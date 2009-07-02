@@ -6,13 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 08:31+0100\n"
+"POT-Creation-Date: 2009-07-02 21:37+0200\n"
 "PO-Revision-Date: 2002-10-18 16:43+0200\n"
 "Last-Translator: DOMA Peter <zelin@pointernet.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "és sokan mások..."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "A Sawfish egy kiterjeszthető ablakkezelő."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "Sawfish honlap"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1226,6 +1238,11 @@ msgstr "Műveletek"
 msgid "Window Cycling"
 msgstr "Lépegetés az ablakokon"
 
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tabs"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
@@ -1241,6 +1258,16 @@ msgstr "Illesztett ablakok"
 msgid "Tooltips"
 msgstr "Buboréksúgók"
 
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "History"
+msgstr "Előzmények"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -1251,20 +1278,42 @@ msgid "Next workspace window"
 msgstr "Következő munkaterület ablak"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "Válaszd a következő ablakot az aktuális munkaterületen."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous workspace window"
 msgstr "Előző munkaterület ablak"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "Fókuszálj az előző ablakra az aktuális munkaterületen."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next window"
 msgstr "Következő ablak"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr ""
+"Válaszd a következő ablakot, az összes lehetséges munkaterületen végigfutva."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous window"
 msgstr "Előző ablak"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr ""
+"Válaszd az előző ablakot, az összes lehetséges munkaterületen végigfutva."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
 msgstr "Szimbólum leírása"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "Megadott szimbólum dokumentációjának megjelenítése."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
@@ -1279,40 +1328,80 @@ msgid "Gnome toggle skip winlist"
 msgstr "Gnome ablaklista kihagyásának kapcsolása"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kapcsolása."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip winlist"
 msgstr "Gnome ablaklista kihagyásának bekapcsolása"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "Az ablak GNOME_SKIP_WINLIST segédjének bekapcsolása."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip winlist"
 msgstr "Gnome ablaklista kihagyásának törlése"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kikapcsolása."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip tasklist"
 msgstr "Gnome feladatlista kihagyásának kapcsolása"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kapcsolása."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip tasklist"
 msgstr "Gnome feladatlista kihagyásának bekapcsolása"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének bekapcsolása."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip tasklist"
 msgstr "Gnome feladatlista kihagyásának törlése"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kikapcsolása."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
 msgstr "Kilépés a Gnome-ból"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "Kilépés az aktuális GNOME-munkamenetből."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
 msgstr "GNOME honlap"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "A GNOME projekt honlapjának indítása."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome help browser"
 msgstr "GNOME súgóböngésző"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "A GNOME súgó böngésző indítása."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
 msgstr "Gnome névjegy"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "GNOME névjegy indítása."
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1398,6 +1487,11 @@ msgstr "Csoport mélységének csökkentése"
 msgid "Delete group"
 msgstr "Csoport törlése"
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr ""
+"Minden ablak törlése abból a csoportból, aminek a jelenlegi ablak is tagja."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Growing and packing of windows"
 msgstr "Ablakok növesztése és tömörítése"
@@ -1449,32 +1543,110 @@ msgid "Grow window left"
 msgstr "Ablak növesztése balra"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Ablak növelése balra, amíg `nekiütközik' egy másik ablaknak.\n"
+"Lásd `grow-window-up'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Ablak növesztése jobbra"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Ablak növelése jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
+"Lásd `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Ablak növesztése felfelé"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Ablak növesztése felfelé, ameddig bele nem ütközik egy másik ablakba. Ha az "
+"ablak felső éle a képernyőn túl van, visszahozza.\n"
+"\n"
+"Univerzális prefix arg használatakor maximalizálja felfelé helyette.\n"
+"Numerikus prefix arg használatakor növessze felfelé a megadott értékű "
+"ablakkal vagy képponttal."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Ablak növesztése lefelé"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Ablak növelése lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
+"Lásd `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Ablak tömörítése balra"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Ablak mozgatása balra, amíg `nekiütközik' egy másik ablaknak.\n"
+"Lásd `pack-window-up'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Ablak tömörítése jobbra"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Ablak mozgatása jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
+"Lásd `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Ablak tömörítése felfelé"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Ablak mozgatása felfelé, ameddig bele nem ütközik egy másik ablakba. Ha az "
+"ablak felső éle a képernyőn túl van, visszahozza.\n"
+"\n"
+"Univerzális prefix arg használatakor mozgatja teljesen fel helyette.\n"
+"Numerikus prefix arg használatakor mozgassa felfelé a megadott értékű "
+"képponttal."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Ablak tömörítése lefelé"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Ablak mozgatása lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
+"Lásd `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
@@ -1538,32 +1710,64 @@ msgid "Move cursor right"
 msgstr "Kurzor mozgatása jobbra"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal jobbra."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left"
 msgstr "Kurzor mozgatása balra"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal balra."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up"
 msgstr "Kurzor mozgatása felfelé"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal felfelé."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down"
 msgstr "Kurzor mozgatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal lefelé."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right fine"
 msgstr "Kurzor mozgatása finoman jobbra"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "A kurzor mozgatása 1 képponttal jobbra."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left fine"
 msgstr "Kurzor mozgatása finoman balra"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "A kurzor mozgatása 1 képponttal balra."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up fine"
 msgstr "Kurzor mozgatása finoman felfelé"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "A kurzor mozgatása 1 képponttal fel."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down fine"
 msgstr "Kurzor mozgatása finoman lefelé"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "A kurzor mozgatása 1 képponttal jobbra."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1652,24 +1856,60 @@ msgid "Move window interactively"
 msgstr "Ablak interaktív mozgatása"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "Ablak interaktív mozgatása az egérrel."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "Ablak interaktív átméretezése"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "Ablak interaktív átméretezése az egér segítségével."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "Kiválasztott ablak mozgatása"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr "Várok a felhasználóra, hogy kiválasszon egy ablakot, és mozgassa azt."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "Kiválasztott ablak átméretezése"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr ""
+"Várakozás egy ablak kiválasztására, majd az ablak interaktív mozgatása."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Előhozás és váltás kattintásra"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
+"pointer eseményt, ami a parancsot hívta."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Előhozás és váltás kattintásra ha fókuszban van"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"A jelenlegi eseményt kapó ablak előhúzása (ha fókuszált), az összes "
+"tranziens ablakával együtt, majd újra végezzen el minden pointer eseményt, "
+"ami a parancsot hívta."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1684,8 +1924,25 @@ msgid "Raise group and pass through click"
 msgstr "Csoport előhozása és váltás kattintásra"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"A jelenlegi eseményt kapó ablakcsoport előhúzása az összes tranziens "
+"ablakával együtt, majd újra végezzen el minden pointer eseményt, ami a "
+"parancsot hívta."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Tranziensek előhozása és váltás kattintásra"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
+"együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot hívta."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1706,9 +1963,21 @@ msgid "Shrink window left"
 msgstr "Ablak csúsztatása balra"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "Ablak csúsztatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1716,9 +1985,21 @@ msgid "Shrink window up"
 msgstr "Ablak csúsztatása felfelé"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "Ablak csúsztatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1726,9 +2007,19 @@ msgid "Yank window left"
 msgstr "Ablak tömörítése balra"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "Ablak tömörítése jobbra"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1736,73 +2027,148 @@ msgid "Yank window up"
 msgstr "Ablak tömörítése felfelé"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yanks WINDOW upwards until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Ablak tömörítése lefelé"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Ablakméret: sor hozzáadása"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Az aktuális ablak méretének növelése egy sorral."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract row"
 msgstr "Ablakméret: sor kivonása"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Az aktuális ablak méretének csökkentése egy sorral."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add column"
 msgstr "Ablakméret oszlop hozzáadása"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Az aktuális ablak méretének növelése egy oszloppal."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract column"
 msgstr "Ablakméret oszlop kivonása"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Az aktuális ablak méretének csökkentése egy oszloppal."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
 msgstr "Ablak csúsztatása balra"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal balra."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
 msgstr "Ablak csúsztatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal jobbra."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
 msgstr "Ablak csúsztatása felfelé"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal felfelé."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
 msgstr "Ablak csúsztatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal lefelé."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
 msgstr "Csoport csúsztatása balra"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal balra."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
 msgstr "Csoport csúsztatása jobbra"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal jobbra."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group up"
 msgstr "Csoport csúsztatása felfelé"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr ""
+"Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal felfelé."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
 msgstr "Csoport csúsztatása lefelé"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal lefelé."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Mozgatás a következő munkalapra"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Mozgatás a következő munkalapra."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
 msgstr "Mozgatás a előző munkalapra"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Mozgatás a előző munkalapra."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
 msgstr "Ablak áthelyezése előzőre"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Ablak áthelyezése az előző munkalapra."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
 msgstr "Ablak áthelyezése következőre"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "Ablak áthelyezése az előző munkalapra."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -1854,13 +2220,26 @@ msgstr "Az `xterm' parancsnak adott paraméterek."
 msgid "Xterm"
 msgstr "X-terminál"
 
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "Új xterm indítása."
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "Parancs hívása"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr ""
+"Meghívja a NAME nevű parancsot; lehetőség szerint a PFX-ARG paraméterekkel."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Run shell command"
 msgstr "Héjparancs futtatása."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "A megadott héjparancs futtatása."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
@@ -1869,6 +2248,10 @@ msgstr "Parancs:"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "Parancssorozat"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Parancslista elemeinek futtatása, egymás után."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
@@ -1893,6 +2276,10 @@ msgstr "Nincs művelet"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Parancs hívása, majd a kimenetének kiírása a képernyőre"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Parancs bekérése, futtatása, majd minden kimenet kiírása a képernyőre."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -1934,6 +2321,10 @@ msgstr "Elhelyezés"
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
 msgstr "Testreszabás"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "A felhasználói-testreszabási rendszer hívása."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2026,6 +2417,10 @@ msgstr "Nincs hiba."
 msgid "Display errors"
 msgstr "Hibák megjelenítése"
 
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "A képernyővel kapcsolatos összes hiba megjelenítése."
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2074,10 +2469,6 @@ msgid "Locale"
 msgstr "Nyelv"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Elkerülő"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore program position"
 msgstr "Alkalmazás pozíciójának figyelmen kívül hagyása"
 
@@ -2111,6 +2502,11 @@ msgid "Placement weight"
 msgstr "Elhelyezés súlya"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed position"
+msgstr "Pozíció"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Maximized"
 msgstr "Teljes méretű"
 
@@ -2141,6 +2537,10 @@ msgstr "Kerettípus"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "Keretstílus"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Elkerülő"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
@@ -2182,6 +2582,15 @@ msgstr "Ablaklista mellőzése"
 #, fuzzy
 msgid "Task list skip"
 msgstr "Ablaklista mellőzése"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "Eredeti méret"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2280,10 +2689,6 @@ msgid "_Forget saved state"
 msgstr "Mentett állapot el_felejtése"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "History"
-msgstr "Előzmények"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
 msgstr "Ablak helyének megjegyzése."
 
@@ -2304,20 +2709,40 @@ msgid "Window history save position"
 msgstr "Ablak előzményei pozíciók mentése"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "A fókuszban levő ablak jelenlegi pozíciójának megjegyzése."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
 msgstr "Ablak előzményei méretek mentése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "A fókuszban levő ablak jelenlegi méreteinek megjegyzése."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
 msgstr "Ablak előzményei tulajdonságok mentése"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "A fókuszban levő ablak jelenlegi tulajdonságainak megjegyzése."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history forget"
 msgstr "Ablakok előzményeinek elfelejtése"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "A jelenlegi ablakhoz rendelt összes állapot elfelejtése."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
 msgstr "Ablakok előzményeinek törlése"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Összes mentett ablak előzmény elfelejtése."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -2330,8 +2755,18 @@ msgstr "%d. munkaterület"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "View the workspace below the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Workspace up"
 msgstr "Munkaterület"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace above the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
@@ -2340,8 +2775,18 @@ msgstr "Munkaterület mozgatása balra"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "View the workspace to the left of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Workspace right"
 msgstr "Munkaterület mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace to the right of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
@@ -2350,8 +2795,18 @@ msgstr "Küldés munkaterületre"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "Send window to the workspace below the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Send to workspace up"
 msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace above the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
@@ -2360,8 +2815,18 @@ msgstr "Küldés munkaterületre"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Send to workspace right"
 msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -2373,7 +2838,7 @@ msgstr "A kattints-a-fókuszhoz üzemmód átadja a kattintást az ablaknak."
 
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
+msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
 
 #. ../lisp/sawfish/wm/focus.jl
@@ -2712,12 +3177,24 @@ msgid "Popup window menu"
 msgstr "Ablak menü nyitása"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Az összes ablakművelet megjelenítése a menüben."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
 msgstr "Gyökér menü nyitása"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Főmenü megjelenítése"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
 msgstr "Alkalmazás menü nyitása"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Az alkalmazások menü megjelenítése."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -2762,21 +3239,49 @@ msgstr "Tranziens ablakok fölé nem kerülhet: \\w"
 msgid "Raise single window"
 msgstr "Ablak előhozása"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Az ablak legmagasabb pozícióba emelése a rétegek között."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
 msgstr "Ablak hátraküldése"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
 msgstr "Alacsonyabb ablak előhozása"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Ha az ablak a lehető legmagasabb pozíciójában van, hátraküldi\n"
+"a lehető legalacsonyabb pozícióba. Egyéb esetben előrehozza\n"
+"amennyire csak lehet."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Ablak mélységének növelése"
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Az ablak a jelenlegi szintnél feljebb helyezése a rétegekben."
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower window depth"
 msgstr "Ablak mélységének csökkentése"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Az ablak a jelenlegi szintnél lejjebb helyezése a rétegekben."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2802,16 +3307,32 @@ msgid "Iconify window"
 msgstr "Ablak ikonizálása"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize the window."
+msgstr "Ablak minimalizálása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Ablak visszaállítása ikonizált állapotból"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Restore the window from its minimized state."
+msgstr "Az ablak visszaállítása az ikonizált állapotból."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
 msgstr "Ablak ikonizálása"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "A W ablak ikonizáltságának átállítása."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify workspace windows"
 msgstr "Munkaterület ablakainak ikonizálása"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize all windows on the current workspace."
+msgstr "Minden ablak ikonizálása az aktuális munkaterületen."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2826,6 +3347,14 @@ msgid "Toggle window sticky"
 msgstr "Ablak ragadósságának kapcsolása"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Az ablak `ragadásának' átállítása -- rajta van-e minden munkaterületen,\n"
+"vagy nem."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Ragadós"
 
@@ -2834,29 +3363,58 @@ msgid "Make window ignored"
 msgstr "Ablak figyelmen kívül hagyása"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "Ablak figyelmen kívül hagyása."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "Ablak figyelembevétele"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "Az ablak figyelembevétele."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window ignored"
 msgstr "Ablak figyelmen kívül hagyása"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
+msgstr "Ablak figyelembevételének állítása."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window never focus"
 msgstr "Ablak fókuszba sohasem kerülésének kapcsolása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Fókuszálhatóság átállítása."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window cycle skip"
 msgstr "Ablak lapozgatásból való kimaradásának kapcsolása"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr "Ablakok lapozgatásánál az ablak figyelmen kívül hagyásának beállítása."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window list skip"
 msgstr "Ablaklistából kihagyás beállítása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle task list skip"
 msgstr "Ablaklistából kihagyás beállítása"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -2888,60 +3446,155 @@ msgid "Maximize window"
 msgstr "Ablak maximalizálása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "Az ablak méreteinek maximalizálása."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Unmaximize window"
 msgstr "Ablak maximalizálásának visszaállítása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr ""
+"Az ablak méreteinek visszaállítása az eredeti, nem maximalizált állapotára."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
 msgstr "Ablak függőleges maximalizálása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "Az ablak függőleges méretének maximalizálása."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally"
 msgstr "Ablak maximalizálása vízszintesen"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "Az ablak vízszintes méretének maximálása."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window toggle"
 msgstr "Maximalizálás kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a maximalizált és a nem maximalizált\n"
+"között."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally toggle"
 msgstr "Ablak vízszintes maximalizálásának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a vízszintesen maximalizált és a nem "
+"maximalizált\n"
+"között."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Ablak függőleges maximalizálásának kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a függőlegesen maximalizált és a nem "
+"maximalizált\n"
+"között."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Ablak maximalizált kitöltése"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "Az ablak méreteinek maximalizálása a többi ablak zavarása nélkül."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically"
 msgstr "Ablak maximális kitöltése függőlegesen"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr ""
+"Az ablak függőleges méretének maximalizálása a többi ablak zavarása nélkül."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally"
 msgstr "Ablak maximális kitöltése vízszintesen"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr ""
+"Az ablak vízszintes méretének maximalizálása a többi ablak zavarása nélkül."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window toggle"
 msgstr "Ablak maximalizált töltésének kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a maximalizált-kitöltött és a nem "
+"maximalizált\n"
+"között."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
 msgstr "Ablak vízszintes maximalizált töltésének kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a vízszintesen maximalizált-kitöltött és a "
+"nem maximalizált\n"
+"között."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Ablak függőleges maximalizált töltésének kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a függőlegesen maximalizált-kitöltött és a "
+"nem maximalizált\n"
+"között."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Maximalizálás teljes képernyőre"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "Ablak minimalizálása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "Teljes képernyős maximalizálás kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a maximalizált és a nem maximalizált\n"
+"között."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -2950,20 +3603,52 @@ msgstr "Maximalizálás teljes képernyőre"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr "Ablak minimalizálása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid "Maximize window fullxinerama toggle"
 msgstr "Teljes képernyős maximalizálás kapcsolása"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr ""
+"Az ablak állapotának kapcsolása a maximalizált-kitöltött és a nem "
+"maximalizált\n"
+"között."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
 msgstr "Ablak árnyékolása"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "Csak az ablak címsorának megjelenítése."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
 msgstr "Ablak lenyitása"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
+msgstr ""
+"Ha az ablak árnyékolt (lásd `shade-window'), visszaállítja annak szokásos\n"
+"állapotát."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Ablak árnyékolásának kapcsolása"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr "Bekapcsolja az ablak árnyékolt állapotát (csak a címsor jelenik meg)."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2978,16 +3663,39 @@ msgid "Raise window and transients"
 msgstr "Ablak és tranziensek előrehozása"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Jelenlegi ablak előhúzása a lehető legmagasabb pozícióra. A tranziens "
+"ablakok együtt mozognak a jelenlegi ablakkal."
+
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Ablak és tranzienseinek hátraküldése"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Ablak hátraküldése a lehető legalacsonyabb pozícióba. Az ablak tranziens "
+"ablakai szintén mozognak vele együtt"
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Alsó ablak és tranzienseinek előhozása"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Tabs"
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
+"Ha az ablak a lehető legmagasabb pozíciójában van, akkor leküldi a\n"
+"lehető legalacsonyabb szintre. Egyéb esetben felemeli amennyire csak lehet.\n"
+"Az ablak tranziens ablakainak szintjét szintén változtatja."
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
@@ -3007,7 +3715,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #, fuzzy
-msgid "Add to group"
+msgid "Raise Tabs on Hover"
+msgstr "Előrehozás fókuszba kerüléskör"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
 msgstr "Csoport kicsinyítése"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
@@ -3017,13 +3730,28 @@ msgstr "Ablak törlése"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Release active window from its group"
+msgstr "Az ablak visszaállítása az ikonizált állapotból."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise left window"
 msgstr "Alsó ablak előhozása"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Raise left window in current group"
+msgstr "Alsó ablak és tranzienseinek előhozása"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise right window"
 msgstr "Ablak előhozása"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Alsó ablak és tranzienseinek előhozása"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -3038,8 +3766,16 @@ msgid "Display window without focusing"
 msgstr "Ablak megjelenítése fókuszálás nélkül"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "A W ablakot tartalmazó munkaterület megjelenítése."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Ablak megjelenítése"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "A W ablakot tartalmazó munkaterület megjelenítése, és fókuszálás W-re."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3049,9 +3785,17 @@ msgstr "Új csoport"
 msgid "Gtkrc reload style"
 msgstr "Gtkrc stílus újratöltése"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "gtkrc beállítások újratöltése."
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "Kulcs leírása"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "Bekér egy billentyűsorozatot, majd megjeleníti a hozzárendelést."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -3064,6 +3808,15 @@ msgstr "[Idézet]"
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
 msgstr "Esemény idézése"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"A következő billentyűzet esemény közvetlen küldése a fókuszban levő "
+"ablaknak\n"
+"az esetleges ablakkezelő hozzárendeléseket figyelmen kívül hagyva."
 
 #. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
@@ -3102,6 +3855,14 @@ msgstr "%d. munkaterület"
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Munkaterület:"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Font for prompt: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Prompt message's colors."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -3155,12 +3916,16 @@ msgid "stop"
 msgstr "Testreszabás"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Wether to stop or wrap-around on first/last viewport"
+msgid "Whether to stop or wrap-around on first/last viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "Nézet  aktiválása"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "A megadott munkalap kiválasztása."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -3175,44 +3940,90 @@ msgid "Activate viewport column"
 msgstr "Nézet oszlopának aktiválása"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "A megadott munkalap-oszlop kiválasztása."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
 msgstr "Nézet sorának aktiválása"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "A megadott munkalap-sor kiválasztása."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
 msgstr "Ablak áthelyezése másik munkalapra"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Az aktuális ablak átmozgatása a megadott munkalapra."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
 msgstr "Munkalap mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Az aktuális munkalap mozgatása egy képernyővel jobbra."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
 msgstr "Munkalap mozgatása balra"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Az aktuális munkalap mozgatása egy képernyővel balra."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
 msgstr "Nézet mozgatása felfelé"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Ablak áthelyezése, majd váltás a lenti munkalapra."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
 msgstr "Nézet mozgatása lefelé"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Munkalap mozgatása egy képernyőnyit le."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
 msgstr "Ablak mozgatása jobbra"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "Mozgassa az ablakot a jobbra levő nézetre, és kapcsoljon oda."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Ablak mozgatása balra"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr "Mozgassa az ablakot a balra levő nézetre, és kapcsoljon oda."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Ablak mozgatása fel"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "Ablak áthelyezése, majd váltás a fenti munkalapra."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Ablak mozgatása le"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Ablak áthelyezése, majd váltás a lenti munkalapra."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
@@ -3247,21 +4058,24 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to enable warping the cursor to windows."
+msgid "Whether to enable warping the cursor to windows."
 msgstr ""
 "Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
 "való ütközésének kapcsolása."
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to not ignore avoided windows by default."
+msgid "Whether to not ignore avoided windows by default."
 msgstr ""
 "Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
 "való ütközésének kapcsolása."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Wether to avoid any unspecified window by default."
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
 msgstr ""
+"Növesztéskor vagy tömörítéskor az ablak figyelmen kívül hagyott ablakokkal "
+"való ütközésének kapcsolása."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -3272,16 +4086,32 @@ msgid "Focus desktop"
 msgstr "Fókuszálás az asztalra"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "A beviteli fókusz mozgatása az asztal ablakára (ha létezik)."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
 msgstr "Ablak törlése"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Ablak törlése."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window safely"
 msgstr "Ablak biztonságos törlése"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr "Az ablak törlése, vagy csengetés, ha nem lehet biztonságosan bezárni."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
 msgstr "Ablak nevének egyedivé tétele"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "A jelenlegi ablak kényszerítése egyedi címsor használatára."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -3349,72 +4179,162 @@ msgid "Popup workspace list"
 msgstr "Munkaterület-lista megnyitása"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Az összes munkaterület menüjének megjelenítése."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Popup window list"
 msgstr "Ablaklista megnyitása"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Az összes kezelt ablak menüjének megjelenítése."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
 msgstr "Következő munkaterület"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Következő munkaterület megjelenítése."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
 msgstr "Előző munkaterület"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Előző munkaterület megjelenítése."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
 msgstr "Küldés a következő munkaterületre"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Ablak áthelyezése a következő munkaterületre"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
 msgstr "Küldés az előző munkaterületre"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Ablak áthelyezése az előző munkaterületre."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
 msgstr "Másolás a következő munkaterületre"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Ablak másolása a következő munkaterületre."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
 msgstr "Másolás az előző munkaterületre"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Ablak másolása az előző munkaterületre."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
 msgstr "Munkaterület hozzáfűzése és küldés"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr ""
+"Új munkaterület létrehozása a lista végén, és az ablak mozgatása erre a "
+"munkaterületre."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
 msgstr "Munkaterület előre fűzése és küldés"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr ""
+"Új munkaterület létrehozása a lista elején, és az ablak mozgatása erre a "
+"munkaterületre."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
 msgstr "Következő munkaterület összefűzése"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"A jelenlegi munkaterület törlése. A munkaterület ablakai átkerülnek a "
+"következő munkaterületre."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Előző munkaterület összefűzése"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"A jelenlegi munkaterület törlése. A munkaterület ablakai az előző\n"
+"munkaterületre kerülnek."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Munkaterület beillesztése mögé"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Új munkaterület létrehozása az aktuális munkaterület után."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
 msgstr "Munkaterület beillesztése elé"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
 msgstr "Munkaterület mozgatása előre"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Az aktuális munkaterület mozgatása egy hellyel jobbra."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace backwards"
 msgstr "Munkaterület mozgatása hátra"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Az aktuális munkaterület mozgatása egy hellyel balra."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete empty workspaces"
 msgstr "Üres munkaterületek törlése"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Az összes olyan munkaterület törlése, ami nem tartalmaz ablakot."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete window instance"
 msgstr "Ablak törlése"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Az ablak másolatának eltávolítása a jelenlegi munkaterületről. Ha ez az\n"
+"utolsó példány, törölje az aktuális ablakot."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -3422,88 +4342,50 @@ msgid "Show desktop"
 msgstr "Fókuszálás az asztalra"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Hide desktop"
 msgstr "Fókuszálás az asztalra"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
 msgstr "Munkaterület aktívvá tétele"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Az n-edik munkaterület kiválasztása."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
 msgstr "Küldés munkaterületre"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move the current window to the N'th workspace."
+msgstr "Az aktuális ablak átmásolása az n-edik munkaterületre."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Másolás munkaterületre"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Az aktuális ablak átmásolása az n-edik munkaterületre."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select workspace interactively"
 msgstr "Munkaterület kiválasztása interaktívan"
 
-#~ msgid "and many others..."
-#~ msgstr "és sokan mások..."
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "A Sawfish egy kiterjeszthető ablakkezelő."
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "Sawfish honlap"
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "Válaszd a következő ablakot az aktuális munkaterületen."
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "Fókuszálj az előző ablakra az aktuális munkaterületen."
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Válaszd a következő ablakot, az összes lehetséges munkaterületen "
-#~ "végigfutva."
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Válaszd az előző ablakot, az összes lehetséges munkaterületen végigfutva."
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "Megadott szimbólum dokumentációjának megjelenítése."
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kapcsolása."
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének bekapcsolása."
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kikapcsolása."
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kapcsolása."
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének bekapcsolása."
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kikapcsolása."
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "Kilépés az aktuális GNOME-munkamenetből."
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "A GNOME projekt honlapjának indítása."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "A GNOME súgó böngésző indítása."
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "GNOME névjegy indítása."
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr ""
-#~ "Minden ablak törlése abból a csoportból, aminek a jelenlegi ablak is "
-#~ "tagja."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Bekér egy munkaterületet, majd átkapcsol rá."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
@@ -3545,638 +4427,11 @@ msgstr "Munkaterület kiválasztása interaktívan"
 #~ "kapcsolása.\n"
 #~ "A `néha' azt jelenti, hogy más mélységben levő ablakokat elkerüli."
 
-#~ msgid ""
-#~ "Grows window to the left until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Ablak növelése balra, amíg `nekiütközik' egy másik ablaknak.\n"
-#~ "Lásd `grow-window-up'."
-
-#~ msgid ""
-#~ "Grows window to the right until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Ablak növelése jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
-#~ "Lásd `grow-window-up'."
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Ablak növesztése felfelé, ameddig bele nem ütközik egy másik ablakba. Ha "
-#~ "az ablak felső éle a képernyőn túl van, visszahozza.\n"
-#~ "\n"
-#~ "Univerzális prefix arg használatakor maximalizálja felfelé helyette.\n"
-#~ "Numerikus prefix arg használatakor növessze felfelé a megadott értékű "
-#~ "ablakkal vagy képponttal."
-
-#~ msgid ""
-#~ "Grows window downwards until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Ablak növelése lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
-#~ "Lásd `grow-window-up'."
-
-#~ msgid ""
-#~ "Moves window to the left until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Ablak mozgatása balra, amíg `nekiütközik' egy másik ablaknak.\n"
-#~ "Lásd `pack-window-up'."
-
-#~ msgid ""
-#~ "Moves window to the right until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Ablak mozgatása jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
-#~ "Lásd `pack-window-up'."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Ablak mozgatása felfelé, ameddig bele nem ütközik egy másik ablakba. Ha "
-#~ "az ablak felső éle a képernyőn túl van, visszahozza.\n"
-#~ "\n"
-#~ "Univerzális prefix arg használatakor mozgatja teljesen fel helyette.\n"
-#~ "Numerikus prefix arg használatakor mozgassa felfelé a megadott értékű "
-#~ "képponttal."
-
-#~ msgid ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Ablak mozgatása lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
-#~ "Lásd `pack-window-up'."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal jobbra."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal balra."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal felfelé."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr "A kurzor mozgatása `kurzor-mozgatás-növekmény' képponttal lefelé."
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "A kurzor mozgatása 1 képponttal jobbra."
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "A kurzor mozgatása 1 képponttal balra."
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "A kurzor mozgatása 1 képponttal fel."
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "A kurzor mozgatása 1 képponttal jobbra."
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "Ablak interaktív mozgatása az egérrel."
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "Ablak interaktív átméretezése az egér segítségével."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr ""
-#~ "Várok a felhasználóra, hogy kiválasszon egy ablakot, és mozgassa azt."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that "
-#~ "window."
-#~ msgstr ""
-#~ "Várakozás egy ablak kiválasztására, majd az ablak interaktív mozgatása."
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any "
-#~ "pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
-#~ "pointer eseményt, ami a parancsot hívta."
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "A jelenlegi eseményt kapó ablak előhúzása (ha fókuszált), az összes "
-#~ "tranziens ablakával együtt, majd újra végezzen el minden pointer "
-#~ "eseményt, ami a parancsot hívta."
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "A jelenlegi eseményt kapó ablakcsoport előhúzása az összes tranziens "
-#~ "ablakával együtt, majd újra végezzen el minden pointer eseményt, ami a "
-#~ "parancsot hívta."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
-#~ "együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot "
-#~ "hívta."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "Az aktuális ablak méretének növelése egy sorral."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "Az aktuális ablak méretének csökkentése egy sorral."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "Az aktuális ablak méretének növelése egy oszloppal."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "Az aktuális ablak méretének csökkentése egy oszloppal."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal balra."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal jobbra."
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal felfelé."
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr "Az ablak mozgatása `ablak-eltolás-növekmény' képponttal lefelé."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr ""
-#~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal balra."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr ""
-#~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal jobbra."
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr ""
-#~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal felfelé."
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr ""
-#~ "Az ablakcsoport mozgatása `ablak-eltolás-növekmény' képponttal lefelé."
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "Mozgatás a következő munkalapra."
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "Mozgatás a előző munkalapra."
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "Ablak áthelyezése az előző munkalapra."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminál"
 
-#~ msgid "Start a new xterm."
-#~ msgstr "Új xterm indítása."
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr ""
-#~ "Meghívja a NAME nevű parancsot; lehetőség szerint a PFX-ARG "
-#~ "paraméterekkel."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "A megadott héjparancs futtatása."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "Parancslista elemeinek futtatása, egymás után."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr ""
-#~ "Parancs bekérése, futtatása, majd minden kimenet kiírása a képernyőre."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "A felhasználói-testreszabási rendszer hívása."
-
 #~ msgid "Error Handling"
 #~ msgstr "Hibakezelés"
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "A képernyővel kapcsolatos összes hiba megjelenítése."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "A fókuszban levő ablak jelenlegi pozíciójának megjegyzése."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "A fókuszban levő ablak jelenlegi méreteinek megjegyzése."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr "A fókuszban levő ablak jelenlegi tulajdonságainak megjegyzése."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr "A jelenlegi ablakhoz rendelt összes állapot elfelejtése."
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "Összes mentett ablak előzmény elfelejtése."
-
-#, fuzzy
-#~ msgid "View the workspace below the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "View the workspace above the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "View the workspace to the left of the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "View the workspace to the right of the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Send window to the workspace below the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Send window to the workspace above the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Send window to the workspace left of the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#, fuzzy
-#~ msgid "Send window to the workspace right of the current workspace"
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "Az összes ablakművelet megjelenítése a menüben."
-
-#~ msgid "Display the main menu."
-#~ msgstr "Főmenü megjelenítése"
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Az alkalmazások menü megjelenítése."
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr "Az ablak legmagasabb pozícióba emelése a rétegek között."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "Ha az ablak a lehető legmagasabb pozíciójában van, hátraküldi\n"
-#~ "a lehető legalacsonyabb pozícióba. Egyéb esetben előrehozza\n"
-#~ "amennyire csak lehet."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr "Az ablak a jelenlegi szintnél feljebb helyezése a rétegekben."
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr "Az ablak a jelenlegi szintnél lejjebb helyezése a rétegekben."
-
-#~ msgid "Minimize the window."
-#~ msgstr "Ablak minimalizálása"
-
-#~ msgid "Restore the window from its minimized state."
-#~ msgstr "Az ablak visszaállítása az ikonizált állapotból."
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "A W ablak ikonizáltságának átállítása."
-
-#~ msgid "Minimize all windows on the current workspace."
-#~ msgstr "Minden ablak ikonizálása az aktuális munkaterületen."
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "Az ablak `ragadásának' átállítása -- rajta van-e minden munkaterületen,\n"
-#~ "vagy nem."
-
-#~ msgid "Ignore the window."
-#~ msgstr "Ablak figyelmen kívül hagyása."
-
-#~ msgid "Unignore the window."
-#~ msgstr "Az ablak figyelembevétele."
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "Ablak figyelembevételének állítása."
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "Fókuszálhatóság átállítása."
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr ""
-#~ "Ablakok lapozgatásánál az ablak figyelmen kívül hagyásának beállítása."
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
-
-#, fuzzy
-#~ msgid "Toggle whether a window will be included in the task-list."
-#~ msgstr "Az ablak ablaklistában való szereplésének be/kikapcsolása."
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "Az ablak méreteinek maximalizálása."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr ""
-#~ "Az ablak méreteinek visszaállítása az eredeti, nem maximalizált "
-#~ "állapotára."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "Az ablak függőleges méretének maximalizálása."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "Az ablak vízszintes méretének maximálása."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a maximalizált és a nem maximalizált\n"
-#~ "között."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a vízszintesen maximalizált és a nem "
-#~ "maximalizált\n"
-#~ "között."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a függőlegesen maximalizált és a nem "
-#~ "maximalizált\n"
-#~ "között."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "Az ablak méreteinek maximalizálása a többi ablak zavarása nélkül."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr ""
-#~ "Az ablak függőleges méretének maximalizálása a többi ablak zavarása "
-#~ "nélkül."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr ""
-#~ "Az ablak vízszintes méretének maximalizálása a többi ablak zavarása "
-#~ "nélkül."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a maximalizált-kitöltött és a nem "
-#~ "maximalizált\n"
-#~ "között."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a vízszintesen maximalizált-kitöltött és "
-#~ "a nem maximalizált\n"
-#~ "között."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a függőlegesen maximalizált-kitöltött és "
-#~ "a nem maximalizált\n"
-#~ "között."
-
-#, fuzzy
-#~ msgid "Fullscreen maximize the window."
-#~ msgstr "Ablak minimalizálása"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized and "
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a maximalizált és a nem maximalizált\n"
-#~ "között."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized across all "
-#~ "Xinerama and unmaximized."
-#~ msgstr ""
-#~ "Az ablak állapotának kapcsolása a maximalizált-kitöltött és a nem "
-#~ "maximalizált\n"
-#~ "között."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "Csak az ablak címsorának megjelenítése."
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr ""
-#~ "Ha az ablak árnyékolt (lásd `shade-window'), visszaállítja annak "
-#~ "szokásos\n"
-#~ "állapotát."
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr ""
-#~ "Bekapcsolja az ablak árnyékolt állapotát (csak a címsor jelenik meg)."
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Jelenlegi ablak előhúzása a lehető legmagasabb pozícióra. A tranziens "
-#~ "ablakok együtt mozognak a jelenlegi ablakkal."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Ablak hátraküldése a lehető legalacsonyabb pozícióba. Az ablak tranziens "
-#~ "ablakai szintén mozognak vele együtt"
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Ha az ablak a lehető legmagasabb pozíciójában van, akkor leküldi a\n"
-#~ "lehető legalacsonyabb szintre. Egyéb esetben felemeli amennyire csak "
-#~ "lehet.\n"
-#~ "Az ablak tranziens ablakainak szintjét szintén változtatja."
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "A W ablakot tartalmazó munkaterület megjelenítése."
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr ""
-#~ "A W ablakot tartalmazó munkaterület megjelenítése, és fókuszálás W-re."
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "gtkrc beállítások újratöltése."
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr "Bekér egy billentyűsorozatot, majd megjeleníti a hozzárendelést."
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "A következő billentyűzet esemény közvetlen küldése a fókuszban levő "
-#~ "ablaknak\n"
-#~ "az esetleges ablakkezelő hozzárendeléseket figyelmen kívül hagyva."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "A megadott munkalap kiválasztása."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "A megadott munkalap-oszlop kiválasztása."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "A megadott munkalap-sor kiválasztása."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "Az aktuális ablak átmozgatása a megadott munkalapra."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "Az aktuális munkalap mozgatása egy képernyővel jobbra."
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "Az aktuális munkalap mozgatása egy képernyővel balra."
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "Ablak áthelyezése, majd váltás a lenti munkalapra."
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "Munkalap mozgatása egy képernyőnyit le."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the right, and switch to that viewport."
-#~ msgstr "Mozgassa az ablakot a jobbra levő nézetre, és kapcsoljon oda."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the left, and switch to that viewport."
-#~ msgstr "Mozgassa az ablakot a balra levő nézetre, és kapcsoljon oda."
-
-#~ msgid "Move the window to the viewport above, and switch to that viewport."
-#~ msgstr "Ablak áthelyezése, majd váltás a fenti munkalapra."
-
-#~ msgid "Move the window to the viewport below, and switch to that viewport."
-#~ msgstr "Ablak áthelyezése, majd váltás a lenti munkalapra."
-
-#~ msgid "Transfer input focus to the desktop window (if one exists)."
-#~ msgstr "A beviteli fókusz mozgatása az asztal ablakára (ha létezik)."
-
-#~ msgid "Delete the window."
-#~ msgstr "Ablak törlése."
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr ""
-#~ "Az ablak törlése, vagy csengetés, ha nem lehet biztonságosan bezárni."
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "A jelenlegi ablak kényszerítése egyedi címsor használatára."
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "Az összes munkaterület menüjének megjelenítése."
-
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "Az összes kezelt ablak menüjének megjelenítése."
-
-#~ msgid "Display the next workspace."
-#~ msgstr "Következő munkaterület megjelenítése."
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "Előző munkaterület megjelenítése."
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "Ablak áthelyezése a következő munkaterületre"
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "Ablak áthelyezése az előző munkaterületre."
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "Ablak másolása a következő munkaterületre."
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "Ablak másolása az előző munkaterületre."
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr ""
-#~ "Új munkaterület létrehozása a lista végén, és az ablak mozgatása erre a "
-#~ "munkaterületre."
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to "
-#~ "it."
-#~ msgstr ""
-#~ "Új munkaterület létrehozása a lista elején, és az ablak mozgatása erre a "
-#~ "munkaterületre."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the "
-#~ "next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "A jelenlegi munkaterület törlése. A munkaterület ablakai átkerülnek a "
-#~ "következő munkaterületre."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "A jelenlegi munkaterület törlése. A munkaterület ablakai az előző\n"
-#~ "munkaterületre kerülnek."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület után."
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "Új munkaterület létrehozása az aktuális munkaterület elé."
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "Az aktuális munkaterület mozgatása egy hellyel jobbra."
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "Az aktuális munkaterület mozgatása egy hellyel balra."
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "Az összes olyan munkaterület törlése, ami nem tartalmaz ablakot."
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "Az ablak másolatának eltávolítása a jelenlegi munkaterületről. Ha ez az\n"
-#~ "utolsó példány, törölje az aktuális ablakot."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "Az n-edik munkaterület kiválasztása."
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "Az aktuális ablak átmásolása az n-edik munkaterületre."
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "Bekér egy munkaterületet, majd átkapcsol rá."
 
 #~ msgid "Select Icon"
 #~ msgstr "Ikon kiválasztása"

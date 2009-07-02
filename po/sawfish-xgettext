@@ -1,0 +1,178 @@
+#!/bin/sh
+exec rep "$0" "$@"
+!#
+
+;; sawfish-xgettext -- extract i18n strings from lisp scripts
+;; $Id: sawfish-xgettext,v 1.8 2001/04/20 21:40:50 jsh Exp $
+
+;; This file is part of sawfish.
+
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+(require 'rep.i18n.xgettext)
+(require 'rep.lang.doc)
+
+(defvar *write-c-file* nil)
+
+(define (exit n) (throw 'quit n))
+
+;; random hackery
+
+;; from sawfish.ui.widgets.match-window
+(define (beautify-symbol-name symbol)
+  (cond ((stringp symbol) symbol)
+	((not (symbolp symbol)) (format "%s" symbol))
+	(t
+	 (let ((name (copy-sequence (symbol-name symbol))))
+	   (while (string-match "[-:]" name)
+	     (setq name (concat (substring name 0 (match-start))
+				?  (substring name (match-end)))))
+	   (aset name 0 (char-upcase (aref name 0)))
+	   name))))
+
+;; from sawfish.ui.layouts.keymaps
+(define (beautify-keymap-name symbol)
+  (cond ((stringp symbol) symbol)
+	((not (symbolp symbol)) (format "%s" symbol))
+	(t
+	 (let ((name (copy-sequence (symbol-name symbol))))
+	   (when (string-match "-keymap" name)
+	     (setq name (substring name 0 (match-start))))
+	   (while (string-match "[-:]" name)
+	     (setq name (concat (substring name 0 (match-start))
+				?  (substring name (match-end)))))
+	   (aset name 0 (char-upcase (aref name 0)))
+	   name))))
+
+;; helper function that groks sawfish specific forms
+
+(define (get-key key args) (and (listp args) (memq key args)))
+
+(define (helper form)
+  (case (car form)
+    ((defcustom)
+     (let ((variable (nth 1 form))
+	   (doc (nth 3 form))
+	   (keys (nthcdr 4 form)))
+       (let ((tooltip (cadr (get-key ':tooltip keys))))
+	 (when tooltip
+	   (setq doc (concat doc "\n\n" tooltip))))
+       (let ((type* (cadr (get-key ':type* keys))))
+	 (when type*
+	   (scan type*)))
+       (let ((options (cadr (get-key ':options keys))))
+	 ;; extract `:options (foo bar..)' strings
+	 (when (listp options)
+	   (mapc (lambda (s)
+		   (when s
+		     (register (symbol-name s)))) options)))
+       (let ((type (cadr (get-key ':type keys))))
+	 ;; extract `:type (choice foo bar..)' strings
+	 (when (eq (car type) 'choice)
+	   (mapc (lambda (s)
+		   (when (symbolp s)
+		     (register (symbol-name s)))) (cdr type)))
+	 ;; extract keymap names
+	 (when (eq type 'keymap)
+	   (register (beautify-keymap-name (symbol-name variable)))))
+       (when (stringp doc)
+	 (register doc))))
+
+    ((defgroup)
+     (let ((real-name (nth 2 form)))
+       (when (stringp real-name)
+	 (register real-name))))
+
+    ((define-command)
+     (let ((name (nth 1 form))
+	   (def (nth 2 form))
+	   (keys (nthcdr 3 form)))
+       (when (and (eq (car name) 'quote)
+		  (symbolp (cadr name)))
+	 (register (beautify-symbol-name (cadr name))))
+       (if (get-key #:doc keys)
+	   (register (cadr (get-key #:doc keys)))
+	 (let ((key (or (cadr (get-key #:doc-key keys))
+			(and (symbolp def)
+			     (doc-file-value-key
+			      def (fluid current-module))))))
+	   (when (stringp key)
+	     (let ((doc (doc-file-ref key)))
+	       (when doc
+		 (register doc))))))
+       (let ((type (car (cdr (get-key #:type keys)))))
+	 (when type
+	   (scan type)))))
+
+    ((i18n-defvar i18n-define)
+     (let ((name (cadr form))
+	   (value (caddr form)))
+       (case name
+	 ((match-window-properties)
+	  (mapc (lambda (x)
+		  (mapc (lambda (y)
+			  (register (beautify-symbol-name (car y)))) (cddr x)))
+		;; remove a `(backquote X)'
+		(nth 1 value)))
+
+	 ((match-window-x-properties)
+	  (mapc (lambda (x)
+		  (register (cdr x)))
+		;; strip a `(quote X)'
+		(nth 1 value))))
+
+       ;; always rescan as normal, to be sure not to miss anything
+       (scan (cons (if (eq (car form) 'i18n-defvar)
+		       'defvar
+		     'define)
+		   (cdr form)))))
+
+    (t (scan-list form))))
+
+;; entry point
+
+(when (get-command-line-option "--help")
+  (write standard-output "\
+Usage: sawfish-xgettext [OPTIONS...] FILES...
+
+Program to extract strings from sawfish Lisp files that should be
+translated.
+
+  --doc-file DOC
+  --c
+  --pot\n")
+  (exit 0))
+
+(when (or (get-command-line-option "-c") (get-command-line-option "--c"))
+  (setq *write-c-file* t))
+(when (or (get-command-line-option "-p") (get-command-line-option "--pot"))
+  (setq *write-c-file* nil))
+
+(let ((doc-file (get-command-line-option "--doc-file" t)))
+  (when doc-file
+    (setq documentation-files (list doc-file))))
+
+(set-helper helper)
+(set-included-definers '())
+(mapc scan-file command-line-args)
+(setq command-line-args '())
+
+(if *write-c-file*
+    (output-c-file)
+  (output-pot-file))
+
+;; Local variables:
+;; major-mode: lisp-mode
+;; End:

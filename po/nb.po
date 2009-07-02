@@ -6,13 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 08:31+0100\n"
+"POT-Creation-Date: 2009-07-02 21:37+0200\n"
 "PO-Revision-Date: 2005-12-06 23:35+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "og mange andre..."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "Sawfish håndterer dine vinduer med mange funksjoner."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "Sawfish nettside"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1218,6 +1230,11 @@ msgstr "Handlinger"
 msgid "Window Cycling"
 msgstr "Vindusskifting"
 
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tabs"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
@@ -1233,6 +1250,16 @@ msgstr "Like vinduer"
 msgid "Tooltips"
 msgstr "Verktøytips"
 
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "History"
+msgstr "Historikk"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -1243,20 +1270,40 @@ msgid "Next workspace window"
 msgstr "Neste vindu på arbeidsområdet"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "Velg neste vindu på aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous workspace window"
 msgstr "Forrige vindu på arbeidsområdet"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "Fokus på forrige vindu på aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next window"
 msgstr "Neste vindu"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr "Velg neste vindu, og bla gjennom alle mulige arbeidsområder."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous window"
 msgstr "Forrige vindu"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr "Velg forrige vindu, og bla gjennom alle mulige arbeidsområder."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
 msgstr "Beskriv symbol"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "Vis dokumentasjon for et spesifisert symbol."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
@@ -1271,40 +1318,80 @@ msgid "Gnome toggle skip winlist"
 msgstr "Slå av/på hopp over vinduliste for GNOME"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "Slå av/på GNOME SKIP_WINLIST hintet for vinduet."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip winlist"
 msgstr "Sett hopp over vinduliste for GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "Sett GNOME SKIP_WINLIST hintet for vinduet."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip winlist"
 msgstr "Fjern hopp over vinduliste for GNOME"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "Slå av GNOME SKIP_WINLIST-hintet for vinduet."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip tasklist"
 msgstr "Slå av/på hopp over oppgaveliste for GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Slå av/på GNOME SKIP_TASKLIST-hintet for vinduet."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip tasklist"
 msgstr "Sett hopp over oppgaveliste for GNOME"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Slå på GNOME SKIP_TASKLIST-hintet for vinduet."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip tasklist"
 msgstr "Tøm hopp over oppgaveliste for GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Slå av GNOME SKIP_TASKLIST-hintet for vinduet."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
 msgstr "GNOME avlogging"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "Logg ut av aktiv GNOME-sesjon."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
 msgstr "GNOME nettside"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "Vis WWW-sidene til GNOME prosjektet."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome help browser"
 msgstr "GNOME hjelpleser"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "Start GNOME hjelpleser."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
 msgstr "Om GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "Start om GNOME dialogen."
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1390,6 +1477,10 @@ msgstr "Senk gruppedybde"
 msgid "Delete group"
 msgstr "Slett gruppe"
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "Slett alle vinduer i gruppen som aktivt vindu er medlem av."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Growing and packing of windows"
 msgstr "Øking og pakking av vinduer"
@@ -1437,32 +1528,109 @@ msgid "Grow window left"
 msgstr "Øk vindu til venstre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Øker størrelsen på et vindu mot venstre til det 'treffer' et annet vindu.\n"
+"Se «grow-window-up»."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Øk vindu til høyre"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Øker størrelsen på et vindu mot høyre til det 'treffer' et annet vindu.\n"
+"Se «grow-window-up»."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Voks vindu oppover"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Øker vinduet oppover til det «dunker inn i» et annet vindu.\n"
+"Hvis den øverste kanten var utenfor skjermens kant hentes den inn igjen.\n"
+"Hvis et universelt prefiksargument oppgis, maksimeres det oppover i stedet.\n"
+"Med et numerisk prefiksargument økes det oppover med antall steg som oppgis "
+"for\n"
+"vinduer eller piksler i stedet."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Voks vindu nedover"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Øker størrelsen på vinduet nedover til det 'treffer' et annet vindu.\n"
+"Se «grow-window-up»."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Pakk vindu mot venstre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Flytter vinduet til venstre til det 'treffer' et annet vindu.\n"
+"Se «pack-window-up»."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Pakk vindu mot høyre"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Flytter vinduet til høyre til det 'treffer' et annet vindu.\n"
+"Se «pack-window-up»."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Pakk vindu oppover"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Flytter vinduet oppover til det «dunker inn i» et annet vindu.\n"
+"Hvis den øverste kanten var utenfor skjermkanten flyttes det inn igjen.\n"
+"Med et universelt prefiksargument flyttes det helt opp i stedet.\n"
+"Med et numerisk prefiksargument flyttes det oppover med spesifisert antll\n"
+"piksler i stedet."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Pakk vindu nedover"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Flytter vinduet nedover til det 'treffer' et annet vindu.\n"
+"Se «pack-window-up»."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
@@ -1526,32 +1694,64 @@ msgid "Move cursor right"
 msgstr "Flytt markør til høyre"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr "Flytt pekeren `move-cursor-increment' piksler til høyre."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left"
 msgstr "Flytt markør til venstre"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Flytt pekeren `move-cursor-increment' piksler til venstre."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up"
 msgstr "Flytt markør opp"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "Flytt pekeren `move-cursor-increment' piksler oppover."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down"
 msgstr "Flytt markør ned"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "Flytt pekeren `move-cursor-increment' piksler nedover."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right fine"
 msgstr "Flytt markør litt til høyre"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "Flytt pekeren 1 piksel til høyre."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left fine"
 msgstr "Flytt markør litt til venstre"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "Flytt pekeren 1 piksel til venstre."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up fine"
 msgstr "Flytt markør litt opp"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "Flytt pekeren 1 piksel nedover."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down fine"
 msgstr "Flytt markør litt ned"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "Flytt pekeren 1 piksel nedover."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1640,24 +1840,59 @@ msgid "Move window interactively"
 msgstr "Flytt vinduet interaktivt"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "Flytt vinduet interaktivt ved bruk av musen."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "Endre størrelse på vinduet interaktivt"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "Endre størrelse på vinduet med musen."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "Flytt valgt vindu"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr "Vent til brukeren velger et vindu, flytt så dette interaktivt."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "Endre størrelse på valgt vindu"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr ""
+"Vent til brukeren velger et vindu, endre så størrelsen på dette interaktivt."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Hev og send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Hev vinduet som mottok aktiv hendelse, og spill så av eventuelle "
+"pekerhendelser som invokerte kommandoen."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Hev og send klikk gjennom hvis fokusert"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Hev vinduet som mottok denne hendelsen (hvis det er fokusert), og spill så "
+"av eventuelle pekerhendelser som invokerte kommandoen."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1672,8 +1907,24 @@ msgid "Raise group and pass through click"
 msgstr "Hev gruppe og send klikk gjennom"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Hev gruppen med vinduer som mottok aktiv hendelse, og spill så av\n"
+"eventuelle pekerhendelser som invokerte kommandoen."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Hev transienter og send klikk gjennom"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"Hev vinduet som mottok aktiv hendelse og eventuelle transienter det har,\n"
+"spill så av eventuelle pekerhendelser som invokerte kommandoen."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1694,9 +1945,21 @@ msgid "Shrink window left"
 msgstr "La vindu gli til venstre"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "La vindu gli til høyre"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1704,9 +1967,21 @@ msgid "Shrink window up"
 msgstr "La vindu gli oppover"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "La vindu gli nedover"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1714,9 +1989,19 @@ msgid "Yank window left"
 msgstr "Pakk vindu mot venstre"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "Pakk vindu mot høyre"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1724,73 +2009,147 @@ msgid "Yank window up"
 msgstr "Pakk vindu oppover"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yanks WINDOW upwards until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Pakk vindu nedover"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Vindustørrelse legg til rad"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Øk størrelsen av aktivt vindu med én rad."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract row"
 msgstr "Vindustørrelse trekk fra rad"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Forminsk størrelsen av aktivt vindu med én rad."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add column"
 msgstr "Vindustørrelse legg til kolonne"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Øk størrelsen av aktivt vindu med én kolonne."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract column"
 msgstr "Vindustørrelse trekk fra kolonne"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Forminsk størrelsen av aktivt vindu med én kolonne."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
 msgstr "La vindu gli til venstre"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Flytt vinduet `slide-window-increment' piksler til venstre."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
 msgstr "La vindu gli til høyre"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Flytt vinduet `slide-window-increment' piksler til høyre."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
 msgstr "La vindu gli oppover"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Flytt vinduet `slide-window-increment' piksler oppover."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
 msgstr "La vindu gli nedover"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Flytt vinduet `slide-window-increment' piksler nedover."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
 msgstr "Gli gruppe til venstre"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "Flytt vindusgruppen `slide-window-increment' piksler til venstre."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
 msgstr "Gli gruppe til høyre"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "Flytt vindusgruppen `slide-window-increment' piksler til høyre."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group up"
 msgstr "Gli gruppe opp"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr "Flytt vindusgruppen `slide-window-increment' piksler oppover."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
 msgstr "Gli gruppe ned"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "Flytt vindusgruppen `slide-window-increment' piksler nedover."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Flytt visningsport til neste"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Flytt til neste visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
 msgstr "Flytt visningsport til forrige"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Flytt til forrige visningsområde."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
 msgstr "Flytt vindu til forrige"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Flytt vinduet til forrige visningsområde."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
 msgstr "Flytt vindu til neste"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "Flytt vinduet til forrige visningsområde."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -1844,13 +2203,25 @@ msgstr "Argumenter gitt til «xterm» kommandoen."
 msgid "Xterm"
 msgstr "Xterm"
 
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "Start en ny xterm."
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "Kallkommando"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Kall kommandoen NAVN; alternativt med prefiks argumentet PFKS-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Run shell command"
 msgstr "Kjør skallkommando"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Kjør oppgitt skallkommando."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
@@ -1859,6 +2230,10 @@ msgstr "Kommando:"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "Kommandosekvens"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Start listen med kommandoer, en etter en."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
@@ -1883,6 +2258,10 @@ msgstr "Ingen operasjon"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Kall kommando med utskrift til skjermen"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Spør etter en kommando, kjør den, og vis utdata på skjermen."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -1924,6 +2303,10 @@ msgstr "Plassering"
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
 msgstr "Tilpass"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Start systemet for brukertilpasning."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2015,6 +2398,10 @@ msgstr "Ingen feil."
 msgid "Display errors"
 msgstr "Vis feil"
 
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Vis alle feil som har oppstått på skjermen."
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2063,10 +2450,6 @@ msgid "Locale"
 msgstr "Locale"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Unngå"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore program position"
 msgstr "Ignorer programplassering"
 
@@ -2100,6 +2483,11 @@ msgid "Placement weight"
 msgstr "Plasseringsvekt"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed position"
+msgstr "Posisjon"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Maximized"
 msgstr "Maksimert"
 
@@ -2130,6 +2518,10 @@ msgstr "Rammetype"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "Rammestil"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Unngå"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
@@ -2171,6 +2563,15 @@ msgstr "Hopp over i vinduslisten"
 #, fuzzy
 msgid "Task list skip"
 msgstr "Hopp over i vinduslisten"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "Avmaksimer"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2269,10 +2670,6 @@ msgid "_Forget saved state"
 msgstr "_Glem lagret tilstand"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "History"
-msgstr "Historikk"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
 msgstr "Husk vindusposisjon automatisk."
 
@@ -2293,20 +2690,40 @@ msgid "Window history save position"
 msgstr "Vinduhistorikk lagre posisjon"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Husk aktiv posisjon for det fokuserte vinduet."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
 msgstr "Vinduhistorikk - lagre dimensjoner"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Husk aktive dimensjoner for det fokuserte vinduet."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
 msgstr "Vinduhistorikk - lagre attributter"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Husk aktive attributter for fokusert vindu."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history forget"
 msgstr "Vinduhistorikk - glem"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Glem eventuell fast tilstand assosiert med aktivt vindu."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
 msgstr "Vinduhistorikk - tøm"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Glem all lagret vindushistorikk."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -2317,32 +2734,64 @@ msgid "Workspace down"
 msgstr "Arbeidsområde ned"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Vis arbeidsområdet nedenfor aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace up"
 msgstr "Arbeidsområde opp"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Vis arbeidsområdet over aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace left"
 msgstr "Arbeidsområde til venstre"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Vis arbeidsområdet til venstre for aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace right"
 msgstr "Arbeidsområde til høyre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Vis arbeidsområdet til høyre for aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace down"
 msgstr "Send til arbeidsområde nedenfor"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Send vindu til arbeidsområde nedenfor aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace up"
 msgstr "Send til arbeidsområde over"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Send vindu til arbeidsområde over aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace left"
 msgstr "Send til arbeidsområde til venstre"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Send vindu til arbeidsområde til venstre for aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace right"
 msgstr "Send til arbeidsområde til høyre"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Send vindu til arbeidsområde til høyre for aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -2354,7 +2803,7 @@ msgstr "Klikk-til-fokus modus sender klikket gjennom til applikasjonen."
 
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
+msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr "Senk vinduet til sin laveste tillatte posisjon i stablingsrekkefølgen."
 
 #. ../lisp/sawfish/wm/focus.jl
@@ -2683,12 +3132,24 @@ msgid "Popup window menu"
 msgstr "Vis vindumeny"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Vis menylisten med alle vindusoperasjoner."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
 msgstr "Vis rotmeny"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Vis hovedmenyen."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
 msgstr "Vis applikasjonsmeny"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Vis applikasjosmenyen."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_All settings"
@@ -2732,21 +3193,48 @@ msgstr "Hold transiente vinduer stablet over: \\w"
 msgid "Raise single window"
 msgstr "Hev enkelt vindu"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Hev vinduet til sin høyeste tillatte posisjon in stablingsrekkefølgen."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
 msgstr "Senk enkelt vindu"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Senk vinduet til sin laveste tillatte posisjon i stablingsrekkefølgen."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
 msgstr "Hev enkelt nedre vindu"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Hvis vinduet er i sin høyeste mulige posisjon, senk det til sin\n"
+"lavest mulige posisjon. Ellers heves det så langt som mulig."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Hev vindusdybde"
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Legg vinudet i stabelnivået over nåværende nivå."
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower window depth"
 msgstr "Senk vindusdybde"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Legg vinduet i stabelnivået under det nåværende nivået."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2771,16 +3259,32 @@ msgid "Iconify window"
 msgstr "Ikonifiser vindu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize the window."
+msgstr "Minimer vinduet."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Avikonifiser vinduet"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Restore the window from its minimized state."
+msgstr "Gjenopprett vinduet fra minimert tilstand."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
 msgstr "Slå på/av ikonifisering av vindu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "Veksle mellom ikonifisering av windu W."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify workspace windows"
 msgstr "Ikonifiser arbeidsområdevinduer"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize all windows on the current workspace."
+msgstr "Minimer alle vinduer i aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2795,6 +3299,14 @@ msgid "Toggle window sticky"
 msgstr "Bytt mellom klebrig/ikke-klebrig"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Slå av/på `klebrighet' for vinduet - uansett om det er medlem av alle\n"
+"arbeidsområder eller ikke."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Klebrig"
 
@@ -2803,29 +3315,58 @@ msgid "Make window ignored"
 msgstr "Gjør vindu ignorert"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "Ignorer vinduet."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "Ikke ignorer vindu"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "Stopp ignorering av dette vinduet."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window ignored"
 msgstr "Slå av/på ignorering av vindu"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
+msgstr "Slå av/på ignorering av et vindu."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window never focus"
 msgstr "Slå av/på vindu får aldri fokus"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Slå av/på fokusering av et vindu."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window cycle skip"
 msgstr "Slå av/på hopp over bla gjennom vinduer"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr "Slå av/på ignorering av et vindu under bytting."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window list skip"
 msgstr "Slå av/på hopp over vinduliste"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr "Slå av/på om et vindu skal inkluderes i vinduslisten."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle task list skip"
 msgstr "Slå av/på hopp over vinduliste"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Slå av/på om et vindu skal inkluderes i vinduslisten."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -2857,60 +3398,143 @@ msgid "Maximize window"
 msgstr "Maksimer vindu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "Maksimer dimensjonene for vinduet."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Unmaximize window"
 msgstr "Av-maksimer vindu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr ""
+"Gjenopprett dimensjonene for vinduet til opprinnelig, ikke-maksimert "
+"tilstand."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
 msgstr "Maksimer vindu vertikalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "Maksimer vinduets vertikale dimensjon."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally"
 msgstr "Maksimer vindu horisontalt"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "Maksimer vinduets horisontale dimensjon."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window toggle"
 msgstr "Knapp for maksimering av vindu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr "Veksle tilstanden for vinduet mellom maksimert og ikke-maksimert."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally toggle"
 msgstr "Knapp for å maksimere vinduet horisontalt"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"Veksle tilstanden for vinduet mellom horisontalt maksimert og\n"
+"ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Knapp for å maksimere vinduet vertikalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"Veksle tilstanden for vinduet mellom vertikalt maksimert og\n"
+"ikke-maksimert."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Maksimer fyllvindu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "Maksimer vinduet uten å overlappe andre vinduer."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically"
 msgstr "Maksimer fyllvindu vertikalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr "Maksimer vinduet vertikalt uten å overlappe noen andre vinduer."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally"
 msgstr "Maksimer fyllvindu horisontalt"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr "Maksimer vinduet horisontalt uten å overlappe noen andre vinduer."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window toggle"
 msgstr "Slå av/på maksimer fyllvindu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr "Veksle tilstanden for vinduet mellom maksimert-fylt og ikke-maksimert."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
 msgstr "Slå av/på maksimer fyllvindu horisontalt"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Veksle tilstanden for vinduet mellom horisontalt maksimert-fylt og\n"
+"ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Slå av/på maksimer fyllvindu vertikalt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Veksle tilstanden for vinduet mellom vertikalt maksimert-fylt og\n"
+"ikke-maksimert."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Maksimer vindu til fullskjerm"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "Minimer vinduet."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "Knapp for maksimering av vindu til fullskjerm"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr "Veksle tilstanden for vinduet mellom maksimert og ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -2919,20 +3543,49 @@ msgstr "Maksimer vindu til fullskjerm"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr "Minimer vinduet."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid "Maximize window fullxinerama toggle"
 msgstr "Knapp for maksimering av vindu til fullskjerm"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr "Veksle tilstanden for vinduet mellom maksimert-fylt og ikke-maksimert."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
 msgstr "Skyggelegg vindu"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "Vis kun vinduets tittellinje."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
 msgstr "Fjern skyggelegging fra vindu"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
+msgstr ""
+"Om vinduet er skyggelagt (se `skyggelegg-vindu'), gjenopprett det til sin "
+"vanlige tilstand."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Slå av/på skyggelegging av vindu"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr "Slå av/på skyggelegging (kun tittellinjen vises) tilstand for vindu."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2947,16 +3600,40 @@ msgid "Raise window and transients"
 msgstr "Hev vindu og transienter"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Hev aktivt vindu til høyeste tillatte posisjon i stablingsrekkefølgen.\n"
+"Hev også eventuelle transiente vinduer det har."
+
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Senk vindu og transienter"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Senk aktivt vindu til laveste tillatte posisjon i stablingsrekkefølgen.\n"
+"Senk også eventuelle transiente vinduer det har."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Hev lavere vindu og transienter"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Tabs"
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
+"Hvis vinduet er ved den høyeste mulige posisjon, senk det til\n"
+"laveste mulige posisjon. Ellers hev det så langt som mulig. Endrer\n"
+"også\n"
+"nivå for eventuelle transiente vinduer det har."
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
@@ -2976,7 +3653,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #, fuzzy
-msgid "Add to group"
+msgid "Raise Tabs on Hover"
+msgstr "Hev ved fokus"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
 msgstr "Senk gruppe"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
@@ -2986,13 +3668,28 @@ msgstr "Slett vindu"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Release active window from its group"
+msgstr "Gjenopprett vinduet fra minimert tilstand."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise left window"
 msgstr "Hev nedre vindu"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Raise left window in current group"
+msgstr "Hev lavere vindu og transienter"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise right window"
 msgstr "Hev enkelt vindu"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Hev lavere vindu og transienter"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -3007,8 +3704,16 @@ msgid "Display window without focusing"
 msgstr "Vis vindu uten å gi det fokus"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "Vis arbeidsomdåde/visningsområde som inneholder vindu W."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Vis vindu"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "Vis arbeidsområdet som inneholder vindu W, og gi fokus til W."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3018,9 +3723,17 @@ msgstr "Ny gruppe"
 msgid "Gtkrc reload style"
 msgstr "Stil for gjenlesing av Gtkrc"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "Gjenles gtkrc-innstillingene."
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "Beskriv tast"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "Spør etter en tastesekvens, og skriv så ut bindingen."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -3033,6 +3746,14 @@ msgstr "[Sitat]"
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
 msgstr "Siter hendelse"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Sender neste tastaturhendelse direkte til det fokuserte klientvinduet, og\n"
+"ignorerer eventuelle bindinger det har i vindushåndtereren."
 
 #. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
@@ -3071,6 +3792,14 @@ msgstr "Arbeidsområde %d"
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Arbeidsområde:"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Font for prompt: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Prompt message's colors."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -3124,12 +3853,16 @@ msgid "stop"
 msgstr "Tilpass"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Wether to stop or wrap-around on first/last viewport"
+msgid "Whether to stop or wrap-around on first/last viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "Aktiver visningsport"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Velg spesifisert visningsport."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -3144,44 +3877,95 @@ msgid "Activate viewport column"
 msgstr "Aktiver kolonne i visningsport"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Velg spesifisert kolonne i visningsport."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
 msgstr "Aktiver rad i visningsport"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Velg spesifisert rad i visningsport."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
 msgstr "Flytt vindu til visningsport"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Flytt dette vinduet til spesifisert visningsområde."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
 msgstr "Flytt visningsport til høyre"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Flytt visningsport en skjerm til høyre."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
 msgstr "Flytt visningsport til venstre"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Flytt visningsport en skjerm til venstre."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
 msgstr "Flytt visningsport opp"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Flytt visningsport en skjerm opp."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
 msgstr "Flytt visningsport ned"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Flytt visningsport en skjerm ned."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
 msgstr "Flytt vindu til høyre"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr ""
+"Flytt vinduet til visningsporten til høyre og bytt til denne visningsporten."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Flytt vindu til venstre"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr ""
+"Flytt vinduet til visningsporten til venstre og bytt til denne "
+"visningsporten."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Flytt vindu opp"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr ""
+"Flytt vinduet til visningsporten til over og bytt til denne visningsporten."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Flytt vindu ned"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr ""
+"Flytt vinduet til visningsporten til under og bytt til denne visningsporten."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
@@ -3216,17 +4000,18 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to enable warping the cursor to windows."
+msgid "Whether to enable warping the cursor to windows."
 msgstr "Om man skal dunke inn i ignorerte vinduer ved øking eller pakking."
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to not ignore avoided windows by default."
+msgid "Whether to not ignore avoided windows by default."
 msgstr "Om man skal dunke inn i ignorerte vinduer ved øking eller pakking."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
+msgstr "Om man skal dunke inn i ignorerte vinduer ved øking eller pakking."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -3237,16 +4022,33 @@ msgid "Focus desktop"
 msgstr "Fokuser skrivebord"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Overfør fokus til skrivebordsvinduet (hvis dette eksisterer)."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
 msgstr "Slett vindu"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Slett vinduet."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window safely"
 msgstr "Slett vindu på en trygg måte"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr ""
+"Slett vinduet, eller pip hvis vinduet ikke kan lukkes på en trygg måte."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
 msgstr "Gjør navn på vindu unikt"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Tving aktivt vindu til å ha en unik tittel."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -3309,72 +4111,161 @@ msgid "Popup workspace list"
 msgstr "Vis liste over arbeidsområder"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Vis meny med liste over alle arbeidsområder."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Popup window list"
 msgstr "Vis vinduliste"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Vis meny med alle håndterte vinduer."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
 msgstr "Neste arbeidsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Vis neste arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
 msgstr "Forrige arbeidsområde"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Vis forrige arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
 msgstr "Send til neste arbeidsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Flytt vinduet til neste arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
 msgstr "Send til forrige arbeidsområde"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Flytt vinduet til forrige arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
 msgstr "Kopier til neste arbeidsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Kopier vinduet til neste arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
 msgstr "Kopier til forrige arbeidsområde"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Kopier vinduet til forrige arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
 msgstr "Legg til arbeidsområde til slutt og send"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr ""
+"Opprett et nytt arbeidsområde på slutten av listen, og flytt vinduet til det."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
 msgstr "Legg til arbeidsområde foran og send"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr ""
+"Opprett et nytt arbeidsområde ved starten av listen, og flytt vinduet til "
+"det."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
 msgstr "Flett neste arbeidsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Slett aktivt arbeidsområde. Dets medlemsvinduer relokeres til neste "
+"arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Flett forrige arbeidsområde"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Slett aktivt arbeidsområde. Dets medlemsvinduer relokeres til forrige "
+"arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Sett inn arbeidsområde etter"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Opprett et nytt arbeidsområde som følger etter aktivt arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
 msgstr "Sett inn arbeidsområde før"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Opprett et nytt arbeidsområde før aktivt arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
 msgstr "Flytt arbeidsområde fremover"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Flytt aktivt arbeidsområde én plass til høyre."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace backwards"
 msgstr "Flytt arbeidsområde bakover"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Flytt aktivt arbeidsområde én plass til venstre."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete empty workspaces"
 msgstr "Slett tomme arbeidsområder"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Slett arbeidsområder som ikke inneholder noen vinduer."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete window instance"
 msgstr "Slett vindusinstans"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Fjern kopien av vinduet på aktivt arbeidsområde. Hvis dette er siste instans "
+"som kjører, slett det faktiske vinduet."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -3382,83 +4273,50 @@ msgid "Show desktop"
 msgstr "Fokuser skrivebord"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Hide desktop"
 msgstr "Fokuser skrivebord"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
 msgstr "Aktiver arbeidsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Velg n'te arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
 msgstr "Send til arbeidsområde"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move the current window to the N'th workspace."
+msgstr "Kopier aktivt vindu til n'te arbeidsområde."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Kopier til arbeidsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Kopier aktivt vindu til n'te arbeidsområde."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select workspace interactively"
 msgstr "Velg arbeidsområde interaktivt"
 
-#~ msgid "and many others..."
-#~ msgstr "og mange andre..."
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "Sawfish håndterer dine vinduer med mange funksjoner."
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "Sawfish nettside"
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "Velg neste vindu på aktivt arbeidsområde."
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "Fokus på forrige vindu på aktivt arbeidsområde."
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr "Velg neste vindu, og bla gjennom alle mulige arbeidsområder."
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr "Velg forrige vindu, og bla gjennom alle mulige arbeidsområder."
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "Vis dokumentasjon for et spesifisert symbol."
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Slå av/på GNOME SKIP_WINLIST hintet for vinduet."
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Sett GNOME SKIP_WINLIST hintet for vinduet."
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Slå av GNOME SKIP_WINLIST-hintet for vinduet."
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Slå av/på GNOME SKIP_TASKLIST-hintet for vinduet."
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Slå på GNOME SKIP_TASKLIST-hintet for vinduet."
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Slå av GNOME SKIP_TASKLIST-hintet for vinduet."
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "Logg ut av aktiv GNOME-sesjon."
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "Vis WWW-sidene til GNOME prosjektet."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "Start GNOME hjelpleser."
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "Start om GNOME dialogen."
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr "Slett alle vinduer i gruppen som aktivt vindu er medlem av."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Spør om arbeidsområde og bytt til det."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
@@ -3501,613 +4359,11 @@ msgstr "Velg arbeidsområde interaktivt"
 #~ "av vinduer.\n"
 #~ "«kanskje» betyr at kun vinduer som skal unngås på andre dybder."
 
-#~ msgid ""
-#~ "Grows window to the left until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Øker størrelsen på et vindu mot venstre til det 'treffer' et annet "
-#~ "vindu.\n"
-#~ "Se «grow-window-up»."
-
-#~ msgid ""
-#~ "Grows window to the right until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Øker størrelsen på et vindu mot høyre til det 'treffer' et annet vindu.\n"
-#~ "Se «grow-window-up»."
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Øker vinduet oppover til det «dunker inn i» et annet vindu.\n"
-#~ "Hvis den øverste kanten var utenfor skjermens kant hentes den inn igjen.\n"
-#~ "Hvis et universelt prefiksargument oppgis, maksimeres det oppover i "
-#~ "stedet.\n"
-#~ "Med et numerisk prefiksargument økes det oppover med antall steg som "
-#~ "oppgis for\n"
-#~ "vinduer eller piksler i stedet."
-
-#~ msgid ""
-#~ "Grows window downwards until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Øker størrelsen på vinduet nedover til det 'treffer' et annet vindu.\n"
-#~ "Se «grow-window-up»."
-
-#~ msgid ""
-#~ "Moves window to the left until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Flytter vinduet til venstre til det 'treffer' et annet vindu.\n"
-#~ "Se «pack-window-up»."
-
-#~ msgid ""
-#~ "Moves window to the right until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Flytter vinduet til høyre til det 'treffer' et annet vindu.\n"
-#~ "Se «pack-window-up»."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Flytter vinduet oppover til det «dunker inn i» et annet vindu.\n"
-#~ "Hvis den øverste kanten var utenfor skjermkanten flyttes det inn igjen.\n"
-#~ "Med et universelt prefiksargument flyttes det helt opp i stedet.\n"
-#~ "Med et numerisk prefiksargument flyttes det oppover med spesifisert "
-#~ "antll\n"
-#~ "piksler i stedet."
-
-#~ msgid ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Flytter vinduet nedover til det 'treffer' et annet vindu.\n"
-#~ "Se «pack-window-up»."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr "Flytt pekeren `move-cursor-increment' piksler til høyre."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr "Flytt pekeren `move-cursor-increment' piksler til venstre."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr "Flytt pekeren `move-cursor-increment' piksler oppover."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr "Flytt pekeren `move-cursor-increment' piksler nedover."
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "Flytt pekeren 1 piksel til høyre."
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "Flytt pekeren 1 piksel til venstre."
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "Flytt pekeren 1 piksel nedover."
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "Flytt pekeren 1 piksel nedover."
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "Flytt vinduet interaktivt ved bruk av musen."
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "Endre størrelse på vinduet med musen."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr "Vent til brukeren velger et vindu, flytt så dette interaktivt."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that "
-#~ "window."
-#~ msgstr ""
-#~ "Vent til brukeren velger et vindu, endre så størrelsen på dette "
-#~ "interaktivt."
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any "
-#~ "pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "Hev vinduet som mottok aktiv hendelse, og spill så av eventuelle "
-#~ "pekerhendelser som invokerte kommandoen."
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Hev vinduet som mottok denne hendelsen (hvis det er fokusert), og spill "
-#~ "så av eventuelle pekerhendelser som invokerte kommandoen."
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Hev gruppen med vinduer som mottok aktiv hendelse, og spill så av\n"
-#~ "eventuelle pekerhendelser som invokerte kommandoen."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Hev vinduet som mottok aktiv hendelse og eventuelle transienter det har,\n"
-#~ "spill så av eventuelle pekerhendelser som invokerte kommandoen."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "Øk størrelsen av aktivt vindu med én rad."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "Forminsk størrelsen av aktivt vindu med én rad."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "Øk størrelsen av aktivt vindu med én kolonne."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "Forminsk størrelsen av aktivt vindu med én kolonne."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr "Flytt vinduet `slide-window-increment' piksler til venstre."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr "Flytt vinduet `slide-window-increment' piksler til høyre."
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr "Flytt vinduet `slide-window-increment' piksler oppover."
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr "Flytt vinduet `slide-window-increment' piksler nedover."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr "Flytt vindusgruppen `slide-window-increment' piksler til venstre."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr "Flytt vindusgruppen `slide-window-increment' piksler til høyre."
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr "Flytt vindusgruppen `slide-window-increment' piksler oppover."
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr "Flytt vindusgruppen `slide-window-increment' piksler nedover."
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "Flytt til neste visningsområde."
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "Flytt til forrige visningsområde."
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "Flytt vinduet til forrige visningsområde."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
 
-#~ msgid "Start a new xterm."
-#~ msgstr "Start en ny xterm."
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr "Kall kommandoen NAVN; alternativt med prefiks argumentet PFKS-ARG."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "Kjør oppgitt skallkommando."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "Start listen med kommandoer, en etter en."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr "Spør etter en kommando, kjør den, og vis utdata på skjermen."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "Start systemet for brukertilpasning."
-
 #~ msgid "Error Handling"
 #~ msgstr "Feilhåndtering"
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "Vis alle feil som har oppstått på skjermen."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "Husk aktiv posisjon for det fokuserte vinduet."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "Husk aktive dimensjoner for det fokuserte vinduet."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr "Husk aktive attributter for fokusert vindu."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr "Glem eventuell fast tilstand assosiert med aktivt vindu."
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "Glem all lagret vindushistorikk."
-
-#~ msgid "View the workspace below the current workspace"
-#~ msgstr "Vis arbeidsområdet nedenfor aktivt arbeidsområde."
-
-#~ msgid "View the workspace above the current workspace"
-#~ msgstr "Vis arbeidsområdet over aktivt arbeidsområde."
-
-#~ msgid "View the workspace to the left of the current workspace"
-#~ msgstr "Vis arbeidsområdet til venstre for aktivt arbeidsområde."
-
-#~ msgid "View the workspace to the right of the current workspace"
-#~ msgstr "Vis arbeidsområdet til høyre for aktivt arbeidsområde."
-
-#~ msgid "Send window to the workspace below the current workspace"
-#~ msgstr "Send vindu til arbeidsområde nedenfor aktivt arbeidsområde."
-
-#~ msgid "Send window to the workspace above the current workspace"
-#~ msgstr "Send vindu til arbeidsområde over aktivt arbeidsområde."
-
-#~ msgid "Send window to the workspace left of the current workspace"
-#~ msgstr "Send vindu til arbeidsområde til venstre for aktivt arbeidsområde."
-
-#~ msgid "Send window to the workspace right of the current workspace"
-#~ msgstr "Send vindu til arbeidsområde til høyre for aktivt arbeidsområde."
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "Vis menylisten med alle vindusoperasjoner."
-
-#~ msgid "Display the main menu."
-#~ msgstr "Vis hovedmenyen."
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Vis applikasjosmenyen."
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr ""
-#~ "Hev vinduet til sin høyeste tillatte posisjon in stablingsrekkefølgen."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr ""
-#~ "Senk vinduet til sin laveste tillatte posisjon i stablingsrekkefølgen."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "Hvis vinduet er i sin høyeste mulige posisjon, senk det til sin\n"
-#~ "lavest mulige posisjon. Ellers heves det så langt som mulig."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr "Legg vinudet i stabelnivået over nåværende nivå."
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr "Legg vinduet i stabelnivået under det nåværende nivået."
-
-#~ msgid "Minimize the window."
-#~ msgstr "Minimer vinduet."
-
-#~ msgid "Restore the window from its minimized state."
-#~ msgstr "Gjenopprett vinduet fra minimert tilstand."
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "Veksle mellom ikonifisering av windu W."
-
-#~ msgid "Minimize all windows on the current workspace."
-#~ msgstr "Minimer alle vinduer i aktivt arbeidsområde."
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "Slå av/på `klebrighet' for vinduet - uansett om det er medlem av alle\n"
-#~ "arbeidsområder eller ikke."
-
-#~ msgid "Ignore the window."
-#~ msgstr "Ignorer vinduet."
-
-#~ msgid "Unignore the window."
-#~ msgstr "Stopp ignorering av dette vinduet."
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "Slå av/på ignorering av et vindu."
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "Slå av/på fokusering av et vindu."
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr "Slå av/på ignorering av et vindu under bytting."
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr "Slå av/på om et vindu skal inkluderes i vinduslisten."
-
-#, fuzzy
-#~ msgid "Toggle whether a window will be included in the task-list."
-#~ msgstr "Slå av/på om et vindu skal inkluderes i vinduslisten."
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "Maksimer dimensjonene for vinduet."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr ""
-#~ "Gjenopprett dimensjonene for vinduet til opprinnelig, ikke-maksimert "
-#~ "tilstand."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "Maksimer vinduets vertikale dimensjon."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "Maksimer vinduets horisontale dimensjon."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr "Veksle tilstanden for vinduet mellom maksimert og ikke-maksimert."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Veksle tilstanden for vinduet mellom horisontalt maksimert og\n"
-#~ "ikke-maksimert."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Veksle tilstanden for vinduet mellom vertikalt maksimert og\n"
-#~ "ikke-maksimert."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "Maksimer vinduet uten å overlappe andre vinduer."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr "Maksimer vinduet vertikalt uten å overlappe noen andre vinduer."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr "Maksimer vinduet horisontalt uten å overlappe noen andre vinduer."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr ""
-#~ "Veksle tilstanden for vinduet mellom maksimert-fylt og ikke-maksimert."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Veksle tilstanden for vinduet mellom horisontalt maksimert-fylt og\n"
-#~ "ikke-maksimert."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Veksle tilstanden for vinduet mellom vertikalt maksimert-fylt og\n"
-#~ "ikke-maksimert."
-
-#, fuzzy
-#~ msgid "Fullscreen maximize the window."
-#~ msgstr "Minimer vinduet."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized and "
-#~ "unmaximized."
-#~ msgstr "Veksle tilstanden for vinduet mellom maksimert og ikke-maksimert."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized across all "
-#~ "Xinerama and unmaximized."
-#~ msgstr ""
-#~ "Veksle tilstanden for vinduet mellom maksimert-fylt og ikke-maksimert."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "Vis kun vinduets tittellinje."
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr ""
-#~ "Om vinduet er skyggelagt (se `skyggelegg-vindu'), gjenopprett det til sin "
-#~ "vanlige tilstand."
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr ""
-#~ "Slå av/på skyggelegging (kun tittellinjen vises) tilstand for vindu."
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Hev aktivt vindu til høyeste tillatte posisjon i stablingsrekkefølgen.\n"
-#~ "Hev også eventuelle transiente vinduer det har."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Senk aktivt vindu til laveste tillatte posisjon i stablingsrekkefølgen.\n"
-#~ "Senk også eventuelle transiente vinduer det har."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Hvis vinduet er ved den høyeste mulige posisjon, senk det til\n"
-#~ "laveste mulige posisjon. Ellers hev det så langt som mulig. Endrer\n"
-#~ "også\n"
-#~ "nivå for eventuelle transiente vinduer det har."
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "Vis arbeidsomdåde/visningsområde som inneholder vindu W."
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr "Vis arbeidsområdet som inneholder vindu W, og gi fokus til W."
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "Gjenles gtkrc-innstillingene."
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr "Spør etter en tastesekvens, og skriv så ut bindingen."
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "Sender neste tastaturhendelse direkte til det fokuserte klientvinduet, "
-#~ "og\n"
-#~ "ignorerer eventuelle bindinger det har i vindushåndtereren."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "Velg spesifisert visningsport."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "Velg spesifisert kolonne i visningsport."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "Velg spesifisert rad i visningsport."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "Flytt dette vinduet til spesifisert visningsområde."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "Flytt visningsport en skjerm til høyre."
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "Flytt visningsport en skjerm til venstre."
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "Flytt visningsport en skjerm opp."
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "Flytt visningsport en skjerm ned."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the right, and switch to that viewport."
-#~ msgstr ""
-#~ "Flytt vinduet til visningsporten til høyre og bytt til denne "
-#~ "visningsporten."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the left, and switch to that viewport."
-#~ msgstr ""
-#~ "Flytt vinduet til visningsporten til venstre og bytt til denne "
-#~ "visningsporten."
-
-#~ msgid "Move the window to the viewport above, and switch to that viewport."
-#~ msgstr ""
-#~ "Flytt vinduet til visningsporten til over og bytt til denne "
-#~ "visningsporten."
-
-#~ msgid "Move the window to the viewport below, and switch to that viewport."
-#~ msgstr ""
-#~ "Flytt vinduet til visningsporten til under og bytt til denne "
-#~ "visningsporten."
-
-#~ msgid "Transfer input focus to the desktop window (if one exists)."
-#~ msgstr "Overfør fokus til skrivebordsvinduet (hvis dette eksisterer)."
-
-#~ msgid "Delete the window."
-#~ msgstr "Slett vinduet."
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr ""
-#~ "Slett vinduet, eller pip hvis vinduet ikke kan lukkes på en trygg måte."
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "Tving aktivt vindu til å ha en unik tittel."
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "Vis meny med liste over alle arbeidsområder."
-
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "Vis meny med alle håndterte vinduer."
-
-#~ msgid "Display the next workspace."
-#~ msgstr "Vis neste arbeidsområde."
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "Vis forrige arbeidsområde."
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "Flytt vinduet til neste arbeidsområde."
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "Flytt vinduet til forrige arbeidsområde."
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "Kopier vinduet til neste arbeidsområde."
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "Kopier vinduet til forrige arbeidsområde."
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr ""
-#~ "Opprett et nytt arbeidsområde på slutten av listen, og flytt vinduet til "
-#~ "det."
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to "
-#~ "it."
-#~ msgstr ""
-#~ "Opprett et nytt arbeidsområde ved starten av listen, og flytt vinduet til "
-#~ "det."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the "
-#~ "next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "Slett aktivt arbeidsområde. Dets medlemsvinduer relokeres til neste "
-#~ "arbeidsområde."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "Slett aktivt arbeidsområde. Dets medlemsvinduer relokeres til forrige "
-#~ "arbeidsområde."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr ""
-#~ "Opprett et nytt arbeidsområde som følger etter aktivt arbeidsområde."
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "Opprett et nytt arbeidsområde før aktivt arbeidsområde."
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "Flytt aktivt arbeidsområde én plass til høyre."
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "Flytt aktivt arbeidsområde én plass til venstre."
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "Slett arbeidsområder som ikke inneholder noen vinduer."
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "Fjern kopien av vinduet på aktivt arbeidsområde. Hvis dette er siste "
-#~ "instans som kjører, slett det faktiske vinduet."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "Velg n'te arbeidsområde."
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "Kopier aktivt vindu til n'te arbeidsområde."
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "Spør om arbeidsområde og bytt til det."
 
 #~ msgid "Select Icon"
 #~ msgstr "Velg ikon"

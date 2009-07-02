@@ -30,13 +30,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 08:31+0100\n"
+"POT-Creation-Date: 2009-07-02 21:37+0200\n"
 "PO-Revision-Date: 2009-01-11 13:05+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "und viele andere …"
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "Sawfish verwaltet Ihre Fenster und ist vielfältig erweiterbar."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "Sawfish-Homepage"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1248,6 +1260,11 @@ msgstr "Aktionen"
 msgid "Window Cycling"
 msgstr "Durchwechseln durch Fenster"
 
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tabs"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
@@ -1263,6 +1280,16 @@ msgstr "Fensterbedingungen"
 msgid "Tooltips"
 msgstr "Minihilfen"
 
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "History"
+msgstr "Chronik"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -1273,20 +1300,44 @@ msgid "Next workspace window"
 msgstr "Nächstes Fenster auf der Arbeitsfläche"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "Das nächste Fenster der aktuellen Arbeitsfläche auswählen."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous workspace window"
 msgstr "Vorheriges Fenster auf der Arbeitsfläche"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "Auf das vorherige Fenster der aktuellen Arbeitsfläche fokussieren."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next window"
 msgstr "Nächstes Fenster"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr ""
+"Das nächste Fenster auswählen, dabei alle möglichen Arbeitsflächen\n"
+"berücksichtigen."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous window"
 msgstr "Vorheriges Fenster"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr ""
+"Das vorherige Fenster auswählen, dabei alle möglichen Arbeitsflächen\n"
+"berücksichtigen."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
 msgstr "Symbol beschreiben"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "Die Dokumentation eines angegebenen Symbols anzeigen."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
@@ -1301,40 +1352,80 @@ msgid "Gnome toggle skip winlist"
 msgstr "In Fensterliste überspringen für GNOME ein/aus"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "Den GNOME-Hint SKIP_WINLIST für dieses Fenster ein-/ausschalten."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip winlist"
 msgstr "In Fensterliste überspringen für GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "Den GNOME-Hint SKIP_WINLIST für dieses Fenster einschalten."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip winlist"
 msgstr "In Fensterliste nicht überspringen für GNOME"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "Den GNOME-Hint SKIP_WINLIST für dieses Fenster ausschalten."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip tasklist"
 msgstr "In Taskliste überspringen für GNOME ein/aus"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Den GNOME-Hint SKIP_TASKLIST für dieses Fenster ein-/ausschalten."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip tasklist"
 msgstr "In Taskliste überspringen für GNOME"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Den GNOME-Hint SKIP_TASKLIST für dieses Fenster einschalten."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip tasklist"
 msgstr "In Taskliste nicht überspringen für GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Den GNOME-Hint SKIP_TASKLIST für dieses Fenster ausschalten."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
 msgstr "GNOME-Abmeldung"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "Von der aktuellen GNOME-Sitzung abmelden."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
 msgstr "GNOME-WWW-Seite"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "Die WWW-Seite des GNOME-Projektes anzeigen."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome help browser"
 msgstr "GNOME-Hilfebrowser"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "Den GNOME-Hilfebrowser starten."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
 msgstr "Über GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "Das GNOME-Info-Dialogfeld anzeigen."
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1420,6 +1511,11 @@ msgstr "Gruppentiefe absenken"
 msgid "Delete group"
 msgstr "Gruppe löschen"
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr ""
+"Alle Fenster in der Gruppe löschen, zu der das aktuelle Fenster gehört."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Growing and packing of windows"
 msgstr "Aufweiten und Packen von Fenstern"
@@ -1471,32 +1567,114 @@ msgid "Grow window left"
 msgstr "Fenster nach links aufweiten"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Fenster nach links aufweiten, bis es an ein anderes stößt.\n"
+"Siehe »Fenster aufweiten«."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Fenster nach rechts aufweiten"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Fenster nach rechts aufweiten, bis es an ein anderes stößt.\n"
+"Siehe »Fenster aufweiten«."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Fenster nach oben aufweiten"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Vergrößert das Fenster nach oben, bis sich dieses mit einem\n"
+"anderen Fenster überschneidet.\n"
+"Falls die Oberkante unterhalb des Bildschirmrands war, wird es\n"
+"zurück nach innen gebracht.\n"
+"Mit einem universellen Präfix-Argument wird es stattdessen\n"
+"maximal nach oben vergrößert.\n"
+"Mit einem numerischen Präfix-Argument wird es stattdessen\n"
+"um so viele Pixel nach oben vergrößert."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Fenster nach unten aufweiten"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Fenster nach unten aufweiten, bis es auf ein anderes stößt.\n"
+"Siehe »Fenster aufweiten«."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Fenster nach links packen"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Fenster nach links verschieben, bis es an ein anderes stößt.\n"
+"Siehe »Fenster packen«."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Fenster nach rechts packen"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Fenster nach rechts verschieben, bis es an ein anderes stößt.\n"
+"Siehe »Fenster packen«."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Fenster nach oben packen"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Verschiebt das Fenster nach oben, bis sich dieses mit einem\n"
+"anderen Fenster überschneidet.\n"
+"Falls die Oberkante unterhalb des Bildschirmrands war, wird es\n"
+"zurück nach innen verschoben.\n"
+"Mit einem universellen Präfix-Argument wird es stattdessen\n"
+"maximal nach oben verschoben.\n"
+"Mit einem numerischen Präfix-Argument wird es stattdessen\n"
+"um so viele Pixel nach oben verschoben."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Fenster nach unten packen"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Fenster nach unten verschieben, bis es an ein anderes stößt.\n"
+"Siehe »Fenster packen«."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
@@ -1560,32 +1738,64 @@ msgid "Move cursor right"
 msgstr "Cursor nach rechts verschieben"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr "Den Cursor um »move-cursor-increment« Pixel nach rechts verschieben."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left"
 msgstr "Cursor nach links verschieben"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Den Cursor um »move-cursor-increment« Pixel nach links verschieben."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up"
 msgstr "Cursor nach oben verschieben"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "Den Cursor um »move-cursor-increment« Pixel nach oben verschieben."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down"
 msgstr "Cursor nach unten verschieben"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "Den Cursor um »move-cursor-increment« Pixel nach unten verschieben."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right fine"
 msgstr "Cursor fein nach rechts verschieben"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "Den Cursor um ein Pixel nach rechts verschieben."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left fine"
 msgstr "Cursor fein nach links verschieben"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "Den Cursor um ein Pixel nach links verschieben."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up fine"
 msgstr "Cursor fein nach oben verschieben"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "Den Cursor um ein Pixel nach oben verschieben."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down fine"
 msgstr "Cursor fein nach unten verschieben"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "Den Cursor um ein Pixel nach unten verschieben."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1674,24 +1884,63 @@ msgid "Move window interactively"
 msgstr "Fenster interaktiv verschieben"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "Das Fenster interaktiv mit der Maus verschieben."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "Fenstergröße interaktiv verändern"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "Die Fenstergröße interaktiv mit der Maus verändern."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "Ausgewähltes Fenster bewegen"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr ""
+"Den Benutzer ein Fenster auswählen lassen, dieses dann interaktiv "
+"verschieben."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "Ausgewähltes Fenster in der Größe ändern"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr ""
+"Den Benutzer ein Fenster auswählen lassen, dieses dann interaktiv mit der "
+"Maus in der Größe ändern."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Anheben und Klick durchreichen"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Das Fenster anheben, das das aktuelle Ereignis erhalten hat, dann alle\n"
+"Zeigerereignisse abspielen, die den Befehl aufgerufen haben."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Anheben und Klick durchreichen wenn fokussiert"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Das Fenster anheben lassen, das das aktuelle Ereignis erhalten hat\n"
+"(falls es fokussiert ist), dann alle Zeigerereignisse abspielen, die\n"
+"den Befehl aufgerufen haben."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1706,8 +1955,25 @@ msgid "Raise group and pass through click"
 msgstr "Gruppe anheben und Klick durchreichen"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Die Fenstergruppe anheben, die das aktuelle Ereignis erhalten hat,\n"
+"dann alle Zeigerereignisse abspielen, die den Befehl aufgerufen haben."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Dialoge anheben und Klick durchreichen"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"Das Fenster, das das aktuelle Ereignis erhalten hat, mit allen seinen\n"
+"flüchtigen Kindern anheben, dann alle Zeigerereignisse abspielen, die\n"
+"den Befehl aufgerufen haben."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1728,9 +1994,21 @@ msgid "Shrink window left"
 msgstr "Fenster nach links schieben"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "Fenster nach rechts schieben"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1738,9 +2016,21 @@ msgid "Shrink window up"
 msgstr "Fenster nach oben schieben"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "Fenster nach unten schieben"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1748,9 +2038,19 @@ msgid "Yank window left"
 msgstr "Fenster nach links packen"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "Fenster nach rechts packen"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1758,73 +2058,151 @@ msgid "Yank window up"
 msgstr "Fenster nach oben packen"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yanks WINDOW upwards until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Fenster nach unten packen"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Fenster um eine Zeile vergrößern"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Das aktuelle Fenster um eine Zeile vergrößern."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract row"
 msgstr "Fenster um eine Zeile verkleinern"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Das aktuelle Fenster um eine Zeile verkleinern."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add column"
 msgstr "Fenster um eine Spalte vergrößern"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Das aktuelle Fenster um eine Spalte vergrößern."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract column"
 msgstr "Fenster um eine Spalte verkleinern"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Das aktuelle Fenster um eine Spalte verkleinern."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
 msgstr "Fenster nach links schieben"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Das Fenster um »slide-window-increment« Pixel nach rechts verschieben."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
 msgstr "Fenster nach rechts schieben"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Das Fenster um »slide-window-increment« Pixel nach links verschieben."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
 msgstr "Fenster nach oben schieben"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Das Fenster um »slide-window-increment« Pixel nach oben verschieben."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
 msgstr "Fenster nach unten schieben"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Das Fenster um »slide-window-increment« Pixel nach unten verschieben."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
 msgstr "Gruppe nach links schieben"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr ""
+"Die Fenstergruppe um »slide-window-increment« Pixel nach links verschieben."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
 msgstr "Gruppe nach rechts schieben"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr ""
+"Die Fenstergruppe um »slide-window-increment« Pixel nach rechts verschieben."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group up"
 msgstr "Gruppe nach oben schieben"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr ""
+"Die Fenstergruppe um »slide-window-increment« Pixel nach oben verschieben."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
 msgstr "Gruppe nach unten schieben"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr ""
+"Die Fenstergruppe um »slide-window-increment« Pixel nach unten verschieben."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Zum nächsten Sichtfeld"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Zum nächsten Sichtfeld gehen."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
 msgstr "Zum vorherigen Sichtfeld"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Zum vorherige Sichtfeld gehen."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
 msgstr "Fenster in vorheriges verschieben"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Das Fenster in das vorherige Sichtfeld verschieben."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
 msgstr "Fenster in nächstes verschieben"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "Das Fenster in das vorherige Sichtfeld verschieben."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -1878,13 +2256,25 @@ msgstr "Argumente für den Befehl »xterm«."
 msgid "Xterm"
 msgstr "XTerm"
 
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "Ein neues XTerm starten."
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "Befehl aufrufen"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Den Befehl NAME aufrufen; evtl. mit dem Präfixargument PFX-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Run shell command"
 msgstr "Shell-Befehl ausführen"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Den angegebenen Shell-Befehl ausführen."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
@@ -1893,6 +2283,10 @@ msgstr "Befehl:"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "Befehlssequenz"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Die Liste von Befehlen ausführen, einen nach dem anderen."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
@@ -1917,6 +2311,12 @@ msgstr "Kein Vorgang"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Befehl mit Ausgabe auf Bildschirm ausführen"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr ""
+"Nach einem Befehl fragen, ihn ausführen, und jede etwaige Ausgabe auf dem "
+"Bildschirm anzeigen."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -1958,6 +2358,10 @@ msgstr "Platzierung"
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
 msgstr "Anpassen"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Das Benutzer-Anpassungssystem aufrufen."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2051,6 +2455,10 @@ msgstr "Keine Fehler."
 msgid "Display errors"
 msgstr "Fehler anzeigen"
 
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Alle vorgekommenen Fehler auf dem Bildschirm anzeigen."
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2099,10 +2507,6 @@ msgid "Locale"
 msgstr "Locale"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Vermeiden"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore program position"
 msgstr "Programmgegebene Position ignorieren"
 
@@ -2136,6 +2540,11 @@ msgid "Placement weight"
 msgstr "Platzierungsgewicht"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed position"
+msgstr "Position"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Maximized"
 msgstr "Maximiert"
 
@@ -2166,6 +2575,10 @@ msgstr "Rahmentyp"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "Rahmenstil"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Vermeiden"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
@@ -2207,6 +2620,15 @@ msgstr "In Fensterliste überspringen"
 #, fuzzy
 msgid "Task list skip"
 msgstr "In Fensterliste überspringen"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "_Wiederherstellen"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2305,10 +2727,6 @@ msgid "_Forget saved state"
 msgstr "Gespeicherten Zustand _vergessen"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "History"
-msgstr "Chronik"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
 msgstr "An Fensterpositionen automatisch erinnern."
 
@@ -2329,20 +2747,41 @@ msgid "Window history save position"
 msgstr "Position in Fensterchronik speichern"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "An die aktuelle Position des fokussierten Fensters erinnern."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
 msgstr "Maße in Fensterchronik speichern"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "An die aktuellen Maße des fokussierten Fensters erinnern."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
 msgstr "Attribute in Fensterchronik speichern"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "An die aktuellen Attribute des fokussierten Fensters erinnern."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history forget"
 msgstr "Fensterchronik vergessen"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr ""
+"Jegliche dauerhaften Statusinformationen über das aktuelle Fenster vergessen."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
 msgstr "Fensterchronik löschen"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Jegliche gespeicherte Fensterchronik vergessen."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -2353,32 +2792,64 @@ msgid "Workspace down"
 msgstr "Arbeitsfläche unten"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Die Arbeitsfläche unterhalb der aktuellen anzeigen"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace up"
 msgstr "Arbeitsfläche oben"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Die Arbeitsfläche oberhalb der aktuellen anzeigen"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace left"
 msgstr "Arbeitsfläche links"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Die Arbeitsfläche links von der aktuellen anzeigen"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace right"
 msgstr "Arbeitsfläche rechts"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Die Arbeitsfläche rechts von der aktuellen anzeigen"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace down"
 msgstr "Auf untere Arbeitsfläche schicken"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Fenster auf die Arbeitsfläche unterhalb der aktuellen schicken"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace up"
 msgstr "Auf obere Arbeitsfläche schicken"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Fenster auf die Arbeitsfläche oberhalb der aktuellen schicken"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace left"
 msgstr "Auf linke Arbeitsfläche schicken"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Fenster auf die Arbeitsfläche links von der aktuellen schicken"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace right"
 msgstr "Auf rechte Arbeitsfläche schicken"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Fenster auf die Arbeitsfläche rechts von der aktuellen schicken"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -2390,7 +2861,7 @@ msgstr "»click-to-focus«-Modus reicht den Klick an die Anwendung weiter."
 
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
+msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr ""
 "Das Fenster auf seine niedrigste erlaubte Stellung in der Schichtung\n"
 "absenken."
@@ -2713,12 +3184,24 @@ msgid "Popup window menu"
 msgstr "Fenstermenü anzeigen"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Das Menü mit sämtlichen Fensteraktionen anzeigen."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
 msgstr "Hintergrundmenü anzeigen"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Das Hauptmenü anzeigen."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
 msgstr "Anwendungsmenü anzeigen"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Das Anwendungsmenü anzeigen."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_All settings"
@@ -2763,21 +3246,52 @@ msgstr "Vergängliche Fenster gestapelt halten über: \\w"
 msgid "Raise single window"
 msgstr "Einzelnes Fenster anheben"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr ""
+"Das Fenster auf seine höchste erlaubte Stellung in der Schichtung\n"
+"anheben."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
 msgstr "Einzelnes Fenster absenken"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr ""
+"Das Fenster auf seine niedrigste erlaubte Stellung in der Schichtung\n"
+"absenken."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
 msgstr "Einzelnes Fenster anheben/absenken"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Wenn das Fenster auf seiner höchsten erlaubten Stellung ist, es auf die\n"
+"niedrigste erlaubte absenken. Andernfalls so weit wie möglich anheben."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Fenstertiefe anheben"
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Das Fenster in die Stapelebene über seiner derzeitigen anheben."
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower window depth"
 msgstr "Fenstertiefe absenken"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Das Fenster in die Stapelebene unter seiner derzeitigen absenken."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2802,16 +3316,32 @@ msgid "Iconify window"
 msgstr "Fenster minimieren"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize the window."
+msgstr "Das Fenster minimieren."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Fenster wiederherstellen"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Restore the window from its minimized state."
+msgstr "Das Fenster aus dem minimierten Zustand zurückrufen."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
 msgstr "Minimierung des Fensters umschalten"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "Die Minimierung des Fensters W umschalten."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify workspace windows"
 msgstr "Fenster der Arbeitsfläche minimieren"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize all windows on the current workspace."
+msgstr "Alle Fenster auf der aktuellen Arbeitsfläche minimieren."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2826,6 +3356,14 @@ msgid "Toggle window sticky"
 msgstr "Fenster ankleben ein/aus"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Die »Klebrigkeit« des Fensters ein-/ausschalten -- ganz gleich, ob es\n"
+"zu allen Arbeitsflächen gehört oder nicht."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Klebrig"
 
@@ -2834,29 +3372,58 @@ msgid "Make window ignored"
 msgstr "Fenster ignorieren lassen"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "Das Fenster ignorieren."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "Fenster nicht ignorieren lassen"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "Aufhören, das Fenster zu ignorieren."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window ignored"
 msgstr "Ignorieren des Fensters umschalten"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
+msgstr "Ignorieren eines Fensters ein-/ausschalten."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window never focus"
 msgstr "Fenster nie fokussieren ein/aus"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Fokussierbarkeit eines Fensters ein-/ausschalten."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window cycle skip"
 msgstr "Fenster beim Durchlaufen überspringen ein/aus"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr "Ignorieren eines Fensters beim Durchwechseln ein-/ausschalten."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window list skip"
 msgstr "Überspringen in Fensterliste umschalten"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr "Einschließen eines Fensters in die Fensterliste ein-/ausschalten."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle task list skip"
 msgstr "Überspringen in Fensterliste umschalten"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Einschließen eines Fensters in die Fensterliste ein-/ausschalten."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -2887,60 +3454,143 @@ msgid "Maximize window"
 msgstr "Fenster maximieren"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "Die Maße des Fensters maximieren."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Unmaximize window"
 msgstr "Fenster wiederherstellen"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr ""
+"Die Maße des Fensters auf ihren ursprünglichen, nicht maximierten Zustand "
+"zurücksetzen."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
 msgstr "Fenster vertikal maximieren"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "Die Höhe des Fensters maximieren."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally"
 msgstr "Fenster horizontal maximieren"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "Die Breite des Fensters maximieren."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window toggle"
 msgstr "Maximieren ein/aus"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr "Das Fenster zwischen maximiert und unmaximiert umschalten."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally toggle"
 msgstr "Fenster in der Breite maximieren ein/aus"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"Das Fenster in der Breite zwischen maximiert und unmaximiert\n"
+"umschalten."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Fenster in der Höhe maximieren ein/aus"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"Das Fenster in der Höhe zwischen maximiert und unmaximiert\n"
+"umschalten."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Fenster schonend maximieren"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "Das Fenster maximieren, ohne andere zu verdecken."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically"
 msgstr "Fenster vertikal schonend maximieren"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr "Das Fenster in der Höhe maximieren, ohne andere zu verdecken."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally"
 msgstr "Fenster horizontal schonend maximieren"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr "Das Fenster in der Breite maximieren, ohne andere zu verdecken."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window toggle"
 msgstr "Fenster schonend maximieren ein/aus"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr "Das Fenster zwischen maximiert/gefüllt und unmaximiert umschalten."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
 msgstr "Fenster in der Breite schonend maximieren ein/aus"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Das Fenster in der Breite zwischen maximiert/gefüllt und unmaximiert\n"
+"umschalten."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Fenster in der Höhe schonend maximierend ein/aus"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Das Fenster in der Höhe zwischen maximiert/gefüllt und unmaximiert\n"
+"umschalten."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Fenster auf Vollbild maximieren"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "Das Fenster minimieren."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "Fenster auf Vollbild maximieren ein/aus"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr "Das Fenster zwischen maximiert und unmaximiert umschalten."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -2949,20 +3599,51 @@ msgstr "Fenster auf Vollbild maximieren"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr "Das Fenster minimieren."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid "Maximize window fullxinerama toggle"
 msgstr "Fenster auf Vollbild maximieren ein/aus"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr "Das Fenster zwischen maximiert/gefüllt und unmaximiert umschalten."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
 msgstr "Fenster einrollen"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "Nur die Titelleiste des Fensters anzeigen."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
 msgstr "Fenster ausrollen"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
+msgstr ""
+"Falls das Fenster aufgerollt ist (siehe »shade-window«), es in seinen\n"
+"Normalzustand zurückführen."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Fenster ein-/ausrollen"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr ""
+"Den aufgerollten Zustand des Fensters (nur die Titelleiste wird angezeigt) "
+"ein-/ausschalten."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2978,16 +3659,39 @@ msgid "Raise window and transients"
 msgstr "Fenster und Dialoge anheben"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Das aktuelle Fenster zu seiner höchsten erlaubten Stellung in der\n"
+"Schichtung anheben. Auch alle Dialoge anheben, die dazugehören."
+
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Fenster und Dialoge absenken"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Das aktuelle Fenster zu seiner niedrigsten erlaubten Stellung in der\n"
+"Schichtung absenken. Auch alle Dialoge absenken, die dazugehören."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Fenster und Dialoge anheben/absenken"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Tabs"
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
+"Falls das Fenster auf seiner höchsten möglichen Stellung ist, es auf\n"
+"die niedrigstmögliche absenken. Es andernfalls so weit wie erlaubt\n"
+"anheben. Auch die Ebene aller dazugehörigen Dialoge mit ändern."
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
@@ -3007,7 +3711,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #, fuzzy
-msgid "Add to group"
+msgid "Raise Tabs on Hover"
+msgstr "Beim Fokussieren anheben"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
 msgstr "Gruppe absenken"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
@@ -3017,13 +3726,28 @@ msgstr "Fenster löschen"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Release active window from its group"
+msgstr "Das Fenster aus dem minimierten Zustand zurückrufen."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise left window"
 msgstr "Fenster anheben/absenken"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Raise left window in current group"
+msgstr "Fenster und Dialoge anheben/absenken"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise right window"
 msgstr "Einzelnes Fenster anheben"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Fenster und Dialoge anheben/absenken"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -3038,8 +3762,16 @@ msgid "Display window without focusing"
 msgstr "Fenster ohne Fokussieren anzeigen"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "Die Arbeitsfläche / das Sichtfeld mit dem Fenster W anzeigen."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Fenster anzeigen"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "Die Arbeitsfläche mit dem Fenster W anzeigen, dann auf W fokussieren."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3049,9 +3781,17 @@ msgstr "Neue Gruppe"
 msgid "Gtkrc reload style"
 msgstr "gtkrc-Stil nachladen"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "Die gtkrc-Einstellungen neu laden."
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "Taste beschreiben"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "Nach einer Tastenkombination fragen, dann ihre Bindung ausgeben."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -3064,6 +3804,15 @@ msgstr "[Quote]"
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
 msgstr "Ereignis freistellen"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Sendet das nächste Tastaturereignis direkt zum fokussierten\n"
+"Client-Fenster, ganz gleich, ob Fenstermanager-Funktionen daran\n"
+"gebunden sind."
 
 #. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
@@ -3102,6 +3851,14 @@ msgstr "Arbeitsfläche %d"
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Arbeitsflächen:"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Font for prompt: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Prompt message's colors."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -3155,12 +3912,16 @@ msgid "stop"
 msgstr "Anpassen"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Wether to stop or wrap-around on first/last viewport"
+msgid "Whether to stop or wrap-around on first/last viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "Sichtfeld aktivieren"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Das angegebene Sichtfeld auswählen."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -3175,44 +3936,98 @@ msgid "Activate viewport column"
 msgstr "Sichtfelder-Spalte aktivieren"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Die angegebene Sichtfelder-Spalte auswählen."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
 msgstr "Sichtfelder-Zeile aktivieren"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Die angegebene Sichtfelder-Zeile auswählen."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
 msgstr "Fenster auf Sichtfeld verschieben"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Das aktuelle Fenster zum angegebenen Sichtfeld verschieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
 msgstr "Sichtfeld nach rechts verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Das Sichtfeld eine Bildschirmbreite nach rechts schieben."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
 msgstr "Sichtfeld nach links verschieben"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Das Sichtfeld eine Bildschirmbreite nach links schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
 msgstr "Sichtfeld nach oben schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Das Sichtfeld eine Bildschirmhöhe nach oben schieben."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
 msgstr "Sichtfeld nach unten schieben."
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Das Sichtfeld eine Bildschirmhöhe nach unten schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
 msgstr "Fenster nach rechts verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld zur Rechten verschieben und auf das Sichtfeld "
+"wechseln."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Fenster nach links verschieben"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld zur Linken verschieben und auf das Sichtfeld "
+"wechseln.."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Fenster nach oben verschieben"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld nach oben verschieben und auf das Sichtfeld "
+"wechseln."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Fenster nach unten verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld  nach unten verschieben und auf das Sichtfeld "
+"wechseln."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
@@ -3247,21 +4062,24 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to enable warping the cursor to windows."
+msgid "Whether to enable warping the cursor to windows."
 msgstr ""
 "Ob es sich beim Wachsen oder Packen mit einem ignorierten Fenster\n"
 "überschneiden soll."
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to not ignore avoided windows by default."
+msgid "Whether to not ignore avoided windows by default."
 msgstr ""
 "Ob es sich beim Wachsen oder Packen mit einem ignorierten Fenster\n"
 "überschneiden soll."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Wether to avoid any unspecified window by default."
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
 msgstr ""
+"Ob es sich beim Wachsen oder Packen mit einem ignorierten Fenster\n"
+"überschneiden soll."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -3272,16 +4090,34 @@ msgid "Focus desktop"
 msgstr "Fokus auf Desktop"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Eingabefokus auf die Desktop-Fenster (wenn eines existiert)"
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
 msgstr "Fenster löschen"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Das Fenster löschen."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window safely"
 msgstr "Fenster sicher löschen"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr ""
+"Das Fenster löschen oder einen Warnton ausgeben, wenn es nicht sicher "
+"geschlossen werden kann."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
 msgstr "Fenstername eindeutig machen"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Erzwingen, dass das aktuelle Fenster einen eindeutigen Titel hat."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -3344,72 +4180,162 @@ msgid "Popup workspace list"
 msgstr "Arbeitsflächen-Liste anzeigen"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Das Menü mit der Liste aller Arbeitsflächen anzeigen."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Popup window list"
 msgstr "Fensterliste anzeigen"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Das Menü mit allen verwalteten Fenster anzeigen."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
 msgstr "Nächste Arbeitsfläche"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Die nächste Arbeitsfläche anzeigen."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
 msgstr "Vorherige Arbeitsfläche"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Die vorherige Arbeitsfläche anzeigen."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
 msgstr "Auf nächste Arbeitsfläche schicken"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Das Fenster auf die nächste Arbeitsfläche verschieben."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
 msgstr "Auf vorherige Arbeitsfläche schicken"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Das Fenster auf die vorherige Arbeitsfläche verschieben."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
 msgstr "Auf nächste Arbeitsfläche kopieren"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Das Fenster auf die nächste Arbeitsfläche kopieren."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
 msgstr "Auf vorherige Arbeitsfläche kopieren"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Das Fenster auf die vorherige Arbeitsfläche kopieren."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
 msgstr "Arbeitsfläche anhängen und darauf schicken"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr ""
+"Eine neue Arbeitsfläche am Ende der Liste anlegen, und das Fenster darauf\n"
+"verschieben."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
 msgstr "Arbeitsplatz voranstellen und darauf schicken"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr ""
+"Eine neue Arbeitsfläche am Anfang der Liste anlegen und das Fenster darauf\n"
+"verschieben."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
 msgstr "Mit nächster Arbeitsfläche verschmelzen"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die nächste\n"
+"verschoben."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Mit vorheriger Arbeitsfläche verschmelzen"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die vorherige\n"
+"verschoben."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Arbeitsfläche einfügen nach"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Eine neue Arbeitsfläche hinter der aktuellen anlegen."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
 msgstr "Arbeitsfläche einfügen vor"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Eine neue Arbeitsfläche vor der aktuellen anlegen."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
 msgstr "Arbeitsfläche vorwärts verschieben"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Die aktuelle Arbeitsfläche einen Platz nach rechts verlegen."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace backwards"
 msgstr "Arbeitsfläche rückwärts verschieben"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Die aktuelle Arbeitsfläche einen Platz nach links verlegen."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete empty workspaces"
 msgstr "Leere Arbeitsflächen löschen"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Alle Arbeitsflächen löschen, die keine Fenster enthalten."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete window instance"
 msgstr "Fensterinstanz löschen"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Die Kopie dieses Fensters auf der aktuellen Arbeitsfläche löschen. Falls\n"
+"dies die letzte verbleibende Instanz ist, das Fenster selbst löschen."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -3417,88 +4343,50 @@ msgid "Show desktop"
 msgstr "Fokus auf Desktop"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Hide desktop"
 msgstr "Fokus auf Desktop"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
 msgstr "Arbeitsfläche aktivieren"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Die n-te Arbeitsfläche auswählen."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
 msgstr "Auf Arbeitsfläche schicken"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move the current window to the N'th workspace."
+msgstr "Das aktuelle Fenster auf die n-te Arbeitsfläche kopieren."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Auf Arbeitsfläche kopieren"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Das aktuelle Fenster auf die n-te Arbeitsfläche kopieren."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select workspace interactively"
 msgstr "Arbeitsfläche interaktiv auswählen"
 
-#~ msgid "and many others..."
-#~ msgstr "und viele andere …"
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "Sawfish verwaltet Ihre Fenster und ist vielfältig erweiterbar."
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "Sawfish-Homepage"
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "Das nächste Fenster der aktuellen Arbeitsfläche auswählen."
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "Auf das vorherige Fenster der aktuellen Arbeitsfläche fokussieren."
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Das nächste Fenster auswählen, dabei alle möglichen Arbeitsflächen\n"
-#~ "berücksichtigen."
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Das vorherige Fenster auswählen, dabei alle möglichen Arbeitsflächen\n"
-#~ "berücksichtigen."
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "Die Dokumentation eines angegebenen Symbols anzeigen."
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Den GNOME-Hint SKIP_WINLIST für dieses Fenster ein-/ausschalten."
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Den GNOME-Hint SKIP_WINLIST für dieses Fenster einschalten."
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Den GNOME-Hint SKIP_WINLIST für dieses Fenster ausschalten."
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Den GNOME-Hint SKIP_TASKLIST für dieses Fenster ein-/ausschalten."
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Den GNOME-Hint SKIP_TASKLIST für dieses Fenster einschalten."
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Den GNOME-Hint SKIP_TASKLIST für dieses Fenster ausschalten."
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "Von der aktuellen GNOME-Sitzung abmelden."
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "Die WWW-Seite des GNOME-Projektes anzeigen."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "Den GNOME-Hilfebrowser starten."
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "Das GNOME-Info-Dialogfeld anzeigen."
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr ""
-#~ "Alle Fenster in der Gruppe löschen, zu der das aktuelle Fenster gehört."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Nach einer Arbeitsfläche fragen und darauf umschalten."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
@@ -3540,635 +4428,11 @@ msgstr "Arbeitsfläche interaktiv auswählen"
 #~ "Tiefe überschneiden soll.\n"
 #~ "»vielleicht« heißt nur gemiedene Fenster in anderen Tiefen."
 
-#~ msgid ""
-#~ "Grows window to the left until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Fenster nach links aufweiten, bis es an ein anderes stößt.\n"
-#~ "Siehe »Fenster aufweiten«."
-
-#~ msgid ""
-#~ "Grows window to the right until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Fenster nach rechts aufweiten, bis es an ein anderes stößt.\n"
-#~ "Siehe »Fenster aufweiten«."
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Vergrößert das Fenster nach oben, bis sich dieses mit einem\n"
-#~ "anderen Fenster überschneidet.\n"
-#~ "Falls die Oberkante unterhalb des Bildschirmrands war, wird es\n"
-#~ "zurück nach innen gebracht.\n"
-#~ "Mit einem universellen Präfix-Argument wird es stattdessen\n"
-#~ "maximal nach oben vergrößert.\n"
-#~ "Mit einem numerischen Präfix-Argument wird es stattdessen\n"
-#~ "um so viele Pixel nach oben vergrößert."
-
-#~ msgid ""
-#~ "Grows window downwards until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Fenster nach unten aufweiten, bis es auf ein anderes stößt.\n"
-#~ "Siehe »Fenster aufweiten«."
-
-#~ msgid ""
-#~ "Moves window to the left until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Fenster nach links verschieben, bis es an ein anderes stößt.\n"
-#~ "Siehe »Fenster packen«."
-
-#~ msgid ""
-#~ "Moves window to the right until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Fenster nach rechts verschieben, bis es an ein anderes stößt.\n"
-#~ "Siehe »Fenster packen«."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Verschiebt das Fenster nach oben, bis sich dieses mit einem\n"
-#~ "anderen Fenster überschneidet.\n"
-#~ "Falls die Oberkante unterhalb des Bildschirmrands war, wird es\n"
-#~ "zurück nach innen verschoben.\n"
-#~ "Mit einem universellen Präfix-Argument wird es stattdessen\n"
-#~ "maximal nach oben verschoben.\n"
-#~ "Mit einem numerischen Präfix-Argument wird es stattdessen\n"
-#~ "um so viele Pixel nach oben verschoben."
-
-#~ msgid ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Fenster nach unten verschieben, bis es an ein anderes stößt.\n"
-#~ "Siehe »Fenster packen«."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr "Den Cursor um »move-cursor-increment« Pixel nach rechts verschieben."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr "Den Cursor um »move-cursor-increment« Pixel nach links verschieben."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr "Den Cursor um »move-cursor-increment« Pixel nach oben verschieben."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr "Den Cursor um »move-cursor-increment« Pixel nach unten verschieben."
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "Den Cursor um ein Pixel nach rechts verschieben."
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "Den Cursor um ein Pixel nach links verschieben."
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "Den Cursor um ein Pixel nach oben verschieben."
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "Den Cursor um ein Pixel nach unten verschieben."
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "Das Fenster interaktiv mit der Maus verschieben."
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "Die Fenstergröße interaktiv mit der Maus verändern."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr ""
-#~ "Den Benutzer ein Fenster auswählen lassen, dieses dann interaktiv "
-#~ "verschieben."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that "
-#~ "window."
-#~ msgstr ""
-#~ "Den Benutzer ein Fenster auswählen lassen, dieses dann interaktiv mit der "
-#~ "Maus in der Größe ändern."
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any "
-#~ "pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "Das Fenster anheben, das das aktuelle Ereignis erhalten hat, dann alle\n"
-#~ "Zeigerereignisse abspielen, die den Befehl aufgerufen haben."
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Das Fenster anheben lassen, das das aktuelle Ereignis erhalten hat\n"
-#~ "(falls es fokussiert ist), dann alle Zeigerereignisse abspielen, die\n"
-#~ "den Befehl aufgerufen haben."
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Die Fenstergruppe anheben, die das aktuelle Ereignis erhalten hat,\n"
-#~ "dann alle Zeigerereignisse abspielen, die den Befehl aufgerufen haben."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Das Fenster, das das aktuelle Ereignis erhalten hat, mit allen seinen\n"
-#~ "flüchtigen Kindern anheben, dann alle Zeigerereignisse abspielen, die\n"
-#~ "den Befehl aufgerufen haben."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "Das aktuelle Fenster um eine Zeile vergrößern."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "Das aktuelle Fenster um eine Zeile verkleinern."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "Das aktuelle Fenster um eine Spalte vergrößern."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "Das aktuelle Fenster um eine Spalte verkleinern."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr ""
-#~ "Das Fenster um »slide-window-increment« Pixel nach rechts verschieben."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr ""
-#~ "Das Fenster um »slide-window-increment« Pixel nach links verschieben."
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr "Das Fenster um »slide-window-increment« Pixel nach oben verschieben."
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr ""
-#~ "Das Fenster um »slide-window-increment« Pixel nach unten verschieben."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr ""
-#~ "Die Fenstergruppe um »slide-window-increment« Pixel nach links verschieben."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr ""
-#~ "Die Fenstergruppe um »slide-window-increment« Pixel nach rechts "
-#~ "verschieben."
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr ""
-#~ "Die Fenstergruppe um »slide-window-increment« Pixel nach oben verschieben."
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr ""
-#~ "Die Fenstergruppe um »slide-window-increment« Pixel nach unten verschieben."
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "Zum nächsten Sichtfeld gehen."
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "Zum vorherige Sichtfeld gehen."
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "Das Fenster in das vorherige Sichtfeld verschieben."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
 
-#~ msgid "Start a new xterm."
-#~ msgstr "Ein neues XTerm starten."
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr "Den Befehl NAME aufrufen; evtl. mit dem Präfixargument PFX-ARG."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "Den angegebenen Shell-Befehl ausführen."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "Die Liste von Befehlen ausführen, einen nach dem anderen."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr ""
-#~ "Nach einem Befehl fragen, ihn ausführen, und jede etwaige Ausgabe auf dem "
-#~ "Bildschirm anzeigen."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "Das Benutzer-Anpassungssystem aufrufen."
-
 #~ msgid "Error Handling"
 #~ msgstr "Fehlerbehandlung"
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "Alle vorgekommenen Fehler auf dem Bildschirm anzeigen."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "An die aktuelle Position des fokussierten Fensters erinnern."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "An die aktuellen Maße des fokussierten Fensters erinnern."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr "An die aktuellen Attribute des fokussierten Fensters erinnern."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr ""
-#~ "Jegliche dauerhaften Statusinformationen über das aktuelle Fenster "
-#~ "vergessen."
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "Jegliche gespeicherte Fensterchronik vergessen."
-
-#~ msgid "View the workspace below the current workspace"
-#~ msgstr "Die Arbeitsfläche unterhalb der aktuellen anzeigen"
-
-#~ msgid "View the workspace above the current workspace"
-#~ msgstr "Die Arbeitsfläche oberhalb der aktuellen anzeigen"
-
-#~ msgid "View the workspace to the left of the current workspace"
-#~ msgstr "Die Arbeitsfläche links von der aktuellen anzeigen"
-
-#~ msgid "View the workspace to the right of the current workspace"
-#~ msgstr "Die Arbeitsfläche rechts von der aktuellen anzeigen"
-
-#~ msgid "Send window to the workspace below the current workspace"
-#~ msgstr "Fenster auf die Arbeitsfläche unterhalb der aktuellen schicken"
-
-#~ msgid "Send window to the workspace above the current workspace"
-#~ msgstr "Fenster auf die Arbeitsfläche oberhalb der aktuellen schicken"
-
-#~ msgid "Send window to the workspace left of the current workspace"
-#~ msgstr "Fenster auf die Arbeitsfläche links von der aktuellen schicken"
-
-#~ msgid "Send window to the workspace right of the current workspace"
-#~ msgstr "Fenster auf die Arbeitsfläche rechts von der aktuellen schicken"
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "Das Menü mit sämtlichen Fensteraktionen anzeigen."
-
-#~ msgid "Display the main menu."
-#~ msgstr "Das Hauptmenü anzeigen."
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Das Anwendungsmenü anzeigen."
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr ""
-#~ "Das Fenster auf seine höchste erlaubte Stellung in der Schichtung\n"
-#~ "anheben."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr ""
-#~ "Das Fenster auf seine niedrigste erlaubte Stellung in der Schichtung\n"
-#~ "absenken."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "Wenn das Fenster auf seiner höchsten erlaubten Stellung ist, es auf die\n"
-#~ "niedrigste erlaubte absenken. Andernfalls so weit wie möglich anheben."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr "Das Fenster in die Stapelebene über seiner derzeitigen anheben."
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr "Das Fenster in die Stapelebene unter seiner derzeitigen absenken."
-
-#~ msgid "Minimize the window."
-#~ msgstr "Das Fenster minimieren."
-
-#~ msgid "Restore the window from its minimized state."
-#~ msgstr "Das Fenster aus dem minimierten Zustand zurückrufen."
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "Die Minimierung des Fensters W umschalten."
-
-#~ msgid "Minimize all windows on the current workspace."
-#~ msgstr "Alle Fenster auf der aktuellen Arbeitsfläche minimieren."
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "Die »Klebrigkeit« des Fensters ein-/ausschalten -- ganz gleich, ob es\n"
-#~ "zu allen Arbeitsflächen gehört oder nicht."
-
-#~ msgid "Ignore the window."
-#~ msgstr "Das Fenster ignorieren."
-
-#~ msgid "Unignore the window."
-#~ msgstr "Aufhören, das Fenster zu ignorieren."
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "Ignorieren eines Fensters ein-/ausschalten."
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "Fokussierbarkeit eines Fensters ein-/ausschalten."
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr "Ignorieren eines Fensters beim Durchwechseln ein-/ausschalten."
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr "Einschließen eines Fensters in die Fensterliste ein-/ausschalten."
-
-#, fuzzy
-#~ msgid "Toggle whether a window will be included in the task-list."
-#~ msgstr "Einschließen eines Fensters in die Fensterliste ein-/ausschalten."
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "Die Maße des Fensters maximieren."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr ""
-#~ "Die Maße des Fensters auf ihren ursprünglichen, nicht maximierten Zustand "
-#~ "zurücksetzen."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "Die Höhe des Fensters maximieren."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "Die Breite des Fensters maximieren."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr "Das Fenster zwischen maximiert und unmaximiert umschalten."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Das Fenster in der Breite zwischen maximiert und unmaximiert\n"
-#~ "umschalten."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Das Fenster in der Höhe zwischen maximiert und unmaximiert\n"
-#~ "umschalten."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "Das Fenster maximieren, ohne andere zu verdecken."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr "Das Fenster in der Höhe maximieren, ohne andere zu verdecken."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr "Das Fenster in der Breite maximieren, ohne andere zu verdecken."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr "Das Fenster zwischen maximiert/gefüllt und unmaximiert umschalten."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Das Fenster in der Breite zwischen maximiert/gefüllt und unmaximiert\n"
-#~ "umschalten."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Das Fenster in der Höhe zwischen maximiert/gefüllt und unmaximiert\n"
-#~ "umschalten."
-
-#, fuzzy
-#~ msgid "Fullscreen maximize the window."
-#~ msgstr "Das Fenster minimieren."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized and "
-#~ "unmaximized."
-#~ msgstr "Das Fenster zwischen maximiert und unmaximiert umschalten."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized across all "
-#~ "Xinerama and unmaximized."
-#~ msgstr "Das Fenster zwischen maximiert/gefüllt und unmaximiert umschalten."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "Nur die Titelleiste des Fensters anzeigen."
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr ""
-#~ "Falls das Fenster aufgerollt ist (siehe »shade-window«), es in seinen\n"
-#~ "Normalzustand zurückführen."
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr ""
-#~ "Den aufgerollten Zustand des Fensters (nur die Titelleiste wird "
-#~ "angezeigt) ein-/ausschalten."
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Das aktuelle Fenster zu seiner höchsten erlaubten Stellung in der\n"
-#~ "Schichtung anheben. Auch alle Dialoge anheben, die dazugehören."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Das aktuelle Fenster zu seiner niedrigsten erlaubten Stellung in der\n"
-#~ "Schichtung absenken. Auch alle Dialoge absenken, die dazugehören."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Falls das Fenster auf seiner höchsten möglichen Stellung ist, es auf\n"
-#~ "die niedrigstmögliche absenken. Es andernfalls so weit wie erlaubt\n"
-#~ "anheben. Auch die Ebene aller dazugehörigen Dialoge mit ändern."
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "Die Arbeitsfläche / das Sichtfeld mit dem Fenster W anzeigen."
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr ""
-#~ "Die Arbeitsfläche mit dem Fenster W anzeigen, dann auf W fokussieren."
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "Die gtkrc-Einstellungen neu laden."
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr "Nach einer Tastenkombination fragen, dann ihre Bindung ausgeben."
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "Sendet das nächste Tastaturereignis direkt zum fokussierten\n"
-#~ "Client-Fenster, ganz gleich, ob Fenstermanager-Funktionen daran\n"
-#~ "gebunden sind."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "Das angegebene Sichtfeld auswählen."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "Die angegebene Sichtfelder-Spalte auswählen."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "Die angegebene Sichtfelder-Zeile auswählen."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "Das aktuelle Fenster zum angegebenen Sichtfeld verschieben."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "Das Sichtfeld eine Bildschirmbreite nach rechts schieben."
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "Das Sichtfeld eine Bildschirmbreite nach links schieben."
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "Das Sichtfeld eine Bildschirmhöhe nach oben schieben."
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "Das Sichtfeld eine Bildschirmhöhe nach unten schieben."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the right, and switch to that viewport."
-#~ msgstr ""
-#~ "Das Fenster in das Sichtfeld zur Rechten verschieben und auf das "
-#~ "Sichtfeld wechseln."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the left, and switch to that viewport."
-#~ msgstr ""
-#~ "Das Fenster in das Sichtfeld zur Linken verschieben und auf das Sichtfeld "
-#~ "wechseln.."
-
-#~ msgid "Move the window to the viewport above, and switch to that viewport."
-#~ msgstr ""
-#~ "Das Fenster in das Sichtfeld nach oben verschieben und auf das Sichtfeld "
-#~ "wechseln."
-
-#~ msgid "Move the window to the viewport below, and switch to that viewport."
-#~ msgstr ""
-#~ "Das Fenster in das Sichtfeld  nach unten verschieben und auf das "
-#~ "Sichtfeld wechseln."
-
-#~ msgid "Transfer input focus to the desktop window (if one exists)."
-#~ msgstr "Eingabefokus auf die Desktop-Fenster (wenn eines existiert)"
-
-#~ msgid "Delete the window."
-#~ msgstr "Das Fenster löschen."
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr ""
-#~ "Das Fenster löschen oder einen Warnton ausgeben, wenn es nicht sicher "
-#~ "geschlossen werden kann."
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "Erzwingen, dass das aktuelle Fenster einen eindeutigen Titel hat."
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "Das Menü mit der Liste aller Arbeitsflächen anzeigen."
-
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "Das Menü mit allen verwalteten Fenster anzeigen."
-
-#~ msgid "Display the next workspace."
-#~ msgstr "Die nächste Arbeitsfläche anzeigen."
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "Die vorherige Arbeitsfläche anzeigen."
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "Das Fenster auf die nächste Arbeitsfläche verschieben."
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "Das Fenster auf die vorherige Arbeitsfläche verschieben."
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "Das Fenster auf die nächste Arbeitsfläche kopieren."
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "Das Fenster auf die vorherige Arbeitsfläche kopieren."
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr ""
-#~ "Eine neue Arbeitsfläche am Ende der Liste anlegen, und das Fenster "
-#~ "darauf\n"
-#~ "verschieben."
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to "
-#~ "it."
-#~ msgstr ""
-#~ "Eine neue Arbeitsfläche am Anfang der Liste anlegen und das Fenster "
-#~ "darauf\n"
-#~ "verschieben."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the "
-#~ "next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die nächste\n"
-#~ "verschoben."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die "
-#~ "vorherige\n"
-#~ "verschoben."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr "Eine neue Arbeitsfläche hinter der aktuellen anlegen."
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "Eine neue Arbeitsfläche vor der aktuellen anlegen."
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "Die aktuelle Arbeitsfläche einen Platz nach rechts verlegen."
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "Die aktuelle Arbeitsfläche einen Platz nach links verlegen."
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "Alle Arbeitsflächen löschen, die keine Fenster enthalten."
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "Die Kopie dieses Fensters auf der aktuellen Arbeitsfläche löschen. Falls\n"
-#~ "dies die letzte verbleibende Instanz ist, das Fenster selbst löschen."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "Die n-te Arbeitsfläche auswählen."
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "Das aktuelle Fenster auf die n-te Arbeitsfläche kopieren."
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "Nach einer Arbeitsfläche fragen und darauf umschalten."
 
 #~ msgid "Select Icon"
 #~ msgstr "Icon wählen"

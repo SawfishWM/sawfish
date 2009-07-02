@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 08:31+0100\n"
+"POT-Creation-Date: 2009-07-02 21:37+0200\n"
 "PO-Revision-Date: 2002-06-19 15:18GMT+10.00\n"
 "Last-Translator: Michelle Kim <mkim@brisbane.redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,6 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "그외 많은 사람들.."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "소피쉬는 윈도를 확장성있게 관리합니다."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "소피쉬 홈페이지"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1221,6 +1233,11 @@ msgstr "행동"
 msgid "Window Cycling"
 msgstr "창 순환"
 
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tabs"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
@@ -1236,6 +1253,16 @@ msgstr "일치하는 창"
 msgid "Tooltips"
 msgstr "툴팁"
 
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "History"
+msgstr "기록"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -1246,20 +1273,40 @@ msgid "Next workspace window"
 msgstr "다음 작업공간 창"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "현재 작업공간의 다음 창 선택"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous workspace window"
 msgstr "이전 작업공간 창"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "현재 작업공간의 이전 창에 초점"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next window"
 msgstr "다음 창"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr "모든 작업공간을 돌면서 다음 창 선택"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous window"
 msgstr "이전 창"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr "모든 작업공간을 돌면서 이전 창 선택"
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
 msgstr "심볼 묘사"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "지정한 심벌의 문서 표시"
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
@@ -1274,40 +1321,80 @@ msgid "Gnome toggle skip winlist"
 msgstr "Gnome 토글 skip winlist"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "창의 GNOME SKIP_WINLIST 힌트 토글"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip winlist"
 msgstr "Gnome 설정 skip winlist"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "창의 GNOME SKIP_WINLIST 힌트 설정"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip winlist"
 msgstr "Gnome 지우기 skip winlist"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "창의 GNOME SKIP_WINLIST 힌트 해제"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip tasklist"
 msgstr "Gnome 토글 skip tasklist"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "창의 GNOME SKIP_TASKLIST 힌트 토글"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip tasklist"
 msgstr "Gnome 설정 skip tasklist"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "창의 GNOME SKIP_TASKLIST 힌트 설정"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip tasklist"
 msgstr "Gnome 지우기 skip tasklist"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "창의 GNOME SKIP_TASKLIST 힌트 해제"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
 msgstr "Gnome 로그아웃"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "현재 그놈 세션에서 로그아웃"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
 msgstr "Gnome www 페이지"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "그놈 프로젝트의 웹페이지를 표시합니다."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome help browser"
 msgstr "Gnome 도움말 부라우저"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "그놈 도움말 시스템 실행"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
 msgstr "Gnome 에 대하여"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "그놈은.. 대화창을 실행"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1393,6 +1480,10 @@ msgstr "그룹 깊이 내리기"
 msgid "Delete group"
 msgstr "그룹 삭제"
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "현재 창은 멤버인 그룹에서 모든 창을 삭제"
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Growing and packing of windows"
 msgstr "창 확장과 축소"
@@ -1438,32 +1529,107 @@ msgid "Grow window left"
 msgstr "창 왼쪽으로 키움"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"다른 창에 부딪힐 때까지 왼쪽으로 창 확장.\n"
+"`창 위로 키움' 참조."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "창 오른쪽으로 키움"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"다른 창에 부딪힐 때까지 오른쪽으로 창 확장.\n"
+"`창 위로 키움' 참조."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "창 위로 키움"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"다른 창에 부딪힐 때까지 위쪽으로 창 확장.\n"
+"만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
+"범용 접두 인자를 사용하여 대신 위로 최대화. \n"
+"수치 접두 인자를 사용하여 대신 창이나 픽셀로 지정된 증가량만큼 \n"
+"위로 확장."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "창 밑으로 키움"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"다른 창에 부딪힐 때까지 아래로 창 확장.\n"
+"`창 위로 키움' 참조."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "창 왼쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"다른 창에 부딪힐 때까지 왼쪽으로 창 이동.\n"
+"'창 밑으로 채워넣기' 참조."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "창 오른쪽으로 채워넣기"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"다른 창에 부딪힐 때까지 오른쪽으로 창 이동.\n"
+"'창 위쪽으로 채워넣기' 참조."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "창 위쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"다른 창에 부딪힐 때까지 위로 창 이동.\n"
+"만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
+"범용 접두 인자를 사용하여 대신 위로 최대한 이동. \n"
+"수치 접두 인자를 사용하여 대신 지정된 픽셀수만큼 위로 이동."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "창 밑으로 채워넣기"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"다른 창에 부딪힐 때까지 아래로 창 이동.\n"
+"'창 위쪽으로 채워넣기' 참조."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
@@ -1527,32 +1693,64 @@ msgid "Move cursor right"
 msgstr "커서 오른쪽으로 이동"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr "`move-cursor-increment' 명령에서 오른쪽으로 이동할 픽셀 수"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left"
 msgstr "커서 왼쪽으로 이동"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "`move-cursor-increment' 명령에서 왼쪽으로 이동할 픽셀 수"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up"
 msgstr "커서를 윗쪽으로 이동"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "`move-cursor-increment' 명령에서 윗쪽으로 이동할 픽셀 수"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down"
 msgstr "커서를 아랫쪽으로 이동"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "`move-cursor-increment' 명령에서 아랫쪽으로 이동할 픽셀 수"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right fine"
 msgstr "커서 오른쪽으로 약간 이동"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "커서를 오른쪽으로 1 픽셀 이동"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left fine"
 msgstr "커서 왼쪽으로 약간 이동"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "커서를 왼쪽으로 1 픽셀 이동"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up fine"
 msgstr "커서 위쪽으로 약간 이동"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "커서를 윗쪽으로 1 픽셀 이동"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down fine"
 msgstr "커서 밑으로 약간 이동"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "커서를 아랫쪽으로 1 픽셀 이동"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1641,24 +1839,58 @@ msgid "Move window interactively"
 msgstr "창을 대화식으로 이동"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "마우스를 사용하여 수동으로 창 이동"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "창을 대화식으로 크기 조정"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "마우스를 사용하여 수동으로 창 크기조정"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "선택한 창 이동"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr "창 선택하기를 기다렸다가 그 창을 수동으로 이동시키기"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "선택한 창 크기 다시 조정"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr "창 선택하기를 기다렸다가 그 창의 크기를 수동으로 변경하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr " 클릭하여 올리고 전달하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"현재 이벤트를 받은 창을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
+"반응하기"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "초점 상태면 클릭하여 올리고 전달하기"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"현재 이벤트를 받은 창을 올리고(초점 상태면),\n"
+"명령을 불러 일으킨 포인터 이벤트에 반응하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1673,8 +1905,24 @@ msgid "Raise group and pass through click"
 msgstr "클릭하여 그룹을 올리고 전달하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"현재 이벤트를 받은 창그룹을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
+"반응하기"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "클릭하여 임시 그룹를 올리고 전달하기"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
+"그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1695,9 +1943,21 @@ msgid "Shrink window left"
 msgstr "창을 왼쪽으로 움직이기"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "창을 오른쪽으로 움직이기"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1705,9 +1965,21 @@ msgid "Shrink window up"
 msgstr "창을 위로 움직이기"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "창을 아래로 움직이기"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1715,9 +1987,19 @@ msgid "Yank window left"
 msgstr "창 왼쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "창 오른쪽으로 채워넣기"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1725,73 +2007,147 @@ msgid "Yank window up"
 msgstr "창 위쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yanks WINDOW upwards until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "창 밑으로 채워넣기"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "창에 줄 추가하여 크기 조절"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "현재 창의 크기를 한 줄 늘립니다."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract row"
 msgstr "창을 줄 빼서 크기 조절"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "현재 창의 크기를 한 줄 줄입니다."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add column"
 msgstr "창 행 추가하여 크기 조절"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "현재 창의 크기를 한 열 늘립니다."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract column"
 msgstr "창 행 빼서 크기 조절"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "현재 창의 크기를 한 열 줄입니다."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
 msgstr "창을 왼쪽으로 움직이기"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "`slide-window-increment' 만큼 창으로 왼쪽으로 이동."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
 msgstr "창을 오른쪽으로 움직이기"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "`slide-window-increment' 픽셀만큼 오른쪽으로 이동"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
 msgstr "창을 위로 움직이기"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "`slide-window-increment' 픽셀만큼 창을 위로 이동"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
 msgstr "창을 아래로 움직이기"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "`slide-window-increment' 픽셀만큼 창을 아래로 이동"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
 msgstr "그룹 왼쪽으로 움직이기"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 왼쪽으로 이동"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
 msgstr "그룹 오른쪽으로 움직이기"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 오른쪽으로 이동"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group up"
 msgstr "그룹 위쪽으로 움직이기"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 위로 이동"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
 msgstr "그룹 아래쪽으로 움직이기"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 아래로 이동"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "뷰포트를 다음으로 이동"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "다음 뷰포트로 이동"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
 msgstr "뷰포트 이전으로 이동"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "이전 뷰포트로 이동"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
 msgstr "창 이전으로 이동"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "창을 이전 뷰포트로 이동"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
 msgstr "창 다음으로 이동"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "창을 이전 뷰포트로 이동"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -1843,13 +2199,25 @@ msgstr "`xterm'명령에 줄 인자"
 msgid "Xterm"
 msgstr "Xterm"
 
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "새로운 xterm 시작"
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "부르기 명령"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "NAME 명령을 요구; prefix 변수 PFX-ARG를 사용할 수도 있습니다."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Run shell command"
 msgstr "쉘 명령을 실행합니다."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "주어진 쉘 명령을 실행합니다."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
@@ -1858,6 +2226,10 @@ msgstr "명령:"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "명령 순환"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "명령 목록을 하나씩 호출합니다."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
@@ -1882,6 +2254,10 @@ msgstr "작동안함"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "화면으로 출력하는 부르기 명령"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "명령을 입력받아 실행하고 출력을 화면에 표시합니다."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -1923,6 +2299,10 @@ msgstr "배치"
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
 msgstr "사용자 정의"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "사용자 정의 시스템 호출"
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2014,6 +2394,10 @@ msgstr "오류 없음."
 msgid "Display errors"
 msgstr "출력 에러"
 
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "발생한 모든 오류를 화면에 나타냅니다."
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2062,10 +2446,6 @@ msgid "Locale"
 msgstr "로케일"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "피하기"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore program position"
 msgstr "프로그램 위치 무시"
 
@@ -2099,6 +2479,11 @@ msgid "Placement weight"
 msgstr "배치 무게"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed position"
+msgstr "위치"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Maximized"
 msgstr "최대화됨"
 
@@ -2129,6 +2514,10 @@ msgstr "프레임 유형"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "프레임 스타일"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "피하기"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
@@ -2170,6 +2559,15 @@ msgstr "창 목록 건너뛰기"
 #, fuzzy
 msgid "Task list skip"
 msgstr "창 목록 건너뛰기"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "최대화않음"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2268,10 +2666,6 @@ msgid "_Forget saved state"
 msgstr "저장 상태 지움(_F)"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "History"
-msgstr "기록"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
 msgstr "창 위치 자동 기억"
 
@@ -2292,20 +2686,40 @@ msgid "Window history save position"
 msgstr "창 이전 기록 저장 위치"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "초점이 맞추어진 창의 현재위치를 기억."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
 msgstr "창 이전 기록 저장 면적"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "초점이 맞추어진 창의 현재크기을 기억."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
 msgstr "창 이전기록 저장 속성"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "초점이 맞추어진 창의 현재속성을 기억."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history forget"
 msgstr "창 이전목록 잊음"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "현재 창과 연관되는 모든 상태 지움"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
 msgstr "창 이전 목록 지움"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "저장된 모든 창기록 잊어버리기."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -2318,8 +2732,18 @@ msgstr "작업공간 %d"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "View the workspace below the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Workspace up"
 msgstr "작업공간"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace above the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
@@ -2328,8 +2752,18 @@ msgstr "작업공간 왼쪽으로 이동"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "View the workspace to the left of the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Workspace right"
 msgstr "작업공간 오른쪽으로 이동"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "View the workspace to the right of the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
@@ -2338,8 +2772,18 @@ msgstr "작업공간으로 보내기"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "Send window to the workspace below the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Send to workspace up"
 msgstr "작업공간으로 보내기"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace above the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
@@ -2348,8 +2792,18 @@ msgstr "작업공간으로 보내기"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 #, fuzzy
+msgid "Send window to the workspace left of the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
 msgid "Send to workspace right"
 msgstr "작업공간으로 보내기"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+#, fuzzy
+msgid "Send window to the workspace right of the current workspace"
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -2363,7 +2817,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
+msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr "창을 가장 아래로 쌓습니다."
 
 #. ../lisp/sawfish/wm/focus.jl
@@ -2692,12 +3146,24 @@ msgid "Popup window menu"
 msgstr "폽업 창 메뉴"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "모든 창 동작을 보여주는 메뉴 표시"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
 msgstr "폽업 루트 메뉴"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "주 메뉴 표시"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
 msgstr "폽업 응용 프로그램 메뉴"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "애플리케이션 메뉴 표시"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -2741,21 +3207,48 @@ msgstr "임시 창을 위로 쌓습니다.: \\w"
 msgid "Raise single window"
 msgstr "단독 창 위로 올리기"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "창을 가장 위로 쌓습니다."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
 msgstr "단독 창 밑으로 내리기"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "창을 가장 아래로 쌓습니다."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
 msgstr "낮은 단독 창 위로 올리기"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"창이 스택 레벨 상 가장 높은 창이면 가장 낮은 곳으로 내리고\n"
+"그렇지 않으면 가장 높은 곳으로 올립니다."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "창 깊이 높이기"
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "창을 스택 레벨에서 현재 레벨 위에 놓기"
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower window depth"
 msgstr "창 깊이 낮추기"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "창을 스택 레벨에서 현재 레벨 밑에 놓기"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2780,16 +3273,32 @@ msgid "Iconify window"
 msgstr "창 아이콘화"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize the window."
+msgstr "창 최소화"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "창 아이콘화 하지않음"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Restore the window from its minimized state."
+msgstr "최소화된 창 원래 크기로 복구"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
 msgstr "창 아이콘화를 토글"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "W 창의 아이콘화를 토글"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify workspace windows"
 msgstr "작업공간 창 아이콘화"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize all windows on the current workspace."
+msgstr "현재 작업공간의 모든 창 최소화"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2804,6 +3313,14 @@ msgid "Toggle window sticky"
 msgstr "창 고정 여부 토글"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"모든 작업공간의 구성원 여부에 상관없이 창의 `고정'\n"
+"속성을 토글"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "고정(_S)"
 
@@ -2812,11 +3329,23 @@ msgid "Make window ignored"
 msgstr "창 무시하기"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "창 무시"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "창 무시하지 않기"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "창 무시 해제"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window ignored"
+msgstr "창 무시 여부 토글"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
 msgstr "창 무시 여부 토글"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
@@ -2824,17 +3353,34 @@ msgid "Toggle window never focus"
 msgstr "창 절대 초점 맞추지 않기 여부 토글"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "창 초점 수용 여부 토글"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window cycle skip"
 msgstr "창 순환 건너뀌기 여부 토글"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr "창이 돌아가는 동안 무시되든지 여부 토글"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window list skip"
 msgstr "창 목록 건너뛰기 여부 토글"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr "창이 창의 목록안에 포함될것인지 아닌지 토글"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle task list skip"
 msgstr "창 목록 건너뛰기 여부 토글"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "창이 창의 목록안에 포함될것인지 아닌지 토글"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -2866,60 +3412,141 @@ msgid "Maximize window"
 msgstr "창 최대화"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "창의 크기를 최대화합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Unmaximize window"
 msgstr "창 최대화 하지 않기"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr "창 크기를  원래의 최대화하지 않은 상태로 복원시킵니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
 msgstr "창 수직으로 최대화하기"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "창의 수직 크기를 최대화합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally"
 msgstr "창 수평으로 최대화하기"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "창의 수평 크기를 최대화합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window toggle"
 msgstr "창 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr "최대화/비최대화 상태를 토글합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally toggle"
 msgstr "창을 수직으로 최대화 여부 토글"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"수평으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
+"토글합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "창을 수직으로 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"수직으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
+"토글합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "창 채우기 최대화 "
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "다른 창을 가리지 않고 창을 최대화합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically"
 msgstr "창 수직으로 채우기 최대화"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr "다른 창을 가리지 않고 창을 수직으로 최대화합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally"
 msgstr "창 수평으로 채우기 최대화"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr "다른 창을 가리지 않고 창을 수직으로 최대화합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window toggle"
 msgstr "창 채우기 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr "최대로 채운 상태와 그렇지 않은 상태 사이를 토글합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
 msgstr "창 수평으로 채우기 최대화 여부 토글"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"수평 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
+"토글합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "창 수직으로 채우기 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"수직 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
+"토글합니다."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "창 전체 화면으로 최대화"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "창 최소화"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "창 최대 화면으로 최대화 여부 토글"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr "최대화/비최대화 상태를 토글합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -2928,20 +3555,49 @@ msgstr "창 전체 화면으로 최대화"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr "창 최소화"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid "Maximize window fullxinerama toggle"
 msgstr "창 최대 화면으로 최대화 여부 토글"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr "최대로 채운 상태와 그렇지 않은 상태 사이를 토글합니다."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
 msgstr "창 은둔 상태"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "창의 타이틀바만 보여주기"
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
 msgstr "창의 은둔 상태 해제"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
+msgstr ""
+"창을 은둔시키면(`shade-winodw' 참고), 원래의 상태로\n"
+"복원하기"
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "은둔한 창 토글"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr "창의 은둔 상태(타이틀바만 있는)를 토글"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2956,16 +3612,40 @@ msgid "Raise window and transients"
 msgstr "창과 임의 창 올리기"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"현재 창을 쌓기에서 허락되는 가장 높은 곳으로 올립니다\n"
+"또한 현재 창과 관련된 모든 창을 올립니다."
+
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "창과 임의 창들 낮추기"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"현재 창을 쌓기에서 허락되는 가장 낮은 곳으로 내립니다\n"
+"또한 현재 창과 관련된 모든 창을 내립니다."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "낮은 창과 임의 창들 올리기"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Tabs"
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
+"만약 창이 가장 높은 위치에 있다면 창을 가장 낮은 곳으로 낮춥니다\n"
+"반대의 경우 허락되는한 높입니다. 또한현재 창과 관련된 모든 창의 단계가 변합니"
+"다\n"
+" "
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
@@ -2985,7 +3665,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #, fuzzy
-msgid "Add to group"
+msgid "Raise Tabs on Hover"
+msgstr "초점에 맞춰 올리기"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
 msgstr "그룹 내리기"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
@@ -2995,13 +3680,28 @@ msgstr "창 삭제"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Release active window from its group"
+msgstr "최소화된 창 원래 크기로 복구"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise left window"
 msgstr "낮은 창 올리기"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Raise left window in current group"
+msgstr "낮은 창과 임의 창들 올리기"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise right window"
 msgstr "단독 창 위로 올리기"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "낮은 창과 임의 창들 올리기"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -3016,8 +3716,16 @@ msgid "Display window without focusing"
 msgstr "초점없이 창 표시하기"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "W 창을 포함하는 작업공간/뷰포트 표시하기"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "창 표시하기"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "W 창을 포함하는 작업공간을 표시하고 W 에 초점주기"
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3027,9 +3735,17 @@ msgstr "새로운 그룹"
 msgid "Gtkrc reload style"
 msgstr "Gtkrc 리로드 스타일"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "gtkrc 설정 다시 읽기"
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "서술 키"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "키입력을 기다립니다. 그리고 키조합을 출력합니다."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -3042,6 +3758,14 @@ msgstr "[쿼우트]"
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
 msgstr "쿼우트 이벤트"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"초점이 주어진 클라이언트 창에 다음키 이벤트를 직접적으로 보냄, \n"
+" 윈도우 관리자와의 어떤 관계도 무시함."
 
 #. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
@@ -3078,6 +3802,14 @@ msgstr "작업공간 %d"
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "작업공간:"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Font for prompt: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Prompt message's colors."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -3129,12 +3861,16 @@ msgid "stop"
 msgstr "사용자 정의"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Wether to stop or wrap-around on first/last viewport"
+msgid "Whether to stop or wrap-around on first/last viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "뷰포트 활성화"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "지정한 뷰포트를 선택합니다."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -3149,44 +3885,90 @@ msgid "Activate viewport column"
 msgstr "뷰포트 열을 활성화합니다."
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "지정한 뷰포트 열을 선택합니다."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
 msgstr "뷰포트 행을 활성화합니다."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "지정한 뷰포트 행을 선택합니다."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
 msgstr "창을 뷰포트로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "현재 창을 지정한 뷰포트로 옮깁니다."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
 msgstr "뷰포트 오른쪽으로 이동"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "뷰포트를 한 화면 오른쪽으로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
 msgstr "뷰포트 왼쪽으로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "뷰포트를 한 화면 왼쪽으로 이동"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
 msgstr "뷰포트를 위로 이동"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "뷰포트를 한 화면 위로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
 msgstr "뷰포트를 아래로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "뷰포트를 한 화면 아래로 이동"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
 msgstr "창을 오른쪽으로 이동"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "창을 오른쪽 뷰포트로 이동 후, 지정한 뷰포트로 전환"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "창을 왼쪽으로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr "창을 왼쪽 뷰포트로 이동 후 지정한 뷰포트로 전환"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "창을 위로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "창을 위쪽 뷰포트로 이동 후, 지정한 뷰포트로 전환"
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "창을 밑으로 이동"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "창을 아래쪽 뷰포트로 이동 후, 지정한 뷰포트로 전환"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
@@ -3221,17 +4003,18 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to enable warping the cursor to windows."
+msgid "Whether to enable warping the cursor to windows."
 msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to not ignore avoided windows by default."
+msgid "Whether to not ignore avoided windows by default."
 msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
+msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -3242,7 +4025,15 @@ msgid "Focus desktop"
 msgstr "초점 데스크탑"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "입력 초점을 데스트탑 창으로 전달 (만일 데스크탑 창이 있다면)"
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
+msgstr "창 삭제"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
 msgstr "창 삭제"
 
 #. ../lisp/sawfish/wm/windows.jl
@@ -3250,8 +4041,16 @@ msgid "Delete window safely"
 msgstr "창 안전하게 삭제"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr "창 삭제를 시도하고 실패하면 경고음 내기"
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
 msgstr "창 유일한 이름 갖게 하기"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "현재 창이 고유 타이틀을 갖도록 강제"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -3319,72 +4118,158 @@ msgid "Popup workspace list"
 msgstr "폽업 작업공간 목록"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "모든 작업공간을 포함하는 메뉴 보여주기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Popup window list"
 msgstr "폽업 창 목록"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "모든 관리 대상 창 메뉴 보여주기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
 msgstr "다음 작업공간"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "다음 작업공간 표시하기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
 msgstr "이전 작업공간"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "이전 작업공간 표시하기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
 msgstr "다음 작업공간으로 보내기"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "창을 다음 작업공간으로 이동시키기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
 msgstr "이전 작업공간으로 보내기"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "창을 이전 작업공간으로 이동시키기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
 msgstr "다음 작업공간으로 복사"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "창을 다음 작업공간에 복사하기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
 msgstr "이전 작업공간으로 복사"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "창을 이전 작업공간에 복사하기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
 msgstr "작업 공간에 추가하여 보내기"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "목록의 맨뒤에 새로운 작업공간을 만들고 창을 그 곳으로 이동시키기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
 msgstr "작업 공간 미리 추가하고 보내기"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr "목록의 맨앞에 새로운 작업공간을 만들고 창을 그 곳으로 이동시키기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
 msgstr "다음 작업공간 합병하기"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"현재 작업공간 삭제하기.  멤버 창은 다음 작업공간에\n"
+"재배치합니다."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "이전 작업공간 합병하기"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"현재 작업공간 삭제하기.  멤버 창은 이전 작업공간에\n"
+"재배치합니다."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "작업공간 이후 삽입"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "현재 작업공간 뒤에 새로운 공간 만들기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
 msgstr "작업공간 이전 삽입"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "현재 작업공간 앞에 새로운 공간 만들기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
 msgstr "작업공간 앞으로 이동"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "현재 작업공간을 오른쪽으로 이동시키기"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace backwards"
 msgstr "작업공간 뒤로 이동"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "현재 작업공간을 왼쪽으로 이동시키기"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete empty workspaces"
 msgstr "빈 작업공간 삭제"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "아무 창도 포함하지 않은 작업공간 삭제"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete window instance"
 msgstr "창 인스턴스 삭제"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"현재 작업공간의 창 복사본 제거.  만약 그 복사본이 마지막 요소였다면\n"
+"실제 창을 제거합니다."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -3392,83 +4277,50 @@ msgid "Show desktop"
 msgstr "초점 데스크탑"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Hide desktop"
 msgstr "초점 데스크탑"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
 msgstr "작업공간 활성화"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "N번째 작업공간 선택"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
 msgstr "작업공간으로 보내기"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move the current window to the N'th workspace."
+msgstr "현재 창을 N번째 작업공간에 복사합니다"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "작업공간으로 복사"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "현재 창을 N번째 작업공간에 복사합니다"
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select workspace interactively"
 msgstr "작업공간 대화식으로 선택하기"
 
-#~ msgid "and many others..."
-#~ msgstr "그외 많은 사람들.."
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "소피쉬는 윈도를 확장성있게 관리합니다."
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "소피쉬 홈페이지"
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "현재 작업공간의 다음 창 선택"
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "현재 작업공간의 이전 창에 초점"
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr "모든 작업공간을 돌면서 다음 창 선택"
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr "모든 작업공간을 돌면서 이전 창 선택"
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "지정한 심벌의 문서 표시"
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "창의 GNOME SKIP_WINLIST 힌트 토글"
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "창의 GNOME SKIP_WINLIST 힌트 설정"
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "창의 GNOME SKIP_WINLIST 힌트 해제"
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "창의 GNOME SKIP_TASKLIST 힌트 토글"
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "창의 GNOME SKIP_TASKLIST 힌트 설정"
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "창의 GNOME SKIP_TASKLIST 힌트 해제"
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "현재 그놈 세션에서 로그아웃"
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "그놈 프로젝트의 웹페이지를 표시합니다."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "그놈 도움말 시스템 실행"
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "그놈은.. 대화창을 실행"
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr "현재 창은 멤버인 그룹에서 모든 창을 삭제"
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "작업공간을 물어서 이동하기"
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
@@ -3509,592 +4361,11 @@ msgstr "작업공간 대화식으로 선택하기"
 #~ "\n"
 #~ "'아마도'는 다른 깊이의 창만 회피하기를 의미."
 
-#~ msgid ""
-#~ "Grows window to the left until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 왼쪽으로 창 확장.\n"
-#~ "`창 위로 키움' 참조."
-
-#~ msgid ""
-#~ "Grows window to the right until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 오른쪽으로 창 확장.\n"
-#~ "`창 위로 키움' 참조."
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 위쪽으로 창 확장.\n"
-#~ "만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
-#~ "범용 접두 인자를 사용하여 대신 위로 최대화. \n"
-#~ "수치 접두 인자를 사용하여 대신 창이나 픽셀로 지정된 증가량만큼 \n"
-#~ "위로 확장."
-
-#~ msgid ""
-#~ "Grows window downwards until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 아래로 창 확장.\n"
-#~ "`창 위로 키움' 참조."
-
-#~ msgid ""
-#~ "Moves window to the left until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 왼쪽으로 창 이동.\n"
-#~ "'창 밑으로 채워넣기' 참조."
-
-#~ msgid ""
-#~ "Moves window to the right until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 오른쪽으로 창 이동.\n"
-#~ "'창 위쪽으로 채워넣기' 참조."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 위로 창 이동.\n"
-#~ "만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
-#~ "범용 접두 인자를 사용하여 대신 위로 최대한 이동. \n"
-#~ "수치 접두 인자를 사용하여 대신 지정된 픽셀수만큼 위로 이동."
-
-#~ msgid ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 아래로 창 이동.\n"
-#~ "'창 위쪽으로 채워넣기' 참조."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr "`move-cursor-increment' 명령에서 오른쪽으로 이동할 픽셀 수"
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr "`move-cursor-increment' 명령에서 왼쪽으로 이동할 픽셀 수"
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr "`move-cursor-increment' 명령에서 윗쪽으로 이동할 픽셀 수"
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr "`move-cursor-increment' 명령에서 아랫쪽으로 이동할 픽셀 수"
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "커서를 오른쪽으로 1 픽셀 이동"
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "커서를 왼쪽으로 1 픽셀 이동"
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "커서를 윗쪽으로 1 픽셀 이동"
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "커서를 아랫쪽으로 1 픽셀 이동"
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "마우스를 사용하여 수동으로 창 이동"
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "마우스를 사용하여 수동으로 창 크기조정"
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr "창 선택하기를 기다렸다가 그 창을 수동으로 이동시키기"
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that "
-#~ "window."
-#~ msgstr "창 선택하기를 기다렸다가 그 창의 크기를 수동으로 변경하기"
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any "
-#~ "pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "현재 이벤트를 받은 창을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
-#~ "반응하기"
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "현재 이벤트를 받은 창을 올리고(초점 상태면),\n"
-#~ "명령을 불러 일으킨 포인터 이벤트에 반응하기"
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "현재 이벤트를 받은 창그룹을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
-#~ "반응하기"
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
-#~ "그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "현재 창의 크기를 한 줄 늘립니다."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "현재 창의 크기를 한 줄 줄입니다."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "현재 창의 크기를 한 열 늘립니다."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "현재 창의 크기를 한 열 줄입니다."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr "`slide-window-increment' 만큼 창으로 왼쪽으로 이동."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr "`slide-window-increment' 픽셀만큼 오른쪽으로 이동"
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr "`slide-window-increment' 픽셀만큼 창을 위로 이동"
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr "`slide-window-increment' 픽셀만큼 창을 아래로 이동"
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 왼쪽으로 이동"
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 오른쪽으로 이동"
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 위로 이동"
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 아래로 이동"
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "다음 뷰포트로 이동"
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "이전 뷰포트로 이동"
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "창을 이전 뷰포트로 이동"
-
 #~ msgid "Terminal"
 #~ msgstr "터미널"
 
-#~ msgid "Start a new xterm."
-#~ msgstr "새로운 xterm 시작"
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr "NAME 명령을 요구; prefix 변수 PFX-ARG를 사용할 수도 있습니다."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "주어진 쉘 명령을 실행합니다."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "명령 목록을 하나씩 호출합니다."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr "명령을 입력받아 실행하고 출력을 화면에 표시합니다."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "사용자 정의 시스템 호출"
-
 #~ msgid "Error Handling"
 #~ msgstr "오류 처리"
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "발생한 모든 오류를 화면에 나타냅니다."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "초점이 맞추어진 창의 현재위치를 기억."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "초점이 맞추어진 창의 현재크기을 기억."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr "초점이 맞추어진 창의 현재속성을 기억."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr "현재 창과 연관되는 모든 상태 지움"
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "저장된 모든 창기록 잊어버리기."
-
-#, fuzzy
-#~ msgid "View the workspace below the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "View the workspace above the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "View the workspace to the left of the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "View the workspace to the right of the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "Send window to the workspace below the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "Send window to the workspace above the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "Send window to the workspace left of the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#, fuzzy
-#~ msgid "Send window to the workspace right of the current workspace"
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "모든 창 동작을 보여주는 메뉴 표시"
-
-#~ msgid "Display the main menu."
-#~ msgstr "주 메뉴 표시"
-
-#~ msgid "Display the applications menu."
-#~ msgstr "애플리케이션 메뉴 표시"
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr "창을 가장 위로 쌓습니다."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr "창을 가장 아래로 쌓습니다."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "창이 스택 레벨 상 가장 높은 창이면 가장 낮은 곳으로 내리고\n"
-#~ "그렇지 않으면 가장 높은 곳으로 올립니다."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr "창을 스택 레벨에서 현재 레벨 위에 놓기"
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr "창을 스택 레벨에서 현재 레벨 밑에 놓기"
-
-#~ msgid "Minimize the window."
-#~ msgstr "창 최소화"
-
-#~ msgid "Restore the window from its minimized state."
-#~ msgstr "최소화된 창 원래 크기로 복구"
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "W 창의 아이콘화를 토글"
-
-#~ msgid "Minimize all windows on the current workspace."
-#~ msgstr "현재 작업공간의 모든 창 최소화"
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "모든 작업공간의 구성원 여부에 상관없이 창의 `고정'\n"
-#~ "속성을 토글"
-
-#~ msgid "Ignore the window."
-#~ msgstr "창 무시"
-
-#~ msgid "Unignore the window."
-#~ msgstr "창 무시 해제"
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "창 무시 여부 토글"
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "창 초점 수용 여부 토글"
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr "창이 돌아가는 동안 무시되든지 여부 토글"
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr "창이 창의 목록안에 포함될것인지 아닌지 토글"
-
-#, fuzzy
-#~ msgid "Toggle whether a window will be included in the task-list."
-#~ msgstr "창이 창의 목록안에 포함될것인지 아닌지 토글"
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "창의 크기를 최대화합니다."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr "창 크기를  원래의 최대화하지 않은 상태로 복원시킵니다."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "창의 수직 크기를 최대화합니다."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "창의 수평 크기를 최대화합니다."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr "최대화/비최대화 상태를 토글합니다."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "수평으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
-#~ "토글합니다."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "수직으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
-#~ "토글합니다."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "다른 창을 가리지 않고 창을 최대화합니다."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr "다른 창을 가리지 않고 창을 수직으로 최대화합니다."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr "다른 창을 가리지 않고 창을 수직으로 최대화합니다."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr "최대로 채운 상태와 그렇지 않은 상태 사이를 토글합니다."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "수평 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
-#~ "토글합니다."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "수직 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
-#~ "토글합니다."
-
-#, fuzzy
-#~ msgid "Fullscreen maximize the window."
-#~ msgstr "창 최소화"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized and "
-#~ "unmaximized."
-#~ msgstr "최대화/비최대화 상태를 토글합니다."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized across all "
-#~ "Xinerama and unmaximized."
-#~ msgstr "최대로 채운 상태와 그렇지 않은 상태 사이를 토글합니다."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "창의 타이틀바만 보여주기"
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr ""
-#~ "창을 은둔시키면(`shade-winodw' 참고), 원래의 상태로\n"
-#~ "복원하기"
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr "창의 은둔 상태(타이틀바만 있는)를 토글"
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "현재 창을 쌓기에서 허락되는 가장 높은 곳으로 올립니다\n"
-#~ "또한 현재 창과 관련된 모든 창을 올립니다."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "현재 창을 쌓기에서 허락되는 가장 낮은 곳으로 내립니다\n"
-#~ "또한 현재 창과 관련된 모든 창을 내립니다."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "만약 창이 가장 높은 위치에 있다면 창을 가장 낮은 곳으로 낮춥니다\n"
-#~ "반대의 경우 허락되는한 높입니다. 또한현재 창과 관련된 모든 창의 단계가 변"
-#~ "합니다\n"
-#~ " "
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "W 창을 포함하는 작업공간/뷰포트 표시하기"
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr "W 창을 포함하는 작업공간을 표시하고 W 에 초점주기"
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "gtkrc 설정 다시 읽기"
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr "키입력을 기다립니다. 그리고 키조합을 출력합니다."
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "초점이 주어진 클라이언트 창에 다음키 이벤트를 직접적으로 보냄, \n"
-#~ " 윈도우 관리자와의 어떤 관계도 무시함."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "지정한 뷰포트를 선택합니다."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "지정한 뷰포트 열을 선택합니다."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "지정한 뷰포트 행을 선택합니다."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "현재 창을 지정한 뷰포트로 옮깁니다."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "뷰포트를 한 화면 오른쪽으로 이동"
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "뷰포트를 한 화면 왼쪽으로 이동"
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "뷰포트를 한 화면 위로 이동"
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "뷰포트를 한 화면 아래로 이동"
-
-#~ msgid ""
-#~ "Move the window to the viewport on the right, and switch to that viewport."
-#~ msgstr "창을 오른쪽 뷰포트로 이동 후, 지정한 뷰포트로 전환"
-
-#~ msgid ""
-#~ "Move the window to the viewport on the left, and switch to that viewport."
-#~ msgstr "창을 왼쪽 뷰포트로 이동 후 지정한 뷰포트로 전환"
-
-#~ msgid "Move the window to the viewport above, and switch to that viewport."
-#~ msgstr "창을 위쪽 뷰포트로 이동 후, 지정한 뷰포트로 전환"
-
-#~ msgid "Move the window to the viewport below, and switch to that viewport."
-#~ msgstr "창을 아래쪽 뷰포트로 이동 후, 지정한 뷰포트로 전환"
-
-#~ msgid "Transfer input focus to the desktop window (if one exists)."
-#~ msgstr "입력 초점을 데스트탑 창으로 전달 (만일 데스크탑 창이 있다면)"
-
-#~ msgid "Delete the window."
-#~ msgstr "창 삭제"
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr "창 삭제를 시도하고 실패하면 경고음 내기"
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "현재 창이 고유 타이틀을 갖도록 강제"
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "모든 작업공간을 포함하는 메뉴 보여주기"
-
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "모든 관리 대상 창 메뉴 보여주기"
-
-#~ msgid "Display the next workspace."
-#~ msgstr "다음 작업공간 표시하기"
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "이전 작업공간 표시하기"
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "창을 다음 작업공간으로 이동시키기"
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "창을 이전 작업공간으로 이동시키기"
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "창을 다음 작업공간에 복사하기"
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "창을 이전 작업공간에 복사하기"
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr "목록의 맨뒤에 새로운 작업공간을 만들고 창을 그 곳으로 이동시키기"
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to "
-#~ "it."
-#~ msgstr "목록의 맨앞에 새로운 작업공간을 만들고 창을 그 곳으로 이동시키기"
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the "
-#~ "next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "현재 작업공간 삭제하기.  멤버 창은 다음 작업공간에\n"
-#~ "재배치합니다."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "현재 작업공간 삭제하기.  멤버 창은 이전 작업공간에\n"
-#~ "재배치합니다."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr "현재 작업공간 뒤에 새로운 공간 만들기"
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "현재 작업공간 앞에 새로운 공간 만들기"
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "현재 작업공간을 오른쪽으로 이동시키기"
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "현재 작업공간을 왼쪽으로 이동시키기"
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "아무 창도 포함하지 않은 작업공간 삭제"
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "현재 작업공간의 창 복사본 제거.  만약 그 복사본이 마지막 요소였다면\n"
-#~ "실제 창을 제거합니다."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "N번째 작업공간 선택"
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "현재 창을 N번째 작업공간에 복사합니다"
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "작업공간을 물어서 이동하기"
 
 #~ msgid "Select Icon"
 #~ msgstr "아이콘 선택"

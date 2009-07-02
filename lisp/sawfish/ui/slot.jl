@@ -100,10 +100,7 @@
 		   (cons slot (table-ref dependence-table depends))))
 
       ;; create the widget
-      (let* ((callback (lambda () (slot-changed slot)))
-	     (doc (if (or (null doc) (string= doc ""))
-		      doc
-		    (_ doc))))
+      (let* ((callback (lambda () (slot-changed slot))))
 	(if (widget-accepts-doc-string-p (or (car type) type))
 	    (slot-widget-set slot (make-widget type callback doc))
 	  (slot-doc-set slot doc)

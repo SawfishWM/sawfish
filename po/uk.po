@@ -7,13 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish-2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 08:31+0100\n"
+"POT-Creation-Date: 2009-07-02 21:37+0200\n"
 "PO-Revision-Date: 2003-01-23 03:44--500\n"
 "Last-Translator: Maxim Dzumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "і багато інших..."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "Розширений набір операцій з вікнами."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "Домашня сторінка Sawfish"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1225,6 +1237,11 @@ msgstr "Дії"
 msgid "Window Cycling"
 msgstr "Перебирання вікон"
 
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tabs"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
@@ -1240,6 +1257,16 @@ msgstr "Співпалі вікна"
 msgid "Tooltips"
 msgstr "Підказки"
 
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "History"
+msgstr "Історія"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -1250,20 +1277,40 @@ msgid "Next workspace window"
 msgstr "Наступне вікно робочого місця"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "Вибрати наступне вікно на поточному робочому місці."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous workspace window"
 msgstr "Попереднє вікно робочого місця"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "Надати фокус попередньому вікну на поточному робочому місці."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next window"
 msgstr "Наступне вікно"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr "Вибирати наступне вікно циклічно через всі доступні робочі місця."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous window"
 msgstr "Попереднє вікно"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr "Вибирати попереднє вікно циклічно через всі доступні робочі місця."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
 msgstr "Описати позначення"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "Показати документацію до вказаного позначення."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
@@ -1278,40 +1325,80 @@ msgid "Gnome toggle skip winlist"
 msgstr "Перемикнути параметр НЕ_У_СПИСКУ_ВІКОН"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "Перемикнути параметр вікна GNOME НЕ_У_СПИСКУ_ВІКОН."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip winlist"
 msgstr "Встановити параметр НЕ_У_СПИСКУ_ВІКОН"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "Встановити параметр вікна GNOME НЕ_У_СПИСКУ_ВІКОН."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip winlist"
 msgstr "Скинути параметр НЕ_У_СПИСКУ_ВІКОН"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "Скинути параметр вікна GNOME НЕ_У_СПИСКУ_ВІКОН."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip tasklist"
 msgstr "Перемикнути параметр НЕ_У_СПИСКУ_ЗАВДАНЬ"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Перемикнути параметр вікна GNOME НЕ_У_СПИСКУ_ЗАВДАНЬ."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip tasklist"
 msgstr "Встановити параметр НЕ_У_СПИСКУ_ЗАВДАНЬ"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Встановити параметр вікна НЕ_У_СПИСКУ_ЗАВДАНЬ."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip tasklist"
 msgstr "Скинути параметр НЕ_У_СПИСКУ_ЗАВДАНЬ"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Скинути параметр вікна GNOME НЕ_У_СПИСКУ_ЗАВДАНЬ."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
 msgstr "Вихід з Gnome"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "Вийти з поточного сеансу GNOME."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
 msgstr "Сторінка GNOME в Інтернеті"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "Відобразити WWW-сторінку проекту GNOME."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome help browser"
 msgstr "Програма перегляду довідки Gnome."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "Запустити програму перегляду довідки."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
 msgstr "Про GNOME"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "Запустити вікно інформації про GNOME."
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1397,6 +1484,10 @@ msgstr "Опустити групу"
 msgid "Delete group"
 msgstr "Стерти групу"
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "Стерти всі вікна з групи, членом якої є поточне вікно."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Growing and packing of windows"
 msgstr "Збільшення та пакування вікон"
@@ -1448,32 +1539,110 @@ msgid "Grow window left"
 msgstr "Розтягнути вікно до лівого краю"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Розширити вікно ліворуч, доки воно не досягне іншого.\n"
+"Дивіться `grow-window-up'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Розтягнути вікно до правого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Розширити вікно праворуч, доки воно не досягне іншого.\n"
+"Дивіться `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Розширити вікно вгору"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Вікна ростуть вгору доки не досягнуть інших вікон.\n"
+"Якщо верхня межа вікна нижче межи екрану, воно повертається назад.\n"
+"Якщо вказано загальний префіксований аргумент, тоді максимізується вгору.\n"
+"Якщо вказано числовий префіксований аргумент. росте вгору на кількість "
+"точок\n"
+"вказаних для вікна."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Розширити вікно вниз"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Розтягнути вікно вниз, доки воно не досягне іншого.\n"
+"Дивіться `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Перенести вікно до лівого краю"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Перенести вікно ліворуч, доки воно не досягне іншого.\n"
+"Дивіться `pack-window-up'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Перенести вікно до правого краю"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Перенести вікно праворуч, доки воно не досягне іншого.\n"
+"Дивіться `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Перенести вікно догори"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Перенести вікно вгору доки воно не досягне інших вікон.\n"
+"Якщо верхня межа вікна нижче межи екрану, воно повертається назад.\n"
+"Якщо вказано загальний префіксований аргумент, тоді максимізується вгору.\n"
+"Якщо вказано числовий префіксований аргумент - росте вгору на кількість "
+"точок\n"
+"вказаних для вікна."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Перенести вікно вниз"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Перенести вікно вниз, доки воно не досягне іншого.\n"
+"Дивіться `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
@@ -1539,32 +1708,66 @@ msgid "Move cursor right"
 msgstr "Посунути курсор праворуч"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr ""
+"Перемістити вказівник на \"крок переміщення курсору\" пікселів праворуч."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left"
 msgstr "Посунути курсор ліворуч"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr ""
+"Перемістити вказівник на \"крок переміщення курсору\" пікселів ліворуч."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up"
 msgstr "Посунути курсор вгору"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "Перемістити вказівник на \"крок переміщення курсору\" пікселів вгору."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down"
 msgstr "Посунути курсор вниз"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "Перемістити вказівник на \"крок переміщення курсору\" пікселів вниз."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right fine"
 msgstr "Перенести курсор праворуч на 1"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "Посунути курсор на один піксель праворуч."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left fine"
 msgstr "Перенести курсор ліворуч на 1"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "Посунути курсор на один піксель ліворуч."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up fine"
 msgstr "Перенести курсор вгору на 1"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "Посунути курсор на один піксель вгору."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down fine"
 msgstr "Перенести курсор униз на 1"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "Посунути курсор на один піксель вниз."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1654,24 +1857,62 @@ msgid "Move window interactively"
 msgstr "Перенести вікно інтерактивно"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "Перенести вікно інтерактивно використовуючи мишу."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "Змінити розмір вікна інтерактивно"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "Змінити розмір вікна інтерактивно використовуючи мишу."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "Перенести вибране вікно"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr ""
+"Зачекати поки користувач обере вікно, а потім інтерактивно переміщувати це "
+"вікно."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "Змінити розмір вибраного вікна"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr ""
+"Зачекати поки користувач вибере вікно, а потім інтерактивно змінювати "
+"розміри цього вікна."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Підняти та передати клацання"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Підняти вікно, що отримало поточну подію, а потім повторити події\n"
+"вказівника, що викликали цю команду."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Підняти та передати клацання, якщо має фокус"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Підняти вікно, що отримало поточну подію (якщо воно має фокус),\n"
+"а потім повторити події вказівника, що викликали цю команду."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1686,8 +1927,24 @@ msgid "Raise group and pass through click"
 msgstr "Підняти групу та передати клацання"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Підняти групу вікон, що отримала поточну подію, а потім повторити\n"
+"події вказівника, що викликали цю команду."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Підняти тимчасові та передати клацання"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"Підняти вікно і всі його тимчасові вікна, що отримали поточну подію,\n"
+"а потім повторити події вказівника, що викликали цю команду."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1708,9 +1965,21 @@ msgid "Shrink window left"
 msgstr "Зсунути вікно ліворуч"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "Зсунути вікно праворуч"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1718,9 +1987,21 @@ msgid "Shrink window up"
 msgstr "Зсунути вікно вгору"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "Зсунути вікно вниз"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1728,9 +2009,19 @@ msgid "Yank window left"
 msgstr "Перенести вікно до лівого краю"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "Перенести вікно до правого краю"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1738,73 +2029,147 @@ msgid "Yank window up"
 msgstr "Перенести вікно догори"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yanks WINDOW upwards until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Перенести вікно вниз"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Збільшити розмір вікна по горизонталі"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Збільшити розмір поточного вікна на один рядок."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract row"
 msgstr "Зменшити розмір вікна по горизонталі"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Зменшити розмір поточного вікна на один рядок."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add column"
 msgstr "Збільшити розмір вікна по горизонталі"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Збільшити розмір поточного вікна на один стовпчик."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract column"
 msgstr "Зменшити розмір вікна по горизонталі"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Зменшити розмір поточного вікна на один стовпчик."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
 msgstr "Зсунути вікно ліворуч"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Перемістити вікно ліворуч на крок зсуву вікна."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
 msgstr "Зсунути вікно праворуч"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Перемістити вікно праворуч на крок зсуву вікна."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
 msgstr "Зсунути вікно вгору"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Перемістити вікно вище на крок зсуву вікна."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
 msgstr "Зсунути вікно вниз"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Перемістити вікно нижче на крок зсуву вікна."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
 msgstr "Зсунути групу ліворуч"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "Перемістити групу вікон ліворуч на крок зсуву вікна."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
 msgstr "Зсунути групу праворуч"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "Перемістити групу вікон праворуч на крок зсуву вікна."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group up"
 msgstr "Зсунути групу вгору"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr "Перемістити групу вікон вище на крок зсуву вікна."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
 msgstr "Зсунути групу вниз"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "Перемістити групу вікон нижче на крок зсуву вікна."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Перейти в наступну ділянку перегляду"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Перенести у наступну ділянку перегляду."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
 msgstr "Перейти в попередню ділянку перегляду"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Перенести у попередню ділянку перегляду."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
 msgstr "Перемістити вікно назад"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Перенести вікно у попередню ділянку перегляду."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
 msgstr "Перемістити вікно далі"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "Перенести вікно у попередню ділянку перегляду."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -1856,13 +2221,25 @@ msgstr "Аргументи, що передаються команді \"xterm\"
 msgid "Xterm"
 msgstr "Xterm"
 
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "Запустити новий xterm."
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "Виконати команду"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Виконати команду NAME з необов'язковим префіксом аргументом PFX-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Run shell command"
 msgstr "Виконати команду оболонки"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Виконати вказану команду оболонки."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
@@ -1871,6 +2248,10 @@ msgstr "Команда:"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "Послідовність команди"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Виконати список команд, одну за однією."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
@@ -1895,6 +2276,10 @@ msgstr "Немає команди"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Виконати команду з виводом на екран"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Запитати команду, виконати її та вивести результат на екран."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -1936,6 +2321,10 @@ msgstr "Розміщення"
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
 msgstr "Налаштувати"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Викликати систему налаштування."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2028,6 +2417,10 @@ msgstr "Без помилок."
 msgid "Display errors"
 msgstr "Показати повідомлення про помилки"
 
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Відображати всі помилки на екран."
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2076,10 +2469,6 @@ msgid "Locale"
 msgstr "Локалізація"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Уникати"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore program position"
 msgstr "Ігнорувати положення, вказане програмою"
 
@@ -2113,6 +2502,11 @@ msgid "Placement weight"
 msgstr "Вага розміщення"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed position"
+msgstr "Позиція"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Maximized"
 msgstr "Максимізувати"
 
@@ -2143,6 +2537,10 @@ msgstr "Тип кадру"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "Стиль кадру"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Уникати"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
@@ -2184,6 +2582,15 @@ msgstr "Немає в списку вікон"
 #, fuzzy
 msgid "Task list skip"
 msgstr "Немає в списку вікон"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "Розмасимізувати"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2282,10 +2689,6 @@ msgid "_Forget saved state"
 msgstr "_Забути збережений стан"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "History"
-msgstr "Історія"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
 msgstr "Автоматично запам'ятовувати позиції вікон."
 
@@ -2306,20 +2709,40 @@ msgid "Window history save position"
 msgstr "Зберегти положення вікна"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Запам'ятати поточну позицію сфокусованого вікна."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
 msgstr "Зберегти розміри вікна"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Запам'ятати поточні розміри сфокусованого вікна."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
 msgstr "Зберегти ознаки вікна"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Запам'ятовувати поточні ознаки сфокусованого вікна."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history forget"
 msgstr "Забути історію вікна"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Забути всі стійкі стани асоційовані з поточним вікном."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
 msgstr "Очистити історію вікон"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Забути всю збережену історію вікна."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -2330,32 +2753,64 @@ msgid "Workspace down"
 msgstr "Робоче місце внизу"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Переглянути робоче місце розташоване нижче"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace up"
 msgstr "Робоче місце вгорі"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Переглянути робоче місце розташоване вгорі"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace left"
 msgstr "Робоче місце ліворуч"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Переглянути робоче місце розташоване ліворуч"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace right"
 msgstr "Робоче місце праворуч"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Переглянути робоче місце розташоване праворуч"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace down"
 msgstr "Відіслати у нижнє робоче місце"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace up"
 msgstr "Відіслати у горішнє робоче місце"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Відсилає вікно у робоче місце розташоване над поточним."
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace left"
 msgstr "Відіслати у робоче місце ліворуч"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace right"
 msgstr "Відіслати у робоче місце праворуч"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -2367,7 +2822,7 @@ msgstr "Передавати клацання вікну в режимі кла�
 
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
+msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr "Опустити вікно до найнижчої можливої позиції в стосі."
 
 #. ../lisp/sawfish/wm/focus.jl
@@ -2695,12 +3150,24 @@ msgid "Popup window menu"
 msgstr "Спливаюче меню вікна"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Показати меню всіх дій вікна."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
 msgstr "Спливаюче головне меню"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Показати головне меню."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
 msgstr "Спливаюче меню програм"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Показати меню програм."
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_All settings"
@@ -2743,21 +3210,48 @@ msgstr "Лишати проміжкові вікна зібраними над: 
 msgid "Raise single window"
 msgstr "Підняти одне вікно"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Підняти вікно до найвищої можливої позиції в стосі."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
 msgstr "Опустити одне вікно"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Опустити вікно до найнижчої можливої позиції в стосі."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
 msgstr "Підняти/опустити одне вікно"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Якщо вікно у найвищий позиції, то опустити його у найнижчу.\n"
+"А інакше, підняти його на найвищу можливу позицію."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Підняти вікно"
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Помістити вікно в стос над його поточним рівнем."
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower window depth"
 msgstr "Опустити вікно"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Помістити вікно в стос під його поточним рівнем."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2782,16 +3276,32 @@ msgid "Iconify window"
 msgstr "Мінімізувати вікно"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize the window."
+msgstr "Мінімізувати вікно."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Розмінімізувати вікно"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Restore the window from its minimized state."
+msgstr "Повернути вікно з мінімізованого стану."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
 msgstr "Перемикнути мінімізованість вікна"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "Перемикнути стан мінімізації вікна W."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify workspace windows"
 msgstr "Мінімізувати вікна робочого місця"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize all windows on the current workspace."
+msgstr "Мінімізувати всі вікна на поточному робочому місці."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2806,6 +3316,14 @@ msgid "Toggle window sticky"
 msgstr "Перемикнути липкість вікна"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Перемикнути \"липкість\" вінка - чи показуватиметься на усіх\n"
+"робочих столах."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Липке"
 
@@ -2814,29 +3332,58 @@ msgid "Make window ignored"
 msgstr "Ігнорувати вікно"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "Ігнорувати вікно."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "Не ігнорувати вікно"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "Вимкнути ігнорування вікна."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window ignored"
 msgstr "Перемикнути стан ігнорування вікна"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
+msgstr "Перемикнути режим ігнорування вікна."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window never focus"
 msgstr "Перемикнути отримуватиме вікно фокус чи ні"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Перемикнути можливість вікна мати фокус."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window cycle skip"
 msgstr "Перемикнути пропуск вікна при перебиранні"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr "Перемикнути режим ігнорування вікна під час циклічного перебору."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window list skip"
 msgstr "Перемикнути стан входження вікна в список вікон"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr "Перемикнути режим включення вікна у список вікон."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle task list skip"
 msgstr "Перемикнути стан входження вікна в список вікон"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Перемикнути режим включення вікна у список вікон."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -2868,60 +3415,142 @@ msgid "Maximize window"
 msgstr "Максимізувати вікно"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "Максимізувати розміри вікна."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Unmaximize window"
 msgstr "Розмасимізувати вікно"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr "Відновити розміри вікна до початкового стану."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
 msgstr "Максимізувати вікно вертикально"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "Максимізувати вікно по вертикалі."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally"
 msgstr "Максимізувати вікно горизонтально"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "Максимізувати вікно по горизонталі."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window toggle"
 msgstr "Перемикнути маскимізацію вікна"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr "Перемикнути стан вікна між максимізованим та не максимізованим."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally toggle"
 msgstr "Перемикнути вертикальну максимізацію вікна"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"Перемикнути стан вікна між горизонтально максимізованим та\n"
+"не максимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Перемикнути горизонтальну максимізацію вікна"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"Перемикнути стан вікна між вертикально максимізованим та\n"
+"не максимізованим."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Маскимізувати вікно без перекриття інших"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "Максимізувати вікно без перекриття інших вікон."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically"
 msgstr "Максимізувати вікно вертикально не затуляючи інших"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr "Максимізувати вікно вертикально без перекриття інших вікон."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally"
 msgstr "Максимізувати вікно горизонтально не затуляючи інших"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr "Максимізувати вікно горизонтально без перекриття інших вікон."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window toggle"
 msgstr "Перемикнути максимізацію не затуляючи інших"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr ""
+"Перемикнути стан вікна між максимізованим-заповненим і не максимізованим."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
 msgstr "Перемикнути горизонтальну максимізацію вікна без перекриття інших"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Перемикнути стан вікна між горизонтально максимізованим-заповненим і\n"
+"не максимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Перемикнути вертикальну максимізацію вікна без перекриття інших"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Перемикнути стан вікна між вертикально максимізованим-заповненим і\n"
+"не максимізованим."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Маскимізувати на весь екран"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "Мінімізувати вікно."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "Перемикнути маскимізацію на весь екран"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr "Перемикнути стан вікна між максимізованим та не максимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -2930,20 +3559,49 @@ msgstr "Маскимізувати на весь екран"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr "Мінімізувати вікно."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid "Maximize window fullxinerama toggle"
 msgstr "Перемикнути маскимізацію на весь екран"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr ""
+"Перемикнути стан вікна між максимізованим-заповненим і не максимізованим."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
 msgstr "Згорнути вікно"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "Показувати лише панель заголовку вікна."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
 msgstr "Розгорнути вікно"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
+msgstr "Якщо вікно згорнуте, повернути його до звичайного стану."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Перемикнути згорнутість вікна"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr ""
+"Перемикнути стан згорнутості вікна (відображується лише рядок заголовка)."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2958,16 +3616,39 @@ msgid "Raise window and transients"
 msgstr "Підняти вікно і його діалоги"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Підняти поточне вікно до найвищої позиції у стосі.\n"
+"Також підняти всі його тимчасові вікна."
+
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Опустити вікно і його діалоги"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Опустити поточне вікно до найнижчої позиції у стосі.\n"
+"Також опустити всі його тимчасові вікна."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Підняти/опустити вікно і його діалоги"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Tabs"
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
+"Якщо вікно у найвищій позиції, тоді опустити його до найнижчої.\n"
+"В іншому випадку підняти його якнайвище. Також змінити рівень\n"
+"будь-яких його тимчасових вікон."
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
@@ -2987,7 +3668,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #, fuzzy
-msgid "Add to group"
+msgid "Raise Tabs on Hover"
+msgstr "Піднімати після отримання фокусу"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
 msgstr "Опустити групу"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
@@ -2997,13 +3683,28 @@ msgstr "Стерти вікно"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Release active window from its group"
+msgstr "Повернути вікно з мінімізованого стану."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise left window"
 msgstr "Підняти/опустити вікно"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Raise left window in current group"
+msgstr "Підняти/опустити вікно і його діалоги"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise right window"
 msgstr "Підняти одне вікно"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Підняти/опустити вікно і його діалоги"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -3018,8 +3719,16 @@ msgid "Display window without focusing"
 msgstr "Показати вікно без фокусування"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "Показати робоче місце і ділянку перегляду, що містить вікно W."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Показати вікно"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "Показати робоче місце, що містить вікно W, тоді сфокусувати W."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3029,9 +3738,17 @@ msgstr "Нова група"
 msgid "Gtkrc reload style"
 msgstr "Перечитати конфігураційний файл gtk"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "Перезавантажити параметри gtkrc."
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "Показувати опис клавіш"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "Запрошення до введення комбінацій клавіш, потім друк їх функцій"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -3044,6 +3761,14 @@ msgstr "[Лапка]"
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
 msgstr "Екранувати наступну подію"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Надсилати наступні події безпосередньо сфокусованому клієнтському вікну,\n"
+"ігноруючи будь-які прив'язки менеджера вікон, які він може мати."
 
 #. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
@@ -3082,6 +3807,14 @@ msgstr "Робоче місце %d"
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Робоче місце:"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Font for prompt: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Prompt message's colors."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -3135,12 +3868,16 @@ msgid "stop"
 msgstr "Налаштувати"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Wether to stop or wrap-around on first/last viewport"
+msgid "Whether to stop or wrap-around on first/last viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "Активувати ділянку перегляду"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Вибрати вказану ділянку перегляду."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -3155,44 +3892,93 @@ msgid "Activate viewport column"
 msgstr "Активувати стовпчик ділянки перегляду"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Вибрати вказаний стовпчик ділянки перегляду."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
 msgstr "Активувати рядок ділянки перегляду"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Вибрати вказаний рядок ділянки перегляду."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
 msgstr "Перенести вікно у ділянку перегляду"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Перенести поточне вікно у вказану ділянку перегляду."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
 msgstr "Пересунути ділянку перегляду праворуч"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Перенести ділянку перегляду на один екран праворуч."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
 msgstr "Пересунути ділянку перегляду ліворуч"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Перенести ділянку перегляду на один екран ліворуч."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
 msgstr "Перенести ділянку перегляду вгору"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Перенести ділянку перегляду на один екран вгору."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
 msgstr "Перенести ділянку перегляду вниз"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Перенести ділянку перегляду на один екран вниз."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
 msgstr "Перенести ділянку перегляду праворуч"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr ""
+"Перенести вікно у ділянку перегляду праворуч, та перейти до тієї ділянки."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Пересунути вікно ліворуч"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr ""
+"Перенести вікно у ділянку перегляду ліворуч, та перейти до тієї ділянки."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Перенести вікно вгору"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr ""
+"Перенести вікно у горішню ділянку перегляду, та перейти до тієї ділянки."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Пересунути вікно нижче"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Перенести вікно у нижню ділянку перегляду, та перейти до тієї ділянки."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
@@ -3227,21 +4013,24 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to enable warping the cursor to windows."
+msgid "Whether to enable warping the cursor to windows."
 msgstr ""
 "Чи потрібно, щоб вікна при розширенні або пакуванні зіштовхувались\n"
 "з цілком ігнорованими вікнами"
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to not ignore avoided windows by default."
+msgid "Whether to not ignore avoided windows by default."
 msgstr ""
 "Чи потрібно, щоб вікна при розширенні або пакуванні зіштовхувались\n"
 "з цілком ігнорованими вікнами"
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Wether to avoid any unspecified window by default."
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
 msgstr ""
+"Чи потрібно, щоб вікна при розширенні або пакуванні зіштовхувались\n"
+"з цілком ігнорованими вікнами"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -3252,16 +4041,33 @@ msgid "Focus desktop"
 msgstr "Передати фокусу стільниці"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Передати фокус вікну стільниці (якщо воно є)"
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
 msgstr "Стерти вікно"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Стерти вікно."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window safely"
 msgstr "Безпечно стерти вікно"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr ""
+"Стерти вікно, чи дати звуковий сигнал якщо його неможливо безпечно закрити."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
 msgstr "Уніфікувати назву вікна"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Примусове використання унікального заголовка поточним вікном."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -3324,72 +4130,158 @@ msgid "Popup workspace list"
 msgstr "Спливаючий перелік робочих місць"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Показати меню, що містить список всіх робочих місць."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Popup window list"
 msgstr "Спливаючий перелік вікон"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Показати меню всіх керованих вікон."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
 msgstr "Наступне робоче місце"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Показати наступне робоче місце."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
 msgstr "Попереднє робоче місце"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Показати попереднє робоче місце."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
 msgstr "Відіслати до наступного робочого місця"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Перенести вікно на наступне робоче місце."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
 msgstr "Відіслати до попереднього робочого місця"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Перенести вікно на попереднє робоче місце."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
 msgstr "Скопіювати у наступне робоче місце"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Скопіювати вікно на наступне робоче місце."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
 msgstr "Скопіювати у попереднє робоче місце"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Скопіювати вікно на попереднє робоче місце."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
 msgstr "Додати робоче місце відіслати до нього"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "Створити нове робоче місце в кінці списку та перенести вікно туди."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
 msgstr "Вставити робоче місце та відіслати до нього"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr "Створити нове робоче місце на початку списку та перенести вікно туди."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
 msgstr "Об'єднати з наступним робочим місцем"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Стерти поточне робоче місце. Всі вікна в ньому перемістити на наступне\n"
+"робоче місце."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Об'єднати з попереднім робочим місцем"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Стерти поточне робоче місце. Всі вікна в ньому перемістити на попереднє\n"
+"робоче місце."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Вставити робоче місце перед"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Створити нове робоче місце за поточним."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
 msgstr "Вставити робоче місце після"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Створити нове робоче місце перед поточним."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
 msgstr "Пересунути робоче місце уперед"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Пересунути поточне робоче місце на одну позицію праворуч."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace backwards"
 msgstr "Пересунути робоче місце назад"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Пересунути поточне робоче місце на одну позицію ліворуч."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete empty workspaces"
 msgstr "Видалити порожні робочі місця"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Видаляти робочі місця, що не містять вікон."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete window instance"
 msgstr "Видалити копію вікна"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Видалити копію вікна на поточному робочому місці. Якщо це остання копія,\n"
+"видалити вікно."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -3397,83 +4289,50 @@ msgid "Show desktop"
 msgstr "Передати фокусу стільниці"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Hide desktop"
 msgstr "Передати фокусу стільниці"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
 msgstr "Активувати робоче місце"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Вибрати робоче місце N."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
 msgstr "Відіслати до робочого місця"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move the current window to the N'th workspace."
+msgstr "Скопіювати поточне вікно у робоче місце N."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Скопіювати у робоче місце"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Скопіювати поточне вікно у робоче місце N."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select workspace interactively"
 msgstr "Вибрати робоче місце інтерактивно"
 
-#~ msgid "and many others..."
-#~ msgstr "і багато інших..."
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "Розширений набір операцій з вікнами."
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "Домашня сторінка Sawfish"
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "Вибрати наступне вікно на поточному робочому місці."
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "Надати фокус попередньому вікну на поточному робочому місці."
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr "Вибирати наступне вікно циклічно через всі доступні робочі місця."
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr "Вибирати попереднє вікно циклічно через всі доступні робочі місця."
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "Показати документацію до вказаного позначення."
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Перемикнути параметр вікна GNOME НЕ_У_СПИСКУ_ВІКОН."
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Встановити параметр вікна GNOME НЕ_У_СПИСКУ_ВІКОН."
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Скинути параметр вікна GNOME НЕ_У_СПИСКУ_ВІКОН."
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Перемикнути параметр вікна GNOME НЕ_У_СПИСКУ_ЗАВДАНЬ."
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Встановити параметр вікна НЕ_У_СПИСКУ_ЗАВДАНЬ."
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Скинути параметр вікна GNOME НЕ_У_СПИСКУ_ЗАВДАНЬ."
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "Вийти з поточного сеансу GNOME."
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "Відобразити WWW-сторінку проекту GNOME."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "Запустити програму перегляду довідки."
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "Запустити вікно інформації про GNOME."
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr "Стерти всі вікна з групи, членом якої є поточне вікно."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Запитати робоче місце і перемикнутись на нього."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
@@ -3515,605 +4374,11 @@ msgstr "Вибрати робоче місце інтерактивно"
 #~ "з вікнами розташованими на інших рівнях.\n"
 #~ "`можливо' означає уникати тільки вікна на інших рівнях."
 
-#~ msgid ""
-#~ "Grows window to the left until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Розширити вікно ліворуч, доки воно не досягне іншого.\n"
-#~ "Дивіться `grow-window-up'."
-
-#~ msgid ""
-#~ "Grows window to the right until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Розширити вікно праворуч, доки воно не досягне іншого.\n"
-#~ "Дивіться `grow-window-up'."
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Вікна ростуть вгору доки не досягнуть інших вікон.\n"
-#~ "Якщо верхня межа вікна нижче межи екрану, воно повертається назад.\n"
-#~ "Якщо вказано загальний префіксований аргумент, тоді максимізується "
-#~ "вгору.\n"
-#~ "Якщо вказано числовий префіксований аргумент. росте вгору на кількість "
-#~ "точок\n"
-#~ "вказаних для вікна."
-
-#~ msgid ""
-#~ "Grows window downwards until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Розтягнути вікно вниз, доки воно не досягне іншого.\n"
-#~ "Дивіться `grow-window-up'."
-
-#~ msgid ""
-#~ "Moves window to the left until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Перенести вікно ліворуч, доки воно не досягне іншого.\n"
-#~ "Дивіться `pack-window-up'."
-
-#~ msgid ""
-#~ "Moves window to the right until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Перенести вікно праворуч, доки воно не досягне іншого.\n"
-#~ "Дивіться `pack-window-up'."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Перенести вікно вгору доки воно не досягне інших вікон.\n"
-#~ "Якщо верхня межа вікна нижче межи екрану, воно повертається назад.\n"
-#~ "Якщо вказано загальний префіксований аргумент, тоді максимізується "
-#~ "вгору.\n"
-#~ "Якщо вказано числовий префіксований аргумент - росте вгору на кількість "
-#~ "точок\n"
-#~ "вказаних для вікна."
-
-#~ msgid ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Перенести вікно вниз, доки воно не досягне іншого.\n"
-#~ "Дивіться `pack-window-up'."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr ""
-#~ "Перемістити вказівник на \"крок переміщення курсору\" пікселів праворуч."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr ""
-#~ "Перемістити вказівник на \"крок переміщення курсору\" пікселів ліворуч."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr ""
-#~ "Перемістити вказівник на \"крок переміщення курсору\" пікселів вгору."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr ""
-#~ "Перемістити вказівник на \"крок переміщення курсору\" пікселів вниз."
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "Посунути курсор на один піксель праворуч."
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "Посунути курсор на один піксель ліворуч."
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "Посунути курсор на один піксель вгору."
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "Посунути курсор на один піксель вниз."
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "Перенести вікно інтерактивно використовуючи мишу."
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "Змінити розмір вікна інтерактивно використовуючи мишу."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr ""
-#~ "Зачекати поки користувач обере вікно, а потім інтерактивно переміщувати "
-#~ "це вікно."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that "
-#~ "window."
-#~ msgstr ""
-#~ "Зачекати поки користувач вибере вікно, а потім інтерактивно змінювати "
-#~ "розміри цього вікна."
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any "
-#~ "pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "Підняти вікно, що отримало поточну подію, а потім повторити події\n"
-#~ "вказівника, що викликали цю команду."
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Підняти вікно, що отримало поточну подію (якщо воно має фокус),\n"
-#~ "а потім повторити події вказівника, що викликали цю команду."
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Підняти групу вікон, що отримала поточну подію, а потім повторити\n"
-#~ "події вказівника, що викликали цю команду."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Підняти вікно і всі його тимчасові вікна, що отримали поточну подію,\n"
-#~ "а потім повторити події вказівника, що викликали цю команду."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "Збільшити розмір поточного вікна на один рядок."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "Зменшити розмір поточного вікна на один рядок."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "Збільшити розмір поточного вікна на один стовпчик."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "Зменшити розмір поточного вікна на один стовпчик."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr "Перемістити вікно ліворуч на крок зсуву вікна."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr "Перемістити вікно праворуч на крок зсуву вікна."
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr "Перемістити вікно вище на крок зсуву вікна."
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr "Перемістити вікно нижче на крок зсуву вікна."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr "Перемістити групу вікон ліворуч на крок зсуву вікна."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr "Перемістити групу вікон праворуч на крок зсуву вікна."
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr "Перемістити групу вікон вище на крок зсуву вікна."
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr "Перемістити групу вікон нижче на крок зсуву вікна."
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "Перенести у наступну ділянку перегляду."
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "Перенести у попередню ділянку перегляду."
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "Перенести вікно у попередню ділянку перегляду."
-
 #~ msgid "Terminal"
 #~ msgstr "Термінал"
 
-#~ msgid "Start a new xterm."
-#~ msgstr "Запустити новий xterm."
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr ""
-#~ "Виконати команду NAME з необов'язковим префіксом аргументом PFX-ARG."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "Виконати вказану команду оболонки."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "Виконати список команд, одну за однією."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr "Запитати команду, виконати її та вивести результат на екран."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "Викликати систему налаштування."
-
 #~ msgid "Error Handling"
 #~ msgstr "Обробка помилок"
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "Відображати всі помилки на екран."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "Запам'ятати поточну позицію сфокусованого вікна."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "Запам'ятати поточні розміри сфокусованого вікна."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr "Запам'ятовувати поточні ознаки сфокусованого вікна."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr "Забути всі стійкі стани асоційовані з поточним вікном."
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "Забути всю збережену історію вікна."
-
-#~ msgid "View the workspace below the current workspace"
-#~ msgstr "Переглянути робоче місце розташоване нижче"
-
-#~ msgid "View the workspace above the current workspace"
-#~ msgstr "Переглянути робоче місце розташоване вгорі"
-
-#~ msgid "View the workspace to the left of the current workspace"
-#~ msgstr "Переглянути робоче місце розташоване ліворуч"
-
-#~ msgid "View the workspace to the right of the current workspace"
-#~ msgstr "Переглянути робоче місце розташоване праворуч"
-
-#~ msgid "Send window to the workspace below the current workspace"
-#~ msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
-
-#~ msgid "Send window to the workspace above the current workspace"
-#~ msgstr "Відсилає вікно у робоче місце розташоване над поточним."
-
-#~ msgid "Send window to the workspace left of the current workspace"
-#~ msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
-
-#~ msgid "Send window to the workspace right of the current workspace"
-#~ msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "Показати меню всіх дій вікна."
-
-#~ msgid "Display the main menu."
-#~ msgstr "Показати головне меню."
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Показати меню програм."
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr "Підняти вікно до найвищої можливої позиції в стосі."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr "Опустити вікно до найнижчої можливої позиції в стосі."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "Якщо вікно у найвищий позиції, то опустити його у найнижчу.\n"
-#~ "А інакше, підняти його на найвищу можливу позицію."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr "Помістити вікно в стос над його поточним рівнем."
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr "Помістити вікно в стос під його поточним рівнем."
-
-#~ msgid "Minimize the window."
-#~ msgstr "Мінімізувати вікно."
-
-#~ msgid "Restore the window from its minimized state."
-#~ msgstr "Повернути вікно з мінімізованого стану."
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "Перемикнути стан мінімізації вікна W."
-
-#~ msgid "Minimize all windows on the current workspace."
-#~ msgstr "Мінімізувати всі вікна на поточному робочому місці."
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "Перемикнути \"липкість\" вінка - чи показуватиметься на усіх\n"
-#~ "робочих столах."
-
-#~ msgid "Ignore the window."
-#~ msgstr "Ігнорувати вікно."
-
-#~ msgid "Unignore the window."
-#~ msgstr "Вимкнути ігнорування вікна."
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "Перемикнути режим ігнорування вікна."
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "Перемикнути можливість вікна мати фокус."
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr "Перемикнути режим ігнорування вікна під час циклічного перебору."
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr "Перемикнути режим включення вікна у список вікон."
-
-#, fuzzy
-#~ msgid "Toggle whether a window will be included in the task-list."
-#~ msgstr "Перемикнути режим включення вікна у список вікон."
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "Максимізувати розміри вікна."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr "Відновити розміри вікна до початкового стану."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "Максимізувати вікно по вертикалі."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "Максимізувати вікно по горизонталі."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr "Перемикнути стан вікна між максимізованим та не максимізованим."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Перемикнути стан вікна між горизонтально максимізованим та\n"
-#~ "не максимізованим."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Перемикнути стан вікна між вертикально максимізованим та\n"
-#~ "не максимізованим."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "Максимізувати вікно без перекриття інших вікон."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr "Максимізувати вікно вертикально без перекриття інших вікон."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr "Максимізувати вікно горизонтально без перекриття інших вікон."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr ""
-#~ "Перемикнути стан вікна між максимізованим-заповненим і не максимізованим."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Перемикнути стан вікна між горизонтально максимізованим-заповненим і\n"
-#~ "не максимізованим."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Перемикнути стан вікна між вертикально максимізованим-заповненим і\n"
-#~ "не максимізованим."
-
-#, fuzzy
-#~ msgid "Fullscreen maximize the window."
-#~ msgstr "Мінімізувати вікно."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized and "
-#~ "unmaximized."
-#~ msgstr "Перемикнути стан вікна між максимізованим та не максимізованим."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized across all "
-#~ "Xinerama and unmaximized."
-#~ msgstr ""
-#~ "Перемикнути стан вікна між максимізованим-заповненим і не максимізованим."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "Показувати лише панель заголовку вікна."
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr "Якщо вікно згорнуте, повернути його до звичайного стану."
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr ""
-#~ "Перемикнути стан згорнутості вікна (відображується лише рядок заголовка)."
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Підняти поточне вікно до найвищої позиції у стосі.\n"
-#~ "Також підняти всі його тимчасові вікна."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Опустити поточне вікно до найнижчої позиції у стосі.\n"
-#~ "Також опустити всі його тимчасові вікна."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Якщо вікно у найвищій позиції, тоді опустити його до найнижчої.\n"
-#~ "В іншому випадку підняти його якнайвище. Також змінити рівень\n"
-#~ "будь-яких його тимчасових вікон."
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "Показати робоче місце і ділянку перегляду, що містить вікно W."
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr "Показати робоче місце, що містить вікно W, тоді сфокусувати W."
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "Перезавантажити параметри gtkrc."
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr "Запрошення до введення комбінацій клавіш, потім друк їх функцій"
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "Надсилати наступні події безпосередньо сфокусованому клієнтському вікну,\n"
-#~ "ігноруючи будь-які прив'язки менеджера вікон, які він може мати."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "Вибрати вказану ділянку перегляду."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "Вибрати вказаний стовпчик ділянки перегляду."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "Вибрати вказаний рядок ділянки перегляду."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "Перенести поточне вікно у вказану ділянку перегляду."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "Перенести ділянку перегляду на один екран праворуч."
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "Перенести ділянку перегляду на один екран ліворуч."
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "Перенести ділянку перегляду на один екран вгору."
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "Перенести ділянку перегляду на один екран вниз."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the right, and switch to that viewport."
-#~ msgstr ""
-#~ "Перенести вікно у ділянку перегляду праворуч, та перейти до тієї ділянки."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the left, and switch to that viewport."
-#~ msgstr ""
-#~ "Перенести вікно у ділянку перегляду ліворуч, та перейти до тієї ділянки."
-
-#~ msgid "Move the window to the viewport above, and switch to that viewport."
-#~ msgstr ""
-#~ "Перенести вікно у горішню ділянку перегляду, та перейти до тієї ділянки."
-
-#~ msgid "Move the window to the viewport below, and switch to that viewport."
-#~ msgstr ""
-#~ "Перенести вікно у нижню ділянку перегляду, та перейти до тієї ділянки."
-
-#~ msgid "Transfer input focus to the desktop window (if one exists)."
-#~ msgstr "Передати фокус вікну стільниці (якщо воно є)"
-
-#~ msgid "Delete the window."
-#~ msgstr "Стерти вікно."
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr ""
-#~ "Стерти вікно, чи дати звуковий сигнал якщо його неможливо безпечно "
-#~ "закрити."
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "Примусове використання унікального заголовка поточним вікном."
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "Показати меню, що містить список всіх робочих місць."
-
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "Показати меню всіх керованих вікон."
-
-#~ msgid "Display the next workspace."
-#~ msgstr "Показати наступне робоче місце."
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "Показати попереднє робоче місце."
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "Перенести вікно на наступне робоче місце."
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "Перенести вікно на попереднє робоче місце."
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "Скопіювати вікно на наступне робоче місце."
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "Скопіювати вікно на попереднє робоче місце."
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr "Створити нове робоче місце в кінці списку та перенести вікно туди."
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to "
-#~ "it."
-#~ msgstr ""
-#~ "Створити нове робоче місце на початку списку та перенести вікно туди."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the "
-#~ "next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "Стерти поточне робоче місце. Всі вікна в ньому перемістити на наступне\n"
-#~ "робоче місце."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "Стерти поточне робоче місце. Всі вікна в ньому перемістити на попереднє\n"
-#~ "робоче місце."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr "Створити нове робоче місце за поточним."
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "Створити нове робоче місце перед поточним."
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "Пересунути поточне робоче місце на одну позицію праворуч."
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "Пересунути поточне робоче місце на одну позицію ліворуч."
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "Видаляти робочі місця, що не містять вікон."
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "Видалити копію вікна на поточному робочому місці. Якщо це остання копія,\n"
-#~ "видалити вікно."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "Вибрати робоче місце N."
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "Скопіювати поточне вікно у робоче місце N."
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "Запитати робоче місце і перемикнутись на нього."
 
 #~ msgid "Select Icon"
 #~ msgstr "Вибір піктограми"

@@ -6,13 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish for latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-05 08:31+0100\n"
+"POT-Creation-Date: 2009-07-02 21:37+0200\n"
 "PO-Revision-Date: 2002-11-10 11:48+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <ll10nt@ttc.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ../scripts/sawfish-about.jl
+msgid "and many others..."
+msgstr "un daudzi citi..."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish manages your windows extensibly."
+msgstr "Sawfish pārvalda jūsu logus paplašināti."
+
+#. ../scripts/sawfish-about.jl
+msgid "Sawfish homepage"
+msgstr "Sawfish mājas lapa"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1223,6 +1235,11 @@ msgstr "Darbības"
 msgid "Window Cycling"
 msgstr "Logu Cirkulēšana"
 
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Tabs"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Sound"
@@ -1238,6 +1255,16 @@ msgstr "Sakrtītošie Logi"
 msgid "Tooltips"
 msgstr "Knifi"
 
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "History"
+msgstr "Vēsture"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Index:"
@@ -1248,20 +1275,42 @@ msgid "Next workspace window"
 msgstr "Nākošais darba vietas logs"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window of the current workspace."
+msgstr "Izvēlēties nākošo logu pašreizējā darba vietā."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous workspace window"
 msgstr "Iepriekšējais darba vietas logs"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Focus on the previous window of the current workspace."
+msgstr "Fokusēt uz iepriekšējo logu pašreizējā darba vietā."
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next window"
 msgstr "Nākošais logs"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the next window, cycling through all possible workspaces."
+msgstr ""
+"Izvēlēties nākošo logu, cirkulējot cauri visām iespējamām darba vietām."
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Previous window"
 msgstr "Iepriekšējais logs"
+
+#. ../lisp/sawfish/wm/commands/cycle.jl
+msgid "Select the previous window, cycling through all possible workspaces."
+msgstr ""
+"Izvēlēties iepriekšējo logu, cirkulējot cauri visām iespējamām darba vietām."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Describe symbol"
 msgstr "Aprakstīt simbolu"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Display the documentation of a specified symbol."
+msgstr "Parādīt dokumentāciju norādītajam simbolam."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
@@ -1276,40 +1325,80 @@ msgid "Gnome toggle skip winlist"
 msgstr "Gnome slēgt izlaižamo logsarakstu"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+msgstr "Slēgt GNOME SKIP_WINLIST loga norādījumu."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip winlist"
 msgstr "Gnome uzstādīt izlaižamo loglsarakstu"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_WINLIST hint of the window."
+msgstr "Uzstādīt GNOME SKIP_WINLIST loga norādījumu."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip winlist"
 msgstr "Gnome attīrīt izlaižamo logsarakstu"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+msgstr "Atslēgt GNOME SKIP_WINLIST loga norādījumu."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome toggle skip tasklist"
 msgstr "Gnome slēgt izlaižamo uzdevumsarakstu"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Slēgt GNOME SKIP_TASKLIST loga norādījumu."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome set skip tasklist"
 msgstr "Gnome uzstādīt izlaižamo uzdevumsarakstu"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Uzstādīt GNOME SKIP_TASKLIST loga norādījumu."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome clear skip tasklist"
 msgstr "Gnome attīrīt izlaižamo uzdevumsarakstu"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+msgstr "Atslēgt GNOME SKIP_TASKLIST  loga norādījumu."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome logout"
 msgstr "Gnome iziešana"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Logout from the current GNOME session."
+msgstr "Atteikšanās no pašreizējās GNOME sesijas."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome www page"
 msgstr "Gnome www lapa"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Display the WWW page of the GNOME project."
+msgstr "Parādīt GNOME projekta WWW lapu."
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome help browser"
 msgstr "Gnome palīdzības pārlūks"
 
 #. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME help browser."
+msgstr "Palaist GNOME palīdzības pārlūku."
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
 msgid "Gnome about"
 msgstr "Par Gnome"
+
+#. ../lisp/sawfish/wm/commands/gnome.jl
+msgid "Launch the GNOME about dialog."
+msgstr "Palaist 'par GNOME' dialogu."
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1395,6 +1484,10 @@ msgstr "Pazemināt grupu dziļumā"
 msgid "Delete group"
 msgstr "Dzēst grupu"
 
+#. ../lisp/sawfish/wm/commands/groups.jl
+msgid "Delete all windows in the group that the current window is a member of."
+msgstr "Dzēst visus logus grupā, no kuras ir pašreizējais logs."
+
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Growing and packing of windows"
 msgstr "Logu palielināšana un samazināšana"
@@ -1442,32 +1535,109 @@ msgid "Grow window left"
 msgstr "Palielināt logu pa kreisi"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Palielina logu pa kresi, līdz tas `uzskrien virsū' citam logam.\n"
+"Apskati `palielināt-logu-augšup'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Palielināt logu pa labi"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Palielina logu pa labi, līdz tas `uzskrien virsū' citam logam.\n"
+"Apskati `palielināt-logu-augšup'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Palielināt logu uz augšu"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Palielina logu uz augšu, līdz tas `uzskrien virsū' citam logam.\n"
+"Ja augšējā mala bija pāri ekrāna malai, tā tiek atgriezta atpakaļ.\n"
+"Ar universālo priedēkļa argumetu, tā vietā maksimizēt augšup.\n"
+"Ar skaitlisko priedēkļa argumentu, tā vieta palielināt uz augšu par tik, "
+"cik\n"
+"nosaka logs vai pikseļi."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Palielināt logu uz leju"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
+msgstr ""
+"Palielina logu uz leju, līdz tas `uzskrien virsū' citam logam.\n"
+"Apskati `palielināt-logu-augšup'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Samazināt logu pa kreisi"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Pārvieto logu pa kreisi līdz tas `uzskrien virsū' citam logam.\n"
+"Apskati `samazināt-logu-no augšas'."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Samazināt logu pa labi"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Pārvieto logu pa labi līdz tas `uzskrien virsū' citam logam.\n"
+"Apskati `samazināt-logu-no augšas'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Samazināt logu no augšas"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Pārvieto logu uz augšu, līdz tas `uzskrien virsū' citam logam.\n"
+"Ja augšējā mala bija pāri ekrāna malai, tā tiek atgriezta atpakaļ.\n"
+"Ar universālo priedēkļa argumetu, tā vietā maksimāli pārvietot augšup.\n"
+"Ar skaitlisko priedēkļa argumentu, tā vieta pārvietot augšup par tik "
+"pikseļiem."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Samazināt logu no lejas"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
+msgstr ""
+"Pārvieto logu lejup līdz tas `uzskrien virsū' citam logam.\n"
+"Apskati `samazināt-logu-no augšas'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow left"
@@ -1532,32 +1702,64 @@ msgid "Move cursor right"
 msgstr "Pārvietot kursoru pa labi"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the right."
+msgstr "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus pa labi."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left"
 msgstr "Pārvietot kursoru pa kreisi"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus pa kreisi."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up"
 msgstr "Pārvietot kursoru uz augšu"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels upwards."
+msgstr "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus augšup."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down"
 msgstr "Pārvietot kursoru uz leju"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor `move-cursor-increment' pixels downwards."
+msgstr "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus lejup."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right fine"
 msgstr "Pārvietot kursoru nedaudz pa labi."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the right."
+msgstr "Pārvietot kursoru 1 pikseli pa labi."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor left fine"
 msgstr "Pārvietot kursoru nedaudz pa kreisi"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel to the left."
+msgstr "Pārvietot kursoru 1 pikseli pa kreisi."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor up fine"
 msgstr "Pārvietot kursoru nedaudz uz augšu"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel upwards."
+msgstr "Pārvietot kursoru 1 pikseli uz augšu."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor down fine"
 msgstr "Pārvietot kursoru nedaudz uz leju"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+msgid "Move the cursor 1 pixel downwards."
+msgstr "Pārvietot kursoru 1 pikseli uz leju."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
@@ -1646,24 +1848,60 @@ msgid "Move window interactively"
 msgstr "Pārvietot logu interaktīvi"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Move the window interactively using the mouse."
+msgstr "Pārvietot logu interaktīvi, lietojot peli."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "Mainīt loga izmēru interaktīvi"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize the window interactively using the mouse."
+msgstr "Mainīt loga izmēru interaktīvi, lietojot peli."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "Pārvietot izvēlēto logu"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively move that window."
+msgstr "Uzgaidīt līdz lietotājs izvēlas logu, tad interaktīvi pārvietot to."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "Izmainīt izmēru izvēlētajam logam"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid ""
+"Wait for the user to select a window, then interactively resize that window."
+msgstr ""
+"Uzgaidīt līdz lietotājs izvēlas logu, tad interaktīvi mainīt tā izmēru."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Paaugstināt un nodot cauri klikšķi"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Paaugstināt logu, kas saņēma pašreizējo notikumu, tad atbildēt jebkuriem "
+"kursora\n"
+"notikumiem, kas izsauca šo komandu."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Paaugstināt un nodot cauri klikšķi, ja fokusēts"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Paaugstināt logu, kas saņēma pašreizējo notikumu (ja tas ir fokusēts), tad\n"
+"atbildēt jebkuriem kursora notikumiem, kas izsauca šo komandu."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1678,8 +1916,24 @@ msgid "Raise group and pass through click"
 msgstr "Paaugstināt grupu un nodot cauri klikšķi"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Paaugstināt logu grupu, kas saņēma pašreizējo notikumu, tad atbildēt\n"
+"jebkuriem kursora notikumiem, kas izsauca šo komandu."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Paaugstināt pagaidu logus un nodot cauri klikšķi"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"Paaugstināt logu un visus tam esošos pagaidu logus, kas saņēma pašreizējo\n"
+"notikumu, tad atbildēt jebkuriem kursora notikumiem, kas izsauca šo komandu."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1700,9 +1954,21 @@ msgid "Shrink window left"
 msgstr "Aizbīdīt logu pa kreisi"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "Aizbīdīt logu pa labi"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1710,9 +1976,21 @@ msgid "Shrink window up"
 msgstr "Aizbīdīt logu augšup"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
+"with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "Aizbīdīt logu lejup"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
+"with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1720,9 +1998,19 @@ msgid "Yank window left"
 msgstr "Samazināt logu pa kreisi"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "Samazināt logu pa labi"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1730,73 +2018,147 @@ msgid "Yank window up"
 msgstr "Samazināt logu no augšas"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid "Yanks WINDOW upwards until it inserts with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Samazināt logu no lejas"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
 msgstr "Palielināt logu, pievienojot rindu"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Palielināt pašreizējā loga izmēru par vienu rindu."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract row"
 msgstr "Samazinot logu, atņemot rindu"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Samazināt pašreizējā loga izmēru par vienu rindu."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add column"
 msgstr "Palielināt logu, pievienojot kolonnu"
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Palielināt pašreizējā loga izmēru par vienu kolonnu."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window subtract column"
 msgstr "Samazinot logu, atņemot kolonnu"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Samazināt pašreizējā loga izmēru par vienu kolonnu."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window left"
 msgstr "Aizbīdīt logu pa kreisi"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus pa reisi."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window right"
 msgstr "Aizbīdīt logu pa labi"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus pa labi."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window up"
 msgstr "Aizbīdīt logu augšup"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus augšup."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide window down"
 msgstr "Aizbīdīt logu lejup"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus lejup."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group left"
 msgstr "Aizbīdīt grupu pa kreisi"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus pa kreisi."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group right"
 msgstr "Aizbīdīt grupu pa labi"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus pa labi."
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group up"
 msgstr "Aizbīdīt grupu augšup"
 
 #. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus augšup."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
 msgid "Slide group down"
 msgstr "Aizbīdīt grupu lejup"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus lejup."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Pārvietot skatpunkts nākošais"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the next viewport."
+msgstr "Pārvietot uz nākamo skatpunktu."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
 msgstr "Pārvietot skatpunks iepriekšējais"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move to the previous viewport."
+msgstr "Pārvietot uz iepriekšējo skatpunktu."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
 msgstr "Pārvietot logs iepriekšējais"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
+msgid "Move the window to the previous viewport."
+msgstr "Pārvietot logu uz iepriekšējo skatpunktu."
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
 msgstr "Pārvietot logs nākošais"
+
+#. ../lisp/sawfish/wm/commands/viewport-extras.jl
+#, fuzzy
+msgid "Move the window to the next viewport."
+msgstr "Pārvietot logu uz iepriekšējo skatpunktu."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -1850,13 +2212,25 @@ msgstr "Dotie argumenti `xterm' komandai."
 msgid "Xterm"
 msgstr "Xterm"
 
+#. ../lisp/sawfish/wm/commands/xterm.jl
+msgid "Start a new xterm."
+msgstr "Sākt jaunu xterm."
+
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "Izsaukt komandu"
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Izsaukt komandu NAME: pēc izvēles ar priedēkļa argumentu PFX-ARG."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Run shell command"
 msgstr "Sāknēt čaulas komandu"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Execute the given shell command."
+msgstr "Izpildīt doto čaulas komandu."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
@@ -1865,6 +2239,10 @@ msgstr "Komanda:"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "Komandas secība"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Izsaukt komandu sarakstu, vienu pēc otras."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Quit"
@@ -1889,6 +2267,10 @@ msgstr "Nav operācijas"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command with output to screen"
 msgstr "Izsaukt komandu ar izvadi uz ekrāna"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Pieprasīt komandu, izpildīt to un izdrukāt jebkuru izvadi uz ekrāna."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -1930,6 +2312,10 @@ msgstr "Novietojums"
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
 msgstr "Pielāgot"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the user-customization system."
+msgstr "Izsaukt lietotāja pielāgošanas sistēmu."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2021,6 +2407,10 @@ msgstr "Nav kļūdu."
 msgid "Display errors"
 msgstr "Parādīt kļūdas"
 
+#. ../lisp/sawfish/wm/ext/error-handler.jl
+msgid "Display all errors that have occurred to the screen."
+msgstr "Parādīt visas kļūdas, kas atgadījušās, uz ekrāna."
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2069,10 +2459,6 @@ msgid "Locale"
 msgstr "Lokāle"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Izvairīties"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignore program position"
 msgstr "Ignorēt programmas pozīciju"
 
@@ -2106,6 +2492,11 @@ msgid "Placement weight"
 msgstr "Novietojuma svars"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed position"
+msgstr "Pozīcija"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Maximized"
 msgstr "Maksimizēts"
 
@@ -2136,6 +2527,10 @@ msgstr "Rāmja tips"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame style"
 msgstr "Rāmja stils"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Izvairīties"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Ignored"
@@ -2177,6 +2572,15 @@ msgstr "Izlaižamo logu saraksts"
 #, fuzzy
 msgid "Task list skip"
 msgstr "Izlaižamo logu saraksts"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "Atmaksimizēt"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
@@ -2275,10 +2679,6 @@ msgid "_Forget saved state"
 msgstr "_Aizmirst saglabāto stāvokli"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "History"
-msgstr "Vēsture"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
 msgstr "Automātiski atcerēties logu pozīcijas."
 
@@ -2299,20 +2699,40 @@ msgid "Window history save position"
 msgstr "Loga vēsture saglabā pozīciju"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Atcerēties pašreizējo fokusētā loga pozīciju."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save dimensions"
 msgstr "Loga vēsture saglabā dimensijas"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Atcerēties pašreizējās fokusētā loga dimensijas."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history save attributes"
 msgstr "Loga vēsture saglabā atribūtus"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Atcerēties pašreizējos fokusētā loga atribūtus."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history forget"
 msgstr "Loga vēsture aizmirst"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Aizmirst jebkuru esošo stāvokli, kas saistīts ar pašreizējo logu."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Window history clear"
 msgstr "Loga vēsture tīra"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Aizmirst visu saglabāto loga vēsturi."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_History"
@@ -2323,32 +2743,64 @@ msgid "Workspace down"
 msgstr "Darba vieta lejup"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace below the current workspace"
+msgstr "Apskatīt darba vietu zem pašreizējās darba vietas"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace up"
 msgstr "Darba vieta augšup"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace above the current workspace"
+msgstr "Apskatīt darba vietu virs pašreizējās darba vietas"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace left"
 msgstr "Darba vieta pa kreisi"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the left of the current workspace"
+msgstr "Apskatīt darba vietu pa kreisi no pašreizējās darba vietas"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace right"
 msgstr "Darba vieta pa labi"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "View the workspace to the right of the current workspace"
+msgstr "Apskatīt darba vietu pa labi no pašreizējās darba vietas"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace down"
 msgstr "Sūtīt uz darba vietu lejup"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace below the current workspace"
+msgstr "Sūtīt logu uz darba vietu lejup no pašreizējās darba vietas"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace up"
 msgstr "Sūtīt uz darba vietu augšup"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace above the current workspace"
+msgstr "Sūtīt logu uz darba vietu augšup no pašreizējās darba vietas"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace left"
 msgstr "Sūtīt uz darba vietu pa kresi"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace left of the current workspace"
+msgstr "Sūtīt logu uz darba vietu pa kresii no pašreizējās darba vietas"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Send to workspace right"
 msgstr "Sūtīt uz darba vietu pa labi"
+
+#. ../lisp/sawfish/wm/ext/workspace-grid.jl
+msgid "Send window to the workspace right of the current workspace"
+msgstr "Sūtīt logu uz darba vietu pa labi no pašreizējās darba vietas"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -2360,7 +2812,7 @@ msgstr "Klikšķis-lai-fokusēt režīms nodod klikšķus caur aplikāciju."
 
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
-msgid "Wether focusing a window doesn't change it's position in the stack."
+msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr "Pazemināt logu uz tā zemāko iespējamo pozīciju krāvuma secībā."
 
 #. ../lisp/sawfish/wm/focus.jl
@@ -2693,12 +3145,24 @@ msgid "Popup window menu"
 msgstr "Parādīt logu izvēlni"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Parādīt izvēlni ar visām loga operācijām."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup root menu"
 msgstr "Parādīt saknes izvēlni"
 
 #. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Parādīt galveno izvēlni."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "Popup apps menu"
 msgstr "Parādīt applikāciju izvēlni"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Parādīt aplikāciju izvēlni."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -2742,21 +3206,48 @@ msgstr "Paturēt pagaidu logus sakrautus virspusē: \\w"
 msgid "Raise single window"
 msgstr "Paaugstināt vienu logu"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Paaugstināt logu uz tā augstāko iespējamo pozīciju krāvuma secībā."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower single window"
 msgstr "Pazemināt vienu logu"
 
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Pazemināt logu uz tā zemāko iespējamo pozīciju krāvuma secībā."
+
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
 msgstr "Paaugstināt zemāko vienu logu"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/stacking.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
+msgstr ""
+"Ja logs ir tā augstākajā iespējamajā pozīcijā, tad pazemināt to uz tā\n"
+"zemāko iespējamo pozīciju. Savādāk paaugstināt to, cik augstu vien iespējams."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Paaugstināt logu dziļumā"
 
 #. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Ievietot logu krāvuma līmenī virs tā pašreizējā līmeņa."
+
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Lower window depth"
 msgstr "Pazemināt logu dziļumā"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Ievietot logu krāvuma līmenī zem tā pašreizējā līmeņa."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -2781,16 +3272,32 @@ msgid "Iconify window"
 msgstr "Ikonificēt logu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize the window."
+msgstr "Minimizēt logu."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Uniconify window"
 msgstr "Atikonificet logu"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Restore the window from its minimized state."
+msgstr "Atjaunot logu no tā minimizācijas stāvokļa."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Toggle window iconified"
 msgstr "Slēgt loga ikonificēšanu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Toggle the iconification of window W."
+msgstr "Slēgt loga W ikonificešanu."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Iconify workspace windows"
 msgstr "Ikonificēt darba vietas logus"
+
+#. ../lisp/sawfish/wm/state/iconify.jl
+msgid "Minimize all windows on the current workspace."
+msgstr "Minimizēt visus logus pašreizējā darba vietā."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window sticky"
@@ -2805,6 +3312,14 @@ msgid "Toggle window sticky"
 msgstr "Slēgt loga lipīgumu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
+msgstr ""
+"Slēgt loga `lipīgumu' - ir vai nav tas atrodams uz\n"
+"visām darba vietām."
+
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Lipīgs"
 
@@ -2813,29 +3328,58 @@ msgid "Make window ignored"
 msgstr "Padarīt logu ignorētu."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Ignore the window."
+msgstr "Ignorēt logu."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "Padarīt logu neignorētu"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Unignore the window."
+msgstr "Atignorēt logu."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window ignored"
 msgstr "Slēgt loga ignorēšanu"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored or not."
+msgstr "Slēgt, vai logs tiek ignorēts vai nē."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window never focus"
 msgstr "Slēgt loga nekad nefokusēšanos"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is focusable or not."
+msgstr "Slēgt, vai logs ir fokusējams vai nav."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window cycle skip"
 msgstr "Slēgt izlaižamos cirkulēšanas logus"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window is ignored while window cycling."
+msgstr "Slēgt to, vai logs tiek ignorēts pie logu cirkulēšanas."
+
+#. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Toggle window list skip"
 msgstr "Slēgt izlaižamo logu sarakstu"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+msgid "Toggle whether a window will be include in the window list."
+msgstr "Slēgt to, vai logs tiks iekļauts logu sarakstā."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle task list skip"
 msgstr "Slēgt izlaižamo logu sarakstu"
+
+#. ../lisp/sawfish/wm/state/ignored.jl
+#, fuzzy
+msgid "Toggle whether a window will be included in the task-list."
+msgstr "Slēgt to, vai logs tiks iekļauts logu sarakstā."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -2867,60 +3411,141 @@ msgid "Maximize window"
 msgstr "Maksimizēt logu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the dimensions of the window."
+msgstr "Maksimizēt loga dimensijas."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Unmaximize window"
 msgstr "Atmaksimizēt logu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Restore the dimensions of the window to its original, unmaximized, state."
+msgstr "Atjaunot loga dimensijas tā oriģinālajā, atmaksimizētajā stāvoklī."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
 msgstr "Maksimizēt logu vertikāli"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the vertical dimension of the window."
+msgstr "Maksimizēt loga vertikālās dimensijas."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally"
 msgstr "Maksimizēt logu horizontāli"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the horizontal dimension of the window."
+msgstr "Maksimizēt loga horizontālās dimensijas."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window toggle"
 msgstr "Slēgt loga maksimizēšanu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Toggle the state of the window between maximized and unmaximized."
+msgstr "Slēgt loga stāvokli starp maksimizētu un atmaksimizētu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window horizontally toggle"
 msgstr "Slēgt loga maksimizēšanu horizontāli"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
+msgstr ""
+"Slēgt loga stāvokli starp horizontāli maksimizētu un\n"
+"atmaksimizētu."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Slēgt loga vertikālo maksimizešanu"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr ""
+"Slēgt loga stāvokli starp vertikāli maksimizētu un\n"
+"atmaksimizētu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Maksimizēt aizpildot logu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window without obscuring any other windows."
+msgstr "Maksimizēt logu neaizklājot citus logus."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically"
 msgstr "Maksimizēt aizpildot logu vertikāli"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window vertically without obscuring any other windows."
+msgstr "Maksimizēt logu vertikāli neaizklājot citus logus."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally"
 msgstr "Maksimizēt aizpildot logu horizontāli"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize the window horizontally without obscuring any other windows."
+msgstr "Maksimizēt logu horizontāli neaizklājot citus logus."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window toggle"
 msgstr "Maksimizēt aizpildot logu slēgt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between maximized-filled and unmaximized."
+msgstr "Slēgt loga stāvokli starp maksimizētu-aizpildītu un atmaksimizētu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window horizontally toggle"
 msgstr "Maksimizēt aizpildot logu horizontāli slēgt"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Slēgt loga stāvokli starp horizontāli maksimizētu-aizpildītu un\n"
+"atmaksimizētu."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Maksimizēt aizpildot logu vertikāli slēgt"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr ""
+"Slēgt loga stāvokli starp vertikāli maksimizētu-aizpildītu un\n"
+"atmaksimizētu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Maksimizēt logu pilnekrānā"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Fullscreen maximize the window."
+msgstr "Minimizēt logu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
 msgstr "Slēgt loga pilnekrāna maksimizēšanu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized and unmaximized."
+msgstr "Slēgt loga stāvokli starp maksimizētu un atmaksimizētu."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -2929,20 +3554,49 @@ msgstr "Maksimizēt logu pilnekrānā"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
+msgid "Fullscreen maximize the window across all Xinerama screens."
+msgstr "Minimizēt logu."
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid "Maximize window fullxinerama toggle"
 msgstr "Slēgt loga pilnekrāna maksimizēšanu"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid ""
+"Toggle the state of the window between fullscreen maximized across all "
+"Xinerama and unmaximized."
+msgstr "Slēgt loga stāvokli starp maksimizētu-aizpildītu un atmaksimizētu."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
 msgstr "Ēnot logu"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid "Display only the title bar of the window."
+msgstr "Parādīt tikai loga virsraksta joslu."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Unshade window"
 msgstr "Atēnot logu"
 
 #. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
+msgstr ""
+"Ja logs ir ēnots (apskati `ēnot-logu'), atjaunot to tā parastajāl\n"
+"stāvoklī."
+
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Slēgt loga ēnošanu"
+
+#. ../lisp/sawfish/wm/state/shading.jl
+msgid ""
+"Toggle the shaded (only the title bar is displayed) state of the window."
+msgstr "Slēgt ēnoto (tikai virsraksta josla tiek parādīta) loga stāvokli."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "S_haded"
@@ -2957,16 +3611,39 @@ msgid "Raise window and transients"
 msgstr "Paaugstināt logu un pagaidu logus"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Paaugstināt pašreizējo logu līdz tā augstākajai atļautajai pozīcijai\n"
+"krāvuma secībā. Paaugstināt arī tā pagaidu logus."
+
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Pazemināt logu un pagaidu logus"
+
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Pazemināt pašreizējo logu līdz tā zemākajai atļautajai pozīcijai\n"
+"krāvuma secībā. Pazemināt arī tā pagaidu logus."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Paaugstināt zemāko logu un pagaidu logus"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Tabs"
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
 msgstr ""
+"Ja logs ir tā augstākajā iespējamajā pozīcijā, tad pazemināt to uz\n"
+"tā zemāko pozīciju. Citādi paaugstināt to, cik augstu vien iespējams. Arī\n"
+"izmaina jebkura tam esošā pagaidu loga līmeni."
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
@@ -2986,7 +3663,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #, fuzzy
-msgid "Add to group"
+msgid "Raise Tabs on Hover"
+msgstr "Paaugstināt pie fokusēšanas"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
 msgstr "Pazemināt grupu"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
@@ -2996,13 +3678,28 @@ msgstr "Dzēst logu"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Release active window from its group"
+msgstr "Atjaunot logu no tā minimizācijas stāvokļa."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise left window"
 msgstr "Paaugstināt zemāko logu"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 #, fuzzy
+msgid "Raise left window in current group"
+msgstr "Paaugstināt zemāko logu un pagaidu logus"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
 msgid "Tab raise right window"
 msgstr "Paaugstināt vienu logu"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Paaugstināt zemāko logu un pagaidu logus"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -3017,8 +3714,16 @@ msgid "Display window without focusing"
 msgstr "Parādīt logu bez fokusēšanas"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace/viewport containing the window W."
+msgstr "Parādīt darba vietu/skatpunktu, kas satur logu W."
+
+#. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Parādīt logu"
+
+#. ../lisp/sawfish/wm/util/display-window.jl
+msgid "Display the workspace containing the window W, then focus on W."
+msgstr "Parādīt darba vietu, kas satur logu W, tad fokusēties uz W."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -3028,9 +3733,17 @@ msgstr "Jauna grupa"
 msgid "Gtkrc reload style"
 msgstr "Gtkrc pārlādes stils"
 
+#. ../lisp/sawfish/wm/util/gtkrc.jl
+msgid "Reload the gtkrc settings."
+msgstr "Pārlādēt gtkrc uzstādījumus."
+
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Describe key"
 msgstr "Aprakstīt taustiņu"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid "Prompt for a key sequence, then print its binding."
+msgstr "Pieprasīt taustiņu secību, tad izdrukāt tās sasaisti."
 
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Press key..."
@@ -3043,6 +3756,14 @@ msgstr "[Citāts]"
 #. ../lisp/sawfish/wm/util/keymap.jl
 msgid "Quote event"
 msgstr "Citēt notikumu"
+
+#. ../lisp/sawfish/wm/util/keymap.jl
+msgid ""
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
+msgstr ""
+"Nosūta nākamo taustiņa notikumu tieši uz fokusēto klienta logu, ignorējot\n"
+"ignorējot jebkādas pastāvošās logu pārvaldnieka sasaistes."
 
 #. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
@@ -3081,6 +3802,14 @@ msgstr "Darba vieta %d"
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Workspace:"
 msgstr "Darba vieta:"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Font for prompt: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Prompt message's colors."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -3135,12 +3864,16 @@ msgid "stop"
 msgstr "Pielāgot"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Wether to stop or wrap-around on first/last viewport"
+msgid "Whether to stop or wrap-around on first/last viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
 msgstr "Aktivizēt skatpunktu"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Izvēlēties noteikto skatpunktu."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -3155,44 +3888,91 @@ msgid "Activate viewport column"
 msgstr "Aktivizēt skatpunkta kolonnu"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Izvēlēties noteikto skatpunkta kolonnu."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
 msgstr "Aktivizēt skatpunkta rindu"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Izvēlēties noteikto skatpunkta rindu."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
 msgstr "Pārvietot logu uz skatpunktu"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Pārvietot pašreizējo logu uz norādīto skatpunktu."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
 msgstr "Pārvietot skatpunktu pa labi"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Pārvietot skatpunktu vienu ekrānu pa labi."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
 msgstr "Pārvietot skatpunktu pa kreisi"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Pārvietot skatpunktu vienu ekrānu pa kreisi."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
 msgstr "Pārvietot skatpunktu augšup"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Pārvietot skatpunktu vienu ekrānu augstāk."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
 msgstr "Pārvietot skatpunktu lejup"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Pārvietot skatpunktu vienu ekrānu zemāk."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
 msgstr "Pārvietot logu pa labi"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that viewport."
+msgstr "Pārvietot logu uz skatpunktu pa labi un pārslēgties uz šo skatpunktu."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Pārvietot logu pa kreisi"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that viewport."
+msgstr ""
+"Pārvietot logu uz skatpunktu pa kreisi un pārslēgties uz šo skatpunktu."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Pārvietot logu augšup"
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport above, and switch to that viewport."
+msgstr "Pārvietot logu uz augšējo skatpunktu un pārslēgties uz šo skatpunktu."
+
+#. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Pārvietot logu lejup"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the window to the viewport below, and switch to that viewport."
+msgstr "Pārvietot logu uz lejējo skatpunktu un pārslēgties uz šo skatpunktu."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
@@ -3227,17 +4007,18 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to enable warping the cursor to windows."
+msgid "Whether to enable warping the cursor to windows."
 msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Wether to not ignore avoided windows by default."
+msgid "Whether to not ignore avoided windows by default."
 msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Wether to avoid any unspecified window by default."
-msgstr ""
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
+msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -3248,16 +4029,32 @@ msgid "Focus desktop"
 msgstr "Fokusēt darba virsmu"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Pārsūtīt ievades fokusu uz darba virsmas logu (ja tāds eksistē)."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
 msgstr "Dzēst logu"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window."
+msgstr "Dzēst šo logu."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window safely"
 msgstr "Dzēst logu droši"
 
 #. ../lisp/sawfish/wm/windows.jl
+msgid "Delete the window, or beep if the window can't be closed safely."
+msgstr "Dzēst logu vai pīkstēt, ja logs nevar tikt droši aizvērts."
+
+#. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
 msgstr "Unikalizēt loga nosaukumu"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Likt pašreizējam logam būt ar unikālu virsrakstu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -3325,72 +4122,158 @@ msgid "Popup workspace list"
 msgstr "Izlecošs darba vietu saraksts"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu containing the list of all workspaces."
+msgstr "Parādīt saraksta izvēlni par visām darba vietām."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Popup window list"
 msgstr "Izlecošs logu saraksts"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the menu of all managed windows."
+msgstr "Parādīt izvēlni par visiem pārvaldītajiem logiem."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Next workspace"
 msgstr "Nākošā darba vieta"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the next workspace."
+msgstr "Parādīt nākošo darba vietu."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Previous workspace"
 msgstr "Iepriekšējā darba vieta"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Display the previous workspace."
+msgstr "Parādīt iepriekšējo darba vietu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to next workspace"
 msgstr "Sūtīt uz nākošo darba vietu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the next workspace."
+msgstr "Pārvietot logu uz nākošo darba vietu."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to previous workspace"
 msgstr "Sūtīt uz iepriekšējo darba vietu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the window to the previous workspace."
+msgstr "Pārvietot logu uz iepriekšējo darba vietu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to next workspace"
 msgstr "Kopēt uz nākošo darba vietu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the next workspace."
+msgstr "Kopēt logu uz nākošo darba vietu."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to previous workspace"
 msgstr "Kopēt uz iepriekšējo darba vietu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the window to the previous workspace."
+msgstr "Kopēt logu uz iepriekšējo darba vietu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Append workspace and send"
 msgstr "Pievienot darba vietu un sūtīt"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the end of the list, and move the window to it."
+msgstr "Izveidot jaunu darba vietu saraksta beigās un pārvietot logu uz to."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Prepend workspace and send"
 msgstr "Pievienot sākumā darba vietu un sūtīt"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Create a new workspace at the start of the list, and move the window to it."
+msgstr "Izveidot jaunu darba vietu saraksta sākumā un pārvietot logu uz to."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
 msgstr "Apvienot nākošo darba vietu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
+msgstr ""
+"Dzēst pašreizējo darba vietu. Tās logi tiks pārvietoti uz nākošo\n"
+"darba vietu."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Apvienot iepriekšējo darba vietu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
+msgstr ""
+"Dzēst pašreizējo darba vietu. Tās logi tiks pārvietoti uz iepriekšējo\n"
+"darba vietu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Ievietot darba vietu pēc"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace following the current workspace."
+msgstr "Izveidot jaunu darba vietu uzreiz aiz pašreizējās darba vietas."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace before"
 msgstr "Ievietot darba vietu pirms"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Create a new workspace before the current workspace."
+msgstr "Izveidot jaunu darba vietu uzreiz pirms pašreizējās darba vietas."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace forwards"
 msgstr "Pārvietot darba vietu uz priekšu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the right."
+msgstr "Pārvietot pašreizējo darba vietu vienu vietu pa labi."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Move workspace backwards"
 msgstr "Pārvietot darba vietu atpakaļ"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Move the current workspace one place to the left."
+msgstr "Pārvietot pašreizējo darba vietu vienu vietu pa kreisi."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete empty workspaces"
 msgstr "Dzēst tukšās darba vietas."
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Delete any workspaces that don't contain any windows."
+msgstr "Dzēst jebkuru darba vietu, kas nesatur nekādus logus."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Delete window instance"
 msgstr "Dzēst logu instanci"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
+msgstr ""
+"Aizvākt loga kopiju pašreizējā darba vietā. Ja tā ir pēdējā\n"
+"instance, tad dzēst īsteno logu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
@@ -3398,86 +4281,50 @@ msgid "Show desktop"
 msgstr "Fokusēt darba virsmu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Hide all windows except the desktop window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Hide desktop"
 msgstr "Fokusēt darba virsmu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Undoes the effect of the `show-desktop' command."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
 msgstr "Aktivizēt darba vietu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Select the N'th workspace."
+msgstr "Izvēlēties N. darba vietu."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Send to workspace"
 msgstr "Sūtīt uz darba vietu"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Move the current window to the N'th workspace."
+msgstr "Kopēt pašreizējo logu uz N. darba vietu."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Kopēt uz darba vietu"
 
 #. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Kopēt pašreizējo logu uz N. darba vietu."
+
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Select workspace interactively"
 msgstr "Izvēlēties darba vietu interaktīvi"
 
-#~ msgid "and many others..."
-#~ msgstr "un daudzi citi..."
-
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "Sawfish pārvalda jūsu logus paplašināti."
-
-#~ msgid "Sawfish homepage"
-#~ msgstr "Sawfish mājas lapa"
-
-#~ msgid "Select the next window of the current workspace."
-#~ msgstr "Izvēlēties nākošo logu pašreizējā darba vietā."
-
-#~ msgid "Focus on the previous window of the current workspace."
-#~ msgstr "Fokusēt uz iepriekšējo logu pašreizējā darba vietā."
-
-#~ msgid "Select the next window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Izvēlēties nākošo logu, cirkulējot cauri visām iespējamām darba vietām."
-
-#~ msgid "Select the previous window, cycling through all possible workspaces."
-#~ msgstr ""
-#~ "Izvēlēties iepriekšējo logu, cirkulējot cauri visām iespējamām darba "
-#~ "vietām."
-
-#~ msgid "Display the documentation of a specified symbol."
-#~ msgstr "Parādīt dokumentāciju norādītajam simbolam."
-
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Slēgt GNOME SKIP_WINLIST loga norādījumu."
-
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Uzstādīt GNOME SKIP_WINLIST loga norādījumu."
-
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Atslēgt GNOME SKIP_WINLIST loga norādījumu."
-
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Slēgt GNOME SKIP_TASKLIST loga norādījumu."
-
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Uzstādīt GNOME SKIP_TASKLIST loga norādījumu."
-
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Atslēgt GNOME SKIP_TASKLIST  loga norādījumu."
-
-#~ msgid "Logout from the current GNOME session."
-#~ msgstr "Atteikšanās no pašreizējās GNOME sesijas."
-
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "Parādīt GNOME projekta WWW lapu."
-
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "Palaist GNOME palīdzības pārlūku."
-
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "Palaist 'par GNOME' dialogu."
-
-#~ msgid ""
-#~ "Delete all windows in the group that the current window is a member of."
-#~ msgstr "Dzēst visus logus grupā, no kuras ir pašreizējais logs."
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Pieprasīt darba vietu un pārslēgties uz to."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
@@ -3520,602 +4367,11 @@ msgstr "Izvēlēties darba vietu interaktīvi"
 #~ "logus.\n"
 #~ "`varbūt' nozīmē tikai izvairīties no logiem citos dziļumos."
 
-#~ msgid ""
-#~ "Grows window to the left until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Palielina logu pa kresi, līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Apskati `palielināt-logu-augšup'."
-
-#~ msgid ""
-#~ "Grows window to the right until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Palielina logu pa labi, līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Apskati `palielināt-logu-augšup'."
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Palielina logu uz augšu, līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Ja augšējā mala bija pāri ekrāna malai, tā tiek atgriezta atpakaļ.\n"
-#~ "Ar universālo priedēkļa argumetu, tā vietā maksimizēt augšup.\n"
-#~ "Ar skaitlisko priedēkļa argumentu, tā vieta palielināt uz augšu par tik, "
-#~ "cik\n"
-#~ "nosaka logs vai pikseļi."
-
-#~ msgid ""
-#~ "Grows window downwards until it `bumps into' another window.\n"
-#~ "See `grow-window-up'."
-#~ msgstr ""
-#~ "Palielina logu uz leju, līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Apskati `palielināt-logu-augšup'."
-
-#~ msgid ""
-#~ "Moves window to the left until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Pārvieto logu pa kreisi līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Apskati `samazināt-logu-no augšas'."
-
-#~ msgid ""
-#~ "Moves window to the right until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Pārvieto logu pa labi līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Apskati `samazināt-logu-no augšas'."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Pārvieto logu uz augšu, līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Ja augšējā mala bija pāri ekrāna malai, tā tiek atgriezta atpakaļ.\n"
-#~ "Ar universālo priedēkļa argumetu, tā vietā maksimāli pārvietot augšup.\n"
-#~ "Ar skaitlisko priedēkļa argumentu, tā vieta pārvietot augšup par tik "
-#~ "pikseļiem."
-
-#~ msgid ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
-#~ msgstr ""
-#~ "Pārvieto logu lejup līdz tas `uzskrien virsū' citam logam.\n"
-#~ "Apskati `samazināt-logu-no augšas'."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
-#~ msgstr ""
-#~ "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus pa labi."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
-#~ msgstr ""
-#~ "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus pa kreisi."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
-#~ msgstr "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus augšup."
-
-#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
-#~ msgstr "Pārvietot kursoru `kursora-aizbīdīšanas-pieaugums' pikseļus lejup."
-
-#~ msgid "Move the cursor 1 pixel to the right."
-#~ msgstr "Pārvietot kursoru 1 pikseli pa labi."
-
-#~ msgid "Move the cursor 1 pixel to the left."
-#~ msgstr "Pārvietot kursoru 1 pikseli pa kreisi."
-
-#~ msgid "Move the cursor 1 pixel upwards."
-#~ msgstr "Pārvietot kursoru 1 pikseli uz augšu."
-
-#~ msgid "Move the cursor 1 pixel downwards."
-#~ msgstr "Pārvietot kursoru 1 pikseli uz leju."
-
-#~ msgid "Move the window interactively using the mouse."
-#~ msgstr "Pārvietot logu interaktīvi, lietojot peli."
-
-#~ msgid "Resize the window interactively using the mouse."
-#~ msgstr "Mainīt loga izmēru interaktīvi, lietojot peli."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively move that window."
-#~ msgstr "Uzgaidīt līdz lietotājs izvēlas logu, tad interaktīvi pārvietot to."
-
-#~ msgid ""
-#~ "Wait for the user to select a window, then interactively resize that "
-#~ "window."
-#~ msgstr ""
-#~ "Uzgaidīt līdz lietotājs izvēlas logu, tad interaktīvi mainīt tā izmēru."
-
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any "
-#~ "pointer\n"
-#~ "events that invoked the command."
-#~ msgstr ""
-#~ "Paaugstināt logu, kas saņēma pašreizējo notikumu, tad atbildēt jebkuriem "
-#~ "kursora\n"
-#~ "notikumiem, kas izsauca šo komandu."
-
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then\n"
-#~ "replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Paaugstināt logu, kas saņēma pašreizējo notikumu (ja tas ir fokusēts), "
-#~ "tad\n"
-#~ "atbildēt jebkuriem kursora notikumiem, kas izsauca šo komandu."
-
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay\n"
-#~ "any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Paaugstināt logu grupu, kas saņēma pašreizējo notikumu, tad atbildēt\n"
-#~ "jebkuriem kursora notikumiem, kas izsauca šo komandu."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Paaugstināt logu un visus tam esošos pagaidu logus, kas saņēma "
-#~ "pašreizējo\n"
-#~ "notikumu, tad atbildēt jebkuriem kursora notikumiem, kas izsauca šo "
-#~ "komandu."
-
-#~ msgid "Increase the size of the current window by one row."
-#~ msgstr "Palielināt pašreizējā loga izmēru par vienu rindu."
-
-#~ msgid "Decrease the size of the current window by one row."
-#~ msgstr "Samazināt pašreizējā loga izmēru par vienu rindu."
-
-#~ msgid "Increase the size of the current window by one column."
-#~ msgstr "Palielināt pašreizējā loga izmēru par vienu kolonnu."
-
-#~ msgid "Decrease the size of the current window by one column."
-#~ msgstr "Samazināt pašreizējā loga izmēru par vienu kolonnu."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the left."
-#~ msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus pa reisi."
-
-#~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus pa labi."
-
-#~ msgid "Move the window `slide-window-increment' pixels upwards."
-#~ msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus augšup."
-
-#~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr "Pārvietot logu `loga-aizbīdīšanas-pieaugums' pikseļus lejup."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the left."
-#~ msgstr ""
-#~ "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus pa kreisi."
-
-#~ msgid "Move the window group `slide-window-increment' pixels to the right."
-#~ msgstr ""
-#~ "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus pa labi."
-
-#~ msgid "Move the window group `slide-window-increment' pixels upwards."
-#~ msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus augšup."
-
-#~ msgid "Move the window group `slide-window-increment' pixels downwards."
-#~ msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus lejup."
-
-#~ msgid "Move to the next viewport."
-#~ msgstr "Pārvietot uz nākamo skatpunktu."
-
-#~ msgid "Move to the previous viewport."
-#~ msgstr "Pārvietot uz iepriekšējo skatpunktu."
-
-#~ msgid "Move the window to the previous viewport."
-#~ msgstr "Pārvietot logu uz iepriekšējo skatpunktu."
-
 #~ msgid "Terminal"
 #~ msgstr "Terminālis"
 
-#~ msgid "Start a new xterm."
-#~ msgstr "Sākt jaunu xterm."
-
-#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-#~ msgstr "Izsaukt komandu NAME: pēc izvēles ar priedēkļa argumentu PFX-ARG."
-
-#~ msgid "Execute the given shell command."
-#~ msgstr "Izpildīt doto čaulas komandu."
-
-#~ msgid "Invoke the list of commands, one by one."
-#~ msgstr "Izsaukt komandu sarakstu, vienu pēc otras."
-
-#~ msgid ""
-#~ "Prompt for a command, execute it, and print any output to the screen."
-#~ msgstr ""
-#~ "Pieprasīt komandu, izpildīt to un izdrukāt jebkuru izvadi uz ekrāna."
-
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "Izsaukt lietotāja pielāgošanas sistēmu."
-
 #~ msgid "Error Handling"
 #~ msgstr "Kļūdu Pārvalde"
-
-#~ msgid "Display all errors that have occurred to the screen."
-#~ msgstr "Parādīt visas kļūdas, kas atgadījušās, uz ekrāna."
-
-#~ msgid "Remember the current position of the focused window."
-#~ msgstr "Atcerēties pašreizējo fokusētā loga pozīciju."
-
-#~ msgid "Remember the current dimensions of the focused window."
-#~ msgstr "Atcerēties pašreizējās fokusētā loga dimensijas."
-
-#~ msgid "Remember the current attributes of the focused window."
-#~ msgstr "Atcerēties pašreizējos fokusētā loga atribūtus."
-
-#~ msgid "Forget any persistent state associated with the current window."
-#~ msgstr "Aizmirst jebkuru esošo stāvokli, kas saistīts ar pašreizējo logu."
-
-#~ msgid "Forget all saved window history."
-#~ msgstr "Aizmirst visu saglabāto loga vēsturi."
-
-#~ msgid "View the workspace below the current workspace"
-#~ msgstr "Apskatīt darba vietu zem pašreizējās darba vietas"
-
-#~ msgid "View the workspace above the current workspace"
-#~ msgstr "Apskatīt darba vietu virs pašreizējās darba vietas"
-
-#~ msgid "View the workspace to the left of the current workspace"
-#~ msgstr "Apskatīt darba vietu pa kreisi no pašreizējās darba vietas"
-
-#~ msgid "View the workspace to the right of the current workspace"
-#~ msgstr "Apskatīt darba vietu pa labi no pašreizējās darba vietas"
-
-#~ msgid "Send window to the workspace below the current workspace"
-#~ msgstr "Sūtīt logu uz darba vietu lejup no pašreizējās darba vietas"
-
-#~ msgid "Send window to the workspace above the current workspace"
-#~ msgstr "Sūtīt logu uz darba vietu augšup no pašreizējās darba vietas"
-
-#~ msgid "Send window to the workspace left of the current workspace"
-#~ msgstr "Sūtīt logu uz darba vietu pa kresii no pašreizējās darba vietas"
-
-#~ msgid "Send window to the workspace right of the current workspace"
-#~ msgstr "Sūtīt logu uz darba vietu pa labi no pašreizējās darba vietas"
-
-#~ msgid "Display the menu listing all window operations."
-#~ msgstr "Parādīt izvēlni ar visām loga operācijām."
-
-#~ msgid "Display the main menu."
-#~ msgstr "Parādīt galveno izvēlni."
-
-#~ msgid "Display the applications menu."
-#~ msgstr "Parādīt aplikāciju izvēlni."
-
-#~ msgid ""
-#~ "Raise the window to its highest allowed position in the stacking order."
-#~ msgstr "Paaugstināt logu uz tā augstāko iespējamo pozīciju krāvuma secībā."
-
-#~ msgid ""
-#~ "Lower the window to its lowest allowed position in the stacking order."
-#~ msgstr "Pazemināt logu uz tā zemāko iespējamo pozīciju krāvuma secībā."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed."
-#~ msgstr ""
-#~ "Ja logs ir tā augstākajā iespējamajā pozīcijā, tad pazemināt to uz tā\n"
-#~ "zemāko iespējamo pozīciju. Savādāk paaugstināt to, cik augstu vien "
-#~ "iespējams."
-
-#~ msgid "Put the window in the stacking level above its current level."
-#~ msgstr "Ievietot logu krāvuma līmenī virs tā pašreizējā līmeņa."
-
-#~ msgid "Put the window in the stacking level beneath its current level."
-#~ msgstr "Ievietot logu krāvuma līmenī zem tā pašreizējā līmeņa."
-
-#~ msgid "Minimize the window."
-#~ msgstr "Minimizēt logu."
-
-#~ msgid "Restore the window from its minimized state."
-#~ msgstr "Atjaunot logu no tā minimizācijas stāvokļa."
-
-#~ msgid "Toggle the iconification of window W."
-#~ msgstr "Slēgt loga W ikonificešanu."
-
-#~ msgid "Minimize all windows on the current workspace."
-#~ msgstr "Minimizēt visus logus pašreizējā darba vietā."
-
-#~ msgid ""
-#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#~ "all workspaces."
-#~ msgstr ""
-#~ "Slēgt loga `lipīgumu' - ir vai nav tas atrodams uz\n"
-#~ "visām darba vietām."
-
-#~ msgid "Ignore the window."
-#~ msgstr "Ignorēt logu."
-
-#~ msgid "Unignore the window."
-#~ msgstr "Atignorēt logu."
-
-#~ msgid "Toggle whether a window is ignored or not."
-#~ msgstr "Slēgt, vai logs tiek ignorēts vai nē."
-
-#~ msgid "Toggle whether a window is focusable or not."
-#~ msgstr "Slēgt, vai logs ir fokusējams vai nav."
-
-#~ msgid "Toggle whether a window is ignored while window cycling."
-#~ msgstr "Slēgt to, vai logs tiek ignorēts pie logu cirkulēšanas."
-
-#~ msgid "Toggle whether a window will be include in the window list."
-#~ msgstr "Slēgt to, vai logs tiks iekļauts logu sarakstā."
-
-#, fuzzy
-#~ msgid "Toggle whether a window will be included in the task-list."
-#~ msgstr "Slēgt to, vai logs tiks iekļauts logu sarakstā."
-
-#~ msgid "Maximize the dimensions of the window."
-#~ msgstr "Maksimizēt loga dimensijas."
-
-#~ msgid ""
-#~ "Restore the dimensions of the window to its original, unmaximized, state."
-#~ msgstr "Atjaunot loga dimensijas tā oriģinālajā, atmaksimizētajā stāvoklī."
-
-#~ msgid "Maximize the vertical dimension of the window."
-#~ msgstr "Maksimizēt loga vertikālās dimensijas."
-
-#~ msgid "Maximize the horizontal dimension of the window."
-#~ msgstr "Maksimizēt loga horizontālās dimensijas."
-
-#~ msgid "Toggle the state of the window between maximized and unmaximized."
-#~ msgstr "Slēgt loga stāvokli starp maksimizētu un atmaksimizētu."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Slēgt loga stāvokli starp horizontāli maksimizētu un\n"
-#~ "atmaksimizētu."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Slēgt loga stāvokli starp vertikāli maksimizētu un\n"
-#~ "atmaksimizētu."
-
-#~ msgid "Maximize the window without obscuring any other windows."
-#~ msgstr "Maksimizēt logu neaizklājot citus logus."
-
-#~ msgid "Maximize the window vertically without obscuring any other windows."
-#~ msgstr "Maksimizēt logu vertikāli neaizklājot citus logus."
-
-#~ msgid ""
-#~ "Maximize the window horizontally without obscuring any other windows."
-#~ msgstr "Maksimizēt logu horizontāli neaizklājot citus logus."
-
-#~ msgid ""
-#~ "Toggle the state of the window between maximized-filled and unmaximized."
-#~ msgstr "Slēgt loga stāvokli starp maksimizētu-aizpildītu un atmaksimizētu."
-
-#~ msgid ""
-#~ "Toggle the state of the window between horizontally maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Slēgt loga stāvokli starp horizontāli maksimizētu-aizpildītu un\n"
-#~ "atmaksimizētu."
-
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and\n"
-#~ "unmaximized."
-#~ msgstr ""
-#~ "Slēgt loga stāvokli starp vertikāli maksimizētu-aizpildītu un\n"
-#~ "atmaksimizētu."
-
-#, fuzzy
-#~ msgid "Fullscreen maximize the window."
-#~ msgstr "Minimizēt logu."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized and "
-#~ "unmaximized."
-#~ msgstr "Slēgt loga stāvokli starp maksimizētu un atmaksimizētu."
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between fullscreen maximized across all "
-#~ "Xinerama and unmaximized."
-#~ msgstr "Slēgt loga stāvokli starp maksimizētu-aizpildītu un atmaksimizētu."
-
-#~ msgid "Display only the title bar of the window."
-#~ msgstr "Parādīt tikai loga virsraksta joslu."
-
-#~ msgid ""
-#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
-#~ "state."
-#~ msgstr ""
-#~ "Ja logs ir ēnots (apskati `ēnot-logu'), atjaunot to tā parastajāl\n"
-#~ "stāvoklī."
-
-#~ msgid ""
-#~ "Toggle the shaded (only the title bar is displayed) state of the window."
-#~ msgstr "Slēgt ēnoto (tikai virsraksta josla tiek parādīta) loga stāvokli."
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Paaugstināt pašreizējo logu līdz tā augstākajai atļautajai pozīcijai\n"
-#~ "krāvuma secībā. Paaugstināt arī tā pagaidu logus."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Pazemināt pašreizējo logu līdz tā zemākajai atļautajai pozīcijai\n"
-#~ "krāvuma secībā. Pazemināt arī tā pagaidu logus."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Ja logs ir tā augstākajā iespējamajā pozīcijā, tad pazemināt to uz\n"
-#~ "tā zemāko pozīciju. Citādi paaugstināt to, cik augstu vien iespējams. "
-#~ "Arī\n"
-#~ "izmaina jebkura tam esošā pagaidu loga līmeni."
-
-#~ msgid "Display the workspace/viewport containing the window W."
-#~ msgstr "Parādīt darba vietu/skatpunktu, kas satur logu W."
-
-#~ msgid "Display the workspace containing the window W, then focus on W."
-#~ msgstr "Parādīt darba vietu, kas satur logu W, tad fokusēties uz W."
-
-#~ msgid "Reload the gtkrc settings."
-#~ msgstr "Pārlādēt gtkrc uzstādījumus."
-
-#~ msgid "Prompt for a key sequence, then print its binding."
-#~ msgstr "Pieprasīt taustiņu secību, tad izdrukāt tās sasaisti."
-
-#~ msgid ""
-#~ "Sends the next key event directly to the focused client window, ignoring\n"
-#~ "any window manager bindings that it may have."
-#~ msgstr ""
-#~ "Nosūta nākamo taustiņa notikumu tieši uz fokusēto klienta logu, "
-#~ "ignorējot\n"
-#~ "ignorējot jebkādas pastāvošās logu pārvaldnieka sasaistes."
-
-#~ msgid "Select the specified viewport."
-#~ msgstr "Izvēlēties noteikto skatpunktu."
-
-#~ msgid "Select the specified viewport column."
-#~ msgstr "Izvēlēties noteikto skatpunkta kolonnu."
-
-#~ msgid "Select the specified viewport row."
-#~ msgstr "Izvēlēties noteikto skatpunkta rindu."
-
-#~ msgid "Move the current window to the specified viewport."
-#~ msgstr "Pārvietot pašreizējo logu uz norādīto skatpunktu."
-
-#~ msgid "Move the viewport one screen to the right."
-#~ msgstr "Pārvietot skatpunktu vienu ekrānu pa labi."
-
-#~ msgid "Move the viewport one screen to the left."
-#~ msgstr "Pārvietot skatpunktu vienu ekrānu pa kreisi."
-
-#~ msgid "Move the viewport one screen up."
-#~ msgstr "Pārvietot skatpunktu vienu ekrānu augstāk."
-
-#~ msgid "Move the viewport one screen down."
-#~ msgstr "Pārvietot skatpunktu vienu ekrānu zemāk."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the right, and switch to that viewport."
-#~ msgstr ""
-#~ "Pārvietot logu uz skatpunktu pa labi un pārslēgties uz šo skatpunktu."
-
-#~ msgid ""
-#~ "Move the window to the viewport on the left, and switch to that viewport."
-#~ msgstr ""
-#~ "Pārvietot logu uz skatpunktu pa kreisi un pārslēgties uz šo skatpunktu."
-
-#~ msgid "Move the window to the viewport above, and switch to that viewport."
-#~ msgstr ""
-#~ "Pārvietot logu uz augšējo skatpunktu un pārslēgties uz šo skatpunktu."
-
-#~ msgid "Move the window to the viewport below, and switch to that viewport."
-#~ msgstr ""
-#~ "Pārvietot logu uz lejējo skatpunktu un pārslēgties uz šo skatpunktu."
-
-#~ msgid "Transfer input focus to the desktop window (if one exists)."
-#~ msgstr "Pārsūtīt ievades fokusu uz darba virsmas logu (ja tāds eksistē)."
-
-#~ msgid "Delete the window."
-#~ msgstr "Dzēst šo logu."
-
-#~ msgid "Delete the window, or beep if the window can't be closed safely."
-#~ msgstr "Dzēst logu vai pīkstēt, ja logs nevar tikt droši aizvērts."
-
-#~ msgid "Force the current window to have a unique title."
-#~ msgstr "Likt pašreizējam logam būt ar unikālu virsrakstu."
-
-#~ msgid "Display the menu containing the list of all workspaces."
-#~ msgstr "Parādīt saraksta izvēlni par visām darba vietām."
-
-#~ msgid "Display the menu of all managed windows."
-#~ msgstr "Parādīt izvēlni par visiem pārvaldītajiem logiem."
-
-#~ msgid "Display the next workspace."
-#~ msgstr "Parādīt nākošo darba vietu."
-
-#~ msgid "Display the previous workspace."
-#~ msgstr "Parādīt iepriekšējo darba vietu."
-
-#~ msgid "Move the window to the next workspace."
-#~ msgstr "Pārvietot logu uz nākošo darba vietu."
-
-#~ msgid "Move the window to the previous workspace."
-#~ msgstr "Pārvietot logu uz iepriekšējo darba vietu."
-
-#~ msgid "Copy the window to the next workspace."
-#~ msgstr "Kopēt logu uz nākošo darba vietu."
-
-#~ msgid "Copy the window to the previous workspace."
-#~ msgstr "Kopēt logu uz iepriekšējo darba vietu."
-
-#~ msgid ""
-#~ "Create a new workspace at the end of the list, and move the window to it."
-#~ msgstr "Izveidot jaunu darba vietu saraksta beigās un pārvietot logu uz to."
-
-#~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to "
-#~ "it."
-#~ msgstr "Izveidot jaunu darba vietu saraksta sākumā un pārvietot logu uz to."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the "
-#~ "next\n"
-#~ "workspace."
-#~ msgstr ""
-#~ "Dzēst pašreizējo darba vietu. Tās logi tiks pārvietoti uz nākošo\n"
-#~ "darba vietu."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "Dzēst pašreizējo darba vietu. Tās logi tiks pārvietoti uz iepriekšējo\n"
-#~ "darba vietu."
-
-#~ msgid "Create a new workspace following the current workspace."
-#~ msgstr "Izveidot jaunu darba vietu uzreiz aiz pašreizējās darba vietas."
-
-#~ msgid "Create a new workspace before the current workspace."
-#~ msgstr "Izveidot jaunu darba vietu uzreiz pirms pašreizējās darba vietas."
-
-#~ msgid "Move the current workspace one place to the right."
-#~ msgstr "Pārvietot pašreizējo darba vietu vienu vietu pa labi."
-
-#~ msgid "Move the current workspace one place to the left."
-#~ msgstr "Pārvietot pašreizējo darba vietu vienu vietu pa kreisi."
-
-#~ msgid "Delete any workspaces that don't contain any windows."
-#~ msgstr "Dzēst jebkuru darba vietu, kas nesatur nekādus logus."
-
-#~ msgid ""
-#~ "Remove the copy of the window on the current workspace. If this is the\n"
-#~ "last instance remaining, then delete the actual window."
-#~ msgstr ""
-#~ "Aizvākt loga kopiju pašreizējā darba vietā. Ja tā ir pēdējā\n"
-#~ "instance, tad dzēst īsteno logu."
-
-#~ msgid "Select the N'th workspace."
-#~ msgstr "Izvēlēties N. darba vietu."
-
-#~ msgid "Copy the current window to the N'th workspace."
-#~ msgstr "Kopēt pašreizējo logu uz N. darba vietu."
-
-#~ msgid "Prompt for a workspace and switch to it."
-#~ msgstr "Pieprasīt darba vietu un pārslēgties uz to."
 
 #~ msgid "Select Icon"
 #~ msgstr "Izvēlieties Ikonu"
