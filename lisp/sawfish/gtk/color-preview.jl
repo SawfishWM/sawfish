@@ -32,7 +32,7 @@
   (defconst color-preview-width 28)
   (defconst color-preview-height 16)
 
-  (define (set-preview-color preview color)
+  (define (set-preview-color color-button color)
     (let ((buf (make-string (* color-preview-width 3))))
       (let ((red (quotient (gdk-color-red color) 256))
 	    (green (quotient (gdk-color-green color) 256))
@@ -43,24 +43,24 @@
 	  (aset buf (1+ (* i 3)) green)
 	  (aset buf (+ 2 (* i 3)) blue)))
       (do ((i 0 (1+ i)))
-	  ((= i color-preview-height))
-	(gtk-preview-draw-row preview buf 0 i color-preview-width))))
+	  ((= i color-preview-height)))))
+
+;; XXX Fixme: Use a Vbox as container instead of another Button
 
   (define (button-new-with-color color-name)
     (let ((button (gtk-button-new))
-	  (preview (gtk-preview-new 'color))
+	  (color-button (gtk-color-button-new 'color))
 	  (color (and color-name (gdk-color-parse-interp color-name))))
-      (gtk-preview-size preview color-preview-width color-preview-height)
       (when color
-	(set-preview-color preview color))
-      (gtk-container-add button preview)
+	(gtk-color-button-set-color color-button color))
+      (gtk-container-add button color-button)
       button))
 
   (define (set-button-color button color-name)
     (let ((color (and color-name (gdk-color-parse-interp color-name))))
       (when color
 	(mapc (lambda (w)
-		(when (gtk-preview-p w)
-		  (set-preview-color w color)
+		(when (gtk-color-button-p w)
+		  (gtk-color-button-set-color w color)
 		  (gtk-widget-draw-interp w)))
 	      (gtk-container-get-children button))))))
