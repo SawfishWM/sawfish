@@ -29,7 +29,7 @@ AM_PROG_LIBTOOL
 #IT_PROG_INTLTOOL([0.40.0])
 
 dnl Release versioning info
-version="1.5.0"
+version="1.6.0"
 subversion=""
 codename="The Hardstyle Factory"
 
@@ -213,14 +213,14 @@ PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  ,AC_MSG_ERROR([can not locate librep]))
 
 dnl Check for rep-gtk
-REP_GTK_MIN_VER="0.18.4"
+REP_GTK_MIN_VER="0.90.0"
 
 PKG_CHECK_MODULES(REP_GTK, rep-gtk >= ${REP_GTK_MIN_VER}
 		  ,
 		  ,AC_MSG_ERROR([can not locate rep-gtk]))
 
 dnl Check for GTK+2
-GTK_MIN_VER="2.6.0"
+GTK_MIN_VER="2.12.0"
 
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
 		  ,GTK_LIBS="`pkg-config --libs gtk+-2.0`"
