@@ -29,13 +29,23 @@
             move-cursor-left
             move-cursor-right
             move-cursor-up
-            move-cursor-down)
+            move-cursor-down
+	    move-cursor-northwest
+	    move-cursor-northeast
+	    move-cursor-southwest
+	    move-cursor-southeast
+            move-cursor-northwest-fine
+	    move-cursor-northeast-fine
+	    move-cursor-southwest-fine
+	    move-cursor-southeast-fine
+            move-cursor-center)
 
     (open rep
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom
-	  sawfish.wm.commands)
+	  sawfish.wm.commands
+          sawfish.wm.gaol)
 
   (defcustom move-cursor-increment 16
     "Number of pixels to move pointer in."
@@ -43,8 +53,9 @@
     :type (number 1))
 
   (define (move-cursor right down)
-    (let ((coords (query-pointer)))
-      (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
+     (let ((coords (query-pointer)))
+       (setq dontmove t)
+         (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
 
   (define (move-cursor-left)
     "Move the cursor `move-cursor-increment' pixels to the left."
@@ -62,6 +73,22 @@
     "Move the cursor `move-cursor-increment' pixels downwards."
     (move-cursor 0 move-cursor-increment))
 
+  (define (move-cursor-northwest)
+    "Move the cursor `move-cursor-increment' pixels northwest"
+    (move-cursor (- move-cursor-increment) (- move-cursor-increment)))
+
+  (define (move-cursor-northeast)
+    "Move the cursor `move-cursor-increment' pixels northeast"
+    (move-cursor move-cursor-increment (- move-cursor-increment)))
+
+  (define (move-cursor-southwest)
+    "Move the cursor `move-cursor-increment' pixels southwest"
+    (move-cursor (- move-cursor-increment) move-cursor-increment))
+
+  (define (move-cursor-southeast)
+    "Move the cursor `move-cursor-increment' pixels southeast"
+    (move-cursor move-cursor-increment move-cursor-increment))
+
   (define (move-cursor-left-fine)
     "Move the cursor 1 pixel to the left."
     (move-cursor -1 0))
@@ -78,6 +105,26 @@
     "Move the cursor 1 pixel downwards."
     (move-cursor 0 1))
 
+  (define (move-cursor-northwest-fine)
+    "Move the cursor `move-cursor-increment' pixels northwest"
+    (move-cursor -1 -1))
+
+  (define (move-cursor-northeast-fine)
+    "Move the cursor `move-cursor-increment' pixels northeast"
+    (move-cursor 1 -1))
+
+  (define (move-cursor-southwest-fine)
+    "Move the cursor `move-cursor-increment' pixels southwest"
+    (move-cursor -1 1))
+
+  (define (move-cursor-southeast-fine)
+    "Move the cursor `move-cursor-increment' pixels southeast"
+    (move-cursor 1 1))
+
+  (define (move-cursor-center)
+    "Move the cursor to the center of the screen"
+    (warp-cursor (/ (screen-width) 2) (/ (screen-height) 2)))
+
   ;;###autoload
   (define-command 'move-cursor-right move-cursor-right)
   (define-command 'move-cursor-left move-cursor-left)
@@ -86,4 +133,14 @@
   (define-command 'move-cursor-right-fine move-cursor-right-fine)
   (define-command 'move-cursor-left-fine move-cursor-left-fine)
   (define-command 'move-cursor-up-fine move-cursor-up-fine)
-  (define-command 'move-cursor-down-fine move-cursor-down-fine))
+  (define-command 'move-cursor-down-fine move-cursor-down-fine)
+  (define-command 'move-cursor-northwest move-cursor-northwest)
+  (define-command 'move-cursor-northeast move-cursor-northeast)
+  (define-command 'move-cursor-southwest move-cursor-southwest)
+  (define-command 'move-cursor-southeast move-cursor-southeast)
+  (define-command 'move-cursor-down-fine move-cursor-down-fine)
+  (define-command 'move-cursor-northwest-fine move-cursor-northwest-fine)
+  (define-command 'move-cursor-northeast-fine move-cursor-northeast-fine)
+  (define-command 'move-cursor-southwest-fine move-cursor-southwest-fine)
+  (define-command 'move-cursor-southeast-fine move-cursor-southeast-fine)
+  (define-command 'move-cursor-center move-cursor-center))
