@@ -67,7 +67,8 @@
   (defcustom tab-raise-on-hover nil 
     "Raise Tabs on Hover"
     :group tabs
-    :type boolean)
+    :type boolean
+    :after-set (lambda () (raise-tabs-on-hover-setter)))
 
   (define (get-tab-pos win)
     (let* ((group (tab-find-window win))
@@ -137,9 +138,13 @@
 
   (define-command 'tab-add-to-group mygroup #:spec "%W")
 
-  (if (eq tab-raise-on-hover 't)
-    (add-hook 'enter-frame-part-hook
-      (lambda (win) (raise-window win)))))
+  (define (raise-tabs-on-hover-action win)
+    (raise-window win))
+
+  (define (raise-tabs-on-hover-setter)
+    (if (eq tab-raise-on-hover 't)
+      (add-hook 'enter-frame-part-hook raise-tabs-on-hover-action)
+      (remove-hook 'enter-frame-part-hook raise-tabs-on-hover-action))))
 
   ;(require 'x-cycle)
   ;(define-cycle-command-pair
