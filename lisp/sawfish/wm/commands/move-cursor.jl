@@ -54,7 +54,6 @@
 
   (define (move-cursor right down)
      (let ((coords (query-pointer)))
-       (setq dontmove t)
          (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
 
   (define (move-cursor-left)
