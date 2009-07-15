@@ -101,13 +101,15 @@
        (window-list-skip boolean)
        (task-list-skip boolean)
        (never-iconify boolean)
-       (never-maximize boolean))
+       (never-maximize boolean)
+       (fullscreen boolean))
       (other ,(_ "Other")
        (unique-name boolean)
        (auto-gravity boolean)
        (shade-hover boolean)
        (transients-above (choice all parents none))
-       (ignore-stacking-requests boolean))))
+       (ignore-stacking-requests boolean)
+       (new-workspace boolean))))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
   ;; libraries implementing them
@@ -381,6 +383,21 @@
    (lambda (w prop value)
      (declare (unused prop))
      (set-focus-mode w value)))
+
+  (define-match-window-setter 'fullscreen
+   (lambda (w prop value)
+     (declare (unused prop))
+     (when value
+       (window-put w 'queued-fullscreen-maximize t))))
+
+  (define-match-window-setter 'new-workspace
+   (lambda (w prop value)
+     (declare (unused prop))
+     (when value
+       (let ((space (car (workspace-limits))))
+         (while (not (workspace-empty-p space))
+	   (setq space (1+ space)))
+	     (set-window-workspaces w (list space))))))
 
   (define-match-window-setter 'maximized
    (lambda (w prop value)
