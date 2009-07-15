@@ -43,7 +43,7 @@ override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_C
 all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
-	$(rep_LIBTOOL) --mode=link $(CC) -export-dynamic $(LDFLAGS) \
+	$(rep_LIBTOOL) --mode=link --tag=CC $(CC) -export-dynamic $(LDFLAGS) \
 	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) $(PANGO_LIBS) \
 	  $(IMAGE_LIBS) $(X11_LIBS) $(EXTRA_X11_LIBS) $(LIBS)
 
@@ -54,7 +54,7 @@ play-sample.la : play-sample.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $< $(ESD_LIBS) $(AUDIOFILE_LIBS)
 
 libclient_.lo : libclient.c
-	$(rep_LIBTOOL) --mode=compile $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(rep_LIBTOOL) --mode=compile --tag=CC $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 client.la : client.lo libclient_.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $^ $(X11_LIBS) $(REP_LIBS) $(LIBS)
