@@ -102,7 +102,8 @@
        (task-list-skip boolean)
        (never-iconify boolean)
        (never-maximize boolean)
-       (fullscreen boolean))
+       (fullscreen boolean)
+       (fullscreen-xinerama boolean))
       (other ,(_ "Other")
        (unique-name boolean)
        (auto-gravity boolean)
@@ -398,6 +399,12 @@
          (while (not (workspace-empty-p space))
 	   (setq space (1+ space)))
 	     (set-window-workspaces w (list space))))))
+
+  (define-match-window-setter 'fullscreen-xinerama
+   (lambda (w prop value)
+     (declare (unused prop))
+     (when value
+       (window-put w 'queued-fullxinerama-maximize t))))
 
   (define-match-window-setter 'maximized
    (lambda (w prop value)

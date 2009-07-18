@@ -554,19 +554,26 @@ unmaximized."
   (define (after-add-window w)
     (let ((vert (window-get w 'queued-vertical-maximize))
 	  (horiz (window-get w 'queued-horizontal-maximize))
-	  (full (window-get w 'queued-fullscreen-maximize)))
-      (when (or vert horiz full)
+	  (full (window-get w 'queued-fullscreen-maximize))
+          (fullxinerama (window-get w 'queued-fullxinerama-maximize)))
+      (when (or vert horiz full fullxinerama)
 	(when vert
 	  (window-put w 'queued-vertical-maximize nil))
 	(when horiz
 	  (window-put w 'queued-horizontal-maximize nil))
 	(when full
 	  (window-put w 'queued-fullscreen-maximize nil))
-	(if full
-	    (maximize-window-fullscreen w t)
-	  (maximize-window w (cond ((and vert horiz) nil)
-				   (vert 'vertical)
-				   (horiz 'horizontal)))))))
+        (when fullxinerama
+          (window-put w 'queued-fullxinerama-maximize nil))
+       (cond
+        (full
+         (maximize-window-fullscreen w t))
+        (fullxinerama
+         (maximize-window-fullxinerama w t))
+        (t
+          (maximize-window w (cond ((and vert horiz) nil)
+                                   (vert 'vertical)
+				   (horiz 'horizontal))))))))
 
   (add-hook 'after-add-window-hook after-add-window)
 
