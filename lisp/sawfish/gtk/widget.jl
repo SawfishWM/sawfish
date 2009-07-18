@@ -269,7 +269,7 @@
     ;; XXX backwards compat..
     (when (eq minimum 'nil) (setq minimum nil))
     (when (eq maximum 'nil) (setq maximum nil))
-    (let ((widget (gtk-spin-button-new-with-range (or minimum 0)
+    (let ((widget (gtk-spin-button-new-with-range (or minimum -65535)
 						  (or maximum 65535) 1)))
       (when changed-callback
 	(g-signal-connect
