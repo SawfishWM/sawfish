@@ -31,12 +31,8 @@
 ;; if it looks like GNOME is the desktop environment, then load the
 ;; extra GNOME integration module
 (unless batch-mode
-  (catch 'out
-    (mapc (lambda (prop)
-	    (when (string-match "^GNOME_" (symbol-name prop))
-	      (require 'sawfish.wm.gnome.integration)
-	      (throw 'out t)))
-	  (list-x-properties 'root))))
+  (if (getenv "GNOME_DESKTOP_SESSION_ID")
+    (require 'sawfish.wm.gnome.integration)))
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)
