@@ -34,7 +34,7 @@
     "Distance between successive placements in `stagger' placement mode."
     :type number
     :range (1)
-    :group placement)
+    :group (misc placement))
 
   (define place-window-stagger
     (let ((last-x 0)
