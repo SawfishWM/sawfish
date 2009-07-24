@@ -196,9 +196,9 @@ deciding which frame type to ask a theme to generate.")
 
   ;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
   (defvar theme-suffix-regexps
-    '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|)$" "\\0#tar/\\2" "\\2")))
+    '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|\\.xz|\\.lzma|)$" "\\0#tar/\\2" "\\2")))
 
-  (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"))
+  (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2" ".tar.xz" ".tar.lzma"))
 
   (defvar themes-are-gaolled t
     "When non-nil themes are assumed to be malicious.")
