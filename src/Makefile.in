@@ -60,7 +60,7 @@ client.la : client.lo libclient_.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $^ $(X11_LIBS) $(REP_LIBS) $(LIBS)
 
 gtk-style : gtk-style.c
-	$(CC) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS)
 
 install : all installdirs
 	for p in sawfish; do \
