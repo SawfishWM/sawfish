@@ -34,8 +34,8 @@
 
   ;; delete the `Restart' and `Quit' items from the root menu
   (let ((restart (rassoc '(restart) root-menu))
-	(quit (rassoc '(quit) root-menu))
-	(programs (rassoc 'apps-menu root-menu)))
+	(quit (rassoc '(quit) root-menu)))
+;;	(programs (rassoc 'apps-menu root-menu)))
     (when restart
       (setq root-menu (delq restart root-menu)))
     (when quit
