@@ -81,7 +81,7 @@ uninstall :
 clean :
 	rm -f core *~ *.mo
 
-realclean : clean
+distclean : clean
 	rm -f Makefile $(PACKAGE).pot
 
 .PHONY : all install uninstall clean realclean
