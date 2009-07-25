@@ -32,11 +32,6 @@ using a GTK+ interface.  Sawfish is mostly GNOME compliant
 %configure
 make host_type=%{_target_platform}
 
-%define librepdir %(\
-   repl=$(rpm -ql librep.%{_arch}| grep -m 1 /rep/); \
-   [ "$repl" ] || repl=$(rpm -ql librep-devel.%{_arch} | grep -m 1 /rep/); \
-   echo ${repl%%/rep/*})
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -74,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/sawfish*.png
 %{_libdir}/pkgconfig/sawfish.pc
 %{_libexecdir}/sawfish/%{version}/%{_host}
-%{librepdir}/rep/%{_host}/sawfish
+@REP_EXECDIR@/sawfish
 %{_infodir}/sawfish*
 
 %changelog
