@@ -3885,7 +3885,9 @@ that is outside of @code{viewport-dimensions}.  When set to
 @code{wrap-around}, it loops in the vertical and horizontal axes
 enough times to keep the viewport within the defined dimensions.  When
 set to @code{stop}, it refuses to switch to a viewport outside of
-@code{viewport-dimensions}.  Defaults to @code{wrap-around}.
+@code{viewport-dimensions}, if set to @code{dynamic}, it will create a
+new viewport at the side the pointer hit the screen-edge.
+Defaults to @code{wrap-around}.
 @end defvar
 
 @defun warp-viewport x y
