@@ -34,7 +34,8 @@
 	    move-window-viewport
 	    window-viewport
 	    window-absolute-position
-	    set-number-of-viewports)
+	    set-number-of-viewports
+	    viewport-windows)
 
     (open rep
 	  rep.system
@@ -58,6 +59,12 @@
     :type (pair (number 1) (number 1))
     :after-set (lambda () (viewport-size-changed)))
 
+  (defcustom viewport-minimum-dimensions '(1 . 1)
+    "Minimum number of columns and rows in each virtual workspace: \\w"
+    :group (workspace viewport)
+    :type (pair (number 1) (number 1))
+    :after-set (lambda () (viewport-minimum-size-changed)))
+
   (defcustom uniconify-to-current-viewport t
     "Windows uniconify to the current viewport."
     :type boolean
@@ -72,7 +79,7 @@
   (defcustom viewport-boundary-mode 'stop
     "Whether to stop or wrap-around on first/last viewport"
     :group (workspace viewport)
-    :type (choice wrap-around stop))
+    :type (choice wrap-around stop dynamic))
 
 ;;; raw viewport handling
 
@@ -126,6 +133,75 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 
   (add-hook 'before-exit-hook viewport-before-exiting t)
 
+  (define (viewport-dynamic-resize)
+    (when (eq viewport-boundary-mode 'dynamic)
+      (let ((windows
+	     (filter-windows
+	      (lambda (w)
+		(window-in-workspace-p w current-workspace)))))
+	(if windows
+	    (let*
+		((points
+		  (nconc
+		   (mapcar (lambda (w)
+			     (let ((pos (window-position w))
+				   (dims (window-frame-dimensions w)))
+			       (list (car pos)
+				     (cdr pos)
+				     (+ (car pos) (car dims))
+				     (+ (cdr pos) (cdr dims)))))
+			   windows)
+		   ;; Include a region in the current screen:
+		   `((0 0 1 1))))
+		 (x-min (apply min (mapcar car points)))
+		 (y-min (apply min (mapcar (lambda (e) (nth 1 e)) points)))
+		 (x-max (apply max (mapcar (lambda (e) (nth 2 e)) points)))
+		 (y-max (apply max (mapcar (lambda (e) (nth 3 e)) points)))
+		 (width (screen-width))
+		 (height (screen-height))
+		 (high-rows (+ (quotient y-max height)
+			       (if (> (mod y-max height) 0)
+				   1
+				 0)))
+		 (low-rows (if (< y-min 0)
+			       (+ (- (quotient y-min height))
+				  (if (> (mod y-min height) 0)
+				      1
+				    0))
+			     0))
+		 (rows (+ low-rows high-rows))
+		 (high-cols (+ (quotient x-max width)
+			       (if (> (mod x-max width) 0)
+				   1
+				 0)))
+		 (low-cols (if (< x-min 0)
+			       (+ (- (quotient x-min width))
+				  (if (> (mod x-min width) 0)
+				      1
+				    0))
+			     0))
+		 (cols (+ low-cols high-cols)))
+	      (setq
+	       viewport-y-offset (* low-rows height)
+	       viewport-x-offset (* low-cols width)
+	       viewport-dimensions (cons
+				    (max cols
+					 (car viewport-minimum-dimensions))
+				    (max rows
+					 (cdr viewport-minimum-dimensions)))))
+	  (setq viewport-y-offset 0
+		viewport-x-offset 0
+		viewport-dimensions viewport-minimum-dimensions))
+	(call-hook 'viewport-resized-hook))))
+
+  ;; Resize virtual workspace on workspace switch or viewport move.
+  ;; TODO: Ensure that the viewport is set reasonably in the new
+  ;; workspace.
+  (add-hook 'enter-workspace-hook
+	    viewport-dynamic-resize)
+  (add-hook 'viewport-moved-hook
+	    viewport-dynamic-resize)
+
 ;; screen sized viewport handling
 
   (define (screen-viewport)
@@ -137,8 +213,9 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
     (when (eq viewport-boundary-mode 'wrap-around)
       (setq col (mod col (car viewport-dimensions))
             row (mod row (cdr viewport-dimensions))))
-    (when (and (>= col 0) (< col (car viewport-dimensions))
-               (>= row 0) (< row (cdr viewport-dimensions)))
+    (when (or (eq viewport-boundary-mode 'dynamic)
+	      (and (>= col 0) (< col (car viewport-dimensions))
+		   (>= row 0) (< row (cdr viewport-dimensions))))
       (set-viewport (* col (screen-width))
                     (* row (screen-height)))
       t))
@@ -221,17 +298,70 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 	position)))
 
   (define (viewport-size-changed)
-    (let ((port (screen-viewport)))
-      (set-screen-viewport (min (car port) (1- (car viewport-dimensions)))
-			   (min (cdr port) (1- (cdr viewport-dimensions))))
-      (map-windows (lambda (w)
-		     (when (window-outside-workspace-p w)
-		       (move-window-to-current-viewport w))))
-      (call-hook 'viewport-resized-hook)))
+    (when (or (< (car viewport-dimensions) (car viewport-minimum-dimensions))
+	      (< (cdr viewport-dimensions) (cdr viewport-minimum-dimensions)))
+      (setq viewport-minimum-dimensions
+	    (cons (min (car viewport-dimensions)
+		       (car viewport-minimum-dimensions))
+		  (min (cdr viewport-dimensions)
+		       (cdr viewport-minimum-dimensions))))
+      (when (eq viewport-boundary-mode 'dynamic)
+	(viewport-dynamic-resize)))
+    (unless (eq viewport-boundary-mode 'dynamic)
+      (let ((port (screen-viewport)))
+	(set-screen-viewport (min (car port) (1- (car viewport-dimensions)))
+			     (min (cdr port) (1- (cdr viewport-dimensions))))
+	(map-windows (lambda (w)
+		       (when (window-outside-workspace-p w)
+			 (move-window-to-current-viewport w))))
+	(call-hook 'viewport-resized-hook))))
+
+  (define (viewport-minimum-size-changed)
+    (if (eq viewport-boundary-mode 'dynamic)
+	(viewport-dynamic-resize)
+      (when (or (< (car viewport-dimensions) (car viewport-minimum-dimensions))
+		(< (cdr viewport-dimensions) (cdr viewport-minimum-dimensions)))
+	(setq viewport-dimensions
+	      (cons (max (car viewport-dimensions)
+			 (car viewport-minimum-dimensions))
+		    (max (cdr viewport-dimensions)
+			 (cdr viewport-minimum-dimensions))))
+	(viewport-size-changed))))
 
   (define (set-number-of-viewports width height)
     (setq viewport-dimensions (cons width height))
-    (viewport-size-changed))
+    (setq viewport-minimum-dimensions (cons width height))
+    (if (eq viewport-boundary-mode 'dynamic)
+	(viewport-dynamic-resize)
+      (viewport-size-changed)))
+
+  (define (viewport-windows #!optional vp-col vp-row workspace
+                            exclude-sticky exclude-iconified)
+    "Provide a list of windows that are mapped to the specified viewport."
+    (let* ((cur-vp (screen-viewport))
+           (col (or vp-col (car cur-vp)))
+           (row (or vp-row (cdr cur-vp)))
+           (ws (or workspace current-workspace))
+           (width (screen-width))
+           (height (screen-height))
+           (left (+ (- viewport-x-offset) (* col width)))
+           (right (+ left (1- width)))
+           (top (+ (- viewport-y-offset) (* row height)))
+           (bottom (+ top (1- height))))
+      (filter-windows (lambda (w)
+                        (let ((pos (window-position w))
+                              (dims (window-frame-dimensions w)))
+                          (and (window-mapped-p w)
+                               (not (window-get w 'ignored))
+                               (if exclude-sticky
+                                   (window-in-workspace-p w ws)
+                                 (window-appears-in-workspace-p w ws))
+                               (not (and exclude-iconified
+                                         (window-get w 'iconified)))
+                               (not (or (<= (+ (car pos) (car dims)) left)
+                                        (<= (+ (cdr pos) (cdr dims)) top)
+                                        (>= (car pos) right)
+                                        (>= (cdr pos) bottom)))))))))
 
 ;; commands
 

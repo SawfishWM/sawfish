@@ -77,7 +77,9 @@
        (depth (number -16 16))
        (placement-weight number)
        (fixed-position boolean)
-       (maximized (choice all vertical horizontal)))
+       (maximized (choice all vertical horizontal))
+       (new-workspace boolean)
+       (new-viewport boolean))
       (focus ,(_ "Focus")
        (raise-on-focus boolean)
        (focus-when-mapped boolean)
@@ -109,8 +111,7 @@
        (auto-gravity boolean)
        (shade-hover boolean)
        (transients-above (choice all parents none))
-       (ignore-stacking-requests boolean)
-       (new-workspace boolean))))
+       (ignore-stacking-requests boolean))))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
   ;; libraries implementing them
@@ -395,10 +396,40 @@
    (lambda (w prop value)
      (declare (unused prop))
      (when value
-       (let ((space (car (workspace-limits))))
-         (while (not (workspace-empty-p space))
-	   (setq space (1+ space)))
-	     (set-window-workspaces w (list space))))))
+       (unless (window-get w 'placed)
+         (let ((space (car (workspace-limits))))
+           (while (not (workspace-empty-p space))
+             (setq space (1+ space)))
+           (set-window-workspaces w (list space)))))))
+	   
+  (define-match-window-setter 'new-viewport
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (unless (window-get w 'placed)
+          (let ((row 0) 
+                (col 0)
+                (nomatch t))
+            (while (and nomatch (< row (cdr viewport-dimensions)))
+              (setq col 0)
+              (while (and nomatch (< col (car viewport-dimensions)))
+                (if (null (viewport-windows col row nil t))
+                    (setq nomatch nil)
+                  (setq col (1+ col))))
+              (if nomatch
+                  (setq row (1+ row))))
+            (when nomatch
+              (let ((cols (car viewport-dimensions))
+                    (rows (cdr viewport-dimensions)))
+                (if (<= cols rows)
+                    (setq viewport-dimensions (cons (1+ cols) rows)
+                          col cols
+                          row 0)
+                  (setq viewport-dimensions (cons cols (1+ rows))
+                        col 0
+                        row rows))))
+            (set-screen-viewport col row)
+            (set-window-viewport w col row))))))
 
   (define-match-window-setter 'fullscreen-xinerama
    (lambda (w prop value)
