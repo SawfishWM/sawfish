@@ -113,11 +113,12 @@ X_EXTRA_LIBS=""
 
 PKG_CHECK_MODULES(libICE, ice >= 1.0
 		  ,X_EXTRA_LIBS="${X_EXTRA_LIBS} -lICE"
-		  ,AC_MSG_ERROR([can't locate libICE]))
+		  ,AC_MSG_ERROR([can not locate libICE]))
 
 PKG_CHECK_MODULES(libSM, sm >= 1.0
 		  ,X_EXTRA_LIBS="${X_EXTRA_LIBS} -lSM"
-		  ,AC_MSG_ERROR([can't locate libSM]))
+		  AC_DEFINE(HAVE_X11_SM_SMLIB_H, 1, [Have smlib])
+		  ,AC_MSG_ERROR([can not locate libSM]))
 
 X_SERVER="X.Org X11R7"
 
