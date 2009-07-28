@@ -6,6 +6,41 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} file in the Sawfish source tree.
 
+@heading 1.5.1
+
+@itemize @bullet
+
+@item The 1.5.1 release has backports from 1.6.0 (HEAD)
+
+@item Bugs fixed:
+@itemize @minus
+
+@item Fix in SMlib check on x11r7 [Christopher Bratusek]
+
+@item Fix in libICE check on x11r7 [Christopher Bratusek]
+
+@item SpinButtons in Sawfish-UI are now connected to correct singal (allows typing in the value manually) [Christoper Bratusek]
+
+@item Fix cursor warping in Infinite-Desktop [Jeremy Hankins]
+
+@item Fixed group of the stagger options [Christopher Bratusek]
+@end itemize
+
+@item Other changes:
+@itemize @minus
+
+@item Sawfish does now appear in KDE4s WM Selector [Christopher Bratusek]
+
+@item Fixed typos in the .desktop files and removed unneded entries [Christopher Bratusek]
+
+@item Changing raise-tabs-on-hover takes effect immediately now [Christopher Bratusek]
+
+@item Add --tag=CC to libtool where necessary, unbrakes compilation on some arches [Gentoo]
+
+@item Distclean rule for po/Makefile.in [Christopher Bratusek]
+@end itemize
+@end itemize
+
 @heading 1.5.0
 
 @itemize @bullet

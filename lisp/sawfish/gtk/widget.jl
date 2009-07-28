@@ -273,7 +273,7 @@
 						  (or maximum 65535) 1)))
       (when changed-callback
 	(g-signal-connect
-	 widget "changed" (make-signal-callback changed-callback)))
+	 widget "value-changed" (make-signal-callback changed-callback)))
       (gtk-widget-show widget)
       (lambda (op)
 	(case op

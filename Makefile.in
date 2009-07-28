@@ -59,6 +59,7 @@ install : all installdirs
 	done
 	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 	$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
+	$(INSTALL_DATA) $(top_srcdir)/sawfish-ksm.desktop $(DESTDIR)$(datadir)/apps/ksmserver/windowmanagers/sawfish.desktop
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
@@ -66,7 +67,8 @@ installdirs : mkinstalldirs
 	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties \
 	  $(DESTDIR)$(datadir)/applications/ \
 	  $(DESTDIR)$(libdir)/pkgconfig/ \
-	  $(DESTDIR)$(datadir)/xsessions/
+	  $(DESTDIR)$(datadir)/xsessions/ \
+	  $(DESTDIR)$(datadir)/apps/ksmserver/windowmanagers/
 
 uninstall :
 	for dir in $(SUBDIRS); do \

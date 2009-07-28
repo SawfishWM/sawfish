@@ -91,7 +91,7 @@
 	     (< (+ viewport-x-offset dist) minx))
 	(setq dist (- minx viewport-x-offset)))
     (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
-    (move-cursor (max dist cdist) 0)))
+    (move-cursor (- (max dist cdist)) 0)))
 
 (define (infinite-desktop.move-top)
   (let ((dist (- infinite-desktop.move-distance))
@@ -102,7 +102,7 @@
 	     (< (+ viewport-y-offset dist) miny))
 	(setq dist (- miny viewport-y-offset)))
     (set-viewport viewport-x-offset (+ viewport-y-offset dist))
-    (move-cursor 0 (max dist cdist))))
+    (move-cursor 0 (- (max dist cdist)))))
 
 (define (infinite-desktop.move-bottom)
   (let ((dist infinite-desktop.move-distance)

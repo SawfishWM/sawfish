@@ -8,7 +8,7 @@
 
    This script is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 3, or (at your option)
+   the Free Software Foundation; either version 2, or (at your option)
    any later version.
 
    sawfish is distributed in the hope that it will be useful, but
@@ -67,7 +67,8 @@
   (defcustom tab-raise-on-hover nil 
     "Raise Tabs on Hover"
     :group tabs
-    :type boolean)
+    :type boolean
+    :after-set (lambda () (raise-tabs-on-hover-setter)))
 
   (define (get-tab-pos win)
     (let* ((group (tab-find-window win))
@@ -137,9 +138,13 @@
 
   (define-command 'tab-add-to-group mygroup #:spec "%W")
 
-  (if (eq tab-raise-on-hover 't)
-    (add-hook 'enter-frame-part-hook
-      (lambda (win) (raise-window win)))))
+  (define (raise-tabs-on-hover-action win)
+    (raise-window win))
+
+  (define (raise-tabs-on-hover-setter)
+    (if (eq tab-raise-on-hover 't)
+      (add-hook 'enter-frame-part-hook raise-tabs-on-hover-action)
+      (remove-hook 'enter-frame-part-hook raise-tabs-on-hover-action))))
 
   ;(require 'x-cycle)
   ;(define-cycle-command-pair

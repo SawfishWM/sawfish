@@ -1,3 +1,28 @@
+2009-07-28  Christopher Bratusek <zanghar@freenet.de>
+	* configure.in: bump version to 1.5.1 ("Great")
+	                small fixup in x11r7 checks regarding SMlib and libICE
+	                non-bash compatibility
+	
+	* lisp/sawfish/wm/tabs/tab.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl
+	* lisp/sawfish/wm/util/marks.jl: fixed license header	
+	
+	* po/Makefile.in: renamed realclean rule to distclean rule
+	
+	* lisp/sawfish/wm/placement/stagger.jl: fix group of stagger option
+	
+	* sawfish.desktop
+	* sawfish-wm.dektop: fixed a typo, removed unneeded entries
+	
+	* lisp/sawfish/wm/ext/infinite-desktop.jl: fixed cursor warping [Jeremy Hankins]
+	
+	* lisp/sawfish/gtk/widget.jl: connect spinbuttons to value-changed signal (allows typing in the value manually)
+	
+	* src/Makefile.in: add --tag=CC there necessary on some systems [Gentoo]
+	                   include $CFLAGS in gtk-style rule
+
+	* sawfish-ksm.desktop: make sawfish appear in the KDE4 Windowselector
+
 2009-07-02  Christopher Bratusek <zanghar@freenet.de>
 	* po/*
 	* configure.in: de-intltoolize sawfish ... is breaking current
