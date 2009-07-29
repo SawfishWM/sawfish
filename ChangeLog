@@ -8,6 +8,11 @@
 
 	* lisp/sawfish/wm/ext/match-window.jl: added window-name matcher
 
+	* lisp/sawfish/gtk/stock.jl: remove make-url-widget function as we now got GtkLinkButton in rep-gtk
+
+	* scripts/sawfish-about.jl.in: use GtkLinkButton instead of make-url-widget
+	                               updated Johns Mail
+
 2009-07-28  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/frames.jl: make doc-windows unframed [Timo Korvola]
 

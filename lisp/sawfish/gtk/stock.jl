@@ -107,7 +107,4 @@
       (when extra
 	(gtk-box-pack-end box extra))
       (gtk-widget-show-all box)
-      (simple-dialog "About" box)))
-
-  (define (make-url-widget url label)
-    (gtk-label-new (format nil "%s <%s>" label url))))
+      (simple-dialog "About" box))))

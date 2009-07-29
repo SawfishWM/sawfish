@@ -36,8 +36,7 @@ exec rep "$0" "$@"
 	  gui.gtk-2.gtk
 	  rep.system
 	  rep.io.files
-	  rep.i18n.gettext
-	  sawfish.gtk.stock)
+	  rep.i18n.gettext)
 
   (unless (get-command-line-option "--disable-nls")
     (bindtextdomain "sawfish" "__localedir__")
@@ -46,13 +45,13 @@ exec rep "$0" "$@"
   (define title "Sawfish")
   (define version "__version__")
   (define copyright "(C) 1999-2000 John Harper; (C) 2000 Eazel, Inc")
-  (define authors `("John Harper <jsh@eazel.com>"
+  (define authors `("John Harper <jsh@unfactored.org>"
 		    ,(_ "and many others...")))
   (define comments (_ "Sawfish manages your windows extensibly."))
   (define logo "sawfish-logo.png")
 
   (let* ((hbox (gtk-hbox-new t 0))
-	 (ref (make-url-widget "http://sawfish.wikia.com/"
+	 (ref (gtk-link-button-new-with-label "http://sawfish.wikia.com/"
 				(_ "Sawfish homepage"))))
     (gtk-box-pack-start hbox ref)
     (gtk-widget-show-all hbox)
