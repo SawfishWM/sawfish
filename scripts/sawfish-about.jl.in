@@ -36,7 +36,8 @@ exec rep "$0" "$@"
 	  gui.gtk-2.gtk
 	  rep.system
 	  rep.io.files
-	  rep.i18n.gettext)
+	  rep.i18n.gettext
+	  sawfish.gtk.stock)
 
   (unless (get-command-line-option "--disable-nls")
     (bindtextdomain "sawfish" "__localedir__")
