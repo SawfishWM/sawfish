@@ -66,7 +66,8 @@
 	  sawfish.wm.util.stacking
 	  sawfish.wm.frames
 	  sawfish.wm.misc
-	  sawfish.wm.focus)
+	  sawfish.wm.focus
+	  sawfish.wm.util.prompt)
 
   (define-structure-alias maximize sawfish.wm.state.maximize)
 
@@ -478,6 +479,14 @@ unmaximized."
 	(unmaximize-window w 'horizontal)
       (maximize-fill-window w 'horizontal)))
 
+  (define (maximize-unframe w)
+    (set-window-type w 'unframed)
+    (maximize-window w))
+
+  (define (maximize-reframe w)
+    (set-window-type w 'default)
+    (maximize-window w))
+
   ;;###autoload
   (define-command 'maximize-fill-window maximize-fill-window #:spec "%W")
   (define-command 'maximize-fill-window-vertically maximize-fill-window-vertically #:spec "%W")
@@ -485,6 +494,8 @@ unmaximized."
   (define-command 'maximize-fill-window-toggle maximize-fill-window-toggle #:spec "%W")
   (define-command 'maximize-fill-window-horizontally-toggle maximize-fill-window-horizontally-toggle #:spec "%W")
   (define-command 'maximize-fill-window-vertically-toggle maximize-fill-window-vertically-toggle #:spec "%W")
+  (define-command 'maximize-unframe maximize-unframe #:spec "%W")
+  (define-command 'maximize-reframe maximize-reframe #:spec "%W")
 
 ;; fullscreen commands
 

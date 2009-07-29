@@ -225,6 +225,16 @@ supported by client window W."
 		((eq (aref data i) atom) t)
 		(t (loop (1+ i))))))))
 
+;;; renaming
+
+(define (rename-window window new-name)
+  (set-x-text-property window '_NET_WM_NAME (vector new-name)))
+
+(define (rename-window-interactive w)
+  (rename-window w (prompt-for-string "new title:" (window-name w))))
+
+(define-command 'rename-window rename-window-interactive #:spec "%W")
+
 ;;; warping
 
   (define (warp-cursor-to-window w #!optional x y)
