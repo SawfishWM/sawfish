@@ -56,7 +56,9 @@
 	     window-avoided-p
 	     avoided-windows
 	     call-after-property-changed
-	     call-after-state-changed))
+	     call-after-state-changed
+	     rename-window
+	     rename-window-interactive))
 
     (open rep
 	  rep.system
@@ -228,7 +230,8 @@ supported by client window W."
 ;;; renaming
 
 (define (rename-window window new-name)
-  (set-x-text-property window '_NET_WM_NAME (vector new-name)))
+  (set-x-text-property window 'WM_NAME (vector new-name)
+  (set-x-text-property window '_NET_WM_NAME (vector new-name))))
 
 (define (rename-window-interactive w)
   (rename-window w (prompt-for-string "new title:" (window-name w))))

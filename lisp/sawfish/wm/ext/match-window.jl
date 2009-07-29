@@ -111,7 +111,8 @@
        (auto-gravity boolean)
        (shade-hover boolean)
        (transients-above (choice all parents none))
-       (ignore-stacking-requests boolean))))
+       (ignore-stacking-requests boolean)
+       (window-name string))))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
   ;; libraries implementing them
@@ -436,6 +437,12 @@
      (declare (unused prop))
      (when value
        (window-put w 'queued-fullxinerama-maximize t))))
+
+  (define-match-window-setter 'window-name
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (rename-window w value))))
 
   (define-match-window-setter 'maximized
    (lambda (w prop value)

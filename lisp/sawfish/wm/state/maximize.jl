@@ -49,7 +49,9 @@
 	    maximize-window-fullscreen
 	    maximize-window-fullscreen-toggle
 	    maximize-window-fullxinerama
-	    maximize-window-fullxinerama-toggle)
+	    maximize-window-fullxinerama-toggle
+	    maximize-unframe
+	    maximize-reframe)
 
     (open rep
 	  rep.system
