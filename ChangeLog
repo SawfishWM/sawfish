@@ -1,3 +1,11 @@
+2009-07-30  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/gtk/widgets/color.jl: since we now got gtk-color-button-get-color-interp in rep-gtk, replace
+	                                     Button + ColorPreview [deprecated] + ColorSelection Trio by single ColorButton
+
+	* lisp/sawfish/gtk/color-preview.jl: obsolete because of the above widget-transistion
+
+	* Makefile.in: add sawfish-ksm.desktop to uninstall rule
+
 2009-07-29  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/mmc/window-manipulation.jl: moved maximize-unframe/reframe into sawfish.wm.state.maximize
 	                                              moved rename-window into sawfish.wm.windows 

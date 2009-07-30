@@ -26,50 +26,27 @@
     (open rep
 	  gui.gtk-2.gtk
 	  rep.regexp
-	  sawfish.gtk.widget
-	  sawfish.gtk.color-preview)
+	  sawfish.gtk.widget)
 
   (defconst default-color "#000000")
 
   (define (make-color-item changed-callback)
     (let* ((value default-color)
-	   (button (button-new-with-color value)))
-      (g-signal-connect
-       button "clicked"
-       (lambda ()
-	 (let ((colorsel (gtk-color-selection-dialog-new (_ "Select color"))))
-	   (gtk-color-selection-set-color-interp
-	    (gtk-color-selection-dialog-colorsel colorsel)
-	    (gdk-color-parse-interp value))
-	   (g-signal-connect
-	    (gtk-color-selection-dialog-ok-button colorsel) "clicked"
-	    (lambda ()
-	      (let ((color (gtk-color-selection-get-color-interp
-			    (gtk-color-selection-dialog-colorsel colorsel))))
-		(setq value (format nil "#%04x%04x%04x"
-				    (gdk-color-red color)
-				    (gdk-color-green color)
-				    (gdk-color-blue color)))
-		(set-button-color button value)
-		(call-callback changed-callback)
-		(gtk-widget-destroy colorsel))))
-	   (g-signal-connect
-	    (gtk-color-selection-dialog-cancel-button colorsel) "clicked"
-	    (lambda () (gtk-widget-destroy colorsel)))
-	   (g-signal-connect colorsel "delete_event"
-			       (lambda () (gtk-widget-destroy colorsel)))
-	   (gtk-widget-hide (gtk-color-selection-dialog-help-button colorsel))
-	   (gtk-widget-show colorsel)
-	   (gtk-grab-add colorsel))))
+	   (button (gtk-color-button-new-with-color (gdk-color-parse-interp value))))
+      (g-signal-connect button "color-set"
+        (lambda ()
+	  (let ((color (gtk-color-button-get-color-interp button)))
+	    (setq value color)
+	    (call-callback changed-callback))))
       (gtk-widget-show button)
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
 		   (setq value x)
-		   (set-button-color button value)))
+		   (gtk-color-button-set-color button (gdk-color-parse-interp value))))
 	  ((clear) (lambda ()
 		     (setq value default-color)
-		     (set-button-color button nil)))
+		     (gtk-color-button-set-color button (gdk-color-parse-interp value))))
 	  ((ref) (lambda () value))
 	  ((gtk-widget) button)
 	  ((validp) (lambda (x)

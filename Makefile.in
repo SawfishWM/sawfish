@@ -79,6 +79,7 @@ uninstall :
 	rm -f $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
 	rm -f $(DESTDIR)$(datadir)/applications/sawfish.desktop
 	rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/sawfish-wm.desktop
+	rm -f $(DESTDIR)$(datadir)/apps/ksmserver/windowmanagers/sawfish.desktop
 
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
