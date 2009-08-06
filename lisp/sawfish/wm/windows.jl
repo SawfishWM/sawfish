@@ -229,6 +229,12 @@ supported by client window W."
 
 ;;; renaming
 
+;; extra require to make rename-window work
+;; (open sawfish.wm.util.prompt) does not work!
+
+(unless batch-mode
+  (require 'sawfish.wm.util.prompt))
+
 (define (rename-window window new-name)
   (set-x-text-property window 'WM_NAME (vector new-name)
   (set-x-text-property window '_NET_WM_NAME (vector new-name))))
