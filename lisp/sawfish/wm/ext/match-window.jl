@@ -45,13 +45,16 @@
 	    define-match-window-formatter
 	    add-window-matcher
 	    remove-window-matcher
-	    match-window)
+	    match-window
+	    rename-window
+	    rename-window-interactive)
 
     (open rep
 	  rep.system
 	  rep.regexp
 	  sawfish.wm
-	  sawfish.wm.util.groups)
+	  sawfish.wm.util.groups
+	  sawfish.wm.util.prompt)
 
   (define-structure-alias match-window sawfish.wm.ext.match-window)
 
@@ -402,13 +405,13 @@
            (while (not (workspace-empty-p space))
              (setq space (1+ space)))
            (set-window-workspaces w (list space)))))))
-	   
+
   (define-match-window-setter 'new-viewport
     (lambda (w prop value)
       (declare (unused prop))
       (when value
         (unless (window-get w 'placed)
-          (let ((row 0) 
+          (let ((row 0)
                 (col 0)
                 (nomatch t))
             (while (and nomatch (< row (cdr viewport-dimensions)))
@@ -450,4 +453,13 @@
      (when (memq value '(all vertical))
        (window-put w 'queued-vertical-maximize t))
      (when (memq value '(all horizontal))
-       (window-put w 'queued-horizontal-maximize t)))))
+       (window-put w 'queued-horizontal-maximize t))))
+
+  (define (rename-window window new-name)
+    (set-x-text-property window 'WM_NAME (vector new-name)
+    (set-x-text-property window '_NET_WM_NAME (vector new-name))))
+
+  (define (rename-window-interactive w)
+    (rename-window w (prompt-for-string "new title:" (window-name w))))
+
+  (define-command 'rename-window rename-window-interactive #:spec "%W"))

@@ -56,9 +56,7 @@
 	     window-avoided-p
 	     avoided-windows
 	     call-after-property-changed
-	     call-after-state-changed
-	     rename-window
-	     rename-window-interactive))
+	     call-after-state-changed))
 
     (open rep
 	  rep.system
@@ -226,23 +224,6 @@ supported by client window W."
 	  (cond ((= i (length data)) nil)
 		((eq (aref data i) atom) t)
 		(t (loop (1+ i))))))))
-
-;;; renaming
-
-;; extra require to make rename-window work
-;; (open sawfish.wm.util.prompt) does not work!
-
-(unless batch-mode
-  (require 'sawfish.wm.util.prompt))
-
-(define (rename-window window new-name)
-  (set-x-text-property window 'WM_NAME (vector new-name)
-  (set-x-text-property window '_NET_WM_NAME (vector new-name))))
-
-(define (rename-window-interactive w)
-  (rename-window w (prompt-for-string "new title:" (window-name w))))
-
-(define-command 'rename-window rename-window-interactive #:spec "%W")
 
 ;;; warping
 
