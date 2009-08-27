@@ -81,6 +81,7 @@
 	    popup-window-list
 	    next-workspace
 	    previous-workspace
+	    send-to-workspace
 	    send-to-next-workspace
 	    send-to-previous-workspace
 	    copy-to-next-workspace
@@ -908,7 +909,7 @@ last instance remaining, then delete the actual window."
     (require 'sawfish.wm.util.prompt)
     (let ((ws (prompt-for-workspace)))
       (when ws
-	(select-workspace-from-first ws))))
+	(select-workspace-from-first (1- ws)))))
 
   (define-command 'select-workspace-interactively
     select-workspace-interactively)
