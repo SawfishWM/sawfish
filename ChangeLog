@@ -25,6 +25,8 @@
 
 	* man/news.texi: updated
 
+	* lisp/sawfish/wm/match-window.jl: set default to 0 if unset previously (avoids -65355 as default)
+
 2009-08-09  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl: move rename-window here, as it requires prompt but this either does not 
 	                                       load properly in windows.jl or breaks sawfish-ui if require'ed instead of open'ed

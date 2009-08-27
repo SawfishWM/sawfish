@@ -47,7 +47,8 @@
 	    remove-window-matcher
 	    match-window
 	    rename-window
-	    rename-window-interactive)
+	    rename-window-interactive
+	    keymap-trans)
 
     (open rep
 	  rep.system
@@ -73,12 +74,12 @@
     `((placement ,(_ "Placement")
        (ignore-program-position boolean)
        (place-mode ,(lambda () `(choice ,@placement-modes)))
-       (position (pair number number))
+       (position (pair (number 0) (number 0)))
        (dimensions (pair (number 1) (number 1)))
        (workspace (number 1))
        (viewport (pair (number 1) (number 1)))
        (depth (number -16 16))
-       (placement-weight number)
+       (placement-weight (number 0))
        (fixed-position boolean)
        (maximized (choice all vertical horizontal))
        (new-workspace boolean)
@@ -454,6 +455,17 @@
        (window-put w 'queued-vertical-maximize t))
      (when (memq value '(all horizontal))
        (window-put w 'queued-horizontal-maximize t))))
+
+  (define-match-window-setter 'keymap-trans
+    (lambda (w prop value)
+     (declare (unused prop))
+      (let ((keymap (or (window-get w 'keymap)
+                        (window-put w 'keymap (copy-sequence window-keymap)))))
+        (mapcar
+         (lambda (pair)         ; pair of from and to keys
+            (bind-keys keymap (car pair)
+              (lambda () (interactive)
+                (synthesize-event (lookup-event (cadr pair)) (input-focus))))) value))))
 
   (define (rename-window window new-name)
     (set-x-text-property window 'WM_NAME (vector new-name)
