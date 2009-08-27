@@ -24,6 +24,15 @@
 
 (define-structure sawfish.wm.commands.shrink-yank ()
 
+  (export shrink-window-left
+          shrink-window-right
+	  shrink-window-up
+	  shrink-window-down
+	  yank-window-left
+	  yank-window-right
+	  yank-window-up
+	  yank-window-down)
+
   (open   rep
 	  sawfish.wm.commands
 	  sawfish.wm.commands.grow-pack
