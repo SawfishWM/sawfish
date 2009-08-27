@@ -35,6 +35,7 @@
 	    window-viewport
 	    window-absolute-position
 	    set-number-of-viewports
+	    viewport-minimum-size-changed
 	    viewport-windows)
 
     (open rep
@@ -57,7 +58,7 @@
     "Number of columns and rows in each virtual workspace: \\w"
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
-    :after-set (lambda () (viewport-size-changed)))
+    :after-set (lambda () (viewport-size-changed t)))
 
   (defcustom viewport-minimum-dimensions '(1 . 1)
     "Minimum number of columns and rows in each virtual workspace: \\w"
@@ -77,9 +78,12 @@
     :range (1 . 50))
 
   (defcustom viewport-boundary-mode 'stop
-    "Whether to stop or wrap-around on first/last viewport"
+    "Whether to stop or wrap-around or grow the virtual workspace on first/last viewport"
     :group (workspace viewport)
     :type (choice wrap-around stop dynamic))
+
+  (defvar workspace-viewport-data nil
+    "Information about the viewport details of different workspaces.")
 
 ;;; raw viewport handling
 
@@ -107,6 +111,12 @@
 		;; in bottom-to-top order
 		(mapc move-window inside)))
 
+              ;; No need to warp windows not in the current workspace.
+              ;; See viewport-leave-workspace-handler and
+              ;; viewport-enter-workspace handler below.
+              ((not
+                (window-appears-in-workspace-p (car rest) current-workspace))
+               (loop (cdr rest) inside outside))
 	      ((window-outside-viewport-p (car rest))
 	       (loop (cdr rest) inside (cons (car rest) outside)))
 
@@ -134,6 +144,8 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
   (add-hook 'before-exit-hook viewport-before-exiting t)
 
   (define (viewport-dynamic-resize)
+    "Reset the size of the viewport to include the current screen as
+well as any windows in the current workspace."
     (when (eq viewport-boundary-mode 'dynamic)
       (let ((windows
 	     (filter-windows
@@ -141,7 +153,9 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 		(window-in-workspace-p w current-workspace)))))
 	(if windows
 	    (let*
-		((points
+               ((width (screen-width))
+                (height (screen-height))
+                (points
 		  (nconc
 		   (mapcar (lambda (w)
 			     (let ((pos (window-position w))
@@ -151,39 +165,45 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 				     (+ (car pos) (car dims))
 				     (+ (cdr pos) (cdr dims)))))
 			   windows)
-		   ;; Include a region in the current screen:
-		   `((0 0 1 1))))
-		 (x-min (apply min (mapcar car points)))
-		 (y-min (apply min (mapcar (lambda (e) (nth 1 e)) points)))
-		 (x-max (apply max (mapcar (lambda (e) (nth 2 e)) points)))
-		 (y-max (apply max (mapcar (lambda (e) (nth 3 e)) points)))
-		 (width (screen-width))
-		 (height (screen-height))
-		 (high-rows (+ (quotient y-max height)
-			       (if (> (mod y-max height) 0)
-				   1
-				 0)))
-		 (low-rows (if (< y-min 0)
-			       (+ (- (quotient y-min height))
-				  (if (> (mod y-min height) 0)
-				      1
-				    0))
-			     0))
+                  ;; Include the current screen:
+                  `((0 0 ,(1- width) ,(1- height)))))
+                 ;; The min/max values calculated below are relative to
+                 ;; the old logical 0,0 point of the virtual desktop:
+                 (old-x-origin (- viewport-x-offset))
+                 (old-y-origin (- viewport-y-offset))
+                 (x-min (- (apply min (mapcar car points)) old-x-origin))
+                 (y-min (- (apply min (mapcar (lambda (e) (nth 1 e)) points))
+                           old-y-origin))
+                 (x-max (- (apply max (mapcar (lambda (e) (nth 2 e)) points))
+                           old-x-origin))
+                 (y-max (- (apply max (mapcar (lambda (e) (nth 3 e)) points))
+                           old-y-origin))
+                 ;; high-* values are the number of rows/columns above
+                 ;; the old origin, low-* values the number below the
+                 ;; old origin.
+		(high-rows (+ (quotient y-max height)
+                               (if (> (mod y-max height) 0)
+                                   1
+                                 0)))
+                (low-rows (+ (- (quotient y-min height))
+                              (if (and (< y-min 0)
+                                       (> (mod y-min height) 0))
+                                  1
+                                0)))
 		 (rows (+ low-rows high-rows))
 		 (high-cols (+ (quotient x-max width)
 			       (if (> (mod x-max width) 0)
 				   1
 				 0)))
-		 (low-cols (if (< x-min 0)
-			       (+ (- (quotient x-min width))
-				  (if (> (mod x-min width) 0)
-				      1
-				    0))
-			     0))
+                (low-cols (+ (- (quotient x-min width))
+                              (if (and (< x-min 0)
+                                       (> (mod x-min width) 0))
+                                  1
+                                0)))
 		 (cols (+ low-cols high-cols)))
 	      (setq
-	       viewport-y-offset (* low-rows height)
-	       viewport-x-offset (* low-cols width)
+              viewport-y-offset (- (- old-y-origin (* low-rows height)))
+              viewport-x-offset (- (- old-x-origin (* low-cols width)))
 	       viewport-dimensions (cons
 				    (max cols
 					 (car viewport-minimum-dimensions))
@@ -194,13 +214,55 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 		viewport-dimensions viewport-minimum-dimensions))
 	(call-hook 'viewport-resized-hook))))
 
-  ;; Resize virtual workspace on workspace switch or viewport move.
-  ;; TODO: Ensure that the viewport is set reasonably in the new
-  ;; workspace.
-  (add-hook 'enter-workspace-hook
-	    viewport-dynamic-resize)
+  ;; Resize virtual workspace on workspace switch or viewport move:
   (add-hook 'viewport-moved-hook
 	    viewport-dynamic-resize)
+
+  (define (viewport-leave-workspace-handler ws)
+    "On leaving a workspace, store information about the viewport
+configuration so that it can be restored properly later."
+    (let ((vp-data (list viewport-y-offset
+                         viewport-x-offset
+                         viewport-dimensions))
+          (old-ent (assoc ws workspace-viewport-data)))
+      (if old-ent
+          (rplacd old-ent vp-data)
+        (setq workspace-viewport-data
+              (cons (cons ws vp-data)
+                    workspace-viewport-data)))))
+
+  (add-hook 'leave-workspace-hook
+            viewport-leave-workspace-handler)
+
+  (define (viewport-enter-workspace-handler ws)
+    "Restore any saved data about the viewport for the new workspace.
+When `viewport-boundary-mode' is not `dynamic', make sure that the new
+viewport is within `viewport-dimensions'."
+    (let ((vp-data (cdr (assoc ws workspace-viewport-data))))
+      (if vp-data
+          (let ((maybe-y-offset (car vp-data))
+                (maybe-x-offset (nth 1 vp-data)))
+            (if (eq viewport-boundary-mode 'dynamic)
+                (setq viewport-dimensions (nth 2 vp-data)
+                      viewport-y-offset maybe-y-offset
+                      viewport-x-offset maybe-x-offset)
+              ;; Do maybe-y-offset and maybe-x-offset fit within
+              ;; current viewport-dimensions?
+              (if (and (<= maybe-y-offset
+                          (* (1- (car viewport-dimensions)) (screen-height)))
+                       (<= maybe-x-offset
+                          (* (1- (cdr viewport-dimensions)) (screen-width))))
+                  (setq viewport-y-offset maybe-y-offset
+                        viewport-x-offset maybe-x-offset)
+                (setq viewport-y-offset 0
+                      viewport-x-offset 0))))
+        (setq viewport-y-offset 0
+              viewport-x-offset 0))
+      (viewport-size-changed)))
+
+  (add-hook 'enter-workspace-hook
+            viewport-enter-workspace-handler)
+
 
 ;; screen sized viewport handling
 
@@ -297,22 +359,37 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
 		(mod (+ (cdr position) viewport-y-offset) (screen-height)))
 	position)))
 
-  (define (viewport-size-changed)
+  (define (viewport-size-changed #!optional force)
+    ;; This is called when the user requests a change (e.g., from the
+    ;; gui, or via `set-number-of-viewports') as well as when the
+    ;; desktop is switched.  If `force' is set it's considered to be
+    ;; user-requested, and therefore mandatory that the
+    ;; `viewport-dimensions' variable be respected.
     (when (or (< (car viewport-dimensions) (car viewport-minimum-dimensions))
 	      (< (cdr viewport-dimensions) (cdr viewport-minimum-dimensions)))
-      (setq viewport-minimum-dimensions
-	    (cons (min (car viewport-dimensions)
-		       (car viewport-minimum-dimensions))
-		  (min (cdr viewport-dimensions)
-		       (cdr viewport-minimum-dimensions))))
+      (if force
+          (setq viewport-minimum-dimensions
+                (cons (min (car viewport-dimensions)
+                           (car viewport-minimum-dimensions))
+                      (min (cdr viewport-dimensions)
+                           (cdr viewport-minimum-dimensions))))
+        (setq viewport-dimensions
+              (cons (max (car viewport-dimensions)
+                         (car viewport-minimum-dimensions))
+                    (max (cdr viewport-dimensions)
+                         (cdr viewport-minimum-dimensions)))))
       (when (eq viewport-boundary-mode 'dynamic)
 	(viewport-dynamic-resize)))
     (unless (eq viewport-boundary-mode 'dynamic)
+      ;; Not using dynmic viewports, so ensure that windows are within
+      ;; the current virtual-workspace boundaries:
       (let ((port (screen-viewport)))
 	(set-screen-viewport (min (car port) (1- (car viewport-dimensions)))
 			     (min (cdr port) (1- (cdr viewport-dimensions))))
 	(map-windows (lambda (w)
-		       (when (window-outside-workspace-p w)
+                      (when (and (window-outside-workspace-p w)
+                                  (window-appears-in-workspace-p
+                                   w current-workspace))
 			 (move-window-to-current-viewport w))))
 	(call-hook 'viewport-resized-hook))))
 
@@ -333,7 +410,7 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
     (setq viewport-minimum-dimensions (cons width height))
     (if (eq viewport-boundary-mode 'dynamic)
 	(viewport-dynamic-resize)
-      (viewport-size-changed)))
+      (viewport-size-changed t)))
 
   (define (viewport-windows #!optional vp-col vp-row workspace
                             exclude-sticky exclude-iconified)

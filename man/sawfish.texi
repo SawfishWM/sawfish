@@ -749,6 +749,15 @@ Return a window object with name matching regular expression
 @var{name}, or @code{nil}.
 @end defun
 
+@defun get-window-by-class class
+Return a window object with class @var{class}, or @code{nil}.
+@end defun
+
+@defun get-window-by-class-re class
+Return a window object with class matchting regular expression
+@var{class}, or @code{nil}.
+@end defun
+
 @defun activate-window window
 Do everything necessary to make @var{window} active, including raising
 it, giving it focus, etc.  Certain steps may be skipped (e.g., giving
@@ -3842,6 +3851,17 @@ This is a cons cell @code{(@var{across} . @var{down})}.  Defaults to
 @code{(1 . 1)}.
 @end defvar
 
+@defvar viewport-minimum-dimensions
+This is only useful if @code{viewport-boundary-mode} is set to
+@code{dynamic}, otherwise it is automatically set to the same value as
+viewport-dimensions.  If @code{viewport-boundary-mode} is set to
+@code{dynamic} then @code{viewport-dimensions} will never shrink to
+less than @code{viewport-minimum-dimensions}.  If setting
+@code{viewport-minimum-dimensions} by hand (not by the customization
+interface) be sure to call @code{viewport-minimum-size-changed} after
+doing so.
+@end defvar
+
 @defun set-number-of-viewports width height
 Change @code{viewport-dimensions} to have the value
 @code{(@var{width} . @var{height})}.
@@ -3885,9 +3905,11 @@ that is outside of @code{viewport-dimensions}.  When set to
 @code{wrap-around}, it loops in the vertical and horizontal axes
 enough times to keep the viewport within the defined dimensions.  When
 set to @code{stop}, it refuses to switch to a viewport outside of
-@code{viewport-dimensions}, if set to @code{dynamic}, it will create a
-new viewport at the side the pointer hit the screen-edge.
-Defaults to @code{wrap-around}.
+@code{viewport-dimensions}.  If it is set to @code{dynamic} it
+automatically resizes @code{viewport-dimensions} to permit the move
+and eliminate unneeded rows or columns, down to the minimum dimensions
+specified by @code{viewport-minimum-dimensions}.  Defaults to
+@code{wrap-around}.
 @end defvar
 
 @defun warp-viewport x y

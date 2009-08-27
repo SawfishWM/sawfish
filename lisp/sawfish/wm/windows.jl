@@ -27,6 +27,8 @@
      (structure-interface sawfish.wm.windows.subrs)
      (export get-window-by-name
 	     get-window-by-name-re
+	     get-window-by-class
+	     get-window-by-class-re
 	     window-really-wants-input-p
 	     window-transient-p
 	     mark-window-as-transient
@@ -130,6 +132,18 @@ window is found."
 Returns nil if no such window is found."
     (car (filter-windows (lambda (w)
 			   (string-match name (window-name w))))))
+
+  (define (get-window-by-class class)
+    "Find a window object whose window-class is CLASS. Returns nil if no such
+window is found."
+    (car (filter-windows (lambda (w)
+			   (string= (window-class w) class)))))
+
+  (define (get-window-by-class-re class)
+    "Find a window object whose window-class matches the regexp CLASS.
+Returns nil if no such window is found."
+    (car (filter-windows (lambda (w)
+			   (string-match class (window-class w))))))
 
   (define (window-really-wants-input-p w)
     "Return nil if window W should never be focused."
