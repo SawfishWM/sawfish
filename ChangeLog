@@ -5,6 +5,15 @@
 
 	* man/sawfish.texi: doc for above changes
 
+	* Makefile.in
+	* src/Makefile.in
+	* man/Makefile.in
+	* lisp/Makefile.in
+	* TODO
+	* lisp/sawfish/ui/WISHLIST: s/sawmill/sawfish/
+
+	* po/Makefile.in: fixed call of make-pot
+
 2009-08-09  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl: move rename-window here, as it requires prompt but this either does not 
 	                                       load properly in windows.jl or breaks sawfish-ui if require'ed instead of open'ed

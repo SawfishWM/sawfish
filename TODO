@@ -9,7 +9,7 @@ the file `BUGS' for instructions on reporting sawfish bugs.
 
 --
 
-TODO list for sawmill
+TODO list for sawfish
 *********************
 
 Bugs are marked !, things that should be done soon are marked +,
@@ -49,7 +49,7 @@ Outstanding bugs
 
   ! running multiple instances of the wm loses
 
-    (because they share the same ~/.sawmill/custom file)
+    (because they share the same ~/.sawfish/custom file)
 
   ! keeping unshown windows unmapped isn't so great?
 
@@ -213,8 +213,8 @@ Window manager tasks
     The sole need for the wm to manage the root menus (as far as I can
     see) is so that it can offer window management functions (such as
     "interactively move the focused window" or whatever), but all
-    these things can be invoked through sawmill-client, i.e.
-    "sawmill-client -c move-window-interactively"
+    these things can be invoked through sawfish-client, i.e.
+    "sawfish-client -c move-window-interactively"
 
     With a bit of work the dynamically generated menus (e.g. the window
     and workspace submenus) could also be generated through the client

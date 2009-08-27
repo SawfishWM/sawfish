@@ -32,10 +32,10 @@ CATOBJEXT=.mo
 POFILES=$(LINGUAS:%=%.po)
 CATALOGS=$(LINGUAS:%=%$(CATOBJEXT))
 
-all : $(CATALOGS) $(PACKAGE).pot
+all : $(PACKAGE).pot $(CATALOGS)
 
 $(PACKAGE).pot :
-	./make-pot
+	./make-pot --update || ./make-pot --generate
 
 ifneq ($(CATALOGS),)
 install : $(CATALOGS) installdirs
