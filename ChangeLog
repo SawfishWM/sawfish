@@ -21,6 +21,10 @@
 	* lisp/sawfish/wm/workspace.jl: export send-to-workspace 
 	                                fix a select-workspace-from-first call [Michal Maruska]
 
+	* configure.in: bump minimum librep to 0.90.2, to make sure folks get a fixed sawfish-ui regarding UTF8 strings
+
+	* man/news.texi: updated
+
 2009-08-09  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl: move rename-window here, as it requires prompt but this either does not 
 	                                       load properly in windows.jl or breaks sawfish-ui if require'ed instead of open'ed
