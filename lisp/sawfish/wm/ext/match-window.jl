@@ -47,8 +47,7 @@
 	    remove-window-matcher
 	    match-window
 	    rename-window
-	    rename-window-interactive
-	    keymap-trans)
+	    rename-window-interactive)
 
     (open rep
 	  rep.system
