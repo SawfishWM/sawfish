@@ -38,6 +38,7 @@
 (setenv "DISPLAY" display-name)
 
 ;; load i18n support when necessary
+
 (unless batch-mode
   (let ((lang (or (getenv "LANGUAGE") (getenv "LC_ALL")
 		  (getenv "LC_MESSAGES") (getenv "LANG")))
@@ -149,13 +150,13 @@
   (sawfish-load-all "sawfish/wm/autoload")
   (sawfish-load-all (concat "os-" (symbol-name operating-system))))
 
+  ;; do user-level initialization
+  (load "sawfish/wm/user")
+
 (let ((session-id (or (get-command-line-option "--sm-client-id" t)
 		      ;; may be passed through from the default GNOME session
 		      (get-command-line-option "-clientId" t)))
       (session-prefix (get-command-line-option "--sm-prefix" t)))
-
-  ;; do user-level initialization
-  (load "sawfish/wm/user")
 
   ;; now connect with the session manager; gsm requires that apps don't
   ;; connect until they're ready to handle the later priority levels
