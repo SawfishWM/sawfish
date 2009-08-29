@@ -61,7 +61,7 @@
   (define safe-specials
     '(default-foreground display-name canonical-display-name
       default-font default-frame nil-frame frame-part-classes
-      decorate-transients batch-mode))
+      decorate-transients batch-mode default-directory))
 
   (define safe-features '(sawfish.wm.util.gtkrc
 			  sawfish.wm.util.x
