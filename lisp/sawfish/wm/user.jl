@@ -77,6 +77,11 @@
 	    (make-symlink "~/.sawmill" ".sawfish")
 	    (message "Created .sawmill symlink (delete if unwanted)"))
 
+	  (when (and (file-exists-p "~/.sawmillrc")
+	             (not (file-exists-p "~/.sawfishrc")))
+	    (rename-file "~/.sawmillrc" "~/sawfishrc")
+	    (message "Renamed file ~/.sawmillrc -> ~/.sawfishrc"))
+
 	  ;; First the site-wide stuff
 	  (load-all "site-init" (lambda (f) (safe-load f nil t)))
 
@@ -95,7 +100,7 @@
 			(when rest
 			  (or (rc-file-exists-p (car rest))
 			      (loop (cdr rest)))))
-		(load "sawfish/wm/defaults" t))
+	        (load "sawfish/wm/defaults" t))
 
 	      ;; then the customized options
 	      (condition-case data
