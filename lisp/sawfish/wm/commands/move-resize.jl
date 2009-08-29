@@ -24,7 +24,9 @@
     (export move-window-interactively
 	    resize-window-interactively
 	    move-selected-window
-	    resize-selected-window)
+	    resize-selected-window
+	    double-window-size
+	    halve-window-size)
 
     (open rep
 	  rep.system
@@ -512,6 +514,22 @@
 		      (copy-sequence move-resize-moving-edges)
 		    (list 'top 'bottom 'left 'right)))))))
 
+  (define (resize-by-factor win amount)
+    "Multiply win's dimensions by amount"
+    (let* (
+      (orig-wid (car (window-dimensions win)))
+      (orig-hgt (cdr (window-dimensions win)))
+      (new-wid (inexact->exact (floor (* amount orig-wid))))
+      (new-hgt (inexact->exact (floor (* amount orig-hgt)))))
+    ; this expects integers ("800 600") and fails on floats ("800. 600.")
+    (resize-window-with-hints* win new-wid new-hgt)))
+
+  (define (double-window-size w)
+    (resize-by-factor w 2))
+
+  (define (halve-window-size w)
+    (resize-by-factor w 0.5))
+
 ;;; hook functions
 
   (define (lost-window w)
@@ -544,9 +562,9 @@
 	(resize-window-interactively w))))
 
   ;;###autoload
-  (define-command 'move-window-interactively
-    move-window-interactively #:spec "%W")
-  (define-command 'resize-window-interactively
-    resize-window-interactively #:spec "%W")
+  (define-command 'move-window-interactively move-window-interactively #:spec "%W")
+  (define-command 'resize-window-interactively resize-window-interactively #:spec "%W")
   (define-command 'move-selected-window move-selected-window)
-  (define-command 'resize-selected-window resize-selected-window))
+  (define-command 'resize-selected-window resize-selected-window)
+  (define-command 'double-window-size double-window-size #:spec "%W")
+  (define-command 'halve-window-size halve-window-size #:spec "%W"))
