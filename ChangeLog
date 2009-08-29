@@ -10,6 +10,12 @@
 
 	* lisp/sawfish/wm/user.jl: rename .sawmillrc to .sawfishrc if the former exists, but the later not
 
+	* lisp/sawfish/wm/ext/match-window.jl: improve position matcher to bind a window to a position
+	                                       either center north north-east north-west east south south-east
+					       south-west west OR to a user-given position for the former
+					       it will also set the gravity of the window to that position
+					       -- [Jeremy Hankins]
+
 	* man/news.texi: updated
 
 	* man/sawfish.texi: added halve/double-window-size
