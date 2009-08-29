@@ -73,7 +73,9 @@
     `((placement ,(_ "Placement")
        (ignore-program-position boolean)
        (place-mode ,(lambda () `(choice ,@placement-modes)))
-       (position (or (pair (number -65535) (number -65535)) (choice center north north-east north-west east south-east south-west west)))
+       (position (or 
+                    (pair (number -65535) (number -65535)) 
+                    (choice center east north north-east north-west south south-east south-west west)))
        (dimensions (pair (number 1) (number 1)))
        (workspace (number 1))
        (viewport (pair (number 1) (number 1)))
