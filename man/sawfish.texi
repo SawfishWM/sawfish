@@ -1754,6 +1754,14 @@ resize that window.
 The interactive move and resize behavior can be customized through the
 following variables:
 
+@deffn Command double-window-size window
+Double the size of @var{window}
+@end deffn
+
+@deffn Command halve-window-size window
+Halve the size of @var{window}
+@end deffn
+
 @defvar move-outline-mode
 A symbol defining the visual method of interactively moving windows.
 Current options include @code{box} for a wire-frame grid, and

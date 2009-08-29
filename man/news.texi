@@ -50,6 +50,8 @@ they occurred between. For more detailed information see the
 
 @item 5 new move-cursor commands (move-cursor -northwest, -northeast, -southwest, -southeast), and move-cursor-center [Christopher Bratusek]
 
+@item Added resize-by-factor meta-function and double/halve-window-size functions making use of it [Christopher Bratusek]
+
 @item Added fullscreen, fullscreen-xinerama, new-workspace and new-viewport window-matchers [Jeremy Hankins]
 
 @item Added window-name window-matcher [Christopher Bratusek]
@@ -79,6 +81,8 @@ they occurred between. For more detailed information see the
 @end itemize
 @item Other Changes:
 @itemize @minus
+
+@item If ~/.sawmillrc exists but ~/.sawfishrc not, rename the former to the later [Christopher Bratusek]
 
 @item Make sure docks/panels are unframed [Timo Korvola]
 
