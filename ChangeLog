@@ -4,6 +4,39 @@
 	* lisp/sawfish/wm/ext/match-window.jl: In configurator GUI, position parameter can take negative value.
 					       Depth's initial value is 0. [Teika Kazura]
 
+	* lisp/sawfish/wm/menus.jl: revamped root and window menu
+
+	* lisp/sawfish/wm/ext/fdo-menu.jl: added FDO Applicationmenu support [Matthew Love]
+
+	* lisp/sawfish/wm/commands/grow-pack.jl
+	* lisp/sawfish/wm/commands/shrink-yank.jl: use same group for options
+
+	* lisp/sawfish/wm/commands/user.jl: ex sawfish.wm.commands.xterm
+	                                    `browser' command added (defaults to `www-broser')
+					    `some' statement added () [Mark Triggs]
+					    `display-message-with-timeout' function added 
+					    `program-available' function added [Mark Triggs]
+					    `view-clipboard' command [Mark Triggs]
+
+	* lisp/sawfish/wm/user.jl: load sawfish.wm.extras
+
+	* lisp/sawfish/wm/extras.jl: `try-require' function added [Mark Triggs]
+				     call update-saw-menu from here (generates fdo-menu)
+
+	* lisp/sawfish/wm/gnome/menus.jl: removed, supersedded by desktop-independ fdo-menu
+
+	* lisp/sawfish/wm/gnome/match-window.jl: removed, gnome-panel for a long time now understands
+	                                         the standard tasklist-skip property, no need for the
+						 for the GNOME specific anymore
+
+	* CONTRIBUTING: added Matthew Love to `THANKS' section
+
+	* man/news.texi: updated
+
+	* po/POTFILES.in: updated
+
+	* po/*.po: regenerated po-files
+
 2009-08-29  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm.jl: changed position of user-level initialization
 

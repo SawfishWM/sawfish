@@ -46,6 +46,8 @@ they occurred between. For more detailed information see the
 @item New features:
 @itemize @minus
 
+@item Added FDO Application Menu [Matthew Love]
+
 @item Sawfish does now support theme-tarballs compressed with XZ or LZMA [Christopher Bratusek]
 
 @item 3 new sawfish-mmc based commands (maximize-unframe, maximize-reframe and rename-window) [Christopher Bratusek]
@@ -56,9 +58,13 @@ they occurred between. For more detailed information see the
 
 @item Added fullscreen, fullscreen-xinerama, new-workspace and new-viewport window-matchers [Jeremy Hankins]
 
-@item Added window-name window-matcher [Christopher Bratusek]
+@item Added @code{window-name} window-matcher [Christopher Bratusek]
 
-@item Added keymap-trans window-matcher [Scott Scriven]
+@item Added @code{keymap-trans} window-matcher [Scott Scriven]
+
+@item Added @code{some} @code{program-available} @code{view-clipboard} @code{try-require} functions [Mark Triggs]
+
+@item Added @code{display-message-with-timeout} @code{browser} commands [Christopher Bratusek]
 
 @item Added viewport-windows function (equivalent to workspace-windows) [Jeremy Hankins]
 
@@ -85,6 +91,10 @@ they occurred between. For more detailed information see the
 @end itemize
 @item Other Changes:
 @itemize @minus
+
+@item Revamped the Root and Window Menu [Christopher Bratusek]
+
+@item Trimm down GNOME Integration to the minimum [Christopher Bratusek]
 
 @item If ~/.sawmillrc exists but ~/.sawfishrc not, rename the former to the later [Christopher Bratusek]
 
@@ -113,6 +123,8 @@ they occurred between. For more detailed information see the
 @item Export shrink-yank commands [Christopher Bratusek]
 
 @item Export send-to-workspace command [Christopher Bratusek]
+
+@item Grow/Pack and Shrink/Yank options are in the same group now [Christopher Bratusek]
 
 @item Doc updates [Christopher Bratusek, Jeremy Hankins]
 @end itemize
