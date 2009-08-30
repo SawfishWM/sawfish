@@ -23,20 +23,12 @@
 
     (open rep
 	  sawfish.wm.state.gnome
-;; FIXME: add support for GNOME 2 applications
-	  sawfish.wm.gnome.menus
 	  sawfish.wm.menus
 	  sawfish.wm.custom
 	  sawfish.wm.commands.help
-	  sawfish.wm.commands.xterm)
+	  sawfish.wm.commands.user)
 
   (define-structure-alias gnome-int sawfish.wm.gnome.integration)
-
-  (when (null (last root-menu))
-    (setq root-menu (delq (last root-menu) root-menu)))
-
-  ;; this option was removed for gnome2
-  (put 'gnome-use-capplet 'custom-obsolete t)
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)

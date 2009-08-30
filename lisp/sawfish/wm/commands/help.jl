@@ -30,7 +30,7 @@
 	  rep.regexp
 	  rep.io.files
 	  sawfish.wm.commands
-	  sawfish.wm.commands.xterm)
+	  sawfish.wm.commands.user)
 
   ;; Info
 
