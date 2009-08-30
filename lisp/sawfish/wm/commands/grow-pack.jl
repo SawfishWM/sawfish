@@ -25,13 +25,6 @@
 ;; `Packing' means to move the window in the indicated direction until
 ;; it `bumps into' another window or by a given amount.
 
-;; I installed this package by placing the following into my ~/.sawfishrc:
-;;
-;; (require 'grow-pack)
-;; (require 'menus)
-;; (setq window-ops-menu
-;;       `(,@window-ops-menu ("Grow/pack" ,@grow-pack-menu)))
-
 (define-structure sawfish.wm.commands.grow-pack
 
     (export grow-window-left
@@ -54,39 +47,49 @@
 	  sawfish.wm.commands
 	  sawfish.wm.focus
 	  sawfish.wm.workspace
-         sawfish.wm.stacking
+	  sawfish.wm.stacking
 	  sawfish.wm.util.stacking)
 
   (define-structure-alias grow-pack sawfish.wm.commands.grow-pack)
 
 ;;; Customization options.
-   
-  (defgroup grow-pack "Growing and packing of windows" :group misc)
+
+  (defgroup gpsy "Grow, Pack, Shrink & Yank")
 
   (defcustom grow-is-maximize t
     "Whether growing is considered to be maximization."
     :type boolean
-    :group (misc grow-pack))
+    :group gpsy)
 
   (defcustom pack-warp-pointer 'maybe
     "Whether and how to move the pointer."
     :type (choice always maybe never)
-    :group (misc grow-pack))
+    :group gpsy)
 
   (defcustom grow-pack-bump-obscured ()
     "Whether to bump into fully obscured windows."
     :type boolean
-    :group (misc grow-pack))
+    :group gpsy)
 
   (defcustom grow-pack-bump-other-depth 'always
     "Whether to bump into windows on a different depth."
     :type (choice always maybe never)
-    :group (misc grow-pack))
+    :group gpsy)
 
   (defcustom grow-pack-bump-ignored t
     "Whether to bump into ignored windows."
     :type boolean
-    :group (misc grow-pack))
+    :group gpsy)
+
+ (defcustom shrink-window-minimum-size 10
+    "The minimum height or width to which a window may be shrunk."
+    :type number
+    :group gpsy)
+
+  (defcustom yank-window-minimum-visible 10
+    "The minimum amount of window left visible, if yanked over the edge."
+    :type number
+    :group gpsy)
 
 ;;; Code:
 
@@ -148,19 +151,6 @@ See `pack-window-up'."
   (define-command 'pack-window-right pack-window-right #:spec "%W\nP")
   (define-command 'pack-window-up pack-window-up #:spec "%W\nP")
   (define-command 'pack-window-down pack-window-down #:spec "%W\nP")
-
-  ;; Convenience variable.
-
-  (defvar grow-pack-menu
-    `((,(_ "Grow left") grow-window-left)
-      (,(_ "Grow right") grow-window-right)
-      (,(_ "Grow up") grow-window-up)
-      (,(_ "Grow down") grow-window-down)
-      (,(_ "Pack left") pack-window-left)
-      (,(_ "Pack right") pack-window-right)
-      (,(_ "Pack up") pack-window-up)
-      (,(_ "Pack down") pack-window-down))
-    "Menu of grow and pack operations.")
 
   ;; Implementation part.
 

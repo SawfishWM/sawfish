@@ -44,20 +44,8 @@
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
 	  sawfish.wm.custom)
-  
+
   (define-structure-alias shrink-yank sawfish.wm.commands.shrink-yank)
-
-  (defgroup shrink-yank "Shrinking and Yanking of windows" :group misc)
-
-  (defcustom shrink-window-minimum-size 10
-    "The minimum height or width to which a window may be shrunk."
-    :type number
-    :group (misc shrink-yank))
-
-  (defcustom yank-window-minimum-visible 10
-    "The minimum amount of window left visible, if yanked over the edge."
-    :type number
-    :group (misc shrink-yank))
 
 ;;; Commands:
 
