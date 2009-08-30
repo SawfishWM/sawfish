@@ -9,11 +9,12 @@
 #
 # $Id: sv.po,v 1.20 2006/01/26 07:25:59 dnylande Exp $
 #
+#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 21:37+0200\n"
+"POT-Creation-Date: 2009-08-24 21:17+0200\n"
 "PO-Revision-Date: 2009-01-25 02:43+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -203,98 +204,46 @@ msgid "none"
 msgstr "inga"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"decoration mode\n"
-"\n"
-"set the mode 'when to draw a titlebar and window buttons'. the decoration "
-"mode 'all' means that all windows, even transients/dialogs, will get a "
-"titlebar and buttons. none means no window will get any :-). usually "
-"transients only have a contents-border. this option is for reimplementing a "
-"sawfish feature that is gone in the latest version."
+msgid "decoration mode"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
+msgid ");"
+msgstr ""
+
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize title string\n"
-"\n"
-"see the tooltip for the 'title string' option below for more information. "
-"(NOTE: i hope the redrawing problems with this option are solved. if not, "
-"write an email please!)"
+msgid "customize title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string\n"
-"\n"
-"the string you insert here will be your new title string. variables always "
-"start with a dollar-sign $ and are replaced with their actual values. to get "
-"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
-"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
-"string]. the following vars are built-in: $name, $fullname, $width, $width-"
-"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
-"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
-"if not, write an email please!"
+msgid "title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"update title string periodically\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "update title string periodically"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string update interval (1 - 1000000 s)\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "title string update interval (1 - 1000000 s)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string font\n"
-"\n"
-"you should really choose a better font. verdana bold 8 pt looks nice."
+msgid "title string font"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize title position\n"
-"\n"
-"by default the title string is centered horizontally and vertically."
-msgstr ""
+#, fuzzy
+msgid "customize title position"
+msgstr "maximeringsknapp-tangentbindning"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "centrerad"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal alignment\n"
-"\n"
-"'real-center' means to take the whole titlebar into account while centering "
-"the string. when selecting 'center' only the distance between the buttons is "
-"taken into account."
+msgid "title string horizontal alignment"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
-"\n"
-"the horizontal position of the title string can only be adjusted if the "
-"horizontal alignment is not 'center'. the range also depends on the setting "
-"of the option above. it the title string is already aligned left, you cannot "
-"adjust it to be even further left because there are button in the way."
+msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -311,32 +260,16 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient titlebar background (experimental)\n"
-"\n"
-"when activating the gradient background the normal titlebar background "
-"colors will be ignored. besides the button background colors will be "
-"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
-"low value, ie high quality.)"
+msgid "gradient titlebar background (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient mode\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used."
+#, fuzzy
+msgid "gradient mode"
+msgstr "tillfälliga fönster"
+
+msgid "gradient quality (1 best - 20 worst)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient quality (1 best - 20 worst)\n"
-"\n"
-"the value here is the factor the calculated gradient image will be scaled "
-"down. this increases speed but decreases quality."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -354,44 +287,24 @@ msgid "custom"
 msgstr "Anpassa"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient color mode\n"
-"\n"
-"the custom mode will respect the colors set in the list below."
-msgstr ""
+#, fuzzy
+msgid "gradient color mode"
+msgstr "Färgskaletema"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used. besides the gradient color mode must be set to "
-"custom to activate this list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "Välj färg"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused/highlighted titlebar colors hue (0 - 360)\n"
-"\n"
-"this value changes the hue of a color, by moving (0 - 360) degress around "
-"the color cycle...180 for example inverts the color"
+msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)\n"
-"\n"
-"the saturation of a color is a measurement of the color intensity"
+"color)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -399,50 +312,21 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"  focused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"  focused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize extended title string colors\n"
-"\n"
-"you can customize additional colors of the title string. if you deactivate "
-"this, these colors will be set to the focused title string color."
+msgid "customize extended title string colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -499,62 +383,32 @@ msgid "ball-12"
 msgstr "alla"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button icon set (experimental)\n"
-"\n"
-"the number at the end is the width/height of the button icons in the icon "
-"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgid "button icon set (experimental)"
+msgstr ""
+
+#, fuzzy
+msgid "customize button size"
+msgstr "maximeringsknapp-tangentbindning"
+
+msgid "buttons size (1 - 1000 pixel)"
+msgstr ""
+
+msgid "button vertical alignment"
+msgstr ""
+
+msgid "scale button icons (experimental)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize button size\n"
-"\n"
-"by default the button size follows the size of the titlebar, but by "
-"activating this you can set it to something different."
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"buttons size (1 - 1000 pixel)\n"
-"\n"
-"a buttons size that is bigger than your current titlebar height is ignored."
-msgstr ""
+#, fuzzy
+msgid "display window icon on menu button"
+msgstr "Visa fönstrets ikon i dess menyknapp."
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button vertical alignment\n"
-"\n"
-"if a button is smaller than the titlebar you might want to set its vertical "
-"alignment."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"scale button icons (experimental)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"display window icon on menu button\n"
-"\n"
-"many people like having the window-icon displayed on the menu-button. this "
-"icon is defined by the application itself and is also shown in your pager "
-"and task-list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -571,15 +425,9 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
-"\n"
-"enabling this will allow you to set the positon of each button in the "
-"titlebar manually. a negative/positiv value means the button will be drawn "
-"on left/right side of the titlebar."
+msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -588,16 +436,10 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button position model\n"
-"\n"
-"'titel-height' means calculate position as multiple of title height. when "
-"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
-"mind that several buttons might slide on top of each other. 'none' means no "
-"buttons at all."
-msgstr ""
+#, fuzzy
+msgid "button position model"
+msgstr "Kom ihåg _position"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "Kom ihåg _position"
@@ -658,12 +500,9 @@ msgid "lock button position"
 msgstr "stängknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize sticky button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: toggle sticky "
-"state of window"
-msgstr ""
+#, fuzzy
+msgid "customize sticky button keymap"
+msgstr "minimeringsknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -671,13 +510,9 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "minimeringsknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize previous button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"previous workspace - button2 workspace-list - button3 send window to first "
-"workspace - button6 pack window left"
-msgstr ""
+#, fuzzy
+msgid "customize previous button keymap"
+msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -685,54 +520,27 @@ msgid "mxflat:previous-button-keymap"
 msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize next button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"next workspace - button2 workspace-list - button3 send window to last "
-"workspace - button6 pack window right"
-msgstr ""
+#, fuzzy
+msgid "customize next button keymap"
+msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "menyknapp-tangentbindning"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: send window to next workspace - button2 workspace-list - button3 "
-"send window to last workspace - button6 pack window right"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize configure button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
-msgstr ""
+#, fuzzy
+msgid "customize configure button keymap"
+msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "menyknapp-tangentbindning"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize info button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: window list - "
-"button3 window snooper (not included by default)"
-msgstr ""
+#, fuzzy
+msgid "customize info button keymap"
+msgstr "minimeringsknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -740,22 +548,13 @@ msgid "mxflat:info-button-keymap"
 msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"always on top depth (-1000 - 1000)\n"
-"\n"
-"a window will have this depth after you have pressed the always-on-top "
-"button. 0 is the normal window level. every positive value means above other "
-"windows, a negative value means below. keept it at a positive value in order "
-"to have the always-on-top button do it's job."
+msgid "always on top depth (-1000 - 1000)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize always-on-top button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: sets window "
-"depth to the adjusted value"
-msgstr ""
+#, fuzzy
+msgid "customize always-on-top button keymap"
+msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -763,12 +562,9 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "menyknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize look button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: lock window "
-"position"
-msgstr ""
+#, fuzzy
+msgid "customize look button keymap"
+msgstr "maximeringsknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -776,14 +572,9 @@ msgid "mxflat:lock-button-keymap"
 msgstr "stängknapp-tangentbindning"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button-colors\n"
-"\n"
-"when you active this you will be able to set custom button colors. by "
-"default the button colors depend on the titlebar colors."
+msgid "customize button-colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -824,85 +615,35 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width (0 - 1000 pixel)\n"
-"\n"
-"set the width border around the window."
+msgid "border width (0 - 1000 pixel)"
+msgstr ""
+
+msgid "border width for maximized windows (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width for maximized windows (0 - 1000 pixel)\n"
-"\n"
-"when you like having a big border around your windows you might have noticed "
-"that sawfish still draws that big border when the window is maximized. if "
-"you don't want that, set the border width for maximized windows smaller than "
-"the border width for unmaximized windows. (NOTE: this feature is still buggy "
-"as sawfish does not resize the windows correctly yet, so the best might be "
-"to set it to the normal border width.)"
+msgid "customize border for focused windows (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize border for focused windows (experimental)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "border width for focused windows (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border width for focused windows (0 - 1000 pixel)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "title-contents border width (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title-contents border width (0 - 1000 pixel)\n"
-"\n"
-"sets the widths of the line between titlebar and contents window"
+msgid "border offset (-1000 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border offset (-1000 - 1000 pixel)\n"
-"\n"
-"adjust the point where the border actually starts. many gtk2 apps draw a "
-"small black border around their contents window and this is just ugly when "
-"sawfish draws another border around the window. with a border offset of -1 "
-"the sawfish window border will overlay the gtk2 border exactly."
+msgid "keep window borders and corners at their place when shading a window"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"keep window borders and corners at their place when shading a window\n"
-"\n"
-"when shading a window borders and corners will stay where they were and not "
-"merge with the titlebar."
+#, fuzzy
+msgid "show window corners"
+msgstr "Låt fönster växa nedåt"
+
+msgid "corners length adjustement (-1 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"show window corners\n"
-"\n"
-" the corners are used to resize a window in two directions at the same time. "
-"usually the width and length of window corners are determined by the border "
-"width but you can adjust them below."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"corners length adjustement (-1 - 100 pixel)\n"
-"\n"
-"increasing the corner length will grow the window corners along the window "
-"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
-"grab the 1 pixel corner to be able to resize the window in two directions; "
-"thus, make it bigger."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -915,29 +656,16 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"corners width adjustement (0 - 100 pixel)\n"
-"\n"
-"this option makes the window corners broader. with a border width of 1 pixel "
-"it is hard to grab this 1 pixel corner to be able to resize the window in "
-"two directions; thus, make it bigger."
+msgid "corners width adjustement (0 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow (experimental)\n"
-"\n"
-"draw a small additional border around your windows emulating a solid shadow "
-"effect. use the options below to adjust its width and direction. (NOTE: this "
-"is VERY cpu intensive and might slow down your computer noticably. so turn "
-"it on at your own risk.)"
+msgid "fake shadow (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "Titelradsbild för ofokuserade fönster."
@@ -979,23 +707,13 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light source\n"
-"\n"
-"set the direction of the fake shadow. usually only 2 or 3 borders of your "
-"window have a fake shadow. this depends on where the light comes from."
+#, fuzzy
+msgid "fake shadow light source"
+msgstr "Gör fönster ignorerat"
+
+msgid "fake shadow light distance (0 - 100)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light distance (0 - 100)\n"
-"\n"
-"this option has only an effect on the north, east, south and west light "
-"sources. the further away the light source is, the smaller will the two "
-"'side' shadows be."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -1004,14 +722,9 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize border colors\n"
-"\n"
-"you can customize your border colors here. if you deactivate this, these "
-"colors will be set to the focused title string color."
+msgid "customize border colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1104,10 +817,6 @@ msgstr "Tangent"
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
 msgstr "Värde"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-msgid "Select color"
-msgstr "Välj färg"
 
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
@@ -1235,6 +944,11 @@ msgstr "Händelser"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "Händelser"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1493,10 +1207,6 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Ta bort alla fönster i gruppen som det aktuella fönstret är med i."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Growing and packing of windows"
-msgstr "Växande och packande av fönster"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing is considered to be maximization."
 msgstr ""
 
@@ -1537,13 +1247,20 @@ msgstr ""
 "Huruvida ignorerade fönster ska krockas med vid växande eller packande."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Låt fönster växa åt vänster"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the left until it `bumps into' another window."
 msgstr ""
 "Låter fönstret växa till vänster tills det \"krockar\" med ett annat "
 "fönster.\n"
@@ -1554,9 +1271,8 @@ msgid "Grow window right"
 msgstr "Låt fönster växa åt höger"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the right until it `bumps into' another window."
 msgstr ""
 "Låter fönstret växa till höger tills det \"krockar\" med ett annat fönster.\n"
 "Se \"grow-window-up\"."
@@ -1566,28 +1282,18 @@ msgid "Grow window up"
 msgstr "Låt fönster växa uppåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
+#, fuzzy
+msgid "Grows window upwards until it `bumps into' another window."
 msgstr ""
-"Låter fönstret växa uppåt tills det \"krockar\" med ett annat fönster.\n"
-"Om den översta kanten var utanför skärmkanten kommer den att tas in igen.\n"
-"Med ett globalt prefixargument maximeras uppåt istället.\n"
-"Med ett numeriskt prefixargument växes istället uppåt med det antal\n"
-"ökningar som är angivet i fönstret eller bildpunkter."
+"Låter fönstret växa nedåt tills det \"krockar\" med ett annat fönster.\n"
+"Se \"grow-window-up\"."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Låt fönster växa nedåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window downwards until it `bumps into' another window."
 msgstr ""
 "Låter fönstret växa nedåt tills det \"krockar\" med ett annat fönster.\n"
 "Se \"grow-window-up\"."
@@ -1597,9 +1303,8 @@ msgid "Pack window left"
 msgstr "Packa fönster åt vänster"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the left until it `bumps into' another window."
 msgstr ""
 "Flyttar fönstret till vänster tills det \"krockar\" med ett annat fönster.\n"
 "Se \"pack-window-up\"."
@@ -1609,9 +1314,8 @@ msgid "Pack window right"
 msgstr "Packa fönster åt höger"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the right until it `bumps into' another window."
 msgstr ""
 "Flyttar fönstret till höger tills det \"krockar\" med ett annat fönster.\n"
 "Se \"pack-window-up\"."
@@ -1621,61 +1325,21 @@ msgid "Pack window up"
 msgstr "Packa fönster uppåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr ""
-"Flyttar fönstret uppåt tills det \"krockar\" med ett annat fönster.\n"
-"Om den översta kanten var utanför skärmkanten kommer den att tas in igen.\n"
-"Med ett globalt prefixargument maximeras uppåt istället.\n"
-"Med ett numeriskt prefixargument flyttas istället uppåt med det antalet\n"
-"bildpunkter."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "Packa fönster nedåt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window upwards until it `bumps into' another window."
 msgstr ""
 "Flyttar fönstret nedåt tills det \"krockar\" med ett annat fönster.\n"
 "Se \"pack-window-up\"."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow left"
-msgstr "Väx åt vänster"
+msgid "Pack window down"
+msgstr "Packa fönster nedåt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow right"
-msgstr "Väx åt höger"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow up"
-msgstr "Väx uppåt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow down"
-msgstr "Väx nedåt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack left"
-msgstr "Packa åt vänster"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack right"
-msgstr "Packa åt höger"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack up"
-msgstr "Packa uppåt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack down"
-msgstr "Packa nedåt"
+#, fuzzy
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr ""
+"Flyttar fönstret nedåt tills det \"krockar\" med ett annat fönster.\n"
+"Se \"pack-window-up\"."
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1766,6 +1430,76 @@ msgstr "Flytta pekare lite nedåt"
 msgid "Move the cursor 1 pixel downwards."
 msgstr "Flytta pekaren en bildpunkt nedåt."
 
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest"
+msgstr "Flytta pekare åt höger"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northwest"
+msgstr "Flytta pekaren \"flytta-pekare-ökning\" bildpunkter åt vänster."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast"
+msgstr "Flytta pekare åt höger"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northeast"
+msgstr "Flytta pekaren \"flytta-pekare-ökning\" bildpunkter åt vänster."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest"
+msgstr "Flytta pekare åt vänster"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southwest"
+msgstr "Flytta pekaren \"flytta-pekare-ökning\" bildpunkter åt vänster."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast"
+msgstr "Flytta pekare åt vänster"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southeast"
+msgstr "Flytta pekaren \"flytta-pekare-ökning\" bildpunkter åt vänster."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest fine"
+msgstr "Flytta pekare lite åt höger"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast fine"
+msgstr "Flytta pekare lite åt höger"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest fine"
+msgstr "Flytta pekare lite åt vänster"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast fine"
+msgstr "Flytta pekare lite åt vänster"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor center"
+msgstr "Flytta pekare åt vänster"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor to the center of the screen"
+msgstr "Flytta pekaren en bildpunkt åt vänster."
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1837,18 +1571,9 @@ msgid "How to choose window edges when resizing."
 msgstr "Visa de aktuella fönsterdimensionerna vid storleksändring."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid ""
-"Distance in pixels before window edges align with each other.\n"
-"\n"
-"When moving a window, this option lets you align one of its edges with an "
-"edge of another window."
+msgid "Distance in pixels before window edges align with each other."
 msgstr ""
-"Avstånd i bildpunkter innan fönsterkanter justeras mot varandra.\n"
-"\n"
-"När ett fönster flyttas låter detta alternativ dig justera ett av dess "
-"kanter med ett annat fönster."
 
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Flytta fönster interaktivt"
 
@@ -1886,31 +1611,39 @@ msgstr ""
 "Vänta på att användaren väljer ett fönster, storleksändra sedan fönstret \n"
 "interaktivt."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Double window size"
+msgstr "Växla fönster klistrig"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Halve window size"
+msgstr "Gör fönster klistrigt"
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Höj och skicka genom klick"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
+"Raise the window that received the current event, then replay any pointer"
 msgstr ""
 "Höj fönstret som mottog den aktuella händelsen, återspela sedan\n"
 "pekarhändelserna som anropade kommandot."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Höj och skicka genom klick om fouserat"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
+"Raise the window that received the current event (if it's focused), then"
 msgstr ""
 "Höj fönstret som mottog den aktuella händelsen (om det är fokuserat),\n"
 "återspela sedan pekarhändelserna som anropade kommandot."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "Höj eller skicka genom klick"
 
@@ -1923,48 +1656,25 @@ msgid "Raise group and pass through click"
 msgstr "Höj grupp och skicka genom klick"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
+#, fuzzy
+msgid "Raise the group of windows that received the current event, then replay"
 msgstr ""
 "Höj gruppen av fönster som mottog den aktuella händelsen, återspela sedan\n"
 "pekarhändelserna som anropade kommandot."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Höj tillfälliga fönster och skicka genom klick"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
-msgstr ""
-"Höj fönstret som mottog den aktuella händelsen och alla tillfälliga fönster "
-"det har, återspela sedan pekarhändelserna som anropade kommandot."
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
-msgid "Shrinking and Yanking of windows"
-msgstr "Växande och packande av fönster"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum height or width to which a window may be shrunk."
+msgid "Raise the window that received the current event and any transients it"
 msgstr ""
+"Höj fönstret som mottog den aktuella händelsen, återspela sedan\n"
+"pekarhändelserna som anropade kommandot."
 
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "Glid fönster åt vänster"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1972,21 +1682,9 @@ msgid "Shrink window right"
 msgstr "Glid fönster åt höger"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window up"
 msgstr "Glid fönster uppåt"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1994,20 +1692,9 @@ msgid "Shrink window down"
 msgstr "Glid fönster nedåt"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window left"
 msgstr "Packa fönster åt vänster"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2015,28 +1702,14 @@ msgid "Yank window right"
 msgstr "Packa fönster åt höger"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window up"
 msgstr "Packa fönster uppåt"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "Yanks WINDOW upwards until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Packa fönster nedåt"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2134,6 +1807,47 @@ msgstr "Glid grupp nedåt"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Flytta fönstergruppen \"glid-fönster-ökning\" bildpunkter nedåt."
 
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Default Applications"
+msgstr "Visa programmenyn."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "The program launched by the `xterm' command."
+msgstr "Programmet som startas av kommandot \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "The program launched by the `browser' command."
+msgstr "Programmet som startas av kommandot \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Start a new xterm."
+msgstr "Starta en ny xterm."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Bläddra..."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Start a new browser instance"
+msgstr "Starta en ny xterm."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "View clipboard"
+msgstr "Skrivbordsvy"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Show the contents of the clipboard in a message window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Flytta skrivbordsvy nästa"
@@ -2204,22 +1918,6 @@ msgstr "växlingstangentbindning"
 msgid ""
 "Keymap containing bindings active only during window cycling operations."
 msgstr "Tangentbindning vars bindningar är aktiva under fönsterväxling."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Programmet som startas av kommandot \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Arguments given to the `xterm' command."
-msgstr "Argument som ges till kommandot \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Start a new xterm."
-msgstr "Starta en ny xterm."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -2506,6 +2204,16 @@ msgid "Maximized"
 msgstr "Maximerad"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Nästa arbetsyta"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "skrivbordsvy"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
 msgstr "Höj vid fokus"
 
@@ -2588,6 +2296,15 @@ msgid "Never maximize"
 msgstr "Avma_ximera"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fullscreen"
+msgstr "skärmen"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Fullscreen xinerama"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Unikt namn"
 
@@ -2608,6 +2325,11 @@ msgid "Ignore stacking requests"
 msgstr "Ignorera lagringsbegäran"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window name"
+msgstr "Fönster:"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "Tillstånd"
 
@@ -2615,21 +2337,19 @@ msgstr "Tillstånd"
 msgid "Other"
 msgstr "Annat"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Höj fönster"
+
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
 msgstr "Skuggsvävning"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid ""
-"Enable shade-hover mode.\n"
-"\n"
-"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgid "Enable shade-hover mode."
 msgstr ""
-"Använd skuggsvävningsläget.\n"
-"\n"
-"(Avskugga fönster tillfälligt när pekaren är över dem.)"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Fördröjning i millisekunder innan fönster avskuggas."
 
@@ -2908,98 +2628,86 @@ msgid "root-window-keymap"
 msgstr "rotfönster-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
+"Keymap containing bindings active when the pointer is in the root window"
 msgstr ""
 "Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
 "(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "titel-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the title of"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är i ett fönsters\n"
-"titelrad. (Endast musbindningar fungerar här)."
+"Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
+"(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "kant-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the border of"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är på en \n"
-"fönsterram. (Endast musbindningar fungerar här)."
+"Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
+"(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "stängknapp-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the close button"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
-"stängknapp. (Endast musbindningar fungerar här)."
+"Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
+"(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "minimeringsknapp-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the iconify"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
-"minimeringsknapp. (Endast musbindningar fungerar här)."
+"Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
+"(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "maximeringsknapp-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the maximize"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
-"maximeringsknapp. (Endast musbindningar fungerar här.)"
+"Tangentbindning som innehåller bindningar som är aktiva när en sträng läses "
+"in från användaren."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "menyknapp-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the menu button"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
-"menyknapp. (Endast musbindningar fungerar här)."
+"Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
+"(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "skuggknapp-tangentbindning"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the shade button"
 msgstr ""
-"Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
-"skuggknapp. (Endast musbindningar fungerar här)."
+"Tangentbindning vars bindningar är aktiva när pekaren är i rotfönstret\n"
+"(eller när inget fönster är fokuserat)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "Modifierartangent(er) som ska användas för standardkortkommandon.."
 
@@ -3048,12 +2756,99 @@ msgid "_Next workspace"
 msgstr "_Nästa arbetsyta"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to p_revious"
-msgstr "Kopiera till fö_regående"
+#, fuzzy
+msgid "C_opy window to"
+msgstr "_Skicka fönster till"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Copy to ne_xt"
-msgstr "Kopiera till n_ästa"
+#, fuzzy
+msgid "P_revious workspace"
+msgstr "Föregående arbetsyta"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "Nästa arbetsyta"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "Väx åt vänster"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "Väx åt höger"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "Väx uppåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "Väx nedåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "Packa åt vänster"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "Packa åt höger"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "Packa uppåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "Packa nedåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "Glid fönster åt vänster"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "Glid fönster åt höger"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "Glid fönster uppåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "Glid fönster nedåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "Packa åt vänster"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "Packa åt höger"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "Packa uppåt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "Packa nedåt"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Stac_king"
@@ -3082,6 +2877,11 @@ msgstr "Ramt_yp"
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Frame sty_le"
 msgstr "Ramst_il"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "Sawfishs hemsida"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
@@ -3118,6 +2918,16 @@ msgstr "_Manual..."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "_Om Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Display Errors"
+msgstr "Visa fel"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "_Fönster"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Restart"
@@ -3212,14 +3022,13 @@ msgstr "Höj nedre enstaka fönster"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
+#. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
+msgid "If the window is at its highest possible position, then lower it to its"
 msgstr ""
 "Om fönstret är det översta fönstret i sitt lager, sänk det till den lägsta\n"
 "nivån, annars höj det överst i sitt lager."
 
-#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Höj fönster i djupled"
 
@@ -3298,14 +3107,12 @@ msgid "Toggle window sticky"
 msgstr "Växla fönster klistrig"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+#, fuzzy
+msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
 msgstr ""
 "Växla fönstrets \"klistrighet\" -- huruvida det är en medlem av alla\n"
 "arbetsytor eller inte."
 
-#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Klistrigt"
 
@@ -3437,22 +3244,18 @@ msgid "Maximize window horizontally toggle"
 msgstr "Maximera fönster hosrisontellt-växel"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between horizontally maximized and"
 msgstr "Växla fönstrets läge mellan maximerad bredd och avmaximerad."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Maximera fönster vertikalt-växel"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized and"
 msgstr "Växla fönstrets läge mellan maximerad höjd och avmaximerad."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Maximera fyll fönster"
 
@@ -3490,22 +3293,29 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "Maximera fyll fönster horisontellt-växel"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and\n"
-"unmaximized."
+"Toggle the state of the window between horizontally maximized-filled and"
 msgstr ""
 "Växla fönsterläge mellan fyllnadsmaximerad bredd och avmaximerad "
 "horisontellt."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Maximera fyll fönster vertikalt-växel"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized-filled and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized-filled and"
 msgstr "Växla fönsterläge mellan fyllnadsmaximerad och avmaximerad vertikalt."
+
+#, fuzzy
+msgid "Maximize unframe"
+msgstr "Maximera fönster"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize reframe"
+msgstr "Maximerad"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -3561,14 +3371,12 @@ msgid "Unshade window"
 msgstr "Avskugga fönster"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-msgid ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
-"state."
+#, fuzzy
+msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
 msgstr ""
 "Om fönstret är skuggat (se \"shade-window\"), återställ det till dess\n"
 "normala läge."
 
-#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Växla fönsterskuggning"
 
@@ -3590,41 +3398,22 @@ msgid "Raise window and transients"
 msgstr "Höj fönster och tillfälliga fönster"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking\n"
-"order. Also raise any transient windows that it has."
-msgstr ""
-"Höj det aktuella fönstret till dess högsta tillåtna position i\n"
-"lagerordningen. Höj också alla tillfälliga fönster som det har."
+"Raise the current window to its highest allowed position in the stacking"
+msgstr "Höj fönstret till högsta tillåtna nivå i dess lager."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Sänk fönster och tillfälliga fönster"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Lower the current window to its lowest allowed position in the stacking\n"
-"order. Also lower any transient windows that it has."
-msgstr ""
-"Sänk det aktuella fönstret till dess lägsta tillåtna position i\n"
-"lagerordningen. Sänk också alla tillfälliga fönster som det har."
+#, fuzzy
+msgid "Lower the current window to its lowest allowed position in the stacking"
+msgstr "Sänk fönstret till lägsta tillåtna nivå i dess lager."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Höj lägre fönster och tillfälliga fönster"
 
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
-msgstr ""
-"Om fönstret är på sin högsta position, sänk det till dess lägsta\n"
-"position. Höj det annars till dess högsta position. Detta gäller alla\n"
-"tillfälliga fönster som fönstret har."
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3737,14 +3526,13 @@ msgid "Quote event"
 msgstr "Citathändelse"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+#, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring\n"
-"any window manager bindings that it may have."
+"Sends the next key event directly to the focused client window, ignoring"
 msgstr ""
 "Skickar nästa tangenthändelse direkt till det fokuserade klientfönstret,\n"
 "och ignorerar alla fönsterhanterarbindningar som den kanske har."
 
-#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "Packa fönster uppåt"
@@ -3821,6 +3609,10 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid "Windows uniconify to the current viewport."
 msgstr "Flytta grupp till aktuell skrivbordsvy"
@@ -3840,6 +3632,10 @@ msgstr ""
 #, fuzzy
 msgid "stop"
 msgstr "Anpassa"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "dynamic"
+msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Whether to stop or wrap-around on first/last viewport"
@@ -4185,24 +3981,21 @@ msgid "Merge next workspace"
 msgstr "Slå samman nästa arbetsyta"
 
 #. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
+"Delete the current workspace. Its member windows are relocated to the next"
 msgstr ""
 "Ta bort den aktuella arbetsytan. Dess fönster flyttas till nästa arbetsyta."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Slå samman föregående arbetsyta"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
+#, fuzzy
+msgid "Delete the current workspace. Its member windows are relocated to the"
 msgstr ""
-"Ta bort aktuell arbetsyta. Dess fönster flyttas till föregående arbetsyta."
+"Ta bort den aktuella arbetsytan. Dess fönster flyttas till nästa arbetsyta."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Infoga arbetsyta efter"
 
@@ -4247,14 +4040,12 @@ msgid "Delete window instance"
 msgstr "Ta bort fönsterinstans"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
+#, fuzzy
+msgid "Remove the copy of the window on the current workspace. If this is the"
 msgstr ""
 "Ta bort kopian av fönstret på den aktuella arbetsytan. Om det är den sista\n"
 "kvarvarande instansen, ta då bort det faktiska fönstret."
 
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "Fokusera skrivbord"
@@ -4304,6 +4095,161 @@ msgstr "Välj arbetsyta interaktivt"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Fråga efter en arbetsyta och byt till den."
+
+#~ msgid "Select color"
+#~ msgstr "Välj färg"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Växande och packande av fönster"
+
+#~ msgid ""
+#~ "Grows window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
+#~ "With a universal prefix arg, maximize upwards instead.\n"
+#~ "With a numeric prefix arg, grow upwards by that many increments specified "
+#~ "by\n"
+#~ "window or pixels instead."
+#~ msgstr ""
+#~ "Låter fönstret växa uppåt tills det \"krockar\" med ett annat fönster.\n"
+#~ "Om den översta kanten var utanför skärmkanten kommer den att tas in "
+#~ "igen.\n"
+#~ "Med ett globalt prefixargument maximeras uppåt istället.\n"
+#~ "Med ett numeriskt prefixargument växes istället uppåt med det antal\n"
+#~ "ökningar som är angivet i fönstret eller bildpunkter."
+
+#~ msgid ""
+#~ "Moves window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
+#~ "With a universal prefix arg, move upwards maximally instead.\n"
+#~ "With a numeric prefix arg, move upwards by that many pixels instead."
+#~ msgstr ""
+#~ "Flyttar fönstret uppåt tills det \"krockar\" med ett annat fönster.\n"
+#~ "Om den översta kanten var utanför skärmkanten kommer den att tas in "
+#~ "igen.\n"
+#~ "Med ett globalt prefixargument maximeras uppåt istället.\n"
+#~ "Med ett numeriskt prefixargument flyttas istället uppåt med det antalet\n"
+#~ "bildpunkter."
+
+#~ msgid ""
+#~ "Distance in pixels before window edges align with each other.\n"
+#~ "\n"
+#~ "When moving a window, this option lets you align one of its edges with an "
+#~ "edge of another window."
+#~ msgstr ""
+#~ "Avstånd i bildpunkter innan fönsterkanter justeras mot varandra.\n"
+#~ "\n"
+#~ "När ett fönster flyttas låter detta alternativ dig justera ett av dess "
+#~ "kanter med ett annat fönster."
+
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it\n"
+#~ "has, then replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Höj fönstret som mottog den aktuella händelsen och alla tillfälliga "
+#~ "fönster det har, återspela sedan pekarhändelserna som anropade kommandot."
+
+#, fuzzy
+#~ msgid "Shrinking and Yanking of windows"
+#~ msgstr "Växande och packande av fönster"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Argument som ges till kommandot \"xterm\"."
+
+#~ msgid ""
+#~ "Enable shade-hover mode.\n"
+#~ "\n"
+#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
+#~ msgstr ""
+#~ "Använd skuggsvävningsläget.\n"
+#~ "\n"
+#~ "(Avskugga fönster tillfälligt när pekaren är över dem.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är i ett fönsters\n"
+#~ "titelrad. (Endast musbindningar fungerar här)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är på en \n"
+#~ "fönsterram. (Endast musbindningar fungerar här)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
+#~ "stängknapp. (Endast musbindningar fungerar här)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
+#~ "minimeringsknapp. (Endast musbindningar fungerar här)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
+#~ "maximeringsknapp. (Endast musbindningar fungerar här.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
+#~ "menyknapp. (Endast musbindningar fungerar här)."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tangentbindning vars bindningar är aktiva när pekaren är på ett fönsters\n"
+#~ "skuggknapp. (Endast musbindningar fungerar här)."
+
+#~ msgid "Copy to p_revious"
+#~ msgstr "Kopiera till fö_regående"
+
+#~ msgid "Copy to ne_xt"
+#~ msgstr "Kopiera till n_ästa"
+
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking\n"
+#~ "order. Also raise any transient windows that it has."
+#~ msgstr ""
+#~ "Höj det aktuella fönstret till dess högsta tillåtna position i\n"
+#~ "lagerordningen. Höj också alla tillfälliga fönster som det har."
+
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking\n"
+#~ "order. Also lower any transient windows that it has."
+#~ msgstr ""
+#~ "Sänk det aktuella fönstret till dess lägsta tillåtna position i\n"
+#~ "lagerordningen. Sänk också alla tillfälliga fönster som det har."
+
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
+#~ "changes\n"
+#~ "the level of any transient windows it has."
+#~ msgstr ""
+#~ "Om fönstret är på sin högsta position, sänk det till dess lägsta\n"
+#~ "position. Höj det annars till dess högsta position. Detta gäller alla\n"
+#~ "tillfälliga fönster som fönstret har."
+
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the\n"
+#~ "previous workspace."
+#~ msgstr ""
+#~ "Ta bort aktuell arbetsyta. Dess fönster flyttas till föregående arbetsyta."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"

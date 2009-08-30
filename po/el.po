@@ -9,11 +9,12 @@
 # kostas: 720 messages, 11Nov2002, completed translation!
 # simos: 720 messages, 11Nov2002, review of translation. Note: some terms should be rechecked.
 #
+#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.2-gtk2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 21:37+0200\n"
+"POT-Creation-Date: 2009-08-24 21:17+0200\n"
 "PO-Revision-Date: 2002-11-11 18:56+0000\n"
 "Last-Translator: Simos Xenitellis <simos74@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -205,98 +206,46 @@ msgid "none"
 msgstr "κανένα"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"decoration mode\n"
-"\n"
-"set the mode 'when to draw a titlebar and window buttons'. the decoration "
-"mode 'all' means that all windows, even transients/dialogs, will get a "
-"titlebar and buttons. none means no window will get any :-). usually "
-"transients only have a contents-border. this option is for reimplementing a "
-"sawfish feature that is gone in the latest version."
+msgid "decoration mode"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
+msgid ");"
+msgstr ""
+
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize title string\n"
-"\n"
-"see the tooltip for the 'title string' option below for more information. "
-"(NOTE: i hope the redrawing problems with this option are solved. if not, "
-"write an email please!)"
+msgid "customize title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string\n"
-"\n"
-"the string you insert here will be your new title string. variables always "
-"start with a dollar-sign $ and are replaced with their actual values. to get "
-"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
-"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
-"string]. the following vars are built-in: $name, $fullname, $width, $width-"
-"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
-"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
-"if not, write an email please!"
+msgid "title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"update title string periodically\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "update title string periodically"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string update interval (1 - 1000000 s)\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "title string update interval (1 - 1000000 s)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string font\n"
-"\n"
-"you should really choose a better font. verdana bold 8 pt looks nice."
+msgid "title string font"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize title position\n"
-"\n"
-"by default the title string is centered horizontally and vertically."
-msgstr ""
+#, fuzzy
+msgid "customize title position"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μεγιστοποίησης"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "κέντρο"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal alignment\n"
-"\n"
-"'real-center' means to take the whole titlebar into account while centering "
-"the string. when selecting 'center' only the distance between the buttons is "
-"taken into account."
+msgid "title string horizontal alignment"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
-"\n"
-"the horizontal position of the title string can only be adjusted if the "
-"horizontal alignment is not 'center'. the range also depends on the setting "
-"of the option above. it the title string is already aligned left, you cannot "
-"adjust it to be even further left because there are button in the way."
+msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -313,32 +262,16 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient titlebar background (experimental)\n"
-"\n"
-"when activating the gradient background the normal titlebar background "
-"colors will be ignored. besides the button background colors will be "
-"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
-"low value, ie high quality.)"
+msgid "gradient titlebar background (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient mode\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used."
+#, fuzzy
+msgid "gradient mode"
+msgstr "βραχύβια"
+
+msgid "gradient quality (1 best - 20 worst)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient quality (1 best - 20 worst)\n"
-"\n"
-"the value here is the factor the calculated gradient image will be scaled "
-"down. this increases speed but decreases quality."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -356,44 +289,24 @@ msgid "custom"
 msgstr "Παραμετροποίηση"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient color mode\n"
-"\n"
-"the custom mode will respect the colors set in the list below."
-msgstr ""
+#, fuzzy
+msgid "gradient color mode"
+msgstr "Θέμα Ανταύγειας"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used. besides the gradient color mode must be set to "
-"custom to activate this list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "Επιλογή χρώματος"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused/highlighted titlebar colors hue (0 - 360)\n"
-"\n"
-"this value changes the hue of a color, by moving (0 - 360) degress around "
-"the color cycle...180 for example inverts the color"
+msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)\n"
-"\n"
-"the saturation of a color is a measurement of the color intensity"
+"color)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -401,50 +314,21 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"  focused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"  focused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize extended title string colors\n"
-"\n"
-"you can customize additional colors of the title string. if you deactivate "
-"this, these colors will be set to the focused title string color."
+msgid "customize extended title string colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -501,62 +385,32 @@ msgid "ball-12"
 msgstr "όλα"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button icon set (experimental)\n"
-"\n"
-"the number at the end is the width/height of the button icons in the icon "
-"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgid "button icon set (experimental)"
+msgstr ""
+
+#, fuzzy
+msgid "customize button size"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μεγιστοποίησης"
+
+msgid "buttons size (1 - 1000 pixel)"
+msgstr ""
+
+msgid "button vertical alignment"
+msgstr ""
+
+msgid "scale button icons (experimental)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize button size\n"
-"\n"
-"by default the button size follows the size of the titlebar, but by "
-"activating this you can set it to something different."
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"buttons size (1 - 1000 pixel)\n"
-"\n"
-"a buttons size that is bigger than your current titlebar height is ignored."
-msgstr ""
+#, fuzzy
+msgid "display window icon on menu button"
+msgstr "Εμφάνιση του εικονιδίου του παραθύρου στο κουμπί του μενού του."
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button vertical alignment\n"
-"\n"
-"if a button is smaller than the titlebar you might want to set its vertical "
-"alignment."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"scale button icons (experimental)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"display window icon on menu button\n"
-"\n"
-"many people like having the window-icon displayed on the menu-button. this "
-"icon is defined by the application itself and is also shown in your pager "
-"and task-list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -573,15 +427,9 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
-"\n"
-"enabling this will allow you to set the positon of each button in the "
-"titlebar manually. a negative/positiv value means the button will be drawn "
-"on left/right side of the titlebar."
+msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -590,16 +438,10 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button position model\n"
-"\n"
-"'titel-height' means calculate position as multiple of title height. when "
-"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
-"mind that several buttons might slide on top of each other. 'none' means no "
-"buttons at all."
-msgstr ""
+#, fuzzy
+msgid "button position model"
+msgstr "Απομνημόνευση _θέσης"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "Απομνημόνευση _θέσης"
@@ -660,12 +502,9 @@ msgid "lock button position"
 msgstr "χάρτης-πλήκτρων-κουμπιού-κλεσίματος"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize sticky button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: toggle sticky "
-"state of window"
-msgstr ""
+#, fuzzy
+msgid "customize sticky button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-εικονοποίησης"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -673,13 +512,9 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-εικονοποίησης"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize previous button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"previous workspace - button2 workspace-list - button3 send window to first "
-"workspace - button6 pack window left"
-msgstr ""
+#, fuzzy
+msgid "customize previous button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -687,54 +522,27 @@ msgid "mxflat:previous-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize next button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"next workspace - button2 workspace-list - button3 send window to last "
-"workspace - button6 pack window right"
-msgstr ""
+#, fuzzy
+msgid "customize next button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: send window to next workspace - button2 workspace-list - button3 "
-"send window to last workspace - button6 pack window right"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize configure button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
-msgstr ""
+#, fuzzy
+msgid "customize configure button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize info button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: window list - "
-"button3 window snooper (not included by default)"
-msgstr ""
+#, fuzzy
+msgid "customize info button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-εικονοποίησης"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -742,22 +550,13 @@ msgid "mxflat:info-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"always on top depth (-1000 - 1000)\n"
-"\n"
-"a window will have this depth after you have pressed the always-on-top "
-"button. 0 is the normal window level. every positive value means above other "
-"windows, a negative value means below. keept it at a positive value in order "
-"to have the always-on-top button do it's job."
+msgid "always on top depth (-1000 - 1000)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize always-on-top button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: sets window "
-"depth to the adjusted value"
-msgstr ""
+#, fuzzy
+msgid "customize always-on-top button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -765,12 +564,9 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize look button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: lock window "
-"position"
-msgstr ""
+#, fuzzy
+msgid "customize look button keymap"
+msgstr "χάρτης-πλήκτρων-κουμπιού-μεγιστοποίησης"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -778,14 +574,9 @@ msgid "mxflat:lock-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-κλεσίματος"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button-colors\n"
-"\n"
-"when you active this you will be able to set custom button colors. by "
-"default the button colors depend on the titlebar colors."
+msgid "customize button-colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -826,85 +617,35 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width (0 - 1000 pixel)\n"
-"\n"
-"set the width border around the window."
+msgid "border width (0 - 1000 pixel)"
+msgstr ""
+
+msgid "border width for maximized windows (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width for maximized windows (0 - 1000 pixel)\n"
-"\n"
-"when you like having a big border around your windows you might have noticed "
-"that sawfish still draws that big border when the window is maximized. if "
-"you don't want that, set the border width for maximized windows smaller than "
-"the border width for unmaximized windows. (NOTE: this feature is still buggy "
-"as sawfish does not resize the windows correctly yet, so the best might be "
-"to set it to the normal border width.)"
+msgid "customize border for focused windows (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize border for focused windows (experimental)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "border width for focused windows (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border width for focused windows (0 - 1000 pixel)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "title-contents border width (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title-contents border width (0 - 1000 pixel)\n"
-"\n"
-"sets the widths of the line between titlebar and contents window"
+msgid "border offset (-1000 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border offset (-1000 - 1000 pixel)\n"
-"\n"
-"adjust the point where the border actually starts. many gtk2 apps draw a "
-"small black border around their contents window and this is just ugly when "
-"sawfish draws another border around the window. with a border offset of -1 "
-"the sawfish window border will overlay the gtk2 border exactly."
+msgid "keep window borders and corners at their place when shading a window"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"keep window borders and corners at their place when shading a window\n"
-"\n"
-"when shading a window borders and corners will stay where they were and not "
-"merge with the titlebar."
+#, fuzzy
+msgid "show window corners"
+msgstr "Μεγάλωμα παραθύρου κάτω"
+
+msgid "corners length adjustement (-1 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"show window corners\n"
-"\n"
-" the corners are used to resize a window in two directions at the same time. "
-"usually the width and length of window corners are determined by the border "
-"width but you can adjust them below."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"corners length adjustement (-1 - 100 pixel)\n"
-"\n"
-"increasing the corner length will grow the window corners along the window "
-"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
-"grab the 1 pixel corner to be able to resize the window in two directions; "
-"thus, make it bigger."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -917,29 +658,16 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"corners width adjustement (0 - 100 pixel)\n"
-"\n"
-"this option makes the window corners broader. with a border width of 1 pixel "
-"it is hard to grab this 1 pixel corner to be able to resize the window in "
-"two directions; thus, make it bigger."
+msgid "corners width adjustement (0 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow (experimental)\n"
-"\n"
-"draw a small additional border around your windows emulating a solid shadow "
-"effect. use the options below to adjust its width and direction. (NOTE: this "
-"is VERY cpu intensive and might slow down your computer noticably. so turn "
-"it on at your own risk.)"
+msgid "fake shadow (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "Εικόνα μπάρας σε μη εστιασμένα παράθυρα."
@@ -981,23 +709,13 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light source\n"
-"\n"
-"set the direction of the fake shadow. usually only 2 or 3 borders of your "
-"window have a fake shadow. this depends on where the light comes from."
+#, fuzzy
+msgid "fake shadow light source"
+msgstr "Το παράθυρο να αγνοείται"
+
+msgid "fake shadow light distance (0 - 100)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light distance (0 - 100)\n"
-"\n"
-"this option has only an effect on the north, east, south and west light "
-"sources. the further away the light source is, the smaller will the two "
-"'side' shadows be."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -1006,14 +724,9 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize border colors\n"
-"\n"
-"you can customize your border colors here. if you deactivate this, these "
-"colors will be set to the focused title string color."
+msgid "customize border colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1106,10 +819,6 @@ msgstr "Κλειδί"
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
 msgstr "Τιμή"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-msgid "Select color"
-msgstr "Επιλογή χρώματος"
 
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
@@ -1240,6 +949,11 @@ msgstr "Ενέργειες"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "Ενέργειες"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1505,10 +1219,6 @@ msgstr ""
 "μέλος."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Growing and packing of windows"
-msgstr "Μεγάλωμα και συσκευασία παραθύρων"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing is considered to be maximization."
 msgstr ""
 
@@ -1552,13 +1262,20 @@ msgstr ""
 "συσκευασία."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Μεγάλωμα παραθύρου στα αριστερά"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the left until it `bumps into' another window."
 msgstr ""
 "Μεγαλώνει το παράθυρο προς τα αριστερά μέχρι να ακουμπήσει σε άλλο "
 "παράθυρο.\n"
@@ -1569,9 +1286,8 @@ msgid "Grow window right"
 msgstr "Μεγάλωμα παραθύρου στα δεξιά"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the right until it `bumps into' another window."
 msgstr ""
 "Μεγαλώνει το παράθυρο προς τα δεξιά μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
 "Βλέπε `μεγάλωμα-παραθύρου-πάνω'."
@@ -1581,28 +1297,18 @@ msgid "Grow window up"
 msgstr "Μεγάλωμα παραθύρου πάνω"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
+#, fuzzy
+msgid "Grows window upwards until it `bumps into' another window."
 msgstr ""
-"Μεγαλώνει το παράθυρο προς τα πάνω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
-"Αν η πάνω άκρη είναι έξω από την άκρη της οθόνης, μετακινείται πίσω.\n"
-"Με ένα γενικό πρόθεμα arg, μεγιστοποιεί προς τα επάνω.\n"
-"Με ένα αριθμητικό πρόθεμα arg, μεγαλώνει προς τα πάνω με τον αντίστοιχο\n"
-"αριθμό βαθμίδων που καθορίζονται από το παράθυρο ή εικονοστοιχείων."
+"Μεγαλώνει το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
+"Βλέπε `μεγάλωμα-παραθύρου-πάνω'."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Μεγάλωμα παραθύρου κάτω"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window downwards until it `bumps into' another window."
 msgstr ""
 "Μεγαλώνει το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
 "Βλέπε `μεγάλωμα-παραθύρου-πάνω'."
@@ -1612,9 +1318,8 @@ msgid "Pack window left"
 msgstr "Συσκευασία παραθύρου αριστερά"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the left until it `bumps into' another window."
 msgstr ""
 "Μετακινεί το παράθυρο προς τα αριστερά μέχρι να ακουμπήσει σε άλλο "
 "παράθυρο.\n"
@@ -1625,9 +1330,8 @@ msgid "Pack window right"
 msgstr "Συσκευασία παραθύρου δεξιά"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the right until it `bumps into' another window."
 msgstr ""
 "Μετακινεί το παράθυρο προς τα δεξιά μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
 "Βλέπε `συσκευασία-παραθύρου-πάνω'."
@@ -1637,61 +1341,21 @@ msgid "Pack window up"
 msgstr "Συσκευασία παραθύρου πάνω"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr ""
-"Μετακινεί το παράθυρο προς τα πάνω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
-"Αν η πάνω άκρη είναι έξω από την άκρη της οθόνης, μετακινείται πίσω.\n"
-"Με ένα γενικό πρόθεμα arg, μετακινείται προς τα πάνω στο μέγιστο βαθμό.\n"
-"Με ένα αριθμητικό πρόθεμα arg, μετακινείται προς τα πάνω με τον αντίστοιχο "
-"αριθμό εικονοστοιχείων."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "Συσκευασία παραθύρου κάτω"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window upwards until it `bumps into' another window."
 msgstr ""
 "Μετακινεί το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
 "Βλέπε `συσκευασία-παραθύρου-πάνω'."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow left"
-msgstr "Μεγάλωμα αριστερά"
+msgid "Pack window down"
+msgstr "Συσκευασία παραθύρου κάτω"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow right"
-msgstr "Μεγάλωμα δεξιά"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow up"
-msgstr "Μεγάλωμα πάνω"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow down"
-msgstr "Μεγάλωμα κάτω"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack left"
-msgstr "Συσκευασία αριστερά"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack right"
-msgstr "Συσκευασία δεξιά"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack up"
-msgstr "Συσκευασία πάνω"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack down"
-msgstr "Συσκευασία κάτω"
+#, fuzzy
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr ""
+"Μετακινεί το παράθυρο προς τα κάτω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
+"Βλέπε `συσκευασία-παραθύρου-πάνω'."
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1791,6 +1455,84 @@ msgstr "Μετακίνηση δρομέα προς τα κάτω"
 msgid "Move the cursor 1 pixel downwards."
 msgstr "Μετακίνηση του δρομέα 1 εικονοστοιχείο προς τα κάτω."
 
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest"
+msgstr "Μετακίνηση δρομέα προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northwest"
+msgstr ""
+"Μετακίνηση του δρομέα κατά `μετακίνηση-δρομέα-αύξηση' εικονοστοιχεία προς τα "
+"αριστερά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast"
+msgstr "Μετακίνηση δρομέα προς τα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northeast"
+msgstr ""
+"Μετακίνηση του δρομέα κατά `μετακίνηση-δρομέα-αύξηση' εικονοστοιχεία προς τα "
+"αριστερά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest"
+msgstr "Μετακίνηση δρομέα προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southwest"
+msgstr ""
+"Μετακίνηση του δρομέα κατά `μετακίνηση-δρομέα-αύξηση' εικονοστοιχεία προς τα "
+"αριστερά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast"
+msgstr "Μετακίνηση δρομέα προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southeast"
+msgstr ""
+"Μετακίνηση του δρομέα κατά `μετακίνηση-δρομέα-αύξηση' εικονοστοιχεία προς τα "
+"αριστερά."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest fine"
+msgstr "Μετακίνηση δρομέα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast fine"
+msgstr "Μετακίνηση δρομέα δεξιά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest fine"
+msgstr "Μετακίνηση δρομέα προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast fine"
+msgstr "Μετακίνηση δρομέα προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor center"
+msgstr "Μετακίνηση δρομέα προς τα αριστερά"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor to the center of the screen"
+msgstr "Μετακίνηση του δρομέα 1 εικονοστοιχείο προς τα αριστερά."
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1862,19 +1604,9 @@ msgid "How to choose window edges when resizing."
 msgstr "Εμφάνιση τρεχόντων διαστάσεων παραθύρων καθών αλλάζουν μέγεθος."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid ""
-"Distance in pixels before window edges align with each other.\n"
-"\n"
-"When moving a window, this option lets you align one of its edges with an "
-"edge of another window."
+msgid "Distance in pixels before window edges align with each other."
 msgstr ""
-"Απόσταση σε εικονοστοιχεία μέχρι οι άκρες του παραθύρου στοιχιστούν μεταξύ "
-"τους.\n"
-"\n"
-"Κατά την μετακίνηση ενός παραθύρου, αυτή η επιλογή σας επιτρέπει να "
-"στοιχίσετε μια από τις άκρες με την άκρη ενός άλλου παραθύρου."
 
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Μετακίνηση του παραθύρου διαδραστικά"
 
@@ -1912,31 +1644,39 @@ msgstr ""
 "Αναμονή για το χρήστη να επιλέξει παράθυρο, έπειτα διαδραστική αλλαγή του "
 "μεγέθους του."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Double window size"
+msgstr "Εναλλαγή του παράθυρου κολλώδες"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Halve window size"
+msgstr "Να γίνεται το παράθυρο κολλώδες"
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Ανασήκωση και μεταβίβαση μέσω πατήματος πλήκτρου"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
+"Raise the window that received the current event, then replay any pointer"
 msgstr ""
 "Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός και μετά επανάληψη\n"
 "οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Ανασήκωση και μεταβίβαση μέσω πατήματος αν είναι εστιασμένο"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
+"Raise the window that received the current event (if it's focused), then"
 msgstr ""
 "Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός (αν είναι εστιασμένο),\n"
 "και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "Ανασήκωση ή μεταβίβαση μέσω πατήματος"
 
@@ -1949,50 +1689,26 @@ msgid "Raise group and pass through click"
 msgstr "Ανασήκωση ομάδας και μεταβίβαση μέσω πατήματος"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
+#, fuzzy
+msgid "Raise the group of windows that received the current event, then replay"
 msgstr ""
 "Ανασήκωση της ομάδας παραθύρων που έλαβε το τρέχων γεγονός και μετά "
 "επανάληψη\n"
 "οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Ανασήκωση παροδικών και μεταβίβαση μέσω πατήματος"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
-msgstr ""
-"Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός και ότι άλλων "
-"παροδικώνέχει,\n"
-"και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
-msgid "Shrinking and Yanking of windows"
-msgstr "Μεγάλωμα και συσκευασία παραθύρων"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum height or width to which a window may be shrunk."
+msgid "Raise the window that received the current event and any transients it"
 msgstr ""
+"Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός και μετά επανάληψη\n"
+"οτιδήποτε γεγονότων δείκτη που έκανε κλήση της εντολής."
 
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "Να σύρεται το παράθυρο στα αριστερά"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2000,21 +1716,9 @@ msgid "Shrink window right"
 msgstr "Να σύρεται το παράθυρο στα δεξιά"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window up"
 msgstr "Να σύρεται το παράθυρο πάνω"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2022,20 +1726,9 @@ msgid "Shrink window down"
 msgstr "Να σύρεται το παράθυρο κάτω"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window left"
 msgstr "Συσκευασία παραθύρου αριστερά"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2043,28 +1736,14 @@ msgid "Yank window right"
 msgstr "Συσκευασία παραθύρου δεξιά"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window up"
 msgstr "Συσκευασία παραθύρου πάνω"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "Yanks WINDOW upwards until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Συσκευασία παραθύρου κάτω"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2178,6 +1857,47 @@ msgstr ""
 "Μετακίνηση της ομάδας παραθύρων `slide-window-increment' εικονοστοιχεία προς "
 "τα κάτω."
 
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Default Applications"
+msgstr "Εμφάνιση του μενού εφαρμογών."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "The program launched by the `xterm' command."
+msgstr "Το πρόγραμμα που εκτελέστηκε από την εντολή `xterm'."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "The program launched by the `browser' command."
+msgstr "Το πρόγραμμα που εκτελέστηκε από την εντολή `xterm'."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Xterm"
+msgstr "Τερματικό"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Start a new xterm."
+msgstr "Εκκίνηση νέου τερματικού."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Εξερεύνηση..."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Start a new browser instance"
+msgstr "Εκκίνηση νέου τερματικού."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "View clipboard"
+msgstr "Θύρα όψης"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Show the contents of the clipboard in a message window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Μετακίνηση θύρας όψης στην επόμενη"
@@ -2253,22 +1973,6 @@ msgid ""
 msgstr ""
 "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται μόνο κατά των λειτουργιών "
 "διαδοχής παραθύρων."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Το πρόγραμμα που εκτελέστηκε από την εντολή `xterm'."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Arguments given to the `xterm' command."
-msgstr "Παράμετροι για την εντολή `xterm'."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Xterm"
-msgstr "Τερματικό"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Start a new xterm."
-msgstr "Εκκίνηση νέου τερματικού."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -2564,6 +2268,16 @@ msgid "Maximized"
 msgstr "Μεγιστοποιημένο"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Επόμενος χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "θύρα όψης"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
 msgstr "Ανασήκωση παραθύρου κατά την εστίαση"
 
@@ -2646,6 +2360,15 @@ msgid "Never maximize"
 msgstr "Απόμεγιστοποίηση"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fullscreen"
+msgstr "οθόνη"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Fullscreen xinerama"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Μοναδικό όνομα"
 
@@ -2666,6 +2389,11 @@ msgid "Ignore stacking requests"
 msgstr "Αγνόηση αιτημάτων συσσώρευσης"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window name"
+msgstr "Παράθυρο:"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "Κατάσταση"
 
@@ -2673,21 +2401,19 @@ msgstr "Κατάσταση"
 msgid "Other"
 msgstr "Λοιπά"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Ανασήκωση παράθυρου"
+
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
 msgstr "Σκίαση Μετεώρισμα"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid ""
-"Enable shade-hover mode.\n"
-"\n"
-"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgid "Enable shade-hover mode."
 msgstr ""
-"Ενεργοποίηση κατάστασης σκίαση-μετεώρισμα.\n"
-"\n"
-"(Προσωρινή αποσκίαση των παραθύρων όταν ο δείκτης είναι από επάνω.)"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Καθυστέρηση σε ms πριν την αποσκίαση παραθύρων."
 
@@ -2970,104 +2696,93 @@ msgid "root-window-keymap"
 msgstr "χάρτης-πλήκτρων-παραθύρου-διαχειριστή"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
+"Keymap containing bindings active when the pointer is in the root window"
 msgstr ""
 "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
 "ριζικό παράθυρο\n"
 "(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "χάρτης-πλήκτρων-τίτλου"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the title of"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στον "
-"τίτλο\n"
-"ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+"ριζικό παράθυρο\n"
+"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "χάρτης-πλήκτρων-πλαισίου"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the border of"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"περιθώριο ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+"ριζικό παράθυρο\n"
+"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-κλεσίματος"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the close button"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί κλεισίματος ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
-"ποντίκι.)"
+"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+"ριζικό παράθυρο\n"
+"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-εικονοποίησης"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the iconify"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί εικονοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
-"ποντίκι.)"
+"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+"ριζικό παράθυρο\n"
+"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μεγιστοποίησης"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the maximize"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί μεγιστοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
-"ποντίκι.)"
+"Πίνακας χαρακτήρων με ενεργές συνδέσεις όταν αναγιγνώσκεται αλφαριθμητικό "
+"από το χρήστη."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-μενού"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the menu button"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί μενού ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+"ριζικό παράθυρο\n"
+"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "χάρτης-πλήκτρων-κουμπιού-σκίασης"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the shade button"
 msgstr ""
-"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο\n"
-"κουμπί σκίασης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι, "
-"σε αυτό το χάρτη.)"
+"Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι στο "
+"ριζικό παράθυρο\n"
+"(ή όταν κανένα παράθυρο δεν είναι εστιασμένο.)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "Πλήκτρο/α τροποποίησης για τις εξ ορισμού συντομεύσεις."
 
@@ -3121,13 +2836,98 @@ msgstr "_Επόμενο χώρος εργασίας"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to p_revious"
-msgstr "Αντιγραφή στο προηγούμενο"
+msgid "C_opy window to"
+msgstr "_Αποστολή παραθύρου στο"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to ne_xt"
-msgstr "Αντιγραφή στο επόμενο"
+msgid "P_revious workspace"
+msgstr "Προηγούμενος χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "Επόμενος χώρος εργασίας"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "Μεγάλωμα αριστερά"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "Μεγάλωμα δεξιά"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "Μεγάλωμα πάνω"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "Μεγάλωμα κάτω"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "Συσκευασία αριστερά"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "Συσκευασία δεξιά"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "Συσκευασία πάνω"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "Συσκευασία κάτω"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "Να σύρεται το παράθυρο στα αριστερά"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "Να σύρεται το παράθυρο στα δεξιά"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "Να σύρεται το παράθυρο πάνω"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "Να σύρεται το παράθυρο κάτω"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "Συσκευασία αριστερά"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "Συσκευασία δεξιά"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "Συσκευασία πάνω"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "Συσκευασία κάτω"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -3163,6 +2963,11 @@ msgstr "Τύπος πλαισίου"
 #, fuzzy
 msgid "Frame sty_le"
 msgstr "Μορφή πλαισίου"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "Αρχική Σελίδα Πριονόψαρου"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
@@ -3201,6 +3006,16 @@ msgstr "_Εγχειρίδιο..."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "_Περί του Πριονόψαρου..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Display Errors"
+msgstr "Προβολή σφαλμάτων"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "_Παράθυρα"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -3301,15 +3116,14 @@ msgstr "Ανασήκωση χαμηλού απλού παράθυρου"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
+#. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
+msgid "If the window is at its highest possible position, then lower it to its"
 msgstr ""
 "Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη\n"
 "χαμηλότερη δυνατή θέση. Διαφορετικά ανασήκωσέ το όσο πιο επάνω είναι "
 "επιτρεπτό."
 
-#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Ανασήκωση βάθους παράθυρου"
 
@@ -3390,14 +3204,12 @@ msgid "Toggle window sticky"
 msgstr "Εναλλαγή του παράθυρου κολλώδες"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+#, fuzzy
+msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
 msgstr ""
 "Αλλαγή της κολλώδους ιδιότητας `κολλώδες' του παραθύρου· είτε είναι μέλος\n"
 "όλων των χώρων εργασίας είτε όχι."
 
-#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Κολλώδες"
 
@@ -3535,26 +3347,22 @@ msgid "Maximize window horizontally toggle"
 msgstr "Οριζόντια μεγιστοποίηση παραθύρου με εναλλαγή"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between horizontally maximized and"
 msgstr ""
 "Αλλαγή της κατάστασης παραθύρου μεταξύ οριζόντια μεγιστοποιημένου και\n"
 "μη μεγιστοποιημένου."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Κάθετη μεγιστοποίηση παραθύρου με με εναλλαγή"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized and"
 msgstr ""
 "Αλλαγή της κατάστασης παραθύρου μεταξύ κάθετα μεγιστοποιημένου και\n"
 "μη μεγιστοποιημένου."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Μεγιστοποίηση γεμίσματος παραθύρου"
 
@@ -3594,25 +3402,32 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "Αλλγή μεγιστοποίησης γεμίσματος παραθύρου εναλλαγής οριζόντια"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and\n"
-"unmaximized."
+"Toggle the state of the window between horizontally maximized-filled and"
 msgstr ""
 "Αλλαγή της κατάστασης παραθύρου μεταξύ οριζόντια μεγιστοποιημένου-"
 "γεμισμένου\n"
 "και μη μεγιστοποιημένου."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Μεγιστοποίηση γεμίσματος παραθύρου εναλλαγής κάθετα"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized-filled and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized-filled and"
 msgstr ""
 "Αλλαγή της κατάστασης παραθύρου μεταξύ κάθετα μεγιστοποιημένου-γεμισμένου\n"
 "και μη μεγιστοποιημένου."
+
+#, fuzzy
+msgid "Maximize unframe"
+msgstr "Μεγιστοποίηση παραθύρου"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize reframe"
+msgstr "Μεγιστοποιημένο"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -3670,14 +3485,12 @@ msgid "Unshade window"
 msgstr "Αποσκίαση παράθυρου"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-msgid ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
-"state."
+#, fuzzy
+msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
 msgstr ""
 "Αν το παράθυρο είναι σκιασμένο (δείτε `σκίαση-παραθύρου'), επαναφορά\n"
 "στη συνήθη κατάσταση."
 
-#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Εναλλαγή σκιασμένων παραθύρων"
 
@@ -3700,43 +3513,24 @@ msgid "Raise window and transients"
 msgstr "Ανασήκωση παραθύρων και βραχύβιων"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking\n"
-"order. Also raise any transient windows that it has."
+"Raise the current window to its highest allowed position in the stacking"
 msgstr ""
-"Ανασήκωση του τρέχοντος παραθύρου στην ψηλότερη επιτρεπτή θέση στη διάταξη\n"
-"στοιβάγματος. Επίσης ανασήκωση οτιδήποτε βραχύβιων παραθύρων έχει."
+"Ανασήκωση του παραθύρου στην ψηλότερη δυνατή θέση στη σειρά στοιβάγματος."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Χαμήλωμα παραθύρων και βραχύβιων"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Lower the current window to its lowest allowed position in the stacking\n"
-"order. Also lower any transient windows that it has."
+#, fuzzy
+msgid "Lower the current window to its lowest allowed position in the stacking"
 msgstr ""
-"Κατέβασμα του τρέχοντος παραθύρου στη χαμηλότερη επιτρεπτή θέση στη διάταξη\n"
-"στοιβάγματος. Επίσης χαμήλωμα οτιδήποτε βραχύβιων παραθύρων έχει."
+"Κατέβασμα του παραθύρου στη χαμηλότερη δυνατή θέση στη σειρά στοιβάγματος."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Ανασήκωση χαμηλού παράθυρου και βραχύβιων"
 
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
-msgstr ""
-"Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη "
-"χαμηλότερη\n"
-"δυνατή θέση. Διαφορετικά, ανασήκωσέ το όσο πιο πολύ επιτρέπεται. Επίσεις, "
-"αλλάζει\n"
-"το επίπεδο οτιδήποτε βραχύβιων παραθύρων υπάρχουν."
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3851,16 +3645,15 @@ msgid "Quote event"
 msgstr "Παράθεση γεγονότος"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+#, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring\n"
-"any window manager bindings that it may have."
+"Sends the next key event directly to the focused client window, ignoring"
 msgstr ""
 "Αποστέλνει το επόμενο γεγονός πλήκτρολογίου κατευθείαν στο εστιασμένο "
 "παράθυρο\n"
 "πελάτη, αγνοώντας οτιδήποτε συνδέσεις μπορεί να έχει ο διαχειριστής "
 "παραθύρων."
 
-#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "Συσκευασία παραθύρου πάνω"
@@ -3937,6 +3730,10 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid "Windows uniconify to the current viewport."
 msgstr "Μετακίνηση ομάδας στην τρέχουσα θύρα όψης"
@@ -3957,6 +3754,10 @@ msgstr ""
 #, fuzzy
 msgid "stop"
 msgstr "Παραμετροποίηση"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "dynamic"
+msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Whether to stop or wrap-around on first/last viewport"
@@ -4317,27 +4118,25 @@ msgid "Merge next workspace"
 msgstr "Συγχώνευση επόμενου χώρου εργασίας"
 
 #. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
+"Delete the current workspace. Its member windows are relocated to the next"
 msgstr ""
 "Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στο "
 "επόμενο\n"
 "χώρο εργασίας."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Συγχώνευση προηγούμενου χώρου εργασίας"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
+#, fuzzy
+msgid "Delete the current workspace. Its member windows are relocated to the"
 msgstr ""
-"Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στον\n"
-"προηγούμενο χώρο εργασίας."
+"Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στο "
+"επόμενο\n"
+"χώρο εργασίας."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Εισαγωγή χώρου εργασίας μετά"
 
@@ -4382,15 +4181,13 @@ msgid "Delete window instance"
 msgstr "Διαγραφή διεργασίας παραθύρου"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
+#, fuzzy
+msgid "Remove the copy of the window on the current workspace. If this is the"
 msgstr ""
 "Διαγραφή του αντιγράφου του παραθύρου από τον τρέχον χώρο εργασίας. Αν "
 "είναι\n"
 "το τελευταίο αντίγραφο που απομένει, διέγραψε το ίδιο το παράθυρο."
 
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "Εστίαση επιφάνειας εργασίας"
@@ -4440,6 +4237,180 @@ msgstr "Διαδραστική επιλογή παραθύρου"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Ερώτηση επιλογής χώρου εργασίας και αλλαγή σε αυτό."
+
+#~ msgid "Select color"
+#~ msgstr "Επιλογή χρώματος"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Μεγάλωμα και συσκευασία παραθύρων"
+
+#~ msgid ""
+#~ "Grows window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
+#~ "With a universal prefix arg, maximize upwards instead.\n"
+#~ "With a numeric prefix arg, grow upwards by that many increments specified "
+#~ "by\n"
+#~ "window or pixels instead."
+#~ msgstr ""
+#~ "Μεγαλώνει το παράθυρο προς τα πάνω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
+#~ "Αν η πάνω άκρη είναι έξω από την άκρη της οθόνης, μετακινείται πίσω.\n"
+#~ "Με ένα γενικό πρόθεμα arg, μεγιστοποιεί προς τα επάνω.\n"
+#~ "Με ένα αριθμητικό πρόθεμα arg, μεγαλώνει προς τα πάνω με τον αντίστοιχο\n"
+#~ "αριθμό βαθμίδων που καθορίζονται από το παράθυρο ή εικονοστοιχείων."
+
+#~ msgid ""
+#~ "Moves window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
+#~ "With a universal prefix arg, move upwards maximally instead.\n"
+#~ "With a numeric prefix arg, move upwards by that many pixels instead."
+#~ msgstr ""
+#~ "Μετακινεί το παράθυρο προς τα πάνω μέχρι να ακουμπήσει σε άλλο παράθυρο.\n"
+#~ "Αν η πάνω άκρη είναι έξω από την άκρη της οθόνης, μετακινείται πίσω.\n"
+#~ "Με ένα γενικό πρόθεμα arg, μετακινείται προς τα πάνω στο μέγιστο βαθμό.\n"
+#~ "Με ένα αριθμητικό πρόθεμα arg, μετακινείται προς τα πάνω με τον "
+#~ "αντίστοιχο αριθμό εικονοστοιχείων."
+
+#~ msgid ""
+#~ "Distance in pixels before window edges align with each other.\n"
+#~ "\n"
+#~ "When moving a window, this option lets you align one of its edges with an "
+#~ "edge of another window."
+#~ msgstr ""
+#~ "Απόσταση σε εικονοστοιχεία μέχρι οι άκρες του παραθύρου στοιχιστούν "
+#~ "μεταξύ τους.\n"
+#~ "\n"
+#~ "Κατά την μετακίνηση ενός παραθύρου, αυτή η επιλογή σας επιτρέπει να "
+#~ "στοιχίσετε μια από τις άκρες με την άκρη ενός άλλου παραθύρου."
+
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it\n"
+#~ "has, then replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Ανασήκωση του παραθύρου που έλαβε το τρέχων γεγονός και ότι άλλων "
+#~ "παροδικώνέχει,\n"
+#~ "και έπειτα επανάληψη οτιδήποτε γεγονότων δείκτη που έκανε κλήση της "
+#~ "εντολής."
+
+#, fuzzy
+#~ msgid "Shrinking and Yanking of windows"
+#~ msgstr "Μεγάλωμα και συσκευασία παραθύρων"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Παράμετροι για την εντολή `xterm'."
+
+#~ msgid ""
+#~ "Enable shade-hover mode.\n"
+#~ "\n"
+#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
+#~ msgstr ""
+#~ "Ενεργοποίηση κατάστασης σκίαση-μετεώρισμα.\n"
+#~ "\n"
+#~ "(Προσωρινή αποσκίαση των παραθύρων όταν ο δείκτης είναι από επάνω.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στον τίτλο\n"
+#~ "ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "περιθώριο ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί κλεισίματος ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί εικονοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί μεγιστοποίησης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί μενού ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το ποντίκι.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Χάρτης πλήκτρων με συνδέσεις που ενεργοποιούνται όταν ο δείκτης είναι "
+#~ "στο\n"
+#~ "κουμπί σκίασης ενός παραθύρου. (Μόνο για συνδέσεις που αφορούν το "
+#~ "ποντίκι, σε αυτό το χάρτη.)"
+
+#, fuzzy
+#~ msgid "Copy to p_revious"
+#~ msgstr "Αντιγραφή στο προηγούμενο"
+
+#, fuzzy
+#~ msgid "Copy to ne_xt"
+#~ msgstr "Αντιγραφή στο επόμενο"
+
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking\n"
+#~ "order. Also raise any transient windows that it has."
+#~ msgstr ""
+#~ "Ανασήκωση του τρέχοντος παραθύρου στην ψηλότερη επιτρεπτή θέση στη "
+#~ "διάταξη\n"
+#~ "στοιβάγματος. Επίσης ανασήκωση οτιδήποτε βραχύβιων παραθύρων έχει."
+
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking\n"
+#~ "order. Also lower any transient windows that it has."
+#~ msgstr ""
+#~ "Κατέβασμα του τρέχοντος παραθύρου στη χαμηλότερη επιτρεπτή θέση στη "
+#~ "διάταξη\n"
+#~ "στοιβάγματος. Επίσης χαμήλωμα οτιδήποτε βραχύβιων παραθύρων έχει."
+
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
+#~ "changes\n"
+#~ "the level of any transient windows it has."
+#~ msgstr ""
+#~ "Αν το παράθυρο είναι στην ψηλότερη δυνατή θέση, τότε κατέβασέ το στη "
+#~ "χαμηλότερη\n"
+#~ "δυνατή θέση. Διαφορετικά, ανασήκωσέ το όσο πιο πολύ επιτρέπεται. Επίσεις, "
+#~ "αλλάζει\n"
+#~ "το επίπεδο οτιδήποτε βραχύβιων παραθύρων υπάρχουν."
+
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the\n"
+#~ "previous workspace."
+#~ msgstr ""
+#~ "Διαγραφή του τρέχοντος χώρου εργασίας. Τα παράθυρά του μεταφέρονται στον\n"
+#~ "προηγούμενο χώρο εργασίας."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"

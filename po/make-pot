@@ -23,7 +23,9 @@
 case $1 in
 	*update)
 		intltool-update --pot
-		mv -f untitled.pot sawfish.pot
+		if test -e untitled.pot; then
+		       	mv -f untitled.pot sawfish.pot
+		fi
 	;;
 
 	*generate)

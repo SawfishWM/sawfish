@@ -1,10 +1,11 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 #
+#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 21:37+0200\n"
+"POT-Creation-Date: 2009-08-24 21:17+0200\n"
 "PO-Revision-Date: 2002-11-05 13:02+0200\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -196,98 +197,46 @@ msgid "none"
 msgstr "няма"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"decoration mode\n"
-"\n"
-"set the mode 'when to draw a titlebar and window buttons'. the decoration "
-"mode 'all' means that all windows, even transients/dialogs, will get a "
-"titlebar and buttons. none means no window will get any :-). usually "
-"transients only have a contents-border. this option is for reimplementing a "
-"sawfish feature that is gone in the latest version."
+msgid "decoration mode"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
+msgid ");"
+msgstr ""
+
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize title string\n"
-"\n"
-"see the tooltip for the 'title string' option below for more information. "
-"(NOTE: i hope the redrawing problems with this option are solved. if not, "
-"write an email please!)"
+msgid "customize title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string\n"
-"\n"
-"the string you insert here will be your new title string. variables always "
-"start with a dollar-sign $ and are replaced with their actual values. to get "
-"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
-"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
-"string]. the following vars are built-in: $name, $fullname, $width, $width-"
-"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
-"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
-"if not, write an email please!"
+msgid "title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"update title string periodically\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "update title string periodically"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string update interval (1 - 1000000 s)\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "title string update interval (1 - 1000000 s)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string font\n"
-"\n"
-"you should really choose a better font. verdana bold 8 pt looks nice."
+msgid "title string font"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize title position\n"
-"\n"
-"by default the title string is centered horizontally and vertically."
-msgstr ""
+#, fuzzy
+msgid "customize title position"
+msgstr "maximize-button-keymap"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "у цэнтры"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal alignment\n"
-"\n"
-"'real-center' means to take the whole titlebar into account while centering "
-"the string. when selecting 'center' only the distance between the buttons is "
-"taken into account."
+msgid "title string horizontal alignment"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
-"\n"
-"the horizontal position of the title string can only be adjusted if the "
-"horizontal alignment is not 'center'. the range also depends on the setting "
-"of the option above. it the title string is already aligned left, you cannot "
-"adjust it to be even further left because there are button in the way."
+msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -304,32 +253,16 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient titlebar background (experimental)\n"
-"\n"
-"when activating the gradient background the normal titlebar background "
-"colors will be ignored. besides the button background colors will be "
-"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
-"low value, ie high quality.)"
+msgid "gradient titlebar background (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient mode\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used."
+#, fuzzy
+msgid "gradient mode"
+msgstr "прамежкавыя вокны"
+
+msgid "gradient quality (1 best - 20 worst)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient quality (1 best - 20 worst)\n"
-"\n"
-"the value here is the factor the calculated gradient image will be scaled "
-"down. this increases speed but decreases quality."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -347,44 +280,24 @@ msgid "custom"
 msgstr "Наладзіць"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient color mode\n"
-"\n"
-"the custom mode will respect the colors set in the list below."
-msgstr ""
+#, fuzzy
+msgid "gradient color mode"
+msgstr "Градыентная тэма"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used. besides the gradient color mode must be set to "
-"custom to activate this list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "Выбярыце колер"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused/highlighted titlebar colors hue (0 - 360)\n"
-"\n"
-"this value changes the hue of a color, by moving (0 - 360) degress around "
-"the color cycle...180 for example inverts the color"
+msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)\n"
-"\n"
-"the saturation of a color is a measurement of the color intensity"
+"color)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -392,50 +305,21 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"  focused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"  focused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize extended title string colors\n"
-"\n"
-"you can customize additional colors of the title string. if you deactivate "
-"this, these colors will be set to the focused title string color."
+msgid "customize extended title string colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -492,62 +376,32 @@ msgid "ball-12"
 msgstr "усе"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button icon set (experimental)\n"
-"\n"
-"the number at the end is the width/height of the button icons in the icon "
-"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgid "button icon set (experimental)"
+msgstr ""
+
+#, fuzzy
+msgid "customize button size"
+msgstr "maximize-button-keymap"
+
+msgid "buttons size (1 - 1000 pixel)"
+msgstr ""
+
+msgid "button vertical alignment"
+msgstr ""
+
+msgid "scale button icons (experimental)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize button size\n"
-"\n"
-"by default the button size follows the size of the titlebar, but by "
-"activating this you can set it to something different."
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"buttons size (1 - 1000 pixel)\n"
-"\n"
-"a buttons size that is bigger than your current titlebar height is ignored."
-msgstr ""
+#, fuzzy
+msgid "display window icon on menu button"
+msgstr "Адлюстроўваць значку акна."
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button vertical alignment\n"
-"\n"
-"if a button is smaller than the titlebar you might want to set its vertical "
-"alignment."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"scale button icons (experimental)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"display window icon on menu button\n"
-"\n"
-"many people like having the window-icon displayed on the menu-button. this "
-"icon is defined by the application itself and is also shown in your pager "
-"and task-list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -564,15 +418,9 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
-"\n"
-"enabling this will allow you to set the positon of each button in the "
-"titlebar manually. a negative/positiv value means the button will be drawn "
-"on left/right side of the titlebar."
+msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -581,16 +429,10 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button position model\n"
-"\n"
-"'titel-height' means calculate position as multiple of title height. when "
-"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
-"mind that several buttons might slide on top of each other. 'none' means no "
-"buttons at all."
-msgstr ""
+#, fuzzy
+msgid "button position model"
+msgstr "Запомніць пазыцыю"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "Запомніць пазыцыю"
@@ -651,12 +493,9 @@ msgid "lock button position"
 msgstr "close-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize sticky button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: toggle sticky "
-"state of window"
-msgstr ""
+#, fuzzy
+msgid "customize sticky button keymap"
+msgstr "iconify-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -664,13 +503,9 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "iconify-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize previous button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"previous workspace - button2 workspace-list - button3 send window to first "
-"workspace - button6 pack window left"
-msgstr ""
+#, fuzzy
+msgid "customize previous button keymap"
+msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -678,54 +513,27 @@ msgid "mxflat:previous-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize next button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"next workspace - button2 workspace-list - button3 send window to last "
-"workspace - button6 pack window right"
-msgstr ""
+#, fuzzy
+msgid "customize next button keymap"
+msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "menu-button-keymap"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: send window to next workspace - button2 workspace-list - button3 "
-"send window to last workspace - button6 pack window right"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize configure button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
-msgstr ""
+#, fuzzy
+msgid "customize configure button keymap"
+msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "menu-button-keymap"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize info button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: window list - "
-"button3 window snooper (not included by default)"
-msgstr ""
+#, fuzzy
+msgid "customize info button keymap"
+msgstr "iconify-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -733,22 +541,13 @@ msgid "mxflat:info-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"always on top depth (-1000 - 1000)\n"
-"\n"
-"a window will have this depth after you have pressed the always-on-top "
-"button. 0 is the normal window level. every positive value means above other "
-"windows, a negative value means below. keept it at a positive value in order "
-"to have the always-on-top button do it's job."
+msgid "always on top depth (-1000 - 1000)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize always-on-top button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: sets window "
-"depth to the adjusted value"
-msgstr ""
+#, fuzzy
+msgid "customize always-on-top button keymap"
+msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -756,12 +555,9 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize look button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: lock window "
-"position"
-msgstr ""
+#, fuzzy
+msgid "customize look button keymap"
+msgstr "maximize-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -769,14 +565,9 @@ msgid "mxflat:lock-button-keymap"
 msgstr "close-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button-colors\n"
-"\n"
-"when you active this you will be able to set custom button colors. by "
-"default the button colors depend on the titlebar colors."
+msgid "customize button-colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -817,85 +608,35 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width (0 - 1000 pixel)\n"
-"\n"
-"set the width border around the window."
+msgid "border width (0 - 1000 pixel)"
+msgstr ""
+
+msgid "border width for maximized windows (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width for maximized windows (0 - 1000 pixel)\n"
-"\n"
-"when you like having a big border around your windows you might have noticed "
-"that sawfish still draws that big border when the window is maximized. if "
-"you don't want that, set the border width for maximized windows smaller than "
-"the border width for unmaximized windows. (NOTE: this feature is still buggy "
-"as sawfish does not resize the windows correctly yet, so the best might be "
-"to set it to the normal border width.)"
+msgid "customize border for focused windows (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize border for focused windows (experimental)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "border width for focused windows (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border width for focused windows (0 - 1000 pixel)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "title-contents border width (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title-contents border width (0 - 1000 pixel)\n"
-"\n"
-"sets the widths of the line between titlebar and contents window"
+msgid "border offset (-1000 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border offset (-1000 - 1000 pixel)\n"
-"\n"
-"adjust the point where the border actually starts. many gtk2 apps draw a "
-"small black border around their contents window and this is just ugly when "
-"sawfish draws another border around the window. with a border offset of -1 "
-"the sawfish window border will overlay the gtk2 border exactly."
+msgid "keep window borders and corners at their place when shading a window"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"keep window borders and corners at their place when shading a window\n"
-"\n"
-"when shading a window borders and corners will stay where they were and not "
-"merge with the titlebar."
+#, fuzzy
+msgid "show window corners"
+msgstr "Павялічваць акно наніз да канца"
+
+msgid "corners length adjustement (-1 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"show window corners\n"
-"\n"
-" the corners are used to resize a window in two directions at the same time. "
-"usually the width and length of window corners are determined by the border "
-"width but you can adjust them below."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"corners length adjustement (-1 - 100 pixel)\n"
-"\n"
-"increasing the corner length will grow the window corners along the window "
-"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
-"grab the 1 pixel corner to be able to resize the window in two directions; "
-"thus, make it bigger."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -908,29 +649,16 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"corners width adjustement (0 - 100 pixel)\n"
-"\n"
-"this option makes the window corners broader. with a border width of 1 pixel "
-"it is hard to grab this 1 pixel corner to be able to resize the window in "
-"two directions; thus, make it bigger."
+msgid "corners width adjustement (0 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow (experimental)\n"
-"\n"
-"draw a small additional border around your windows emulating a solid shadow "
-"effect. use the options below to adjust its width and direction. (NOTE: this "
-"is VERY cpu intensive and might slow down your computer noticably. so turn "
-"it on at your own risk.)"
+msgid "fake shadow (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "Відарыс радку для вокнаў па-за засяроджаньнем."
@@ -972,23 +700,13 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light source\n"
-"\n"
-"set the direction of the fake shadow. usually only 2 or 3 borders of your "
-"window have a fake shadow. this depends on where the light comes from."
+#, fuzzy
+msgid "fake shadow light source"
+msgstr "Зрабіць акно ігнараваным"
+
+msgid "fake shadow light distance (0 - 100)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light distance (0 - 100)\n"
-"\n"
-"this option has only an effect on the north, east, south and west light "
-"sources. the further away the light source is, the smaller will the two "
-"'side' shadows be."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -997,14 +715,9 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize border colors\n"
-"\n"
-"you can customize your border colors here. if you deactivate this, these "
-"colors will be set to the focused title string color."
+msgid "customize border colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1097,10 +810,6 @@ msgstr "Клявіша"
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
 msgstr "Значэньне"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-msgid "Select color"
-msgstr "Выбярыце колер"
 
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
@@ -1231,6 +940,11 @@ msgstr "Дзеяньні"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "Дзеяньні"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1489,10 +1203,6 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Выдаляць усе вокны ў групе, да якой належыць акно."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Growing and packing of windows"
-msgstr "Павялічэньне й памяньшэньне вокнаў"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing is considered to be maximization."
 msgstr ""
 
@@ -1530,13 +1240,20 @@ msgid "Whether to bump into ignored windows."
 msgstr "Ці сутыкаюцца ігнараваныя вокны пад час павялічэньня й памяньшэньня."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Павялічваць акно ўлева да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the left until it `bumps into' another window."
 msgstr ""
 "Павялічваць акно ўлева, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
 "Глядзіце `grow-window-up'."
@@ -1546,9 +1263,8 @@ msgid "Grow window right"
 msgstr "Павялічваць акно ўправа да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the right until it `bumps into' another window."
 msgstr ""
 "Павялічваць акно ўправа, покуль яно ня \"сутыкнецца з іншым акном.\n"
 "Глядзіце `grow-window-up'."
@@ -1559,23 +1275,17 @@ msgstr "Павялічваць акно ўгору да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
-msgstr "Павялічвае акно угору покуль яно ня сутыкнецца з іншым вкном.\n"
+msgid "Grows window upwards until it `bumps into' another window."
+msgstr ""
+"Павялічваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `grow-window-up'."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Павялічваць акно наніз да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window downwards until it `bumps into' another window."
 msgstr ""
 "Павялічваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
 "Глядзіце `grow-window-up'."
@@ -1585,9 +1295,8 @@ msgid "Pack window left"
 msgstr "Перасунуць акно ўлева да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the left until it `bumps into' another window."
 msgstr ""
 "Пераносіць акно ўлева, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
 "Глядзіце `pack-window-up'."
@@ -1597,9 +1306,8 @@ msgid "Pack window right"
 msgstr "Перасунуць акно ўправа да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the right until it `bumps into' another window."
 msgstr ""
 "Пераносіць акно ўправа, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
 "Глядзіце `pack-window-up'."
@@ -1610,56 +1318,20 @@ msgstr "Перасунуць акно ўгору да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr "Перасоўваць акно вышэй, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "Перасунуць акно наніз да канца"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
+msgid "Moves window upwards until it `bumps into' another window."
 msgstr ""
 "Перасоўваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
 "Глядзіце `pack-window-up'."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow left"
-msgstr "Павялічваць улева"
+msgid "Pack window down"
+msgstr "Перасунуць акно наніз да канца"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow right"
-msgstr "Павялічваць управа"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow up"
-msgstr "Павялічваць дагары"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow down"
-msgstr "Павялічваць да долу"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack left"
-msgstr "Перасунуць улева"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack right"
-msgstr "Перасунуць управа"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack up"
-msgstr "Перасунуць ўгору"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack down"
-msgstr "Перасунуць наніз"
+#, fuzzy
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr ""
+"Перасоўваць акно наніз, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+"Глядзіце `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1756,6 +1428,80 @@ msgstr "Перасунуць курсор наніз на 1"
 msgid "Move the cursor 1 pixel downwards."
 msgstr "Перасунуць курсор на 1 піксэл наніз."
 
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest"
+msgstr "Перасунуць курсор управа"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northwest"
+msgstr ""
+"Перасунуць указальнік на \"крок перасоўваньня курсору\" піксэлаў улева."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast"
+msgstr "Перасунуць курсор управа"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northeast"
+msgstr ""
+"Перасунуць указальнік на \"крок перасоўваньня курсору\" піксэлаў улева."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest"
+msgstr "Перасунуць курсор улева"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southwest"
+msgstr ""
+"Перасунуць указальнік на \"крок перасоўваньня курсору\" піксэлаў улева."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast"
+msgstr "Перасунуць курсор улева"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southeast"
+msgstr ""
+"Перасунуць указальнік на \"крок перасоўваньня курсору\" піксэлаў улева."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest fine"
+msgstr "Перасунуць курсор управа на 1"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast fine"
+msgstr "Перасунуць курсор управа на 1"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest fine"
+msgstr "Перасунуць курсор улева на 1"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast fine"
+msgstr "Перасунуць курсор улева на 1"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor center"
+msgstr "Перасунуць курсор улева"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor to the center of the screen"
+msgstr "Перасунуць курсор на 1 піксэл улева."
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1827,17 +1573,9 @@ msgid "How to choose window edges when resizing."
 msgstr "Адлюстроўваць бягучыя памеры падчас зьмяненьня памераў акна."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid ""
-"Distance in pixels before window edges align with each other.\n"
-"\n"
-"When moving a window, this option lets you align one of its edges with an "
-"edge of another window."
+msgid "Distance in pixels before window edges align with each other."
 msgstr ""
-"Адлегласьць у піксэлях да таго, як вокны параўнаюцца адно з адным.\n"
-"\n"
-"Пад час пераносу акна гэтая опцыя дазваляе раўнаць край акна з краям іншага."
 
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Перасоўваць акно інтэрактыўна"
 
@@ -1875,33 +1613,41 @@ msgstr ""
 "Чакаць покуль карыстальнік выбярэ акно, затым інтэрактыўна зьмяняць памер "
 "гэтага акна."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Double window size"
+msgstr "Пераключыць ліпкасьць акна"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Halve window size"
+msgstr "Зрабіць акно ліпкім"
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Падняць акно й перадаць падзею"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
+"Raise the window that received the current event, then replay any pointer"
 msgstr ""
 "Падняць акно, якое атрымала бягучую падзею, потым паўтарыць падзеі "
 "ўказальніку,\n"
 "якія выклікалі гэтую каманду."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Падняць і перадаць падзею калі акно актыўнае"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
+"Raise the window that received the current event (if it's focused), then"
 msgstr ""
 "Падняць акно, якое атрымала бягучую падзею (калі яно мае засяроджаньне), "
 "потым паўтарыць\n"
 "падзеі указальніку, якія выклікалі гэтую каманду."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "Падняць ці перадаць падзею"
 
@@ -1914,50 +1660,27 @@ msgid "Raise group and pass through click"
 msgstr "Падняць групу й перадаць падзею"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
+#, fuzzy
+msgid "Raise the group of windows that received the current event, then replay"
 msgstr ""
 "Падняць групу вокнаў, атрымаўшых бягучую падзею, потым паўтарыць падзеі "
 "ўказальніку,\n"
 "якія выклікалі гэтую каманду."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Падняць дыялёгі й перадаць падзею"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
-msgstr ""
-"Падняць акно й усе яго часовыя вокны, атрымаўшыя бягучую падзею (калі яны "
-"маюць засяроджаньне),\n"
-"потым паўтарыць падзеі ўказальніку, якія выклікалі гэтую каманду."
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
-msgid "Shrinking and Yanking of windows"
-msgstr "Павялічэньне й памяньшэньне вокнаў"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum height or width to which a window may be shrunk."
+msgid "Raise the window that received the current event and any transients it"
 msgstr ""
+"Падняць акно, якое атрымала бягучую падзею, потым паўтарыць падзеі "
+"ўказальніку,\n"
+"якія выклікалі гэтую каманду."
 
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "Зрушыць акно ўлева"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1965,21 +1688,9 @@ msgid "Shrink window right"
 msgstr "Зрушыць акно ўправа"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window up"
 msgstr "Зрушыць акно ўгору"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1987,20 +1698,9 @@ msgid "Shrink window down"
 msgstr "Зрушыць акно ўніз"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window left"
 msgstr "Перасунуць акно ўлева да канца"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2008,28 +1708,14 @@ msgid "Yank window right"
 msgstr "Перасунуць акно ўправа да канца"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window up"
 msgstr "Перасунуць акно ўгору да канца"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "Yanks WINDOW upwards until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Перасунуць акно наніз да канца"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2127,6 +1813,47 @@ msgstr "Зрушыць групу наніз"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Зрушыць групу акна на \"крок зруху акна\" піксэлаў наніз."
 
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Default Applications"
+msgstr "Адлюстраваць мэню дастасаваньняў."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "The program launched by the `xterm' command."
+msgstr "Праграма, якая запускаецца камандай \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "The program launched by the `browser' command."
+msgstr "Праграма, якая запускаецца камандай \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Start a new xterm."
+msgstr "Запусьціць новы xterm."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Прагляд..."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Start a new browser instance"
+msgstr "Запусьціць новы xterm."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "View clipboard"
+msgstr "Вобласьць прагляду"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Show the contents of the clipboard in a message window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Перайсьці на наст. вобласьць прагляду"
@@ -2197,22 +1924,6 @@ msgstr "cycle-keymap"
 msgid ""
 "Keymap containing bindings active only during window cycling operations."
 msgstr "Камбінацыі, актыўныя пад час пераходу між вокнамі."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Праграма, якая запускаецца камандай \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Arguments given to the `xterm' command."
-msgstr "Аргумэнты, якія перадаюцца камандзе \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Start a new xterm."
-msgstr "Запусьціць новы xterm."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -2501,6 +2212,16 @@ msgid "Maximized"
 msgstr "Максымізаваць"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Наст. працоўная прастора"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "вобласьць прагляду"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
 msgstr "Паднімаць пад час перадачы засяроджаньня"
 
@@ -2583,6 +2304,15 @@ msgid "Never maximize"
 msgstr "Вярнуць _памер"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fullscreen"
+msgstr "экран"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Fullscreen xinerama"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Унікальнае імя"
 
@@ -2603,6 +2333,11 @@ msgid "Ignore stacking requests"
 msgstr "Ігнараваць запыты зьмены стосу"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window name"
+msgstr "Акно:"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "Стан"
 
@@ -2610,21 +2345,19 @@ msgstr "Стан"
 msgid "Other"
 msgstr "Іншае"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Падняць акно"
+
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
 msgstr "Часовае аўтавысоўваньне"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid ""
-"Enable shade-hover mode.\n"
-"\n"
-"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgid "Enable shade-hover mode."
 msgstr ""
-"Дазволіць рэжым часовага аўтавысоўваньня.\n"
-"\n"
-"(Часова высоўвае вокны пад час прахаджэньня ўказальніку па-над імі.)"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Затрымка ў мілісэкундах перад высоўваньнем акна"
 
@@ -2908,98 +2641,84 @@ msgid "root-window-keymap"
 msgstr "root-window-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
+"Keymap containing bindings active when the pointer is in the root window"
 msgstr ""
 "Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
 "засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "title-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the title of"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на загалоўке акна. "
-"(Дапушчальныя толькі падзеі мышы)"
+"Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
+"засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "border-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the border of"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на рамке акна. (Дапушчальныя "
-"толькі падзеі мышы)"
+"Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
+"засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "close-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the close button"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы закрыцьця акна. "
-"(Дапушчальны толькі падзеі мышы)"
+"Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
+"засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "iconify-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the iconify"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы сгортваньня акна ў "
-"значку. (Дапушчальныя толькі падзеі мышы)"
+"Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
+"засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "maximize-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы найбольшаньня "
-"акна. (Дапушчальны толькі падзеі мышы)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the maximize"
+msgstr "Камбінацыі актыўныя пад час чытаньня радку ўводу карыстальніку."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the menu button"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы мэню окна. "
-"(Дапушчальны толькі падзеі мышы)"
+"Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
+"засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "shade-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the shade button"
 msgstr ""
-"Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы хаваньня акна. "
-"(Дапушчальныя толькі падзеі мышы)"
+"Камбінацыі актыўныя калі курсор знаходзіцца ў каранёвым акне (ці няма "
+"засяроджаных вокнаў)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "Клявіша-мадыфікатар для дапомных хуткіх клявішаў."
 
@@ -3053,13 +2772,98 @@ msgstr "_Наст. працоўная прастора"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to p_revious"
-msgstr "Скапіяваць на папяр."
+msgid "C_opy window to"
+msgstr "Да_слаць вакно на"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to ne_xt"
-msgstr "Скапіяваць на наст."
+msgid "P_revious workspace"
+msgstr "Папяр. працоўная прастора"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "Наст. працоўная прастора"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "Павялічваць улева"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "Павялічваць управа"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "Павялічваць дагары"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "Павялічваць да долу"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "Перасунуць улева"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "Перасунуць управа"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "Перасунуць ўгору"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "Перасунуць наніз"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "Зрушыць акно ўлева"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "Зрушыць акно ўправа"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "Зрушыць акно ўгору"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "Зрушыць акно ўніз"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "Перасунуць улева"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "Перасунуць управа"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "Перасунуць ўгору"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "Перасунуць наніз"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -3097,6 +2901,11 @@ msgid "Frame sty_le"
 msgstr "Стыль кадру"
 
 #. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "Хатняя старонка Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
 msgstr "_Вокны"
 
@@ -3131,6 +2940,16 @@ msgstr "_Кіраўніцтва..."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "_Пра Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Display Errors"
+msgstr "Адлюстраваць паведамленьні пра памылкі"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "_Вокны"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -3228,14 +3047,13 @@ msgstr "Падняць/апусьціць адно акно"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
+#. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
+msgid "If the window is at its highest possible position, then lower it to its"
 msgstr ""
 "Калі акно ў найвышэйшай магчымай пазыцыі, апусьціць яго да найніжэйшай\n"
 " мажлівай пазыцыі. У адваротным выпадку падняць яго як можна вышэй."
 
-#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Падняць акно"
 
@@ -3314,14 +3132,12 @@ msgid "Toggle window sticky"
 msgstr "Пераключыць ліпкасьць акна"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+#, fuzzy
+msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
 msgstr ""
 "Пераключыць `ліпкасьць' акна --ці адлюстроўваць яго на ўсіх працоўных "
 "прасторах."
 
-#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Ліпкі"
 
@@ -3454,26 +3270,22 @@ msgid "Maximize window horizontally toggle"
 msgstr "Пераключыць гарыз. максымізаванасьць акна"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between horizontally maximized and"
 msgstr ""
 "Пераключыць стан акна між гарызантальна найбольшаным\n"
 "і ня найбольшаным."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Пераключыць вэрт. максымізаванасьць акна"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized and"
 msgstr ""
 "Пераключыць стан акна між вэртыкальна найбольшаным\n"
 "і ня найбольшаным."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Найбольшыць акно не засланяючы іншых"
 
@@ -3511,24 +3323,31 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "Пераключыць найбольшаньне бяз засланеньня па гарызанталі"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and\n"
-"unmaximized."
+"Toggle the state of the window between horizontally maximized-filled and"
 msgstr ""
 "Пераключыць стан акна між гарызантальна найбольшаным-запоўненым і ня "
 "найбольшаным."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Пераключыць найбольшаньне бяз зацяненьня па вэртыкалі"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized-filled and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized-filled and"
 msgstr ""
 "Пераключыць стан вакна між вэртыкальна найбольшаным-запоўненым і ня "
 "найбольшаным."
+
+#, fuzzy
+msgid "Maximize unframe"
+msgstr "Найбольшыць акно"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize reframe"
+msgstr "Максымізаваць"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -3584,12 +3403,10 @@ msgid "Unshade window"
 msgstr "Вярнуць з цені"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-msgid ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
-"state."
+#, fuzzy
+msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
 msgstr "Калі акно у цяні (гл. `shade-window'), аднавіць яго папярэдні стан."
 
-#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Пераключыць цень акна"
 
@@ -3612,41 +3429,22 @@ msgid "Raise window and transients"
 msgstr "Паднімаць акно й яго дыялёгі"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking\n"
-"order. Also raise any transient windows that it has."
-msgstr ""
-"Падняць бягучае акно да найвышэйшай дапушчальнай пазыцыі ў стосе.\n"
-"Таксама падняць усе яго прамежкавыя вокны."
+"Raise the current window to its highest allowed position in the stacking"
+msgstr "Падняць акно да найвышэйшай дапушчальнай пазыцыі ў стосе."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Апусьціць акно й яго дыялёгі"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Lower the current window to its lowest allowed position in the stacking\n"
-"order. Also lower any transient windows that it has."
-msgstr ""
-"Апусьціць бягучае акно да найніжэйшай дапушчальнай пазыцыі ў стосе.\n"
-"Таксама апусьціць усе яго прамежкавыя вокны."
+#, fuzzy
+msgid "Lower the current window to its lowest allowed position in the stacking"
+msgstr "Апусьціць акно да найніжэйшай дапушчальнай пазыцыі ў стосе."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Падняць/апусьціць акно й яго дыялёгі"
 
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
-msgstr ""
-"Калі акно ў найвышэйшай магчымай пазыцыі, тады апусьціць яго да найніжэйшай "
-"магчымай пазыцыі. У іншым выпадку падняць яго як мага вышэй. Таксама "
-"зьмяніць узровень усіх яго прамежкаавых вокнаў."
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3762,14 +3560,13 @@ msgid "Quote event"
 msgstr "Адлюстраваць наст. падзею"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+#, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring\n"
-"any window manager bindings that it may have."
+"Sends the next key event directly to the focused client window, ignoring"
 msgstr ""
 "Даслаць наступныя падзеі клявіятуры наўпрост да засяроджанага кліентскага "
 "акна, ігнаруючы любыя сувязі мэнаджару вокнаў, якія ён можа мець."
 
-#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "Перасунуць акно ўгору да канца"
@@ -3844,6 +3641,10 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid "Windows uniconify to the current viewport."
 msgstr "Даслаць групу на бяг. вобласьць прагляду"
@@ -3865,6 +3666,10 @@ msgstr ""
 #, fuzzy
 msgid "stop"
 msgstr "Наладзіць"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "dynamic"
+msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Whether to stop or wrap-around on first/last viewport"
@@ -4213,28 +4018,25 @@ msgid "Merge next workspace"
 msgstr "Далучыць наст. працоўную прастору"
 
 #. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
+"Delete the current workspace. Its member windows are relocated to the next"
 msgstr ""
 "Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на наст. "
 "працоўную\n"
 "прастору."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Далучыць папяр. працоўную прастору"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
+#, fuzzy
+msgid "Delete the current workspace. Its member windows are relocated to the"
 msgstr ""
-"Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на папяр. "
-"працоўную\\n\"\n"
-"\"прастору."
+"Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на наст. "
+"працоўную\n"
+"прастору."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Уставіць працоўную прастору пасьля"
 
@@ -4279,14 +4081,12 @@ msgid "Delete window instance"
 msgstr "Выдаліць копію акна"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
+#, fuzzy
+msgid "Remove the copy of the window on the current workspace. If this is the"
 msgstr ""
 "Выдаліць копію акна на бягучай працоўнай прасторы. Калі гэта апошняя\n"
 "копія, тады выдаліць акно."
 
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "Засяроджаньне стальца"
@@ -4336,6 +4136,157 @@ msgstr "Выбраць працоўную прастору інтэрактыў�
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Запыт працоўнае прасторы й пераключэньне на яе."
+
+#~ msgid "Select color"
+#~ msgstr "Выбярыце колер"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Павялічэньне й памяньшэньне вокнаў"
+
+#, fuzzy
+#~ msgid ""
+#~ "Grows window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
+#~ "With a universal prefix arg, maximize upwards instead.\n"
+#~ "With a numeric prefix arg, grow upwards by that many increments specified "
+#~ "by\n"
+#~ "window or pixels instead."
+#~ msgstr "Павялічвае акно угору покуль яно ня сутыкнецца з іншым вкном.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Moves window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
+#~ "With a universal prefix arg, move upwards maximally instead.\n"
+#~ "With a numeric prefix arg, move upwards by that many pixels instead."
+#~ msgstr ""
+#~ "Перасоўваць акно вышэй, покуль яно ня \"сутыкнецца\" з іншым акном.\n"
+
+#~ msgid ""
+#~ "Distance in pixels before window edges align with each other.\n"
+#~ "\n"
+#~ "When moving a window, this option lets you align one of its edges with an "
+#~ "edge of another window."
+#~ msgstr ""
+#~ "Адлегласьць у піксэлях да таго, як вокны параўнаюцца адно з адным.\n"
+#~ "\n"
+#~ "Пад час пераносу акна гэтая опцыя дазваляе раўнаць край акна з краям "
+#~ "іншага."
+
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it\n"
+#~ "has, then replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Падняць акно й усе яго часовыя вокны, атрымаўшыя бягучую падзею (калі яны "
+#~ "маюць засяроджаньне),\n"
+#~ "потым паўтарыць падзеі ўказальніку, якія выклікалі гэтую каманду."
+
+#, fuzzy
+#~ msgid "Shrinking and Yanking of windows"
+#~ msgstr "Павялічэньне й памяньшэньне вокнаў"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Аргумэнты, якія перадаюцца камандзе \"xterm\"."
+
+#~ msgid ""
+#~ "Enable shade-hover mode.\n"
+#~ "\n"
+#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
+#~ msgstr ""
+#~ "Дазволіць рэжым часовага аўтавысоўваньня.\n"
+#~ "\n"
+#~ "(Часова высоўвае вокны пад час прахаджэньня ўказальніку па-над імі.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на загалоўке акна. "
+#~ "(Дапушчальныя толькі падзеі мышы)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на рамке акна. "
+#~ "(Дапушчальныя толькі падзеі мышы)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы закрыцьця акна. "
+#~ "(Дапушчальны толькі падзеі мышы)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы сгортваньня "
+#~ "акна ў значку. (Дапушчальныя толькі падзеі мышы)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы найбольшаньня "
+#~ "акна. (Дапушчальны толькі падзеі мышы)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы мэню окна. "
+#~ "(Дапушчальны толькі падзеі мышы)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Камбінацыі актыўныя калі указальнік знаходзіцца на кнопцы хаваньня акна. "
+#~ "(Дапушчальныя толькі падзеі мышы)"
+
+#, fuzzy
+#~ msgid "Copy to p_revious"
+#~ msgstr "Скапіяваць на папяр."
+
+#, fuzzy
+#~ msgid "Copy to ne_xt"
+#~ msgstr "Скапіяваць на наст."
+
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking\n"
+#~ "order. Also raise any transient windows that it has."
+#~ msgstr ""
+#~ "Падняць бягучае акно да найвышэйшай дапушчальнай пазыцыі ў стосе.\n"
+#~ "Таксама падняць усе яго прамежкавыя вокны."
+
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking\n"
+#~ "order. Also lower any transient windows that it has."
+#~ msgstr ""
+#~ "Апусьціць бягучае акно да найніжэйшай дапушчальнай пазыцыі ў стосе.\n"
+#~ "Таксама апусьціць усе яго прамежкавыя вокны."
+
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
+#~ "changes\n"
+#~ "the level of any transient windows it has."
+#~ msgstr ""
+#~ "Калі акно ў найвышэйшай магчымай пазыцыі, тады апусьціць яго да "
+#~ "найніжэйшай магчымай пазыцыі. У іншым выпадку падняць яго як мага вышэй. "
+#~ "Таксама зьмяніць узровень усіх яго прамежкаавых вокнаў."
+
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the\n"
+#~ "previous workspace."
+#~ msgstr ""
+#~ "Выдаліць бягучую працоўную прастору. Яе вокны будуць перанесены на папяр. "
+#~ "працоўную\\n\"\n"
+#~ "\"прастору."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"

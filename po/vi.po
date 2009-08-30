@@ -3,11 +3,12 @@
 # Nguyễn Thái Ngọc Duy <pclouds@fptnet.com>, 2002.
 # Clytie Siddall <clytie@riverland.net.au>, 2006.
 #
+#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 21:37+0200\n"
+"POT-Creation-Date: 2009-08-24 21:17+0200\n"
 "PO-Revision-Date: 2006-01-10 19:16+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
@@ -193,98 +194,46 @@ msgid "none"
 msgstr "không"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"decoration mode\n"
-"\n"
-"set the mode 'when to draw a titlebar and window buttons'. the decoration "
-"mode 'all' means that all windows, even transients/dialogs, will get a "
-"titlebar and buttons. none means no window will get any :-). usually "
-"transients only have a contents-border. this option is for reimplementing a "
-"sawfish feature that is gone in the latest version."
+msgid "decoration mode"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
+msgid ");"
+msgstr ""
+
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize title string\n"
-"\n"
-"see the tooltip for the 'title string' option below for more information. "
-"(NOTE: i hope the redrawing problems with this option are solved. if not, "
-"write an email please!)"
+msgid "customize title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string\n"
-"\n"
-"the string you insert here will be your new title string. variables always "
-"start with a dollar-sign $ and are replaced with their actual values. to get "
-"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
-"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
-"string]. the following vars are built-in: $name, $fullname, $width, $width-"
-"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
-"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
-"if not, write an email please!"
+msgid "title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"update title string periodically\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "update title string periodically"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string update interval (1 - 1000000 s)\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "title string update interval (1 - 1000000 s)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string font\n"
-"\n"
-"you should really choose a better font. verdana bold 8 pt looks nice."
+msgid "title string font"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize title position\n"
-"\n"
-"by default the title string is centered horizontally and vertically."
-msgstr ""
+#, fuzzy
+msgid "customize title position"
+msgstr "Ánh xạ nút phóng to"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "giữa"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal alignment\n"
-"\n"
-"'real-center' means to take the whole titlebar into account while centering "
-"the string. when selecting 'center' only the distance between the buttons is "
-"taken into account."
+msgid "title string horizontal alignment"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
-"\n"
-"the horizontal position of the title string can only be adjusted if the "
-"horizontal alignment is not 'center'. the range also depends on the setting "
-"of the option above. it the title string is already aligned left, you cannot "
-"adjust it to be even further left because there are button in the way."
+msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -301,32 +250,16 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient titlebar background (experimental)\n"
-"\n"
-"when activating the gradient background the normal titlebar background "
-"colors will be ignored. besides the button background colors will be "
-"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
-"low value, ie high quality.)"
+msgid "gradient titlebar background (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient mode\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used."
+#, fuzzy
+msgid "gradient mode"
+msgstr "điều tạm"
+
+msgid "gradient quality (1 best - 20 worst)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient quality (1 best - 20 worst)\n"
-"\n"
-"the value here is the factor the calculated gradient image will be scaled "
-"down. this increases speed but decreases quality."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -344,44 +277,24 @@ msgid "custom"
 msgstr "Tùy chỉnh"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient color mode\n"
-"\n"
-"the custom mode will respect the colors set in the list below."
-msgstr ""
+#, fuzzy
+msgid "gradient color mode"
+msgstr "Sắc thái độ dốc"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used. besides the gradient color mode must be set to "
-"custom to activate this list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "Chọn màu"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused/highlighted titlebar colors hue (0 - 360)\n"
-"\n"
-"this value changes the hue of a color, by moving (0 - 360) degress around "
-"the color cycle...180 for example inverts the color"
+msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)\n"
-"\n"
-"the saturation of a color is a measurement of the color intensity"
+"color)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -389,50 +302,21 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"  focused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"  focused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize extended title string colors\n"
-"\n"
-"you can customize additional colors of the title string. if you deactivate "
-"this, these colors will be set to the focused title string color."
+msgid "customize extended title string colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -489,62 +373,32 @@ msgid "ball-12"
 msgstr "tất cả"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button icon set (experimental)\n"
-"\n"
-"the number at the end is the width/height of the button icons in the icon "
-"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgid "button icon set (experimental)"
+msgstr ""
+
+#, fuzzy
+msgid "customize button size"
+msgstr "Ánh xạ nút phóng to"
+
+msgid "buttons size (1 - 1000 pixel)"
+msgstr ""
+
+msgid "button vertical alignment"
+msgstr ""
+
+msgid "scale button icons (experimental)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize button size\n"
-"\n"
-"by default the button size follows the size of the titlebar, but by "
-"activating this you can set it to something different."
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"buttons size (1 - 1000 pixel)\n"
-"\n"
-"a buttons size that is bigger than your current titlebar height is ignored."
-msgstr ""
+#, fuzzy
+msgid "display window icon on menu button"
+msgstr "Hiện biểu tượng của cửa sổ trong nút trình đơn của nó"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button vertical alignment\n"
-"\n"
-"if a button is smaller than the titlebar you might want to set its vertical "
-"alignment."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"scale button icons (experimental)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"display window icon on menu button\n"
-"\n"
-"many people like having the window-icon displayed on the menu-button. this "
-"icon is defined by the application itself and is also shown in your pager "
-"and task-list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -561,15 +415,9 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
-"\n"
-"enabling this will allow you to set the positon of each button in the "
-"titlebar manually. a negative/positiv value means the button will be drawn "
-"on left/right side of the titlebar."
+msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -578,16 +426,10 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button position model\n"
-"\n"
-"'titel-height' means calculate position as multiple of title height. when "
-"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
-"mind that several buttons might slide on top of each other. 'none' means no "
-"buttons at all."
-msgstr ""
+#, fuzzy
+msgid "button position model"
+msgstr "Nhớ _vị trí"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "Nhớ _vị trí"
@@ -648,12 +490,9 @@ msgid "lock button position"
 msgstr "Ánh xạ nút đóng"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize sticky button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: toggle sticky "
-"state of window"
-msgstr ""
+#, fuzzy
+msgid "customize sticky button keymap"
+msgstr "Ánh xạ nút làm hình nhỏ"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -661,13 +500,9 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "Ánh xạ nút làm hình nhỏ"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize previous button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"previous workspace - button2 workspace-list - button3 send window to first "
-"workspace - button6 pack window left"
-msgstr ""
+#, fuzzy
+msgid "customize previous button keymap"
+msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -675,54 +510,27 @@ msgid "mxflat:previous-button-keymap"
 msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize next button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"next workspace - button2 workspace-list - button3 send window to last "
-"workspace - button6 pack window right"
-msgstr ""
+#, fuzzy
+msgid "customize next button keymap"
+msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "Ánh xạ nút trình đơn"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: send window to next workspace - button2 workspace-list - button3 "
-"send window to last workspace - button6 pack window right"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize configure button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
-msgstr ""
+#, fuzzy
+msgid "customize configure button keymap"
+msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "Ánh xạ nút trình đơn"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize info button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: window list - "
-"button3 window snooper (not included by default)"
-msgstr ""
+#, fuzzy
+msgid "customize info button keymap"
+msgstr "Ánh xạ nút làm hình nhỏ"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -730,22 +538,13 @@ msgid "mxflat:info-button-keymap"
 msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"always on top depth (-1000 - 1000)\n"
-"\n"
-"a window will have this depth after you have pressed the always-on-top "
-"button. 0 is the normal window level. every positive value means above other "
-"windows, a negative value means below. keept it at a positive value in order "
-"to have the always-on-top button do it's job."
+msgid "always on top depth (-1000 - 1000)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize always-on-top button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: sets window "
-"depth to the adjusted value"
-msgstr ""
+#, fuzzy
+msgid "customize always-on-top button keymap"
+msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -753,12 +552,9 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize look button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: lock window "
-"position"
-msgstr ""
+#, fuzzy
+msgid "customize look button keymap"
+msgstr "Ánh xạ nút phóng to"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -766,14 +562,9 @@ msgid "mxflat:lock-button-keymap"
 msgstr "Ánh xạ nút đóng"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button-colors\n"
-"\n"
-"when you active this you will be able to set custom button colors. by "
-"default the button colors depend on the titlebar colors."
+msgid "customize button-colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -814,85 +605,35 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width (0 - 1000 pixel)\n"
-"\n"
-"set the width border around the window."
+msgid "border width (0 - 1000 pixel)"
+msgstr ""
+
+msgid "border width for maximized windows (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width for maximized windows (0 - 1000 pixel)\n"
-"\n"
-"when you like having a big border around your windows you might have noticed "
-"that sawfish still draws that big border when the window is maximized. if "
-"you don't want that, set the border width for maximized windows smaller than "
-"the border width for unmaximized windows. (NOTE: this feature is still buggy "
-"as sawfish does not resize the windows correctly yet, so the best might be "
-"to set it to the normal border width.)"
+msgid "customize border for focused windows (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize border for focused windows (experimental)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "border width for focused windows (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border width for focused windows (0 - 1000 pixel)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "title-contents border width (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title-contents border width (0 - 1000 pixel)\n"
-"\n"
-"sets the widths of the line between titlebar and contents window"
+msgid "border offset (-1000 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border offset (-1000 - 1000 pixel)\n"
-"\n"
-"adjust the point where the border actually starts. many gtk2 apps draw a "
-"small black border around their contents window and this is just ugly when "
-"sawfish draws another border around the window. with a border offset of -1 "
-"the sawfish window border will overlay the gtk2 border exactly."
+msgid "keep window borders and corners at their place when shading a window"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"keep window borders and corners at their place when shading a window\n"
-"\n"
-"when shading a window borders and corners will stay where they were and not "
-"merge with the titlebar."
+#, fuzzy
+msgid "show window corners"
+msgstr "Nới bên dưới cửa sổ"
+
+msgid "corners length adjustement (-1 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"show window corners\n"
-"\n"
-" the corners are used to resize a window in two directions at the same time. "
-"usually the width and length of window corners are determined by the border "
-"width but you can adjust them below."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"corners length adjustement (-1 - 100 pixel)\n"
-"\n"
-"increasing the corner length will grow the window corners along the window "
-"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
-"grab the 1 pixel corner to be able to resize the window in two directions; "
-"thus, make it bigger."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -905,29 +646,16 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"corners width adjustement (0 - 100 pixel)\n"
-"\n"
-"this option makes the window corners broader. with a border width of 1 pixel "
-"it is hard to grab this 1 pixel corner to be able to resize the window in "
-"two directions; thus, make it bigger."
+msgid "corners width adjustement (0 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow (experimental)\n"
-"\n"
-"draw a small additional border around your windows emulating a solid shadow "
-"effect. use the options below to adjust its width and direction. (NOTE: this "
-"is VERY cpu intensive and might slow down your computer noticably. so turn "
-"it on at your own risk.)"
+msgid "fake shadow (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "Ảnh thanh ngang của cửa sổ không có tiêu điểm."
@@ -969,23 +697,13 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light source\n"
-"\n"
-"set the direction of the fake shadow. usually only 2 or 3 borders of your "
-"window have a fake shadow. this depends on where the light comes from."
+#, fuzzy
+msgid "fake shadow light source"
+msgstr "Lập cửa sổ bị bỏ qua"
+
+msgid "fake shadow light distance (0 - 100)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light distance (0 - 100)\n"
-"\n"
-"this option has only an effect on the north, east, south and west light "
-"sources. the further away the light source is, the smaller will the two "
-"'side' shadows be."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -994,14 +712,9 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize border colors\n"
-"\n"
-"you can customize your border colors here. if you deactivate this, these "
-"colors will be set to the focused title string color."
+msgid "customize border colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1094,10 +807,6 @@ msgstr "Phím"
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
 msgstr "Giá trị"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-msgid "Select color"
-msgstr "Chọn màu"
 
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
@@ -1225,6 +934,11 @@ msgstr "Hành động"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "Hành động"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1483,10 +1197,6 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Xóa bỏ mọi cửa sổ trong nhóm chứa cửa sổ hiện thời."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Growing and packing of windows"
-msgstr "Nới và nén cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing is considered to be maximization."
 msgstr ""
 
@@ -1529,13 +1239,20 @@ msgstr ""
 "khi tăng kích cỡ hoặc nén cửa sổ."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Nới bên trái cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the left until it `bumps into' another window."
 msgstr ""
 "Tăng kích cỡ của cửa sổ bên trái cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
@@ -1546,9 +1263,8 @@ msgid "Grow window right"
 msgstr "Nới bên phải cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the right until it `bumps into' another window."
 msgstr ""
 "Tăng kích cỡ của cửa sổ bên phải cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
@@ -1559,29 +1275,19 @@ msgid "Grow window up"
 msgstr "Nới bên trên cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
+#, fuzzy
+msgid "Grows window upwards until it `bumps into' another window."
 msgstr ""
-"Tăng kích cỡ của cửa sổ bên trên cho đến khi\n"
+"Tăng kích cỡ của cửa sổ bên dưới cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
-"Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
-"Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
-"Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
-"bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
+"Xem « nới bên trên cửa sổ »."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Nới bên dưới cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window downwards until it `bumps into' another window."
 msgstr ""
 "Tăng kích cỡ của cửa sổ bên dưới cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
@@ -1592,9 +1298,8 @@ msgid "Pack window left"
 msgstr "Nén bên trái cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the left until it `bumps into' another window."
 msgstr ""
 "Chuyển cửa sổ bên trái cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
@@ -1605,9 +1310,8 @@ msgid "Pack window right"
 msgstr "Nén bên phải cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the right until it `bumps into' another window."
 msgstr ""
 "Chuyển cửa sổ bên phải cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
@@ -1618,63 +1322,23 @@ msgid "Pack window up"
 msgstr "Nén bên trên cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr ""
-"Chuyển của cửa sổ bên trên cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
-"Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
-"Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
-"bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "Nén bên dưới cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window upwards until it `bumps into' another window."
 msgstr ""
 "Chuyển cửa sổ bên dưới cho đến khi\n"
 "nó « đâm sầm vào » một cửa sổ khác.\n"
 "Xem « nén bên trên cửa sổ »."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow left"
-msgstr "Nới bên trái"
+msgid "Pack window down"
+msgstr "Nén bên dưới cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow right"
-msgstr "Nới bên phải"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow up"
-msgstr "Nới lên"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow down"
-msgstr "Nới xuống"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack left"
-msgstr "Nén bên trái"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack right"
-msgstr "Nén bên phải"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack up"
-msgstr "Nén bên trên"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack down"
-msgstr "Nén bên dưới"
+#, fuzzy
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr ""
+"Chuyển cửa sổ bên dưới cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1765,6 +1429,76 @@ msgstr "Nhích con trỏ xuống dưới"
 msgid "Move the cursor 1 pixel downwards."
 msgstr "Di chuyển con trỏ xuống dưới một điểm ảnh."
 
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest"
+msgstr "Đẩy con trỏ sang phải"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northwest"
+msgstr "Đẩy con trỏ sang trái « move-cursor-increment » điểm."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast"
+msgstr "Đẩy con trỏ sang phải"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northeast"
+msgstr "Đẩy con trỏ sang trái « move-cursor-increment » điểm."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest"
+msgstr "Đẩy con trỏ sang trái"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southwest"
+msgstr "Đẩy con trỏ sang trái « move-cursor-increment » điểm."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast"
+msgstr "Đẩy con trỏ sang trái"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southeast"
+msgstr "Đẩy con trỏ sang trái « move-cursor-increment » điểm."
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest fine"
+msgstr "Nhích con trỏ sang phải"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast fine"
+msgstr "Nhích con trỏ sang phải"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest fine"
+msgstr "Nhích con trỏ sang trái"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast fine"
+msgstr "Nhích con trỏ sang trái"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor center"
+msgstr "Đẩy con trỏ sang trái"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor to the center of the screen"
+msgstr "Di chuyển con trỏ sang trái một điểm ảnh."
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1836,19 +1570,9 @@ msgid "How to choose window edges when resizing."
 msgstr "Hiện kích cỡ hiện thời của cửa sổ trong khi đổi kích cỡ."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid ""
-"Distance in pixels before window edges align with each other.\n"
-"\n"
-"When moving a window, this option lets you align one of its edges with an "
-"edge of another window."
+msgid "Distance in pixels before window edges align with each other."
 msgstr ""
-"Khoảng cách theo điểm ảnh cần di chuyển trước khi hai cạnh cửa sổ canh với "
-"nhau.\n"
-"\n"
-"Khi di chuyển cửa sổ, tùy chọn này cho phép bạn canh một cạnh của nó với một "
-"cạnh của cửa sổ khác."
 
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Di chuyển tương tác cửa sổ"
 
@@ -1884,31 +1608,39 @@ msgid ""
 msgstr ""
 "Đợi người dùng chọn cửa sổ, sau đó đổi kích cỡ cửa sổ đó một cách tương tác."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Double window size"
+msgstr "Bật/tắt cửa sổ dính"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Halve window size"
+msgstr "Lập cửa sổ là dính"
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Nâng lên và gởi nhắp qua"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
+"Raise the window that received the current event, then replay any pointer"
 msgstr ""
 "Nâng cửa sổ lên mà nhận dữ kiện hiện thời,\n"
 "rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Nâng lên và gởi nhắp qua nếu có tiêu điểm"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
+"Raise the window that received the current event (if it's focused), then"
 msgstr ""
 "Nâng cửa sổ lên mà nhận dữ kiện hiện thời (nếu nó có tiêu điểm),\n"
 "rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "Nâng lên hay gởi nhắp qua"
 
@@ -1921,48 +1653,25 @@ msgid "Raise group and pass through click"
 msgstr "Nâng nhóm lên và gởi nhắp qua"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
+#, fuzzy
+msgid "Raise the group of windows that received the current event, then replay"
 msgstr ""
 "Nâng nhóm cửa sổ lên mà nhận dữ kiện hiện thời.\n"
 "rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Nâng điều tạm lên và gởi nhắp qua"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
+#, fuzzy
+msgid "Raise the window that received the current event and any transients it"
 msgstr ""
-"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
+"Nâng cửa sổ lên mà nhận dữ kiện hiện thời,\n"
 "rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
 
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrinking and Yanking of windows"
-msgstr "Nới và nén cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum height or width to which a window may be shrunk."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "Trượt cửa sổ sang trái"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1970,21 +1679,9 @@ msgid "Shrink window right"
 msgstr "Trượt cửa sổ sang phải"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window up"
 msgstr "Trượt cửa sổ lên trên"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1992,20 +1689,9 @@ msgid "Shrink window down"
 msgstr "Trượt cửa sổ xuống dưới"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window left"
 msgstr "Nén bên trái cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2013,28 +1699,14 @@ msgid "Yank window right"
 msgstr "Nén bên phải cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window up"
 msgstr "Nén bên trên cửa sổ"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "Yanks WINDOW upwards until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Nén bên dưới cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2132,6 +1804,47 @@ msgstr "Trượt nhóm xuống dưới"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Di chuyển nhóm cửa sổ xuống dưới « slide-window-increment » điểm ảnh."
 
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Default Applications"
+msgstr "Hiện trình đơn ứng dụng."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "The program launched by the `xterm' command."
+msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "The program launched by the `browser' command."
+msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Start a new xterm."
+msgstr "Chạy xterm mới."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Duyệt..."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Start a new browser instance"
+msgstr "Chạy xterm mới."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "View clipboard"
+msgstr "Cổng xem"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Show the contents of the clipboard in a message window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Tới cổng xem kế"
@@ -2202,22 +1915,6 @@ msgstr "ánh xạ phím xoay vòng"
 msgid ""
 "Keymap containing bindings active only during window cycling operations."
 msgstr "Ánh xạ phím chứa tổ hợp hoạt động chỉ trong khi xoay vòng cửa sổ."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Arguments given to the `xterm' command."
-msgstr "Đối số được đưa cho lệnh « xterm »."
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Start a new xterm."
-msgstr "Chạy xterm mới."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -2504,6 +2201,16 @@ msgid "Maximized"
 msgstr "Đã phóng to"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Vùng làm việc kế"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "cổng xem"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
 msgstr "Nâng lên khi nhận tiêu điểm"
 
@@ -2586,6 +2293,15 @@ msgid "Never maximize"
 msgstr "Hủy phóng to"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fullscreen"
+msgstr "màn hình"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Fullscreen xinerama"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Tên duy nhất"
 
@@ -2606,6 +2322,11 @@ msgid "Ignore stacking requests"
 msgstr "Bỏ qua yêu cầu tạo chồng"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window name"
+msgstr "Cửa sổ :"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "Tình trạng"
 
@@ -2613,21 +2334,19 @@ msgstr "Tình trạng"
 msgid "Other"
 msgstr "Khác"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Nâng cửa sổ lên"
+
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
 msgstr "Thoáng bóng"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid ""
-"Enable shade-hover mode.\n"
-"\n"
-"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgid "Enable shade-hover mode."
 msgstr ""
-"Bật chế độ thoáng bóng.\n"
-"\n"
-"(Tạm thời bỏ bóng cửa sổ khi con trỏ di chuyển trên nó.)"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
 
@@ -2906,105 +2625,84 @@ msgid "root-window-keymap"
 msgstr "ánh xạ cửa sổ gốc"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
+"Keymap containing bindings active when the pointer is in the root window"
 msgstr ""
 "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
 "(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "ánh xạ tựa"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the title of"
 msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trong tựa đề của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "Ánh xạ viền"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the border of"
 msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên viền của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "Ánh xạ nút đóng"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the close button"
 msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút đóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "Ánh xạ nút làm hình nhỏ"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the iconify"
 msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút co lại thành biểu tượng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này."
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "Ánh xạ nút phóng to"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút phóng to của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the maximize"
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi đọc chuỗi từ người dùng."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "Ánh xạ nút trình đơn"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the menu button"
 msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút trình đơn của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "Ánh xạ nút bóng"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the shade button"
 msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút bóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "Phím sửa đổi dùng cho phím tắt mặc định."
 
@@ -3058,13 +2756,98 @@ msgstr "Vùng làm việc _kế"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to p_revious"
-msgstr "Chép tới trước"
+msgid "C_opy window to"
+msgstr "_Chuyển cửa sổ tới"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to ne_xt"
-msgstr "Chép tới kế"
+msgid "P_revious workspace"
+msgstr "Vùng làm việc trước"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "Vùng làm việc kế"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "Nới bên trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "Nới bên phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "Nới lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "Nới xuống"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "Nén bên trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "Nén bên phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "Nén bên trên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "Nén bên dưới"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "Trượt cửa sổ sang trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "Trượt cửa sổ sang phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "Trượt cửa sổ lên trên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "Trượt cửa sổ xuống dưới"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "Nén bên trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "Nén bên phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "Nén bên trên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "Nén bên dưới"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -3102,6 +2885,11 @@ msgid "Frame sty_le"
 msgstr "Kiểu dáng khung"
 
 #. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "Trang chủ của Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
 msgstr "_Cửa sổ"
 
@@ -3136,6 +2924,16 @@ msgstr "_Sổ tay..."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "_Giới thiệu về Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Display Errors"
+msgstr "Hiển thị lỗi"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "_Cửa sổ"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Restart"
@@ -3230,14 +3028,13 @@ msgstr "Nâng cửa sổ đơn thấp hơn lên"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
+#. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
+msgid "If the window is at its highest possible position, then lower it to its"
 msgstr ""
 "Nếu cửa sổ đang ở vị trí cao nhất có thể thì hạ thấp nó\n"
 "xuống vị trí thấp nhất có thể. Nếu không thì đẩy nó lên cao hết mức."
 
-#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Nâng độ sâu cửa sổ lên"
 
@@ -3316,14 +3113,12 @@ msgid "Toggle window sticky"
 msgstr "Bật/tắt cửa sổ dính"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+#, fuzzy
+msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
 msgstr ""
 "Bật/tắt khả năng dính của cửa sổ, nó có hay không thuộc vào mọi vùng làm "
 "việc."
 
-#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Dính"
 
@@ -3456,22 +3251,18 @@ msgid "Maximize window horizontally toggle"
 msgstr "Bật tắt phóng ngang cửa sổ"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between horizontally maximized and"
 msgstr "Bật tắt tính trạng phóng to theo chiều ngang cửa cửa sổ."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Bật tắt phóng dọc cửa sổ"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized and"
 msgstr "Bật tắt tính trạng phóng to theo chiều dọc của cửa sổ."
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Mở rộng cửa sổ vừa"
 
@@ -3509,20 +3300,27 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "Bật tắt tính trạng mở rộng ngang cửa sổ vừa"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and\n"
-"unmaximized."
+"Toggle the state of the window between horizontally maximized-filled and"
 msgstr "Bật tắt tính trạng mở rộng vừa theo chiều ngang của cửa sổ"
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Bật tắt mở rộng dọc cửa sổ vừa"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized-filled and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized-filled and"
 msgstr "Bật tắt tính trạng mở rộng vừa theo chiều dọc của sổ"
+
+#, fuzzy
+msgid "Maximize unframe"
+msgstr "Phóng to cửa sổ"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize reframe"
+msgstr "Đã phóng to"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -3578,13 +3376,11 @@ msgid "Unshade window"
 msgstr "Bỏ bóng cửa sổ"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-msgid ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
-"state."
+#, fuzzy
+msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
 msgstr ""
 "Nếu cửa sổ có bóng (xem « bóng cửa sổ »), phục hồi nó vào tính trạng thường."
 
-#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Bật/tắt cửa sổ có bóng"
 
@@ -3606,41 +3402,22 @@ msgid "Raise window and transients"
 msgstr "Nâng cửa sổ và các điều tạm lên"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking\n"
-"order. Also raise any transient windows that it has."
-msgstr ""
-"Nâng cửa sổ hiện thời lên vị trí cao nhất được phép trong thứ tự chồng. Cũng "
-"nâng cửa sổ tạm nào của nó lên."
+"Raise the current window to its highest allowed position in the stacking"
+msgstr "Nâng cửa sổ lên vị trí cao nhất được phép trong thứ tự chồng."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Hạ thấp cửa sổ và các điều tạm"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Lower the current window to its lowest allowed position in the stacking\n"
-"order. Also lower any transient windows that it has."
-msgstr ""
-"Hạ thấp cửa sổ hiện thời xuống vị trí thấp nhất được phép trong thứ tự "
-"chồng. Cũng hạ thấp cửa sổ tạm nào của nó."
+#, fuzzy
+msgid "Lower the current window to its lowest allowed position in the stacking"
+msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Nâng lên/hạ thấp cửa sổ và các điều tạm lên"
 
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
-msgstr ""
-"Nếu cửa sổ tại vị trí cao nhất có thể, hạ thấp nó xuống vị trí thấp nhất có "
-"thể. Nếu không thì nâng nó lên cao nhất được phép. Cũng thay đổi lớp của cửa "
-"sổ tạm nào của nó."
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3753,14 +3530,13 @@ msgid "Quote event"
 msgstr "Trích dẫn dữ kiện"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+#, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring\n"
-"any window manager bindings that it may have."
+"Sends the next key event directly to the focused client window, ignoring"
 msgstr ""
 "Gởi dữ kiến phím kế tiếp trực tiếp cho cửa sổ khách có tiêu điểm,\n"
 "bỏ qua tổ hợp bộ quản lý cửa sổ nào của nó."
 
-#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "Nén bên trên cửa sổ"
@@ -3835,6 +3611,10 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid "Windows uniconify to the current viewport."
 msgstr "Chuyển nhóm sang cổng xem hiện thời"
@@ -3854,6 +3634,10 @@ msgstr ""
 #, fuzzy
 msgid "stop"
 msgstr "Tùy chỉnh"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "dynamic"
+msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Whether to stop or wrap-around on first/last viewport"
@@ -4201,26 +3985,23 @@ msgid "Merge next workspace"
 msgstr "Trộn vùng làm việc kế"
 
 #. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
+"Delete the current workspace. Its member windows are relocated to the next"
 msgstr ""
 "Xóa bỏ vùng làm việc hiện tại. Các cửa sổ trong vùng làm việc sẽ được chuyển "
 "qua vùng làm việc kế tiếp."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Trộn vùng làm việc trước"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
+#, fuzzy
+msgid "Delete the current workspace. Its member windows are relocated to the"
 msgstr ""
 "Xóa bỏ vùng làm việc hiện tại. Các cửa sổ trong vùng làm việc sẽ được chuyển "
-"sang vùng làm việc trước đó."
+"qua vùng làm việc kế tiếp."
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Chèn vùng làm việc sau"
 
@@ -4265,14 +4046,12 @@ msgid "Delete window instance"
 msgstr "Xóa bỏ cửa sổ tức thời"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
+#, fuzzy
+msgid "Remove the copy of the window on the current workspace. If this is the"
 msgstr ""
 "Xóa bỏ một bản sao của cửa sổ trên vùng làm việc hiện thời.\n"
 "Nếu đây là cửa sổ tức thời cuỗi cùng còn lại, xóa bỏ cửa sổ thật."
 
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "Đặt tiêu điểm vào màn hình nền"
@@ -4322,6 +4101,172 @@ msgstr "Chọn tương tác vùng làm việc"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Nhắc với vùng làm việc và chuyển đổi qua đó."
+
+#~ msgid "Select color"
+#~ msgstr "Chọn màu"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "Nới và nén cửa sổ"
+
+#~ msgid ""
+#~ "Grows window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
+#~ "With a universal prefix arg, maximize upwards instead.\n"
+#~ "With a numeric prefix arg, grow upwards by that many increments specified "
+#~ "by\n"
+#~ "window or pixels instead."
+#~ msgstr ""
+#~ "Tăng kích cỡ của cửa sổ bên trên cho đến khi\n"
+#~ "nó « đâm sầm vào » một cửa sổ khác.\n"
+#~ "Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
+#~ "Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
+#~ "Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
+#~ "bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
+
+#~ msgid ""
+#~ "Moves window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
+#~ "With a universal prefix arg, move upwards maximally instead.\n"
+#~ "With a numeric prefix arg, move upwards by that many pixels instead."
+#~ msgstr ""
+#~ "Chuyển của cửa sổ bên trên cho đến khi\n"
+#~ "nó « đâm sầm vào » một cửa sổ khác.\n"
+#~ "Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
+#~ "Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
+#~ "Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
+#~ "bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
+
+#~ msgid ""
+#~ "Distance in pixels before window edges align with each other.\n"
+#~ "\n"
+#~ "When moving a window, this option lets you align one of its edges with an "
+#~ "edge of another window."
+#~ msgstr ""
+#~ "Khoảng cách theo điểm ảnh cần di chuyển trước khi hai cạnh cửa sổ canh "
+#~ "với nhau.\n"
+#~ "\n"
+#~ "Khi di chuyển cửa sổ, tùy chọn này cho phép bạn canh một cạnh của nó với "
+#~ "một cạnh của cửa sổ khác."
+
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it\n"
+#~ "has, then replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
+#~ "rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
+
+#, fuzzy
+#~ msgid "Shrinking and Yanking of windows"
+#~ msgstr "Nới và nén cửa sổ"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "Đối số được đưa cho lệnh « xterm »."
+
+#~ msgid ""
+#~ "Enable shade-hover mode.\n"
+#~ "\n"
+#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
+#~ msgstr ""
+#~ "Bật chế độ thoáng bóng.\n"
+#~ "\n"
+#~ "(Tạm thời bỏ bóng cửa sổ khi con trỏ di chuyển trên nó.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trong tựa đề của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trên viền của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trên cái nút đóng của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trên cái nút co lại thành biểu tượng của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này."
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trên cái nút phóng to của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trên cái nút trình đơn của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+#~ "có trên cái nút bóng của cửa sổ.\n"
+#~ "(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#, fuzzy
+#~ msgid "Copy to p_revious"
+#~ msgstr "Chép tới trước"
+
+#, fuzzy
+#~ msgid "Copy to ne_xt"
+#~ msgstr "Chép tới kế"
+
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking\n"
+#~ "order. Also raise any transient windows that it has."
+#~ msgstr ""
+#~ "Nâng cửa sổ hiện thời lên vị trí cao nhất được phép trong thứ tự chồng. "
+#~ "Cũng nâng cửa sổ tạm nào của nó lên."
+
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking\n"
+#~ "order. Also lower any transient windows that it has."
+#~ msgstr ""
+#~ "Hạ thấp cửa sổ hiện thời xuống vị trí thấp nhất được phép trong thứ tự "
+#~ "chồng. Cũng hạ thấp cửa sổ tạm nào của nó."
+
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
+#~ "changes\n"
+#~ "the level of any transient windows it has."
+#~ msgstr ""
+#~ "Nếu cửa sổ tại vị trí cao nhất có thể, hạ thấp nó xuống vị trí thấp nhất "
+#~ "có thể. Nếu không thì nâng nó lên cao nhất được phép. Cũng thay đổi lớp "
+#~ "của cửa sổ tạm nào của nó."
+
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the\n"
+#~ "previous workspace."
+#~ msgstr ""
+#~ "Xóa bỏ vùng làm việc hiện tại. Các cửa sổ trong vùng làm việc sẽ được "
+#~ "chuyển sang vùng làm việc trước đó."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"

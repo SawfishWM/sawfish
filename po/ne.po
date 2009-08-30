@@ -14,11 +14,12 @@
 # Jaydeep Bhusal <zaydeep@hotmail.com>, 2005.
 # Mahesh subedi <submanesh@hotmail.com>, 2006.
 #
+#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.HEAD.ne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-02 21:37+0200\n"
+"POT-Creation-Date: 2009-08-24 21:17+0200\n"
 "PO-Revision-Date: 2006-06-16 15:32+0545\n"
 "Last-Translator: Mahesh subedi <submanesh@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -206,98 +207,46 @@ msgid "none"
 msgstr "कुनै पनि होइन"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"decoration mode\n"
-"\n"
-"set the mode 'when to draw a titlebar and window buttons'. the decoration "
-"mode 'all' means that all windows, even transients/dialogs, will get a "
-"titlebar and buttons. none means no window will get any :-). usually "
-"transients only have a contents-border. this option is for reimplementing a "
-"sawfish feature that is gone in the latest version."
+msgid "decoration mode"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
+msgid ");"
+msgstr ""
+
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize title string\n"
-"\n"
-"see the tooltip for the 'title string' option below for more information. "
-"(NOTE: i hope the redrawing problems with this option are solved. if not, "
-"write an email please!)"
+msgid "customize title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string\n"
-"\n"
-"the string you insert here will be your new title string. variables always "
-"start with a dollar-sign $ and are replaced with their actual values. to get "
-"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
-"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
-"string]. the following vars are built-in: $name, $fullname, $width, $width-"
-"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
-"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
-"if not, write an email please!"
+msgid "title string"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"update title string periodically\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "update title string periodically"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string update interval (1 - 1000000 s)\n"
-"\n"
-"this is useful if your title string changes without user interaction (eg "
-"because it displays the current time or something like that)."
+msgid "title string update interval (1 - 1000000 s)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string font\n"
-"\n"
-"you should really choose a better font. verdana bold 8 pt looks nice."
+msgid "title string font"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize title position\n"
-"\n"
-"by default the title string is centered horizontally and vertically."
-msgstr ""
+#, fuzzy
+msgid "customize title position"
+msgstr "बटन कुञ्जीमानचित्रहरू बढाउनुहोस्"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "केन्द्र"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal alignment\n"
-"\n"
-"'real-center' means to take the whole titlebar into account while centering "
-"the string. when selecting 'center' only the distance between the buttons is "
-"taken into account."
+msgid "title string horizontal alignment"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
-"\n"
-"the horizontal position of the title string can only be adjusted if the "
-"horizontal alignment is not 'center'. the range also depends on the setting "
-"of the option above. it the title string is already aligned left, you cannot "
-"adjust it to be even further left because there are button in the way."
+msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -314,32 +263,16 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient titlebar background (experimental)\n"
-"\n"
-"when activating the gradient background the normal titlebar background "
-"colors will be ignored. besides the button background colors will be "
-"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
-"low value, ie high quality.)"
+msgid "gradient titlebar background (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient mode\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used."
+#, fuzzy
+msgid "gradient mode"
+msgstr "अस्थायी"
+
+msgid "gradient quality (1 best - 20 worst)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"gradient quality (1 best - 20 worst)\n"
-"\n"
-"the value here is the factor the calculated gradient image will be scaled "
-"down. this increases speed but decreases quality."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -357,44 +290,24 @@ msgid "custom"
 msgstr "अनुकूलन"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"gradient color mode\n"
-"\n"
-"the custom mode will respect the colors set in the list below."
-msgstr ""
+#, fuzzy
+msgid "gradient color mode"
+msgstr "ग्राडिएन्ट विषयवस्तु"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used. besides the gradient color mode must be set to "
-"custom to activate this list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "रङ चयन गर्नुहोस्"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused/highlighted titlebar colors hue (0 - 360)\n"
-"\n"
-"this value changes the hue of a color, by moving (0 - 360) degress around "
-"the color cycle...180 for example inverts the color"
+msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)\n"
-"\n"
-"the saturation of a color is a measurement of the color intensity"
+"color)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -402,50 +315,21 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"  focused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused titlebar color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused titlebar color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"  focused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "  focused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"unfocused title string color\n"
-"\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
-"depend on these 4 colors."
+msgid "unfocused title string color"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize extended title string colors\n"
-"\n"
-"you can customize additional colors of the title string. if you deactivate "
-"this, these colors will be set to the focused title string color."
+msgid "customize extended title string colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -502,62 +386,32 @@ msgid "ball-12"
 msgstr "सबै"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button icon set (experimental)\n"
-"\n"
-"the number at the end is the width/height of the button icons in the icon "
-"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+msgid "button icon set (experimental)"
+msgstr ""
+
+#, fuzzy
+msgid "customize button size"
+msgstr "बटन कुञ्जीमानचित्रहरू बढाउनुहोस्"
+
+msgid "buttons size (1 - 1000 pixel)"
+msgstr ""
+
+msgid "button vertical alignment"
+msgstr ""
+
+msgid "scale button icons (experimental)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize button size\n"
-"\n"
-"by default the button size follows the size of the titlebar, but by "
-"activating this you can set it to something different."
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"buttons size (1 - 1000 pixel)\n"
-"\n"
-"a buttons size that is bigger than your current titlebar height is ignored."
-msgstr ""
+#, fuzzy
+msgid "display window icon on menu button"
+msgstr "सञ्झ्यालको प्रतिमा मेनु बटनमा देखाउनुहोस्"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button vertical alignment\n"
-"\n"
-"if a button is smaller than the titlebar you might want to set its vertical "
-"alignment."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"scale button icons (experimental)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
-"\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"display window icon on menu button\n"
-"\n"
-"many people like having the window-icon displayed on the menu-button. this "
-"icon is defined by the application itself and is also shown in your pager "
-"and task-list."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -574,15 +428,9 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
-"\n"
-"enabling this will allow you to set the positon of each button in the "
-"titlebar manually. a negative/positiv value means the button will be drawn "
-"on left/right side of the titlebar."
+msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -591,16 +439,10 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"button position model\n"
-"\n"
-"'titel-height' means calculate position as multiple of title height. when "
-"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
-"mind that several buttons might slide on top of each other. 'none' means no "
-"buttons at all."
-msgstr ""
+#, fuzzy
+msgid "button position model"
+msgstr "स्थिति सम्झिनुहोस्"
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "स्थिति सम्झिनुहोस्"
@@ -661,12 +503,9 @@ msgid "lock button position"
 msgstr "बटन कुञ्जीमानचित्र बन्द गर्नुहोस्"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize sticky button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: toggle sticky "
-"state of window"
-msgstr ""
+#, fuzzy
+msgid "customize sticky button keymap"
+msgstr "प्रतिमित बटन कुञ्जचित्र"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -674,13 +513,9 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "प्रतिमित बटन कुञ्जचित्र"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize previous button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"previous workspace - button2 workspace-list - button3 send window to first "
-"workspace - button6 pack window left"
-msgstr ""
+#, fuzzy
+msgid "customize previous button keymap"
+msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -688,54 +523,27 @@ msgid "mxflat:previous-button-keymap"
 msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize next button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: send window to "
-"next workspace - button2 workspace-list - button3 send window to last "
-"workspace - button6 pack window right"
-msgstr ""
+#, fuzzy
+msgid "customize next button keymap"
+msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "मेनु बटन कुञ्जीमानचित्र"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: send window to next workspace - button2 workspace-list - button3 "
-"send window to last workspace - button6 pack window right"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize configure button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
-msgstr ""
+#, fuzzy
+msgid "customize configure button keymap"
+msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "मेनु बटन कुञ्जीमानचित्र"
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"\n"
-"\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize info button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: window list - "
-"button3 window snooper (not included by default)"
-msgstr ""
+#, fuzzy
+msgid "customize info button keymap"
+msgstr "प्रतिमित बटन कुञ्जचित्र"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -743,22 +551,13 @@ msgid "mxflat:info-button-keymap"
 msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"always on top depth (-1000 - 1000)\n"
-"\n"
-"a window will have this depth after you have pressed the always-on-top "
-"button. 0 is the normal window level. every positive value means above other "
-"windows, a negative value means below. keept it at a positive value in order "
-"to have the always-on-top button do it's job."
+msgid "always on top depth (-1000 - 1000)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize always-on-top button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: sets window "
-"depth to the adjusted value"
-msgstr ""
+#, fuzzy
+msgid "customize always-on-top button keymap"
+msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -766,12 +565,9 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize look button keymap\n"
-"\n"
-"by default a button will work as it's name suggests. button1: lock window "
-"position"
-msgstr ""
+#, fuzzy
+msgid "customize look button keymap"
+msgstr "बटन कुञ्जीमानचित्रहरू बढाउनुहोस्"
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -779,14 +575,9 @@ msgid "mxflat:lock-button-keymap"
 msgstr "बटन कुञ्जीमानचित्र बन्द गर्नुहोस्"
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize button-colors\n"
-"\n"
-"when you active this you will be able to set custom button colors. by "
-"default the button colors depend on the titlebar colors."
+msgid "customize button-colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -827,85 +618,35 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width (0 - 1000 pixel)\n"
-"\n"
-"set the width border around the window."
+msgid "border width (0 - 1000 pixel)"
+msgstr ""
+
+msgid "border width for maximized windows (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"border width for maximized windows (0 - 1000 pixel)\n"
-"\n"
-"when you like having a big border around your windows you might have noticed "
-"that sawfish still draws that big border when the window is maximized. if "
-"you don't want that, set the border width for maximized windows smaller than "
-"the border width for unmaximized windows. (NOTE: this feature is still buggy "
-"as sawfish does not resize the windows correctly yet, so the best might be "
-"to set it to the normal border width.)"
+msgid "customize border for focused windows (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"customize border for focused windows (experimental)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "border width for focused windows (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border width for focused windows (0 - 1000 pixel)\n"
-"\n"
-"(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+msgid "title-contents border width (0 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"title-contents border width (0 - 1000 pixel)\n"
-"\n"
-"sets the widths of the line between titlebar and contents window"
+msgid "border offset (-1000 - 1000 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"border offset (-1000 - 1000 pixel)\n"
-"\n"
-"adjust the point where the border actually starts. many gtk2 apps draw a "
-"small black border around their contents window and this is just ugly when "
-"sawfish draws another border around the window. with a border offset of -1 "
-"the sawfish window border will overlay the gtk2 border exactly."
+msgid "keep window borders and corners at their place when shading a window"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"keep window borders and corners at their place when shading a window\n"
-"\n"
-"when shading a window borders and corners will stay where they were and not "
-"merge with the titlebar."
+#, fuzzy
+msgid "show window corners"
+msgstr "सञ्झ्याललाई तल बढाउनुहोस्"
+
+msgid "corners length adjustement (-1 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"show window corners\n"
-"\n"
-" the corners are used to resize a window in two directions at the same time. "
-"usually the width and length of window corners are determined by the border "
-"width but you can adjust them below."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
-msgid ""
-"corners length adjustement (-1 - 100 pixel)\n"
-"\n"
-"increasing the corner length will grow the window corners along the window "
-"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
-"grab the 1 pixel corner to be able to resize the window in two directions; "
-"thus, make it bigger."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -918,29 +659,16 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"corners width adjustement (0 - 100 pixel)\n"
-"\n"
-"this option makes the window corners broader. with a border width of 1 pixel "
-"it is hard to grab this 1 pixel corner to be able to resize the window in "
-"two directions; thus, make it bigger."
+msgid "corners width adjustement (0 - 100 pixel)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow (experimental)\n"
-"\n"
-"draw a small additional border around your windows emulating a solid shadow "
-"effect. use the options below to adjust its width and direction. (NOTE: this "
-"is VERY cpu intensive and might slow down your computer noticably. so turn "
-"it on at your own risk.)"
+msgid "fake shadow (experimental)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "पट्टी छवि, फोकस नगरिएको सञ्झ्यालका लागि"
@@ -982,23 +710,13 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light source\n"
-"\n"
-"set the direction of the fake shadow. usually only 2 or 3 borders of your "
-"window have a fake shadow. this depends on where the light comes from."
+#, fuzzy
+msgid "fake shadow light source"
+msgstr "सञ्झ्याललाई उपेक्षित बनाउनुहोस्"
+
+msgid "fake shadow light distance (0 - 100)"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
-msgid ""
-"fake shadow light distance (0 - 100)\n"
-"\n"
-"this option has only an effect on the north, east, south and west light "
-"sources. the further away the light source is, the smaller will the two "
-"'side' shadows be."
-msgstr ""
-
-#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -1007,14 +725,9 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid ""
-"customize border colors\n"
-"\n"
-"you can customize your border colors here. if you deactivate this, these "
-"colors will be set to the focused title string color."
+msgid "customize border colors"
 msgstr ""
 
-#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1107,10 +820,6 @@ msgstr "कुञ्जी"
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
 msgstr "माान"
-
-#. ../lisp/sawfish/gtk/widgets/color.jl
-msgid "Select color"
-msgstr "रङ चयन गर्नुहोस्"
 
 #. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
@@ -1238,6 +947,11 @@ msgstr "कार्यहरू"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "कार्यहरू"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#. ../lisp/sawfish/wm/autoload.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1496,10 +1210,6 @@ msgid "Delete all windows in the group that the current window is a member of."
 msgstr "समूहमा भएका सबै सञ्झ्यालहरूलाई मेट्नुहोस् जुन चालु सञ्झ्यालको सदस्य हो।"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Growing and packing of windows"
-msgstr "सञ्झ्यालको वृद्धि हुदै र प्याकिङ गर्दै"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing is considered to be maximization."
 msgstr ""
 
@@ -1538,13 +1248,20 @@ msgid "Whether to bump into ignored windows."
 msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "सञ्झ्याललाई बायाँ बढाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the left until it `bumps into' another window."
 msgstr ""
 "अन्य सञ्झ्यालमा `bumps into' गरेसम्म यसले सञ्झ्याल बायाँतिर बढाउदछ।\n"
 "'वृद्धि-सञ्झ्याल-माथी' हेर्नुहोस्"
@@ -1554,9 +1271,8 @@ msgid "Grow window right"
 msgstr "सञ्झ्याललाई दायाँ बढाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window to the right until it `bumps into' another window."
 msgstr ""
 "सञ्झ्याललाई दायाँ बढाउनुहोस् जव सम्म यो अघिल्लो सञ्झ्याल\n"
 "मा `bumps into''वृद्धि-सञ्झ्याल-माथी' हेर्नुहोस्"
@@ -1566,28 +1282,18 @@ msgid "Grow window up"
 msgstr "सञ्झ्याल माथि वृद्धि गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
+#, fuzzy
+msgid "Grows window upwards until it `bumps into' another window."
 msgstr ""
-"यसले अन्य सञ्झ्यालमा `bumps into' गरेसम्म सञ्झ्याल माथितिर बढाउदछ।\n"
-"यदि माथि छेउ पर्दा छेउ बाहिर छ भने, यसलाई फर्काइन्छ।\n"
-"\n"
-"एउटा विश्व उपसर्ग आर्ग संग, माथितिर बढाउनुको सट्टामा। सञ्झ्याल वा पिक्सेलको सट्टामा\n"
-"धेरै निर्दिष्ट बढावाद्धारा माथितिर बढाउनुहोस्।"
+"यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई तलतिर बढाइरहन्छ।\n"
+"'सञ्झ्याललाई-माथि-लैजानुस्' हेर्नुहोस्।"
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "सञ्झ्याललाई तल बढाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
+#, fuzzy
+msgid "Grows window downwards until it `bumps into' another window."
 msgstr ""
 "यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई तलतिर बढाइरहन्छ।\n"
 "'सञ्झ्याललाई-माथि-लैजानुस्' हेर्नुहोस्।"
@@ -1597,9 +1303,8 @@ msgid "Pack window left"
 msgstr "सञ्झ्याललाई बायाँ प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the left until it `bumps into' another window."
 msgstr ""
 "यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई बायाँ तर्फ सार्दछ।\n"
 "`प्याक-सञ्झ्याल-माथि' हेर्नुहोस्।"
@@ -1609,9 +1314,8 @@ msgid "Pack window right"
 msgstr "सञ्झ्याललाई दायाँ प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window to the right until it `bumps into' another window."
 msgstr ""
 "यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई दायाँ तर्फ सार्दछ।\n"
 "`प्याक-सञ्झ्याल-माथि' हेर्नुहोस्।"
@@ -1621,60 +1325,21 @@ msgid "Pack window up"
 msgstr "सञ्झ्याललाई माथि प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr ""
-"यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई माथितिर सार्दछ।\n"
-"यदि माथिको छेउ पर्दा छेउ बाहिर छ भने, यसलाई पछाडि फर्काइन्छ।\n"
-"एउटा विश्व उपसर्ग आर्ग संग, सट्टामा अधिकतम रूपमा माथितिर सार्दछ।\n"
-"एउटा संङ्ख्यात्मक उपसर्ग आर्ग संग, सट्टामा ति धेरै पिक्सेल माथितिर सार्दछ।"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "सञ्झ्याललाई तल प्याक गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
+#, fuzzy
+msgid "Moves window upwards until it `bumps into' another window."
 msgstr ""
 "यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई तल तिर सार्दछ।\n"
 "`प्याक-सञ्झ्याल-माथि' हेर्नुहोस्।"
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow left"
-msgstr "बायाँ बढाउनुहोस्"
+msgid "Pack window down"
+msgstr "सञ्झ्याललाई तल प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow right"
-msgstr "दायाँ बढाउनुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow up"
-msgstr "माथि बढाउनुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow down"
-msgstr "तल बढाउनुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack left"
-msgstr "बायाँ प्याक गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack right"
-msgstr "दायाँ प्याक गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack up"
-msgstr "माथी प्याक गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack down"
-msgstr "तल प्याक गर्नुहोस्"
+#, fuzzy
+msgid "Moves window downwards until it `bumps into' another window."
+msgstr ""
+"यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई तल तिर सार्दछ।\n"
+"`प्याक-सञ्झ्याल-माथि' हेर्नुहोस्।"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1765,6 +1430,76 @@ msgstr "तल तिर सूचकलाई सार्नुहोस्"
 msgid "Move the cursor 1 pixel downwards."
 msgstr "सूचक १ पिक्सेल तल तिर सार्नुहोस्"
 
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest"
+msgstr "सूचकलाई दायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northwest"
+msgstr "'चलाउनुहोस्-सूचक-वृद्धि'मा पिक्सेल् बायाँ सूचकलाई सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast"
+msgstr "सूचकलाई दायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels northeast"
+msgstr "'चलाउनुहोस्-सूचक-वृद्धि'मा पिक्सेल् बायाँ सूचकलाई सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest"
+msgstr "सूचकलाई बायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southwest"
+msgstr "'चलाउनुहोस्-सूचक-वृद्धि'मा पिक्सेल् बायाँ सूचकलाई सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast"
+msgstr "सूचकलाई बायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor `move-cursor-increment' pixels southeast"
+msgstr "'चलाउनुहोस्-सूचक-वृद्धि'मा पिक्सेल् बायाँ सूचकलाई सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northwest fine"
+msgstr "सूचकलाई राम्रो दायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor northeast fine"
+msgstr "सूचकलाई राम्रो दायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southwest fine"
+msgstr "सूचकलाई राम्रो बायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor southeast fine"
+msgstr "सूचकलाई राम्रो बायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move cursor center"
+msgstr "सूचकलाई बायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-cursor.jl
+#, fuzzy
+msgid "Move the cursor to the center of the screen"
+msgstr "सूचक १ पिक्सेल बायाँ तिर सार्नुहोस्"
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1836,18 +1571,9 @@ msgid "How to choose window edges when resizing."
 msgstr "साइज मिलाएको बेलामा, सञ्झ्यालको चालु आयामिकहरू देखाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid ""
-"Distance in pixels before window edges align with each other.\n"
-"\n"
-"When moving a window, this option lets you align one of its edges with an "
-"edge of another window."
+msgid "Distance in pixels before window edges align with each other."
 msgstr ""
-"सञ्झ्यालजको छेउहरू एक अर्कासँग पङ्क्तिबद्ध हुनु भन्दा पहिले पिक्सेलमा दुरि।\n"
-"\n"
-"जव तपाईँले सञ्झ्याललाई चलाउनुहुन्छ, यो विकल्पले तपाईँलाई एउटा यसको छेउलाई अर्को सञ्झ्यालको "
-"अर्को छेउसँग पङ्क्तिबद्ध गर्न दिन्छ।"
 
-#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "सञ्झ्याललाई अन्तक्रियात्मक तरिकाले सार्नुहोस्"
 
@@ -1885,31 +1611,39 @@ msgstr ""
 "सञ्झ्याल चयन गर्नका लागि प्रयोगकर्तालाई प्रतीक्षा गर्नुहोस्, त्यसपछि सञ्झ्याललाई "
 "अन्तरक्रियात्मक तरिकाले रिसाइज गर्नुहोस्।"
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Double window size"
+msgstr "टाँसिने सञ्झ्याललाई टगल गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Halve window size"
+msgstr "सञ्झ्याललाई टाँसिने बनाउनुहोस्"
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "क्लिक गरेर बढाउनुहोस् र पास गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
+"Raise the window that received the current event, then replay any pointer"
 msgstr ""
 "चालु घटनाहरू प्राप्त गरेको सञ्झ्याललाई बढाउनुहोस्, त्यसपछि कुनै पनि सूचक \n"
 "घटना पुन: सुरु गर्नुहोस् जुनले आदेश प्राप्त गर्दछ।"
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "यदि फोकस गरेमा क्लिक गरेर बढाउनुहोस् र पठाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
+"Raise the window that received the current event (if it's focused), then"
 msgstr ""
 "चालु घटना प्राप्त गरेको सञ्झ्याललाई उठाउनुहोस् (यदि यसमा फोकस गरिएको भए), त्यसपछि\n"
 "कुनै पनि सूचक घटनाहरू जसले आदेशलाई वोलाउछ, लाई पुन: सुरु गर्नुहोस्।"
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "क्लिक द्वारा बढाउनुहोस् वा पठाउनुहोस्"
 
@@ -1922,48 +1656,25 @@ msgid "Raise group and pass through click"
 msgstr "समूहलाई बढाउनुहोस् र क्किक द्वारा पठाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
+#, fuzzy
+msgid "Raise the group of windows that received the current event, then replay"
 msgstr ""
 "चालु घटनालाई प्राप्त गरेको सञ्झ्यालको समूहलाई बढाउनुहोस्, त्यसपछि \n"
 "कुनै सूचक घटना जसले आदेशलाई बोलाउछ।"
 
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "अस्थिरहरूलाई बढाउनुहोस् र क्लिक द्वारा पठाउनुहोस्"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
-msgstr ""
-"सञ्झ्याललाई बढाउनुहोस्, जसले चालु घटना र कुनै अस्थिरता \n"
-"पाएको छ, त्यसपछि कुनै सूचक घटना जुनलाई आदेश भएकोलाई पुन: सुरु गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
-msgid "Shrinking and Yanking of windows"
-msgstr "सञ्झ्यालको वृद्धि हुदै र प्याकिङ गर्दै"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum height or width to which a window may be shrunk."
+msgid "Raise the window that received the current event and any transients it"
 msgstr ""
+"चालु घटनाहरू प्राप्त गरेको सञ्झ्याललाई बढाउनुहोस्, त्यसपछि कुनै पनि सूचक \n"
+"घटना पुन: सुरु गर्नुहोस् जुनले आदेश प्राप्त गर्दछ।"
 
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "सञ्झ्याल बायाँतिर स्लाइड गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1971,21 +1682,9 @@ msgid "Shrink window right"
 msgstr "सञ्झ्याललाई दायाँ सार्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window up"
 msgstr "सञ्झ्याललाई माथि सार्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it intersects\n"
-"with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -1993,20 +1692,9 @@ msgid "Shrink window down"
 msgstr "सञ्झ्याललाई तलतिर सार्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it intersects\n"
-"with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window left"
 msgstr "सञ्झ्याललाई बायाँ प्याक गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2014,28 +1702,14 @@ msgid "Yank window right"
 msgstr "सञ्झ्याललाई दायाँ प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window up"
 msgstr "सञ्झ्याललाई माथि प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid "Yanks WINDOW upwards until it inserts with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "सञ्झ्याललाई तल प्याक गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than before."
-msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2133,6 +1807,47 @@ msgstr "समूहलाई तलतिर स्लाइड गर्नु
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "'सञ्झ्याल-चिप्ल्याउनु-वृद्धि'सञ्झ्याल समूहलाई पिक्सेल तलतिर सार्नुहोस्"
 
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Default Applications"
+msgstr "अनुप्रयोग मेनु प्रदर्शन गर्नुहोस्।"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "The program launched by the `xterm' command."
+msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "The program launched by the `browser' command."
+msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Xterm"
+msgstr "एक्सटर्म"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Start a new xterm."
+msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Browser"
+msgstr "ब्राउज गर्नुहोस्..."
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "Start a new browser instance"
+msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+#, fuzzy
+msgid "View clipboard"
+msgstr "दृश्यबिन्दु"
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Show the contents of the clipboard in a message window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "अघिल्लो दृश्यबिन्दुमा सार्नुहोस्"
@@ -2205,22 +1920,6 @@ msgid ""
 msgstr ""
 "कुञ्जीमानचित्र भएको बाइन्डिङ्गहरू सक्रिय हुन्छन् जुन बेला मात्र सञ्झ्याल घुम्ने कामहरू भइरहेको "
 "हुन्छ।"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "The program launched by the `xterm' command."
-msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Arguments given to the `xterm' command."
-msgstr "'एक्सटर्म'आदेशका लागि दिइएको तर्क"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Xterm"
-msgstr "एक्सटर्म"
-
-#. ../lisp/sawfish/wm/commands/xterm.jl
-msgid "Start a new xterm."
-msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
@@ -2509,6 +2208,16 @@ msgid "Maximized"
 msgstr "अधिकतम गरिएको"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "अघिल्लो कार्यस्थान"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "दृश्यबिन्दु"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
 msgstr "फोकसमा बढाउनुहोस्"
 
@@ -2591,6 +2300,15 @@ msgid "Never maximize"
 msgstr "सानो पार्नुहोस्"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fullscreen"
+msgstr "पर्दा"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Fullscreen xinerama"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "अद्धितिय नाम"
 
@@ -2611,6 +2329,11 @@ msgid "Ignore stacking requests"
 msgstr "थाक लागेको अनुरोधहरूलाई उपेक्षा गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window name"
+msgstr "सञ्झ्याल:"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "State"
 msgstr "स्थिति"
 
@@ -2618,21 +2341,19 @@ msgstr "स्थिति"
 msgid "Other"
 msgstr "अन्य"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "सञ्झ्याललाई उठाउनुहोस्"
+
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
 msgstr "छायाँ होभर"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid ""
-"Enable shade-hover mode.\n"
-"\n"
-"(Temporarily unshades windows while the mouse pointer is over them.)"
+msgid "Enable shade-hover mode."
 msgstr ""
-"छायाँ-झुण्डिएको-अवस्थालाई सक्रिय पार्नुहोस्।\n"
-"\n"
-"(माउस सूचक माथि भएको बेलामा अस्थायी किसिमले सञ्झ्यालमा छायाँ हटाउनुहोस्)"
 
-#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "सञ्झ्यालहरू छायाँरहित गर्नुभन्दा पहिले मिलिसेकेण्डमा ढिलो गर्नुहोस्।"
 
@@ -2909,105 +2630,84 @@ msgid "root-window-keymap"
 msgstr "मूल-सञ्झ्याल-कुञ्जीमानचित्र"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
+"Keymap containing bindings active when the pointer is in the root window"
 msgstr ""
 "जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
 "(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "शीर्षक-कुञ्जीमानचित्र"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the title of"
 msgstr ""
-"जव सूचक \n"
-"सञ्झ्यालको शीर्षकमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्रहरू सक्रिय हुन्छन् (अथवा कुनै पनि सञ्झ्याल "
-"फोकस गरिएको हुँदैछन्। (यो नक्सामा माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्.)"
+"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "किनारा कुञ्जीमानचित्र "
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the border of"
 msgstr ""
-"जव सूचक \n"
-" सञ्झ्यालको किनारमा हुन्छ,बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "बटन कुञ्जीमानचित्र बन्द गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the close button"
 msgstr ""
-"जव सूचक \n"
-"बटनको बन्द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "प्रतिमित बटन कुञ्जचित्र"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the iconify"
 msgstr ""
-"जव सूचक प्रतिमित \n"
-"बटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "बटन कुञ्जीमानचित्रहरू बढाउनुहोस्"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"जव सूचक सञ्झ्यालको बढाउनुस् \n"
-"बटनमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन्(यो नक्सामा माउस बाइन्डिङ्गहरू मात्र "
-"मूल्याङ्कन् गरिन्छन्।)"
+#, fuzzy
+msgid "Keymap containing bindings active when the pointer is in the maximize"
+msgstr "प्रयोगकर्ता बाट स्ट्रीङ पढेको बेला कुञ्जीमानचित्र भएको वाईन्डिङ सक्रिय हुन्छ।"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "मेनु बटन कुञ्जीमानचित्र"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the menu button"
 msgstr ""
-"जव सूचक \n"
-"मेनुबटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "सेड-बटन-कुञ्जीमानचित्र"
 
 #. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
+"Keymap containing bindings active when the pointer is in the shade button"
 msgstr ""
-"जव सूचक \n"
-"बटनको सेड द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
-"बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+"जव सूचक मूल सञ्झ्यालमा हुन्छ, बाइन्डिङ्गका कुञ्जीमानचित्रहरू सक्रिय हुन्छन्\n"
+"(अथवा कुनै पनि सञ्झ्याल फोकस गरिएको हुँदैछन्)"
 
-#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "पूर्वनिर्धारित सर्टकटहरूका लागि प्रयोग गरिएको परिमार्जन कुञ्जी(हरू)"
 
@@ -3061,13 +2761,98 @@ msgstr "अघिल्लो कार्यक्षेत्र"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to p_revious"
-msgstr "पछिल्लोमा प्रतिलिपि बनाउनुहोस्"
+msgid "C_opy window to"
+msgstr "यसमा सञ्झ्याल पठाउनुहोस्"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "Copy to ne_xt"
-msgstr "अघिल्लोमा प्रतिलिपि बनाउनुहोस्"
+msgid "P_revious workspace"
+msgstr "पछिल्लो कार्यस्थान"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "अघिल्लो कार्यस्थान"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "बायाँ बढाउनुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "दायाँ बढाउनुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "माथि बढाउनुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "तल बढाउनुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "बायाँ प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "दायाँ प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "माथी प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "तल प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "सञ्झ्याल बायाँतिर स्लाइड गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "सञ्झ्याललाई दायाँ सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "सञ्झ्याललाई माथि सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "सञ्झ्याललाई तलतिर सार्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "बायाँ प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "दायाँ प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "माथी प्याक गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "तल प्याक गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -3105,6 +2890,11 @@ msgid "Frame sty_le"
 msgstr "फ्रेमको शैली"
 
 #. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "सफिस मुख्य पाना"
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
 msgstr "सञ्झ्यालहरू"
 
@@ -3139,6 +2929,16 @@ msgstr "म्यानुअल..."
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_About Sawfish..."
 msgstr "सफिसका बारेमा..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Display Errors"
+msgstr "त्रुटिहरू प्रदर्शन गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "सञ्झ्यालहरू"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Restart"
@@ -3233,14 +3033,13 @@ msgstr "तल्लो एकल सञ्झ्याललाई माथि
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
+#. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
+msgid "If the window is at its highest possible position, then lower it to its"
 msgstr ""
 "सञ्झ्याल यस्को सबै भन्दा माथिको स्थानमा भएमा यस्लाई यस्को तलको संभाव्य \n"
 "स्थानमा ल्याउनु होस्, होइन भने यसलाई सक्दो माथि अनुमतिप्राप्त स्थानमा पुर्याउनुहोस्।"
 
-#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "सञ्झ्यालको गहिराइ बढाउनुहोस्"
 
@@ -3319,14 +3118,12 @@ msgid "Toggle window sticky"
 msgstr "टाँसिने सञ्झ्याललाई टगल गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-msgid ""
-"Toggle the `stickiness' of the window--whether or not it is a member of\n"
-"all workspaces."
+#, fuzzy
+msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
 msgstr ""
 "सञ्झ्यालको--'टाँसिने पन'लाई टगल गर्नुहोस् यदि यो \n"
 "सबै कार्यक्षेत्रको सदस्य भएमा वा नभएमा "
 
-#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "टाँसिने"
 
@@ -3459,26 +3256,22 @@ msgid "Maximize window horizontally toggle"
 msgstr "तेर्सो गरी टगल गरिएको सञ्झ्यालको साइजलाई ठूलो पार्नुहोस्"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between horizontally maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between horizontally maximized and"
 msgstr ""
 "तेर्सो गरी साइज ठूलो पारिएको\n"
 " र ठूलो नपारिएको अवस्थालाई टगल गर्नुहोस्"
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "ठाडो गरी टगल गरिएको सञ्झ्यालको साइज बढाउनुहोस्"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized and"
 msgstr ""
 "ठाडो गरी साइज ठूलो पारिएको\n"
 " र ठूलो नपारिएको अवस्थालाई टगल गर्नुहोस्"
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "भरिएको सञ्झ्याल साइज बढाउनुहोस्"
 
@@ -3516,24 +3309,31 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "टगल तेर्सो हुनेगरी भर्ने सञ्झ्याललाई अधिकतम पार्नुहोस्"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and\n"
-"unmaximized."
+"Toggle the state of the window between horizontally maximized-filled and"
 msgstr ""
 "तेर्सो अधिकतम-भरिएको र\n"
 " ठूलो नपारिएको विचको सञ्झ्यालको अवस्थालाई टगल गर्नुहोस्।"
 
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "टगल ठाडो हुनेगरी भर्ने सञ्झ्याललाई अधिकतम पार्नुहोस्"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid ""
-"Toggle the state of the window between vertically maximized-filled and\n"
-"unmaximized."
+#, fuzzy
+msgid "Toggle the state of the window between vertically maximized-filled and"
 msgstr ""
 "ठाडोगरी अधिकतम-भरिएको र\n"
 " ठूलो नपारिएको विचको सञ्झ्यालको अवस्थालाई टगल गर्नुहोस्"
+
+#, fuzzy
+msgid "Maximize unframe"
+msgstr "सञ्झ्याल ठूलो बनाउनुहोस्"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize reframe"
+msgstr "अधिकतम गरिएको"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -3589,14 +3389,12 @@ msgid "Unshade window"
 msgstr "सञ्झ्यालमा छायाँ हटाउनुहोस्"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-msgid ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
-"state."
+#, fuzzy
+msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
 msgstr ""
 "यदि सञ्झ्याललाई छायाँ पारिएको भए (हेर्नुस् सञ्झ्याल-छाया''), लाई यसको पुर्वास्थितिमा\n"
 " फर्काउनुहोस्"
 
-#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "छायाँ गरिएको सञ्झ्याललाई टगल गर्नुहोस्"
 
@@ -3618,44 +3416,22 @@ msgid "Raise window and transients"
 msgstr "सञ्झ्याल र अस्थिरतालाई उठाउनुहोस्"
 
 #. ../lisp/sawfish/wm/state/transient.jl
+#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking\n"
-"order. Also raise any transient windows that it has."
-msgstr ""
-"थाक लगाईएको \n"
-" क्रममा चालु सञ्झ्याललाई यसको सबै भन्दा माथि दिइएको अवस्थामा उठाउनुहोस्, यसमा भएका कुनै "
-"अस्थिर सञ्झ्यालहरूलाई पनि उठाउनुहोस्।"
+"Raise the current window to its highest allowed position in the stacking"
+msgstr "सञ्झ्याललाई यसको सबै भन्दा माथि निर्धारित स्थानमा अनुक्रम मिलाएर बढाउनुहोस्।"
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "सञ्झ्याल र अस्थिरतालाई तल गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"Lower the current window to its lowest allowed position in the stacking\n"
-"order. Also lower any transient windows that it has."
-msgstr ""
-"थाक लगाईएको \n"
-" क्रममा चालु सञ्झ्याललाई यसको सबै भन्दा तल दिइएको अवस्थामा ल्याउनुहोस्, यसमा भएका कुनै "
-"अस्थिर सञ्झ्यालहरूलाई पनि ल्याउनुहोस्"
+#, fuzzy
+msgid "Lower the current window to its lowest allowed position in the stacking"
+msgstr "एकल सञ्झ्याललाई तल निर्धारण गरिएको ठाउमा वढाउने क्रममा सार्नुहोस्"
 
-#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "तल्लो सञ्झ्याल र अस्थिरतालाई उठाउनुहोस्"
 
-#. ../lisp/sawfish/wm/state/transient.jl
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
-msgstr ""
-"यदी सञ्झ्याल यसको सबैभन्दा माथी संभाव्य अवस्थामा छ भने यसलाई यसको\n"
-"सबै भन्दा तलको संभाव्य अवस्थामा ल्याउनुहोस्। होइन भने यसलाई अनुमति दिइएको स्थान सम्मम "
-"उठाउनुहोस्। यसमा भएको अस्थिरताको कुनै सञ्झ्यालको कुनै तह\n"
-"परिवर्तन गर्नुहोस्।"
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3768,15 +3544,14 @@ msgid "Quote event"
 msgstr "उद्धरण घटना"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
+#, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring\n"
-"any window manager bindings that it may have."
+"Sends the next key event directly to the focused client window, ignoring"
 msgstr ""
 "सञ्झ्यालमा कुनै \n"
 "सञ्झ्याल प्रबन्धक भएमा उपेक्षा गर्दै अघिल्लो कुञ्जी घटना सिधै फोकस गरिएको शाखा यसमा "
 "पठाउनुहोस्।"
 
-#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "सञ्झ्याललाई माथि प्याक गर्नुहोस्"
@@ -3849,6 +3624,10 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
+msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid "Windows uniconify to the current viewport."
 msgstr "चालु दृश्यकेन्द्रमा समूह सार्नुहोस्"
@@ -3868,6 +3647,10 @@ msgstr ""
 #, fuzzy
 msgid "stop"
 msgstr "अनुकूलन"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "dynamic"
+msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Whether to stop or wrap-around on first/last viewport"
@@ -4205,26 +3988,23 @@ msgid "Merge next workspace"
 msgstr "अघिल्लो कार्यक्षेत्रलाई गाभ्नुहोस्"
 
 #. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next\n"
-"workspace."
+"Delete the current workspace. Its member windows are relocated to the next"
 msgstr ""
 "चालु कार्यस्थान मेट्नुहोस्, यसका सदस्य सञ्झ्यालहरू\n"
 "कार्यस्थानमा पुन: स्थान्तरण गरिन्छ।"
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "पछिल्लो कार्यस्थानलाई गाभ्नुहोस्"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Delete the current workspace. Its member windows are relocated to the\n"
-"previous workspace."
+#, fuzzy
+msgid "Delete the current workspace. Its member windows are relocated to the"
 msgstr ""
 "चालु कार्यस्थान मेट्नुहोस्, यसका सदस्य सञ्झ्यालहरू\n"
-"पछिल्लो कार्यस्थानमा स्थान्तरण गरिन्छ।"
+"कार्यस्थानमा पुन: स्थान्तरण गरिन्छ।"
 
-#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "पछि कार्यस्थान घुसाउनुहोस्"
 
@@ -4269,14 +4049,12 @@ msgid "Delete window instance"
 msgstr "सञ्झ्याल प्रतिरूप मेट्नुहोस्"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid ""
-"Remove the copy of the window on the current workspace. If this is the\n"
-"last instance remaining, then delete the actual window."
+#, fuzzy
+msgid "Remove the copy of the window on the current workspace. If this is the"
 msgstr ""
 "चालु कार्यस्थानवाट सञ्झ्यालको प्रतिलिपि हटाउनुहोस्,यदि यो \n"
 "अन्तिम प्रतिलिपि रहेको भए, ठीक सञ्झ्याललाई मेट्नुहोस्।"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "डेस्कटपलाई फोकस गर्नुहोस्"
@@ -4326,6 +4104,171 @@ msgstr "अन्तरक्रियात्मक तवरले कार�
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "एउटा कार्यक्षेत्रलाई प्रयत्न गर्नुहोस् र यसलाई स्विच गर्नुहोस्"
+
+#~ msgid "Select color"
+#~ msgstr "रङ चयन गर्नुहोस्"
+
+#~ msgid "Growing and packing of windows"
+#~ msgstr "सञ्झ्यालको वृद्धि हुदै र प्याकिङ गर्दै"
+
+#~ msgid ""
+#~ "Grows window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
+#~ "With a universal prefix arg, maximize upwards instead.\n"
+#~ "With a numeric prefix arg, grow upwards by that many increments specified "
+#~ "by\n"
+#~ "window or pixels instead."
+#~ msgstr ""
+#~ "यसले अन्य सञ्झ्यालमा `bumps into' गरेसम्म सञ्झ्याल माथितिर बढाउदछ।\n"
+#~ "यदि माथि छेउ पर्दा छेउ बाहिर छ भने, यसलाई फर्काइन्छ।\n"
+#~ "\n"
+#~ "एउटा विश्व उपसर्ग आर्ग संग, माथितिर बढाउनुको सट्टामा। सञ्झ्याल वा पिक्सेलको सट्टामा\n"
+#~ "धेरै निर्दिष्ट बढावाद्धारा माथितिर बढाउनुहोस्।"
+
+#~ msgid ""
+#~ "Moves window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
+#~ "With a universal prefix arg, move upwards maximally instead.\n"
+#~ "With a numeric prefix arg, move upwards by that many pixels instead."
+#~ msgstr ""
+#~ "यसले अन्य सञ्झ्याललाई `bumps into' गरेसम्म सञ्झ्याललाई माथितिर सार्दछ।\n"
+#~ "यदि माथिको छेउ पर्दा छेउ बाहिर छ भने, यसलाई पछाडि फर्काइन्छ।\n"
+#~ "एउटा विश्व उपसर्ग आर्ग संग, सट्टामा अधिकतम रूपमा माथितिर सार्दछ।\n"
+#~ "एउटा संङ्ख्यात्मक उपसर्ग आर्ग संग, सट्टामा ति धेरै पिक्सेल माथितिर सार्दछ।"
+
+#~ msgid ""
+#~ "Distance in pixels before window edges align with each other.\n"
+#~ "\n"
+#~ "When moving a window, this option lets you align one of its edges with an "
+#~ "edge of another window."
+#~ msgstr ""
+#~ "सञ्झ्यालजको छेउहरू एक अर्कासँग पङ्क्तिबद्ध हुनु भन्दा पहिले पिक्सेलमा दुरि।\n"
+#~ "\n"
+#~ "जव तपाईँले सञ्झ्याललाई चलाउनुहुन्छ, यो विकल्पले तपाईँलाई एउटा यसको छेउलाई अर्को "
+#~ "सञ्झ्यालको अर्को छेउसँग पङ्क्तिबद्ध गर्न दिन्छ।"
+
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it\n"
+#~ "has, then replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "सञ्झ्याललाई बढाउनुहोस्, जसले चालु घटना र कुनै अस्थिरता \n"
+#~ "पाएको छ, त्यसपछि कुनै सूचक घटना जुनलाई आदेश भएकोलाई पुन: सुरु गर्नुहोस्"
+
+#, fuzzy
+#~ msgid "Shrinking and Yanking of windows"
+#~ msgstr "सञ्झ्यालको वृद्धि हुदै र प्याकिङ गर्दै"
+
+#~ msgid "Arguments given to the `xterm' command."
+#~ msgstr "'एक्सटर्म'आदेशका लागि दिइएको तर्क"
+
+#~ msgid ""
+#~ "Enable shade-hover mode.\n"
+#~ "\n"
+#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
+#~ msgstr ""
+#~ "छायाँ-झुण्डिएको-अवस्थालाई सक्रिय पार्नुहोस्।\n"
+#~ "\n"
+#~ "(माउस सूचक माथि भएको बेलामा अस्थायी किसिमले सञ्झ्यालमा छायाँ हटाउनुहोस्)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "सञ्झ्यालको शीर्षकमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्रहरू सक्रिय हुन्छन् (अथवा कुनै पनि "
+#~ "सञ्झ्याल फोकस गरिएको हुँदैछन्। (यो नक्सामा माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्.)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ " सञ्झ्यालको किनारमा हुन्छ,बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
+#~ "बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "बटनको बन्द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा "
+#~ "माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक प्रतिमित \n"
+#~ "बटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
+#~ "बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक सञ्झ्यालको बढाउनुस् \n"
+#~ "बटनमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन्(यो नक्सामा माउस बाइन्डिङ्गहरू मात्र "
+#~ "मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "मेनुबटनको सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा माउस "
+#~ "बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "जव सूचक \n"
+#~ "बटनको सेड द गर्नुस सञ्झ्यालमा हुन्छ, बाइन्डिङ कुञ्जीमानचित्र सक्रिय हुन्छन् (यो नक्सामा "
+#~ "माउस बाइन्डिङ्गहरू मात्र मूल्याङ्कन् गरिन्छन्।)"
+
+#, fuzzy
+#~ msgid "Copy to p_revious"
+#~ msgstr "पछिल्लोमा प्रतिलिपि बनाउनुहोस्"
+
+#, fuzzy
+#~ msgid "Copy to ne_xt"
+#~ msgstr "अघिल्लोमा प्रतिलिपि बनाउनुहोस्"
+
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking\n"
+#~ "order. Also raise any transient windows that it has."
+#~ msgstr ""
+#~ "थाक लगाईएको \n"
+#~ " क्रममा चालु सञ्झ्याललाई यसको सबै भन्दा माथि दिइएको अवस्थामा उठाउनुहोस्, यसमा भएका "
+#~ "कुनै अस्थिर सञ्झ्यालहरूलाई पनि उठाउनुहोस्।"
+
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking\n"
+#~ "order. Also lower any transient windows that it has."
+#~ msgstr ""
+#~ "थाक लगाईएको \n"
+#~ " क्रममा चालु सञ्झ्याललाई यसको सबै भन्दा तल दिइएको अवस्थामा ल्याउनुहोस्, यसमा भएका "
+#~ "कुनै अस्थिर सञ्झ्यालहरूलाई पनि ल्याउनुहोस्"
+
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
+#~ "changes\n"
+#~ "the level of any transient windows it has."
+#~ msgstr ""
+#~ "यदी सञ्झ्याल यसको सबैभन्दा माथी संभाव्य अवस्थामा छ भने यसलाई यसको\n"
+#~ "सबै भन्दा तलको संभाव्य अवस्थामा ल्याउनुहोस्। होइन भने यसलाई अनुमति दिइएको स्थान सम्मम "
+#~ "उठाउनुहोस्। यसमा भएको अस्थिरताको कुनै सञ्झ्यालको कुनै तह\n"
+#~ "परिवर्तन गर्नुहोस्।"
+
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the\n"
+#~ "previous workspace."
+#~ msgstr ""
+#~ "चालु कार्यस्थान मेट्नुहोस्, यसका सदस्य सञ्झ्यालहरू\n"
+#~ "पछिल्लो कार्यस्थानमा स्थान्तरण गरिन्छ।"
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
