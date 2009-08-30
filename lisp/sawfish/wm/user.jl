@@ -113,7 +113,9 @@
 		(when rest
 		  (if (rc-file-exists-p (car rest))
 		      (safe-load (car rest) t t t)
-		    (loop (cdr rest))))))))
+		    (loop (cdr rest)))))
+		    
+	      (load "sawfish/wm/extras" t))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
