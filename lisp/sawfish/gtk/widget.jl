@@ -61,9 +61,12 @@
 
   ;; predefined widget types are:
 
+  ;;	(choice SYMBOLS)
   ;;	(symbol OPTIONS...)
   ;;	(string)
-  ;;	(number [MIN [MAX]])
+  ;;	(number [MIN [MAX [INITIAL-VALUE]]]) ;; integer only
+  ;;	  The default of minimum is 0, max 65536,
+  ;;	  and initial value is the same as the min.
   ;;	(boolean [LABEL])
   ;;	(color)
   ;;	(font)
@@ -175,8 +178,8 @@
   (define (tooltip-split doc)
     (setq doc (_ doc))
     (if (string-match "\n\n\\s*" doc)
-	(cons (utf8-substring doc 0 (match-start))
-	      (utf8-substring doc (match-end)))
+	(cons (substring doc 0 (match-start))
+	      (substring doc (match-end)))
       (cons doc nil)))
 
   (define (tooltip-set widget tip-string #!optional (key "Foo"))
@@ -266,12 +269,15 @@
 
   (define-widget-type 'string make-string-item)
 
-  (define (make-number-item changed-callback #!optional minimum maximum)
+  (define (make-number-item changed-callback
+                            #!optional minimum maximum initial-value)
     ;; XXX backwards compat..
     (when (eq minimum 'nil) (setq minimum nil))
     (when (eq maximum 'nil) (setq maximum nil))
-    (let ((widget (gtk-spin-button-new-with-range (or minimum -65535)
+    (let ((widget (gtk-spin-button-new-with-range (or minimum 0)
 						  (or maximum 65535) 1)))
+      (when initial-value
+        (gtk-spin-button-set-value widget initial-value))
       (when changed-callback
 	(g-signal-connect
 	 widget "value-changed" (make-signal-callback changed-callback)))
