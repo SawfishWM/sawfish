@@ -446,5 +446,4 @@
     (delete-x-property 'root '_WIN_UNIFIED_AREA))
 
   (unless (or gnome-window-id batch-mode)
-    (gnome-init)
-    (require 'sawfish.wm.gnome.match-window)))
+    (gnome-init)))
