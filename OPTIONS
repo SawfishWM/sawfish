@@ -602,7 +602,7 @@
 ;; (define-special-variable tab-raise-on-hover nil
 ;;   "Raise Tabs on Hover")    
 
-;; shrink-yank options
+;; shrink-yank options (in grow-pack.jl)
 
 ;; (define-special-variable shrink-window-minimum-size 10
 ;;   "The minimum height or width to which a window may be shrunk.")
@@ -623,3 +623,31 @@
 
 ;; (define-special-variable infinite-desktop.stop-at-workspace-borders nil
 ;;   "Stop scrolling at workspace borders (Fixes warp-to-window bugs).")
+
+;; fdo-menu options
+
+;; (define-special-variable my-term-string "xterm -e"
+;;   "Terminal to use if a .desktop files has Terminal=true")
+
+;; (define-special-variable my-lang-string '()
+;;   "Two digits lang code to use (if available) for extracting application names")
+
+;; (define-special-variable my-desktop-directory '("/usr/share/applications")
+;;   "List of directories to look for .desktop files")
+
+;; (define-special-variable ignore-no-display '()
+;;   "Wether to ignore the `NoDisplay' setting")
+
+;; (define-special-variable want-alphabetize 't
+;;   "Wether to alphabetically sort menuentries")
+
+;; (define-special-varaible use-fdo-menu 't
+;;   "Wether to use the fdo-menu (nil allows customized apps-menu)")
+
+;; view-clipboard options
+
+;; (define-special-variable clipboard-preview-clip-length 60
+;;   "Maximum number of chars to display in `view-clipboard'")
+
+;; (define-special-variable clipboard-preview-timeout 5
+;;   "Maximum time to let `view-clipboard' stay running")

@@ -34,7 +34,7 @@ Make sure the mk-saw-menu.jl is in your load path
 ;; if your .desktop files are located somewhere else than
 ;; /usr/share/applications, then change the desktop-directory
 
-(setq desktop-directory "/usr/share/applications"))
+(setq desktop-directory '("/usr/share/applications"))
 
 ;; some entries are hidden from the menu, especially GNOME Apps
 ;; like eog, nautilus or evince & Co, if you want to have them
