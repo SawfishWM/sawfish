@@ -60,7 +60,7 @@ enum {
        all predefined wm key bindings to a different modifier */
     EV_MOD_WM     = 0x04000000,
 
-    /* Matches any of the modifiers */
+    /* Matches any of the modifiers, including no modifier */
     EV_MOD_ANY    = 0x00400000,
 
     /* a KeyRelease event */
