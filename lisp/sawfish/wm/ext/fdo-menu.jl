@@ -145,6 +145,9 @@ Make sure the mk-saw-menu.jl is in your load path
     
     (if (not (boundp 'my-term-string))
 	(defvar my-term-string "xterm -e "))
+    
+    (if (not (boundp 'use-fdo-menu))
+	(defvar use-fdo-menu 't))
 ;    )
 
     
@@ -347,12 +350,15 @@ Make sure the mk-saw-menu.jl is in your load path
 		(alphabetize-entries (cdr saw-menu)))))
 
     (define (update-saw-menu)
-      (setq *loc-menu* nil)
-      (setq desk-files (flatten (map-dir-files desktop-directory)))
-      (mapc (lambda (x)
-	      (setq *loc-menu* (append *loc-menu* (list (parse-desktop-file x))))) desk-files)
-      (if want-alphabetize
-	  (setq apps-menu (alphabetize-entries (fix-cats menu-cat-alist)))
-	(setq apps-menu (fix-cats menu-cat-alist))))
+      (unless (not use-fdo-menu)
+	(setq *loc-menu* nil)
+	(setq desk-files (flatten (map-dir-files desktop-directory)))
+	(mapc (lambda (x)
+		(setq *loc-menu* (append *loc-menu* (list (parse-desktop-file x))))) desk-files)
+	(if want-alphabetize
+	    (setq apps-menu (alphabetize-entries (fix-cats menu-cat-alist)))
+	  (setq apps-menu (fix-cats menu-cat-alist)))))
 	
-    (define-command 'update-saw-menu update-saw-menu)))
+    (define-command 'update-saw-menu update-saw-menu)
+
+))

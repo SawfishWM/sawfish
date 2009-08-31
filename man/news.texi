@@ -20,6 +20,22 @@ they occurred between. For more detailed information see the
 @item rep-gtk 0.18.4 -> 0.90.0
 @end itemize
 
+@item User visible changes:
+@itemize @minus
+
+@item Sawfish now uses an implementation of the FDO (freedesktop.org) application menu,
+by default it overrides a possibly custom-set apps-menu from your resourcefile, to avoid that,
+place the following before your apps-menu config: 
+
+@code{(setq use-fod-menu nil)}
+
+and sawfishs root-menu will behave as expected by you.
+
+@item Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from this version on,
+sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
+your system, but the later doesn't
+@end itemize
+
 @item Bugs fixed:
 @itemize @minus
 
@@ -46,17 +62,17 @@ they occurred between. For more detailed information see the
 @item New features:
 @itemize @minus
 
-@item Added FDO Application Menu [Matthew Love]
+@item Added FDO (freedesktop.org) application-menu-implementation [Matthew Love]
 
-@item Sawfish does now support theme-tarballs compressed with XZ or LZMA [Christopher Bratusek]
+@item Sawfish does now support theme-tarballs compressed with XZ (aka LZMA2) or LZMA [Christopher Bratusek]
 
-@item 3 new sawfish-mmc based commands (maximize-unframe, maximize-reframe and rename-window) [Christopher Bratusek]
+@item 3 new sawfish-mmc based commands (@code{maximize-unframe}, @code{maximize-reframe} and @code{rename-window}) [Christopher Bratusek]
 
-@item 5 new move-cursor commands (move-cursor -northwest, -northeast, -southwest, -southeast), and move-cursor-center [Christopher Bratusek]
+@item 5 new move-cursor commands (@code{move-cursor-} @code{northwest}, @code{northeast}, @code{southwest}, @code{southeast}), and @code{move-cursor-center} [Christopher Bratusek]
 
-@item Added resize-by-factor meta-function and double/halve-window-size functions making use of it [Christopher Bratusek]
+@item Added @code{resize-by-factor} meta-function and @code{double-}, @code{halve-window-size} functions making use of it [Christopher Bratusek]
 
-@item Added fullscreen, fullscreen-xinerama, new-workspace and new-viewport window-matchers [Jeremy Hankins]
+@item Added @code{fullscreen}, @code{fullscreen-xinerama}, @code{new-workspace} and @code{new-viewport} window-matchers [Jeremy Hankins]
 
 @item Added @code{window-name} window-matcher [Christopher Bratusek]
 
@@ -66,19 +82,19 @@ they occurred between. For more detailed information see the
 
 @item Added @code{display-message-with-timeout} @code{browser} commands [Christopher Bratusek]
 
-@item Added viewport-windows function (equivalent to workspace-windows) [Jeremy Hankins]
+@item Added @code{viewport-windows} function (equivalent to workspace-windows) [Jeremy Hankins]
 
-@item Added viewport-boundary-mode dynamic (creates a new viewport then hitting the screen-edge) [Jeremy Hankins]
+@item Added viewport-boundary-mode @code{dynamic} (creates a new viewport then hitting the screen-edge) [Jeremy Hankins]
 
-@item Improve position matcher to bind a window to a position (either center east north north-east north-west south south-east south-west west) OR to a user-given position [Jeremy Hankins]
+@item Improve position matcher to bind a window to a position (either @code{center} @code{east} @code{north} @code{north-east} @code{north-west} @code{south} @code{south-east} @code{south-west} @code{west}) OR to a user-given position [Jeremy Hankins]
 
-@item When GNOME Integration is loaded, don't remove quit and restart entries from menu [Christopher Bratusek]
+@item When GNOME Integration is loaded, don't remove @code{quit} and @code{restart} entries from menu [Christopher Bratusek]
 
-@item Use gnome-www-browser for displaying GNOME-Homepage instead of gnome-moz-remote [Christopher Bratusek]
+@item Use @code{gnome-www-browser} for displaying GNOME-Homepage instead of ancient @code{gnome-moz-remote} [Christopher Bratusek]
 
 @item Make strings in Sawfish-UI fully translatable [Alexey I. Froloff]
 
-@item Added get-window-by-class and get-window-by-class-re [Christopher Bratusek]
+@item Added @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
 @end itemize
 @item Widget Transistion:
 @itemize @minus
@@ -90,13 +106,11 @@ they occurred between. For more detailed information see the
 @item Other Changes:
 @itemize @minus
 
-@item Renamed `after-add-window' to `maxmize-after-add-window' for easier evaluation [Teika Kazura]
+@item Renamed @code{after-add-window} to @code{maxmize-after-add-window} for easier evaluation [Teika Kazura]
 
 @item Revamped the Root and Window Menu [Christopher Bratusek]
 
 @item Trimm down GNOME Integration to the minimum [Christopher Bratusek]
-
-@item If ~/.sawmillrc exists but ~/.sawfishrc not, rename the former to the later [Christopher Bratusek]
 
 @item Make sure docks/panels are unframed [Timo Korvola]
 
@@ -110,7 +124,7 @@ they occurred between. For more detailed information see the
 
 @item Fixed typos in the .desktop files and removed unneded entries [Christopher Bratusek]
 
-@item Changing raise-tabs-on-hover takes effect immediately now [Christopher Bratusek]
+@item Changing @code{raise-tabs-on-hover takes} effect immediately now [Christopher Bratusek]
 
 @item Add --tag=CC to libtool where necessary, unbrakes compilation on some arches [Gentoo]
 
@@ -122,7 +136,7 @@ they occurred between. For more detailed information see the
 
 @item Export shrink-yank commands [Christopher Bratusek]
 
-@item Export send-to-workspace command [Christopher Bratusek]
+@item Export @code{send-to-workspace} command [Christopher Bratusek]
 
 @item Grow/Pack and Shrink/Yank options are in the same group now [Christopher Bratusek]
 
