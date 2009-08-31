@@ -564,7 +564,7 @@ unmaximized."
 
 ;;; initialisation
 
-  (define (after-add-window w)
+  (define (maximize-after-add-window w)
     (let ((vert (window-get w 'queued-vertical-maximize))
 	  (horiz (window-get w 'queued-horizontal-maximize))
 	  (full (window-get w 'queued-fullscreen-maximize))
@@ -588,7 +588,7 @@ unmaximized."
                                    (vert 'vertical)
 				   (horiz 'horizontal))))))))
 
-  (add-hook 'after-add-window-hook after-add-window)
+  (add-hook 'after-add-window-hook maximize-after-add-window)
 
   ;; before exiting, return all windows to their unmaximized
   ;; geometries. But _don't_ change any of the properties (either

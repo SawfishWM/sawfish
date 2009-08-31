@@ -1,6 +1,10 @@
 2009-08-31  Christopher Bratusek <zanghar@freenet.de>
 	* CONTRIBUTING: Encoding is changed to utf-8 from latin-1 [Teika Kazura]
 
+	* lisp/sawfish/wm/state/maximize.jl: Renamed hooked function `after-add-window' to `maximize-after-add-window'.
+	    				     This makes it self-descriptive, so that when you evaluate `after-add-window-hook',
+					     you see what's hooked in. [Teika Kazura]
+
 2009-08-30  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/gtk/widget.jl: Number widget can take optional initial value [Teika Kazura]
 
