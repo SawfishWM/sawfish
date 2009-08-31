@@ -232,33 +232,32 @@ The color used for text where no other color is defined.
 @chapter Fonts
 @cindex Fonts
 
-As with the color type, the font type allows X11 fonts to be
-manipulated by Lisp code.
+Lisp font object allows manipulation of correspondig X11 fonts.
 
 @defun fontp arg
 Returns @code{t} if @var{arg} is a font object.
 @end defun
 
-Sawfish supports two types of fonts: X11 core fonts (fontsets and
-fontstructs) and Xft fonts.  Calling code must look up fonts by
-giving both a name and a type: an @code{xlfd} argument indicates the
-core fonts, and @code{Xft} indicates Xft fonts.  These types are
-always literal strings.
+Sawfish supports three ``types'' of fonts: X11 old core fonts (fontsets
+and fontstructs), Xft fonts, and if supported, Pango fonts. In lisp,
+type is represented by a string, @code{"xlfd"}, @code{"Xft"}, or
+@code{"Pango"}.
 
 @defun font-type-exists-p type
-Returns true if fonts with the type described by the string @var{type}
-can be loaded, false otherwise.
+Returns true if fonts of @var{type} are available, false otherwise.
 @end defun
 
 @defun get-font-typed type name
-Return a font object representing the X11 font specified by the string
-@var{name}.  Argument @var{type} indicates the type of font to look
-for; it must be one of the strings @code{xlfd} for a X11 core fonts
-(based on fontsets or a fontstructs), or @code{Xft} for an Xft font.
+Returns a font object which represents an X11 font. It's specified by
+the string @var{name}, and string @var{type}. Signals an error if the
+specified font is not available.
 
-Signals an error if @var{type} is not one of the literal strings
-listed above.  Also signals an error if no font named @var{name}
-can be found within the requested type.
+``Safe'' examples are:
+@lisp
+(get-font-typed "xlfd" "fixed")
+(get-font-typed "Xft" "Sans")
+(get-font-typed "Pango" "Sans")
+@end lisp
 @end defun
 
 @defun get-font name
@@ -273,13 +272,13 @@ Several functions allow the attributes associated with a font object to
 be found.
 
 @defun font-name font
-Returns the name of the X11 font represented by object @var{font} (a
-string).
+Returns the name, in string, of the X11 font represented by object
+@var{font}.
 @end defun
 
 @defun font-type font
-Returns a string indicating the font's class.  This is @code{xlfd}
-for X11 core fonts, or @code{Xft} for Xft fonts.
+Returns the font's type. It is one of @code{"xlfd"}, @code{"Xft"}, and
+@code{"Pango"}.
 @end defun
 
 @defun font-height font
@@ -1204,7 +1203,6 @@ responsible for checking whether an entered window wants input events.
 The desktop never receives @code{pointer-in} or @code{pointer-out};
 only normal windows do.
 
-@item
 @item enter-root
 @itemx leave-root
 The pointer has entered or exited the desktop (which is the
@@ -1783,13 +1781,14 @@ screen.
 When non-nil, the window size is shown in the center of the screen.
 @end defvar
 
-@defvar move-snap-edges
-When non-nil, the window position is ``snapped'' to edges of other
-windows within close proximity.
-@end defvar
+When you move a window and it comes close to another, sawfish adjusts
+its position so that its edge fits to the other, or ``snaps''. (It may
+be dubbed as ``interactive tiling''.) Snapping also takes place agaisnt
+screen boundary.
 
 @defvar move-snap-epsilon
-The distance in pixels before snapping together two edges.
+The distance in pixels before snapping together two edges. The bigger
+the value, the more adhesive windows get.
 @end defvar
 
 Windows have a ``gravity'' property, which affect how they are placed
@@ -2520,10 +2519,13 @@ Cycle through all cycleable windows.
 
 @defun cycle-group
 @defunx cycle-group-backwards
-Cycle through all windows in this group.
+Cycle through all windows inside the same group. This is somewhat
+comparable to the @key{Control-TAB} behavior of Windows OS.
+@end defun
 
-This is somewhat comparable to the @key{Control-TAB} behavior of
-windows.
+@defun cycle-among-groups
+@defunx cycle-among-groups-backwards
+Cycle through windows at the top of each group.
 @end defun
 
 @defun cycle-prefix
@@ -5824,17 +5826,20 @@ executable name).
 
 @defvar sawfish-directory
 The home directory for Sawfish files.  For example:
-@code{"/usr/share/sawfish"}.
+@code{"/usr/share/sawfish"}. You can override it with the environment
+variable @code{SAWFISHDIR}.
 @end defvar
 
 @defvar sawfish-exec-directory
 The directory for architechture-specific Sawfish executables.  For
-example: @code{"/usr/lib/sawfish/1.3/i386-pc-linux-gnu"}.
+example: @code{"/usr/lib/sawfish/1.3/i386-pc-linux-gnu"}. You can
+override it with the environment variable @code{SAWFISHEXECDIR}.
 @end defvar
 
 @defvar sawfish-lisp-lib-directory
 The top-level directory for Sawfish lisp files.  For example:
-@code{"/usr/share/sawfish/1.3/lisp"}.
+@code{"/usr/share/sawfish/1.3/lisp"}. You can override it with the
+environment variable @code{SAWFISHLISPDIR}.
 @end defvar
 
 @defvar sawfish-locale-directory
@@ -5845,7 +5850,8 @@ part of the Sawfish distribution.  For example:
 
 @defvar sawfish-site-lisp-directory
 The top-level directory for site-specific Sawfish lisp files.  For
-example: @code{"/usr/share/sawfish/site-lisp"}.
+example: @code{"/usr/share/sawfish/site-lisp"}. You can override it
+with the environment variable @code{SAWFISHSITELISPDIR}.
 @end defvar
 
 @defvar sawfish-version
