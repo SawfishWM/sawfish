@@ -542,11 +542,11 @@
 ;;; Entry points
 
   (define (move-window-interactively w)
-    "Move the window interactively using the mouse."
+    "Move the window interactively, with mouse or keyboard."
     (do-move-resize w 'move))
 
   (define (resize-window-interactively w)
-    "Resize the window interactively using the mouse."
+    "Resize the window interactively, with mouse or keyboard."
     (do-move-resize w 'resize))
 
   (define (move-selected-window)
