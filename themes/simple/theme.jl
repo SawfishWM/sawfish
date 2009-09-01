@@ -76,7 +76,8 @@
 	       (right-edge . -1)
 	       (width . 1)
 	       (top-edge . -22)
-	       (bottom-edge . -5))
+	       (bottom-edge . -5)
+	       (class . right-border))
 	       
 	      ((background . ,frame-colors)
 	       (left-edge . 0)
@@ -119,7 +120,7 @@
 		      (right-edge . 0)
 		      (top-edge . -22)
 		      (height . 1))
-		      
+
 		     ((background . "black")
 		      (left-edge . -1)
 		      (width . 1)
@@ -130,7 +131,8 @@
 		      (right-edge . -1)
 		      (width . 1)
 		      (top-edge . -22)
-		      (height . 23))
+		      (height . 23)
+		      (class . right-border))
 		      
 		     ((background . "black")
 		      (left-edge . 0)
@@ -173,7 +175,8 @@
 			 (right-edge . -1)
 			 (width . 1)
 			 (top-edge . -5)
-			 (bottom-edge . -5))
+			 (bottom-edge . -5)
+			 (class . right-border))
 
 			((background . ,frame-colors)
 			 (left-edge . 0)
@@ -211,7 +214,8 @@
 				(right-edge . -1)
 				(width . 1)
 				(top-edge . -6)
-				(height . 6))
+				(height . 6)
+				(class . right-border))
 				
 			       ((background . "black")
 				(left-edge . 0)
