@@ -1,6 +1,32 @@
 2009-09-01  Christopher Bratusek <zanghar@freenet.de>
 	* themes/simple/theme.jl: make windows resizable from right border
 
+	* lisp/sawfish/wm/menus.jl: added Session sub-menu
+				    move Display Errors here
+				    move Restart Sawfish here
+				    move Quit Sawfish here
+
+	* lisp/sawfish/wm/help.jl: removed display-url-commands, use browser-command instead
+	                           removed help-call-info-gnome
+
+	* lisp/sawfish/wm/user.jl: don't load sawfish.wm.state.gnome
+
+	* lisp/sawfish/wm/state/gnome.jl: removed, since we support WM_STATE_*
+
+	* lisp/sawfish/wm/commands/gnome.jl: removed
+
+	* lisp/sawfish/wm/autoload.jl: removed sawfish.wm.commands.gnome autoloads
+
+	* lisp/sawfish/wm/integration.jl: use browser-program instead of display-url-command
+	                                  removed some obsolete bits
+					  append Logout from GNOME to Session sub-menu
+					  append Shutdown from GNOME to Session sub-menu
+					  updated commands for more recent GNOME versions
+
+	* po/POTFILES.in: updated
+
+	* OPTIONS: more updates
+
 2009-08-31  Christopher Bratusek <zanghar@freenet.de>
 	* CONTRIBUTING: Encoding is changed to utf-8 from latin-1 [Teika Kazura]
 

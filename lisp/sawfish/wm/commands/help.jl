@@ -22,8 +22,7 @@
 (define-structure sawfish.wm.commands.help
 
     (export display-url
-	    help-call-info
-	    help-call-info-gnome)
+	    help-call-info)
 
     (open rep
 	  rep.system
@@ -38,26 +37,14 @@
     (xterm (format nil "info '%s' '%s'"
 		    document node)))
 
-  (define (help-call-info-gnome document node)
-    (while (string-match " " node)
-      (setq node (concat (substring node 0 (match-start)) ?_
-			 (substring node (match-end)))))
-    (system (format nil "gnome-help 'info:%s#%s' >/dev/null 2>&1 </dev/null &"
-		    document node)))
-
   (defvar help-display-info-function help-call-info)
 
   ;; WWW
 
-  (defvar display-url-command
-    "( netscape -remote 'openUrl(%s)' || netscape '%s' ) &"
-    "Shell command used to direct a web browser to load a url. Any `%s'
-substrings will be replaced by the name of the url.")
-
   (define (display-url url)
     (let ((args (list url)))
       (rplacd args args)
-      (system (apply format nil display-url-command args))))
+      (system (apply format nil browser-program args))))
 
   ;; Commands
 

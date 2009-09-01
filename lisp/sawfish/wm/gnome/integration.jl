@@ -22,9 +22,9 @@
 (define-structure sawfish.wm.gnome.integration ()
 
     (open rep
-	  sawfish.wm.state.gnome
 	  sawfish.wm.menus
 	  sawfish.wm.custom
+	  sawfish.wm.commands
 	  sawfish.wm.commands.help
 	  sawfish.wm.commands.user)
 
@@ -35,13 +35,19 @@
     (setq xterm-program "x-terminal-emulator"))
 
   ;; use the GNOME help browser and url launcher
-  (setq help-display-info-function help-call-info-gnome)
-  (setq display-url-command "gnome-www-browser %s &")
+  (setq browser-program "gnome-www-browser %s &")
 
   ;; add some GNOME help menus
   (let ((menu (assoc (_ "_Help") root-menu)))
     (when menu
       (nconc menu `(()
-		    (,(_ "_GNOME Help...") gnome-help-browser)
-		    (,(_ "GNOME WWW...") gnome-www-page)
-		    (,(_ "About GNOME...") gnome-about))))))
+		    (,(_ "_GNOME Help") (system "yelp &"))
+		    (,(_ "GNOME Website") (display-url "http://www.gnome.org"))
+		    (,(_ "About GNOME") (system "gnome-about &"))))))
+
+  ;; add gnome-logout menu item
+  (let ((menu (assoc (_ "Sessi_on") root-menu)))
+    (when menu
+      (nconc menu `(()
+                   (,(_ "_Logout from GNOME") (system "gnome-session-save --logout-dialog &"))
+		   (,(_ "_Shutdown from GNOME") (system "gnome-session-save --shutdown-dialog &")))))))

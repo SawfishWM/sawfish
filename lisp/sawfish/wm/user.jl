@@ -129,15 +129,6 @@
   ;; load the new WM-spec code by default now
   (load-module 'sawfish.wm.state.wm-spec)
 
-  ;; might it be useful to load the old GNOME support?
-  (unless batch-mode
-    (catch 'out
-      (mapc (lambda (prop)
-	      (when (string-match "^GNOME_" (symbol-name prop))
-		(load-module 'sawfish.wm.state.gnome)
-		(throw 'out t)))
-	    (list-x-properties 'root))))
-
   ;; Use all arguments which are left.
   (let ((do-load (lambda (name)
 		   (cond ((file-exists-p name)
