@@ -21,8 +21,7 @@
 
 (define-structure sawfish.wm.commands.help
 
-    (export display-url
-	    help-call-info)
+    (export help-call-info)
 
     (open rep
 	  rep.system
@@ -39,13 +38,6 @@
 
   (defvar help-display-info-function help-call-info)
 
-  ;; WWW
-
-  (define (display-url url)
-    (let ((args (list url)))
-      (rplacd args args)
-      (system (apply format nil browser-program args))))
-
   ;; Commands
 
   (define (show-faq) (help-display-info-function "sawfish" "FAQ"))
@@ -55,7 +47,7 @@
   (define (show-programmer-manual)
     (help-display-info-function "sawfish" "Top"))
 
-  (define (show-homepage) (display-url "http://sawfish.sourceforge.net/"))
+  (define (show-homepage) (browser "http://sawfish.sourceforge.net/"))
 
   (define (show-about)
     (system (format nil "%s >/dev/null 2>&1 </dev/null &"

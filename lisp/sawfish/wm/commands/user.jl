@@ -57,13 +57,16 @@
     (if (not command)
 	(system (format nil "%s >/dev/null 2>&1 </dev/null &"
 			xterm-program))
-      (system (format nil "%s -e %s >/dev/null 2>&1 </dev/null&"
+      (system (format nil "%s -e %s >/dev/null 2>&1 </dev/null &"
 		      xterm-program command))))
 
-  (define (browser)
+  (define (browser #!optional website)
     "Start a new browser instance"
-    (system (format nil "%s >/dev/null 2>&1 </dev/null &"
-			browser-program)))
+    (if (not website)
+        (system (format nil "%s >/dev/null 2>&1 </dev/null &"
+			browser-program))
+      (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
+                      browser-program website))))
 
   (defvar clipboard-preview-clip-length 60)
   (defvar clipboard-preview-timeout 5)
