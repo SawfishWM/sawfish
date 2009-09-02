@@ -1,5 +1,5 @@
 ;-*-sawfish-*-
-;; (fdo-menu.jl (v0.6.1) --- sawfish wm menu generation -- librep)
+;; (fdo-menu.jl (v0.6.5) --- sawfish wm menu generation -- librep)
 
 ;; (c) 2009 Matthew Love
 ;; Christopher Bratusek
@@ -84,7 +84,6 @@ Make sure the mk-saw-menu.jl is in your load path
 
   (unless batch-mode
 
-;  (defun update-vars
     ;; Some defaults
     ;;my-comm ()
     ;;my-icon ()
@@ -116,19 +115,16 @@ Make sure the mk-saw-menu.jl is in your load path
 	    (t (append (flatten (car input))
 		       (flatten (cdr input))))))
 
-    ;; Variables that can be set in .sawfish[/]rc
-    
-    (if (not (boundp 'desktop-directory))
-	(defvar desktop-directory '("/usr/share/applications")))
-
-    (defvar desk-files (flatten (map-dir-files desktop-directory)))
-
     (defun find-lang-string ()
       (if (getenv "LANG")
 	  (if (> (length (getenv "LANG")) 2)
 	      (substring (getenv "LANG") 0 5)
 	    (substring (getenv "LANG") 0 2))
 	'()))
+
+    ;; Variables that can be set in .sawfish[/]rc    
+    (if (not (boundp 'desktop-directory))
+	(defvar desktop-directory '("/usr/share/applications")))
 
     (if (not (boundp 'my-lang-string))
 	(defvar my-lang-string (find-lang-string)))
@@ -148,8 +144,6 @@ Make sure the mk-saw-menu.jl is in your load path
     
     (if (not (boundp 'use-fdo-menu))
 	(defvar use-fdo-menu 't))
-;    )
-
     
     ;; The Master Category List
     (defvar menu-cat-alist
@@ -191,23 +185,18 @@ Make sure the mk-saw-menu.jl is in your load path
     (defun desktop-file-p (directory-file)
       (let ((this-file (open-file directory-file 'read)))
 	(let ((this-line (read-line this-file)))
-	  (if (string= this-line "[Desktop Entry]\012")
-	      't
-	    '()))))
+	  (string= this-line "[Desktop Entry]\012"))))
     
     (defun backup-file-p (input-file-name)
-      (if (or (string= "~" (substring input-file-name (- (length input-file-name) 1)))
-	      (string= "#" (substring input-file-name 0 1)))
-	  't
-	'()))
+      (or (string= "~" (substring input-file-name (- (length input-file-name) 1)))
+	  (string= "#" (substring input-file-name 0 1))))
 
     ;; Helper for (parse-desk-line) - specifically, for categories.
-    (defun build-cat-list (line) ;; line must be excluding the \
-      ;; categories= part -> (substring line 11)
+    ;; line must be excluding the categories= part -> (substring line 11)
+    (defun build-cat-list (line) 
       (if (> (length line) 1)
 	  (let ((this-cat (prin1-to-string (read-from-string line))))
 	    (cons this-cat (build-cat-list (substring line (+ 1 (length this-cat))))))))
-
 
     ;; Helper function for (fix-cats)
     (defun fix-sub-cats (cat-list loc-list)
@@ -217,7 +206,6 @@ Make sure the mk-saw-menu.jl is in your load path
 		(cons (cdr (assoc cat-val loc-list))
 		      (fix-sub-cats cat-list (remove (assoc cat-val loc-list) loc-list)))
 	      (fix-sub-cats (cdr cat-list) loc-list)))))
-
 
     ;; Second Part of process, after (parse-desktop-file) has run \
     ;; through and generated the *loc-menu*.
@@ -256,7 +244,6 @@ Make sure the mk-saw-menu.jl is in your load path
 	      this-cat))
 	(car cat-list)))
 
-
     ;; Helper function for (create-menu), which will parse the string input there.
     ;; Will only give an output for specified lines (i.e. category, name, etc.)
     (defun parse-desk-line (line desk-value)
@@ -268,8 +255,8 @@ Make sure the mk-saw-menu.jl is in your load path
 	       my-lang-string
 	       (string= desk-value (substring line 0 5))
 	       (string= (substring line 4 5) "[")
-	       (or (string= my-lang-string (substring line 5 (+ (length my-lang-string) 5)))
-		   (string= (substring my-lang-string 0 2) (substring line 5 (+ (length my-lang-string) 5)))))
+	       (string= my-lang-string (substring line 5 (+ (length my-lang-string) 5)))
+	       (string= (substring line (+ (length my-lang-string) 5) (+ (length my-lang-string) 6)) "]"))
 	  (substring line (+ 4 (length my-lang-string) 3) (- line-len 1)))
 
 	 ;; this section is for the exec and default name strings
@@ -313,18 +300,13 @@ Make sure the mk-saw-menu.jl is in your load path
        ((parse-desk-line line "NoDisplay=")
 	(setq my-disp (parse-desk-line line "NoDisplay=")))))
 
-
     ;; Parse a .desktop file into a list suitable for a menu
     ;; ex. (parse-desktop-file "emacs.desktop") ==> ("Development" "Emacs Text Editor" (system "emacs &"))
-
     (defun parse-desktop-file (desktop-file)
       (let ((desktop-file-name desktop-file))
-	;;desktop-file-name
 	(if (and (file-exists-p desktop-file-name)
 		 (desktop-file-p desktop-file-name)
 		 (not (file-directory-p desktop-file-name)))
-	    ;;(not (backup-file-p desktop-file-name))
-	    ;;(file-regular-p desktop-file-name))
 	    (let ((new-file (open-file desktop-file-name 'read)))
 	      (while (setq file-line (read-line new-file))
 		(create-menu file-line))
@@ -338,10 +320,6 @@ Make sure the mk-saw-menu.jl is in your load path
 		;;(cons my-cat (cons my-icon (cons my-name (cons my-comm (cons (list 'system (concat my-term-string my-exec)) nil))))))
 		(setq my-disp ()))))))
 
-    ;; Format the menu for sawfish
-    (defun build-saw-menu (entry)
-      `(defvar saw-apps-menu ',entry))
-
     ;; Alphabetize the entries in the category menus
     (defun alphabetize-entries (saw-menu)
       (if saw-menu
@@ -349,10 +327,11 @@ Make sure the mk-saw-menu.jl is in your load path
 		      (sort (cdr (car saw-menu)) string<)) 
 		(alphabetize-entries (cdr saw-menu)))))
 
+    ;; Update the menu and set it to 'apps-menu
     (define (update-saw-menu)
       (unless (not use-fdo-menu)
 	(setq *loc-menu* nil)
-	(setq desk-files (flatten (map-dir-files desktop-directory)))
+	(defvar desk-files (flatten (map-dir-files desktop-directory)))
 	(mapc (lambda (x)
 		(setq *loc-menu* (append *loc-menu* (list (parse-desktop-file x))))) desk-files)
 	(if want-alphabetize
@@ -360,5 +339,4 @@ Make sure the mk-saw-menu.jl is in your load path
 	  (setq apps-menu (fix-cats menu-cat-alist)))))
 	
     (define-command 'update-saw-menu update-saw-menu)
-
 ))
