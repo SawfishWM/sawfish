@@ -19,30 +19,30 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.gnome.integration ()
+(define-structure sawfish.wm.integration.gnome ()
 
     (open rep
 	  sawfish.wm.menus
 	  sawfish.wm.custom
 	  sawfish.wm.commands
-	  sawfish.wm.commands.help
 	  sawfish.wm.commands.user)
 
-  (define-structure-alias gnome-int sawfish.wm.gnome.integration)
+  (define-structure-alias gnome-int sawfish.wm.integration.gnome)
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
-    (setq xterm-program "x-terminal-emulator"))
+    (setq xterm-program "gnome-terminal.wrapper"))
 
   ;; use the GNOME help browser and url launcher
-  (setq browser-program "gnome-www-browser %s &")
+  (unless (variable-customized-p 'browser-program)
+    (setq browser-program "gnome-www-browser"))
 
   ;; add some GNOME help menus
   (let ((menu (assoc (_ "_Help") root-menu)))
     (when menu
       (nconc menu `(()
 		    (,(_ "_GNOME Help") (system "yelp &"))
-		    (,(_ "GNOME Website") (display-url "http://www.gnome.org"))
+		    (,(_ "GNOME Website") (browser "http://www.gnome.org"))
 		    (,(_ "About GNOME") (system "gnome-about &"))))))
 
   ;; add gnome-logout menu item

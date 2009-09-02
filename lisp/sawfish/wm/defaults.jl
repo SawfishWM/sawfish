@@ -32,7 +32,7 @@
 ;; extra GNOME integration module
 (unless batch-mode
   (if (getenv "GNOME_DESKTOP_SESSION_ID")
-    (require 'sawfish.wm.gnome.integration)))
+    (require 'sawfish.wm.integration.gnome)))
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)
