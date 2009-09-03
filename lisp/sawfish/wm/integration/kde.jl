@@ -1,4 +1,4 @@
-;; gnome-int.jl -- more GNOME integration
+;; kde-int.jl -- more KDE integration
 ;; $Id: integration.jl,v 1.20 2003/08/14 06:55:36 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
@@ -37,12 +37,6 @@
   (unless (variable-customized-p 'browser-program)
     (setq browser-program "konqueror"))
 
-  ;; add the KDE Control Center menu-item
-  (let ((menu (assoc (_ "_Customize") root-menu)))
-    (when menu
-      (nconc menu `(()
-                    (, (_ "_KDE Control Center") (system "systemsettings &"))))))
-
   ;; add some KDE help menus
   (let ((menu (assoc (_ "_Help") root-menu)))
     (when menu
@@ -56,4 +50,4 @@
   ;  (when menu
   ;    (nconc menu `(()
   ;                 (,(_ "_Logout from KDE") (system "false &"))
-;		   (,(_ "_Shutdown from KDE") (system "false &")))))))
+  ;		   (,(_ "_Shutdown from KDE") (system "false &")))))))
