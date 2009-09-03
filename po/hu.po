@@ -2,12 +2,11 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Róbert Ványi <robi@mora.u-szeged.hu>, 2000.
 #
-#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-24 21:17+0200\n"
+"POT-Creation-Date: 2009-09-03 20:53+0200\n"
 "PO-Revision-Date: 2002-10-18 16:43+0200\n"
 "Last-Translator: DOMA Peter <zelin@pointernet.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -198,46 +197,98 @@ msgid "none"
 msgstr "nincs"
 
 #. ../themes/mxflat/theme.jl
-msgid "decoration mode"
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
 msgstr ""
 
-msgid ");"
-msgstr ""
-
+#. ../themes/mxflat/theme.jl
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize title string"
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
 msgstr ""
 
-msgid "title string"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
 msgstr ""
 
-msgid "update title string periodically"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 msgstr ""
 
-msgid "title string update interval (1 - 1000000 s)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 msgstr ""
 
-msgid "title string font"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
 msgstr ""
 
-#, fuzzy
-msgid "customize title position"
-msgstr "maximize-button-keymap"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "középre"
 
 #. ../themes/mxflat/theme.jl
-msgid "title string horizontal alignment"
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
 msgstr ""
 
-msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -254,16 +305,32 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "gradient titlebar background (experimental)"
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
 msgstr ""
 
-#, fuzzy
-msgid "gradient mode"
-msgstr "tranziensek"
-
-msgid "gradient quality (1 best - 20 worst)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -281,24 +348,44 @@ msgid "custom"
 msgstr "Testreszabás"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "gradient color mode"
-msgstr "Színátmenet keretstílusnál"
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "Szín kiválasztása"
 
 #. ../themes/mxflat/theme.jl
-msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)"
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -306,21 +393,50 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "  focused titlebar color"
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "unfocused titlebar color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "  focused title string color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "unfocused title string color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "customize extended title string colors"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -377,32 +493,62 @@ msgid "ball-12"
 msgstr "összes"
 
 #. ../themes/mxflat/theme.jl
-msgid "button icon set (experimental)"
-msgstr ""
-
-#, fuzzy
-msgid "customize button size"
-msgstr "maximize-button-keymap"
-
-msgid "buttons size (1 - 1000 pixel)"
-msgstr ""
-
-msgid "button vertical alignment"
-msgstr ""
-
-msgid "scale button icons (experimental)"
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "display window icon on menu button"
-msgstr "Az ablak ikonjának megjelenítése a menügombon."
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -419,9 +565,15 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -430,10 +582,16 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "button position model"
-msgstr "_Hely megjegyzése"
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "_Hely megjegyzése"
@@ -494,9 +652,12 @@ msgid "lock button position"
 msgstr "close-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize sticky button keymap"
-msgstr "iconify-button-keymap"
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -504,9 +665,13 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "iconify-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize previous button keymap"
-msgstr "menu-button-keymap"
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -514,27 +679,54 @@ msgid "mxflat:previous-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize next button keymap"
-msgstr "menu-button-keymap"
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "menu-button-keymap"
 
-#, fuzzy
-msgid "customize configure button keymap"
-msgstr "menu-button-keymap"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "menu-button-keymap"
 
-#, fuzzy
-msgid "customize info button keymap"
-msgstr "iconify-button-keymap"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -542,13 +734,22 @@ msgid "mxflat:info-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid "always on top depth (-1000 - 1000)"
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize always-on-top button keymap"
-msgstr "menu-button-keymap"
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -556,9 +757,12 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize look button keymap"
-msgstr "maximize-button-keymap"
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -566,9 +770,14 @@ msgid "mxflat:lock-button-keymap"
 msgstr "close-button-keymap"
 
 #. ../themes/mxflat/theme.jl
-msgid "customize button-colors"
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -609,35 +818,85 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "border width (0 - 1000 pixel)"
-msgstr ""
-
-msgid "border width for maximized windows (0 - 1000 pixel)"
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize border for focused windows (experimental)"
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
 msgstr ""
 
-msgid "border width for focused windows (0 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
 msgstr ""
 
-msgid "title-contents border width (0 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
 msgstr ""
 
-msgid "border offset (-1000 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
 msgstr ""
 
-msgid "keep window borders and corners at their place when shading a window"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
 msgstr ""
 
-#, fuzzy
-msgid "show window corners"
-msgstr "Ablak növesztése lefelé"
-
-msgid "corners length adjustement (-1 - 100 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -650,16 +909,29 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "corners width adjustement (0 - 100 pixel)"
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "fake shadow (experimental)"
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "Fejléc-háttérképek fókuszon kívüli ablakokhoz."
@@ -701,13 +973,23 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "fake shadow light source"
-msgstr "Ablak figyelmen kívül hagyása"
-
-msgid "fake shadow light distance (0 - 100)"
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -716,9 +998,14 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize border colors"
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1037,86 +1324,6 @@ msgstr "Apropos függvény"
 msgid "Apropos variable"
 msgstr "Apropos változó"
 
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome toggle skip winlist"
-msgstr "Gnome ablaklista kihagyásának kapcsolása"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kapcsolása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome set skip winlist"
-msgstr "Gnome ablaklista kihagyásának bekapcsolása"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Set the GNOME SKIP_WINLIST hint of the window."
-msgstr "Az ablak GNOME_SKIP_WINLIST segédjének bekapcsolása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome clear skip winlist"
-msgstr "Gnome ablaklista kihagyásának törlése"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kikapcsolása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome toggle skip tasklist"
-msgstr "Gnome feladatlista kihagyásának kapcsolása"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kapcsolása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome set skip tasklist"
-msgstr "Gnome feladatlista kihagyásának bekapcsolása"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének bekapcsolása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome clear skip tasklist"
-msgstr "Gnome feladatlista kihagyásának törlése"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kikapcsolása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome logout"
-msgstr "Kilépés a Gnome-ból"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Logout from the current GNOME session."
-msgstr "Kilépés az aktuális GNOME-munkamenetből."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome www page"
-msgstr "GNOME honlap"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Display the WWW page of the GNOME project."
-msgstr "A GNOME projekt honlapjának indítása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome help browser"
-msgstr "GNOME súgóböngésző"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Launch the GNOME help browser."
-msgstr "A GNOME súgó böngésző indítása."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome about"
-msgstr "Gnome névjegy"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Launch the GNOME about dialog."
-msgstr "GNOME névjegy indítása."
-
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
 msgstr "Csoport ikonizálása"
@@ -1262,7 +1469,9 @@ msgstr "Ablak növesztése balra"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window to the left until it `bumps into' another window."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "Ablak növelése balra, amíg `nekiütközik' egy másik ablaknak.\n"
 "Lásd `grow-window-up'."
@@ -1273,7 +1482,9 @@ msgstr "Ablak növesztése jobbra"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window to the right until it `bumps into' another window."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "Ablak növelése jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
 "Lásd `grow-window-up'."
@@ -1283,18 +1494,30 @@ msgid "Grow window up"
 msgstr "Ablak növesztése felfelé"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Grows window upwards until it `bumps into' another window."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
 msgstr ""
-"Ablak növelése lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
-"Lásd `grow-window-up'."
+"Ablak növesztése felfelé, ameddig bele nem ütközik egy másik ablakba. Ha az "
+"ablak felső éle a képernyőn túl van, visszahozza.\n"
+"\n"
+"Univerzális prefix arg használatakor maximalizálja felfelé helyette.\n"
+"Numerikus prefix arg használatakor növessze felfelé a megadott értékű "
+"ablakkal vagy képponttal."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Ablak növesztése lefelé"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window downwards until it `bumps into' another window."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "Ablak növelése lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
 "Lásd `grow-window-up'."
@@ -1305,7 +1528,9 @@ msgstr "Ablak tömörítése balra"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window to the left until it `bumps into' another window."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "Ablak mozgatása balra, amíg `nekiütközik' egy másik ablaknak.\n"
 "Lásd `pack-window-up'."
@@ -1316,7 +1541,9 @@ msgstr "Ablak tömörítése jobbra"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window to the right until it `bumps into' another window."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "Ablak mozgatása jobbra, amíg `nekiütközik' egy másik ablaknak.\n"
 "Lásd `pack-window-up'."
@@ -1326,18 +1553,28 @@ msgid "Pack window up"
 msgstr "Ablak tömörítése felfelé"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Moves window upwards until it `bumps into' another window."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
-"Ablak mozgatása lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
-"Lásd `pack-window-up'."
+"Ablak mozgatása felfelé, ameddig bele nem ütközik egy másik ablakba. Ha az "
+"ablak felső éle a képernyőn túl van, visszahozza.\n"
+"\n"
+"Univerzális prefix arg használatakor mozgatja teljesen fel helyette.\n"
+"Numerikus prefix arg használatakor mozgassa felfelé a megadott értékű "
+"képponttal."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Ablak tömörítése lefelé"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window downwards until it `bumps into' another window."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "Ablak mozgatása lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
 "Lásd `pack-window-up'."
@@ -1572,14 +1809,24 @@ msgid "How to choose window edges when resizing."
 msgstr "Az ablak aktuális méretének megjelenítése átméretezéskor."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Distance in pixels before window edges align with each other."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
 msgstr ""
+"Ablakok szélei közti távolság (pixelekben).\n"
+"\n"
+"Ablakok mozgatásánál, ez a beállítás segíti az ablakok sarkainak egymás "
+"mellé helyezését."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Ablak interaktív mozgatása"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Move the window interactively using the mouse."
+#, fuzzy
+msgid "Move the window interactively, with mouse or keyboard."
 msgstr "Ablak interaktív mozgatása az egérrel."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1587,7 +1834,8 @@ msgid "Resize window interactively"
 msgstr "Ablak interaktív átméretezése"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Resize the window interactively using the mouse."
+#, fuzzy
+msgid "Resize the window interactively, with mouse or keyboard."
 msgstr "Ablak interaktív átméretezése az egér segítségével."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1626,23 +1874,26 @@ msgstr "Előhozás és váltás kattintásra"
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer"
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
 msgstr ""
-"A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
-"pointer eseményt, ami a parancsot hívta."
+"A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
+"együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot hívta."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Előhozás és váltás kattintásra ha fókuszban van"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then"
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
 msgstr ""
-"A jelenlegi eseményt kapó ablak előhúzása (ha fókuszált), az összes "
-"tranziens ablakával együtt, majd újra végezzen el minden pointer eseményt, "
-"ami a parancsot hívta."
+"A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
+"együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot hívta."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "Előhozás vagy váltás kattintásra"
 
@@ -1656,22 +1907,26 @@ msgstr "Csoport előhozása és váltás kattintásra"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
-msgid "Raise the group of windows that received the current event, then replay"
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
 msgstr ""
-"A jelenlegi eseményt kapó ablakcsoport előhúzása az összes tranziens "
-"ablakával együtt, majd újra végezzen el minden pointer eseményt, ami a "
-"parancsot hívta."
+"A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
+"együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot hívta."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Tranziensek előhozása és váltás kattintásra"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid "Raise the window that received the current event and any transients it"
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
 msgstr ""
-"A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
-"pointer eseményt, ami a parancsot hívta."
+"A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
+"együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot hívta."
 
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "Ablak csúsztatása balra"
@@ -2117,6 +2372,10 @@ msgstr "Hibák megjelenítése"
 msgid "Display all errors that have occurred to the screen."
 msgstr "A képernyővel kapcsolatos összes hiba megjelenítése."
 
+#. ../lisp/sawfish/wm/ext/fdo-menu.jl
+msgid "Update saw menu"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2350,9 +2609,16 @@ msgid "Shade Hover"
 msgstr "Lebegő árnyékolás"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid "Enable shade-hover mode."
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
 msgstr ""
+"Lebegő árnyékolás engedélyezése.\n"
+"\n"
+"(Ideiglenesen lenyitja az ablakot, ha az egérmutató felette van.)"
 
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Késleltetés ablak előhozása előtt (milliszekundumokban)."
 
@@ -2604,25 +2870,47 @@ msgid "None"
 msgstr "Nincs"
 
 #. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/gnome/integration.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "_Help"
 msgstr "_Súgó"
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "_GNOME Help..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_GNOME Help"
 msgstr "_GNOME Súgó..."
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "GNOME WWW..."
-msgstr "GNOME WWW..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "GNOME Website"
+msgstr ""
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "About GNOME..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "About GNOME"
 msgstr "GNOME névjegy..."
 
-#. ../lisp/sawfish/wm/gnome/menus.jl
-msgid "Gnome menus update"
-msgstr "Gnome menük frissítése"
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "Sessi_on"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Logout from GNOME"
+msgstr "Kilépés az aktuális GNOME-munkamenetből."
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Shutdown from GNOME"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_KDE Help"
+msgstr "_Súgó"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "KDE Website"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
@@ -2649,91 +2937,103 @@ msgstr "root-window-keymap"
 #. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window"
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
 msgstr ""
 "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
 "áll,\n"
 "(vagy egy ablak sincs fókuszban)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "title-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the title of"
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-"áll,\n"
-"(vagy egy ablak sincs fókuszban)."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"címsorán van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "border-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the border of"
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-"áll,\n"
-"(vagy egy ablak sincs fókuszban)."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az "
+"ablakkereten\n"
+"van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "close-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button"
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-"áll,\n"
-"(vagy egy ablak sincs fókuszban)."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"bezár gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "iconify-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the iconify"
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-"áll,\n"
-"(vagy egy ablak sincs fókuszban)."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"ikonizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "maximize-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the maximize"
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Billentyűtábla, melynek hozzárendelései akkor aktívak, ha felhasználótól "
-"kérünk be egy karakterláncot."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"maximalizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "menu-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button"
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-"áll,\n"
-"(vagy egy ablak sincs fókuszban)."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
+"menü gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
+"hozzárendelés.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "shade-button-keymap"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button"
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
-"áll,\n"
-"(vagy egy ablak sincs fókuszban)."
+"A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak shade\n"
+"gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a táblában.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid "Modifier key(s) used for default shortcuts."
 msgstr ""
@@ -2940,6 +3240,21 @@ msgid "_Customize"
 msgstr "_Testreszabás"
 
 #. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display Errors"
+msgstr "Hibák megjelenítése"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Restart Sawfish"
+msgstr "Újraindítás"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Quit Sawfish"
+msgstr "A Sawfish névjegye..."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_FAQ..."
 msgstr "_GYIK..."
 
@@ -2961,23 +3276,8 @@ msgstr "A Sawfish névjegye..."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "_Display Errors"
-msgstr "Hibák megjelenítése"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Kill Window"
+msgid "Kill Window"
 msgstr "_Ablakok"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Restart"
-msgstr "Újraindítás"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Quit"
-msgstr "Kilépés"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -3004,9 +3304,8 @@ msgid "Display the applications menu."
 msgstr "Az alkalmazások menü megjelenítése."
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_All settings"
-msgstr "Minden beállítás"
+msgid "S_awfish-UI"
+msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -3066,14 +3365,16 @@ msgstr "Alacsonyabb ablak előhozása"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/state/transient.jl
 #, fuzzy
-msgid "If the window is at its highest possible position, then lower it to its"
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Ha az ablak a lehető legmagasabb pozíciójában van, hátraküldi\n"
-"a lehető legalacsonyabb pozícióba. Egyéb esetben előrehozza\n"
-"amennyire csak lehet."
+"Ha az ablak a lehető legmagasabb pozíciójában van, akkor leküldi a\n"
+"lehető legalacsonyabb szintre. Egyéb esetben felemeli amennyire csak lehet.\n"
+"Az ablak tranziens ablakainak szintjét szintén változtatja."
 
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Ablak mélységének növelése"
 
@@ -3154,11 +3455,14 @@ msgstr "Ablak ragadósságának kapcsolása"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 #, fuzzy
-msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
 msgstr ""
 "Az ablak `ragadásának' átállítása -- rajta van-e minden munkaterületen,\n"
 "vagy nem."
 
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Ragadós"
 
@@ -3295,23 +3599,28 @@ msgstr "Ablak vízszintes maximalizálásának kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between horizontally maximized and"
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
 msgstr ""
 "Az ablak állapotának kapcsolása a vízszintesen maximalizált és a nem "
 "maximalizált\n"
 "között."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Ablak függőleges maximalizálásának kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between vertically maximized and"
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
 msgstr ""
-"Az ablak állapotának kapcsolása a függőlegesen maximalizált és a nem "
-"maximalizált\n"
+"Az ablak állapotának kapcsolása a maximalizált és a nem maximalizált\n"
 "között."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Ablak maximalizált kitöltése"
 
@@ -3356,23 +3665,28 @@ msgstr "Ablak vízszintes maximalizált töltésének kapcsolása"
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and"
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
 msgstr ""
 "Az ablak állapotának kapcsolása a vízszintesen maximalizált-kitöltött és a "
 "nem maximalizált\n"
 "között."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Ablak függőleges maximalizált töltésének kapcsolása"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between vertically maximized-filled and"
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
 msgstr ""
-"Az ablak állapotának kapcsolása a függőlegesen maximalizált-kitöltött és a "
-"nem maximalizált\n"
+"Az ablak állapotának kapcsolása a maximalizált-kitöltött és a nem "
+"maximalizált\n"
 "között."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid "Maximize unframe"
 msgstr "Ablak maximalizálása"
@@ -3442,11 +3756,14 @@ msgstr "Ablak lenyitása"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 #, fuzzy
-msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
 msgstr ""
 "Ha az ablak árnyékolt (lásd `shade-window'), visszaállítja annak szokásos\n"
 "állapotát."
 
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Ablak árnyékolásának kapcsolása"
 
@@ -3468,22 +3785,41 @@ msgid "Raise window and transients"
 msgstr "Ablak és tranziensek előrehozása"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking"
-msgstr "Az ablak legmagasabb pozícióba emelése a rétegek között."
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Jelenlegi ablak előhúzása a lehető legmagasabb pozícióra. A tranziens "
+"ablakok együtt mozognak a jelenlegi ablakkal."
 
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Ablak és tranzienseinek hátraküldése"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
-msgid "Lower the current window to its lowest allowed position in the stacking"
-msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Ablak hátraküldése a lehető legalacsonyabb pozícióba. Az ablak tranziens "
+"ablakai szintén mozognak vele együtt"
 
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Alsó ablak és tranzienseinek előhozása"
 
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"Ha az ablak a lehető legmagasabb pozíciójában van, akkor leküldi a\n"
+"lehető legalacsonyabb szintre. Egyéb esetben felemeli amennyire csak lehet.\n"
+"Az ablak tranziens ablakainak szintjét szintén változtatja."
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3598,12 +3934,14 @@ msgstr "Esemény idézése"
 #. ../lisp/sawfish/wm/util/keymap.jl
 #, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring"
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
 msgstr ""
 "A következő billentyűzet esemény közvetlen küldése a fókuszban levő "
 "ablaknak\n"
 "az esetleges ablakkezelő hozzárendeléseket figyelmen kívül hagyva."
 
+#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "Ablak tömörítése felfelé"
@@ -3709,7 +4047,9 @@ msgid "dynamic"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Whether to stop or wrap-around on first/last viewport"
+msgid ""
+"Whether to stop or wrap-around or grow the virtual workspace on first/last "
+"viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4060,21 +4400,25 @@ msgstr "Következő munkaterület összefűzése"
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next"
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
 msgstr ""
 "A jelenlegi munkaterület törlése. A munkaterület ablakai átkerülnek a "
 "következő munkaterületre."
 
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Előző munkaterület összefűzése"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
-msgid "Delete the current workspace. Its member windows are relocated to the"
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
 msgstr ""
-"A jelenlegi munkaterület törlése. A munkaterület ablakai átkerülnek a "
-"következő munkaterületre."
+"A jelenlegi munkaterület törlése. A munkaterület ablakai az előző\n"
+"munkaterületre kerülnek."
 
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Munkaterület beillesztése mögé"
 
@@ -4120,11 +4464,14 @@ msgstr "Ablak törlése"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-msgid "Remove the copy of the window on the current workspace. If this is the"
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
 msgstr ""
 "Az ablak másolatának eltávolítása a jelenlegi munkaterületről. Ha ez az\n"
 "utolsó példány, törölje az aktuális ablakot."
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "Fókuszálás az asztalra"
@@ -4175,58 +4522,282 @@ msgstr "Munkaterület kiválasztása interaktívan"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Bekér egy munkaterületet, majd átkapcsol rá."
 
+#, fuzzy
+#~ msgid "customize title position"
+#~ msgstr "maximize-button-keymap"
+
+#, fuzzy
+#~ msgid "gradient mode"
+#~ msgstr "tranziensek"
+
+#, fuzzy
+#~ msgid "gradient color mode"
+#~ msgstr "Színátmenet keretstílusnál"
+
+#, fuzzy
+#~ msgid "customize button size"
+#~ msgstr "maximize-button-keymap"
+
+#, fuzzy
+#~ msgid "display window icon on menu button"
+#~ msgstr "Az ablak ikonjának megjelenítése a menügombon."
+
+#, fuzzy
+#~ msgid "button position model"
+#~ msgstr "_Hely megjegyzése"
+
+#, fuzzy
+#~ msgid "customize sticky button keymap"
+#~ msgstr "iconify-button-keymap"
+
+#, fuzzy
+#~ msgid "customize previous button keymap"
+#~ msgstr "menu-button-keymap"
+
+#, fuzzy
+#~ msgid "customize next button keymap"
+#~ msgstr "menu-button-keymap"
+
+#, fuzzy
+#~ msgid "customize configure button keymap"
+#~ msgstr "menu-button-keymap"
+
+#, fuzzy
+#~ msgid "customize info button keymap"
+#~ msgstr "iconify-button-keymap"
+
+#, fuzzy
+#~ msgid "customize always-on-top button keymap"
+#~ msgstr "menu-button-keymap"
+
+#, fuzzy
+#~ msgid "customize look button keymap"
+#~ msgstr "maximize-button-keymap"
+
+#, fuzzy
+#~ msgid "show window corners"
+#~ msgstr "Ablak növesztése lefelé"
+
+#, fuzzy
+#~ msgid "fake shadow light source"
+#~ msgstr "Ablak figyelmen kívül hagyása"
+
+#~ msgid "Gnome toggle skip winlist"
+#~ msgstr "Gnome ablaklista kihagyásának kapcsolása"
+
+#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kapcsolása."
+
+#~ msgid "Gnome set skip winlist"
+#~ msgstr "Gnome ablaklista kihagyásának bekapcsolása"
+
+#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének bekapcsolása."
+
+#~ msgid "Gnome clear skip winlist"
+#~ msgstr "Gnome ablaklista kihagyásának törlése"
+
+#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "Az ablak GNOME_SKIP_WINLIST segédjének kikapcsolása."
+
+#~ msgid "Gnome toggle skip tasklist"
+#~ msgstr "Gnome feladatlista kihagyásának kapcsolása"
+
+#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kapcsolása."
+
+#~ msgid "Gnome set skip tasklist"
+#~ msgstr "Gnome feladatlista kihagyásának bekapcsolása"
+
+#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének bekapcsolása."
+
+#~ msgid "Gnome clear skip tasklist"
+#~ msgstr "Gnome feladatlista kihagyásának törlése"
+
+#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "Az ablak GNOME_SKIP_TASKLIST segédjének kikapcsolása."
+
+#~ msgid "Gnome logout"
+#~ msgstr "Kilépés a Gnome-ból"
+
+#~ msgid "Gnome www page"
+#~ msgstr "GNOME honlap"
+
+#~ msgid "Display the WWW page of the GNOME project."
+#~ msgstr "A GNOME projekt honlapjának indítása."
+
+#~ msgid "Gnome help browser"
+#~ msgstr "GNOME súgóböngésző"
+
+#~ msgid "Launch the GNOME help browser."
+#~ msgstr "A GNOME súgó böngésző indítása."
+
+#~ msgid "Gnome about"
+#~ msgstr "Gnome névjegy"
+
+#~ msgid "Launch the GNOME about dialog."
+#~ msgstr "GNOME névjegy indítása."
+
+#, fuzzy
+#~ msgid "Grows window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "Ablak növelése lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
+#~ "Lásd `grow-window-up'."
+
+#, fuzzy
+#~ msgid "Moves window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "Ablak mozgatása lefelé, amíg `nekiütközik' egy másik ablaknak.\n"
+#~ "Lásd `pack-window-up'."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event, then replay any pointer"
+#~ msgstr ""
+#~ "A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
+#~ "pointer eseményt, ami a parancsot hívta."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event (if it's focused), then"
+#~ msgstr ""
+#~ "A jelenlegi eseményt kapó ablak előhúzása (ha fókuszált), az összes "
+#~ "tranziens ablakával együtt, majd újra végezzen el minden pointer "
+#~ "eseményt, ami a parancsot hívta."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the group of windows that received the current event, then replay"
+#~ msgstr ""
+#~ "A jelenlegi eseményt kapó ablakcsoport előhúzása az összes tranziens "
+#~ "ablakával együtt, majd újra végezzen el minden pointer eseményt, ami a "
+#~ "parancsot hívta."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it"
+#~ msgstr ""
+#~ "A jelenlegi eseményt kapó ablak előhúzása, majd újra végezzen el minden "
+#~ "pointer eseményt, ami a parancsot hívta."
+
+#~ msgid "GNOME WWW..."
+#~ msgstr "GNOME WWW..."
+
+#~ msgid "Gnome menus update"
+#~ msgstr "Gnome menük frissítése"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of"
+#~ msgstr ""
+#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+#~ "áll,\n"
+#~ "(vagy egy ablak sincs fókuszban)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of"
+#~ msgstr ""
+#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+#~ "áll,\n"
+#~ "(vagy egy ablak sincs fókuszban)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close button"
+#~ msgstr ""
+#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+#~ "áll,\n"
+#~ "(vagy egy ablak sincs fókuszban)."
+
+#, fuzzy
+#~ msgid "Keymap containing bindings active when the pointer is in the iconify"
+#~ msgstr ""
+#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+#~ "áll,\n"
+#~ "(vagy egy ablak sincs fókuszban)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize"
+#~ msgstr ""
+#~ "Billentyűtábla, melynek hozzárendelései akkor aktívak, ha felhasználótól "
+#~ "kérünk be egy karakterláncot."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button"
+#~ msgstr ""
+#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+#~ "áll,\n"
+#~ "(vagy egy ablak sincs fókuszban)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade button"
+#~ msgstr ""
+#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató a háttéren "
+#~ "áll,\n"
+#~ "(vagy egy ablak sincs fókuszban)."
+
+#, fuzzy
+#~ msgid "_Restart"
+#~ msgstr "Újraindítás"
+
+#, fuzzy
+#~ msgid "_Quit"
+#~ msgstr "Kilépés"
+
+#, fuzzy
+#~ msgid "_All settings"
+#~ msgstr "Minden beállítás"
+
+#, fuzzy
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its"
+#~ msgstr ""
+#~ "Ha az ablak a lehető legmagasabb pozíciójában van, hátraküldi\n"
+#~ "a lehető legalacsonyabb pozícióba. Egyéb esetben előrehozza\n"
+#~ "amennyire csak lehet."
+
+#, fuzzy
+#~ msgid "Toggle the state of the window between vertically maximized and"
+#~ msgstr ""
+#~ "Az ablak állapotának kapcsolása a függőlegesen maximalizált és a nem "
+#~ "maximalizált\n"
+#~ "között."
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between vertically maximized-filled and"
+#~ msgstr ""
+#~ "Az ablak állapotának kapcsolása a függőlegesen maximalizált-kitöltött és "
+#~ "a nem maximalizált\n"
+#~ "között."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking"
+#~ msgstr "Az ablak legmagasabb pozícióba emelése a rétegek között."
+
+#, fuzzy
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking"
+#~ msgstr "Az ablak legmagasabb pozícióba süllyesztése a rétegek között."
+
+#, fuzzy
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the"
+#~ msgstr ""
+#~ "A jelenlegi munkaterület törlése. A munkaterület ablakai átkerülnek a "
+#~ "következő munkaterületre."
+
 #~ msgid "Select color"
 #~ msgstr "Szín kiválasztása"
 
 #~ msgid "Growing and packing of windows"
 #~ msgstr "Ablakok növesztése és tömörítése"
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Ablak növesztése felfelé, ameddig bele nem ütközik egy másik ablakba. Ha "
-#~ "az ablak felső éle a képernyőn túl van, visszahozza.\n"
-#~ "\n"
-#~ "Univerzális prefix arg használatakor maximalizálja felfelé helyette.\n"
-#~ "Numerikus prefix arg használatakor növessze felfelé a megadott értékű "
-#~ "ablakkal vagy képponttal."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Ablak mozgatása felfelé, ameddig bele nem ütközik egy másik ablakba. Ha "
-#~ "az ablak felső éle a képernyőn túl van, visszahozza.\n"
-#~ "\n"
-#~ "Univerzális prefix arg használatakor mozgatja teljesen fel helyette.\n"
-#~ "Numerikus prefix arg használatakor mozgassa felfelé a megadott értékű "
-#~ "képponttal."
-
-#~ msgid ""
-#~ "Distance in pixels before window edges align with each other.\n"
-#~ "\n"
-#~ "When moving a window, this option lets you align one of its edges with an "
-#~ "edge of another window."
-#~ msgstr ""
-#~ "Ablakok szélei közti távolság (pixelekben).\n"
-#~ "\n"
-#~ "Ablakok mozgatásánál, ez a beállítás segíti az ablakok sarkainak egymás "
-#~ "mellé helyezését."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "A jelenlegi eseményt kapó ablak előhúzása az összes tranziens ablakával "
-#~ "együtt, majd újra végezzen el minden pointer eseményt, ami a parancsot "
-#~ "hívta."
 
 #, fuzzy
 #~ msgid "Shrinking and Yanking of windows"
@@ -4235,73 +4806,6 @@ msgstr "Bekér egy munkaterületet, majd átkapcsol rá."
 #~ msgid "Arguments given to the `xterm' command."
 #~ msgstr "Az `xterm' parancsnak adott paraméterek."
 
-#~ msgid ""
-#~ "Enable shade-hover mode.\n"
-#~ "\n"
-#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
-#~ msgstr ""
-#~ "Lebegő árnyékolás engedélyezése.\n"
-#~ "\n"
-#~ "(Ideiglenesen lenyitja az ablakot, ha az egérmutató felette van.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "címsorán van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az "
-#~ "ablakkereten\n"
-#~ "van. (Csak egér-hozzárendeléseket értékel ki ez a hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "bezár gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "ikonizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "maximalizál gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak\n"
-#~ "menü gombján van. (Csak egér-hozzárendeléseket értékel ki ez a "
-#~ "hozzárendelés.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "A billentyűtábla bejegyzései csak akkor aktívak, ha a mutató az ablak "
-#~ "shade\n"
-#~ "gombján van. (Csak az egér-hozzárendelések értékelődnek ki ebben a "
-#~ "táblában.)"
-
 #, fuzzy
 #~ msgid "Copy to p_revious"
 #~ msgstr "Másolás az előzőre"
@@ -4309,38 +4813,6 @@ msgstr "Bekér egy munkaterületet, majd átkapcsol rá."
 #, fuzzy
 #~ msgid "Copy to ne_xt"
 #~ msgstr "Másolás a következőre"
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Jelenlegi ablak előhúzása a lehető legmagasabb pozícióra. A tranziens "
-#~ "ablakok együtt mozognak a jelenlegi ablakkal."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Ablak hátraküldése a lehető legalacsonyabb pozícióba. Az ablak tranziens "
-#~ "ablakai szintén mozognak vele együtt"
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Ha az ablak a lehető legmagasabb pozíciójában van, akkor leküldi a\n"
-#~ "lehető legalacsonyabb szintre. Egyéb esetben felemeli amennyire csak "
-#~ "lehet.\n"
-#~ "Az ablak tranziens ablakainak szintjét szintén változtatja."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "A jelenlegi munkaterület törlése. A munkaterület ablakai az előző\n"
-#~ "munkaterületre kerülnek."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"

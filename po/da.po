@@ -18,12 +18,11 @@
 #   transient -> midlertidigt [under]vindue
 #   dialog -> meddelelsesvindue
 #
-#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-24 21:17+0200\n"
+"POT-Creation-Date: 2009-09-03 20:53+0200\n"
 "PO-Revision-Date: 2002-11-10 11:39+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Dansk <dansk@klid.dk>\n"
@@ -208,46 +207,98 @@ msgid "none"
 msgstr "ingen"
 
 #. ../themes/mxflat/theme.jl
-msgid "decoration mode"
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
 msgstr ""
 
-msgid ");"
-msgstr ""
-
+#. ../themes/mxflat/theme.jl
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize title string"
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
 msgstr ""
 
-msgid "title string"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
 msgstr ""
 
-msgid "update title string periodically"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 msgstr ""
 
-msgid "title string update interval (1 - 1000000 s)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 msgstr ""
 
-msgid "title string font"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
 msgstr ""
 
-#, fuzzy
-msgid "customize title position"
-msgstr "maksimérknap-tastekombinationsliste"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "centreret"
 
 #. ../themes/mxflat/theme.jl
-msgid "title string horizontal alignment"
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
 msgstr ""
 
-msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -264,16 +315,32 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "gradient titlebar background (experimental)"
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
 msgstr ""
 
-#, fuzzy
-msgid "gradient mode"
-msgstr "midlertidige vinduer"
-
-msgid "gradient quality (1 best - 20 worst)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -291,24 +358,44 @@ msgid "custom"
 msgstr "Indstillinger"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "gradient color mode"
-msgstr "Overgangstema"
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "Vælg farve"
 
 #. ../themes/mxflat/theme.jl
-msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)"
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -316,21 +403,50 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "  focused titlebar color"
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "unfocused titlebar color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "  focused title string color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "unfocused title string color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "customize extended title string colors"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -387,32 +503,62 @@ msgid "ball-12"
 msgstr "alle"
 
 #. ../themes/mxflat/theme.jl
-msgid "button icon set (experimental)"
-msgstr ""
-
-#, fuzzy
-msgid "customize button size"
-msgstr "maksimérknap-tastekombinationsliste"
-
-msgid "buttons size (1 - 1000 pixel)"
-msgstr ""
-
-msgid "button vertical alignment"
-msgstr ""
-
-msgid "scale button icons (experimental)"
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "display window icon on menu button"
-msgstr "Vis vinduets ikon på dets menuknap."
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -429,9 +575,15 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -440,10 +592,16 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "button position model"
-msgstr "Husk _position"
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "Husk _position"
@@ -504,9 +662,12 @@ msgid "lock button position"
 msgstr "lukknap-tastekombinationsliste"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize sticky button keymap"
-msgstr "minimérknap-tastekombinationsliste"
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -514,9 +675,13 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "minimérknap-tastekombinationsliste"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize previous button keymap"
-msgstr "menuknap-tastekombinationsliste"
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -524,27 +689,54 @@ msgid "mxflat:previous-button-keymap"
 msgstr "menuknap-tastekombinationsliste"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize next button keymap"
-msgstr "menuknap-tastekombinationsliste"
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "menuknap-tastekombinationsliste"
 
-#, fuzzy
-msgid "customize configure button keymap"
-msgstr "menuknap-tastekombinationsliste"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "menuknap-tastekombinationsliste"
 
-#, fuzzy
-msgid "customize info button keymap"
-msgstr "minimérknap-tastekombinationsliste"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -552,13 +744,22 @@ msgid "mxflat:info-button-keymap"
 msgstr "menuknap-tastekombinationsliste"
 
 #. ../themes/mxflat/theme.jl
-msgid "always on top depth (-1000 - 1000)"
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize always-on-top button keymap"
-msgstr "menuknap-tastekombinationsliste"
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -566,9 +767,12 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "menuknap-tastekombinationsliste"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize look button keymap"
-msgstr "maksimérknap-tastekombinationsliste"
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -576,9 +780,14 @@ msgid "mxflat:lock-button-keymap"
 msgstr "lukknap-tastekombinationsliste"
 
 #. ../themes/mxflat/theme.jl
-msgid "customize button-colors"
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -619,35 +828,85 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "border width (0 - 1000 pixel)"
-msgstr ""
-
-msgid "border width for maximized windows (0 - 1000 pixel)"
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize border for focused windows (experimental)"
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
 msgstr ""
 
-msgid "border width for focused windows (0 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
 msgstr ""
 
-msgid "title-contents border width (0 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
 msgstr ""
 
-msgid "border offset (-1000 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
 msgstr ""
 
-msgid "keep window borders and corners at their place when shading a window"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
 msgstr ""
 
-#, fuzzy
-msgid "show window corners"
-msgstr "Forstør vindue nedad"
-
-msgid "corners length adjustement (-1 - 100 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -660,16 +919,29 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "corners width adjustement (0 - 100 pixel)"
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "fake shadow (experimental)"
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "Bjælke-billede for vinduer uden fokus"
@@ -711,13 +983,23 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "fake shadow light source"
-msgstr "Ignorér vindue"
-
-msgid "fake shadow light distance (0 - 100)"
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -726,9 +1008,14 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize border colors"
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1045,86 +1332,6 @@ msgstr "Apropos funktion"
 msgid "Apropos variable"
 msgstr "Apropos variabel"
 
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome toggle skip winlist"
-msgstr "Skift mellem at springe over i vinduesliste"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-msgstr "Slå Gnome SKIP_WINLIST-hintet til/fra for vinduet."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome set skip winlist"
-msgstr "Spring over i vinduesliste"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Set the GNOME SKIP_WINLIST hint of the window."
-msgstr "Aktivér Gnome SKIP_WINLIST-hintet for vinduet."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome clear skip winlist"
-msgstr "Spring ikke over i vinduesliste"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-msgstr "Deaktivér Gnome SKIP_WINLIST-hintet for vinduet."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome toggle skip tasklist"
-msgstr "Skift mellem at springe over i opgaveliste"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Slå Gnome SKIP_TASKLIST-hintet til/fra for vinduet"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome set skip tasklist"
-msgstr "Spring over i opgaveliste"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Aktivér Gnome SKIP_TASKLIST-hintet for vinduet."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome clear skip tasklist"
-msgstr "Spring ikke over i opgaveliste"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-msgstr "Deaktivér Gnome SKIP_TASKLIST-hintet for vinduet."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome logout"
-msgstr "Logud"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Logout from the current GNOME session."
-msgstr "Log ud af den nuværende Gnome-session."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome www page"
-msgstr "Gnomes hjemmeside"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Display the WWW page of the GNOME project."
-msgstr "Vis Gnome-projektets netsted."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome help browser"
-msgstr "Gnome-hjælpevejledning"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Launch the GNOME help browser."
-msgstr "Start hjælpevejledningen til Gnome"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome about"
-msgstr "Om Gnome..."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Launch the GNOME about dialog."
-msgstr "Start 'Om Gnome...'-vinduet"
-
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
 msgstr "Minimér gruppe"
@@ -1269,7 +1476,9 @@ msgstr "Forstør vindue mod venstre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window to the left until it `bumps into' another window."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "Forstørrer vinduet til venstre indtil det rammer et andet vindue.\n"
 "Se 'grow-window-up'."
@@ -1280,7 +1489,9 @@ msgstr "Forstør vindue mod højre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window to the right until it `bumps into' another window."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "Forstørrer vinduet til højre indtil det rammer et andet vindue.\n"
 "Se 'grow-window-up'."
@@ -1290,18 +1501,30 @@ msgid "Grow window up"
 msgstr "Forstør vindue opad"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Grows window upwards until it `bumps into' another window."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
 msgstr ""
-"Forstørrer vinduet nedad indtil det rammer et andet vindue.\n"
-"Se 'grow-window-up'."
+"Forstørrer vinduet opad indtil det rammer et andet vindue.\n"
+"Hvis den øverste kant var uden for skærmkanten, bliver den bragt tilbage "
+"inden for.\n"
+"Med en universel præfiksparameter, maksimér opad i stedet.\n"
+"Med en numerisk præfiksparameter, forstør opad med så mange forøgelser som "
+"angivet af vinduet eller punkter i stedet."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Forstør vindue nedad"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window downwards until it `bumps into' another window."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "Forstørrer vinduet nedad indtil det rammer et andet vindue.\n"
 "Se 'grow-window-up'."
@@ -1312,7 +1535,9 @@ msgstr "Indpas vindue mod venstre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window to the left until it `bumps into' another window."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "Flytter vinduet til venstre indtil det rammer et andet vindue.\n"
 "Se 'pack-window-up'."
@@ -1323,7 +1548,9 @@ msgstr "Indpas vindue mod højre"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window to the right until it `bumps into' another window."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "Flytter vinduet til højre indtil det rammer et andet vindue.\n"
 "Se 'pack-window-up'."
@@ -1333,18 +1560,27 @@ msgid "Pack window up"
 msgstr "Indpas vindue opad"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Moves window upwards until it `bumps into' another window."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
-"Flytter vinduet nedad indtil det rammer et andet vindue.\n"
-"Se 'pack-window-up'."
+"Flytter vinduet opad indtil det rammer et andet vindue.\n"
+"Hvis den øverste kant var uden for skærmkanten, bliver den bragt tilbage "
+"inden for.\n"
+"Med en universel præfiksparameter, flyt maksimalt opad i stedet.\n"
+"Med en numerisk præfiksparameter, flyt opad med så mange punkter i stedet."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Indpas vindue nedad"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window downwards until it `bumps into' another window."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "Flytter vinduet nedad indtil det rammer et andet vindue.\n"
 "Se 'pack-window-up'."
@@ -1579,14 +1815,24 @@ msgid "How to choose window edges when resizing."
 msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Distance in pixels before window edges align with each other."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
 msgstr ""
+"Afstand i punkter før vindueskanter justeres med hinanden.\n"
+"\n"
+"Ved flytning af et vindue lader dette dig justere en af dets kanter med "
+"kanten på et andet vindue."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Flyt vindue interaktivt"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Move the window interactively using the mouse."
+#, fuzzy
+msgid "Move the window interactively, with mouse or keyboard."
 msgstr "Flyt vinduet interaktivt vha. musen."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1594,7 +1840,8 @@ msgid "Resize window interactively"
 msgstr "Forstør/formindsk vindue interaktivt"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Resize the window interactively using the mouse."
+#, fuzzy
+msgid "Resize the window interactively, with mouse or keyboard."
 msgstr "Forstør/formindsk vinduet interaktivt vha. musen."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1633,22 +1880,28 @@ msgstr "Hæv og videresend klik"
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer"
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
 msgstr ""
-"Hæv vinduet som modtog den nuværende handling og genafspil derefter\n"
-"alle markørhandlinger som startede kommandoen."
+"Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+"midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+"startede kommandoen."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Hæv og videresend klik hvis har fokus"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then"
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
 msgstr ""
-"Hæv vinduet som modtog den nuværende handling (hvis det har fokus)\n"
-"og genafspil derefter alle markørhandlinger som startede kommandoen."
+"Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+"midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+"startede kommandoen."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "Hæv eller videresend klik"
 
@@ -1662,21 +1915,28 @@ msgstr "Hæv gruppe og videresend klik"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
-msgid "Raise the group of windows that received the current event, then replay"
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
 msgstr ""
-"Hæv den gruppe af vinduer som modtog den nuværende handling og\n"
-"genafspil derefter alle markørhandlinger som startede kommandoen."
+"Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+"midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+"startede kommandoen."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "Hæv midlertidige vinduer og videresend klik"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid "Raise the window that received the current event and any transients it"
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
 msgstr ""
-"Hæv vinduet som modtog den nuværende handling og genafspil derefter\n"
-"alle markørhandlinger som startede kommandoen."
+"Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+"midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+"startede kommandoen."
 
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "Flyt vindue mod venstre"
@@ -2124,6 +2384,10 @@ msgstr "Vis fejl"
 msgid "Display all errors that have occurred to the screen."
 msgstr "Vis alle de fejl der er sket på skærmen."
 
+#. ../lisp/sawfish/wm/ext/fdo-menu.jl
+msgid "Update saw menu"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2357,9 +2621,16 @@ msgid "Shade Hover"
 msgstr "Smart nedrulning"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid "Enable shade-hover mode."
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
 msgstr ""
+"Aktivér automatisk nedrulning.\n"
+"\n"
+"(nedruller vinduer midlertidigt når markøren er over dem)"
 
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "Pause i millisekunder før nedrulning af vinduer."
 
@@ -2595,25 +2866,47 @@ msgid "None"
 msgstr "Ingen"
 
 #. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/gnome/integration.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "_Help"
 msgstr "_Hjælp"
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "_GNOME Help..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_GNOME Help"
 msgstr "_Gnome hjælp..."
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "GNOME WWW..."
-msgstr "Gnomes netsted..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "GNOME Website"
+msgstr ""
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "About GNOME..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "About GNOME"
 msgstr "Om Gnome..."
 
-#. ../lisp/sawfish/wm/gnome/menus.jl
-msgid "Gnome menus update"
-msgstr "Opdatér Gnome menuer"
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "Sessi_on"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Logout from GNOME"
+msgstr "Log ud af den nuværende Gnome-session."
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Shutdown from GNOME"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_KDE Help"
+msgstr "_Hjælp"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "KDE Website"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
@@ -2640,91 +2933,108 @@ msgstr "rod-vindue-tastekombinationsliste"
 #. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window"
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
 msgstr ""
 "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
 "befinder sig\n"
 "i rod-vinduet (eller når ingen vinduer har fokus)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "titel-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the title of"
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"titlen på et vindue (i denne liste bliver kun musebindinger brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "kant-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the border of"
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"kanten på et vindue (i denne liste bliver kun musebindinger brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "lukknap-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button"
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "minimérknap-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the iconify"
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"minimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
+"brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "maksimérknap-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the maximize"
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når der indtastes "
-"tekst."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"maksimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
+"brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "menuknap-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button"
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"menuknappen på et vindue (i denne liste bliver kun musebindinger brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "oprulningsknap-tastekombinationsliste"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button"
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-"befinder sig\n"
-"i rod-vinduet (eller når ingen vinduer har fokus)."
+"Tastekombinationsliste som indeholder bindinger der gælder når markøren er "
+"over\n"
+"op-/nedrulningsknappen på et vindue (i denne liste bliver kun musebindinger "
+"brugt)."
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "Modificeringstaster til standardgenveje i vindueshåndteringen."
 
@@ -2928,6 +3238,21 @@ msgid "_Customize"
 msgstr "_Indstillinger"
 
 #. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display Errors"
+msgstr "Vis fejl"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Restart Sawfish"
+msgstr "Genstart"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Quit Sawfish"
+msgstr "Om S_awfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_FAQ..."
 msgstr "_OSS..."
 
@@ -2949,23 +3274,8 @@ msgstr "Om S_awfish..."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "_Display Errors"
-msgstr "Vis fejl"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Kill Window"
+msgid "Kill Window"
 msgstr "_Vinduer"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Restart"
-msgstr "Genstart"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Quit"
-msgstr "Afslut"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -2992,9 +3302,8 @@ msgid "Display the applications menu."
 msgstr "Vis menuen til at starte programmer fra."
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_All settings"
-msgstr "Alle indstillinger"
+msgid "S_awfish-UI"
+msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -3054,13 +3363,16 @@ msgstr "Hæv/sænk enkelt vindue"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/state/transient.jl
 #, fuzzy
-msgid "If the window is at its highest possible position, then lower it to its"
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Hvis vinduet er på sin øverst mulige position, sænk det til den lavest\n"
-"mulige position. Ellers hæv det så meget som tilladt."
+"Hvis vinduet er på dets højeste mulige position, så sænk det til dets\n"
+"lavest mulige position. Ellers hæv det så langt som tilladt. Ændrer\n"
+"også niveauet for alle dets midlertidige vinduer."
 
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "Hæv vinduesdybde"
 
@@ -3141,11 +3453,14 @@ msgstr "Skift mellem om vinduet er klæbrigt"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 #, fuzzy
-msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
 msgstr ""
 "Aktiverer/deaktiverer vinduets klæbrighed - med andre ord om det er medlem "
 "af alle arbejdsområder."
 
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "_Klæbrig"
 
@@ -3280,17 +3595,23 @@ msgstr "Skift mellem maksimeret tilstand vandret"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between horizontally maximized and"
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
 msgstr "Skift vinduets tilstand mellem vandret maksimeret og gendannet."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Skift mellem maksimeret tilstand lodret"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between vertically maximized and"
-msgstr "Skift vinduets tilstand mellem lodret maksimeret og gendannet."
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr "Skift vinduets tilstand mellem maksimeret og gendannet."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "Maksimér vinduesudfyldning"
 
@@ -3330,17 +3651,22 @@ msgstr "Skift mellem maksimeret vinduesudfyldningstilstand vandret"
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and"
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
 msgstr "Skift vinduets tilstand mellem maksimalt udfyldt vandret og gendannet."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Skift mellem maksimeret vinduesudfyldningstilstand lodret"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between vertically maximized-filled and"
-msgstr "Skift vinduets tilstand mellem maksimalt udfyldt lodret og gendannet."
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr "Skift vinduets tilstand mellem maksimalt udfyldt og gendannet."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid "Maximize unframe"
 msgstr "Maksimér vindue"
@@ -3405,10 +3731,13 @@ msgstr "Nedrul vindue"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 #, fuzzy
-msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
 msgstr ""
 "Hvis vinduet er oprullet (se 'shade-window'), rul det ned og gendan det."
 
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "Skift mellem op-/nedrullet"
 
@@ -3432,23 +3761,42 @@ msgid "Raise window and transients"
 msgstr "Hæv vindue inkl. midlertidige undervinduer"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking"
-msgstr "Hæv vinduet til den øverst tilladte position i stabelordenen."
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"Hæv det nuværende vindue til dets højeste tilladte position i\n"
+"stablingsordenen, og hæv også alle dets midlertidige vinduer."
 
 # se næste tekst for forklaring
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "Sænk vindue inkl. midlertidige undervinduer"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
-msgid "Lower the current window to its lowest allowed position in the stacking"
-msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"Sænk det nuværende vindue til dets laveste tilladte position i\n"
+"stablingsordenen, og sænk også dets midlertidige vinduer."
 
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "Hæv/sænk vindue inkl. midlertidige undervinduer"
 
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"Hvis vinduet er på dets højeste mulige position, så sænk det til dets\n"
+"lavest mulige position. Ellers hæv det så langt som tilladt. Ændrer\n"
+"også niveauet for alle dets midlertidige vinduer."
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3563,11 +3911,13 @@ msgstr "Citér hændelse"
 #. ../lisp/sawfish/wm/util/keymap.jl
 #, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring"
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
 msgstr ""
 "Send den næste tastehændelse direkte til klientvinduet med fokus idet\n"
 "enhver vindueshåndteringsbinding til hændelsen ignoreres."
 
+#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "Indpas vindue opad"
@@ -3673,7 +4023,9 @@ msgid "dynamic"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Whether to stop or wrap-around on first/last viewport"
+msgid ""
+"Whether to stop or wrap-around or grow the virtual workspace on first/last "
+"viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4027,21 +4379,25 @@ msgstr "Indflet næste arbejdsområde"
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next"
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
 msgstr ""
 "Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til næste\n"
 "arbejdsområde."
 
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "Indflet forrige arbejdsområde"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
-msgid "Delete the current workspace. Its member windows are relocated to the"
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
 msgstr ""
-"Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til næste\n"
+"Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til forrige\n"
 "arbejdsområde."
 
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "Indsæt arbejdsområde efter"
 
@@ -4087,11 +4443,14 @@ msgstr "Fjern vinduesinstans"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-msgid "Remove the copy of the window on the current workspace. If this is the"
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
 msgstr ""
 "Fjern kopien af vinduet på det aktive arbejdsområde. Hvis dette er den\n"
 "sidste instans af vinduet, så fjern det helt."
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "Fokusér skrivebord"
@@ -4142,57 +4501,274 @@ msgstr "Vælg arbejdsområde interaktivt"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Spørg efter og skift til arbejdsområde."
 
+#, fuzzy
+#~ msgid "customize title position"
+#~ msgstr "maksimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "gradient mode"
+#~ msgstr "midlertidige vinduer"
+
+#, fuzzy
+#~ msgid "gradient color mode"
+#~ msgstr "Overgangstema"
+
+#, fuzzy
+#~ msgid "customize button size"
+#~ msgstr "maksimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "display window icon on menu button"
+#~ msgstr "Vis vinduets ikon på dets menuknap."
+
+#, fuzzy
+#~ msgid "button position model"
+#~ msgstr "Husk _position"
+
+#, fuzzy
+#~ msgid "customize sticky button keymap"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "customize previous button keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "customize next button keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "customize configure button keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "customize info button keymap"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "customize always-on-top button keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "customize look button keymap"
+#~ msgstr "maksimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "show window corners"
+#~ msgstr "Forstør vindue nedad"
+
+#, fuzzy
+#~ msgid "fake shadow light source"
+#~ msgstr "Ignorér vindue"
+
+#~ msgid "Gnome toggle skip winlist"
+#~ msgstr "Skift mellem at springe over i vinduesliste"
+
+#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "Slå Gnome SKIP_WINLIST-hintet til/fra for vinduet."
+
+#~ msgid "Gnome set skip winlist"
+#~ msgstr "Spring over i vinduesliste"
+
+#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "Aktivér Gnome SKIP_WINLIST-hintet for vinduet."
+
+#~ msgid "Gnome clear skip winlist"
+#~ msgstr "Spring ikke over i vinduesliste"
+
+#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "Deaktivér Gnome SKIP_WINLIST-hintet for vinduet."
+
+#~ msgid "Gnome toggle skip tasklist"
+#~ msgstr "Skift mellem at springe over i opgaveliste"
+
+#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "Slå Gnome SKIP_TASKLIST-hintet til/fra for vinduet"
+
+#~ msgid "Gnome set skip tasklist"
+#~ msgstr "Spring over i opgaveliste"
+
+#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "Aktivér Gnome SKIP_TASKLIST-hintet for vinduet."
+
+#~ msgid "Gnome clear skip tasklist"
+#~ msgstr "Spring ikke over i opgaveliste"
+
+#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "Deaktivér Gnome SKIP_TASKLIST-hintet for vinduet."
+
+#~ msgid "Gnome logout"
+#~ msgstr "Logud"
+
+#~ msgid "Gnome www page"
+#~ msgstr "Gnomes hjemmeside"
+
+#~ msgid "Display the WWW page of the GNOME project."
+#~ msgstr "Vis Gnome-projektets netsted."
+
+#~ msgid "Gnome help browser"
+#~ msgstr "Gnome-hjælpevejledning"
+
+#~ msgid "Launch the GNOME help browser."
+#~ msgstr "Start hjælpevejledningen til Gnome"
+
+#~ msgid "Gnome about"
+#~ msgstr "Om Gnome..."
+
+#~ msgid "Launch the GNOME about dialog."
+#~ msgstr "Start 'Om Gnome...'-vinduet"
+
+#, fuzzy
+#~ msgid "Grows window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "Forstørrer vinduet nedad indtil det rammer et andet vindue.\n"
+#~ "Se 'grow-window-up'."
+
+#, fuzzy
+#~ msgid "Moves window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "Flytter vinduet nedad indtil det rammer et andet vindue.\n"
+#~ "Se 'pack-window-up'."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event, then replay any pointer"
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling og genafspil derefter\n"
+#~ "alle markørhandlinger som startede kommandoen."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event (if it's focused), then"
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling (hvis det har fokus)\n"
+#~ "og genafspil derefter alle markørhandlinger som startede kommandoen."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the group of windows that received the current event, then replay"
+#~ msgstr ""
+#~ "Hæv den gruppe af vinduer som modtog den nuværende handling og\n"
+#~ "genafspil derefter alle markørhandlinger som startede kommandoen."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it"
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling og genafspil derefter\n"
+#~ "alle markørhandlinger som startede kommandoen."
+
+#~ msgid "GNOME WWW..."
+#~ msgstr "Gnomes netsted..."
+
+#~ msgid "Gnome menus update"
+#~ msgstr "Opdatér Gnome menuer"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close button"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#, fuzzy
+#~ msgid "Keymap containing bindings active when the pointer is in the iconify"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når der "
+#~ "indtastes tekst."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade button"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#, fuzzy
+#~ msgid "_Restart"
+#~ msgstr "Genstart"
+
+#, fuzzy
+#~ msgid "_Quit"
+#~ msgstr "Afslut"
+
+#, fuzzy
+#~ msgid "_All settings"
+#~ msgstr "Alle indstillinger"
+
+#, fuzzy
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its"
+#~ msgstr ""
+#~ "Hvis vinduet er på sin øverst mulige position, sænk det til den lavest\n"
+#~ "mulige position. Ellers hæv det så meget som tilladt."
+
+#, fuzzy
+#~ msgid "Toggle the state of the window between vertically maximized and"
+#~ msgstr "Skift vinduets tilstand mellem lodret maksimeret og gendannet."
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between vertically maximized-filled and"
+#~ msgstr ""
+#~ "Skift vinduets tilstand mellem maksimalt udfyldt lodret og gendannet."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking"
+#~ msgstr "Hæv vinduet til den øverst tilladte position i stabelordenen."
+
+#, fuzzy
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking"
+#~ msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
+
+#, fuzzy
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the"
+#~ msgstr ""
+#~ "Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til næste\n"
+#~ "arbejdsområde."
+
 #~ msgid "Select color"
 #~ msgstr "Vælg farve"
 
 #~ msgid "Growing and packing of windows"
 #~ msgstr "Forstørrelse og indpasning af vinduer"
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "Forstørrer vinduet opad indtil det rammer et andet vindue.\n"
-#~ "Hvis den øverste kant var uden for skærmkanten, bliver den bragt tilbage "
-#~ "inden for.\n"
-#~ "Med en universel præfiksparameter, maksimér opad i stedet.\n"
-#~ "Med en numerisk præfiksparameter, forstør opad med så mange forøgelser "
-#~ "som angivet af vinduet eller punkter i stedet."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "Flytter vinduet opad indtil det rammer et andet vindue.\n"
-#~ "Hvis den øverste kant var uden for skærmkanten, bliver den bragt tilbage "
-#~ "inden for.\n"
-#~ "Med en universel præfiksparameter, flyt maksimalt opad i stedet.\n"
-#~ "Med en numerisk præfiksparameter, flyt opad med så mange punkter i stedet."
-
-#~ msgid ""
-#~ "Distance in pixels before window edges align with each other.\n"
-#~ "\n"
-#~ "When moving a window, this option lets you align one of its edges with an "
-#~ "edge of another window."
-#~ msgstr ""
-#~ "Afstand i punkter før vindueskanter justeres med hinanden.\n"
-#~ "\n"
-#~ "Ved flytning af et vindue lader dette dig justere en af dets kanter med "
-#~ "kanten på et andet vindue."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "Hæv vinduet som modtog den nuværende handling sammen med dets\n"
-#~ "midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
-#~ "startede kommandoen."
 
 #, fuzzy
 #~ msgid "Shrinking and Yanking of windows"
@@ -4201,76 +4777,6 @@ msgstr "Spørg efter og skift til arbejdsområde."
 #~ msgid "Arguments given to the `xterm' command."
 #~ msgstr "Parametre til 'xterm'-kommandoen."
 
-#~ msgid ""
-#~ "Enable shade-hover mode.\n"
-#~ "\n"
-#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
-#~ msgstr ""
-#~ "Aktivér automatisk nedrulning.\n"
-#~ "\n"
-#~ "(nedruller vinduer midlertidigt når markøren er over dem)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "titlen på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "kanten på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "minimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
-#~ "brugt)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "maksimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
-#~ "brugt)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "menuknappen på et vindue (i denne liste bliver kun musebindinger brugt)."
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
-#~ "er over\n"
-#~ "op-/nedrulningsknappen på et vindue (i denne liste bliver kun "
-#~ "musebindinger brugt)."
-
 #, fuzzy
 #~ msgid "Copy to p_revious"
 #~ msgstr "Kopiér til forrige"
@@ -4278,37 +4784,6 @@ msgstr "Spørg efter og skift til arbejdsområde."
 #, fuzzy
 #~ msgid "Copy to ne_xt"
 #~ msgstr "Kopiér til næste"
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "Hæv det nuværende vindue til dets højeste tilladte position i\n"
-#~ "stablingsordenen, og hæv også alle dets midlertidige vinduer."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "Sænk det nuværende vindue til dets laveste tilladte position i\n"
-#~ "stablingsordenen, og sænk også dets midlertidige vinduer."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "Hvis vinduet er på dets højeste mulige position, så sænk det til dets\n"
-#~ "lavest mulige position. Ellers hæv det så langt som tilladt. Ændrer\n"
-#~ "også niveauet for alle dets midlertidige vinduer."
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til forrige\n"
-#~ "arbejdsområde."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"

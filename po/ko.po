@@ -3,12 +3,11 @@
 # Man-Yong Lee <manyong@gnu.org>, 2000.
 # Updated by Young-Ho, Cha <ganadist@chollian.net>, 2001
 # Updated by Michelle, Kim <mkim@redhat.com>, 2002
-#. ../themes/mxflat/theme.jl
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-24 21:17+0200\n"
+"POT-Creation-Date: 2009-09-03 20:53+0200\n"
 "PO-Revision-Date: 2002-06-19 15:18GMT+10.00\n"
 "Last-Translator: Michelle Kim <mkim@brisbane.redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -193,46 +192,98 @@ msgid "none"
 msgstr "없음"
 
 #. ../themes/mxflat/theme.jl
-msgid "decoration mode"
+msgid ""
+"decoration mode\n"
+"\n"
+"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"mode 'all' means that all windows, even transients/dialogs, will get a "
+"titlebar and buttons. none means no window will get any :-). usually "
+"transients only have a contents-border. this option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
 msgstr ""
 
-msgid ");"
-msgstr ""
-
+#. ../themes/mxflat/theme.jl
 msgid "titlebar height (9 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize title string"
+msgid ""
+"customize title string\n"
+"\n"
+"see the tooltip for the 'title string' option below for more information. "
+"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"write an email please!)"
 msgstr ""
 
-msgid "title string"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string\n"
+"\n"
+"the string you insert here will be your new title string. variables always "
+"start with a dollar-sign $ and are replaced with their actual values. to get "
+"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
+"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
+"if not, write an email please!"
 msgstr ""
 
-msgid "update title string periodically"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"update title string periodically\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 msgstr ""
 
-msgid "title string update interval (1 - 1000000 s)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"this is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 msgstr ""
 
-msgid "title string font"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string font\n"
+"\n"
+"you should really choose a better font. verdana bold 8 pt looks nice."
 msgstr ""
 
-#, fuzzy
-msgid "customize title position"
-msgstr "최대화-버튼-키맵"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize title position\n"
+"\n"
+"by default the title string is centered horizontally and vertically."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "real-center"
 msgstr "[중앙]"
 
 #. ../themes/mxflat/theme.jl
-msgid "title string horizontal alignment"
+msgid ""
+"title string horizontal alignment\n"
+"\n"
+"'real-center' means to take the whole titlebar into account while centering "
+"the string. when selecting 'center' only the distance between the buttons is "
+"taken into account."
 msgstr ""
 
-msgid "title string horizontal align adjustment (-10000 - 10000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"the horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'. the range also depends on the setting "
+"of the option above. it the title string is already aligned left, you cannot "
+"adjust it to be even further left because there are button in the way."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "top"
 msgstr ""
 
@@ -249,16 +300,32 @@ msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "gradient titlebar background (experimental)"
+msgid ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"when activating the gradient background the normal titlebar background "
+"colors will be ignored. besides the button background colors will be "
+"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
+"low value, ie high quality.)"
 msgstr ""
 
-#, fuzzy
-msgid "gradient mode"
-msgstr "임의"
-
-msgid "gradient quality (1 best - 20 worst)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient mode\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"the value here is the factor the calculated gradient image will be scaled "
+"down. this increases speed but decreases quality."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "rainbow"
 msgstr ""
 
@@ -276,24 +343,44 @@ msgid "custom"
 msgstr "사용자 정의"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "gradient color mode"
-msgstr "그래디언트 테마"
+msgid ""
+"gradient color mode\n"
+"\n"
+"the custom mode will respect the colors set in the list below."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used. besides the gradient color mode must be set to "
+"custom to activate this list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
 msgstr "색상 선택"
 
 #. ../themes/mxflat/theme.jl
-msgid "unfocused/highlighted titlebar colors hue (0 - 360)"
+msgid ""
+"unfocused/highlighted titlebar colors hue (0 - 360)\n"
+"\n"
+"this value changes the hue of a color, by moving (0 - 360) degress around "
+"the color cycle...180 for example inverts the color"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
-"color)"
+"color)\n"
+"\n"
+"the saturation of a color is a measurement of the color intensity"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, c-format
 msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
@@ -301,21 +388,50 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "  focused titlebar color"
+msgid ""
+"  focused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "unfocused titlebar color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused titlebar color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "  focused title string color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"  focused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "unfocused title string color"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"unfocused title string color\n"
+"\n"
+"this is one of the 4 base colors. you can set these 4 colors and keep the "
+"extended colors deactivated. all other color options of the theme will then "
+"depend on these 4 colors."
 msgstr ""
 
-msgid "customize extended title string colors"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize extended title string colors\n"
+"\n"
+"you can customize additional colors of the title string. if you deactivate "
+"this, these colors will be set to the focused title string color."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
 msgstr ""
 
@@ -372,32 +488,62 @@ msgid "ball-12"
 msgstr "모두"
 
 #. ../themes/mxflat/theme.jl
-msgid "button icon set (experimental)"
-msgstr ""
-
-#, fuzzy
-msgid "customize button size"
-msgstr "최대화-버튼-키맵"
-
-msgid "buttons size (1 - 1000 pixel)"
-msgstr ""
-
-msgid "button vertical alignment"
-msgstr ""
-
-msgid "scale button icons (experimental)"
+msgid ""
+"button icon set (experimental)\n"
+"\n"
+"the number at the end is the width/height of the button icons in the icon "
+"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)"
+"customize button size\n"
+"\n"
+"by default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "display window icon on menu button"
-msgstr "메뉴 버튼의 창 아이콘 표시"
+msgid ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"a buttons size that is bigger than your current titlebar height is ignored."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button vertical alignment\n"
+"\n"
+"if a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"scale button icons (experimental)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate button-"
+"scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"display window icon on menu button\n"
+"\n"
+"many people like having the window-icon displayed on the menu-button. this "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
 msgstr ""
 
@@ -414,9 +560,15 @@ msgid "buttons right offset (0 - 1000 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
+msgid ""
+"customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"enabling this will allow you to set the positon of each button in the "
+"titlebar manually. a negative/positiv value means the button will be drawn "
+"on left/right side of the titlebar."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "title-height"
 msgstr ""
 
@@ -425,10 +577,16 @@ msgid "pixel"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "button position model"
-msgstr "위치 저장(_p)"
+msgid ""
+"button position model\n"
+"\n"
+"'titel-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
+msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "menu button position"
 msgstr "위치 저장(_p)"
@@ -489,9 +647,12 @@ msgid "lock button position"
 msgstr "닫기-버튼-키맵"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize sticky button keymap"
-msgstr "iconify-버튼-키맵"
+msgid ""
+"customize sticky button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: toggle sticky "
+"state of window"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -499,9 +660,13 @@ msgid "mxflat:sticky-button-keymap"
 msgstr "iconify-버튼-키맵"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize previous button keymap"
-msgstr "메뉴-버튼-키맵"
+msgid ""
+"customize previous button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -509,27 +674,54 @@ msgid "mxflat:previous-button-keymap"
 msgstr "메뉴-버튼-키맵"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize next button keymap"
-msgstr "메뉴-버튼-키맵"
+msgid ""
+"customize next button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:next-button-keymap"
 msgstr "메뉴-버튼-키맵"
 
-#, fuzzy
-msgid "customize configure button keymap"
-msgstr "메뉴-버튼-키맵"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize configure button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: start sawfish-"
+"ui - button3: toggle custom title string"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "mxflat:configure-button-keymap"
 msgstr "메뉴-버튼-키맵"
 
-#, fuzzy
-msgid "customize info button keymap"
-msgstr "iconify-버튼-키맵"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"\n"
+"\n"
+"button1: start sawfish-ui - button3: toggle custom title string"
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize info button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: window list - "
+"button3 window snooper (not included by default)"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -537,13 +729,22 @@ msgid "mxflat:info-button-keymap"
 msgstr "메뉴-버튼-키맵"
 
 #. ../themes/mxflat/theme.jl
-msgid "always on top depth (-1000 - 1000)"
+msgid ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"a window will have this depth after you have pressed the always-on-top "
+"button. 0 is the normal window level. every positive value means above other "
+"windows, a negative value means below. keept it at a positive value in order "
+"to have the always-on-top button do it's job."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize always-on-top button keymap"
-msgstr "메뉴-버튼-키맵"
+msgid ""
+"customize always-on-top button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: sets window "
+"depth to the adjusted value"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -551,9 +752,12 @@ msgid "mxflat:always-on-top-button-keymap"
 msgstr "메뉴-버튼-키맵"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "customize look button keymap"
-msgstr "최대화-버튼-키맵"
+msgid ""
+"customize look button keymap\n"
+"\n"
+"by default a button will work as it's name suggests. button1: lock window "
+"position"
+msgstr ""
 
 #. ../themes/mxflat/theme.jl
 #, fuzzy
@@ -561,9 +765,14 @@ msgid "mxflat:lock-button-keymap"
 msgstr "닫기-버튼-키맵"
 
 #. ../themes/mxflat/theme.jl
-msgid "customize button-colors"
+msgid ""
+"customize button-colors\n"
+"\n"
+"when you active this you will be able to set custom button colors. by "
+"default the button colors depend on the titlebar colors."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
 msgstr ""
 
@@ -604,35 +813,85 @@ msgid "  focused clicked button foreground color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "border width (0 - 1000 pixel)"
-msgstr ""
-
-msgid "border width for maximized windows (0 - 1000 pixel)"
+msgid ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize border for focused windows (experimental)"
+msgid ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"when you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized. if "
+"you don't want that, set the border width for maximized windows smaller than "
+"the border width for unmaximized windows. (NOTE: this feature is still buggy "
+"as sawfish does not resize the windows correctly yet, so the best might be "
+"to set it to the normal border width.)"
 msgstr ""
 
-msgid "border width for focused windows (0 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
 msgstr ""
 
-msgid "title-contents border width (0 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY cpu intensive and might slow down your "
+"computer noticably. so turn it on at your own risk.)"
 msgstr ""
 
-msgid "border offset (-1000 - 1000 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"sets the widths of the line between titlebar and contents window"
 msgstr ""
 
-msgid "keep window borders and corners at their place when shading a window"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"adjust the point where the border actually starts. many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. with a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
 msgstr ""
 
-#, fuzzy
-msgid "show window corners"
-msgstr "창 밑으로 키움"
-
-msgid "corners length adjustement (-1 - 100 pixel)"
+#. ../themes/mxflat/theme.jl
+msgid ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"when shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"show window corners\n"
+"\n"
+" the corners are used to resize a window in two directions at the same time. "
+"usually the width and length of window corners are determined by the border "
+"width but you can adjust them below."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
+msgid ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
+"grab the 1 pixel corner to be able to resize the window in two directions; "
+"thus, make it bigger."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "outside"
 msgstr ""
 
@@ -645,16 +904,29 @@ msgid "corner direction"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "corners width adjustement (0 - 100 pixel)"
+msgid ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"this option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "fake shadow (experimental)"
+msgid ""
+"fake shadow (experimental)\n"
+"\n"
+"draw a small additional border around your windows emulating a solid shadow "
+"effect. use the options below to adjust its width and direction. (NOTE: this "
+"is VERY cpu intensive and might slow down your computer noticably. so turn "
+"it on at your own risk.)"
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "fake shadow only on focused windows"
 msgstr "초점없는 창의 바 이미지"
@@ -696,13 +968,23 @@ msgid "south-west"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-msgid "fake shadow light source"
-msgstr "창 무시하기"
-
-msgid "fake shadow light distance (0 - 100)"
+msgid ""
+"fake shadow light source\n"
+"\n"
+"set the direction of the fake shadow. usually only 2 or 3 borders of your "
+"window have a fake shadow. this depends on where the light comes from."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
+msgid ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"this option has only an effect on the north, east, south and west light "
+"sources. the further away the light source is, the smaller will the two "
+"'side' shadows be."
+msgstr ""
+
+#. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
 msgstr ""
 
@@ -711,9 +993,14 @@ msgid "shadow color"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-msgid "customize border colors"
+msgid ""
+"customize border colors\n"
+"\n"
+"you can customize your border colors here. if you deactivate this, these "
+"colors will be set to the focused title string color."
 msgstr ""
 
+#. ../themes/mxflat/theme.jl
 msgid "  focused border color"
 msgstr ""
 
@@ -1030,86 +1317,6 @@ msgstr "적절한 기능"
 msgid "Apropos variable"
 msgstr "적절한 변수"
 
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome toggle skip winlist"
-msgstr "Gnome 토글 skip winlist"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-msgstr "창의 GNOME SKIP_WINLIST 힌트 토글"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome set skip winlist"
-msgstr "Gnome 설정 skip winlist"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Set the GNOME SKIP_WINLIST hint of the window."
-msgstr "창의 GNOME SKIP_WINLIST 힌트 설정"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome clear skip winlist"
-msgstr "Gnome 지우기 skip winlist"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-msgstr "창의 GNOME SKIP_WINLIST 힌트 해제"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome toggle skip tasklist"
-msgstr "Gnome 토글 skip tasklist"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-msgstr "창의 GNOME SKIP_TASKLIST 힌트 토글"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome set skip tasklist"
-msgstr "Gnome 설정 skip tasklist"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-msgstr "창의 GNOME SKIP_TASKLIST 힌트 설정"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome clear skip tasklist"
-msgstr "Gnome 지우기 skip tasklist"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-msgstr "창의 GNOME SKIP_TASKLIST 힌트 해제"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome logout"
-msgstr "Gnome 로그아웃"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Logout from the current GNOME session."
-msgstr "현재 그놈 세션에서 로그아웃"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome www page"
-msgstr "Gnome www 페이지"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Display the WWW page of the GNOME project."
-msgstr "그놈 프로젝트의 웹페이지를 표시합니다."
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome help browser"
-msgstr "Gnome 도움말 부라우저"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Launch the GNOME help browser."
-msgstr "그놈 도움말 시스템 실행"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Gnome about"
-msgstr "Gnome 에 대하여"
-
-#. ../lisp/sawfish/wm/commands/gnome.jl
-msgid "Launch the GNOME about dialog."
-msgstr "그놈은.. 대화창을 실행"
-
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
 msgstr "아이콘화 그룹"
@@ -1248,7 +1455,9 @@ msgstr "창 왼쪽으로 키움"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window to the left until it `bumps into' another window."
+msgid ""
+"Grows window to the left until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "다른 창에 부딪힐 때까지 왼쪽으로 창 확장.\n"
 "`창 위로 키움' 참조."
@@ -1259,7 +1468,9 @@ msgstr "창 오른쪽으로 키움"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window to the right until it `bumps into' another window."
+msgid ""
+"Grows window to the right until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "다른 창에 부딪힐 때까지 오른쪽으로 창 확장.\n"
 "`창 위로 키움' 참조."
@@ -1269,18 +1480,29 @@ msgid "Grow window up"
 msgstr "창 위로 키움"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Grows window upwards until it `bumps into' another window."
+msgid ""
+"Grows window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
 msgstr ""
-"다른 창에 부딪힐 때까지 아래로 창 확장.\n"
-"`창 위로 키움' 참조."
+"다른 창에 부딪힐 때까지 위쪽으로 창 확장.\n"
+"만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
+"범용 접두 인자를 사용하여 대신 위로 최대화. \n"
+"수치 접두 인자를 사용하여 대신 창이나 픽셀로 지정된 증가량만큼 \n"
+"위로 확장."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "창 밑으로 키움"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Grows window downwards until it `bumps into' another window."
+msgid ""
+"Grows window downwards until it `bumps into' another window.\n"
+"See `grow-window-up'."
 msgstr ""
 "다른 창에 부딪힐 때까지 아래로 창 확장.\n"
 "`창 위로 키움' 참조."
@@ -1291,7 +1513,9 @@ msgstr "창 왼쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window to the left until it `bumps into' another window."
+msgid ""
+"Moves window to the left until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "다른 창에 부딪힐 때까지 왼쪽으로 창 이동.\n"
 "'창 밑으로 채워넣기' 참조."
@@ -1302,7 +1526,9 @@ msgstr "창 오른쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window to the right until it `bumps into' another window."
+msgid ""
+"Moves window to the right until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "다른 창에 부딪힐 때까지 오른쪽으로 창 이동.\n"
 "'창 위쪽으로 채워넣기' 참조."
@@ -1312,18 +1538,26 @@ msgid "Pack window up"
 msgstr "창 위쪽으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Moves window upwards until it `bumps into' another window."
+msgid ""
+"Moves window upwards until it `bumps into' another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
-"다른 창에 부딪힐 때까지 아래로 창 이동.\n"
-"'창 위쪽으로 채워넣기' 참조."
+"다른 창에 부딪힐 때까지 위로 창 이동.\n"
+"만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
+"범용 접두 인자를 사용하여 대신 위로 최대한 이동. \n"
+"수치 접두 인자를 사용하여 대신 지정된 픽셀수만큼 위로 이동."
 
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "창 밑으로 채워넣기"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Moves window downwards until it `bumps into' another window."
+msgid ""
+"Moves window downwards until it `bumps into' another window.\n"
+"See `pack-window-up'."
 msgstr ""
 "다른 창에 부딪힐 때까지 아래로 창 이동.\n"
 "'창 위쪽으로 채워넣기' 참조."
@@ -1558,14 +1792,24 @@ msgid "How to choose window edges when resizing."
 msgstr "사용자가 크기조정하는 동안 현재 크기 표시하기"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Distance in pixels before window edges align with each other."
+msgid ""
+"Distance in pixels before window edges align with each other.\n"
+"\n"
+"When moving a window, this option lets you align one of its edges with an "
+"edge of another window."
 msgstr ""
+"창 테두리간의 픽셀 거리.\n"
+"\n"
+"창을 이동시 이 옵션을 사용하여 현재 창과 다른 창 테두리 사이를 정렬할 수 있습"
+"니다."
 
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "창을 대화식으로 이동"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Move the window interactively using the mouse."
+#, fuzzy
+msgid "Move the window interactively, with mouse or keyboard."
 msgstr "마우스를 사용하여 수동으로 창 이동"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1573,7 +1817,8 @@ msgid "Resize window interactively"
 msgstr "창을 대화식으로 크기 조정"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Resize the window interactively using the mouse."
+#, fuzzy
+msgid "Resize the window interactively, with mouse or keyboard."
 msgstr "마우스를 사용하여 수동으로 창 크기조정"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -1611,22 +1856,26 @@ msgstr " 클릭하여 올리고 전달하기"
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid ""
-"Raise the window that received the current event, then replay any pointer"
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
 msgstr ""
-"현재 이벤트를 받은 창을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
-"반응하기"
+"현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
+"그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "초점 상태면 클릭하여 올리고 전달하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid ""
-"Raise the window that received the current event (if it's focused), then"
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
 msgstr ""
-"현재 이벤트를 받은 창을 올리고(초점 상태면),\n"
-"명령을 불러 일으킨 포인터 이벤트에 반응하기"
+"현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
+"그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
 msgstr "클릭하여 올리거나 전달하기"
 
@@ -1640,21 +1889,26 @@ msgstr "클릭하여 그룹을 올리고 전달하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
-msgid "Raise the group of windows that received the current event, then replay"
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
 msgstr ""
-"현재 이벤트를 받은 창그룹을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
-"반응하기"
+"현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
+"그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
 
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
 msgstr "클릭하여 임시 그룹를 올리고 전달하기"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid "Raise the window that received the current event and any transients it"
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
 msgstr ""
-"현재 이벤트를 받은 창을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
-"반응하기"
+"현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
+"그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
 
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window left"
 msgstr "창을 왼쪽으로 움직이기"
@@ -2097,6 +2351,10 @@ msgstr "출력 에러"
 msgid "Display all errors that have occurred to the screen."
 msgstr "발생한 모든 오류를 화면에 나타냅니다."
 
+#. ../lisp/sawfish/wm/ext/fdo-menu.jl
+msgid "Update saw menu"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
 msgid "Infinite Desktop"
@@ -2330,9 +2588,16 @@ msgid "Shade Hover"
 msgstr "쉐이드 호버"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-msgid "Enable shade-hover mode."
+msgid ""
+"Enable shade-hover mode.\n"
+"\n"
+"(Temporarily unshades windows while the mouse pointer is over them.)"
 msgstr ""
+"쉐이드 호버 모드 사용.\n"
+"\n"
+"(포인터가 다가오면 가려진 창을 잠시 보여줍니다.)"
 
+#. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
 msgstr "창을 잠시 보여주기 전에 지연될 밀리 초."
 
@@ -2586,25 +2851,47 @@ msgid "None"
 msgstr "없음"
 
 #. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/gnome/integration.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "_GNOME Help..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_GNOME Help"
 msgstr "그놈 도움말(_G)..."
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "GNOME WWW..."
-msgstr "그놈 웹 페이지..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "GNOME Website"
+msgstr ""
 
-#. ../lisp/sawfish/wm/gnome/integration.jl
-msgid "About GNOME..."
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "About GNOME"
 msgstr "그놈은..."
 
-#. ../lisp/sawfish/wm/gnome/menus.jl
-msgid "Gnome menus update"
-msgstr "Gnome 메뉴 업데이트"
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "Sessi_on"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Logout from GNOME"
+msgstr "현재 그놈 세션에서 로그아웃"
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Shutdown from GNOME"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_KDE Help"
+msgstr "도움말(_H)"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "KDE Website"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
@@ -2629,82 +2916,97 @@ msgstr "루트-창-키맵"
 #. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the root window"
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
 msgstr ""
 "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
 "(또는 창에 초점이 없을 때)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
 msgstr "제목-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the title of"
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
+"포인터가 창의 제목에 있을 때 작동하는 바인딩을 가진 키맵\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
 msgstr "경계-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the border of"
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
+"포인터가 창의 테두리에 있을 때 작동하는 바인딩을 가진 키맵\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
 msgstr "닫기-버튼-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the close button"
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
+"포인터가 닫기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
 msgstr "iconify-버튼-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the iconify"
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
+"포인터가 아이콘화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
 msgstr "최대화-버튼-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "Keymap containing bindings active when the pointer is in the maximize"
-msgstr "사용자로부터 문자열을 입력받을 때 작동하는 바인딩을 가진 키맵."
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"포인터가 최대화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
 msgstr "메뉴-버튼-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the menu button"
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
+"포인터가 메뉴 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
 msgstr "그림자-버튼-키맵"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
-"Keymap containing bindings active when the pointer is in the shade button"
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
-"(또는 창에 초점이 없을 때)"
+"포인터가 가리기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
+"(이 맵에서는 마우스 바인딩만 작동합니다.)"
 
+#. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid "Modifier key(s) used for default shortcuts."
 msgstr "기본 창관리자 단축키에 사용되는 키 수정."
@@ -2909,6 +3211,21 @@ msgid "_Customize"
 msgstr "사용자 정의(_C)"
 
 #. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display Errors"
+msgstr "출력 에러"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Restart Sawfish"
+msgstr "재시작"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Quit Sawfish"
+msgstr "소피쉬는(_A)..."
+
+#. ../lisp/sawfish/wm/menus.jl
 msgid "_FAQ..."
 msgstr "질문과 답변(_F)..."
 
@@ -2930,23 +3247,8 @@ msgstr "소피쉬는(_A)..."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
-msgid "_Display Errors"
-msgstr "출력 에러"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Kill Window"
+msgid "Kill Window"
 msgstr "창(_W)"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Restart"
-msgstr "재시작"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Quit"
-msgstr "종료"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -2973,9 +3275,8 @@ msgid "Display the applications menu."
 msgstr "애플리케이션 메뉴 표시"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_All settings"
-msgstr "모든 설정"
+msgid "S_awfish-UI"
+msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -3034,13 +3335,17 @@ msgstr "낮은 단독 창 위로 올리기"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/state/transient.jl
 #, fuzzy
-msgid "If the window is at its highest possible position, then lower it to its"
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"창이 스택 레벨 상 가장 높은 창이면 가장 낮은 곳으로 내리고\n"
-"그렇지 않으면 가장 높은 곳으로 올립니다."
+"만약 창이 가장 높은 위치에 있다면 창을 가장 낮은 곳으로 낮춥니다\n"
+"반대의 경우 허락되는한 높입니다. 또한현재 창과 관련된 모든 창의 단계가 변합니"
+"다\n"
+" "
 
+#. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
 msgstr "창 깊이 높이기"
 
@@ -3120,11 +3425,14 @@ msgstr "창 고정 여부 토글"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 #, fuzzy
-msgid "Toggle the `stickiness' of the window--whether or not it is a member of"
+msgid ""
+"Toggle the `stickiness' of the window--whether or not it is a member of\n"
+"all workspaces."
 msgstr ""
 "모든 작업공간의 구성원 여부에 상관없이 창의 `고정'\n"
 "속성을 토글"
 
+#. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
 msgstr "고정(_S)"
 
@@ -3258,21 +3566,25 @@ msgstr "창을 수직으로 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between horizontally maximized and"
+msgid ""
+"Toggle the state of the window between horizontally maximized and\n"
+"unmaximized."
 msgstr ""
 "수평으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
 "토글합니다."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "창을 수직으로 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between vertically maximized and"
-msgstr ""
-"수직으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
-"토글합니다."
+msgid ""
+"Toggle the state of the window between vertically maximized and\n"
+"unmaximized."
+msgstr "최대화/비최대화 상태를 토글합니다."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
 msgstr "창 채우기 최대화 "
 
@@ -3312,21 +3624,24 @@ msgstr "창 수평으로 채우기 최대화 여부 토글"
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid ""
-"Toggle the state of the window between horizontally maximized-filled and"
+"Toggle the state of the window between horizontally maximized-filled and\n"
+"unmaximized."
 msgstr ""
 "수평 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
 "토글합니다."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "창 수직으로 채우기 최대화 여부 토글"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Toggle the state of the window between vertically maximized-filled and"
-msgstr ""
-"수직 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
-"토글합니다."
+msgid ""
+"Toggle the state of the window between vertically maximized-filled and\n"
+"unmaximized."
+msgstr "최대로 채운 상태와 그렇지 않은 상태 사이를 토글합니다."
 
+#. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid "Maximize unframe"
 msgstr "창 최대화"
@@ -3391,11 +3706,14 @@ msgstr "창의 은둔 상태 해제"
 
 #. ../lisp/sawfish/wm/state/shading.jl
 #, fuzzy
-msgid "If the window is shaded (see `shade-window'), restore it to it's usual"
+msgid ""
+"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"state."
 msgstr ""
 "창을 은둔시키면(`shade-winodw' 참고), 원래의 상태로\n"
 "복원하기"
 
+#. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
 msgstr "은둔한 창 토글"
 
@@ -3417,22 +3735,42 @@ msgid "Raise window and transients"
 msgstr "창과 임의 창 올리기"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
 msgid ""
-"Raise the current window to its highest allowed position in the stacking"
-msgstr "창을 가장 위로 쌓습니다."
+"Raise the current window to its highest allowed position in the stacking\n"
+"order. Also raise any transient windows that it has."
+msgstr ""
+"현재 창을 쌓기에서 허락되는 가장 높은 곳으로 올립니다\n"
+"또한 현재 창과 관련된 모든 창을 올립니다."
 
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Lower window and transients"
 msgstr "창과 임의 창들 낮추기"
 
 #. ../lisp/sawfish/wm/state/transient.jl
-#, fuzzy
-msgid "Lower the current window to its lowest allowed position in the stacking"
-msgstr "창을 가장 아래로 쌓습니다."
+msgid ""
+"Lower the current window to its lowest allowed position in the stacking\n"
+"order. Also lower any transient windows that it has."
+msgstr ""
+"현재 창을 쌓기에서 허락되는 가장 낮은 곳으로 내립니다\n"
+"또한 현재 창과 관련된 모든 창을 내립니다."
 
+#. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise lower window and transients"
 msgstr "낮은 창과 임의 창들 올리기"
 
+#. ../lisp/sawfish/wm/state/transient.jl
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed. Also "
+"changes\n"
+"the level of any transient windows it has."
+msgstr ""
+"만약 창이 가장 높은 위치에 있다면 창을 가장 낮은 곳으로 낮춥니다\n"
+"반대의 경우 허락되는한 높입니다. 또한현재 창과 관련된 모든 창의 단계가 변합니"
+"다\n"
+" "
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
 msgstr ""
 
@@ -3547,11 +3885,13 @@ msgstr "쿼우트 이벤트"
 #. ../lisp/sawfish/wm/util/keymap.jl
 #, fuzzy
 msgid ""
-"Sends the next key event directly to the focused client window, ignoring"
+"Sends the next key event directly to the focused client window, ignoring\n"
+"any window manager bindings that it may have."
 msgstr ""
 "초점이 주어진 클라이언트 창에 다음키 이벤트를 직접적으로 보냄, \n"
 " 윈도우 관리자와의 어떤 관계도 무시함."
 
+#. ../lisp/sawfish/wm/util/marks.jl
 #, fuzzy
 msgid "Mark window"
 msgstr "창 위쪽으로 채워넣기"
@@ -3653,7 +3993,9 @@ msgid "dynamic"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Whether to stop or wrap-around on first/last viewport"
+msgid ""
+"Whether to stop or wrap-around or grow the virtual workspace on first/last "
+"viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -3994,21 +4336,25 @@ msgstr "다음 작업공간 합병하기"
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid ""
-"Delete the current workspace. Its member windows are relocated to the next"
+"Delete the current workspace. Its member windows are relocated to the next\n"
+"workspace."
 msgstr ""
 "현재 작업공간 삭제하기.  멤버 창은 다음 작업공간에\n"
 "재배치합니다."
 
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge previous workspace"
 msgstr "이전 작업공간 합병하기"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
-msgid "Delete the current workspace. Its member windows are relocated to the"
+msgid ""
+"Delete the current workspace. Its member windows are relocated to the\n"
+"previous workspace."
 msgstr ""
-"현재 작업공간 삭제하기.  멤버 창은 다음 작업공간에\n"
+"현재 작업공간 삭제하기.  멤버 창은 이전 작업공간에\n"
 "재배치합니다."
 
+#. ../lisp/sawfish/wm/workspace.jl
 msgid "Insert workspace after"
 msgstr "작업공간 이후 삽입"
 
@@ -4054,11 +4400,14 @@ msgstr "창 인스턴스 삭제"
 
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-msgid "Remove the copy of the window on the current workspace. If this is the"
+msgid ""
+"Remove the copy of the window on the current workspace. If this is the\n"
+"last instance remaining, then delete the actual window."
 msgstr ""
 "현재 작업공간의 창 복사본 제거.  만약 그 복사본이 마지막 요소였다면\n"
 "실제 창을 제거합니다."
 
+#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid "Show desktop"
 msgstr "초점 데스크탑"
@@ -4109,54 +4458,269 @@ msgstr "작업공간 대화식으로 선택하기"
 msgid "Prompt for a workspace and switch to it."
 msgstr "작업공간을 물어서 이동하기"
 
+#, fuzzy
+#~ msgid "customize title position"
+#~ msgstr "최대화-버튼-키맵"
+
+#, fuzzy
+#~ msgid "gradient mode"
+#~ msgstr "임의"
+
+#, fuzzy
+#~ msgid "gradient color mode"
+#~ msgstr "그래디언트 테마"
+
+#, fuzzy
+#~ msgid "customize button size"
+#~ msgstr "최대화-버튼-키맵"
+
+#, fuzzy
+#~ msgid "display window icon on menu button"
+#~ msgstr "메뉴 버튼의 창 아이콘 표시"
+
+#, fuzzy
+#~ msgid "button position model"
+#~ msgstr "위치 저장(_p)"
+
+#, fuzzy
+#~ msgid "customize sticky button keymap"
+#~ msgstr "iconify-버튼-키맵"
+
+#, fuzzy
+#~ msgid "customize previous button keymap"
+#~ msgstr "메뉴-버튼-키맵"
+
+#, fuzzy
+#~ msgid "customize next button keymap"
+#~ msgstr "메뉴-버튼-키맵"
+
+#, fuzzy
+#~ msgid "customize configure button keymap"
+#~ msgstr "메뉴-버튼-키맵"
+
+#, fuzzy
+#~ msgid "customize info button keymap"
+#~ msgstr "iconify-버튼-키맵"
+
+#, fuzzy
+#~ msgid "customize always-on-top button keymap"
+#~ msgstr "메뉴-버튼-키맵"
+
+#, fuzzy
+#~ msgid "customize look button keymap"
+#~ msgstr "최대화-버튼-키맵"
+
+#, fuzzy
+#~ msgid "show window corners"
+#~ msgstr "창 밑으로 키움"
+
+#, fuzzy
+#~ msgid "fake shadow light source"
+#~ msgstr "창 무시하기"
+
+#~ msgid "Gnome toggle skip winlist"
+#~ msgstr "Gnome 토글 skip winlist"
+
+#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "창의 GNOME SKIP_WINLIST 힌트 토글"
+
+#~ msgid "Gnome set skip winlist"
+#~ msgstr "Gnome 설정 skip winlist"
+
+#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "창의 GNOME SKIP_WINLIST 힌트 설정"
+
+#~ msgid "Gnome clear skip winlist"
+#~ msgstr "Gnome 지우기 skip winlist"
+
+#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
+#~ msgstr "창의 GNOME SKIP_WINLIST 힌트 해제"
+
+#~ msgid "Gnome toggle skip tasklist"
+#~ msgstr "Gnome 토글 skip tasklist"
+
+#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "창의 GNOME SKIP_TASKLIST 힌트 토글"
+
+#~ msgid "Gnome set skip tasklist"
+#~ msgstr "Gnome 설정 skip tasklist"
+
+#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "창의 GNOME SKIP_TASKLIST 힌트 설정"
+
+#~ msgid "Gnome clear skip tasklist"
+#~ msgstr "Gnome 지우기 skip tasklist"
+
+#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
+#~ msgstr "창의 GNOME SKIP_TASKLIST 힌트 해제"
+
+#~ msgid "Gnome logout"
+#~ msgstr "Gnome 로그아웃"
+
+#~ msgid "Gnome www page"
+#~ msgstr "Gnome www 페이지"
+
+#~ msgid "Display the WWW page of the GNOME project."
+#~ msgstr "그놈 프로젝트의 웹페이지를 표시합니다."
+
+#~ msgid "Gnome help browser"
+#~ msgstr "Gnome 도움말 부라우저"
+
+#~ msgid "Launch the GNOME help browser."
+#~ msgstr "그놈 도움말 시스템 실행"
+
+#~ msgid "Gnome about"
+#~ msgstr "Gnome 에 대하여"
+
+#~ msgid "Launch the GNOME about dialog."
+#~ msgstr "그놈은.. 대화창을 실행"
+
+#, fuzzy
+#~ msgid "Grows window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "다른 창에 부딪힐 때까지 아래로 창 확장.\n"
+#~ "`창 위로 키움' 참조."
+
+#, fuzzy
+#~ msgid "Moves window upwards until it `bumps into' another window."
+#~ msgstr ""
+#~ "다른 창에 부딪힐 때까지 아래로 창 이동.\n"
+#~ "'창 위쪽으로 채워넣기' 참조."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event, then replay any pointer"
+#~ msgstr ""
+#~ "현재 이벤트를 받은 창을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
+#~ "반응하기"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event (if it's focused), then"
+#~ msgstr ""
+#~ "현재 이벤트를 받은 창을 올리고(초점 상태면),\n"
+#~ "명령을 불러 일으킨 포인터 이벤트에 반응하기"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the group of windows that received the current event, then replay"
+#~ msgstr ""
+#~ "현재 이벤트를 받은 창그룹을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
+#~ "반응하기"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it"
+#~ msgstr ""
+#~ "현재 이벤트를 받은 창을 올리고, 명령을 불러 일으킨 포인터 이벤트에\n"
+#~ "반응하기"
+
+#~ msgid "GNOME WWW..."
+#~ msgstr "그놈 웹 페이지..."
+
+#~ msgid "Gnome menus update"
+#~ msgstr "Gnome 메뉴 업데이트"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of"
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of"
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close button"
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#, fuzzy
+#~ msgid "Keymap containing bindings active when the pointer is in the iconify"
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize"
+#~ msgstr "사용자로부터 문자열을 입력받을 때 작동하는 바인딩을 가진 키맵."
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button"
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade button"
+#~ msgstr ""
+#~ "포인트가 루트 창에 있을 때 작동하는 바인딩을 가진 키맵\n"
+#~ "(또는 창에 초점이 없을 때)"
+
+#, fuzzy
+#~ msgid "_Restart"
+#~ msgstr "재시작"
+
+#, fuzzy
+#~ msgid "_Quit"
+#~ msgstr "종료"
+
+#, fuzzy
+#~ msgid "_All settings"
+#~ msgstr "모든 설정"
+
+#, fuzzy
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its"
+#~ msgstr ""
+#~ "창이 스택 레벨 상 가장 높은 창이면 가장 낮은 곳으로 내리고\n"
+#~ "그렇지 않으면 가장 높은 곳으로 올립니다."
+
+#, fuzzy
+#~ msgid "Toggle the state of the window between vertically maximized and"
+#~ msgstr ""
+#~ "수직으로 최대화한 상태와 최대화하지 않은 상태 사이를\n"
+#~ "토글합니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between vertically maximized-filled and"
+#~ msgstr ""
+#~ "수직 방향으로 최대화하여 채운 상태와 그렇지 않은 상태 사이를\n"
+#~ "토글합니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking"
+#~ msgstr "창을 가장 위로 쌓습니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking"
+#~ msgstr "창을 가장 아래로 쌓습니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the"
+#~ msgstr ""
+#~ "현재 작업공간 삭제하기.  멤버 창은 다음 작업공간에\n"
+#~ "재배치합니다."
+
 #~ msgid "Select color"
 #~ msgstr "색상 선택"
 
 #~ msgid "Growing and packing of windows"
 #~ msgstr "창 확장과 축소"
-
-#~ msgid ""
-#~ "Grows window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
-#~ "With a universal prefix arg, maximize upwards instead.\n"
-#~ "With a numeric prefix arg, grow upwards by that many increments specified "
-#~ "by\n"
-#~ "window or pixels instead."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 위쪽으로 창 확장.\n"
-#~ "만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
-#~ "범용 접두 인자를 사용하여 대신 위로 최대화. \n"
-#~ "수치 접두 인자를 사용하여 대신 창이나 픽셀로 지정된 증가량만큼 \n"
-#~ "위로 확장."
-
-#~ msgid ""
-#~ "Moves window upwards until it `bumps into' another window.\n"
-#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
-#~ "With a universal prefix arg, move upwards maximally instead.\n"
-#~ "With a numeric prefix arg, move upwards by that many pixels instead."
-#~ msgstr ""
-#~ "다른 창에 부딪힐 때까지 위로 창 이동.\n"
-#~ "만일 위쪽 테두리가 화면 가장자리를 벗어나면, 안으로 복귀. \n"
-#~ "범용 접두 인자를 사용하여 대신 위로 최대한 이동. \n"
-#~ "수치 접두 인자를 사용하여 대신 지정된 픽셀수만큼 위로 이동."
-
-#~ msgid ""
-#~ "Distance in pixels before window edges align with each other.\n"
-#~ "\n"
-#~ "When moving a window, this option lets you align one of its edges with an "
-#~ "edge of another window."
-#~ msgstr ""
-#~ "창 테두리간의 픽셀 거리.\n"
-#~ "\n"
-#~ "창을 이동시 이 옵션을 사용하여 현재 창과 다른 창 테두리 사이를 정렬할 수 "
-#~ "있습니다."
-
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it\n"
-#~ "has, then replay any pointer events that invoked the command."
-#~ msgstr ""
-#~ "현재 이벤트에서 받은 창을 올리고 현재 관련된\n"
-#~ "그리고 명령을 받아들이는 모든 포인터 이벤트에도 응답합니다."
 
 #, fuzzy
 #~ msgid "Shrinking and Yanking of windows"
@@ -4165,66 +4729,6 @@ msgstr "작업공간을 물어서 이동하기"
 #~ msgid "Arguments given to the `xterm' command."
 #~ msgstr "`xterm'명령에 줄 인자"
 
-#~ msgid ""
-#~ "Enable shade-hover mode.\n"
-#~ "\n"
-#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
-#~ msgstr ""
-#~ "쉐이드 호버 모드 사용.\n"
-#~ "\n"
-#~ "(포인터가 다가오면 가려진 창을 잠시 보여줍니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 창의 제목에 있을 때 작동하는 바인딩을 가진 키맵\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of\n"
-#~ "a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 창의 테두리에 있을 때 작동하는 바인딩을 가진 키맵\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 닫기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the iconify\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 아이콘화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize\n"
-#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 최대화 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 메뉴 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade "
-#~ "button\n"
-#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
-#~ msgstr ""
-#~ "포인터가 가리기 버튼에 있을 때 작동하는 바인딩을 가진 키맵.\n"
-#~ "(이 맵에서는 마우스 바인딩만 작동합니다.)"
-
 #, fuzzy
 #~ msgid "Copy to p_revious"
 #~ msgstr "이전 공간으로 복사"
@@ -4232,38 +4736,6 @@ msgstr "작업공간을 물어서 이동하기"
 #, fuzzy
 #~ msgid "Copy to ne_xt"
 #~ msgstr "다음 공간으로 복사"
-
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking\n"
-#~ "order. Also raise any transient windows that it has."
-#~ msgstr ""
-#~ "현재 창을 쌓기에서 허락되는 가장 높은 곳으로 올립니다\n"
-#~ "또한 현재 창과 관련된 모든 창을 올립니다."
-
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking\n"
-#~ "order. Also lower any transient windows that it has."
-#~ msgstr ""
-#~ "현재 창을 쌓기에서 허락되는 가장 낮은 곳으로 내립니다\n"
-#~ "또한 현재 창과 관련된 모든 창을 내립니다."
-
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its\n"
-#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
-#~ "changes\n"
-#~ "the level of any transient windows it has."
-#~ msgstr ""
-#~ "만약 창이 가장 높은 위치에 있다면 창을 가장 낮은 곳으로 낮춥니다\n"
-#~ "반대의 경우 허락되는한 높입니다. 또한현재 창과 관련된 모든 창의 단계가 변"
-#~ "합니다\n"
-#~ " "
-
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the\n"
-#~ "previous workspace."
-#~ msgstr ""
-#~ "현재 작업공간 삭제하기.  멤버 창은 이전 작업공간에\n"
-#~ "재배치합니다."
 
 #~ msgid ""
 #~ "Whether growing is considered to be maximization.  When you turn\n"
