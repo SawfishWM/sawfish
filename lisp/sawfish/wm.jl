@@ -153,9 +153,7 @@
   ;; do user-level initialization
   (load "sawfish/wm/user")
 
-(let ((session-id (or (get-command-line-option "--sm-client-id" t)
-		      ;; may be passed through from the default GNOME session
-		      (get-command-line-option "-clientId" t)))
+(let ((session-id     (get-command-line-option "--sm-client-id" t))
       (session-prefix (get-command-line-option "--sm-prefix" t)))
 
   ;; now connect with the session manager; gsm requires that apps don't
