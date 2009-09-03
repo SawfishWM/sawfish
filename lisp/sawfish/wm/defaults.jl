@@ -34,5 +34,11 @@
   (if (getenv "GNOME_DESKTOP_SESSION_ID")
     (require 'sawfish.wm.integration.gnome)))
 
+;; if it looks like KDE is the desktop environment, then load the
+;; extra KDE integration module
+(unless batch-mode
+  (if (getenv "KDE_SESSION_VERSION")
+    (require 'sawfish.wm.integration.kde)))
+
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)
