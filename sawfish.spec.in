@@ -1,7 +1,7 @@
 Summary: An extensible window manager for the X Window System.
 Name: sawfish
 Version: @version@
-Release: 1
+Release: 1%{?dist}
 Requires: librep >= @REP_MIN_VER@, rep-gtk >= @REP_GTK_MIN_VER@
 License: GPL
 Group: User Interface/Desktops
@@ -67,9 +67,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %dir %{_datadir}/sawfish
 %{_datadir}/sawfish/%{version}
-%{_datadir}/locale
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{_datadir}/applications/sawfish.desktop
+%{_datadir}/apps/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
 %{_datadir}/pixmaps/sawfish*.png
 %{_libdir}/pkgconfig/sawfish.pc
@@ -78,6 +78,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_infodir}/sawfish*
 
 %changelog
+* Sat Sep 05 2009 Kim B. Heino <b@bbbs.net>
+- add dist-tag, update files list
+
 * Sun Jan 18 2008 Christopher Bratusek <zanghar@freenet.de>
 - several fixups
 
