@@ -45,7 +45,7 @@
 
 ;; try-require
 ;; try to trequire a script, but don't
-;; err if failed, just place a message
+;; err if failed
 (define (try-require sym)
   (condition-case nil
       (require sym)
