@@ -42,3 +42,11 @@
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)
+
+;; try-require
+;; try to trequire a script, but don't
+;; err if failed, just place a message
+(define (try-require sym)
+  (condition-case nil
+      (require sym)
+    (error nil)))

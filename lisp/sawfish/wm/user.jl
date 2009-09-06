@@ -45,7 +45,8 @@
 	   sawfish.wm
 	   sawfish.wm.util.groups
 	   sawfish.wm.util.display-window
-	   sawfish.wm.util.compat)
+	   sawfish.wm.util.compat
+	   sawfish.wm.ext.fdo-menu)
      (set-binds))
 
   (setq *user-structure* 'user)
@@ -94,13 +95,8 @@
 				      (or (file-exists-p f)
 					  (file-exists-p (concat f ".jl"))
 					  (file-exists-p (concat f ".jlc"))))))
-	      ;; load these before customized settings (but only if there's
-	      ;; no .sawfishrc file)
-	      (unless (let loop ((rest rc-files))
-			(when rest
-			  (or (rc-file-exists-p (car rest))
-			      (loop (cdr rest)))))
-	        (load "sawfish/wm/defaults" t))
+	      ;; load these before customized settings
+	      (load "sawfish/wm/defaults" t)
 
 	      ;; then the customized options
 	      (condition-case data
@@ -113,11 +109,13 @@
 		(when rest
 		  (if (rc-file-exists-p (car rest))
 		      (safe-load (car rest) t t t)
-		    (loop (cdr rest)))))
-		    
-	      (load "sawfish/wm/extras" t))))
+		    (loop (cdr rest))))))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
+
+  ;; use a default menu if none is given
+  (unless (or batch-mode apps-menu)
+    (update-saw-menu))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)

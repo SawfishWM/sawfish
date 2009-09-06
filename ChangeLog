@@ -1,6 +1,14 @@
 2009-09-06  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/fdo-menu.jl: Partial rewrite of fdo-menu [Matthew Love]
 
+	* lisp/sawfish/wm/user.jl
+	* lisp/sawfish/wm/defaults.jl
+	* lisp/sawfish/wm/extras.jl: sawfish.wm.extras removed
+	                             moved try-require from extras to defaults
+				     since gnome-int does no longer change the behaviour of sawfish itself
+				     load defaults even if there's an rc file
+				     generate the fdo-menu if there's no customized apps-menu
+
 2009-09-05  Christopher Bratusek <zanghar@freenet.de>
 	* sawfish.spec.in: improved [Kim B. Heino]
 
