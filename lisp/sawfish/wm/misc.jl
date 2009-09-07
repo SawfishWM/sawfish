@@ -28,7 +28,8 @@
 		   rep.module-system
 		   rep.io.files
 		   sawfish.wm.windows.subrs
-		   sawfish.wm.events))
+		   sawfish.wm.events
+		   sawfish.wm.ext.error-handler))
 
 (defvar *user-module* nil)
 

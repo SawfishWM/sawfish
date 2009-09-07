@@ -22,7 +22,8 @@
 (define-structure sawfish.wm.ext.error-handler
 
     (export retrieve-errors
-	    display-errors)
+	    display-errors
+	    error-handler-function)
 
     (open rep
 	  rep.system
