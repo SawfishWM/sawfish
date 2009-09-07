@@ -9,6 +9,12 @@
 
 	* lisp/sawfish/wm/integration/kde.jl: added logout, reboot and shutdown entries
 
+	* lisp/sawfish/wm/theming/make-theme.jl: make-image is defined the *second* time here
+	                                         the first time in gaol, rename this instance to
+						 make-image-possibly-from-cache to avoid confusion
+						 for both users and the rep-compiler 
+						 also squashes a compiler warning [Matthew Love]
+
 2009-09-06  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/fdo-menu.jl: Partial rewrite of fdo-menu [Matthew Love]
 

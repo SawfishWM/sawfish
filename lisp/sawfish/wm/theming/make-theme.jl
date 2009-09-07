@@ -35,10 +35,9 @@
   (define (make-frames patterns-alist frame-alist)
     (let ((image-cache '()))
       
-      (define (make-image file)
+      (define (make-image-possibly-from-cache file)
 	(or (cdr (assoc file image-cache))
-	    (let
-		((img (gaol-eval `(make-image ',file))))
+	    (let ((img (gaol-eval `(make-image ',file))))
 	      (setq image-cache (cons (cons file img) image-cache))
 	      img)))
 
@@ -50,7 +49,7 @@
 			   (setq value (get-color value)))
 			  ((and (consp value) (stringp (car value)))
 			   (let
-			       ((img (make-image (car value))))
+			       ((img (make-image-possibly-from-cache (car value))))
 			     (when img
 			       (mapc (lambda (attr)
 				       (cond
