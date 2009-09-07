@@ -42,12 +42,13 @@
     (when menu
       (nconc menu `(()
 		    (,(_ "_KDE Help") (system "khelpcenter &"))
-		    (,(_ "KDE Website") (browser "http://www.kde.org")))))))
+		    (,(_ "KDE Website") (browser "http://www.kde.org"))))))
 		    ;(,(_ "About KDE") (system "false &"))))))
 
-  ;; add kde-logout menu item
-  ;(let ((menu (assoc (_ "Sessi_on") root-menu)))
-  ;  (when menu
-  ;    (nconc menu `(()
-  ;                 (,(_ "_Logout from KDE") (system "false &"))
-  ;		   (,(_ "_Shutdown from KDE") (system "false &")))))))
+  ; add kde-logout menu item
+  (let ((menu (assoc (_ "Sessi_on") root-menu)))
+    (when menu
+      (nconc menu `(()
+                   (,(_ "_Logout from KDE") (system "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 0 -1 &"))
+  		   (,(_ "_Reboot from KDE") (system "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 2 -1 &"))
+		   (,(_ "_Shutdown from KDE") (system "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 2 -1 &")))))))
