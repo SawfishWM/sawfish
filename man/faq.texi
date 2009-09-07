@@ -17,7 +17,7 @@
 Either execute the command @samp{info sawfish}, or enter the Info mode
 within Emacs (@kbd{C-h i}) and type @kbd{g (sawfish) RET}.
 
-If you're using Gnome, then try executing @samp{gnome-help-browser
+If you're using GNOME, then try executing @samp{gnome-help-browser
 info:sawfish}.
 
 @item I installed Sawfish but it's not working!  All I see when I
@@ -32,7 +32,7 @@ Why this is so? Because Sawfish is minimal - Sawfish is a @emph{window
 manager} and as such is not responsible for setting the background,
 starting programs or displaying a pager --- these can all be done
 using separate applications (e.g. by using a desktop environment such
-as Gnome).
+as GNOME).
 
 @item How do I customize Sawfish?
 
@@ -51,8 +51,8 @@ This is a system default lisp library. It loads some of the common
 window manager features. More precisely, it currently does:
 
 @itemize
-@item Gnome setup, by opening @code{sawfish.wm.integration.gnome},
-if Gnome is running.
+@item GNOME setup, by opening @code{sawfish.wm.integration.gnome},
+if GNOME is running.
 @item Error handling enhancements, by opening 
 @code{sawfish.wm.ext.error-handler} 
 @end itemize
@@ -195,7 +195,7 @@ functionality as Lisp extensions
 @item Will you add background setting?
 
 No. This can easily be done by a separate application (e.g. with the
-Gnome hints, simply monitor property @code{_WIN_WORKSPACE} on the root
+GNOME hints, simply monitor property @code{_WIN_WORKSPACE} on the root
 window).
 
 @item Why does Sawfish look weird/crash on Solaris?
@@ -229,7 +229,7 @@ WM_HINTS(WM_HINTS):
 @end example
 
 
-@item Why doesn't the Gnome desk-guide / tasklist show the true state
+@item Why doesn't the GNOME desk-guide / tasklist show the true state
 of my desktop?
 
 It seems that there is a problem with these applets that only occurs
