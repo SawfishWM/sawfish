@@ -536,7 +536,7 @@ unmaximized."
     "Fullscreen maximize the window across all Xinerama screens."
     (cond ((and state (not (window-maximized-fullscreen-p w)))
 	   (when (window-maximizable-p w)
-	     ( let ((screen-dims (screen-dimensions w)))
+	     (let ((screen-dims (screen-dimensions)))
 	       (save-unmaximized-geometry w)
 	       (window-put w 'unmaximized-type (window-type w))
 	       (push-window-type w 'unframed 'sawfish.wm.state.maximize)
