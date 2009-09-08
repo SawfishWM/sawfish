@@ -62,12 +62,12 @@
 
   (defgroup messages "Messages" :group misc)
 
-(defcustom prompt-font default-font
-  "Font for prompt: \\w"
-  :type font
-  :group (misc messages))
+  (defcustom prompt-font default-font
+    "Font for prompt: \\w"
+    :type font
+    :group (misc messages))
 
-(defcustom prompt-color (cons (get-color "black") (get-color "white"))
+  (defcustom prompt-color (cons (get-color "black") (get-color "white"))
     "Prompt message's colors."
     :type (pair (labelled "Foreground:" color) (labelled "Background:" color))
     :group (misc messages))
@@ -107,10 +107,10 @@ displayed. See the `display-message' function for more details.")
 
   (defvar prompt-result nil)
   (defvar prompt-prompt nil)
-  (defvar prompt-completion-fun nil)
-  (defvar prompt-validation-fun nil)
-  (defvar prompt-abbrev-fun nil)
-  (defvar prompt-display-fun nil)
+  (defvar prompt-completion-fun (lambda (#!rest) nil))
+  (defvar prompt-validation-fun (lambda (#!rest) nil))
+  (defvar prompt-abbrev-fun (lambda (#!rest) nil))
+  (defvar prompt-display-fun (lambda (#!rest) nil))
   (defvar prompt-position 0)
   (defvar prompt-completion-position nil)
   (defvar prompt-completions nil)
@@ -118,7 +118,6 @@ displayed. See the `display-message' function for more details.")
   (defvar prompt-history-pos nil)
   (defvar prompt-saved nil)
   (defvar prompt-attr nil)
-
 
 ;; From merlin
 ;; But maybe better if we'd include this util?
@@ -143,7 +142,7 @@ displayed. See the `display-message' function for more details.")
 
   (defun prompt-accept ()
     "End input and accept current string."
-    (let ((result (if (not prompt-validation-fun)
+    (let ((result (if (not (prompt-validation-fun prompt-result))
 		      prompt-result
 		    (prompt-validation-fun prompt-result))))
       (if result
@@ -260,7 +259,7 @@ displayed. See the `display-message' function for more details.")
 		(if (= new prompt-completion-position)
 		    0
 		  new)))
-      (when prompt-completion-fun
+      (when (prompt-completion-fun prompt-result)
 	(let
 	    (compl)
 	  (setq prompt-completions (prompt-completion-fun prompt-result))
@@ -289,14 +288,14 @@ displayed. See the `display-message' function for more details.")
 	(concat (and (/= prompt-completion-position 0) "[...]\n")
 		(apply concat (mapcar (lambda (x)
 					(format nil "%s\n"
-						(if prompt-abbrev-fun
+						(if (prompt-abbrev-fun x)
 						    (prompt-abbrev-fun x)
 						  x)))
 				      compl))
 		continued))))
 
   (defun prompt-update-display ()
-    (let ((result (if prompt-display-fun
+    (let ((result (if (prompt-display-fun prompt-result)
 		      (prompt-display-fun prompt-result)
 		   prompt-result))
 	 (completions (prompt-format-completions)))
@@ -356,17 +355,17 @@ displayed. See the `display-message' function for more details.")
 	 (display-message nil)))))
 
   (defun prompt-for-symbol (#!optional title predicate validator)
-    (let ((prompt-completion-fun 
-	   (lambda (x)
-	     (mapcar symbol-name
-		     (apropos (concat ?^ (quote-regexp x)) predicate))))
-	  (prompt-validation-fun
-	   (lambda (x)
-	     (let
-		 ((symbol (intern x)))
-	       (if validator
-		   (and (validator symbol) symbol)
-		 symbol)))))
+    (let ((prompt-completion-fun
+	      (lambda (x)
+		(mapcar symbol-name
+			(apropos (concat ?^ (quote-regexp x)) predicate))))
+	     (prompt-validation-fun
+	      (lambda (x)
+		(let
+		    ((symbol (intern x)))
+		  (if validator
+		      (and (validator symbol) symbol)
+		    symbol)))))
       (prompt title)))
 
   (defun prompt-for-function (#!optional title)
