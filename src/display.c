@@ -55,8 +55,8 @@ int preferred_depth;
 
 /* some atoms that may be useful.. */
 Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
-  xa_wm_colormap_windows, xa_wm_take_focus, xa_compound_text,
-  xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string;
+    xa_wm_colormap_windows, xa_wm_take_focus, xa_compound_text,
+    xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string, xa_manager, xa_wm_sn;
 
 DEFSYM(display_name, "display-name");
 DEFSYM(canonical_display_name, "canonical-display-name");
@@ -109,6 +109,14 @@ static int
 error_other_wm (Display *dpy, XErrorEvent *ev)
 {
     fputs ("You may only run one window manager\n", stderr);
+    exit (1);
+}
+
+
+static void
+replace_race_error
+{
+    fputs ("It is getting kind of crowded here.\n", strerr);
     exit (1);
 }
 
@@ -279,6 +287,57 @@ choose_visual (void)
     }
 }
 
+
+/* Acquire the manager selection, replacing its previous owner if any. */
+static void
+acquire_manager_selection(Window sel_owner)
+{
+    Time time = get_server_timestamp();
+    XClientMessageEvent cm;
+    if (sel_owner != None)
+    {
+        Window sel2;
+        XSelectInput (dpy, sel_owner, StructureNotifyMask);
+        sel2 = XGetSelectionOwner (dpy, xa_wm_sn);
+        if (sel2 == None)
+        {
+            /* Gone already! */
+            XSelectInput (dpy, sel_owner, 0);
+            sel_owner = None;
+        }
+        else if (sel2 != sel_owner)
+            /* Somebody else has taken over, so we quit. */
+            replace_race_error ();
+    }
+    XSetSelectionOwner (dpy, xa_wm_sn, no_focus_window, time);
+    if (XGetSelectionOwner (dpy, xa_wm_sn) != no_focus_window)
+    {
+        fputs ("Could not acquire manager selection.\n", strerr);
+        exit (1);
+    }
+    if (sel_owner != None)
+    {
+        fputs ("Waiting for the previous manager to go away.\n", strerr);
+        for (;;)
+        {
+            XEvent ev;
+            XWindowEvent (dpy,  sel_owner, StructureNotifyMask,
+                          &ev);
+            if (ev.type == DestroyNotify
+                && ev.xdestroywindow.window == sel_owner)
+                break;
+            fputs ("Wrong event!  Still waiting.\n", strerr);
+        }
+    }
+    cm.message_type = xa_manager;
+    cm.format = 32;
+    cm.data.l[0] = time;
+    cm.data.l[1] = xa_wm_sn;
+    cm.data.l[2] = no_focus_window;
+    XSendEvent (dpy, root_window, False, StructureNotifyMask, &cm);
+}
+
+
 /* Called from main(). */
 bool
 sys_init(char *program_name)
@@ -315,6 +374,7 @@ sys_init(char *program_name)
 	dpy = XOpenDisplay(display_name);
 	if(dpy != 0)
 	{
+            Window sel_owner;
 	    Fset (Qdisplay_name, rep_string_dup (display_name));
 	    Fset (Qcanonical_display_name,
 		  rep_string_dup (canonical_display (display_name)));
@@ -325,37 +385,49 @@ sys_init(char *program_name)
 	    screen_height = DisplayHeight(dpy, screen_num);
 	    choose_visual ();
 
+            {
+                char buf[50];
+                snprintf (buf, sizeof buf, "WM_S%d", screen_num);
+                xa_wm_sn = XInternAtom (dpy, buf, False);
+            }
 	    xa_wm_state = XInternAtom (dpy, "WM_STATE", False);
 	    xa_wm_change_state = XInternAtom (dpy, "WM_CHANGE_STATE", False);
 	    xa_wm_protocols = XInternAtom (dpy, "WM_PROTOCOLS", False);
 	    xa_wm_delete_window = XInternAtom (dpy, "WM_DELETE_WINDOW", False);
-	    xa_wm_colormap_windows = XInternAtom (dpy, "WM_COLORMAP_WINDOWS", False);
+	    xa_wm_colormap_windows = XInternAtom (dpy, "WM_COLORMAP_WINDOWS",
+                                                  False);
 	    xa_wm_take_focus = XInternAtom (dpy, "WM_TAKE_FOCUS", False);
 	    xa_compound_text = XInternAtom (dpy, "COMPOUND_TEXT", False);
 	    xa_wm_net_name = XInternAtom (dpy, "_NET_WM_NAME", False);
-	    xa_wm_net_icon_name = XInternAtom (dpy, "_NET_WM_ICON_NAME", False);
+	    xa_wm_net_icon_name = XInternAtom (dpy, "_NET_WM_ICON_NAME",
+                                               False);
 	    xa_utf8_string = XInternAtom (dpy, "UTF8_STRING", False);
+            xa_manager = XInternAtom (dpy, "MANAGER", False);
+
+            sel_owner = XGetSelectionOwner (dpy, xa_wm_sn);
+            if (sel_owner != None && !rep_get_option ("--replace", 0))
+            {
+                fputs ("A window manager is already running but "
+                       "--replace was not given.\n", stderr);
+                exit (1);
+            }
 
 	    if (!XShapeQueryExtension (dpy, &shape_event_base,
 				       &shape_error_base))
 	    {
-		fprintf (stderr, "sawfish: your X server doesn't suppot the SHAPE extension; aborting\n");
+		fprintf (stderr, "sawfish: your X server doesn't support "
+                         "the SHAPE extension; aborting\n");
 		return FALSE;
 	    }
 
 	    /* Error handler is used to prevent from two Sawfish running.
 	     * (Not sure for other WMs.) */
-	    XSetErrorHandler (error_other_wm);
-	    XSelectInput (dpy, root_window, ROOT_EVENTS);
-	    XSync (dpy, False);
-	    XSetErrorHandler (error_handler);
-
 	    {
-		/* Create the mapped-but-invisible window that is given
-		   the focus when no other window has it. */
+                /* Create the mapped-but-invisible window that is given
+		   the focus when no other window has it.  The window
+                   is also used for selection manipulation. */
 		XSetWindowAttributes attr;
-		/* this value is assumed in events.c:get_server_timestamp */
-		attr.event_mask = KeyPressMask;
+		attr.event_mask = NO_FOCUS_EVENTS;
 		attr.override_redirect = True;
 		no_focus_window = XCreateWindow (dpy, root_window,
 						 -10, -10, 10, 10, 0, 0,
@@ -365,6 +437,13 @@ sys_init(char *program_name)
 						 &attr);
 		XMapWindow (dpy, no_focus_window);
 	    }
+
+            acquire_manager_selection (sel_owner);
+
+	    XSetErrorHandler (error_other_wm);
+	    XSelectInput (dpy, root_window, ROOT_EVENTS);
+	    XSync (dpy, False);
+	    XSetErrorHandler (error_handler);
 
 	    /* This should _never_ be used in Real Life; only for
 	       debugging. Sawfish tries to work out when the error

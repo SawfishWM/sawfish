@@ -92,6 +92,9 @@ typedef int bool;
 #define POINTER_GRAB_EVENTS (ButtonPressMask | ButtonReleaseMask \
 			     | PointerMotionMask | PointerMotionHintMask)
 
+/* Events selected on the invisible no_focus_window */
+#define NO_FOCUS_EVENTS (KeyPressMask | StructureNotifyMask)
+
 /* Type defs */
 
 /* A managed window */
