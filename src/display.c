@@ -58,6 +58,9 @@ Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
     xa_wm_colormap_windows, xa_wm_take_focus, xa_compound_text,
     xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string, xa_manager, xa_wm_sn;
 
+/* Time when the manager selection was acquired. */
+Time startup_time;
+
 DEFSYM(display_name, "display-name");
 DEFSYM(canonical_display_name, "canonical-display-name");
 
@@ -292,7 +295,7 @@ choose_visual (void)
 static void
 acquire_manager_selection(Window sel_owner)
 {
-    Time time = get_server_timestamp();
+    startup_time = get_server_timestamp();
     XClientMessageEvent cm;
     if (sel_owner != None)
     {
@@ -318,6 +321,7 @@ acquire_manager_selection(Window sel_owner)
     if (sel_owner != None)
     {
         fputs ("Waiting for the previous manager to go away.\n", strerr);
+        /* This may hang. */
         for (;;)
         {
             XEvent ev;
