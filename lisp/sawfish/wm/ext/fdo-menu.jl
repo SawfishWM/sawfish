@@ -1,10 +1,23 @@
 ;-*-sawfish-*-
-;; (fdo-menu.jl (v1.0.0) --- sawfish wm menu generation -- librep)
+;; (fdo-menu.jl (v1.0.1) sawfish-wm-menu-generation librep)
 
 ;; (c) 2009 Matthew Love
-;; Christopher Bratusek
 
-;; This file will be part of Sawfish
+;; This file is part of sawfish.
+
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;;; Description:
 ;;
@@ -267,15 +280,14 @@
 
     ;; Update the menu
     (define (update-saw-menu)
-      (interactive)
       (unless (not use-fdo-menu)
 	(setq *loc-menu* nil)
-	(defvar desk-files (flatten (map-dir-files desktop-directory)))
-	(mapc (lambda (x)
-		(setq *loc-menu* (append *loc-menu* (list (generate-menu-entry x))))) desk-files)
-	(if want-alphabetize
-	    (setq apps-menu (alphabetize-entries (fix-cats menu-cat-alist)))
-	  (setq apps-menu (fix-cats menu-cat-alist)))))
+	(let ((desk-files (flatten (map-dir-files desktop-directory))))
+	  (mapc (lambda (x)
+		  (setq *loc-menu* (append *loc-menu* (list (generate-menu-entry x))))) desk-files)
+	  (if want-alphabetize
+	      (setq apps-menu (alphabetize-entries (fix-cats menu-cat-alist)))
+	    (setq apps-menu (fix-cats menu-cat-alist))))))
 
     (define-command 'update-saw-menu update-saw-menu)
 ))    
