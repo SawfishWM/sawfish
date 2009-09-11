@@ -361,6 +361,13 @@ if test $REP_MSGFMT = true; then
 fi
 AC_MSG_RESULT($LINGUAS)
 
+dnl install directory for sawfish-ksm.desktop
+KDEDIR="`kde4-config --path data | sed -e 's/.*://g'`"
+
+if test "x$KDEDIR" = x; then
+	KDEDIR="/usr/share/apps/"
+fi
+
 dnl Nonstandard exported symbols
 AC_SUBST(version)
 AC_SUBST(subversion)
@@ -372,6 +379,7 @@ AC_SUBST(install_sh)
 AC_SUBST(datarootdir)
 AC_SUBST(MAKEDEP)
 AC_SUBST(GNOMEDIR)
+AC_SUBST(KDEDIR)
 AC_SUBST(SUBDIRS)
 AC_SUBST(HAVE_X11)
 AC_SUBST(CPPFLAGS)

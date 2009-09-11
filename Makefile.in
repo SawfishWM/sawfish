@@ -59,7 +59,7 @@ install : all installdirs
 	done
 	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 	$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
-	$(INSTALL_DATA) $(top_srcdir)/sawfish-ksm.desktop $(DESTDIR)$(datadir)/apps/ksmserver/windowmanagers/sawfish.desktop
+	$(INSTALL_DATA) $(top_srcdir)/sawfish-ksm.desktop $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
@@ -68,7 +68,7 @@ installdirs : mkinstalldirs
 	  $(DESTDIR)$(datadir)/applications/ \
 	  $(DESTDIR)$(libdir)/pkgconfig/ \
 	  $(DESTDIR)$(datadir)/xsessions/ \
-	  $(DESTDIR)$(datadir)/apps/ksmserver/windowmanagers/
+	  $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/
 
 uninstall :
 	for dir in $(SUBDIRS); do \
@@ -79,7 +79,7 @@ uninstall :
 	rm -f $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
 	rm -f $(DESTDIR)$(datadir)/applications/sawfish.desktop
 	rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/sawfish-wm.desktop
-	rm -f $(DESTDIR)$(datadir)/apps/ksmserver/windowmanagers/sawfish.desktop
+	rm -f $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop
 
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
