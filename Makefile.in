@@ -46,7 +46,6 @@ install : all installdirs
 	for f in ./DOC*; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawfishexecdir); \
 	done
-	rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/Sawmill.desktop
 	$(INSTALL_DATA) $(srcdir)/sawfish.desktop \
 		$(DESTDIR)$(datadir)/applications/
 	$(INSTALL_DATA) $(srcdir)/sawfish-wm.desktop \
