@@ -23,13 +23,8 @@ they occurred between. For more detailed information see the
 @item User visible changes:
 @itemize @minus
 
-@item Sawfish now uses an implementation of the FDO (freedesktop.org) application menu,
-by default it overrides a possibly custom-set apps-menu from your resourcefile, to avoid that,
-place the following before your apps-menu config: 
-
-@code{(setq use-fod-menu nil)}
-
-and sawfishs root-menu will behave as expected by you.
+@item Sawfish now got an implementation of the FDO (freedesktop.org) application menu, it is
+beeing generated, if there's no customized apps-menu
 
 @item Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from this version on,
 sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
