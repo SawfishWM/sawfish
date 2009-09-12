@@ -81,7 +81,7 @@
   ;; display-message-with-timeout
   ;; like display-message, but it dissapears
   ;; after `timemout' seconds
-  (define (display-message-with-timeout message #!optional (timeout 1))
+  (define (display-message-with-timeout message timeout)
     (display-message message)
     (make-timer (lambda () (display-message nil)) timeout))
 
