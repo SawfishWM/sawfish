@@ -1,6 +1,6 @@
-#| xterm.jl -- command to launch an xterm
+#| user.jl -- command to launch an xterm/brower and more
 
-   $Id: xterm.jl,v 1.7 2002/04/21 22:25:12 jsh Exp $
+   $Id: user.jl,v 1.7 2002/04/21 22:25:12 jsh Exp $
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -92,6 +92,8 @@
       (file-exists-p (concat dir "/" cmd)))
       (string-split ":" (getenv "PATH"))))
 
+  ;; view-clipboard
+  ;; view the content of the primary x-clipboard
   (define (view-clipboard)
     "Show the contents of the clipboard in a message window"
     (let ((c (x-get-selection 'PRIMARY)))
