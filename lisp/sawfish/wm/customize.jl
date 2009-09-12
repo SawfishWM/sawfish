@@ -1,4 +1,4 @@
-;; customize.jl -- configuration user interface
+;; customize.jl -- invocation of configurator GUI & customization file IO
 ;; $Id: customize.jl,v 1.46 2000/11/29 00:54:47 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -36,10 +36,13 @@
   (define-structure-alias customize sawfish.wm.customize)
 
   (defvar customize-program "sawfish-ui"
-    "Location of the program implementing sawfish's configuration interface.")
+    "Command name of the configurator GUI.")
 
   (defvar customize-group-opt "--group")
 
+  (defvar customize-redirect ">/dev/null 2>&1 </dev/null"
+    "Redirect the configurator's input & output.")
+  
   (define customize-user-forms nil)
   (define customize-user-file-read nil)
   (define customize-user-file-dirty nil)
@@ -47,11 +50,12 @@
 ;;; ui
 
   (define (customize #!optional group)
-    "Invoke the user-customization system."
-    (system (format nil "%s %s '%S' >/dev/null 2>&1 </dev/null &"
+    "Invoke the configurator GUI."
+    (system (format nil "%s %s '%S' %s &"
 		    customize-program
 		    (if group customize-group-opt "")
-		    (or group ""))))
+		    (or group "")
+		    customize-redirect)))
 
   ;;###autoload
   (define-command 'customize customize)

@@ -26,9 +26,6 @@
 
 ;; window animation options
 
-;; sawfish-ui does use a treeview by default, if you prefer the
-;; notebook-style instead use: sawfish-ui --flatten
-
 ;;  (define-special-variable default-window-animator 'none
 ;;    "The default window animation mode. Options include none,
 ;;wireframe, solid, cross, elliptical and draft.")
@@ -43,11 +40,16 @@
 
 ;; customization options
 
+;;   From sawfish-1.5.0, sawfish-ui does use a treeview by default.
+;;   If you prefer the previous notebook-style instead use:
+;;   "sawfish-ui --flatten"
 ;;  (define-special-variable customize-program "sawfish-ui"
-;;    "Location of the program implementing sawfish's configuration
-;;interface.")
+;;    "Command name of the configurator GUI.")
 
 ;;  (define-special-variable customize-group-opt "--group")
+
+;;  (define-special-variable customize-redirect ">/dev/null 2>&1 </dev/null"
+;;    "Redirect the configurator's input & output.")
 
 ;;  (define-special-variable customize-show-symbols nil
 ;;    "Show variable names of each customization option.")
