@@ -1,3 +1,3 @@
-Motyw wzorowany na WindowMakerze; domy∂lnie uøywa obrazÛw z paska absolute-e,
-ale prawie wszystko moøna zmieniaÊ.
+Motyw wzorowany na WindowMakerze; domy≈õlnie u≈ºywa obraz√≥w z paska absolute-e,
+ale prawie wszystko mo≈ºna zmieniaƒá.
 

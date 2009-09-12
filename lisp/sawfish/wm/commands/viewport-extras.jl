@@ -2,7 +2,7 @@
 
    $Id$
 
-   Contributed by: Dams Nadé <anvil@amin.unice.fr>
+   Contributed by: Dams NadÃ© <anvil@amin.unice.fr>
 |#
 
 (define-structure sawfish.wm.commands.viewport-extras ()

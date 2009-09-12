@@ -55,7 +55,7 @@ your system, but the later doesn't
 
 @item Fixed issue with translated tooltip strings [Teika Kazura]
 
-@item Fixed a call of select-workspace-from-first [Michal Maruska]
+@item Fixed a call of select-workspace-from-first [Michal Maru≈°ka]
 
 @item In Sawfish-UI position parameters can be negative [Christopher Bratusek, Teika Kazura]
 
@@ -121,6 +121,8 @@ your system, but the later doesn't
 @item Make sure docks/panels are unframed [Timo Korvola]
 
 @item Make sure window-type of docks/panels is dock [Timo Korvola]
+
+@item Encoding is unified to utf-8 of all distributed files [Teika Kazura]
 
 @item Number widget can take optional initial value [Teika Kazura]
 
@@ -587,7 +589,7 @@ in the substitutions (John Harper)
 @item Implemented EMWH "show desktop" mode
 
 @item Set client window gravity to @code{StaticGravity} while
-reparenting windows (Michal Maruπka)
+reparenting windows (Michal Maru≈°ka)
 
 @item Support EWMH @code{SKIP_TASKBAR} state (Chris Boyle, me)
 
@@ -691,7 +693,7 @@ Removed many obscure options (most are still available as lisp
 variables, just not from the UI). Viewports are no longer available in
 the UI
 
-@item Updates to the @code{grow-pack} module (Kai Groﬂjohann, Daniel
+@item Updates to the @code{grow-pack} module (Kai Gro√üjohann, Daniel
 Pfeiffer)
 
 @item In matched windows, boolean options can be turned off as well as
@@ -709,7 +711,7 @@ on (me, merlin)
 
 @item Don't trigger a stacking-list assertion on logout
 
-@item Check for window-ness in window-visibility (Michal Maruπka)
+@item Check for window-ness in window-visibility (Michal Maru¬πka)
 
 @item Reread WM_WINDOW_PROTOCOLS when it changes
 
@@ -747,9 +749,9 @@ conflict with one another
 
 @itemize @bullet
 
-@item Translation updates: pt (Carlos PerellÛ MarÌn), it (Michele
+@item Translation updates: pt (Carlos Perell√≥ Mar√≠n), it (Michele
 Campeotto), pl (Zbigniew Chyla), zh_CN (Wang Jian), zh_TW (Abel
-Cheung), es (Eneko Lacunza), tr (÷mer Fad˝l USTA), sv (Gˆran Uddeborg,
+Cheung), es (Eneko Lacunza), tr (√ñmer Fad√Ωl USTA), sv (G√∂ran Uddeborg,
 Christian Rose), da (Ole Laursen), gl (Jesus Bravo Alvarez)
 
 @item Bug fixes:
@@ -792,9 +794,9 @@ compliance
 @item Requires @code{librep} 0.14 or newer
 
 @item Translation updates: ja (Sato Satoru), no (Kjartan Maraas), es
-(Carlos PerellÛ MarÌn), fi (Antti Ahvensalmi), cs (Jiri Cerny), fr
+(Carlos Perell√≥ Mar√≠n), fi (Antti Ahvensalmi), cs (Jiri Cerny), fr
 (Christian Marillat), de (Matthias Warkus, Christian Meyer), da (Ole
-Laursen), sk (Stanislav Visnovsky), tr (÷zg¸r), sv (Christian Rose,
+Laursen), sk (Stanislav Visnovsky), tr (√ñzg√ºr), sv (Christian Rose,
 Peter Winnberg), gl (Jesus Bravo Alvarez)
 
 @item Do i18n on more text strings (Vlad Harchev, me)
@@ -859,8 +861,8 @@ window's maximized state
 @itemize @bullet
 
 @item Translation updates: gl (Jesus Bravo Alvarez), sv (Martin
-Norb‰ck), de (Matthias Warkus, Christian Meyer), ru (Vlad Harchev), es
-(Joseba GarcÌa Etxebarria), pl (Daniel Koc), fi (Antti Ahvensalmi), sk
+Norb√§ck), de (Matthias Warkus, Christian Meyer), ru (Vlad Harchev), es
+(Joseba Garc√≠a Etxebarria), pl (Daniel Koc), fi (Antti Ahvensalmi), sk
 (Stanislav Visnovsky), az (Pablo Saratxaga), cz (Stanislav Brabec), no
 (Kjartan Maraas), el (Simos Xenitellis), it (Michele Campeotto), fr
 (Christian Marillat), ro (Marius Andreiana), ko (?)
@@ -871,7 +873,7 @@ Extract some more translatable strings (Vlad Harchev)
 like Mac OS Platinum but also has an iconify button. Used by default
 
 @item The @code{grow-pack} module now works with windows which specify
-increments (Kai Groﬂjohann)
+increments (Kai Gro√üjohann)
 
 @item New command @code{kill-client}
 
@@ -929,7 +931,7 @@ simultaneously
 progress
 
 @item Translation updates: ja (Sato Satoru), sk (Stanislav Visnovsky),
-es (IÒaki GarcÌa Etxebarria), hu (Robert Vanyi), tr (Fatih Demir), ro
+es (I√±aki Garc√≠a Etxebarria), hu (Robert Vanyi), tr (Fatih Demir), ro
 (Tutu Valentin), no (Kjartan Maraas), it (Michele Campeotto), pl
 (Daniel Koc)
 
@@ -1072,7 +1074,7 @@ they will have no visible parents afterwards
 message (with a similar format to the @code{_WIN_STATE} message)
 
 @item New module @code{sawfish.wm.commands.viewport-extras}, some
-commands for viewport for viewport navigation (Dams NadÈ)
+commands for viewport for viewport navigation (Dams Nad√©)
 
 @item Check for @code{never-iconify} and @code{never-maximize}
 window properties when appropriate
@@ -1132,13 +1134,13 @@ modifier is used for all standard window-manager key bindings, it may
 be set to any of the standard X modifiers using the configuration tool
 
 @item Optionally show window-icons when cycling through windows (Unai
-Uribarri RodrÌguez, me)
+Uribarri Rodr√≠guez, me)
 
 @item Event handlers for low-level X windows now get passed the window
-as their second argument (Unai Uribarri RodrÌguez)
+as their second argument (Unai Uribarri Rodr√≠guez)
 
 @item Translation updates: fr (Christian Marillat), sv (Richard Hult),
-pt_BR (Fl·vio Bruno Leitner), it (Michele Campeotto)
+pt_BR (Fl√°vio Bruno Leitner), it (Michele Campeotto)
 
 @item Error handler module (@code{sawfish.wm.ext.error-handler}). When
 loaded it records the most recent errors, and the time at which they
@@ -1317,8 +1319,8 @@ skip-winlist hint
 state
 
 @item Translation updates: uk (Yuri Syrota), pt_BR (Douglas Moura
-Ferreira), hu (RÛbert V·nyi), de (Christian Meyer), ja (SATO Satoru),
-da (Keld J¯rn Simonsen), es (IÒaki GarcÌa Etxebarria), fr (Christian
+Ferreira), hu (R√≥bert V√°nyi), de (Christian Meyer), ja (SATO Satoru),
+da (Keld J√∏rn Simonsen), es (I√±aki Garc√≠a Etxebarria), fr (Christian
 Marillat)
 
 @item Fixed bugs:
@@ -1477,10 +1479,10 @@ associate menu items to the `Help' menu
 @item New window property @code{cycle-skip}, defines whether the window
 is included when cycling the focused window. (Dave Dribin, me)
 
-@item Translation additions and updates: es (IÒaki GarcÌa Etxebarria),
+@item Translation additions and updates: es (I√±aki Garc√≠a Etxebarria),
 tr (Fatih Demir), zh_CN.GB2312 (zw@@zhaoway.com), fr (Christian
 Marillat), ja (SATO Satoru), de (Kai Lahmann), el (Simos Xenitellis),
-ga (Se·n ” Ceallaigh), ru (Valek Filippov), sl (Andraz Tori)
+ga (Se√°n √ì Ceallaigh), ru (Valek Filippov), sl (Andraz Tori)
 
 @item Bug fixes:
 
@@ -1661,7 +1663,7 @@ New commands @code{iconify-transient-group}, and
 but value is left unquoted
 
 @item Translation updates: pl (Daniel Koc), ru (Valek Filippov), uk
-(Yuri Syrota), es (IÒaki GarcÌa Etxebarria)
+(Yuri Syrota), es (I√±aki Garc√≠a Etxebarria)
 
 @item Fixed handling of @code{WM_NORMAL_HINTS} (was using base-size
 instead of min-size in places)
@@ -1754,7 +1756,7 @@ keys for transient windows)
 @code{old-window-menu} to get the original version). Also made this
 display the windows' class names
 
-@item Updated translations: es (IÒaki GarcÌa Etxebarria), tr (Fatih
+@item Updated translations: es (I√±aki Garc√≠a Etxebarria), tr (Fatih
 Demir)
 
 @end itemize
@@ -1839,7 +1841,7 @@ releasing Meta)
 @itemize @bullet
 
 @item Translation updates: da (Kenneth Christiansen), de (Karl
-Eichwalder), es (IÒaki GarcÌa Etxebarria), ja (SATO Satoru)
+Eichwalder), es (I√±aki Garc√≠a Etxebarria), ja (SATO Satoru)
 
 @item Attempt to destructure the language code when parsing GNOME
 desktop items (e.g. if @samp{LANG=de_DE} look for both @samp{de_DE} and
@@ -1886,7 +1888,7 @@ Added new command @code{raise-lower-group}
 
 @item New option @code{raise-groups-on-focus}
 
-@item Updated translations: de (Hubert Nachbaur), es (IÒaki GarcÌa
+@item Updated translations: de (Hubert Nachbaur), es (I√±aki Garc√≠a
 Etxebarria), gl (Jesus Bravo Alvarez), ko
 (Man-Yong Lee), tr (Fatih Demir)
 
@@ -2090,7 +2092,7 @@ milliseconds between button presses to count as @kbd{click2} or
 @item New option @code{edge-flip-only-when-moving} (Yaron M. Minsky)
 
 @item New window cycling commands @code{cycle-prefix},
-@code{cycle-class} (Kai Groﬂjohann); can now be bound to events with
+@code{cycle-class} (Kai Gro√üjohann); can now be bound to events with
 more than one modifier (Timo Korvola)
 
 @item New command @code{uniquify-window-name}; new property
@@ -2104,7 +2106,7 @@ more than one modifier (Timo Korvola)
 (the old method), @code{attraction} and @code{resistance}. (Merlin, me)
 
 @item New commands @code{grow-window-@{left,right,up,down@}} and
-@code{pack-window-@{left,right,up,down@}} (Kai Groﬂjohann)
+@code{pack-window-@{left,right,up,down@}} (Kai Gro√üjohann)
 
 @item Support the @code{WM_COLORMAP_WINDOWS} protocol
 
@@ -2123,7 +2125,7 @@ displayed in the bindings widget
 @item When applicable, load the GNOME applications menu when the wm is
 first idle, reduces the latency of displaying the first root menu
 
-@item Translation updates: de (Hubert Nachbaur), es (IÒaki GarcÌa
+@item Translation updates: de (Hubert Nachbaur), es (I√±aki Garc√≠a
 Etxebarria), ja (Sato Satoru), sv (Andreas Persenius)
 
 @item Fix bug of not noticing when the keyboard / pointer / modifier
@@ -2203,7 +2205,7 @@ are now aligned into columns (if you use a monospaced font for them)
 
 @item New option @code{move-resize-inhibit-configure}
 
-@item Translation updates: es (IÒaki GarcÌa Etxebarria), fr (Christian
+@item Translation updates: es (I√±aki Garc√≠a Etxebarria), fr (Christian
 Gillot), gl (Jesus Bravo Alvarez), nl (Han-Wen Nienhuys), pt_PT (Rui
 Silva), sv (Andreas Persenius)
 
@@ -2264,7 +2266,7 @@ error handler (and allows the much-maligned beep to be turned off),
 requires rep 0.11+
 
 @item Allow the pointer-warp position to be defined relative to the
-window (Kai Groﬂjohann)
+window (Kai Gro√üjohann)
 
 @item New module @code{shade-hover}, unshades windows while the pointer
 is over them
@@ -2284,9 +2286,9 @@ shorten sticky entries as usual (James Antill)
 mouse pointer; these commands are bound to the cursor keys when moving
 or resizing windows
 
-@item Translation updates: es (IÒaki GarcÌa Etxebarria), fr (Fabien
+@item Translation updates: es (I√±aki Garc√≠a Etxebarria), fr (Fabien
 Ninoles), gl (Jesus Bravo Alvarez), ja (Satoru Sato), nl (Jan
-Nieuwenhuizen), tr (F‚tih Demir)
+Nieuwenhuizen), tr (F√¢tih Demir)
 
 @item Fix bug of leaving window-name unset when @code{WM_NAME} is a
 null text property
@@ -2348,8 +2350,8 @@ the window matcher when GNOME support is enabled (Ben Liblit)
 @item Integrated patch supporting multi-byte languages from the Kondara
 MNU/Linux distribution (forwarded by Yukihiro Nakai)
 
-@item Translation updates: de (Christoph Rauch), es (IÒaki GarcÌa
-Etxebarria), gl (Jesus Bravo Alvarez), ja (Satoru Sato), tr (F‚tih
+@item Translation updates: de (Christoph Rauch), es (I√±aki Garc√≠a
+Etxebarria), gl (Jesus Bravo Alvarez), ja (Satoru Sato), tr (F√¢tih
 Demir)
 
 @item Use a combo box in the configurator to display the list of
@@ -2414,8 +2416,8 @@ GNOME is around, sets up some GNOME'ish things
 
 @item New command @code{toggle-single-window-mode}
 
-@item Translation updates/additions: de (Christoph Rauch), es (IÒaki
-GarcÌa Etxebarria), nl (Han-Wen Nienhuys)
+@item Translation updates/additions: de (Christoph Rauch), es (I√±aki
+Garc√≠a Etxebarria), nl (Han-Wen Nienhuys)
 
 @item Optional removal of tooltips after time period (Morgan Schweers)
 
@@ -2465,7 +2467,7 @@ show null keymaps)
 the window in a group on its own
 
 @item Translation additions/updates: da (Wandy Christiansen), en_GB
-(me), es (IÒaki GarcÌa Etxebarria), fr (Christian Gillot), gl (Jesus
+(me), es (I√±aki Garc√≠a Etxebarria), fr (Christian Gillot), gl (Jesus
 Bravo Alvarez)
 
 @item Fixed bug of not refocusing unshaded windows
@@ -2530,7 +2532,7 @@ Alvarez); Danish (Birger Langkjer)
 @item Fixed typo when looking for i18n theme README files (Jesus Bravo
 Alvarez)
 
-@item Fixed @code{popup-apps-menu} command (GÈrard Milmeister)
+@item Fixed @code{popup-apps-menu} command (G√©rard Milmeister)
 
 @item Fixed @code{define-frame-class} when creating keymaps
 
@@ -2605,7 +2607,7 @@ application that has grabbed the keyboard
 @item Fixed (again) the problems when handling remapped windows; also
 should be more ICCCM-compliant
 
-@item Fixed typos in one-dimensional maximisation (GÈrard Milmeister)
+@item Fixed typos in one-dimensional maximisation (G√©rard Milmeister)
 
 @item Fixed the logic deciding when it's necessary to switch workspaces
 after merging an empty one

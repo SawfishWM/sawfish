@@ -1,2 +1,2 @@
-Próba na¶ladowania bie¿±cego motywu GTK (z przyciskami wzorowanymi na
-Afterstepie). Wystrój okna definiuj± kolory i piksmapy domy¶lnego stylu GTK.
+PrÃ³ba naÅ›ladowania bieÅ¼Ä…cego motywu GTK (z przyciskami wzorowanymi na
+Afterstepie). WystrÃ³j okna definiujÄ… kolory i piksmapy domyÅ›lnego stylu GTK.

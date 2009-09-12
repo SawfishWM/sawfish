@@ -1,2 +1,2 @@
-Obrazy stworzone przez tigerta, pochodz±ce z Enlightenment 0.15,
-odpowiadaj± motywowi GTK o tej samej nazwie
+Obrazy stworzone przez tigerta, pochodzÄ…ce z Enlightenment 0.15,
+odpowiadajÄ… motywowi GTK o tej samej nazwie

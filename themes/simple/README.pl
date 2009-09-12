@@ -1,2 +1,2 @@
 Kolejny motyw wzorowany na Afterstepie, bardzo prosty -- tylko dwa
-kolory (które mo¿na wybieraæ).
+kolory (ktÃ³re moÅ¼na wybieraÄ‡).

@@ -1,5 +1,5 @@
 Ten motyw bazuje na QNX Photon microGUI (zrzuty ekranowe pod
-adresem http://www.qnx.com/amiga/delivering.html). Wiele elementów
-zaczerpniêto z motywu minEguE Enlightenment autorstwa Bena
-FrantzDale (frantb@rpi.edu). Pozosta³e pochodz± od Ryana
+adresem http://www.qnx.com/amiga/delivering.html). Wiele elementÃ³w
+zaczerpniÄ™to z motywu minEguE Enlightenment autorstwa Bena
+FrantzDale (frantb@rpi.edu). PozostaÅ‚e pochodzÄ… od Ryana
 Lovetta (ryan@ocf.berkeley.edu) z modyfikacjami Johna Harpera.

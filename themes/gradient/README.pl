@@ -1,1 +1,1 @@
-Wzorowane na Afterstepie, wszystkie gradienty kolorów s± ustawialne.
+Wzorowane na Afterstepie, wszystkie gradienty kolorÃ³w sÄ… ustawialne.
