@@ -124,6 +124,8 @@ your system, but the later doesn't
 
 @item Encoding is unified to utf-8 of all distributed files [Teika Kazura]
 
+@item You can exit from sawfish-client with @code{,quit} (also @code{C-d}), unlike @code{C-c} it won't kill the WM [Teika Kazura]
+
 @item Number widget can take optional initial value [Teika Kazura]
 
 @item Sawfish does now appear in KDE4s WM Selector [Christopher Bratusek]
@@ -254,7 +256,7 @@ In lisp, replaced hardcoded focus logic by @code{focus-revert}
 function. Previously, action when the focused transient window is
 unmapped was not handled by focus modes, but coded elsewhere. Now
 @code{focus-revert} event is invoked, and passed to focus modes. (For
-detail, @pxref{Input Focus}.) This makes the modes' policy clear, and
+detail, Input Focus.) This makes the modes' policy clear, and
 programmable.
 
 @item cursor warp enhancements. [Christopher Bratusek]
