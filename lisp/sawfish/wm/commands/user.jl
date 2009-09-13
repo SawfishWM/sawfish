@@ -28,7 +28,8 @@
 	    some
 	    display-message-with-timeout
 	    program-available
-	    view-clipboard)
+	    view-clipboard
+	    display-workspace-name)
 
     (open rep
 	  rep.system
@@ -38,6 +39,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.commands
+	  sawfish.wm.workspace
 	  sawfish.wm.util.selection)
 
   (defgroup apps "Default Applications" :group misc)
@@ -68,9 +70,6 @@
       (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
                       browser-program website))))
 
-  (defvar clipboard-preview-clip-length 60)
-  (defvar clipboard-preview-timeout 5)
-
   ;; some
   ;; XXX description
   (define (some pred lst)
@@ -92,6 +91,16 @@
       (file-exists-p (concat dir "/" cmd)))
       (string-split ":" (getenv "PATH"))))
 
+  (defcustom clipboard-preview-clip-length 60
+    "Maximum length of Clipboard Preview"
+    :type number
+    :group misc)
+
+  (defcustom clipboard-preview-timeout 5
+    "How long to display Clipboard Preview"
+    :type number
+    :group misc)
+
   ;; view-clipboard
   ;; view the content of the primary x-clipboard
   (define (view-clipboard)
@@ -103,7 +112,33 @@
         (display-message-with-timeout (format nil "%s ..."
           (substring c 0 clipboard-preview-clip-length)) clipboard-preview-timeout)))))
 
+  (defcustom display-ws-name-on-switch nil
+    "Wether to display workspace name upon switch"
+    :type boolean
+    :group workspace
+    :after-set (lambda () (display-ws-name-setter)))
+
+  (defcustom display-ws-name-timeout 3
+    "How long to display workspace name"
+    :type number
+    :group workspace)
+
+  ;; display-workspace-name
+  ;; display WS name on switch
+  (define (display-workspace-name)
+    (display-message-with-timeout
+       (format nil "Entered Workspace: %s"
+         (or (nth current-workspace workspace-names)
+           (format nil (_ "Workspace %d") (1+ current-workspace))))
+             display-ws-name-timeout))
+
+  (define (display-ws-name-setter)
+    (if (eq display-ws-name-on-switch 't)
+      (add-hook 'enter-workspace-hook display-workspace-name)
+      (remove-hook 'enter-workspace-hook display-workspace-name)))
+
   ;;###autoload
   (define-command 'xterm xterm #:class 'default)
   (define-command 'browser browser #:class 'default)
-  (define-command 'view-clipboard view-clipboard #:class 'default))
+  (define-command 'view-clipboard view-clipboard #:class 'default)
+  (define-command 'display-workspace-name display-workspace-name #:class 'default))

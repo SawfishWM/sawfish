@@ -23,7 +23,7 @@
 
 (define-structure sawfish.wm.tabs.tab
 
-	(export tab-add-to-group )
+	(export tab-add-to-group)
 
 	(open rep
 	      rep.system
@@ -64,7 +64,7 @@
     :group tabs
     :type number)
 
-  (defcustom tab-raise-on-hover nil 
+  (defcustom tab-raise-on-hover nil
     "Raise Tabs on Hover"
     :group tabs
     :type boolean
