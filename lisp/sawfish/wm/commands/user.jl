@@ -127,7 +127,7 @@
   ;; display WS name on switch
   (define (display-workspace-name)
     (display-message-with-timeout
-       (format nil "Entered Workspace: %s"
+       (format nil "Now on Workspace: %s"
          (or (nth current-workspace workspace-names)
            (format nil (_ "Workspace %d") (1+ current-workspace))))
              display-ws-name-timeout))
