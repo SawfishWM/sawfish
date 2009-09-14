@@ -490,13 +490,13 @@
          (lambda (pair)         ; pair of from and to keys
             (bind-keys keymap (car pair)
               (lambda () (interactive)
-                (synthesize-event (lookup-event (cadr pair)) (input-focus))))) value))))
+                (synthesize-event (lookup-event (cadr pair)) (current-event-window))))) value))))
 
   (define (rename-window window new-name)
     (set-x-text-property window 'WM_NAME (vector new-name)
     (set-x-text-property window '_NET_WM_NAME (vector new-name))))
 
   (define (rename-window-interactive w)
-    (rename-window w (prompt-for-string "new title:" (window-name w))))
+    (rename-window w (prompt-for-string "Enter new window-title:" (window-name w))))
 
   (define-command 'rename-window rename-window-interactive #:spec "%W"))
