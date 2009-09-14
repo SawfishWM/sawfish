@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-04 12:28+0200\n"
-"PO-Revision-Date: 2009-09-04 12:33+0200\n"
+"POT-Creation-Date: 2009-09-14 11:51+0200\n"
+"PO-Revision-Date: 2009-09-14 11:52+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -163,6 +163,12 @@ msgstr "Indizea:"
 msgid "Command:"
 msgstr "Komandoa:"
 
+#: ../lisp/sawfish/wm/commands/user.jl:132
+#: ../lisp/sawfish/wm/util/prompt-wm.jl:63
+#, librep-format
+msgid "Workspace %d"
+msgstr "%d laneko area"
+
 #: ../lisp/sawfish/wm/ext/audio-events.jl:76
 msgid "Event"
 msgstr "Gertaera"
@@ -171,7 +177,7 @@ msgstr "Gertaera"
 msgid "Audio file"
 msgstr "Audio-fitxategia"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:82
+#: ../lisp/sawfish/wm/ext/error-handler.jl:83
 msgid "No errors."
 msgstr "Errorerik ez."
 
@@ -259,7 +265,10 @@ msgid "About GNOME"
 msgstr "GNOMEri buruz"
 
 #. add gnome-logout menu item
-#: ../lisp/sawfish/wm/integration/gnome.jl:49 ../lisp/sawfish/wm/menus.jl:152
+#. (,(_ "About KDE") (system "false &"))))))
+#. add kde-logout menu item
+#: ../lisp/sawfish/wm/integration/gnome.jl:49
+#: ../lisp/sawfish/wm/integration/kde.jl:49 ../lisp/sawfish/wm/menus.jl:152
 msgid "Sessi_on"
 msgstr "_Saioa"
 
@@ -278,6 +287,18 @@ msgstr "_KDEren Laguntza"
 #: ../lisp/sawfish/wm/integration/kde.jl:45
 msgid "KDE Website"
 msgstr "KDEren webgunea"
+
+#: ../lisp/sawfish/wm/integration/kde.jl:52
+msgid "_Logout from KDE"
+msgstr "_Amaitu KDEko saioa"
+
+#: ../lisp/sawfish/wm/integration/kde.jl:53
+msgid "_Reboot from KDE"
+msgstr "_Berrabiarazi KDEtik"
+
+#: ../lisp/sawfish/wm/integration/kde.jl:54
+msgid "_Shutdown from KDE"
+msgstr "_Itzali KDEtik"
 
 #: ../lisp/sawfish/wm/menus.jl:88
 msgid "Mi_nimize"
@@ -542,11 +563,6 @@ msgstr "[Aipamena]"
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:51
 msgid "Window:"
 msgstr "Leihoa:"
-
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:63
-#, librep-format
-msgid "Workspace %d"
-msgstr "%d laneko area"
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:77 ../lisp/sawfish/wm/workspace.jl:889
 #: ../lisp/sawfish/wm/workspace.jl:897 ../lisp/sawfish/wm/workspace.jl:905
