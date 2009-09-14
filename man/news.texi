@@ -43,6 +43,10 @@ they occurred between. For more detailed information see the
 
 @heading 1.5.0
 
+The new release is Sawfish-1.5.0. We don't release 1.4 series for
+historical reason. The next will be 1.6, and 1.5.x are for bugfix
+branches.
+
 @itemize @bullet
 
 @item The 1.5.0 release has new features and bugfixes
@@ -100,47 +104,83 @@ To use the old style, put @code{(define-special-variable customize-program "sawf
 
 @item Fixup the last incomplete AC_DEFINE [Christopher Bratusek]
 
-@item Fixed a speed-issue with microGUI [Christopher Bratusek]
+@item Fixed a speed-issue with ``microGUI'' theme [Christopher Bratusek]
 
-@item Make properly use of WM_NAME in Elberg-tabbed [Christopher Bratusek]
+@item Make properly use of WM_NAME in ``Elberg-tabbed'' theme [Christopher Bratusek]
+
+@item UTF-8 Support in window menus [Wang Diancheng]
+
+@item UTF-8 Support in GTK Widgets [Christopher Bratusek]
 @end itemize
 
 @item New features:
 @itemize @minus
 
-@item UTF-8 Support in Windowmenus [Wang Diancheng]
+@item Tabbed Windowing Support [Yann Hodique, Scott Scriven, Nathan Froyd, Christopher Bratusek], Raise Tabs on hover [Christopher Bratusek]
 
-@item UTF-8 Support in GTK Widgets [Christopher Bratusek]
+Windows can be ``tabbed'', or multiple windows bound to one, sharing
+size and frames. It's still under development (sorry). For instructions,
+see our wiki site @url{http://sawfish.wikia.com/Tabs}.
 
-@item Tabbed Windowing Support [Yann Hodique, Scott Scriven, Nathan Froyd, Christopher Bratusek]
+@item Focus enhancements [Timo Korvola]
 
-@item Improved KDE3 Integration [Timo Korvola]
+Improvements in focus are done from which KDE users will benefit.
+Some new windows can receive focus. Some undesired focus transitions
+to desktop windows are suppressed.
 
-@item Replaced hardcoded focus logic by focus-revert function [Timo Korvola]
+In enter-exit and enter-only focus modes, enter-notify events caused
+by grab/ungrab are ignored. This has a bad side effect, too.
 
-@item Tabbed Windowing Support: Raise Tabs on hover [Christopher Bratusek]
+In lisp, replaced hardcoded focus logic by @code{focus-revert}
+function. Previously, action when the focused transient window is
+unmapped was not handled by focus modes, but coded elsewhere. Now
+@code{focus-revert} event is invoked, and passed to focus modes. (For
+detail, Input Focus.) This makes the modes' policy clear, and
+programmable.
 
-@item Warp cursor to cycled windows, if warp-cursor is enabled [Christopher Bratusek]
+@item cursor warp enhancements. [Christopher Bratusek]
 
-@item Warp cursor to unmaximied windows, if warp-cursor is enabled [Fernando Carmona Varo]
+During window cycling, cursor is warped to the current top window if
+@code{warp-to-window-enabled} and @code{cycle-raise-windows} are
+non-nil.
 
-@item 3 New Window-Animators: cross, elliptical and draft [Christopher Bratusek, Teika Kazura[draft fixups]]
+When the window gets unmaximized, the cursor is retained in that
+window when @code{warp-to-window-enabled} is non-nil.
+
+@item 3 New Window-Animators for moving and resizing: cross, elliptical and draft [Christopher Bratusek, Teika Kazura (draft fixups)]
 
 @item Shrinking/Yanking Support [Timo Korvola]
 
-@item Infinite Desktop Feature (make the virtual desktop bigger than the physical) [David T. McWherter]
+Shrink and yank are commands to reduce overlap with other windows ``by
+one'', with a motion in direction left/right/up/down. ``Shrink''
+commands move one edge of the window to shrink, and ``yank'' commands
+move the window.
 
-@item Make Viewport commands appear in Sawfish-UI [Christopher Bratusek]
+To use them, put @code{(require 'sawfish.wm.commands.shrink-yank)} in
+your configuration file, and use the configurator GUI to bind commands
+to keys.
 
-@item Make Window History appear in Sawfish-UI [Christopher Bratusek]
+@item ``Infinite Desktop'' Feature [David T. McWherter]
 
-@item Added cycle-among-groups(,-backwards) commands (cycle between the most recently used window of groups) [Fernando Carmano Varo]
+It makes the virtual desktop bigger than the screen, actually so big
+that there's no limit. You can scroll it with mouse continuously in
+natural manner.
+
+This is in contrast to the coventional viewport; it scrolls
+by a step of one screen size. Thus it may not work so well with
+viewports.
+
+To use it, put @code{(require 'sawfish.wm.ext.infinite-desktop)} in
+your configuration file, and use configurator GUI.
+
+@item In configurator GUI, viewport commands and history appear. Under matched-window, fixed-position, never-iconify, never-maximize are available. [Christopher Bratusek]
+
+@item Added cycle-among-groups(,-backwards) commands (cycle among the most recently used window of groups) [Fernando Carmano Varo]
 
 @item Interactive placement-mode now also for transients [Christopher Bratusek]
 
-@item Improved prompt.jl (allows changing font, fg and bg color) [Sergey I. Sharybi]
+@item Improved prompt.jl (allows changing font, fg and bg color) [Sergey I. Sharybin]
 
-@item Expose fixed-position, never-iconify, never-maximize in the Window-Matcher UI [Christopher Bratusek]
 @end itemize
 
 @item Other changes:
