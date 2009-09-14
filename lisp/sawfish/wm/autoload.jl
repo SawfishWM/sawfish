@@ -143,6 +143,7 @@
 (autoload-command 'xterm 'sawfish.wm.commands.user)
 (autoload-command 'browser 'sawfish.wm.commands.user)
 (autoload-command '3d-hack 'sawfish.wm.ext.3d-hack)
+(autoload-command 'rename-window 'sawfish.wm.ext.match-window)
 (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)
 (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
 (defgroup tooltips "Tooltips" :group appearance :require sawfish.wm.ext.tooltips)

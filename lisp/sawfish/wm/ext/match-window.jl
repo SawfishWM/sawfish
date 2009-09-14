@@ -46,7 +46,7 @@
 	    add-window-matcher
 	    remove-window-matcher
 	    match-window
-	    rename-window
+	    rename-window-func
 	    rename-window-interactive)
 
     (open rep
@@ -471,7 +471,7 @@
     (lambda (w prop value)
       (declare (unused prop))
       (when value
-        (rename-window w value))))
+        (rename-window-func w value))))
 
   (define-match-window-setter 'maximized
    (lambda (w prop value)
@@ -492,11 +492,12 @@
               (lambda () (interactive)
                 (synthesize-event (lookup-event (cadr pair)) (current-event-window))))) value))))
 
-  (define (rename-window window new-name)
-    (set-x-text-property window 'WM_NAME (vector new-name)
-    (set-x-text-property window '_NET_WM_NAME (vector new-name))))
+  (define (rename-window-func window new-name)
+    (set-x-text-property window 'WM_NAME (vector new-name))
+    (set-x-text-property window '_NET_WM_NAME (vector new-name)))
 
   (define (rename-window-interactive w)
-    (rename-window w (prompt-for-string "Enter new window-title:" (window-name w))))
+    (let ((new-name (prompt-for-string "Enter new window title:" (window-name w))))
+      (rename-window-func w new-name)))
 
   (define-command 'rename-window rename-window-interactive #:spec "%W"))
