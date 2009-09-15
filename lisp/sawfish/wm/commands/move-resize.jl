@@ -122,8 +122,8 @@
 			   (bottom-left-corner bottom left)
 			   (bottom-right-corner bottom right)))
 
-  (defvar move-cursor-shape (default-cursor))
-  (defvar resize-cursor-shape (default-cursor))
+  (defvar move-cursor-shape 'hand2)
+  (defvar resize-cursor-shape 'crosshair)
 
   ;; specials, should make these fluids (external users?)
   (defvar move-resize-window nil)
