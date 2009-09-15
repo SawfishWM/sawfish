@@ -28,14 +28,10 @@ VPATH=@srcdir@:@top_srcdir@
 SRCS = sawfish.texi news.texi faq.texi
 
 MAKEINFO = makeinfo
+MAKEINFOFLAGS =
 
-#MAKEINFOFLAGS = --no-validate
-MAKEINFOFLAGS = 
 
-TEXI2DVI = texi2dvi
-DVIPS = dvips
-
-all : sawfish.info ../NEWS ../USERDOC
+all : sawfish.info ../NEWS ../USERDOC ../FAQ
 
 ../USERDOC : user-doc.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../USERDOC
@@ -49,25 +45,23 @@ all : sawfish.info ../NEWS ../USERDOC
 sawfish.info : $(SRCS)
 	$(MAKEINFO) $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.info
 
-sawfish.dvi : $(SRCS)
-	$(TEXI2DVI) -I $(srcdir) $<
-
-sawfish.ps : sawfish.dvi
-	$(DVIPS) -f <sawfish.dvi >sawfish.ps
-
-man : sawfish.info sawfish.guide sawfish.doc sawfish.dvi sawfish.ps
-
 install : sawfish.info installdirs
 	for f in sawfish.info*; do \
  	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
 	done
 	-install-info --info-dir=$(DESTDIR)$(infodir) sawfish.info
+	for f in sawfish*.1; do \
+		gzip $$f; \
+		$(INSTALL_DATA) $$f.gz $(DESTDIR)/usr/share/man/man1/; \
+	done
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(infodir)
+	$(SHELL) $< $(DESTDIR)/usr/share/man/man1/
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*
+	rm -f $(DESTDIR)/usr/share/man/man1/sawfish*
 	-install-info --remove --info-dir=$(DESTDIR)$(infodir) sawfish.info
 
 clean :
