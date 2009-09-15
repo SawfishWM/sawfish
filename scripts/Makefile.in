@@ -29,7 +29,7 @@ VPATH=@srcdir@:@top_srcdir@
 LISP_SRCS := sawfish-menu.jl sawfish-client.jl sawfish-about.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
 
-REP_ENVIRON := $(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp
+REP_ENVIRON := $(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lisp
 
 SUBSTS := -e "s|__lispdir__|$(lispdir)|" \
 	  -e "s|__localedir__|$(localedir)|" \
