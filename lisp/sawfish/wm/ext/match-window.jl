@@ -494,7 +494,9 @@
 
   (define (rename-window-func window new-name)
     (set-x-text-property window 'WM_NAME (vector new-name))
-    (set-x-text-property window '_NET_WM_NAME (vector new-name)))
+    (set-x-text-property window '_NET_WM_NAME (vector new-name))
+    (set-x-text-property window 'WM_ICON_NAME (vector new-name))
+    (set-x-text-property window '_NET_WM_ICON_NAME (vector new-name)))
 
   (define (rename-window-interactive w)
     (let ((new-name (prompt-for-string "Enter new window title:" (window-name w))))
