@@ -37,7 +37,7 @@ all : sawfish.info ../NEWS ../USERDOC ../FAQ
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../USERDOC
 
 ../NEWS : news.texi
-	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../NEWS
+	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../NEWS
 
 ../FAQ : faq.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../FAQ
