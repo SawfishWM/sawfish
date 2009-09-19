@@ -860,7 +860,7 @@ Lisp properties bound to @var{window}.  Returns the value of the last
 
 @defun window-plist window
 Returns the property list of the window @var{window} which is of the form
-@code{(prop value prop value ...)}. 
+@code{(prop value prop value ...)}.
 
 Do not attempt to change properties by modifying the property list in place.
 Use window-put instead.
@@ -904,7 +904,7 @@ transient for window @var{ancestor}, false otherwise.
 Return the list of windows that window @var{child} is a transient
 for.  If @var{indirectly} is true, then return the list of all
 ancestors rather than parents.
-@end defun 
+@end defun
 
 @defun transient-children parent &optional indirectly
 Return the list of windows that are transients for window
@@ -1579,7 +1579,7 @@ pair is different.
 @deffn Function lower-window* window
 @deffnx Command lower-window window
 Lower @var{window} and possibly associated windows to the bottom of
-their stacking depths. 
+their stacking depths.
 @end deffn
 
 @deffn Function raise-window* window
@@ -1750,9 +1750,6 @@ Wait for the user to select a window with the mouse, then interactively
 resize that window.
 @end deffn
 
-The interactive move and resize behavior can be customized through the
-following variables:
-
 @deffn Command double-window-size window
 Double the size of @var{window}
 @end deffn
@@ -1760,6 +1757,14 @@ Double the size of @var{window}
 @deffn Command halve-window-size window
 Halve the size of @var{window}
 @end deffn
+
+@deffn Command move-window-center windows
+Place @var{window} in the middle of the screen
+(frame-size is respected while calculating position)
+@end deffn
+
+The interactive move and resize behavior can be customized through the
+following variables:
 
 @defvar move-outline-mode
 A symbol defining the visual method of interactively moving windows.
@@ -2183,10 +2188,10 @@ Return @code{t} when @var{window} is horizontally maximized.
 @end defun
 
 @menu
-* Basic Maximizations::         
+* Basic Maximizations::
 * Maximizing Without Overlap::
-* Maximizing Without Borders::  
-* Unmaximizing::                
+* Maximizing Without Borders::
+* Unmaximizing::
 @end menu
 
 @node Basic Maximizations, Maximizing Without Overlap, Maximizing Windows, Maximizing Windows
@@ -2258,7 +2263,7 @@ Return @code{t} if the @var{part} of @var{window} can be moved.
 @code{bottom-border}, @code{left-border}, @code{right-border},
 @code{top-left-corner}, @code{top-right-corner},
 @code{bottom-left-corner}, @code{bottom-right-corner}, or
-@code{title} 
+@code{title}
 @end defun
 
 @defvar maximize-raises
@@ -2276,7 +2281,7 @@ window's dimension will never shrink it.
 @subsection Maximizing Without Overlap
 
 It is possible to maximize a window where it gets only large enough
-not to overlap with other windows. 
+not to overlap with other windows.
 
 @defvar maximize-avoid-avoided
 When true (the default), maximized window does not cover avoided
@@ -2739,7 +2744,7 @@ using side-effects, rather than returning values.
 @defun window-group-menu &optional w
 Return a menu definition suitable for @code{popup-menu}.  This menu
 will allow the user to assign the window @var{w} into any group of a
-managed window, or into a brand new group.  The window's current group 
+managed window, or into a brand new group.  The window's current group
 is checked or otherwise marked.
 @end defun
 
@@ -2844,9 +2849,9 @@ macro must be used. This augments the variable with extra information
 for the GUI, including such things as its required data type.
 
 @menu
-* Defgroup and Defcustom::      
-* Customization Files::         
-* Customized Variable Status::  
+* Defgroup and Defcustom::
+* Customization Files::
+* Customized Variable Status::
 @end menu
 
 @node Defgroup and Defcustom, Customization Files, Customization, Customization
@@ -5031,7 +5036,7 @@ this, we mark them with metadata that the runtime system can query.
 @menu
 * Old-style Command Definition::  Emacs-Lisp style
 * New-style Command Definition::  Common-Lisp style
-* Interactive Calling Specification::  
+* Interactive Calling Specification::
 * Operations on Commands::	Accessors and the like
 * Invoking Commands::           call-commmand, command hooks
 * Default Commands::            Sawfish ships with a few commands
@@ -5496,7 +5501,7 @@ mouse pointer position, relative to the origin of the root window.
 
 If there is a mouse update current event, the position is read
 directly from that event.  Otherwise it is read from the server.  If
-@var{from-server} is non-nil then the position is read directly from 
+@var{from-server} is non-nil then the position is read directly from
 the server in any case.
 @end defun
 
@@ -6119,7 +6124,7 @@ Compare with @code{window-moved-hook} and @code{window-resized-hook}.
 @defvrx {Window Hook} after-resize-hook
 Called after completion of an interactive move or resize.  In addition
 to the window, the hook is called with a list of symbols indicating how
-the window was moved or resized: 
+the window was moved or resized:
 @code{horizontal} and @code{vertical} for movement,
 @code{right}, @code{left}, @code{bottom} and @code{top} for resizing.
 @end defvr
@@ -6546,7 +6551,7 @@ attribute names are @code{background} and @code{border-color}.
 @end defun
 
 @defun x-configure-window window attrs
-Reconfigure the window associated with @var{window}.  @var{Attrs} is 
+Reconfigure the window associated with @var{window}.  @var{Attrs} is
 an alist mapping attribute names to values.  Allowed attribute names
 are @code{x}, @code{y}, @code{width}, @code{height} and
 @code{border-width}.

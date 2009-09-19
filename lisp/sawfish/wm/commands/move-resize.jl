@@ -26,7 +26,8 @@
 	    move-selected-window
 	    resize-selected-window
 	    double-window-size
-	    halve-window-size)
+	    halve-window-size
+	    move-window-center)
 
     (open rep
 	  rep.system
@@ -561,7 +562,15 @@
       (when w
 	(resize-window-interactively w))))
 
+;; Move Window To Center
+
+  (define (move-window-center w)
+    (move-window-to w
+      (round (/ (- (screen-width) (car (window-frame-dimensions w))) 2))
+      (round (/ (- (screen-height) (cdr (window-frame-dimensions w))) 2))))
+
   ;;###autoload
+  (define-command 'move-window-center move-window-center #:spec "%W")
   (define-command 'move-window-interactively move-window-interactively #:spec "%W")
   (define-command 'resize-window-interactively resize-window-interactively #:spec "%W")
   (define-command 'move-selected-window move-selected-window)
