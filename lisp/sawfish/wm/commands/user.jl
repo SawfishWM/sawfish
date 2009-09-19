@@ -28,8 +28,7 @@
 	    some
 	    display-message-with-timeout
 	    program-available
-	    view-clipboard
-	    display-workspace-name)
+	    view-clipboard)
 
     (open rep
 	  rep.system
@@ -112,33 +111,7 @@
         (display-message-with-timeout (format nil "%s ..."
           (substring c 0 clipboard-preview-clip-length)) clipboard-preview-timeout)))))
 
-  (defcustom display-ws-name-on-switch nil
-    "Wether to display workspace name upon switch"
-    :type boolean
-    :group workspace
-    :after-set (lambda () (display-ws-name-setter)))
-
-  (defcustom display-ws-name-timeout 3
-    "How long to display workspace name"
-    :type number
-    :group workspace)
-
-  ;; display-workspace-name
-  ;; display WS name on switch
-  (define (display-workspace-name)
-    (display-message-with-timeout
-       (format nil "Now on Workspace: %s"
-         (or (nth current-workspace workspace-names)
-           (format nil (_ "Workspace %d") (1+ current-workspace))))
-             display-ws-name-timeout))
-
-  (define (display-ws-name-setter)
-    (if (eq display-ws-name-on-switch 't)
-      (add-hook 'enter-workspace-hook display-workspace-name)
-      (remove-hook 'enter-workspace-hook display-workspace-name)))
-
   ;;###autoload
   (define-command 'xterm xterm #:class 'default)
   (define-command 'browser browser #:class 'default)
-  (define-command 'view-clipboard view-clipboard #:class 'default)
-  (define-command 'display-workspace-name display-workspace-name #:class 'default))
+  (define-command 'view-clipboard view-clipboard #:class 'default))

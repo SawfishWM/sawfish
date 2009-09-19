@@ -102,6 +102,7 @@
 	    show-desktop
 	    hide-desktop
 	    showing-desktop-p
+	    display-workspace-name
 
 	    ;; XXX rename these..?
 	    ws-remove-window
@@ -115,7 +116,8 @@
 	  sawfish.wm.events
 	  sawfish.wm.commands
 	  sawfish.wm.custom
-	  sawfish.wm.session.init)
+	  sawfish.wm.session.init
+	  sawfish.wm.commands.user)
 
 ;;; Options and variables
 
@@ -185,7 +187,7 @@
   ;; property. `swapped-in' is a workspace id defining which of the
   ;; window's configurations is stored in the window itself (as if there
   ;; was no swapping). The `swapped' property is an alist associating
-  ;; workspace ids with an alist of swapped attributes 
+  ;; workspace ids with an alist of swapped attributes
 
   ;; this doesn't need to be called explicitly for every switch, just to
   ;; fork the data
@@ -950,6 +952,35 @@ last instance remaining, then delete the actual window."
     (setq first-interesting-workspace nil)
     (setq last-interesting-workspace nil)
     (call-hook 'workspace-state-change-hook))
+
+;;; Extras
+
+  (defcustom display-ws-name-on-switch nil
+    "Wether to display workspace name upon switch"
+    :type boolean
+    :group workspace
+    :after-set (lambda () (display-ws-name-setter)))
+
+  (defcustom display-ws-name-timeout 3
+    "How long to display workspace name"
+    :type number
+    :group workspace)
+
+  ;; display-workspace-name
+  ;; display WS name on switch
+  (define (display-workspace-name)
+    (display-message-with-timeout
+       (format nil "Now on Workspace: %s"
+         (or (nth current-workspace workspace-names)
+           (format nil (_ "Workspace %d") (1+ current-workspace))))
+             display-ws-name-timeout))
+
+  (define (display-ws-name-setter)
+    (if (eq display-ws-name-on-switch 't)
+      (add-hook 'enter-workspace-hook display-workspace-name)
+      (remove-hook 'enter-workspace-hook display-workspace-name)))
+
+  (define-command 'display-workspace-name display-workspace-name #:class 'default)
 
 ;;; Initialisation
 
