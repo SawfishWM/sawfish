@@ -78,13 +78,14 @@
 
   ;; display-message-with-timeout
   ;; like display-message, but it dissapears
-  ;; after `timemout' seconds
+  ;; after `timemout' seconds, displayed endlessly
+  ;; (like without timeout), if a negative value is given
   (define (display-message-with-timeout message timeout)
     (display-message message)
     (make-timer (lambda () (display-message nil)) timeout))
 
   ;; program-available
-  ;; return true, if program `cmd' is in path
+  ;; return true, if program `cmd' is in PATH
   (define (program-available cmd)
     (some (lambda (dir)
       (file-exists-p (concat dir "/" cmd)))
