@@ -1,0 +1,48 @@
+.TH "sawfish" "1" 
+.SH "NAME" 
+sawfish \(em Sawfish window manager. 
+.SH "SYNOPSIS" 
+.PP 
+\fBsawfish\fR [\fB\-\-display \fI[=DPY]\fR \fP]  [\fB\-\-multihead \fP]  [\fB\-\-visual \fI[=VISUAL]\fR \fP]  [\fB\-\-depth \fI[=DEPTH]\fR \fP]  [\fB\-\-disable-nls \fP]  [\fBFILE \fP]  [\fB\-\-batch \fP]  [\fB\-\-interp \fP]  [\fB-f, \-\-call \fIFUNCTION\fR \fP]  [\fB-l, \-\-load \fIFILE\fR \fP]  [\fB\-\-version \fP]  [\fB\-\-no-rc \fP]  [\fB-q, \-\-quit \fP]  
+.SH "DESCRIPTION" 
+.PP 
+Sawfish is a lisp-extensible window manager for X11. Its aim is to 
+allow all areas of window management (decoration, manipulation) to be 
+customized as far as is possible, yet still remain as fast or faster 
+than existing window managers. 
+.SH "OPTIONS" 
+.IP "\fB\-\-display=\fIDPY\fR\fP" 10 
+Connect to X display \fIDPY\fR. 
+.IP "\fB\-\-multihead\fP" 10 
+Fork a copy of sawfish for each screen. 
+.IP "\fB\-\-visual=\fIVISUAL\fR\fP" 10 
+Preferred \fIVISUAL\fR type. 
+.IP "\fB\-\-depth=\fIDEPTH\fR\fP" 10 
+Preferred color \fIDEPTH\fR. 
+.IP "\fB\-\-disable-nls\fP" 10 
+Disable internationalization of messages. 
+.IP "\fBFILE\fP 	" 10 
+Load the Lisp file \fIFILE\fR (from the 
+cwd if possible, implies \fI\-\-batch\fR mode). 
+.IP "\fB\-\-batch\fP 	" 10 
+Batch mode: process options and exit. 
+.IP "\fB\-\-interp\fP 	" 10 
+Interpreted mode: don't load compiled Lisp files. 
+.IP "\fB-f, \-\-call\fP 	  \fBFUNCTION\fP 	" 10 
+Call Lisp function \fIFUNCTION\fR. 
+.IP "\fB-l, \-\-load\fP 	  \fBFILE\fP 	" 10 
+Load the file of Lisp forms called \fIFUNCTION\fR. 
+.IP "\fB\-\-version\fP" 10 
+Print version details. 
+.IP "\fB\-\-no-rc\fP" 10 
+Don't load rc or site-init files. 
+.IP "\fB-q, \-\-quit-\fP" 10 
+Terminate the interpreter process. 
+.SH "SEE ALSO" 
+.PP 
+Sawfish is documented fully by \fIJohn Harper\fP       available via the \fBInfo\fP system. 
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Christian Marillat marillat@debian.org for 
+the \fBDebian GNU/Linux\fP system (but may be used by others). 
+.\" created by instant / docbook-to-man, Sat 02 Feb 2008, 23:15 

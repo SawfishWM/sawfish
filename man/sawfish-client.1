@@ -1,0 +1,35 @@
+.TH "sawfish-client" "1" 
+.SH "NAME" 
+sawfish-client \(em Evaluate arbitrary Lisp forms with sawfish. 
+.SH "SYNOPSIS" 
+.PP 
+\fBsawfish-client\fR [\fB \-\-display \fIX \fR\fP]  [\fB \-q \fP]  [\fB \-f \fIFUNCTION \fR\fP]  [\fB \-c \fICOMMAND \fR\fP]  [\fB \-r \fIFEATURE \fR\fP]  [\fB \-e \fIFORM \fR\fP]  [\fB \- \fP]  [\fB \-\- \fP]  
+.SH "DESCRIPTION" 
+.PP 
+This allows you to connect to a window manager process and 
+evaluate arbitrary Lisp forms. 
+.SH "OPTIONS" 
+.IP "\fB\-\-display\fP" 10 
+Connect to the window manager on display X 
+.IP "\fB-q\fP" 10 
+Be quiet (perform commands asynchronously) 
+.IP "\fB-f\fP 	  \fBFUNCTION\fP 	" 10 
+Call Lisp function \fIFUNCTION\fR on the server 
+.IP "\fB-c\fP 	  \fBCOMMAND\fP 	" 10 
+Call the interactive Lisp function \fICOMMAND\fR 
+.IP "\fB-r\fP 	  \fBFEATURE\fP 	" 10 
+Require the module called \fIFEATURE\fR 
+.IP "\fB-e\fP 	  \fBFORM\fP 	" 10 
+Evaluate Lisp form \fIFORM\fR on the server 
+.IP "\fB-\fP" 10 
+Read lines of input until \fIEOF\fR, evaluating each one as it is read 
+.IP "\fB\-\-\fP" 10 
+Read forms from standard input until \fIEOF\fR, evaluating the whole lot in one go (inside a progn) 
+.SH "SEE ALSO" 
+.PP 
+Sawfish are documented fully by \fIJohn Harper\fP       available via the \fBInfo\fP system . 
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Christian Marillat marillat@debian.org for 
+the \fBDebian GNU/Linux\fP system (but may be used by others). 
+.\" created by instant / docbook-to-man, Sat 02 Feb 2008, 23:15 
