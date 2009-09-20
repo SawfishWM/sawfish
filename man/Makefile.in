@@ -65,7 +65,7 @@ uninstall :
 	-install-info --remove --info-dir=$(DESTDIR)$(infodir) sawfish.info
 
 clean :
-	rm -f *~ sawfish.info* sawfish.?? sawfish.???
+	rm -f *~ sawfish.info* sawfish.?? sawfish.??? *1.gz
 
 distclean: realclean
 
