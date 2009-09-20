@@ -23,6 +23,12 @@
 
 (define-structure sawfish.gtk.widget-test
 
+ ;;;;; This is broken, it kills sawfish, test it:            ;
+  ;;;; sawfish-client                                        ;;
+   ;;; (require 'sawfish.gtk.widget-test)                    ;;;
+    ;; (test-widget '(optional (choice one two three)) 'two) ;;;;
+     ; now move the window -> X Window System error -> kill  ;;;;;
+
     (export test-widget)
 
     (open rep
@@ -48,6 +54,7 @@
 	(gtk-widget-show-all window)
 	(unwind-protect
 	    (catch 'done
-	      (recursive-edit))
-	  (gtk-widget-destroy window)
+	      (recursive-edit)
+	      (gtk-widget-destroy window))
 	  (gdk-flush))))))
+
