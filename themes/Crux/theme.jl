@@ -294,7 +294,7 @@
      (width . ,(lambda (w) (+ (title-left-width w) 2 -48)))
      (top-edge . -19)
      (text . ,window-name)
-     (foreground . ("grey95" "white"))
+     (foreground . ("black" "white"))
      (x-justify . ,horizontal-justification)
      (y-justify . ,vertical-justification)
      (class . title))
