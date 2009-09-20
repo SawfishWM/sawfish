@@ -51,7 +51,7 @@ install : sawfish.info installdirs
 	done
 	-install-info --info-dir=$(DESTDIR)$(infodir) sawfish.info
 	for f in sawfish*.1; do \
-		gzip $$f; \
+		gzip $$f -c > $$f.gz; \
 		$(INSTALL_DATA) $$f.gz $(DESTDIR)/usr/share/man/man1/; \
 	done
 
