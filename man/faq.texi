@@ -53,6 +53,8 @@ window manager features. More precisely, it currently does:
 @itemize
 @item GNOME setup, by opening @code{sawfish.wm.integration.gnome},
 if GNOME is running.
+@item KDE setup, by opening @code{sawfish.wm.integration.kde},
+if KDE is running.
 @item Error handling enhancements, by opening 
 @code{sawfish.wm.ext.error-handler} 
 @end itemize
@@ -68,17 +70,6 @@ Choose either @file{~/.sawfish/rc} or @file{~/.sawfishrc}. The
 former is recommended, because the directory @file{~/.sawfish} is
 anyway created to store @file{custom}, and you can also put other lisp
 scripts, like user-contributed codes there.
-
-If this file is present, then @file{sawfish-defaults} isn't read by
-default. But it loads standard features, so if you want it, add the
-following line to your @file{~/.sawfishrc} (or @file{~/.sawfish/rc})
-file:
-
-@lisp
-(require 'sawfish-defaults)
-@end lisp
-
-In fact, @file{sawfish-defaults} is an alias of @file{sawfish.wm.defaults}.
 @end table
 
 @item How do I bind a key to execute a shell command?
