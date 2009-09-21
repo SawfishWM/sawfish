@@ -1,5 +1,5 @@
 ;; prompt.jl -- read line from user
-;; Time-stamp: <2000-02-25 22:02:54 tjp>
+;; Time-stamp: <Fri Sep 18 12:09:45 CDT 2009>
 ;;
 ;; Copyright (C) 2008 Sergey I. Sharybin <sharybin@nm.ru>
 ;; Copyright (C) 2000 Topi Paavola <tjp@iki.fi>
@@ -107,10 +107,10 @@ displayed. See the `display-message' function for more details.")
 
   (defvar prompt-result nil)
   (defvar prompt-prompt nil)
-  (defvar prompt-completion-fun (lambda (#!rest) nil))
-  (defvar prompt-validation-fun (lambda (#!rest) nil))
-  (defvar prompt-abbrev-fun (lambda (#!rest) nil))
-  (defvar prompt-display-fun (lambda (#!rest) nil))
+  (defvar prompt-completion-fun nil)
+  (defvar prompt-validation-fun nil)
+  (defvar prompt-abbrev-fun nil)
+  (defvar prompt-display-fun nil)
   (defvar prompt-position 0)
   (defvar prompt-completion-position nil)
   (defvar prompt-completions nil)
@@ -118,6 +118,15 @@ displayed. See the `display-message' function for more details.")
   (defvar prompt-history-pos nil)
   (defvar prompt-saved nil)
   (defvar prompt-attr nil)
+
+  ;; Compilation hack: ensure that the compiler doesn't complain when
+  ;; these are treated like functions and passed values.
+  (eval-when-compile
+    (setq prompt-completion-fun (lambda (#!rest) nil)
+          prompt-validation-fun (lambda (#!rest) nil)
+          prompt-abbrev-fun (lambda (#!rest) nil)
+          prompt-display-fun (lambda (#!rest) nil)))
+
 
 ;; From merlin
 ;; But maybe better if we'd include this util?
@@ -142,7 +151,7 @@ displayed. See the `display-message' function for more details.")
 
   (defun prompt-accept ()
     "End input and accept current string."
-    (let ((result (if (not (prompt-validation-fun prompt-result))
+    (let ((result (if (not prompt-validation-fun)
 		      prompt-result
 		    (prompt-validation-fun prompt-result))))
       (if result
@@ -259,7 +268,7 @@ displayed. See the `display-message' function for more details.")
 		(if (= new prompt-completion-position)
 		    0
 		  new)))
-      (when (prompt-completion-fun prompt-result)
+      (when prompt-completion-fun
 	(let
 	    (compl)
 	  (setq prompt-completions (prompt-completion-fun prompt-result))
@@ -288,14 +297,14 @@ displayed. See the `display-message' function for more details.")
 	(concat (and (/= prompt-completion-position 0) "[...]\n")
 		(apply concat (mapcar (lambda (x)
 					(format nil "%s\n"
-						(if (prompt-abbrev-fun x)
+						(if prompt-abbrev-fun
 						    (prompt-abbrev-fun x)
 						  x)))
 				      compl))
 		continued))))
 
   (defun prompt-update-display ()
-    (let ((result (if (prompt-display-fun prompt-result)
+    (let ((result (if prompt-display-fun
 		      (prompt-display-fun prompt-result)
 		   prompt-result))
 	 (completions (prompt-format-completions)))
@@ -355,17 +364,17 @@ displayed. See the `display-message' function for more details.")
 	 (display-message nil)))))
 
   (defun prompt-for-symbol (#!optional title predicate validator)
-    (let ((prompt-completion-fun
-	      (lambda (x)
-		(mapcar symbol-name
-			(apropos (concat ?^ (quote-regexp x)) predicate))))
-	     (prompt-validation-fun
-	      (lambda (x)
-		(let
-		    ((symbol (intern x)))
-		  (if validator
-		      (and (validator symbol) symbol)
-		    symbol)))))
+    (let ((prompt-completion-fun 
+	   (lambda (x)
+	     (mapcar symbol-name
+		     (apropos (concat ?^ (quote-regexp x)) predicate))))
+	  (prompt-validation-fun
+	   (lambda (x)
+	     (let
+		 ((symbol (intern x)))
+	       (if validator
+		   (and (validator symbol) symbol)
+		 symbol)))))
       (prompt title)))
 
   (defun prompt-for-function (#!optional title)

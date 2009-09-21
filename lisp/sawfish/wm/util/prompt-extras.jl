@@ -127,7 +127,7 @@ Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
 
 (define (prompt-for-string #!optional title start)
   (let ((prompt-completion-fun prompt-complete-filename)
-	(prompt-validation-fun (lambda (#!rest) nil)))
+	(prompt-validation-fun nil))
     (prompt (or title "Enter string: ") start)))
 
 (define (prompt-for-number #!optional title)
