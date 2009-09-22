@@ -146,60 +146,54 @@
        "xx"))
 
     ;; Variables that can be set in .sawfish[/]rc    
-    
-    (if (not (boundp 'my-lang-string))
-	(defvar my-lang-string (find-lang-string)))
-
-    (if (not (boundp 'desktop-directory))
-	(defvar desktop-directory '("/usr/share/applications")))
-
-    (if (not (boundp 'ignore-no-display))
-	(defvar ignore-no-display '()))
-
-    (if (not (boundp 'want-alphabetize))
-	(defvar want-alphabetize 't))
-
-    (if (not (boundp 'my-term-string))
-	(defvar my-term-string "xterm -e "))
-
-    (if (not (boundp 'use-fdo-menu))
-	(defvar use-fdo-menu 't))
+    ;; Docstrings would be nice.
+    (defvar my-lang-string (find-lang-string))
+    (defvar desktop-directory '("/usr/share/applications"))
+    (defvar ignore-no-display '())
+    (defvar want-alphabetize 't)
+    (defvar my-term-string "xterm -e ")
+    (defvar use-fdo-menu 't)
 
     ;; The Master Category List
 
     (defvar menu-cat-alist
-      '(("Desktop" .  ("X-Desktop" "X-DesktopApplets" "X-DesktopCountry" \
-		       "DesktopSettings" "GNOME" "KDE" "X-GNOME-PersonalSettings" \
-		       "X-Xfce-Toplevel"))
-	("Personal" . ("X-Personal" "X-PersonalUtility" "Calendar" "ContactManagement"))
-	("Office" . ("Office" "WordProcessor" "Presentation" "X-Document" \
-		     "TextEditor" "SpreadSheet" "Calculator" "X-Calculate" \
+      '(("Desktop" . ("X-Desktop" "X-DesktopApplets" "X-DesktopCountry"
+                      "DesktopSettings" "GNOME" "KDE"
+                      "X-GNOME-PersonalSettings" "X-Xfce-Toplevel"))
+	("Personal" . ("X-Personal" "X-PersonalUtility" "Calendar"
+                       "ContactManagement"))
+	("Office" . ("Office" "WordProcessor" "Presentation" "X-Document"
+		     "TextEditor" "SpreadSheet" "Calculator" "X-Calculate"
 		     "Chart" "FlowChart" "Finance"))
-	("Internet" . ("Telephony" "Network" "Dialup" "VideoConference" \
-		       "RemoteAccess" "News" "HamRadio" "FileTransfer" \
-		       "X-Internet" "P2P" "Email" "WebBrowser" "IRCClient" "Chat" \
-		       "InstantMessaging" "Chat" "WebDevelopment"))
-	("Games" . ("Game" "ActionGame" "AdventureGame" "ArcadeGame" "BoardGame" "Emulator"\
-		    "BlocksGame" "CardGame" "KidsGame" "LogicGame" "RolePlaying" "Simulation"))
-	("Graphics" . ("RasterGraphics" "VectorGraphics" "X-GraphicUtility" \
-		       "2DGraphics" "3dGraphics" "3DGraphics" "Scanning" "OCR" "Photography" \
-		       "Viewer" "Publishing" "Art" "ImageProcessing"))
-	("Media" . ("AudioVideo" "Audio", "Video" "Midi" "Mixer" "Sequencer" "Tuner" \
-		    "TV" "AudioVideoEditing" "Player" "Recorder" "DiscBurning" "Music"))
-	("Science" . ("Science" "Astrology" "ArtificialIntelligence" "Astronomy" \
-		      "Biology" "Chemistry" "ComputerScience" "DataVisualization" \
-		      "Electricity" "Robotics" "Physics" "Math" "Education" "Geography"))
-	("Development" . ("GUIDesigner" "IDE" "Profiling" "RevisionControl" \
-			  "ProjectManagement" "Translation" "GTK" "Development" \
-			  "Qt" "Development" "Documentation"))
-	("Utility" . ("X-SystemMemory" "Security" "Utility" \
-		      "X-SetupEntry" "X-SetupUtility" "X-SystemMemory" \
-		      "TextTools" "TelephonyTools" "Accessibility" "Clock" \
-		      "ConsoleOnly"))
-	("Filesystem" .  ("X-FileSystemFind" "X-FileSystemUtility" "Archiving" \
-			  "FileManager" "X-FileSystemMount" "Compression"))
-	("System" . ("X-SystemSchedule" "System" "X-SystemMemory" \
-		     "TerminalEmulator" "Dictionary" "Puppy" "Printing" "Monitor" "Security"))
+	("Internet" . ("Telephony" "Network" "Dialup" "VideoConference"
+		       "RemoteAccess" "News" "HamRadio" "FileTransfer"
+		       "X-Internet" "P2P" "Email" "WebBrowser" "IRCClient"
+                       "Chat" "InstantMessaging" "Chat" "WebDevelopment"))
+	("Games" . ("Game" "ActionGame" "AdventureGame" "ArcadeGame"
+                    "BoardGame" "Emulator" "BlocksGame" "CardGame" "KidsGame"
+                    "LogicGame" "RolePlaying" "Simulation"))
+	("Graphics" . ("RasterGraphics" "VectorGraphics" "X-GraphicUtility"
+		       "2DGraphics" "3dGraphics" "3DGraphics" "Scanning"
+                       "OCR" "Photography" "Viewer" "Publishing" "Art"
+                       "ImageProcessing"))
+	("Media" . ("AudioVideo" "Audio", "Video" "Midi" "Mixer" "Sequencer"
+                    "Tuner" "TV" "AudioVideoEditing" "Player" "Recorder"
+                    "DiscBurning" "Music"))
+	("Science" . ("Science" "Astrology" "ArtificialIntelligence"
+                      "Astronomy" "Biology" "Chemistry" "ComputerScience"
+                      "DataVisualization" "Electricity" "Robotics" "Physics"
+                      "Math" "Education" "Geography"))
+	("Development" . ("GUIDesigner" "IDE" "Profiling" "RevisionControl"
+			  "ProjectManagement" "Translation" "GTK"
+                          "Development" "Qt" "Development" "Documentation"))
+	("Utility" . ("X-SystemMemory" "Security" "Utility" "X-SetupEntry"
+                      "X-SetupUtility" "X-SystemMemory" "TextTools"
+                      "TelephonyTools" "Accessibility" "Clock" "ConsoleOnly"))
+	("Filesystem" . ("X-FileSystemFind" "X-FileSystemUtility" "Archiving"
+                         "FileManager" "X-FileSystemMount" "Compression"))
+	("System" . ("X-SystemSchedule" "System" "X-SystemMemory"
+                     "TerminalEmulator" "Dictionary" "Puppy" "Printing"
+                     "Monitor" "Security"))
 	("Settings" . ("Settings" "HardwareSettings" "PackageManager"))
 	("Exiles" . ("Exile"))))
 
@@ -207,7 +201,8 @@
     (define (find-lang-in-desktop-file fdo-list)
       (if (assoc (concat fdo-name-string my-lang-string "]") fdo-list)
 	  (concat fdo-name-string my-lang-string "]")
-	(if (assoc (concat fdo-name-string (substring my-lang-string 0 2) "]") fdo-list)
+	(if (assoc (concat fdo-name-string (substring my-lang-string 0 2) "]")
+                   fdo-list)
 	    (concat fdo-name-string (substring my-lang-string 0 2) "]")
 	  "Name")))
 
@@ -217,7 +212,8 @@
 	  (let ((cat-val (car cat-list)))
 	    (if (assoc cat-val loc-list)
 		(cons (cdr (assoc cat-val loc-list))
-		      (fix-sub-cats cat-list (remove (assoc cat-val loc-list) loc-list)))
+		      (fix-sub-cats cat-list (remove (assoc cat-val loc-list)
+                                                     loc-list)))
 	      (fix-sub-cats (cdr cat-list) loc-list)))))
 
     ;; Associate values from the Master Category list with sub-categories from file
