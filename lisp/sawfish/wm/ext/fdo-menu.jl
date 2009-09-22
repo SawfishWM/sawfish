@@ -197,14 +197,19 @@
 	("Settings" . ("Settings" "HardwareSettings" "PackageManager"))
 	("Exiles" . ("Exile"))))
 
-    ;; Get the correct Name value based on language settings
+    ;; Get the correct Name entry based on language settings
+    ;; This is wrong.  Read the desktop entry spec to see how it should
+    ;; be done.  It's complicated.
     (define (find-lang-in-desktop-file fdo-list)
-      (if (assoc (concat fdo-name-string my-lang-string "]") fdo-list)
-	  (concat fdo-name-string my-lang-string "]")
-	(if (assoc (concat fdo-name-string (substring my-lang-string 0 2) "]")
-                   fdo-list)
-	    (concat fdo-name-string (substring my-lang-string 0 2) "]")
-	  "Name")))
+      (or (and my-lang-string
+               (or (assoc (concat fdo-name-string my-lang-string "]")
+                          fdo-list)
+                   (and (> (length my-lang-string) 2)
+                        (assoc (concat fdo-name-string
+                                       (substring my-lang-string 0 2)
+                                       "]")
+                               fdo-list))))
+          (assoc "Name" fdo-list)))
 
     ;; Functions for categories
     (define (fix-sub-cats cat-list loc-list)
@@ -216,7 +221,8 @@
                                                      loc-list)))
 	      (fix-sub-cats (cdr cat-list) loc-list)))))
 
-    ;; Associate values from the Master Category list with sub-categories from file
+    ;; Associate values from the Master Category list with sub-categories
+    ;; from file
     (define (fix-cats cat-list)
       (if cat-list
 	  (let ((cat-val (car (car cat-list)))
@@ -286,16 +292,25 @@
 	       (desktop-file-p desk-file))
 	  (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
 	    (if ignore-no-display
-		(if (assoc "NoDisplay" fdo-list)
-		    (rplacd (assoc "NoDisplay" fdo-list) "false\n")
-		  (setq fdo-list (append fdo-list (cons (cons "NoDisplay" "false\n"))))))
+		(let ((a (assoc "NoDisplay" fdo-list)))
+                  (if a (rplacd a "false\n")
+                    (setq fdo-list (cons (cons "NoDisplay" "false\n")
+                                         fdo-list)))))
        	    (if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true\n"))
-		(cons (parse-cat-list (build-cat-list (trim-end (cdr (assoc "Categories" fdo-list)))))
-		      (cons (trim-end (cdr (assoc (find-lang-in-desktop-file fdo-list) fdo-list)))
-			    (if (string= (cdr (assoc "Terminal" fdo-list)) "true\n")
-				(cons (list 
-				       'system (concat my-term-string (trim-end (cdr (assoc "Exec" fdo-list))) " &")))
-			      (cons (list 'system (concat (trim-end (cdr (assoc "Exec" fdo-list))) " &"))))))))))
+		(list
+                 (parse-cat-list (build-cat-list
+                                  (trim-end (cdr (assoc "Categories"
+                                                        fdo-list)))))
+                 (trim-end (cdr (find-lang-in-desktop-file fdo-list)))
+                 (if (string= (cdr (assoc "Terminal" fdo-list))
+                              "true\n")
+                     (list 'system
+                           (concat my-term-string
+                                   (trim-end (cdr (assoc "Exec" fdo-list)))
+                                   " &"))
+                   (list 'system
+                         (concat (trim-end (cdr (assoc "Exec" fdo-list)))
+                                 " &"))))))))
 
     ;; Update the menu
     (define (update-saw-menu)
