@@ -128,33 +128,23 @@
        (string
 	(substring string 0 (- (length string) 1)))))
 
+    ;; This is wrong.  Read the desktop entry spec to see how it should
+    ;; be done.  It's complicated.
     (define (find-lang-string)
-      (cond
-       ((getenv "LANGUAGE")
-	(let ((mlang (getenv "LANGUAGE")))
-	  (if (>= (length mlang) 2)
-	      (if (>= (length mlang) 5)
-		  (substring mlang 0 5)
-		(substring mlang 0 2)) "xx")))
-       ((getenv "LC_ALL")
-	(let ((mlang (getenv "LC_ALL")))
-	  (if (>= (length mlang) 2)
-	      (if (>= (length mlang) 5)
-		  (substring mlang 0 5)
-		(substring mlang 0 2)) "xx")))
-       ((getenv "LC_MESSAGES")
-	(let ((mlang (getenv "LC_MESSAGES")))
-	  (if (>= (length mlang) 2)
-	      (if (>= (length mlang) 5)
-		  (substring mlang 0 5)
-		(substring mlang 0 2)) "xx")))
-       ((getenv "LANG")
-	(let ((mlang (getenv "LANG")))
-	  (if (>= (length mlang) 2)
-	      (if (>= (length mlang) 5)
-		  (substring mlang 0 5)
-		(substring mlang 0 2)) "xx")))
-       (t "xx")))
+      (define (simplify mlang)
+        ;; N.B.: returns nil if mlang is "C" or "POSIX",
+        ;; "fi" if it is "finnish", "sw" if it is "swedish"
+        ;; Swedes can set locale to "sv_SE" or start learning Swahili.
+        (and (string-looking-at "([a-z][a-z])(_..)?" mlang)
+             (expand-last-match "\\0")))
+      (or
+       (let loop ((lang-vars '("LC_ALL" "LC_MESSAGES" "LANG")))
+            (and lang-vars
+                 (let ((mlang (getenv (car lang-vars))))
+                   (if mlang (simplify mlang)
+                     (loop (cdr lang-vars))))))
+       ;; Kluge to keep braindead code from breaking.
+       "xx"))
 
     ;; Variables that can be set in .sawfish[/]rc    
     
