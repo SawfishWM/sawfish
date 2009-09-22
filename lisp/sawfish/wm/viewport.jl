@@ -61,7 +61,7 @@
     :after-set (lambda () (viewport-size-changed t)))
 
   (defcustom viewport-minimum-dimensions '(1 . 1)
-    "Minimum number of columns and rows in each virtual workspace: \\w"
+    "Minimum number of columns and rows in each virtual workspace (if boundary mode is dynamic): \\w"
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
     :after-set (lambda () (viewport-minimum-size-changed)))
