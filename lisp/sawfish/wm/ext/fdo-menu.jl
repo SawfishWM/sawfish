@@ -50,7 +50,7 @@
     
     (define (desktop-file-p directory-file)
       (let ((this-file (open-file directory-file 'read)))
-	(string= (read-line this-file) "[Desktop Entry]\012")))
+	(string= (read-line this-file) "[Desktop Entry]\n")))
 
     (define (desktop-group-p instring)
       (string= (substring instring 0 1) "["))
@@ -58,14 +58,13 @@
     (define (desktop-skip-line-p instring)
       (or (not instring)
 	  (string= (substring instring 0 1) "#")
-	  (string= (substring instring 0 1) "\012")))
+	  (string= (substring instring 0 1) "\n")))
 
     (define (get-key-break instring key)
       (if instring
 	  (let ((mlength (length instring)))
 	    (do ((mcount 0 (1+ mcount))) 
 		((or (string= (substring instring mcount (+ mcount 1)) "\n")
-		     (string= (substring instring mcount (+ mcount 1)) "\012")
 		     (string= (substring instring mcount (+ mcount 1)) key)
 		     (= mcount (- mlength 2))
 		     (= mcount 398)) mcount)))))
@@ -297,7 +296,7 @@
        	    (if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true\n"))
 		(cons (parse-cat-list (build-cat-list (trim-end (cdr (assoc "Categories" fdo-list)))))
 		      (cons (trim-end (cdr (assoc (find-lang-in-desktop-file fdo-list) fdo-list)))
-			    (if (string= (cdr (assoc "Terminal" fdo-list)) "true\012")
+			    (if (string= (cdr (assoc "Terminal" fdo-list)) "true\n")
 				(cons (list 
 				       'system (concat my-term-string (trim-end (cdr (assoc "Exec" fdo-list))) " &")))
 			      (cons (list 'system (concat (trim-end (cdr (assoc "Exec" fdo-list))) " &"))))))))))
