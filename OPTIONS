@@ -155,7 +155,7 @@
 ;;  (define-special-variable place-window-mode 'top-left
 ;;    "Method of placing windows. Standard modes include: randomly,
 ;;interactively, centered, centered-on-parent, under-pointer, none,
-;;top-left, off-center, first-fit, best-fit.")
+;;top-left, off-center, first-fit, best-fit, stagger.")
 
 ;;  (define-special-variable place-transient-mode 'centered-on-parent
 ;;    "Method of placing dialog windows")
@@ -383,7 +383,7 @@
 ;;  (define-special-variable window-history-ignore-transients t
 ;;    "Don't automatically remember details of transient windows.")
 
-;; auto raise optiosn
+;; auto raise options
 
 ;;  (require 'sawfish.wm.ext.auto-raise)
 
@@ -405,19 +405,6 @@
 
 ;;  (defcustom shade-hover-raise nil
 ;;    "Raise windows when they are unshaded.")
-
-;; gnome menus options
-
-;;  (require 'sawfish.wm.gnome.menus)
-
-;;  (define-special-variable gnome-menu-lang '()
-;;    "List of language codes used when constructing GNOME menus.")
-
-;;  (define-special-variable gnome-menu-roots (list (expand-file-name
-;;				  "apps" gnome-share-directory)
-;;				 "/etc/X11/applnk"	;on RedHat systems
-;;				 "~/.gnome/apps")
-;;    "List of directories to read GNOME menu entries from.")
 
 ;; smart placement modes
 
@@ -442,12 +429,6 @@
 
 ;;  (define-special-variable configure-ignore-stacking-requests nil
 ;;    "Ignore requests from applications to change window stacking.")
-
-;; original (obsolete) gnome hints
-
-;;  ;; this is needed since the gnome tasklist applet doesn't honour
-;;  ;; the _WIN_HIDDEN property (?)
-;;  (define-special-variable gnome-ignored-windows-in-client-list t)
 
 ;; iconify options
 
@@ -637,9 +618,6 @@
 
 ;; (define-special-variable want-alphabetize 't
 ;;   "Wether to alphabetically sort menuentries")
-
-;; (define-special-varaible use-fdo-menu 't
-;;   "Wether to use the fdo-menu (nil allows customized apps-menu)")
 
 ;; view-clipboard options
 
