@@ -29,6 +29,8 @@ beeing generated, if there's no customized apps-menu
 @item Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from this version on,
 Sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
 your system, but the later doesn't
+
+@item In Sawfish-UI the "Matched Windows" group has been renamed to "Windows Rules"
 @end itemize
 
 @item Bugs fixed:
@@ -177,6 +179,10 @@ This function is only used in a hook.
 @item Added new contributors to @code{THANKS} section of @code{CONTRIBUTING} [Christopher Bratusek]
 
 @item When moving a window the cursor shape is now @code{hand2}, when resizing @code{crosshair} [Christopher Bratusek]
+
+@item Changed WM_CLASS of sawfish-ui to "sawfish-configurator" "Sawfish-Configurator" [Christopher Bratusek]
+
+@item In the appearance groups TextView make the cursor invisible and set the wrap mode to word-char [Christopher Bratusek]
 @end itemize
 @end itemize
 
