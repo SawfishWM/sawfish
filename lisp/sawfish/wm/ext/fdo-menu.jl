@@ -284,7 +284,8 @@
 	  (setq fdo-list (append fdo-list (cons (cons "Name" "Unknown\n")))))
       (if (assoc "Categories" fdo-list)
 	  (rplacd (assoc "Categories" fdo-list) "Exile\n")
-	(setq fdo-list (append fdo-list (cons (cons "Categories" "Exile\n"))))))
+	(setq fdo-list (append fdo-list (cons (cons "Categories" "Exile\n")))))
+      fdo-list)
 
     (define (fdo-check-exile fdo-list)
       (if fdo-list
