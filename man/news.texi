@@ -27,38 +27,48 @@ they occurred between. For more detailed information see the
 beeing generated, if there's no customized apps-menu
 
 @item Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from this version on,
-sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
+Sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
 your system, but the later doesn't
 @end itemize
 
 @item Bugs fixed:
 @itemize @minus
 
-@item Fix in SMlib check on x11r7 [Christopher Bratusek]
+@item Build and installation
 
-@item Fix in libICE check on x11r7 [Christopher Bratusek]
+Library check: Fix in SMlib and libICE check on x11r7 [Christopher Bratusek]
 
-@item SpinButtons in Sawfish-UI are now connected to correct singal (allows typing in the value manually) [Christoper Bratusek]
+.desktop files fixes: typos fix and removed unneeded entries [Christopher Bratusek]
+
+In spec file, fixed repexecdir definition [Christopher Bratusek]
+
+In po/Makefile.in, fixed wrong call of make-pot [Christopher Bratusek]
+
+Build the FAQ upon make [Christopher Bratusek]
+
+Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
+
+@item In configurator,
+
+Strings are fully translatable [Alexey I. Froloff]
+
+SpinButton listens to manual value change. (It's connected to correct signal.)  [Christoper Bratusek]
+
+Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 
 @item Fix cursor warping in Infinite-Desktop [Jeremy Hankins]
 
 @item Fixed group of the stagger options [Christopher Bratusek]
 
-@item Fixed repexecdir definition in the spec-file [Christopher Bratusek]
-
-@item Fixed wrong call of make-pot in po/Makefile.in [Christopher Bratusek]
-
 @item Fixed issue with translated tooltip strings [Teika Kazura]
 
 @item Fixed a call of select-workspace-from-first [Michal Maruška]
 
-@item In Sawfish-UI position parameters can be negative [Christopher Bratusek, Teika Kazura]
+@item In @code{Simple} theme, windows are now resizable from right border [Christopher Bratusek]
 
-@item In Simple theme windows are now resizable from right border [Christopher Bratusek]
+@item Missing exports are supplied[Christopher Bratusek]
+Shrink-yank functions and @code{send-to-workspace}.
 
-@item Actually build the FAQ upon make [Christopher Bratusek]
-
-@item Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
 @end itemize
 @item New features:
 @itemize @minus
@@ -93,13 +103,20 @@ your system, but the later doesn't
 
 @item When entering a different Workspace, it's now possible to display the name of it (like in Enlightenment) [Christopher Bratusek]
 
-@item When GNOME Integration is loaded, don't remove @code{quit} and @code{restart} entries from menu [Christopher Bratusek]
+@item GNOME support updates [Christopher Bratusek]
+Commands are updated to more recent GNOME. GNOME Integration is
+trimmed down to the minimum. GNOME-Detection is updated (Last item by
+Alexey I. Froloff.)
 
-@item When GNOME Integration is loaded, append @code{Logout}- and @code{Shutdown from GNOME} entries to Session sub-menu [Christopher Bratusek]
+Some session updates: In session sub-menu, @code{Logout}- and
+@code{Shutdown from GNOME} are added. Don't remove @code{quit} and
+@code{restart} from menu.
 
-@item Updated commands in GNOME Integration for more recent GNOME versions [Christopher Bratusek]
+@item KDE support [Christopher Bratusek]
+KDE is automatically detected. Applications (konsole, konqueror), KDE
+help, and KDE logout/shutdown/reboot are provided in the menu.
 
-@item Make strings in Sawfish-UI fully translatable [Alexey I. Froloff]
+In KDE4 WM Selector, Sawfish is added.
 
 @item Added @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
 @end itemize
@@ -113,13 +130,11 @@ your system, but the later doesn't
 @item Other Changes:
 @itemize @minus
 
-@item Renamed @code{after-add-window} to @code{maxmize-after-add-window} for easier evaluation [Teika Kazura]
+@item Renamed @code{after-add-window} to @code{maxmize-after-add-window} [Teika Kazura]
+
+This function is only used in a hook.
 
 @item Revamped the Root and Window Menu [Christopher Bratusek]
-
-@item Trimmed down GNOME Integration to the minimum [Christopher Bratusek]
-
-@item Added KDE Integration [Christopher Bratusek]
 
 @item Make sure docks/panels are unframed [Timo Korvola]
 
@@ -130,12 +145,6 @@ your system, but the later doesn't
 @item You can exit from sawfish-client with @code{,quit} (also @code{C-d}), unlike @code{C-c} it won't kill the WM [Teika Kazura]
 
 @item Number widget can take optional initial value [Teika Kazura]
-
-@item Sawfish does now appear in KDE4s WM Selector [Christopher Bratusek]
-
-@item Update GNOME-Detection [Alexey I. Froloff]
-
-@item Fixed typos in the .desktop files and removed unneded entries [Christopher Bratusek]
 
 @item Changing @code{raise-tabs-on-hover} takes effect immediately now [Christopher Bratusek]
 
@@ -151,23 +160,19 @@ your system, but the later doesn't
 
 @item With new option @code{customize-redirect}, configurator's output can be redirected. [Teika Kazura]
 
-@item Export shrink-yank commands [Christopher Bratusek]
-
-@item Export @code{send-to-workspace} command [Christopher Bratusek]
-
 @item Grow/Pack and Shrink/Yank options are in the same group now [Christopher Bratusek]
 
 @item Squashed several compiler warnings [Matthew Love]
 
 @item Doc updates [Christopher Bratusek, Jeremy Hankins, Teika Kazura]
 
-@item News items for 1.5.0 are rewritten to describe them better [Teika Kazura]
+@item News items for 1.5.0 are rewritten to more readable style [Teika Kazura]
 
 @item Updated OPTIONS [Christopher Bratusek]
 
 @item Added man-pages for sawfish, sawfish-client and sawfish-ui [Debian]
 
-@item Added section to sawfish info-file [Luis Rodrigo Gallardo Cruz]
+@item In installation, to info file @code{dir} is added the section @code{sawfish} [Luis Rodrigo Gallardo Cruz]
 
 @item Added new contributors to @code{THANKS} section of @code{CONTRIBUTING} [Christopher Bratusek]
 
