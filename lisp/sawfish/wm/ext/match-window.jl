@@ -148,7 +148,7 @@
   (put 'match-window 'custom-widget match-window-widget)
 
   ;;###autoload (defgroup match-window "Matched Windows" :layout single :require sawfish.wm.ext.match-window)
-  (defgroup match-window "Matched Windows"
+  (defgroup match-window "Window Rules"
     :layout single
     :require sawfish.wm.ext.match-window)
 
