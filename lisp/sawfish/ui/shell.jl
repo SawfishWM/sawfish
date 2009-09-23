@@ -103,7 +103,7 @@
 	(setq revert-widget (stock-button 'revert))
 	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish Configurator"))
-	(gtk-window-set-wmclass main-window "main" "Nokogiri"))
+	(gtk-window-set-wmclass main-window "sawfish-configurator" "Sawfish-Configurator"))
 
       (g-signal-connect main-window "delete_event"
 			  (if (not socket-id) on-quit capplet-delete-event))
@@ -248,7 +248,6 @@
 
   (define (add-group-widgets group)
     (if (and *nokogiri-flatten-groups* (group-sub-groups group))
-	;;(display-flattened group)
 	(display-book-tree group)
       (display-unflattened group))
     (update-all-dependences))
