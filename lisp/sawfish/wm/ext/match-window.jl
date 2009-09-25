@@ -45,16 +45,14 @@
 	    define-match-window-formatter
 	    add-window-matcher
 	    remove-window-matcher
-	    match-window
-	    rename-window-func
-	    rename-window-interactive)
+	    match-window)
 
     (open rep
 	  rep.system
 	  rep.regexp
 	  sawfish.wm
-	  sawfish.wm.util.groups
-	  sawfish.wm.util.prompt)
+	  sawfish.wm.windows
+	  sawfish.wm.util.groups)
 
   (define-structure-alias match-window sawfish.wm.ext.match-window)
 
@@ -492,14 +490,4 @@
               (lambda () (interactive)
                 (synthesize-event (lookup-event (cadr pair)) (current-event-window))))) value))))
 
-  (define (rename-window-func window new-name)
-    (set-x-text-property window 'WM_NAME (vector new-name))
-    (set-x-text-property window '_NET_WM_NAME (vector new-name))
-    (set-x-text-property window 'WM_ICON_NAME (vector new-name))
-    (set-x-text-property window '_NET_WM_ICON_NAME (vector new-name)))
-
-  (define (rename-window-interactive w)
-    (let ((new-name (prompt-for-string "Enter new window title:" (window-name w))))
-      (rename-window-func w new-name)))
-
-  (define-command 'rename-window rename-window-interactive #:spec "%W"))
+)
