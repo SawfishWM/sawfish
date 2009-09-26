@@ -167,7 +167,7 @@ that overrides settings set elsewhere.")
   (define (update-frame-font-color)
     (if use-custom-font-color
 	(mapc (lambda (fc)
-		(set-frame-part-value fc 'foreground (list frame-font-inactive-color frame-font-focus-color) 't)) (list 'title 'tab))
+		(set-frame-part-value fc 'foreground (list frame-font-inactive-color frame-font-active-color) 't)) (list 'title 'tab))
       (mapc (lambda (fc)
 	      (rplacd (assoc 'foreground (assoc fc override-frame-part-classes)) nil)
 	      (rplaca (assoc 'foreground (assoc fc override-frame-part-classes)) nil)) (list 'title 'tab)))

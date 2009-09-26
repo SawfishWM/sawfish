@@ -30,7 +30,7 @@
     :group appearance
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-focus-color "black"
+  (defcustom frame-font-active-color "black"
     "Font color for active frames"
     :type color
     :group appearance
