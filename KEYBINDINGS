@@ -111,6 +111,24 @@ for example:
 
 ( unbind-keys global-keymap "W-Tab" 'cycle-windows )
 
+another thing would be nested keybindings (I prefer `macros' instead of `nested keyinbindgs'),
+like in emacs. nested means you first press keys which together act as a new modifier 
+(this new modifier works like the compose key does -> you don't have to keep it pressed, like other modifiers),
+then you press another key (or keybinding) to actually perform the desired action, example:
+
+;; create a new meta-keymap called apps-keymap
+( define apps-keymap ( make-keymap ) )
+
+;; glue it into the global-keymap, make the apps-keymap modifier W-e (WM-Modifier + e)
+( bind-keys global-keymap "W-e" apps-keymap )
+
+;; add bindings to the apps-keymap
+( bind-keys apps-keymap "b" '( system "bluefish &" ) )
+
+now first press "W-e" (as I said no need to keep it pressed) and press b, now bluefish starts.
+
+Explanation of Keymaps (+ default bindings)
+
 global-keymap (Those bindings are active everywhere):
 
 W-Left -> Previous Workspace
