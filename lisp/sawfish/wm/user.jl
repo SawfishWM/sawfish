@@ -47,7 +47,8 @@
 	   sawfish.wm.util.display-window
 	   sawfish.wm.util.compat
 	   sawfish.wm.ext.error-handler
-	   sawfish.wm.ext.fdo-menu)
+	   sawfish.wm.ext.fdo-menu
+	   sawfish.wm.frames)
      (set-binds))
 
   (setq *user-structure* 'user)
@@ -117,6 +118,11 @@
   ;; use a default menu if none is given
   (unless (or batch-mode apps-menu)
     (update-saw-menu))
+
+  ;; apply customized font-colors
+  (require 'sawfish.wm.extras)
+  (if use-custom-font-color
+    (update-frame-font-color))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)
