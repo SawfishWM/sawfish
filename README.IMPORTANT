@@ -56,7 +56,7 @@ simply add the following flag to configure:
 
 (eg: ./configure --prefix=/usr --without-nls)
 
-Sawfish-UI GtkTree:
+SawfishConfig GtkTree:
 *******************
 
 recently the old GtkNotebook UI has been replaced by a GtkTree
@@ -65,7 +65,7 @@ it, so you need to double-click it.
 
 but: the old ui is -of course- still available, use:
 
-sawfish-ui --flatten [in a terminal]
-(define-special-variable customize-program "sawfish-ui --flatten") [in your config-file]
+sawfish-config --flatten [in a terminal]
+(define-special-variable customize-program "sawfish-config --flatten") [in your config-file]
 
 - Christopher Bratusek <zanghar@freenet.de>

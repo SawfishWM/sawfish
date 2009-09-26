@@ -38,15 +38,15 @@ exec rep "$0" "$@"
 	  rep.system
 	  rep.io.streams
 	  sawfish.gtk.widget
-	  sawfish.ui.i18n
-	  sawfish.ui.shell
-	  sawfish.ui.group)
+	  sawfish.cfg.i18n
+	  sawfish.cfg.shell
+	  sawfish.cfg.group)
 
   (define socket-id nil)
 
   (when (get-command-line-option "--help")
     (write standard-output "\
-usage: sawfish-ui [OPTIONS...]\n
+usage: sawfish-cfg [OPTIONS...]\n
 where OPTIONS are any of:\n
   --group=GROUP-NAME
   --flatten
@@ -71,7 +71,7 @@ where OPTIONS are any of:\n
 
   (setq interrupt-mode 'exit)
   (i18n-init)
-  (add-widget-prefix 'sawfish.ui.widgets)
+  (add-widget-prefix 'sawfish.cfg.widgets)
   (run-shell socket-id))
 
 

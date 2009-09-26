@@ -21,7 +21,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.slot
+(define-structure sawfish.cfg.slot
 
     (export slot-name
 	    slot-widget
@@ -42,7 +42,7 @@
 	  rep.data.tables
 	  rep.data.records
 	  sawfish.gtk.widget
-	  sawfish.ui.wm)
+	  sawfish.cfg.wm)
 
   (define-record-type :slot
     (create-slot name old-value flags)

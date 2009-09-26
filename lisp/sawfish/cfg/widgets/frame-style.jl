@@ -21,7 +21,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.widgets.frame-style ()
+(define-structure sawfish.cfg.widgets.frame-style ()
 
     (open rep
 	  gui.gtk-2.gtk
@@ -29,7 +29,7 @@
 	  rep.io.files
 	  rep.io.timers
 	  sawfish.gtk.widget
-	  sawfish.ui.i18n)
+	  sawfish.cfg.i18n)
 
   (define (make-frame-style-item changed-callback doc options path)
 

@@ -21,16 +21,16 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.config
+(define-structure sawfish.cfg.config
 
     (export define-config-item
 	    initialize-configs)
 
     (open rep
 	  rep.data.tables
-	  sawfish.ui.apply
-	  sawfish.ui.slot
-	  sawfish.ui.group)
+	  sawfish.cfg.apply
+	  sawfish.cfg.slot
+	  sawfish.cfg.group)
 
   (define done-init nil)
 

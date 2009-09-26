@@ -21,14 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.widgets.match-window ()
+(define-structure sawfish.cfg.widgets.match-window ()
 
     (open rep
 	  gui.gtk-2.gtk
 	  rep.regexp
 	  sawfish.gtk.widget
 	  sawfish.gtk.stock
-	  sawfish.ui.wm)
+	  sawfish.cfg.wm)
 
   (defconst matcher-count 3)
 
@@ -53,9 +53,9 @@
 	      (button (gtk-button-new-with-label (_ "Grab..."))))
 	  (gtk-combo-set-popdown-strings
 	   combo (cons "" (mapcar cdr l10n-x-properties)))
-	  (gtk-table-attach-defaults table combo 0 1 i (1+ i))
-	  (gtk-table-attach-defaults table entry 1 2 i (1+ i))
-	  (gtk-table-attach-defaults table button 2 3 i (1+ i))
+	  (gtk-table-attach-defaults table button 0 1 i (1+ i))
+	  (gtk-table-attach-defaults table combo 1 2 i (1+ i))
+	  (gtk-table-attach-defaults table entry 2 3 i (1+ i))
 	  (g-signal-connect button "clicked"
 	   (lambda ()
 	     (let* ((string (gtk-entry-get-text (gtk-combo-entry combo)))
@@ -176,7 +176,7 @@
 
   (define (make-left-label string)
     (let ((hbox (gtk-hbox-new nil 0)))
-      (gtk-box-pack-end hbox (gtk-label-new string))
+      (gtk-box-pack-start hbox (gtk-label-new string))
       hbox))
   
   ;; also in sawfish-xgettext

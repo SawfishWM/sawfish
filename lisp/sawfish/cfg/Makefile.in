@@ -69,26 +69,26 @@ all : $(ALL_SRCS) $(ALL_OBJS)
 
 install : all installdirs
 	set -e; for p in $(SRCS) $(OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/ui; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg; \
 	done
 	set -e; for p in $(W_SRCS) $(W_OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/ui/widgets; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg/widgets; \
 	done
 	set -e; for p in $(L_SRCS) $(L_OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/ui/layouts; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg/layouts; \
 	done
 	$(INSTALL_DATA) monitor.png $(DESTDIR)${lispdir}/..
-	$(INSTALL_SCRIPT) main.jlc $(DESTDIR)${bindir}/sawfish-ui
+	$(INSTALL_SCRIPT) main.jlc $(DESTDIR)${bindir}/sawfish-config
 
 uninstall :
-	rm -rf $(DESTDIR)${lispdir}/sawfish/ui
+	rm -rf $(DESTDIR)${lispdir}/sawfish/cfg
 	rm -f $(DESTDIR)${lispdir}/../monitor.png
-	rm -f $(DESTDIR)${bindir}/sawfish-ui
+	rm -f $(DESTDIR)${bindir}/sawfish-config
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/ui \
-	  $(DESTDIR)$(lispdir)/sawfish/ui/widgets \
-	  $(DESTDIR)$(lispdir)/sawfish/ui/layouts $(DESTDIR)$(bindir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/cfg \
+	  $(DESTDIR)$(lispdir)/sawfish/cfg/widgets \
+	  $(DESTDIR)$(lispdir)/sawfish/cfg/layouts $(DESTDIR)$(bindir)
 
 clean : 
 	rm -f *.jlc *~ core

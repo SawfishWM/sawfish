@@ -35,7 +35,7 @@
 
   (define-structure-alias customize sawfish.wm.customize)
 
-  (defvar customize-program "sawfish-ui"
+  (defvar customize-program "sawfish-config"
     "Command name of the configurator GUI.")
 
   (defvar customize-group-opt "--group")

@@ -884,7 +884,7 @@
 (defcustom mxflat:customize-configure-keymap
 	nil
 	"customize configure button keymap"
-	:tooltip "by default a button will work as it's name suggests. button1: start sawfish-ui - button3: toggle custom title string"
+	:tooltip "by default a button will work as it's name suggests. button1: start sawfish-config - button3: toggle custom title string"
 	:group (appearance mxflat:group mxflat:buttons-group mxflat:buttons-keymaps2-group)
 	:type boolean
 	:after-set recreate-all-frames
@@ -893,7 +893,7 @@
 (defcustom mxflat:configure-button-keymap
 	nil
 	nil
-	:tooltip "button1: start sawfish-ui - button3: toggle custom title string"
+	:tooltip "button1: start sawfish-config - button3: toggle custom title string"
 	:group (appearance mxflat:group mxflat:buttons-group mxflat:buttons-keymaps2-group)
 	:widget-flags (expand-horizontally)
 	:depends mxflat:customize-configure-keymap

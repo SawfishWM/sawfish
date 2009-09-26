@@ -21,14 +21,14 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.layouts.keymaps ()
+(define-structure sawfish.cfg.layouts.keymaps ()
 
     (open rep
 	  gui.gtk-2.gtk
 	  rep.regexp
-	  sawfish.ui.slot
-	  sawfish.ui.wm
-	  sawfish.ui.layout
+	  sawfish.cfg.slot
+	  sawfish.cfg.wm
+	  sawfish.cfg.layout
 	  sawfish.gtk.widget)
 
   (define label-ptr nil)

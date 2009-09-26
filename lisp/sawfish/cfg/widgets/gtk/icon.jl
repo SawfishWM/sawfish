@@ -1,6 +1,6 @@
 #| nokogiri-widgets/icon.jl -- GNOME icon entry widget
 
-   $Id: icon.jl,v 1.1 2000/09/01 20:03:29 john Exp $
+   $Id$
 
    Originally written by Bruce Miller <docmad@md.prestige.net>
 
@@ -23,7 +23,7 @@
 
 ;; GNOME-less version of this widget
 
-(define-structure sawfish.ui.widgets.icon ()
+(define-structure sawfish.cfg.widgets.icon ()
 
     (open rep
 	  sawfish.gtk.widget)

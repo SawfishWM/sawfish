@@ -23,7 +23,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.widgets.modifier-list ()
+(define-structure sawfish.cfg.widgets.modifier-list ()
 
     (open rep
 	  rep.regexp
