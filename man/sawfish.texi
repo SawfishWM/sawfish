@@ -3736,6 +3736,12 @@ Reloads the frame style @var{name} from disk if it is already known to
 the system.  All windows with that style are reframed.
 @end defun
 
+@defun update-frame-font-color
+Reloads the frame font colors, if @var{use-custom-font-color} is true.
+Use @var{frame-font-active-color} and @var{frame-font-inactive-color}
+to modify the frame font colors.
+@end defun
+
 @node Themes, Removing Frame Parts, Frame Styles, Window Frames
 @section Themes
 @cindex Themes
