@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 20:53+0200\n"
+"POT-Creation-Date: 2009-09-26 17:40+0200\n"
 "PO-Revision-Date: 2002-11-05 22:25+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -708,7 +708,7 @@ msgid ""
 "customize configure button keymap\n"
 "\n"
 "by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
+"config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -720,7 +720,7 @@ msgstr "menüünupu-klahvivastend"
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
+"button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1083,6 +1083,83 @@ msgstr "Akna äärise laius."
 msgid "Border width of bar images."
 msgstr ""
 
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "%s muutmisel:"
+
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "Saekala viga"
+
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Kontekst:"
+
+#. ../lisp/sawfish/cfg/shell.jl
+msgid "Sawfish Configurator"
+msgstr "Saekala seadistaja"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Command"
+msgstr "Käsk"
+
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Dokumenteerimata"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Haara..."
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Töötsoonid:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Veerge:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Ridu:"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Edit Binding"
+msgstr ""
+
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key"
+msgstr "Klahv"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Klahv:"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr ""
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Tegevused"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "mitte"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Match Window Properties"
+msgstr "Vastavuses olevate akende omadused"
+
 #. ../lisp/sawfish/gtk/widget.jl
 #, c-format
 msgid "No matching item for %S"
@@ -1091,11 +1168,6 @@ msgstr ""
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** tundmatu vidin **  "
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Key"
-msgstr "Klahv"
 
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
@@ -1142,78 +1214,6 @@ msgstr "Jah"
 msgid "No"
 msgstr "Ei"
 
-#. ../lisp/sawfish/ui/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "%s muutmisel:"
-
-#. ../lisp/sawfish/ui/apply.jl
-msgid "Sawfish Error"
-msgstr "Saekala viga"
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Kontekst:"
-
-#. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish Configurator"
-msgstr "Saekala seadistaja"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Command"
-msgstr "Käsk"
-
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Undocumented"
-msgstr "Dokumenteerimata"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#. ../lisp/sawfish/ui/widgets/event.jl
-msgid "Grab..."
-msgstr "Haara..."
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Töötsoonid:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Veerge:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Ridu:"
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit Binding"
-msgstr ""
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Key:"
-msgstr "Klahv:"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Matchers"
-msgstr ""
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Actions"
-msgstr "Tegevused"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "not"
-msgstr "mitte"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match Window Properties"
-msgstr "Vastavuses olevate akende omadused"
-
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
 msgstr ""
@@ -1250,8 +1250,9 @@ msgstr "Heli"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-msgid "Matched Windows"
-msgstr "Vastavuses olevad aknad"
+#, fuzzy
+msgid "Window Rules"
+msgstr "_Aknad"
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1815,6 +1816,11 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 #, fuzzy
+msgid "Move window center"
+msgstr "Liiguta aken vasakule"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
 msgid "Move window interactively"
 msgstr "Liiguta aken vasakule"
 
@@ -2074,6 +2080,14 @@ msgid "The program launched by the `browser' command."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/user.jl
+msgid "Maximum length of Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "How long to display Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
 #, fuzzy
 msgid "Xterm"
 msgstr "Muu"
@@ -2283,8 +2297,8 @@ msgid "Customize"
 msgstr "Kohanda"
 
 #. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Käivita kohandamise süsteem."
+msgid "Invoke the configurator GUI."
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2837,6 +2851,18 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Kui teemasid uuendatakse, lae need automaatselt uuesti."
 
 #. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Vaikimisi kirjatüüp: \\w"
 
@@ -2889,6 +2915,7 @@ msgid "About GNOME"
 msgstr "GNOMEi info..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr ""
@@ -2908,6 +2935,18 @@ msgstr "_Abi"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "KDE Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Logout from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Reboot from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3952,6 +3991,7 @@ msgstr ""
 msgid "Window:"
 msgstr "Aken:"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4006,7 +4046,9 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"Minimum number of columns and rows in each virtual workspace (if boundary "
+"mode is dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4493,6 +4535,25 @@ msgstr "Vali _järgmine töötsoon"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Wether to display workspace name upon switch"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How long to display workspace name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Display workspace name"
+msgstr "Töötsoonide nimed"
+
+#~ msgid "Matched Windows"
+#~ msgstr "Vastavuses olevad aknad"
+
+#~ msgid "Invoke the user-customization system."
+#~ msgstr "Käivita kohandamise süsteem."
 
 #, fuzzy
 #~ msgid "customize title position"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 20:53+0200\n"
+"POT-Creation-Date: 2009-09-26 17:40+0200\n"
 "PO-Revision-Date: 2004-04-18 04:48+0200\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
@@ -706,7 +706,7 @@ msgid ""
 "customize configure button keymap\n"
 "\n"
 "by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
+"config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -718,7 +718,7 @@ msgstr "menu-button-keymap"
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
+"button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1082,6 +1082,83 @@ msgstr "Širina ivice prozora."
 msgid "Border width of bar images."
 msgstr "Širina ivice slika na traci."
 
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "Pri izmeni %s:"
+
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "Sawfish greška"
+
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Kontekst:"
+
+#. ../lisp/sawfish/cfg/shell.jl
+msgid "Sawfish Configurator"
+msgstr "Alat za podešavanje Sawfish-a"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Command"
+msgstr "Naredba"
+
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Nedokumentovano"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Uhvati..."
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Radne površine:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Kolona:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Redova:"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Edit Binding"
+msgstr "Uredi prečicu"
+
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key"
+msgstr "Taster"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Taster:"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "Poklapanja"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Akcije"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "nije"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Match Window Properties"
+msgstr "Osobine poklapanja prozora"
+
 #. ../lisp/sawfish/gtk/widget.jl
 #, c-format
 msgid "No matching item for %S"
@@ -1090,11 +1167,6 @@ msgstr "Nema odgovarajuće stavke za %S"
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** nepoznat grafički element **  "
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Key"
-msgstr "Taster"
 
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
@@ -1141,78 +1213,6 @@ msgstr "Da"
 msgid "No"
 msgstr "Ne"
 
-#. ../lisp/sawfish/ui/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "Pri izmeni %s:"
-
-#. ../lisp/sawfish/ui/apply.jl
-msgid "Sawfish Error"
-msgstr "Sawfish greška"
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Kontekst:"
-
-#. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish Configurator"
-msgstr "Alat za podešavanje Sawfish-a"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Command"
-msgstr "Naredba"
-
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Undocumented"
-msgstr "Nedokumentovano"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#. ../lisp/sawfish/ui/widgets/event.jl
-msgid "Grab..."
-msgstr "Uhvati..."
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Radne površine:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Kolona:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Redova:"
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit Binding"
-msgstr "Uredi prečicu"
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Key:"
-msgstr "Taster:"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Matchers"
-msgstr "Poklapanja"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Actions"
-msgstr "Akcije"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "not"
-msgstr "nije"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match Window Properties"
-msgstr "Osobine poklapanja prozora"
-
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
 msgstr ""
@@ -1249,8 +1249,9 @@ msgstr "Zvuk"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-msgid "Matched Windows"
-msgstr "Prozori koji se podudaraju"
+#, fuzzy
+msgid "Window Rules"
+msgstr "Pro_zori"
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1812,6 +1813,11 @@ msgstr ""
 "ivica sa ivicom nekog drugog prozora."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window center"
+msgstr "Premesti prozor na sledeći"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "Interaktivno premesti prozor"
 
@@ -2072,6 +2078,14 @@ msgid "The program launched by the `browser' command."
 msgstr "Program koji se pokreće pomoću naredbe „xterm“."
 
 #. ../lisp/sawfish/wm/commands/user.jl
+msgid "Maximum length of Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "How long to display Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
 msgid "Xterm"
 msgstr "Iks-term"
 
@@ -2268,8 +2282,8 @@ msgid "Customize"
 msgstr "Prilagodi"
 
 #. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Pozovi sistem za prilagođavanje korisniku."
+msgid "Invoke the configurator GUI."
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2817,6 +2831,18 @@ msgid "Automatically reload themes when they are updated."
 msgstr "Automatski osveži teme pri njihovoj dopuni."
 
 #. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Uobičajeno pismo: \\w"
 
@@ -2869,6 +2895,7 @@ msgid "About GNOME"
 msgstr "O Gnomu..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr ""
@@ -2889,6 +2916,20 @@ msgstr "_Pomoć"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "KDE Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Logout from KDE"
+msgstr "Odjava iz tekuće sesije Gnoma."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Reboot from KDE"
+msgstr "Odjava iz tekuće sesije Gnoma."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3924,6 +3965,7 @@ msgstr ""
 msgid "Window:"
 msgstr "Prozor:"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -3973,7 +4015,9 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"Minimum number of columns and rows in each virtual workspace (if boundary "
+"mode is dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4470,6 +4514,25 @@ msgstr "Upitaj za izbor radne površine"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Upitaj za radnu površinu i prebaci se na nju."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Wether to display workspace name upon switch"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How long to display workspace name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Display workspace name"
+msgstr "Imena radnih prostora"
+
+#~ msgid "Matched Windows"
+#~ msgstr "Prozori koji se podudaraju"
+
+#~ msgid "Invoke the user-customization system."
+#~ msgstr "Pozovi sistem za prilagođavanje korisniku."
 
 #, fuzzy
 #~ msgid "customize title position"

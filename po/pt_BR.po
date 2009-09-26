@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 20:53+0200\n"
+"POT-Creation-Date: 2009-09-26 17:40+0200\n"
 "PO-Revision-Date: 2003-07-05 15:55-0300\n"
 "Last-Translator: Alexandre Folle de Menezes <afmenezes@terra.com.br>\n"
 "Language-Team: Debian-BR <debian-l10n-portuguese@lists.debian.org>, "
@@ -734,7 +734,7 @@ msgid ""
 "customize configure button keymap\n"
 "\n"
 "by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
+"config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -746,7 +746,7 @@ msgstr "Mapa do botão de menu"
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
+"button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1123,6 +1123,99 @@ msgstr "Comprimento da borda das janelas."
 msgid "Border width of bar images."
 msgstr "Comprimento da borda das imagens de barras."
 
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "ao mudar %s:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "Erro do Sawfish"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Contexto:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/shell.jl
+msgid "Sawfish Configurator"
+msgstr "Configurador do Sawfish"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Command"
+msgstr "Comando"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Sem documentação"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Capturar..."
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Áreas de Trabalho"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Colunas"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Linhas"
+
+# ../lisp/keymaps.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Edit Binding"
+msgstr "Editar Atalho"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key"
+msgstr "Tecla"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Tecla:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "Comparadores"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Ações"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "não"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Match Window Properties"
+msgstr "Comparar com Propriedades da Janela"
+
 # ../themer/themer.in
 #. ../lisp/sawfish/gtk/widget.jl
 #, c-format
@@ -1132,12 +1225,6 @@ msgstr "Nenhum item correspondente a %S"
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** objeto desconhecido ** "
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Key"
-msgstr "Tecla"
 
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
@@ -1194,93 +1281,6 @@ msgstr "Sim"
 msgid "No"
 msgstr "Não"
 
-#. ../lisp/sawfish/ui/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "ao mudar %s:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/apply.jl
-msgid "Sawfish Error"
-msgstr "Erro do Sawfish"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Contexto:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish Configurator"
-msgstr "Configurador do Sawfish"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Command"
-msgstr "Comando"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Undocumented"
-msgstr "Sem documentação"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#. ../lisp/sawfish/ui/widgets/event.jl
-msgid "Grab..."
-msgstr "Capturar..."
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Áreas de Trabalho"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Colunas"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Linhas"
-
-# ../lisp/keymaps.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit Binding"
-msgstr "Editar Atalho"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Key:"
-msgstr "Tecla:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Matchers"
-msgstr "Comparadores"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Actions"
-msgstr "Ações"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "not"
-msgstr "não"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match Window Properties"
-msgstr "Comparar com Propriedades da Janela"
-
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
 msgstr ""
@@ -1318,11 +1318,13 @@ msgstr ""
 msgid "Sound"
 msgstr "Som"
 
-# ../lisp/match-window.jl
+# ../lisp/menus.jl
+#
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-msgid "Matched Windows"
-msgstr "Janelas Combinadas"
+#, fuzzy
+msgid "Window Rules"
+msgstr "_Janelas"
 
 # ../lisp/tooltips.jl
 #. ../lisp/sawfish/wm/ext/tooltips.jl
@@ -1980,6 +1982,12 @@ msgstr ""
 "Ao mover uma janela, esta opção permite-lhe alinhar uma das suas margens com "
 "a margem de uma outra janela."
 
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window center"
+msgstr "Mover janela para a seguinte"
+
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2279,6 +2287,14 @@ msgstr "Programa executado pelo comando 'xterm'."
 msgid "The program launched by the `browser' command."
 msgstr "Programa executado pelo comando 'xterm'."
 
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Maximum length of Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "How long to display Clipboard Preview"
+msgstr ""
+
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/commands/user.jl
 msgid "Xterm"
@@ -2512,10 +2528,9 @@ msgstr "Posicionamento"
 msgid "Customize"
 msgstr "Personalizar"
 
-# ../lisp/customize.jl
 #. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Chamar o sistema de personalização."
+msgid "Invoke the configurator GUI."
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -3145,6 +3160,18 @@ msgstr "Estilo de moldura padrão:"
 msgid "Automatically reload themes when they are updated."
 msgstr "Recarregar automaticamente os temas atualizados."
 
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
 # ../lisp/frames.jl
 #
 #. ../lisp/sawfish/wm/frames.jl
@@ -3208,6 +3235,7 @@ msgid "About GNOME"
 msgstr "Sobre o GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr ""
@@ -3229,6 +3257,22 @@ msgstr "_Ajuda"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "KDE Website"
+msgstr ""
+
+# ../lisp/sm-init.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Logout from KDE"
+msgstr "Sair desta sessão do GNOME."
+
+# ../lisp/sm-init.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Reboot from KDE"
+msgstr "Sair desta sessão do GNOME."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -4433,6 +4477,7 @@ msgstr "Janela:"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
+#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4484,7 +4529,9 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"Minimum number of columns and rows in each virtual workspace (if boundary "
+"mode is dynamic): \\w"
 msgstr ""
 
 # ../lisp/viewport.jl
@@ -5067,6 +5114,29 @@ msgstr "Selecionar área de trabalho interativamente"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Perguntar por uma área de trabalho e mudar para ela."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Wether to display workspace name upon switch"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How long to display workspace name"
+msgstr ""
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Display workspace name"
+msgstr "Nomes das áreas de trabalho"
+
+# ../lisp/match-window.jl
+#~ msgid "Matched Windows"
+#~ msgstr "Janelas Combinadas"
+
+# ../lisp/customize.jl
+#~ msgid "Invoke the user-customization system."
+#~ msgstr "Chamar o sistema de personalização."
 
 #, fuzzy
 #~ msgid "customize title position"
