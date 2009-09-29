@@ -1,5 +1,4 @@
 ;; mwm.jl -- handle some of the Motif hints
-;; $Id: mwm.jl,v 1.8 2000/11/16 23:05:30 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -36,13 +35,15 @@
 ;; For the moment I'll just have to mash the window hints into the four
 ;; available window types: default, shaped, transient, shaped-transient
 
-(define-structure sawfish.wm.state.mwm ()
+(define-structure sawfish.wm.state.mwm
+
+    (export )
 
     (open rep
-	  rep.system
-	  sawfish.wm.windows
-	  sawfish.wm.misc
-	  sawfish.wm.frames)
+          rep.system
+          sawfish.wm.windows
+          sawfish.wm.misc
+          sawfish.wm.frames)
 
 ;;; Hint definitions
 

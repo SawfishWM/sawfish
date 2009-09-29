@@ -1,5 +1,4 @@
 ;; window-anim.jl -- visual feedback for window actions
-;; $Id: window-anim.jl,v 1.6 2002/04/21 04:52:13 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 

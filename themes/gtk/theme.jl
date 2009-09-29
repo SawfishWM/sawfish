@@ -1,5 +1,4 @@
 ;; gtk/theme.jl
-;; $Id: theme.jl,v 1.22 2001/01/12 03:51:49 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

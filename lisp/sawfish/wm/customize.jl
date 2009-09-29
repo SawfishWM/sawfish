@@ -1,5 +1,4 @@
 ;; customize.jl -- invocation of configurator GUI & customization file IO
-;; $Id: customize.jl,v 1.46 2000/11/29 00:54:47 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -42,7 +41,7 @@
 
   (defvar customize-redirect ">/dev/null 2>&1 </dev/null"
     "Redirect the configurator's input & output.")
-  
+
   (define customize-user-forms nil)
   (define customize-user-file-read nil)
   (define customize-user-file-dirty nil)
@@ -97,7 +96,7 @@
 		(format file "\
 ;; sawfish user customization -- do not edit by hand!
 ;; sawfish version %s, written %s\n\n"
-			      sawfish-version (current-time-string))
+                        sawfish-version (current-time-string))
 		(mapc (lambda (f)
 			(format file "%S\n" f)) customize-user-forms))
 	    (close-file file))

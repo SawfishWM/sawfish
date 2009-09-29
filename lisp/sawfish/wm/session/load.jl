@@ -1,5 +1,4 @@
 ;; sm-load.jl -- session manager code to reload a saved session
-;; $Id: load.jl,v 1.12 2002/11/04 03:35:39 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -98,7 +97,7 @@
 	  ;; no WM_WINDOW_ROLE, so try matching WM_CLASS
 	  (when (and class (cdr (assq 'class alist))
 		     (not (string= class (cdr (assq 'class alist)))))
-	      (throw 'out nil))
+            (throw 'out nil))
 	  ;; no WM_CLASS, so try matching WM_NAME
 	  (when (and name (cdr (assq 'name alist))
 		     (not (string= name (cdr (assq 'name alist)))))

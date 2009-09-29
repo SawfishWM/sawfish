@@ -1,5 +1,4 @@
 ;; configure.jl -- default configure-request handler
-;; $Id: configure.jl,v 1.25 2002/09/29 22:11:33 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -73,7 +72,7 @@
 			   ((windows-intersect-p w (car wins)) t)
 			   (t (iter (cdr below) (cdr wins)))))))
       (iter below-w sorted-wlist)))
-  
+
   (defun configure-request-handler (w alist)
     (let ((coords (window-position w))
 	  (dims (window-dimensions w))

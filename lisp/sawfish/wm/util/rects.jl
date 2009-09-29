@@ -1,5 +1,4 @@
 ;; rects.jl -- rectangle manipulation
-;; $Id: rects.jl,v 1.15 2002/04/24 06:57:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -117,7 +116,7 @@ result is prepended to it."
                          result)))
           ;; Completely covered.
           (t result))))
-                 
+
   (define (rectangles-from-grid x-points y-points #!optional pred)
     "The two lists of integers X-POINTS and Y-POINTS define a rectangular
 grid. Return the complete list of rectangles formed by the
@@ -181,14 +180,14 @@ a cons cell `(X-POINTS . Y-POINTS)' defining the grid they represent.
 If WITH-ROOT is non-nil, then add the root window boundaries to the
 grid."
 
-  (let ((x-edges (nconc (mapcar car rects)
-			(mapcar (lambda (x) (nth 2 x)) rects)))
-	(y-edges (nconc (mapcar (lambda (x) (nth 1 x)) rects)
-			(mapcar (lambda (x) (nth 3 x)) rects))))
-    (when with-root
-      (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
-      (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
-    (cons (uniquify-list x-edges) (uniquify-list y-edges))))
+    (let ((x-edges (nconc (mapcar car rects)
+                          (mapcar (lambda (x) (nth 2 x)) rects)))
+          (y-edges (nconc (mapcar (lambda (x) (nth 1 x)) rects)
+                          (mapcar (lambda (x) (nth 3 x)) rects))))
+      (when with-root
+        (setq x-edges (cons 0 (nconc x-edges (list (screen-width)))))
+        (setq y-edges (cons 0 (nconc y-edges (list (screen-height))))))
+      (cons (uniquify-list x-edges) (uniquify-list y-edges))))
 
   (define (rectangle-area rect)
     "Given a rectangle RECT, return its area."
@@ -283,10 +282,10 @@ DIMS and POINT, and the list of rectangles RECTS when placed at POINT."
     "Return the number of screen heads that rectangle RECT appears on."
     (let loop ((head 0)
 	       (count 0))
-      (if (= head (head-count))
-	  count
-	(loop (1+ head)
-	      (if (> (rect-2d-overlap (head-dimensions head)
-				      (head-offset head) rect) 0)
-		  (1+ count)
-		count))))))
+         (if (= head (head-count))
+             count
+           (loop (1+ head)
+                 (if (> (rect-2d-overlap (head-dimensions head)
+                                         (head-offset head) rect) 0)
+                     (1+ count)
+                   count))))))

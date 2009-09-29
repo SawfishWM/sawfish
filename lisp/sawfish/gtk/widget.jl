@@ -1,25 +1,22 @@
-#| nokogiri-widget.jl -- high-level widget encapsulation
-
-   $Id: widget.jl,v 1.21 2003/07/30 05:56:04 jsh Exp $
-
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; nokogiri-widget.jl -- high-level widget encapsulation
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.gtk.widget
 
@@ -148,11 +145,11 @@
 
   (define (widget-set item value)
     (let-fluids ((callback-enabled nil))
-      ((item 'set) value)))
+                ((item 'set) value)))
 
   (define (widget-clear item)
     (let-fluids ((callback-enabled nil))
-      ((item 'clear))))
+                ((item 'clear))))
 
   (define (widget-gtk-widget item) (item 'gtk-widget))
 
@@ -195,17 +192,18 @@
 	  (value (or (caar options) (car options))))
       (let loop ((rest options)
 		 (last nil))
-	(when rest
-	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
-			 last (_ (or (cadar rest) (symbol-name (car rest)))))))
-	    (gtk-menu-shell-append menu button)
-	    (gtk-widget-show button)
-	    (g-signal-connect button "toggled"
-				(lambda (w)
-				  (when (gtk-check-menu-item-active w)
-				    (setq value (or (caar rest) (car rest)))
-				    (call-callback changed-callback))))
-	    (loop (cdr rest) button))))
+           (when rest
+             (let ((button (gtk-radio-menu-item-new-with-label-from-widget
+                            last (_ (or (cadar rest)
+                                        (symbol-name (car rest)))))))
+               (gtk-menu-shell-append menu button)
+               (gtk-widget-show button)
+               (g-signal-connect button "toggled"
+                                 (lambda (w)
+                                   (when (gtk-check-menu-item-active w)
+                                     (setq value (or (caar rest) (car rest)))
+                                     (call-callback changed-callback))))
+               (loop (cdr rest) button))))
       (gtk-option-menu-set-menu omenu menu)
       (gtk-widget-show-all omenu)
       (lambda (op)
@@ -353,7 +351,7 @@
       (do ((i 0 (1+ i)))
 	  ((= i (length items)))
 	(g-signal-connect (nth i checks) "toggled" (lambda ()
-						       (toggle-fun i)))
+                                                     (toggle-fun i)))
 	(gtk-box-pack-start box (nth i hboxes))
 	(gtk-box-pack-start (nth i hboxes) (nth i checks))
 	(gtk-box-pack-start (nth i hboxes) (widget-gtk-widget (nth i items))))
@@ -433,11 +431,11 @@
 
   (define-widget-type 'h-and (lambda (#!rest args)
 			       (let-fluids ((and-direction 'horizontal))
-				 (apply make-and-item args))))
+                                           (apply make-and-item args))))
 
   (define-widget-type 'v-and (lambda (#!rest args)
 			       (let-fluids ((and-direction 'vertical))
-				 (apply make-and-item args))))
+                                           (apply make-and-item args))))
 
   (define (make-labelled-item changed-callback label item)
     (let ((box (gtk-hbox-new nil box-spacing)))
@@ -525,6 +523,6 @@
 
   (define (option-index lst x)
     (let loop ((i 0) (rest lst))
-      (cond ((null rest) nil)
-	    ((eq (or (caar rest) (car rest)) x) i)
-	    (t (loop (1+ i) (cdr rest)))))))
+         (cond ((null rest) nil)
+               ((eq (or (caar rest) (car rest)) x) i)
+               (t (loop (1+ i) (cdr rest)))))))

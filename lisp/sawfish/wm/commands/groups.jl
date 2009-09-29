@@ -1,5 +1,4 @@
 ;; groups.jl -- commands for manipulating window groups
-;; $Id: groups.jl,v 1.21 2002/04/21 22:25:12 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -75,15 +74,21 @@
   (define (uniconify-transient-group w)
     (call-with-iconify-mode 'transients uniconify-window w))
 
-  (define-command 'iconify-group iconify-group #:spec "%W")
-  (define-command 'uniconify-group uniconify-group #:spec "%W")
-  (define-command 'iconify-transient-group iconify-transient-group #:spec "%W")
-  (define-command 'uniconify-transientgroup uniconify-transient-group #:spec "%W")
-  
+  (define-command 'iconify-group
+    iconify-group #:spec "%W")
+  (define-command 'uniconify-group
+    uniconify-group #:spec "%W")
+  (define-command 'iconify-transient-group
+    iconify-transient-group #:spec "%W")
+  (define-command 'uniconify-transientgroup
+    uniconify-transient-group #:spec "%W")
+
   ;; sticky
 
-  (define (make-group-sticky w) (map-window-group make-window-sticky w))
-  (define (make-group-unsticky w) (map-window-group make-window-unsticky w))
+  (define (make-group-sticky w)
+    (map-window-group make-window-sticky w))
+  (define (make-group-unsticky w)
+    (map-window-group make-window-unsticky w))
 
   (defun toggle-group-sticky (w)
     (if (window-get w 'sticky)
@@ -145,10 +150,14 @@
     move-group-to-current-viewport #:spec "%W" #:class 'viewport)
 
   ;;###autoload
-  (define-command 'move-group-left move-group-left #:spec "%W" #:class 'viewport)
-  (define-command 'move-group-right move-group-right #:spec "%W" #:class 'viewport)
-  (define-command 'move-group-up move-group-up #:spec "%W" #:class 'viewport)
-  (define-command 'move-group-down move-group-down #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-left
+    move-group-left #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-right
+    move-group-right #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-up
+    move-group-up #:spec "%W" #:class 'viewport)
+  (define-command 'move-group-down
+    move-group-down #:spec "%W" #:class 'viewport)
 
   ;; stacking
 

@@ -1,25 +1,22 @@
-#| sawfish.wm.misc bootstrap
-
-   $Id: misc.jl,v 1.12 2002/10/04 06:33:23 jsh Exp $
-
-   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; sawfish.wm.misc bootstrap
+;;
+;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (declare (in-module sawfish.wm.misc))
 
@@ -45,20 +42,20 @@
 server is currently grabbed, ungrab it first, restoring the original grab
 status after the call to THUNK returns."
   (let loop ((counter 0))
-    (if (server-grabbed-p)
-	(progn
-	  (ungrab-server)
-	  (loop (1+ counter)))
-      (unwind-protect
-	  (thunk)
-	(do ((i 0 (1+ i)))
-	    ((= i counter))
-	  (grab-server))))))
+       (if (server-grabbed-p)
+           (progn
+             (ungrab-server)
+             (loop (1+ counter)))
+         (unwind-protect
+             (thunk)
+           (do ((i 0 (1+ i)))
+               ((= i counter))
+             (grab-server))))))
 
 (define grab-counter 0)
 
 (define (call-with-keyboard-grabbed thunk)
-"Call the zero-parameter function THUNK with the keyboard grabbed. If unable
+  "Call the zero-parameter function THUNK with the keyboard grabbed. If unable
 to grab the keyboard then THUNK won't be called."
   (when (grab-keyboard)
     (unwind-protect
@@ -86,10 +83,10 @@ to grab the keyboard then THUNK won't be called."
   "Search for a file called FILENAME in any of the directories named by the
 list of strings DIRS."
   (let loop ((rest dirs))
-    (cond ((null rest) nil)
-	  ((file-exists-p (expand-file-name filename (car rest)))
-	   (expand-file-name filename (car rest)))
-	  (t (loop (cdr rest))))))
+       (cond ((null rest) nil)
+             ((file-exists-p (expand-file-name filename (car rest)))
+              (expand-file-name filename (car rest)))
+             (t (loop (cdr rest))))))
 
 (define (clamp x lower upper)
   (cond ((< x lower) lower)
@@ -181,13 +178,13 @@ vector of strings representing the contents of the property."
 	(let loop ((start 0)
 		   (point 0)
 		   (out '()))
-	  (cond ((= point (length string))
-		 (apply vector (nreverse (cons (substring
-						string start point) out))))
-		((= (aref string point) 0)
-		 (loop (1+ point) (1+ point)
-		       (cons (substring string start point) out)))
-		(t (loop start (1+ point) out))))))))	
+             (cond ((= point (length string))
+                    (apply vector (nreverse (cons (substring
+                                                   string start point) out))))
+                   ((= (aref string point) 0)
+                    (loop (1+ point) (1+ point)
+                          (cons (substring string start point) out)))
+                   (t (loop start (1+ point) out))))))))
 
 (define (set-x-text-property w prop seq #!optional (encoding 'STRING))
   "Set the X property named PROP on window W to the text property obtained
@@ -196,11 +193,12 @@ by concatenating the sequence of strings SEQ."
 
 ;; exports
 
-(export-bindings '(with-server-grabbed call-with-server-ungrabbed
-		   call-with-keyboard-grabbed call-with-error-handler
-		   make-directory-recursively locate-file
-		   clamp clamp* uniquify-list screen-dimensions
-		   pointer-head current-head current-head-dimensions
-		   current-head-offset load-module eval-in
-		   user-eval user-require quote-menu-item
-		   get-x-text-property set-x-text-property))
+(export-bindings
+ '(with-server-grabbed call-with-server-ungrabbed
+                       call-with-keyboard-grabbed call-with-error-handler
+                       make-directory-recursively locate-file
+                       clamp clamp* uniquify-list screen-dimensions
+                       pointer-head current-head current-head-dimensions
+                       current-head-offset load-module eval-in
+                       user-eval user-require quote-menu-item
+                       get-x-text-property set-x-text-property))

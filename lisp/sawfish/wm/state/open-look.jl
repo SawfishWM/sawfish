@@ -1,5 +1,4 @@
 ;; open-look.jl -- handle some ol hints
-;; $Id: open-look.jl,v 1.7 2000/09/08 15:14:01 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -24,13 +23,15 @@
 ;; This suffers from the same limitations as the Motif hints. See
 ;; mwm.jl for more details
 
-(define-structure sawfish.wm.state.open-look ()
+(define-structure sawfish.wm.state.open-look
+
+    (export )
 
     (open rep
-	  rep.system
-	  sawfish.wm.windows
-	  sawfish.wm.misc
-	  sawfish.wm.frames)
+          rep.system
+          sawfish.wm.windows
+          sawfish.wm.misc
+          sawfish.wm.frames)
 
   (define (ol-add-window w)
     (let* ((type (window-type w))

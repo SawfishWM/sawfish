@@ -1,5 +1,4 @@
-;; describe.jl -- 
-;; $Id: describe.jl,v 1.11 2002/04/21 04:52:14 jsh Exp $
+;; describe.jl --
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -41,7 +40,7 @@
   (define-command 'describe-symbol describe-symbol
     #:spec "SSymbol:" #:class 'advanced)
   (define-command-to-screen 'describe-symbol-to-screen describe-symbol
-   #:spec "SSymbol:" #:class 'advanced)
+    #:spec "SSymbol:" #:class 'advanced)
 
   (define (apropos-output symbols)
     (let ((separator (make-string 72 ?-)))
@@ -64,7 +63,7 @@
     #:spec "sApropos functions:\nP" #:class 'advanced)
   (define-command-to-screen 'apropos-function-to-screen apropos-function
     #:spec "sApropos functions:\nP" #:class 'advanced)
-  
+
   (define (apropos-variable regexp)
     (format standard-output "Apropos variable `%s':\n" regexp)
     (apropos-output (apropos regexp boundp)))

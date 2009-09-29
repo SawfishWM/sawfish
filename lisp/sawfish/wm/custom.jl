@@ -1,5 +1,4 @@
 ;; custom.jl -- Emacs-like ``customizing'' (but more simple)
-;; $Id: custom.jl,v 1.64 2002/11/03 10:53:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -77,7 +76,7 @@
 
   (define custom-quoted-keys
     '(:group :require :type :options :range :depends :user-level
-      :layout :widget-flags)
+             :layout :widget-flags)
     "defcustom keys whose values are quoted by the macro expansion.")
 
   (define custom-option-alist '((:group . custom-group)
@@ -99,7 +98,7 @@
   (define custom-group-option-alist '((:layout . custom-group-layout)
 				      (:require . custom-group-require)))
 
-  ;; hash group names (lists of symbols) to alist of options 
+  ;; hash group names (lists of symbols) to alist of options
   (define custom-group-table (make-table equal-hash equal))
 
 ;;; defining custom variables and groups
@@ -207,9 +206,9 @@ Note that the value of the `:group' key is not evaluated."
       (unless container
 	;; declare a command to customize this group
 	(define-command (intern (concat "customize:" (symbol-name group)))
-			(lambda ()
-			  (require 'sawfish.wm.customize)
-			  (customize group))))))
+          (lambda ()
+            (require 'sawfish.wm.customize)
+            (customize group))))))
 
   (define (custom-quote-keys keys)
     (let ((out '()))
@@ -231,7 +230,7 @@ Note that the value of the `:group' key is not evaluated."
   (define (custom-setter name)
     (or (table-ref custom-setter-table name)
 	(error "No such custom setter: %s" name)))
-      
+
   (define (custom-set-property sym prop value)
     "Set the custom key PROP for defcustom'd symbol SYM to value."
     (let ((key (cdr (assq prop custom-option-alist))))
@@ -283,32 +282,32 @@ of choices."
       (setq full-group (list full-group)))
     (let loop ((group full-group)
 	       (parent custom-groups))
-      (if (null group)
-	  parent
-	(loop (cdr group)
-	      (or (assq (car group) (cddr parent))
-		  (error "No such group: %S" full-group))))))
+         (if (null group)
+             parent
+           (loop (cdr group)
+                 (or (assq (car group) (cddr parent))
+                     (error "No such group: %S" full-group))))))
 
   (define (custom-add-to-group cell full-group)
     (when (and (symbolp full-group) (not (null full-group)))
       (setq full-group (list full-group)))
     (let loop ((group full-group)
 	       (parent custom-groups))
-      (if (null group)
-	  (unless (or (memq cell (cddr parent))
-		      (assq (car cell) (cddr parent)))
-	    ;; reached the bottom most group
-	    (rplacd (cdr parent) (nconc (cddr parent) (list cell))))
-	;; keep on recursing
-	(loop (cdr group)
-	      (or (assq (car group) (cddr parent))
-		  (error "Unknown group %s" full-group)))
-	(unless (cdr group)
-	  (rplacd (cdr custom-groups)
-		  (nconc (sort (filter consp (cddr custom-groups))
-			       (lambda (x y)
-				 (string-lessp (cadr x) (cadr y))))
-			 (filter atom (cddr custom-groups))))))))
+         (if (null group)
+             (unless (or (memq cell (cddr parent))
+                         (assq (car cell) (cddr parent)))
+               ;; reached the bottom most group
+               (rplacd (cdr parent) (nconc (cddr parent) (list cell))))
+           ;; keep on recursing
+           (loop (cdr group)
+                 (or (assq (car group) (cddr parent))
+                     (error "Unknown group %s" full-group)))
+           (unless (cdr group)
+             (rplacd (cdr custom-groups)
+                     (nconc (sort (filter consp (cddr custom-groups))
+                                  (lambda (x y)
+                                    (string-lessp (cadr x) (cadr y))))
+                            (filter atom (cddr custom-groups))))))))
 
 ;;; setting values
 
@@ -334,7 +333,7 @@ of choices."
 	       (set symbol old-value)
 	     (makunbound symbol))
 	   (raise-exception ex))))))
- 
+
   (define (custom-set-variable symbol value #!optional req)
     ;; XXX kludge for old custom files..
     (when (eq value 'nil) (setq value nil))
@@ -356,7 +355,8 @@ of choices."
 		       symbol))
 
   (define (variable-customized-p symbol)
-    "Returns `t' if the variable named SYMBOL has been customized by the user."
+    "Returns `t' if the variable named SYMBOL has been customized by
+the user."
     (get symbol 'custom-user-value))
 
   (define (variable-type symbol)
@@ -376,10 +376,10 @@ of choices."
     (let ((fun (or (get symbol 'custom-set) 'custom-set-typed-variable))
 	  (custom-value (custom-serialize value (variable-type symbol))))
       `(,fun ',symbol ',custom-value
-        ,@(and (eq fun 'custom-set-typed-variable)
-	       (list (list 'quote (variable-type symbol))))
-        ,@(and (get symbol 'custom-require)
-	       (list (list 'quote (get symbol 'custom-require)))))))
+             ,@(and (eq fun 'custom-set-typed-variable)
+                    (list (list 'quote (variable-type symbol))))
+             ,@(and (get symbol 'custom-require)
+                    (list (list 'quote (get symbol 'custom-require)))))))
 
   (define (custom-eval form)
     (apply (custom-setter (car form))
@@ -391,7 +391,8 @@ of choices."
 
 ;;; serializing unreadable types
 
-  ;; property name (symbol) to find type converters on during custom-convert
+  ;; property name (symbol) to find type converters on during
+  ;; custom-convert
   (define custom-converter-property (make-fluid))
 
   ;; convert VALUE of TYPE to or from a printable object
@@ -438,12 +439,12 @@ of choices."
   (define (custom-serialize value type)
     "Convert VALUE of TYPE to a printable value."
     (let-fluids ((custom-converter-property 'custom-serializer))
-      (custom-convert value type)))
+                (custom-convert value type)))
 
   (define (custom-deserialize value type)
     "Convert VALUE of TYPE back from a printable value."
     (let-fluids ((custom-converter-property 'custom-deserializer))
-      (custom-convert value type)))
+                (custom-convert value type)))
 
   (define (define-custom-serializer type fun)
     (put type 'custom-serializer fun))

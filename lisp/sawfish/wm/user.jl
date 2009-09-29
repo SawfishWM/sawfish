@@ -1,25 +1,22 @@
-#| user.jl -- do user-local initialization
-
-   $Id: user.jl,v 1.16 2001/02/14 00:03:21 jsh Exp $
-
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; user.jl -- do user-local initialization
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;; Commentary:
 
@@ -35,7 +32,9 @@
 ;; The downside is that it's harder for user extensions to redefine
 ;; existing code, IMHO this may also be a good thing..
 
-(define-structure user ()
+(define-structure user
+
+    (export )
 
     ((open rep
 	   rep.regexp
@@ -108,10 +107,10 @@
 
 	      ;; then the sawfish specific user configuration
 	      (let loop ((rest rc-files))
-		(when rest
-		  (if (rc-file-exists-p (car rest))
-		      (safe-load (car rest) t t t)
-		    (loop (cdr rest))))))))
+                   (when rest
+                     (if (rc-file-exists-p (car rest))
+                         (safe-load (car rest) t t t)
+                       (loop (cdr rest))))))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
@@ -122,7 +121,7 @@
   ;; apply customized font-colors
   (require 'sawfish.wm.extras)
   (if use-custom-font-color
-    (update-frame-font-color))
+      (update-frame-font-color))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)

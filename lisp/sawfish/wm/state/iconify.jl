@@ -1,5 +1,4 @@
 ;; iconify.jl -- handling window state
-;; $Id: iconify.jl,v 1.33 2002/04/21 22:25:15 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -52,7 +51,7 @@
 	  sawfish.wm.commands.groups
 	  sawfish.wm.state.transient
 	  sawfish.wm.menus)
-  
+
   ;; Commentary:
 
   ;; Iconification (but without icons)
@@ -207,13 +206,13 @@
       (make-window-sticky/workspace w #:no-hooks t)
       (make-window-sticky/viewport w #:no-hooks t)
       (emit-sticky-hook w)))
-  
+
   (define (make-window-unsticky w)
     (when (window-sticky-p w)
       (make-window-unsticky/workspace w #:no-hooks t)
       (make-window-unsticky/viewport w #:no-hooks t)
       (emit-sticky-hook w)))
-  
+
   (define (toggle-window-sticky w)
     "Toggle the `stickiness' of the window--whether or not it is a member of
 all workspaces."

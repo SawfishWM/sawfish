@@ -1,25 +1,22 @@
-#| nokogiri-slot.jl -- managing individual config items
-
-   $Id: slot.jl,v 1.9 2003/01/12 20:30:47 jsh Exp $
-
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; nokogiri-slot.jl -- managing individual config items
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.cfg.slot
 
@@ -47,11 +44,11 @@
   (define-record-type :slot
     (create-slot name old-value flags)
     ;; [no predicate]
-    (name slot-name)			;name of config item
+    (name slot-name)			 ;name of config item
     (widget slot-widget slot-widget-set) ;associated lisp widget
     (layout slot-layout set-slot-layout) ;gtk widget if the slot is displayed
-    (old-value slot-old-value)		;original value of slot's config
-    (doc slot-doc slot-doc-set)		;doc string (unless shown in widget)
+    (old-value slot-old-value)		 ;original value of slot's config
+    (doc slot-doc slot-doc-set)		 ;doc string (unless shown in widget)
     (flags slot-flags))
 
   (define-record-discloser :slot
@@ -125,31 +122,31 @@
     ;; the nil spaces.
     (define (merge slots extra)
       (let loop ((rest slots))
-	(if (null rest)
-	    slots
-	  (when (null (car rest))
-	    (rplaca rest (apply make-slot (car extra)))
-	    (setq extra (cdr extra)))
-	  (loop (cdr rest)))))
+           (if (null rest)
+               slots
+             (when (null (car rest))
+               (rplaca rest (apply make-slot (car extra)))
+               (setq extra (cdr extra)))
+             (loop (cdr rest)))))
 
     ;; find which slots still need to be loaded
     (let ((slots (mapcar get-slot names)))
       (let loop ((names-rest names)
 		 (slots-rest slots)
 		 (to-fetch '()))
-	(if (null names-rest)
-	    (if to-fetch
-		;; load and merge the required slots
-		(merge slots (wm-load-slots (nreverse to-fetch)))
-	      slots)
-	  (if (null (car slots-rest))
-	      ;; slot not loaded yet
-	      (loop (cdr names-rest)
-		    (cdr slots-rest)
-		    (cons (car names-rest) to-fetch))
-	    (loop (cdr names-rest)
-		  (cdr slots-rest)
-		  to-fetch))))))
+           (if (null names-rest)
+               (if to-fetch
+                   ;; load and merge the required slots
+                   (merge slots (wm-load-slots (nreverse to-fetch)))
+                 slots)
+             (if (null (car slots-rest))
+                 ;; slot not loaded yet
+                 (loop (cdr names-rest)
+                       (cdr slots-rest)
+                       (cons (car names-rest) to-fetch))
+               (loop (cdr names-rest)
+                     (cdr slots-rest)
+                     to-fetch))))))
 
 ;;; misc
 

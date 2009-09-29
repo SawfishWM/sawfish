@@ -1,27 +1,24 @@
-#| recolor-image.jl -- simple code for recolouring images
-
-   $Id$
-
-   Copyright (C) 2001 Eazel, Inc.
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-
-   Authors: John Harper <jsh@eazel.com>
-|#
+;; recolor-image.jl -- simple code for recolouring images
+;;
+;; Copyright (C) 2001 Eazel, Inc.
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+;;
+;; Authors: John Harper <jsh@eazel.com>
 
 ;; this module is marked as being fully-safe, so don't add any
 ;; dangerous functions!
@@ -78,17 +75,17 @@
 				  (red-rest red-luts)
 				  (green-rest green-luts)
 				  (blue-rest blue-luts))
-			 (when rest
-			   (let ((index (nth (car rest) pixel)))
-			     (if (not (zerop index))
-				 (list (aref (car red-rest) index)
-				       (aref (car green-rest) index)
-				       (aref (car blue-rest) index)
-				       (nth alpha-channel pixel))
-			       (loop (cdr rest)
-				     (cdr red-rest)
-				     (cdr green-rest)
-				     (cdr blue-rest))))))))
+                            (when rest
+                              (let ((index (nth (car rest) pixel)))
+                                (if (not (zerop index))
+                                    (list (aref (car red-rest) index)
+                                          (aref (car green-rest) index)
+                                          (aref (car blue-rest) index)
+                                          (nth alpha-channel pixel))
+                                  (loop (cdr rest)
+                                        (cdr red-rest)
+                                        (cdr green-rest)
+                                        (cdr blue-rest))))))))
 		   image))))
 
   (define (make-image-recolorer color #!key

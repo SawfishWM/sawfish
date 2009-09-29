@@ -1,5 +1,4 @@
 ;; move-resize.jl -- interactive moving and resizing of windows
-;; $Id: move-resize.jl,v 1.91 2002/05/29 06:39:02 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -77,16 +76,17 @@
     :group move
     :type boolean)
 
- (defcustom resize-edge-mode 'border-grab
-   "How to choose window edges when resizing."
-   :type (choice region border grab border-grab)
-   :group move)
+  (defcustom resize-edge-mode 'border-grab
+    "How to choose window edges when resizing."
+    :type (choice region border grab border-grab)
+    :group move)
 
   (defcustom move-snap-epsilon 12
     "Distance in pixels before window edges align with each other."
     :group move
     :type (number 0 64)
-    :tooltip "When moving a window, this option lets you align one of its edges with an edge of another window.")
+    :tooltip "When moving a window, this option lets you align one of \
+its edges with an edge of another window.")
 
   (defvar move-snap-mode 'resistance
     "How to snap together window edges, one of `magnetism', `resistance', or
@@ -99,20 +99,20 @@
     "Only update window contents after it has stopped moving.")
 
   (defvar move-resize-map (bind-keys (make-keymap)
-			    "Any-Off1" (lambda () (finished))
-			    "Any-Off2" (lambda () (finished))
-			    "Any-Off3" (lambda () (finished))
-			    "Any-Move" (lambda () (motion))
-			    "Any-ESC" (lambda () (cancel))
-			    "Any-RET" (lambda () (finished))
-			    "Up" 'move-cursor-up
-			    "Down" 'move-cursor-down
-			    "Left" 'move-cursor-left
-			    "Right" 'move-cursor-right
-			    "S-Up" 'move-cursor-up-fine
-			    "S-Down" 'move-cursor-down-fine
-			    "S-Left" 'move-cursor-left-fine
-			    "S-Right" 'move-cursor-right-fine))
+                                     "Any-Off1" (lambda () (finished))
+                                     "Any-Off2" (lambda () (finished))
+                                     "Any-Off3" (lambda () (finished))
+                                     "Any-Move" (lambda () (motion))
+                                     "Any-ESC" (lambda () (cancel))
+                                     "Any-RET" (lambda () (finished))
+                                     "Up" 'move-cursor-up
+                                     "Down" 'move-cursor-down
+                                     "Left" 'move-cursor-left
+                                     "Right" 'move-cursor-right
+                                     "S-Up" 'move-cursor-up-fine
+                                     "S-Down" 'move-cursor-down-fine
+                                     "S-Left" 'move-cursor-left-fine
+                                     "S-Right" 'move-cursor-right-fine))
 
   (define fp-edges-alist '((top-border top)
 			   (left-border left)
@@ -342,7 +342,8 @@
 		 (setq move-resize-width
 		       (constrain-dimension-to-hints
 			(+ move-resize-old-width
-			   (- move-resize-old-ptr-x ptr-x)) 'x move-resize-hints))
+			   (- move-resize-old-ptr-x ptr-x))
+                        'x move-resize-hints))
                  (when (or min-aspect max-aspect)
                    (setq move-resize-height
                          (constrain-aspect-to-hints
@@ -518,12 +519,12 @@
   (define (resize-by-factor win amount)
     "Multiply win's dimensions by amount"
     (let* (
-      (orig-wid (car (window-dimensions win)))
-      (orig-hgt (cdr (window-dimensions win)))
-      (new-wid (inexact->exact (floor (* amount orig-wid))))
-      (new-hgt (inexact->exact (floor (* amount orig-hgt)))))
-    ; this expects integers ("800 600") and fails on floats ("800. 600.")
-    (resize-window-with-hints* win new-wid new-hgt)))
+           (orig-wid (car (window-dimensions win)))
+           (orig-hgt (cdr (window-dimensions win)))
+           (new-wid (inexact->exact (floor (* amount orig-wid))))
+           (new-hgt (inexact->exact (floor (* amount orig-hgt)))))
+      ;; this expects integers ("800 600") and fails on floats ("800. 600.")
+      (resize-window-with-hints* win new-wid new-hgt)))
 
   (define (double-window-size w)
     (resize-by-factor w 2))
@@ -551,29 +552,40 @@
     (do-move-resize w 'resize))
 
   (define (move-selected-window)
-    "Wait for the user to select a window, then interactively move that window."
+    "Wait for the user to select a window, then interactively move
+that window."
     (let ((w (select-window)))
       (when w
 	(move-window-interactively w))))
 
   (define (resize-selected-window)
-    "Wait for the user to select a window, then interactively resize that window."
+    "Wait for the user to select a window, then interactively resize
+that window."
     (let ((w (select-window)))
       (when w
 	(resize-window-interactively w))))
 
-;; Move Window To Center
+  ;; Move Window To Center
 
   (define (move-window-center w)
     (move-window-to w
-      (round (/ (- (screen-width) (car (window-frame-dimensions w))) 2))
-      (round (/ (- (screen-height) (cdr (window-frame-dimensions w))) 2))))
+                    (round (/ (- (screen-width)
+                                 (car (window-frame-dimensions w))) 2))
+                    (round (/ (- (screen-height)
+                                 (cdr (window-frame-dimensions w))) 2))))
 
   ;;###autoload
-  (define-command 'move-window-center move-window-center #:spec "%W")
-  (define-command 'move-window-interactively move-window-interactively #:spec "%W")
-  (define-command 'resize-window-interactively resize-window-interactively #:spec "%W")
-  (define-command 'move-selected-window move-selected-window)
-  (define-command 'resize-selected-window resize-selected-window)
-  (define-command 'double-window-size double-window-size #:spec "%W")
-  (define-command 'halve-window-size halve-window-size #:spec "%W"))
+  (define-command 'move-window-center
+    move-window-center #:spec "%W")
+  (define-command 'move-window-interactively
+    move-window-interactively #:spec "%W")
+  (define-command 'resize-window-interactively
+    resize-window-interactively #:spec "%W")
+  (define-command 'move-selected-window
+    move-selected-window)
+  (define-command 'resize-selected-window
+    resize-selected-window)
+  (define-command 'double-window-size
+    double-window-size #:spec "%W")
+  (define-command 'halve-window-size
+    halve-window-size #:spec "%W"))

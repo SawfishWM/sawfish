@@ -1,5 +1,4 @@
 ;; absolute-e/theme.jl
-;; $Id: theme.jl,v 1.11 2000/05/15 16:37:52 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -46,7 +45,7 @@
 		    (let
 			((w-width (car (window-dimensions w))))
 		      (- (min (max (/ w-width 2) 100) w-width) 16))))
-     
+
      ;; 100x16
      (bar-images (mapcar (lambda (i)
 			   (set-image-border i 4 4 4 4))

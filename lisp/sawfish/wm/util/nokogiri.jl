@@ -1,25 +1,22 @@
-#| nokogiri-sawfish.jl -- code to load into window manager
-
-   $Id: nokogiri.jl,v 1.20 2002/04/21 04:52:17 jsh Exp $
-
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; nokogiri-sawfish.jl -- code to load into window manager
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.util.nokogiri
 
@@ -60,10 +57,10 @@
 	(setq doc (_ doc))
 	(when customize-show-symbols
 	  (setq doc (format nil "%s\n[%s]" doc (symbol-name symbol)))))
-      
+
       (when (and (symbolp type) (get type 'custom-widget))
 	(setq type ((get type 'custom-widget) type)))
-      
+
       ;; backwards compatibility
       (case type
 	((symbol)
@@ -76,7 +73,7 @@
 	 (setq type 'file))
 	((program-name)
 	 (setq type 'program)))
-      
+
       (nconc (list #:name symbol
 		   #:type type
 		   #:value value)
@@ -126,7 +123,7 @@
 
   (mapc (lambda (x) (put x 'deprecated-command t))
 	'(apropos-function apropos-variable beep call-command
-	  copy-file delete-directory delete-file describe-key
-	  describe-symbol focus-click garbage-collect load
-	  make-directory nop rename-file set step system
-	  trace untrace recursive-edit)))
+                           copy-file delete-directory delete-file describe-key
+                           describe-symbol focus-click garbage-collect load
+                           make-directory nop rename-file set step system
+                           trace untrace recursive-edit)))

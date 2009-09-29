@@ -1,5 +1,4 @@
 ;; compat.jl -- aliases for obsolete functions
-;; $Id: compat.jl,v 1.18 2002/04/21 23:11:40 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -96,30 +95,29 @@
 
   (mapc (lambda (x)
 	  (put x 'custom-obsolete t))
-	'(viewport-columns viewport-rows
-	  preallocated-workspaces iconify-whole-group
-	  uniconify-whole-group always-update-frames
-	  edge-flip-warp-pointer frame-type-fallbacks
-	  warp-to-window-x-offset warp-to-window-y-offset
-	  uniquify-name-format transients-get-focus decorate-transients
-	  raise-windows-on-uniconify uniconify-to-current-workspace
-	  uniconify-to-current-viewport iconify-ignored
-	  focus-windows-on-uniconify
-	  transients-are-group-members raise-selected-windows
-	  warp-to-selected-windows menus-include-shortcuts
-	  configure-auto-gravity configure-ignore-stacking-requests
-	  beos-window-menu-simplifies customize-show-symbols
-	  move-snap-mode move-snap-ignored-windows
-	  move-resize-inhibit-configure move-snap-edges
-	  raise-windows-when-unshaded persistent-group-ids
-	  delete-workspaces-when-empty transients-on-parents-workspace
-	  audio-for-ignored-windows
-	  size-window-def-increment slide-window-increment
-	  default-bevel-percent sp-padding nokogiri-user-level
-	  nokogiri-buttons workspace-boundary-mode
-	  workspace-send-boundary-mode lock-first-workspace
-	  ignore-window-input-hint workspace-geometry
-	  pointer-motion-threshold ignore-program-positions))
+	'(viewport-columns viewport-rows preallocated-workspaces
+          iconify-whole-group uniconify-whole-group
+          always-update-frames edge-flip-warp-pointer
+          frame-type-fallbacks warp-to-window-x-offset
+          warp-to-window-y-offset uniquify-name-format
+          transients-get-focus decorate-transients
+          raise-windows-on-uniconify uniconify-to-current-workspace
+          uniconify-to-current-viewport iconify-ignored
+          focus-windows-on-uniconify transients-are-group-members
+          raise-selected-windows warp-to-selected-windows
+          menus-include-shortcuts configure-auto-gravity
+          configure-ignore-stacking-requests
+          beos-window-menu-simplifies customize-show-symbols
+          move-snap-mode move-snap-ignored-windows
+          move-resize-inhibit-configure move-snap-edges
+          raise-windows-when-unshaded persistent-group-ids
+          delete-workspaces-when-empty transients-on-parents-workspace
+          audio-for-ignored-windows size-window-def-increment
+          slide-window-increment default-bevel-percent sp-padding
+          nokogiri-user-level nokogiri-buttons workspace-boundary-mode
+          workspace-send-boundary-mode lock-first-workspace
+          ignore-window-input-hint workspace-geometry
+          pointer-motion-threshold ignore-program-positions))
 
 ;;; obsolete custom setters
 

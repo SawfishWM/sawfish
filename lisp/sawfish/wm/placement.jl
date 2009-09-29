@@ -1,5 +1,4 @@
 ;; place-window.jl -- decide where to initially place a window
-;; $Id: placement.jl,v 1.55 2003/01/12 20:48:36 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -188,7 +187,8 @@ this mode. The single argument is the window to be placed."
 	(let ((dims (window-frame-dimensions w))
 	      (pdims (window-frame-dimensions parent))
 	      (coords (window-position parent))
-	      (screen (calculate-workarea #:window w #:head (current-head parent))))
+	      (screen (calculate-workarea #:window w
+                                          #:head (current-head parent))))
 	  (rplaca coords (clamp* (+ (car coords)
 				    (quotient (- (car pdims) (car dims)) 2))
 				 (car dims) (nth 0 screen) (nth 2 screen)))
@@ -207,9 +207,15 @@ this mode. The single argument is the window to be placed."
 			     (cdr dims) (nth 1 screen) (nth 3 screen)))
       (move-window-to w (car coords) (cdr coords))))
 
-  (define-placement-mode 'randomly place-window-randomly #:for-normal t #:for-dialogs t)
-  (define-placement-mode 'interactively place-window-interactively #:for-normal t #:for-dialogs t)
-  (define-placement-mode 'centered place-window-centered #:for-normal t #:for-dialogs t)
-  (define-placement-mode 'centered-on-parent place-window-centered-on-parent #:for-normal t #:for-dialogs t)
-  (define-placement-mode 'under-pointer place-window-under-pointer #:for-normal t #:for-dialogs t)
-  (define-placement-mode 'none nop #:for-normal t #:for-dialogs t))
+  (define-placement-mode 'randomly place-window-randomly
+    #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'interactively place-window-interactively
+    #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'centered place-window-centered
+    #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'centered-on-parent place-window-centered-on-parent
+    #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'under-pointer place-window-under-pointer
+    #:for-normal t #:for-dialogs t)
+  (define-placement-mode 'none nop
+    #:for-normal t #:for-dialogs t))

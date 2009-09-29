@@ -1,5 +1,4 @@
 ;; keymaps.jl -- the default keymaps
-;; $Id: keymaps.jl,v 1.55 2003/01/12 20:30:50 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -101,7 +100,7 @@
 			     "W-Button2-Click1" 'popup-window-menu
 			     "W-Button1-Move" 'move-window-interactively
 			     "Button1-Click1" 'raise-and-pass-through-click
-			     "W-ISO_Left_Tab" 'tab-raise-left-window 
+			     "W-ISO_Left_Tab" 'tab-raise-left-window
 			     "H-ISO_Left_Tab" 'tab-raise-right-window)
     "Keymap containing bindings active when a client window is focused."
     :group bindings
@@ -196,7 +195,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
   (define (keymap-add-window w)
     (unless (window-get w 'keymap)
       (window-put w 'keymap window-keymap)))
-  
+
   (add-hook 'add-window-hook keymap-add-window)
 
 ;; custom support for modifiers

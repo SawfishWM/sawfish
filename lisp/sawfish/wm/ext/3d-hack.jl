@@ -1,5 +1,4 @@
 ;; 3d-hack.jl -- too much spare time..
-;; $Id: 3d-hack.jl,v 1.10 2002/04/21 04:52:15 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -115,9 +114,12 @@
       (setq 3d-rot-speed [0.02 0.04 -0.1])))
 
   (define (3d-make-cube)
-    (let ((red-gc (x-create-gc 3d-window `((foreground . ,(get-color "red")))))
-	  (blue-gc (x-create-gc 3d-window `((foreground . ,(get-color "blue")))))
-	  (green-gc (x-create-gc 3d-window `((foreground . ,(get-color "green"))))))
+    (let ((red-gc (x-create-gc 3d-window
+                               `((foreground . ,(get-color "red")))))
+	  (blue-gc (x-create-gc 3d-window
+                                `((foreground . ,(get-color "blue")))))
+	  (green-gc (x-create-gc 3d-window
+                                 `((foreground . ,(get-color "green"))))))
       (setq 3d-vertices [[-1 -1 1]
 			 [1 -1 1]
 			 [1 1 1]

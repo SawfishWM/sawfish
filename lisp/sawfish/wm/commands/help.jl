@@ -1,5 +1,4 @@
 ;; help.jl -- commands for the help menu
-;; $Id: help.jl,v 1.6 2003/01/12 20:35:09 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -34,7 +33,7 @@
 
   (define (help-call-info document node)
     (xterm (format nil "info '%s' '%s'"
-		    document node)))
+                   document node)))
 
   (defvar help-display-info-function help-call-info)
 

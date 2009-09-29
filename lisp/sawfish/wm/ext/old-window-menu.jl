@@ -1,5 +1,4 @@
 ;; old-window-menu.jl
-;; $Id: old-window-menu.jl,v 1.8 2000/10/09 13:13:41 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

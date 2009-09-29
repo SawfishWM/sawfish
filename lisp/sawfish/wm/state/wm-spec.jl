@@ -1,7 +1,5 @@
 ;; wm-spec.jl -- implement the new (GNOME/KDE) wm hints spec
 
-;; $Id: wm-spec.jl,v 1.49 2005/07/01 16:04:50 jsh Exp $
-
 ;; Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
 
 ;; This file is part of sawfish.
@@ -124,7 +122,7 @@
      _NET_WM_WINDOW_TYPE_UTILITY
      _NET_WM_WINDOW_TYPE_SPLASH
      _NET_WM_USER_TIME])
-  
+
   (defvar wm-spec-below-depth -2)
   (defvar wm-spec-above-depth +2)
 
@@ -136,18 +134,18 @@
     (define (set-prop lst prop)
       (let loop ((rest lst)
 		 (collected '()))
-	(cond ((null rest)
-	       (set-x-property 'root prop
-			       (apply vector (nreverse collected))
-			       'WINDOW 32))
-	      ((window-mapped-p (car rest))
-	       (loop (cdr rest) (cons (window-id (car rest)) collected)))
-	      (t (loop (cdr rest) collected)))))
+           (cond ((null rest)
+                  (set-x-property 'root prop
+                                  (apply vector (nreverse collected))
+                                  'WINDOW 32))
+                 ((window-mapped-p (car rest))
+                  (loop (cdr rest) (cons (window-id (car rest)) collected)))
+                 (t (loop (cdr rest) collected)))))
     (unless only-stacking-list
       (set-prop (managed-windows) '_NET_CLIENT_LIST))
     (set-prop (nreverse (stacking-order)) '_NET_CLIENT_LIST_STACKING))
 
-;; setting the desktop / viewport hints
+  ;; setting the desktop / viewport hints
 
   (define last-workspace nil)
   (define last-workspace-count 0)
@@ -210,12 +208,12 @@
 	(unless (equal last-area port)
 	  (let ((view (make-vector (* total-workspaces 2))))
 	    (let loop ((i 0))
-	      (if (= i total-workspaces)
-		  (set-x-property 'root '_NET_DESKTOP_VIEWPORT
-				  view 'CARDINAL 32)
-		(aset view (* i 2) (* (car port) (screen-width)))
-		(aset view (1+ (* i 2)) (* (cdr port) (screen-height)))
-		(loop (1+ i))))))
+                 (if (= i total-workspaces)
+                     (set-x-property 'root '_NET_DESKTOP_VIEWPORT
+                                     view 'CARDINAL 32)
+                   (aset view (* i 2) (* (car port) (screen-width)))
+                   (aset view (1+ (* i 2)) (* (cdr port) (screen-height)))
+                   (loop (1+ i))))))
 
 	;; _NET_WORKAREA
 	(unless (equal last-workarea workarea)
@@ -240,7 +238,7 @@
 	  (aset workarea (+ (* i 4) 1) (nth 1 area))
 	  (aset workarea (+ (* i 4) 2) (- (nth 2 area) (nth 0 area)))
 	  (aset workarea (+ (* i 4) 3) (- (nth 3 area) (nth 1 area)))))
-		 
+
       ;; apparently some pagers don't like it if we place windows
       ;; on (temporarily) non-existent workspaces
       (when (< last-workspace-count total-workspaces)
@@ -284,7 +282,7 @@
       (when (and strut (eq (nth 0 strut) 'CARDINAL))
 	(let ((data (nth 2 strut)))
 	  (define-window-strut w (aref data 0) (aref data 2)
-			       (aref data 1) (aref data 3))))))
+            (aref data 1) (aref data 3))))))
 
   (define (honour-client-state w)
     (let ((space (get-x-property w '_NET_WM_DESKTOP)))
@@ -301,10 +299,10 @@
 	;; _NET_WM_WINDOW_TYPE is a vector of atoms, the first atom
 	;; about which we know something is the type we'll use
 	(let loop ((i 0))
-	  (cond ((= i (length type)))
-		((get (aref type i) 'wm-spec-type)
-		 ((get (aref type i) 'wm-spec-type) w))
-		(t (loop (1+ i)))))))
+             (cond ((= i (length type)))
+                   ((get (aref type i) 'wm-spec-type)
+                    ((get (aref type i) 'wm-spec-type) w))
+                   (t (loop (1+ i)))))))
 
     (let ((state (get-x-property w '_NET_WM_STATE)))
       (when state
@@ -318,9 +316,9 @@
     (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
       (when geom
 	(update-icon-geometry w (nth 2 geom))))
-      (when (equal (get-x-property w '_NET_WM_USER_TIME)
-          '(CARDINAL 32 #(0)))
-        (window-put w 'inhibit-focus-when-mapped t)))
+    (when (equal (get-x-property w '_NET_WM_USER_TIME)
+                 '(CARDINAL 32 #(0)))
+      (window-put w 'inhibit-focus-when-mapped t)))
 
 ;;; helper functions
 
@@ -345,48 +343,48 @@
 	(fun w mode))))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DESKTOP
-   (lambda (w)
-     (mark-window-as-desktop w)))
+    (lambda (w)
+      (mark-window-as-desktop w)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DOCK
-   (lambda (w)
-     (mark-window-as-dock w)))
+    (lambda (w)
+      (mark-window-as-dock w)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_DIALOG
-   (lambda (w)
-     (mark-window-as-transient w)))
+    (lambda (w)
+      (mark-window-as-transient w)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_UTILITY
-   (lambda (w)
-     (require 'sawfish.wm.frames)
-     (set-window-type w 'utility)))
+    (lambda (w)
+      (require 'sawfish.wm.frames)
+      (set-window-type w 'utility)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_TOOLBAR
-   (lambda (w)
-     (require 'sawfish.wm.frames)
-     (set-window-type w 'toolbar)))
+    (lambda (w)
+      (require 'sawfish.wm.frames)
+      (set-window-type w 'toolbar)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_MENU
-   (lambda (w)
-     (require 'sawfish.wm.frames)
-     (set-window-type w 'menu)))
+    (lambda (w)
+      (require 'sawfish.wm.frames)
+      (set-window-type w 'menu)))
 
   (define-wm-spec-window-type '_NET_WM_WINDOW_TYPE_SPLASH
-   (lambda (w)
-     (require 'sawfish.wm.frames)
-     (set-window-type w 'splash)
-     (window-put w 'place-mode 'centered)))
+    (lambda (w)
+      (require 'sawfish.wm.frames)
+      (set-window-type w 'splash)
+      (window-put w 'place-mode 'centered)))
 
   (define-wm-spec-window-state '_NET_WM_STATE_STICKY
-   (lambda (w mode)
-     (case mode
-       ((init)   (window-put w 'sticky-viewport t))
-       ((remove) (make-window-unsticky/viewport w))
-       ((add)    (make-window-sticky/viewport w))
-       ((toggle) (if (window-sticky-p/viewport w)
-		     (make-window-unsticky/viewport w)
-		   (make-window-sticky/viewport w)))
-       ((get)    (window-sticky-p/viewport w)))))
+    (lambda (w mode)
+      (case mode
+        ((init)   (window-put w 'sticky-viewport t))
+        ((remove) (make-window-unsticky/viewport w))
+        ((add)    (make-window-sticky/viewport w))
+        ((toggle) (if (window-sticky-p/viewport w)
+                      (make-window-unsticky/viewport w)
+                    (make-window-sticky/viewport w)))
+        ((get)    (window-sticky-p/viewport w)))))
 
   (define (wm-spec-maximize-handler direction)
     (lambda (w mode)
@@ -407,49 +405,49 @@
 		      (t (window-maximized-p w))))))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_VERT
-			       (wm-spec-maximize-handler 'vertical))
+    (wm-spec-maximize-handler 'vertical))
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED_HORZ
-			       (wm-spec-maximize-handler 'horizontal))
+    (wm-spec-maximize-handler 'horizontal))
   (define-wm-spec-window-state '_NET_WM_STATE_MAXIMIZED
-			       (wm-spec-maximize-handler nil)
-			       #:pseudo t)
+    (wm-spec-maximize-handler nil)
+    #:pseudo t)
 
   (define-wm-spec-window-state '_NET_WM_STATE_SHADED
-   (lambda (w mode)
-     (require 'sawfish.wm.state.shading)
-     (case mode
-       ((init)   (window-put w 'shaded t))
-       ((add)    (shade-window w))
-       ((remove) (unshade-window w))
-       ((toggle) (toggle-window-shaded w))
-       ((get)    (window-get w 'shaded)))))
+    (lambda (w mode)
+      (require 'sawfish.wm.state.shading)
+      (case mode
+        ((init)   (window-put w 'shaded t))
+        ((add)    (shade-window w))
+        ((remove) (unshade-window w))
+        ((toggle) (toggle-window-shaded w))
+        ((get)    (window-get w 'shaded)))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_SKIP_PAGER
-   (lambda (w mode)
-     (case mode
-       ((init add) (window-put w 'window-list-skip t))
-       ((remove)   (window-put w 'window-list-skip nil))
-       ((toggle)   (window-put w 'window-list-skip
-			       (not (window-get w 'window-list-skip))))
-       ((get)      (window-get w 'window-list-skip)))))
+    (lambda (w mode)
+      (case mode
+        ((init add) (window-put w 'window-list-skip t))
+        ((remove)   (window-put w 'window-list-skip nil))
+        ((toggle)   (window-put w 'window-list-skip
+                                (not (window-get w 'window-list-skip))))
+        ((get)      (window-get w 'window-list-skip)))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_SKIP_TASKBAR
-   (lambda (w mode)
-     (case mode
-       ((init add) (window-put w 'task-list-skip t))
-       ((remove)   (window-put w 'task-list-skip nil))
-       ((toggle)   (window-put w 'task-list-skip
-			       (not (window-get w 'task-list-skip))))
-       ((get)      (window-get w 'task-list-skip)))))
+    (lambda (w mode)
+      (case mode
+        ((init add) (window-put w 'task-list-skip t))
+        ((remove)   (window-put w 'task-list-skip nil))
+        ((toggle)   (window-put w 'task-list-skip
+                                (not (window-get w 'task-list-skip))))
+        ((get)      (window-get w 'task-list-skip)))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_FULLSCREEN
-   (lambda (w mode)
-     (require 'sawfish.wm.state.maximize)
-     (case mode
-       ((init) (window-put w 'queued-fullscreen-maximize t))
-       ((add remove) (maximize-window-fullscreen w (eq mode 'add)))
-       ((toggle) (maximize-window-fullscreen-toggle w))
-       ((get) (window-maximized-fullscreen-p w)))))
+    (lambda (w mode)
+      (require 'sawfish.wm.state.maximize)
+      (case mode
+        ((init) (window-put w 'queued-fullscreen-maximize t))
+        ((add remove) (maximize-window-fullscreen w (eq mode 'add)))
+        ((toggle) (maximize-window-fullscreen-toggle w))
+        ((get) (window-maximized-fullscreen-p w)))))
 
   (define (above-below-handler depth w mode)
     (require 'sawfish.wm.stacking)
@@ -464,12 +462,12 @@
        (= (window-depth w) depth))))
 
   (define-wm-spec-window-state '_NET_WM_STATE_BELOW
-   (lambda (w mode)
-     (above-below-handler wm-spec-below-depth w mode)))
+    (lambda (w mode)
+      (above-below-handler wm-spec-below-depth w mode)))
 
   (define-wm-spec-window-state '_NET_WM_STATE_ABOVE
-   (lambda (w mode)
-     (above-below-handler wm-spec-above-depth w mode)))
+    (lambda (w mode)
+      (above-below-handler wm-spec-above-depth w mode)))
 
 ;;; client messages
 
@@ -495,14 +493,22 @@
 		     (eq mode _NET_WM_MOVERESIZE_MOVE_KEYBOARD))
 		 (move-window-interactively w)
 	       (let ((move-resize-moving-edges
-		      (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT) '(top left))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOP) '(top))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPRIGHT) '(top right))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT) '(bottom left))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOM) '(bottom))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT) '(bottom right))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_LEFT) '(left))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT) '(right)))))
+		      (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT)
+                             '(top left))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOP)
+                             '(top))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPRIGHT)
+                             '(top right))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT)
+                             '(bottom left))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOM)
+                             '(bottom))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT)
+                             '(bottom right))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_LEFT)
+                             '(left))
+			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT)
+                             '(right)))))
 		 (resize-window-interactively w))))))
 
 	((_NET_NUMBER_OF_DESKTOPS)
@@ -515,8 +521,8 @@
 	 (set-viewport (aref data 0) (aref data 1)))
 
 	((_NET_CURRENT_DESKTOP)
-         ; KDE spews _NET_CURRENT_DESKTOP( -1) messages so often that it
-         ; is best to just ignore out of bounds errors silently.
+         ;; KDE spews _NET_CURRENT_DESKTOP( -1) messages so often that it
+         ;; is best to just ignore out of bounds errors silently.
          (let ((ws (workspace-id-from-logical (aref data 0)))
                (limits (workspace-limits)))
            (if (<= (car limits) ws (cdr limits))
@@ -528,9 +534,9 @@
 	 (setq data (aref data 0))
 	 (let loop ((i 0)
 		    (out '()))
-	   (if (= i (length data))
-	       (setq workspace-names (nreverse out))
-	     (loop (1+ i) (cons (aref data i) out)))))
+              (if (= i (length data))
+                  (setq workspace-names (nreverse out))
+                (loop (1+ i) (cons (aref data i) out)))))
 
 	((_NET_ACTIVE_WINDOW)
 	 (require 'sawfish.wm.util.display-window)
@@ -539,9 +545,12 @@
 
 	((_NET_WM_STATE)
 	 (when (windowp w)
-	   (let ((mode (cond ((eql (aref data 0) _NET_WM_STATE_REMOVE) 'remove)
-			     ((eql (aref data 0) _NET_WM_STATE_ADD) 'add)
-			     ((eql (aref data 0) _NET_WM_STATE_TOGGLE) 'toggle)))
+	   (let ((mode (cond ((eql (aref data 0) _NET_WM_STATE_REMOVE)
+                              'remove)
+			     ((eql (aref data 0) _NET_WM_STATE_ADD)
+                              'add)
+			     ((eql (aref data 0) _NET_WM_STATE_TOGGLE)
+                              'toggle)))
 		 (atom1 (x-atom-name (aref data 1)))
 		 (atom2 (x-atom-name (aref data 2))))
 	     (when (or (and (eq atom1 '_NET_WM_STATE_MAXIMIZED_VERT)
@@ -623,9 +632,9 @@
     (add-hook 'workarea-changed-hook update-workspace-hints)
     (add-hook 'configure-notify-hook update-on-configure-notify)
 
-    ; Better not expose work in progress.  map-notify-hook gets
-    ; called after this anyway.
-    ;(add-hook 'add-window-hook update-client-list-hints)
+    ;; Better not expose work in progress.  map-notify-hook gets
+    ;; called after this anyway.
+    ;;(add-hook 'add-window-hook update-client-list-hints)
     (add-hook 'destroy-notify-hook update-client-list-hints)
     (add-hook 'map-notify-hook update-client-list-hints)
     (add-hook 'unmap-notify-hook update-client-list-hints)
@@ -634,7 +643,7 @@
     (add-hook 'before-add-window-hook honour-client-state)
     (add-hook 'add-window-hook update-client-state)
     (call-after-state-changed '(sticky shaded maximized stacking
-				window-list-skip task-list-skip)
+                                       window-list-skip task-list-skip)
 			      update-client-state)
     (call-after-state-changed 'sticky update-window-workspace-hints)
 

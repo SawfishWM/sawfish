@@ -1,27 +1,24 @@
-#| ping.jl -- implement the _NET_WM_PING protocol
-
-   $Id$
-
-   Author: John Harper <jsh@eazel.com>
-
-   Copyright (C) 2000 Eazel, Inc.
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; ping.jl -- implement the _NET_WM_PING protocol
+;;
+;; Author: John Harper <jsh@eazel.com>
+;;
+;; Copyright (C) 2000 Eazel, Inc.
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.util.ping
 
@@ -89,17 +86,17 @@ milliseconds (defaults to 1 second), false otherwise."
       ;; a returning ping (pong?)
       (let ((id (aref data 1)))
 	(let loop ((rest pings-in-transit))
-	  (cond ((null loop)
-		 (format
-		  standard-error "Received stray _NET_WM_PING: %s\n" data))
+             (cond ((null loop)
+                    (format
+                     standard-error "Received stray _NET_WM_PING: %s\n" data))
 
-		((eql (ping-id (car rest)) id)
-		 ;; found our ping
-		 (let ((this (car rest)))
-		   (setq pings-in-transit (delq this pings-in-transit))
-		   ((ping-callback this) t)))
+                   ((eql (ping-id (car rest)) id)
+                    ;; found our ping
+                    (let ((this (car rest)))
+                      (setq pings-in-transit (delq this pings-in-transit))
+                      ((ping-callback this) t)))
 
-		(t (loop (cdr rest))))))
+                   (t (loop (cdr rest))))))
       t))
 
   (add-hook 'client-message-hook client-message-handler))

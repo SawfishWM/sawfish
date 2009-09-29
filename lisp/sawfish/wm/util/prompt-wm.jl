@@ -1,5 +1,4 @@
 ;; prompt-wm.jl -- prompt variants for windows/workspaces
-;; $Id: prompt-wm.jl,v 1.6 2000/09/11 07:44:42 john Exp $
 
 ;; Contributed by Dave Pearson <davep@davep.org>
 

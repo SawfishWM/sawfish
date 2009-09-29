@@ -1,5 +1,4 @@
 ;; prompt-extras.jl -- more esoteric prompt variants
-;; $Id: prompt-extras.jl,v 1.7 2000/09/08 15:14:02 john Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -138,6 +137,6 @@ Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
 
 (define (pwd-prompt title)
   (let ((prompt-display-fun (lambda (string)
-			     (make-string (length string) ?*)))
+                              (make-string (length string) ?*)))
 	(prompt-history nil))
     (prompt-for-string title)))

@@ -1,32 +1,31 @@
-#| nokogiri-widgets/list.jl -- list widget
+;; nokogiri-widgets/list.jl -- list widget
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id$
+(define-structure sawfish.gtk.widgets.list
 
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
-
-(define-structure sawfish.gtk.widgets.list ()
+    (export )
 
     (open rep
-	  gui.gtk-2.gtk
-	  sawfish.gtk.widget
-	  sawfish.gtk.widget-dialog)
+          gui.gtk-2.gtk
+          sawfish.gtk.widget
+          sawfish.gtk.widget-dialog)
 
   ;; (list SPEC-OR-FUNCTION [TITLE])
 
@@ -72,18 +71,22 @@
 	  (list (format nil "%s" x))))
 
       (define (add-item)
-	(let ((callback (lambda (new)
-			  (with-clist-frozen clist
-			    (if (not selection)
-				(progn
-				  (setq value (append value (list new)))
-				  (gtk-clist-append clist (print-value new)))
-			      (setq value (copy-sequence value))
-			      (setq value (insert-after new value selection))
-			      (gtk-clist-insert
-			       clist (1+ selection) (print-value new))
-			      (gtk-clist-select-row clist (1+ selection) 0)))
-			  (call-callback changed-callback))))
+	(let ((callback
+               (lambda (new)
+                 (with-clist-frozen clist
+                                    (if (not selection)
+                                        (progn
+                                          (setq value (append value (list new)))
+                                          (gtk-clist-append clist
+                                                            (print-value new)))
+                                      (setq value (copy-sequence value))
+                                      (setq value (insert-after new value
+                                                                selection))
+                                      (gtk-clist-insert
+                                       clist (1+ selection) (print-value new))
+                                      (gtk-clist-select-row clist
+                                                            (1+ selection) 0)))
+                 (call-callback changed-callback))))
 	  (if (functionp spec)
 	      ((spec 'dialog) (_ "Add:") callback #:for (top-level))
 	    (widget-dialog (_ "Add:") spec callback nil (top-level)))))
@@ -97,10 +100,10 @@
 	      (rplacd (nthcdr (1- selection) value)
 		      (nthcdr (1+ selection) value)))
 	    (with-clist-frozen clist
-	      (gtk-clist-remove clist selection)
-	      (if (> (gtk-clist-rows clist) orig-sel)
-		  (gtk-clist-select-row clist orig-sel 0)
-		(set-selection nil)))
+                               (gtk-clist-remove clist selection)
+                               (if (> (gtk-clist-rows clist) orig-sel)
+                                   (gtk-clist-select-row clist orig-sel 0)
+                                 (set-selection nil)))
 	    (call-callback changed-callback))))
 
       (define (edit-item)
@@ -108,14 +111,15 @@
 	  (setq value (copy-sequence value))
 	  (let* ((orig-sel selection)
 		 (cell (nthcdr orig-sel value))
-		 (callback (lambda (new)
-			     (rplaca cell new)
-			     (with-clist-frozen clist
-			       (gtk-clist-remove clist orig-sel)
-			       (gtk-clist-insert
-				clist orig-sel (print-value new))
-			       (gtk-clist-select-row clist orig-sel 0))
-			     (call-callback changed-callback))))
+		 (callback
+                  (lambda (new)
+                    (rplaca cell new)
+                    (with-clist-frozen clist
+                                       (gtk-clist-remove clist orig-sel)
+                                       (gtk-clist-insert
+                                        clist orig-sel (print-value new))
+                                       (gtk-clist-select-row clist orig-sel 0))
+                    (call-callback changed-callback))))
 	    (if (functionp spec)
 		((spec 'dialog) (_ "Edit:") callback
 		 #:value (car cell) #:for (top-level))
@@ -130,26 +134,26 @@
       (g-signal-connect delete "clicked" delete-item)
       (g-signal-connect edit "clicked" edit-item)
       (g-signal-connect clist "select_row"
-			  (lambda (w row col)
-			    (declare (unused w col))
-			    (set-selection row)))
+                        (lambda (w row col)
+                          (declare (unused w col))
+                          (set-selection row)))
       (g-signal-connect clist "unselect_row"
-			  (lambda (w row col)
-			    (declare (unused w col))
-			    (when (= row selection)
-			      (set-selection nil))))
+                        (lambda (w row col)
+                          (declare (unused w col))
+                          (when (= row selection)
+                            (set-selection nil))))
       (g-signal-connect clist "button_press_event"
-			  (lambda (w ev)
-			    (declare (unused w))
-			    (when (eq (gdk-event-type ev) '2button-press)
-			      (edit-item))
-			    nil))
+                        (lambda (w ev)
+                          (declare (unused w))
+                          (when (eq (gdk-event-type ev) '2button-press)
+                            (edit-item))
+                          nil))
       (g-signal-connect clist "key_press_event"
-			  (lambda (w ev)
-			    (declare (unused w))
-			    (when (string= (gdk-event-string ev) "\r")
-			      (edit-item))
-			    nil))
+                        (lambda (w ev)
+                          (declare (unused w))
+                          (when (string= (gdk-event-string ev) "\r")
+                            (edit-item))
+                          nil))
 
       (gtk-clist-set-shadow-type clist 'none)
       (gtk-clist-set-column-width clist 0 100)

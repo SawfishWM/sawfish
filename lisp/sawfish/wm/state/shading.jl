@@ -1,5 +1,4 @@
 ;; shading.jl -- window ``shading''
-;; $Id: shading.jl,v 1.24 2003/10/21 16:17:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

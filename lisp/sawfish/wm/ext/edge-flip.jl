@@ -1,5 +1,4 @@
 ;; edge-flip.jl -- move viewports by pushing pointer against screen edges
-;; $Id: edge-flip.jl,v 1.31 2002/08/18 21:30:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

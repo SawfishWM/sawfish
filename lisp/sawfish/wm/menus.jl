@@ -1,5 +1,4 @@
 ;; menus.jl -- popup menus
-;; $Id: menus.jl,v 1.76 2005/02/07 00:12:18 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -109,24 +108,24 @@ before killing it.")
        (,(_ "Ne_xt workspace") copy-to-next-workspace))
       (,(_ "_Grow & Pack")
        (,(_ "Grow left") grow-window-left)
-      (,(_ "Grow right") grow-window-right)
-      (,(_ "Grow up") grow-window-up)
-      (,(_ "Grow down") grow-window-down)
-      ()
-      (,(_ "Pack left") pack-window-left)
-      (,(_ "Pack right") pack-window-right)
-      (,(_ "Pack up") pack-window-up)
-      (,(_ "Pack down") pack-window-down))
+       (,(_ "Grow right") grow-window-right)
+       (,(_ "Grow up") grow-window-up)
+       (,(_ "Grow down") grow-window-down)
+       ()
+       (,(_ "Pack left") pack-window-left)
+       (,(_ "Pack right") pack-window-right)
+       (,(_ "Pack up") pack-window-up)
+       (,(_ "Pack down") pack-window-down))
       (,(_ "Shrink & _Yank")
        (,(_ "Shrink left") shrink-window-left)
-      (,(_ "Shrink right") shrink-window-right)
-      (,(_ "Shrink up") shrink-window-up)
-      (,(_ "Shrink down") shrink-window-down)
-      ()
-      (,(_ "Yank left") yank-window-left)
-      (,(_ "Yank right") yank-window-right)
-      (,(_ "Yank up") yank-window-up)
-      (,(_ "Yank down") yank-window-down))
+       (,(_ "Shrink right") shrink-window-right)
+       (,(_ "Shrink up") shrink-window-up)
+       (,(_ "Shrink down") shrink-window-down)
+       ()
+       (,(_ "Yank left") yank-window-left)
+       (,(_ "Yank right") yank-window-right)
+       (,(_ "Yank up") yank-window-up)
+       (,(_ "Yank down") yank-window-down))
       (,(_ "Stac_king")
        (,(_ "_Raise") raise-window)
        (,(_ "_Lower") lower-window)
@@ -165,7 +164,7 @@ before killing it.")
       (,(_ "Kill Window") (system "xkill &"))))
 
   (defvar apps-menu)
-  
+
   (define (menu-start-process)
     (when menu-timer
       (delete-timer menu-timer)
@@ -269,7 +268,7 @@ before killing it.")
 				    (require 'sawfish.wm.util.keymap)
 				    (make-memoizing-where-is
 				     (list global-keymap window-keymap)))))
-      (inner cell)))
+       (inner cell)))
 
   (define (menu-dispatch result)
     (let ((orig-win menu-active))
@@ -333,15 +332,15 @@ before killing it.")
 		      ;; avoid large numbers of system calls :-[
 		      (format nil "%S" (mapcar menu-preprocessor spec))
 		      (x-server-timestamp) offset))
-	      (error
-	       ;; prevents spurious errors with subsequent menus
-	       (setq menu-active nil)
-	       (apply signal error-data))))))
+          (error
+           ;; prevents spurious errors with subsequent menus
+           (setq menu-active nil)
+           (apply signal error-data))))))
 
   (define (popup-window-menu w)
     "Display the menu listing all window operations."
     (let-fluids ((menu-args (list w)))
-      (popup-menu window-ops-menu)))
+       (popup-menu window-ops-menu)))
 
   (define (popup-root-menu)
     "Display the main menu."
@@ -361,14 +360,14 @@ before killing it.")
   (define (add-window-menu-toggle label command #!optional predicate)
     (let ((item (list* label command
 		       (and predicate (list (cons 'check predicate))))))
-    (let loop ((rest window-ops-toggle-menu))
-      (cond
-       ((null rest)
-	(setq window-ops-toggle-menu (nconc window-ops-toggle-menu
-					    (list item))))
-       ((eq (cadar rest) command)
-	(rplaca rest item))
-       (t (loop (cdr rest)))))))
+      (let loop ((rest window-ops-toggle-menu))
+         (cond
+          ((null rest)
+           (setq window-ops-toggle-menu (nconc window-ops-toggle-menu
+                                               (list item))))
+          ((eq (cadar rest) command)
+           (rplaca rest item))
+          (t (loop (cdr rest)))))))
 
 ;;; customize menu
 

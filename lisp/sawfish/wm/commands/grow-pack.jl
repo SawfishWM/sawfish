@@ -1,5 +1,4 @@
 ;; grow-pack.jl -- window resize and movement
-;; $Id: grow-pack.jl,v 1.15 2002/09/27 06:20:42 jsh Exp $
 
 ;; Copyright (C) 2000, 01 Kai Grossjohann <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 
@@ -81,7 +80,7 @@
     :type boolean
     :group gpsy)
 
- (defcustom shrink-window-minimum-size 10
+  (defcustom shrink-window-minimum-size 10
     "The minimum height or width to which a window may be shrunk."
     :type number
     :group gpsy)
@@ -192,7 +191,7 @@ See `pack-window-up'."
 			    (window-avoided-p x)
 			  (eq grow-pack-bump-other-depth 'always))))
 		  (or grow-pack-bump-obscured
-                     (not (eq (stacking-visibility x) 'fully-obscured)))
+                      (not (eq (stacking-visibility x) 'fully-obscured)))
 		  (or grow-pack-bump-ignored
 		      (not (window-ignored-p x)))
 		  (setq xa (window-position x)
@@ -226,7 +225,7 @@ See `pack-window-up'."
 	  (window-put w 'unmaximized-geometry (list x y (car dim) (cdr dim))))
 	(window-put w
 		    (if horizontal 'maximized-horizontally
-			'maximized-vertically)
+                      'maximized-vertically)
 		    t))
       (setq dim (cons (car new-dim) (cdr new-dim)))
       (maximize-truncate-dims w new-dim (if horizontal 'horizontal 'vertical)

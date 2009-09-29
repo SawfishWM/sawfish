@@ -1,5 +1,4 @@
 ;; sawfish-default.jl -- default user startup
-;; $Id: defaults.jl,v 1.20 2002/04/20 20:59:15 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -32,13 +31,13 @@
 ;; extra GNOME integration module
 (unless batch-mode
   (if (getenv "GNOME_DESKTOP_SESSION_ID")
-    (require 'sawfish.wm.integration.gnome)))
+      (require 'sawfish.wm.integration.gnome)))
 
 ;; if it looks like KDE is the desktop environment, then load the
 ;; extra KDE integration module
 (unless batch-mode
   (if (getenv "KDE_SESSION_VERSION")
-    (require 'sawfish.wm.integration.kde)))
+      (require 'sawfish.wm.integration.kde)))
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)

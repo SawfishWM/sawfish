@@ -1,27 +1,24 @@
-#| font.jl -- some font-related functions
-
-   $Id: font.jl,v 1.4 2003/08/14 06:55:36 jsh Exp $
-
-   Author: John Harper <jsh@unfactored.org>
-
-   Copyright (C) 2002 John Harper
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; font.jl -- some font-related functions
+;;
+;; Author: John Harper <jsh@unfactored.org>
+;;
+;; Copyright (C) 2002 John Harper
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.util.font
 
@@ -66,14 +63,14 @@
 
   (define (assoc-case x map)
     (let loop ((rest map))
-      (cond ((null rest) nil)
-	    ((string-equal x (caar rest)) (car rest))
-	    (t (loop (cdr rest))))))
+         (cond ((null rest) nil)
+               ((string-equal x (caar rest)) (car rest))
+               (t (loop (cdr rest))))))
 
   (define (face-style face style)
     (cdr (assoc-case style (face-styles face))))
 
-;; Xft naming scheme
+  ;; Xft naming scheme
 
   (define xft-abbrev-map
     '(("light" "weight" . "light")
@@ -110,19 +107,19 @@
       ;; extract styles
       (let loop ((rest (cdr fields))
 		 (styles '()))
-	(if (null rest)
-	    (make-face family size (nreverse styles))
-	  (cond ((string-match "\\s*=\\s*" (car rest))
-		 (loop (cdr rest)
-		       (cons (cons (substring (car rest) 0 (match-start))
-				   (substring (car rest) (match-end)))
-			     styles)))
-		((assoc-case (car rest) xft-abbrev-map)
-		 (loop (cdr rest)
-		       (cons (cdr (assoc-case (car rest)
-					      xft-abbrev-map)) styles)))
-		;; drop unknown single words..
-		(t (loop (cdr rest) styles)))))))
+           (if (null rest)
+               (make-face family size (nreverse styles))
+             (cond ((string-match "\\s*=\\s*" (car rest))
+                    (loop (cdr rest)
+                          (cons (cons (substring (car rest) 0 (match-start))
+                                      (substring (car rest) (match-end)))
+                                styles)))
+                   ((assoc-case (car rest) xft-abbrev-map)
+                    (loop (cdr rest)
+                          (cons (cdr (assoc-case (car rest)
+                                                 xft-abbrev-map)) styles)))
+                   ;; drop unknown single words..
+                   (t (loop (cdr rest) styles)))))))
 
   (define (face->xft-description face)
     (let ((families (string-replace "-" "\\-" (face-families face)))
@@ -139,13 +136,13 @@
 					(format nil "%s=%s" (car x) (cdr x)))
 				       (t (car x)))) styles)) #\:)))
 
-;; Pango naming scheme
+  ;; Pango naming scheme
 
   (define pango-style-map
     '(("Oblique" "slant" . "oblique")
       ("Italic" "slant" . "italic")
       ("Small-Caps" "style" . "smallcaps")	;FIXME?
-#|
+      #|
       ("Ultra-Condensed" . ?)			;FIXME
       ("Extra-Condensed" . ?)
       ("Condensed" . ?)
@@ -154,7 +151,7 @@
       ("Expanded" . ?)
       ("Extra-Expanded" . ?)
       ("Ultra-Expanded" . ?)
-|#
+      |#
       ("Ultra-Light" "weight" . "ultralight")	;FIXME?
       ("Light" "weight" . "light")
       ("Medium" "weight" . "medium")
@@ -189,7 +186,8 @@
 				 (car fields) pango-style-map)) styles))
 	(setq fields (cdr fields)))
 
-      ;; whatever's left is the family name, except of that comma found in name
+      ;; whatever's left is the family name, except of that comma
+      ;; found in name
       (if force-family
 	  (setq family force-family)
 	(setq family (mapconcat identity (nreverse fields) #\space)))
@@ -200,29 +198,30 @@
     (catch 'found
       (mapc (lambda (x) (if (string-match regexp (car x) 0 case-fold)
 			    (throw 'found x)))
-	alist)))
+            alist)))
 
   (define (face->pango-description face)
     (let loop ((rest (face-styles face))
 	       (out '()))
-      (if (null rest)
-	  (let* ((family (face-families face))
-		 (regexp (concat "^" (last (string-split "\\s+" family)))))
-	    (when (and (not (string-equal family ""))
-		       (assoc-grep regexp pango-style-map t))
-	      (setq family (concat family ",")))
-	    (mapconcat identity
-		       (nconc (list family)
-			      (nreverse out)
-			      (and (face-size face)
-				   (list (format nil "%d" (face-size face)))))
-		       #\space))
-	(let ((tem (rassoc (car rest) pango-style-map)))
-	  (if tem
-	      (loop (cdr rest) (cons (car tem) out))
-	    (loop (cdr rest) out))))))
+         (if (null rest)
+             (let* ((family (face-families face))
+                    (regexp (concat "^" (last (string-split "\\s+" family)))))
+               (when (and (not (string-equal family ""))
+                          (assoc-grep regexp pango-style-map t))
+                 (setq family (concat family ",")))
+               (mapconcat identity
+                          (nconc (list family)
+                                 (nreverse out)
+                                 (and (face-size face)
+                                      (list
+                                       (format nil "%d" (face-size face)))))
+                          #\space))
+           (let ((tem (rassoc (car rest) pango-style-map)))
+             (if tem
+                 (loop (cdr rest) (cons (car tem) out))
+               (loop (cdr rest) out))))))
 
-;; XLFD naming scheme
+  ;; XLFD naming scheme
 
   (define xlfd-style-names
     '((5 . "width")

@@ -1,27 +1,24 @@
-#| hide-dialogs.jl -- only show dialog windows for the focused group
-
-   $Id: hide-dialogs.jl,v 1.2 2002/04/21 22:25:13 jsh Exp $
-
-   Copyright (C) 2001 Eazel, Inc.
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-
-   Authors: John Harper <jsh@eazel.com>
-|#
+;; hide-dialogs.jl -- only show dialog windows for the focused group
+;;
+;; Copyright (C) 2001 Eazel, Inc.
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+;;
+;; Authors: John Harper <jsh@eazel.com>
 
 ;; Commentary:
 
@@ -30,15 +27,17 @@
 ;; The idea is to minimize dialog windows for all groups but the group
 ;; containing the currently focused windows.
 
-(define-structure sawfish.wm.ext.hide-dialogs ()
+(define-structure sawfish.wm.ext.hide-dialogs
+
+    (define )
 
     (open rep
-	  rep.system
-	  rep.io.timers
-	  sawfish.wm.util.groups  
-	  sawfish.wm.state.iconify
-	  sawfish.wm.state.transient
-	  sawfish.wm.windows)
+          rep.system
+          rep.io.timers
+          sawfish.wm.util.groups
+          sawfish.wm.state.iconify
+          sawfish.wm.state.transient
+          sawfish.wm.windows)
 
   (define (dialogs-in-group w)
     (filter window-transient-p (windows-in-group w)))

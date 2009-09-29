@@ -1,5 +1,4 @@
 ;; mono/theme.jl
-;; $Id: theme.jl,v 1.10 2001/02/11 01:33:56 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

@@ -1,5 +1,4 @@
 ;; keymap.jl -- some keymap utilities, mostly copied from jade
-;; $Id: keymap.jl,v 1.18 2000/12/19 23:49:54 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -54,7 +53,7 @@ cons cell (COMMAND . EVENT)."
     (when (keymapp keymap)
       (setq keymap (list keymap)))
     (let ((keymap-list keymap)
-	 (done-list nil))
+          (done-list nil))
       (while keymap-list
 	(let
 	    ((keymap (car keymap-list)))
@@ -99,7 +98,7 @@ for the bindings to be installed if and when it is."
     `(if (featurep ',feature)
 	 (bind-keys ,keymap ,@bindings)
        (eval-after-load ,(symbol-name feature)
-			'(bind-keys ,keymap ,@bindings))))
+         '(bind-keys ,keymap ,@bindings))))
 
 ;;; Search for a named command in the current keymap configuration
 
@@ -108,7 +107,9 @@ for the bindings to be installed if and when it is."
     (let ((where-is-results '()))
       (map-keymap (lambda (k)
 		    (when (eq (car k) command)
-		      (setq where-is-results (cons (event-name (substitute-wm-modifier (cdr k))) where-is-results))))
+		      (setq where-is-results
+                            (cons (event-name (substitute-wm-modifier (cdr k)))
+                                  where-is-results))))
 		  (or keymap global-keymap))
       where-is-results))
 

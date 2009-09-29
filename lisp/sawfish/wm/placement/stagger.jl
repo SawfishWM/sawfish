@@ -1,7 +1,5 @@
 ;; stagger-placement.jl -- for jwz
 
-;; $Id: stagger.jl,v 1.3 2002/05/27 05:18:56 jsh Exp $
-
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
 ;; This file is part of sawfish.
@@ -20,15 +18,17 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.placement.stagger ()
+(define-structure sawfish.wm.placement.stagger
+
+    (export )
 
     (open rep
-	  sawfish.wm.windows
-	  sawfish.wm.misc
-	  sawfish.wm.events
-	  sawfish.wm.placement
-	  sawfish.wm.custom
-	  sawfish.wm.util.workarea)
+          sawfish.wm.windows
+          sawfish.wm.misc
+          sawfish.wm.events
+          sawfish.wm.placement
+          sawfish.wm.custom
+          sawfish.wm.util.workarea)
 
   (defcustom stagger-placement-step 32
     "Distance between successive placements in `stagger' placement mode."

@@ -1,5 +1,4 @@
 ;; viewport.jl -- virtual desktops
-;; $Id: viewport.jl,v 1.46 2002/04/23 03:44:18 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -133,7 +132,8 @@ The scrolling makes a number of increments equal to `scroll-viewport-steps'."
              (ystep (quotient (- y viewport-y-offset) scroll-viewport-steps))
              (step-count (if (= xstep ystep 0) 0 scroll-viewport-steps)))
         (while (> step-count 1)
-          (warp-viewport (+ viewport-x-offset xstep) (+ viewport-y-offset ystep))
+          (warp-viewport (+ viewport-x-offset xstep)
+                         (+ viewport-y-offset ystep))
           (setq step-count (1- step-count)))))
     (warp-viewport x y)
     (call-hook 'viewport-moved-hook))
@@ -152,58 +152,57 @@ well as any windows in the current workspace."
 	      (lambda (w)
 		(window-in-workspace-p w current-workspace)))))
 	(if windows
-	    (let*
-               ((width (screen-width))
-                (height (screen-height))
-                (points
-		  (nconc
-		   (mapcar (lambda (w)
-			     (let ((pos (window-position w))
-				   (dims (window-frame-dimensions w)))
-			       (list (car pos)
-				     (cdr pos)
-				     (+ (car pos) (car dims))
-				     (+ (cdr pos) (cdr dims)))))
-			   windows)
-                  ;; Include the current screen:
-                  `((0 0 ,(1- width) ,(1- height)))))
-                 ;; The min/max values calculated below are relative to
-                 ;; the old logical 0,0 point of the virtual desktop:
-                 (old-x-origin (- viewport-x-offset))
-                 (old-y-origin (- viewport-y-offset))
-                 (x-min (- (apply min (mapcar car points)) old-x-origin))
-                 (y-min (- (apply min (mapcar (lambda (e) (nth 1 e)) points))
-                           old-y-origin))
-                 (x-max (- (apply max (mapcar (lambda (e) (nth 2 e)) points))
-                           old-x-origin))
-                 (y-max (- (apply max (mapcar (lambda (e) (nth 3 e)) points))
-                           old-y-origin))
-                 ;; high-* values are the number of rows/columns above
-                 ;; the old origin, low-* values the number below the
-                 ;; old origin.
-		(high-rows (+ (quotient y-max height)
-                               (if (> (mod y-max height) 0)
-                                   1
-                                 0)))
-                (low-rows (+ (- (quotient y-min height))
-                              (if (and (< y-min 0)
-                                       (> (mod y-min height) 0))
-                                  1
-                                0)))
-		 (rows (+ low-rows high-rows))
-		 (high-cols (+ (quotient x-max width)
-			       (if (> (mod x-max width) 0)
-				   1
-				 0)))
-                (low-cols (+ (- (quotient x-min width))
-                              (if (and (< x-min 0)
-                                       (> (mod x-min width) 0))
-                                  1
-                                0)))
-		 (cols (+ low-cols high-cols)))
+	    (let* ((width (screen-width))
+                   (height (screen-height))
+                   (points
+                    (nconc
+                     (mapcar (lambda (w)
+                               (let ((pos (window-position w))
+                                     (dims (window-frame-dimensions w)))
+                                 (list (car pos)
+                                       (cdr pos)
+                                       (+ (car pos) (car dims))
+                                       (+ (cdr pos) (cdr dims)))))
+                             windows)
+                     ;; Include the current screen:
+                     `((0 0 ,(1- width) ,(1- height)))))
+                   ;; The min/max values calculated below are relative to
+                   ;; the old logical 0,0 point of the virtual desktop:
+                   (old-x-origin (- viewport-x-offset))
+                   (old-y-origin (- viewport-y-offset))
+                   (x-min (- (apply min (mapcar car points)) old-x-origin))
+                   (y-min (- (apply min (mapcar (lambda (e) (nth 1 e)) points))
+                             old-y-origin))
+                   (x-max (- (apply max (mapcar (lambda (e) (nth 2 e)) points))
+                             old-x-origin))
+                   (y-max (- (apply max (mapcar (lambda (e) (nth 3 e)) points))
+                             old-y-origin))
+                   ;; high-* values are the number of rows/columns above
+                   ;; the old origin, low-* values the number below the
+                   ;; old origin.
+                   (high-rows (+ (quotient y-max height)
+                                 (if (> (mod y-max height) 0)
+                                     1
+                                   0)))
+                   (low-rows (+ (- (quotient y-min height))
+                                (if (and (< y-min 0)
+                                         (> (mod y-min height) 0))
+                                    1
+                                  0)))
+                   (rows (+ low-rows high-rows))
+                   (high-cols (+ (quotient x-max width)
+                                 (if (> (mod x-max width) 0)
+                                     1
+                                   0)))
+                   (low-cols (+ (- (quotient x-min width))
+                                (if (and (< x-min 0)
+                                         (> (mod x-min width) 0))
+                                    1
+                                  0)))
+                   (cols (+ low-cols high-cols)))
 	      (setq
-              viewport-y-offset (- (- old-y-origin (* low-rows height)))
-              viewport-x-offset (- (- old-x-origin (* low-cols width)))
+               viewport-y-offset (- (- old-y-origin (* low-rows height)))
+               viewport-x-offset (- (- old-x-origin (* low-cols width)))
 	       viewport-dimensions (cons
 				    (max cols
 					 (car viewport-minimum-dimensions))
@@ -249,9 +248,9 @@ viewport is within `viewport-dimensions'."
               ;; Do maybe-y-offset and maybe-x-offset fit within
               ;; current viewport-dimensions?
               (if (and (<= maybe-y-offset
-                          (* (1- (car viewport-dimensions)) (screen-height)))
+                           (* (1- (car viewport-dimensions)) (screen-height)))
                        (<= maybe-x-offset
-                          (* (1- (cdr viewport-dimensions)) (screen-width))))
+                           (* (1- (cdr viewport-dimensions)) (screen-width))))
                   (setq viewport-y-offset maybe-y-offset
                         viewport-x-offset maybe-x-offset)
                 (setq viewport-y-offset 0
@@ -264,7 +263,7 @@ viewport is within `viewport-dimensions'."
             viewport-enter-workspace-handler)
 
 
-;; screen sized viewport handling
+;;; screen sized viewport handling
 
   (define (screen-viewport)
     (cons (quotient viewport-x-offset (screen-width))
@@ -387,7 +386,7 @@ viewport is within `viewport-dimensions'."
 	(set-screen-viewport (min (car port) (1- (car viewport-dimensions)))
 			     (min (cdr port) (1- (cdr viewport-dimensions))))
 	(map-windows (lambda (w)
-                      (when (and (window-outside-workspace-p w)
+                       (when (and (window-outside-workspace-p w)
                                   (window-appears-in-workspace-p
                                    w current-workspace))
 			 (move-window-to-current-viewport w))))
@@ -396,8 +395,10 @@ viewport is within `viewport-dimensions'."
   (define (viewport-minimum-size-changed)
     (if (eq viewport-boundary-mode 'dynamic)
 	(viewport-dynamic-resize)
-      (when (or (< (car viewport-dimensions) (car viewport-minimum-dimensions))
-		(< (cdr viewport-dimensions) (cdr viewport-minimum-dimensions)))
+      (when (or (< (car viewport-dimensions)
+                   (car viewport-minimum-dimensions))
+		(< (cdr viewport-dimensions)
+                   (cdr viewport-minimum-dimensions)))
 	(setq viewport-dimensions
 	      (cons (max (car viewport-dimensions)
 			 (car viewport-minimum-dimensions))
@@ -440,7 +441,7 @@ viewport is within `viewport-dimensions'."
                                         (>= (car pos) right)
                                         (>= (cdr pos) bottom)))))))))
 
-;; commands
+;;; commands
 
   (define (activate-viewport x y)
     "Select the specified viewport."
@@ -509,29 +510,41 @@ viewport is within `viewport-dimensions'."
 	(window-put window 'sticky-viewport nil))))
 
   (define (move-window-left w)
-    "Move the window to the viewport on the left, and switch to that viewport."
+    "Move the window to the viewport on the left, and switch to that
+viewport."
     (move-window-to-viewport-and-move-viewport w -1 0))
 
   (define (move-window-right w)
-    "Move the window to the viewport on the right, and switch to that viewport."
+    "Move the window to the viewport on the right, and switch to that
+viewport."
     (move-window-to-viewport-and-move-viewport w 1 0))
 
   (define (move-window-down w)
-    "Move the window to the viewport below, and switch to that viewport."
+    "Move the window to the viewport below, and switch to that
+viewport."
     (move-window-to-viewport-and-move-viewport w 0 1))
 
   (define (move-window-up w)
-    "Move the window to the viewport above, and switch to that viewport."
+    "Move the window to the viewport above, and switch to that
+viewport."
     (move-window-to-viewport-and-move-viewport w 0 -1))
 
-  (define-command 'move-viewport-right move-viewport-right #:class 'default)
-  (define-command 'move-viewport-left move-viewport-left #:class 'default)
-  (define-command 'move-viewport-up move-viewport-up #:class 'default)
-  (define-command 'move-viewport-down move-viewport-down #:class 'default)
-  (define-command 'move-window-right move-window-right #:spec "%W" #:class 'default)
-  (define-command 'move-window-left move-window-left #:spec "%W" #:class 'default)
-  (define-command 'move-window-up move-window-up #:spec "%W" #:class 'default)
-  (define-command 'move-window-down move-window-down #:spec "%W" #:class 'default)
+  (define-command 'move-viewport-right move-viewport-right
+    #:class 'default)
+  (define-command 'move-viewport-left move-viewport-left
+    #:class 'default)
+  (define-command 'move-viewport-up move-viewport-up
+    #:class 'default)
+  (define-command 'move-viewport-down move-viewport-down
+    #:class 'default)
+  (define-command 'move-window-right move-window-right #:spec "%W"
+    #:class 'default)
+  (define-command 'move-window-left move-window-left #:spec "%W"
+    #:class 'default)
+  (define-command 'move-window-up move-window-up #:spec "%W"
+    #:class 'default)
+  (define-command 'move-window-down move-window-down #:spec "%W"
+    #:class 'default)
 
 ;;; session management, config
 

@@ -1,25 +1,22 @@
-#| theme.jl for Arlo's new theme design
-
-   Copyright (C) 2001 Eazel, Inc.
-
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public License as
-   published by the Free Software Foundation; either version 2 of the
-   License, or (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-   $Id: theme.jl,v 1.8 2002/03/29 04:00:23 jsh Exp $
-
-   Authors: John Harper <jsh@eazel.com>
-|#
+;; theme.jl for Arlo's new theme design
+;;
+;; Copyright (C) 2001 Eazel, Inc.
+;;
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 2 of the
+;; License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; if not, write to the Free Software
+;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+;;
+;; Authors: John Harper <jsh@eazel.com>
 
 (require 'rep.data.tables)		;need hash tables for icon cache
 (require 'sawfish.wm.util.recolor-image)
@@ -40,22 +37,25 @@
   :group (appearance Crux)
   :after-set (lambda () (rebuild-all)))
 
-(defvar Crux:button-themes '((default
-			      ((close-button) . (iconify-button maximize-button shade-button)))
-			     (platinum
-			      ((close-button) . (maximize-button shade-button)))
-			     (macos-x
-			      ((close-button maximize-button iconify-button)))
-			     (windows
-			      ((menu-button) . (iconify-button maximize-button close-button))
-			      ((menu-button)))
-			     (next
-			      ((iconify-button) . (close-button))
-			      ((iconify-button) . (close-button)))
-			     (complete
-			      ((close-button) . (shade-button iconify-button maximize-button menu-button)))
-			     (complete-inverse
-			      ((menu-button maximize-button iconify-button shade-button) . (close-button)))))
+(defvar Crux:button-themes
+  '((default
+      ((close-button) . (iconify-button maximize-button shade-button)))
+    (platinum
+     ((close-button) . (maximize-button shade-button)))
+    (macos-x
+     ((close-button maximize-button iconify-button)))
+    (windows
+     ((menu-button) . (iconify-button maximize-button close-button))
+     ((menu-button)))
+    (next
+     ((iconify-button) . (close-button))
+     ((iconify-button) . (close-button)))
+    (complete
+     ((close-button) . (shade-button iconify-button maximize-button
+                                     menu-button)))
+    (complete-inverse
+     ((menu-button maximize-button iconify-button shade-button) .
+      (close-button)))))
 
 (defcustom Crux:button-theme 'default
   "Display title buttons to mimic: \\w"
@@ -146,8 +146,10 @@
 
 ;; 32*x6
 (define bottom-left-border
-  (list (set-image-border (make-image "inactive:bottom-left-border.png") 0 30 0 0)
-	(set-image-border (make-image "active:bottom-left-border.png") 0 30 0 0)))
+  (list (set-image-border
+         (make-image "inactive:bottom-left-border.png") 0 30 0 0)
+	(set-image-border
+         (make-image "active:bottom-left-border.png") 0 30 0 0)))
 
 ;; 16*x6
 (define bottom-right-border

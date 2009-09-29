@@ -1,5 +1,4 @@
 ;; anim-outline.jl -- simple window animations
-;; $Id: outline.jl,v 1.8 2002/03/24 10:12:26 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 

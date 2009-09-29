@@ -1,25 +1,22 @@
-#| nokogiri-layout.jl -- arranging groups of slots
-
-   $Id: layout.jl,v 1.9 2003/01/12 20:30:47 jsh Exp $
-
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; nokogiri-layout.jl -- arranging groups of slots
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.cfg.layout
 
@@ -137,7 +134,7 @@
 		  (gtk-box-pack-start hbox widget-ptr t t)
 		(gtk-box-pack-start hbox widget-ptr nil nil))
 	      (when (< break (length doc))
-		(setq tempstring (substring doc (+ break 2)))	
+		(setq tempstring (substring doc (+ break 2)))
 		(if (> (length tempstring) 0)
 		    (progn
 		      (setq label-ptr (make-label tempstring))
@@ -146,7 +143,7 @@
 	      (setq hbox (add-tooltip hbox))
 	      (gtk-widget-show-all hbox)
 	      hbox))))))
-    
+
   (define (remove-newlines string)
     (let loop ((point 0)
 	       (out '()))
@@ -154,7 +151,7 @@
 	     (loop (match-end)
 		   (list* #\space (substring string point (match-start)) out))
 	   (apply concat (nreverse (cons (substring string point) out))))))
-  
+
   (define (make-label text)
     (let ((label (gtk-label-new text)))
       (gtk-label-set-justify label 'left)

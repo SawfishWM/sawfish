@@ -1,5 +1,4 @@
 ;; size-window -- resizing window iteratively (like `C-x ^' in emacs)
-;; $Id: size-window.jl,v 1.6 2002/04/21 03:39:33 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -57,7 +56,7 @@ size of each row or column is taken from `size-window-def-increment.'"
 	   (descale (lambda (x base inc)
 		      (quotient (- x base) inc))))
 
-    ;; use the configure-request handler (to handle gravity)
+      ;; use the configure-request handler (to handle gravity)
       (call-window-hook
        'configure-request-hook w
        (list (list (cons 'dimensions

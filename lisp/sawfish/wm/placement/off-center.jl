@@ -1,27 +1,24 @@
-#| off-center.jl -- place windows around the centre of the screen
-
-   Copyright (C) 2000 Eazel, Inc.
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-
-   $Id: off-center.jl,v 1.3 2002/04/24 06:57:02 jsh Exp $
-
-   Authors: John Harper <jsh@eazel.com>
-|#
+;; off-center.jl -- place windows around the centre of the screen
+;;
+;; Copyright (C) 2000 Eazel, Inc.
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+;;
+;; Authors: John Harper <jsh@eazel.com>
 
 ;; Commentary:
 
@@ -33,7 +30,9 @@
 ;; created one after the other, so that the user is sure to see (at
 ;; least part of) both windows
 
-(define-structure sawfish.wm.placement.off-center ()
+(define-structure sawfish.wm.placement.off-center
+
+    (export )
 
     (open rep
 	  sawfish.wm.misc

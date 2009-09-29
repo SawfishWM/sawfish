@@ -1,5 +1,4 @@
 ;; smart-placement.jl -- ``intelligent'' window placement
-;; $Id: smart.jl,v 1.50 2002/07/01 03:07:18 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -21,7 +20,7 @@
 
 ;; Commentary:
 
-;; This implements two different algorithms: first-fit and best-fit. 
+;; This implements two different algorithms: first-fit and best-fit.
 
 ;; Both use the same inner core -- they scan for the position to place
 ;; the window where it overlaps the smallest area with other windows
@@ -66,7 +65,8 @@
   (defvar sp-normal-windows-weight 1)
 
   (defvar sp-padding 0
-    "Try to leave at least this many pixels between window edges in first/best-fit.")
+    "Try to leave at least this many pixels between window edges in
+first/best-fit.")
 
   ;; the maximum number of points to keep in each grid dimension
   (defvar sp-max-points 10)
@@ -117,7 +117,7 @@
 				  points))
 	       (setq total (1+ total)))))
       points))
-	   
+
   ;; returns the list of windows to compare with when overlapping, by
   ;; default windows with their `ignored' property set are dropped
   (define (sp-get-windows w #!optional pred)
@@ -302,8 +302,8 @@ the proposed placement to the center of the screen."
 
   (defvar sp-cost-components (list (cons sp-cost:overlap 7/8)
 				   (cons sp-cost:center-locality 1/8))
-    "Alist defining smart placement cost functions and their associated weights
-(multipliers).")
+    "Alist defining smart placement cost functions and their
+associated weights (multipliers).")
 
   ;; This is the crux of the problem -- this function must assign a value
   ;; to placing a window of DIMS at POINT. GRID defines the grid from which
@@ -355,7 +355,8 @@ the proposed placement to the center of the screen."
 
 ;;; entry-points
 
-  (define (sp-do-placement w fit-fun #!optional fall-back-fun #!key window-filter)
+  (define (sp-do-placement w fit-fun #!optional fall-back-fun
+                           #!key window-filter)
     (if (and sp-max-queued-events (> (x-events-queued) sp-max-queued-events))
 	;; fitted placement can cause event tailbacks when there's
 	;; lots of windows being opened with lots of windows already
@@ -410,12 +411,14 @@ the proposed placement to the center of the screen."
 
   (define (place-window-first-fit-or-interactive w)
     (sp-do-placement w sp-fit-or-nil (placement-mode 'interactively)))
-						     
+
 
 ;;; init
 
   ;;###autoload
   (define-placement-mode 'first-fit place-window-first-fit #:for-normal t)
   (define-placement-mode 'best-fit place-window-best-fit #:for-normal t)
-  (define-placement-mode 'best-fit-group place-window-best-fit-group #:for-normal t)
-  (define-placement-mode 'first-fit-or-interactive place-window-first-fit-or-interactive #:for-normal t))
+  (define-placement-mode 'best-fit-group
+    place-window-best-fit-group #:for-normal t)
+  (define-placement-mode 'first-fit-or-interactive
+    place-window-first-fit-or-interactive #:for-normal t))

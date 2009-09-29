@@ -3,7 +3,6 @@ exec rep "$0" "$@"
 !#
 
 ;; sawmill-menu -- subprocess to handle menus
-;; $Id: sawfish-menu.jl,v 1.8 2003/04/03 02:23:33 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -101,7 +100,7 @@ exec rep "$0" "$@"
 
 (define (popup-menu spec #!optional timestamp position)
   (let ((menu (let-fluids ((group-table (make-group-table)))
-		(create-menu spec))))
+                          (create-menu spec))))
     (g-signal-connect menu "deactivate" gtk-main-quit)
     (setq menu-selected nil)
     (gtk-menu-popup-interp menu nil nil 0 (or timestamp 0) position)

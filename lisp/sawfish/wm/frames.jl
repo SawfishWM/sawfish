@@ -1,5 +1,4 @@
 ;; frames.jl -- handle window framing
-;; $Id: frames.jl,v 1.93 2003/10/21 16:17:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -156,9 +155,9 @@ that overrides settings set elsewhere.")
       (utility . default)
       (shaded-utility . shaded-transient)
       (toolbar . unframed)
-;;    (shaded-toolbar . shaded-utility)
+      ;;    (shaded-toolbar . shaded-utility)
       (menu . unframed)
-;;    (shaded-menu . shaded-utility)
+      ;;    (shaded-menu . shaded-utility)
       (splash . unframed))
     "Frame type fallbacks.")
 
@@ -167,10 +166,17 @@ that overrides settings set elsewhere.")
   (define (update-frame-font-color)
     (if use-custom-font-color
 	(mapc (lambda (fc)
-		(set-frame-part-value fc 'foreground (list frame-font-inactive-color frame-font-active-color) 't)) (list 'title 'tab))
+		(set-frame-part-value fc 'foreground
+                                      (list frame-font-inactive-color
+                                            frame-font-active-color)
+                                      't))
+              (list 'title 'tab))
       (mapc (lambda (fc)
-	      (rplacd (assoc 'foreground (assoc fc override-frame-part-classes)) nil)
-	      (rplaca (assoc 'foreground (assoc fc override-frame-part-classes)) nil)) (list 'title 'tab)))
+	      (rplacd (assoc 'foreground
+                             (assoc fc override-frame-part-classes)) nil)
+	      (rplaca (assoc 'foreground
+                             (assoc fc override-frame-part-classes)) nil))
+            (list 'title 'tab)))
     (mapc (lambda (x) (rebuild-frame x)) (managed-windows)))
 
   (defvar theme-update-interval 60
@@ -193,7 +199,7 @@ that overrides settings set elsewhere.")
     "List of directories from which themes may be loaded.")
 
   (define frame-styles nil
-    "List of (NAME . FUNCTION) defining all loaded frame styles.")
+          "List of (NAME . FUNCTION) defining all loaded frame styles.")
 
   ;; List of (NAME FILENAME MODTIME) mapping loaded frame styles to the
   ;; files they were loaded from; used to check if the theme needs reloading
@@ -203,14 +209,17 @@ that overrides settings set elsewhere.")
   (define editable-frame-styles nil)
 
   (define frame-type-mappers '()
-    "List of functions that map (WINDOW FRAME-TYPE) -> FRAME-TYPE. Used when
-deciding which frame type to ask a theme to generate.")
+          "List of functions that map (WINDOW FRAME-TYPE) ->
+FRAME-TYPE. Used when deciding which frame type to ask a theme to
+generate.")
 
   ;; list of (REGEXP DIR-EXPAND NAME-EXPAND)
   (defvar theme-suffix-regexps
-    '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|\\.xz|\\.lzma|)$" "\\0#tar/\\2" "\\2")))
+    '(("^(.*)/(.*)\\.tar(\\.gz|\\.Z|\\.bz2|\\.xz|\\.lzma|)$"
+       "\\0#tar/\\2" "\\2")))
 
-  (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2" ".tar.xz" ".tar.lzma"))
+  (defvar theme-suffixes '("" ".tar" ".tar.gz" ".tar.Z" ".tar.bz2"
+                           ".tar.xz" ".tar.lzma"))
 
   (defvar themes-are-gaolled t
     "When non-nil themes are assumed to be malicious.")
@@ -239,21 +248,23 @@ deciding which frame type to ask a theme to generate.")
     ;; 1. map window type to actual frame type
     (let loop-1 ((rest frame-type-mappers)
 		 (type (window-type w)))
-      (if (null rest)
-	  ;; found the final frame type, so,
-	  ;; 2. find the closest type that the style implements to this
-	  (let loop-2 ((type type)
-		       (seen (list type)))
-	    (cond ((eq type 'unframed) nil-frame)
-		  ((style w type))
-		  (t (let ((next (or (cdr (assq type frame-type-fallback-alist))
-				     'unframed)))
-		       (if (memq next seen)
-			   ;; been here before..
-			   nil-frame
-			 (loop-2 next (cons next seen)))))))
-	;; else, apply this transformation and keep looping
-	(loop-1 (cdr rest) ((car rest) w type)))))
+         (if (null rest)
+             ;; found the final frame type, so,
+             ;; 2. find the closest type that the style implements to this
+             (let loop-2 ((type type)
+                          (seen (list type)))
+                  (cond ((eq type 'unframed) nil-frame)
+                        ((style w type))
+                        (t (let ((next (or
+                                        (cdr (assq type
+                                                   frame-type-fallback-alist))
+                                        'unframed)))
+                             (if (memq next seen)
+                                 ;; been here before..
+                                 nil-frame
+                               (loop-2 next (cons next seen)))))))
+           ;; else, apply this transformation and keep looping
+           (loop-1 (cdr rest) ((car rest) w type)))))
 
 ;;; managing frame styles
 
@@ -493,7 +504,7 @@ deciding which frame type to ask a theme to generate.")
 		(gaol-load (expand-file-name "theme.jl" dir) gaol)
 		(define-gaol-structure (intern (concat "themes."
 						       (symbol-name name)))
-				       gaol))
+                  gaol))
 	    (load (expand-file-name "theme" dir) nil t))))))
 
   (define (find-all-frame-styles #!optional sorted)
@@ -641,9 +652,9 @@ deciding which frame type to ask a theme to generate.")
 	  (define-frame-class x `((cursor . ,(cursor-for-frame-part x))
 				  (keymap . border-keymap))))
 	'(top-border bottom-border
-	  left-border right-border
-	  top-left-corner top-right-corner
-	  bottom-left-corner bottom-right-corner))
+                     left-border right-border
+                     top-left-corner top-right-corner
+                     bottom-left-corner bottom-right-corner))
 
   (gaol-add add-frame-style reframe-window rebuild-frames-with-style
 	    reframe-windows-with-style reframe-all-windows window-type

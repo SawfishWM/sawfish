@@ -1,5 +1,4 @@
 ;; error-handler.jl -- replace the standard rep error handler
-;; $Id: error-handler.jl,v 1.7 2002/04/21 03:39:34 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

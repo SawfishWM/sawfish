@@ -1,15 +1,14 @@
-#| viewport-extras.jl -- extra viewport commands
+;; viewport-extras.jl -- extra viewport commands
+;;
+;; Contributed by: Dams Nadé <anvil@amin.unice.fr>
 
-   $Id$
+(define-structure sawfish.wm.commands.viewport-extras
 
-   Contributed by: Dams Nadé <anvil@amin.unice.fr>
-|#
-
-(define-structure sawfish.wm.commands.viewport-extras ()
+    (export )
 
     (open rep
-	  sawfish.wm.viewport
-	  sawfish.wm.commands)
+          sawfish.wm.viewport
+          sawfish.wm.commands)
 
   ;; Returns (cons next-x next-y) from current screen-viewport
   (define (next-coords)
@@ -59,7 +58,11 @@
       (set-window-and-viewport w (car prevs) (cdr prevs))))
 
   ;;###autoload
-  (define-command 'move-viewport-next move-viewport-next #:class 'viewport)
-  (define-command 'move-viewport-previous move-viewport-previous #:class 'viewport)
-  (define-command 'move-window-previous move-window-previous #:spec "%W" #:class 'viewport)
-  (define-command 'move-window-next move-window-next #:spec "%W" #:class 'viewport))
+  (define-command 'move-viewport-next
+    move-viewport-next #:class 'viewport)
+  (define-command 'move-viewport-previous
+    move-viewport-previous #:class 'viewport)
+  (define-command 'move-window-previous
+    move-window-previous #:spec "%W" #:class 'viewport)
+  (define-command 'move-window-next
+    move-window-next #:spec "%W" #:class 'viewport))
