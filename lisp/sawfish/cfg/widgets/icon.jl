@@ -1,8 +1,8 @@
-#| nokogiri-widgets/workspace-geometry.jl
+#| nokogiri-widgets/icon.jl -- GNOME icon entry widget
 
-   $Id$
+   $Id: icon.jl,v 1.1 2000/09/01 20:03:29 john Exp $
 
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+   Originally written by Bruce Miller <docmad@md.prestige.net>
 
    This file is part of sawfish.
 
@@ -23,14 +23,9 @@
 
 ;; GNOME-less version of this widget
 
-(define-structure sawfish.ui.widgets.workspace-geometry ()
+(define-structure sawfish.cfg.widgets.icon ()
 
     (open rep
 	  sawfish.gtk.widget)
 
-  (define-widget-type 'workspace-geometry
-    (lambda (changed)
-      (make-widget `(pair (labelled ,(_ "Workspaces:") (number 1))
-			  (pair (labelled ,(_ "Columns:") (number 1))
-				(labelled ,(_ "Rows:") (number 1))) t)
-		   changed))))
+  (define-widget-type 'icon (lambda (changed) (make-widget 'file changed))))

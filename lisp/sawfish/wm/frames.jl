@@ -52,8 +52,9 @@
 	     frame-class-removed-p
 	     set-frame-part-value
 	     def-frame-class
-	     define-frame-class))
-	    
+	     define-frame-class
+	     update-frame-font-color))
+
     (open rep
 	  rep.system
 	  rep.regexp
@@ -160,6 +161,17 @@ that overrides settings set elsewhere.")
 ;;    (shaded-menu . shaded-utility)
       (splash . unframed))
     "Frame type fallbacks.")
+
+  ;; Re-Coloring Options for Themes
+
+  (define (update-frame-font-color)
+    (if use-custom-font-color
+	(mapc (lambda (fc)
+		(set-frame-part-value fc 'foreground (list frame-font-inactive-color frame-font-active-color) 't)) (list 'title 'tab))
+      (mapc (lambda (fc)
+	      (rplacd (assoc 'foreground (assoc fc override-frame-part-classes)) nil)
+	      (rplaca (assoc 'foreground (assoc fc override-frame-part-classes)) nil)) (list 'title 'tab)))
+    (mapc (lambda (x) (rebuild-frame x)) (managed-windows)))
 
   (defvar theme-update-interval 60
     "Number of seconds between checking if theme files have been modified.")
@@ -565,7 +577,7 @@ deciding which frame type to ask a theme to generate.")
   ;; (def-frame-class shade-button '((cursor . foo) ...)
   ;;   (bind-keys shade-button-keymap
   ;;     "Button1-Off" 'toggle-window-shaded))
-  ;; 
+  ;;
   ;; the idea being that it will only create the frame part if it doesn't
   ;; exist, it will add all properties from the second argument unless
   ;; they're already set, then create and initialise the keymap from the

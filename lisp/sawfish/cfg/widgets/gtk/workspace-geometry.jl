@@ -1,6 +1,6 @@
 #| nokogiri-widgets/workspace-geometry.jl
 
-   $Id: workspace-geometry.jl,v 1.1 2000/09/01 20:03:29 john Exp $
+   $Id$
 
    Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -23,7 +23,7 @@
 
 ;; GNOME-less version of this widget
 
-(define-structure sawfish.ui.widgets.workspace-geometry ()
+(define-structure sawfish.cfg.widgets.workspace-geometry ()
 
     (open rep
 	  sawfish.gtk.widget)

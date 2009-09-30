@@ -21,7 +21,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.shell
+(define-structure sawfish.cfg.shell
 
     (export initialize-shell
 	    destroy-shell
@@ -35,11 +35,11 @@
 	  rep.io.timers
 	  sawfish.gtk.stock
 	  sawfish.gtk.widget
-	  sawfish.ui.group
-	  sawfish.ui.slot
-	  sawfish.ui.apply
-	  sawfish.ui.layout
-	  sawfish.ui.config)
+	  sawfish.cfg.group
+	  sawfish.cfg.slot
+	  sawfish.cfg.apply
+	  sawfish.cfg.layout
+	  sawfish.cfg.config)
 
   (defvar *nokogiri-flatten-groups* nil)
   (defvar *nokogiri-single-level* nil)

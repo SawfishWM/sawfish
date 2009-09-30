@@ -21,7 +21,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.apply
+(define-structure sawfish.cfg.apply
 
     (export define-change-handler
 	    apply-slot-changes
@@ -35,9 +35,9 @@
 	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
 	  sawfish.gtk.stock
-	  sawfish.ui.slot
-	  sawfish.ui.group
-	  sawfish.ui.wm)
+	  sawfish.cfg.slot
+	  sawfish.cfg.group
+	  sawfish.cfg.wm)
 
   ;; list of slots that have changed since last apply
   (define changed-slots '())

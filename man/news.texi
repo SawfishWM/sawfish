@@ -30,7 +30,9 @@ beeing generated, if there's no customized apps-menu
 Sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
 your system, but the later doesn't
 
-@item In Sawfish-UI the "Matched Windows" group has been renamed to "Windows Rules"
+@item @code{sawfish-ui} has been renamed to @code{sawfish-config}
+
+@item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
 @end itemize
 
 @item Bugs fixed:
@@ -76,6 +78,8 @@ Shrink-yank functions and @code{send-to-workspace}.
 @itemize @minus
 
 @item Added FDO (freedesktop.org) application-menu-implementation [Matthew Love]
+
+@item Added a way to change the font-color via SawfishConfig independently of what theme is beeing used [Matthew Love, Christopher Bratusek]
 
 @item Sawfish does now support theme-tarballs compressed with XZ (aka LZMA2) or LZMA [Christopher Bratusek]
 

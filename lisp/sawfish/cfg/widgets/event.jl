@@ -21,13 +21,13 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.widgets.event ()
+(define-structure sawfish.cfg.widgets.event ()
 
     (open rep
 	  rep.regexp
 	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
-	  sawfish.ui.wm)
+	  sawfish.cfg.wm)
 
   (define (make-event-item changed)
 

@@ -40,10 +40,10 @@
 
 ;; customization options
 
-;;   From sawfish-1.5.0, sawfish-ui does use a treeview by default.
+;;   From sawfish-1.5.0, sawfish-config does use a treeview by default.
 ;;   If you prefer the previous notebook-style instead use:
-;;   "sawfish-ui --flatten"
-;;  (define-special-variable customize-program "sawfish-ui"
+;;   "sawfish-config --flatten"
+;;  (define-special-variable customize-program "sawfish-config"
 ;;    "Command name of the configurator GUI.")
 
 ;;  (define-special-variable customize-group-opt "--group")
@@ -126,6 +126,15 @@
 
 ;;  (define-special-variable default-bevel-percent nil
 ;;    "Bevel intensity as a percentage.")
+
+;;  (define-special-variable use-custom-font-color '()
+;;    "Use custom font colors for frames")
+
+;;  (define-special-variable frame-font-active-color "black"
+;;    "Font color for active frames")
+
+;;  (define-special-variable frame-font-inactive-color "black"
+;;    "Font color for inactive frames")
 
 ;; menu options
 

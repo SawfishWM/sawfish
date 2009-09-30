@@ -1,3 +1,47 @@
+2009-09-26  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/Makefile.in
+	* lisp/sawfish/cfg/Makefile.in
+	* configure.in
+	* man/sawfish-ui.1
+	* man/sawfish-config.1
+	* lisp/sawfish/ui/
+	* lisp/sawfish/cfg/: renamed `sawfish-ui' to `sawfish-config'
+
+	* OPTIONS
+	* README.IMPORTANT
+	* TODO
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/ext/match-window.jl
+	* sawfish.ebuild.in
+	* sawfish.spec.in
+	* sawfish-ksm.desktop
+	* sawfish-wm.desktop
+	* themes/mxflat/theme.jl
+	* themes/mxflat/CHANGELOG
+	* themes/mxflat/README
+	* themes/mxflat/TODO
+	* CONTRIBUTING
+	* man/sawfish.texi
+	* man/news.texi: updated
+
+	* lisp/sawfish/cfg/widgets/match-window.jl: justify the `grab' button to the left
+	                                            justify the labels to the left
+
+	* KEYBINDINGS: explained macros (artist formerly known as `nested keybindings')
+	               added Multikey (aka Compose)
+		       better explaination of ISO_Level3_Shift
+
+	* po/make-pot: removed --update (intltool + rep = puke)
+
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/extras.jl: added customization options for changing font-color
+	                             *independently* of what frame-style is beeing used
+				     -- [Matthew Love, Christopher Bratusek]
+
+	* OPTIONS: updated
+
+	* man/sawfish.texi: added update-frame-font-color
+
 2009-09-23  Christopher Bratusek <zanghar@freenet.de>
 	* man/news.texi: news items for 1.6.0 are partially rewritten [Teika Kazura]
 
@@ -74,7 +118,7 @@
 
 	* man/sawfish.1
 	* man/sawfish-client.1
-	* man/sawfish-ui.1: added man-page for sawfish 
+	* man/sawfish-ui.1: added man-page for sawfish
 	                 added man-page for sawfish-client
 			 added man-page for sawfish-ui
 			 -- [Debian]
@@ -107,7 +151,7 @@
 	* lisp/sawfish/wm/focus.jl: doc for focus-revert
 	                            indention improvements
 				    -- [Teika Kazura]
-	
+
 	* man/news.texi: major rewrite of 1.5.0 section [Teika Kazura]
 	                 updated
 
@@ -180,7 +224,7 @@
 	* lisp/sawfish/wm/theming/make-theme.jl: make-image is defined the *second* time here
 	                                         the first time in gaol, rename this instance to
 						 make-image-possibly-from-cache to avoid confusion
-						 for both users and the rep-compiler 
+						 for both users and the rep-compiler
 						 also squashes a compiler warning [Matthew Love]
 
 	* src/play-sample.c
@@ -303,7 +347,7 @@
 	* lisp/sawfish/wm/commands/user.jl: ex sawfish.wm.commands.xterm
 	                                    `browser' command added (defaults to `www-broser')
 					    `some' statement added () [Mark Triggs]
-					    `display-message-with-timeout' function added 
+					    `display-message-with-timeout' function added
 					    `program-available' function added [Mark Triggs]
 					    `view-clipboard' command [Mark Triggs]
 
@@ -332,7 +376,7 @@
 	* lisp/sawfish/wm/autoload.jl: unify entry syntax
 
 	* lisp/sawfish/wm/gaol.jl: make default-directory safe-special
-	
+
 	* lisp/sawfish/wm/commands/move-resize.jl: added halve/double-window-size functions
 						   added resize-by-factor meta functions
 
@@ -374,7 +418,7 @@
 
 	* lisp/sawfish/wm/commands/shrink-yank.jl: export commands
 
-	* lisp/sawfish/wm/workspace.jl: export send-to-workspace 
+	* lisp/sawfish/wm/workspace.jl: export send-to-workspace
 	                                fix a select-workspace-from-first call [Michal Maruska]
 
 	* configure.in: bump minimum librep to 0.90.2, to make sure folks get a fixed sawfish-ui regarding UTF8 strings
@@ -384,7 +428,7 @@
 	* lisp/sawfish/wm/match-window.jl: set default to 0 if unset previously (avoids -65355 as default)
 
 2009-08-09  Christopher Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/ext/match-window.jl: move rename-window here, as it requires prompt but this either does not 
+	* lisp/sawfish/wm/ext/match-window.jl: move rename-window here, as it requires prompt but this either does not
 	                                       load properly in windows.jl or breaks sawfish-ui if require'ed instead of open'ed
 
 	* KEYBINDINGS: Added desckription of several keys
@@ -404,7 +448,7 @@
 
 2009-07-29  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/mmc/window-manipulation.jl: moved maximize-unframe/reframe into sawfish.wm.state.maximize
-	                                              moved rename-window into sawfish.wm.windows 
+	                                              moved rename-window into sawfish.wm.windows
 
 	* lisp/sawfish/wm/windows.jl: first change WM_NAME then _NET_WM_NAME in rename-window (so that we can grab
 	                              the new window-name with sawfish-ui and display it in the titlebar (some panels,
@@ -640,7 +684,7 @@
 	* man/news.texi: removed dupped entries, fixed typos
 
 	* sounds/Makefile.in
-	* po/Makefile.in	
+	* po/Makefile.in
 	* src/Makefile.in: fix uninstall target
 
 	* Makefile.in: uninstall all .desktop files

@@ -11,7 +11,6 @@ Packager: Christopher Bratusek <zanghar@freenet.de>
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: gmp-devel texinfo
 Provides: windowmanager
-Obsoletes: sawmill sawmill-gnome sawfish-gnome sawfish-themer
 
 %description
 Sawfish is an extensible window manager which uses a Lisp-based
@@ -64,8 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sawfish/%{version}
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{_datadir}/applications/sawfish.desktop
-%{_datadir}/apps/ksmserver/windowmanagers/sawfish.desktop
+@KDEDIR@/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
+%{_datadir}/man/man1/sawfish*.gz
 %{_datadir}/pixmaps/sawfish*.png
 %{_libdir}/pkgconfig/sawfish.pc
 %{_libexecdir}/sawfish/%{version}/%{_host}

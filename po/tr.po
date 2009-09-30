@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 20:53+0200\n"
+"POT-Creation-Date: 2009-09-26 17:40+0200\n"
 "PO-Revision-Date: 2002-09-18 05:27+0300\n"
 "Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: GNOME Turk <gnome-turk@gnome.org>\n"
@@ -154,7 +154,6 @@ msgstr ""
 msgid "gradient"
 msgstr "Geçiciler"
 
-# ../src/sawfish-ui.jl
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "colors"
@@ -380,7 +379,6 @@ msgid ""
 "custom to activate this list."
 msgstr ""
 
-# ../src/sawfish-ui.jl
 #. ../themes/mxflat/theme.jl
 #, fuzzy
 msgid "reverse colors"
@@ -724,7 +722,7 @@ msgid ""
 "customize configure button keymap\n"
 "\n"
 "by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
+"config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -735,7 +733,7 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
+"button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1105,6 +1103,91 @@ msgstr "Pencere kenarlýðýnýn geniþliði."
 msgid "Border width of bar images."
 msgstr "Çubuk resimlerinin kenar kalýnlýðý."
 
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "%s deðiþtirilirken:"
+
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "Sawfish Hatasý"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Çerçeve:"
+
+#. ../lisp/sawfish/cfg/shell.jl
+#, fuzzy
+msgid "Sawfish Configurator"
+msgstr "Sawfish ayarlayýcýsý"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Command"
+msgstr "Komut"
+
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Dökümansýz"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Yakala..."
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Çalýþma alanlarý:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Sütunlar:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Sýralar:"
+
+# ../lisp/keymaps.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#, fuzzy
+msgid "Edit Binding"
+msgstr "Baðýntýlarý düzenle"
+
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key"
+msgstr "Tuþ"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Tuþ :"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "Yakalayýcýlar"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Hareketler"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr ""
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#, fuzzy
+msgid "Match Window Properties"
+msgstr "Pencere özelliklerini yakala"
+
 #. ../lisp/sawfish/gtk/widget.jl
 #, c-format
 msgid "No matching item for %S"
@@ -1113,12 +1196,6 @@ msgstr "%S için eþleþen öðe yok"
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** bilinmeyen parçacýk ** "
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Key"
-msgstr "Tuþ"
 
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
@@ -1130,38 +1207,31 @@ msgstr "Deðer"
 msgid "Browse..."
 msgstr "Gözat..."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Select file"
 msgstr "Dosya Seç"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/font.jl
 msgid "Select font"
 msgstr "Yazýtipini Seç"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add..."
 msgstr "Ekle..."
 
 # ../lisp/menus.jl
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Delete"
 msgstr "Sil"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Edit..."
 msgstr "Düzenle..."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add:"
 msgstr "Ekle:"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Edit:"
 msgstr "Düzenle:"
@@ -1175,106 +1245,15 @@ msgstr ""
 msgid "No"
 msgstr "Hayýr"
 
-#. ../lisp/sawfish/ui/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "%s deðiþtirilirken:"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/apply.jl
-msgid "Sawfish Error"
-msgstr "Sawfish Hatasý"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Çerçeve:"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/shell.jl
-#, fuzzy
-msgid "Sawfish Configurator"
-msgstr "Sawfish ayarlayýcýsý"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Command"
-msgstr "Komut"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Undocumented"
-msgstr "Dökümansýz"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#. ../lisp/sawfish/ui/widgets/event.jl
-msgid "Grab..."
-msgstr "Yakala..."
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Çalýþma alanlarý:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Sütunlar:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Sýralar:"
-
-# ../lisp/keymaps.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#, fuzzy
-msgid "Edit Binding"
-msgstr "Baðýntýlarý düzenle"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Key:"
-msgstr "Tuþ :"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Matchers"
-msgstr "Yakalayýcýlar"
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Actions"
-msgstr "Hareketler"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "not"
-msgstr ""
-
-# ../src/sawfish-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#, fuzzy
-msgid "Match Window Properties"
-msgstr "Pencere özelliklerini yakala"
-
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
 msgstr ""
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/animation/outline.jl
 #, fuzzy
 msgid "Animation Steps"
 msgstr "Hareketler"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/animation/outline.jl
 #, fuzzy
 msgid "Animation Delay"
@@ -1301,11 +1280,12 @@ msgstr ""
 msgid "Sound"
 msgstr "Ses"
 
-# ../lisp/match-window.jl
+# ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-msgid "Matched Windows"
-msgstr "Eþleþen Pencereler"
+#, fuzzy
+msgid "Window Rules"
+msgstr "_Pencereler"
 
 # ../lisp/tooltips.jl
 #. ../lisp/sawfish/wm/ext/tooltips.jl
@@ -1483,7 +1463,6 @@ msgid "Lower group depth"
 msgstr "Düþük grup derinliði"
 
 # ../lisp/menus.jl
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Delete group"
 msgstr "Grup Sil"
@@ -1504,7 +1483,6 @@ msgstr "her zaman"
 msgid "maybe"
 msgstr "belki"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "never"
 msgstr "hiçbir vakit"
@@ -1920,6 +1898,12 @@ msgid ""
 "edge of another window."
 msgstr ""
 
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window center"
+msgstr "Pencereyi Sonrakiyle birleþtir"
+
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2203,7 +2187,14 @@ msgstr "`xterm' komutuyla çalýþtýrýlacak uygulama."
 msgid "The program launched by the `browser' command."
 msgstr "`xterm' komutuyla çalýþtýrýlacak uygulama."
 
-# ../src/sawfish-ui.jl
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Maximum length of Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "How long to display Clipboard Preview"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/user.jl
 msgid "Xterm"
 msgstr "Xterm"
@@ -2325,7 +2316,6 @@ msgstr ""
 "Pencereler arasýnda gezinirken odaklanmýþ penceredeki etkin baðýntýlarý "
 "içeren tuþ haritasý."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Call command"
 msgstr "Komutu Çaðýr"
@@ -2342,12 +2332,10 @@ msgstr "Kabuk komutunu çalýþtýr"
 msgid "Execute the given shell command."
 msgstr "Verilen kabuk komutunu çalýþtýr."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command:"
 msgstr "Komut:"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
 msgstr "Komut sýrasý"
@@ -2440,7 +2428,7 @@ msgid "Customize"
 msgstr "Özelleþtir"
 
 #. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
+msgid "Invoke the configurator GUI."
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
@@ -2796,7 +2784,6 @@ msgstr "Pencere:"
 msgid "State"
 msgstr "Durum"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "Diðer"
@@ -3068,6 +3055,18 @@ msgstr "Öntanýmlý çerçeve stili:"
 msgid "Automatically reload themes when they are updated."
 msgstr "Görünümler yenilenince görünümleri yeniden yükle "
 
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
@@ -3129,6 +3128,7 @@ msgid "About GNOME"
 msgstr "GNOME Hakkýnda..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr ""
@@ -3148,6 +3148,18 @@ msgstr "_Yardým"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "KDE Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Logout from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Reboot from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3593,7 +3605,6 @@ msgstr "Uygulama menüsünü göster."
 msgid "S_awfish-UI"
 msgstr ""
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
 msgstr "Temayý düzenle..."
@@ -3767,7 +3778,6 @@ msgstr ""
 msgid "_Sticky"
 msgstr "_Yapýþkan"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window ignored"
 msgstr "Pencereyi göz ardý edilmiþ yap"
@@ -3778,7 +3788,6 @@ msgstr "Pencereyi göz ardý edilmiþ yap"
 msgid "Ignore the window."
 msgstr "Pencereyi sil."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "Make window not ignored"
 msgstr "Penceredeki göz ardý durumunu kaldýr"
@@ -3789,13 +3798,11 @@ msgstr "Penceredeki göz ardý durumunu kaldýr"
 msgid "Unignore the window."
 msgstr "Pencereyi sil."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle window ignored"
 msgstr "Pencereyi göz ardý edilmiþ yap"
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/state/ignored.jl
 #, fuzzy
 msgid "Toggle whether a window is ignored or not."
@@ -4297,6 +4304,7 @@ msgstr "Pencere:"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
+#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4351,7 +4359,9 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"Minimum number of columns and rows in each virtual workspace (if boundary "
+"mode is dynamic): \\w"
 msgstr ""
 
 # ../lisp/viewport.jl
@@ -4519,7 +4529,6 @@ msgstr "Pencereyi aþaðý taþý"
 msgid "Move the window to the viewport below, and switch to that viewport."
 msgstr "Geçerli pencereyi belirlenmiþ bakýþ noktasýna taþýr."
 
-# ../src/sawfish-ui.jl
 #. ../lisp/sawfish/wm/window-anim.jl
 #, fuzzy
 msgid "Animation"
@@ -4937,6 +4946,25 @@ msgstr "Çalýþma alanýný etkileþimli seç"
 msgid "Prompt for a workspace and switch to it."
 msgstr ""
 
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Wether to display workspace name upon switch"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How long to display workspace name"
+msgstr ""
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Display workspace name"
+msgstr "Çalýþma alaný isimleri"
+
+# ../lisp/match-window.jl
+#~ msgid "Matched Windows"
+#~ msgstr "Eþleþen Pencereler"
+
 #, fuzzy
 #~ msgid "customize title position"
 #~ msgstr "_Yeri hatýrla"
@@ -4995,7 +5023,6 @@ msgstr ""
 #~ msgid "show window corners"
 #~ msgstr "Pencereyi aþaðý geniþlet"
 
-# ../src/sawfish-ui.jl
 #, fuzzy
 #~ msgid "fake shadow light source"
 #~ msgstr "Pencereyi göz ardý edilmiþ yap"
@@ -5103,7 +5130,6 @@ msgstr ""
 #~ msgid "_All settings"
 #~ msgstr "Tüm ayarlar"
 
-# ../src/sawfish-ui.jl
 #~ msgid "Select color"
 #~ msgstr "Rengi Seç"
 
@@ -5155,6 +5181,5 @@ msgstr ""
 #~ msgid "Error Handling"
 #~ msgstr "Hata Yakalama"
 
-# ../src/sawfish-ui.jl
 #~ msgid "Select Icon"
 #~ msgstr "Simgeyi Seç"

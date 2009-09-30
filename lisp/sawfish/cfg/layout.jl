@@ -21,7 +21,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.layout
+(define-structure sawfish.cfg.layout
 
     (export define-layout-type
 	    layout-slots
@@ -32,7 +32,7 @@
     ((open rep
 	   gui.gtk-2.gtk
 	   rep.regexp
-	   sawfish.ui.slot
+	   sawfish.cfg.slot
 	   sawfish.gtk.widget)
      (access rep.structures))
 
@@ -45,7 +45,7 @@
   (define (layout-type name)
     (or (get name 'nokogiri-layout)
 	;; try to dynamically load it
-	(let ((module-name (intern (concat "sawfish.ui.layouts."
+	(let ((module-name (intern (concat "sawfish.cfg.layouts."
 					   (symbol-name name)))))
 	  (condition-case nil
 	      (progn

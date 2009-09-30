@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 20:53+0200\n"
+"POT-Creation-Date: 2009-09-26 17:40+0200\n"
 "PO-Revision-Date: 2006-12-10 23:05+0530\n"
 "Last-Translator: yangka <yanang_ka@hotmail.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -709,7 +709,7 @@ msgid ""
 "customize configure button keymap\n"
 "\n"
 "by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
+"config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -721,7 +721,7 @@ msgstr "དཀར་ཆག-ཨེབ་རྟ-ས་ཁྲ་གཙོ་བོ�
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
+"button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1085,6 +1085,83 @@ msgstr "ཝིནཌོ་མཐའ་མཚམས་ཀྱི་རྒྱ་ཚ
 msgid "Border width of bar images."
 msgstr "ཕྲ་རིང་གཟུགས་བརྙན་ཚུ་གི་མཐའ་མཚམས་རྒྱ་ཚད།"
 
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "བསྒྱུར་བཅོས་འབད་བའི་སྐབས %s:"
+
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "སྭ་ཕིཤི་འཛོལ་བ།"
+
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "སྐབས་དོན།:"
+
+#. ../lisp/sawfish/cfg/shell.jl
+msgid "Sawfish Configurator"
+msgstr "སྭ་ཕིཤི་རིམ་སྒྲིག"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Command"
+msgstr "བརྡ་བཀོད།"
+
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "ཡིག་ཆ་འབད་བཤོལ་ཡོདཔ།"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "འཛིན་པ..."
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "ལཱ་གི་ས་གནས་ཚུ:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "ཀེར་ཐིག་ཚུ།:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "གྱལ་ཚུ།:"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Edit Binding"
+msgstr "ཞུན་དག་སྡམ་ཐག"
+
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key"
+msgstr "ལྡེ་མིག"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "ལྡེ་མིག:"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "མཐུན་སྒྲིག་པ་ཚུ།"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "བྱ་བ་ཚུ།"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "མེདཔ།"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Match Window Properties"
+msgstr "ཝིནཌོ་རྒྱུ་དངོས་ཚུ་མཐུན་སྒྲིག་འབད།"
+
 #. ../lisp/sawfish/gtk/widget.jl
 #, c-format
 msgid "No matching item for %S"
@@ -1093,11 +1170,6 @@ msgstr "་དོན་ལུ་རྣམ་གྲངས་མཐུན་སྒ
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** མ་ཤེསཔ་ཝེ་གེཊི། **  "
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Key"
-msgstr "ལྡེ་མིག"
 
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
@@ -1144,78 +1216,6 @@ msgstr "ཨིན།"
 msgid "No"
 msgstr "མེན།"
 
-#. ../lisp/sawfish/ui/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "བསྒྱུར་བཅོས་འབད་བའི་སྐབས %s:"
-
-#. ../lisp/sawfish/ui/apply.jl
-msgid "Sawfish Error"
-msgstr "སྭ་ཕིཤི་འཛོལ་བ།"
-
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "སྐབས་དོན།:"
-
-#. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish Configurator"
-msgstr "སྭ་ཕིཤི་རིམ་སྒྲིག"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Command"
-msgstr "བརྡ་བཀོད།"
-
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Undocumented"
-msgstr "ཡིག་ཆ་འབད་བཤོལ་ཡོདཔ།"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#. ../lisp/sawfish/ui/widgets/event.jl
-msgid "Grab..."
-msgstr "འཛིན་པ..."
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "ལཱ་གི་ས་གནས་ཚུ:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "ཀེར་ཐིག་ཚུ།:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "གྱལ་ཚུ།:"
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit Binding"
-msgstr "ཞུན་དག་སྡམ་ཐག"
-
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Key:"
-msgstr "ལྡེ་མིག:"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Matchers"
-msgstr "མཐུན་སྒྲིག་པ་ཚུ།"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Actions"
-msgstr "བྱ་བ་ཚུ།"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "not"
-msgstr "མེདཔ།"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match Window Properties"
-msgstr "ཝིནཌོ་རྒྱུ་དངོས་ཚུ་མཐུན་སྒྲིག་འབད།"
-
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
 msgstr ""
@@ -1252,8 +1252,9 @@ msgstr "སྒྲ་སྐད།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-msgid "Matched Windows"
-msgstr "མཐུན་སྒྲིག་འབད་ཡོད་མི་ཝིནཌོ་ཚུ།"
+#, fuzzy
+msgid "Window Rules"
+msgstr "ཝིནཌོསི།(_W)"
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1811,6 +1812,11 @@ msgstr ""
 "ཝིནཌོ་ཅིག་སྤོ་བའི་སྐབས་གདམ་ཁ་འདི་གིས་ཁྱོད་ལུ་འདིའི་མཐའམ་གཅིག་གཞན་ཝིནཌོ་གི་མཐའམ་ཅིག་ཕྲང་་བཅུགཔ་ཨིན།"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window center"
+msgstr "སྤོ་ཝིནཌོ་ཤུལ་མ།"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
 msgstr "ཝིནཌོ་ཕན་ཚུན་ཤུགས་ལྡན་སྦེ་སྤོ།"
 
@@ -2068,6 +2074,14 @@ msgid "The program launched by the `browser' command."
 msgstr "ལས་རིམ་འདི་ `xterm' བརྡ་བཀོད་འདི་གིས་གསར་བཙུགས་འབཐ་ཡོད་མི།"
 
 #. ../lisp/sawfish/wm/commands/user.jl
+msgid "Maximum length of Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "How long to display Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
 msgid "Xterm"
 msgstr "ཨེགསི་ཊམ།"
 
@@ -2263,8 +2277,8 @@ msgid "Customize"
 msgstr "སྲོལ་སྒྲིག་བཟོ།"
 
 #. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "ལག་ལེན་པ་སྲོལ་སྒྲིག་རིམ་ལུགས་འདི་ལས་བཀོལ་འབད་ནི།"
+msgid "Invoke the configurator GUI."
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -2810,6 +2824,18 @@ msgid "Automatically reload themes when they are updated."
 msgstr "དེ་དུས་མཐུན་བཟོ་ཡོད་པའི་སྐབས་བརྗོད་དོན་ཚུ་རང་བཞིན་གྱིས་ཡང་བསྐྱར་མངོན་གསལ་འབད་འོང་།"
 
 #. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "སྔོན་སྒྲིག་ཡིག་གཟུགས: \\w"
 
@@ -2862,6 +2888,7 @@ msgid "About GNOME"
 msgstr "སྐོར་ལས་ GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr ""
@@ -2882,6 +2909,20 @@ msgstr "གྲོགས་རིམ།(_H)"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "KDE Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Logout from KDE"
+msgstr "ད་ལྟོའི་ཇི་ནོམ་ལཱ་ཡུན་འདི་ལས་ཕྱིར་བསྐྱོད་འབད།"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Reboot from KDE"
+msgstr "ད་ལྟོའི་ཇི་ནོམ་ལཱ་ཡུན་འདི་ལས་ཕྱིར་བསྐྱོད་འབད།"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3913,6 +3954,7 @@ msgstr ""
 msgid "Window:"
 msgstr "ཝིནཌོ:"
 
+#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -3960,7 +4002,9 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"Minimum number of columns and rows in each virtual workspace (if boundary "
+"mode is dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4449,6 +4493,25 @@ msgstr "ལཱ་གི་ས་སྒོ་ཕན་ཚུན་ཤུགས་
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "ལཱ་གི་ས་སྒོ་ཅིག་གི་དོན་ལུ་ནུས་སྤེལ་འབད་ནི་དང་འདི་ལུ་ཧོར་བསྒྱུར་འབད།"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Wether to display workspace name upon switch"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How long to display workspace name"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Display workspace name"
+msgstr "ལཱ་གི་ས་སྒོའི་མིང་ཚུ།"
+
+#~ msgid "Matched Windows"
+#~ msgstr "མཐུན་སྒྲིག་འབད་ཡོད་མི་ཝིནཌོ་ཚུ།"
+
+#~ msgid "Invoke the user-customization system."
+#~ msgstr "ལག་ལེན་པ་སྲོལ་སྒྲིག་རིམ་ལུགས་འདི་ལས་བཀོལ་འབད་ནི།"
 
 #, fuzzy
 #~ msgid "customize title position"

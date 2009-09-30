@@ -21,7 +21,7 @@
    the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 |#
 
-(define-structure sawfish.ui.group
+(define-structure sawfish.cfg.group
 
     (export group-real-name
 	    group-slots
@@ -44,8 +44,8 @@
 	  rep.system
 	  rep.data.records
 	  rep.data.tables
-	  sawfish.ui.slot
-	  sawfish.ui.wm)
+	  sawfish.cfg.slot
+	  sawfish.cfg.wm)
 
   (define-record-type :group
     (make-group name)

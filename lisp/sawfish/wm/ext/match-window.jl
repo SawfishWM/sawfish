@@ -159,7 +159,7 @@
     :group match-window
     :require sawfish.wm.ext.match-window)
 
-  ;; used by sawfish-ui when grabbing property values
+  ;; used by sawfish-config when grabbing property values
   (define (match-window-grab-x-property real-prop)
     (let ((window (select-window))
 	  prop)

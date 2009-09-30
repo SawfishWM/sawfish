@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-03 20:53+0200\n"
+"POT-Creation-Date: 2009-09-26 17:40+0200\n"
 "PO-Revision-Date: 2004-05-02 01:47+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -736,7 +736,7 @@ msgid ""
 "customize configure button keymap\n"
 "\n"
 "by default a button will work as it's name suggests. button1: start sawfish-"
-"ui - button3: toggle custom title string"
+"config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -748,7 +748,7 @@ msgstr "menuknop-toetsenkaart"
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-ui - button3: toggle custom title string"
+"button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1125,6 +1125,99 @@ msgstr "Breedte van de vensterrand."
 msgid "Border width of bar images."
 msgstr "Randbreedte van balkafbeeldingen."
 
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "Bij veranderen van %s:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "Sawfish fout"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Omgeving:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/shell.jl
+msgid "Sawfish Configurator"
+msgstr "Sawfish configuratie"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Command"
+msgstr "Opdracht"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Ongedocumenteerd"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Grijpen..."
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Werkruimten:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Kolommen:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Rijen:"
+
+# ../lisp/keymaps.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Edit Binding"
+msgstr "Binding bewerken"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key"
+msgstr "Toets"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Toets:"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "Eigenschappen"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Handelingen"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "niet"
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Match Window Properties"
+msgstr "Venstereigenschappen overeen laten komen"
+
 # ../themer/themer.in
 #. ../lisp/sawfish/gtk/widget.jl
 #, c-format
@@ -1134,12 +1227,6 @@ msgstr "Geen overeenkomstig item voor %S"
 #. ../lisp/sawfish/gtk/widget.jl
 msgid "** unknown widget **  "
 msgstr "** onbekend object **"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Key"
-msgstr "Toets"
 
 #. ../lisp/sawfish/gtk/widgets/alist.jl
 msgid "Value"
@@ -1200,93 +1287,6 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nee"
 
-#. ../lisp/sawfish/ui/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "Bij veranderen van %s:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/apply.jl
-msgid "Sawfish Error"
-msgstr "Sawfish fout"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/ui/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Omgeving:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/shell.jl
-msgid "Sawfish Configurator"
-msgstr "Sawfish configuratie"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Command"
-msgstr "Opdracht"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/command.jl
-msgid "Undocumented"
-msgstr "Ongedocumenteerd"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-#. ../lisp/sawfish/ui/widgets/event.jl
-msgid "Grab..."
-msgstr "Grijpen..."
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Werkruimten:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Kolommen:"
-
-#. ../lisp/sawfish/ui/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/ui/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Rijen:"
-
-# ../lisp/keymaps.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Edit Binding"
-msgstr "Binding bewerken"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/keymap.jl
-msgid "Key:"
-msgstr "Toets:"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Matchers"
-msgstr "Eigenschappen"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Actions"
-msgstr "Handelingen"
-
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "not"
-msgstr "niet"
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/ui/widgets/match-window.jl
-msgid "Match Window Properties"
-msgstr "Venstereigenschappen overeen laten komen"
-
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
 msgstr ""
@@ -1324,11 +1324,12 @@ msgstr ""
 msgid "Sound"
 msgstr "Geluid"
 
-# ../lisp/match-window.jl
+# ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-msgid "Matched Windows"
-msgstr "Speciale vensters"
+#, fuzzy
+msgid "Window Rules"
+msgstr "_Vensters"
 
 # ../lisp/tooltips.jl
 #. ../lisp/sawfish/wm/ext/tooltips.jl
@@ -1970,6 +1971,12 @@ msgstr ""
 "Bij het verplaatsen van vensters geeft deze optie de mogelijkheid om de "
 "randen uit te lijnen met de randen van een ander venster."
 
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Move window center"
+msgstr "Verplaats venster naar volgende"
+
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -2270,6 +2277,14 @@ msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
 msgid "The program launched by the `browser' command."
 msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
 
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "Maximum length of Clipboard Preview"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/user.jl
+msgid "How long to display Clipboard Preview"
+msgstr ""
+
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/commands/user.jl
 msgid "Xterm"
@@ -2505,10 +2520,9 @@ msgstr "Plaatsing"
 msgid "Customize"
 msgstr "Aanpassen"
 
-# ../lisp/customize.jl
 #. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the user-customization system."
-msgstr "Roep het gebruiker-aanpassings systeem op."
+msgid "Invoke the configurator GUI."
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
@@ -3122,6 +3136,18 @@ msgstr "Standaard Vensterrand:"
 msgid "Automatically reload themes when they are updated."
 msgstr "Herlaad thema's automatisch zodra ze bij de tijd zijn gebracht."
 
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
@@ -3184,6 +3210,7 @@ msgid "About GNOME"
 msgstr "GNOME Info..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr ""
@@ -3205,6 +3232,22 @@ msgstr "_Hulp"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "KDE Website"
+msgstr ""
+
+# ../lisp/sm-init.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Logout from KDE"
+msgstr "Sluit de huidige GNOME sessie."
+
+# ../lisp/sm-init.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Reboot from KDE"
+msgstr "Sluit de huidige GNOME sessie."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -4383,6 +4426,7 @@ msgstr "Venster:"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
+#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4434,7 +4478,9 @@ msgid "Number of columns and rows in each virtual workspace: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Minimum number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"Minimum number of columns and rows in each virtual workspace (if boundary "
+"mode is dynamic): \\w"
 msgstr ""
 
 # ../lisp/viewport.jl
@@ -5022,6 +5068,29 @@ msgstr "Kies zelf werkruimte uit"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Vraag om een werkruimte en ga erheen."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Wether to display workspace name upon switch"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "How long to display workspace name"
+msgstr ""
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/workspace.jl
+#, fuzzy
+msgid "Display workspace name"
+msgstr "Namen van werkruimten"
+
+# ../lisp/match-window.jl
+#~ msgid "Matched Windows"
+#~ msgstr "Speciale vensters"
+
+# ../lisp/customize.jl
+#~ msgid "Invoke the user-customization system."
+#~ msgstr "Roep het gebruiker-aanpassings systeem op."
 
 #, fuzzy
 #~ msgid "customize title position"
