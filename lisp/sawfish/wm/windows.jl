@@ -91,7 +91,7 @@
     :group (misc warp))
 
   (defcustom dont-avoid-ignored t
-    "Whether to not ignore avoided windows by default."
+    "Whether to not avoid ignored windows by default."
     :type boolean
     :group misc)
 
