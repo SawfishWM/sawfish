@@ -94,8 +94,15 @@
 ;;      (shaded . shaped)
 ;;      (shaded-transient . shaped-transient)
 ;;      (icon . shaped-transient)
-;;      (dock . unframed))
-;;    "Frame type fallbacks.")
+;;      (dock . unframed)
+;;      (utility . default)
+;;      (shaded-utility . shaded-transient)
+;;      (toolbar . unframed)
+;;      (menu . unframed)
+;;      (splash . unframed))
+;;    "Frame type fallbacks. This is an alist whose elements are
+;;   (required-type . fallback-type). When REQUIRED-TYPE is not supported
+;;   by the current theme, then FALLBACK-TYPE is used instead.")
 
 ;;  (define-special-variable decorate-transients nil
 ;;    "Decorate dialog windows similarly to application windows.")
@@ -519,7 +526,17 @@
 ;;    '(window-list-skip cycle-skip fixed-position focus-click-through
 ;;      avoid no-history never-iconify never-maximize sticky
 ;;      stick-viewport placed)
-;;    "List of properties set (to true) on windows marked as docks.")
+;;    "List of properties set (to true) on windows when they are marked as docks.")
+
+;; (define-special-variable desktop-window-properties
+;;   '(fixed-position sticky sticky-viewport)
+;;   "List of properties set (to true) on windows when they are marked as desktops.")
+
+;; (define-special-variable desktop-window-depth -4
+;;   "The stacking depth of desktop windows.")
+
+;; (define-special-variable dock-window-depth 0
+;;   "The stacking depth of dock windows.")
 
 ;;  (define-special-variable select-window-cursor-shape 'crosshair
 ;;    "Cursor used by select-window function.")

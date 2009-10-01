@@ -877,9 +877,16 @@ Remove @var{property} of @var{window}. Returns @code{t} for success,
 @cindex Types, of windows
 @cindex Windows, types of
 
-Transient windows are pop-up or dialog windows associated with a main
-application.  They tend to have less window decorations, and are
-intended to last a short time only.
+Some window ``types'' are defined. They represent the window's special
+nature based on the role. Defined types are ``transient'',
+``desktop'', and ``dock''.
+
+A type is usually set by applications through hints when the
+window appears. Many windows do not have any types.
+
+``Transient'' windows are pop-up or dialog windows associated with
+a main application.  They tend to have less window decorations, and
+are intended to last a short time only.
 
 @defun window-transient-p arg
 Returns @code{t} if @var{arg} represents a transient window.
@@ -954,7 +961,9 @@ Decorate dialog windows similarly to application windows.  Defaults to
 false.
 @end defvar
 
-Desktop windows are root windows or viewport windows.
+``Desktop'' windows are root windows or viewport windows. They
+accept keys as if it is a root window. (I.e.,
+@code{root-window-keymap} is used.) They don't have a frame.
 
 @defun desktop-window-p arg
 Returns @code{t} if @var{arg} represents a desktop window.
@@ -966,8 +975,8 @@ window.
 @end defun
 
 @defvar desktop-window-properties
-List of properties set (to true) on windows marked as desktops.
-Defaults to
+List of properties set (to true) on windows when they are marked as
+desktops.  Defaults to
 @lisp
 '(fixed-position sticky sticky-viewport)
 @end lisp
@@ -977,9 +986,8 @@ Defaults to
 The stacking depth of desktop windows.  Defaults to -4.
 @end defvar
 
-Dock windows are simply those with the @code{dock-type} property.
-GNOME panels are one example.  Sawfish does not currently assign them
-any special behavior.
+``Dock'' windows are docks or panels. They don't have frame by
+default.
 
 @defun dock-window-p arg
 Returns @code{t} if @var{arg} represents a dock window.
@@ -991,8 +999,8 @@ window.
 @end defun
 
 @defvar dock-window-properties
-List of properties set (to true) on windows marked as docks.
-Defaults to
+List of properties set (to true) on windows when they are marked as
+docks. Defaults to
 @lisp
 '(window-list-skip cycle-skip fixed-position focus-click-through
   avoid no-history never-iconify never-maximize sticky
@@ -3822,6 +3830,12 @@ Default 60.
 @defvar themes-are-gaoled
 If @code{t}, non-nil themes are assumed to be malicious.  They will be
 evaluated in a restricted environment.
+@end defvar
+
+@defvar frame-type-fallback-alist
+Frame type fallbacks. This is an alist whose elements are
+(required-type . fallback-type). When REQUIRED-TYPE is not supported
+by the current theme, then FALLBACK-TYPE is used instead."
 @end defvar
 
 @node Removing Frame Parts,  , Themes, Window Frames

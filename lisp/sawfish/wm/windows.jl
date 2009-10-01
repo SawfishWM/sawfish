@@ -104,13 +104,13 @@
 
   (defvar dock-window-properties
     '(window-list-skip cycle-skip fixed-position focus-click-through
-                       avoid no-history never-iconify never-maximize sticky
-                       sticky-viewport placed)
-    "List of properties set (to true) on windows marked as docks.")
+		       avoid no-history never-iconify never-maximize sticky
+		       sticky-viewport placed)
+    "List of properties set (to true) on windows when they are marked as docks.")
 
   (defvar desktop-window-properties
     '(fixed-position sticky sticky-viewport)
-    "List of properties set (to true) on windows marked as desktops.")
+    "List of properties set (to true) on windows when they are marked as desktops.")
 
   (defvar desktop-window-depth -4
     "The stacking depth of desktop windows.")
@@ -191,7 +191,7 @@ then be the numeric id of its parent window."
   (define-command 'focus-desktop focus-desktop)
 
   (define (dock-window-p arg)
-    "Return true if ARG represents a dock window (i.e. the GNOME panel)."
+    "Return true if ARG represents a dock window."
     (and (windowp arg) (window-get arg 'dock-type)))
 
   (define (mark-window-as-dock w)
