@@ -1,5 +1,4 @@
 ;; make-theme-preview.jl -- previewing for theme builder
-;; $Id: make-theme-preview.jl,v 1.8 2000/10/31 07:12:04 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 

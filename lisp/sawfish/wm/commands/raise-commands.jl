@@ -1,5 +1,4 @@
 ;; raise-commands.jl -- some commands for raising windows
-;; $Id: raise-commands.jl,v 1.11 2002/04/21 04:52:14 jsh Exp $
 
 ;; Copyright (C) 1999-2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,17 +18,19 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.commands.raise-commands ()
+(define-structure sawfish.wm.commands.raise-commands
+
+    (export )
 
     (open rep
-	  sawfish.wm.windows
-	  sawfish.wm.events
-	  sawfish.wm.stacking
-	  sawfish.wm.util.stacking
-	  sawfish.wm.state.transient
-	  sawfish.wm.commands.groups
-	  sawfish.wm.commands
-	  sawfish.wm.focus)
+          sawfish.wm.windows
+          sawfish.wm.events
+          sawfish.wm.stacking
+          sawfish.wm.util.stacking
+          sawfish.wm.state.transient
+          sawfish.wm.commands.groups
+          sawfish.wm.commands
+          sawfish.wm.focus)
 
   (define (replay-pointer w)
     ;; click-to-focus mode sets this to t when it calls a command

@@ -1,5 +1,4 @@
 ;; ignore-window.jl -- controlling the ignored property
-;; $Id: ignored.jl,v 1.13 2003/02/20 07:29:10 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -88,13 +87,20 @@
     (window-put w 'task-list-skip (not (window-get w 'task-list-skip)))
     (call-window-hook 'window-state-change-hook w (list '(task-list-skip))))
 
-  (define-command 'make-window-ignored make-window-ignored #:spec "%W")
-  (define-command 'make-window-not-ignored make-window-not-ignored #:spec "%W")
-  (define-command 'toggle-window-ignored toggle-window-ignored #:spec "%W")
-  (define-command 'toggle-window-never-focus toggle-window-never-focus #:spec "%W")
-  (define-command 'toggle-window-cycle-skip toggle-window-cycle-skip #:spec "%W")
-  (define-command 'toggle-window-list-skip toggle-window-list-skip #:spec "%W")
-  (define-command 'toggle-task-list-skip toggle-task-list-skip #:spec "%W")
+  (define-command 'make-window-ignored
+    make-window-ignored #:spec "%W")
+  (define-command 'make-window-not-ignored
+    make-window-not-ignored #:spec "%W")
+  (define-command 'toggle-window-ignored
+    toggle-window-ignored #:spec "%W")
+  (define-command 'toggle-window-never-focus
+    toggle-window-never-focus #:spec "%W")
+  (define-command 'toggle-window-cycle-skip
+    toggle-window-cycle-skip #:spec "%W")
+  (define-command 'toggle-window-list-skip
+    toggle-window-list-skip #:spec "%W")
+  (define-command 'toggle-task-list-skip
+    toggle-task-list-skip #:spec "%W")
 
   (add-window-menu-toggle (_ "_Ignored") 'toggle-window-ignored
 			  window-ignored-p)
@@ -105,5 +111,5 @@
   (add-window-menu-toggle (_ "In _window list") 'toggle-window-list-skip
 			  (lambda (w) (not (window-get w 'window-list-skip))))
   (add-window-menu-toggle (_ "In _task list") 'toggle-task-list-skip
-                         (lambda (w) (not (window-get w 'task-list-skip)))))
+                          (lambda (w) (not (window-get w 'task-list-skip)))))
 

@@ -1,5 +1,4 @@
 ;; transient.jl -- support transient windows
-;; $Id: transient.jl,v 1.63 2002/04/27 19:31:25 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -37,7 +36,7 @@
 	  sawfish.wm.events
 	  sawfish.wm.custom
 	  sawfish.wm.commands
-         sawfish.wm.focus
+          sawfish.wm.focus
 	  sawfish.wm.windows
 	  sawfish.wm.stacking
 	  sawfish.wm.viewport
@@ -71,17 +70,18 @@
 		    (eql (window-group-id x) (window-group-id y)))))))
 
   (define (indirect-transient-of-p x y #!key allow-root)
-    "Return t if window X is (directly, or indirectly) a transient for window Y."
+    "Return t if window X is (directly, or indirectly) a transient for
+window Y."
     (let loop ((x x))
-      (or (transient-of-p x y #:allow-root allow-root)
-	  (let ((x-for (window-transient-p x)))
-	    (and x-for
-		 ;; Some KDE windows set WM_TRANSIENT_FOR to their own id!
-		 (not (eql x-for (window-id x)))
-		 (let ((x-for-w (get-window-by-id x-for)))
-		   (if x-for-w
-		       (loop x-for-w)
-		     nil)))))))
+         (or (transient-of-p x y #:allow-root allow-root)
+             (let ((x-for (window-transient-p x)))
+               (and x-for
+                    ;; Some KDE windows set WM_TRANSIENT_FOR to their own id!
+                    (not (eql x-for (window-id x)))
+                    (let ((x-for-w (get-window-by-id x-for)))
+                      (if x-for-w
+                          (loop x-for-w)
+                        nil)))))))
 
   (define (transient-parents w #!optional indirectly)
     "Return the list of windows that window W is a transient for."

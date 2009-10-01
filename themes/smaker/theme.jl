@@ -1,5 +1,4 @@
 ;; smaker/theme.jl -- somewhat windowmaker like theme, heavily customizable
-;; $Id: theme.jl,v 1.11 2000/06/28 15:53:06 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -90,7 +89,7 @@
 		(make-image i)
 	      (error))
 	    (make-image (concat install-dir i)))))
-     
+
      (rebuild (lambda ()
 		(rebuild-frames-with-style 'smaker)))
 

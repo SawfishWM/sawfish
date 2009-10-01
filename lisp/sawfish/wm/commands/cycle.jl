@@ -1,5 +1,4 @@
 ;; cycle.jl -- simple window cycling
-;; $Id: cycle.jl,v 1.5 2000/09/14 12:43:36 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

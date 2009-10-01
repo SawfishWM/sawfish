@@ -1,23 +1,22 @@
-#| display-wininfo.jl -- shows info about focused window
-
-   Copyright (C) 2000 Unai Uribarri <unaiur@telecable.es>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; display-wininfo.jl -- shows info about focused window
+;;
+;; Copyright (C) 2000 Unai Uribarri <unaiur@telecable.es>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.util.display-wininfo
 
@@ -33,8 +32,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.util.x
 	  sawfish.wm.windows
-	  sawfish.wm.workspace
-	  )
+	  sawfish.wm.workspace)
 
 ;;; variables
 
@@ -83,18 +81,15 @@
   ;; Returns a list of strings describing window W in some way
   (define (window-info w)
     (list (concat (and (window-get w 'iconified) ?[)
-                  (window-name w)
-                  (and (window-get w 'iconified) ?])
-		  ; potentially include the workspace where the window is
+                       (window-name w)
+                       (and (window-get w 'iconified) ?])
+                  ;; potentially include the workspace where the window is
 		  (if (and
 		       display-wininfo-show-workspace
 		       (not (window-in-workspace-p w current-workspace)))
-		      (concat " <" (number->string (car (window-workspaces w))) ">")
-		    ""
-		    )
-                  )
-          )
-    )
+		      (concat " <" (number->string
+                                    (car (window-workspaces w))) ">")
+                    ""))))
 
 ;;; entry point
 
@@ -110,7 +105,7 @@ icon (if available). With a null W any displayed information is removed."
     (when info-window
       (x-destroy-window info-window)
       (setq info-window nil))
-	
+
     (when w
       (let* ((text (make-text-item (window-info w) default-font))
 	     (icon (let ((i (window-icon-image w)))
@@ -134,7 +129,7 @@ icon (if available). With a null W any displayed information is removed."
 			     (cons x-margin
 				   (quotient (- (x-drawable-height xw)
 						(cdr icon-dims)) 2))))
-	       
+
 	     ;; draw lines of text one at a time
 	     (let ((gc (x-create-gc xw
 				    `((foreground . ,(get-color "black"))

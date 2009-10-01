@@ -1,27 +1,24 @@
-#| workarea.jl -- calculating the usable region of a head
-
-   $Id$
-
-   Author: John Harper <jsh@unfactored.org>
-
-   Copyright (C) 2002 John Harper
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; workarea.jl -- calculating the usable region of a head
+;;
+;; Author: John Harper <jsh@unfactored.org>
+;;
+;; Copyright (C) 2002 John Harper
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.util.workarea
 
@@ -69,15 +66,15 @@
       ;; or span multiple heads, or be on a different head
       ;; to that requested
       (let loop ((rest avoided))
-	(cond ((null rest) t)
-	      ((or (> (rect-2d-overlap
-		       (window-frame-dimensions (car rest))
-		       (window-position (car rest))
-		       rect) 0)
-		   (/= (rectangle-heads rect) 1)
-		   (and head (/= head (find-head (car rect) (cadr rect)))))
-	       nil)
-	      (t (loop (cdr rest))))))
+           (cond ((null rest) t)
+                 ((or (> (rect-2d-overlap
+                          (window-frame-dimensions (car rest))
+                          (window-position (car rest))
+                          rect) 0)
+                      (/= (rectangle-heads rect) 1)
+                      (and head (/= head (find-head (car rect) (cadr rect)))))
+                  nil)
+                 (t (loop (cdr rest))))))
 
     (let* ((grid (grid-from-edges (car edges) (cdr edges)))
 	   ;; find all possible rectangles
@@ -95,10 +92,10 @@
 	max-rect)))
 
   (define (calculate-workarea #!key window head)
-    "Return the rectangle representing the largest rectangle on the screen that
-doesn't overlap any avoided windows, or nil.  If HEAD is true, then an
-empty workarea will be replaced with the area of HEAD, not the current
-head (of WINDOW)."
+    "Return the rectangle representing the largest rectangle on the
+screen that doesn't overlap any avoided windows, or nil.  If HEAD is
+true, then an empty workarea will be replaced with the area of HEAD,
+not the current head (of WINDOW)."
     (unless head
       (setq head (current-head window)))
     (let* ((avoided (avoided-windows window))
@@ -110,7 +107,7 @@ head (of WINDOW)."
 	   ;; Find the rectangle covering the current head
 	   (head-rect (rectangle-from-coords (head-offset head)
 					     (head-dimensions head)))
-	   ;; Find the largest rectangle 
+	   ;; Find the largest rectangle
 	   (rect (or (largest-rectangle-from-edges
 		      edges #:avoided avoided #:head head) head-rect)))
       ;; Shrink that to the union of all struts

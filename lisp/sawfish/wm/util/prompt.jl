@@ -1,9 +1,8 @@
 ;; prompt.jl -- read line from user
-;; Time-stamp: <Fri Sep 18 12:09:45 CDT 2009>
 ;;
 ;; Copyright (C) 2008 Sergey I. Sharybin <sharybin@nm.ru>
 ;; Copyright (C) 2000 Topi Paavola <tjp@iki.fi>
-;;   
+;;
 ;; This file is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 2, or (at your option)
@@ -87,8 +86,8 @@
 of a word when moving.")
 
   (defvar prompt-file-exclude '"\\.(o|jlc|x)$|~$|^#.*#$|^\\.\\.?$"
-    "A regexp, if it matches the file being considered for completion, the file
-is rejected.")
+    "A regexp, if it matches the file being considered for completion,
+the file is rejected.")
 
   (defvar prompt-list nil
     "List of possible entries for prompt-from-list.")
@@ -128,8 +127,8 @@ displayed. See the `display-message' function for more details.")
           prompt-display-fun (lambda (#!rest) nil)))
 
 
-;; From merlin
-;; But maybe better if we'd include this util?
+  ;; From merlin
+  ;; But maybe better if we'd include this util?
 
   ;; string/font -> font
   (define (prompt-fontify font)
@@ -142,7 +141,7 @@ displayed. See the `display-message' function for more details.")
   ;; assq with default
   (define (prompt-assqd key alist default)
     (if (assq key alist)
-      (assq key alist)
+        (assq key alist)
       (cons key default)))
 
   (defun prompt-exit ()
@@ -218,7 +217,7 @@ displayed. See the `display-message' function for more details.")
       (and (>= new-pos 0) (<= new-pos (length prompt-result))
 	   (setq prompt-position new-pos)
 	   (prompt-update-display))))
-         
+
   (defun prompt-forward-word ()
     "Move to next non-word character."
     (setq prompt-position (1+ prompt-position))
@@ -306,25 +305,28 @@ displayed. See the `display-message' function for more details.")
   (defun prompt-update-display ()
     (let ((result (if prompt-display-fun
 		      (prompt-display-fun prompt-result)
-		   prompt-result))
-	 (completions (prompt-format-completions)))
-     (let
-       (
-         (fg (prompt-colorify (cdr (prompt-assqd 'foreground prompt-attr (car prompt-color)))))
-         (bg (prompt-colorify (cdr (prompt-assqd 'background prompt-attr (cdr prompt-color)))))
-         (font (prompt-fontify (cdr (prompt-assqd 'font prompt-attr prompt-font))))
-       )
-       (display-message
+                    prompt-result))
+          (completions (prompt-format-completions)))
+      (let
+          ((fg (prompt-colorify
+                (cdr (prompt-assqd 'foreground prompt-attr
+                                   (car prompt-color)))))
+           (bg (prompt-colorify
+                (cdr (prompt-assqd 'background prompt-attr
+                                   (cdr prompt-color)))))
+           (font (prompt-fontify
+                  (cdr (prompt-assqd 'font prompt-attr prompt-font)))))
+        (display-message
          (concat completions
-			      (when completions "\n\n")
-			       prompt-prompt
-			       (substring result 0 prompt-position)
-			       ?| (substring result prompt-position))
-		       `((position . ,prompt-window-position)
-             (foreground . ,fg)
-             (background . ,bg)
-             (font . , font)
-             )))))
+                 (when completions "\n\n")
+                 prompt-prompt
+                 (substring result 0 prompt-position)
+                 ?| (substring result prompt-position))
+         `((position . ,prompt-window-position)
+           (foreground . ,fg)
+           (background . ,bg)
+           (font . , font)
+           )))))
 
   ;; Insert all unbound keys to result.
   (defun prompt-unbound-callback ()
@@ -364,7 +366,7 @@ displayed. See the `display-message' function for more details.")
 	 (display-message nil)))))
 
   (defun prompt-for-symbol (#!optional title predicate validator)
-    (let ((prompt-completion-fun 
+    (let ((prompt-completion-fun
 	   (lambda (x)
 	     (mapcar symbol-name
 		     (apropos (concat ?^ (quote-regexp x)) predicate))))

@@ -1,5 +1,4 @@
 ;; simple/theme.jl
-;; $Id: theme.jl,v 1.16 2000/08/14 14:23:08 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -59,45 +58,45 @@
 	       (top-edge . -21)
 	       (height . 21)
 	       (class . title))
-	       
+
 	      ((background . "black")
 	       (left-edge . 0)
 	       (right-edge . 0)
 	       (top-edge . -22)
 	       (height . 1))
-	       
+
 	      ((background . "black")
 	       (left-edge . -1)
 	       (width . 1)
 	       (top-edge . -22)
 	       (bottom-edge . -5))
-	       
+
 	      ((background . "black")
 	       (right-edge . -1)
 	       (width . 1)
 	       (top-edge . -22)
 	       (bottom-edge . -5)
 	       (class . right-border))
-	       
+
 	      ((background . ,frame-colors)
 	       (left-edge . 0)
 	       (right-edge . 0)
 	       (bottom-edge . -4)
 	       (height . 4)
 	       (class . bottom-border))
-	       
+
 	      ((background . "black")
 	       (left-edge . 0)
 	       (right-edge . 0)
 	       (bottom-edge . -5)
 	       (height . 1))
-	       
+
 	      ((background . ,minimize)
 	       (left-edge . 4)
 	       (top-edge . -18)
 	       (class . iconify-button)
 	       (removable . t))
-	       
+
 	      ((background . ,close)
 	       (right-edge . 4)
 	       (top-edge . -18)
@@ -114,7 +113,7 @@
 		      (top-edge . -21)
 		      (height . 21)
 		      (class . title))
-		      
+
 		     ((background . "black")
 		      (left-edge . 0)
 		      (right-edge . 0)
@@ -126,14 +125,14 @@
 		      (width . 1)
 		      (top-edge . -22)
 		      (height . 23))
-		      
+
 		     ((background . "black")
 		      (right-edge . -1)
 		      (width . 1)
 		      (top-edge . -22)
 		      (height . 23)
 		      (class . right-border))
-		      
+
 		     ((background . "black")
 		      (left-edge . 0)
 		      (right-edge . 0)
@@ -145,7 +144,7 @@
 		      (top-edge . -18)
 		      (class . iconify-button)
 		      (removable . t))
-		      
+
 		     ((background . ,close)
 		      (right-edge . 4)
 		      (top-edge . -18)
@@ -158,19 +157,19 @@
 			 (top-edge . -4)
 			 (height . 4)
 			 (class . title))
-			 
+
 			((background . "black")
 			 (left-edge . 0)
 			 (right-edge . 0)
 			 (top-edge . -5)
 			 (height . 1))
-			 
+
 			((background . "black")
 			 (left-edge . -1)
 			 (width . 1)
 			 (top-edge . -5)
 			 (bottom-edge . -5))
-			 
+
 			((background . "black")
 			 (right-edge . -1)
 			 (width . 1)
@@ -184,7 +183,7 @@
 			 (bottom-edge . -4)
 			 (height . 4)
 			 (class . bottom-border))
-			 
+
 			((background . "black")
 			 (left-edge . 0)
 			 (right-edge . 0)
@@ -197,26 +196,26 @@
 				(top-edge . -5)
 				(height . 4)
 				(class . title))
-				
+
 			       ((background . "black")
 				(left-edge . 0)
 				(right-edge . 0)
 				(top-edge . -6)
 				(height . 1))
-				
+
 			       ((background . "black")
 				(left-edge . -1)
 				(width . 1)
 				(top-edge . -6)
 				(height . 6))
-				
+
 			       ((background . "black")
 				(right-edge . -1)
 				(width . 1)
 				(top-edge . -6)
 				(height . 6)
 				(class . right-border))
-				
+
 			       ((background . "black")
 				(left-edge . 0)
 				(right-edge . 0)

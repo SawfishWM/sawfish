@@ -1,5 +1,4 @@
 ;; match-window.jl -- match windows to properties
-;; $Id: match-window.jl,v 1.52 2003/02/20 04:56:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -59,63 +58,69 @@
 ;;; configuration and customize stuff
 
   (i18n-defvar match-window-x-properties
-    '((WM_NAME . "Name")
-      (WM_CLASS . "Class")
-      (WM_ICON_NAME . "Icon Name")
-      (WM_WINDOW_ROLE . "Role")
-      (WM_CLIENT_MACHINE . "Host")
-      (WM_COMMAND . "Command")
-      (WM_LOCALE_NAME . "Locale")))
+               '((WM_NAME . "Name")
+                 (WM_CLASS . "Class")
+                 (WM_ICON_NAME . "Icon Name")
+                 (WM_WINDOW_ROLE . "Role")
+                 (WM_CLIENT_MACHINE . "Host")
+                 (WM_COMMAND . "Command")
+                 (WM_LOCALE_NAME . "Locale")))
 
-  (i18n-defvar match-window-properties
-    `((placement ,(_ "Placement")
-       (ignore-program-position boolean)
-       (place-mode ,(lambda () `(choice ,@placement-modes)))
-       (position (or 
-                    (pair (number -65536 65536 0) (number -65536 65536 0))
-                    (choice center east north north-east north-west south south-east south-west west)))
-       (dimensions (pair (number 1) (number 1)))
-       (workspace (number 1))
-       (viewport (pair (number 1) (number 1)))
-       (depth (number -16 16 0))
-       (placement-weight (number 0))
-       (fixed-position boolean)
-       (maximized (choice all vertical horizontal))
-       (new-workspace boolean)
-       (new-viewport boolean))
-      (focus ,(_ "Focus")
-       (raise-on-focus boolean)
-       (focus-when-mapped boolean)
-       (never-focus boolean)
-       (focus-click-through boolean)
-       (focus-mode ,(lambda () `(choice ,@focus-modes))))
-      (appearance ,(_ "Appearance")
-       (frame-type ,(lambda () `(choice ,@(mapcar car match-window-types))))
-       (frame-style ,(lambda () `(symbol ,@(find-all-frame-styles t)))))
-      (state ,(_ "State")
-       (avoid boolean)
-       (ignored boolean)
-       (iconified boolean)
-       (shaded boolean)
-       (sticky boolean)
-       (sticky-viewport boolean)
-       (group ,(lambda ()
-		 `(symbol ,@(delete-if-not symbolp (window-group-ids)))))
-       (ungrouped boolean)
-       (cycle-skip boolean)
-       (window-list-skip boolean)
-       (task-list-skip boolean)
-       (never-iconify boolean)
-       (never-maximize boolean)
-       (fullscreen boolean)
-       (fullscreen-xinerama boolean))
-      (other ,(_ "Other")
-       (unique-name boolean)
-       (auto-gravity boolean)
-       (shade-hover boolean)
-       (transients-above (choice all parents none))
-       (ignore-stacking-requests boolean)
-       (window-name string))))
+  (i18n-defvar
+   match-window-properties
+   `((placement ,(_ "Placement")
+                (ignore-program-position boolean)
+                (place-mode ,(lambda () `(choice ,@placement-modes)))
+                (position (or
+                           (pair (number -65536 65536 0)
+                                 (number -65536 65536 0))
+                           (choice center east north north-east
+                                   north-west south south-east
+                                   south-west west)))
+                (dimensions (pair (number 1) (number 1)))
+                (workspace (number 1))
+                (viewport (pair (number 1) (number 1)))
+                (depth (number -16 16 0))
+                (placement-weight (number 0))
+                (fixed-position boolean)
+                (maximized (choice all vertical horizontal))
+                (new-workspace boolean)
+                (new-viewport boolean))
+     (focus ,(_ "Focus")
+            (raise-on-focus boolean)
+            (focus-when-mapped boolean)
+            (never-focus boolean)
+            (focus-click-through boolean)
+            (focus-mode ,(lambda () `(choice ,@focus-modes))))
+     (appearance ,(_ "Appearance")
+                 (frame-type ,(lambda ()
+                                `(choice ,@(mapcar car match-window-types))))
+                 (frame-style ,(lambda ()
+                                 `(symbol ,@(find-all-frame-styles t)))))
+     (state ,(_ "State")
+            (avoid boolean)
+            (ignored boolean)
+            (iconified boolean)
+            (shaded boolean)
+            (sticky boolean)
+            (sticky-viewport boolean)
+            (group ,(lambda ()
+                      `(symbol ,@(delete-if-not symbolp (window-group-ids)))))
+            (ungrouped boolean)
+            (cycle-skip boolean)
+            (window-list-skip boolean)
+            (task-list-skip boolean)
+            (never-iconify boolean)
+            (never-maximize boolean)
+            (fullscreen boolean)
+            (fullscreen-xinerama boolean))
+     (other ,(_ "Other")
+            (unique-name boolean)
+            (auto-gravity boolean)
+            (shade-hover boolean)
+            (transients-above (choice all parents none))
+            (ignore-stacking-requests boolean)
+            (window-name string))))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
   ;; libraries implementing them
@@ -322,113 +327,113 @@
 ;;; custom property formatters and setters
 
   (define-match-window-formatter 'WM_CLASS
-   (lambda (vec)
-     (format nil "%s/%s" (and (> (length vec) 1) (aref vec 1)) (aref vec 0))))
+    (lambda (vec)
+      (format nil "%s/%s" (and (> (length vec) 1) (aref vec 1)) (aref vec 0))))
 
   (define-match-window-formatter 'WM_COMMAND
-   (lambda (vec)
-     (let ((i 0)
-	   parts)
-       (while (< i (length vec))
-	 (when parts
-	   (setq parts (cons ?  parts)))
-	 (setq parts (cons (aref vec i) parts))
-	 (setq i (1+ i)))
-       (apply concat (nreverse parts)))))
+    (lambda (vec)
+      (let ((i 0)
+            parts)
+        (while (< i (length vec))
+          (when parts
+            (setq parts (cons ?  parts)))
+          (setq parts (cons (aref vec i) parts))
+          (setq i (1+ i)))
+        (apply concat (nreverse parts)))))
 
   (define-match-window-setter 'workspace
-   (lambda (w prop value)
-     (declare (unused prop))
-     (unless (or (window-get w 'placed) (window-workspaces w))
-       ;; translate from 1.. to 0..
-       (set-window-workspaces w (list (1- value))))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (unless (or (window-get w 'placed) (window-workspaces w))
+        ;; translate from 1.. to 0..
+        (set-window-workspaces w (list (1- value))))))
 
   (define-match-window-setter 'position
-   (lambda (w prop value)
-     (declare (unused prop))
-     (let* ((size (window-frame-dimensions w))
-            (x (if (symbolp value)
-                   (cond ((memq value '(east south-east north-east))
-                          (- (screen-width) (car size)))
-                         ((memq value '(north center south))
-                          (- (quotient (screen-width) 2)
-                             (quotient (car size) 2)))
-                         (t 0))
-                 (car value)))
-            (y (if (symbolp value)
-                   (cond ((memq value '(south south-east south-west))
-                          (- (screen-height) (cdr size)))
-                         ((memq value '(east center west))
-                          (- (quotient (screen-height) 2)
-                             (quotient (cdr size) 2)))
-                         (t 0))
-                 (cdr value)))
-            (gravity (cond ((symbolp value)
-                            value)
-                           ((and (< x 0) (< y 0))
-                            'south-east)
-                           ((< x 0)
-                            'north-east)
-                           ((< y 0)
-                            'south-west)
-                           (t nil))))
-       (when gravity
-         (window-put w 'gravity gravity))
-       (when (< x 0)
+    (lambda (w prop value)
+      (declare (unused prop))
+      (let* ((size (window-frame-dimensions w))
+             (x (if (symbolp value)
+                    (cond ((memq value '(east south-east north-east))
+                           (- (screen-width) (car size)))
+                          ((memq value '(north center south))
+                           (- (quotient (screen-width) 2)
+                              (quotient (car size) 2)))
+                          (t 0))
+                  (car value)))
+             (y (if (symbolp value)
+                    (cond ((memq value '(south south-east south-west))
+                           (- (screen-height) (cdr size)))
+                          ((memq value '(east center west))
+                           (- (quotient (screen-height) 2)
+                              (quotient (cdr size) 2)))
+                          (t 0))
+                  (cdr value)))
+             (gravity (cond ((symbolp value)
+                             value)
+                            ((and (< x 0) (< y 0))
+                             'south-east)
+                            ((< x 0)
+                             'north-east)
+                            ((< y 0)
+                             'south-west)
+                            (t nil))))
+        (when gravity
+          (window-put w 'gravity gravity))
+        (when (< x 0)
           (setq x (+ (- (screen-width) (car size)) x)))
-       (when (< y 0)
+        (when (< y 0)
           (setq y (+ (- (screen-height) (cdr size)) y)))
-       (move-window-to w x y))))
+        (move-window-to w x y))))
 
   (define-match-window-setter 'dimensions
-   (lambda (w prop value)
-     (declare (unused prop))
-     (resize-window-with-hints w (car value) (cdr value))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (resize-window-with-hints w (car value) (cdr value))))
 
   (define-match-window-setter 'viewport
-   (lambda (w prop value)
-     (declare (unused prop))
-     (unless (window-get w 'placed)
-       (set-screen-viewport (1- (car value)) (1- (cdr value)))
-       (set-window-viewport w (1- (car value)) (1- (cdr value))))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (unless (window-get w 'placed)
+        (set-screen-viewport (1- (car value)) (1- (cdr value)))
+        (set-window-viewport w (1- (car value)) (1- (cdr value))))))
 
   (define-match-window-setter 'frame-type
-   (lambda (w prop value)
-     (declare (unused prop))
-     (set-window-type w (or (cdr (assq value match-window-types)) value))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (set-window-type w (or (cdr (assq value match-window-types)) value))))
 
   (define-match-window-setter 'ungrouped
-   (lambda (w prop value)
-     (declare (unused prop))
-     (when value
-       (add-window-to-new-group w))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (add-window-to-new-group w))))
 
   (define-match-window-setter 'unique-name
     (lambda (w prop value)
-     (declare (unused prop))
+      (declare (unused prop))
       (when value
 	(uniquify-window-name w))))
 
   (define-match-window-setter 'focus-mode
-   (lambda (w prop value)
-     (declare (unused prop))
-     (set-focus-mode w value)))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (set-focus-mode w value)))
 
   (define-match-window-setter 'fullscreen
-   (lambda (w prop value)
-     (declare (unused prop))
-     (when value
-       (window-put w 'queued-fullscreen-maximize t))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (window-put w 'queued-fullscreen-maximize t))))
 
   (define-match-window-setter 'new-workspace
-   (lambda (w prop value)
-     (declare (unused prop))
-     (when value
-       (unless (window-get w 'placed)
-         (let ((space (car (workspace-limits))))
-           (while (not (workspace-empty-p space))
-             (setq space (1+ space)))
-           (set-window-workspaces w (list space)))))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (unless (window-get w 'placed)
+          (let ((space (car (workspace-limits))))
+            (while (not (workspace-empty-p space))
+              (setq space (1+ space)))
+            (set-window-workspaces w (list space)))))))
 
   (define-match-window-setter 'new-viewport
     (lambda (w prop value)
@@ -460,10 +465,10 @@
             (set-window-viewport w col row))))))
 
   (define-match-window-setter 'fullscreen-xinerama
-   (lambda (w prop value)
-     (declare (unused prop))
-     (when value
-       (window-put w 'queued-fullxinerama-maximize t))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (window-put w 'queued-fullxinerama-maximize t))))
 
   (define-match-window-setter 'window-name
     (lambda (w prop value)
@@ -472,22 +477,23 @@
         (rename-window-func w value))))
 
   (define-match-window-setter 'maximized
-   (lambda (w prop value)
-     (declare (unused prop))
-     (when (memq value '(all vertical))
-       (window-put w 'queued-vertical-maximize t))
-     (when (memq value '(all horizontal))
-       (window-put w 'queued-horizontal-maximize t))))
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when (memq value '(all vertical))
+        (window-put w 'queued-vertical-maximize t))
+      (when (memq value '(all horizontal))
+        (window-put w 'queued-horizontal-maximize t))))
 
   (define-match-window-setter 'keymap-trans
     (lambda (w prop value)
-     (declare (unused prop))
+      (declare (unused prop))
       (let ((keymap (or (window-get w 'keymap)
                         (window-put w 'keymap (copy-sequence window-keymap)))))
         (mapcar
          (lambda (pair)         ; pair of from and to keys
-            (bind-keys keymap (car pair)
-              (lambda () (interactive)
-                (synthesize-event (lookup-event (cadr pair)) (current-event-window))))) value))))
+           (bind-keys keymap (car pair)
+                      (lambda () (interactive)
+                        (synthesize-event (lookup-event (cadr pair))
+                                          (current-event-window))))) value))))
 
 )

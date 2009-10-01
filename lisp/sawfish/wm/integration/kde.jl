@@ -1,5 +1,4 @@
 ;; kde-int.jl -- more KDE integration
-;; $Id: integration.jl,v 1.20 2003/08/14 06:55:36 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,13 +18,15 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.integration.kde ()
+(define-structure sawfish.wm.integration.kde
+
+    (export )
 
     (open rep
-	  sawfish.wm.menus
-	  sawfish.wm.custom
-	  sawfish.wm.commands
-	  sawfish.wm.commands.user)
+          sawfish.wm.menus
+          sawfish.wm.custom
+          sawfish.wm.commands
+          sawfish.wm.commands.user)
 
   (define-structure-alias kde-int sawfish.wm.integration.kde)
 
@@ -43,12 +44,15 @@
       (nconc menu `(()
 		    (,(_ "_KDE Help") (system "khelpcenter &"))
 		    (,(_ "KDE Website") (browser "http://www.kde.org"))))))
-		    ;(,(_ "About KDE") (system "false &"))))))
 
   ;; add kde-logout menu item
-  (let ((menu (assoc (_ "Sessi_on") root-menu)))
+  (let ((menu (assoc (_ "Sessi_on") root-menu))
+        (kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout"))
     (when menu
       (nconc menu `(()
-                   (,(_ "_Logout from KDE") (system "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 0 -1 &"))
-  		   (,(_ "_Reboot from KDE") (system "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 1 -1 &"))
-		   (,(_ "_Shutdown from KDE") (system "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 2 -1 &")))))))
+                    (,(_ "_Logout from KDE")
+                     (system ,(concat kde-logout-cmd " 1 0 -1 &")))
+                    (,(_ "_Reboot from KDE")
+                     (system ,(concat kde-logout-cmd " 1 1 -1 &")))
+                    (,(_ "_Shutdown from KDE")
+                     (system ,(concat kde-logout-cmd " 1 2 -1 &"))))))))

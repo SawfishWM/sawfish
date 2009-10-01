@@ -1,5 +1,4 @@
 ;; decode-events.jl -- symbolic event manipulation
-;; $Id: decode-events.jl,v 1.12 2001/05/04 07:41:33 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -83,8 +82,9 @@
       event))
 
   (define (decode-event event)
-    "Return a symbol description of the low-level event structure EVENT (a cons
-cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
+    "Return a symbol description of the low-level event structure
+EVENT (a cons cell). The symbolic description has the form `(TYPE
+MODIFIER-LIST ACTION)'."
     (let* ((code (car event))
 	   (mods (cdr event)))
 
@@ -99,8 +99,9 @@ cell). The symbolic description has the form `(TYPE MODIFIER-LIST ACTION)'."
 	    (t (error "Unknown event type")))))
 
   (define (encode-event event)
-    "Return the low-level event structure (cons cell) representing the symbolic
-event description EVENT, a list `(TYPE MODIFIER-LIST ACTION)'."
+    "Return the low-level event structure (cons cell) representing the
+symbolic event description EVENT, a list `(TYPE MODIFIER-LIST
+ACTION)'."
     (let* ((code 0)
 	   (mods (encode-modifier (cadr event))))
 
@@ -152,9 +153,9 @@ representing the X11 keysyms that may generate the modifier."
 
   (define (member-event ev lst)
     (let loop ((rest lst))
-      (cond ((null rest) nil)
-	    ((event-match ev (car rest)) rest)
-	    (t (loop (cdr rest))))))
+         (cond ((null rest) nil)
+               ((event-match ev (car rest)) rest)
+               (t (loop (cdr rest))))))
 
   (define (should-grab-button-event-p event keymap)
     (let* ((decoded (decode-event event))
@@ -163,6 +164,6 @@ representing the X11 keysyms that may generate the modifier."
 				(list (car decoded) (cadr decoded) action)))
 			     '(click-2 click-3 move off-1 off-2 off-3))))
       (let loop ((rest (cdr keymap)))
-	(cond ((null rest) nil)
-	      ((member-event (cdar rest) variants) t)
-	      (t (loop (cdr rest))))))))
+           (cond ((null rest) nil)
+                 ((member-event (cdar rest) variants) t)
+                 (t (loop (cdr rest))))))))

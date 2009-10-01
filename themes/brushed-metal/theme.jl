@@ -1,5 +1,4 @@
 ;; brushed-metal/theme.jl
-;; $Id: theme.jl,v 1.12 2000/10/09 15:42:30 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

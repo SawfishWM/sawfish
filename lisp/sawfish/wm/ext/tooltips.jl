@@ -1,5 +1,4 @@
 ;; tooltips.jl -- display frame-part keymap descriptions
-;; $Id: tooltips.jl,v 1.33 2004/01/06 06:48:02 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

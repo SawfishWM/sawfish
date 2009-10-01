@@ -1,12 +1,12 @@
-; This USED to be the theme.jl from the microGUI theme by
-; Ryan Lovett, Ben FrantzDale, and John Harper.  Big props to them, and
-; here's to hoping someone will write a decent HOWTO for sawfish-themer
-; because I really, _really_ suck at scheme coding.
+;; This USED to be the theme.jl from the microGUI theme by
+;; Ryan Lovett, Ben FrantzDale, and John Harper.  Big props to them, and
+;; here's to hoping someone will write a decent HOWTO for sawfish-themer
+;; because I really, _really_ suck at scheme coding.
 
-; This theme is GPL, unless Ryan, Ben, or John have a problem with that.
-; I just got tired of there not being many non-hideous themes for Sawfish.
+;; This theme is GPL, unless Ryan, Ben, or John have a problem with that.
+;; I just got tired of there not being many non-hideous themes for Sawfish.
 
-; Modified to add tabbed windowing support by Scott Scriven.
+;; Modified to add tabbed windowing support by Scott Scriven.
 
 (let*
     ;; Update window title pixel length
@@ -15,7 +15,7 @@
 	(let
 	    ((w-width (car (window-dimensions w))))
 	  (max 0 (min (- w-width 100) (text-width (window-name w)))))))
-     
+
      ;; 6x19 - upper left corner
      (upper-left-images (list (make-image "i-ul.png")
                               (make-image "a-ul.png")))
@@ -42,7 +42,7 @@
 
      ;; 3x19 - upper grey background
      (top-grey-images (list (make-image "i-t0.png")
-                                 (make-image "a-t0.png")))
+                            (make-image "a-t0.png")))
 
      ;; 17x16 - iconify icon
      (iconify-images (list (make-image "i-ti.png")
@@ -141,41 +141,41 @@
 	       (class . menu-button))
 
 	      ;; top curves
-	      ;((background . ,top-lefthollow-images)
-	      ; (top-edge . -19)
-          ; ;(left-edge . 16)
-          ; (left-edge . 0)
-	      ; (class . title))
+	      ;;((background . ,top-lefthollow-images)
+	      ;; (top-edge . -19)
+              ;; ;(left-edge . 16)
+              ;; (left-edge . 0)
+	      ;; (class . title))
 
 	      ;; top green
-	      ;((background . ,top-hollow-images)
-	      ; (foreground . ,text-colors)
-	      ; (text . ,window-name)
-	      ; (x-justify . 4)
-	      ; (y-justify . center)
-	      ; (top-edge . -19)
-	      ; ;(left-edge . 27)
-	      ; (left-edge . 11)
-	      ; (width . ,(lambda (w) (+ (title-width w) 13)))
-	      ; ;(right-edge . 27)
-	      ; (class . title))
+	      ;;((background . ,top-hollow-images)
+	      ;; (foreground . ,text-colors)
+	      ;; (text . ,window-name)
+	      ;; (x-justify . 4)
+	      ;; (y-justify . center)
+	      ;; (top-edge . -19)
+	      ;; ;(left-edge . 27)
+	      ;; (left-edge . 11)
+	      ;; (width . ,(lambda (w) (+ (title-width w) 13)))
+	      ;; ;(right-edge . 27)
+	      ;; (class . title))
 
 	      ;; top curves
-	      ;((background . ,top-righthollow-images)
-	      ; ;(left-edge . ,(lambda (w) (+ (title-width w) 37)))
-	      ; (left-edge . ,(lambda (w) (+ (title-width w) 21)))
-	      ; ;(right-edge . 16)
-	      ; (top-edge . -19)
-	      ; (class . title))
+	      ;;((background . ,top-righthollow-images)
+	      ;; ;(left-edge . ,(lambda (w) (+ (title-width w) 37)))
+	      ;; (left-edge . ,(lambda (w) (+ (title-width w) 21)))
+	      ;; ;(right-edge . 16)
+	      ;; (top-edge . -19)
+	      ;; (class . title))
 
 	      ;; top grey
-	      ;((background . ,top-grey-images)
-	      ; ;(left-edge . ,(lambda (w) (+ (title-width w) 48)))
-	      ; (left-edge . ,(lambda (w) (+ (title-width w) 32)))
-	      ; (top-edge . -19)
-	      ; ;(right-edge . 48)
-	      ; (right-edge . 16)
-	      ; (class . title))
+	      ;;((background . ,top-grey-images)
+	      ;; ;(left-edge . ,(lambda (w) (+ (title-width w) 48)))
+	      ;; (left-edge . ,(lambda (w) (+ (title-width w) 32)))
+	      ;; (top-edge . -19)
+	      ;; ;(right-edge . 48)
+	      ;; (right-edge . 16)
+	      ;; (class . title))
 
 	      ;; left border
 	      ((background . ,left-side-images)
@@ -217,16 +217,16 @@
 	       (class . bottom-right-corner))
 
 	      ;; iconify button
-	      ;((background . ,iconify-images)
-	      ; (right-edge . 32)
-	      ; (top-edge . -19)
-	      ; (class . iconify-button))
+                                        ;((background . ,iconify-images)
+                                        ; (right-edge . 32)
+                                        ; (top-edge . -19)
+                                        ; (class . iconify-button))
 
 	      ;; maximize button
-	      ;((background . ,maximize-images)
-	      ; (right-edge . 16)
-	      ; (top-edge . -19)
-	      ; (class . maximize-button))
+                                        ;((background . ,maximize-images)
+                                        ; (right-edge . 16)
+                                        ; (top-edge . -19)
+                                        ; (class . maximize-button))
 
 	      ;; delete button
 	      ((background . ,close-images)
@@ -244,11 +244,11 @@
 	       (background . ,top-hollow-images)
 	       (foreground . ,text-colors)
 	       (top-edge . -19)
-	       ;(left-edge . 0)
+                                        ;(left-edge . 0)
 	       (height . 19)
 	       (text . ,window-name)
-	       ;(x-justify . 4)
-	       ;(y-justify . center)
+                                        ;(x-justify . 4)
+                                        ;(y-justify . center)
 	       (class . tab))
 
 	      ;; tab right curve
@@ -259,181 +259,181 @@
 
 	      ))
 
-       (shaped-frame `(((background . ,upper-left-shaped-images)
-			(left-edge . -6)
-			(top-edge . -19)
-			(height . 19)
-			(class . top-left-corner))
+     (shaped-frame `(((background . ,upper-left-shaped-images)
+                      (left-edge . -6)
+                      (top-edge . -19)
+                      (height . 19)
+                      (class . top-left-corner))
 
-		       ;; menu button
-		       ((background . ,menu-images)
-			(top-edge . -19)
-			(left-edge . 0)
-			(class . menu-button))
+                     ;; menu button
+                     ((background . ,menu-images)
+                      (top-edge . -19)
+                      (left-edge . 0)
+                      (class . menu-button))
 
-                       ;; top curves
-                       ;((background . ,top-lefthollow-images)
-                        ;(top-edge . -19)
-                        ;(left-edge . 16) 
-                        ;(class . title))
+                     ;; top curves
+                                        ;((background . ,top-lefthollow-images)
+                                        ;(top-edge . -19)
+                                        ;(left-edge . 16)
+                                        ;(class . title))
 
-		       ;; Title text area
-		       ;((background . ,top-hollow-images)
-			;(foreground . ,text-colors)
-			;(text . ,window-name)
-			;(x-justify . 4)
-			;(y-justify . center)
-			;(top-edge . -19)
-			;(left-edge . 27)
-			;(width . ,(lambda (w) (+ (title-width w) 13)))
-			;(class . title))
+                     ;; Title text area
+                                        ;((background . ,top-hollow-images)
+                                        ;(foreground . ,text-colors)
+                                        ;(text . ,window-name)
+                                        ;(x-justify . 4)
+                                        ;(y-justify . center)
+                                        ;(top-edge . -19)
+                                        ;(left-edge . 27)
+                                        ;(width . ,(lambda (w) (+ (title-width w) 13)))
+                                        ;(class . title))
 
-		       ;; top curves
-		       ;((background . ,top-righthollow-images)
-			;(left-edge . ,(lambda (w) (+ (title-width w) 37)))
-			;(top-edge . -19)
-			;(class . title))
+                     ;; top curves
+                                        ;((background . ,top-righthollow-images)
+                                        ;(left-edge . ,(lambda (w) (+ (title-width w) 37)))
+                                        ;(top-edge . -19)
+                                        ;(class . title))
 
-		       ;; top grey
-		       ;((background . ,top-grey-images)
-			;(left-edge . ,(lambda (w) (+ (title-width w) 48)))
-			;(top-edge . -19)
-			;(right-edge . 48)
-			;(class . title))
+                     ;; top grey
+                                        ;((background . ,top-grey-images)
+                                        ;(left-edge . ,(lambda (w) (+ (title-width w) 48)))
+                                        ;(top-edge . -19)
+                                        ;(right-edge . 48)
+                                        ;(class . title))
 
-		       ;; top-right corner
-		       ((background . ,upper-right-shaped-images)
-			(right-edge . -6)
-			(top-edge . -19)
-			(height . 19)
-			(class . top-right-corner))
+                     ;; top-right corner
+                     ((background . ,upper-right-shaped-images)
+                      (right-edge . -6)
+                      (top-edge . -19)
+                      (height . 19)
+                      (class . top-right-corner))
 
-		       ;; iconify button
-		       ;((background . ,iconify-images)
-			;(right-edge . 32)
-			;(top-edge . -19)
-			;(class . iconify-button))
+                     ;; iconify button
+                                        ;((background . ,iconify-images)
+                                        ;(right-edge . 32)
+                                        ;(top-edge . -19)
+                                        ;(class . iconify-button))
 
-		       ;; maximize button
-		       ;((background . ,maximize-images)
-			;(right-edge . 16)
-			;(top-edge . -19)
-			;(class . maximize-button))
+                     ;; maximize button
+                                        ;((background . ,maximize-images)
+                                        ;(right-edge . 16)
+                                        ;(top-edge . -19)
+                                        ;(class . maximize-button))
 
-		       ;; delete button
-		       ((background . ,close-images)
-			(right-edge . 0)
-			(top-edge . -19)
-			(class . close-button))
+                     ;; delete button
+                     ((background . ,close-images)
+                      (right-edge . 0)
+                      (top-edge . -19)
+                      (class . close-button))
 
-		       ;; tab left curve
-		       ((background . ,top-lefthollow-images)
-			(top-edge . -19)
-			(class . tab-l))
+                     ;; tab left curve
+                     ((background . ,top-lefthollow-images)
+                      (top-edge . -19)
+                      (class . tab-l))
 
-		       ;; tab
-		       (
-			(background . ,top-hollow-images)
-			(foreground . ,text-colors)
-			(top-edge . -19)
-			;(left-edge . 0)
-			(height . 19)
-			(text . ,window-name)
-			;(x-justify . 4)
-			;(y-justify . center)
-			(class . tab))
+                     ;; tab
+                     (
+                      (background . ,top-hollow-images)
+                      (foreground . ,text-colors)
+                      (top-edge . -19)
+                                        ;(left-edge . 0)
+                      (height . 19)
+                      (text . ,window-name)
+                                        ;(x-justify . 4)
+                                        ;(y-justify . center)
+                      (class . tab))
 
-		       ;; tab right curve
-		       ((background . ,top-righthollow-images)
-			(top-edge . -19)
-			(class . tab-r))
+                     ;; tab right curve
+                     ((background . ,top-righthollow-images)
+                      (top-edge . -19)
+                      (class . tab-r))
 
-		       ))
+                     ))
 
 
-       (transient-frame `(((background . ,t-upper-left-images)
-			   (left-edge . -4)
-			   (top-edge . -4)
-			   (class . top-left-corner))
+     (transient-frame `(((background . ,t-upper-left-images)
+                         (left-edge . -4)
+                         (top-edge . -4)
+                         (class . top-left-corner))
 
-			  ;;top-right corner
-			  ((background . ,t-upper-right-images)
-			   (right-edge . -17)
-			   (top-edge . -4)
-			   (class . top-right-corner))
+                        ;;top-right corner
+                        ((background . ,t-upper-right-images)
+                         (right-edge . -17)
+                         (top-edge . -4)
+                         (class . top-right-corner))
 
-			  ;;title border
-			  ((background . ,t-upper-side-images)
-			   (left-edge . -1)
-			   (right-edge . -1)
-			   (top-edge . -4)
-			   (class . top-border))
+                        ;;title border
+                        ((background . ,t-upper-side-images)
+                         (left-edge . -1)
+                         (right-edge . -1)
+                         (top-edge . -4)
+                         (class . top-border))
 
-			  ;; left border
-			  ((background . ,t-left-images)
-			   (left-edge . -4)
-			   (top-edge . -1)
-			   (bottom-edge . -1)
-			   (class . left-border))
+                        ;; left border
+                        ((background . ,t-left-images)
+                         (left-edge . -4)
+                         (top-edge . -1)
+                         (bottom-edge . -1)
+                         (class . left-border))
 
-			  ;; right border
-			  ((background . ,t-right-images)
-			   (right-edge . -17)
-			   (top-edge . -1)
-			   (bottom-edge . -1)
-			   (class . title))
+                        ;; right border
+                        ((background . ,t-right-images)
+                         (right-edge . -17)
+                         (top-edge . -1)
+                         (bottom-edge . -1)
+                         (class . title))
 
-			  ;; bottom border
-			  ((background . ,t-bottom-side-images)
-			   (left-edge . -1)
-			   (right-edge . -1)
-			   (bottom-edge . -4)
-			   (class . bottom-border))
+                        ;; bottom border
+                        ((background . ,t-bottom-side-images)
+                         (left-edge . -1)
+                         (right-edge . -1)
+                         (bottom-edge . -4)
+                         (class . bottom-border))
 
-			  ;; bottom-left corner
-			  ((background . ,t-bottom-left-images)
-			   (left-edge . -4)
-			   (bottom-edge . -4)
-			   (class . bottom-left-corner))
+                        ;; bottom-left corner
+                        ((background . ,t-bottom-left-images)
+                         (left-edge . -4)
+                         (bottom-edge . -4)
+                         (class . bottom-left-corner))
 
-			  ;; bottom-right corner
-			  ((background . ,t-bottom-right-images)
-			   (right-edge . -17)
-			   (bottom-edge . -4)
-			   (class . bottom-right-corner))
+                        ;; bottom-right corner
+                        ((background . ,t-bottom-right-images)
+                         (right-edge . -17)
+                         (bottom-edge . -4)
+                         (class . bottom-right-corner))
 
-			  ;; delete button
-			  ((background . ,t-close-images)
-			   (right-edge . -17)
-			   (top-edge . 1)
-			   (class . close-button))
+                        ;; delete button
+                        ((background . ,t-close-images)
+                         (right-edge . -17)
+                         (top-edge . 1)
+                         (class . close-button))
 
-			  ))
+                        ))
 
-       (shaped-transient-frame `(((background . ,t-upper-right-shaped-images)
-				  (right-edge . -17)
-				  (top-edge . -4)
-				  (class . top-right-corner))
+     (shaped-transient-frame `(((background . ,t-upper-right-shaped-images)
+                                (right-edge . -17)
+                                (top-edge . -4)
+                                (class . top-right-corner))
 
-				 ;; right border
-				 ((background . ,t-right-images)
-				  (right-edge . -17)
-				  (top-edge . -1)
-				  (bottom-edge . -1)
-				  (class . title))
+                               ;; right border
+                               ((background . ,t-right-images)
+                                (right-edge . -17)
+                                (top-edge . -1)
+                                (bottom-edge . -1)
+                                (class . title))
 
-				 ;; bottom-right corner
-				 ((background . ,t-bottom-right-shaped-images)
-				  (right-edge . -17)
-				  (bottom-edge . -4)
-				  (class . bottom-right-corner))
+                               ;; bottom-right corner
+                               ((background . ,t-bottom-right-shaped-images)
+                                (right-edge . -17)
+                                (bottom-edge . -4)
+                                (class . bottom-right-corner))
 
-				 ;; delete button
-				 ((background . ,t-close-images)
-				  (right-edge . -17)
-				  (top-edge . 1)
-				  (class . close-button)))))
-  
+                               ;; delete button
+                               ((background . ,t-close-images)
+                                (right-edge . -17)
+                                (top-edge . 1)
+                                (class . close-button)))))
+
   (add-frame-style 'Elberg-tabbed
 		   (lambda (w type)
 		     (case type
@@ -443,5 +443,5 @@
 		       ((shaped-transient) shaped-transient-frame))))
 
   (call-after-property-changed
-    '(WM_NAME _NET_WM_NAME) (lambda (w prop state)
-	       (reframe-window w))))
+   '(WM_NAME _NET_WM_NAME) (lambda (w prop state)
+                             (reframe-window w))))

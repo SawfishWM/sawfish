@@ -1,31 +1,28 @@
-#| workspace-grid.jl -- Workspace Grid
-
-   $Id$
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-
-   Author: Michael Toomim <toomim@cs.berkeley.edu>
-|#
+;; workspace-grid.jl -- Workspace Grid
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+;;
+;; Author: Michael Toomim <toomim@cs.berkeley.edu>
 
 ;; Commentary:
 
 ;; Provides a virtual desktop "grid" abstraction, using workspaces. In
 ;; effect, this emulates viewports with workspaces
-  
+
 ;; Gets desktop layout information from the _NET_DESKTOP_LAYOUT root
 ;; property according to a proposed ICWWM EWMH spec.  Accounts for bugs
 ;; in gnome2's implementation.
@@ -99,19 +96,19 @@ number of rows your workspaces are arranged in")
     (safe-send-to-workspace
      window
      (get-workspace-down current-workspace 1)))
-     
+
   (define (send-to-workspace-up window)
     "Send window to the workspace above the current workspace"
     (safe-send-to-workspace
      window
      (get-workspace-up current-workspace 1)))
-     
+
   (define (send-to-workspace-left window)
     "Send window to the workspace left of the current workspace"
     (safe-send-to-workspace
      window
      (get-workspace-left current-workspace 1)))
-     
+
   (define (send-to-workspace-right window)
     "Send window to the workspace right of the current workspace"
     (safe-send-to-workspace
@@ -123,7 +120,7 @@ number of rows your workspaces are arranged in")
   (define-command 'send-to-workspace-up send-to-workspace-up #:spec "%W")
   (define-command 'send-to-workspace-left send-to-workspace-left #:spec "%W")
   (define-command 'send-to-workspace-right send-to-workspace-right #:spec "%W")
-     
+
 ;;; Public Procedures
 
   ;; The workspace-switcher makes a desktop grid by splitting a sequence of
@@ -157,7 +154,7 @@ pager, or nil of none exists."
 		 (cdr coords))
 	 (cons (car coords)
 	       (+ distance (cdr coords)))))))
-      
+
   (define (get-workspace-right workspace distance)
     "Returns the workspace `distance' squares right of `workspace' in
 the pager, or nil of none exists."
@@ -207,7 +204,7 @@ the pager, or nil of none exists."
 	  ;; x is always sideways
 	  ;; y is always vertical
 	  ;; x or y are optional (can be zero)
-	  
+
 	  ;; Bugs in gnome2: x and y are switched, orientation is always
 	  ;; horizontal
 	  (if (not layout-property)
@@ -215,7 +212,7 @@ the pager, or nil of none exists."
 
 	    (let ((cols (aref (caddr layout-property) 1))
 		  (rows (aref (caddr layout-property) 2)))
-	      
+
 	      ;; Since we're translating (x,y) to (cols,rows), swap if values
 	      ;; are for a vertical pager,
   	      (when (= (aref (caddr layout-property) 0) 1)

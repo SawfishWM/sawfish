@@ -1,5 +1,4 @@
 ;; focus.jl -- implement standard focus behaviour
-;; $Id: focus.jl,v 1.50 2002/04/21 03:39:31 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -68,8 +67,8 @@
     :group focus)
 
   (define focus-within-click-event (make-fluid nil)
-    "When true, the current command is being called from within a
-click-to-focus button press event.")
+          "When true, the current command is being called from within
+a click-to-focus button press event.")
 
 ;;; general utilities
 
@@ -224,7 +223,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	(let ((command (lookup-event-binding event)))
 	  (if command
 	      (let-fluids ((focus-within-click-event t))
-		(call-command command))
+                 (call-command command))
 	    (require 'sawfish.wm.util.decode-events)
 	    (when (and (or focus-click-through
 			   (window-get w 'focus-click-through)
@@ -235,16 +234,16 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	      ;; need to keep the grab for the events that would follow
 	      (allow-events 'replay-pointer)
 	      (forget-button-press)))))
-    (unless (eq (input-focus) w)
-      (focus-push-map w click-to-focus-map))))
+      (unless (eq (input-focus) w)
+        (focus-push-map w click-to-focus-map))))
 
   (defvar click-to-focus-map
     (bind-keys (make-keymap)
-      ;; apparently buttons 4 & 5 are usually bound to the
-      ;; wheel on some mice
-      "Any-Button1-Click1" focus-click
-      "Any-Button2-Click1" focus-click
-      "Any-Button3-Click1" focus-click))
+               ;; apparently buttons 4 & 5 are usually bound to the
+               ;; wheel on some mice
+               "Any-Button1-Click1" focus-click
+               "Any-Button2-Click1" focus-click
+               "Any-Button3-Click1" focus-click))
 
   (define-focus-mode 'click
     (lambda (w action)
@@ -317,7 +316,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 
   (sm-add-saved-properties 'never-focus 'focus-mode)
 
-;; bug prevention
+;;; bug prevention
 
   ;; XXX Pavel reported this bug (windows becoming unfocusable in
   ;; XXX click-to-focus mode). I can't see why it happens, hence this
@@ -332,10 +331,10 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 				 (not (window-really-wants-input-p w))
 				 (eq (window-get w 'keymap)
 				     click-to-focus-map))
-;		       (format standard-error
-;			       "Window lost focus keymap: %s, %s\n"
-;			       (window-name w) (window-get w 'keymap))
-;		       (beep) (beep)
+		       ;;(format standard-error
+                       ;;        "Window lost focus keymap: %s, %s\n"
+                       ;;        (window-name w) (window-get w 'keymap))
+                       ;;(beep) (beep)
 		       (focus-push-map w click-to-focus-map))))))
 
   (add-hook 'idle-hook scan-windows-for-bugs))

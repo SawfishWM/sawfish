@@ -1,25 +1,22 @@
-#| gaol.jl -- protected environment for themes
-
-   $Id: gaol.jl,v 1.35 2002/11/03 04:23:45 jsh Exp $
-
-   Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; gaol.jl -- protected environment for themes
+;;
+;; Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.gaol
 
@@ -43,20 +40,21 @@
 
   ;; safe functions in the core module
   (define safe-functions
-    '(get-color-rgb get-color color-name color-rgb colorp get-cursor
-      cursorp get-font get-font-typed font-type-exists-p font-name
-      fontp font-type text-width font-height font-ascent font-descent
-      screen-width screen-height get-x-property get-x-text-property
+    '(get-color-rgb get-color color-name color-rgb colorp
+      get-cursor cursorp get-font get-font-typed
+      font-type-exists-p font-name fontp font-type text-width
+      font-height font-ascent font-descent screen-width
+      screen-height get-x-property get-x-text-property
       list-x-properties x-atom x-atom-name make-image
       make-image-from-x-drawable copy-image
       flip-image-horizontally flip-image-vertically
-      flip-image-diagonally image-get
-      image-put imagep image-dimensions image-border set-image-border
+      flip-image-diagonally image-get image-put imagep
+      image-dimensions image-border set-image-border
       image-shape-color set-image-shape-color image-modifier
       set-image-modifier make-sized-image bevel-image clear-image
       tile-image scale-image composite-images crop-image
-      make-keymap bind-keys unbind-keys keymapp eventp
-      image-ref image-set image-map image-fill color-rgb-8 uniquify-list))
+      make-keymap bind-keys unbind-keys keymapp eventp image-ref
+      image-set image-map image-fill color-rgb-8 uniquify-list))
 
   (define safe-specials
     '(default-foreground display-name canonical-display-name
@@ -105,15 +103,20 @@
 
   ;; a plugin, so easier to do this here..
   (call-after-load "sawfish.wm.util.x"
-   (lambda ()
-     (require 'sawfish.wm.util.x)
-     (mapc (lambda (x) (gaol-define x (symbol-value x)))
-	   '(x-create-gc x-change-gc x-destroy-gc x-gc-p
-	     x-create-pixmap x-create-bitmap x-change-window-attributes
-	     x-window-p x-destroy-drawable x-drawable-p
-	     x-pixmap-p x-bitmap-p x-drawable-id x-drawable-width
-	     x-drawable-height x-window-id x-window-back-buffer
-	     x-window-swap-buffers x-clear-window x-draw-string
-	     x-draw-line x-draw-rectangle x-fill-rectangle
-	     x-draw-arc x-fill-arc x-fill-polygon x-copy-area
-	     x-draw-image x-grab-image-from-drawable x-gc-set-dashes)))))
+                   (lambda ()
+                     (require 'sawfish.wm.util.x)
+                     (mapc (lambda (x) (gaol-define x (symbol-value x)))
+                           '(x-create-gc x-change-gc x-destroy-gc x-gc-p
+                             x-create-pixmap x-create-bitmap
+                             x-change-window-attributes x-window-p
+                             x-destroy-drawable x-drawable-p
+                             x-pixmap-p x-bitmap-p x-drawable-id
+                             x-drawable-width x-drawable-height
+                             x-window-id x-window-back-buffer
+                             x-window-swap-buffers x-clear-window
+                             x-draw-string x-draw-line
+                             x-draw-rectangle x-fill-rectangle
+                             x-draw-arc x-fill-arc x-fill-polygon
+                             x-copy-area x-draw-image
+                             x-grab-image-from-drawable
+                             x-gc-set-dashes)))))

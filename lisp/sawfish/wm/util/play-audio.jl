@@ -1,5 +1,4 @@
 ;; play-audio.jl -- functions for playing sound samples
-;; $Id: play-audio.jl,v 1.8 2002/04/21 03:39:41 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 

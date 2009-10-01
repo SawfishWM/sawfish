@@ -1,35 +1,34 @@
-#| nokogiri-layouts/keymaps.jl -- shell for binding group
+;; nokogiri-layouts/keymaps.jl -- shell for binding group
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: keymaps.jl,v 1.8 2003/01/12 20:30:49 jsh Exp $
+(define-structure sawfish.cfg.layouts.keymaps
 
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
-
-(define-structure sawfish.cfg.layouts.keymaps ()
+    (export )
 
     (open rep
-	  gui.gtk-2.gtk
-	  rep.regexp
-	  sawfish.cfg.slot
-	  sawfish.cfg.wm
-	  sawfish.cfg.layout
-	  sawfish.gtk.widget)
+          gui.gtk-2.gtk
+          rep.regexp
+          sawfish.cfg.slot
+          sawfish.cfg.wm
+          sawfish.cfg.layout
+          sawfish.gtk.widget)
 
   (define label-ptr nil)
 
@@ -50,7 +49,7 @@
 	   (active (car keymap-slots)))
 
       (when keymap-slots
-	(setq label-ptr (gtk-label-new (_ "Context:")))	
+	(setq label-ptr (gtk-label-new (_ "Context:")))
 	(gtk-box-pack-start hbox label-ptr)
 	(gtk-box-pack-start hbox omenu)
 	(gtk-widget-relate-label omenu label-ptr)
@@ -58,23 +57,23 @@
 
 	(let loop ((rest keymap-slots)
 		   (last nil))
-	  (when rest
-	    (let* ((slot (car rest))
-		   (button (gtk-radio-menu-item-new-with-label-from-widget
-			    last (beautify-keymap-name (slot-name slot)))))
-	      (gtk-menu-shell-append menu button)
-	      (gtk-widget-show button)
-	      (g-signal-connect button "toggled"
-				  (lambda (w)
-				    (when (gtk-check-menu-item-active w)
-				      (when active
-					(gtk-container-remove
-					 km-vbox (slot-gtk-widget active)))
-				      (setq active slot)
-				      (gtk-box-pack-start
-				       km-vbox (slot-gtk-widget active) t t))))
-	      (set-slot-layout slot (slot-gtk-widget slot))
-	      (loop (cdr rest) button))))
+             (when rest
+               (let* ((slot (car rest))
+                      (button (gtk-radio-menu-item-new-with-label-from-widget
+                               last (beautify-keymap-name (slot-name slot)))))
+                 (gtk-menu-shell-append menu button)
+                 (gtk-widget-show button)
+                 (g-signal-connect button "toggled"
+                                   (lambda (w)
+                                     (when (gtk-check-menu-item-active w)
+                                       (when active
+                                         (gtk-container-remove
+                                          km-vbox (slot-gtk-widget active)))
+                                       (setq active slot)
+                                       (gtk-box-pack-start
+                                        km-vbox (slot-gtk-widget active) t t))))
+                 (set-slot-layout slot (slot-gtk-widget slot))
+                 (loop (cdr rest) button))))
 
 	(gtk-option-menu-set-menu omenu menu)
 

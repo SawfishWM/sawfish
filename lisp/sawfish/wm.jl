@@ -1,25 +1,22 @@
-#| sawfish.wm bootstrap
-
-   $Id: wm.jl,v 1.13 2002/05/07 03:35:59 jsh Exp $
-
-   Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; sawfish.wm bootstrap
+;;
+;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (declare (in-module sawfish.wm))
 
@@ -150,8 +147,8 @@
   (sawfish-load-all "sawfish/wm/autoload")
   (sawfish-load-all (concat "os-" (symbol-name operating-system))))
 
-  ;; do user-level initialization
-  (load "sawfish/wm/user")
+;; do user-level initialization
+(load "sawfish/wm/user")
 
 (let ((session-id     (get-command-line-option "--sm-client-id" t))
       (session-prefix (get-command-line-option "--sm-prefix" t)))

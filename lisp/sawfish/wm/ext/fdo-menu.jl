@@ -1,4 +1,4 @@
-;-*-sawfish-*-
+;;-*-sawfish-*-
 ;; (fdo-menu.jl (v1.0.1) sawfish-wm-menu-generation librep)
 
 ;; (c) 2009 Matthew Love
@@ -29,7 +29,7 @@
 (define-structure sawfish.wm.ext.fdo-menu
 
     (export update-saw-menu)
-    
+
     (open rep
 	  rep.io.files
 	  rep.io.streams
@@ -47,7 +47,7 @@
     (make-variable-special 'apps-menu)
 
     ;; fdo-desktop-file-parsing
-    
+
     (define (desktop-file-p directory-file)
       (let ((this-file (open-file directory-file 'read)))
 	(string= (read-line this-file) "[Desktop Entry]\012")))
@@ -63,7 +63,7 @@
     (define (get-key-break instring key)
       (if instring
 	  (let ((mlength (length instring)))
-	    (do ((mcount 0 (1+ mcount))) 
+	    (do ((mcount 0 (1+ mcount)))
 		((or (string= (substring instring mcount (+ mcount 1)) "\n")
 		     (string= (substring instring mcount (+ mcount 1)) "\012")
 		     (string= (substring instring mcount (+ mcount 1)) key)
@@ -92,7 +92,8 @@
 	       (if (desktop-group-p this-line)
 		   (get-desktop-group this-line)
 		 (if (not (desktop-group-p this-line))
-		     (cons (get-desktop-key this-line) (get-desktop-value this-line))))
+		     (cons (get-desktop-key this-line)
+                           (get-desktop-value this-line))))
 	       (parse-desktop-file-line infile))
 	    (parse-desktop-file-line infile))))
 
@@ -101,17 +102,17 @@
 	(parse-desktop-file-line d-file)))
 
     ;; generic functions
-    
+
     (define (map-desk-files in-desk-files in-directory)
       (if in-desk-files
 	  (cons (expand-file-name (car in-desk-files) in-directory)
 		(map-desk-files (cdr in-desk-files) in-directory))))
-    
+
     (define (map-dir-files directories)
       (if directories
 	  (if (file-directory-p (car directories))
 	      (let ((desk0 (directory-files (car directories))))
-		(cons (map-desk-files desk0 (car directories)) 
+		(cons (map-desk-files desk0 (car directories))
 		      (map-dir-files (cdr directories))))
 	    (map-dir-files (cdr directories)))))
 
@@ -120,7 +121,7 @@
 	    ((atom input) (list input))
 	    (t (append (flatten (car input))
 		       (flatten (cdr input))))))
-    
+
     (define (trim-end string)
       (cond
        ((string= (aref string (- (length string) 3)) 37)
@@ -156,8 +157,8 @@
 		(substring mlang 0 2)) "xx")))
        (t "xx")))
 
-    ;; Variables that can be set in .sawfish[/]rc    
-    
+    ;; Variables that can be set in .sawfish[/]rc
+
     (if (not (boundp 'my-lang-string))
 	(defvar my-lang-string (find-lang-string)))
 
@@ -179,46 +180,62 @@
     ;; The Master Category List
 
     (defvar menu-cat-alist
-      '(("Desktop" .  ("X-Desktop" "X-DesktopApplets" "X-DesktopCountry" \
-		       "DesktopSettings" "GNOME" "KDE" "X-GNOME-PersonalSettings" \
-		       "X-Xfce-Toplevel"))
-	("Personal" . ("X-Personal" "X-PersonalUtility" "Calendar" "ContactManagement"))
-	("Office" . ("Office" "WordProcessor" "Presentation" "X-Document" \
-		     "TextEditor" "SpreadSheet" "Calculator" "X-Calculate" \
-		     "Chart" "FlowChart" "Finance"))
-	("Internet" . ("Telephony" "Network" "Dialup" "VideoConference" \
-		       "RemoteAccess" "News" "HamRadio" "FileTransfer" \
-		       "X-Internet" "P2P" "Email" "WebBrowser" "IRCClient" "Chat" \
-		       "InstantMessaging" "Chat" "WebDevelopment"))
-	("Games" . ("Game" "ActionGame" "AdventureGame" "ArcadeGame" "BoardGame" "Emulator"\
-		    "BlocksGame" "CardGame" "KidsGame" "LogicGame" "RolePlaying" "Simulation"))
-	("Graphics" . ("RasterGraphics" "VectorGraphics" "X-GraphicUtility" \
-		       "2DGraphics" "3dGraphics" "3DGraphics" "Scanning" "OCR" "Photography" \
-		       "Viewer" "Publishing" "Art" "ImageProcessing"))
-	("Media" . ("AudioVideo" "Audio", "Video" "Midi" "Mixer" "Sequencer" "Tuner" \
-		    "TV" "AudioVideoEditing" "Player" "Recorder" "DiscBurning" "Music"))
-	("Science" . ("Science" "Astrology" "ArtificialIntelligence" "Astronomy" \
-		      "Biology" "Chemistry" "ComputerScience" "DataVisualization" \
-		      "Electricity" "Robotics" "Physics" "Math" "Education" "Geography"))
-	("Development" . ("GUIDesigner" "IDE" "Profiling" "RevisionControl" \
-			  "ProjectManagement" "Translation" "GTK" "Development" \
-			  "Qt" "Development" "Documentation"))
-	("Utility" . ("X-SystemMemory" "Security" "Utility" \
-		      "X-SetupEntry" "X-SetupUtility" "X-SystemMemory" \
-		      "TextTools" "TelephonyTools" "Accessibility" "Clock" \
-		      "ConsoleOnly"))
-	("Filesystem" .  ("X-FileSystemFind" "X-FileSystemUtility" "Archiving" \
-			  "FileManager" "X-FileSystemMount" "Compression"))
-	("System" . ("X-SystemSchedule" "System" "X-SystemMemory" \
-		     "TerminalEmulator" "Dictionary" "Puppy" "Printing" "Monitor" "Security"))
-	("Settings" . ("Settings" "HardwareSettings" "PackageManager"))
+      '(("Desktop" .  ("X-Desktop" "X-DesktopApplets"
+                       "X-DesktopCountry" "DesktopSettings" "GNOME"
+                       "KDE" "X-GNOME-PersonalSettings"
+                       "X-Xfce-Toplevel"))
+	("Personal" . ("X-Personal" "X-PersonalUtility" "Calendar"
+                       "ContactManagement"))
+	("Office" . ("Office" "WordProcessor" "Presentation"
+                     "X-Document" "TextEditor" "SpreadSheet"
+                     "Calculator" "X-Calculate" "Chart" "FlowChart"
+                     "Finance"))
+	("Internet" . ("Telephony" "Network" "Dialup"
+                       "VideoConference" "RemoteAccess" "News"
+                       "HamRadio" "FileTransfer" "X-Internet" "P2P"
+                       "Email" "WebBrowser" "IRCClient" "Chat"
+                       "InstantMessaging" "Chat" "WebDevelopment"))
+	("Games" . ("Game" "ActionGame" "AdventureGame" "ArcadeGame"
+                    "BoardGame" "Emulator" "BlocksGame" "CardGame"
+                    "KidsGame" "LogicGame" "RolePlaying"
+                    "Simulation"))
+	("Graphics" . ("RasterGraphics" "VectorGraphics"
+                       "X-GraphicUtility" "2DGraphics" "3dGraphics"
+                       "3DGraphics" "Scanning" "OCR" "Photography"
+                       "Viewer" "Publishing" "Art" "ImageProcessing"))
+	("Media" . ("AudioVideo" "Audio", "Video" "Midi" "Mixer"
+                    "Sequencer" "Tuner" "TV" "AudioVideoEditing"
+                    "Player" "Recorder" "DiscBurning" "Music"))
+	("Science" . ("Science" "Astrology" "ArtificialIntelligence"
+                      "Astronomy" "Biology" "Chemistry"
+                      "ComputerScience" "DataVisualization"
+                      "Electricity" "Robotics" "Physics" "Math"
+                      "Education" "Geography"))
+	("Development" . ("GUIDesigner" "IDE" "Profiling"
+                          "RevisionControl" "ProjectManagement"
+                          "Translation" "GTK" "Development" "Qt"
+                          "Development" "Documentation"))
+	("Utility" . ("X-SystemMemory" "Security" "Utility"
+                      "X-SetupEntry" "X-SetupUtility" "X-SystemMemory"
+                      "TextTools" "TelephonyTools" "Accessibility"
+                      "Clock" "ConsoleOnly"))
+	("Filesystem" .  ("X-FileSystemFind" "X-FileSystemUtility"
+                          "Archiving" "FileManager"
+                          "X-FileSystemMount" "Compression"))
+	("System" . ("X-SystemSchedule" "System" "X-SystemMemory"
+                     "TerminalEmulator" "Dictionary" "Puppy"
+                     "Printing" "Monitor" "Security"))
+	("Settings" . ("Settings" "HardwareSettings"
+                       "PackageManager"))
 	("Exiles" . ("Exile"))))
 
     ;; Get the correct Name value based on language settings
     (define (find-lang-in-desktop-file fdo-list)
       (if (assoc (concat fdo-name-string my-lang-string "]") fdo-list)
 	  (concat fdo-name-string my-lang-string "]")
-	(if (assoc (concat fdo-name-string (substring my-lang-string 0 2) "]") fdo-list)
+	(if (assoc (concat fdo-name-string
+                           (substring my-lang-string 0 2) "]")
+                   fdo-list)
 	    (concat fdo-name-string (substring my-lang-string 0 2) "]")
 	  "Name")))
 
@@ -228,10 +245,12 @@
 	  (let ((cat-val (car cat-list)))
 	    (if (assoc cat-val loc-list)
 		(cons (cdr (assoc cat-val loc-list))
-		      (fix-sub-cats cat-list (remove (assoc cat-val loc-list) loc-list)))
+		      (fix-sub-cats cat-list (remove (assoc cat-val loc-list)
+                                                     loc-list)))
 	      (fix-sub-cats (cdr cat-list) loc-list)))))
 
-    ;; Associate values from the Master Category list with sub-categories from file
+    ;; Associate values from the Master Category list with
+    ;; sub-categories from file
     (define (fix-cats cat-list)
       (if cat-list
 	  (let ((cat-val (car (car cat-list)))
@@ -240,13 +259,15 @@
 		(cons (cons cat-val c-list) (fix-cats (cdr cat-list)))
 	      (fix-cats (cdr cat-list))))))
 
-    ;; Convert a Categories key value from ; delineated records to a list
-    (define (build-cat-list line) 
+    ;; Convert a Categories key value from ; delineated records to a
+    ;; list
+    (define (build-cat-list line)
       (if (> (length line) 1)
 	  (let ((this-cat (prin1-to-string (read-from-string line))))
-	    (cons this-cat 
+	    (cons this-cat
 		  (if (< (length this-cat) (length line))
-		      (build-cat-list (substring line (+ 1 (length this-cat)))))))))
+		      (build-cat-list
+                       (substring line (+ 1 (length this-cat)))))))))
 
     ;; Helper for (parse-desk-line)
     ;; Determine best category to use... :|
@@ -267,51 +288,82 @@
     ;; Alphabetize the entries in the category menus
     (define (alphabetize-entries saw-menu)
       (if saw-menu
-	  (cons (cons (car (car saw-menu)) 
-		      (sort (cdr (car saw-menu)) string<)) 
+	  (cons (cons (car (car saw-menu))
+		      (sort (cdr (car saw-menu)) string<))
 		(alphabetize-entries (cdr saw-menu)))))
 
     (define (fdo-exile fdo-list)
-      (setq fdo-list 
-	    (append fdo-list (cons (cons "fdo-Comment" "This .desktop file was exiled, use with caution, file may be corrupt.\n"))))
-      (if (assoc "NoDisplay" fdo-list)
-	  (rplacd (assoc "NoDisplay" fdo-list) "true\n")
-	(setq fdo-list (append fdo-list (cons (cons "NoDisplay" "true\n")))))
-      (if (not (assoc "Exec" fdo-list))
-	  (setq fdo-list (append fdo-list (cons (cons "Exec" "sawfish-client -c 'display-errors'\n")))))
-      (if (and (not (assoc "Name" fdo-list))
-	       (not (assoc (concat fdo-name-string my-lang-string "]") fdo-list)))
-	  (setq fdo-list (append fdo-list (cons (cons "Name" "Unknown\n")))))
-      (if (assoc "Categories" fdo-list)
-	  (rplacd (assoc "Categories" fdo-list) "Exile\n")
-	(setq fdo-list (append fdo-list (cons (cons "Categories" "Exile\n")))))
-      fdo-list)
+      "Exile `fdo-list' -- i.e., mark it as an invalid or garbled
+.desktop file."
+      (let ((exile-comment
+             (cons "fdo-Comment" "This .desktop file was exiled, use \
+with caution, file may be corrupt.\n"))
+            (exile-cmd
+             (cons "Exec" "sawfish-client -c 'display-errors'\n")))
+        (setq fdo-list
+              (append fdo-list (list exile-comment)))
+        (if (assoc "NoDisplay" fdo-list)
+            (rplacd (assoc "NoDisplay" fdo-list) "true\n")
+          (setq fdo-list (append fdo-list (cons (cons "NoDisplay"
+                                                      "true\n")))))
+        (when (not (assoc "Exec" fdo-list))
+          (setq fdo-list (append fdo-list (list exile-cmd))))
+        (when (and (not (assoc "Name" fdo-list))
+                   (not (assoc (concat fdo-name-string my-lang-string "]")
+                               fdo-list)))
+          (setq fdo-list (append fdo-list (cons (cons "Name"
+                                                      "Unknown\n")))))
+        (if (assoc "Categories" fdo-list)
+            (rplacd (assoc "Categories" fdo-list) "Exile\n")
+          (setq fdo-list (append fdo-list (cons (cons "Categories"
+                                                      "Exile\n")))))
+        fdo-list))
 
     (define (fdo-check-exile fdo-list)
-      (if fdo-list
-       (if (or (not (assoc "Categories" fdo-list))
-	       (not (assoc "Exec" fdo-list))
-	       (and (not (assoc "Name" fdo-list))
-		    (not (assoc (concat fdo-name-string my-lang-string "]") fdo-list))))
-	   (fdo-exile fdo-list)
-	 fdo-list)))
+      "If `fdo-list' doesn't have a Categories, Exec, or Name field
+exile it."
+      (when fdo-list
+        (if (or (not (assoc "Categories" fdo-list))
+                (not (assoc "Exec" fdo-list))
+                (and (not (assoc "Name" fdo-list))
+                     (not (assoc (concat fdo-name-string
+                                         my-lang-string "]")
+                                 fdo-list))))
+            (fdo-exile fdo-list)
+          fdo-list)))
 
     ;; generate a saw-fish menu entry from a .desktop file
     (define (generate-menu-entry desk-file)
+      "Generate a menu entry to run the program specified in the the
+.desktop file `desk-file'."
       (if (and (not (file-directory-p desk-file))
 	       (desktop-file-p desk-file))
 	  (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
 	    (if ignore-no-display
 		(if (assoc "NoDisplay" fdo-list)
 		    (rplacd (assoc "NoDisplay" fdo-list) "false\n")
-		  (setq fdo-list (append fdo-list (cons (cons "NoDisplay" "false\n"))))))
+		  (setq fdo-list (append fdo-list (list (cons "NoDisplay"
+                                                              "false\n"))))))
        	    (if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true\n"))
-		(cons (parse-cat-list (build-cat-list (trim-end (cdr (assoc "Categories" fdo-list)))))
-		      (cons (trim-end (cdr (assoc (find-lang-in-desktop-file fdo-list) fdo-list)))
-			    (if (string= (cdr (assoc "Terminal" fdo-list)) "true\012")
-				(cons (list 
-				       'system (concat my-term-string (trim-end (cdr (assoc "Exec" fdo-list))) " &")))
-			      (cons (list 'system (concat (trim-end (cdr (assoc "Exec" fdo-list))) " &"))))))))))
+		(cons (parse-cat-list
+                       (build-cat-list
+                        (trim-end (cdr (assoc "Categories" fdo-list)))))
+		      (cons (trim-end
+                             (cdr (assoc (find-lang-in-desktop-file fdo-list)
+                                         fdo-list)))
+			    (if (string= (cdr (assoc "Terminal" fdo-list))
+                                         "true\012")
+				(cons (list
+				       'system
+                                       (concat my-term-string
+                                               (trim-end
+                                                (cdr (assoc "Exec" fdo-list)))
+                                               " &")))
+			      (cons (list
+                                     'system
+                                     (concat (trim-end
+                                              (cdr (assoc "Exec" fdo-list)))
+                                             " &"))))))))))
 
     ;; Update the menu
     (define (update-saw-menu)
@@ -321,12 +373,15 @@
 	    (setq my-lang-string "xx"))
 	(let ((desk-files (flatten (map-dir-files desktop-directory))))
 	  (mapc (lambda (x)
-		  (setq *fdo-local-menu* (append *fdo-local-menu* (list (generate-menu-entry x))))) desk-files)
+		  (setq *fdo-local-menu*
+                        (append *fdo-local-menu*
+                                (list (generate-menu-entry x))))) desk-files)
 	  (if want-alphabetize
 	      (setq apps-menu (alphabetize-entries (fix-cats menu-cat-alist)))
 	    (setq apps-menu (fix-cats menu-cat-alist))))))
 
     (define-command 'update-saw-menu update-saw-menu)
-))    
-    ;; END-FILE
+
+    ))
+;; END-FILE
 

@@ -1,34 +1,33 @@
-#| nokogiri-widgets/match-window.jl -- match-window widget
+;; nokogiri-widgets/match-window.jl -- match-window widget
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-   $Id: match-window.jl,v 1.11 2003/01/12 20:30:49 jsh Exp $
+(define-structure sawfish.cfg.widgets.match-window
 
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
-
-(define-structure sawfish.cfg.widgets.match-window ()
+    (export )
 
     (open rep
-	  gui.gtk-2.gtk
-	  rep.regexp
-	  sawfish.gtk.widget
-	  sawfish.gtk.stock
-	  sawfish.cfg.wm)
+          gui.gtk-2.gtk
+          rep.regexp
+          sawfish.gtk.widget
+          sawfish.gtk.stock
+          sawfish.cfg.wm)
 
   (defconst matcher-count 3)
 
@@ -56,16 +55,17 @@
 	  (gtk-table-attach-defaults table button 0 1 i (1+ i))
 	  (gtk-table-attach-defaults table combo 1 2 i (1+ i))
 	  (gtk-table-attach-defaults table entry 2 3 i (1+ i))
-	  (g-signal-connect button "clicked"
-	   (lambda ()
-	     (let* ((string (gtk-entry-get-text (gtk-combo-entry combo)))
-		    (x-prop (and string (car (rassoc string
-						     l10n-x-properties)))))
-	       (when string
-		 (let ((prop (wm-grab-x-property (or x-prop (intern string)))))
-		   (gtk-entry-set-text entry (if (stringp prop)
-						 prop
-					       "")))))))
+	  (g-signal-connect
+           button "clicked"
+           (lambda ()
+             (let* ((string (gtk-entry-get-text (gtk-combo-entry combo)))
+                    (x-prop (and string (car (rassoc string
+                                                     l10n-x-properties)))))
+               (when string
+                 (let ((prop (wm-grab-x-property (or x-prop (intern string)))))
+                   (gtk-entry-set-text entry (if (stringp prop)
+                                                 prop
+                                               "")))))))
 	  (setq widgets (nconc widgets (list (cons combo entry))))))
       (gtk-container-add frame table)
       (gtk-container-set-border-width table box-border)
@@ -94,19 +94,19 @@
 	   (lambda ()
 	     (let loop ((cells widgets)
 			(out '()))
-	       (if (null cells)
-		   (nreverse out)
-		 (let ((name (gtk-entry-get-text
-			      (gtk-combo-entry (caar cells))))
-		       (value (gtk-entry-get-text (cdar cells))))
-		   (if (or (string= name "") (string= value ""))
-		       (loop (cdr cells) out)
-		     (let ((prop (rassoc name l10n-x-properties)))
-		       (if prop
-			   (setq name (car prop))
-			 (setq name (intern name))))
-		     (loop (cdr cells)
-			   (cons (cons name value) out))))))))
+                  (if (null cells)
+                      (nreverse out)
+                    (let ((name (gtk-entry-get-text
+                                 (gtk-combo-entry (caar cells))))
+                          (value (gtk-entry-get-text (cdar cells))))
+                      (if (or (string= name "") (string= value ""))
+                          (loop (cdr cells) out)
+                        (let ((prop (rassoc name l10n-x-properties)))
+                          (if prop
+                              (setq name (car prop))
+                            (setq name (intern name))))
+                        (loop (cdr cells)
+                              (cons (cons name value) out))))))))
 	  ((validp) listp)))))
 
   (define-widget-type 'match-window:matchers make-match-window:matchers)
@@ -165,20 +165,20 @@
 	   (lambda ()
 	     (let loop ((rest widgets)
 			(out '()))
-	       (if (null rest)
-		   (nreverse out)
-		 (let ((value (widget-ref (cdar rest))))
-		   (if value
-		       (loop (cdr rest) (cons (cons (caar rest) value) out))
-		     (loop (cdr rest) out)))))))))))
-		     
+                  (if (null rest)
+                      (nreverse out)
+                    (let ((value (widget-ref (cdar rest))))
+                      (if value
+                          (loop (cdr rest) (cons (cons (caar rest) value) out))
+                        (loop (cdr rest) out)))))))))))
+
   (define-widget-type 'match-window:actions make-match-window:actions)
 
   (define (make-left-label string)
     (let ((hbox (gtk-hbox-new nil 0)))
       (gtk-box-pack-start hbox (gtk-label-new string))
       hbox))
-  
+
   ;; also in sawfish-xgettext
   (define (beautify-symbol-name symbol)
     (cond ((stringp symbol) symbol)
@@ -192,7 +192,7 @@
 	     (_ name)))))
 
 ;;; the main widget
-		     
+
   ;; (match-window ...)
 
   (define (make-match-window-item changed-callback properties x-properties)

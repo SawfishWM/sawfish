@@ -1,5 +1,4 @@
 ;; edges.jl -- Identify all window edges
-;; $Id: edges.jl,v 1.23 2000/08/29 18:16:35 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -56,22 +55,22 @@ The returned lists may contain duplicates, and are unsorted."
 			(not (window-get w 'ignored)))
 		    (not (memq w windows-to-ignore))
 		    (or (not (listp windows)) (memq w windows)))
-	 (let ((dims (window-frame-dimensions w))
-	       (coords (window-position w)))
-	   (setq x-edges (cons (list (car coords) (cdr coords)
-				     (+ (cdr coords) (cdr dims)) t)
-			       (cons (list (+ (car coords) (car dims))
-					   (cdr coords)
-					   (+ (cdr coords) (cdr dims))
-					   nil)
-				     x-edges)))
-	   (setq y-edges (cons (list (cdr coords) (car coords)
-				     (+ (car coords) (car dims)) t)
-			       (cons (list (+ (cdr coords) (cdr dims))
-					   (car coords)
-					   (+ (car coords) (car dims))
-					   nil)
-				     y-edges)))))))
+           (let ((dims (window-frame-dimensions w))
+                 (coords (window-position w)))
+             (setq x-edges (cons (list (car coords) (cdr coords)
+                                       (+ (cdr coords) (cdr dims)) t)
+                                 (cons (list (+ (car coords) (car dims))
+                                             (cdr coords)
+                                             (+ (cdr coords) (cdr dims))
+                                             nil)
+                                       x-edges)))
+             (setq y-edges (cons (list (cdr coords) (car coords)
+                                       (+ (car coords) (car dims)) t)
+                                 (cons (list (+ (cdr coords) (cdr dims))
+                                             (car coords)
+                                             (+ (car coords) (car dims))
+                                             nil)
+                                       y-edges)))))))
 
       (when include-screen
 	(setq x-edges (list* (list 0 0 (screen-height) nil)
@@ -104,7 +103,7 @@ The returned lists may contain duplicates, and are unsorted."
 					     (+ (car offset) (car dims)) t)
 				       y-edges))))
 	      include-heads))
-	
+
       (cons x-edges y-edges)))
 
   (define (grid-from-edges x-edges y-edges)

@@ -1,5 +1,4 @@
 ;; move-cursor.jl -- commands to move the mouse pointer
-;; $Id: move-cursor.jl,v 1.4 2000/07/27 13:19:29 john Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -53,8 +52,8 @@
     :type (number 1))
 
   (define (move-cursor right down)
-     (let ((coords (query-pointer)))
-         (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
+    (let ((coords (query-pointer)))
+      (warp-cursor (+ (car coords) right) (+ (cdr coords) down))))
 
   (define (move-cursor-left)
     "Move the cursor `move-cursor-increment' pixels to the left."

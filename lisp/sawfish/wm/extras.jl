@@ -1,5 +1,4 @@
 ;; extras.jl -- handle extra functions
-;; $Id: extras.jl,v 1.93 2003/10/21 16:17:59 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -24,22 +23,22 @@
 ;; magic comment to get an alias installed
 ;; (define-structure-alias sawfish-extras sawfish.wm.extras)
 
-  (defcustom use-custom-font-color '()
-    "Use custom font colors for frames"
-    :type boolean
-    :group appearance
-    :after-set (lambda () (update-frame-font-color)))
+(defcustom use-custom-font-color '()
+  "Use custom font colors for frames"
+  :type boolean
+  :group appearance
+  :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-active-color "black"
-    "Font color for active frames"
-    :type color
-    :group appearance
-    :depends use-custom-font-color
-    :after-set (lambda () (update-frame-font-color)))
+(defcustom frame-font-active-color "black"
+  "Font color for active frames"
+  :type color
+  :group appearance
+  :depends use-custom-font-color
+  :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-inactive-color "black"
-    "Font color for inactive frames"
-    :type color
-    :group appearance
-    :depends use-custom-font-color
-    :after-set (lambda () (update-frame-font-color)))
+(defcustom frame-font-inactive-color "black"
+  "Font color for inactive frames"
+  :type color
+  :group appearance
+  :depends use-custom-font-color
+  :after-set (lambda () (update-frame-font-color)))

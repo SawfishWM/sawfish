@@ -1,5 +1,4 @@
 ;; maximize.jl -- window maximization
-;; $Id: maximize.jl,v 1.67 2002/09/23 07:33:17 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -74,7 +73,8 @@
   (define-structure-alias maximize sawfish.wm.state.maximize)
 
   (defvar maximize-always-expands nil
-    "Maximizing a window in one dimension must increase the size of that dimension.")
+    "Maximizing a window in one dimension must increase the size of
+that dimension.")
 
   (defvar maximize-raises t
     "Raise windows when they are maximized.")
@@ -89,7 +89,7 @@
     "Lock position and size while windows are maximized."
     :type boolean
     :group min-max)
-  
+
   ;; called when a window is maximized, args (W #!optional DIRECTION)
   (defvar window-maximized-hook nil)
 
@@ -295,7 +295,7 @@
 	  (y-inc (or (cdr (assq 'height-inc hints)) 1))
 	  (x-max (cdr (assq 'max-width hints)))
 	  (y-max (cdr (assq 'max-height hints)))
-	  
+
 	  (trunc (lambda (x inc base #!optional maximum)
 		   (min (+ base (max 0 (- (- x base) (mod (- x base) inc))))
 			(or maximum 65535)))))
@@ -329,7 +329,7 @@
 	  ((top-border bottom-border) (not v-maximized))
 	  ((left-border right-border) (not h-maximized))
 	  ((top-left-corner top-right-corner
-	    bottom-left-corner bottom-right-corner title)
+                            bottom-left-corner bottom-right-corner title)
 	   (not (and h-maximized v-maximized)))))))
 
 ;;; commands
@@ -391,18 +391,19 @@
 			       (car dims) (cdr dims)))))
 
   (define (unmaximize-window w #!optional direction)
-    "Restore the dimensions of the window to its original, unmaximized, state."
+    "Restore the dimensions of the window to its original,
+unmaximized, state."
     (unmaximize-window-1 w direction
-     (lambda ()
-       (when (memq direction '(() fullscreen horizontal))
-	 (window-put w 'maximized-horizontally nil))
-       (when (memq direction '(() fullscreen vertical))
-	 (window-put w 'maximized-vertically nil))
-       (window-put w 'maximized-fullscreen nil)
-       (when (and (not (window-maximized-vertically-p w))
-		  (not (window-maximized-horizontally-p w))
-		  (not (window-maximized-fullscreen-p w)))
-	 (discard-unmaximized-geometry w))))
+                         (lambda ()
+                           (when (memq direction '(() fullscreen horizontal))
+                             (window-put w 'maximized-horizontally nil))
+                           (when (memq direction '(() fullscreen vertical))
+                             (window-put w 'maximized-vertically nil))
+                           (window-put w 'maximized-fullscreen nil)
+                           (when (and (not (window-maximized-vertically-p w))
+                                      (not (window-maximized-horizontally-p w))
+                                      (not (window-maximized-fullscreen-p w)))
+                             (discard-unmaximized-geometry w))))
     (warp-pointer-if-necessary w)
     (call-window-hook 'window-unmaximized-hook w (list direction))
     (call-window-hook 'window-state-change-hook w (list '(maximized))))
@@ -436,13 +437,20 @@ unmaximized."
       (maximize-window w 'horizontal)))
 
   ;;###autoload
-  (define-command 'maximize-window maximize-window #:spec "%W")
-  (define-command 'unmaximize-window unmaximize-window #:spec "%W")
-  (define-command 'maximize-window-vertically maximize-window-vertically #:spec "%W")
-  (define-command 'maximize-window-horizontally maximize-window-horizontally #:spec "%W")
-  (define-command 'maximize-window-toggle maximize-window-toggle #:spec "%W")
-  (define-command 'maximize-window-horizontally-toggle maximize-window-horizontally-toggle #:spec "%W")
-  (define-command 'maximize-window-vertically-toggle maximize-window-vertically-toggle #:spec "%W")
+  (define-command 'maximize-window
+    maximize-window #:spec "%W")
+  (define-command 'unmaximize-window
+    unmaximize-window #:spec "%W")
+  (define-command 'maximize-window-vertically
+    maximize-window-vertically #:spec "%W")
+  (define-command 'maximize-window-horizontally
+    maximize-window-horizontally #:spec "%W")
+  (define-command 'maximize-window-toggle
+    maximize-window-toggle #:spec "%W")
+  (define-command 'maximize-window-horizontally-toggle
+    maximize-window-horizontally-toggle #:spec "%W")
+  (define-command 'maximize-window-vertically-toggle
+    maximize-window-vertically-toggle #:spec "%W")
 
 ;;; fill commands
 
@@ -490,22 +498,31 @@ unmaximized."
     (maximize-window w))
 
   ;;###autoload
-  (define-command 'maximize-fill-window maximize-fill-window #:spec "%W")
-  (define-command 'maximize-fill-window-vertically maximize-fill-window-vertically #:spec "%W")
-  (define-command 'maximize-fill-window-horizontally maximize-fill-window-horizontally #:spec "%W")
-  (define-command 'maximize-fill-window-toggle maximize-fill-window-toggle #:spec "%W")
-  (define-command 'maximize-fill-window-horizontally-toggle maximize-fill-window-horizontally-toggle #:spec "%W")
-  (define-command 'maximize-fill-window-vertically-toggle maximize-fill-window-vertically-toggle #:spec "%W")
-  (define-command 'maximize-unframe maximize-unframe #:spec "%W")
-  (define-command 'maximize-reframe maximize-reframe #:spec "%W")
+  (define-command 'maximize-fill-window
+    maximize-fill-window #:spec "%W")
+  (define-command 'maximize-fill-window-vertically
+    maximize-fill-window-vertically #:spec "%W")
+  (define-command 'maximize-fill-window-horizontally
+    maximize-fill-window-horizontally #:spec "%W")
+  (define-command 'maximize-fill-window-toggle
+    maximize-fill-window-toggle #:spec "%W")
+  (define-command 'maximize-fill-window-horizontally-toggle
+    maximize-fill-window-horizontally-toggle #:spec "%W")
+  (define-command 'maximize-fill-window-vertically-toggle
+    maximize-fill-window-vertically-toggle #:spec "%W")
+  (define-command 'maximize-unframe
+    maximize-unframe #:spec "%W")
+  (define-command 'maximize-reframe
+    maximize-reframe #:spec "%W")
 
-;; fullscreen commands
+  ;; fullscreen commands
 
   (define (maximize-window-fullscreen w state)
     "Fullscreen maximize the window."
     (cond ((and state (not (window-maximized-fullscreen-p w)))
 	   (when (window-maximizable-p w)
-	     (let ((head-offset (current-head-offset w)) (head-dims (current-head-dimensions w)))
+	     (let ((head-offset (current-head-offset w))
+                   (head-dims (current-head-dimensions w)))
 	       (save-unmaximized-geometry w)
 	       (window-put w 'unmaximized-type (window-type w))
 	       (push-window-type w 'unframed 'sawfish.wm.state.maximize)
@@ -524,7 +541,8 @@ unmaximized."
 	   (unmaximize-window w 'fullscreen))))
 
   (define (maximize-window-fullscreen-toggle w)
-    "Toggle the state of the window between fullscreen maximized and unmaximized."
+    "Toggle the state of the window between fullscreen maximized and
+unmaximized."
     (maximize-window-fullscreen w (not (window-maximized-fullscreen-p w))))
 
   (define-command 'maximize-window-fullscreen
@@ -540,7 +558,9 @@ unmaximized."
 	       (save-unmaximized-geometry w)
 	       (window-put w 'unmaximized-type (window-type w))
 	       (push-window-type w 'unframed 'sawfish.wm.state.maximize)
-	       (move-resize-window-to w 0 0 (car screen-dims) (cdr screen-dims))
+	       (move-resize-window-to w 0 0
+                                      (car screen-dims)
+                                      (cdr screen-dims))
 	       (raise-window* w)
 	       (window-put w 'maximized-fullscreen t)
 	       (window-put w 'maximized-vertically t)
@@ -554,7 +574,8 @@ unmaximized."
 	   (unmaximize-window w 'fullscreen))))
 
   (define (maximize-window-fullxinerama-toggle w)
-    "Toggle the state of the window between fullscreen maximized across all Xinerama and unmaximized."
+    "Toggle the state of the window between fullscreen maximized
+across all Xinerama and unmaximized."
     (maximize-window-fullxinerama w (not (window-maximized-fullscreen-p w))))
 
   (define-command 'maximize-window-fullxinerama
@@ -578,12 +599,12 @@ unmaximized."
 	  (window-put w 'queued-fullscreen-maximize nil))
         (when fullxinerama
           (window-put w 'queued-fullxinerama-maximize nil))
-       (cond
-        (full
-         (maximize-window-fullscreen w t))
-        (fullxinerama
-         (maximize-window-fullxinerama w t))
-        (t
+        (cond
+         (full
+          (maximize-window-fullscreen w t))
+         (fullxinerama
+          (maximize-window-fullxinerama w t))
+         (t
           (maximize-window w (cond ((and vert horiz) nil)
                                    (vert 'vertical)
 				   (horiz 'horizontal))))))))

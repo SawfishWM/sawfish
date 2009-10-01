@@ -1,7 +1,5 @@
 ;; beos-window-menu.jl -- hack to change window-menu to approximate BeOS
 
-;; $Id: beos-window-menu.jl,v 1.15 2003/08/14 06:55:35 jsh Exp $
-
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
 ;; This file is part of sawfish.
@@ -85,11 +83,11 @@
   (define (make-group-item id)
     (let loop ((menu '())
 	       (windows (windows-by-group id)))
-      (if (null windows)
-	  (cons (group-name id) (nreverse menu))
-	(if (window-suitable-p (car windows))
-	    (loop (cons (make-item (car windows)) menu) (cdr windows))
-	  (loop menu (cdr windows))))))
+         (if (null windows)
+             (cons (group-name id) (nreverse menu))
+           (if (window-suitable-p (car windows))
+               (loop (cons (make-item (car windows)) menu) (cdr windows))
+             (loop menu (cdr windows))))))
 
   (define (cleanup-menu menu)
     ;; sort the group names..
@@ -97,49 +95,50 @@
 			    (not (string-lessp (car x) (car y))))))
     ;; ..then merge any identically named sub-menus
     (let loop ((rest menu))
-      (when (cdr rest)
-	(if (string= (caar rest) (caadr rest))
-	    (progn
-	      (rplacd (car rest) (nconc (cdar rest) (cdadr rest)))
-	      (rplacd rest (cddr rest))
-	      (loop rest))
-	  (loop (cdr rest)))))
+         (when (cdr rest)
+           (if (string= (caar rest) (caadr rest))
+               (progn
+                 (rplacd (car rest) (nconc (cdar rest) (cdadr rest)))
+                 (rplacd rest (cddr rest))
+                 (loop rest))
+             (loop (cdr rest)))))
     menu)
 
   (define (make-menu)
     (let-fluids ((windows-left (managed-windows)))
-      (let loop-1 ((menu '())
-		   (groups (window-group-ids)))
-	(if (null groups)
-	    (progn
-	      (setq menu (cleanup-menu menu))
-	      (let ((left (delete-if-not window-suitable-p
-					 (fluid windows-left))))
-		(if left
-		    (let loop-2 ((menu (cons '() menu))
-				 (rest left))
-		      (if (null rest)
-			  menu
-			(loop-2 (cons (make-item (car rest)) menu)
-				(cdr rest))))
-		  menu)))
-	  (loop-1 (let ((item (make-group-item (car groups))))
-		    (if (cdr item)
-			(cons item menu)
-		      menu))
-		  (cdr groups))))))
+                (let loop-1 ((menu '())
+                             (groups (window-group-ids)))
+                     (if (null groups)
+                         (progn
+                           (setq menu (cleanup-menu menu))
+                           (let ((left (delete-if-not window-suitable-p
+                                                      (fluid windows-left))))
+                             (if left
+                                 (let loop-2 ((menu (cons '() menu))
+                                              (rest left))
+                                      (if (null rest)
+                                          menu
+                                        (loop-2 (cons (make-item (car rest))
+                                                      menu)
+                                                (cdr rest))))
+                               menu)))
+                       (loop-1 (let ((item (make-group-item (car groups))))
+                                 (if (cdr item)
+                                     (cons item menu)
+                                   menu))
+                               (cdr groups))))))
 
   (define (simplify menu)
     (let loop ((rest menu)
 	       (out '()))
-      (if (null rest)
-	  out
-	(let ((next (cdr rest)))
-	  ;; reverse the pointers
-	  (rplacd rest out)
-	  (when (= (length (cdar rest)) 1)
-	    (rplaca rest (cadar rest)))
-	  (loop next rest)))))
+         (if (null rest)
+             out
+           (let ((next (cdr rest)))
+             ;; reverse the pointers
+             (rplacd rest out)
+             (when (= (length (cdar rest)) 1)
+               (rplaca rest (cadar rest)))
+             (loop next rest)))))
 
   (define (beos-window-menu) (simplify (make-menu)))
 

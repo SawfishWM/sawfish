@@ -1,5 +1,4 @@
 ;; sm-init.jl -- session manager code loaded on startup
-;; $Id: init.jl,v 1.21 2003/08/15 08:09:30 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -38,10 +37,10 @@
 	  sawfish.wm.session.util)
 
   (define sm-client-id nil
-    "A string identifying the current session.")
+          "A string identifying the current session.")
 
   (define sm-prefix nil
-    "A string used to uniquify the session file.")
+          "A string used to uniquify the session file.")
 
   ;; this is before both the panel and gmc..?
   (defconst sm-gsm-priority 30)
@@ -113,7 +112,7 @@ that feature off, allowing some broken clients to be session managed.")
 
   (define (make-unique-prefix) (number->string (current-utime) 36))
 
-;; callback
+  ;; callback
 
   (define (sm-save-yourself)
     (require 'sawfish.wm.session.save)
@@ -144,14 +143,15 @@ that feature off, allowing some broken clients to be session managed.")
   (define (remove-sm-options)
     ;; remove any sm options from saved-command-line-args
     (let loop ((args saved-command-line-args))
-      (when (cdr args)
-	(if (string-match "^(--sm-client-id|-clientId|--sm-prefix)" (cadr args))
-	    (progn
-	      (if (string-match "=" (cadr args))
-		  (rplacd args (cddr args))
-		(rplacd args (cdddr args)))
-	      (loop args))
-	  (loop (cdr args))))))
+         (when (cdr args)
+           (if (string-match "^(--sm-client-id|-clientId|--sm-prefix)"
+                             (cadr args))
+               (progn
+                 (if (string-match "=" (cadr args))
+                     (rplacd args (cddr args))
+                   (rplacd args (cdddr args)))
+                 (loop args))
+             (loop (cdr args))))))
 
   (define (set-discard-command)
     (sm-set-property

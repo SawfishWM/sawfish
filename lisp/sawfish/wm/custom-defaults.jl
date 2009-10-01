@@ -1,5 +1,4 @@
 ;; custom-defaults.jl -- customize settings loaded if no user customization
-;; $Id: custom-defaults.jl,v 1.4 2002/04/20 20:59:15 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,4 +18,5 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(custom-set-typed-variable (quote workspace-geometry) (quote (4 1 . 1)) (quote workspace-geometry))
+(custom-set-typed-variable (quote workspace-geometry) (quote (4 1 . 1))
+                           (quote workspace-geometry))

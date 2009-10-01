@@ -1,5 +1,4 @@
 ;; window-history.jl -- store state across window instances
-;; $Id: window-history.jl,v 1.34 2003/02/04 05:43:19 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -73,8 +72,9 @@
 
   ;; list of states in window-state-change-hook that should be tracked
   (defvar window-history-states '(sticky ignored never-focus type maximized
-				  frame-style cycle-skip window-list-skip))
-  
+                                         frame-style cycle-skip
+                                         window-list-skip))
+
   ;; property matched on
   (defvar window-history-key-property '(WM_CLASS WM_WINDOW_ROLE))
 
@@ -254,7 +254,7 @@
     ;; handle the `position' attribute specially
     (let ((position (cdr (assq 'position alist))))
       (when position
-	;; we don't want to place two windows of the same class 
+	;; we don't want to place two windows of the same class
 	;; at the same position, that's just pointless
 	(when (or (window-get w 'placed)
 		  (catch 'out

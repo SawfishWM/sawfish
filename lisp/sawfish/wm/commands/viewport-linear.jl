@@ -1,5 +1,4 @@
 ;; viewport-linear.jl -- linear address of viewports
-;; $Id: viewport-linear.jl,v 1.10 2002/04/21 22:25:12 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

@@ -1,5 +1,4 @@
 ;; with-output.jl -- call a command/function redirecting stdout
-;; $Id: with-output.jl,v 1.7 2000/09/11 07:44:42 john Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 

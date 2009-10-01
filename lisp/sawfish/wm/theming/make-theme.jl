@@ -1,5 +1,4 @@
 ;; make-theme.jl -- support for theme builder
-;; $Id: make-theme.jl,v 1.8 2000/11/27 18:17:21 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -34,7 +33,7 @@
 
   (define (make-frames patterns-alist frame-alist)
     (let ((image-cache '()))
-      
+
       (define (make-image-possibly-from-cache file)
 	(or (cdr (assoc file image-cache))
 	    (let ((img (gaol-eval `(make-image ',file))))
@@ -49,7 +48,8 @@
 			   (setq value (get-color value)))
 			  ((and (consp value) (stringp (car value)))
 			   (let
-			       ((img (make-image-possibly-from-cache (car value))))
+			       ((img (make-image-possibly-from-cache
+                                      (car value))))
 			     (when img
 			       (mapc (lambda (attr)
 				       (cond
@@ -66,7 +66,7 @@
 				       (cons (car cell)
 					     (make-pattern (cdr cell))))
 				     patterns-alist)))
-	    
+
 	(define (make-frame-part def)
 	  (mapcar (lambda (cell)
 		    (cons (car cell)
@@ -89,7 +89,7 @@
 	(mapcar (lambda (cell)
 		  (cons (car cell) (mapcar make-frame-part (cdr cell))))
 		frame-alist))))
-			      
+
   (define (make-theme patterns-alist frame-alist mapping-alist)
     (let ((real-frames (make-frames patterns-alist frame-alist)))
       (lambda (w type)

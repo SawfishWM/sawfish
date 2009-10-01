@@ -1,5 +1,4 @@
 ;; autoload.jl -- Initialise auto-load functions
-;; $Id: autoload.jl,v 1.21 2002/08/18 21:30:05 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

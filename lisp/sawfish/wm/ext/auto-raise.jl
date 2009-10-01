@@ -1,5 +1,4 @@
 ;; auto-raise.jl -- auto-raise on focus
-;; $Id: auto-raise.jl,v 1.25 2002/04/21 22:25:13 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,14 +18,16 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.ext.auto-raise ()
+(define-structure sawfish.wm.ext.auto-raise
+
+    (export )
 
     (open rep
-	  rep.system
-	  rep.io.timers
-	  sawfish.wm.windows
-	  sawfish.wm.custom
-	  sawfish.wm.util.stacking)
+          rep.system
+          rep.io.timers
+          sawfish.wm.windows
+          sawfish.wm.custom
+          sawfish.wm.util.stacking)
 
   (define-structure-alias auto-raise sawfish.wm.ext.auto-raise)
 

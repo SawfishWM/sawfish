@@ -1,5 +1,4 @@
 ;; gtkrc.jl -- code to read current gtkrc settings
-;; $Id: gtkrc.jl,v 1.16 2001/01/15 18:57:23 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

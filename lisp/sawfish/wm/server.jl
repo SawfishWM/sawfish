@@ -1,5 +1,4 @@
 ;; server.jl -- execute forms on demand
-;; $Id: server.jl,v 1.13 2000/09/11 07:44:42 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

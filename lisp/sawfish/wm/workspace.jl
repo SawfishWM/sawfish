@@ -1,5 +1,4 @@
 ;; workspace.jl -- similar to virtual desktops
-;; $Id: workspace.jl,v 1.162 2003/04/03 02:50:12 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -127,7 +126,8 @@
     :group workspace)
 
   (defcustom workspace-send-boundary-mode 'stop
-    "How to act when passing the first or last workspace, while moving a window"
+    "How to act when passing the first or last workspace, while moving
+a window"
     :type (choice stop wrap-around keep-going)
     :group workspace)
 
@@ -412,9 +412,11 @@
       (setq index current-workspace))
     (when (> current-workspace index)
       (setq current-workspace (1- current-workspace)))
-    (when (and first-interesting-workspace (> first-interesting-workspace index))
+    (when (and first-interesting-workspace
+               (> first-interesting-workspace index))
       (setq first-interesting-workspace (1- first-interesting-workspace)))
-    (when (and last-interesting-workspace (> last-interesting-workspace index))
+    (when (and last-interesting-workspace
+               (> last-interesting-workspace index))
       (setq last-interesting-workspace (1- last-interesting-workspace)))
     (map-windows
      (lambda (w)
@@ -453,7 +455,7 @@
 						   ((= space index)
 						    (+ space count))
 						   ((>= space (+ index count))
-						  (1+ space))
+                                                    (1+ space))
 						   (t space))) w)))
 	   (cond ((= current-workspace index)
 		  (setq current-workspace (+ current-workspace count)))
@@ -477,7 +479,8 @@
   (define (move-window-to-workspace w old new #!optional was-focused)
     (or (window-in-workspace-p w old)
 	(error
-	 "move-window-to-workspace--window isn't in original workspace: %s, %s" w old))
+	 "move-window-to-workspace--window isn't in original workspace: %s, %s"
+         w old))
     (unless (= old new)
       (cond ((window-in-workspace-p w new)
 	     ;; just remove from the source workspace
@@ -503,7 +506,8 @@
   (define (copy-window-to-workspace w old new #!optional was-focused)
     (or (window-in-workspace-p w old)
 	(error
-	 "copy-window-to-workspace--window isn't in original workspace: %s, %s" w old))
+	 "copy-window-to-workspace--window isn't in original workspace: %s, %s"
+         w old))
     (unless (= old new)
       (unless (window-in-workspace-p w new)
 	(window-add-to-workspace w new))
@@ -566,7 +570,8 @@
 	(call-hook 'workspace-state-change-hook))))
 
   (define (select-workspace space #!optional dont-focus inner-thunk)
-    (select-workspace* space #:dont-focus dont-focus #:inner-thunk inner-thunk))
+    (select-workspace* space #:dont-focus dont-focus
+                       #:inner-thunk inner-thunk))
 
   ;; return a list of all windows on workspace index SPACE
   (define (workspace-windows
@@ -739,7 +744,8 @@
 	   w orig-space (1+ (cdr limits)) was-focused)))))
 
   (define (prepend-workspace-and-send w #!optional select)
-    "Create a new workspace at the start of the list, and move the window to it."
+    "Create a new workspace at the start of the list, and move the
+window to it."
     (let ((limits (workspace-limits))
 	  (was-focused (eq (input-focus) w))
 	  (orig-space (if (window-in-workspace-p w current-workspace)
@@ -880,7 +886,7 @@ last instance remaining, then delete the actual window."
   (define-command 'show-desktop show-desktop)
   (define-command 'hide-desktop hide-desktop)
 
-;; some commands for moving directly to a workspace
+;;; some commands for moving directly to a workspace
 
   (define (activate-workspace n)
     "Select the N'th workspace."
@@ -970,17 +976,18 @@ last instance remaining, then delete the actual window."
   ;; display WS name on switch
   (define (display-workspace-name)
     (display-message-with-timeout
-       (format nil "Now on Workspace: %s"
-         (or (nth current-workspace workspace-names)
-           (format nil (_ "Workspace %d") (1+ current-workspace))))
-             display-ws-name-timeout))
+     (format nil "Now on Workspace: %s"
+             (or (nth current-workspace workspace-names)
+                 (format nil (_ "Workspace %d") (1+ current-workspace))))
+     display-ws-name-timeout))
 
   (define (display-ws-name-setter)
     (if (eq display-ws-name-on-switch 't)
-      (add-hook 'enter-workspace-hook display-workspace-name)
+        (add-hook 'enter-workspace-hook display-workspace-name)
       (remove-hook 'enter-workspace-hook display-workspace-name)))
 
-  (define-command 'display-workspace-name display-workspace-name #:class 'default)
+  (define-command 'display-workspace-name display-workspace-name
+    #:class 'default)
 
 ;;; Initialisation
 

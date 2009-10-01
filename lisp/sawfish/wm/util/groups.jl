@@ -1,5 +1,4 @@
 ;; group-funs.jl -- ever-present window-group support
-;; $Id: groups.jl,v 1.31 2002/04/20 20:59:20 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -79,9 +78,9 @@
 	  (window-id w))))
 
   (define (windows-by-group group-id #!optional by-depth)
-    "Return the list of windows in the group with id GROUP-ID. If BY-DEPTH is
-non-nil, then return the windows in order of stacking, from topmost to
-bottommost."
+    "Return the list of windows in the group with id GROUP-ID. If
+BY-DEPTH is non-nil, then return the windows in order of stacking,
+from topmost to bottommost."
     (delete-if-not (lambda (x)
 		     (eq (window-actual-group-id x) group-id))
 		   (if by-depth (stacking-order) (managed-windows))))
@@ -91,8 +90,8 @@ bottommost."
     (windows-by-group (window-actual-group-id w) by-depth))
 
   (define (map-window-group fun w)
-    "Map the single argument function FUN over all windows in the same group as
-window W."
+    "Map the single argument function FUN over all windows in the same
+group as window W."
     (mapc fun (windows-in-group w)))
 
   (define (map-other-window-groups fun w)
@@ -118,8 +117,8 @@ group as window W."
     (window-put w 'group group-id))
 
   (define (add-window-to-new-group w)
-    "Add window W to a new group (i.e. has W as its sole member); returns the
-id of the new group."
+    "Add window W to a new group (i.e. has W as its sole member); returns
+the id of the new group."
     (let ((ids (window-group-ids))
 	  (i -1))
       (while (memq i ids)

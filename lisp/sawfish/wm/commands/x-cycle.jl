@@ -1,5 +1,4 @@
 ;; x-cycle.jl -- stack-based window cycling
-;; $Id: x-cycle.jl,v 1.68 2002/04/21 03:39:33 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -97,7 +96,9 @@
 ;;; customization options
 
   ;;###autoload (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-  (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
+  (defgroup cycle "Window Cycling"
+    :group focus
+    :require sawfish.wm.commands.x-cycle)
 
   (defcustom cycle-show-window-names t
     "Display window names and icons while cycling through windows."
@@ -132,7 +133,7 @@
   (defvar after-cycle-step-hook '()
     "Window hook called after each step of window cycling.")
 
-;; variables
+  ;; variables
 
   ;; the current window
   (define x-cycle-current (make-fluid))
@@ -154,9 +155,9 @@
   (define (forwards lst elt count)
     (let ((total (length lst))
 	  (current (let loop ((rest lst) (i 0))
-		     (cond ((null rest) 0)
-			   ((eq (car rest) elt) i)
-			   (t (loop (cdr rest) (1+ i)))))))
+                        (cond ((null rest) 0)
+                              ((eq (car rest) elt) i)
+                              (t (loop (cdr rest) (1+ i)))))))
       (nth (mod (+ current count) total) lst)))
 
   (define (cycle-display-message)
@@ -222,80 +223,80 @@
 		   (x-cycle-windows windows)
 		   (x-cycle-active t))
 
-	(define (unmap-fun w)
-	  (when (eq w grab-win)
-	    (setq grab-win nil)
-	    (or (grab-keyboard nil nil t)
-		(throw 'x-cycle-exit nil))
-	    (allow-events 'sync-keyboard)))
+        (define (unmap-fun w)
+          (when (eq w grab-win)
+            (setq grab-win nil)
+            (or (grab-keyboard nil nil t)
+                (throw 'x-cycle-exit nil))
+            (allow-events 'sync-keyboard)))
 
-	(define (enter-fun space)
-	  (declare (unused space))
-	  (when grab-win
-	    (setq grab-win nil)
-	    (or (grab-keyboard nil nil t)
-		(throw 'x-cycle-exit nil))
-	    (allow-events 'sync-keyboard)))
+        (define (enter-fun space)
+          (declare (unused space))
+          (when grab-win
+            (setq grab-win nil)
+            (or (grab-keyboard nil nil t)
+                (throw 'x-cycle-exit nil))
+            (allow-events 'sync-keyboard)))
 
-	(define (unbound-fun)
-	  (let* ((event (current-event))
-		 (ev (decode-event event)))
-	    (cond
-	     ((memq 'release (nth 1 ev)) ;; key released
-	      (when (and (modifier-keysym-p (nth 2 ev)) ; modifier released
-			 (eq 2 (length (nth 1 ev))))	; 'release + 1 modifier
-			 (throw 'x-cycle-exit t)))
-	     ((not (modifier-keysym-p (nth 2 ev)))
-	      ;; real key pressed
-	      (let* ((override-keymap cycle-keymap)
-		     (command (lookup-event-binding event)))
-		(unless command
-		  ;; search cycle-keymap then the usual ones
-		  (setq override-keymap nil)
-		  (setq command (lookup-event-binding event)))
-		(if (memq command cycle-commands)
-		    ;; call without aborting cycle operation
-		    (progn
-		      (current-event-window (fluid x-cycle-current))
-		      (call-command command))
-		  (unless (setq tail-command command)
-		    ;; no wm binding, so forward the event to
-		    ;; the focused window (this is why we have
-		    ;; to grab the keyboard synchronously)
-		    (allow-events 'replay-keyboard))
-		  (throw 'x-cycle-exit nil)))))))
+        (define (unbound-fun)
+          (let* ((event (current-event))
+                 (ev (decode-event event)))
+            (cond
+             ((memq 'release (nth 1 ev)) ; key released
+              (when (and (modifier-keysym-p (nth 2 ev)) ; modifier released
+                         (eq 2 (length (nth 1 ev))))    ; 'release + 1 modifier
+                (throw 'x-cycle-exit t)))
+             ((not (modifier-keysym-p (nth 2 ev)))
+              ;; real key pressed
+              (let* ((override-keymap cycle-keymap)
+                     (command (lookup-event-binding event)))
+                (unless command
+                  ;; search cycle-keymap then the usual ones
+                  (setq override-keymap nil)
+                  (setq command (lookup-event-binding event)))
+                (if (memq command cycle-commands)
+                    ;; call without aborting cycle operation
+                    (progn
+                      (current-event-window (fluid x-cycle-current))
+                      (call-command command))
+                  (unless (setq tail-command command)
+                    ;; no wm binding, so forward the event to
+                    ;; the focused window (this is why we have
+                    ;; to grab the keyboard synchronously)
+                    (allow-events 'replay-keyboard))
+                  (throw 'x-cycle-exit nil)))))))
 
-	(let* ((decoded (decode-event (current-event)))
+        (let* ((decoded (decode-event (current-event)))
                (eval-modifier-events t)
-	       (eval-key-release-events t)
-	       (override-keymap (make-keymap))
-	       (focus-dont-push t)
-	       (disable-auto-raise t)
-	       (tooltips-enabled nil)
-	       (unmap-notify-hook (cons unmap-fun unmap-notify-hook))
-	       (enter-workspace-hook (cons enter-fun enter-workspace-hook))
-	       (unbound-key-hook (list unbound-fun)))
+               (eval-key-release-events t)
+               (override-keymap (make-keymap))
+               (focus-dont-push t)
+               (disable-auto-raise t)
+               (tooltips-enabled nil)
+               (unmap-notify-hook (cons unmap-fun unmap-notify-hook))
+               (enter-workspace-hook (cons enter-fun enter-workspace-hook))
+               (unbound-key-hook (list unbound-fun)))
 
           (unless (and (eq 'key (car decoded)) (nth 1 decoded))
             (error "%s must be bound to a key event with modifiers."
-		   this-command))
+                   this-command))
 
-	  ;; grab synchronously, so that event replaying works
-	  (when (grab-keyboard grab-win nil t)
-	    (unwind-protect
-		(progn
-		  (catch 'x-cycle-exit
-		    ;; do the first step
-		    (cycle-next windows step)
-		    (setq focus-ignore-pointer-events t)
-		    (recursive-edit))
-		  (when (fluid x-cycle-current)
-		    (display-window (fluid x-cycle-current))))
-	      (remove-message)
-	      (ungrab-keyboard)
-	      (make-timer (lambda ()
-			    (setq focus-ignore-pointer-events nil))
-			  0 100)))))
+          ;; grab synchronously, so that event replaying works
+          (when (grab-keyboard grab-win nil t)
+            (unwind-protect
+                (progn
+                  (catch 'x-cycle-exit
+                    ;; do the first step
+                    (cycle-next windows step)
+                    (setq focus-ignore-pointer-events t)
+                    (recursive-edit))
+                  (when (fluid x-cycle-current)
+                    (display-window (fluid x-cycle-current))))
+              (remove-message)
+              (ungrab-keyboard)
+              (make-timer (lambda ()
+                            (setq focus-ignore-pointer-events nil))
+                          0 100)))))
 
       (when tail-command
 	;; make sure that the command operates on the newly-focused
@@ -338,57 +339,57 @@ Any extra arguments are passed to each call to define-command."
 ;;; commands
 
   (define-cycle-command-pair
-   'cycle-windows 'cycle-windows-backwards
-   (lambda () (filter-windows window-in-cycle-p)))
+    'cycle-windows 'cycle-windows-backwards
+    (lambda () (filter-windows window-in-cycle-p)))
 
   (define-cycle-command-pair
-   'cycle-group 'cycle-group-backwards
-   (lambda (w)
-     (delete-if-not window-in-cycle-p (windows-in-group w)))
-   #:spec "%W")
+    'cycle-group 'cycle-group-backwards
+    (lambda (w)
+      (delete-if-not window-in-cycle-p (windows-in-group w)))
+    #:spec "%W")
 
   (define-cycle-command-pair
-   'cycle-among-groups 'cycle-among-groups-backwards
-   (lambda ()
-     "Only cycle the top members of each group."
-     (delete-if-not window-in-cycle-p
-                    (mapcar (lambda (gid) (car (windows-by-group gid t)))
-                            (window-group-ids)))))
+    'cycle-among-groups 'cycle-among-groups-backwards
+    (lambda ()
+      "Only cycle the top members of each group."
+      (delete-if-not window-in-cycle-p
+                     (mapcar (lambda (gid) (car (windows-by-group gid t)))
+                             (window-group-ids)))))
 
   (define-cycle-command-pair
-   'cycle-prefix 'cycle-prefix-backwards
-   (lambda (w)
-     (when (string-match "^([^:]+)\\s*:" (window-name w))
-       (let* ((prefix (expand-last-match "\\1"))
-	      (re (concat ?^ (quote-regexp prefix) "\\s*:")))
-	 (delete-if-not window-in-cycle-p
-			(filter-windows
-			 (lambda (x)
-			   (string-match re (window-name x))))))))
-   #:spec "%W")
+    'cycle-prefix 'cycle-prefix-backwards
+    (lambda (w)
+      (when (string-match "^([^:]+)\\s*:" (window-name w))
+        (let* ((prefix (expand-last-match "\\1"))
+               (re (concat ?^ (quote-regexp prefix) "\\s*:")))
+          (delete-if-not window-in-cycle-p
+                         (filter-windows
+                          (lambda (x)
+                            (string-match re (window-name x))))))))
+    #:spec "%W")
 
   (define-cycle-command-pair
-   'cycle-class 'cycle-class-backwards
-   (lambda (w)
-     (let ((class (window-class w)))
-       (delete-if-not window-in-cycle-p
-		      (filter-windows
-		       (lambda (x) (equal (window-class x) class))))))
-   #:spec "%W")
+    'cycle-class 'cycle-class-backwards
+    (lambda (w)
+      (let ((class (window-class w)))
+        (delete-if-not window-in-cycle-p
+                       (filter-windows
+                        (lambda (x) (equal (window-class x) class))))))
+    #:spec "%W")
 
   (define-cycle-command-pair
-   'cycle-step 'cycle-step-backwards
-   (lambda ()
-     (if (fluid x-cycle-active)
-	 (fluid x-cycle-windows)
-       (error "%s must be bound to a key event in the cycle keymap."
-	      this-command))))
+    'cycle-step 'cycle-step-backwards
+    (lambda ()
+      (if (fluid x-cycle-active)
+          (fluid x-cycle-windows)
+        (error "%s must be bound to a key event in the cycle keymap."
+               this-command))))
 
   (define-cycle-command-pair
-   'cycle-dock 'cycle-dock-backwards
-   (lambda ()
-     (delete-if-not (lambda (x) (window-in-cycle-p x #:ignore-cycle-skip t))
-		    (filter-windows dock-window-p)))))
+    'cycle-dock 'cycle-dock-backwards
+    (lambda ()
+      (delete-if-not (lambda (x) (window-in-cycle-p x #:ignore-cycle-skip t))
+                     (filter-windows dock-window-p)))))
 
 #| autoload cookies:
 

@@ -1,5 +1,4 @@
 ;; audio-events.jl -- map wm actions to audio samples
-;; $Id: audio-events.jl,v 1.14 2002/04/21 03:39:34 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -62,8 +61,8 @@
 				  (unmapped . "unmap.wav")
 				  (mapped-transient . "map-transient.wav")
 				  (unmapped-transient . "unmap-transient.wav")
-				  ;(focused . "focused.wav")
-				  ;(unfocused . "unfocused.wav")
+                                  ;;(focused . "focused.wav")
+                                  ;;(unfocused . "unfocused.wav")
 				  (switch-workspace . "switch-workspace.wav")
 				  (move-viewport . "move-viewport.wav"))
     nil

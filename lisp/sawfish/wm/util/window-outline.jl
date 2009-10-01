@@ -1,5 +1,4 @@
 ;; window-outline.jl -- drawing window `rubber-band' outlines
-;; $Id: window-outline.jl,v 1.5 2000/07/28 21:51:54 john Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -44,8 +43,8 @@
 ;;; entry points
 
   (define (draw-window-outline mode x y width height)
-    "Draw an outline of a window of dimensions (WIDTH, HEIGHT) at position
-(X, Y) relative to the root window.
+    "Draw an outline of a window of dimensions (WIDTH, HEIGHT) at
+position (X, Y) relative to the root window.
 
 MODE is a symbol defining the type of outline drawn, currently it may
 only be `box' for a 3x3 grid.
@@ -59,11 +58,10 @@ grabbed until the outline is erased."
 	(fun x y width height))))
 
   (defun erase-window-outline (mode x y width height)
-    "Erase a previously drawn outline of a window of dimensions (WIDTH, HEIGHT)
-at position (X, Y) relative to the root window. See `draw-window-outline'.
-
-MODE is a symbol defining the type of outline drawn, currently it may
-only be `box' for a 3x3 grid."
+    "Erase a previously drawn outline of a window of dimensions (WIDTH,
+HEIGHT) at position (X, Y) relative to the root window. See
+`draw-window-outline'. MODE is a symbol defining the type of outline
+drawn, currently it may only be `box' for a 3x3 grid."
 
     (draw-window-outline mode x y width height))
 

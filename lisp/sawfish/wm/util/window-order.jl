@@ -1,5 +1,4 @@
 ;; window-order.jl -- keep track of recently accessed windows
-;; $Id: window-order.jl,v 1.21 2002/04/23 07:43:52 jsh Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -88,11 +87,11 @@
 WINDOWS argument is given it should be a list of windows, in this case the
 function will restrict its search to the elements of this list."
     (let loop ((rest (window-order current-workspace nil)))
-      (cond ((null rest) nil)
-	    ((or (window-get (car rest) 'never-focus)
-		 (and (listp windows) (not (memq (car rest) windows))))
-	     (loop (cdr rest)))
-	    (t (car rest)))))
+         (cond ((null rest) nil)
+               ((or (window-get (car rest) 'never-focus)
+                    (and (listp windows) (not (memq (car rest) windows))))
+                (loop (cdr rest)))
+               (t (car rest)))))
 
   (define (window-order-focus-most-recent)
     (set-input-focus (window-order-most-recent)))

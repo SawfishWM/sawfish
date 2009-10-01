@@ -1,4 +1,3 @@
-;;; $Id: shrink-yank.jl,v 1.10 2008/06/23 11:39:07 thk Exp $
 ;;; shrink windows to fit or yank them free.
 ;; Copyright 2000, 2001, 2003, 2005 by Timo Korvola <tkorvola@iki.fi>
 
@@ -22,67 +21,71 @@
 ;; If the window would have to be yanked off the screen to satisfy the
 ;; condition `yank-window-minimum-visible' pixels will be left visible instead.
 
-(define-structure sawfish.wm.commands.shrink-yank ()
+(define-structure sawfish.wm.commands.shrink-yank
 
-  (export shrink-window-left
-          shrink-window-right
-	  shrink-window-up
-	  shrink-window-down
-	  yank-window-left
-	  yank-window-right
-	  yank-window-up
-	  yank-window-down)
+    (export shrink-window-left
+            shrink-window-right
+            shrink-window-up
+            shrink-window-down
+            yank-window-left
+            yank-window-right
+            yank-window-up
+            yank-window-down)
 
-  (open   rep
-	  sawfish.wm.commands
-	  sawfish.wm.commands.grow-pack
-	  sawfish.wm.events
-	  sawfish.wm.misc
-	  sawfish.wm.state.maximize
-	  sawfish.wm.state.iconify
-	  sawfish.wm.util.rects
-	  sawfish.wm.windows
-	  sawfish.wm.workspace
-	  sawfish.wm.custom)
+    (open   rep
+            sawfish.wm.commands
+            sawfish.wm.commands.grow-pack
+            sawfish.wm.events
+            sawfish.wm.misc
+            sawfish.wm.state.maximize
+            sawfish.wm.state.iconify
+            sawfish.wm.util.rects
+            sawfish.wm.windows
+            sawfish.wm.workspace
+            sawfish.wm.custom)
 
   (define-structure-alias shrink-yank sawfish.wm.commands.shrink-yank)
 
 ;;; Commands:
 
   (define (shrink-window-left window)
-    "Shrinks WINDOW by moving the right edge to the left until it intersects
-with one window less than before."
+    "Shrinks WINDOW by moving the right edge to the left until it
+intersects with one window less than before."
     (shrink-window window 'left))
 
   (define (shrink-window-right window)
-    "Shrinks WINDOW by moving the left edge to the right until it intersects
-with one window less than before."
+    "Shrinks WINDOW by moving the left edge to the right until it
+intersects with one window less than before."
     (shrink-window window 'right))
 
   (define (shrink-window-up window)
-    "Shrinks WINDOW by moving the lower edge upwards until it intersects
-with one window less than before."
+    "Shrinks WINDOW by moving the lower edge upwards until it
+intersects with one window less than before."
     (shrink-window window 'up))
 
   (define (shrink-window-down window)
-    "Shrinks WINDOW by moving the upper edge downwards until it intersects
-with one window less than before."
+    "Shrinks WINDOW by moving the upper edge downwards until it
+intersects with one window less than before."
     (shrink-window window 'down))
 
   (define (yank-window-left window)
-    "Yanks WINDOW to the left until it inserts with one window less than before."
+    "Yanks WINDOW to the left until it inserts with one window less
+than before."
     (yank-window window 'left))
 
   (define (yank-window-right window)
-    "Yanks WINDOW to the right until it inserts with one window less than before."
+    "Yanks WINDOW to the right until it inserts with one window less
+than before."
     (yank-window window 'right))
 
   (define (yank-window-up window)
-    "Yanks WINDOW upwards until it inserts with one window less than before."
+    "Yanks WINDOW upwards until it inserts with one window less than
+before."
     (yank-window window 'up))
 
   (define (yank-window-down window)
-    "Yanks WINDOW downwards until it inserts with one window less than before."
+    "Yanks WINDOW downwards until it inserts with one window less than
+before."
     (yank-window window 'down))
 
   ;;###autoload
@@ -140,10 +143,11 @@ dimensions of WINDOW."
                                 (top nwr) (bottom nwr)))))
 	   (warp-cursor xpos ypos))))))
 
-  ;; Return the coordinate of the window intersection to shink or yank to.
-  ;; This will do for both shrinking and yanking although the
+  ;; Return the coordinate of the window intersection to shink or yank
+  ;; to.  This will do for both shrinking and yanking although the
   ;; requirements are slightly different: e.g., a window that
-  ;; completely surrounds the active window is irrelevant for shrinking.
+  ;; completely surrounds the active window is irrelevant for
+  ;; shrinking.
   (define (find-least-intersection window wr direction yank)
     (let* ((isect-coord (if yank
 			    (case direction
@@ -172,8 +176,8 @@ dimensions of WINDOW."
 			   (lambda (xr)
 			     (and (< (top wr) (bottom xr) isect-coord)
 				  (setq isect-coord (bottom xr))))))))
-      ;; If the window is partially (shrink or yank) or entirely (yank only)
-      ;; outside the screen return the screen edge.
+      ;; If the window is partially (shrink or yank) or entirely (yank
+      ;; only) outside the screen return the screen edge.
       (cond ((and (eq direction 'left)
 		  (< isect-coord (screen-width) (right wr)))
 	     (screen-width))

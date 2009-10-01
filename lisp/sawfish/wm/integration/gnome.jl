@@ -1,5 +1,4 @@
 ;; gnome-int.jl -- more GNOME integration
-;; $Id: integration.jl,v 1.20 2003/08/14 06:55:36 jsh Exp $
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -19,13 +18,15 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.integration.gnome ()
+(define-structure sawfish.wm.integration.gnome
+
+    (export )
 
     (open rep
-	  sawfish.wm.menus
-	  sawfish.wm.custom
-	  sawfish.wm.commands
-	  sawfish.wm.commands.user)
+          sawfish.wm.menus
+          sawfish.wm.custom
+          sawfish.wm.commands
+          sawfish.wm.commands.user)
 
   (define-structure-alias gnome-int sawfish.wm.integration.gnome)
 
@@ -49,5 +50,7 @@
   (let ((menu (assoc (_ "Sessi_on") root-menu)))
     (when menu
       (nconc menu `(()
-                   (,(_ "_Logout from GNOME") (system "gnome-session-save --logout-dialog &"))
-		   (,(_ "_Shutdown from GNOME") (system "gnome-session-save --shutdown-dialog &")))))))
+                    (,(_ "_Logout from GNOME")
+                     (system "gnome-session-save --logout-dialog &"))
+                    (,(_ "_Shutdown from GNOME")
+                     (system "gnome-session-save --shutdown-dialog &")))))))

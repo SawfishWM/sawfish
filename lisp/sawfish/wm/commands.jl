@@ -1,25 +1,22 @@
-#| commands.jl -- managing the command database
-
-   $Id$
-
-   Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
-
-   This file is part of sawfish.
-
-   sawfish is free software; you can redistribute it and/or modify it
-   under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
-   sawfish is distributed in the hope that it will be useful, but
-   WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with sawfish; see the file COPYING.  If not, write to
-   the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
-|#
+;; commands.jl -- managing the command database
+;;
+;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;;
+;; This file is part of sawfish.
+;;
+;; sawfish is free software; you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+;;
+;; sawfish is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with sawfish; see the file COPYING.  If not, write to
+;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 (define-structure sawfish.wm.commands
 
@@ -200,34 +197,36 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
     (cond ((stringp spec)
 	   (let loop ((args '())
 		      (point 0))
-	     (cond ((>= point (length spec)) (nreverse args))
-		   ((eql (aref spec point) #\newline)
-		    (loop (cons nil args) (1+ point)))
-		   (t
-		    (let ((local nil)
-			  (code nil)
-			  (prompt nil))
-		      (if (eql (aref spec point) #\%)
-			  (progn
-			    (setq local t)
-			    (setq code (aref spec (1+ point)))
-			    (setq point (+ point 2)))
-			(setq code (aref spec point))
-			(setq point (1+ point)))
-		      (let ((end (if (string-match "(\n|$)" spec point)
-				     (match-start)
-				   (length spec))))
-			(unless (= point end)
-			  (setq prompt (substring spec point end)))
-			(setq point (1+ end)))
-		      (let (arg)
-			(let-fluids ((arg-can-be-nil nil))
-			  (setq arg (if local
-					(local-codes code prompt)
-				      (global-codes code prompt)))
-			  (when (and (not (fluid arg-can-be-nil)) (null arg))
-			    (error "Null argument to command: %s" name)))
-			(loop (cons arg args) point)))))))
+                (cond ((>= point (length spec)) (nreverse args))
+                      ((eql (aref spec point) #\newline)
+                       (loop (cons nil args) (1+ point)))
+                      (t
+                       (let ((local nil)
+                             (code nil)
+                             (prompt nil))
+                         (if (eql (aref spec point) #\%)
+                             (progn
+                               (setq local t)
+                               (setq code (aref spec (1+ point)))
+                               (setq point (+ point 2)))
+                           (setq code (aref spec point))
+                           (setq point (1+ point)))
+                         (let ((end (if (string-match "(\n|$)" spec point)
+                                        (match-start)
+                                      (length spec))))
+                           (unless (= point end)
+                             (setq prompt (substring spec point end)))
+                           (setq point (1+ end)))
+                         (let (arg)
+                           (let-fluids ((arg-can-be-nil nil))
+                                       (setq arg (if local
+                                                     (local-codes code prompt)
+                                                   (global-codes code prompt)))
+                                       (when (and (not (fluid arg-can-be-nil))
+                                                  (null arg))
+                                         (error "Null argument to command: %s"
+                                                name)))
+                           (loop (cons arg args) point)))))))
 	  ((functionp spec) (spec))
 	  ((consp spec) (user-eval spec))))
 
@@ -253,7 +252,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
        (prompt-for-workspace prompt))
 
       (t (error "Unknown spec: %%%c" code))))
-  
+
   ;; general rep codes
   (define (global-codes code prompt)
     (case code
@@ -334,9 +333,9 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 		 ((eq (car body) 'lambda)
 		  ;; search for interactive decl at head of body
 		  (let loop ((rest (cddr body)))
-		    (cond ((stringp (car rest)) (loop (cdr rest)))
-			  ((eq (caar rest) 'interactive) (car rest))
-			  (t nil))))))))
+                       (cond ((stringp (car rest)) (loop (cdr rest)))
+                             ((eq (caar rest) 'interactive) (car rest))
+                             (t nil))))))))
 
   (define (command-documentation name)
     "Return the documentation associated with the command called NAME."
@@ -386,4 +385,4 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 
   (define (define-command-to-screen name fun #!rest keys)
     (apply define-command name (lambda args (with-output-to-screen
-					     (apply fun args))) keys)))
+                                              (apply fun args))) keys)))

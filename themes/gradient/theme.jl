@@ -1,5 +1,4 @@
 ;; gradient/theme.jl
-;; $Id: theme.jl,v 1.22 2000/08/14 14:23:08 john Exp $
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
