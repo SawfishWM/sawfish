@@ -307,9 +307,8 @@
 ;;	  ".")
 ;;    "List of directories to search for sound samples.")
 
-;;  (define-special-variable play-sample-program nil
-;;    "The program used to play audio samples. If unset, built-in
-;;support for ESD is used.")
+;;  (define-special-variable play-sample-program "/usr/bin/paplay"
+;;    "The program used to play audio samples.")
 
 ;; edge flip options
 
@@ -573,6 +572,8 @@
 
 ;; tab options
 
+;; (require 'sawfish.wm.tabs.tab)
+
 ;; (define-special-variable tab-left-dec-width 11
 ;;   "Width of tab's left-edge decoration")
 
@@ -581,7 +582,6 @@
 
 ;; (define-special-variable tab-left-margin 16 
 ;;   "Width of tab area's left-edge decoration")
-
 
 ;; (define-special-variable tab-right-margin 16
 ;;   "Width of tab area's right-edge decoration")
@@ -598,6 +598,8 @@
 ;;   "The minimum amount of window left visible, if yanked over the edge.")
 
 ;; infinite-desktop options
+
+;; (require 'sawfish.wm.ext.infinite-desktop)
 
 ;; (define-special-variable infinite-desktop-p 1
 ;;   "Simulate an infinite desktop (Conflicts edge-flipping).")
@@ -629,6 +631,8 @@
 ;;   "Wether to alphabetically sort menuentries")
 
 ;; view-clipboard options
+
+;; (require 'sawfish.wm.commands.user)
 
 ;; (define-special-variable clipboard-preview-clip-length 60
 ;;   "Maximum number of chars to display in `view-clipboard'")

@@ -261,36 +261,6 @@ if test "$with_gdk_pixbuf" = "no"; then
 			  ,AC_MSG_ERROR([cannot locate imlib1 library]))
 fi
 
-dnl Check for libaudiofile
-AUDIOFILE_MIN_VER="0.2.3"
-
-AC_ARG_WITH(audiofile,
-	    [  --with-audiofile	  Use libaudiofile for sound manipulation
-	     --without-audiofile], [], [with_audiofile=yes])
-
-if test "$with_audiofile" = "yes"; then
-    PKG_CHECK_MODULES(AUDIOFILE, audiofile >= ${AUDIOFILE_MIN_VER},
-		      ,AUDIOFILE_LIBS="`pkg-config --libs audiofile`"
-		      AUDIOFILE_CFLAGS="`pkg-config --cflags audiofile`"
-		      AC_DEFINE(HAVE_LIBAUDIOFILE, 1, [Have libaudiofile])
-		      ,AC_MSG_ERROR([cannot locate libaudiofile]))
-fi
-
-dnl Check for esound
-ESD_MIN_VER="0.2.23"
-
-AC_ARG_WITH(esd,
-	    [  --with-esd	  Use the Enlightened Sound Daemon
-	     --without-esd], [], [with_esd=yes])
-
-if test "$with_esd" = "yes"; then
-    PKG_CHECK_MODULES(ESD, esound >= ${ESD_MIN_VER}
-		      ,ESD_LIBS="`pkg-config --libs esound`"
-		      ESD_CFLAGS="`pkg-config --cflags esound`"
-		      AC_DEFINE(HAVE_ESD, 1, [Have ESD])
-		      ,AC_MSG_ERROR([cannot locate esound]))
-fi
-
 dnl Check wether to install mo files
 
 AC_ARG_WITH(nls,
@@ -411,12 +381,6 @@ AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(REP_MIN_VER)
 AC_SUBST(REP_GTK_MIN_VER)
-AC_SUBST(AUDIOFILE_MIN_VER)
-AC_SUBST(AUDIOFILE_LIBS)
-AC_SUBST(AUDIOFILE_CFLAGS)
-AC_SUBST(ESD_MIN_VER)
-AC_SUBST(ESD_LIBS)
-AC_SUBST(ESD_CFLAGS)
 AC_SUBST(VERSION)
 AC_SUBST(PACKAGE)
 AC_SUBST(GETTEXT_PACKAGE)

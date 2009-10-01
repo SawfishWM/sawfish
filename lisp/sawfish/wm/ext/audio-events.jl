@@ -28,12 +28,12 @@
 	  rep.system
 	  sawfish.wm.custom
 	  sawfish.wm.windows
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.state.maximize
+	  sawfish.wm.util.play-audio)
 
   (define-structure-alias audio-events sawfish.wm.ext.audio-events)
 
-  (defgroup audio "Sound"
-    :require sawfish.wm.ext.audio-events)
+  (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)
 
   ;; XXX it would be cool to merge the customization with the GNOME sound prefs
 

@@ -3231,10 +3231,11 @@ The names of the pre-defined classes are as follows, their meanings
 should be self-explanatory:
 
 @code{title}, @code{menu-button}, @code{close-button},
-@code{iconify-button}, @code{maximize-button}, @code{top-border},
-@code{left-border}, @code{right-border}, @code{bottom-border},
-@code{top-left-corner}, @code{top-right-corner},
-@code{bottom-left-corner}, @code{bottom-right-corner}.
+@code{iconify-button}, @code{maximize-button}, @code{sticky-button},
+@code{lock-button}, @code{rename-button}, @code{move-resize-button},
+@code{raise-lower-button}, @code{top-border}, @code{left-border},
+@code{right-border}, @code{bottom-border}, @code{top-left-corner},
+@code{top-right-corner}, @code{bottom-left-corner}, @code{bottom-right-corner}.
 
 @noindent
 Extra classes can be created by adding to @code{frame-part-classes}.
@@ -5347,6 +5348,11 @@ Keymaps active in the title and borders of window frames.
 @itemx maximize-button-keymap
 @itemx menu-button-keymap
 @itemx shade-button-keymap
+@itemx sticky-button-keymap
+@itemx lock-button-keymap
+@itemx rename-button-keymap
+@itemx move-resize-button-keymap
+@itemx raise-lower-button-keymap
 Keymaps active in the standard window frame buttons.
 
 @item override-keymap

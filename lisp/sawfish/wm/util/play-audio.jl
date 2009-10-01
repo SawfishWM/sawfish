@@ -38,10 +38,9 @@
 	  ".")
     "List of directories to search for sound samples.")
 
-  (defcustom play-sample-program nil
-    "The program used to play audio samples. If unset, built-in support for \
-ESD is used."
-    :type (optional program)
+  (defcustom play-sample-program "/usr/bin/paplay"
+    "The program used to play audio samples."
+    :type program
     :group audio)
 
   ;; currently running audio process
@@ -59,18 +58,13 @@ ESD is used."
 	(setq real-name (make-temp-name))
 	(copy-file filename real-name)
 	(setq delete-it t))
-      (if play-sample-program
-	  ;; start programs asynchronously in case they block..
-	  (let ((sentinel (lambda (proc)
-			    (when (eq play-sample-process proc)
-			      (setq play-sample-process nil))
-			    (when delete-it
-			      (delete-file real-name)))))
-	    (when play-sample-process
-	      (kill-process play-sample-process))
-	    (setq play-sample-process (make-process standard-error sentinel))
-	    (start-process play-sample-process play-sample-program real-name))
-	(require 'sawfish.wm.util.play-sample)
-	(primitive-play-sample real-name)
-	(when delete-it
-	  (delete-file real-name))))))
+	;; start programs asynchronously in case they block..
+	(let ((sentinel (lambda (proc)
+	    (when (eq play-sample-process proc)
+	      (setq play-sample-process nil))
+	    (when delete-it
+	      (delete-file real-name)))))
+	  (when play-sample-process
+	    (kill-process play-sample-process))
+	  (setq play-sample-process (make-process standard-error sentinel))
+	  (start-process play-sample-process play-sample-program real-name)))))

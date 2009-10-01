@@ -31,14 +31,13 @@ SRCS :=	colors.c cursors.c display.c events.c fonts.c frames.c \
 	property-cache.c server.c session.c stacking-list.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := gradient.c flippers.c x.c selection.c play-sample.c
+DL_SRCS := gradient.c flippers.c x.c selection.c
 DL_OBJS := $(DL_SRCS:%.c=%.la) client.la
 DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/flippers.la \
-	  sawfish/wm/util/x.la sawfish/wm/util/selection.la \
-	  sawfish/wm/util/play-sample.la
+	  sawfish/wm/util/x.la sawfish/wm/util/selection.la
 DL_DIRS = sawfish/wm/util
 
-override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(ESD_CFLAGS) $(PANGO_CFLAGS)
+override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(PANGO_CFLAGS)
 
 all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
@@ -49,9 +48,6 @@ sawfish : $(OBJS) $(LIBOBJS)
 
 %.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
-
-play-sample.la : play-sample.lo
-	$(rep_DL_LD) $(LDFLAGS) -o $@ $< $(ESD_LIBS) $(AUDIOFILE_LIBS)
 
 libclient_.lo : libclient.c
 	$(rep_LIBTOOL) --mode=compile --tag=CC $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
