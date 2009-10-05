@@ -459,6 +459,10 @@ add_window (Window id)
 	w->net_name = Qnil;
 	w->net_icon_name = Qnil;
 
+        /* Don't garbage collect the window before we are done. */
+        /* Note: must not return without rep_POPGC. */
+	rep_PUSHGC(gc_win, win);
+
 	/* have to put it somewhere until it finds the right place */
 	insert_in_stacking_list_above_all (w);
 	restack_window (w);
@@ -527,10 +531,8 @@ add_window (Window id)
 	  }
 	
 	/* ..then call the add-window-hook's.. */
-	rep_PUSHGC(gc_win, win);
 	Fcall_window_hook (Qbefore_add_window_hook, rep_VAL(w), Qnil, Qnil);
 	Fcall_window_hook (Qadd_window_hook, rep_VAL(w), Qnil, Qnil);
-	rep_POPGC;
 
 	/* In case the window disappeared during the hook call */
 	if (!WINDOW_IS_GONE_P (w))
@@ -551,13 +553,11 @@ add_window (Window id)
 
 	if (!WINDOW_IS_GONE_P (w))
 	{
-           repv tem = Fwindow_get (rep_VAL(w), Qplaced, Qnil);
+            repv tem = Fwindow_get (rep_VAL(w), Qplaced, Qnil);
 	    if (initialising || (tem && tem == Qnil))
 	    {
 		/* ..then the place-window-hook.. */
-		rep_PUSHGC(gc_win, win);
 		Fcall_window_hook (Qplace_window_hook, rep_VAL(w), Qnil, Qor);
-		rep_POPGC;
 	    }
 	}
 	Fwindow_put (rep_VAL(w), Qplaced, Qt);
@@ -570,6 +570,7 @@ add_window (Window id)
 	    /* Tell the window where it ended up.. */
 	    send_synthetic_configure (w);
 	}
+        rep_POPGC;
     }
     return w;
 }
