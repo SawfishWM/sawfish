@@ -155,11 +155,14 @@ that overrides settings set elsewhere.")
       (utility . default)
       (shaded-utility . shaded-transient)
       (toolbar . unframed)
-      ;;    (shaded-toolbar . shaded-utility)
       (menu . unframed)
-      ;;    (shaded-menu . shaded-utility)
-      (splash . unframed))
-    "Frame type fallbacks.")
+      (splash . unframed)
+      ;; (shaded-toolbar . shaded-utility)
+      ;; (shaded-menu . shaded-utility)
+      )
+    "Frame type fallbacks. This is an alist whose elements are
+(required-type . fallback-type). When REQUIRED-TYPE is not supported
+by the current theme, then FALLBACK-TYPE is used instead.")
 
   ;; Re-Coloring Options for Themes
 
