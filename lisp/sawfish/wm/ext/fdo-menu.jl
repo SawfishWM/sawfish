@@ -34,6 +34,7 @@
 	  rep.io.files
 	  rep.io.streams
 	  rep.system
+          rep.regexp
 	  sawfish.wm
 	  sawfish.wm.commands)
 
