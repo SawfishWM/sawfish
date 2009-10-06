@@ -376,7 +376,7 @@ before killing it.")
 
   (define (custom-menu)
     `(,@(and custom-menu-includes-all-settings
-	     (list (list (_ "S_awfish-UI") 'customize) nil))
+	     (list (list (_ "S_awfishConfig") 'customize) nil))
       ,@(mapcar (lambda (sub)
 		  (list (_ (cadr sub))
 			(intern (concat "customize:"

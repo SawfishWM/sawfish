@@ -176,6 +176,57 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
+  (defcustom sticky-button-keymap (bind-keys (make-keymap)
+				   "Button1-Off" 'toggle-window-sticky
+				   "Button2-Off" '(call-command
+				                   (lambda ()
+						     (if (window-get (current-event-window) 'sticky-viewport)
+						           (window-put (current-event-window) 'sticky-viewport nil)
+							   (window-put (current-event-window) 'sticky-viewport t)))))
+    "Keymap containing bindings active when the pointer is in the sticky button
+of a window. (Only mouse-bindings are evaluated in this map.)"
+    :group bindings
+    :type keymap)
+
+  (defcustom lock-button-keymap (bind-keys (make-keymap)
+    "Button1-Off" '(call-command
+			(lambda ()
+				(if (window-get (current-event-window) 'fixed-position)
+					(window-put (current-event-window) 'fixed-position nil)
+					(window-put (current-event-window) 'fixed-position t)))))
+    "Keymap containing bindings active when the pointer is in the lock button
+of a window. (Only mouse-bindings are evaluated in this map.)"
+    :group bindings
+    :type keymap)
+
+  (defcustom rename-button-keymap (bind-keys (make-keymap)
+				   "Button1-Off" 'rename-window)
+    "Keymap containing bindings active when the pointer is in the rename button
+of a window. (Only mouse-bindings are evaluated in this map.)"
+    :group bindings
+    :type keymap)
+
+  (defcustom move-resize-button-keymap (bind-keys (make-keymap)
+                                        "Button1-Off" 'move-window-interactively
+					"Button2-Off" 'resize-window-interactively
+					"Button3-Off" 'move-window-center
+					"Button4-Off" 'double-window-size
+					"Button5-Off" 'halve-window-size)
+    "Keymap containing bindings active when the pointer is in the move/resize button
+of a window. (Only mouse-bindings are evaluated in this map.)"
+    :group bindings
+    :type keymap)
+
+  (defcustom raise-lower-button-keymap (bind-keys (make-keymap)
+                                         "Button1-Off" 'raise-window
+					 "Button2-Off" 'lower-window
+					 "Button4-Off" 'raise-window-depth
+					 "Button5-Off" 'lower-window-depth)
+    "Keymap containing bindings active when the pointer is in the raise/lower button
+of a window. (Only mouse-bindings are evaluated in this map.)"
+  :group bindings
+  :type keymap)
+
   (defvar pointer-motion-threshold 2
     "Distance in pixels pointer must move before generating motion events.")
 

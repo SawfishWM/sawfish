@@ -113,7 +113,7 @@ for example:
 ( unbind-keys global-keymap "W-Tab" 'cycle-windows )
 
 another thing would be nested keybindings (I prefer `macros' instead of `nested keyinbindgs'),
-like in emacs. nested means you first press keys which together act as a new modifier 
+like in emacs. nested means you first press keys which together act as a new modifier
 (this new modifier works like the compose key does -> you don't have to keep it pressed, like other modifiers),
 then you press another key (or keybinding) to actually perform the desired action, example:
 
@@ -189,3 +189,31 @@ Button1-Click1 -> Popup Window Menu
 shade-button-keymap (Those bindings are active when the pointer is on the shade button)
 
 Button1-Off -> Toggle Window Shaded
+
+sticky-button-keymap (Those bindings are active when the pointer is on the sticky button)
+
+Button1-Off -> Toggle Window Sticky
+Button2-Off -> Toggle Window Viewport-Sticky
+
+lock-button-keymap (Those bindings are active when the pointer is on the lock button)
+
+Button1-Off -> Toggle Window Fixed-Position
+
+rename-button-keymap (Those bindings are active when the pointer is on the rename button)
+
+Button1-Off -> Rename Window
+
+move-resize-button-keymap (Those bindings are active when the pointer is on the move/resize button)
+
+Button1-Off -> Move Window Interactively
+Button2-Off -> Resize Window Interactively
+Button3-Off -> Move Window Center
+Button4-Off -> Double Window Size
+Button5-Off -> Halve Window Size
+
+raise-lower-button-keymap (Those bindings are active when the pointer is on the raise/lower button)
+
+Button1-Off -> Raise Window
+Button2-Off -> Lower Window
+Button4-Off -> Raise Window Depth
+Button5-Off -> Lower Window Depth

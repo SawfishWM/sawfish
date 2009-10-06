@@ -19,7 +19,13 @@ they occurred between. For more detailed information see the
 
 @item rep-gtk 0.18.4 -> 0.90.0
 @end itemize
+@item Removed requirements:
+@itemize @minus
 
+@item LibAudiofile
+
+@item ESounD
+@end itemize
 @item User visible changes:
 @itemize @minus
 
@@ -83,7 +89,7 @@ Shrink-yank functions and @code{send-to-workspace}.
 
 @item Sawfish does now support theme-tarballs compressed with XZ (aka LZMA2) or LZMA [Christopher Bratusek]
 
-@item 3 new sawfish-mmc based commands (@code{maximize-unframe}, @code{maximize-reframe} and @code{rename-window}) [Christopher Bratusek]
+@item 3 new sawfish-mmc based commands (@code{maximize-unframe}, @code{maximize-reframe} and @code{rename-window} (not ICCCM compliant)) [Christopher Bratusek]
 
 @item 5 new move-cursor commands (@code{move-cursor-} @code{northwest}, @code{northeast}, @code{southwest}, @code{southeast}), and @code{move-cursor-center} [Christopher Bratusek]
 
@@ -125,6 +131,24 @@ help, and KDE logout/shutdown/reboot are provided in the menu.
 In KDE4 WM Selector, Sawfish is added.
 
 @item Added @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
+@end itemize
+@item Removed Features:
+@itemize @minus
+
+@item Built-in audio support has been dropped, instead we rely on an extern playbin [Christopher Bratusek]
+@end itemize
+@item New Frame Classes:
+@itemize @minus
+
+@item @code{sticky-button}, a button to toggle window @code{sticky} or @code{viewport-sticky} [Christopher Bratusek]
+
+@item @code{lock-button}, a button to toggle window position @code{fixed} [Christopher Bratusek]
+
+@item @code{rename-button}, a button to rename the window-title and window-icon properties (not ICCCM compliant) [Christopher Bratusek]
+
+@item @code{move-resize-button}, a button to perform various move and resize actions on a window [Christopher Bratusek]
+
+@item @code{raise-lower-button}, a button to perform various raising and lowering actions on a window [Christopher Bratusek]
 @end itemize
 @item Widget Transistion:
 @itemize @minus

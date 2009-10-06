@@ -1,3 +1,28 @@
+2009-10-01  Christopher Bratusek <zanghar@freenet.de>
+	* configure.in
+	* OPTIONS
+	* src/play-sample.c
+	* src/Makefile.in
+	* Makedefs.in
+	* sawfish.ebuild.in
+	* lisp/sawfish/wm/util/play-audio.jl: removed built-in audio support, using /usr/bin/paplay by default
+
+	* man/sawfish.texi
+	* KEYBINDINGS
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/keymaps.jl: added new buttons (frame-classes) (+ keymaps and docs):
+                                      - sticky button
+				      - lock button
+				      - rename button
+				      - move/resize button
+				      - raise/lower button
+
+	* lisp/sawfish/wm/menus.jl: string change in customize-menu
+
+	* man/news.texi: updated
+
+	* OPTIONS: updated
+
 2009-10-01  Teika kazura <teika@lavabit.com>
 	* OPTIONS
 	* lisp/sawfish/wm/frames.jl
