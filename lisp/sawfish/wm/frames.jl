@@ -50,6 +50,7 @@
 	     add-frame-class
 	     frame-class-removed-p
 	     set-frame-part-value
+	     remove-frame-part-value
 	     def-frame-class
 	     define-frame-class
 	     update-frame-font-color))
@@ -172,15 +173,11 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 		(set-frame-part-value fc 'foreground
                                       (list frame-font-inactive-color
                                             frame-font-active-color)
-                                      't))
-              (list 'title 'tab))
-      (mapc (lambda (fc)
-	      (rplacd (assoc 'foreground
-                             (assoc fc override-frame-part-classes)) nil)
-	      (rplaca (assoc 'foreground
-                             (assoc fc override-frame-part-classes)) nil))
-            (list 'title 'tab)))
-    (mapc (lambda (x) (rebuild-frame x)) (managed-windows)))
+                                      t))
+              '(title 'tab))
+      (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
+            '(title tab)))
+    (mapc rebuild-frame (managed-windows)))
 
   (defvar theme-update-interval 60
     "Number of seconds between checking if theme files have been modified.")
@@ -587,6 +584,13 @@ generate.")
 	    (rplacd item (cons (cons key value) (cdr item))))
 	(set var (cons (cons class (list (cons key value)))
 		       (symbol-value var))))))
+
+  (define (remove-frame-part-value class key #!optional override)
+    (let* ((fpcs (if override override-frame-part-classes frame-part-classes))
+           (item (assq class fpcs)))
+      (when item
+        (setcdr item (delete-if (lambda (it) (eq (car it) key))
+                                (cdr item))))))
 
   ;; (def-frame-class shade-button '((cursor . foo) ...)
   ;;   (bind-keys shade-button-keymap
