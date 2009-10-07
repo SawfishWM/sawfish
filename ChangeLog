@@ -28,6 +28,9 @@
 					   - Fix more ugliness in find-lang-in-desktop-file and generate-menu-entry
 					   - Import rep.regexp
 
+	* src/windows.c: merged timo/race branch
+	                 - Wrap most of add_window in rep_PUSHGC/rep_POPGC
+
 	* ^^^^^^^^^: see git log in Timo Korvolas Repo until proper NEWS/DOC entries are added
 
 	* Makefile.in: don't try to remove ancient sawmill* binaries
