@@ -2,15 +2,32 @@
 	* src/events.c
 	* lisp/sawfish/wm/focus.jl
 	* lisp/sawfish/wm/transient.jl: merged timo/kde-menu-focus branch
+	                                - Changed an ugly cond into an ugly when
+					- Fix focus behaviour of KDE Run Command
+					- Fix KDE focus behaviour also in transient-unmap-window
+					- Ignore grab-induced enter-notify events
+	                                
 
 	* lisp/sawfish/wm/frames.jl: merged timo/frame-fix branch
+	                             - added remove-frame-part-value
+				     - improved update-frame-font-color
 
 	* lisp/sawfish/wm/frames.jl
 	* lisp/sawfish/wm/windows.jl: merged timo/kde4 branch
+	                              - merged earlier already
 
 	* src/keys.h: merged timo/mouse branch
+	              - removed built-in (hackish) support for Mousebuttons 6 - 9
+		      - use evdev if you need support for those buttons, instead
 
 	* lisp/sawfish/wm/ext/fdo-menu.jl: merged timo/fdo-fix branch
+	                                   - improved find-lang-string
+					   - s/\012/\n/
+					   - Fix whitespace and other ugliness
+					   - Fix more ugliness in find-lang-in-desktop-file and generate-menu-entry
+					   - Import rep.regexp
+
+	* ^^^^^^^^^: see git log in Timo Korvolas Repo until proper NEWS/DOC entries are added
 
 2009-10-05  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/defaults.jl
