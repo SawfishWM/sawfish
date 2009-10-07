@@ -128,7 +128,6 @@
 
 (defvar previous-button-keymap
   (bind-keys (make-keymap)
-             "Button6-Click" 'pack-window-left
              "Button3-Off" '(command-sequence
                              `((send-to-workspace
                                 ,(1+ (car (workspace-limits))))
@@ -139,7 +138,6 @@
 
 (defvar next-button-keymap
   (bind-keys (make-keymap)
-             "Button6-Click" 'pack-window-right
              "Button3-Off" '(command-sequence
                              `((send-to-workspace
                                 ,(1+ (cdr (workspace-limits))))
