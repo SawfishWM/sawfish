@@ -27,8 +27,6 @@ VPATH=@srcdir@
 
 SUBDIRS = @SUBDIRS@
 
-OLD_BINARIES = sawmill sawmill-client sawmill-ui
-
 all : build.h DOC NEWS FAQ
 	for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
@@ -50,12 +48,6 @@ install : all installdirs
 		$(DESTDIR)$(datadir)/applications/
 	$(INSTALL_DATA) $(srcdir)/sawfish-wm.desktop \
 	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties
-	-for f in $(OLD_BINARIES); do \
-	  if [ -x $(DESTDIR)$(bindir)/$$f ]; then \
-	    rm -f $(DESTDIR)$(bindir)/$$f; \
-	    $(INSTALL_SCRIPT) $(srcdir)/moved $(DESTDIR)$(bindir)/$$f; \
-	  fi \
-	done
 	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 	$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop
 	$(INSTALL_DATA) $(top_srcdir)/sawfish-ksm.desktop $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop
