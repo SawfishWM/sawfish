@@ -1,3 +1,9 @@
+2009-10-08  Christopher Bratusek <zanghar@freenet.de>
+	* ChangeLog
+	* man/sawfish.texi
+	* lisp/sawfish/wm/focus.jl
+	* lisp/sawfish/wm/transient.jl: revert timo/kde-menu-focus branch merge, (re)merge timo/focus-revert instead
+
 2009-10-07  Jeremy Hankins <nowan@nowan.org>
 	* themes/mxflat/theme.jl: Removed bindings for Button6-Click that are no longer valid.
 
@@ -855,6 +861,16 @@
 	* lisp/sawfish/wm/util/prompt.jl: improved prompt.jl [Sergey I. Sharybi]
 
 	* OPTIONS: updated
+
+2009-05-10  Timo Korvola  <tkorvola@iki.fi>
+
+	* focus.jl, transient.jl: focus modes are now expected to respond
+	to a new of event, `focus-revert'.  It is invoked when the
+	focused window closes and transient-unmap-window does not have
+	any candidate that should inherit the focus.  The focus mode is
+	then expected to set focus somewhere reasonable, whatever that
+	means.  The window argument is always nil.  All user-defined
+	focus modes need to be updated!
 
 2009-05-08  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/placement.jl: interactive placement mode now also for dialogs

@@ -192,26 +192,15 @@ the level of any transient windows it has."
 			 (or (window-order-most-recent
 			      #:windows (delq w (windows-in-group w)))
 			     (get-window-by-id (window-transient-p w))))))
-	(when (or (not parent)
-		  (not (window-mapped-p parent))
-		  (not (window-visible-p parent))
-		  (window-outside-viewport-p parent)
-		  (not (window-really-wants-input-p parent))
-                  (window-get parent 'desktop))
-	  ;; if no parent, choose the topmost window (if in click-to-focus
-	  ;; mode) or the window under the pointer otherwise
-	  (if (eq focus-mode 'click)
-	      (setq parent nil)
-	    (setq parent (query-pointer-window))
-	    (when (and (eq focus-mode 'enter-only)
-		       parent (desktop-window-p parent))
-	      ;; in sloppy-focus mode, don't want to focus on the
-	      ;; desktop window just because the pointer is under it
-	      (setq parent nil)))
-	  (unless (or parent (eq focus-mode 'enter-exit))
-	    (setq parent (window-order-most-recent))))
-	(when (or (null parent) (window-really-wants-input-p parent))
-	  (set-input-focus parent)))))
+	(if (and parent
+                 (window-mapped-p parent)
+                 (window-visible-p parent)
+                 (not (window-outside-viewport-p parent))
+                 (window-really-wants-input-p parent)
+                 (not (window-get parent 'desktop)))
+            (set-input-focus parent)
+          ;; No parent to give focus back to.
+          (focus-revert)))))
 
   (add-hook 'map-notify-hook transient-map-window)
   (add-hook 'unmap-notify-hook transient-unmap-window)

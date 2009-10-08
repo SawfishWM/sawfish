@@ -27,7 +27,7 @@
 	    focus-push-map
 	    focus-pop-map
 	    warp-pointer-if-necessary
-	    focus-revert
+            focus-revert
 	    focus-within-click-event)
 
     (open rep
@@ -181,11 +181,11 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	((warp-if-necessary)
 	 (unless (eq (query-pointer-window) w)
 	   (warp-cursor-to-window w)))
-	((focus-revert)
-	 (setq w (query-pointer-window))
-	 (when (or (null w)
-		   (window-really-wants-input-p w))
-	   (set-input-focus w))))))
+        ((focus-revert)
+         (setq w (query-pointer-window))
+         (when (or (null w)
+                   (window-really-wants-input-p w))
+           (set-input-focus w))))))
 
   (define-focus-mode 'enter-only
     (lambda (w action . args)
@@ -200,14 +200,14 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	 (let ((current (query-pointer-window)))
 	   (unless (or (eq current w) (desktop-window-p current))
 	     (warp-cursor-to-window w))))
-	((focus-revert)
-	 (setq w (query-pointer-window))
-	 (when (or (null w)
-		   (desktop-window-p w))
-	   (setq w (window-order-most-recent)))
-	 (when (or (null w)
-		   (window-really-wants-input-p w))
-	   (set-input-focus w))))))
+        ((focus-revert)
+         (setq w (query-pointer-window))
+         (when (or (null w)
+                   (desktop-window-p w))
+           (setq w (window-order-most-recent)))
+         (when (or (null w)
+                   (window-really-wants-input-p w))
+           (set-input-focus w))))))
 
   (define (focus-click)
     (let ((w (current-event-window))
@@ -260,19 +260,19 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	 (unless (or (not (window-really-wants-input-p w))
 		     (eq w (input-focus)))
 	   (focus-push-map w click-to-focus-map)))
-	((focus-revert)
-	 (setq w (window-order-most-recent))
-	 (when (or (null w)
-		   (window-really-wants-input-p w))
-	   (set-input-focus w))))))
+        ((focus-revert)
+         (setq w (window-order-most-recent))
+         (when (or (null w)
+                   (window-really-wants-input-p w))
+           (set-input-focus w))))))
 
   (define-focus-mode 'enter-click
     (lambda (w action . args)
       (case action
-	((pointer-in warp-if-necessary focus-revert)
-	 (apply (focus-mode-ref 'enter-only) w action args))
-	((focus-in focus-out add-window before-mode-change after-mode-change)
-	 (apply (focus-mode-ref 'click) w action args)))))
+        ((pointer-in warp-if-necessary focus-revert)
+         (apply (focus-mode-ref 'enter-only) w action args))
+        ((focus-in focus-out add-window before-mode-change after-mode-change)
+         (apply (focus-mode-ref 'click) w action args)))))
 
 ;;; hooks
 
