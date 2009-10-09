@@ -22,9 +22,7 @@
 
     (export xterm
 	    browser
-	    some
 	    display-message-with-timeout
-	    program-available
 	    view-clipboard)
 
     (open rep
@@ -66,13 +64,6 @@
       (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
                       browser-program website))))
 
-  ;; some
-  ;; XXX description
-  (define (some pred lst)
-    (cond ((null lst) nil)
-          ((pred (car lst)) t)
-          (t (some pred (cdr lst)))))
-
   ;; display-message-with-timeout
   ;; like display-message, but it dissapears
   ;; after `timemout' seconds, displayed endlessly
@@ -80,13 +71,6 @@
   (define (display-message-with-timeout message timeout)
     (display-message message)
     (make-timer (lambda () (display-message nil)) timeout))
-
-  ;; program-available
-  ;; return true, if program `cmd' is in PATH
-  (define (program-available cmd)
-    (some (lambda (dir)
-            (file-exists-p (concat dir "/" cmd)))
-          (string-split ":" (getenv "PATH"))))
 
   (defcustom clipboard-preview-clip-length 60
     "Maximum length of Clipboard Preview"
