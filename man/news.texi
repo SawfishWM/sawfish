@@ -47,7 +47,9 @@ your system, but the later doesn't
 Segfault fix: Wrap most of add_window in rep_PUSHGC/rep_POPGC
 There have been crashes that might be due to a window being
 destroyed, garbage collected and then accessed, all during
-add_window (client destroys window really quickly after mapping) [Timo Korvola]
+add_window (client destroys window really quickly after mapping),
+also prevent add_window_hook to be called with uninitialised arguement.
+[Timo Korvola, Janek Kozicki]
 
 @item Build and Installation:
 

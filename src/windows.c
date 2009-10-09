@@ -530,6 +530,13 @@ add_window (Window id)
 			    rep_VAL(w));
 	  }
 	
+	/* Prevent hook call on non existing window */
+	if (WINDOW_IS_GONE_P (w))
+	{
+		rep_POPGC;
+		return 0;
+	}
+	
 	/* ..then call the add-window-hook's.. */
 	Fcall_window_hook (Qbefore_add_window_hook, rep_VAL(w), Qnil, Qnil);
 	Fcall_window_hook (Qadd_window_hook, rep_VAL(w), Qnil, Qnil);
