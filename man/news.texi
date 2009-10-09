@@ -6,6 +6,18 @@ This lists the user-visible changes made to Sawfish, and which releases
 they occurred between. For more detailed information see the
 @file{ChangeLog} file in the Sawfish source tree.
 
+@heading 1.5.3
+
+@itemize @bullet
+
+@item The 1.5.3 release has backports from 1.6.0 (HEAD)
+
+@item Bugs fixed:
+@itemize @minus
+
+@item Fixed a race condition which lead to segfault, if a window is mapped and immediately unmapped [Janek Kozicki, Timo Korvola]
+@end itemize
+@end itemize
 @heading 1.5.2
 
 @itemize @bullet

@@ -1,3 +1,8 @@
+2009-10-09  Christopher Bratusek <zanghar@freenet.de>
+	* src/windows.c: fixed a race condition which may lead to a crash, if
+	                 a window is mapped and immediately unmapped
+			 -- [Janek Kozicki, Timo Korvola]
+
 2009-09-20  Christopher Bratusek <zanghar@freenet.de>
 	* themes/Crux/theme.jl: make default text-color of inactive frames black
 	                          for better readability
