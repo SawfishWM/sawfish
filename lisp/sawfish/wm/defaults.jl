@@ -1,4 +1,4 @@
-;; sawfish-default.jl -- default user startup
+;; defaults.jl -- do some user supports before loading rc file
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -20,7 +20,8 @@
 
 ;; Commentary:
 
-;; This file provides defaults for users without .sawfishrc files
+;; This used to be read only if .sawfishrc lacks, thus named
+;; "defaults", but starting from Sawfish-1.6, it is always read.
 
 (declare (in-module user))
 

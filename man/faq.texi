@@ -43,35 +43,25 @@ code. The GUI can be run by middle-clicking background ->
 ``Customize''. Most customizations similar to other window managers
 can be done through GUI.
 
-For customizations by lisp, first understand that in the startup, three
-files are read, in the order: @file{sawfish-defaults},
-@file{~/.sawfish/custom}, @file{.sawfishrc}.
+For customizations by lisp, first understand that in the startup, files
+@file{~/.sawfish/custom}, @file{.sawfishrc} are read in this order.
 
 @table @asis
-@item @file{sawfish-defaults}
-This is a system default lisp library. It loads some of the common
-window manager features. More precisely, it currently does:
-
-@itemize
-@item GNOME setup, by opening @code{sawfish.wm.integration.gnome},
-if GNOME is running.
-@item KDE setup, by opening @code{sawfish.wm.integration.kde},
-if KDE is running.
-@item Error handling enhancements, by opening 
-@code{sawfish.wm.ext.error-handler} 
-@end itemize
 @item @file{~/.sawfish/custom}
-This stores customizations created by the configurator GUI; it
-shouldn't really be edited manually.
+This file is created and edited by the configurator GUI, and stores
+customizations. It shouldn't really be edited manually.
 
 @item @file{~/.sawfish/rc}  or @file{~/.sawfishrc}
 This is the file you edit. It is a hand written lisp code, and almost
-all explicit customization should be done here.
+all explicit customizations should be done here.
 
-Choose either @file{~/.sawfish/rc} or @file{~/.sawfishrc}. The
-former is recommended, because the directory @file{~/.sawfish} is
-anyway created to store @file{custom}, and you can also put other lisp
-scripts, like user-contributed codes there.
+Choose the filename either @file{~/.sawfish/rc} or
+@file{~/.sawfishrc}. The former is recommended, because the directory
+@file{~/.sawfish} is anyway created to store @file{custom}, and you
+can also put other lisp scripts, like user-contributed codes there.
+
+Sawfish < 1.6 reads @file{sawfish-defaults} by default only if
+@file{~/.sawfishrc} lacks, but now it is always read.
 @end table
 
 @item How do I bind a key to execute a shell command?

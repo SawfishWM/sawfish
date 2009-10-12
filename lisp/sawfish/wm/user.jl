@@ -81,7 +81,7 @@
 
 	  (when (and (file-exists-p "~/.sawmillrc")
 	             (not (file-exists-p "~/.sawfishrc")))
-	    (rename-file "~/.sawmillrc" "~/sawfishrc")
+	    (rename-file "~/.sawmillrc" "~/.sawfishrc")
 	    (message "Renamed file ~/.sawmillrc -> ~/.sawfishrc"))
 
 	  ;; First the site-wide stuff
