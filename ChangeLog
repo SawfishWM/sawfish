@@ -1,3 +1,13 @@
+2009-10-11  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/util/edges.jl
+	* lisp/sawfish/wm/viewport.jl: Fix bugs that shift windows between viewports on restart:
+	                               - maximize-window and maximize-window-fullscreen now work for windows outside of the current viewport
+	                               - the position window matcher now preserves the current viewport
+
+	* lisp/sawfish/wm/ext/infinite-desktop.jl: infinite-desktop.stop-at-workspace-borders is now true iff viewport-boundary-mode is not dynamic.
+
 2009-10-09  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/menus.jl: added "Reload Appsmenu" entry
 

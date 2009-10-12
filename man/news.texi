@@ -29,6 +29,11 @@ they occurred between. For more detailed information see the
 @item User visible changes:
 @itemize @minus
 
+@item In @code{infinite-desktop} there is no longer any option to
+prevent the viewport from going beyond the edge of the workspace.
+Instead it is prevented if and only if @code{viewport-boundary-mode} is
+not set to @code{'dynamic}.
+
 @item Sawfish now got an implementation of the FDO (freedesktop.org) application menu, it is
 beeing generated, if there's no customized apps-menu
 

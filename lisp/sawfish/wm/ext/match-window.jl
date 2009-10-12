@@ -352,6 +352,7 @@
     (lambda (w prop value)
       (declare (unused prop))
       (let* ((size (window-frame-dimensions w))
+             (vp-offset (viewport-offset (window-viewport w)))
              (x (if (symbolp value)
                     (cond ((memq value '(east south-east north-east))
                            (- (screen-width) (car size)))
@@ -383,7 +384,9 @@
           (setq x (+ (- (screen-width) (car size)) x)))
         (when (< y 0)
           (setq y (+ (- (screen-height) (cdr size)) y)))
-        (move-window-to w x y))))
+        (move-window-to w
+                        (+ (car vp-offset) x)
+                        (+ (cdr vp-offset) y)))))
 
   (define-match-window-setter 'dimensions
     (lambda (w prop value)

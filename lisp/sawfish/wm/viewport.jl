@@ -32,6 +32,8 @@
 	    set-window-viewport
 	    move-window-viewport
 	    window-viewport
+            viewport-offset
+            window-relative-position
 	    window-absolute-position
 	    set-number-of-viewports
 	    viewport-minimum-size-changed
@@ -217,6 +219,9 @@ well as any windows in the current workspace."
   (add-hook 'viewport-moved-hook
 	    viewport-dynamic-resize)
 
+  (add-hook 'after-initialization-hook
+            viewport-dynamic-resize)
+
   (define (viewport-leave-workspace-handler ws)
     "On leaving a workspace, store information about the viewport
 configuration so that it can be restored properly later."
@@ -266,6 +271,7 @@ viewport is within `viewport-dimensions'."
 ;;; screen sized viewport handling
 
   (define (screen-viewport)
+    "Gives the row and column of the current viewport."
     (cons (quotient viewport-x-offset (screen-width))
 	  (quotient viewport-y-offset (screen-height))))
 
@@ -300,6 +306,10 @@ viewport is within `viewport-dimensions'."
 			     (quotient (cdr pos) (screen-height))))))
 
   (define (window-outside-workspace-p window)
+    "True if `window' is outside the virtual workspace.  Note that
+this does not check which workspace the windows is in; the window is
+outside the virtual workspace if it's position is not within any
+viewport."
     (let ((pos (window-position window))
 	  (dims (window-frame-dimensions window))
 	  (left (- viewport-x-offset))
@@ -313,13 +323,29 @@ viewport is within `viewport-dimensions'."
 	  (<= (+ (car pos) (car dims)) left)
 	  (<= (+ (cdr pos) (cdr dims)) top))))
 
-  (define (window-outside-viewport-p window)
-    (let ((pos (window-position window))
-	  (dims (window-frame-dimensions window)))
-      (or (<= (+ (car pos) (car dims)) 0)
-	  (<= (+ (cdr pos) (cdr dims)) 0)
-	  (>= (car pos) (screen-width))
-	  (>= (cdr pos) (screen-height)))))
+  (define (window-outside-viewport-p window #!optional viewport)
+    "True if some part of `window' is inside the current viewport.  If
+`viewport' is specified check against that viewport rather than the
+current one."
+    (let* ((cur-vp (screen-viewport))
+           (width (screen-width))
+           (height (screen-height))
+           (x-min (if viewport
+                      (* (- (car viewport) (car cur-vp))
+                         width)
+                    0))
+           (x-max (+ x-min width))
+           (y-min (if viewport
+                      (* (- (cdr viewport) (cdr cur-vp))
+                         height)
+                    0))
+           (y-max (+ y-min width))
+           (pos (window-position window))
+           (dims (window-frame-dimensions window)))
+      (or (<= (+ (car pos) (car dims)) x-min)
+          (<= (+ (cdr pos) (cdr dims)) y-min)
+          (>= (car pos) x-max)
+          (>= (cdr pos) y-max))))
 
   (define (move-window-to-current-viewport window)
     (when (and (window-outside-viewport-p window)
@@ -347,11 +373,41 @@ viewport is within `viewport-dimensions'."
 					(screen-height)) row))))
 
   (define (window-viewport w)
+    "Returns a cons cell consisting of the column and row of the
+viewport containing w."
     (let ((position (window-position w)))
       (cons (quotient (+ (car position) viewport-x-offset) (screen-width))
 	    (quotient (+ (cdr position) viewport-y-offset) (screen-height)))))
 
+  (define (viewport-offset vp)
+    "`vp' is (column . row) of a viewport (whether or not that
+viewport currently exists).  A cons cell consisting of the x and y
+offset between the specified viewport and the current viewport is
+returned.  The offset can be used to translate between locations in
+the two viewports.  For example:
+
+<position in current vp> + <offset> = <equivalent position in other vp>
+
+If `vp' is nil treat it as the current viewport -- i.e., return '(0 . 0)"
+    (if (consp vp)
+        (let* ((cur-vp (screen-viewport)))
+          (cons
+           (* (- (car vp) (car cur-vp)) (screen-width))
+           (* (- (cdr vp) (cdr cur-vp)) (screen-height))))
+      '(0 . 0)))
+
+  (define (window-relative-position w)
+    "Returns a cons cell with the coordinates of the window relative
+to the viewport it occupies."
+    (let ((offset (viewport-offset (window-viewport w)))
+          (coords (window-position w)))
+      (cons
+       (- (car coords) (car offset))
+       (- (cdr coords) (cdr offset)))))
+
   (define (window-absolute-position w)
+    "Returns a cons cell with the coordinates of the window relative
+to the viewport 0,0."
     (let ((position (window-position w)))
       (if (window-outside-viewport-p w)
 	  (cons (mod (+ (car position) viewport-x-offset) (screen-width))
