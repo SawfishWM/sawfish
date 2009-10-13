@@ -102,6 +102,7 @@
 	    hide-desktop
 	    showing-desktop-p
 	    display-workspace-name
+	    display-ws-name-setter
 
 	    ;; XXX rename these..?
 	    ws-remove-window

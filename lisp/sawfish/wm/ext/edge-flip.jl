@@ -22,7 +22,8 @@
 
     (export edge-flip-for-edge
 	    edge-flip-synthesize
-	    edge-flip-while-moving)
+	    edge-flip-while-moving
+	    edge-flip-enable)
 
     (open rep
 	  rep.system
