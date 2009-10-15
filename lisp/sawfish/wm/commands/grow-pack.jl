@@ -53,42 +53,42 @@
 
 ;;; Customization options.
 
-  (defgroup gpsy "Grow, Pack, Shrink & Yank")
+  (defgroup gpsy "Grow, Pack, Shrink & Yank" :group move)
 
   (defcustom grow-is-maximize t
     "Whether growing is considered to be maximization."
     :type boolean
-    :group gpsy)
+    :group (move gpsy))
 
   (defcustom pack-warp-pointer 'maybe
     "Whether and how to move the pointer."
     :type (choice always maybe never)
-    :group gpsy)
+    :group (move gpsy))
 
   (defcustom grow-pack-bump-obscured ()
     "Whether to bump into fully obscured windows."
     :type boolean
-    :group gpsy)
+    :group (move gpsy))
 
   (defcustom grow-pack-bump-other-depth 'always
     "Whether to bump into windows on a different depth."
     :type (choice always maybe never)
-    :group gpsy)
+    :group (move gpsy))
 
   (defcustom grow-pack-bump-ignored t
     "Whether to bump into ignored windows."
     :type boolean
-    :group gpsy)
+    :group (move gpsy))
 
   (defcustom shrink-window-minimum-size 10
     "The minimum height or width to which a window may be shrunk."
     :type number
-    :group gpsy)
+    :group (move gpsy))
 
   (defcustom yank-window-minimum-visible 10
     "The minimum amount of window left visible, if yanked over the edge."
     :type number
-    :group gpsy)
+    :group (move gpsy))
 
 ;;; Code:
 
