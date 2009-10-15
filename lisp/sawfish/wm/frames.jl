@@ -174,7 +174,7 @@ by the current theme, then FALLBACK-TYPE is used instead.")
                                       (list frame-font-inactive-color
                                             frame-font-active-color)
                                       t))
-              '(title 'tab))
+              '(title tab))
       (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
             '(title tab)))
     (mapc rebuild-frame (managed-windows)))
