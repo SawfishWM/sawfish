@@ -46,7 +46,7 @@
 	   sawfish.wm.util.display-window
 	   sawfish.wm.util.compat
 	   sawfish.wm.ext.error-handler
-	   sawfish.wm.ext.fdo-menu
+	   sawfish.wm.ext.apps-menu
 	   sawfish.wm.frames)
      (set-binds))
 

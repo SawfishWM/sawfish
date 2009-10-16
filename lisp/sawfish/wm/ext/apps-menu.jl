@@ -26,7 +26,7 @@
 
 ;;; Code:
 
-(define-structure sawfish.wm.ext.fdo-menu
+(define-structure sawfish.wm.ext.apps-menu
 
     (export update-saw-menu)
 
@@ -38,7 +38,7 @@
 	  sawfish.wm
 	  sawfish.wm.commands)
 
-  (define-structure-alias fdo-menu sawfish.wm.ext.fdo-menu)
+  (define-structure-alias apps-menu sawfish.wm.ext.apps-menu)
 
   (unless batch-mode
 
