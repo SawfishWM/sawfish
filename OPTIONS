@@ -323,6 +323,8 @@
 
 ;;  (define-special-variable edge-flip-enabled nil
 ;;    "Select the next desktop when the pointer hits screen edge.")
+;;  ;; need to call this function to manually enable edge-flip:
+;;  (edge-flip-enable)
 
 ;;  (define-special-variable edge-flip-type 'workspace
 ;;    "Control what hitting the screen edge selects, workspace or viewport.")
@@ -605,6 +607,8 @@
 
 ;; (define-special-variable tab-raise-on-hover nil
 ;;   "Raise Tabs on Hover")    
+;; ;; need to call this function to make tab-raise-on-hover work
+;; (raise-tabs-on-hover-setter)
 
 ;; shrink-yank options (in grow-pack.jl)
 
@@ -661,6 +665,8 @@
 
 ;; (define-special-variable display-ws-name-on-switch nil
 ;;   "Wether to display workspace name upon switch")
+;;  ;; need to call this function to make display-ws-name work
+;; (display-ws-name-setter)
 
 ;; (define-special-variable display-ws-name-timeout 3
 ;;   "How long to display workspace name")
