@@ -115,8 +115,8 @@
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
   ;; use a default menu if none is given
-  (unless (or batch-mode apps-menu)
-    (update-saw-menu))
+  (unless batch-mode
+    (init-apps-menu))
 
   ;; apply customized font-colors
   (require 'sawfish.wm.extras)
