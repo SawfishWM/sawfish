@@ -29,9 +29,6 @@ they occurred between. For more detailed information see the
 @item User visible changes:
 @itemize @minus
 
-@item Sawfish now got an implementation of the FDO (freedesktop.org) application menu, it is
-beeing generated, if there's no customized apps-menu
-
 @item User config file changes
 
 In Sawfish < 1.6, @code{sawfish.wm.defaults} is loaded by default,
@@ -43,7 +40,9 @@ Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from this ver
 Sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
 your system, but the latter doesn't.
 
-@item @code{sawfish-ui} has been renamed to @code{sawfish-config}
+@item Configurator's binary, @code{sawfish-ui}, is renamed to @code{sawfish-config} [Christopher Bratusek]
+
+Its window class is changed to @code{sawfish-configurator} / @code{Sawfish-Configurator}, too.
 
 @item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
 @end itemize
@@ -51,27 +50,33 @@ your system, but the latter doesn't.
 @item Bugs fixed:
 @itemize @minus
 
-@item Segfault fix: Wrap most of add_window in rep_PUSHGC/rep_POPGC
-There have been crashes that might be due to a window being
-destroyed, garbage collected and then accessed, all during
-add_window (client destroys window really quickly after mapping),
-also prevent add_window_hook to be called with uninitialised arguement.
+@item Prevents crashes for quick window destructions, especially under high load
+
+There have been crashes if a window is destroyed soon after its creation.
+It happens in @code{add_window} function, and it might be due to a
+window being destroyed, garbage collected and then accessed.
+
+Now most parts of @code{add_window} are protected from garbage
+collection with @code{rep_PUSHGC} / @code{rep_POPGC}. It also prevents
+@code{add_window_hook} from being called with uninitialised argument.
 [Timo Korvola, Janek Kozicki]
 
 @item Build and Installation:
+@itemize +
+@item Library check: Fix in @code{SMlib} and @code{libICE} check on x11r7 [Christopher Bratusek]
 
-Library check: Fix in SMlib and libICE check on x11r7 [Christopher Bratusek]
+@item @file{.desktop} files fixes: typos fix and removed unneeded entries [Christopher Bratusek]
 
-.desktop files fixes: typos fix and removed unneeded entries [Christopher Bratusek]
+@item In spec file, fixed repexecdir definition [Christopher Bratusek]
 
-In spec file, fixed repexecdir definition [Christopher Bratusek]
+@item In @file{po/Makefile.in}, fixed wrong call of make-pot [Christopher Bratusek]
 
-In po/Makefile.in, fixed wrong call of make-pot [Christopher Bratusek]
+@item Build the FAQ upon make [Christopher Bratusek]
 
-Build the FAQ upon make [Christopher Bratusek]
+@item Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
 
-Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
-
+@item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo]
+@end itemize
 @item In configurator,
 
 Strings are fully translatable [Alexey I. Froloff]
@@ -86,28 +91,36 @@ Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 
 @item Fixed group of the stagger options [Christopher Bratusek]
 
-@item Fixed issue with translated tooltip strings [Teika Kazura]
-
-@item Fixed a call of select-workspace-from-first [Michal Maruška]
+@item Fixed a call of @code{select-workspace-from-first} [Michal Maruška]
 
 @item In @code{Simple} theme, windows are now resizable from right border [Christopher Bratusek]
 
-@item Missing exports are now supplied
-Shrink-yank functions and @code{send-to-workspace}. [Christopher Bratusek]
+@item Missing exports are now supplied, for shrink-yank functions and @code{send-to-workspace}. [Christopher Bratusek]
 
 @end itemize
 @item New features:
 @itemize @minus
 
-@item Added FDO (freedesktop.org) application-menu implementation [Matthew Love, Timo Korvola]
+@item New application menu [Matthew Love, Timo Korvola]
 
-@item Added @code{remove-frame-part-value}, which allows to change/remove values from frame-parts [Timo Korvola]
+Sawfish now generates application menu automatically, by reading
+@file{/usr/share/applications/*.desktop} files. (Technically,
+specifications of these files are defined by freedesktop.org.)
 
-@item Added options change the font-color independently of what theme is beeing used (@code{based on remove-frame-part-value}) [Matthew Love, Christopher Bratusek, Timo Korvola]
+This is done only if you don't set value of the variable @code{apps-menu}.
+
+Root menu is revamped, too. [Christopher Bratusek]
+
+@item Added options to change the font color of window title, independent of used theme [Matthew Love, Christopher Bratusek, Timo Korvola]
+
+Internally, a new function @code{remove-frame-part-value} which allows to change/remove values from frame-parts is used. [Timo Korvola]
 
 @item Sawfish does now support theme-tarballs compressed with XZ (aka LZMA2) and LZMA [Christopher Bratusek]
 
-@item 3 new sawfish-mmc based commands (@code{maximize-unframe}, @code{maximize-reframe} and @code{rename-window} (not ICCCM compliant)) [Christopher Bratusek]
+@item 3 new sawfish-mmc based commands: @code{maximize-unframe}, @code{maximize-reframe} and @code{rename-window} [Christopher Bratusek]
+
+In practice, @code{rename-window} works, but technically speaking, the
+window name is not supposed to be changed in ICCCM.
 
 @item 5 new move-cursor commands (@code{move-cursor-} @code{northwest}, @code{northeast}, @code{southwest}, @code{southeast}), and @code{move-cursor-center} [Christopher Bratusek]
 
@@ -134,41 +147,49 @@ Shrink-yank functions and @code{send-to-workspace}. [Christopher Bratusek]
 @item When entering a different Workspace, it's now possible to display the name of it (like in Enlightenment) [Christopher Bratusek]
 
 @item GNOME integration updates
+
 Commands are updated for more recent GNOME. GNOME Integration is
 trimmed down to the minimum. [Christopher Bratusek]
-GNOME-Detection is updated [Alexey I. Froloff]
-In session sub-menu, @code{Logout}- and @code{Shutdown from GNOME}
-are added. Don't remove @code{quit} and @code{restart} from menu. [Christopher Bratusek]
+
+GNOME-Detection is updated. [Alexey I. Froloff]
+
+In sub-menu under Sawfish root menu, @code{Logout}- and @code{Shutdown
+from GNOME} are added. Don't remove @code{quit} and @code{restart}
+from menu. [Christopher Bratusek]
 
 @item KDE integration module
+
 KDE is automatically detected. Applications (konsole, konqueror), KDE
 help, and KDE logout/shutdown/reboot are provided in the menu.
 In KDE4 WM Selector, Sawfish is added. [Christopher Bratusek]
 
 @item Added @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
+
+@item New Frame Classes [Christopher Bratusek]
+@itemize +
+
+@item @code{sticky-button}, a button to toggle window @code{sticky} or @code{viewport-sticky}
+
+@item @code{lock-button}, a button to toggle window position @code{fixed}
+
+@item @code{rename-button}, a button to rename the window-title and window-icon properties (not ICCCM compliant)
+
+@item @code{move-resize-button}, a button to perform various move and resize actions on a window
+
+@item @code{raise-lower-button}, a button to perform various raising and lowering actions on a window
+@end itemize
 @end itemize
 @item Removed Features:
 @itemize @minus
 
 @item Built-in audio support has been dropped, instead we rely on an extern playbin [Christopher Bratusek]
 
-@item Built-in (hacky) support for mouse-buttons 6 to 9 has ben dropped
-X.Org/XF86 Headers only include up to Button5, though technically more are possible.
-If you have a mouse with more than 5 buttons, rely on evdev instead, this is a saner way [Timo Korvola]
+@item Built-in support for mouse-buttons 6 to 9 is dropped
+
+X.Org/XF86 Headers only include up to Button5. Our previous support for button 6 to 9 is hackish, and dropped, though technically more are possible.
+A way to bind a command to button > 5 in Sawfish is described in our Wiki. [Timo Korvola]
 @end itemize
-@item New Frame Classes:
-@itemize @minus
 
-@item @code{sticky-button}, a button to toggle window @code{sticky} or @code{viewport-sticky} [Christopher Bratusek]
-
-@item @code{lock-button}, a button to toggle window position @code{fixed} [Christopher Bratusek]
-
-@item @code{rename-button}, a button to rename the window-title and window-icon properties (not ICCCM compliant) [Christopher Bratusek]
-
-@item @code{move-resize-button}, a button to perform various move and resize actions on a window [Christopher Bratusek]
-
-@item @code{raise-lower-button}, a button to perform various raising and lowering actions on a window [Christopher Bratusek]
-@end itemize
 @item Widget Transistion:
 @itemize @minus
 
@@ -179,58 +200,59 @@ If you have a mouse with more than 5 buttons, rely on evdev instead, this is a s
 @item Other Changes:
 @itemize @minus
 
-@item Renamed @code{after-add-window} to @code{maxmize-after-add-window}
+@item Renamed @code{after-add-window} to @code{maxmize-after-add-window} @*
 This function is only used in a hook [Teika Kazura]
 
-@item Revamped the Root and Window Menu [Christopher Bratusek]
-
-@item Make sure docks/panels are unframed [Timo Korvola]
-
-@item Make sure window-type of docks/panels is dock [Timo Korvola]
-
-@item Encoding is unified to utf-8 of all distributed files [Teika Kazura]
+@item Docks/panels are unframed, and window type is set to @code{dock} [Timo Korvola]
 
 @item You can exit from sawfish-client with @code{,quit} (also @code{C-d}), unlike @code{C-c} it won't kill the WM [Teika Kazura]
 
 @item Number widget (GtkSpinButton) can take optional initial value [Teika Kazura]
 
-@item Changing @code{raise-tabs-on-hover} takes effect immediately now [Christopher Bratusek]
+@item @code{raise-tabs-on-hover} takes effect immediately now [Christopher Bratusek]
 
 @item Inactive windows in Crux theme do now have black text for better readability [Christopher Bratusek]
-
-@item Add @code{--tag=CC} to libtool where necessary, unbrakes compilation on some arches [Gentoo]
-
-@item Improved ebuild [Christopher Bratusek]
-
-@item Distclean rule for po/Makefile.in [Christopher Bratusek]
-
-@item Fixed the license-header of tabbed-windowing files [Christopher Bratusek]
 
 @item With new option @code{customize-redirect}, configurator's output can be redirected. [Teika Kazura]
 
 @item Grow/Pack and Shrink/Yank options are in the same group now [Christopher Bratusek]
 
-@item Squashed all compiler warnings coming from the rep interpreter [Matthew Love]
-
-@item Doc updates [Christopher Bratusek, Jeremy Hankins, Teika Kazura]
-
-@item News items for 1.5.0 are rewritten in a more readable fashion [Teika Kazura]
-
-@item Updated OPTIONS [Christopher Bratusek]
-
-@item Added man-pages for @code{sawfish}, @code{sawfish-client} and @code{sawfish-ui} [Debian]
-
-@item To info file @code{dir} the section @code{sawfish} is beeing added [Luis Rodrigo Gallardo Cruz]
-
-@item Added new contributors to @code{THANKS} section of @code{CONTRIBUTING} [Christopher Bratusek]
+These commands are now available from window operation menu, too.
 
 @item When moving a window the cursor shape is now @code{hand2}, when resizing @code{crosshair} [Christopher Bratusek]
 
-@item Changed WM_CLASS of sawfish-ui to @code{sawfish-configurator} @code{Sawfish-Configurator} [Christopher Bratusek]
+@item In the theme document in the configurator, the cursor is invisible and the wrap mode is set to word-char [Christopher Bratusek]
 
-@item In the appearance groups TextView make the cursor invisible and set the wrap mode to word-char [Christopher Bratusek]
+@item Build and installation
+@itemize +
+@item Improved ebuild [Christopher Bratusek]
+
+@item Encoding is unified to utf-8 for all distributed files [Teika Kazura]
+
+@item Squashed all byte compiler warnings [Matthew Love] @*
+Some warnings are superfluous, though.
+
+@item To info file @file{dir} the section @code{sawfish} is added upon installation [Luis Rodrigo Gallardo Cruz]
+
+@item Distclean rule for po/Makefile.in [Christopher Bratusek]
 
 @item Removed ancient sawmill removal fragments from Makefile [Christopher Bratusek]
+@end itemize
+
+@item Docs
+@itemize +
+@item Added man-pages for @code{sawfish}, @code{sawfish-client} and @code{sawfish-config} [Debian]
+
+@item News items for 1.5.0 are rewritten in a more readable fashion [Teika Kazura]
+
+@item Info manual updates [Christopher Bratusek, Jeremy Hankins, Teika Kazura]
+
+@item Added new contributors to @code{THANKS} section of @code{CONTRIBUTING} [Christopher Bratusek]
+
+@item Updated OPTIONS [Christopher Bratusek]
+@item Fixed the license header of tabbed-windowing files [Christopher Bratusek]
+@end itemize
+
 @end itemize
 @end itemize
 
