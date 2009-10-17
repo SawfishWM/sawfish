@@ -201,7 +201,7 @@ set this to non-nil.")
 		    "Math" "Education" "Geography"))
       ("Development" . ("GUIDesigner" "IDE" "Profiling" "RevisionControl"
 			"ProjectManagement" "Translation" "GTK"
-			"Development" "Qt" "Development" "Documentation"))
+			"Development" "Qt" "Documentation" "Editors"))
       ("Utility" . ("X-SystemMemory" "Security" "Utility" "X-SetupEntry"
 		    "X-SetupUtility" "X-SystemMemory" "TextTools"
 		    "TelephonyTools" "Accessibility" "Clock" "ConsoleOnly"))
