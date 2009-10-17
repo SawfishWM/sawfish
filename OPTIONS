@@ -636,20 +636,20 @@
 
 ;; fdo-menu options
 
-;; (define-special-variable my-term-string "xterm -e"
-;;   "Terminal to use if a .desktop files has Terminal=true")
+;; (define-special-variable apps-menu-lang nil
+;;   "Language for applications menu, in string. Default is set from locale.")
 
-;; (define-special-variable my-lang-string '()
-;;   "Two digits lang code to use (if available) for extracting application names")
-
-;; (define-special-variable my-desktop-directory '("/usr/share/applications")
+;; (define-special-variable desktop-directory '("/usr/share/applications")
 ;;   "List of directories to look for .desktop files")
 
-;; (define-special-variable ignore-no-display '()
+;; (define-special-variable apps-menu-ignore-no-display nil
 ;;   "Wether to ignore the `NoDisplay' setting")
 
-;; (define-special-variable want-alphabetize 't
+;; (define-special-variable apps-menu-alphabetize 't
 ;;   "Wether to alphabetically sort menuentries")
+
+;; (define-special-variable apps-menu-autogen t
+;;   "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
 
 ;; view-clipboard options
 
