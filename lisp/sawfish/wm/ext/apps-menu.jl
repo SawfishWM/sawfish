@@ -43,7 +43,8 @@
 	  rep.regexp
 	  sawfish.wm
 	  sawfish.wm.menus
-	  sawfish.wm.commands)
+	  sawfish.wm.commands
+	  sawfish.wm.commands.user)
 
   (define-structure-alias apps-menu sawfish.wm.ext.apps-menu)
 
@@ -60,7 +61,6 @@ eog, nautilus or evince. If you want to have them added to your menu,
 set this to non-nil.")
   (defvar apps-menu-alphabetize t
     "Sort the apps menu alphabetically.")
-  (defvar my-term-string "xterm -e")
   (defvar apps-menu-autogen t
     "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
   (defvar apps-menu-lang nil
@@ -341,7 +341,7 @@ exile it."
 	       (if (string= (cdr (assoc "Terminal" fdo-list))
 			    "true\n")
 		   (list 'system
-			 (concat my-term-string " "
+			 (concat xterm-program " -e "
 				 (trim-end (cdr (assoc "Exec" fdo-list)))
 				 " &"))
 		 (list 'system

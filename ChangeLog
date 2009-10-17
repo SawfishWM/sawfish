@@ -1,6 +1,11 @@
 2009-10-17  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/apps-menu.jl: removed dupped Development Category from Developmentmenu
 	                                    added Editors Category to Developmentmenu
+	                                    make use of global `xterm-prgoram' instead of local `my-term-string'
+
+	* OPTIONS: updated for Teikas changes
+
+	* lisp/sawfish/wm/menus.jl: updated "Reload Appsmenu" entry to call new `update-apps-menu' instead of `update-saw-menu'
 
 2009-10-16  Teika kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/user.jl
