@@ -3,10 +3,10 @@
 @settitle sawfish Programming Manual
 @footnotestyle end
 
-@set EDITION 0.14
-@set VERSION 1.5.0
-@set UPDATED 02 Apr 2009
-@set UPDATE-MONTH Apr 2009
+@set EDITION 0.15
+@set VERSION 1.6.0
+@set UPDATED 17 Oct 2009
+@set UPDATE-MONTH Oct 2009
 
 @ifinfo
 @dircategory Programming
@@ -1765,6 +1765,137 @@ Double the size of @var{window}
 @deffn Command halve-window-size window
 Halve the size of @var{window}
 @end deffn
+
+Sawfish supports increasing a windows size until it bumps into another
+window, this is called @code{grow}. @code{shrink} achieves the opposite,
+it decreases a windows size, until it does no longer overlap any other window.
+
+@deffn Command grow-window-up window #!optional arg
+Grows @var{window} upwards until it "bumps into" another window.
+If the top edge was beyond the screen edge, it is brought back in.
+With a universal prefix @var{arg}, maximize upwards instead. With a numeric
+prefix @var{arg}, grow upwards by that many increments specified by
+window or pixels instead.
+@end deffn
+
+@deffn Command grow-window-down window #!optional arg
+Grows @var{window} downwards until it "bumps into" another window.
+See @code{grow-window-up}.
+@end deffn
+
+@deffn Command grow-window-left window #!optional arg
+Grows @var{window} left until it "bumps into" another window.
+See @code{grow-window-up}.
+@end deffn
+
+@deffn Command grow-window-right window #!optional arg
+Grows @var{window} right until it "bumps into" another window.
+See @code{grow-window-up}.
+@end deffn
+
+@deffn Command shrink-window-up window
+Shrinks @var{window} by moving the lower edge upwards until it
+intersects with one window less than before.
+@end deffn
+
+@deffn Command shrink-window-down window
+Shrinks @var{window} by moving the upper edge downwards until it
+intersects with one window less than before.
+@end deffn
+
+@deffn Command shrink-window-left window
+Shrinks @var{window} by moving the right edge to the left until it
+intersects with one window less than before.
+@end deffn
+
+@deffn Command shrink-window-right window
+Shrinks @var{window} by moving the left edge to the right until it
+intersects with one window less than before.
+@end deffn
+
+in addition to @code{grow} and @code{shrink} sawfish also has @code{pack} and @code{yank},
+the difference is that while @code{grow} and @code{shrink} resize the window,
+@code{pack} and @code{yank} move it.
+
+@deffn Command pack-window-up window #! optional arg
+Moves @var{window} upwards until it "bumps into" another window.
+If the top edge was beyond the screen edge, it is moved back in.
+With a universal prefix @var{arg}, move upwards maximally instead.
+With a numeric prefix @var{arg}, move upwards by that many pixels instead.
+@end deffn
+
+@deffn Command pack-window-down #!optional arg
+Moves @var{window} downwards until it "bumps into" another window.
+See @code{pack-window-up}.
+@end deffn
+
+@deffn Command pack-window-left window #!optional arg
+Moves @var{window} left until it "bumps into" another window.
+See @code{pack-window-up}.
+@end deffn
+
+@deffn Command pack-window-right window #!optional arg
+Moves @var{window} right until it "bumps into" another window.
+See @code{pack-window-up}.
+@end deffn
+
+@deffn Command yank-window-up window
+Yanks @var{window} upwards until it inserts with one window less than
+before.
+@end deffn
+
+@deffn Command yank-window-down window
+Yanks @var{window} downwards until it inserts with one window less than
+before.
+@end deffn
+
+@deffn Command yank-window-left window
+Yanks @var{window} left until it inserts with one window less than
+before.
+@end deffn
+
+@deffn Command yank-window-right window
+Yanks @var{window} right until it inserts with one window less than
+before.
+@end deffn
+
+grow, pack, shrink and yank behavior can be customized through the
+following variables:
+
+@defvar grow-is-maximize
+Whether growing is considered to be maximization.
+The default value is @code{t}.
+@end defvar
+
+@defvar pack-warp-pointer
+Whether and how to move the pointer, either @code{allways} @code{maybe}
+or @code{never}. The default value is @code{maybe}.
+@end defvar
+
+@defvar grow-pack-bump-obscured
+Whether to bump into fully obscured windows.
+The default value is @code{nil}.
+@end defvar
+
+@defvar grow-pack-bump-other-depth
+Whether to bump into windows on a different depth, either @code{allways}
+@code{maybe} or @code{never}. The default value is @code{always}.
+@end defvar
+
+@defvar grow-pack-bump-ignored
+Whether to bump into ignored windows.
+The default value is @code{t}.
+@end defvar
+
+@defvar shrink-window-minimum-size
+The minimum height or width to which a window may be shrunk.
+The default value is @code{10}.
+@end defvar
+
+@defvar yank-window-minimum-visible
+The minimum amount of window left visible, if yanked over the edge.
+The default value is @code{10}.
+@end defvar
 
 @deffn Command move-window-center windows
 Place @var{window} in the middle of the screen

@@ -7,6 +7,31 @@
 
 	* lisp/sawfish/wm/menus.jl: updated "Reload Appsmenu" entry to call new `update-apps-menu' instead of `update-saw-menu'
 
+	* man/sawfish.texi: added docs for several functions and variables:
+				- grow-window-up
+				- grow-window-down
+				- grow-window-left
+				- grow-window-right
+				- shrink-window-up
+				- shrink-window-down
+				- shrink-window-left
+				- shrink-window-right
+				- pack-window-up
+				- pack-window-down
+				- pack-window-left
+				- pack-window-right
+				- yank-window-up
+				- yank-window-down
+				- yank-window-left
+				- yank-window-right
+				- grow-is-maximize
+				- pack-warp-pointer
+				- grow-pack-bump-obscured
+				- grow-pack-bump-other-depth
+				- grow-pack-bump-ignored
+				- shrink-window-minimum-size
+				- yank-window-minimum-visible
+
 2009-10-16  Teika kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/user.jl
 	* lisp/sawfish/wm/ext/apps-menu.jl: User can prepend their own apps-menu to the auto generated one. Cleanups, mostly in variables.

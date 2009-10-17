@@ -65,7 +65,7 @@
     :type (choice always maybe never)
     :group (move gpsy))
 
-  (defcustom grow-pack-bump-obscured ()
+  (defcustom grow-pack-bump-obscured nil
     "Whether to bump into fully obscured windows."
     :type boolean
     :group (move gpsy))
