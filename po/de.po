@@ -11,6 +11,7 @@
 # Hendrik Richter <hendrikr@gnome.org>, 2005.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
 # Mario Blättermann <mariobl@gnome.org>, 2009.
+# Christian Kirbach <Christian.Kirbach@googlemail.com>, 2009.
 #
 # Dank für Hinweise an Benjamin Greiner.
 # KONVENTIONEN:
@@ -25,15 +26,13 @@
 # transient windows = ?
 # Schlagt mich nicht, aber irgendwie muss man das alles übersetzen,
 # und ich habe für jede dieser Übersetzungen sehr gute Gründe! -mw-
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=sawfish&component=general\n"
-"POT-Creation-Date: 2009-10-01 17:38+0000\n"
-"PO-Revision-Date: 2009-10-03 19:20+0100\n"
-"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-18 11:22+0200\n"
+"PO-Revision-Date: 2009-10-18 00:02+0200\n"
+"Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +48,7 @@ msgid "Value"
 msgstr "Wert"
 
 #: ../lisp/sawfish/gtk/widgets/file.jl:32
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:45
+#: ../lisp/sawfish/gtk/widgets/font.jl.in:44
 msgid "Browse..."
 msgstr "Auswählen …"
 
@@ -57,7 +56,7 @@ msgstr "Auswählen …"
 msgid "Select file"
 msgstr "Datei wählen"
 
-#: ../lisp/sawfish/gtk/widgets/font.jl.in:55
+#: ../lisp/sawfish/gtk/widgets/font.jl.in:54
 msgid "Select font"
 msgstr "Schrift wählen"
 
@@ -196,23 +195,23 @@ msgstr "Klangdatei"
 msgid "No errors."
 msgstr "Keine Fehler."
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:73
+#: ../lisp/sawfish/wm/ext/match-window.jl:71
 msgid "Placement"
 msgstr "Platzierung"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:91
+#: ../lisp/sawfish/wm/ext/match-window.jl:89
 msgid "Focus"
 msgstr "Fokus"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:97
+#: ../lisp/sawfish/wm/ext/match-window.jl:95
 msgid "Appearance"
 msgstr "Aussehen"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:102
+#: ../lisp/sawfish/wm/ext/match-window.jl:100
 msgid "State"
 msgstr "Zustand"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:119
+#: ../lisp/sawfish/wm/ext/match-window.jl:117
 msgid "Other"
 msgstr "Andere(s)"
 
@@ -263,7 +262,7 @@ msgstr "Nichts"
 #. add some GNOME help menus
 #. add some KDE help menus
 #: ../lisp/sawfish/wm/integration/gnome.jl:42
-#: ../lisp/sawfish/wm/integration/kde.jl:42 ../lisp/sawfish/wm/menus.jl:156
+#: ../lisp/sawfish/wm/integration/kde.jl:42 ../lisp/sawfish/wm/menus.jl:158
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -372,7 +371,7 @@ msgstr "_Nächste Arbeitsfläche"
 
 #: ../lisp/sawfish/wm/menus.jl:109
 msgid "_Grow & Pack"
-msgstr ""
+msgstr "_Aufweiten und Packen"
 
 #: ../lisp/sawfish/wm/menus.jl:110
 msgid "Grow left"
@@ -411,24 +410,20 @@ msgid "Shrink & _Yank"
 msgstr ""
 
 #: ../lisp/sawfish/wm/menus.jl:120
-#, fuzzy
 msgid "Shrink left"
-msgstr "Fenster nach links schieben"
+msgstr "Nach links schrumpfen"
 
 #: ../lisp/sawfish/wm/menus.jl:121
-#, fuzzy
 msgid "Shrink right"
-msgstr "Fenster nach rechts schieben"
+msgstr "Nach rechts schrumpfen"
 
 #: ../lisp/sawfish/wm/menus.jl:122
-#, fuzzy
 msgid "Shrink up"
-msgstr "Fenster nach oben schieben"
+msgstr "Nach oben schrumpfen"
 
 #: ../lisp/sawfish/wm/menus.jl:123
-#, fuzzy
 msgid "Shrink down"
-msgstr "Fenster nach unten schieben"
+msgstr "Nach unten schrumpfen"
 
 #: ../lisp/sawfish/wm/menus.jl:125
 #, fuzzy
@@ -503,43 +498,46 @@ msgid "Display Errors"
 msgstr "Fehler anzeigen"
 
 #: ../lisp/sawfish/wm/menus.jl:153
+msgid "Reload Appsmenu"
+msgstr "Anwendungsmenü neu laden"
+
+#: ../lisp/sawfish/wm/menus.jl:155
 msgid "Restart Sawfish"
 msgstr "Sawfish neu starten"
 
-#: ../lisp/sawfish/wm/menus.jl:154
+#: ../lisp/sawfish/wm/menus.jl:156
 msgid "Quit Sawfish"
 msgstr "Sawfish beenden"
 
-#: ../lisp/sawfish/wm/menus.jl:157
+#: ../lisp/sawfish/wm/menus.jl:159
 msgid "_FAQ..."
 msgstr "_FAQ …"
 
-#: ../lisp/sawfish/wm/menus.jl:158
+#: ../lisp/sawfish/wm/menus.jl:160
 msgid "_News..."
 msgstr "_Neues …"
 
-#: ../lisp/sawfish/wm/menus.jl:159
+#: ../lisp/sawfish/wm/menus.jl:161
 msgid "_WWW page..."
 msgstr "_WWW-Seite …"
 
-#: ../lisp/sawfish/wm/menus.jl:160
+#: ../lisp/sawfish/wm/menus.jl:162
 msgid "_Manual..."
 msgstr "_Handbuch …"
 
-#: ../lisp/sawfish/wm/menus.jl:162
+#: ../lisp/sawfish/wm/menus.jl:164
 msgid "_About Sawfish..."
 msgstr "_Info zu Sawfish …"
 
-#: ../lisp/sawfish/wm/menus.jl:164
+#: ../lisp/sawfish/wm/menus.jl:166
 msgid "Kill Window"
 msgstr "Fenster abwürgen"
 
-#: ../lisp/sawfish/wm/menus.jl:379
-#| msgid "Sawfish Configurator"
+#: ../lisp/sawfish/wm/menus.jl:381
 msgid "S_awfishConfig"
 msgstr "S_awfish-Einstellungen"
 
-#: ../lisp/sawfish/wm/menus.jl:386
+#: ../lisp/sawfish/wm/menus.jl:388
 msgid "Edit theme..."
 msgstr "Thema bearbeiten …"
 
@@ -587,13 +585,13 @@ msgstr "[Quote]"
 msgid "Window:"
 msgstr "Fenster:"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:62 ../lisp/sawfish/wm/workspace.jl:981
+#: ../lisp/sawfish/wm/util/prompt-wm.jl:62 ../lisp/sawfish/wm/workspace.jl:982
 #, librep-format
 msgid "Workspace %d"
 msgstr "Arbeitsfläche %d"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:76 ../lisp/sawfish/wm/workspace.jl:897
-#: ../lisp/sawfish/wm/workspace.jl:905 ../lisp/sawfish/wm/workspace.jl:913
+#: ../lisp/sawfish/wm/util/prompt-wm.jl:76 ../lisp/sawfish/wm/workspace.jl:898
+#: ../lisp/sawfish/wm/workspace.jl:906 ../lisp/sawfish/wm/workspace.jl:914
 msgid "Workspace:"
 msgstr "Arbeitsflächen:"
 
@@ -605,52 +603,52 @@ msgstr "Spalte:"
 msgid "Row:"
 msgstr "Zeile"
 
-#: ../lisp/sawfish/wm/workspace.jl:136
+#: ../lisp/sawfish/wm/workspace.jl:137
 msgid "Workspace names"
 msgstr "Namen der Arbeitsflächen"
 
-#: ../lisp/sawfish/wm/workspace.jl:153
+#: ../lisp/sawfish/wm/workspace.jl:154
 msgid "_Insert workspace"
 msgstr "Arbeitsfläche e_infügen"
 
-#: ../lisp/sawfish/wm/workspace.jl:154
+#: ../lisp/sawfish/wm/workspace.jl:155
 msgid "Select _next workspace"
 msgstr "_Nächste Arbeitsfläche auswählen"
 
-#: ../lisp/sawfish/wm/workspace.jl:155
+#: ../lisp/sawfish/wm/workspace.jl:156
 msgid "Select _previous workspace"
 msgstr "_Vorherige Arbeitsfläche auswählen"
 
-#: ../lisp/sawfish/wm/workspace.jl:156
+#: ../lisp/sawfish/wm/workspace.jl:157
 msgid "Merge with next"
 msgstr "Mit der nächsten verschmelzen"
 
-#: ../lisp/sawfish/wm/workspace.jl:157
+#: ../lisp/sawfish/wm/workspace.jl:158
 msgid "Merge with previous"
 msgstr "Mit der vorherigen verschmelzen"
 
-#: ../lisp/sawfish/wm/workspace.jl:158
+#: ../lisp/sawfish/wm/workspace.jl:159
 msgid "Move workspace _right"
 msgstr "Arbeitsfläche nach _rechts verschieben"
 
-#: ../lisp/sawfish/wm/workspace.jl:159
+#: ../lisp/sawfish/wm/workspace.jl:160
 msgid "Move workspace _left"
 msgstr "Arbeitsfläche nach _links verschieben"
 
-#: ../lisp/sawfish/wm/workspace.jl:642
+#: ../lisp/sawfish/wm/workspace.jl:643
 #, librep-format
 msgid "space %d"
 msgstr "Fläche %d"
 
-#: ../scripts/sawfish-about.jl.in:50
+#: ../scripts/sawfish-about.jl.in:49
 msgid "and many others..."
 msgstr "und viele andere …"
 
-#: ../scripts/sawfish-about.jl.in:51
+#: ../scripts/sawfish-about.jl.in:50
 msgid "Sawfish manages your windows extensibly."
 msgstr "Sawfish verwaltet Ihre Fenster und ist vielfältig erweiterbar."
 
-#: ../scripts/sawfish-about.jl.in:56
+#: ../scripts/sawfish-about.jl.in:55
 msgid "Sawfish homepage"
 msgstr "Sawfish-Homepage"
 
@@ -1425,7 +1423,8 @@ msgstr "Sawfish-Homepage"
 
 #, fuzzy
 #~ msgid ""
-#~ "Raise the window that received the current event, then replay any pointer\n"
+#~ "Raise the window that received the current event, then replay any "
+#~ "pointer\n"
 #~ "events that invoked the command."
 #~ msgstr ""
 #~ "Das Fenster, das das aktuelle Ereignis erhalten hat, mit allen seinen\n"
@@ -1540,7 +1539,8 @@ msgstr "Sawfish-Homepage"
 #~ msgstr "Fenster nach rechts schieben"
 
 #~ msgid "Move the window `slide-window-increment' pixels to the right."
-#~ msgstr "Das Fenster um »slide-window-increment« Pixel nach links verschieben."
+#~ msgstr ""
+#~ "Das Fenster um »slide-window-increment« Pixel nach links verschieben."
 
 #~ msgid "Slide window up"
 #~ msgstr "Fenster nach oben schieben"
@@ -1552,7 +1552,8 @@ msgstr "Sawfish-Homepage"
 #~ msgstr "Fenster nach unten schieben"
 
 #~ msgid "Move the window `slide-window-increment' pixels downwards."
-#~ msgstr "Das Fenster um »slide-window-increment« Pixel nach unten verschieben."
+#~ msgstr ""
+#~ "Das Fenster um »slide-window-increment« Pixel nach unten verschieben."
 
 #~ msgid "Slide group left"
 #~ msgstr "Gruppe nach links schieben"
@@ -1566,7 +1567,8 @@ msgstr "Sawfish-Homepage"
 
 #~ msgid "Move the window group `slide-window-increment' pixels to the right."
 #~ msgstr ""
-#~ "Die Fenstergruppe um »slide-window-increment« Pixel nach rechts verschieben."
+#~ "Die Fenstergruppe um »slide-window-increment« Pixel nach rechts "
+#~ "verschieben."
 
 #~ msgid "Slide group up"
 #~ msgstr "Gruppe nach oben schieben"
@@ -1704,7 +1706,8 @@ msgstr "Sawfish-Homepage"
 #~ msgid "Call command with output to screen"
 #~ msgstr "Befehl mit Ausgabe auf Bildschirm ausführen"
 
-#~ msgid "Prompt for a command, execute it, and print any output to the screen."
+#~ msgid ""
+#~ "Prompt for a command, execute it, and print any output to the screen."
 #~ msgstr ""
 #~ "Nach einem Befehl fragen, ihn ausführen, und jede etwaige Ausgabe auf dem "
 #~ "Bildschirm anzeigen."
@@ -2148,7 +2151,8 @@ msgstr "Sawfish-Homepage"
 #~ msgstr "Schließknopf-Tastenbelegung"
 
 #~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close button\n"
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
 #~ "of a window. (Only mouse-bindings are evaluated in this map.)"
 #~ msgstr ""
 #~ "Tastenbelegung mit Tastenkombinationen, die aktiv sind, wenn der Zeiger "
@@ -2196,7 +2200,8 @@ msgstr "Sawfish-Homepage"
 #~ msgstr "Einrollknopf-Tastenbewegung"
 
 #~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade button\n"
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
 #~ "of a window. (Only mouse-bindings are evaluated in this map.)"
 #~ msgstr ""
 #~ "Tastenbelegung mit Tastenkombinationen, die aktiv sind, wenn der\n"
@@ -2217,9 +2222,6 @@ msgstr "Sawfish-Homepage"
 
 #~ msgid "Display the main menu."
 #~ msgstr "Das Hauptmenü anzeigen."
-
-#~ msgid "Popup apps menu"
-#~ msgstr "Anwendungsmenü anzeigen"
 
 #~ msgid "Display the applications menu."
 #~ msgstr "Das Anwendungsmenü anzeigen."
@@ -2458,7 +2460,8 @@ msgstr "Sawfish-Homepage"
 #~ msgid "Maximize fill window horizontally"
 #~ msgstr "Fenster horizontal schonend maximieren"
 
-#~ msgid "Maximize the window horizontally without obscuring any other windows."
+#~ msgid ""
+#~ "Maximize the window horizontally without obscuring any other windows."
 #~ msgstr "Das Fenster in der Breite maximieren, ohne andere zu verdecken."
 
 #~ msgid "Maximize fill window toggle"
@@ -2553,8 +2556,8 @@ msgstr "Sawfish-Homepage"
 #~ msgid ""
 #~ "Toggle the shaded (only the title bar is displayed) state of the window."
 #~ msgstr ""
-#~ "Den aufgerollten Zustand des Fensters (nur die Titelleiste wird angezeigt) "
-#~ "ein-/ausschalten."
+#~ "Den aufgerollten Zustand des Fensters (nur die Titelleiste wird "
+#~ "angezeigt) ein-/ausschalten."
 
 #~ msgid "Focus on application windows when they first appear."
 #~ msgstr ""
@@ -2683,8 +2686,8 @@ msgstr "Sawfish-Homepage"
 
 #, fuzzy
 #~ msgid ""
-#~ "The program used to play audio samples. If unset, built-in support for ESD "
-#~ "is used."
+#~ "The program used to play audio samples. If unset, built-in support for "
+#~ "ESD is used."
 #~ msgstr ""
 #~ "Das zum Abspielen von Klängen verwendete Programm. Wenn nicht angegeben, "
 #~ "wird die eingebaute ESD-Unterstützung verwendet."
@@ -2777,8 +2780,8 @@ msgstr "Sawfish-Homepage"
 #~ msgid ""
 #~ "Move the window to the viewport on the right, and switch to that viewport."
 #~ msgstr ""
-#~ "Das Fenster in das Sichtfeld zur Rechten verschieben und auf das Sichtfeld "
-#~ "wechseln."
+#~ "Das Fenster in das Sichtfeld zur Rechten verschieben und auf das "
+#~ "Sichtfeld wechseln."
 
 #~ msgid "Move window left"
 #~ msgstr "Fenster nach links verschieben"
@@ -2802,8 +2805,8 @@ msgstr "Sawfish-Homepage"
 
 #~ msgid "Move the window to the viewport below, and switch to that viewport."
 #~ msgstr ""
-#~ "Das Fenster in das Sichtfeld  nach unten verschieben und auf das Sichtfeld "
-#~ "wechseln."
+#~ "Das Fenster in das Sichtfeld  nach unten verschieben und auf das "
+#~ "Sichtfeld wechseln."
 
 #, fuzzy
 #~ msgid "Animation"
@@ -2928,14 +2931,16 @@ msgstr "Sawfish-Homepage"
 #~ msgid ""
 #~ "Create a new workspace at the end of the list, and move the window to it."
 #~ msgstr ""
-#~ "Eine neue Arbeitsfläche am Ende der Liste anlegen, und das Fenster darauf\n"
+#~ "Eine neue Arbeitsfläche am Ende der Liste anlegen, und das Fenster "
+#~ "darauf\n"
 #~ "verschieben."
 
 #~ msgid "Prepend workspace and send"
 #~ msgstr "Arbeitsplatz voranstellen und darauf schicken"
 
 #~ msgid ""
-#~ "Create a new workspace at the start of the list, and move the window to it."
+#~ "Create a new workspace at the start of the list, and move the window to "
+#~ "it."
 #~ msgstr ""
 #~ "Eine neue Arbeitsfläche am Anfang der Liste anlegen und das Fenster "
 #~ "darauf\n"
@@ -2960,7 +2965,8 @@ msgstr "Sawfish-Homepage"
 #~ "Delete the current workspace. Its member windows are relocated to the\n"
 #~ "previous workspace."
 #~ msgstr ""
-#~ "Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die vorherige\n"
+#~ "Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die "
+#~ "vorherige\n"
 #~ "verschoben."
 
 #~ msgid "Insert workspace after"
@@ -3218,7 +3224,8 @@ msgstr "Sawfish-Homepage"
 #~ msgstr "GNOME-Menüs aktualisieren"
 
 #, fuzzy
-#~ msgid "Keymap containing bindings active when the pointer is in the title of"
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of"
 #~ msgstr ""
 #~ "Tastenbelegung mit Tastenkombinationen, die aktiv sind, wenn der Zeiger\n"
 #~ "über dem Hintergrundfenster ist (oder kein Fenster fokussiert ist)."
@@ -3244,7 +3251,8 @@ msgstr "Sawfish-Homepage"
 #~ "über dem Hintergrundfenster ist (oder kein Fenster fokussiert ist)."
 
 #, fuzzy
-#~ msgid "Keymap containing bindings active when the pointer is in the maximize"
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize"
 #~ msgstr ""
 #~ "Tastenbelegung mit Tastenkombinationen, die aktiv sind, wenn eine "
 #~ "Zeichenkette vom Benutzer eingelesen wird."
@@ -3298,7 +3306,8 @@ msgstr "Sawfish-Homepage"
 #~ "absenken."
 
 #, fuzzy
-#~ msgid "Delete the current workspace. Its member windows are relocated to the"
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the"
 #~ msgstr ""
 #~ "Die aktuelle Arbeitsfläche löschen. Ihre Fenster werden auf die nächste\n"
 #~ "verschoben."
@@ -3353,7 +3362,8 @@ msgstr "Sawfish-Homepage"
 #~ "»nie« heißt, dass der Zeiger nicht bewegt wird."
 
 #~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or packing\n"
+#~ "Whether to bump into windows on a different depth when growing or "
+#~ "packing\n"
 #~ "windows.\n"
 #~ "`maybe' means only avoided windows in other depths."
 #~ msgstr ""
