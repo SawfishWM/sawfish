@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-26 17:40+0200\n"
+"POT-Creation-Date: 2009-10-18 15:29+0200\n"
 "PO-Revision-Date: 2005-03-31 20:55-0700\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -273,10 +273,10 @@ msgstr "ntacyo"
 msgid ""
 "decoration mode\n"
 "\n"
-"set the mode 'when to draw a titlebar and window buttons'. the decoration "
+"Set the mode 'when to draw a titlebar and window buttons'.  The decoration "
 "mode 'all' means that all windows, even transients/dialogs, will get a "
-"titlebar and buttons. none means no window will get any :-). usually "
-"transients only have a contents-border. this option is for reimplementing a "
+"titlebar and buttons.  None means no window will get any :-).  Usually "
+"transients only have a contents-border.  This option is for reimplementing a "
 "sawfish feature that is gone in the latest version."
 msgstr ""
 
@@ -288,8 +288,8 @@ msgstr ""
 msgid ""
 "customize title string\n"
 "\n"
-"see the tooltip for the 'title string' option below for more information. "
-"(NOTE: i hope the redrawing problems with this option are solved. if not, "
+"See the tooltip for the 'title string' option below for more information.  "
+"(NOTE: I hope the redrawing problems with this option are solved.  If not, "
 "write an email please!)"
 msgstr ""
 
@@ -297,21 +297,21 @@ msgstr ""
 msgid ""
 "title string\n"
 "\n"
-"the string you insert here will be your new title string. variables always "
-"start with a dollar-sign $ and are replaced with their actual values. to get "
-"the value of an environment variable use $(variable), eg $(DISPLAY). to get "
-"the value of an rep/sawfish function use $[fuction], eg $[current-time-"
-"string]. the following vars are built-in: $name, $fullname, $width, $width-"
+"The string you insert here will be your new title string.  Variables always "
+"start with a dollar-sign ($) and are replaced with their actual values.  To "
+"get the value of an environment variable use $(variable), eg $(DISPLAY).  To "
+"get the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string].  The following vars are built-in: $name, $fullname, $width, $width-"
 "content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
-"$last-ws. (NOTE: i hope the redrawing problems with this option are solved. "
-"if not, write an email please!"
+"$last-ws. (NOTE: I hope the redrawing problems with this option are solved.  "
+"If not, write an email please!"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "update title string periodically\n"
 "\n"
-"this is useful if your title string changes without user interaction (eg "
+"This is useful if your title string changes without user interaction (eg "
 "because it displays the current time or something like that)."
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid ""
 "title string update interval (1 - 1000000 s)\n"
 "\n"
-"this is useful if your title string changes without user interaction (eg "
+"This is useful if your title string changes without user interaction (e.g., "
 "because it displays the current time or something like that)."
 msgstr ""
 
@@ -327,14 +327,14 @@ msgstr ""
 msgid ""
 "title string font\n"
 "\n"
-"you should really choose a better font. verdana bold 8 pt looks nice."
+"You should really choose a better font.  Verdana bold 8 pt looks nice."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "customize title position\n"
 "\n"
-"by default the title string is centered horizontally and vertically."
+"By default the title string is centered horizontally and vertically."
 msgstr ""
 
 # officecfg/registry\schema\org\openoffice\Office\DataAccess.xcs:....Column.Align..1.text
@@ -356,10 +356,10 @@ msgstr ""
 msgid ""
 "title string horizontal align adjustment (-10000 - 10000 pixel)\n"
 "\n"
-"the horizontal position of the title string can only be adjusted if the "
-"horizontal alignment is not 'center'. the range also depends on the setting "
-"of the option above. it the title string is already aligned left, you cannot "
-"adjust it to be even further left because there are button in the way."
+"The horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'center'.  The range also depends on the setting "
+"of the option above.  It the title string is already aligned left, you "
+"cannot adjust it to be even further left because there are button in the way."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -382,17 +382,17 @@ msgstr ""
 msgid ""
 "gradient titlebar background (experimental)\n"
 "\n"
-"when activating the gradient background the normal titlebar background "
-"colors will be ignored. besides the button background colors will be "
-"ignored. (NOTE: this can be very cpu intensive if you set the quality to a "
-"low value, ie high quality.)"
+"When activating the gradient background the normal titlebar background "
+"colors will be ignored.  Besides the button background colors will be "
+"ignored.  (NOTE: This can be very cpu intensive if you set the quality to a "
+"low value, i.e., high quality.)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "gradient mode\n"
 "\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"With gradient mode vertical or diagonal only the first or last (reversed) 2 "
 "colors in the list are used."
 msgstr ""
 
@@ -400,8 +400,8 @@ msgstr ""
 msgid ""
 "gradient quality (1 best - 20 worst)\n"
 "\n"
-"the value here is the factor the calculated gradient image will be scaled "
-"down. this increases speed but decreases quality."
+"The value here is the factor the calculated gradient image will be scaled "
+"down.  This increases speed but decreases quality."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -432,8 +432,8 @@ msgstr ""
 msgid ""
 "\n"
 "\n"
-"with gradient mode vertical or diagonal only the first or last (reversed) 2 "
-"colors in the list are used. besides the gradient color mode must be set to "
+"With gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colors in the list are used.  Besides the gradient color mode must be set to "
 "custom to activate this list."
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr "Ibara"
 msgid ""
 "unfocused/highlighted titlebar colors hue (0 - 360)\n"
 "\n"
-"this value changes the hue of a color, by moving (0 - 360) degress around "
+"This value changes the hue of a color, by moving (0 - 360) degress around "
 "the color cycle...180 for example inverts the color"
 msgstr ""
 
@@ -456,7 +456,7 @@ msgid ""
 "unfocused/highlighted titlebar colors saturation (0 - 100% of the focused "
 "color)\n"
 "\n"
-"the saturation of a color is a measurement of the color intensity"
+"The saturation of a color is a measurement of the color intensity"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -470,8 +470,8 @@ msgstr ""
 msgid ""
 "  focused titlebar color\n"
 "\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
+"This is one of the 4 base colors.  You can set these 4 colors and keep the "
+"extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
 
@@ -479,8 +479,8 @@ msgstr ""
 msgid ""
 "unfocused titlebar color\n"
 "\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
+"This is one of the 4 base colors.  You can set these 4 colors and keep the "
+"extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
 
@@ -488,8 +488,8 @@ msgstr ""
 msgid ""
 "  focused title string color\n"
 "\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
+"This is one of the 4 base colors.  You can set these 4 colors and keep the "
+"extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
 
@@ -497,8 +497,8 @@ msgstr ""
 msgid ""
 "unfocused title string color\n"
 "\n"
-"this is one of the 4 base colors. you can set these 4 colors and keep the "
-"extended colors deactivated. all other color options of the theme will then "
+"This is one of the 4 base colors.  You can set these 4 colors and keep the "
+"extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
 
@@ -506,7 +506,7 @@ msgstr ""
 msgid ""
 "customize extended title string colors\n"
 "\n"
-"you can customize additional colors of the title string. if you deactivate "
+"You can customize additional colors of the title string.  If you deactivate "
 "this, these colors will be set to the focused title string color."
 msgstr ""
 
@@ -572,15 +572,15 @@ msgstr "Byose"
 msgid ""
 "button icon set (experimental)\n"
 "\n"
-"the number at the end is the width/height of the button icons in the icon "
-"set. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
+"The number at the end is the width/height of the button icons in the icon "
+"set.  (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "customize button size\n"
 "\n"
-"by default the button size follows the size of the titlebar, but by "
+"By default the button size follows the size of the titlebar, but by "
 "activating this you can set it to something different."
 msgstr ""
 
@@ -588,14 +588,14 @@ msgstr ""
 msgid ""
 "buttons size (1 - 1000 pixel)\n"
 "\n"
-"a buttons size that is bigger than your current titlebar height is ignored."
+"A buttons size that is bigger than your current titlebar height is ignored."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "button vertical alignment\n"
 "\n"
-"if a button is smaller than the titlebar you might want to set its vertical "
+"If a button is smaller than the titlebar you might want to set its vertical "
 "alignment."
 msgstr ""
 
@@ -603,8 +603,8 @@ msgstr ""
 msgid ""
 "scale button icons (experimental)\n"
 "\n"
-"in case you don't like the default size of 9 pixel you might activate button-"
-"scaling. YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
+"In case you don't like the default size of 9 pixel you might activate button-"
+"scaling.  YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -619,7 +619,7 @@ msgstr ""
 msgid ""
 "display window icon on menu button\n"
 "\n"
-"many people like having the window-icon displayed on the menu-button. this "
+"Many people like having the window-icon displayed on the menu-button.  This "
 "icon is defined by the application itself and is also shown in your pager "
 "and task-list."
 msgstr ""
@@ -644,8 +644,8 @@ msgstr ""
 msgid ""
 "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
 "\n"
-"enabling this will allow you to set the positon of each button in the "
-"titlebar manually. a negative/positiv value means the button will be drawn "
+"Enabling this will allow you to set the positon of each button in the "
+"titlebar manually.  A negative/positiv value means the button will be drawn "
 "on left/right side of the titlebar."
 msgstr ""
 
@@ -661,7 +661,7 @@ msgstr ""
 msgid ""
 "button position model\n"
 "\n"
-"'titel-height' means calculate position as multiple of title height. when "
+"'title-height' means calculate position as multiple of title height. when "
 "selecting 'pixel' you can adjust the button position pixelwise, but keep in "
 "mind that several buttons might slide on top of each other. 'none' means no "
 "buttons at all."
@@ -731,8 +731,8 @@ msgstr "Gufunga Akabuto"
 msgid ""
 "customize sticky button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: toggle sticky "
-"state of window"
+"By default a button will work as it's name suggests.\n"
+"Button1: toggle sticky state of window"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -744,7 +744,7 @@ msgstr "Akabuto"
 msgid ""
 "customize previous button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: send window to "
+"By default a button will work as it's name suggests. Button1: send window to "
 "previous workspace - button2 workspace-list - button3 send window to first "
 "workspace - button6 pack window left"
 msgstr ""
@@ -758,7 +758,7 @@ msgstr "Ibikubiyemo Akabuto"
 msgid ""
 "customize next button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: send window to "
+"By default a button will work as it's name suggests. Button1: send window to "
 "next workspace - button2 workspace-list - button3 send window to last "
 "workspace - button6 pack window right"
 msgstr ""
@@ -780,7 +780,7 @@ msgstr ""
 msgid ""
 "customize configure button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: start sawfish-"
+"By default a button will work as it's name suggests. Button1: start sawfish-"
 "config - button3: toggle custom title string"
 msgstr ""
 
@@ -793,14 +793,14 @@ msgstr "Ibikubiyemo Akabuto"
 msgid ""
 "\n"
 "\n"
-"button1: start sawfish-config - button3: toggle custom title string"
+"Button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "customize info button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: window list - "
+"By default a button will work as it's name suggests. Button1: window list - "
 "button3 window snooper (not included by default)"
 msgstr ""
 
@@ -813,18 +813,18 @@ msgstr "Ibikubiyemo Akabuto"
 msgid ""
 "always on top depth (-1000 - 1000)\n"
 "\n"
-"a window will have this depth after you have pressed the always-on-top "
-"button. 0 is the normal window level. every positive value means above other "
-"windows, a negative value means below. keept it at a positive value in order "
-"to have the always-on-top button do it's job."
+"A window will have this depth after you have pressed the always-on-top "
+"button.  0 is the normal window level.  Every positive value means above "
+"other windows, a negative value means below.  Keep it at a positive value in "
+"order to have the always-on-top button do it's job."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "customize always-on-top button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: sets window "
-"depth to the adjusted value"
+"By default a button will work as it's name suggests. Button1: sets window "
+"depth to the adjusted value."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -836,7 +836,7 @@ msgstr "Ibikubiyemo Akabuto"
 msgid ""
 "customize look button keymap\n"
 "\n"
-"by default a button will work as it's name suggests. button1: lock window "
+"By default a button will work as it's name suggests. Button1: lock window "
 "position"
 msgstr ""
 
@@ -849,7 +849,7 @@ msgstr "Gufunga Akabuto"
 msgid ""
 "customize button-colors\n"
 "\n"
-"when you active this you will be able to set custom button colors. by "
+"When you active this you will be able to set custom button colors.  By "
 "default the button colors depend on the titlebar colors."
 msgstr ""
 
@@ -904,12 +904,12 @@ msgstr ""
 msgid ""
 "border width for maximized windows (0 - 1000 pixel)\n"
 "\n"
-"when you like having a big border around your windows you might have noticed "
-"that sawfish still draws that big border when the window is maximized. if "
+"When you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximized.  If "
 "you don't want that, set the border width for maximized windows smaller than "
-"the border width for unmaximized windows. (NOTE: this feature is still buggy "
-"as sawfish does not resize the windows correctly yet, so the best might be "
-"to set it to the normal border width.)"
+"the border width for unmaximized windows.  (NOTE: this feature is still "
+"buggy as sawfish does not resize the windows correctly yet, so the best "
+"might be to set it to the normal border width.)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -917,7 +917,7 @@ msgid ""
 "customize border for focused windows (experimental)\n"
 "\n"
 "(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+"computer noticably.  So turn it on at your own risk.)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -925,23 +925,23 @@ msgid ""
 "border width for focused windows (0 - 1000 pixel)\n"
 "\n"
 "(NOTE: this works but it is VERY cpu intensive and might slow down your "
-"computer noticably. so turn it on at your own risk.)"
+"computer noticably.  So turn it on at your own risk.)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "title-contents border width (0 - 1000 pixel)\n"
 "\n"
-"sets the widths of the line between titlebar and contents window"
+"Sets the widths of the line between titlebar and contents window"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "border offset (-1000 - 1000 pixel)\n"
 "\n"
-"adjust the point where the border actually starts. many gtk2 apps draw a "
+"Adjust the point where the border actually starts.  Many gtk2 apps draw a "
 "small black border around their contents window and this is just ugly when "
-"sawfish draws another border around the window. with a border offset of -1 "
+"sawfish draws another border around the window. With a border offset of -1 "
 "the sawfish window border will overlay the gtk2 border exactly."
 msgstr ""
 
@@ -949,7 +949,7 @@ msgstr ""
 msgid ""
 "keep window borders and corners at their place when shading a window\n"
 "\n"
-"when shading a window borders and corners will stay where they were and not "
+"When shading a window borders and corners will stay where they were and not "
 "merge with the titlebar."
 msgstr ""
 
@@ -957,8 +957,8 @@ msgstr ""
 msgid ""
 "show window corners\n"
 "\n"
-" the corners are used to resize a window in two directions at the same time. "
-"usually the width and length of window corners are determined by the border "
+"The corners are used to resize a window in two directions at the same time.  "
+"Usually the width and length of window corners are determined by the border "
 "width but you can adjust them below."
 msgstr ""
 
@@ -966,10 +966,10 @@ msgstr ""
 msgid ""
 "corners length adjustement (-1 - 100 pixel)\n"
 "\n"
-"increasing the corner length will grow the window corners along the window "
-"border (i.e. make them longer). with a border width of 1 pixel it is hard to "
-"grab the 1 pixel corner to be able to resize the window in two directions; "
-"thus, make it bigger."
+"Increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer).  With a border width of 1 pixel it is hard "
+"to grab the 1 pixel corner to be able to resize the window in two "
+"directions; thus, make it bigger."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -988,7 +988,7 @@ msgstr ""
 msgid ""
 "corners width adjustement (0 - 100 pixel)\n"
 "\n"
-"this option makes the window corners broader. with a border width of 1 pixel "
+"This option makes the window corners broader. with a border width of 1 pixel "
 "it is hard to grab this 1 pixel corner to be able to resize the window in "
 "two directions; thus, make it bigger."
 msgstr ""
@@ -1001,10 +1001,10 @@ msgstr ""
 msgid ""
 "fake shadow (experimental)\n"
 "\n"
-"draw a small additional border around your windows emulating a solid shadow "
-"effect. use the options below to adjust its width and direction. (NOTE: this "
-"is VERY cpu intensive and might slow down your computer noticably. so turn "
-"it on at your own risk.)"
+"Draw a small additional border around your windows emulating a solid shadow "
+"effect.  Use the options below to adjust its width and direction.  (NOTE: "
+"this is VERY cpu intensive and might slow down your computer noticably.  So "
+"turn it on at your own risk.)"
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
@@ -1056,16 +1056,16 @@ msgstr ""
 msgid ""
 "fake shadow light source\n"
 "\n"
-"set the direction of the fake shadow. usually only 2 or 3 borders of your "
-"window have a fake shadow. this depends on where the light comes from."
+"Set the direction of the fake shadow.  Usually only 2 or 3 borders of your "
+"window have a fake shadow.  This depends on where the light comes from."
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
 "fake shadow light distance (0 - 100)\n"
 "\n"
-"this option has only an effect on the north, east, south and west light "
-"sources. the further away the light source is, the smaller will the two "
+"This option has only an effect on the north, east, south and west light "
+"sources.  The further away the light source is, the smaller will the two "
 "'side' shadows be."
 msgstr ""
 
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid ""
 "customize border colors\n"
 "\n"
-"you can customize your border colors here. if you deactivate this, these "
+"You can customize your border colors here. If you deactivate this, these "
 "colors will be set to the focused title string color."
 msgstr ""
 
@@ -2027,7 +2027,8 @@ msgstr "Byahiswemo Idirishya"
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 #, fuzzy
 msgid ""
-"Wait for the user to select a window, then interactively move that window."
+"Wait for the user to select a window, then interactively move\n"
+"that window."
 msgstr ""
 "kugirango i Ukoresha: Kuri Guhitamo a Idirishya Hanyuma Kwimura Idirishya"
 
@@ -2039,7 +2040,8 @@ msgstr "Byahiswemo Idirishya"
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 #, fuzzy
 msgid ""
-"Wait for the user to select a window, then interactively resize that window."
+"Wait for the user to select a window, then interactively resize\n"
+"that window."
 msgstr ""
 "kugirango i Ukoresha: Kuri Guhitamo a Idirishya Hanyuma Ihindurangero "
 "Idirishya"
@@ -2126,9 +2128,21 @@ msgid "Shrink window left"
 msgstr "Idirishya Ibumoso:"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it\n"
+"intersects with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window right"
 msgstr "Idirishya Iburyo:"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it\n"
+"intersects with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2136,9 +2150,21 @@ msgid "Shrink window up"
 msgstr "Idirishya Hejuru"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it\n"
+"intersects with one window less than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Shrink window down"
 msgstr "Idirishya Hasi"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it\n"
+"intersects with one window less than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2146,9 +2172,21 @@ msgid "Yank window left"
 msgstr "Idirishya Ibumoso:"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the left until it inserts with one window less\n"
+"than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window right"
 msgstr "Idirishya Iburyo:"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW to the right until it inserts with one window less\n"
+"than before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
@@ -2156,9 +2194,21 @@ msgid "Yank window up"
 msgstr "Idirishya Hejuru"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW upwards until it inserts with one window less than\n"
+"before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
 #, fuzzy
 msgid "Yank window down"
 msgstr "Idirishya Hasi"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Yanks WINDOW downwards until it inserts with one window less than\n"
+"before."
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 #, fuzzy
@@ -2553,6 +2603,17 @@ msgstr ""
 msgid "3d hack"
 msgstr "3D"
 
+#. ../lisp/sawfish/wm/ext/apps-menu.jl
+#, fuzzy
+msgid "Update apps menu"
+msgstr "Ibikubiyemo"
+
+#. ../lisp/sawfish/wm/ext/apps-menu.jl
+msgid ""
+"Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
+"append the auto generated one."
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #, fuzzy
 msgid "Play sound effects for window events."
@@ -2677,10 +2738,6 @@ msgstr "Amakosa"
 #, fuzzy
 msgid "Display all errors that have occurred to the screen."
 msgstr "Byose Amakosa Kuri i Mugaragaza"
-
-#. ../lisp/sawfish/wm/ext/fdo-menu.jl
-msgid "Update saw menu"
-msgstr ""
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
@@ -2985,11 +3042,6 @@ msgstr "Leta"
 msgid "Other"
 msgstr "Ikindi"
 
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Rename window"
-msgstr "Idirishya"
-
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 #, fuzzy
 msgid "Shade Hover"
@@ -3223,6 +3275,18 @@ msgid "Send window to the workspace right of the current workspace"
 msgstr ""
 "Idirishya Kuri i Umwanya- nkenerwa Iburyo: Bya i KIGEZWEHO Umwanya- nkenerwa"
 
+#. ../lisp/sawfish/wm/extras.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/extras.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/extras.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
 msgid "When does the mouse pointer affect the input focus."
@@ -3251,18 +3315,6 @@ msgstr "Ikadiri IMISUSIRE"
 #, fuzzy
 msgid "Automatically reload themes when they are updated."
 msgstr "Kongera Gutangiza Insanganyamatsiko Ryari:"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Use custom font colors for frames"
-msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
@@ -3490,6 +3542,78 @@ msgid ""
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
 "Ibyafataranyijwe Gikora Ryari: i Mweretsi ni in i a Idirishya Imbeba "
+"Ibyafataranyijwe in iyi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "sticky-button-keymap"
+msgstr "Akabuto"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the sticky button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ibyafataranyijwe Gikora Ryari: i Mweretsi ni in i Gufunga a Idirishya Imbeba "
+"Ibyafataranyijwe in iyi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "lock-button-keymap"
+msgstr "Gufunga Akabuto"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the lock button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ibyafataranyijwe Gikora Ryari: i Mweretsi ni in i Gufunga a Idirishya Imbeba "
+"Ibyafataranyijwe in iyi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "rename-button-keymap"
+msgstr "Ibikubiyemo Akabuto"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the rename button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ibyafataranyijwe Gikora Ryari: i Mweretsi ni in i Ibikubiyemo a Idirishya "
+"Imbeba Ibyafataranyijwe in iyi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "move-resize-button-keymap"
+msgstr "Gufunga Akabuto"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the move/resize "
+"button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ibyafataranyijwe Gikora Ryari: i Mweretsi ni in i Gufunga a Idirishya Imbeba "
+"Ibyafataranyijwe in iyi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "raise-lower-button-keymap"
+msgstr "Gufunga Akabuto"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the raise/lower "
+"button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ibyafataranyijwe Gikora Ryari: i Mweretsi ni in i Gufunga a Idirishya Imbeba "
 "Ibyafataranyijwe in iyi"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3733,6 +3857,11 @@ msgstr "Kunoza"
 msgid "Display Errors"
 msgstr "Amakosa"
 
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Reload Appsmenu"
+msgstr "Ibikubiyemo"
+
 # #-#-#-#-#  setup2.pot (PACKAGE VERSION)  #-#-#-#-#
 # setup2/source\ui\app.src:STR_RESTART_BTN_YES.text
 # #-#-#-#-#  setup2.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -3809,8 +3938,9 @@ msgid "Display the applications menu."
 msgstr "i Porogaramu Ibikubiyemo"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "S_awfish-UI"
-msgstr ""
+#, fuzzy
+msgid "S_awfishConfig"
+msgstr "Ipajikwinjira"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Edit theme..."
@@ -3853,7 +3983,6 @@ msgstr "Birunze hejuru"
 msgid "Raise single window"
 msgstr "UMWE Idirishya"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 #, fuzzy
 msgid "Raise the window to its highest allowed position in the stacking order."
@@ -3864,7 +3993,6 @@ msgstr "i Idirishya Kuri kirekire kurusha ibindi Ibirindiro in i Itondekanya"
 msgid "Lower single window"
 msgstr "UMWE Idirishya"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 #, fuzzy
 msgid "Lower the window to its lowest allowed position in the stacking order."
@@ -3875,7 +4003,6 @@ msgstr "i Idirishya Kuri Byo hasi cyane Ibirindiro in i Itondekanya"
 msgid "Raise lower single window"
 msgstr "Ntoya UMWE Idirishya"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/stacking.jl
 #, fuzzy
 msgid ""
@@ -4113,7 +4240,8 @@ msgstr "Idirishya"
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid ""
-"Restore the dimensions of the window to its original, unmaximized, state."
+"Restore the dimensions of the window to its original,\n"
+"unmaximized, state."
 msgstr "i Ingero Bya i Idirishya Kuri Umwimerere Leta"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -4265,7 +4393,8 @@ msgstr "Idirishya Mukomatanya"
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid ""
-"Toggle the state of the window between fullscreen maximized and unmaximized."
+"Toggle the state of the window between fullscreen maximized and\n"
+"unmaximized."
 msgstr "i Leta Bya i Idirishya hagati Na"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -4286,8 +4415,8 @@ msgstr "Idirishya Mukomatanya"
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid ""
-"Toggle the state of the window between fullscreen maximized across all "
-"Xinerama and unmaximized."
+"Toggle the state of the window between fullscreen maximized\n"
+"across all Xinerama and unmaximized."
 msgstr "i Leta Bya i Idirishya hagati Byuzuye Na"
 
 #. ../lisp/sawfish/wm/state/shading.jl
@@ -4523,9 +4652,7 @@ msgstr "Idirishya"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 #, fuzzy
-msgid ""
-"The program used to play audio samples. If unset, built-in support for ESD "
-"is used."
+msgid "The program used to play audio samples."
 msgstr "Porogaramu Kuri Gukina Ingero- fatizo in Gushigikira kugirango ni"
 
 # sc/source\ui\src\optdlg.src:RID_SCPAGE_CONTENT.GB_WINDOW.text
@@ -4577,13 +4704,37 @@ msgstr "Idirishya"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
+msgid ""
+"Raise the window to its highest allowed position in the stacking\n"
+"order."
+msgstr "i Idirishya Kuri kirekire kurusha ibindi Ibirindiro in i Itondekanya"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#, fuzzy
 msgid "Lower window"
 msgstr "Idirishya"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
+msgid ""
+"Lower the window to its lowest allowed position in the stacking\n"
+"order."
+msgstr "i Idirishya Kuri Byo hasi cyane Ibirindiro in i Itondekanya"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#, fuzzy
 msgid "Raise lower window"
 msgstr "Ntoya Idirishya"
+
+#. ../lisp/sawfish/wm/util/stacking.jl
+#, fuzzy
+msgid ""
+"If the window is at its highest possible position, then lower it\n"
+"to its lowest possible position. Otherwise raise it as far as\n"
+"allowed."
+msgstr ""
+"i Idirishya ni ku kirekire kurusha ibindi Ibirindiro Hanyuma Ntoya Kuri "
+"Ibirindiro Nka Nka urwego Bya"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Number of columns and rows in each virtual workspace: \\w"
@@ -4724,7 +4875,8 @@ msgstr "Idirishya Iburyo:"
 #. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid ""
-"Move the window to the viewport on the right, and switch to that viewport."
+"Move the window to the viewport on the right, and switch to that\n"
+"viewport."
 msgstr "i Idirishya Kuri i ku i Iburyo: Na Hindura Kuri"
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4735,7 +4887,8 @@ msgstr "Idirishya Ibumoso:"
 #. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
 msgid ""
-"Move the window to the viewport on the left, and switch to that viewport."
+"Move the window to the viewport on the left, and switch to that\n"
+"viewport."
 msgstr "i Idirishya Kuri i ku i Ibumoso: Na Hindura Kuri"
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4745,7 +4898,9 @@ msgstr "Idirishya Hejuru"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
-msgid "Move the window to the viewport above, and switch to that viewport."
+msgid ""
+"Move the window to the viewport above, and switch to that\n"
+"viewport."
 msgstr "i Idirishya Kuri i hejuru Na Hindura Kuri"
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4755,7 +4910,9 @@ msgstr "Idirishya Hasi"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #, fuzzy
-msgid "Move the window to the viewport below, and switch to that viewport."
+msgid ""
+"Move the window to the viewport below, and switch to that\n"
+"viewport."
 msgstr "i Idirishya Kuri i munsi Na Hindura Kuri"
 
 #. ../lisp/sawfish/wm/window-anim.jl
@@ -4794,7 +4951,7 @@ msgstr "Kuri Ryari: Cyangwa"
 
 #. ../lisp/sawfish/wm/windows.jl
 #, fuzzy
-msgid "Whether to not ignore avoided windows by default."
+msgid "Whether to not avoid ignored windows by default."
 msgstr "Kuri Ryari: Cyangwa"
 
 #. ../lisp/sawfish/wm/windows.jl
@@ -4846,6 +5003,11 @@ msgstr "Idirishya Izina:"
 msgid "Force the current window to have a unique title."
 msgstr "i KIGEZWEHO Idirishya Kuri a Cyo nyine Umutwe"
 
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Idirishya"
+
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
 msgstr ""
@@ -4858,7 +5020,8 @@ msgstr "i Ibikubiyemo i Urutonde Bya Byose"
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid ""
-"How to act when passing the first or last workspace, while moving a window"
+"How to act when passing the first or last workspace, while moving\n"
+"a window"
 msgstr "i Ibikubiyemo i Urutonde Bya Byose"
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -5012,7 +5175,8 @@ msgstr "Umwanya- nkenerwa Na Kohereza"
 #. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
 msgid ""
-"Create a new workspace at the start of the list, and move the window to it."
+"Create a new workspace at the start of the list, and move the\n"
+"window to it."
 msgstr ""
 "a Gishya Umwanya- nkenerwa ku i Gutangira Bya i Urutonde Na Kwimura i "
 "Idirishya Kuri"
