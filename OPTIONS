@@ -22,8 +22,6 @@
 
 ;; Good luck!
 
-;; $Id: OPTIONS,v 1.5 2004/01/11 17:26:15 jsh Exp $
-
 ;; window animation options
 
 ;;  (define-special-variable default-window-animator 'none
@@ -161,10 +159,35 @@
 ;;  (define-special-variable window-ops-toggle-menu)
 ;;  (define-special-variable window-menu)
 ;;  (define-special-variable root-menu)
+
+;;  Probably you want to set `user-apps-menu', instead of `apps-menu'.
+;;  See below.
 ;;  (define-special-variable apps-menu)
 
 ;;  (define-special-variable custom-menu-includes-all-settings t
 ;;    "When non-nil, the custom menu includes the `All settings' item.")
+
+;; Applications menu options
+;;  (define-special-variable apps-menu-autogen t
+;;   "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
+
+;;  (define-special-variable user-apps-menu '()
+;;    "Your own `apps-menu' entries. It is followed by auto generated
+;:  applications menu.")
+
+;; (define-special-variable apps-menu-ignore-no-display nil
+;;    "Some entries are hidden from the menu, especially GNOME Apps like
+;;  eog, nautilus or evince. If you want to have them added to your menu,
+;;  set this to non-nil.")
+
+;; (define-special-variable desktop-directory '("/usr/share/applications")
+;;   "List of directories to look for *.desktop files")
+
+;; (define-special-variable apps-menu-lang nil
+;;   "Language for applications menu, in string. Default is set from locale.")
+
+;; (define-special-variable apps-menu-alphabetize 't
+;;   "Sort the apps menu alphabetically.")
 
 ;; window placement options
 
@@ -633,23 +656,6 @@
 
 ;; (define-special-variable infinite-desktop.stop-at-workspace-borders nil
 ;;   "Stop scrolling at workspace borders (Fixes warp-to-window bugs).")
-
-;; fdo-menu options
-
-;; (define-special-variable apps-menu-lang nil
-;;   "Language for applications menu, in string. Default is set from locale.")
-
-;; (define-special-variable desktop-directory '("/usr/share/applications")
-;;   "List of directories to look for .desktop files")
-
-;; (define-special-variable apps-menu-ignore-no-display nil
-;;   "Wether to ignore the `NoDisplay' setting")
-
-;; (define-special-variable apps-menu-alphabetize 't
-;;   "Wether to alphabetically sort menuentries")
-
-;; (define-special-variable apps-menu-autogen t
-;;   "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
 
 ;; view-clipboard options
 

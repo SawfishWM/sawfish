@@ -104,10 +104,10 @@ Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 @item New application menu [Matthew Love, Timo Korvola]
 
 Sawfish now generates application menu automatically, by reading
-@file{/usr/share/applications/*.desktop} files. (Technically,
-specifications of these files are defined by freedesktop.org.)
-
-This is done only if you don't set value of the variable @code{apps-menu}.
+@file{/usr/share/applications/*.desktop} files. If you set
+@code{apps-menu}, then it won't be done. If you like to have both your
+own applications menu and auto generated one, then set your own in
+@code{user-apps-menu} instead of @code{apps-menu}.
 
 Root menu is revamped, too. [Christopher Bratusek]
 

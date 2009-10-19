@@ -4817,17 +4817,16 @@ three of this variables contain functions) (@code{workspace-menu},
 these must be special variables, i.e. initially declared using the
 @code{defvar} special form.
 
-The @code{apps-menu} variable can thus be used to redefine the
-applications menu. The default definition is as follows:
+Sawfish generates applications menu from @file{*.desktop} files.
+User can use @code{user-apps-menu} variable to define their own
+applications menu, and it is appended by auto generated one.
+Example of @code{user-apps-menu} definition can be as follows:
 
 @lisp
 (("xterm" (system "xterm &"))
  ("Emacs" (system "emacs &"))
- ("Netscape" (system "netscape &"))
- ("The GIMP" (system "gimp &"))
- ("XFIG" (system "xfig &"))
- ("GV" (system "gv &"))
- ("xcalc" (system "xcalc &")))
+ ("Firefox" (system "firefox &"))
+ ("The GIMP" (system "gimp &")))
 @end lisp
 
 @noindent
@@ -4886,6 +4885,42 @@ the root menu.  The default root menu includes this as a child menu.
 @defun popup-apps-menu
 Display the applications menu.
 @end defun
+
+Sawfish generates applications menu from @file{*.desktop} files.
+
+@defvar apps-menu-autogen
+If non-nil, `apps-menu' is automatically generated from *.desktop files.
+Default is @code{t}.
+@end defvar
+
+@defvar user-apps-menu
+Your own `apps-menu' entries. It is followed by auto generated
+applications menu.
+@end defvar
+
+@defvar apps-menu-ignore-no-display
+Some entries are hidden from the menu, especially GNOME Apps like
+eog, nautilus or evince. If you want to have them added to your menu,
+set this to non-nil. Default is @code{nil}.
+@end defvar
+
+@defvar desktop-directory
+List of directories to look for *.desktop files. Default is
+@code{'("/usr/share/applications")}.
+@end defvar
+
+@defvar apps-menu-alphabetize
+Sort the apps menu alphabetically. Defaults to @code{t}.
+@end defvar
+
+@defvar apps-menu-lang
+Language for applications menu, in string. Default is set from locale.
+@end defvar
+
+@deffn Comand update-apps-menu
+Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is
+non-nil, append the auto generated one.
+@end deffn
 
 @defun window-ops-menu
 The variable containing the definition of all window operations.

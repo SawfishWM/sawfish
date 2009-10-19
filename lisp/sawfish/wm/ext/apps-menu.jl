@@ -49,20 +49,23 @@
   (define-structure-alias apps-menu sawfish.wm.ext.apps-menu)
 
   ;; User Options
-  ;; Docstrings would be nice.
+  (defvar apps-menu-autogen t
+    "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
+
   (defvar user-apps-menu '()
     "Your own `apps-menu' entries. It is followed by auto generated
 applications menu.")
 
-  (defvar desktop-directory '("/usr/share/applications"))
   (defvar apps-menu-ignore-no-display nil
     "Some entries are hidden from the menu, especially GNOME Apps like
 eog, nautilus or evince. If you want to have them added to your menu,
 set this to non-nil.")
+
+  (defvar desktop-directory '("/usr/share/applications")
+    "List of directories to look for *.desktop files."
+
   (defvar apps-menu-alphabetize t
     "Sort the apps menu alphabetically.")
-  (defvar apps-menu-autogen t
-    "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
   (defvar apps-menu-lang nil
     "Language for applications menu, in string. Default is set from locale.")
 
@@ -365,7 +368,8 @@ exile it."
 	(fix-cats menu-cat-alist))))
 
   (define (init-apps-menu)
-    "If `apps-menu' is nil, then call `update-apps-menu'."
+    "If `apps-menu' is nil, then call `update-apps-menu'. This function
+is intended to be called during Sawfish initialization."
     (unless apps-menu
       (update-apps-menu)))
 
