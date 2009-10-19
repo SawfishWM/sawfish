@@ -1767,8 +1767,9 @@ Halve the size of @var{window}
 @end deffn
 
 Sawfish supports increasing a windows size until it bumps into another
-window, this is called @code{grow}. @code{shrink} achieves the opposite,
-it decreases a windows size, until it does no longer overlap any other window.
+window. This is called ``grow''. ``Shrink'' achieves the opposite,
+i.e. it decreases a windows size, until it does no longer overlap any
+other window, or more precisely, until it overlaps with one less window.
 
 @deffn Command grow-window-up window #!optional arg
 Grows @var{window} upwards until it "bumps into" another window.
@@ -1813,9 +1814,9 @@ Shrinks @var{window} by moving the left edge to the right until it
 intersects with one window less than before.
 @end deffn
 
-in addition to @code{grow} and @code{shrink} sawfish also has @code{pack} and @code{yank},
-the difference is that while @code{grow} and @code{shrink} resize the window,
-@code{pack} and @code{yank} move it.
+Moving counterparts, instead of resizing of ``grow'' and ``shrink'',
+are ``pack'' and ``yank''. So, ``pack'' moves until the window bumps
+into another, and ``yank'' moves until the overlap reduces.
 
 @deffn Command pack-window-up window #! optional arg
 Moves @var{window} upwards until it "bumps into" another window.
@@ -1868,8 +1869,14 @@ The default value is @code{t}.
 @end defvar
 
 @defvar pack-warp-pointer
-Whether and how to move the pointer, either @code{allways} @code{maybe}
-or @code{never}. The default value is @code{maybe}.
+Whether and how to move the pointer, either @code{always} @code{maybe}
+or @code{never}. The default value is @code{maybe}
+
+@code{maybe} means that the pointer is moved along with the window, if
+the pointer was within the window area before packing. @code{always}
+warps the pointer to the center of the window if it isn't already in
+the window, then does like @code{maybe}. @code{never} means not to
+warp the pointer.
 @end defvar
 
 @defvar grow-pack-bump-obscured
@@ -1878,8 +1885,10 @@ The default value is @code{nil}.
 @end defvar
 
 @defvar grow-pack-bump-other-depth
-Whether to bump into windows on a different depth, either @code{allways}
+Whether to bump into windows on a different depth, either @code{always}
 @code{maybe} or @code{never}. The default value is @code{always}.
+
+@code{maybe} means only @code{avoided} windows (@pxref{Avoided Windows}).
 @end defvar
 
 @defvar grow-pack-bump-ignored

@@ -61,7 +61,12 @@
     :group (move gpsy))
 
   (defcustom pack-warp-pointer 'maybe
-    "Whether and how to move the pointer."
+    "Whether and how to move the pointer when packing windows.
+`maybe' means that the pointer is moved along with the window, if the
+pointer was within the window area before packing. `always' warps the
+pointer to the center of the window if it isn't already in the
+window, then does like `maybe'.  `never' means not to warp the
+pointer."
     :type (choice always maybe never)
     :group (move gpsy))
 
@@ -71,7 +76,8 @@
     :group (move gpsy))
 
   (defcustom grow-pack-bump-other-depth 'always
-    "Whether to bump into windows on a different depth."
+    "Whether to bump into windows on a different depth. When 'maybe,
+Only `avoided' windows are bumped."
     :type (choice always maybe never)
     :group (move gpsy))
 
