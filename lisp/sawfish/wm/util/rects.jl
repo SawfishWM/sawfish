@@ -36,6 +36,7 @@
 	    rect-2d-overlap
 	    rect-2d-overlap*
 	    rect-total-overlap
+            rect-wholly-within-rect
 	    rect-wholly-visible-p
 	    rectangle-heads)
 
@@ -266,17 +267,20 @@ dimensions DIMS and origin POINT, while the other is defined by RECT."
   (define (rect-total-overlap dims point rects)
     "Returns the total area of the overlap between a rectangle defined by
 DIMS and POINT, and the list of rectangles RECTS when placed at POINT."
-
     (let ((total 0))
       (mapc (lambda (r)
 	      (setq total (+ total (rect-2d-overlap dims point r))))
 	    rects)
       total))
 
+  (define (rect-wholly-within-rect outer inner)
+    "Return t if INNER is completely inside the boundaries of OUTER."
+    (eq (rect-obscured inner outer) 'fully-obscured))
+
   (define (rect-wholly-visible-p rect)
     "Return t if RECT is completely inside the screen boundaries."
-    (and (>= (car rect) 0) (>= (nth 1 rect) 0)
-	 (<= (nth 2 rect) (screen-width)) (<= (nth 3 rect) (screen-height))))
+    (rect-wholly-within-rect (list 0 0 (screen-width) (screen-height))
+                             rect))
 
   (define (rectangle-heads rect)
     "Return the number of screen heads that rectangle RECT appears on."

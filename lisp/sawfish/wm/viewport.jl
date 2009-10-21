@@ -31,12 +31,17 @@
 	    move-window-to-current-viewport
 	    set-window-viewport
 	    move-window-viewport
+            viewport-at
 	    window-viewport
             viewport-offset
             window-relative-position
 	    window-absolute-position
 	    set-number-of-viewports
+            rect-within-viewport-p
+            rect-within-head-p
+            window-head-any-viewport
 	    viewport-minimum-size-changed
+            viewport-honor-workspace-edges
 	    viewport-windows)
 
     (open rep
@@ -47,6 +52,7 @@
 	  sawfish.wm.commands
 	  sawfish.wm.workspace
 	  sawfish.wm.custom
+          sawfish.wm.util.rects
 	  sawfish.wm.session.init)
 
   ;; Virtual workspaces are implemented by moving windows in and out of
@@ -90,6 +96,12 @@
 
   (defvar viewport-x-offset 0)
   (defvar viewport-y-offset 0)
+
+  (define (viewport-honor-workspace-edges)
+    "Whether or not to prevent the display from moving past the
+current viewport boundaries.  Returns true if `viewport-boundary-mode'
+is not set to 'dynamic."
+    (not (eq viewport-boundary-mode 'dynamic)))
 
   (define (warp-viewport x y)
     "Change view by incrementing the coordinates of the x,y position."
@@ -324,7 +336,7 @@ viewport."
 	  (<= (+ (cdr pos) (cdr dims)) top))))
 
   (define (window-outside-viewport-p window #!optional viewport)
-    "True if some part of `window' is inside the current viewport.  If
+    "True if no part of `window' is inside the current viewport.  If
 `viewport' is specified check against that viewport rather than the
 current one."
     (let* ((cur-vp (screen-viewport))
@@ -339,7 +351,7 @@ current one."
                       (* (- (cdr viewport) (cdr cur-vp))
                          height)
                     0))
-           (y-max (+ y-min width))
+           (y-max (+ y-min height))
            (pos (window-position window))
            (dims (window-frame-dimensions window)))
       (or (<= (+ (car pos) (car dims)) x-min)
@@ -372,12 +384,82 @@ current one."
 			   (+ (quotient (+ (cdr pos) viewport-y-offset)
 					(screen-height)) row))))
 
+  (define (viewport-at x y)
+    "Returns a cons cell consisting of the column and row of the
+viewport containing the specified coordinates."
+    (let ((x (+ x viewport-x-offset))
+          (y (+ y viewport-y-offset)))
+      ;; If x or y is negative the viewport must be adjusted by one.
+      (cons (- (quotient x (screen-width))
+               (if (< x 0)
+                   1
+                 0))
+	    (- (quotient y (screen-height))
+               (if (< y 0)
+                   1
+                 0)))))
+
   (define (window-viewport w)
     "Returns a cons cell consisting of the column and row of the
-viewport containing w."
-    (let ((position (window-position w)))
-      (cons (quotient (+ (car position) viewport-x-offset) (screen-width))
-	    (quotient (+ (cdr position) viewport-y-offset) (screen-height)))))
+viewport containing (or mostly containing) `w'."
+    (let* ((pos (window-position w))
+           (dims (window-dimensions w)))
+      (viewport-at (+ (car pos) (quotient (car dims) 2))
+                   (+ (cdr pos) (quotient (cdr dims) 2)))))
+
+  ;; From sawfish.wm.util.rects:
+  ;; A rectangle is (LEFT TOP RIGHT BOTTOM [WEIGHT])
+  ;; The left and top edges are considered part of the rectangle,
+  ;; the right and bottom edges are not.
+
+  (define (rect-within-viewport-p rect #!optional viewport)
+    "Return t if `rect' is entirely inside the screen boundaries for
+some viewport, regardless of whether it is the current viewport, or
+even if the viewport currently exists.  If `viewport' is specified
+check only against that viewport."
+    (let ((vp (viewport-at (car rect) (nth 1 rect))))
+      (when (or (null viewport) (equal vp viewport))
+        (let ((offset (viewport-offset vp)))
+          (rect-wholly-within-rect (list (car offset)
+                                         (cdr offset)
+                                         (+ (car offset) (screen-width))
+                                         (+ (cdr offset) (screen-height)))
+                                   rect)))))
+
+  ;; The next two functions should perhaps go in a "heads" module if
+  ;; there were one.  But what makes them interesting is that they
+  ;; must account for viewports, which is why I put them here.
+
+  (define (rect-within-head-p rect #!optional head)
+    "Return t if `rect' is entirely within some head on some
+viewport. If `head' is provided `rect' must be within that head on
+some viewport."
+    (let* ((offset (viewport-offset (viewport-at (car rect)
+                                                 (nth 1 rect))))
+           (left (- (car rect) (car offset)))
+           (top (- (nth 1 rect) (cdr offset)))
+           (right (- (nth 2 rect) (car offset)))
+           (bottom (- (nth 3 rect) (cdr offset)))
+           (head (or head (find-head left top)))
+           (head-pos (head-offset head))
+           (head-dims (head-dimensions head)))
+      (rect-wholly-within-rect (list (car head-pos)
+                                     (cdr head-pos)
+                                     (+ (car head-pos) (car head-dims))
+                                     (+ (cdr head-pos) (cdr head-dims)))
+                               (list left top right bottom))))
+
+  (define (window-head-any-viewport w)
+    "Return the id of the head that would contain `w', if the viewport
+`w' occupies were visible."
+    (let* ((coords (window-position w))
+           (dims (window-dimensions w))
+           (center (cons (+ (car coords) (quotient (car dims) 2))
+                         (+ (cdr coords) (quotient (cdr dims) 2))))
+           (vp-offset (viewport-offset (viewport-at (car center)
+                                                    (cdr center)))))
+      (find-head (- (car center) (car vp-offset))
+                 (- (cdr center) (cdr vp-offset)))))
 
   (define (viewport-offset vp)
     "`vp' is (column . row) of a viewport (whether or not that

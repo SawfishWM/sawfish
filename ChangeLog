@@ -1,3 +1,18 @@
+2009-10-21  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* lisp/sawfish/wm/util/rects.jl
+	* lisp/sawfish/wm/util/workarea.jl
+	* lisp/sawfish/wm/viewport.jl
+	* man/news.texi: Fix bugs introduced by the recent changes to allow maximization outside of the current viewport:
+	                 - viewport-window now gives the viewport where most of the window is located.
+	                 - A few new functions for working with rectangles.
+
+	* lisp/sawfish/wm/ext/infinite-desktop.jl: infinite-desktop now checks viewport-honor-workspace-edges
+	                                           (in sawfish.wm.viewport) before allowing movement past workspace boundaries.
+
+	* man/sawfish.texi: Adjustments to viewport docs; new docs for sawfish.wm.util.rects.
+
 2009-10-11  Jeremy Hankins <nowan@nowan.org>
 	* lisp/sawfish/wm/ext/match-window.jl
 	* lisp/sawfish/wm/state/maximize.jl

@@ -65,12 +65,6 @@
     :type number
     :range (1 . nil))
 
-  (define (infinite-desktop.stop-at-workspace-borders)
-    "Whether or not to prevent the display from moving past the
-current viewport boundaries.  Returns true if `viewport-boundary-mode'
-is not set to 'dynamic."
-    (not (eq viewport-boundary-mode 'dynamic)))
-
   (define (infinite-desktop.move-right)
     "Shifts the display `infinite-desktop.move-distance' pixels to the
 right."
@@ -78,7 +72,7 @@ right."
           (cdist infinite-desktop.move-cursor-distance)
           (maxx (* (screen-width) (1- (car viewport-dimensions)))))
       (if
-          (and (infinite-desktop.stop-at-workspace-borders)
+          (and (viewport-honor-workspace-edges)
                (> (+ dist viewport-x-offset) maxx))
           (setq dist (- maxx viewport-x-offset)))
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
@@ -91,7 +85,7 @@ left."
           (cdist (- infinite-desktop.move-cursor-distance))
           (minx 0))
       (if
-          (and (infinite-desktop.stop-at-workspace-borders)
+          (and (viewport-honor-workspace-edges)
                (< (+ viewport-x-offset dist) minx))
           (setq dist (- minx viewport-x-offset)))
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
@@ -103,7 +97,7 @@ left."
           (cdist (- infinite-desktop.move-cursor-distance))
           (miny 0))
       (if
-          (and (infinite-desktop.stop-at-workspace-borders)
+          (and (viewport-honor-workspace-edges)
                (< (+ viewport-y-offset dist) miny))
           (setq dist (- miny viewport-y-offset)))
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
@@ -115,7 +109,7 @@ left."
           (cdist infinite-desktop.move-cursor-distance)
           (maxy (* (screen-height) (1- (cdr viewport-dimensions)))))
       (if
-          (and (infinite-desktop.stop-at-workspace-borders)
+          (and (viewport-honor-workspace-edges)
                (> (+ dist viewport-y-offset) maxy))
           (setq dist (- maxy viewport-y-offset)))
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))

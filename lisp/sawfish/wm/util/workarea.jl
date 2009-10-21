@@ -33,6 +33,7 @@
 	  sawfish.wm.util.rects
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
+          sawfish.wm.viewport
 	  sawfish.wm.misc)
 
   (define (define-window-strut w left top right bottom)
@@ -66,29 +67,30 @@
       ;; or span multiple heads, or be on a different head
       ;; to that requested
       (let loop ((rest avoided))
-           (cond ((null rest) t)
-                 ((or (> (rect-2d-overlap
-                          (window-frame-dimensions (car rest))
-                          (window-position (car rest))
-                          rect) 0)
-                      (/= (rectangle-heads rect) 1)
-                      (and head (/= head (find-head (car rect) (cadr rect)))))
+           (cond ((null rest) (rect-within-head-p rect head))
+                 ((> (rect-2d-overlap
+                      (window-frame-dimensions (car rest))
+                      (window-position (car rest))
+                      rect)
+                     0)
                   nil)
                  (t (loop (cdr rest))))))
 
     (let* ((grid (grid-from-edges (car edges) (cdr edges)))
 	   ;; find all possible rectangles
-	   (rects (rectangles-from-grid
-		   (sort (car grid)) (sort (cdr grid)) pred)))
+           (rects (rectangles-from-grid (sort (car grid))
+                                        (sort (cdr grid))
+                                        pred)))
 
       ;; return the largest
       (let ((max-area 0)
 	    (max-rect nil))
 	(mapc (lambda (rect)
-		(when (and (rect-wholly-visible-p rect)
+		(when (and (rect-within-viewport-p rect)
 			   (> (rectangle-area rect) max-area))
 		  (setq max-area (rectangle-area rect))
-		  (setq max-rect rect))) rects)
+		  (setq max-rect rect)))
+              rects)
 	max-rect)))
 
   (define (calculate-workarea #!key window head)

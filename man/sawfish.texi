@@ -3949,6 +3949,19 @@ specified by @code{viewport-minimum-dimensions}.  Defaults to
 @code{wrap-around}.
 @end defvar
 
+@defun viewport-honor-workspace-edges
+Whether or not the display is permitted to move past the current
+viewport boundaries.  It returns true if @code{viewport-boundary-mode}
+is not set to @code{dynamic}.
+@end defun
+
+@defun viewport-at x y
+Returns a cons cell consisting of @code{(column . row)} of the viewport
+containing the specified @code{x} and @code{y} coordinates.  The
+coordinates are specified relative to the current viewport, so
+@code{(viewport-at 0 0)} is equivalent to @code{(screen-viewport)}.
+@end defun
+
 @defun warp-viewport x y
 Change the position of the physical display, such that location
 @code{(@var{x}, @var{y})} is at the top-left of the display.  The
@@ -4498,6 +4511,13 @@ Return the ID of the head containing the window with input focus.  If
 @var{window} is supplied and a window, return the head containing that
 window.  If @var{window} is supplied and @var{nil}, return
 @code{(pointer-head)}.
+@end defun
+
+@defun window-head-any-viewport window
+Like @code{current-head}, this will return the ID of the heand
+containing the specified window.  But unlike @code{current-head},
+@code{window-head-any-viewport} returns the head that the window would
+be in if its viewport were the visible viewport.
 @end defun
 
 @defun current-head-dimensions &optional window
@@ -5530,6 +5550,7 @@ Returns the number of X events waiting to be handled.
 * Pointer Functions::
 * Grab Functions::
 * Display Functions::
+* Rectangle Functions::
 * Gradient Functions::
 * Other Functions::
 @end menu
@@ -5704,7 +5725,7 @@ called.
 @end defun
 
 
-@node Display Functions, Gradient Functions, Grab Functions, Miscellaneous Functions
+@node Display Functions, Rectangle Functions, Grab Functions, Miscellaneous Functions
 @section Display Functions
 @cindex Display functions
 @cindex Functions, display
@@ -5788,7 +5809,172 @@ has the input focus.
 @end defun
 
 
-@node Gradient Functions, Other Functions, Display Functions, Miscellaneous Functions
+@node Rectangle Functions, Gradient Functions, Display Functions, Miscellaneous Functions
+@section Rectangle Functions
+@cindex Rectangle functions
+@cindex Functions, rectangle
+
+Rectangles define a region of the display.  A rectangle is a list of
+values: @code{(left top right bottom [weight])}.  @code{left} and
+@code{top} are the @code{x} and @code{y} coordinates of the upper left
+corner, @code{right} and @code{bottom} are the coordinates for the lower
+right corner.  @code{weight} is an integer.  The bulk of the rectangle
+management functions are in sawfish.wm.util.rects.
+
+@defun rect-left rect
+The x-axis value of the left side of the rectangle.  Equivalent to
+@code{car}
+@end defun
+
+@defun rect-top rect
+The y-axis value of the top of the rectangle.  Equivalent to
+@code{cadr}
+@end defun
+
+@defun rect-right rect
+The x-axis value of the right side of the rectangle.  Equivalent to
+@code{caddr}
+@end defun
+
+@defun rect-bottom rect
+The y-axis value of the bottom of the rectangle.  Equivalent to
+@code{cadddr}
+@end defun
+
+@defun rect-obscured r by
+Check whether the rectangle @code{r} is wholly or partially contained in
+rectangle @code{by}.  Returns one of the symbols @code{unobscured},
+@code{partially-obscured}, or @code{fully-obscured}.
+@end defun
+
+@defun rect-minus r s &optional tail
+Return a list of rectangles whose union is the part of rectangle
+@code{r} not contained in rectangle @code{s}.  If @code{tail} is given,
+the result is prepended to it.
+@end defun
+
+@defun rectangles-from-grid x-points y-poinst &optional pred
+The two lists of integers @code{x-points} and @code{y-points} define a
+rectangular grid. Return the complete list of rectangles formed by the
+intersections of the grid.
+
+If @code{pred} is defined it is called for each rectangle and only those
+for which it returns @code{t} are added to the returned list.
+
+Assumes that @code{x-points} and @code{y-points} are both sorted
+smallest->largest.
+@end defun
+
+@defun rectangles-from-windows windows &optional weight-fun
+Returns a list of rectangle objects representing the list of window
+objects @code{windows}.
+
+If @code{weight-fun} is defined, it is a function to call on each window
+to return the weight for that window. If not defined, the window's
+@code{weight} property is used instead.
+@end defun
+
+@defun grid-from-rectangles rects &optional with-root
+Given a list of rectangles @code{rects} return a cons cell
+@code{(x-points . y-points)} defining the grid they represent.
+
+If @code{with-root} is non-nil, then add the root window boundaries to
+the grid.
+@end defun
+
+@defun rectangle-area rect
+Returns the area of the specified rectangle.
+@end defun
+
+@defun rectangle-from-coords point dims
+Return the rectangle object with origin @code{point} and dimensions
+@code{dims}.
+@end defun
+
+@defun rectangle-corners
+Return a list of four cons cells representing the coordinates of the
+corners of the rectangle @code{rect}.
+@end defun
+
+@defun rectangle-center rect
+Returns a cons cell of the (approximate, to the nearest integer)
+coordinates of the center of the rectangle @code{rect}.
+@end defun
+
+@defun rectangle-center* point dims
+The same as @code{rectangle-center} except that the rectangle is
+specified via the x,y coordinates @code{point} and the dimensions
+@code{dims}.
+@end defun
+
+@defun rectangle-union rect1 rect2
+Gives the smallest rectangle containing both @code{rect1} and
+@code{rect2}.  The weight of the resulting rectangle is the weight of
+@code{rect1}.
+@end defun
+
+@defun rectangle-intersection rect1 rect2
+Gives the intersection of the two rectangles @code{rect1} and
+@code{rect2}.  The weigth of the resultant rectangle is the weight of
+@code{rect1}.  Returns @code{nil} if there the two rectangles do not
+intersect.
+@end defun
+
+@defun rect-1d-overlap a-1 a-2 b-1 b-2
+@code{a-1} to @code{a-2} indicates one line segment and @code{b-1} to
+@code{b-2} indicates another.  Returns the overlap between the two line
+segments.
+@end defun
+
+@defun rect-2d-overlap dims point rect
+Returns the overlap between two rectangles, one with dimensions
+@code{dims} and upper-left corner at @code{point}; the other is defined
+by @code{rect}.
+@end defun
+
+@defun rect-2d-overlap* rect1 rect2
+Like @code{rect-2d-overlap}, except that the rectangles are
+@code{rect1} and @code{rect2}.
+@end defun
+
+@defun rect-total-overlap dims point rects
+Returns the total area of the overlap between a rectangle defined by
+@code{dims} and @code{point}, and the list of rectangles @code{rects}
+when placed at @code{point}.
+@end defun
+
+@defun rect-wholly-within-rect outer inner
+Returns @code{t} if @code{inner} is completely within the boundaries of
+@code{outer}.
+@end defun
+
+@defun rect-wholly-visible-p
+Returns @code{t} if @code{rect} is completely inside the screen
+boundaries.
+@end defun
+
+@defun rectangle-heads
+Returns the number of screen heads that the rectangle @code{rect}
+appears on.
+@end defun
+
+These functions are found in sawfish.wm.viewport:
+
+@defun rect-within-viewport-p rect &optional viewport
+Return @code{t} if @code{rect} is entirely inside the screen boundaries
+for some viewport, regardless of whether it is the current viewport, or
+even if the viewport currently exists.  If @code{viewport} is specified
+check only against that viewport.
+@end defun
+
+@defun rect-within-head-p rect &optional head
+Return @code{t} if @code{rect} is entirely within some head on some
+viewport. If @code{head} is provided @code{rect} must be within that
+head on some viewport.
+@end defun
+
+
+@node Gradient Functions, Other Functions, Rectangle Functions, Miscellaneous Functions
 @section Gradient Functions
 @cindex Gradient functions
 @cindex Functions, gradients
