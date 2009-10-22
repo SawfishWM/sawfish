@@ -50,10 +50,11 @@
 
   ;; User Options
   (defvar apps-menu-autogen t
-    "If non-nil, `apps-menu' is automatically generated from *.desktop files.")
+    "If non-nil, `apps-menu' is automatically generated from `user-apps-menu'
+and *.desktop files. If you set `apps-menu', then it won't happen anyway.")
 
   (defvar user-apps-menu '()
-    "Your own `apps-menu' entries. It is followed by auto generated
+    "Your own applications menu entries. It is followed by auto generated
 applications menu.")
 
   (defvar apps-menu-ignore-no-display nil

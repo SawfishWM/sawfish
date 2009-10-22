@@ -4813,34 +4813,37 @@ Consider the following definition:
  ("Programs" . apps-menu)
  ("Customize" . custom-menu)
  ("About..." (customize 'about))
- ()
+ () ; Separation horizontal bar.
  ("Restart" restart)
  ("Quit" quit))
 @end lisp
 
 @noindent
-This is the definition of Sawfish's root menu. We can see that four
-submenus are created dynamically by dereferencing variables (in fact,
-three of this variables contain functions) (@code{workspace-menu},
-@code{window-menu}, @code{apps-menu} and @code{custom-menu}). Note that
-these must be special variables, i.e. initially declared using the
-@code{defvar} special form.
+This is the old definition of Sawfish's root menu. We can see
+that four submenus are created dynamically by dereferencing variables
+(in fact, three of this variables contain functions)
+(@code{workspace-menu}, @code{window-menu}, @code{apps-menu} and
+@code{custom-menu}). Note that these must be special variables,
+i.e. initially declared using the @code{defvar} special form.
 
-Sawfish generates applications menu from @file{*.desktop} files.
-User can use @code{user-apps-menu} variable to define their own
-applications menu, and it is appended by auto generated one.
+User can set @code{apps-menu} as they like. If it is unset, then
+Sawfish generates applications menu from @file{*.desktop} files. In
+that case, user can use @code{user-apps-menu} variable to define their
+own applications menu, and it is appended by auto generated one.
 Example of @code{user-apps-menu} definition can be as follows:
 
 @lisp
-(("xterm" (system "xterm &"))
+(("_xterm" (system "xterm &"))
  ("Emacs" (system "emacs &"))
  ("Firefox" (system "firefox &"))
- ("The GIMP" (system "gimp &")))
+ ("The _GIMP" (system "gimp &"))
+ () ; Seperation horizontal bar
+ )
 @end lisp
 
 @noindent
 The @code{system} function simply executes its single argument using
-@file{/bin/sh}.
+@file{/bin/sh}. The underscore defines the keyboard shortcut.
 
 When displaying a menu item, it is possible to also display the
 corresponding keyboard shortcut in the menu.
@@ -4898,12 +4901,15 @@ Display the applications menu.
 Sawfish generates applications menu from @file{*.desktop} files.
 
 @defvar apps-menu-autogen
-If non-nil, `apps-menu' is automatically generated from *.desktop files.
+If non-nil, @code{apps-menu} is automatically generated from
+@code{user-apps-menu} and @file{*.desktop} files. If you set
+@code{apps-menu}, then it won't happen anyway.
+ 
 Default is @code{t}.
 @end defvar
 
 @defvar user-apps-menu
-Your own `apps-menu' entries. It is followed by auto generated
+Your own application menu entries. It is followed by auto generated
 applications menu.
 @end defvar
 
@@ -4919,16 +4925,22 @@ List of directories to look for *.desktop files. Default is
 @end defvar
 
 @defvar apps-menu-alphabetize
-Sort the apps menu alphabetically. Defaults to @code{t}.
+Sort the generated apps menu alphabetically. Defaults to @code{t}.
 @end defvar
 
 @defvar apps-menu-lang
-Language for applications menu, in string. Default is set from locale.
+Language for applications menu auto generation, in string. Default is
+set from locale.
 @end defvar
 
-@deffn Comand update-apps-menu
-Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is
-non-nil, append the auto generated one.
+@deffn Function update-apps-menu
+@deffnx Comand update-apps-menu
+Set @code{apps-menu} to @code{user-apps-menu}, and if
+@code{apps-menu-autogen} is non-nil, append the auto generated one.
+@end deffn
+
+@deffn Function generate-apps-menu
+Return the applications menu list, generated from @file{*.desktop} files.
 @end deffn
 
 @defun window-ops-menu
