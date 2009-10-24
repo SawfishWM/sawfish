@@ -4107,10 +4107,16 @@ each step in the motion.
 @end defun
 
 @defvr Customizable scroll-viewport-steps
-Number of steps in which to divide a viewport change for
-@code{set-viewport}.  Each step requires a redisplay.  Defaults to 1,
-which causes an instantaneous change to the new viewport.  The
-customization limit is 50.
+When you go to another viewport, the bigger this value, the more
+smoothly the screen is scrolled. It is the number of steps for
+scrolling. 
+
+The default value 1 means no scroll, and the change is
+instantaneous. The upper limit for customization is 50.
+
+This variable is used for @code{set-viewport}. All interactive commands
+defined by Sawfish call this function, so this variable is important
+for user.
 @end defvr
 
 @node Windows and Viewports,  , Switching Viewports, Viewports

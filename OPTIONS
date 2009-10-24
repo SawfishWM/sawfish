@@ -218,7 +218,10 @@
 ;;    "How to act when passing the first or last viewport stop, wrap-around or dynamic")
 
 ;;  (define-special-variable scroll-viewport-steps 1
-;;    "Number of steps in which to scroll between viewports (less steps = faster scrolling)."
+;;    "When you go to another viewport, the bigger this value,
+;;  the more smoothly the screen is scrolled.
+;;  It is the number of steps for scrolling. The value 1 means no scroll, and
+;;  the change is instantaneous.")
 
 ;; workspace options
 

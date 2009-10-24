@@ -71,7 +71,10 @@
     :group (workspace viewport))
 
   (defcustom scroll-viewport-steps 1
-    "Number of steps for viewport scrolling."
+    "When you go to another viewport, the bigger this value,
+the more smoothly the screen is scrolled.
+It is the number of steps for scrolling. The value 1 means no scroll, and
+the change is instantaneous."
     :group (workspace viewport)
     :type number
     :range (1 . 50))
