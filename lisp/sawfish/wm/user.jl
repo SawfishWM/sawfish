@@ -114,7 +114,7 @@
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
-  ;; use a default menu if none is given
+  ;; generate apps-menu from *.desktop files
   (unless batch-mode
     (init-apps-menu))
 
