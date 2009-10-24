@@ -32,22 +32,27 @@ exec rep --batch "$0" "$@"
   (define dialog (gtk-about-dialog-new))
   (gtk-about-dialog-set-program-name dialog "Sawfish")
   (gtk-about-dialog-set-version dialog "__version__")
-  (gtk-about-dialog-set-copyright dialog "(c) 1999-2000 John Harper\n
-  (c) 2000 Eazel, Inc\n
-  (c) 2007-2008 Janek Kozicki\n
-  (c) 2008-2009 Christopher Bratusek")
-  (gtk-about-dialog-set-license dialog "Sawfish is released under the terms of the\n
-  GNU General Public License version 2, or (at your option) any later version.\n
-  See the `COPYING' file in the source tree for the full license\n\n
-  The sound-files are distributed under the Artistic License version 2.0.\n
-  See the `COPYING.SOUNDS' file in the source-tree.")
+  (gtk-about-dialog-set-copyright dialog "© 1999-2000 John Harper\
+  \n© 2000 Eazel, Inc\
+  \n© 2007-2008 Janek Kozicki\
+  \n© 2008-2009 Christopher Bratusek")
+  (gtk-about-dialog-set-license dialog "Sawfish is released under the terms of the\
+  \n\n\tGNU General Public License> version 2, or (at your option) any later version.\
+  \n\nSee the `COPYING' file in the source tree for the full license\
+  \n\nThe Sounds are distributed under the terms of the\
+  \n\n\tArtistic License version 2.0.\
+  \n\nSee the `COPYING.SOUNDS' file in the source-tree for the full license.")
   (gtk-about-dialog-set-comments dialog "Sawfish manages your windows extensibly")
   (gtk-about-dialog-set-website dialog "http://sawfish.wikia.com")
   (gtk-about-dialog-set-website-label dialog "Sawfish Wiki")
-  (gtk-about-dialog-set-authors dialog '("1999-2007: John Harper\n
-  2007-2009: Janek Kozicki, Timo Korvola, Andrea Vetorello, Guillermo S. Romero\n
-  2008-2009: Christopher Bratusek, Teika 'Mister X' Kazura, Jeremy Hankins\n
-  1999-2009: All the brave contributors (see `THANKS' in `CONTRIBUTING')"))
+  (gtk-about-dialog-set-authors dialog '("1999-2007: John Harper\
+  \n2007-2009: Janek Kozicki, Timo Korvola, Andrea Vetorello, Guillermo S. Romero\
+  \n2008-2009: Christopher Bratusek, Teika 'Mister X' Kazura, Jeremy Hankins\
+  \n1999-2009: All the brave contributors (see `THANKS' in `CONTRIBUTING')"))
+  (gtk-about-dialog-set-translator-credits dialog "de: Christian Kirbach, Mario Blättermann\
+  \nes: Jorge Gonzalez Gonzalez, Jacinto Capote Robles\
+  \neu: Inaki Larranaga Murgoitio\
+  \nsv: Daniel Nylander")
   (gtk-about-dialog-set-logo dialog (gdk-pixbuf-new-from-file "__sawfishdir__/sawfish.png"))
   (g-signal-connect dialog "delete_event" (lambda () (throw 'quit 0)))
   (gtk-widget-show-all dialog)
