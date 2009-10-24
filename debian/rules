@@ -1,0 +1,163 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+
+include /usr/share/quilt/quilt.make
+
+version = $(shell sed -n 's/version="\(.*\)"/\1/p' configure.in | head -n 1)
+
+DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+  confflags += --build $(DEB_HOST_GNU_TYPE)
+else
+  confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
+endif
+
+CFLAGS += -Wall -g -fno-strict-aliasing
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+
+LC_ALL=
+LINGUAS=
+LANG=
+export LC_ALL LINGUAS LANG
+
+configure: configure-stamp
+configure-stamp: $(QUILT_STAMPFN)
+	dh_testdir
+
+	cp /usr/share/misc/config.guess .
+	cp /usr/share/misc/config.sub .
+
+	aclocal-1.10
+	autoconf
+
+	CFLAGS="$(CFLAGS)" ./configure --prefix=/usr --with-readline \
+	--libexecdir=/usr/lib $(confflags)
+
+# Get rid of rpath
+	set -e; \
+	 tmpfile=`mktemp`; \
+	 sed "s/^REP_LIBS=\(.*\)-Wl,--rpath -Wl,[^ ]* \(.*\)$$/REP_LIBS=\1 \2/" Makedefs >$$tmpfile ;\
+	 mv $$tmpfile Makedefs
+
+	touch configure-stamp
+
+build: build-stamp
+build-stamp: configure-stamp
+
+	$(MAKE)
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	[ ! -f Makefile ] || $(MAKE) distclean
+
+	rm -rf src/.libexec
+	rm -rf src/.libs
+	rm -rf autom4te.cache/
+
+	dh_clean
+	$(MAKE) -f debian/rules unpatch
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+
+# Fixup libdir in .la files
+	find debian/tmp -name \*.la | while read file; do \
+	  libdir=`echo $$file | sed -e 's@debian/tmp\(.*\)/[^/]*la$$@\1@' `; \
+	  tmpfile=`mktemp`; \
+	  sed "s@^libdir=.*@libdir='$$libdir'@" $$file >$$tmpfile; \
+	  mv $$tmpfile $$file; \
+	done
+
+# Remove info files installed by Makefile. dh_installinfo will do it again without creating info.dir
+	find debian -type d -name info | xargs rm -rf
+
+	[ ! -f debian/sawfish-lisp-source.install ] || rm debian/sawfish-lisp-source.install
+	find debian/tmp/usr/share/sawfish/*/lisp -name \*.jl | \
+	 cut -d/ -f3- | grep -v 'autoload\|custom-defaults' > debian/sawfish-lisp-source.install
+
+	cp debian/sawfish-data.install.in debian/sawfish-data.install
+	find debian/tmp/usr/share/sawfish/*/lisp -name \*.jlc | \
+	 cut -d/ -f3- | grep -v 'main' >> debian/sawfish-data.install
+
+	dh_install --fail-missing
+
+# These are scripts. (Actually, they are /usr/bin/sawfish-config before and after compiling)
+# Should that be a symlink?
+	chmod a+x debian/sawfish/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jlc
+	chmod a+x debian/sawfish-lisp-source/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jl
+
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir -i
+	dh_testroot -i
+	dh_installdocs -psawfish-data FAQ NEWS README TODO OPTIONS KEYBINDINGS USERDOC
+	dh_installinfo -psawfish-data
+	dh_installexamples -psawfish-data
+	dh_installmenu -psawfish-data
+	dh_installchangelogs -psawfish-data
+	dh_link -i
+	dh_compress -i
+	dh_fixperms -i
+	dh_installdeb -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installmenu -a
+	dh_installman -a
+	dh_installemacsen -a -psawfish
+	dh_link -a
+	dh_strip -a --dbg-package=sawfish-dbg
+	dh_compress -a
+	dh_fixperms -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary: binary-indep binary-arch
+
+# Obtain upstream source snapshot from svn. Leaves it in
+# debian/sawfish_$version.orig.tar.gz
+# By default will get the latest version available, but can be controlled
+# by setting SVN_REV before calling make
+
+SVN_REPO ?= svn://svn.gnome.org/svn/sawfish/trunk
+SVN_REV  ?= $(shell LANG=C svn info $(SVN_REPO) | grep Revision: | cut -d: -f 2 | sed 's/^ *\([^ ]*\) *$$/\1/')
+export_dir = debian/tmp-src
+
+source:
+	dh_testdir
+	mkdir -p $(export_dir)
+	svn export -q -r $(SVN_REV) $(SVN_REPO) $(export_dir)/sawfish
+# remove unneeded files
+	cd $(export_dir)/sawfish; \
+	 find . -name .cvsignore | xargs rm
+	cd $(export_dir); \
+	  tar czf ../sawfish_$$(sed -n 's/version="\(.*\)"/\1/p' sawfish/configure.in | head -n 1)+svn$(SVN_REV).orig.tar.gz sawfish
+	-rm -rf $(export_dir)
+
+.PHONY: build clean binary-indep binary-arch binary install configure

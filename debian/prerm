@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+if [ "$1" = "remove" ]; then
+
+# Because dh_installwm don't remove a slave manpage
+  update-alternatives --remove x-window-manager /usr/bin/sawfish
+fi
+
+#DEBHELPER#
+
+exit 0
