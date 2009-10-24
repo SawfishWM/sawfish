@@ -33,9 +33,8 @@ REP_ENVIRON := $(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/l
 
 SUBSTS := -e "s|__lispdir__|$(lispdir)|" \
 	  -e "s|__localedir__|$(localedir)|" \
-	  -e "s|__version__|$(version)|"
-
-G_PIXMAP_DIR = $(GNOMEDIR)/share/pixmaps
+	  -e "s|__version__|$(version)|" \
+	  -e "s|__sawfishdir__|$(sawfishdir)|"
 
 %.jlc : %.jl
 	$(REP_ENVIRON) rep compiler -f compile-batch $<
@@ -49,17 +48,16 @@ install : all installdirs
 	$(INSTALL_SCRIPT) sawfish-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
 	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
 	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-about
-	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(G_PIXMAP_DIR)/sawfish-logo.png
+	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(sawfishdir)/sawfish.png
 
 uninstall :
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
 	rm -f $(DESTDIR)${bindir}/sawfish-client
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-about
-	rm -f $(DESTDIR)$(G_PIXMAP_DIR)/sawfish-logo.png
+	rm -f $(DESTDIR)$(sawfishdir)/sawfish.png
 
 installdirs : mkinstalldirs
-	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
-	  $(DESTDIR)$(G_PIXMAP_DIR)
+	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir)
 
 clean :
 	rm -f *~ *.jlc core
