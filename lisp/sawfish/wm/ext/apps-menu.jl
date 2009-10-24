@@ -63,7 +63,7 @@ eog, nautilus or evince. If you want to have them added to your menu,
 set this to non-nil.")
 
   (defvar desktop-directory '("/usr/share/applications")
-    "List of directories to look for *.desktop files."
+    "List of directories to look for *.desktop files.")
 
   (defvar apps-menu-alphabetize t
     "Sort the apps menu alphabetically.")
