@@ -107,10 +107,8 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 		   (let ((input (readline
 				 (format nil (if (repl-pending r) "" "%s> ")
 					 (repl-struct r)))))
-		     (when (equal ",quit\n" input)
-                       (throw 'bye nil)
-                       )
-		     (when input
+		     (when (and input
+                                (not (equal ",quit\n" input)))
 		       (let ((out (sawfish-client-eval
 				   `(progn
 				      (require 'rep.util.repl)
@@ -147,9 +145,7 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
   (sawfish-client-eval
    `(repl-completions ',(fluid current-repl) ',w)))
 
-(catch 'bye
-  (main)
-  )
+(main)
 
 (write standard-output "Bye.\n")
 
