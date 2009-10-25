@@ -100,6 +100,8 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 	     (let ((r (sawfish-client-eval
 		       `(progn
 			  (require 'rep.util.repl)
+                          (define-repl-command 'quit
+                            (lambda () (throw 'sawfish-client-exit)))
 			  (make-repl 'user)))))
 	       (let-fluids ((current-repl r))
 		 (write standard-output "\nEnter `,help' to list commands.\n")
@@ -107,8 +109,7 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 		   (let ((input (readline
 				 (format nil (if (repl-pending r) "" "%s> ")
 					 (repl-struct r)))))
-		     (when (and input
-                                (not (equal ",quit\n" input)))
+		     (when input
 		       (let ((out (sawfish-client-eval
 				   `(progn
 				      (require 'rep.util.repl)
@@ -116,7 +117,9 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 					      (make-string-output-stream))
 					     (standard-error standard-output)
 					     (r ',r))
-					(cons (and (repl-iterate r ',input) r)
+					(cons (catch 'sawfish-client-exit
+                                                (and (repl-iterate r ',input)
+                                                     r))
 					      (get-output-stream-string
 					       standard-output)))))))
 			 (setq r (car out))
