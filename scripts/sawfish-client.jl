@@ -142,6 +142,7 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 	       (format standard-error
 		       "Try `sawfish-client --help' for more information.\n")
 	       (exit 1))))
+    (write standard-output "\nBye.\n")
     (exit 0)))
 
 (define (rl-completion-generator w)
@@ -149,8 +150,6 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
    `(repl-completions ',(fluid current-repl) ',w)))
 
 (main)
-
-(write standard-output "Bye.\n")
 
 ;; Local variables:
 ;; major-mode: lisp-mode
