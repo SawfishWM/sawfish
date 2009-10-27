@@ -1,0 +1,65 @@
+Source: sawfish
+Section: x11
+Build-Conflicts: autoconf2.13, automake1.4
+Priority: optional
+Maintainer: Christopher Roy Bratusek <zanghar@freenet.de>
+Standards-Version: 3.8.3
+Build-Depends: gettext (>= 0.10.37), debhelper (>= 7.0.0), libxinerama-dev,
+ rep-gtk (>= 1:0.90.0), libgmp3-dev (>= 4.1.4-8),
+ texinfo (<< 4.11) | texinfo (>= 4.11.dfsg.1-3), 
+ libgtk2.0-dev (>= 2.12), libxrender-dev, libxext-dev,
+ autotools-dev, automake1.10, quilt (>=0.40), librep-dev (>= 0.90.1),
+ rep, libtool
+Homepage: http://sawfish.wikia.com/
+
+Package: sawfish
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, librep9 (>=0.90.0), rep,
+ rep-gtk (>= 0.18.4), gnome-terminal | x-terminal-emulator,
+ sawfish-data (= ${source:Version})
+Suggests: menu, gnome-control-center, yelp
+Provides: x-window-manager
+Replaces: sawfish-lisp-source (<= 0.38-6), sawfish2
+Conflicts: sawfish2, sawfish-themer, menu (<< 2.1.14)
+Description: a window manager for X11
+ Sawfish is an extensible window manager using an Emacs Lisp-like scripting
+ language. All window decorations are configurable, the basic idea is to
+ have as much user-interface policy as possible controlled through the Lisp
+ language.
+
+Package: sawfish-dbg
+Architecture: any
+Depends: ${misc:Depends}, sawfish (= ${binary:Version}),
+ sawfish-data (= ${source:Version})
+Recommends: sawfish-lisp-source
+Section: debug
+Priority: extra
+Description: sawfish debugging symbols
+ This package contains the debugging symbols from the sawfish window manager.
+ It is not needed for normal operation of the package.
+ .
+ Install it if you need to debug problems in sawfish. You will also almost
+ certainly need sawfish-lisp-source in that case.
+
+Package: sawfish-data
+Architecture: all
+Depends: ${misc:Depends}
+Replaces: sawfish (<< 1:1.5.0-1)
+Conflicts: sawfish (<= 1:1.3+cvs20060518-2)
+Description: sawfish architecture independent data
+ This package contains the architecture independent lisp compiled files
+ and other data, such as theme pixmaps. It is unlikely to be of any
+ use without the sawfish window manager.
+ .
+ The lisp source files are in the sawfish-lisp-source package.
+
+Package: sawfish-lisp-source
+Architecture: all
+Depends: ${misc:Depends}, sawfish-data (= ${source:Version})
+Recommends: sawfish
+Description: sawfish lisp files
+ This package contains the lisp source files in case you want to modify,
+ study or debug the behaviour of the window manager.
+ .
+ It is not required for normal use of sawfish and not installing it will save
+ space in small systems.

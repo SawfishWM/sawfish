@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+
+# Touch all jlc files
+  find /usr/share/sawfish/*/lisp -name *.jlc | xargs touch
+
+# Because dh_installwm don't install a slave manpage
+  update-alternatives --install /usr/bin/x-window-manager \
+  x-window-manager /usr/bin/sawfish 70 \
+  --slave /usr/share/man/man1/x-window-manager.1.gz \
+  x-window-manager.1.gz /usr/share/man/man1/sawfish.1.gz
+
+fi
+
+#DEBHELPER#
+
+exit 0
