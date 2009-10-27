@@ -82,23 +82,9 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	if (w != NULL)
 	{
 	    DB(("error_handler (%s)\n", rep_STR(w->name)));
-
+	    
 	    if (!WINDOW_IS_GONE_P (w))
-           {
-               /* don't unmap a window that had send an X_ConfigureWindow request */
-               if(
-                   /*     ev->type == 0 what is the "type" ? but I've seen that type is always 0 */
-                   /*&&*/ ev->error_code==BadWindow /* the window is bad, because it is not configured yet */
-                     &&   ev->request_code==X_ConfigureWindow
-                     &&   ev->minor_code==0 /* X_ConfigureWindow is not in an Xlib extension, so it must be 0 */
-               )
-               {
-                   return 0;
-               } else
-               {
-                   remove_window (w, TRUE, TRUE);
-               }
-           }
+		remove_window (w, TRUE, TRUE);
 
 	    /* so we call emit_pending_destroys () at some point */
 	    rep_mark_input_pending (ConnectionNumber (dpy));
@@ -456,7 +442,7 @@ void
 send_client_message (Window w, Atom a, Time time)
 {
   XClientMessageEvent ev;
-
+  
   ev.type = ClientMessage;
   ev.window = w;
   ev.message_type = xa_wm_protocols;

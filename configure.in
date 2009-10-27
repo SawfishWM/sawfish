@@ -338,11 +338,8 @@ if test "x$KDEDIR" = x; then
 	KDEDIR="/usr/share/apps/"
 fi
 
-gitdate=`date +%y%m%d`
-
 dnl Nonstandard exported symbols
 AC_SUBST(version)
-AC_SUBST(gitdate)
 AC_SUBST(subversion)
 AC_SUBST(sawfishdir)
 AC_SUBST(sawfishexecdir)
@@ -406,7 +403,6 @@ scripts/Makefile
 sounds/Makefile
 src/Makefile
 themes/Makefile
-debian/changelog
 ])
 
 AC_OUTPUT
