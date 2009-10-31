@@ -2504,15 +2504,14 @@ is usually required for terminal windows, for example.)
 The ``fullscreen'' category maximizes the window to the current
 screen.
 
-@deffn Function maximize-window-fullscreen window
+@deffn Function maximize-window-fullscreen window state
 @deffnx Command maximize-window-fullscreen window
 Maximize both dimensions of @var{window} on the screen, removing
 window decorations and making the window edges flush with the screen
-sides.
+sides. 
 
-If defined, @var{direction} is a symbol, either @code{vertical} or
-@code{horizontal}, and maximization will only occur for that
-direction.
+If @var{state} nil, it unmaximizes. Else, it maximizes. If called as
+a command, it always maximizes.
 @end deffn
 
 @deffn Function maximize-window-fullscreen-toggle window
@@ -2520,24 +2519,19 @@ direction.
 Toggle the state of @var{window} between maximized and unmaximized in
 the screen, removing window decorations and making the window edges
 flush with the screen sides.
-
-If defined, @var{direction} is a symbol, either @code{vertical} or
-@code{horizontal}, and maximization will only occur for that
-direction.
 @end deffn
 
 The ``fullxinerama'' category maximizes the window to the entire
 Xinerama display.
 
-@deffn Function maximize-window-fullxinerama window
+@deffn Function maximize-window-fullxinerama window state
 @deffnx Command maximize-window-fullxinerama window
 Maximize both dimensions of @var{window} across all Xinerama screens,
 removing window decorations and making the window edges flush with the
 screen sides.
 
-If defined, @var{direction} is a symbol, either @code{vertical} or
-@code{horizontal}, and maximization will only occur for that
-direction.
+If @var{state} nil, it unmaximizes. Else, it maximizes. If called as
+a command, it always maximizes.
 @end deffn
 
 @deffn Function maximize-window-fullxinerama-toggle window
@@ -2545,10 +2539,6 @@ direction.
 Toggle the state of @var{window} between maximized and unmaximized
 across all Xinerama screeens, removing window decorations and making
 the window edges flush with the screen sides.
-
-If defined, @var{direction} is a symbol, either @code{vertical} or
-@code{horizontal}, and maximization will only occur for that
-direction.
 @end deffn
 
 @node Unmaximizing,  , Maximizing Without Borders, Maximizing Windows

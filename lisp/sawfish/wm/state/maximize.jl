@@ -546,7 +546,8 @@ unmaximized."
     (maximize-window-fullscreen w (not (window-maximized-fullscreen-p w))))
 
   (define-command 'maximize-window-fullscreen
-    maximize-window-fullscreen #:spec "%W")
+    maximize-window-fullscreen #:spec "%W
+t")
   (define-command 'maximize-window-fullscreen-toggle
     maximize-window-fullscreen-toggle #:spec "%W")
 
@@ -579,7 +580,9 @@ across all Xinerama and unmaximized."
     (maximize-window-fullxinerama w (not (window-maximized-fullscreen-p w))))
 
   (define-command 'maximize-window-fullxinerama
-    maximize-window-fullxinerama #:spec "%W")
+    maximize-window-fullxinerama #:spec "%W
+t")
+  
   (define-command 'maximize-window-fullxinerama-toggle
     maximize-window-fullxinerama-toggle #:spec "%W")
 
