@@ -119,7 +119,6 @@
     (init-apps-menu))
 
   ;; apply customized font-colors
-  (require 'sawfish.wm.extras)
   (if use-custom-font-color
       (update-frame-font-color))
 
