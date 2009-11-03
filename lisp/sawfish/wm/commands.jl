@@ -184,6 +184,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
       ;; postfix
       (call-hook 'post-command-hook (list name))
       (setq last-command this-command)
+      (setq this-command nil)
       (setq current-prefix-arg nil)))
 
   (define-command 'call-command call-command

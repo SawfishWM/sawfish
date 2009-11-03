@@ -5446,8 +5446,8 @@ prefix argument.
 @end defvar
 
 @defvar this-command
-The command currently being called, or @samp{nil} if no command is
-being called.
+The command currently being called. The value is only set during
+command call, and @code{nil} anytime else.
 @end defvar
 
 @defvar last-command
@@ -6186,8 +6186,12 @@ The available hooks are listed below.
 @cindex Command Hooks
 @cindex Hooks, Command
 
+The hook functions are passed one argument which is the command name.
+
 @defvr {Hook} pre-command-hook
-Called before each command is evaluated.
+Called before each command is evaluated. If you set the value
+@code{this-command} to @code{nil} in this hook, then the command 
+won't be executed.
 @end defvr
 
 @defvr {Hook} post-command-hook
