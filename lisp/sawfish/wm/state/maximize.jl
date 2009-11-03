@@ -48,9 +48,7 @@
 	    maximize-window-fullscreen
 	    maximize-window-fullscreen-toggle
 	    maximize-window-fullxinerama
-	    maximize-window-fullxinerama-toggle
-	    maximize-unframe
-	    maximize-reframe)
+	    maximize-window-fullxinerama-toggle)
 
     (open rep
 	  rep.system
@@ -489,14 +487,6 @@ unmaximized."
 	(unmaximize-window w 'horizontal)
       (maximize-fill-window w 'horizontal)))
 
-  (define (maximize-unframe w)
-    (set-window-type w 'unframed)
-    (maximize-window w))
-
-  (define (maximize-reframe w)
-    (set-window-type w 'default)
-    (maximize-window w))
-
   ;;###autoload
   (define-command 'maximize-fill-window
     maximize-fill-window #:spec "%W")
@@ -510,10 +500,6 @@ unmaximized."
     maximize-fill-window-horizontally-toggle #:spec "%W")
   (define-command 'maximize-fill-window-vertically-toggle
     maximize-fill-window-vertically-toggle #:spec "%W")
-  (define-command 'maximize-unframe
-    maximize-unframe #:spec "%W")
-  (define-command 'maximize-reframe
-    maximize-reframe #:spec "%W")
 
   ;; fullscreen commands
 
