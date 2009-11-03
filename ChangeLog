@@ -1,3 +1,18 @@
+2009-11-03  Teika kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands.jl
+	* man/news.texi
+	* man/sawfish.texi: `this-command' is set to nil when command execution is over.
+
+	* scripts/sawfish-client.jl: sawfish-client says "Bye." on normal exit.
+
+	* lisp/sawfish/wm/state/maximize.jl
+	* man/news.texi
+	* man/sawfish.texi :Bugfix. Commands 'maximize-window-fullscreen' and 'maximize-window-fullxinerama' work. Related doc error is corrected, too.
+
+	* lisp/sawfish/wm/extras.jl
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/user.jl: Moved contents of wm/extras.jl to wm/frames.jl, and deleted extras.jl.
+
 2009-10-28  Christopher Bratusek <zanghar@freenet.de>
 	* scripts/sawfish-client.jl: merged branch `quit' from Ti-Mo (improved ,quit action)
 
