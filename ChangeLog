@@ -46,6 +46,21 @@
 	* lisp/sawfish/wm/ext/apps-menu.jl
 	* man/sawfish.texi: Doc improvements on applications menu.
 
+2009-10-21  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* lisp/sawfish/wm/util/rects.jl
+	* lisp/sawfish/wm/util/workarea.jl
+	* lisp/sawfish/wm/viewport.jl
+	* man/news.texi: Fix bugs introduced by the recent changes to allow maximization outside of the current viewport:
+	                 - viewport-window now gives the viewport where most of the window is located.
+	                 - A few new functions for working with rectangles.
+
+	* lisp/sawfish/wm/ext/infinite-desktop.jl: infinite-desktop now checks viewport-honor-workspace-edges
+	                                           (in sawfish.wm.viewport) before allowing movement past workspace boundaries.
+
+	* man/sawfish.texi: Adjustments to viewport docs; new docs for sawfish.wm.util.rects.
+
 2009-10-19  Teika kazura <teika@lavabit.com>
 	* OPTIONS
 	* lisp/sawfish/wm/ext/apps-menu.jl
@@ -119,6 +134,16 @@
 					- display-ws-name-setter
 
 	* OPTIONS: updated
+
+2009-10-11  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/util/edges.jl
+	* lisp/sawfish/wm/viewport.jl: Fix bugs that shift windows between viewports on restart:
+	                               - maximize-window and maximize-window-fullscreen now work for windows outside of the current viewport
+	                               - the position window matcher now preserves the current viewport
+
+	* lisp/sawfish/wm/ext/infinite-desktop.jl: infinite-desktop.stop-at-workspace-borders is now true iff viewport-boundary-mode is not dynamic.
 
 2009-10-09  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/menus.jl: added "Reload Appsmenu" entry

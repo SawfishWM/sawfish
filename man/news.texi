@@ -36,13 +36,24 @@ only if the @file{~/.sawfishrc} lacks. Now, it is always read, so you
 don't have to @code{require} it. It sets up GNOME and KDE support if
 they run, and does @code{(require 'sawfish.wm.ext.error-handler)}.
 
-Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from this version on,
-Sawfish will rename @code{~/.sawmillrc} to @code{~/.sawfishrc}, if the former does exist on
-your system, but the latter doesn't.
+Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from
+this version on, Sawfish will rename @code{~/.sawmillrc} to
+@code{~/.sawfishrc}, if the former does exist on your system, but the
+latter doesn't.
 
 @item Configurator's binary, @code{sawfish-ui}, is renamed to @code{sawfish-config} [Christopher Bratusek]
 
-Its window class is changed to @code{sawfish-configurator} / @code{Sawfish-Configurator}, too.
+Its window class is changed to @code{sawfish-configurator} /
+@code{Sawfish-Configurator}, too.
+
+@item Infinite Desktop and Dynamic Viewports
+
+In @code{infinite-desktop} there is no longer any option to prevent the
+viewport from going beyond the edge of the workspace.  Instead it is
+prevented if and only if @code{viewport-boundary-mode} is not set to
+@code{'dynamic}.  This means that the default behavior is now to stop at
+workspace boundaries; to acheive the previous behavior set
+@code{viewport-boundary-mode} to @code{'dynamic}.
 
 @item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
 @end itemize

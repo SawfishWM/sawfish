@@ -65,56 +65,59 @@
     :type number
     :range (1 . nil))
 
-  (defcustom infinite-desktop.stop-at-workspace-borders nil
-    "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-    :group (workspace infinite-desktop)
-    :type boolean )
-
   (define (infinite-desktop.move-right)
+    "Shifts the display `infinite-desktop.move-distance' pixels to the
+right."
     (let ((dist infinite-desktop.move-distance)
           (cdist infinite-desktop.move-cursor-distance)
           (maxx (* (screen-width) (1- (car viewport-dimensions)))))
       (if
-          (and infinite-desktop.stop-at-workspace-borders
+          (and (viewport-honor-workspace-edges)
                (> (+ dist viewport-x-offset) maxx))
           (setq dist (- maxx viewport-x-offset)))
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
       (move-cursor (- (min dist cdist)) 0)))
 
   (define (infinite-desktop.move-left)
+    "Shifts the display `infinite-desktop.move-distance' pixels to the
+left."
     (let ((dist (- infinite-desktop.move-distance))
           (cdist (- infinite-desktop.move-cursor-distance))
           (minx 0))
       (if
-          (and infinite-desktop.stop-at-workspace-borders
+          (and (viewport-honor-workspace-edges)
                (< (+ viewport-x-offset dist) minx))
           (setq dist (- minx viewport-x-offset)))
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
       (move-cursor (- (max dist cdist)) 0)))
 
   (define (infinite-desktop.move-top)
+    "Shifts the display `infinite-desktop.move-distance' pixels up."
     (let ((dist (- infinite-desktop.move-distance))
           (cdist (- infinite-desktop.move-cursor-distance))
           (miny 0))
       (if
-          (and infinite-desktop.stop-at-workspace-borders
+          (and (viewport-honor-workspace-edges)
                (< (+ viewport-y-offset dist) miny))
           (setq dist (- miny viewport-y-offset)))
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (max dist cdist)))))
 
   (define (infinite-desktop.move-bottom)
+    "Shifts the display `infinite-desktop.move-distance' pixels down."
     (let ((dist infinite-desktop.move-distance)
           (cdist infinite-desktop.move-cursor-distance)
           (maxy (* (screen-height) (1- (cdr viewport-dimensions)))))
       (if
-          (and infinite-desktop.stop-at-workspace-borders
+          (and (viewport-honor-workspace-edges)
                (> (+ dist viewport-y-offset) maxy))
           (setq dist (- maxy viewport-y-offset)))
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (min dist cdist)))))
 
   (define (infinite-desktop.enter-flipper-hook w)
+    "Called when a desktop flipper is triggered to shift the visible
+desktop."
     (if infinite-desktop-p
         (cond ((eq w 'right) (infinite-desktop.move-right))
               ((eq w 'left) (infinite-desktop.move-left))
@@ -123,6 +126,7 @@
               (t (display-message "move-unknown")))))
 
   (define (infinite-desktop.infinite-desktop)
+    "Turn on infinite-desktop if `infinite-desktop-p' is true."
     (if infinite-desktop-p
         (enable-flippers)))
 

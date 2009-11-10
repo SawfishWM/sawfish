@@ -34,7 +34,8 @@
 
   (define (get-visible-window-edges #!key with-ignored-windows
 				    windows-to-ignore (windows t)
-				    include-screen include-heads)
+				    include-screen include-heads
+                                    viewport)
     "Returns (X-EDGES . Y-EDGES), X-EDGES is a list of (X Y1 Y2 OPEN-P),
 and Y-EDGES is a list of (Y X1 X2 OPEN-P). OPEN-P is t if the edge is
 the left or top edge of a window. For the root window, the meaning of
@@ -43,14 +44,20 @@ OPEN-P is reversed.
 #:include-heads may be a list of head ids, or a true non-list, in which
 case all heads are included.
 
+#:viewport may be a cons cell specifying (col . row); if specified
+edges are given for that viewport rather than the current one.
+
 The returned lists may contain duplicates, and are unsorted."
 
-    (let (x-edges y-edges)
+    (let* ((width (screen-width))
+           (height (screen-height))
+           (vp-offset (viewport-offset viewport))
+           x-edges y-edges)
       (map-windows
        (lambda (w)
 	 (when (and (window-mapped-p w)
 		    (window-visible-p w)
-		    (not (window-outside-viewport-p w))
+		    (not (window-outside-viewport-p w viewport))
 		    (or with-ignored-windows
 			(not (window-get w 'ignored)))
 		    (not (memq w windows-to-ignore))
@@ -73,12 +80,16 @@ The returned lists may contain duplicates, and are unsorted."
                                        y-edges)))))))
 
       (when include-screen
-	(setq x-edges (list* (list 0 0 (screen-height) nil)
-			     (list (screen-width) 0 (screen-height) t)
-			     x-edges))
-	(setq y-edges (list* (list 0 0 (screen-width) nil)
-			     (list (screen-height) 0 (screen-width) t)
-			     y-edges)))
+        (let* ((x-min (car vp-offset))
+               (y-min (cdr vp-offset))
+               (x-max (+ x-min width))
+               (y-max (+ y-min height)))
+          (setq x-edges (list* (list x-min y-min y-max nil)
+                               (list x-max y-min y-max t)
+                               x-edges))
+          (setq y-edges (list* (list y-min x-min x-max nil)
+                               (list y-max x-min x-max t)
+                               y-edges))))
 
       (when (and include-heads (not (listp include-heads)))
 	(setq include-heads (do ((i 0 (1+ i))
@@ -86,21 +97,17 @@ The returned lists may contain duplicates, and are unsorted."
 				((= i (head-count)) lst))))
       (when include-heads
 	(mapc (lambda (h)
-		(let ((dims (head-dimensions h))
-		      (offset (head-offset h)))
-		  (setq x-edges (list* (list (car offset)
-					     (cdr offset)
-					     (+ (cdr offset) (cdr dims)) nil)
-				       (list (+ (car offset) (car dims))
-					     (cdr offset)
-					     (+ (cdr offset) (cdr dims)) t)
+		(let* ((dims (head-dimensions h))
+                       (offset (head-offset h))
+                       (x-min (+ (car offset) (car vp-offset)))
+                       (y-min (+ (cdr offset) (cdr vp-offset)))
+                       (x-max (+ x-min (car dims)))
+                       (y-max (+ y-min (cdr dims))))
+		  (setq x-edges (list* (list x-min y-min y-max nil)
+				       (list x-max y-min y-max t)
 				       x-edges))
-		  (setq y-edges (list* (list (cdr offset)
-					     (car offset)
-					     (+ (car offset) (car dims)) nil)
-				       (list (+ (cdr offset) (cdr dims))
-					     (car offset)
-					     (+ (car offset) (car dims)) t)
+		  (setq y-edges (list* (list y-min x-min x-max nil)
+				       (list y-max x-min x-max t)
 				       y-edges))))
 	      include-heads))
 

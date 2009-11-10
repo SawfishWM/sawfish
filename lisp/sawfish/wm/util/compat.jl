@@ -117,7 +117,8 @@
           nokogiri-user-level nokogiri-buttons workspace-boundary-mode
           workspace-send-boundary-mode lock-first-workspace
           ignore-window-input-hint workspace-geometry
-          pointer-motion-threshold ignore-program-positions))
+          pointer-motion-threshold ignore-program-positions
+          infinite-desktop.stop-at-workspace-borders))
 
 ;;; obsolete custom setters
 
