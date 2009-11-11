@@ -142,7 +142,6 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 	       (format standard-error
 		       "Try `sawfish-client --help' for more information.\n")
 	       (exit 1))))
-    (write standard-output "\nBye.\n")
     (exit 0)))
 
 (define (rl-completion-generator w)
