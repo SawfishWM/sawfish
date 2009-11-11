@@ -132,6 +132,25 @@ package preventing engine based themes working with several interpreted
 languages. Get the latest @code{gtk-engines} from
 @url{ftp://ftp.gnome.org/}
 
+@item Sound support.
+
+Here we explain sound support which can't be set via Configurator.
+
+You can add sound files under @file{~/.sawfish/sounds/}. This path can
+be changed with @code{audio-load-path} variable. See the file
+@file{OPTIONS} for the format.
+
+The program to play sounds is set by @code{play-sample-program}. If
+you want to pass arguments or redirect the output, prepare a wrapper script,
+for example something like following:
+
+@example
+#!/bin/sh
+
+# No need of backgrounding.
+mplayer -volume 30 "$1" &>/dev/null
+@end example
+
 @item What's this @code{sawfish-client} program?
 
 This allows you to connect to a window manager process and evaluate

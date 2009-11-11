@@ -56,8 +56,19 @@ workspace boundaries; to acheive the previous behavior set
 @code{viewport-boundary-mode} to @code{'dynamic}.
 
 @item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
-@end itemize
 
+@item Sound support has changed. [Christopher Bratusek]
+
+Sawfish used to rely on esound and libaudiofile to play sound, but we
+stopped it. If you want sound, set the variable
+@code{play-sample-program} to the path of the program capable of
+playing *.wav file. You can set the variable from the Configurator,
+too.
+
+You can't set any arguments to pass from this variable. If you want to
+give arguments or redirect output, write a wrapper
+program. (@pxref{FAQ}, ``Sound support'' section.)
+@end itemize
 @item Bugs fixed:
 @itemize @minus
 
@@ -199,8 +210,6 @@ In KDE4 WM Selector, Sawfish is added. [Christopher Bratusek]
 @end itemize
 @item Removed Features:
 @itemize @minus
-
-@item Built-in audio support has been dropped, instead we rely on an extern playbin [Christopher Bratusek]
 
 @item Built-in support for mouse-buttons 6 to 9 is dropped
 

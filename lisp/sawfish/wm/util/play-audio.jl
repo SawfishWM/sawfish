@@ -39,7 +39,10 @@
     "List of directories to search for sound samples.")
 
   (defcustom play-sample-program "/usr/bin/paplay"
-    "The program used to play audio samples."
+    "The program used to play audio samples. Should be capable of
+playing *.wav file.
+  You can't set any arguments to pass from this variable. If you want
+to give arguments or redirect output, write a wrapper program."
     :type program
     :group audio)
 
