@@ -15,7 +15,16 @@ they occurred between. For more detailed information see the
 @item Bugs fixed:
 @itemize @minus
 
-@item Fixed a race condition which lead to segfault, if a window is mapped and immediately unmapped, also prevent add-window-hook to be called with an uninitialised arguement [Janek Kozicki, Timo Korvola]
+@item Prevents crashes for quick window destructions, especially under high load
+
+There have been crashes if a window is destroyed soon after its creation.
+It happens in @code{add_window} function, and it might be due to a
+window being destroyed, garbage collected and then accessed.
+
+Now most parts of @code{add_window} are protected from garbage
+collection with @code{rep_PUSHGC} / @code{rep_POPGC}. It also prevents
+@code{add_window_hook} from being called with uninitialised argument.
+[Timo Korvola, Janek Kozicki]
 @end itemize
 @end itemize
 @heading 1.5.2
