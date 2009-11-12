@@ -1,29 +1,5 @@
 In Sawfish 1.6.0 there are the following major changes:
 
-reboot/shutdown from root-menu
-******************************
-
-The sawfish root-menu has a session sub-menu which allows you
-to reboot and/or shutdown your machine. If you use GNOME or KDE,
-no additional work by you is required. But if you use sawfish
-standalone, you have to make sure that you're allowed to execute
-`shutdown', there are several ways to achieve that, the suggested
-approach is to use sudo combined with a group called shutdown:
-
-;; add a new group called `shutdown'
-groupadd shutdown
-
-;; add user to the `shutdown' group
-adduser misterx shutdown
-
-;; add the group `shutdown' to sudoers
-visudo
-  
-  ;; add the following:
-  %shutdown ALL=(root) NOPASSWD: /sbin/shutdown
-
-That's it, now everyone in the shutdown group can do it!
-
 sawfish-ui is now sawfish-config
 ********************************
 
