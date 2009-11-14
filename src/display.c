@@ -86,8 +86,8 @@ error_handler (Display *dpy, XErrorEvent *ev)
 	    if (!WINDOW_IS_GONE_P (w))
 		remove_window (w, TRUE, TRUE);
 
-	    /* so we call emit_pending_destroys () at some point */
-	    rep_mark_input_pending (ConnectionNumber (dpy));
+	    /* so we call emit_pending_destroys () at some point
+	    rep_mark_input_pending (ConnectionNumber (dpy)); */
 	}
     }
 

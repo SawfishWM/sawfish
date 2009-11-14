@@ -21,9 +21,7 @@
 (define-structure sawfish.wm.commands.user
 
     (export xterm
-	    browser
-	    display-message-with-timeout
-	    view-clipboard)
+	    browser)
 
     (open rep
 	  rep.system
@@ -32,9 +30,7 @@
 	  rep.io.files
 	  sawfish.wm.misc
 	  sawfish.wm.custom
-	  sawfish.wm.commands
-	  sawfish.wm.workspace
-	  sawfish.wm.util.selection)
+	  sawfish.wm.commands)
 
   (defgroup apps "Default Applications" :group misc)
 
@@ -64,37 +60,6 @@
       (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
                       browser-program website))))
 
-  ;; display-message-with-timeout
-  ;; like display-message, but it dissapears
-  ;; after `timemout' seconds, displayed endlessly
-  ;; (like without timeout), if a negative value is given
-  (define (display-message-with-timeout message timeout)
-    (display-message message)
-    (make-timer (lambda () (display-message nil)) timeout))
-
-  (defcustom clipboard-preview-clip-length 60
-    "Maximum length of Clipboard Preview"
-    :type number
-    :group misc)
-
-  (defcustom clipboard-preview-timeout 5
-    "How long to display Clipboard Preview"
-    :type number
-    :group misc)
-
-  ;; view-clipboard
-  ;; view the content of the primary x-clipboard
-  (define (view-clipboard)
-    "Show the contents of the clipboard in a message window"
-    (let ((c (x-get-selection 'PRIMARY)))
-      (if (> (length c) 0)
-          (if (< (length c) clipboard-preview-clip-length)
-              (display-message-with-timeout c clipboard-preview-timeout)
-            (display-message-with-timeout
-             (format nil "%s ..." (substring c 0 clipboard-preview-clip-length))
-             clipboard-preview-timeout)))))
-
   ;;###autoload
   (define-command 'xterm xterm #:class 'default)
-  (define-command 'browser browser #:class 'default)
-  (define-command 'view-clipboard view-clipboard #:class 'default))
+  (define-command 'browser browser #:class 'default))

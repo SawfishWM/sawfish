@@ -101,8 +101,6 @@
 	    show-desktop
 	    hide-desktop
 	    showing-desktop-p
-	    display-workspace-name
-	    display-ws-name-setter
 
 	    ;; XXX rename these..?
 	    ws-remove-window
@@ -959,33 +957,6 @@ last instance remaining, then delete the actual window."
     (setq first-interesting-workspace nil)
     (setq last-interesting-workspace nil)
     (call-hook 'workspace-state-change-hook))
-
-;;; Extras
-
-  (defcustom display-ws-name-on-switch nil
-    "Whether to display workspace name upon switch"
-    :type boolean
-    :group workspace
-    :after-set (lambda () (display-ws-name-setter)))
-
-  (defcustom display-ws-name-timeout 3
-    "How long to display workspace name"
-    :type number
-    :group workspace)
-
-  ;; display-workspace-name
-  ;; display WS name on switch
-  (define (display-workspace-name)
-    (display-message-with-timeout
-     (format nil "Now on Workspace: %s"
-             (or (nth current-workspace workspace-names)
-                 (format nil (_ "Workspace %d") (1+ current-workspace))))
-     display-ws-name-timeout))
-
-  (define (display-ws-name-setter)
-    (if (eq display-ws-name-on-switch 't)
-        (add-hook 'enter-workspace-hook display-workspace-name)
-      (remove-hook 'enter-workspace-hook display-workspace-name)))
 
   (define-command 'display-workspace-name display-workspace-name
     #:class 'default)
