@@ -83,12 +83,21 @@ collection with @code{rep_PUSHGC} / @code{rep_POPGC}. It also prevents
 @code{add_window_hook} from being called with uninitialised argument.
 [Timo Korvola, Janek Kozicki]
 
-@item When a window sends request_code 12 (X_ConfigureWindow), don't auto-asumme
+@item error_handler() Vs Xinerama and X_ConfigureWindow
+
+When a window sends request_code 12 (X_ConfigureWindow), don't auto-asumme
 it to be unmapped, as this may let several windows disappear at once randomly
 not just the one that sent the request, this bug appears mostly in Xinerama
 setups, but is not limited to it. The change is not 100% failsafe at the moment
 but it reduces the failure-rate by 95% which is the reason why it is integrated
 while not beeing final. [Janek Kozicki]
+
+@item Basic Xinerama support for Grow/Pack
+
+Make grow/pack Xinerama aware. Old implementations supported only 1
+Head, current does 3, but needs to be extended to support atleast 4.
+Also shrink-yank needs to be improved, but since Xinerama was previously
+not supported this patch was still applied [Nolan Leake]
 
 @item Build and Installation:
 @itemize +

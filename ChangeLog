@@ -15,6 +15,11 @@
 			 but it reduces the failure-rate by 95% which is the reason why it is integrated
 			 while not beeing final. [Janek Kozicki]
 
+	* lisp/sawfish/wm/commands/grow-pack.jl: Make grow/pack Xinerama aware. Old implementations supported only 1
+	                                         Head, current does 3, but needs to be extended to support atleast 4.
+						 Also shrink-yank needs to be improved, but since Xinerama was previously
+						 not supported this patch was still applied [Nolan Leake]
+
 2009-11-14  Teika kazura <teika@lavabit.com>
 	* sawfish-client.jl: won't say "bye" at exit. The greeting "bye" annoys if you use emacs' sawfish-mode, so drop it.
 

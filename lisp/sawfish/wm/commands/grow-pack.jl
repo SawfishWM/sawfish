@@ -159,10 +159,28 @@ See `pack-window-up'."
 
   ;; Implementation part.
 
+  (define (bump-get-head w direction)
+    (let* ((frame-dims (window-frame-dimensions w))
+           (frame-pos (window-position w))
+           (head1 (current-head w))
+           (head2 (find-head
+                   (case direction
+                     ((left) (- (car frame-pos) 1))
+                     ((right) (+ (car frame-pos) (car frame-dims)))
+                     (t (car frame-pos)))
+                   (case direction
+                     ((up) (- (cdr frame-pos) 1))
+                     ((down) (+ (cdr frame-pos) (cdr frame-dims)))
+                     (t (cdr frame-pos))))))
+      (if head2 head2 head1)))
+
   (define (bump-distance w direction maximize min-dist)
     (let* ((a (window-position w))
 	   (z (window-frame-dimensions w))
 	   (depth (window-get w 'depth))
+	   (head (bump-get-head w direction))
+	   (head-dims (head-dimensions head))
+	   (head-offs (head-offset head))
 	   bump cmp
 	   xa xz
 	   min-next border xborders)
@@ -175,7 +193,9 @@ See `pack-window-up'."
 					,(y xa) . ,(+ (y xa) (y xz))))
 		  a (y a)
 		  z (+ a (y z))
-		  bump 0
+	          bump (if (eq direction 'up)
+	                   (cdr head-offs)
+	                   (car head-offs))
 		  cmp <=)
 	  (setq border (+ (x a) (x z))
 		min-next (+ border min-dist)
@@ -183,7 +203,9 @@ See `pack-window-up'."
 				      ,(y xa) . ,(+ (y xa) (y xz))))
 		a (y a)
 		z (+ a (y z))
-		bump ((if (eq direction 'down) screen-height screen-width))
+	        bump (if (eq direction 'down)
+	                 (+ (cdr head-offs) (cdr head-dims))
+	                 (+ (car head-offs) (car head-dims)))
 		cmp >=)))
       (if (cmp bump min-next)
 	  (mapc
