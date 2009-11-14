@@ -963,7 +963,7 @@ last instance remaining, then delete the actual window."
 ;;; Extras
 
   (defcustom display-ws-name-on-switch nil
-    "Wether to display workspace name upon switch"
+    "Whether to display workspace name upon switch"
     :type boolean
     :group workspace
     :after-set (lambda () (display-ws-name-setter)))

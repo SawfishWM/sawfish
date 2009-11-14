@@ -6375,7 +6375,7 @@ The available hooks are listed below.
 * Window Cycling Hooks::
 * X Hooks::
 * Pointer Motion Hooks::
-* Workspace Hooks::
+* Workspace and Viewport Hooks::
 * Startup and Shutdown Hooks::
 * Other Hooks::
 @end menu
@@ -6590,7 +6590,7 @@ argument to the hook.
 @end defvr
 
 
-@node Pointer Motion Hooks, Workspace Hooks, X Hooks, Standard Hooks
+@node Pointer Motion Hooks, Workspace and Viewport Hooks, X Hooks, Standard Hooks
 @section Pointer Motion Hooks
 @cindex Pointer Motion Hooks
 @cindex Hooks, Pointer Motion
@@ -6657,10 +6657,11 @@ never gets focus.
 @end defvr
 
 
-@node Workspace Hooks, Startup and Shutdown Hooks, Pointer Motion Hooks, Standard Hooks
-@section Workspace Hooks
+@node Workspace and Viewport Hooks, Startup and Shutdown Hooks, Pointer Motion Hooks, Standard Hooks
+@section Workspace and Viewport Hooks
 @cindex Workspace Hooks
-@cindex Hooks, Workspace
+@cindex Viewport Hooks
+@cindex Hooks, Workspace and Viewport
 
 @defvr {Hook} enter-workspace-hook
 @defvrx {Hook} leave-workspace-hook
@@ -6706,7 +6707,7 @@ edge in question.
 @end defvr
 
 
-@node Startup and Shutdown Hooks, Other Hooks, Workspace Hooks, Standard Hooks
+@node Startup and Shutdown Hooks, Other Hooks, Workspace and Viewport Hooks, Standard Hooks
 @section Startup and Shutdown Hooks
 @cindex Startup and Shutdown Hooks
 @cindex Hooks, Startup and Shutdown
