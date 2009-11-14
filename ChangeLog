@@ -8,6 +8,13 @@
 	* man/news.texi
 	* OPTIONS: updated
 
+	* src/display.c: When a window sends request_code 12 (X_ConfigureWindow), don't auto-asumme
+	                 it to be unmapped, as this may let several windows disappear at once randomly
+			 not just the one that sent the request, this bug appears mostly in Xinerama
+			 setups, but is not limited to it. The change is not 100% failsafe at the moment
+			 but it reduces the failure-rate by 95% which is the reason why it is integrated
+			 while not beeing final. [Janek Kozicki]
+
 2009-11-14  Teika kazura <teika@lavabit.com>
 	* sawfish-client.jl: won't say "bye" at exit. The greeting "bye" annoys if you use emacs' sawfish-mode, so drop it.
 
