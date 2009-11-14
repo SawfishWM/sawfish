@@ -958,9 +958,6 @@ last instance remaining, then delete the actual window."
     (setq last-interesting-workspace nil)
     (call-hook 'workspace-state-change-hook))
 
-  (define-command 'display-workspace-name display-workspace-name
-    #:class 'default)
-
 ;;; Initialisation
 
   (sm-add-saved-properties 'sticky 'iconified 'fixed-position)
