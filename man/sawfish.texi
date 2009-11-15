@@ -4130,16 +4130,15 @@ Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
 holding the top-left corner of @var{window}.
 @end defun
 
-@defun viewport-offset vp
-@var{vp} is @code{(column . row)} of a viewport (whether or not that
-viewport currently exists).  A cons cell consisting of the x and y
-offset between the specified viewport and the current viewport is
-returned.  The offset can be used to translate between locations in the
-two viewports.  Given a position in the current viewport you can get the
-equivalent position in another viewport by adding the offset, or you can
-go the other way by subtracting the offset.  If @var{vp} is @code{nil}
-it is understood as the current viewport,
-i.e., @code{'(0 . 0)} will be returned.
+@defun viewport-offset-pixel viewport
+Returns the offset from the current viewport to @var{viewport}
+which is specified as @code{(column . row)}. The return value is the
+cons cell @code{(x . y)}. The values are in pixel, and are negative if
+it lies at left or above the current viewport.
+
+@var{viewport} can be non existent one. If @var{viewport} is @code{nil} it
+is understood as the current viewport, i.e., @code{(0 . 0)} will be
+returned.
 @end defun
 
 @defun window-relative-position w

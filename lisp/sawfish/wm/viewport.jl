@@ -33,7 +33,7 @@
 	    move-window-viewport
             viewport-at
 	    window-viewport
-            viewport-offset
+            viewport-offset-pixel
             window-relative-position
 	    window-absolute-position
 	    set-number-of-viewports
@@ -422,7 +422,7 @@ even if the viewport currently exists.  If `viewport' is specified
 check only against that viewport."
     (let ((vp (viewport-at (car rect) (nth 1 rect))))
       (when (or (null viewport) (equal vp viewport))
-        (let ((offset (viewport-offset vp)))
+        (let ((offset (viewport-offset-pixel vp)))
           (rect-wholly-within-rect (list (car offset)
                                          (cdr offset)
                                          (+ (car offset) (screen-width))
@@ -437,7 +437,7 @@ check only against that viewport."
     "Return t if `rect' is entirely within some head on some
 viewport. If `head' is provided `rect' must be within that head on
 some viewport."
-    (let* ((offset (viewport-offset (viewport-at (car rect)
+    (let* ((offset (viewport-offset-pixel (viewport-at (car rect)
                                                  (nth 1 rect))))
            (left (- (car rect) (car offset)))
            (top (- (nth 1 rect) (cdr offset)))
@@ -459,21 +459,19 @@ some viewport."
            (dims (window-dimensions w))
            (center (cons (+ (car coords) (quotient (car dims) 2))
                          (+ (cdr coords) (quotient (cdr dims) 2))))
-           (vp-offset (viewport-offset (viewport-at (car center)
+           (vp-offset (viewport-offset-pixel (viewport-at (car center)
                                                     (cdr center)))))
       (find-head (- (car center) (car vp-offset))
                  (- (cdr center) (cdr vp-offset)))))
 
-  (define (viewport-offset vp)
-    "`vp' is (column . row) of a viewport (whether or not that
-viewport currently exists).  A cons cell consisting of the x and y
-offset between the specified viewport and the current viewport is
-returned.  The offset can be used to translate between locations in
-the two viewports.  For example:
+  (define (viewport-offset-pixel vp)
+    "Returns the offset from the current viewport to viewport `VP'
+which is specified as (column . row). The return value is the cons
+cell (x . y). The values are in pixel, and are negative if it lies at
+left or above the current viewport.
 
-<position in current vp> + <offset> = <equivalent position in other vp>
-
-If `vp' is nil treat it as the current viewport -- i.e., return '(0 . 0)"
+`VP' can be non existent one. If `VP' is nil, it is
+understood as the current viewport, i.e., (0 . 0) will be returned."
     (if (consp vp)
         (let* ((cur-vp (screen-viewport)))
           (cons
@@ -484,7 +482,7 @@ If `vp' is nil treat it as the current viewport -- i.e., return '(0 . 0)"
   (define (window-relative-position w)
     "Returns a cons cell with the coordinates of the window relative
 to the viewport it occupies."
-    (let ((offset (viewport-offset (window-viewport w)))
+    (let ((offset (viewport-offset-pixel (window-viewport w)))
           (coords (window-position w)))
       (cons
        (- (car coords) (car offset))
