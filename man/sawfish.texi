@@ -4153,9 +4153,8 @@ that viewport rather than the current one.
 @end defun
 
 @defun window-absolute-position window
-Returns a cons cell @code{(@var{x} . @var{y})} of the position of
-@var{window} in its containing viewport.  The containing viewport may
-or may not be the current viewport.
+Returns the coordinates of the window as if the window's viewport
+is selected. The return value is the cons cell (x . y).
 @end defun
 
 @defun set-window-viewport window col row

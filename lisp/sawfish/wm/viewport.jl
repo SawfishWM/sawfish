@@ -489,8 +489,11 @@ to the viewport it occupies."
        (- (cdr coords) (cdr offset)))))
 
   (define (window-absolute-position w)
-    "Returns a cons cell with the coordinates of the window relative
-to the viewport 0,0."
+    "Returns the coordinates of the window as if the window's viewport
+is selected. The return value is the cons cell (x . y)."
+    ;; So, ignoring the side effect, it's roughly equal to
+    ;; (set-screen-viewport (window-viewport w))
+    ;; (window-position w)
     (let ((position (window-position w)))
       (if (window-outside-viewport-p w)
 	  (cons (mod (+ (car position) viewport-x-offset) (screen-width))
