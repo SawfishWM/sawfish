@@ -102,7 +102,7 @@
           warp-to-window-y-offset uniquify-name-format
           transients-get-focus decorate-transients
           raise-windows-on-uniconify uniconify-to-current-workspace
-          uniconify-to-current-viewport iconify-ignored
+          iconify-ignored
           focus-windows-on-uniconify transients-are-group-members
           raise-selected-windows warp-to-selected-windows
           menus-include-shortcuts configure-auto-gravity
