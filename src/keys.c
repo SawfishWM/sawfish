@@ -97,7 +97,11 @@ DEFSYM(super_keysyms, "super-keysyms");
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
 
+#ifdef HAVE_NINE_MOUSEBUTTONS
 static int all_buttons[9] = { Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9 };
+#else
+static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
+#endif
 
 /* locks: currently LockMask, num_lock, and scroll_lock */
 static int total_lock_combs, all_lock_mask;
@@ -262,6 +266,7 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 	case Button5:
 	    *mods |= Button5Mask;
 	    break;
+#ifdef HAVE_NINE_MOUSEBUTTONS
 	case Button6:
 	    *mods |= Button6Mask;
 	    break;
@@ -274,6 +279,7 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 	case Button9:
 	    *mods |= Button9Mask;
 	    break;
+#endif
 	}
 	ret = TRUE;
 	break;
@@ -345,10 +351,12 @@ translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
 	    { Button3, Button3Mask },
 	    { Button4, Button4Mask },
 	    { Button5, Button5Mask },
+#ifdef HAVE_NINE_MOUSEBUTTONS
 	    { Button6, Button6Mask },
 	    { Button7, Button7Mask },
 	    { Button8, Button8Mask },
 	    { Button9, Button9Mask },
+#endif
 	    { 0, 0 }
 	};
 	int i;
@@ -670,10 +678,12 @@ static struct key_def default_mods[] = {
     { "Button3",  Button3Mask },
     { "Button4",  Button4Mask },
     { "Button5",  Button5Mask },
+#ifdef HAVE_NINE_MOUSEBUTTONS
     { "Button6",  Button6Mask },
     { "Button7",  Button7Mask },
     { "Button8",  Button8Mask },
     { "Button9",  Button9Mask },
+#endif
     { "Any",      EV_MOD_ANY },
     { "Release",  EV_MOD_RELEASE },
     { 0, 0 }
@@ -1706,7 +1716,11 @@ grab_event (Window grab_win, repv ev)
 	    {
 		/* sawfish treats mouse buttons as modifiers, not as
 		   codes, so for us AnyModifier includes all buttons.. */
+#ifdef HAVE_NINE_MOUSEBUTTONS
 		for (i = 0; i < 9; i++)
+#else
+		for (i = 0; i < 5; i++)
+#endif
 		{
 		    XGrabButton (dpy, all_buttons[i], AnyModifier,
 				 grab_win, False, POINTER_GRAB_EVENTS,
@@ -1758,7 +1772,11 @@ ungrab_event (Window grab_win, repv ev)
 	    }
 	    else
 	    {
+#ifdef HAVE_NINE_MOUSEBUTTONS
 		for (i = 0; i < 9; i++)
+#else
+		for (i = 0; i < 5; i++)
+#endif
 		    XUngrabButton (dpy, all_buttons[i], AnyModifier, grab_win);
 	    }
 	}
