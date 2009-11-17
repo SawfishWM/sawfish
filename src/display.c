@@ -100,8 +100,8 @@ error_handler (Display *dpy, XErrorEvent *ev)
                }
            }
 
-	    /* so we call emit_pending_destroys () at some point
-	    rep_mark_input_pending (ConnectionNumber (dpy)); */
+	    /* so we call emit_pending_destroys () at some point */
+	    rep_mark_input_pending (ConnectionNumber (dpy)); 
 	}
     }
 
