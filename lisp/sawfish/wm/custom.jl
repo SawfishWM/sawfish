@@ -75,7 +75,7 @@
     "Lisp library storing default customization settings.")
 
   (define custom-quoted-keys
-    '(:group :require :type :options :range :depends :user-level
+    '(:group :require :type :options :range :depends
              :layout :widget-flags)
     "defcustom keys whose values are quoted by the macro expansion.")
 
@@ -85,8 +85,6 @@
 				(:type* . custom-type)
 				(:options . custom-options)
 				(:depends . custom-depends)
-				;; XXX not used anymore
-				(:user-level . custom-user-level)
 				(:set . custom-set)
 				(:get . custom-get)
 				(:widget . custom-widget)

@@ -25,14 +25,12 @@
   "Color of inactive frames in `simple' frame style."
   :type color
   :group (appearance simple)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom simple:active-color "goldenrod"
   "Color of active frames in `simple' frame style."
   :type color
   :group (appearance simple)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (let*

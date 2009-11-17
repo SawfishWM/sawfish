@@ -24,13 +24,11 @@
 (defcustom smaker:inverted-buttons nil
   "Use black-on-white button images."
   :group (appearance smaker)
-  :user-level novice
   :type boolean)
 
 (defcustom smaker:fg-color "white"
   "Color to use when drawing text."
   :group (appearance smaker)
-  :user-level novice
   :type color)
 
 (defcustom smaker:bar-normal "bar_normal.png"

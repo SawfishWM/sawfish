@@ -28,7 +28,6 @@
   "Accent color for focused windows (if unset uses the GTK+ selection color)."
   :type (optional color)
   :group (appearance Crux)
-  :user-level novice
   :after-set (lambda () (color-changed)))
 
 (defcustom Crux:show-window-icons nil

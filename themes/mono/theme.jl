@@ -25,14 +25,12 @@
   "Color of inactive frames (if unset use GTK+ background color)."
   :type (optional color)
   :group (appearance mono)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom mono:active-color nil
   "Color of active frames (if unset use GTK+ selection color)."
   :type (optional color)
   :group (appearance mono)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom mono:text-justify 'left

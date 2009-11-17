@@ -35,35 +35,30 @@
   :type symbol
   :options (horizontal vertical diagonal)
   :group (appearance gradient)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom gradient:normal-from-color (get-color "#b6b6b6")
   "`From' color of inactive frames in `gradient' frame style."
   :type color
   :group (appearance gradient)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom gradient:normal-to-color (get-color "#323232")
   "`To' color of inactive frames in `gradient' frame style."
   :type color
   :group (appearance gradient)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom gradient:active-from-color (get-color "#64b4df")
   "`From' color of active frames in `gradient' frame style."
   :type color
   :group (appearance gradient)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom gradient:active-to-color (get-color "#000030")
   "`To' color of active frames in `gradient' frame style."
   :type color
   :group (appearance gradient)
-  :user-level novice
   :after-set after-setting-frame-option)
 
 (defcustom gradient:save-memory t

@@ -7,6 +7,18 @@
 			optional, enabled by default, configures ending message
 			shows how many buttons are configured to be supported
 
+	* README.IMPORTANT: updated
+
+	* po/POTFILES.in: added sawfish.wm.ext.apps-menu to the list
+
+	* lisp/sawfish/wm/custom.jl
+	* themes/Crux/theme.jl
+	* themes/gradient/theme.jl
+	* themes/mono/theme.jl
+	* themes/simple/theme.jl
+	* themes/smaker/theme.jl: removed user-level value of defcustom. Not used for years,
+	                          but still here, so it's gone now
+
 2009-11-14  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/user.jl
 	* lisp/sawfish/wm/workspace.jl: removed display-message-with-timeout
