@@ -44,7 +44,7 @@
 	  sawfish.wm
 	  sawfish.wm.menus
 	  sawfish.wm.commands
-	  sawfish.wm.commands.user)
+	  sawfish.wm.commands.launcher)
 
   (define-structure-alias apps-menu sawfish.wm.ext.apps-menu)
 

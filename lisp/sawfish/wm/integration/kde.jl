@@ -26,7 +26,7 @@
           sawfish.wm.menus
           sawfish.wm.custom
           sawfish.wm.commands
-          sawfish.wm.commands.user)
+          sawfish.wm.commands.launcher)
 
   (define-structure-alias kde-int sawfish.wm.integration.kde)
 
