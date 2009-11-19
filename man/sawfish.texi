@@ -91,6 +91,7 @@ last updated @value{UPDATED} for Sawfish version @value{VERSION}.
 * Keymaps::			Bindings events to actions
 * Event Loop::			Handling input events
 * Miscellaneous Functions::	Useful features
+* External Applications::       Invocation of external applications
 * Standard Hooks::		Hooking into wm actions
 * Standard Properties::		Window properties
 * Session Management::		Saving state across sessions
@@ -5723,7 +5724,7 @@ Returns the number of X events waiting to be handled.
 @end defun
 
 
-@node Miscellaneous Functions, Standard Hooks, Event Loop, Top
+@node Miscellaneous Functions, External Applications, Event Loop, Top
 @chapter Miscellaneous Functions
 @cindex Miscellaneous functions
 
@@ -6339,7 +6340,33 @@ Remove all duplicates values from @var{lst}, using @code{eq}.  The
 order of elements is not preserved.
 @end defun
 
-@node Standard Hooks, Standard Properties, Miscellaneous Functions, Top
+@node External Applications, Standard Hooks, Miscellaneous Functions, Top
+@chapter External Applications
+@cindex External applications
+
+There're some functions and variables for invocation of external applications.
+
+@defvr {Customizable} xterm-program
+The program launched by the @code{xterm} function. Interpreted by shell.
+@end defvr
+
+@deffn Function xterm #!optional command
+@deffnx Command xterm
+Start a new terminal. Optional argument @var{COMMAND} is passed to the
+terminal with @code{-e} option, so for most, including xterm, it can contain
+arguments to be passed.
+@end deffn
+
+@defvr {Customizable} browser-program
+The program launched by the @code{browser} function. Interpreted by shell.
+@end defvr
+
+@deffn Function browser #!optional url
+@deffnx Command browser
+Start a new browser instance. Visit @var{URL} if supplied.
+@end deffn
+
+@node Standard Hooks, Standard Properties, External Applications, Top
 @chapter Standard Hooks
 @cindex Standard hooks
 @cindex Hooks, standard

@@ -1,4 +1,4 @@
-;; user.jl -- command to launch an xterm/brower and more
+;; launcher.jl -- command to launch external apps, xterm & browser
 ;;
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 ;;
@@ -18,7 +18,8 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.commands.user
+;; This module was renamed from xterm in Sawfish-1.6.
+(define-structure sawfish.wm.commands.launcher
 
     (export xterm
 	    browser)
@@ -32,33 +33,36 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands)
 
-  (defgroup apps "Default Applications" :group misc)
+  (defgroup apps "External Applications" :group misc)
 
   (defcustom xterm-program "xterm"
-    "The program launched by the `xterm' command."
+    "The program launched by the `xterm' function. Interpreted by shell."
     :type string
     :group (misc apps))
 
   (defcustom browser-program "www-browser"
-    "The program launched by the `browser' command."
+    "The program launched by the `browser' function. Interpreted by shell."
     :type string
     :group (misc apps))
 
   (define (xterm #!optional command)
-    "Start a new xterm."
+    "Start a new terminal. Optional argument `COMMAND' is passed to the
+terminal with -e option, so for most, including xterm, it can contain
+arguments to be passed."
     (if (not command)
 	(system (format nil "%s >/dev/null 2>&1 </dev/null &"
 			xterm-program))
+      ;; Note that -e has to be the last argument. See man xterm.
       (system (format nil "%s -e %s >/dev/null 2>&1 </dev/null &"
 		      xterm-program command))))
 
-  (define (browser #!optional website)
-    "Start a new browser instance"
-    (if (not website)
+  (define (browser #!optional url)
+    "Start a new browser instance."
+    (if (not url)
         (system (format nil "%s >/dev/null 2>&1 </dev/null &"
 			browser-program))
       (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
-                      browser-program website))))
+                      browser-program url))))
 
   ;;###autoload
   (define-command 'xterm xterm #:class 'default)
