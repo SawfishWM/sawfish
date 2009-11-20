@@ -65,5 +65,14 @@ arguments to be passed."
                       browser-program url))))
 
   ;;###autoload
-  (define-command 'xterm xterm #:class 'default)
-  (define-command 'browser browser #:class 'default))
+  (define-command 'xterm xterm #:class 'default
+    #:spec "sCommand:"
+    #:type `(and (labelled ,(_ "Command:") string))
+    #:doc "Start xterm. Optional command is passed with -e."
+    )
+  (define-command 'browser browser #:class 'default
+    #:spec "sUrl:"
+    #:type `(and (labelled ,(_ "url:") string))
+    #:doc "Start browser. Url is optional."
+    )
+  )
