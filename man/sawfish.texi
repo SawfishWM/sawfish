@@ -1963,7 +1963,7 @@ is @code{north-west} (specified by ICCCM).
 @cindex Windows, showing and hiding
 
 Sawfish provides two low-level functions for withdrawing client windows
-from the display. These are used to implement both virtual workspaces
+from the display. These are used to implement both workspaces
 (@pxref{Workspaces}) and iconification (@pxref{Iconifying Windows}).
 
 @defun hide-window window
@@ -4001,33 +4001,29 @@ Disable all frame parts that are a member of @var{class} in
 @node Viewports, Workspaces, Window Frames, Top
 @chapter Viewports
 @cindex Viewports
+@cindex Large Desktop
 
-It is sometimes useful to have a logical display that is larger than
-the computer screen.  This is most often implemented by displaying
-only a portion of the logical display at any time.  Sawfish does this
-using ``viewports''.
+Sawfish can have the virtual desktop size larger then the computer
+screen size. This notion is called ``viewport'' in Sawfish.
 
-When viewports are enabled, the Sawfish logical display becomes
-potentially infinitely large in the two directions ``across'' and
-``down'' (to the maximum representable size of integers).  Sawfish
-divides this logical display into a potentially infinite grid of
-cells.  Each cell of the grid is the same size of the virtual display.
+Viewport can be thought that it displays a portion of virtual desktop,
+and the entire virtual desktop consists of the grid of ``cells'' whose
+size is of the physical screen. Viewport sits on a cell.
+
+Technically speaking, the word ``viewport'' should mean the currently
+displayed part of the entire desktop. But in Sawfish, the entire
+desktop is wrongly called ``viewport'', too. When focused to
+enlargement, ``large desktop'' is the correct nomenclature, but
+simply calling it ``workspace'' = ``virtual desktop'' are correct, too,
+for most cases.
 
 @defvar viewport-dimensions
-The current number of viewports across and down the virtual display.
-This is a cons cell @code{(@var{across} . @var{down})}.  Defaults to
-@code{(1 . 1)}.
-@end defvar
+The number of viewports of the virtual desktop. This is a cons cell
+@code{(columns . rows)}.  Defaults to @code{(1 . 1)}.
 
-@defvar viewport-minimum-dimensions
-This is only useful if @code{viewport-boundary-mode} is set to
-@code{dynamic}, otherwise it is automatically set to the same value as
-viewport-dimensions.  If @code{viewport-boundary-mode} is set to
-@code{dynamic} then @code{viewport-dimensions} will never shrink to
-less than @code{viewport-minimum-dimensions}.  If setting
-@code{viewport-minimum-dimensions} by hand (not by the customization
-interface) be sure to call @code{viewport-minimum-size-changed} after
-doing so.
+If @code{viewport-boundary-mode} is @code{dynamic} (@pxref{Dynamic 
+Viewport}), then this variable is the current size of the current
+workspace, and does not have the meaning as a user option.
 @end defvar
 
 @defun set-number-of-viewports width height
@@ -4035,31 +4031,30 @@ Change @code{viewport-dimensions} to have the value
 @code{(@var{width} . @var{height})}.
 @end defun
 
-Note that cell indices start at zero in each dimension.  Indices are
-never negative.
-
 @menu
-* Switching Viewports::
+* Viewport Functions::
+* Dynamic Viewport::       Automatic resizing of workspace.
 * Windows and Viewports::
 @end menu
 
-@node Switching Viewports, Windows and Viewports, Viewports, Viewports
-@section Switching Viewports
+@node Viewport Functions, Dynamic Viewport, Viewports, Viewports
+@section Viewport Functions
 
-A user switches viewports by telling Sawfish to move the physical
-display from cell to cell.  On a cell change, windows in previous
-cells are removed, and windows in the current cell appear.  Windows
-that span two or more cells will appear in each cell, appropriately
-displaced.
+Each cell is labeled with the index @code{(col, row)}, and the
+top-left cell is @code{(0, 0)}.  Indices are never negative.
+
+Sawfish implements viewport as follows. On a cell change, windows in
+previous cells are removed, and windows in the current cell appear.
+Windows that span two or more cells will appear in each cell,
+appropriately displaced.
 
 @defun screen-viewport
-Returns the currently displayed viewport as a pair @code{(@var{x},
+Returns the currently displayed viewport as a pair @code{(@var{x} .
 @var{y})}.
 @end defun
 
 @defun set-screen-viewport col row
-Change the physical display to view cell @code{(@var{col},
-@var{row})}.
+Change the viewport to visit cell (@var{col}, @var{row}).
 @end defun
 
 @defun move-viewport right down
@@ -4068,67 +4063,30 @@ Move the viewport to see the cell @var{right} slots to the right and
 @end defun
 
 @defvar viewport-boundary-mode
-How to act when switching via @code{set-screen-viewport} to a viewport
-that is outside of @code{viewport-dimensions}.  When set to
-@code{wrap-around}, it loops in the vertical and horizontal axes
-enough times to keep the viewport within the defined dimensions.  When
-set to @code{stop}, it refuses to switch to a viewport outside of
-@code{viewport-dimensions}.  If it is set to @code{dynamic} it
-automatically resizes @code{viewport-dimensions} to permit the move
-and eliminate unneeded rows or columns, down to the minimum dimensions
-specified by @code{viewport-minimum-dimensions}.  Defaults to
-@code{wrap-around}.
+Decides how to act when you call @code{set-screen-viewport} and you
+try to go outside of the virtual desktop. (Its size is specified by
+@code{viewport-dimensions}.) Defaults to @code{stop}.
+
+When set to @code{stop}, it stops at the boundary of the virtual desktop.
+
+When set to @code{wrap-around}, it behaves as if the leftmost viewport
+and the rightmost are connected. Same for the top and bottom.
+
+If it is set to @code{dynamic}, then the workspace size changes
+automatically. For detail, see @xref{Dynamic Viewport}.
 @end defvar
 
 @defun viewport-honor-workspace-edges
-Whether or not the display is permitted to move past the current
-viewport boundaries.  It returns true if @code{viewport-boundary-mode}
-is not set to @code{dynamic}.
+Returns whether or not the display is permitted to move past the
+current workspace boundaries.  It returns true if
+@code{viewport-boundary-mode} is not set to @code{dynamic}.
 @end defun
 
 @defun viewport-at x y
 Returns a cons cell consisting of @code{(column . row)} of the viewport
-containing the specified @code{x} and @code{y} coordinates.  The
+containing the specified @var{x} and @var{y} coordinates.  The
 coordinates are specified relative to the current viewport, so
 @code{(viewport-at 0 0)} is equivalent to @code{(screen-viewport)}.
-@end defun
-
-@defun warp-viewport x y
-Change the position of the physical display, such that location
-@code{(@var{x}, @var{y})} is at the top-left of the display.  The
-physical display may be showing more than one cell at this point.
-All windows are redisplayed as appropriate.
-@end defun
-
-@defun set-viewport x y
-Change the position of the physical display, such that location
-@code{(@var{x}, @var{y})} is at the top-left of the display.  The
-physical display may be showing more than one cell at this point.
-
-Unlike @code{warp-viewport}, the change takes place by dividing the
-motion into @code{scroll-viewport-steps} steps, and redisplaying after
-each step in the motion.
-@end defun
-
-@defvr Customizable scroll-viewport-steps
-When you go to another viewport, the bigger this value, the more
-smoothly the screen is scrolled. It is the number of steps for
-scrolling. 
-
-The default value 1 means no scroll, and the change is
-instantaneous. The upper limit for customization is 50.
-
-This variable is used for @code{set-viewport}. All interactive commands
-defined by Sawfish call this function, so this variable is important
-for user.
-@end defvr
-
-@node Windows and Viewports,  , Switching Viewports, Viewports
-@section Windows and Viewports
-
-@defun window-viewport window
-Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
-holding the top-left corner of @var{window}.
 @end defun
 
 @defun viewport-offset-pixel viewport
@@ -4142,9 +4100,80 @@ is understood as the current viewport, i.e., @code{(0 . 0)} will be
 returned.
 @end defun
 
+Actually, Sawfish can move viewport by any pixels, not only by
+screen size. Here're low level functions to do it.
+
+@defun warp-viewport x y
+Change the position of the viewport, such that location
+@code{(@var{x}, @var{y})} is at the top-left of the display. The unit
+is by pixels.
+@end defun
+
+@defun set-viewport x y
+Change the position of the viewport, such that location
+@code{(@var{x}, @var{y})} is at the top-left of the display. The unit
+is by pixels.
+
+Unlike @code{warp-viewport}, the change takes place by dividing the
+motion into @code{scroll-viewport-steps} steps, and redisplaying after
+each step in the motion.
+@end defun
+
+@defvr Customizable scroll-viewport-steps
+When you move the viewport, the bigger this value, the more
+smoothly the screen is scrolled. It is the number of steps for
+scrolling. 
+
+The default value 1 means the change is instantaneous, and no scroll
+is done. The upper limit for customization is 50.
+
+This variable is used for @code{set-viewport}. All interactive commands
+defined by Sawfish call this function, so this variable is important
+for user.
+@end defvr
+
+@node Dynamic Viewport, Windows and Viewports, Viewport Functions, Viewports
+@section Dynamic Viewport
+
+If the variable @code{viewport-boundary-mode} (@pxref{Viewport
+Functions}) is set to @code{dynamic}, the viewport is ``dynamic''. If
+dynamic viewport is enabled, then each workspace has its size
+indepedent of other workspaces, and it is automatically resized so
+that it contains all windows plus the current viewport. The size is set at
+Sawfish startup, and each time you move viewport.
+
+Even in dynamic viewport, the top-left cell is always @code{(0, 0)},
+and the cell indices are never negative.
+
+The dynamic viewport is still an experimental feature, and its
+specification may change.
+
+@defvar viewport-minimum-dimensions
+This is only useful if dynamic viewport is enabled. It means that
+@code{viewport-dimensions} gets never less than this variable. 
+
+If setting @code{viewport-minimum-dimensions} by hand (not by the
+customization interface) be sure to call
+@code{viewport-minimum-size-changed} after doing so.
+
+If the viewport is not dynamic, it is automatically set to the same
+value as @code{viewport-dimensions}.
+@end defvar
+
+Under dynamic viewport, @code{viewport-dimensions} is the current size
+of the current workspace, and does not have the meaning as a user option.
+
+@node Windows and Viewports,  , Dynamic Viewport, Viewports
+@section Windows and Viewports
+
+@defun window-viewport window
+Returns a cons cell @code{(col . row)} of the viewport
+holding the top-left corner of @var{window}.
+@end defun
+
 @defun window-relative-position w
-Return a cons cell with the coodinates of the window relative to the
-viewport that it occupies.
+Returns in a cons cell the coodinates of the window relative to the
+current viewport.
 @end defun
 
 @defun window-outside-viewport-p window &optional viewport
@@ -4190,12 +4219,14 @@ the viewport they were iconified on.  Defaults to true.
 @chapter Workspaces
 @cindex Workspaces
 @cindex Desktop workspaces
+@cindex Virtual desktop
 
 Workspaces provide another way for users to organize their windows in
-Sawfish.  Instead of stretching the screen real estate to the right
-and down, workplaces stack screens on top of each other.  The user
-drills down into the stack, or pops up through the stack, seeing the
-appropriate windows in each workspace.
+Sawfish. Unlike viewports, workspaces don't have geometric relationship
+with each other.
+
+The word ``virtual desktop'' is sometimes used instead of
+``workspace''.
 
 @menu
 * Workspace Intervals::			``Interesting'' workspaces
@@ -4212,8 +4243,8 @@ to positive infinity, we normally present only the first non-empty
 workspace through the last non-empty workspace to the user.  The
 non-empty interval is occasionally re-normalized to start with zero.
 
-We typically refer to workplaces with lower IDs being to the ``left''
-of workplaces with higher IDs, as if on a number line.
+We typically refer to workspaces with lower IDs being to the ``left''
+of workspaces with higher IDs, as if on a number line.
 
 @defvar current-workspace
 The ID of the currently active workspace.  This is an integer.  The
@@ -4236,7 +4267,7 @@ function uses the result of @code{workspace-limits} directly.
 
 @defun workspace-id-from-logical offset &optional limits
 Takes an offset position into an interval of ``interesting''
-workspaces, and returns the workplace ID at that position.  If
+workspaces, and returns the workspace ID at that position.  If
 @var{limits} is provided, it must be a pair @code{(@var{first-index}
 . @var{last-index})} like that returned by @code{workspace-limits}.
 If it is not provided, the function uses the result of
@@ -4346,8 +4377,8 @@ previous workspace.
 Add or remove workspaces until the number of ``interesting''
 workspaces is equal to @var{wanted}.
 
-When adding workplaces, the new workplaces get indices higher than any
-existing indices.  When removing workplaces, the lowest workplaces are
+When adding workspaces, the new workspaces get indices higher than any
+existing indices.  When removing workspaces, the lowest workspaces are
 always chosen for removal (their windows are merged into the new
 lowest-index workspace).
 @end defun

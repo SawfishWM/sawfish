@@ -62,13 +62,14 @@
   (defgroup viewport "Viewport" :group workspace)
 
   (defcustom viewport-dimensions '(1 . 1)
-    "Number of columns and rows in each virtual workspace: \\w"
+    "The number of columns and rows of the virtual desktop: \\w"
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
+    :tooltip "This is meaningless if dynamic viewport is enabled."
     :after-set (lambda () (viewport-size-changed t)))
 
   (defcustom viewport-minimum-dimensions '(1 . 1)
-    "Minimum number of columns and rows in each virtual workspace (if boundary mode is dynamic): \\w"
+    "Minimum number of columns and rows of virtual desktop (if boundary mode is dynamic): \\w"
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
     :after-set (lambda () (viewport-minimum-size-changed)))
@@ -88,7 +89,7 @@ the change is instantaneous."
     :range (1 . 50))
 
   (defcustom viewport-boundary-mode 'stop
-    "Whether to stop or wrap-around or grow the virtual workspace on first/last viewport"
+    "Stop, wrap-around, or grow the virtual desktop when you go beyond virtual desktop edge."
     :group (workspace viewport)
     :type (choice wrap-around stop dynamic))
 

@@ -206,16 +206,19 @@
 ;; viewport options
 
 ;;  (define-special-variable viewport-dimensions '(1 . 1)
-;;    "Size of each virtual workspace.")
+;;    "The number of columns and rows of viewports of the virtual desktop.
+;; If the dynamic viewport is enabled, this variable is meaningless.")
 
 ;;  (defcustom viewport-minimum-dimensions '(1 . 1)
-;;    "Minimum number of columns and rows in each virtual workspace (if boundary-mode is dynamic")
+;;    "Minimum number of columns and rows in virtual desktop (if boundary-mode is dynamic).")
 
 ;;  (define-special-variable uniconify-to-current-viewport t
 ;;    "Windows uniconify to the current viewport.")
 
 ;;  (define-special-variable viewport-boundary-mode 'stop
-;;    "How to act when passing the first or last viewport stop, wrap-around or dynamic")
+;;    "Decides how to act when you try to go beyond virtual desktop boundary.
+;; Stop means stop there. Wrap-around means jump to the other edge.
+;; Dynamic grows the virtual desktop.")
 
 ;;  (define-special-variable scroll-viewport-steps 1
 ;;    "When you go to another viewport, the bigger this value,
@@ -660,6 +663,3 @@
 
 ;; (define-special-variable infinite-desktop.move-cursor-distance 32
 ;;   "Amount to move the cursor after moving the workspace.")
-
-;; (define-special-variable infinite-desktop.stop-at-workspace-borders nil
-;;   "Stop scrolling at workspace borders (Fixes warp-to-window bugs).")
