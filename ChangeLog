@@ -1,3 +1,37 @@
+2009-11-21  Teika Kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/util/compat.jl
+	* man/news.texi: Custom var 'uniconify-to-current-viewport' is deprecated, but valid again.
+
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/util/edges.jl
+	* lisp/sawfish/wm/viewport.jl
+	* man/sawfish.texi: `viewport-offset' is renamed to `viewport-offset-pixel'.
+
+	* lisp/sawfish/wm/viewport.jl
+	* man/sawfish.texi: Doc bugfix of window-absolute-position.
+
+	* lisp/sawfish/wm/autoload.jl
+	* lisp/sawfish/wm/commands/help.jl
+	* lisp/sawfish/wm/commands/launcher.jl
+	* lisp/sawfish/wm/commands/user.jl
+	* lisp/sawfish/wm/ext/apps-menu.jl
+	* lisp/sawfish/wm/integration/gnome.jl
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/workspace.jl: Renamed wm/commands/user.jl to wm/commands/launcher.jl. Necessary changes for 'define-structure' and module openings are included.
+
+	* lisp/sawfish/wm/commands/launcher.jl
+	* man/news.texi
+	* man/sawfish.texi:News and docs for xterm and browser are improved.
+
+	* lisp/sawfish/wm/commands/launcher.jl: Commands xterm & browser can take an argument.
+
+	* OPTIONS
+	* lisp/sawfish/wm/viewport.jl
+	* man/news.texi
+	* man/sawfish.texi: Doc improvements, mostly on viewport.
+
 2009-11-17  Christopher Bratusek <zanghar@freenet.de>
 	* src/keys.[ch]: reverted merge of mouse branch
 
@@ -17,12 +51,12 @@
 	* themes/mono/theme.jl
 	* themes/simple/theme.jl
 	* themes/smaker/theme.jl: removed user-level value of defcustom. Not used for years,
-	                          but still here, so it's gone now
+				  but still here, so it's gone now
 
 2009-11-14  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/user.jl
 	* lisp/sawfish/wm/workspace.jl: removed display-message-with-timeout
-	                                        view-clipboard
+						view-clipboard
 						display-ws-name
 						with all setters and defvars/defcustoms
 
@@ -30,14 +64,14 @@
 	* OPTIONS: updated
 
 	* src/display.c: When a window sends request_code 12 (X_ConfigureWindow), don't auto-asumme
-	                 it to be unmapped, as this may let several windows disappear at once randomly
+			 it to be unmapped, as this may let several windows disappear at once randomly
 			 not just the one that sent the request, this bug appears mostly in Xinerama
 			 setups, but is not limited to it. The change is not 100% failsafe at the moment
 			 but it reduces the failure-rate by 95% which is the reason why it is integrated
 			 while not beeing final. [Janek Kozicki]
 
 	* lisp/sawfish/wm/commands/grow-pack.jl: Make grow/pack Xinerama aware. Old implementations supported only 1
-	                                         Head, current does 3, but needs to be extended to support atleast 4.
+						 Head, current does 3, but needs to be extended to support atleast 4.
 						 Also shrink-yank needs to be improved, but since Xinerama was previously
 						 not supported this patch was still applied [Nolan Leake]
 
@@ -114,11 +148,11 @@
 	* lisp/sawfish/wm/util/workarea.jl
 	* lisp/sawfish/wm/viewport.jl
 	* man/news.texi: Fix bugs introduced by the recent changes to allow maximization outside of the current viewport:
-	                 - viewport-window now gives the viewport where most of the window is located.
-	                 - A few new functions for working with rectangles.
+			 - viewport-window now gives the viewport where most of the window is located.
+			 - A few new functions for working with rectangles.
 
 	* lisp/sawfish/wm/ext/infinite-desktop.jl: infinite-desktop now checks viewport-honor-workspace-edges
-	                                           (in sawfish.wm.viewport) before allowing movement past workspace boundaries.
+						   (in sawfish.wm.viewport) before allowing movement past workspace boundaries.
 
 	* man/sawfish.texi: Adjustments to viewport docs; new docs for sawfish.wm.util.rects.
 
@@ -133,8 +167,8 @@
 
 2009-10-17  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/apps-menu.jl: removed dupped Development Category from Developmentmenu
-	                                    added Editors Category to Developmentmenu
-	                                    make use of global `xterm-prgoram' instead of local `my-term-string'
+					    added Editors Category to Developmentmenu
+					    make use of global `xterm-prgoram' instead of local `my-term-string'
 
 	* OPTIONS: updated for Teikas changes
 
@@ -201,8 +235,8 @@
 	* lisp/sawfish/wm/state/maximize.jl
 	* lisp/sawfish/wm/util/edges.jl
 	* lisp/sawfish/wm/viewport.jl: Fix bugs that shift windows between viewports on restart:
-	                               - maximize-window and maximize-window-fullscreen now work for windows outside of the current viewport
-	                               - the position window matcher now preserves the current viewport
+				       - maximize-window and maximize-window-fullscreen now work for windows outside of the current viewport
+				       - the position window matcher now preserves the current viewport
 
 	* lisp/sawfish/wm/ext/infinite-desktop.jl: infinite-desktop.stop-at-workspace-borders is now true iff viewport-boundary-mode is not dynamic.
 
@@ -228,34 +262,34 @@
 	* src/events.c
 	* lisp/sawfish/wm/focus.jl
 	* lisp/sawfish/wm/transient.jl: merged timo/kde-menu-focus branch
-	                                - Changed an ugly cond into an ugly when
+					- Changed an ugly cond into an ugly when
 					- Fix focus behaviour of KDE Run Command
 					- Fix KDE focus behaviour also in transient-unmap-window
 					- Ignore grab-induced enter-notify events
 
 	* lisp/sawfish/wm/frames.jl: merged timo/frame-fix branch
-	                             - added remove-frame-part-value
+				     - added remove-frame-part-value
 				     - improved update-frame-font-color
 
 	* lisp/sawfish/wm/frames.jl
 	* lisp/sawfish/wm/windows.jl: merged timo/kde4 branch
-	                              -- (merged earlier already)
+				      -- (merged earlier already)
 				      - fixed doc-window properties
 
 	* lisp/sawfish/wm/ext/fdo-menu.jl: merged timo/fdo-fix branch
-	                                   - improved find-lang-string
+					   - improved find-lang-string
 					   - s/\012/\n/
 					   - Fix whitespace and other ugliness
 					   - Fix more ugliness in find-lang-in-desktop-file and generate-menu-entry
 					   - Import rep.regexp
 
 	* src/windows.c: merged timo/race branch
-	                 - Wrap most of add_window in rep_PUSHGC/rep_POPGC
+			 - Wrap most of add_window in rep_PUSHGC/rep_POPGC
 
 	* Makefile.in: don't try to remove ancient sawmill* binaries
 
 	* man/news.texi: added entries for above changes
-	                 reworked sawfish 1.6.0 section partially
+			 reworked sawfish 1.6.0 section partially
 
 2009-10-05  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/defaults.jl
@@ -282,7 +316,7 @@
 	* KEYBINDINGS
 	* lisp/sawfish/wm/frames.jl
 	* lisp/sawfish/wm/keymaps.jl: added new buttons (frame-classes) (+ keymaps and docs):
-                                      - sticky button
+				      - sticky button
 				      - lock button
 				      - rename button
 				      - move/resize button
@@ -450,9 +484,9 @@
 	* themes/mxflat/theme.jl
 	* themes/simple/theme.jl
 	* themes/smaker/theme.jl: General whitespace cleanup.  Indentation
-	                          is standardized and lines (with a few
-		                  exceptions -- mostly long strings) are
-			          capped at 80 chars.
+				  is standardized and lines (with a few
+				  exceptions -- mostly long strings) are
+				  capped at 80 chars.
 
 2009-09-26  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/Makefile.in
@@ -481,17 +515,17 @@
 	* man/news.texi: updated
 
 	* lisp/sawfish/cfg/widgets/match-window.jl: justify the `grab' button to the left
-	                                            justify the labels to the left
+						    justify the labels to the left
 
 	* KEYBINDINGS: explained macros (artist formerly known as `nested keybindings')
-	               added Multikey (aka Compose)
+		       added Multikey (aka Compose)
 		       better explaination of ISO_Level3_Shift
 
 	* po/make-pot: removed --update (intltool + rep = puke)
 
 	* lisp/sawfish/wm/frames.jl
 	* lisp/sawfish/wm/extras.jl: added customization options for changing font-color
-	                             *independently* of what frame-style is beeing used
+				     *independently* of what frame-style is beeing used
 				     -- [Matthew Love, Christopher Bratusek]
 
 	* OPTIONS: updated
@@ -509,11 +543,11 @@
 	* lisp/sawfish/wm/ext/fdo-menu.jl: small fix in the exile function [Matthew Love]
 
 	* lisp/sawfish/ui/widgets/frame-style.jl: also support tar.lzma and tar.xz here
-	                                          make cursor invisible in the textview
+						  make cursor invisible in the textview
 						  set wrap-mode to word-char
 
 	* lisp/sawfish/ui/shell.jl: changed wm class of sawfish-ui from "main" "Nokogiri"
-	                            to "sawfish-configurator" "Sawfish-Configurator"
+				    to "sawfish-configurator" "Sawfish-Configurator"
 
 	* lisp/sawfish/wm/autoload.jl
 	* lisp/sawfish/wm/ext/match-window: rename "Matched Windows" group to "Window Rules" in UI
@@ -522,7 +556,7 @@
 	* lisp/sawfish/wm/viewport.jl: string-change
 
 	* OPTIONS: updated
-	           fixed typos
+		   fixed typos
 		   removed old GNOME stuff
 
 2009-09-21  Christopher Bratusek <zanghar@freenet.de>
@@ -530,7 +564,7 @@
 
 2009-09-20  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/fdo-menu.jl: use define instead of defun
-	                                   changed name of a few variables
+					   changed name of a few variables
 					   make it more error tolerant regarding bad .desktop files
 					   make it work if any lang-setting variable is unset
 					   -- [Matthew Love]
@@ -540,13 +574,13 @@
 	* lisp/sawfish/gtk/widget-text.jl: mark as broken
 
 	* themes/Crux/theme.jl: make default text-color of inactive frames black
-	                        for better readability
+				for better readability
 
 	* man/sawfish.1
 	* man/sawfish-client.1
 	* man/sawfish-ui.1
 	* man/Makefile.in: actually add man-pages to git
-	                   improve man target
+			   improve man target
 
 2009-09-19  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/commands/user.jl
@@ -559,7 +593,7 @@
 	* man/sawfish.texi: fixed a glitch
 
 	* man/news.texi: updated
-	                 added pxref to Input Focus
+			 added pxref to Input Focus
 
 	* man/Makefile.in: add --no-validate flag for generating NEWS
 
@@ -573,26 +607,26 @@
 	* scripts/Makefile.in: also expand REP_ENVIRON here [Luis Rodrigo Gallardo Cruz]
 
 	* lisp/sawfish/wm/commands/move-resize.jl: change cursor to hand2 on move
-	                                           change cursor to crosshair on resize
+						   change cursor to crosshair on resize
 
 	* OPTIONS: small update
 
 	* man/sawfish.1
 	* man/sawfish-client.1
 	* man/sawfish-ui.1: added man-page for sawfish
-	                 added man-page for sawfish-client
+			 added man-page for sawfish-client
 			 added man-page for sawfish-ui
 			 -- [Debian]
 
 	* man/Makefile.in: actually build FAQ
-	                   removed sawfish.dvi target
+			   removed sawfish.dvi target
 			   removed sawfish.ps target
 
 	* man/news.texi: updated
 
 2009-09-14  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl: string change in rename-window
-	                                       improved keymap-trans
+					       improved keymap-trans
 					       renamed rename-window to rename-window-func
 					       fixed a glitch in rename-window-func
 
@@ -602,7 +636,7 @@
 	* sawfish.doap: added
 
 	* lisp/sawfish/wm/commands/user.jl: added display-workspace-name
-	                                    clipboard-preview-clip-length is now a defcustom
+					    clipboard-preview-clip-length is now a defcustom
 					    clipboard-preview-timeout is now a defcustom
 
 	* OPTIONS
@@ -610,11 +644,11 @@
 
 2009-09-12  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/focus.jl: doc for focus-revert
-	                            indention improvements
+				    indention improvements
 				    -- [Teika Kazura]
 
 	* man/news.texi: major rewrite of 1.5.0 section [Teika Kazura]
-	                 updated
+			 updated
 
 	* sawfish.desktop
 	* sawfish-session.desktop
@@ -656,7 +690,7 @@
 	* Makefile.in: don't remove ancient Sawmill.desktop
 
 	* lisp/sawfish/wm/user.jl: display-message-with-timeout now must be called with a timeout
-	                           header updated
+				   header updated
 				   description for view-clipboard
 
 2009-09-11  Christopher Bratusek <zanghar@freenet.de>
@@ -665,7 +699,7 @@
 	* Makefile.in: check for installation path of sawfish-ksm.desktop via kde4-config
 
 	* lisp/sawfish/wm/ext/fdo-menu.jl: added copyright header
-	                                   make update-sawfish-menu work without restarting sawfish
+					   make update-sawfish-menu work without restarting sawfish
 					   -- (after intial call on sawfish-startup) [Matthew Love]
 
 2009-09-08  Christopher Bratusek <zanghar@freenet.de>
@@ -683,7 +717,7 @@
 	* lisp/sawfish/wm/integration/kde.jl: added logout, reboot and shutdown entries
 
 	* lisp/sawfish/wm/theming/make-theme.jl: make-image is defined the *second* time here
-	                                         the first time in gaol, rename this instance to
+						 the first time in gaol, rename this instance to
 						 make-image-possibly-from-cache to avoid confusion
 						 for both users and the rep-compiler
 						 also squashes a compiler warning [Matthew Love]
@@ -697,7 +731,7 @@
 	* lisp/sawfish/wm/user.jl
 	* lisp/sawfish/wm/defaults.jl
 	* lisp/sawfish/wm/extras.jl: sawfish.wm.extras removed
-	                             moved try-require from extras to defaults
+				     moved try-require from extras to defaults
 				     since gnome-int does no longer change the behaviour of sawfish itself
 				     load defaults even if there's an rc file
 				     generate the fdo-menu if there's no customized apps-menu
@@ -723,16 +757,16 @@
 2009-09-02  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/commands/user.jl
 	* lisp/sawfish/wm/commands/help.jl: replace display-url by browser
-	                                    improved browser command
+					    improved browser command
 
 	* lisp/sawfish/wm/gnome/integration.jl
 	* lisp/sawfish/wm/integration/gnome.jl: renamed file
-	                                        correctly change of browser-command
-	                                        only change browser-command if not customized
+						correctly change of browser-command
+						only change browser-command if not customized
 						use browser instead of display-url
 
 	* lisp/sawfish/wm/ext/fdo-menu.jl: fixed a bug in language setting
-	                                   removed obsolete code
+					   removed obsolete code
 					   trimmed down code
 					   clean-up
 					   -- [Matthew Love]
@@ -748,7 +782,7 @@
 				    move Quit Sawfish here
 
 	* lisp/sawfish/wm/help.jl: removed display-url-commands, use browser-command instead
-	                           removed help-call-info-gnome
+				   removed help-call-info-gnome
 
 	* lisp/sawfish/wm/user.jl: don't load sawfish.wm.state.gnome
 
@@ -759,7 +793,7 @@
 	* lisp/sawfish/wm/autoload.jl: removed sawfish.wm.commands.gnome autoloads
 
 	* lisp/sawfish/wm/integration.jl: use browser-program instead of display-url-command
-	                                  removed some obsolete bits
+					  removed some obsolete bits
 					  append Logout from GNOME to Session sub-menu
 					  append Shutdown from GNOME to Session sub-menu
 					  updated commands for more recent GNOME versions
@@ -776,10 +810,10 @@
 					     you see what's hooked in. [Teika Kazura]
 
 	* man/news.texi: Minor fixes in 1.5.0 section [Teika Kazura]
-	                 Improved 1.6.0 section
+			 Improved 1.6.0 section
 
 	* man/sawfish.texi: Better description on font type.
-	                    Description on window snapping and cycle-among-groups[-backwards].
+			    Description on window snapping and cycle-among-groups[-backwards].
 			    Usage on environmental variables.
 			    -- [Teika Kazura]
 
@@ -790,7 +824,7 @@
 	* lisp/sawfish/wm/fdo-menu.jl: make it avoidable via (setq use-fod-menu nil) in your resourcefile [Matthew Love]
 
 	* OPTIONS: updated for sawfish.wm.commands.user:view-clipbard
-	           updated for sawfish.wm.ext.fdo-menu
+		   updated for sawfish.wm.ext.fdo-menu
 
 2009-08-30  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/gtk/widget.jl: Number widget can take optional initial value [Teika Kazura]
@@ -806,7 +840,7 @@
 	* lisp/sawfish/wm/commands/shrink-yank.jl: use same group for options
 
 	* lisp/sawfish/wm/commands/user.jl: ex sawfish.wm.commands.xterm
-	                                    `browser' command added (defaults to `www-broser')
+					    `browser' command added (defaults to `www-broser')
 					    `some' statement added () [Mark Triggs]
 					    `display-message-with-timeout' function added
 					    `program-available' function added [Mark Triggs]
@@ -820,7 +854,7 @@
 	* lisp/sawfish/wm/gnome/menus.jl: removed, supersedded by desktop-independ fdo-menu
 
 	* lisp/sawfish/wm/gnome/match-window.jl: removed, gnome-panel for a long time now understands
-	                                         the standard tasklist-skip property, no need for the
+						 the standard tasklist-skip property, no need for the
 						 for the GNOME specific anymore
 
 	* CONTRIBUTING: added Matthew Love to `THANKS' section
@@ -844,7 +878,7 @@
 	* lisp/sawfish/wm/user.jl: rename .sawmillrc to .sawfishrc if the former exists, but the later not
 
 	* lisp/sawfish/wm/ext/match-window.jl: improve position matcher to bind a window to a position
-	                                       either center north north-east north-west east south south-east
+					       either center north north-east north-west east south south-east
 					       south-west west south OR to a user-given position for the former
 					       it will also set the gravity of the window to that position
 					       -- [Jeremy Hankins]
@@ -855,7 +889,7 @@
 
 2009-08-28  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl: accidently also commited keymap-trans window-matcher (...)
-	                                       remove an unused export
+					       remove an unused export
 
 	* CONTRIBUTING: updated `THANKS' section
 
@@ -880,7 +914,7 @@
 	* lisp/sawfish/wm/commands/shrink-yank.jl: export commands
 
 	* lisp/sawfish/wm/workspace.jl: export send-to-workspace
-	                                fix a select-workspace-from-first call [Michal Maruska]
+					fix a select-workspace-from-first call [Michal Maruska]
 
 	* configure.in: bump minimum librep to 0.90.2, to make sure folks get a fixed sawfish-ui regarding UTF8 strings
 
@@ -890,7 +924,7 @@
 
 2009-08-09  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl: move rename-window here, as it requires prompt but this either does not
-	                                       load properly in windows.jl or breaks sawfish-ui if require'ed instead of open'ed
+					       load properly in windows.jl or breaks sawfish-ui if require'ed instead of open'ed
 
 	* KEYBINDINGS: Added desckription of several keys
 
@@ -899,7 +933,7 @@
 
 2009-07-30  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/gtk/widgets/color.jl: since we now got gtk-color-button-get-color-interp in rep-gtk, replace
-	                                     Button + ColorPreview [deprecated] + ColorSelection Trio by single ColorButton
+					     Button + ColorPreview [deprecated] + ColorSelection Trio by single ColorButton
 
 	* lisp/sawfish/gtk/color-preview.jl: obsolete because of the above widget-transistion
 
@@ -909,10 +943,10 @@
 
 2009-07-29  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/mmc/window-manipulation.jl: moved maximize-unframe/reframe into sawfish.wm.state.maximize
-	                                              moved rename-window into sawfish.wm.windows
+						      moved rename-window into sawfish.wm.windows
 
 	* lisp/sawfish/wm/windows.jl: first change WM_NAME then _NET_WM_NAME in rename-window (so that we can grab
-	                              the new window-name with sawfish-ui and display it in the titlebar (some panels,
+				      the new window-name with sawfish-ui and display it in the titlebar (some panels,
 				      eg. gnome-panel, don't accept the new name, though))
 
 	* lisp/sawfish/wm/ext/match-window.jl: added window-name matcher
@@ -920,7 +954,7 @@
 	* lisp/sawfish/gtk/stock.jl: remove make-url-widget function as we now got GtkLinkButton in rep-gtk
 
 	* scripts/sawfish-about.jl.in: use GtkLinkButton instead of make-url-widget
-	                               updated Johns Mail
+				       updated Johns Mail
 
 2009-07-28  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/frames.jl: make doc-windows unframed [Timo Korvola]
@@ -941,9 +975,9 @@
 	* lisp/sawfish/wm/util/marks.jl: fixed license header
 
 	* lisp/sawfish/wm/gnome-integration.jl: don't remove quit and restart entries from menu
-	                                        use gnome-www-browser instead of ancient gnome-moz-remote
+						use gnome-www-browser instead of ancient gnome-moz-remote
 						display applications in the apps-menu (currently uncategorized)
-					        remove Applnk from application search paths
+						remove Applnk from application search paths
 						removed some yet obsolete code
 
 2009-07-25  Christopher Bratusek <zanghar@freenet.de>
@@ -1062,7 +1096,7 @@
 	* lisp/sawfish/wm/ext/beos-window-menu.jl: UTF-8 Support [Wang Diancheng]
 
 	* configure.in: bump minimum librep to 0.90.0 for UTF-8 Support
-		        small fixup in rep-gtk check
+			small fixup in rep-gtk check
 
 2009-05-27  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/util/prompt.jl: fixed typo
@@ -1140,7 +1174,7 @@
 
 2009-04-14  Christopher Bratusek <zanghar@freenet.de>
 	* src/keys.c : - added AltGR as synonyme for Mod5
-	               - make sure we don't mix Super and Hyper [Denis Barbier]
+		       - make sure we don't mix Super and Hyper [Denis Barbier]
 
 2009-04-05  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl
@@ -1185,7 +1219,7 @@
 	* man/faq.texi: major update [Teika]
 
 	* man/sawfish.texi: major update [Teika]
-                            bump EDITION to 0.14
+			    bump EDITION to 0.14
 			    bump VERSION to 1.5.0
 			    update UPDATED and UPDATE-MONTH
 
@@ -1203,28 +1237,28 @@
 	* lisp/sawfish/wm/windows.jl: replace several Wether by Whether [Teika]
 
 	* lisp/sawfish/wm/util/compat.jl: maximize-always-expands, maximize-ignore-when-filling and
-	                                  maximize-avoid-avoided are not obosolete [Teika]
+					  maximize-avoid-avoided are not obosolete [Teika]
 
 	* lisp/sawfish/ui/layouts/keymaps.jl
 	* lisp/sawfish/ui/layout.jl: replace several defvar with define [Teika]
-	                             some indention improvements [Teika]
+				     some indention improvements [Teika]
 
 	* man/news.texi: improvements [Teika]
-                         updated [Chris]
+			 updated [Chris]
 
 2009-03-24  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/viewport.jl
 	* lisp/sawfish/wm/autoload.jl: make viewport commands appear in sawfish-ui
 
 	* configure.in: changed appearance of ending message a bit
-	                display additional infos
+			display additional infos
 			added codename field
 			re-ordered some checks
-	                only display cairo version if it exists
+			only display cairo version if it exists
 			put all AC_SUBST at the end of the file
 
 	* Makedefs.in: remove nokogiridir (not beeing used)
-	               first define host_type then stuff that refers to it
+		       first define host_type then stuff that refers to it
 		       first define datarootdir then stuff that refers to it
 
 	* man/news.texi: updated
@@ -1289,7 +1323,7 @@
 
 2009-03-04  Christopher Bratusek <zanghar@freenet.de>
 	* KEYBINDINGS: - added description of ISO_Left_Tab
-	               - mention Alt Gr
+		       - mention Alt Gr
 		       - mention Buttons 4 and 5
 		       - add how to add keybindings manually
 
@@ -1338,7 +1372,7 @@
 
 2009-02-15  Guillermo S. Romero <gsromero@svn.gnome.org>
 	* man/faq.texi: more s/sawmill/sawfish/ clean up
-	                also explained rc duality (~/.sawfish[/]rc).
+			also explained rc duality (~/.sawfish[/]rc).
 
 	* KEYBINDINGS: Suggest xmodmap and xev. Super (not s) is Super
 
@@ -1351,7 +1385,7 @@
 
 2009-02-12  Christopher Bratusek <zanghar@freenet.de>
 	* man/user-doc.texi: added uniconify, maximize, unmaximize, delete, shade, unshade, raise, lower, cycle
-	                     nicer formatting
+			     nicer formatting
 
 2009-02-11  Christopher Bratusek <zanghar@freenet.de>
 	* man/user-doc.texi
@@ -1359,8 +1393,8 @@
 
 2009-02-09  Christopher Bratusek <zanghar@freenet.de>
 	* KEYBINDINGS: S is Super not Shift
-	               W is Modifier and M is Alt
-	               s/take place/are active/g
+		       W is Modifier and M is Alt
+		       s/take place/are active/g
 
 	* lisp/sawfish/wm/commands/shrink-yank: Don't forget to load sawfish.wm.custom
 
@@ -1410,13 +1444,13 @@
 	* lisp/sawfish/wm/frames.jl: fix an issue, that broke sawfish-ui
 
 2009-02-07  Christopher Bratusek <zanghar@freenet.de>
-        * configure.in: use POSIX code [Mark Diekhans]
+	* configure.in: use POSIX code [Mark Diekhans]
 
 2009-02-07  Guillermo S. Romero <gsromero@svn.gnome.org>
-        * lisp/sawfish/wm/tabs/marks.jl
-        * lisp/sawfish/wm/util/marks.jl: move marks from tabs to util
+	* lisp/sawfish/wm/tabs/marks.jl
+	* lisp/sawfish/wm/util/marks.jl: move marks from tabs to util
 
-        * lisp/sawfish/wm/tabs/tab.jl: update accordingly
+	* lisp/sawfish/wm/tabs/tab.jl: update accordingly
 
 2009-02-05  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/keymaps.jl
@@ -1449,17 +1483,17 @@
 
 2009-02-03  Christopher Bratusek <zanghar@freenet.de>
 	* configure.in: - re-add checks for XFree86 (add --without-xorg-x11r7 flag)
-                        - fixed a typo
+			- fixed a typo
 
 	* README.IMPORTANT: updated
 
 	* install-sh: added for libtool < 2.2
 
 	* librep.spec.in: don't call make-pot (deprecated)
-	                  don't %doc deprecated files
+			  don't %doc deprecated files
 
 	* lisp/sawfish/wm/keymaps.jl: - merged tab-keymap.jl
-	                              - add keymap for tabs (tab-keymap)
+				      - add keymap for tabs (tab-keymap)
 
 	* lisp/sawfish/wm/tabs/tab.jl
 	* lisp/sawfish/wm/tabs/tabgroup.jl
@@ -1473,7 +1507,7 @@
 
 2009-02-02  Christopher Bratusek <zanghar@freenet.de>
 	* Makefile.in: create $DESTDIR$datadir/applications before
-	               installing desktop file into it
+		       installing desktop file into it
 
 	* */Makefile.in: add distclean rule to all subdir Makefiles
 
@@ -1589,7 +1623,7 @@
 
 2009-01-25  Daniel Nylander <po@danielnylander.se>
 
-        * po/sv.po: Updated Swedish translation
+	* po/sv.po: Updated Swedish translation
 
 2009-01-18  Christopher Bratusek <zanghar@freenet.de>
 	* OPTIONS
@@ -2148,7 +2182,7 @@
 
 2006-01-26  Daniel Nylander <po@danielnylander.se>
 
-        * po/sv.po: Updated Swedish translation
+	* po/sv.po: Updated Swedish translation
 
 2005-06-26  Philip Langdale <philipl@mail.utexas.edu>
 
@@ -2158,7 +2192,7 @@
 
 2005-04-01  Steve Murphy  <murf@e-tools.com>
 
-        * configure.in: Added "rw" to ALL_LINGUAS.
+	* configure.in: Added "rw" to ALL_LINGUAS.
 
 2005-01-17	Amanpreet Alam <amanpreetalam@yahoo.com>
 
@@ -3171,7 +3205,7 @@
 2000-07-20  Joaquim Fellmann <joaquim@hrnet.fr>
 
 	* po/fr.po: Updated French translation with patch from
-          Christian Marillat <marillat.christian@wanadoo.fr>
+	  Christian Marillat <marillat.christian@wanadoo.fr>
 
 2000-07-23  John Harper  <john@dcs.warwick.ac.uk>
 
@@ -3349,5 +3383,3 @@
 	* Makedefs.in: added -lXext to $(X11_LIBS)
 
 	* Makedefs.in: added IMAGE_CFLAGS and IMAGE_LIBS macros
-
-
