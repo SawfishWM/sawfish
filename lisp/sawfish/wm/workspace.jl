@@ -115,7 +115,7 @@
 	  sawfish.wm.commands
 	  sawfish.wm.custom
 	  sawfish.wm.session.init
-	  sawfish.wm.commands.user)
+	  sawfish.wm.commands.launcher)
 
 ;;; Options and variables
 

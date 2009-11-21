@@ -27,7 +27,7 @@
 	  rep.regexp
 	  rep.io.files
 	  sawfish.wm.commands
-	  sawfish.wm.commands.user)
+	  sawfish.wm.commands.launcher)
 
   ;; Info
 
