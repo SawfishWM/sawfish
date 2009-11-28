@@ -42,13 +42,11 @@ In @code{infinite-desktop}, the option to specify the boundary
 behavior has changed. If @code{viewport-boundary-mode} is
 @code{dynamic}, then you can go as far as you like. Otherwise, it
 stops at the workspace boundary of which size is specified by
-@code{viewport-dimensions}. The latter is the default. See also
+@code{viewport-dimensions}. Now the latter is the default. See also
 ``dynamic viewport'' described below.
 
 The previous variable, @code{infinite-desktop.stop-at-workspace-borders},
 which is used for this purpose, no longer exists.
-
-@item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
 
 @item User config file changes
 
@@ -61,20 +59,6 @@ Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from
 this version on, Sawfish will rename @code{~/.sawmillrc} to
 @code{~/.sawfishrc}, if the former does exist on your system, but the
 latter doesn't.
-
-@item Configurator's binary, @code{sawfish-ui}, is renamed to @code{sawfish-config} [Christopher Bratusek]
-
-Its window class is changed to @code{sawfish-configurator} /
-@code{Sawfish-Configurator}, too.
-
-@item Infinite Desktop and Dynamic Viewports
-
-In @code{infinite-desktop} there is no longer any option to prevent the
-viewport from going beyond the edge of the workspace.  Instead it is
-prevented if and only if @code{viewport-boundary-mode} is not set to
-@code{'dynamic}.  This means that the default behavior is now to stop at
-workspace boundaries; to acheive the previous behavior set
-@code{viewport-boundary-mode} to @code{'dynamic}.
 
 @item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
 
@@ -90,6 +74,23 @@ You can't set any arguments to pass from this variable. If you want to
 give arguments or redirect output, write a wrapper
 program. (@pxref{FAQ}, ``Sound support'' section.)
 
+@item GNOME integration updates [Christopher Bratusek]
+
+Gnome support is trimmed down. All we offer now is as follows:
+
+If GNOME runs, in @code{session} submenu under Sawfish root menu,
+logout and shutdown from GNOME are added. Don't remove @code{quit} and
+@code{restart} from menu now. Gnome help is available in menu.
+
+Unless set by user, gnome terminal and gnome help browser are used for
+user options @code{xterm-program} and @code{browser-program}.
+
+Most of dropped GNOME integrations are ancient, mainly for 1.x and
+early 2.x. Files @file{lisp/sawfish/wm/commands/gnome.jl} and
+@file{lisp/sawfish/wm/state/gnome.jl} are deleted.
+
+GNOME-Detection is updated. [Alexey I. Froloff]
+
 @item Xterm and browser changes
 
 Module @code{sawfish.wm.commands.xterm} is renamed to
@@ -97,14 +98,13 @@ Module @code{sawfish.wm.commands.xterm} is renamed to
 dropped. If you use it, simply append the value to @code{xterm-program}.
 
 Customization group is changed from @code{misc} to @code{External
-Applications}. 
+Applications}.
 
 The functinon @code{display-url} is renamed to @code{browser}, now
 defined in the module cited above. Variable @code{display-url-command} is
 renamed to @code{browser-program}.
-@item Browser changes
-
 @end itemize
+
 @item Bugs fixed:
 @itemize @minus
 
@@ -225,22 +225,14 @@ window name is not supposed to be changed in ICCCM.
 
 @item Improve position matcher to bind a window to a position (either @code{center} @code{east} @code{north} @code{north-east} @code{north-west} @code{south} @code{south-east} @code{south-west} @code{west}) OR to a user-given position [Jeremy Hankins]
 
-@item GNOME integration updates
+@item KDE integration module [Christopher Bratusek]
 
-Commands are updated for more recent GNOME. GNOME Integration is
-trimmed down to the minimum. [Christopher Bratusek]
+KDE is automatically detected. KDE help, and KDE logout, shutdown, and
+reboot are provided in the menu. In KDE4 WM Selector, Sawfish is
+added.
 
-GNOME-Detection is updated. [Alexey I. Froloff]
-
-In sub-menu under Sawfish root menu, @code{Logout}- and @code{Shutdown
-from GNOME} are added. Don't remove @code{quit} and @code{restart}
-from menu. [Christopher Bratusek]
-
-@item KDE integration module
-
-KDE is automatically detected. Applications (konsole, konqueror), KDE
-help, and KDE logout/shutdown/reboot are provided in the menu.
-In KDE4 WM Selector, Sawfish is added. [Christopher Bratusek]
+Unless set by user, konsole and konqueror are used for user options
+@code{xterm-program} and @code{browser-program}.
 
 @item Added @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
 
