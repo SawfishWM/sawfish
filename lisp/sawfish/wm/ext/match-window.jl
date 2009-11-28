@@ -77,15 +77,16 @@
                            (choice center east north north-east
                                    north-west south south-east
                                    south-west west)))
-                (dimensions (pair (number 1) (number 1)))
                 (workspace (number 1))
+		(new-workspace boolean)
+                (new-viewport boolean)
                 (viewport (pair (number 1) (number 1)))
                 (depth (number -16 16 0))
                 (placement-weight (number 0))
                 (fixed-position boolean)
-                (maximized (choice all vertical horizontal))
-                (new-workspace boolean)
-                (new-viewport boolean))
+		(sticky boolean)
+		(sticky-viewport boolean)
+		)
      (focus ,(_ "Focus")
             (raise-on-focus boolean)
             (focus-when-mapped boolean)
@@ -96,31 +97,31 @@
                  (frame-type ,(lambda ()
                                 `(choice ,@(mapcar car match-window-types))))
                  (frame-style ,(lambda ()
-                                 `(symbol ,@(find-all-frame-styles t)))))
-     (state ,(_ "State")
+                                 `(symbol ,@(find-all-frame-styles t))))
+		 (dimensions (pair (number 1) (number 1)))
+		 (maximized (choice all vertical horizontal
+				    fullscreen full-xinerama))
+		 (iconified boolean)
+		 (shaded boolean)
+		 (never-iconify boolean)
+		 (never-maximize boolean)
+		 )
+     (other ,(_ "Other")
             (avoid boolean)
             (ignored boolean)
-            (iconified boolean)
-            (shaded boolean)
-            (sticky boolean)
-            (sticky-viewport boolean)
             (group ,(lambda ()
                       `(symbol ,@(delete-if-not symbolp (window-group-ids)))))
             (ungrouped boolean)
             (cycle-skip boolean)
             (window-list-skip boolean)
             (task-list-skip boolean)
-            (never-iconify boolean)
-            (never-maximize boolean)
-            (fullscreen boolean)
-            (fullscreen-xinerama boolean))
-     (other ,(_ "Other")
             (unique-name boolean)
-            (auto-gravity boolean)
+            (window-name string)
             (shade-hover boolean)
             (transients-above (choice all parents none))
             (ignore-stacking-requests boolean)
-            (window-name string))))
+	    (auto-gravity boolean)
+	    )))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
   ;; libraries implementing them
@@ -422,12 +423,6 @@
       (declare (unused prop))
       (set-focus-mode w value)))
 
-  (define-match-window-setter 'fullscreen
-    (lambda (w prop value)
-      (declare (unused prop))
-      (when value
-        (window-put w 'queued-fullscreen-maximize t))))
-
   (define-match-window-setter 'new-workspace
     (lambda (w prop value)
       (declare (unused prop))
@@ -467,11 +462,6 @@
             (set-screen-viewport col row)
             (set-window-viewport w col row))))))
 
-  (define-match-window-setter 'fullscreen-xinerama
-    (lambda (w prop value)
-      (declare (unused prop))
-      (when value
-        (window-put w 'queued-fullxinerama-maximize t))))
 
   (define-match-window-setter 'window-name
     (lambda (w prop value)
@@ -482,10 +472,18 @@
   (define-match-window-setter 'maximized
     (lambda (w prop value)
       (declare (unused prop))
-      (when (memq value '(all vertical))
-        (window-put w 'queued-vertical-maximize t))
-      (when (memq value '(all horizontal))
-        (window-put w 'queued-horizontal-maximize t))))
+      (cond ((eq value 'vertical)
+	     (window-put w 'queued-vertical-maximize t))
+	    ((eq value 'horizontal)
+	     (window-put w 'queued-horizontal-maximize t))
+	    ((eq value 'all)
+	     (window-put w 'queued-vertical-maximize t)
+	     (window-put w 'queued-horizontal-maximize t))
+	    ((eq value 'fullscreen)
+	     (window-put w 'queued-fullscreen-maximize t))
+	    ((eq value 'full-xinerama)
+	     (window-put w 'queued-fullxinerama-maximize))
+	    )))
 
   (define-match-window-setter 'keymap-trans
     (lambda (w prop value)
