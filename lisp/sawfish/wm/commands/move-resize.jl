@@ -569,10 +569,10 @@ that window."
 
   (define (move-window-center w)
     (move-window-to w
-                    (round (/ (- (screen-width)
-                                 (car (window-frame-dimensions w))) 2))
-                    (round (/ (- (screen-height)
-                                 (cdr (window-frame-dimensions w))) 2))))
+                    (quotient (- (screen-width)
+                                 (car (window-frame-dimensions w))) 2)
+                    (quotient (- (screen-height)
+                                 (cdr (window-frame-dimensions w))) 2)))
 
   ;;###autoload
   (define-command 'move-window-center
