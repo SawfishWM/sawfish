@@ -1,4 +1,4 @@
-;; custom-defaults.jl -- customize settings loaded if no user customization
+;; custom-defaults.jl -- loaded if there's no user customization
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -18,5 +18,11 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(custom-set-typed-variable (quote workspace-geometry) (quote (4 1 . 1))
-                           (quote workspace-geometry))
+;; This file is read if there's no ~/.sawfish/custom.
+
+;; The following can be taken as an example.
+;; (But it is a deprecated variable, so meaningless per se.)
+
+;;(custom-set-typed-variable (quote workspace-geometry)
+;;			     (quote (4 1 . 1))
+;;                           (quote workspace-geometry))

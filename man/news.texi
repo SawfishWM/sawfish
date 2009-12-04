@@ -205,6 +205,25 @@ Internally, a new function @code{remove-frame-part-value} which allows to change
 In practice, @code{rename-window} works, but technically speaking, the
 window name is not supposed to be changed in ICCCM.
 
+@item Window rules can be set by lisp
+
+Window rules (former ``matched windows'') can easily be set from
+configurator, but it can now be set by lisp, too, with
+@code{add-window-matcher} function. For the details, @xref{Window
+Rules by Matching}. An example usage is like this:
+
+
+@lisp
+(add-window-matcher '((WM_NAME . "^root$")
+                      (WM_CLASS . "^XTerm/xterm$"))
+                    '((ignore-program-position . t)
+                      (maximize . vertical)))
+@end lisp
+
+In fact, this function has existed, but now it can take multiple
+rules, and the grammar has changed. The old syntax is still allowed,
+but deprecated.
+
 @item 5 new move-cursor commands (@code{move-cursor-} @code{northwest}, @code{northeast}, @code{southwest}, @code{southeast}), and @code{move-cursor-center} [Christopher Bratusek]
 
 @item Added @code{resize-by-factor} meta-function and @code{double-}, @code{halve-window-size} functions making use of it [Christopher Bratusek]

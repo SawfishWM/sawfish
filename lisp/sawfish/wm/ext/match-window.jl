@@ -21,19 +21,7 @@
 ;; Commentary:
 
 ;; This module provides a general mechanism for setting properties on
-;; matched windows as they're created. It removes much of the need for
-;; manually creating functions to put in before-add-window-hook.
-
-;; For example, doing:
-
-;;	(add-window-matcher 'WM_CLASS "Term" '(place-mode . interactive))
-
-;; makes all terminal windows be placed interactively. Or even better:
-
-;;	(add-window-matcher 'WM_CLASS "Netscape/Navigator"
-;;			    '(ignore-program-position . t))
-
-;; makes netscape windows a lot easier to live with.
+;; matched windows as they're created.
 
 (define-structure sawfish.wm.ext.match-window
 
@@ -203,13 +191,52 @@
   (define (define-match-window-formatter name formatter)
     (put name 'match-window-formatter formatter))
 
+  (define (alist-eq-p a b)
+    "Whether alist a and b are equal. Used by add/remove-window-matcher"
+    (let (ret-val tem)
+      (when (eq (length a)
+		(length b))
+	(setq ret-val t)
+	(while b
+	  (setq tem (assoc (caar b) a))
+	  (if (and tem
+		   (equal (cdr tem) (cdar b)))
+	      (setq b (cdr b))
+	    (setq ret-val nil)
+	    (setq b nil))))
+      ret-val))
+
 ;;; main entry point
 
-  (define (add-window-matcher prop value #!rest actions)
+  (define (add-window-matcher rules #!rest actions)
+    ;; #!rest is used to support the old usage.
+    ;; The new grammar is (add-window-matcher rules actions),
+    ;; where `actions' is an alist.
+    ;;
+    ;; The old grammar remains supported, but it is deprecated.
+    ;; It was:
+    ;;  (add-window-matcher 'WM_CLASS "Term"
+    ;;       '(place-mode . interactive)
+    ;;       '(maximize . all)
+    ;;        ... )
+    ;; The new style is introduced in 1.6. The old one can be deleted in
+    ;; future.
+    ;;
+    ;; It used to have a bug in how the match was done.
+    ;; Read the commit log.
+    ;;
+    ;; This wrapper function exists only to support the old use.
+    (if (consp rules)
+	(add-window-matcher-core rules (car actions))
+      ;; old usage
+      (add-window-matcher-core (list (cons rules (car actions)))
+			       (cdr actions)))
+    )
+
+  (define (add-window-matcher-core rules actions)
     (catch 'out
       (let
-	  ((pair (cons prop value))
-	   (add-to (lambda (slot)
+	  ((add-to (lambda (slot)
 		     (mapc (lambda (action)
 			     (let
 				 ((tem (assq (car action) (cdr slot))))
@@ -217,21 +244,30 @@
 				   (rplacd tem (cdr action))
 				 (rplacd slot (cons action (cdr slot))))))
 			   actions))))
-	;; does the list already contain a (PROP . VALUE) pair?
+	;; does the list already contain any actions for rules?
+	;; then add, using add-to.
 	(mapc (lambda (cell)
-		(when (member pair (car cell))
+		(when (alist-eq-p rules (car cell))
 		  (add-to cell)
 		  (throw 'out t)))
 	      match-window-profile)
-	;; no
-	(setq match-window-profile (cons (list (cons pair nil))
+	;; no. create new entry
+	(setq match-window-profile (cons (list* rules actions)
 					 match-window-profile))
-	(add-to (car match-window-profile)))))
+      )))
 
-  (define (remove-window-matcher prop value #!rest props)
+  (define (remove-window-matcher rules #!rest props)
+    ;; See add-window-matcher for why this wrapper is.
+    (if (consp rules)
+	(remove-window-matcher-core rules (car props))
+      ;; old usage
+      (remove-window-matcher-core (list (cons rules (car props)))
+				  (cdr props)))
+    )
+  
+  (define (remove-window-matcher-core rules props)
     (let
-	((pair (cons prop value))
-	 (remove-from (lambda (slot)
+	((remove-from (lambda (slot)
 			(mapc (lambda (p)
 				(let
 				    ((tem (assq p (cdr slot))))
@@ -239,7 +275,7 @@
 				    (rplacd slot (delq tem (cdr slot))))))
 			      props))))
       (mapc (lambda (cell)
-	      (when (member pair (car cell))
+	      (when (alist-eq-p rules (car cell))
 		(remove-from cell)))
 	    match-window-profile)
       ;; remove any empty matchers

@@ -810,6 +810,7 @@ Return true if @var{window} includes @var{atom} in its
 * Animating Windows::
 * Cycling Between Windows::
 * Window Groups::
+* Window Rules by Matching::
 @end menu
 
 
@@ -2509,7 +2510,7 @@ screen.
 @deffnx Command maximize-window-fullscreen window
 Maximize both dimensions of @var{window} on the screen, removing
 window decorations and making the window edges flush with the screen
-sides. 
+sides.
 
 If @var{state} nil, it unmaximizes. Else, it maximizes. If called as
 a command, it always maximizes.
@@ -2778,7 +2779,7 @@ Switch input focus to the most-recently focused window in the current
 workspace.
 @end defun
 
-@node Window Groups,  , Cycling Between Windows, Windows
+@node Window Groups, Window Rules by Matching , Cycling Between Windows, Windows
 @section Window Groups
 @cindex Groups, windows
 
@@ -2815,6 +2816,59 @@ belongs to one group.
 * Assigning Windows to Groups::
 * Operations on Groups::
 @end menu
+
+@node Window Rules by Matching, , Window Groups, Windows
+@section Window Rules by Matching
+@cindex Matching, windows
+
+Sawfish can trigger actions particular to each window. More
+precisely, if the window's properties match to the user set rule, then
+it is executed when the window appears. Check is done in
+@code{before-add-window-hook}. (@pxref{Standard Hooks})
+
+These rules can easily be set by configurater GUI, but there're
+functions to manipulate them. They're defined in
+@code{sawfish.wm.ext.match-window}.
+
+@defun add-window-matcher rules actions
+Let us see an example first:
+
+@lisp
+(add-window-matcher '((WM_NAME . "^root$")
+                      (WM_CLASS . "^XTerm/xterm$"))
+                    '((ignore-program-position . t)
+                      (maximize . vertical)))
+@end lisp
+
+@var{rules} is an alist, and each value is matched using regex.
+Allowed keys are any of @code{WM_NAME}, @code{WM_CLASS},
+@code{WM_ICON_NAME}, @code{WM_WINDOW_ROLE}, @code{WM_CLIENT_MACHINE},
+@code{WM_COMMAND}, and @code{WM_LOCALE_NAME}. Values to the keys are
+strings. Windows are selected if all of these rules match.
+
+@var{actions} is an alist. For possible keys and values, see
+@file{lisp/sawfish/wm/ext/match-window.jl}.
+
+Check for invalid arguments are not done.
+@end defun
+
+@defun remove-window-matcher rules props
+Opposite of @code{add-window-matcher}, but unlike it, @var{props} are
+list of properties. Example:
+
+@lisp
+(remove-window-matcher '((WM_NAME . "^root$"))
+                       '(place-mode ignore-program-position))
+@end lisp
+@end defun
+
+The best place to use @code{add-window-matcher} is in
+@file{~/.sawfish/rc}. It's because rules modified by these commands are
+not necessarily saved, depending on how you run the configurator.
+
+The rules are stored in variable @code{match-window-profile}. Use
+the above functions to modify its value. It is not recommended
+to directly manipulate it.
 
 @node Assigning Windows to Groups, Operations on Groups, Window Groups, Window Groups
 @subsection Assigning Windows to Groups
@@ -4021,7 +4075,7 @@ for most cases.
 The number of viewports of the virtual desktop. This is a cons cell
 @code{(columns . rows)}.  Defaults to @code{(1 . 1)}.
 
-If @code{viewport-boundary-mode} is @code{dynamic} (@pxref{Dynamic 
+If @code{viewport-boundary-mode} is @code{dynamic} (@pxref{Dynamic
 Viewport}), then this variable is the current size of the current
 workspace, and does not have the meaning as a user option.
 @end defvar
@@ -4122,7 +4176,7 @@ each step in the motion.
 @defvr Customizable scroll-viewport-steps
 When you move the viewport, the bigger this value, the more
 smoothly the screen is scrolled. It is the number of steps for
-scrolling. 
+scrolling.
 
 The default value 1 means the change is instantaneous, and no scroll
 is done. The upper limit for customization is 50.
@@ -4150,7 +4204,7 @@ specification may change.
 
 @defvar viewport-minimum-dimensions
 This is only useful if dynamic viewport is enabled. It means that
-@code{viewport-dimensions} gets never less than this variable. 
+@code{viewport-dimensions} gets never less than this variable.
 
 If setting @code{viewport-minimum-dimensions} by hand (not by the
 customization interface) be sure to call
@@ -4968,7 +5022,7 @@ Sawfish generates applications menu from @file{*.desktop} files.
 If non-nil, @code{apps-menu} is automatically generated from
 @code{user-apps-menu} and @file{*.desktop} files. If you set
 @code{apps-menu}, then it won't happen anyway.
- 
+
 Default is @code{t}.
 @end defvar
 
@@ -6446,7 +6500,7 @@ The hook functions are passed one argument which is the command name.
 
 @defvr {Hook} pre-command-hook
 Called before each command is evaluated. If you set the value
-@code{this-command} to @code{nil} in this hook, then the command 
+@code{this-command} to @code{nil} in this hook, then the command
 won't be executed.
 @end defvr
 
