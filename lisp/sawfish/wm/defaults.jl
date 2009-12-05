@@ -38,20 +38,7 @@
 ;; if it looks like KDE is the desktop environment, then load the
 ;; extra KDE integration module
   (if (getenv "KDE_SESSION_VERSION")
-      (require 'sawfish.wm.integration.kde)
-
-;; if neither GNOME nor KDE is running, append standard
-;; reboot and shutdown actions to the session submenu
-
-;; read README.IMPORTANT if you don't know how to make
-;; non-root users able to use `shutdown'
-  (let ((menu (assoc (_ "Sessi_on") root-menu)))
-    (when menu
-      (nconc menu `(()
-                    (,(_ "_Reboot System")
-                     (system "sudo shutdown -r now &"))
-                    (,(_ "_Shutdown System")
-                     (system "sudo shutdown -h now &")))))))))
+      (require 'sawfish.wm.integration.kde))))
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)

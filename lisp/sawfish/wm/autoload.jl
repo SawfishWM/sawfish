@@ -142,6 +142,7 @@
 (autoload-command 'cycle-dock-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'xterm 'sawfish.wm.commands.launcher)
 (autoload-command 'browser 'sawfish.wm.commands.launcher)
+(autoload-command 'poweroff 'sawfish.wm.commands.poweroff)
 (autoload-command '3d-hack 'sawfish.wm.ext.3d-hack)
 (autoload-command 'rename-window 'sawfish.wm.windows)
 (defgroup audio "Sound" :require sawfish.wm.ext.audio-events)

@@ -116,6 +116,17 @@ defined in the module cited above. Variable @code{display-url-command} is
 renamed to @code{browser-program}.
 @end itemize
 
+@item Poweroff actions
+
+Added poweroff command for letting none KDE/GNOME users easily
+reboot, halt, suspend or hibernate their machine. The commands
+beeing used to do so are also user-settable. In addition when
+it's used to reboot or halt, when the call the `before-exit-hook'
+and `map-windows delete-window' before actually rebooting or,
+to ensure everything is fine on the next startup. Furthermore
+entries to the session-menu are beeing added. If you're using
+KDE or GNOME then those are not generated.
+
 @item Bugs fixed:
 @itemize @minus
 
@@ -153,7 +164,7 @@ Kozicki]
 
 @item Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
 
-@item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo Linux] 
+@item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo Linux]
 @end itemize
 @item In configurator,
 
@@ -207,7 +218,7 @@ Internally, a new function @code{remove-frame-part-value} which allows to change
 @item Xinerama support for Grow/Pack [Nolan Leake]
 
 Make grow/pack Xinerama aware. The support still remains basic.
-Shrink-yank doesn't yet. 
+Shrink-yank doesn't yet.
 
 @item Window rules can be set by lisp
 
@@ -234,7 +245,7 @@ Sawfish can ``translate'' keymaps for each window. Suppose you have
 the following lines in your @file{~/.sawfish/rc}:
 
 @lisp
-(add-window-matcher 
+(add-window-matcher
         '((WM_NAME . "^Terminal$"))
         '(keymap-trans . (("C-n" "C-S-t")
                           ("C-w" "C-S-w"))))
@@ -325,7 +336,7 @@ changes.
 
 @item Startup window placement improvement [Jeremy Hankins]
 
-At Sawfish startup including restart, maximized windows and 
+At Sawfish startup including restart, maximized windows and
 position specified windows used to mess up viewport, appearing
 in wrong viewports. It is fixed.
 

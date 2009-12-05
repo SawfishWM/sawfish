@@ -47,7 +47,9 @@
 	   sawfish.wm.util.compat
 	   sawfish.wm.ext.error-handler
 	   sawfish.wm.ext.apps-menu
-	   sawfish.wm.frames)
+	   sawfish.wm.frames
+	   sawfish.wm.integration.standalone
+	   sawfish.wm.commands.poweroff)
      (set-binds))
 
   (setq *user-structure* 'user)
@@ -121,6 +123,9 @@
   ;; apply customized font-colors
   (if use-custom-font-color
       (update-frame-font-color))
+
+  (if extra-session-menu
+    (add-extra-session-menu))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)
