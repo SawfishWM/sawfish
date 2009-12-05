@@ -13,20 +13,31 @@ they occurred between. For more detailed information see the
 
 @item The 1.6.0 release has new features and bugfixes
 
-@item New/Updated requirements:
+@item Build and installation changes
 @itemize @minus
 
+@item New/Updated requirements:
+@itemize +
 @item librep 0.90.0 -> 0.90.2
-
 @item rep-gtk 0.18.4 -> 0.90.0
 @end itemize
-@item Removed requirements:
-@itemize @minus
 
-@item LibAudiofile
+@item Removed requirements: LibAudiofile and ESounD
+@item Mouse buttons 6 - 9 support is now optional
 
-@item ESounD
+Support for 6 - 9 mouse buttons is now optional. X.Org/XFree86 headers
+only define up to 5 buttons, and we use a working but somewhat hackish
+workaround for getting buttons 6 - 9 which is suspected to cause some
+problems with modifiers. Support for them is enabled by default. If
+you want to disable it, add the following flag to configure:
+
+@code{--without-nine-mousebuttons}
+@c Well, ``code'' gives ugly (back)quote, but otherwise the first hyphen is dropped.
+
+If you drop it, then you can't use mouse button 8 to, for example,
+drag windows.
 @end itemize
+
 @item Incompatible user visible changes:
 @itemize @minus
 
@@ -55,12 +66,12 @@ only if the @file{~/.sawfishrc} lacks. Now, it is always read, so you
 don't have to @code{require} it. It sets up GNOME and KDE support if
 they run, and does @code{(require 'sawfish.wm.ext.error-handler)}.
 
-Since v1.5.0 @code{~/.sawmillrc} is no longer a valid resoucefile, from
-this version on, Sawfish will rename @code{~/.sawmillrc} to
+Since Sawfish 1.5 @code{~/.sawmillrc} is no longer a valid resoucefil.
+From this version on, Sawfish will rename @code{~/.sawmillrc} to
 @code{~/.sawfishrc}, if the former does exist on your system, but the
 latter doesn't.
 
-@item In SawfishConfig the "Matched Windows" group has been renamed to "Windows Rules"
+@item In configurator, the "Matched Windows" group has been renamed to "Window Rules"
 
 @item Sound support has changed. [Christopher Bratusek]
 
@@ -111,29 +122,22 @@ renamed to @code{browser-program}.
 @item Prevents crashes for quick window destructions, especially under high load
 
 There have been crashes if a window is destroyed soon after its creation.
-It happens in @code{add_window} function, and it might be due to a
-window being destroyed, garbage collected and then accessed.
+It happens in @code{add_window} function, and the cause is guessed to be
+garbage collection following window destruction before the object access.
 
 Now most parts of @code{add_window} are protected from garbage
 collection with @code{rep_PUSHGC} / @code{rep_POPGC}. It also prevents
 @code{add_window_hook} from being called with uninitialised argument.
 [Timo Korvola, Janek Kozicki]
 
-@item error_handler() Vs Xinerama and X_ConfigureWindow
+@item Random window disapperance prevention
 
-When a window sends request_code 12 (X_ConfigureWindow), don't auto-asumme
-it to be unmapped, as this may let several windows disappear at once randomly
-not just the one that sent the request, this bug appears mostly in Xinerama
-setups, but is not limited to it. The change is not 100% failsafe at the moment
-but it reduces the failure-rate by 95% which is the reason why it is integrated
-while not beeing final. [Janek Kozicki]
+There're reports of sudden, random window disapperance, under Xinerama
+and some other drivers. It is partly prevented, but not completely.
 
-@item Basic Xinerama support for Grow/Pack
-
-Make grow/pack Xinerama aware. Old implementations supported only 1
-Head, current does 3, but needs to be extended to support atleast 4.
-Also shrink-yank needs to be improved, but since Xinerama was previously
-not supported this patch was still applied [Nolan Leake]
+Now in error_handler() in src/display.c, when a window sends request_code
+12 (X_ConfigureWindow), don't auto-assume it to be unmapped. [Janek
+Kozicki]
 
 @item Build and Installation:
 @itemize +
@@ -149,7 +153,7 @@ not supported this patch was still applied [Nolan Leake]
 
 @item Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
 
-@item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo]
+@item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo Linux] 
 @end itemize
 @item In configurator,
 
@@ -200,10 +204,10 @@ Internally, a new function @code{remove-frame-part-value} which allows to change
 
 @item Sawfish does now support theme-tarballs compressed with XZ (aka LZMA2) and LZMA [Christopher Bratusek]
 
-@item New, sawfish-mmc based @code{rename-window} function [Christopher Bratusek]
+@item Xinerama support for Grow/Pack [Nolan Leake]
 
-In practice, @code{rename-window} works, but technically speaking, the
-window name is not supposed to be changed in ICCCM.
+Make grow/pack Xinerama aware. The support still remains basic.
+Shrink-yank doesn't yet. 
 
 @item Window rules can be set by lisp
 
@@ -220,29 +224,66 @@ Rules by Matching}. An example usage is like this:
                       (maximize . vertical)))
 @end lisp
 
-In fact, this function has existed, but now it can take multiple
-rules, and the grammar has changed. The old syntax is still allowed,
-but deprecated.
+In fact, this function has existed, but now it can now specify both
+window name and class, and the grammar has changed. The old syntax is
+still allowed, but deprecated.
 
-@item 5 new move-cursor commands (@code{move-cursor-} @code{northwest}, @code{northeast}, @code{southwest}, @code{southeast}), and @code{move-cursor-center} [Christopher Bratusek]
+@item Keymap translation [Scott Scriven]
 
-@item Added @code{resize-by-factor} meta-function and @code{double-}, @code{halve-window-size} functions making use of it [Christopher Bratusek]
+Sawfish can ``translate'' keymaps for each window. Suppose you have
+the following lines in your @file{~/.sawfish/rc}:
 
-@item Added @code{fullscreen}, @code{fullscreen-xinerama}, @code{new-workspace} and @code{new-viewport} window-matchers [Jeremy Hankins]
+@lisp
+(add-window-matcher 
+        '((WM_NAME . "^Terminal$"))
+        '(keymap-trans . (("C-n" "C-S-t")
+                          ("C-w" "C-S-w"))))
+@end lisp
 
-@item Added @code{window-name} window-matcher [Christopher Bratusek]
+Then, when you press @kbd{C-n}, any windows with name ``Terminal''
+receive @kbd{C-S-t}, and so on.
 
-@item Added @code{keymap-trans} window-matcher [Scott Scriven]
+This is part of window rules, but it cannot be set by configurator
+yet.
 
-@item Added @code{browser} command [Christopher Bratusek]
+@item New window rules
+@itemize +
+@item Maximizations @code{fullscreen} and @code{full-xinerama} are available (@pxref{Maximizing Without Borders}) [Jeremy Hankins]
+@item Window position can also be specified by the direction, like north or east, instead of the coordinates. [Jeremy Hankins]
+@item New placement modes @code{new-workspace} and @code{new-viewport} [Jeremy Hankins]
 
-@item Added @code{move-window-center} command [Christopher Bratusek]
+If @code{new-workspace} is chosen, then the window is put in an empty
+workspace, or a new workspace is created if none. A workspace with
+sticky windows only are considered empty. @code{new-viewport} is
+the same but an empty viewport is chosen. If none is, the workspace is
+enlarged, and the window is put in a new viewport.
+@item @code{window-name} can change the window's name. [Christopher Bratusek]
+@end itemize
 
-@item Added @code{viewport-windows} function (equivalent to workspace-windows) [Jeremy Hankins]
+@item New commands [Christopher Bratusek]
 
-@item Added viewport-boundary-mode @code{dynamic} (creates a new viewport then hitting the screen-edge) [Jeremy Hankins]
+5 new move-cursor commands, 4 diagonals and 1 to center. (@pxref{Pointer Functions}
 
-@item Improve position matcher to bind a window to a position (either @code{center} @code{east} @code{north} @code{north-east} @code{north-west} @code{south} @code{south-east} @code{south-west} @code{west}) OR to a user-given position [Jeremy Hankins]
+Three window manipulation commands, @code{double-window-size}, @code{halve-window-size}, and @code{move-window-center}.
+
+@code{browser} invokes a browser instance.
+
+@item New funcitons
+@code{rename-window} changes the window name. [from ``mmc'' fork, Christopher Bratusek]
+
+In practice, it works, but technically speaking, the
+window name is not supposed to be changed in ICCCM.
+
+@code{viewport-windows} returns windows in a viewport. [Jeremy Hankins]
+
+@code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
+
+@item Dynamic Viewport Mode [Jeremy Hankins]
+
+When you set @code{viewport-boundary-mode} to @code{dynamic},
+then the workspace grows and shrinks dynamically so that it contains
+all windows and the current viewport. For the details, @xref{Dynamic
+Viewport}.
 
 @item KDE integration module [Christopher Bratusek]
 
@@ -252,8 +293,6 @@ added.
 
 Unless set by user, konsole and konqueror are used for user options
 @code{xterm-program} and @code{browser-program}.
-
-@item Added @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
 
 @item New Frame Classes [Christopher Bratusek] @*
 A ``frame class'' defines frame component. There's no user visible
@@ -272,17 +311,23 @@ changes.
 @item @code{raise-lower-button}, a button to perform various raising and lowering actions on a window
 @end itemize
 @end itemize
-@item Widget Transistion:
+@item Widget Transistion [Christopher Bratusek]
 @itemize @minus
 
-@item Custom make-url-widget replaced by GtkLinkButton [Christopher Bratusek]
+@item Custom make-url-widget replaced by GtkLinkButton
 
-@item Custom about-dialog replaced by GtkAboutDialog [Christopher Bratusek]
+@item Custom about-dialog replaced by GtkAboutDialog
 
-@item GtkButton + GtkPreview + GtkColorSelection trio replaced by single GtkColorButton [Christopher Bratusek]
+@item GtkButton + GtkPreview + GtkColorSelection trio replaced by single GtkColorButton
 @end itemize
 @item Other Changes:
 @itemize @minus
+
+@item Startup window placement improvement [Jeremy Hankins]
+
+At Sawfish startup including restart, maximized windows and 
+position specified windows used to mess up viewport, appearing
+in wrong viewports. It is fixed.
 
 @item Renamed @code{after-add-window} to @code{maxmize-after-add-window} @*
 This function is only used in a hook [Teika Kazura]

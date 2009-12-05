@@ -599,17 +599,8 @@ four-element list indicating the current cache status:
 @cindex Cursors
 
 Cursors define the shape and hot-spot of the mouse pointer's image.  A
-lisp type is provided for manipulating these objects.  In addition,
-Sawfish provides functions for manipulating the position of the
-cursor.
-
-@menu
-* Cursor Appearance::
-* Cursor Positioning::
-@end menu
-
-@node Cursor Appearance, Cursor Positioning, Cursors, Cursors
-@section Cursor Appearance
+lisp type is provided for manipulating these objects. For pointer
+related functions, @xref{Pointer Functions}.
 
 @defun cursorp arg
 Returns @code{t} if @var{arg} is a member of the cursor type.
@@ -674,50 +665,6 @@ following symbols are automatically set:
 
 The glyphs associated with these names are shown in Appendix I, of
 Volume Two, @cite{Xlib Reference Manual}.
-
-@node Cursor Positioning,  , Cursor Appearance, Cursors
-@section Cursor Positioning
-
-Sawfish provides one basic command for adjusting the relative position
-of the cursor.
-
-@defun move-cursor right down
-Move the cursor @var{right} pixels to the right across the screen, and
-@var{down} pixels down the screen.  The cursor stops at the edge of
-the screen (although in multi-head environments, this may not be at
-the edge of the display).
-@end defun
-
-There are also more specialized cursor movement commands.
-
-@defun move-cursor-left-fine
-@defunx move-cursor-right-fine
-@defunx move-cursor-up-fine
-@defunx move-cursor-down-fine
-@defunx move-cursor-northwest-fine
-@defunx move-cursor-northeast-fine
-@defunx move-cursor-southwest-fine
-@defunx move-cursor-southeast-fine
-Move the cursor 1 pixel in the indicated direction.
-@end defun
-
-@defun move-cursor-center
-@defunx move-cursor-left
-@defunx move-cursor-right
-@defunx move-cursor-up
-@defunx move-cursor-down
-@defunx move-cursor-northwest
-@defunx move-cursor-northeast
-@defunx move-cursor-southwest
-@defunx move-cursor-southeast
-Move the cursor @code{move-cursor-increment} pixels in the indicated
-direction.
-@end defun
-
-@defvar move-cursor-increment 16
-The @code{move-cursor-@var{DIRECTION}} functions move this cursor this
-many pixels at a time.
-@end defvar
 
 @node Windows, Customization, Cursors, Top
 @chapter Windows
@@ -792,25 +739,32 @@ Return true if @var{window} includes @var{atom} in its
 @end defun
 
 @menu
+Basics:
 * Window Property Lists::
 * Window Types::
 * Window Attributes::
 * Input Focus::
 * X Properties::
+* Window Groups::
+
+@noindent
+Operations on windows:
 * Window Stacking::
 * Moving and Resizing Windows::
 * Showing and Hiding Windows::
 * Destroying Windows::
 * Shading Windows::
+* Maximizing Windows::
+* Cycling Between Windows::
+* Window Rules by Matching::
+* Animating Windows::
 * Iconifying Windows::
+
+@noindent
+Windows with special properties:
 * Window Stickiness::
 * Ignored Windows::
 * Avoided Windows::
-* Maximizing Windows::
-* Animating Windows::
-* Cycling Between Windows::
-* Window Groups::
-* Window Rules by Matching::
 @end menu
 
 
@@ -1045,6 +999,11 @@ Format to create unique window names.  Defaults to @code{"%s [%d]"}.
 @deffnx Command uniquify-window-name window
 Force @var{window} to have a unique title.
 @end deffn
+
+@defun rename-window win name
+Change the window's name to @var{name}. This works in practice, but
+technically ICCCM doesn't suppose window name changes.
+@end defun
 
 @defun window-icon-name window
 Return the icon name associated with @var{window}.
@@ -1385,7 +1344,7 @@ The cursor shape to use when selecting a window.  Defaults to
 @code{crosshair}.
 @end defvar
 
-@node X Properties, Window Stacking, Input Focus, Windows
+@node X Properties, Window Groups, Input Focus, Windows
 @section X Properties
 @cindex X properties
 @cindex Properties, X
@@ -1469,8 +1428,179 @@ Arrange for function @var{fun} to be called with arguments
 to monitor.
 @end defun
 
+@node Window Groups, Window Stacking, X Properties, Windows
+@section Window Groups
+@cindex Groups, windows
 
-@node Window Stacking, Moving and Resizing Windows, X Properties, Windows
+Sawfish provides extra tools and commands for dealing with ICCCM
+groups.  Most ``normal'' groups work the same way as they do in the
+ICCCM standard: windows have a group property that is set to the X
+window ID of the group leader.  These are ``group IDs'', and they are
+always positive integers.  In addition, Sawfish allows group IDs to
+be:
+
+@table @asis
+@item negative integers
+These are anonymous user-defined groups.
+@item symbols
+These are named user-defined groups.  Named user-defined groups are
+saved as part of window properties when saving sessions.
+@end table
+
+@defun window-group-ids
+Return the list of all group ids.
+@end defun
+
+There may be certain named groups that always exist, whether or not
+any window belongs to them.
+
+@defvar peristent-group-ids
+A list of symbols naming groups that always exist.
+@end defvar
+
+In any case, a window is limited to belonging to one group, and always
+belongs to one group.
+
+@menu
+* Assigning Windows to Groups::
+* Operations on Groups::
+@end menu
+
+@node Assigning Windows to Groups, Operations on Groups, Window Groups, Window Groups
+@subsection Assigning Windows to Groups
+@cindex Groups, assigning windows to
+
+It is possible to change the group of a window in Sawfish.  Use
+@code{add-window-to-group}, or if necessary you can set the window's
+@code{group} property explicitly.
+
+@defun add-window-to-group window group-id
+Place @var{window} in group @var{group-id}, replacing any previous
+group membership.  If @var{group-id} is @code{nil}, then Sawfish
+returns the window to whatever group membership was supplied by ICCCM.
+@end defun
+
+@defun add-window-to-new-group window
+Place @var{window} into a new group, which will have @var{window} as
+its sole member.  This is an anonymous user-defined group.  The new
+group ID is returned.
+@end defun
+
+The Sawfish group assignment never overrides the ICCCM group
+assignment, just suppresses it.  The @code{window-actual-group-id}
+function implements this overriding.
+
+@defun window-actual-group-id window
+Return the (Sawfish) group ID for @var{window}.  This is, in order of
+preference:
+@itemize @bullet
+@item The group ID assigned by Sawfish
+@item The group ID passed in by ICCCM.
+@item The corresponding values for an owning window, if the given window is transient.
+@item The window's own window ID.
+@end itemize
+
+This means that a window is, at the very least, part of its own group.
+@end defun
+
+Each of the following functions operates on the ``actual group ID'' as
+returned by the above function.
+
+@defun windows-by-group group-id &optional by-depth
+Return the list of windows in the group with id @var{group-id}.
+If @var{by-depth} is non-nil, then return the windows in order of
+stacking, from topmost to bottommost.
+@end defun
+
+@defun windows-in-group w &optional by-depth
+Return the list of windows in the same group as window @var{w}.
+If @var{by-depth} is non-nil, then return the windows in order of
+stacking, from topmost to bottommost.
+@end defun
+
+@defun map-window-group fun w
+Map the single argument function @var{fun} over all windows in the
+same group as window @var{w}.  Note that @var{fun} needs to operate
+using side-effects, rather than returning values.
+@end defun
+
+@defun map-other-window-groups fun w
+Map the single argument function @var{fun} over all windows not in the
+same group as window @var{w}.  Note that @var{fun} needs to operate
+using side-effects, rather than returning values.
+@end defun
+
+@defun window-group-menu &optional w
+Return a menu definition suitable for @code{popup-menu}.  This menu
+will allow the user to assign the window @var{w} into any group of a
+managed window, or into a brand new group.  The window's current group
+is checked or otherwise marked.
+@end defun
+
+@node Operations on Groups,  , Assigning Windows to Groups, Window Groups
+@subsection Operations on Groups
+@cindex Groups, operations on
+
+Most of the window manipulation functions that operate on windows are
+also available for window groups.  Each of these functions takes a
+window as argument; the affected group is that window's group.
+
+@defun iconify-group w
+@defunx uniconify-group w
+@defunx iconify-transient-group w
+@defunx uniconify-transient-group w
+These operate like their single-window counterparts.  They work by
+temporarily rebinding @code{iconify-group-mode} and
+@code{uniconify-group-mode}.
+@end defun
+
+@defun make-group-sticky w
+@defunx make-group-unsticky w
+These operate like their single-window counterparts.
+@end defun
+
+@defun toggle-group-sticky w
+If window @var{w} is sticky, all windows in its group have their
+stickyness removed.  Otherwise all windows in its group become sticky.
+@end defun
+
+@defun send-group-to-workspace w workspace
+@defunx send-group-to-next-workspace w count
+@defunx send-group-to-previous-workspace w count
+These operate like their single-window counterparts.
+@end defun
+
+@defun send-group-to-current-workspace w
+All windows in the group of @var{w} are moved from their existing
+workspaces to the nearest workspace that @var{w} is in.  Sticky
+windows are not affected.  If the window had the input focus and it is
+visible after the move, it retains the input focus.
+@end defun
+
+@defun move-group-to-current-viewport w
+@defunx move-group-viewport w
+@end defun
+
+@defun move-group-left w
+@defunx move-group-right w
+@defunx move-group-up w
+@defunx move-group-down w
+These operate like their single-window counterparts.
+@end defun
+
+@defun raise-group w
+@defunx lower-group w
+@defunx raise-lower-group w
+@defunx raise-group-depth w
+@defunx lower-group-depth w
+These operate like their single-window counterparts.
+@end defun
+
+@defun set-group-frame-style w style
+This operates like its single-window counterpart.
+@end defun
+
+@node Window Stacking, Moving and Resizing Windows, Window Groups, Windows
 @section Window Stacking
 @cindex Window stacking
 @cindex Stacking, of windows
@@ -2017,7 +2147,7 @@ by @var{window} (a window object, or numeric id).
 When a managed window is destroyed, the @code{destroy-notify-hook} will
 subsequently be invoked (@pxref{Standard Hooks}).
 
-@node Shading Windows, Iconifying Windows, Destroying Windows, Windows
+@node Shading Windows, Maximizing Windows, Destroying Windows, Windows
 @section Shading Windows
 @cindex Shading windows
 @cindex Windows, shading
@@ -2049,264 +2179,7 @@ The @code{shaded} property of a window is set to @code{t} when the
 window is shaded. If a window is added with this property already set,
 then the window will appear in its shaded state.
 
-
-@node Iconifying Windows, Window Stickiness, Shading Windows, Windows
-@section Iconifying Windows
-@cindex Iconifying windows
-@cindex Windows, iconifying
-
-X defines an iconic state for windows, often windows in this state are
-displayed as small icons. Sawfish does not display these icons, instead
-iconified windows are shown slightly differently in the menu of all
-windows.
-
-@deffn Command iconify-window window
-Iconify the window associated with object @var{window}.
-@end deffn
-
-@deffn Command uniconify-window window
-Return the window associated with @var{window} from its iconified state.
-@end deffn
-
-@deffn Command toggle-window-iconified window
-Minimize the window associated with @var{window}, or restore it if it
-is already minimized.
-@end deffn
-
-@deffn Command iconify-workspace-windows
-Minimize all windows in the current workspace.
-@end deffn
-
-A window's iconic state may be tested through examination of its
-@code{iconified} property---when @code{t} the window is iconified.
-But it is preferable to use explicit testing functions instead:
-
-@defun window-iconified-p window
-Returns true if the window associated with @var{window} is iconified,
-false otherwise.
-@end defun
-
-@defun window-iconifiable-p window
-Returns true if the window associated with @var{window} can be
-iconified, false otherwise.  Some reasons a window might not be
-iconifiable are: it has a @code{never-iconify} property; it is
-already iconified; it is not a desktop window; or it is marked
-@code{ignored} and @code{iconify-ignored} is not true.
-@end defun
-
-@defvar iconify-ignored nil
-Unmanaged (@code{ignored}) windows may be iconified.  Defaults to nil.
-@end defvar
-
-Sawfish allows you to control certain behaviors when restoring
-minimized windows.
-
-@defvar focus-windows-on-uniconify
-Windows are focused after being unminimized.  Defaults to false.
-@end defvar
-
-@defvar raise-windows-on-uniconify
-Windows are raised after being unminimized.  Defaults to true.
-@end defvar
-
-@defvar uniconify-to-current-workspace
-Move windows to the current workspace when they are unminimized.
-Defaults to true.
-@end defvar
-
-When iconifying, it is possible to force other windows to iconify.
-
-@defvr Customizable iconify-group-mode
-@defvrx Customizable uniconify-group-mode
-Policy for performing chains of minimizations or restorations.  When a
-particular window is minimized or restored, it can cause other windows
-to be minimized or restored at the same time.  Their allowed values
-are set to the following list.  By default, both variables are bound
-to the symbol @code{transients}. but they are not required to have the
-same value.
-@end defvr
-
-@table @code
-@item none
-No additional windows are minimized or restored.
-@item transients
-All transient windows associated with the target window are minimized
-or restored.
-@item group
-All windows in the target window's group are minimized or restored.
-@end table
-
-Finally, it's possible to get the icon that would normally be
-displayed for an iconified window.
-
-@defun window-icon-image window
-Return an image object representing the icon currently associated with
-@var{window}, or @code{nil} if there is no such image.
-@end defun
-
-@node Window Stickiness, Ignored Windows, Iconifying Windows, Windows
-@section Window Stickiness
-@cindex Window stickiness
-@cindex Sticky, windows
-
-Windows normally exist in a single workspace and a single viewport
-into that workspace.  When changing workspace or viewport, the current
-windows disappear.  This is sometimes not the correct policy; there
-are certain windows that should ``follow'' the user from window to
-window.  These are typically windows that are not bound to a
-particular activity.  The most common example is a dashboard window
-for calling other applications.  Another example might be a diagnostic
-program such as a load monitory.
-
-Each window has ``stickiness'' flags that govern this behavior.  One
-flag controls stickiness across workspaces: sticky windows will appear
-in every workspace automatically.  The other flag similarly governs
-stickiness across viewports.  A window is ``sticky'' if either of
-these flags are set.
-
-Sticky windows are often @code{ignored}, so they lack window
-decorations, and @code{avoid}ed so other windows do not cover them up.
-
-@defun window-sticky-p/workspace window
-@defunx window-sticky-p/viewport window
-@defunx window-sticky-p window
-Returns true if @var{window} is sticky across a particular environment
-(workspaces, viewports, or either), false otherwise.
-@end defun
-
-@defun make-window-sticky/workspace window
-@defunx make-window-sticky/viewport window
-@defunx make-window-sticky window
-Make the @var{window} sticky across some environment (workspaces,
-viewports, or both).
-@end defun
-
-@defun make-window-unsticky/workspace window
-@defunx make-window-unsticky/viewport window
-@defunx make-window-unsticky window
-Make the @var{window} unsticky across some environment (workspaces,
-viewports or both).
-@end defun
-
-@defun toggle-window-sticky window
-If @code{window-sticky-p} would report true for @var{window}, make
-@var{window} unsticky for all environments.  Otherwise make it sticky
-for all environments.
-@end defun
-
-@node Ignored Windows, Avoided Windows, Window Stickiness, Windows
-@section Ignored Windows
-@cindex Windows, ignored
-@cindex ignored
-
-Sawfish has a general concept of ``ignored'' windows; the user does
-not interact normally with those windows.  The concept is actually
-defined by five different window properties:
-
-@table @code
-@item ignored
-The window does not receive frames.
-
-@item never-focus
-The window never receives the input focus.
-
-@item cycle-skip
-The window is ignored while window cycling.
-
-@item window-list-skip
-The window will not be included in the window list.
-
-@item task-list-skip
-The window will not be included in the task list.
-
-@end table
-
-A monitor application such as ``xload'' might have all five of these
-flags set.
-
-Rather than directly manipulating the window properties, it is better
-to use the following access functions:
-
-@defun window-ignored-p window
-Returns true if the window has the @code{ignored} property, false
-otherwise.
-@end defun
-
-@deffn Command make-window-ignored window
-Ignore the window @var{window}.
-@end deffn
-
-@deffn Command make-window-not-ignored window
-Unignore the window @var{window}.
-@end deffn
-
-@deffn Command toggle-window-ignored window
-If @code{window-ignored-p} would return true for @var{window}, make it
-unignored.  Otherwise make it ignored.
-@end deffn
-
-The remaining flags only have toggle functions implemented right now:
-
-@deffn Command toggle-window-never-focus window
-@deffnx Command toggle-window-cycle-skip window
-@deffnx Command toggle-window-list-skip window
-@deffnx Command toggle-task-list-skip window
-Toggle the appropriate flag on @var{window}.
-@end deffn
-
-All five of the flags are available through the window menu's
-``Toggle'' entry.
-
-@node Avoided Windows, Maximizing Windows, Ignored Windows, Windows
-@section Avoided Windows
-@cindex Windows, avoided
-@cindex avoid
-
-``Avoided'' windows are kept unobscured by other windows
-wherever possible. It is involved in window placement (@pxref{Window
-Placement}) and maximization (@pxref{Maximizing Windows}).
-Most placement modes will attempt to place a new window avoiding
-overlap with them. Windows can be maximized avoiding overlap to
-avoided windows.
-
-In this context, windows are categorized into three: windows with
-@code{avoid} property, those with
-@code{ignored} property (@pxref{Ignored Windows}), and the others.
-
-It is possible to avoid overlap only with avoided windows, and
-also is possible @emph{not} to avoid overlap only with ignored windows.
-
-Remember that the window with @code{avoid} property is @emph{avoided}
-by @emph{other} windows. Thus property name @code{avoid} should have
-been named ``avoided''. On the other hand, related functions and
-variables are named correctly, and no special care is necessary.
-
-@defvar dont-avoid-ignored
-When non-nil (the default), ignored windows aren't avoided.
-@end defvar
-
-@defvar avoid-by-default
-When non-nil, any windows are avoided. Defaults to nil.
-@end defvar
-
-@defun window-avoided-p window
-Returns t if @var{window} is avoided by other windows.
-It is determined in the following order:
-
-@enumerate
-@item A window with @code{avoid} property is always avoided.
-@item A window with @code{ignored} property is always @emph{not} avoided
-unless @code{dont-avoid-ignored} is non-nil.
-@item Otherwise, @code{avoid-by-default} determines if it should be avoided.
-@end enumerate
-@end defun
-
-@defun avoided-windows &optional window
-Returns a list of all windows that are avoided. If
-@var{window} is defined, then it is excluded from the returned list.
-@end defun
-
-@node Maximizing Windows, Animating Windows, Avoided Windows, Windows
+@node Maximizing Windows, Cycling Between Windows, Shading Windows, Windows
 @section Maximizing Windows
 @cindex Maximizing windows
 @cindex Windows, maximizing
@@ -2579,41 +2452,7 @@ vertically maximized window will be restored to its original @var{h}
 dimension, but its @var{w} coordinate may have changed.
 @end defun
 
-@node Animating Windows, Cycling Between Windows, Maximizing Windows, Windows
-@section Animating Windows
-@cindex Windows, Animating
-
-Sawfish provides certain window animation capabilities.  They have
-been described as ``lame'', so they are off by default.
-
-@defvar default-window-animator
-The default window animation mode, used if a window has no explicit
-animation set.  Normally @code{none}.
-@end defvar
-
-@defun define-window-animator name fun
-Define a window animator called @var{name} (a symbol) that is managed
-by function @var{fun}. @var{fun} is called as @samp{(fun window op
-[action])} when it should change the state of an animation sequence.
-@var{Op} may be one of the symbols @code{start}, @code{stop}.
-@end defun
-
-@defun autoload-window-animator name struct
-Construct an autoloader for window animator @var{name} from structure
-@var{struct}.
-@end defun
-
-@defun run-window-animator window action
-Invoke an animation for action @var{action} on @var{window}.
-@var{Action} may be one of the symbols @code{start}, @code{stop}.
-@end defun
-
-@defun record-window-animator window animator
-Note that @var{window} currently has an animation running, being
-controlled by animator function @var{animator}.
-@end defun
-
-@node Cycling Between Windows, Window Groups, Animating Windows, Windows
+@node Cycling Between Windows, Window Rules by Matching, Maximizing Windows, Windows
 @section Cycling Between Windows
 @cindex Windows, cycling between
 
@@ -2779,45 +2618,7 @@ Switch input focus to the most-recently focused window in the current
 workspace.
 @end defun
 
-@node Window Groups, Window Rules by Matching , Cycling Between Windows, Windows
-@section Window Groups
-@cindex Groups, windows
-
-Sawfish provides extra tools and commands for dealing with ICCCM
-groups.  Most ``normal'' groups work the same way as they do in the
-ICCCM standard: windows have a group property that is set to the X
-window ID of the group leader.  These are ``group IDs'', and they are
-always positive integers.  In addition, Sawfish allows group IDs to
-be:
-
-@table @asis
-@item negative integers
-These are anonymous user-defined groups.
-@item symbols
-These are named user-defined groups.  Named user-defined groups are
-saved as part of window properties when saving sessions.
-@end table
-
-@defun window-group-ids
-Return the list of all group ids.
-@end defun
-
-There may be certain named groups that always exist, whether or not
-any window belongs to them.
-
-@defvar peristent-group-ids
-A list of symbols naming groups that always exist.
-@end defvar
-
-In any case, a window is limited to belonging to one group, and always
-belongs to one group.
-
-@menu
-* Assigning Windows to Groups::
-* Operations on Groups::
-@end menu
-
-@node Window Rules by Matching, , Window Groups, Windows
+@node Window Rules by Matching, Animating Windows, Cycling Between Windows, Windows
 @section Window Rules by Matching
 @cindex Matching, windows
 
@@ -2870,139 +2671,296 @@ The rules are stored in variable @code{match-window-profile}. Use
 the above functions to modify its value. It is not recommended
 to directly manipulate it.
 
-@node Assigning Windows to Groups, Operations on Groups, Window Groups, Window Groups
-@subsection Assigning Windows to Groups
-@cindex Groups, assigning windows to
+@node Animating Windows, Iconifying Windows, Window Rules by Matching, Windows
+@section Animating Windows
+@cindex Windows, Animating
 
-It is possible to change the group of a window in Sawfish.  Use
-@code{add-window-to-group}, or if necessary you can set the window's
-@code{group} property explicitly.
+Sawfish provides certain window animation capabilities.  They have
+been described as ``lame'', so they are off by default.
 
-@defun add-window-to-group window group-id
-Place @var{window} in group @var{group-id}, replacing any previous
-group membership.  If @var{group-id} is @code{nil}, then Sawfish
-returns the window to whatever group membership was supplied by ICCCM.
+@defvar default-window-animator
+The default window animation mode, used if a window has no explicit
+animation set.  Normally @code{none}.
+@end defvar
+
+@defun define-window-animator name fun
+Define a window animator called @var{name} (a symbol) that is managed
+by function @var{fun}. @var{fun} is called as @samp{(fun window op
+[action])} when it should change the state of an animation sequence.
+@var{Op} may be one of the symbols @code{start}, @code{stop}.
 @end defun
 
-@defun add-window-to-new-group window
-Place @var{window} into a new group, which will have @var{window} as
-its sole member.  This is an anonymous user-defined group.  The new
-group ID is returned.
+@defun autoload-window-animator name struct
+Construct an autoloader for window animator @var{name} from structure
+@var{struct}.
 @end defun
 
-The Sawfish group assignment never overrides the ICCCM group
-assignment, just suppresses it.  The @code{window-actual-group-id}
-function implements this overriding.
-
-@defun window-actual-group-id window
-Return the (Sawfish) group ID for @var{window}.  This is, in order of
-preference:
-@itemize @bullet
-@item The group ID assigned by Sawfish
-@item The group ID passed in by ICCCM.
-@item The corresponding values for an owning window, if the given window is transient.
-@item The window's own window ID.
-@end itemize
-
-This means that a window is, at the very least, part of its own group.
+@defun run-window-animator window action
+Invoke an animation for action @var{action} on @var{window}.
+@var{Action} may be one of the symbols @code{start}, @code{stop}.
 @end defun
 
-Each of the following functions operates on the ``actual group ID'' as
-returned by the above function.
-
-@defun windows-by-group group-id &optional by-depth
-Return the list of windows in the group with id @var{group-id}.
-If @var{by-depth} is non-nil, then return the windows in order of
-stacking, from topmost to bottommost.
+@defun record-window-animator window animator
+Note that @var{window} currently has an animation running, being
+controlled by animator function @var{animator}.
 @end defun
 
-@defun windows-in-group w &optional by-depth
-Return the list of windows in the same group as window @var{w}.
-If @var{by-depth} is non-nil, then return the windows in order of
-stacking, from topmost to bottommost.
+@node Iconifying Windows, Window Stickiness, Animating Windows, Windows
+@section Iconifying Windows
+@cindex Iconifying windows
+@cindex Windows, iconifying
+
+X defines an iconic state for windows, often windows in this state are
+displayed as small icons. Sawfish does not display these icons, instead
+iconified windows are shown slightly differently in the menu of all
+windows.
+
+@deffn Command iconify-window window
+Iconify the window associated with object @var{window}.
+@end deffn
+
+@deffn Command uniconify-window window
+Return the window associated with @var{window} from its iconified state.
+@end deffn
+
+@deffn Command toggle-window-iconified window
+Minimize the window associated with @var{window}, or restore it if it
+is already minimized.
+@end deffn
+
+@deffn Command iconify-workspace-windows
+Minimize all windows in the current workspace.
+@end deffn
+
+A window's iconic state may be tested through examination of its
+@code{iconified} property---when @code{t} the window is iconified.
+But it is preferable to use explicit testing functions instead:
+
+@defun window-iconified-p window
+Returns true if the window associated with @var{window} is iconified,
+false otherwise.
 @end defun
 
-@defun map-window-group fun w
-Map the single argument function @var{fun} over all windows in the
-same group as window @var{w}.  Note that @var{fun} needs to operate
-using side-effects, rather than returning values.
+@defun window-iconifiable-p window
+Returns true if the window associated with @var{window} can be
+iconified, false otherwise.  Some reasons a window might not be
+iconifiable are: it has a @code{never-iconify} property; it is
+already iconified; it is not a desktop window; or it is marked
+@code{ignored} and @code{iconify-ignored} is not true.
 @end defun
 
-@defun map-other-window-groups fun w
-Map the single argument function @var{fun} over all windows not in the
-same group as window @var{w}.  Note that @var{fun} needs to operate
-using side-effects, rather than returning values.
+@defvar iconify-ignored nil
+Unmanaged (@code{ignored}) windows may be iconified.  Defaults to nil.
+@end defvar
+
+Sawfish allows you to control certain behaviors when restoring
+minimized windows.
+
+@defvar focus-windows-on-uniconify
+Windows are focused after being unminimized.  Defaults to false.
+@end defvar
+
+@defvar raise-windows-on-uniconify
+Windows are raised after being unminimized.  Defaults to true.
+@end defvar
+
+@defvar uniconify-to-current-workspace
+Move windows to the current workspace when they are unminimized.
+Defaults to true.
+@end defvar
+
+When iconifying, it is possible to force other windows to iconify.
+
+@defvr Customizable iconify-group-mode
+@defvrx Customizable uniconify-group-mode
+Policy for performing chains of minimizations or restorations.  When a
+particular window is minimized or restored, it can cause other windows
+to be minimized or restored at the same time.  Their allowed values
+are set to the following list.  By default, both variables are bound
+to the symbol @code{transients}. but they are not required to have the
+same value.
+@end defvr
+
+@table @code
+@item none
+No additional windows are minimized or restored.
+@item transients
+All transient windows associated with the target window are minimized
+or restored.
+@item group
+All windows in the target window's group are minimized or restored.
+@end table
+
+Finally, it's possible to get the icon that would normally be
+displayed for an iconified window.
+
+@defun window-icon-image window
+Return an image object representing the icon currently associated with
+@var{window}, or @code{nil} if there is no such image.
 @end defun
 
-@defun window-group-menu &optional w
-Return a menu definition suitable for @code{popup-menu}.  This menu
-will allow the user to assign the window @var{w} into any group of a
-managed window, or into a brand new group.  The window's current group
-is checked or otherwise marked.
+@node Window Stickiness, Ignored Windows, Iconifying Windows, Windows
+@section Window Stickiness
+@cindex Window stickiness
+@cindex Sticky, windows
+
+Windows normally exist in a single workspace and a single viewport
+into that workspace.  When changing workspace or viewport, the current
+windows disappear.  This is sometimes not the correct policy; there
+are certain windows that should ``follow'' the user from window to
+window.  These are typically windows that are not bound to a
+particular activity.  The most common example is a dashboard window
+for calling other applications.  Another example might be a diagnostic
+program such as a load monitory.
+
+Each window has ``stickiness'' flags that govern this behavior.  One
+flag controls stickiness across workspaces: sticky windows will appear
+in every workspace automatically.  The other flag similarly governs
+stickiness across viewports.  A window is ``sticky'' if either of
+these flags are set.
+
+Sticky windows are often @code{ignored}, so they lack window
+decorations, and @code{avoid}ed so other windows do not cover them up.
+
+@defun window-sticky-p/workspace window
+@defunx window-sticky-p/viewport window
+@defunx window-sticky-p window
+Returns true if @var{window} is sticky across a particular environment
+(workspaces, viewports, or either), false otherwise.
 @end defun
 
-@node Operations on Groups,  , Assigning Windows to Groups, Window Groups
-@subsection Operations on Groups
-@cindex Groups, operations on
-
-Most of the window manipulation functions that operate on windows are
-also available for window groups.  Each of these functions takes a
-window as argument; the affected group is that window's group.
-
-@defun iconify-group w
-@defunx uniconify-group w
-@defunx iconify-transient-group w
-@defunx uniconify-transient-group w
-These operate like their single-window counterparts.  They work by
-temporarily rebinding @code{iconify-group-mode} and
-@code{uniconify-group-mode}.
+@defun make-window-sticky/workspace window
+@defunx make-window-sticky/viewport window
+@defunx make-window-sticky window
+Make the @var{window} sticky across some environment (workspaces,
+viewports, or both).
 @end defun
 
-@defun make-group-sticky w
-@defunx make-group-unsticky w
-These operate like their single-window counterparts.
+@defun make-window-unsticky/workspace window
+@defunx make-window-unsticky/viewport window
+@defunx make-window-unsticky window
+Make the @var{window} unsticky across some environment (workspaces,
+viewports or both).
 @end defun
 
-@defun toggle-group-sticky w
-If window @var{w} is sticky, all windows in its group have their
-stickyness removed.  Otherwise all windows in its group become sticky.
+@defun toggle-window-sticky window
+If @code{window-sticky-p} would report true for @var{window}, make
+@var{window} unsticky for all environments.  Otherwise make it sticky
+for all environments.
 @end defun
 
-@defun send-group-to-workspace w workspace
-@defunx send-group-to-next-workspace w count
-@defunx send-group-to-previous-workspace w count
-These operate like their single-window counterparts.
+@node Ignored Windows, Avoided Windows, Window Stickiness, Windows
+@section Ignored Windows
+@cindex Windows, ignored
+@cindex ignored
+
+Sawfish has a general concept of ``ignored'' windows; the user does
+not interact normally with those windows.  The concept is actually
+defined by five different window properties:
+
+@table @code
+@item ignored
+The window does not receive frames.
+
+@item never-focus
+The window never receives the input focus.
+
+@item cycle-skip
+The window is ignored while window cycling.
+
+@item window-list-skip
+The window will not be included in the window list.
+
+@item task-list-skip
+The window will not be included in the task list.
+
+@end table
+
+A monitor application such as ``xload'' might have all five of these
+flags set.
+
+Rather than directly manipulating the window properties, it is better
+to use the following access functions:
+
+@defun window-ignored-p window
+Returns true if the window has the @code{ignored} property, false
+otherwise.
 @end defun
 
-@defun send-group-to-current-workspace w
-All windows in the group of @var{w} are moved from their existing
-workspaces to the nearest workspace that @var{w} is in.  Sticky
-windows are not affected.  If the window had the input focus and it is
-visible after the move, it retains the input focus.
+@deffn Command make-window-ignored window
+Ignore the window @var{window}.
+@end deffn
+
+@deffn Command make-window-not-ignored window
+Unignore the window @var{window}.
+@end deffn
+
+@deffn Command toggle-window-ignored window
+If @code{window-ignored-p} would return true for @var{window}, make it
+unignored.  Otherwise make it ignored.
+@end deffn
+
+The remaining flags only have toggle functions implemented right now:
+
+@deffn Command toggle-window-never-focus window
+@deffnx Command toggle-window-cycle-skip window
+@deffnx Command toggle-window-list-skip window
+@deffnx Command toggle-task-list-skip window
+Toggle the appropriate flag on @var{window}.
+@end deffn
+
+All five of the flags are available through the window menu's
+``Toggle'' entry.
+
+@node Avoided Windows, , Ignored Windows, Windows
+@section Avoided Windows
+@cindex Windows, avoided
+@cindex avoid
+
+``Avoided'' windows are kept unobscured by other windows
+wherever possible. It is involved in window placement (@pxref{Window
+Placement}) and maximization (@pxref{Maximizing Windows}).
+Most placement modes will attempt to place a new window avoiding
+overlap with them. Windows can be maximized avoiding overlap to
+avoided windows.
+
+In this context, windows are categorized into three: windows with
+@code{avoid} property, those with
+@code{ignored} property (@pxref{Ignored Windows}), and the others.
+
+It is possible to avoid overlap only with avoided windows, and
+also is possible @emph{not} to avoid overlap only with ignored windows.
+
+Remember that the window with @code{avoid} property is @emph{avoided}
+by @emph{other} windows. Thus property name @code{avoid} should have
+been named ``avoided''. On the other hand, related functions and
+variables are named correctly, and no special care is necessary.
+
+@defvar dont-avoid-ignored
+When non-nil (the default), ignored windows aren't avoided.
+@end defvar
+
+@defvar avoid-by-default
+When non-nil, any windows are avoided. Defaults to nil.
+@end defvar
+
+@defun window-avoided-p window
+Returns t if @var{window} is avoided by other windows.
+It is determined in the following order:
+
+@enumerate
+@item A window with @code{avoid} property is always avoided.
+@item A window with @code{ignored} property is always @emph{not} avoided
+unless @code{dont-avoid-ignored} is non-nil.
+@item Otherwise, @code{avoid-by-default} determines if it should be avoided.
+@end enumerate
 @end defun
 
-@defun move-group-to-current-viewport w
-@defunx move-group-viewport w
+@defun avoided-windows &optional window
+Returns a list of all windows that are avoided. If
+@var{window} is defined, then it is excluded from the returned list.
 @end defun
 
-@defun move-group-left w
-@defunx move-group-right w
-@defunx move-group-up w
-@defunx move-group-down w
-These operate like their single-window counterparts.
-@end defun
-
-@defun raise-group w
-@defunx lower-group w
-@defunx raise-lower-group w
-@defunx raise-group-depth w
-@defunx lower-group-depth w
-These operate like their single-window counterparts.
-@end defun
-
-@defun set-group-frame-style w style
-This operates like its single-window counterpart.
-@end defun
 
 @node Customization, Window Frames, Windows, Top
 @chapter Customization
@@ -4057,32 +4015,40 @@ Disable all frame parts that are a member of @var{class} in
 @cindex Viewports
 @cindex Large Desktop
 
-Sawfish can have the virtual desktop size larger then the computer
-screen size. This notion is called ``viewport'' in Sawfish.
+Sawfish can have a virtual desktop which is larger than the computer's
+screen size. This is done through the use of ``viewport''.
 
-Viewport can be thought that it displays a portion of virtual desktop,
-and the entire virtual desktop consists of the grid of ``cells'' whose
-size is of the physical screen. Viewport sits on a cell.
+Viewport can be thought of as a screen-sized hole through which you
+can view a portion of the virtual desktop.  The entire virtual desktop
+consists of the grid of ``cells'' whose size is that of the physical
+screen. Viewport moves around, and sits on a cell.
 
-Technically speaking, the word ``viewport'' should mean the currently
-displayed part of the entire desktop. But in Sawfish, the entire
-desktop is wrongly called ``viewport'', too. When focused to
-enlargement, ``large desktop'' is the correct nomenclature, but
-simply calling it ``workspace'' = ``virtual desktop'' are correct, too,
-for most cases.
+In Sawfish, the word ``viewport'' is sometimes used to mean the entire
+larger-than-normal desktop.  This is natural, but a confusion and not
+technically correct. When focused to enlargement, ``large desktop'' is
+the correct nomenclature, but simply calling it the ``workspace'' or
+the ``virtual desktop'' are correct too.
+
+The word ``viewport'' is also used to mean the cell on which the
+viewport is set, like ``Go to the next viewport.''
 
 @defvar viewport-dimensions
-The number of viewports of the virtual desktop. This is a cons cell
-@code{(columns . rows)}.  Defaults to @code{(1 . 1)}.
+The dimension of the virtual destkop.  This is a cons cell
+@code{(@var{columns} . @var{rows})}.  Defaults to @code{(1 . 1)}.  The number of
+viewport cells in the virtual desktop is @code{columns} times
+@code{rows}.
 
 If @code{viewport-boundary-mode} is @code{dynamic} (@pxref{Dynamic
-Viewport}), then this variable is the current size of the current
-workspace, and does not have the meaning as a user option.
+Viewport}) then this variable is set by Sawfish to the current size of
+the current workspace and should not be set by the user.
 @end defvar
 
 @defun set-number-of-viewports width height
 Change @code{viewport-dimensions} to have the value
-@code{(@var{width} . @var{height})}.
+@code{(@var{width} . @var{height})}.  If @code{viewport-boundary-mode}
+is @code{dynamic} then this sets the minimum dimensions of the virtual
+workspace (@pxref{Dynamic Viewport}) rather than setting the
+dimensions directly.
 @end defun
 
 @menu
@@ -4094,7 +4060,7 @@ Change @code{viewport-dimensions} to have the value
 @node Viewport Functions, Dynamic Viewport, Viewports, Viewports
 @section Viewport Functions
 
-Each cell is labeled with the index @code{(col, row)}, and the
+Each cell is labeled with the index @code{(@var{col}, @var{row})}, and the
 top-left cell is @code{(0, 0)}.  Indices are never negative.
 
 Sawfish implements viewport as follows. On a cell change, windows in
@@ -4112,11 +4078,11 @@ Change the viewport to visit cell (@var{col}, @var{row}).
 @end defun
 
 @defun move-viewport right down
-Move the viewport to see the cell @var{right} slots to the right and
-@var{down} slots down.  Either argument may be zero or negative.
+Move the viewport to see the cell @var{right} columns right and
+@var{down} rows down.  Either argument may be zero or negative.
 @end defun
 
-@defvar viewport-boundary-mode
+@defvr Customizable viewport-boundary-mode
 Decides how to act when you call @code{set-screen-viewport} and you
 try to go outside of the virtual desktop. (Its size is specified by
 @code{viewport-dimensions}.) Defaults to @code{stop}.
@@ -4127,8 +4093,8 @@ When set to @code{wrap-around}, it behaves as if the leftmost viewport
 and the rightmost are connected. Same for the top and bottom.
 
 If it is set to @code{dynamic}, then the workspace size changes
-automatically. For detail, see @xref{Dynamic Viewport}.
-@end defvar
+automatically. For details, see @xref{Dynamic Viewport}.
+@end defvr
 
 @defun viewport-honor-workspace-edges
 Returns whether or not the display is permitted to move past the
@@ -4137,40 +4103,34 @@ current workspace boundaries.  It returns true if
 @end defun
 
 @defun viewport-at x y
-Returns a cons cell consisting of @code{(column . row)} of the viewport
-containing the specified @var{x} and @var{y} coordinates.  The
-coordinates are specified relative to the current viewport, so
+Returns a cons cell consisting of @code{(@var{column} . @var{row})} of
+the viewport containing the specified @var{x} and @var{y} coordinates.
+The coordinates are specified relative to the current viewport, so
 @code{(viewport-at 0 0)} is equivalent to @code{(screen-viewport)}.
 @end defun
 
 @defun viewport-offset-pixel viewport
-Returns the offset from the current viewport to @var{viewport}
-which is specified as @code{(column . row)}. The return value is the
-cons cell @code{(x . y)}. The values are in pixel, and are negative if
-it lies at left or above the current viewport.
+Returns the offset from the current viewport to @var{viewport} which
+is specified as @code{(@var{column} . @var{row})}. The return value is
+the cons cell @code{(@var{x} . @var{y})}. The values are in pixel, and are
+negative if it lies at left or above the current viewport.
 
-@var{viewport} can be non existent one. If @var{viewport} is @code{nil} it
-is understood as the current viewport, i.e., @code{(0 . 0)} will be
-returned.
+@var{viewport} can be outside of the workspace. (The check is not
+done.) If @var{viewport} is @code{nil} it is understood as the
+current viewport, i.e., @code{(0 . 0)} will be returned.
 @end defun
 
-Actually, Sawfish can move viewport by any pixels, not only by
-screen size. Here're low level functions to do it.
+There are lower-level functions which move viewport by pixel, not
+by multiples of the physical screen dimensions.
 
-@defun warp-viewport x y
-Change the position of the viewport, such that location
-@code{(@var{x}, @var{y})} is at the top-left of the display. The unit
-is by pixels.
-@end defun
+Note that use of these breaks the traditional behavior and user
+interface of Sawfish. Though they are useful, simultaneous use of
+these functions and other functions may cause weird results.
 
 @defun set-viewport x y
 Change the position of the viewport, such that location
-@code{(@var{x}, @var{y})} is at the top-left of the display. The unit
-is by pixels.
-
-Unlike @code{warp-viewport}, the change takes place by dividing the
-motion into @code{scroll-viewport-steps} steps, and redisplaying after
-each step in the motion.
+@code{(@var{x}, @var{y})} is at the top-left of the display.  So
+@code{(set-viewport 0 -5)} will shift the viewport up five pixels.
 @end defun
 
 @defvr Customizable scroll-viewport-steps
@@ -4183,18 +4143,25 @@ is done. The upper limit for customization is 50.
 
 This variable is used for @code{set-viewport}. All interactive commands
 defined by Sawfish call this function, so this variable is important
-for user.
+for the user.
 @end defvr
 
 @node Dynamic Viewport, Windows and Viewports, Viewport Functions, Viewports
 @section Dynamic Viewport
 
-If the variable @code{viewport-boundary-mode} (@pxref{Viewport
-Functions}) is set to @code{dynamic}, the viewport is ``dynamic''. If
-dynamic viewport is enabled, then each workspace has its size
-indepedent of other workspaces, and it is automatically resized so
-that it contains all windows plus the current viewport. The size is set at
-Sawfish startup, and each time you move viewport.
+``Dynamic viewport'' is enabled by setting
+@code{viewport-boundary-mode} to the symbol @code{dynamic}. It has
+two features.
+
+Normally, the viewport cannot move beyond the limits set by
+@code{viewport-dimensions}, but this limitation is removed in dynamic
+viewport. The viewport is allowed to go as far as you wish.
+
+In addition, workspace is automatically resized, both enlarged and
+shrinked, so that it contains the current viewport and all
+windows. (Precisely speaking, it takes the minimum such size.)  The
+size is set when you move the viewport, and also at Sawfish
+startup. Each workspace has its own size independent of the others.
 
 Even in dynamic viewport, the top-left cell is always @code{(0, 0)},
 and the cell indices are never negative.
@@ -4202,17 +4169,26 @@ and the cell indices are never negative.
 The dynamic viewport is still an experimental feature, and its
 specification may change.
 
-@defvar viewport-minimum-dimensions
-This is only useful if dynamic viewport is enabled. It means that
-@code{viewport-dimensions} gets never less than this variable.
+@defvr Customizable viewport-minimum-dimensions
+This is only useful if dynamic viewport is enabled.
+@code{viewport-dimensions} will never be set to less than
+@code{viewport-minimum-dimensions}, unless it is a change requested by
+the user, either by using the configuration interface or by calling
+@code{set-number-of-viewports}.
 
 If setting @code{viewport-minimum-dimensions} by hand (not by the
 customization interface) be sure to call
-@code{viewport-minimum-size-changed} after doing so.
+@code{viewport-minimum-size-changed} after doing so to ensure that the
+new minimum dimensions immediately go into effect.
 
-If the viewport is not dynamic, it is automatically set to the same
-value as @code{viewport-dimensions}.
-@end defvar
+If @code{set-number-of-viewports} is called to set the viewport
+dimensions @code{viewport-minimum-dimensions} will be set to the same
+value.  Also, if (using the configuration interface) you set the
+viewport dimensions to less than @code{viewport-minimum-dimensions} then
+@code{viewport-minimum-dimensions} will be adjusted to match.  This way
+those who are not using dynamic viewports do not need to worry about
+@code{viewport-minimum-dimensions}.
+@end defvr
 
 Under dynamic viewport, @code{viewport-dimensions} is the current size
 of the current workspace, and does not have the meaning as a user option.
@@ -4221,13 +4197,13 @@ of the current workspace, and does not have the meaning as a user option.
 @section Windows and Viewports
 
 @defun window-viewport window
-Returns a cons cell @code{(col . row)} of the viewport
+Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
 holding the top-left corner of @var{window}.
 @end defun
 
 @defun window-relative-position w
 Returns in a cons cell the coodinates of the window relative to the
-current viewport.
+viewport it occupies.
 @end defun
 
 @defun window-outside-viewport-p window &optional viewport
@@ -4264,10 +4240,10 @@ window that spans multiple cells, this function will pick the cell
 showing the window's top-left corner.
 @end defun
 
-@defvar uniconify-to-current-viewport
+@defvr Customizable uniconify-to-current-viewport
 When true, windows uniconify to the current viewport, rather than to
 the viewport they were iconified on.  Defaults to true.
-@end defvar
+@end defvr
 
 @node Workspaces, Multi-Head Environments, Viewports, Top
 @chapter Workspaces
@@ -5190,7 +5166,8 @@ The super modifier; note that this is a lowercase @kbd{s}
 The standard X modifiers, for @var{k} between 1 and 5
 
 @item Any
-A special modifier that matches any set of modifiers in events.
+A special modifier that matches any set of modifiers in events,
+including no modifier.
 @xref{Event Matching}.
 
 @item Release
@@ -5828,7 +5805,7 @@ Returns the number of X events waiting to be handled.
 @cindex Functions, pointer
 
 @defun query-pointer &optional from-server
-Returns a cons cell @code{(@var{x} . @var{y})} representing the current
+Returns a cons cell @code{(x . y)} representing the current
 mouse pointer position, relative to the origin of the root window.
 
 If there is a mouse update current event, the position is read
@@ -5890,6 +5867,53 @@ either axis before Sawfish considers it to have moved.  If the pointer
 has not moved by this amount, Sawfish will ignore @code{MotionNotify}
 events from X.  The variable defaults to 2 pixels.  If not an integer,
 Sawfish assumes a threshold of 0 pixels.
+@end defvar
+
+Sawfish provides functions to move the pointer relative to the current
+positions. They're named ``move-cursor'', and defined in
+@code{sawfish.wm.commands.move-cursor}.
+
+@defun move-cursor right down
+Move the cursor @var{right} pixels to the right across the screen, and
+@var{down} pixels down the screen.  The cursor stops at the edge of
+the screen (although in multi-head environments, this may not be at
+the edge of the display).
+@end defun
+
+There are also more specialized cursor movement functions.  All of
+them are commands, too.
+
+@defun move-cursor-left-fine
+@defunx move-cursor-right-fine
+@defunx move-cursor-up-fine
+@defunx move-cursor-down-fine
+@defunx move-cursor-northwest-fine
+@defunx move-cursor-northeast-fine
+@defunx move-cursor-southwest-fine
+@defunx move-cursor-southeast-fine
+Move the cursor 1 pixel in the indicated direction.
+@end defun
+
+@defun move-cursor-left
+@defunx move-cursor-right
+@defunx move-cursor-up
+@defunx move-cursor-down
+@defunx move-cursor-northwest
+@defunx move-cursor-northeast
+@defunx move-cursor-southwest
+@defunx move-cursor-southeast
+Move the cursor @code{move-cursor-increment} pixels in the indicated
+direction. @code{move-cursor-northeast} is equal to the northward
+move cobmined with the eastward.
+@end defun
+
+@defun move-cursor-center
+Move the cursor to the center of the screen.
+@end defun
+
+@defvar move-cursor-increment 16
+The @code{move-cursor-@var{DIRECTION}} functions move this cursor this
+many pixels at a time.
 @end defvar
 
 

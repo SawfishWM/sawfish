@@ -98,17 +98,14 @@ the change is instantaneous."
 
 ;;; raw viewport handling
 
+  ;; The unit is pixel, NOT (col, row).
+  ;; Position (0, 0) means the top-left of the workspace.
   (defvar viewport-x-offset 0)
   (defvar viewport-y-offset 0)
 
-  (define (viewport-honor-workspace-edges)
-    "Whether or not to prevent the display from moving past the
-current viewport boundaries.  Returns true if `viewport-boundary-mode'
-is not set to 'dynamic."
-    (not (eq viewport-boundary-mode 'dynamic)))
-
   (define (warp-viewport x y)
-    "Change view by incrementing the coordinates of the x,y position."
+    "Move viewport to (x, y). The unit is pixel, not (col, row).
+Position (0, 0) is the top-left of the workspace."
     (define (move-window w)
       (unless (window-get w 'sticky-viewport)
 	(let ((pos (window-position w)))
@@ -142,9 +139,17 @@ is not set to 'dynamic."
       (setq viewport-x-offset x)
       (setq viewport-y-offset y)))
 
+  (define (viewport-honor-workspace-edges)
+    "Whether or not to prevent the display from moving past the
+current viewport boundaries.  Returns true if `viewport-boundary-mode'
+is not set to 'dynamic."
+    (not (eq viewport-boundary-mode 'dynamic)))
+
   (define (set-viewport x y)
-    "Scroll viewport view by incrementing the coordinates of the x,y position.
-The scrolling makes a number of increments equal to `scroll-viewport-steps'."
+    "Move viewport to (x, y). The unit is pixel, not (col, row).
+Position (0, 0) is the top-left of the workspace.
+
+Scroll is done whose steps are `scroll-viewport-steps'."
     (unless (= scroll-viewport-steps 1) ; fast skip if scroll is unwanted
       (let* ((xstep (quotient (- x viewport-x-offset) scroll-viewport-steps))
              (ystep (quotient (- y viewport-y-offset) scroll-viewport-steps))
@@ -240,7 +245,8 @@ well as any windows in the current workspace."
 
   (define (viewport-leave-workspace-handler ws)
     "On leaving a workspace, store information about the viewport
-configuration so that it can be restored properly later."
+configuration so that it can be restored properly later.
+`WS' is the workspace to leave."
     (let ((vp-data (list viewport-y-offset
                          viewport-x-offset
                          viewport-dimensions))
@@ -283,8 +289,7 @@ viewport is within `viewport-dimensions'."
   (add-hook 'enter-workspace-hook
             viewport-enter-workspace-handler)
 
-
-;;; screen sized viewport handling
+  ;; screen sized viewport handling
 
   (define (screen-viewport)
     "Gives the row and column of the current viewport."
@@ -322,10 +327,9 @@ viewport is within `viewport-dimensions'."
 			     (quotient (cdr pos) (screen-height))))))
 
   (define (window-outside-workspace-p window)
-    "True if `window' is outside the virtual workspace.  Note that
-this does not check which workspace the windows is in; the window is
-outside the virtual workspace if it's position is not within any
-viewport."
+    "True if `window' is outside the workspace.  Note that this does
+not check which workspace the windows is in; the window is outside the
+workspace if it's position is not within any viewport."
     (let ((pos (window-position window))
 	  (dims (window-frame-dimensions window))
 	  (left (- viewport-x-offset))
@@ -471,7 +475,7 @@ which is specified as (column . row). The return value is the cons
 cell (x . y). The values are in pixel, and are negative if it lies at
 left or above the current viewport.
 
-`VP' can be non existent one. If `VP' is nil, it is
+`VP' can be outside of the workspace. If `VP' is nil, it is
 understood as the current viewport, i.e., (0 . 0) will be returned."
     (if (consp vp)
         (let* ((cur-vp (screen-viewport)))
