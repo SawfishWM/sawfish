@@ -33,6 +33,8 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands)
 
+  (define-structure-alias launcher sawfish.wm.commands.launcher)
+
   (defgroup apps "External Applications" :group misc)
 
   (defcustom xterm-program "xterm"
