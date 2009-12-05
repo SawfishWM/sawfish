@@ -40,7 +40,8 @@
 	    window-history-save-attributes
 	    window-history-forget
 	    window-history-load
-	    window-history-save)
+	    window-history-save
+	    window-history-clear)
 
     (open rep
 	  rep.system
@@ -82,8 +83,11 @@
     `((,(_ "Remember _position") window-history-save-position)
       (,(_ "Remember _dimensions") window-history-save-dimensions)
       (,(_ "Remember _attributes") window-history-save-attributes)
+      (,(_ "_Forget saved state") window-history-forget)
       ()
-      (,(_ "_Forget saved state") window-history-forget)))
+      (,(_ "_Clear window-istory") window-history-clear)
+      (,(_ "_Save window-history") window-history-save)
+      (,(_ "_Reload window-history") window-history-load)))
 
 ;;; customizations
 
