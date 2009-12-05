@@ -374,7 +374,8 @@ Any extra arguments are passed to each call to define-command."
       (let ((class (window-class w)))
         (delete-if-not window-in-cycle-p
                        (filter-windows
-                        (lambda (x) (equal (window-class x) class))))))
+                        (lambda (x) (equal (window-class x) class))
+                        (window-order)))))
     #:spec "%W")
 
   (define-cycle-command-pair
