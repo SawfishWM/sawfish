@@ -20,7 +20,7 @@
 
 (define-structure sawfish.wm.commands.poweroff
 
-    (export exit)
+    (export poweroff)
 
     (open rep
 	  rep.system
