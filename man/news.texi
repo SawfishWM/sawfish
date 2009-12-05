@@ -18,7 +18,7 @@ they occurred between. For more detailed information see the
 
 @item New/Updated requirements:
 @itemize +
-@item librep 0.90.0 -> 0.90.2
+@item librep 0.90.0 -> 0.90.4
 @item rep-gtk 0.18.4 -> 0.90.0
 @end itemize
 
@@ -165,6 +165,8 @@ Kozicki]
 @item Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
 
 @item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo Linux]
+
+@item Use $prefix/lib instead of $prefix/libexecdir, to satify the FHS [Christopher Bratusek]
 @end itemize
 @item In configurator,
 

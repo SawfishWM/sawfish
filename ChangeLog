@@ -22,6 +22,16 @@
 			    entries to the session-menu are beeing added. If you're using
 			    KDE or GNOME then those are not generated.
 
+	* Makedefs.in
+	* configure.in
+	* debian/rules
+	* sawfish.pc.in
+	* sawfish.spec.in: use $prefix/lib instead of $prefix/libexecdir to satisfy FHS
+
+	* configure.in: minimum librep is now 0.90.4
+
+	* man/news.texi: updated
+
 2009-12-05  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/custom-defaults.jl
 	* lisp/sawfish/wm/ext/match-window.jl

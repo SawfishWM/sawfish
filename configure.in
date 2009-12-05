@@ -45,7 +45,7 @@ SUBDIRS="src lisp scripts themes sounds man"
 sawfishdir='${datadir}/sawfish'
 lispdir='${sawfishdir}/${version}/lisp'
 localedir='${datadir}/locale'
-sawfishexecdir='${libexecdir}/sawfish/${version}/${host_type}'
+sawfishexecdir='${libdir}/sawfish/${version}/${host_type}'
 
 dnl Several checks
 AC_C_CONST
@@ -204,7 +204,7 @@ else FONT_LOADER="X.Org"
 fi
 
 dnl Check for librep
-REP_MIN_VER="0.90.2"
+REP_MIN_VER="0.90.4"
 
 PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  ,REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
@@ -443,7 +443,6 @@ echo "
   prefix:	$prefix
   exec_prefix:	$exec_prefix
   libdir:	$libdir
-  libexecdir:	$libexecdir
 
   == == == == == == == == == == == == ==
 

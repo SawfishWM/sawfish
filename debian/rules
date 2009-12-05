@@ -38,8 +38,7 @@ configure-stamp: $(QUILT_STAMPFN)
 	aclocal-1.10
 	autoconf
 
-	CFLAGS="$(CFLAGS)" ./configure --prefix=/usr --with-readline \
-	--libexecdir=/usr/lib $(confflags)
+	CFLAGS="$(CFLAGS)" ./configure --prefix=/usr --with-readline $(confflags)
 
 # Get rid of rpath
 	set -e; \
