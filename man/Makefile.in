@@ -52,16 +52,16 @@ install : sawfish.info installdirs
 	-install-info --info-dir=$(DESTDIR)$(infodir) sawfish.info
 	for f in sawfish*.1; do \
 		gzip $$f -c > $$f.gz; \
-		$(INSTALL_DATA) $$f.gz $(DESTDIR)/usr/share/man/man1/; \
+		$(INSTALL_DATA) $$f.gz $(DESTDIR)$(prefix)/share/man/man1/; \
 	done
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(infodir)
-	$(SHELL) $< $(DESTDIR)/usr/share/man/man1/
+	$(SHELL) $< $(DESTDIR)$(prefix)/share/man/man1/
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*
-	rm -f $(DESTDIR)/usr/share/man/man1/sawfish*
+	rm -f $(DESTDIR)$(prefix)/share/man/man1/sawfish*
 	-install-info --remove --info-dir=$(DESTDIR)$(infodir) sawfish.info
 
 clean :
