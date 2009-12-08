@@ -5575,23 +5575,6 @@ Calls the function of the same name.  @code{destroy-window} and
 @code{kill-client} both take @code{%W} as argument.
 @end defun
 
-@defun poweroff @var{action}
-A function for rebooting, halting, suspending and hibernating
-your machine. Normally this is only used when running outside
-of GNOME or KDE, as their functions for doing so are beeing used then.
-
-The following @var{action} calls the following command:
-
-@var{reboot}    @code{reboot-command}
-@var{halt}      @code{halt-command}
-@var{suspend}   @code{suspend-command}
-@var{hibernate} @code{hibernate-command}
-
-Plus when @var{action} is @var{reboot} or @var{halt}, the
-@code{before-exit-hook} and afterwards @code{map-windows delete-windows},
-to ensure we safely quit the current session.
-@end defun
-
 @node Keymaps, Event Loop, Commands, Top
 @chapter Keymaps
 @cindex Keymaps
@@ -6362,6 +6345,27 @@ includes the full host name and the screen number.  For example:
 A string containing the name of the X display, exactly as passed to
 Sawfish.  For example: @code{":0"}, or @code{"foo:0.0"}.
 @end defvar
+
+@defun poweroff action
+A function for rebooting, halting, suspending and hibernating
+your machine. Normally this is only used when running outside
+of GNOME or KDE; they provied their own versions of functions.
+
+@var{action} is a symbol, and each invokes the shell command
+defined by the variable as follows:
+
+@multitable @columnfractions .2 .5
+@headitem @var{action} @tab variable
+@item @code{reboot} @tab @code{reboot-command}
+@item @code{halt} @tab @code{halt-command}
+@item @code{suspend} @tab @code{suspend-command}
+@item @code{hibernate} @tab @code{hibernate-command}
+@end multitable
+
+When @var{action} is @code{reboot} or @code{halt}, 
+@code{before-exit-hook} is called, and @code{delete-windows} is
+applied to each window to ensure we safely quit the current session.
+@end defun
 
 @defvar saved-command-line-args
 Holds a list of all of the command line arguments (including the
