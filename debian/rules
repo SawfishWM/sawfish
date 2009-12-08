@@ -35,7 +35,7 @@ configure-stamp: $(QUILT_STAMPFN)
 	cp /usr/share/misc/config.guess .
 	cp /usr/share/misc/config.sub .
 
-	aclocal-1.10
+	aclocal
 	autoconf
 
 	CFLAGS="$(CFLAGS)" ./configure --prefix=/usr --with-readline $(confflags)
