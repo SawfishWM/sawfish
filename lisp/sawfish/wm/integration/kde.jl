@@ -30,7 +30,7 @@
 
   (define-structure-alias kde-int sawfish.wm.integration.kde)
 
-  (define-special-variable extra-session-menu nil)
+  (define-special-variable want-poweroff-menu nil)
 
   ;; invoke the KDE terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)

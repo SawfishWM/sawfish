@@ -1,6 +1,6 @@
-;; standalone.jl
+;; standalone.jl - For those who don't have GNOME / KDE
 
-;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;; Copyright (C) 2009 Christopher Roy Bratusek <zanghar@freenet.de>
 
 ;; This file is part of sawfish.
 
@@ -20,7 +20,7 @@
 
 (define-structure sawfish.wm.integration.standalone
 
-  (export add-extra-session-menu)
+  (export add-poweroff-menu)
 
   (open rep
         rep.system
@@ -30,18 +30,19 @@
 
   (define-structure-alias standalone-int sawfish.wm.integration.standalone)
 
-  (defvar extra-session-menu t)
+  (defvar want-poweroff-menu t
+    "Add poweroff menu if you don't use GNOME / KDE.")
 
-  (define (add-extra-session-menu)
-    (if extra-session-menu
-      (let ((menu (assoc (_ "Sessi_on") root-menu)))
-        (when menu
-          (nconc menu `(()
-                        (,(_ "_Reboot System")
-                         (poweroff 'reboot))
-                        (,(_ "_Shutdown System")
-                         (poweroff 'halt))
-                        (,(_ "S_uspend System")
-                         (poweroff 'suspend))
-                        (,(_ "_Hibernate System")
-                         (poweroff 'hibernate)))))))))
+  (define (add-poweroff-menu)
+    "Add poweroff related menu items to Session sub-menu."
+    (let ((menu (assoc (_ "Sessi_on") root-menu)))
+      (when menu
+	(nconc menu `(()
+		      (,(_ "_Reboot System")
+		       (poweroff 'reboot))
+		      (,(_ "_Shutdown System")
+		       (poweroff 'halt))
+		      (,(_ "S_uspend System")
+		       (poweroff 'suspend))
+		      (,(_ "_Hibernate System")
+		       (poweroff 'hibernate))))))))

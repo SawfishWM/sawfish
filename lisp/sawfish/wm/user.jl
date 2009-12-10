@@ -124,8 +124,8 @@
   (if use-custom-font-color
       (update-frame-font-color))
 
-  (if extra-session-menu
-    (add-extra-session-menu))
+  (if want-poweroff-menu
+      (add-poweroff-menu))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)

@@ -30,7 +30,7 @@
 
   (define-structure-alias gnome-int sawfish.wm.integration.gnome)
 
-  (define-special-variable extra-session-menu nil)
+  (define-special-variable want-poweroff-menu nil)
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
