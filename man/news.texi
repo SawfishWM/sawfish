@@ -116,17 +116,6 @@ defined in the module cited above. Variable @code{display-url-command} is
 renamed to @code{browser-program}.
 @end itemize
 
-@item Poweroff actions
-
-Added poweroff command for letting none KDE/GNOME users easily
-reboot, halt, suspend or hibernate their machine. The commands
-beeing used to do so are also user-settable. In addition, when
-it's used to reboot or halt, when we call the `before-exit-hook'
-and `map-windows delete-window' before actually rebooting or halting,
-to ensure everything is fine on the next startup. Furthermore
-entries to the session-menu are beeing added. If you're using
-KDE or GNOME then those are not generated.
-
 @item Bugs fixed:
 @itemize @minus
 
@@ -206,10 +195,6 @@ own applications menu and auto generated one, then set your own in
 @code{user-apps-menu} instead of @code{apps-menu}.
 
 Root and Window-History menus are revamped, too. [Christopher Bratusek]
-
-Now you can reboot and shutdown your computer from the root menu ->
-``session'', but the user needs the appropriate privilege. For a way
-to do so, see @xref{FAQ}, ``Reboot and shutdown privilege'' section.
 
 @item Added options to change the font color of window title, independent of used theme [Matthew Love, Christopher Bratusek, Timo Korvola]
 
@@ -306,6 +291,20 @@ added.
 
 Unless set by user, konsole and konqueror are used for user options
 @code{xterm-program} and @code{browser-program}.
+
+@item Poweroff from menu
+
+Added poweroff commands in menu for non KDE/GNOME users.  They are
+reboot, halt, suspend and hibernate. The used shell commands can be
+set from configurator, under ``Misc'' -> ``External Applications''. If
+you don't want it, set @code{want-poweroff-menu} to nil.
+
+User needs the appropriate privilege. For a way to do so, see
+@xref{FAQ}, ``Shutdown privilege'' section.
+
+Reboot and halt call @code{before-exit-hook} and do
+@code{delete-window} to each window before actually rebooting or
+halting, to ensure everything is fine on the next startup.
 
 @item New Frame Classes [Christopher Bratusek] @*
 A ``frame class'' defines frame component. There's no user visible

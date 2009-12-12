@@ -25,11 +25,6 @@
 	    ws-move-window
 	    ws-insert-workspace
 	    ws-remove-workspace
-	    sawfish-directory
-	    sawfish-lisp-lib-directory
-	    sawfish-site-lisp-directory
-	    sawfish-exec-directory
-	    sawfish-version
 	    custom-set-color
 	    custom-set-font
 	    custom-set-frame-style)
@@ -58,14 +53,6 @@
   (define ws-move-window move-window-to-workspace)
   (define ws-insert-workspace insert-workspace)
   (define ws-remove-workspace remove-workspace)
-
-;;; obsolete variables
-
-  (define sawfish-directory sawfish-directory)
-  (define sawfish-lisp-lib-directory sawfish-lisp-lib-directory)
-  (define sawfish-site-lisp-directory sawfish-site-lisp-directory)
-  (define sawfish-exec-directory sawfish-exec-directory)
-  (define sawfish-version sawfish-version)
 
 ;;; obsolete commands
 
