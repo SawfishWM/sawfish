@@ -1,3 +1,21 @@
+2009-12-12  Teika Kazura <teika@lavabit.com>
+	* man/faq.texi
+	* man/news.texi
+	* man/sawfish.texi: Doc for poweroff.
+
+	* man/sawfish.texi: Small reorganization.
+
+	* lisp/sawfish/wm/util/compat.jl: Outdated part deletion.
+	                                  Declaration as obsolete for 'sawfish-directory' and so on are not necessary now, after purge of 'sawmill'.
+	                                  Deleted codes are harmless, but confusing.
+
+	* OPTIONS
+	* lisp/sawfish/wm/integration/gnome.jl
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/integration/standalone.jl
+	* lisp/sawfish/wm/user.jl
+	* man/news.texi: Poweroff refinements. Describes the option if you want poweroff menu. Option "extra-session-menu" is renamed to 'want-poweroff-menu'.
+
 2009-12-08  Christopher Bratusek <zanghar@freenet.de>
 	* debian/rules
 	* debian/control: depend on automake rather than on automake1.10
