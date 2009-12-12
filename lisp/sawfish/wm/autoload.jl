@@ -30,6 +30,7 @@
 (autoload-command 'popup-window-menu 'sawfish.wm.menus)
 (autoload-command 'popup-root-menu 'sawfish.wm.menus)
 (autoload-command 'popup-apps-menu 'sawfish.wm.menus)
+(autoload-command 'popup-window-list-menu 'sawfish.wm.menus)
 (autoload-window-animator 'wireframe 'sawfish.wm.animation.outline)
 (autoload-window-animator 'solid 'sawfish.wm.animation.outline)
 (autoload-window-animator 'cross 'sawfish.wm.animation.outline)

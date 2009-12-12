@@ -24,6 +24,7 @@
 	    menu-stop-process
 	    popup-menu
 	    popup-window-menu
+	    popup-window-list-menu
 	    popup-root-menu
 	    popup-apps-menu
 	    add-window-menu-toggle
@@ -344,6 +345,10 @@ before killing it.")
     (let-fluids ((menu-args (list w)))
        (popup-menu window-ops-menu)))
 
+  (define (popup-window-list-menu)
+    "Display the window-list menu."
+    (popup-menu window-menu))
+
   (define (popup-root-menu)
     "Display the main menu."
     (popup-menu root-menu))
@@ -356,6 +361,7 @@ before killing it.")
   (define-command 'popup-window-menu popup-window-menu #:spec "%W")
   (define-command 'popup-root-menu popup-root-menu)
   (define-command 'popup-apps-menu popup-apps-menu)
+  (define-command 'popup-window-list-menu popup-window-list-menu)
 
 ;;; menu modifiers
 
