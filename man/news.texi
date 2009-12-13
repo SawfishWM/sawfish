@@ -36,6 +36,11 @@ you want to disable it, add the following flag to configure:
 
 If you drop it, then you can't use mouse button 8 to, for example,
 drag windows.
+
+@item Installation directory change
+
+Directory @file{libexec} is not used anymore for library files
+installation. Instead, they go into @file{lib} by default.
 @end itemize
 
 @item Incompatible user visible changes:
@@ -114,6 +119,11 @@ Applications}.
 The functinon @code{display-url} is renamed to @code{browser}, now
 defined in the module cited above. Variable @code{display-url-command} is
 renamed to @code{browser-program}.
+
+@item Sawfish pager
+
+If you've been using Sawfish-pager, then you have to recompile it,
+due to library files location change.
 @end itemize
 
 @item Bugs fixed:
