@@ -4201,11 +4201,6 @@ Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
 holding the top-left corner of @var{window}.
 @end defun
 
-@defun window-relative-position w
-Returns in a cons cell the coodinates of the window relative to the
-viewport it occupies.
-@end defun
-
 @defun window-outside-viewport-p window &optional viewport
 Returns true if @var{window} is completely outside the current
 viewport in any direction.  If @var{viewport} is specified check against

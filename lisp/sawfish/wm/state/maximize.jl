@@ -132,7 +132,7 @@ that dimension.")
   ;; currently maximize window to `(X Y W H)', the saved geometry.
   (define (save-unmaximized-geometry w)
     (unless (window-get w 'unmaximized-geometry)
-      (let* ((coords (window-relative-position w))
+      (let* ((coords (window-absolute-position w t))
              (dims (window-dimensions w)))
 	(window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
 						  (car dims) (cdr dims))))))
@@ -150,7 +150,7 @@ that dimension.")
     (when vertically
       (window-put w 'maximized-vertically nil))
     (let ((dims (window-dimensions w))
-	  (coords (window-relative-position w))
+	  (coords (window-absolute-position w t))
 	  (saved (unmaximized-geometry w)))
       (when saved
 	(unless (window-maximized-horizontally-p w)

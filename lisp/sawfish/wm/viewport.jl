@@ -34,7 +34,6 @@
             viewport-at
 	    window-viewport
             viewport-offset-coord
-            window-relative-position
 	    window-absolute-position
 	    set-number-of-viewports
             rect-within-viewport-p
@@ -484,26 +483,36 @@ understood as the current viewport, i.e., (0 . 0) will be returned."
            (* (- (cdr vp) (cdr cur-vp)) (screen-height))))
       '(0 . 0)))
 
-  (define (window-relative-position w)
-    "Returns a cons cell with the coordinates of the window relative
-to the viewport it occupies."
-    (let ((offset (viewport-offset-coord (window-viewport w)))
-          (coords (window-position w)))
-      (cons
-       (- (car coords) (car offset))
-       (- (cdr coords) (cdr offset)))))
-
-  (define (window-absolute-position w)
+  (define (window-absolute-position w #!optional disambiguate)
     "Returns the coordinates of the window as if the window's viewport
 is selected. The return value is the cons cell (x . y)."
     ;; So, ignoring the side effect, it's roughly equal to
     ;; (set-screen-viewport (window-viewport w))
     ;; (window-position w)
-    (let ((position (window-position w)))
-      (if (window-outside-viewport-p w)
-	  (cons (mod (+ (car position) viewport-x-offset) (screen-width))
-		(mod (+ (cdr position) viewport-y-offset) (screen-height)))
-	position)))
+    ;; The correct name should be "window-position-in-viewport".
+
+    ;; The temporary hack 'disambiguate' is introduced in Sawfish 1.6.
+    ;; It will be removed.
+
+    ;; Two methods differ if the window lies across several vp slots.
+    ;; Maybe both are necessary.
+    (if disambiguate
+	;; method 1: always returns the same value.
+	;; This is introduced in 1.6.
+	(let ((offset (viewport-offset-coord (window-viewport w)))
+	      (coords (window-position w)))
+	  (cons
+	   (- (car coords) (car offset))
+	   (- (cdr coords) (cdr offset))))
+      ;; method 2: If the window is visible from the current viewport,
+      ;; then simply window-position is returned.
+      ;; Else, the viewport where the window's top-left lies is used.
+      ;; This has existed for long time.
+      (let ((position (window-position w)))
+	(if (window-outside-viewport-p w)
+	    (cons (mod (+ (car position) viewport-x-offset) (screen-width))
+		  (mod (+ (cdr position) viewport-y-offset) (screen-height)))
+	  position))))
 
   (define (viewport-size-changed #!optional force)
     ;; This is called when the user requests a change (e.g., from the
