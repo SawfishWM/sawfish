@@ -4109,7 +4109,7 @@ The coordinates are specified relative to the current viewport, so
 @code{(viewport-at 0 0)} is equivalent to @code{(screen-viewport)}.
 @end defun
 
-@defun viewport-offset-pixel viewport
+@defun viewport-offset-coord viewport
 Returns the offset from the current viewport to @var{viewport} which
 is specified as @code{(@var{column} . @var{row})}. The return value is
 the cons cell @code{(@var{x} . @var{y})}. The values are in pixel, and are

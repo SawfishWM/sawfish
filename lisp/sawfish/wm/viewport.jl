@@ -33,7 +33,7 @@
 	    move-window-viewport
             viewport-at
 	    window-viewport
-            viewport-offset-pixel
+            viewport-offset-coord
             window-relative-position
 	    window-absolute-position
 	    set-number-of-viewports
@@ -427,7 +427,7 @@ even if the viewport currently exists.  If `viewport' is specified
 check only against that viewport."
     (let ((vp (viewport-at (car rect) (nth 1 rect))))
       (when (or (null viewport) (equal vp viewport))
-        (let ((offset (viewport-offset-pixel vp)))
+        (let ((offset (viewport-offset-coord vp)))
           (rect-wholly-within-rect (list (car offset)
                                          (cdr offset)
                                          (+ (car offset) (screen-width))
@@ -442,7 +442,7 @@ check only against that viewport."
     "Return t if `rect' is entirely within some head on some
 viewport. If `head' is provided `rect' must be within that head on
 some viewport."
-    (let* ((offset (viewport-offset-pixel (viewport-at (car rect)
+    (let* ((offset (viewport-offset-coord (viewport-at (car rect)
                                                  (nth 1 rect))))
            (left (- (car rect) (car offset)))
            (top (- (nth 1 rect) (cdr offset)))
@@ -464,12 +464,12 @@ some viewport."
            (dims (window-dimensions w))
            (center (cons (+ (car coords) (quotient (car dims) 2))
                          (+ (cdr coords) (quotient (cdr dims) 2))))
-           (vp-offset (viewport-offset-pixel (viewport-at (car center)
+           (vp-offset (viewport-offset-coord (viewport-at (car center)
                                                     (cdr center)))))
       (find-head (- (car center) (car vp-offset))
                  (- (cdr center) (cdr vp-offset)))))
 
-  (define (viewport-offset-pixel vp)
+  (define (viewport-offset-coord vp)
     "Returns the offset from the current viewport to viewport `VP'
 which is specified as (column . row). The return value is the cons
 cell (x . y). The values are in pixel, and are negative if it lies at
@@ -487,7 +487,7 @@ understood as the current viewport, i.e., (0 . 0) will be returned."
   (define (window-relative-position w)
     "Returns a cons cell with the coordinates of the window relative
 to the viewport it occupies."
-    (let ((offset (viewport-offset-pixel (window-viewport w)))
+    (let ((offset (viewport-offset-coord (window-viewport w)))
           (coords (window-position w)))
       (cons
        (- (car coords) (car offset))

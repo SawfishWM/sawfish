@@ -51,7 +51,7 @@ The returned lists may contain duplicates, and are unsorted."
 
     (let* ((width (screen-width))
            (height (screen-height))
-           (vp-offset (viewport-offset-pixel viewport))
+           (vp-offset (viewport-offset-coord viewport))
            x-edges y-edges)
       (map-windows
        (lambda (w)

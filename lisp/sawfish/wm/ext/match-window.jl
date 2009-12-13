@@ -389,7 +389,7 @@
     (lambda (w prop value)
       (declare (unused prop))
       (let* ((size (window-frame-dimensions w))
-             (vp-offset (viewport-offset-pixel (window-viewport w)))
+             (vp-offset (viewport-offset-coord (window-viewport w)))
              (x (if (symbolp value)
                     (cond ((memq value '(east south-east north-east))
                            (- (screen-width) (car size)))
