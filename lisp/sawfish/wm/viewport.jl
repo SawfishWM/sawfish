@@ -495,10 +495,9 @@ is selected. The return value is the cons cell (x . y)."
     ;; It will be removed.
 
     ;; Two methods differ if the window lies across several vp slots.
-    ;; Maybe both are necessary.
     (if disambiguate
 	;; method 1: always returns the same value.
-	;; This is introduced in 1.6.
+	;; This is introduced in 1.6, and necessary for maximization.
 	(let ((offset (viewport-offset-coord (window-viewport w)))
 	      (coords (window-position w)))
 	  (cons
@@ -508,6 +507,8 @@ is selected. The return value is the cons cell (x . y)."
       ;; then simply window-position is returned.
       ;; Else, the viewport where the window's top-left lies is used.
       ;; This has existed for long time.
+      ;; Perhaps this can be deleted, and check of visibility can be
+      ;; separated, done by the caller.
       (let ((position (window-position w)))
 	(if (window-outside-viewport-p w)
 	    (cons (mod (+ (car position) viewport-x-offset) (screen-width))
