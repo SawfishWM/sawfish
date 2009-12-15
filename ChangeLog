@@ -1,3 +1,21 @@
+2009-12-15  Teika Kazura <teika@lavabit.com>
+	* man/news.texi: News items for 'libexec' -> 'lib' change, and need for sawfish-pager recompilation.
+
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/util/edges.jl
+	* lisp/sawfish/wm/viewport.jl
+	* man/sawfish.texi: Renamed 'viewport-offset-pixel' to 'viewport-offset-coord'.
+
+	* lisp/sawfish/wm/state/maximize.jl
+	* lisp/sawfish/wm/viewport.jl
+	* man/news.texi
+	* man/sawfish.texi: 'window-relative-position' is unified to 'window-absolute-position'. These two functions are similar, but not identical. The former is recently introduced, so I chose to make the old one remain, and merged the newer to the older.
+			     Yet, I don't understand the exact difference under the real world use. Improvements in documentation is desired
+
+	* README.IMPORTANT
+	* man/news.texi: News item on the deletion of 'user-level' defcustom property.
+
 2009-12-12  Christopher Bratusek <zanghar@freenet.de>
 	* README.IMPORTANT: updated
 
@@ -12,8 +30,8 @@
 	* man/sawfish.texi: Small reorganization.
 
 	* lisp/sawfish/wm/util/compat.jl: Outdated part deletion.
-	                                  Declaration as obsolete for 'sawfish-directory' and so on are not necessary now, after purge of 'sawmill'.
-	                                  Deleted codes are harmless, but confusing.
+					  Declaration as obsolete for 'sawfish-directory' and so on are not necessary now, after purge of 'sawmill'.
+					  Deleted codes are harmless, but confusing.
 
 	* OPTIONS
 	* lisp/sawfish/wm/integration/gnome.jl
@@ -45,7 +63,7 @@
 	* lisp/sawfish/wm/integration/standalone.jl
 	* lisp/sawfish/wm/user.jl
 	* man/sawfish.texi: Added poweroff command for letting none KDE/GNOME users easily
-	                    reboot, halt, suspend or hibernate their machine. The commands
+			    reboot, halt, suspend or hibernate their machine. The commands
 			    beeing used to do so are also user-settable. In addition, when
 			    it's used to reboot or halt, when we call the `before-exit-hook'
 			    and `map-windows delete-window' before actually rebooting or halting,
