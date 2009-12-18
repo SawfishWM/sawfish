@@ -34,16 +34,6 @@
 
   (define-structure-alias infinite-desktop sawfish.wm.ext.infinite-desktop)
 
-  ;;
-  ;; Remove our hooks if they're already installed -
-  ;; allows us to be imported multiple times safely.
-  ;;
-
-  (define (infinite-desktop.remove a l)
-    (cond ((not l) nil)
-          ((eq a (car l)) (infinite-desktop.remove a (cdr l)))
-          (t (cons (car l) (infinite-desktop.remove a (cdr l))))))
-
   (defgroup infinite-desktop "Infinite Desktop"
     :group workspace)
 
