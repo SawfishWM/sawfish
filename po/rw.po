@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2005-03-31 20:55-0700\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -23,20 +23,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "ULL NAME <EMAIL@ADDRESS>\n"
-
-#. ../scripts/sawfish-about.jl
-#, fuzzy
-msgid "and many others..."
-msgstr "Na Ibindi"
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr ""
-
-#. ../scripts/sawfish-about.jl
-#, fuzzy
-msgid "Sawfish homepage"
-msgstr "Ipajikwinjira"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1597,8 +1583,17 @@ msgstr "Nta narimwe"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "i Idirishya Kuri i Komeza>>"
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Na Kuri Kwimura i Mweretsi Ryari: i Mweretsi ni Na: i Idirishya NIBA muri i "
+"Idirishya Ubuso Mbere i Mweretsi Kuri i hagati Bya i Idirishya NIBA in i "
+"Idirishya Hanyuma nka OYA Kuri i Mweretsi"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1607,8 +1602,10 @@ msgstr "Kuri Ryari: Cyangwa"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "Kuri Ryari: Cyangwa"
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr "Kuri ku a Ubujyakuzimu Ryari: Cyangwa in Ikindi"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1755,6 +1752,59 @@ msgstr "Garagaza Ipajikwinjira"
 #, fuzzy
 msgid "Help about"
 msgstr "Ibyerekeye"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "i Porogaramu Ibikubiyemo"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Porogaramu ku i Komandi:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Porogaramu ku i Komandi:"
+
+# framework/source\classes\fltdlg.src:STR_FILTER_OTHERS.text
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Xterm"
+msgstr "Ikindi"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+# padmin/source\padialog.src:RID_PADIALOG.RID_PA_TXT_COMMAND.text
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Komandi:"
+
+# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
+# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.ED_XML_DTD_SCHEMA_BROWSE.text
+# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
+# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.PB_XML_EXPORT_XSLT_BROWSE.text
+# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
+# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.PB_XML_IMPORT_XSLT_BROWSE.text
+# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
+# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.PB_XML_IMPORT_TEMPLATE_BROWSE.text
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Gushakisha..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Gutangira a Gishya"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -2056,6 +2106,26 @@ msgstr "Idirishya"
 msgid "Halve window size"
 msgstr "Idirishya"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 #, fuzzy
 msgid "Raise and pass through click"
@@ -2330,66 +2400,6 @@ msgstr "Itsinda Hasi"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "i Idirishya Itsinda Igice Idirishya Pigiseli Njyesi"
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "i Porogaramu Ibikubiyemo"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `xterm' command."
-msgstr "Porogaramu ku i Komandi:"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Porogaramu ku i Komandi:"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-# framework/source\classes\fltdlg.src:STR_FILTER_OTHERS.text
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Xterm"
-msgstr "Ikindi"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new xterm."
-msgstr "Gutangira a Gishya"
-
-# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
-# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.ED_XML_DTD_SCHEMA_BROWSE.text
-# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
-# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.PB_XML_EXPORT_XSLT_BROWSE.text
-# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
-# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.PB_XML_IMPORT_XSLT_BROWSE.text
-# #-#-#-#-#  filter.pot (PACKAGE VERSION)  #-#-#-#-#
-# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.PB_XML_IMPORT_TEMPLATE_BROWSE.text
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Gushakisha..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Gutangira a Gishya"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "View clipboard"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 #, fuzzy
 msgid "Move viewport next"
@@ -2495,11 +2505,6 @@ msgstr "Igikonoshwa Komandi:"
 #, fuzzy
 msgid "Execute the given shell command."
 msgstr "i Igikonoshwa Komandi:"
-
-# padmin/source\padialog.src:RID_PADIALOG.RID_PA_TXT_COMMAND.text
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Komandi:"
 
 # padmin/source\rtsetup.src:RID_RTS_RTSDIALOG.RID_RTS_RTSDIALOG_TABCONTROL.RID_RTS_COMMANDPAGE.text
 #. ../lisp/sawfish/wm/commands.jl
@@ -2758,10 +2763,6 @@ msgstr "Kuri Komeza>> Umwanya- nkenerwa"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "i KIGEZWEHO Idirishya Kuri i Umwanya- nkenerwa"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Izina"
@@ -2826,15 +2827,20 @@ msgstr "Ubwoko"
 msgid "Position"
 msgstr "Ibirindiro"
 
-# sc/source\ui\src\scfuncs.src:RID_SC_FUNCTION_DESCRIPTIONS1.SC_OPCODE_MATRIX_UNIT.2.text
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Ingero"
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
 msgid "Workspace"
 msgstr "Umwanya- nkenerwa"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Umwanya- nkenerwa"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "Hejuru"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2876,21 +2882,14 @@ msgstr "Uburemere"
 msgid "Fixed position"
 msgstr "Ibirindiro"
 
-# sc/source\ui\formdlg\formdlgs.src:RID_SCDLG_FORMULA.RB_REF.quickhelptext
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Maximized"
-msgstr "Kugira kinini"
+msgid "Sticky"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "New workspace"
-msgstr "Umwanya- nkenerwa"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "Hejuru"
+msgid "Sticky viewport"
+msgstr "By'umurongo"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
@@ -2927,13 +2926,16 @@ msgstr "Ubwoko"
 msgid "Frame style"
 msgstr "Imisusire y'Ikadiri"
 
+# sc/source\ui\src\scfuncs.src:RID_SC_FUNCTION_DESCRIPTIONS1.SC_OPCODE_MATRIX_UNIT.2.text
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr ""
+msgid "Dimensions"
+msgstr "Ingero"
 
+# sc/source\ui\formdlg\formdlgs.src:RID_SCDLG_FORMULA.RB_REF.quickhelptext
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr ""
+#, fuzzy
+msgid "Maximized"
+msgstr "Kugira kinini"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
@@ -2945,13 +2947,22 @@ msgid "Shaded"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
+msgid "Never iconify"
+msgstr ""
+
+# sc/source\ui\formdlg\formdlgs.src:RID_SCDLG_FORMULA.RB_REF.quickhelptext
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "Kugira kinini"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Sticky viewport"
-msgstr "By'umurongo"
+msgid "Ignored"
+msgstr ""
 
 # #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
 # sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_UNDO_MAKEOUTLINE.text
@@ -2985,33 +2996,15 @@ msgid "Task list skip"
 msgstr "Urutonde"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-# sc/source\ui\formdlg\formdlgs.src:RID_SCDLG_FORMULA.RB_REF.quickhelptext
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Kugira kinini"
-
-# offmgr/source\offapp\dialog\fontsubs.src:RID_SVX_FONT_SUBSTITUTION.STR_HEADER2.text
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Mugaragaza"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
 msgid "Unique name"
 msgstr "Izina:"
 
+# sc/source\ui\src\optdlg.src:RID_SCPAGE_CONTENT.GB_WINDOW.text
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr ""
+#, fuzzy
+msgid "Window name"
+msgstr "Idirishya"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
@@ -3027,15 +3020,9 @@ msgstr "hejuru"
 msgid "Ignore stacking requests"
 msgstr ""
 
-# sc/source\ui\src\optdlg.src:RID_SCPAGE_CONTENT.GB_WINDOW.text
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Idirishya"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Leta"
+msgid "Auto gravity"
+msgstr ""
 
 # framework/source\classes\fltdlg.src:STR_FILTER_OTHERS.text
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -3116,6 +3103,21 @@ msgstr "Ibiranga"
 #, fuzzy
 msgid "_Forget saved state"
 msgstr "Leta"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "Idirishya Kuri"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "Idirishya Kuri"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Byose Idirishya Urutonde"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
@@ -3275,18 +3277,6 @@ msgid "Send window to the workspace right of the current workspace"
 msgstr ""
 "Idirishya Kuri i Umwanya- nkenerwa Iburyo: Bya i KIGEZWEHO Umwanya- nkenerwa"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 #, fuzzy
 msgid "When does the mouse pointer affect the input focus."
@@ -3320,6 +3310,18 @@ msgstr "Kongera Gutangiza Insanganyamatsiko Ryari:"
 #, fuzzy
 msgid "Default font: \\w"
 msgstr "Intego- nyuguti"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
@@ -3375,6 +3377,7 @@ msgid "About GNOME"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -3410,6 +3413,23 @@ msgstr "Bivuye i KIGEZWEHO Umukoro"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Bivuye i KIGEZWEHO Umukoro"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3939,6 +3959,16 @@ msgstr "i Porogaramu Ibikubiyemo"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Idirishya Ibikubiyemo"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "i Ibikubiyemo"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Ipajikwinjira"
 
@@ -4363,18 +4393,6 @@ msgid ""
 "unmaximized."
 msgstr "i Leta Bya i Idirishya hagati Byuzuye Na"
 
-# 3784
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "heza idirishya"
-
-# sc/source\ui\formdlg\formdlgs.src:RID_SCDLG_FORMULA.RB_REF.quickhelptext
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Kugira kinini"
-
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
 msgid "Maximize window fullscreen"
@@ -4651,9 +4669,12 @@ msgid "Unmark all windows"
 msgstr "Idirishya"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "Porogaramu Kuri Gukina Ingero- fatizo in Gushigikira kugirango ni"
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
+msgstr ""
 
 # sc/source\ui\src\optdlg.src:RID_SCPAGE_CONTENT.GB_WINDOW.text
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
@@ -4661,7 +4682,6 @@ msgstr "Porogaramu Kuri Gukina Ingero- fatizo in Gushigikira kugirango ni"
 msgid "Window:"
 msgstr "Idirishya"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, fuzzy, c-format
 msgid "Workspace %d"
@@ -4737,13 +4757,16 @@ msgstr ""
 "Ibirindiro Nka Nka urwego Bya"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4752,9 +4775,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Itsinda Kuri KIGEZWEHO"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "Bya Pigiseli Kuri Kwimura Mweretsi in Kwimura indanga Amabwiriza"
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4773,8 +4799,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -5327,18 +5353,55 @@ msgstr "Umwanya- nkenerwa"
 msgid "Prompt for a workspace and switch to it."
 msgstr "kugirango a Umwanya- nkenerwa Na Hindura Kuri"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
-
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Amazina"
+#~ msgid "and many others..."
+#~ msgstr "Na Ibindi"
+
+#, fuzzy
+#~ msgid "Sawfish homepage"
+#~ msgstr "Ipajikwinjira"
+
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "i Idirishya Kuri i Komeza>>"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "Kuri Ryari: Cyangwa"
+
+#, fuzzy
+#~ msgid "Start a new xterm."
+#~ msgstr "Gutangira a Gishya"
+
+# offmgr/source\offapp\dialog\fontsubs.src:RID_SVX_FONT_SUBSTITUTION.STR_HEADER2.text
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "Mugaragaza"
+
+#~ msgid "State"
+#~ msgstr "Leta"
+
+# 3784
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "heza idirishya"
+
+# sc/source\ui\formdlg\formdlgs.src:RID_SCDLG_FORMULA.RB_REF.quickhelptext
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Kugira kinini"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr "Porogaramu Kuri Gukina Ingero- fatizo in Gushigikira kugirango ni"
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "Bya Pigiseli Kuri Kwimura Mweretsi in Kwimura indanga Amabwiriza"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Amazina"
 
 #, fuzzy
 #~ msgid "Matched Windows"
@@ -5643,27 +5706,3 @@ msgstr "Amazina"
 #~ "this on, you can use `unmaximize-window' or something similar to get\n"
 #~ "back to the original size."
 #~ msgstr "ni Kuri ku Gukoresha Cyangwa Kuri Kuri i Umwimerere Ingano"
-
-#, fuzzy
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Na Kuri Kwimura i Mweretsi Ryari: i Mweretsi ni Na: i Idirishya NIBA muri "
-#~ "i Idirishya Ubuso Mbere i Mweretsi Kuri i hagati Bya i Idirishya NIBA in "
-#~ "i Idirishya Hanyuma nka OYA Kuri i Mweretsi"
-
-#, fuzzy
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr "Kuri ku a Ubujyakuzimu Ryari: Cyangwa in Ikindi"

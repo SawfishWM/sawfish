@@ -12,25 +12,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2002-06-01 15:19+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "i wielu innych..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish jest rozszerzalnym menedżerem okien."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Witryna domowa Sawfisha"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1435,15 +1423,32 @@ msgstr "nigdy"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Przenosi okno na kolejny pulpit."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Czy i jak ma się poruszać wskaźnik przy upakowywaniu okien.\n"
+"\n"
+"\"może\" oznacza, że wskaźnik jest przenoszony wraz z oknem, jeśli\n"
+"znajdował się w oknie przed upakowaniem.\n"
+"\n"
+"\"zawsze\" przyciąga wskaźnik do środka okna, jeśli znajduje się on\n"
+"poza oknem, potem zachowuje się jak przy opcji \"może\".\n"
+"\n"
+"\"nigdy\" nie przyciąga wskaźnika do okna."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether to bump into fully obscured windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1573,6 +1578,48 @@ msgstr "Pomoc: Witryna WWW"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Pomoc: Informacje o"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Wyświetla menu aplikacji."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Program uruchamiany poleceniem \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Program uruchamiany poleceniem \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Polecenie:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Przeglądaj..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Uruchom nowy xterm."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1868,6 +1915,26 @@ msgstr "Przełączenie trybu przyczepienia okna"
 msgid "Halve window size"
 msgstr "Przyczepienie okna"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Wydobycie i przyjęcie zdarzenia"
@@ -2127,55 +2194,6 @@ msgstr ""
 "Przesuwa grupę w dół o ilość pikseli podaną w zmiennej \"slide-window-"
 "increment\"."
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Wyświetla menu aplikacji."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Program uruchamiany poleceniem \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Program uruchamiany poleceniem \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Uruchom nowy xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Przeglądaj..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Uruchom nowy xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Pulpit"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Przeniesienie na kolejny pulpit"
@@ -2265,10 +2283,6 @@ msgstr "Uruchomienie polecenie powłoki"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Wykonanie wprowadzonych poleceń powłoki."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Polecenie:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2478,10 +2492,6 @@ msgstr "Przeniesienie na następne biurko"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Przenosi bieżące okno na n-te biurko."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Nazwa"
@@ -2519,12 +2529,18 @@ msgid "Position"
 msgstr "Położenie"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Wymiary"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Biurko"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Następne biurko"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "pulpit"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2545,18 +2561,13 @@ msgid "Fixed position"
 msgstr "Położenie"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Maksymalizowanie"
+msgid "Sticky"
+msgstr "Przyczepione"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "New workspace"
-msgstr "Następne biurko"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "pulpit"
+msgid "Sticky viewport"
+msgstr "Przyczepione do pulpitu"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2589,12 +2600,12 @@ msgid "Frame style"
 msgstr "Motyw ramki"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Unikanie"
+msgid "Dimensions"
+msgstr "Wymiary"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Pomijane"
+msgid "Maximized"
+msgstr "Maksymalizowanie"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2605,13 +2616,21 @@ msgid "Shaded"
 msgstr "Zwinięte"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Przyczepione"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Sticky viewport"
-msgstr "Przyczepione do pulpitu"
+msgid "Never maximize"
+msgstr "Przywróć"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Unikanie"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Pomijane"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2636,30 +2655,13 @@ msgid "Task list skip"
 msgstr "Na liście okien"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Przywróć"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "ekran"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Unikalna nazwa"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Automatyczne przyciąganie"
+#, fuzzy
+msgid "Window name"
+msgstr "Okno:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2674,13 +2676,8 @@ msgid "Ignore stacking requests"
 msgstr "Pomijanie żądań warstwy"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Okno:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Stan"
+msgid "Auto gravity"
+msgstr "Automatyczne przyciąganie"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2753,6 +2750,21 @@ msgstr "Pamiętaj _atrybuty"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Zapomnij zapamiętany stan"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Wyślij okno na"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Wyślij okno na"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Zapomna całą historię okna."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2894,18 +2906,6 @@ msgstr "Wyślij na biurko"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Tworzy nowe biurko przed bieżącym biurkiem."
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Tryb aktywacji okna za pomocą wskaźnika myszy."
@@ -2935,6 +2935,18 @@ msgstr "Automatyczne uwzględnianie zmian motywów."
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Domyślna czcionka: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2985,6 +2997,7 @@ msgid "About GNOME"
 msgstr "O GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -3020,6 +3033,23 @@ msgstr "Wylogowuje z bieżącej sesji GNOME."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Wylogowuje z bieżącej sesji GNOME."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3491,6 +3521,16 @@ msgstr "Wyświetla menu aplikacji."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Menu okna"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Wyświetla menu główne."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Konfigurator Sawfisha"
 
@@ -3878,16 +3918,6 @@ msgstr "Przełącza pomiędzy dopełnieniem oknem, a jego przywróceniem."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Maximize unframe"
-msgstr "Maksymalizacja okna"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Maksymalizowanie"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window fullscreen"
 msgstr "Przełączenie trybu maksymalizacji okna"
 
@@ -4143,17 +4173,17 @@ msgid "Unmark all windows"
 msgstr "Przywrócenie okna"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Program używany do odtwarzania dźwięków. Jeśli nie zaznaczone, uruchamiana "
-"jest wbudowana obsługa ESD."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Okno:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4221,13 +4251,16 @@ msgstr ""
 "wypadku wydobądź je. Dotyczy także wszystkich jego okien potomnych."
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4236,10 +4269,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Prenieś grupę na bieżący pulpit"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 msgstr ""
-"Przesuwa wskaźnik ilość pikseli określoną w poleceniach \"move-cursor-\"."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4258,8 +4293,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4736,18 +4771,55 @@ msgstr "Wybierz biurko interaktywne"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Pyta o biurko i przełącza się na nie."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "i wielu innych..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish jest rozszerzalnym menedżerem okien."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Witryna domowa Sawfisha"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Nazwy biurek"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Przenosi okno na kolejny pulpit."
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Uruchom nowy xterm."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Pulpit"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "ekran"
+
+#~ msgid "State"
+#~ msgstr "Stan"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Maksymalizacja okna"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Maksymalizowanie"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Program używany do odtwarzania dźwięków. Jeśli nie zaznaczone, "
+#~ "uruchamiana jest wbudowana obsługa ESD."
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr ""
+#~ "Przesuwa wskaźnik ilość pikseli określoną w poleceniach \"move-cursor-\"."
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Nazwy biurek"
 
 #~ msgid "Matched Windows"
 #~ msgstr "Skojarzenia okien"
@@ -5035,27 +5107,6 @@ msgstr "Nazwy biurek"
 #~ "Czy zwiększanie jest uznawane za maksymalizację. Włączenie tej opcji\n"
 #~ "pozwala na \"przywracanie\" pierwotnego rozmiaru okna, podobnie jak\n"
 #~ "w przypadku okna zmaksymalizowanego."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Czy i jak ma się poruszać wskaźnik przy upakowywaniu okien.\n"
-#~ "\n"
-#~ "\"może\" oznacza, że wskaźnik jest przenoszony wraz z oknem, jeśli\n"
-#~ "znajdował się w oknie przed upakowaniem.\n"
-#~ "\n"
-#~ "\"zawsze\" przyciąga wskaźnik do środka okna, jeśli znajduje się on\n"
-#~ "poza oknem, potem zachowuje się jak przy opcji \"może\".\n"
-#~ "\n"
-#~ "\"nigdy\" nie przyciąga wskaźnika do okna."
 
 #~ msgid "Terminal"
 #~ msgstr "Terminal"

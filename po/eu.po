@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2009-09-14 11:52+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
@@ -17,18 +17,6 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "eta beste asko..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish-ek zabaltasunez kudeatzen ditu leihoak "
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish-en etxeko orria"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1412,7 +1400,13 @@ msgid "never"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether and how to move the pointer."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1420,7 +1414,9 @@ msgid "Whether to bump into fully obscured windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1548,6 +1544,45 @@ msgstr "Sawfish-en etxeko orria"
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "External Applications"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Xterm"
+msgstr "Bestelakoa"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Komandoa:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Arakatu..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start browser. Url is optional."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
@@ -1798,6 +1833,26 @@ msgstr ""
 msgid "Halve window size"
 msgstr ""
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr ""
@@ -2037,52 +2092,6 @@ msgstr ""
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr ""
 
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Default Applications"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `browser' command."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Xterm"
-msgstr "Bestelakoa"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Arakatu..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new browser instance"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "View clipboard"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 #, fuzzy
 msgid "Move viewport next"
@@ -2172,10 +2181,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr ""
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Komandoa:"
 
 #. ../lisp/sawfish/wm/commands.jl
 #, fuzzy
@@ -2388,10 +2393,6 @@ msgstr ""
 msgid "Amount to move the cursor after moving the workspace."
 msgstr ""
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr ""
@@ -2432,13 +2433,17 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Dimensions"
-msgstr "Gogoratu _neurriak"
+msgid "Workspace"
+msgstr "Laneko area:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Workspace"
-msgstr "Laneko area:"
+msgid "New workspace"
+msgstr "_Hurrengo laneko area"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "New viewport"
+msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2461,16 +2466,11 @@ msgstr "Gogoratu _posizioa"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Maximized"
-msgstr "_Maximizatu"
+msgid "Sticky"
+msgstr "_Itsaskorra"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "_Hurrengo laneko area"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "New viewport"
+msgid "Sticky viewport"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2505,13 +2505,14 @@ msgid "Frame style"
 msgstr "Marko-_estiloa"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr ""
+#, fuzzy
+msgid "Dimensions"
+msgstr "Gogoratu _neurriak"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Ignored"
-msgstr "_Ezikusia"
+msgid "Maximized"
+msgstr "_Maximizatu"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2523,13 +2524,22 @@ msgid "Shaded"
 msgstr "Bildu_ta"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Sticky"
-msgstr "_Itsaskorra"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
+#, fuzzy
+msgid "Never maximize"
+msgstr "_Desmaximizatu"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
 msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Ignored"
+msgstr "_Ezikusia"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
@@ -2555,29 +2565,13 @@ msgid "Task list skip"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "_Desmaximizatu"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr ""
+#, fuzzy
+msgid "Window name"
+msgstr "Leihoa:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2592,13 +2586,8 @@ msgid "Ignore stacking requests"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Leihoa:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Egoera"
+msgid "Auto gravity"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2666,6 +2655,21 @@ msgstr "Gogoratu _atributuak"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "A_haztu gordetako egoera"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Bidali leihoa hona"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Bidali leihoa hona"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "_Bidali leihoa hona"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2799,18 +2803,6 @@ msgstr "Eraman laneko area _eskuinera"
 msgid "Send window to the workspace right of the current workspace"
 msgstr ""
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr ""
@@ -2840,6 +2832,18 @@ msgstr ""
 #, fuzzy
 msgid "Default font: \\w"
 msgstr "Lehenetsia"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
@@ -2889,6 +2893,7 @@ msgid "About GNOME"
 msgstr "GNOMEri buruz"
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2921,6 +2926,24 @@ msgstr "_Berrabiarazi KDEtik"
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
 msgstr "_Itzali KDEtik"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "_Berrabiarazi KDEtik"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Shutdown System"
+msgstr "_Itzali KDEtik"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
+msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
@@ -3317,6 +3340,16 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "_Kopiatu leihoa hemen"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Bistaratu erroreak"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Sawfish-en konfiguratzailea"
 
@@ -3671,16 +3704,6 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "_Maximizatu"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "_Maximizatu"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr ""
 
@@ -3911,14 +3934,17 @@ msgid "Unmark all windows"
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Leihoa:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -3982,13 +4008,16 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -3996,7 +4025,11 @@ msgid "Windows uniconify to the current viewport."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of steps for viewport scrolling."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -4015,8 +4048,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4503,18 +4536,29 @@ msgstr "Hautatu _hurrengo laneko area"
 msgid "Prompt for a workspace and switch to it."
 msgstr ""
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "eta beste asko..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish-ek zabaltasunez kudeatzen ditu leihoak "
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish-en etxeko orria"
+
+#~ msgid "State"
+#~ msgstr "Egoera"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Laneko areen izenak"
+#~ msgid "Maximize unframe"
+#~ msgstr "_Maximizatu"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "_Maximizatu"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Laneko areen izenak"
 
 #~ msgid "S_awfish-UI"
 #~ msgstr "S_awfish-UI"

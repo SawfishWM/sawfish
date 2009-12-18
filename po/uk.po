@@ -7,25 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish-2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2003-01-23 03:44--500\n"
 "Last-Translator: Maxim Dzumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "і багато інших..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Розширений набір операцій з вікнами."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Домашня сторінка Sawfish"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1428,8 +1416,23 @@ msgstr "ніколи"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Перенести вікно у наступну ділянку перегляду."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Метод пересування вказівника при пакуванні вікон.\n"
+"\n"
+"\"можливо\" означає, що вказівник переміщується разом з вікном, якщо\n"
+"він був над вікном перед пакуванням.\n"
+"\n"
+"\"завжди\" перекидає вказівник в центр вікна якщо він не над вікном,\n"
+"а потім діє так, як у випадку з \"можливо\".\n"
+"\n"
+"\"ніколи\" означає, що вказівник не переміщується."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1440,10 +1443,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
 "Чи потрібно, щоб вікна при розширенні або пакуванні зіштовхувались\n"
-"з цілком ігнорованими вікнами"
+"з вікнами розташованими на інших рівнях.\n"
+"`можливо' означає уникати тільки вікна на інших рівнях."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1595,6 +1601,48 @@ msgstr "Показати домашню сторінку"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Довідка про Sawfish"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Показати меню програм."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Програма, що запускається командою \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Програма, що запускається командою \"xterm\"."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Команда:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Перегляд..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Запустити новий xterm."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1885,6 +1933,26 @@ msgstr "Перемикнути липкість вікна"
 msgid "Halve window size"
 msgstr "Зробити вікно липким"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Підняти та передати клацання"
@@ -2128,55 +2196,6 @@ msgstr "Зсунути групу вниз"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Перемістити групу вікон нижче на крок зсуву вікна."
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Показати меню програм."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Програма, що запускається командою \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Програма, що запускається командою \"xterm\"."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Запустити новий xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Перегляд..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Запустити новий xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Ділянка перегляду"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Перейти в наступну ділянку перегляду"
@@ -2263,10 +2282,6 @@ msgstr "Виконати команду оболонки"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Виконати вказану команду оболонки."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Команда:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2474,10 +2489,6 @@ msgstr "Відіслати до наступного робочого місця
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Перемістити поточне вікно у робоче місце N."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Назва"
@@ -2515,12 +2526,18 @@ msgid "Position"
 msgstr "Позиція"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Розміри"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Робоче місце"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Наступне робоче місце"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "ділянка перегляду"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2541,18 +2558,12 @@ msgid "Fixed position"
 msgstr "Позиція"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Максимізувати"
+msgid "Sticky"
+msgstr "Липке"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "Наступне робоче місце"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "ділянка перегляду"
+msgid "Sticky viewport"
+msgstr "Причіплюватись до ділянки перегляду"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2583,12 +2594,12 @@ msgid "Frame style"
 msgstr "Стиль кадру"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Уникати"
+msgid "Dimensions"
+msgstr "Розміри"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Ігнорується"
+msgid "Maximized"
+msgstr "Максимізувати"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2599,12 +2610,21 @@ msgid "Shaded"
 msgstr "Згорнуте"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Липке"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "Причіплюватись до ділянки перегляду"
+#, fuzzy
+msgid "Never maximize"
+msgstr "Розмасимізувати"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Уникати"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Ігнорується"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2628,30 +2648,13 @@ msgid "Task list skip"
 msgstr "Немає в списку вікон"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Розмасимізувати"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "екран"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Унікальна назва"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Автогравітація"
+#, fuzzy
+msgid "Window name"
+msgstr "Вікно:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2666,13 +2669,8 @@ msgid "Ignore stacking requests"
 msgstr "Ігнорувати запити зміни стосу"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Вікно:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Стан"
+msgid "Auto gravity"
+msgstr "Автогравітація"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2745,6 +2743,21 @@ msgstr "Запам'ятати _атрибути"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Забути збережений стан"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "Пере_містити вікно на"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "Пере_містити вікно на"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Забути всю збережену історію вікна."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2870,18 +2883,6 @@ msgstr "Відіслати у робоче місце праворуч"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Відсилає вікно у робоче місце розташоване нижче поточного."
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Коли вказівник миші впливає на фокус вводу."
@@ -2910,6 +2911,18 @@ msgstr "Автоматично перезавантажувати теми пр�
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Типовий шрифт: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2960,6 +2973,7 @@ msgid "About GNOME"
 msgstr "Про GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2995,6 +3009,23 @@ msgstr "Вийти з поточного сеансу GNOME."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Вийти з поточного сеансу GNOME."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3458,6 +3489,16 @@ msgstr "Показати меню програм."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Спливаюче меню вікна"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Показати головне меню."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Програма налаштовування Sawfish"
 
@@ -3825,16 +3866,6 @@ msgstr ""
 "Перемикнути стан вікна між максимізованим-заповненим і не максимізованим."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Максимізувати вікно"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Максимізувати"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Маскимізувати на весь екран"
 
@@ -4090,17 +4121,17 @@ msgid "Unmark all windows"
 msgstr "Розмасимізувати вікно"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Програма, що використовується для відтворення звуків. Якщо не встановлено, "
-"використовується владнана підтримка для ESD."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Вікно:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4169,13 +4200,16 @@ msgstr ""
 "будь-яких його тимчасових вікон."
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4184,11 +4218,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Перенести групу у поточну ділянку перегляду"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 msgstr ""
-"Кількість пікселів на яку переміщується вказівник командою \"перемістити "
-"вказівник\"."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4207,8 +4242,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4694,18 +4729,62 @@ msgstr "Вибрати робоче місце інтерактивно"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Запитати робоче місце і перемикнутись на нього."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "і багато інших..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Розширений набір операцій з вікнами."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Домашня сторінка Sawfish"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Назви робочих місць"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Перенести вікно у наступну ділянку перегляду."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Чи потрібно, щоб вікна при розширенні або пакуванні зіштовхувались\n"
+#~ "з цілком ігнорованими вікнами"
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Запустити новий xterm."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Ділянка перегляду"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "екран"
+
+#~ msgid "State"
+#~ msgstr "Стан"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Максимізувати вікно"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Максимізувати"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Програма, що використовується для відтворення звуків. Якщо не "
+#~ "встановлено, використовується владнана підтримка для ESD."
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr ""
+#~ "Кількість пікселів на яку переміщується вказівник командою \"перемістити "
+#~ "вказівник\"."
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Назви робочих місць"
 
 #~ msgid "Matched Windows"
 #~ msgstr "Співпалі вікна"
@@ -4997,37 +5076,6 @@ msgstr "Назви робочих місць"
 #~ "Чи вважати збільшення розміру максимізацією. Коли це увімкнено,\n"
 #~ "можна використовувати розмаксимізацію вікна для повернення попереднього\n"
 #~ "розміру."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Метод пересування вказівника при пакуванні вікон.\n"
-#~ "\n"
-#~ "\"можливо\" означає, що вказівник переміщується разом з вікном, якщо\n"
-#~ "він був над вікном перед пакуванням.\n"
-#~ "\n"
-#~ "\"завжди\" перекидає вказівник в центр вікна якщо він не над вікном,\n"
-#~ "а потім діє так, як у випадку з \"можливо\".\n"
-#~ "\n"
-#~ "\"ніколи\" означає, що вказівник не переміщується."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "Чи потрібно, щоб вікна при розширенні або пакуванні зіштовхувались\n"
-#~ "з вікнами розташованими на інших рівнях.\n"
-#~ "`можливо' означає уникати тільки вікна на інших рівнях."
 
 #~ msgid "Terminal"
 #~ msgstr "Термінал"

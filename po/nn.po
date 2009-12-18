@@ -6,26 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2001-11-10 21:14+0100\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-# panel/menu.c:213
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "og mange, mange andre ..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish handsamar vindauga dine med utvidingar."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish heimeside"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1473,7 +1460,13 @@ msgid "never"
 msgstr "aldri"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether and how to move the pointer."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1481,7 +1474,9 @@ msgid "Whether to bump into fully obscured windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1623,6 +1618,52 @@ msgstr "Vis _heimeside"
 #, fuzzy
 msgid "Help about"
 msgstr "/Hjelp/_Om"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Program meny"
+
+# gsm/manager.c:834
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Ikkje noko svar på kommandoen %s."
+
+# gsm/manager.c:834
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Ikkje noko svar på kommandoen %s."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Kommando:"
+
+# gnome-terminal/gnome-terminal.c:1153 panel/gnome-run.c:375
+# panel/gnome-run.c:597
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Bla gjennom ..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Start ein ny xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in."
@@ -1915,6 +1956,26 @@ msgstr "Slå av/på om listevindauget viser"
 msgid "Halve window size"
 msgstr "Ta tak i vindauge skjermdump tast"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr ""
@@ -2179,60 +2240,6 @@ msgstr "Heilfylt bakgrunn"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Flytt denne fana høgre / ned"
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Program meny"
-
-# gsm/manager.c:834
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `xterm' command."
-msgstr "Ikkje noko svar på kommandoen %s."
-
-# gsm/manager.c:834
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Ikkje noko svar på kommandoen %s."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Start ein ny xterm"
-
-# gnome-terminal/gnome-terminal.c:1153 panel/gnome-run.c:375
-# panel/gnome-run.c:597
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Bla gjennom ..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Start ein ny xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Fileigenskapar"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 #, fuzzy
 msgid "Move viewport next"
@@ -2332,10 +2339,6 @@ msgstr "Køyr skalkommando"
 #, fuzzy
 msgid "Execute the given shell command."
 msgstr "Kunne ikkje køyra førkommando: %1"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Kommando:"
 
 #. ../lisp/sawfish/wm/commands.jl
 #, fuzzy
@@ -2554,10 +2557,6 @@ msgstr "Sett arbeidsområde"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Kan ikkje setja rette løyve for oppsett-fila\n"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Namn"
@@ -2598,12 +2597,18 @@ msgid "Position"
 msgstr "Plassering"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Dimensjonar"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Arbeidsområder"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Neste arbeidsområde"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "nytt format"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2625,20 +2630,14 @@ msgstr "Erstatning:"
 msgid "Fixed position"
 msgstr "Plassering"
 
-# panel/menu.c:4792
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Maksimert"
+msgid "Sticky"
+msgstr "Festa"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "New workspace"
-msgstr "Neste arbeidsområde"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "nytt format"
+msgid "Sticky viewport"
+msgstr "Sensitivitetsrapport"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
@@ -2670,12 +2669,13 @@ msgid "Frame style"
 msgstr "Rammestil"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Unngå"
+msgid "Dimensions"
+msgstr "Dimensjonar"
 
+# panel/menu.c:4792
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Ignorert"
+msgid "Maximized"
+msgstr "Maksimert"
 
 # applets/tasklist/tasklist_menu.c:258
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2687,13 +2687,22 @@ msgid "Shaded"
 msgstr "Skuggelagd"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Festa"
+msgid "Never iconify"
+msgstr ""
 
+# panel/menu.c:4766
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Sticky viewport"
-msgstr "Sensitivitetsrapport"
+msgid "Never maximize"
+msgstr "Unngå ved maksimering"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Unngå"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Ignorert"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2720,34 +2729,14 @@ msgid "Task list skip"
 msgstr "Meny for vindaugsoperasjonar"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-# panel/menu.c:4766
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Unngå ved maksimering"
-
-# gtk/gtkinputdialog.c:261
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "skjerm"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
 msgid "Unique name"
 msgstr "Filnamn"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Auto gravity"
-msgstr "Autolagring"
+msgid "Window name"
+msgstr "Vindauge:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
@@ -2765,13 +2754,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Window name"
-msgstr "Vindauge:"
-
-# gsm/gsm-client-list.c:121
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Tilstand"
+msgid "Auto gravity"
+msgstr "Autolagring"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2848,6 +2832,21 @@ msgstr "Attributtar"
 #, fuzzy
 msgid "_Forget saved state"
 msgstr "Formater som dato"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Send vindauge til"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Send vindauge til"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Lukk alle Galeon vindauger"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
@@ -3003,18 +3002,6 @@ msgstr "Sett arbeidsområde"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Opprette eit nytt delt visning av arbeidsboka"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr ""
@@ -3044,6 +3031,18 @@ msgstr "Signer automatisk meldingar ved hjelp av PGP"
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Forvald skrifttype: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -3100,6 +3099,7 @@ msgid "About GNOME"
 msgstr "Om GNOME ..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -3135,6 +3135,23 @@ msgstr "Skjer det noverande valet"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Skjer det noverande valet"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3596,6 +3613,17 @@ msgstr "Program meny"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Hopp over vindaugesmeny"
+
+# panel/menu-properties.c:416
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "På hovudmenyen"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "KCalc-oppsett"
 
@@ -4013,17 +4041,6 @@ msgid ""
 "unmaximized."
 msgstr "Gå til neste melding"
 
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Hovudvindauge"
-
-# panel/menu.c:4792
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Maksimert"
-
 # panel/menu.c:4792
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
@@ -4297,14 +4314,17 @@ msgid "Unmark all windows"
 msgstr "Hovudvindauge"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Vindauge:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4371,13 +4391,16 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4386,7 +4409,11 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Lukkar prosjektet"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of steps for viewport scrolling."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
@@ -4406,8 +4433,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4945,18 +4972,44 @@ msgstr "La vindaugehandsamaren velje"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Spør ved erstatting"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+# panel/menu.c:213
+#~ msgid "and many others..."
+#~ msgstr "og mange, mange andre ..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish handsamar vindauga dine med utvidingar."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish heimeside"
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Start ein ny xterm"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Arbeidsområder:"
+#~ msgid "View clipboard"
+#~ msgstr "Fileigenskapar"
+
+# gtk/gtkinputdialog.c:261
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "skjerm"
+
+# gsm/gsm-client-list.c:121
+#~ msgid "State"
+#~ msgstr "Tilstand"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Hovudvindauge"
+
+# panel/menu.c:4792
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Maksimert"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Arbeidsområder:"
 
 #, fuzzy
 #~ msgid "Matched Windows"

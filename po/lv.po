@@ -6,25 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish for latvian\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2002-11-10 11:48+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <ll10nt@ttc.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "un daudzi citi..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish pārvalda jūsu logus paplašināti."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish mājas lapa"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1428,8 +1416,23 @@ msgstr "nekad"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Pārvietot logu uz nākamo skatpunktu."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Vai un kā pārvietot kursoru, kad samazina logus.\n"
+"\n"
+"`varbūt' nozīmē to, ka kursors tiek pārvietots gar logu, ja\n"
+"kursors atradās loga laukumā pirms samazināšanas.\n"
+"\n"
+"`vienmēr' ierauj kursoru loga centrā, ja tas jau nav\n"
+"pašā logā, tad darbojas kā `varbūt'.\n"
+"\n"
+"`nekad' nozīmē neieraut kursoru."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1440,8 +1443,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"Vai uzskriet virsū logiem dažādos dziļumos, kad palielina vai samazina\n"
+"logus.\n"
+"`varbūt' nozīmē tikai izvairīties no logiem citos dziļumos."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1590,6 +1598,48 @@ msgstr "Palīdzība parādīt mājas lapu"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Palīdzība par"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Parādīt aplikāciju izvēlni."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Programma, palaista ar `xterm' komandu."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Programma, palaista ar `xterm' komandu."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Komanda:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Lūkoties..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Sākt jaunu xterm."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1869,6 +1919,26 @@ msgstr "Slēgt loga lipīgumu"
 msgid "Halve window size"
 msgstr "Padarīt logu lipīgu"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Paaugstināt un nodot cauri klikšķi"
@@ -2112,55 +2182,6 @@ msgstr "Aizbīdīt grupu lejup"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Pārvietot logu grupu `loga-aizbīdīšanas-pieaugums' pikseļus lejup."
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Parādīt aplikāciju izvēlni."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Programma, palaista ar `xterm' komandu."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Programma, palaista ar `xterm' komandu."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Sākt jaunu xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Lūkoties..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Sākt jaunu xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Skatpunkts"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Pārvietot skatpunkts nākošais"
@@ -2249,10 +2270,6 @@ msgstr "Sāknēt čaulas komandu"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Izpildīt doto čaulas komandu."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Komanda:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2459,10 +2476,6 @@ msgstr "Sūtīt uz nākošo darba vietu"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Pārvietot pašreizējo logu uz N. darba vietu."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Nosaukums"
@@ -2500,12 +2513,18 @@ msgid "Position"
 msgstr "Pozīcija"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Dimensijas"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Darba vieta"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Nākošā darba vieta"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "skatpunkts"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2526,18 +2545,12 @@ msgid "Fixed position"
 msgstr "Pozīcija"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Maksimizēts"
+msgid "Sticky"
+msgstr "Lipīgs"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "Nākošā darba vieta"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "skatpunkts"
+msgid "Sticky viewport"
+msgstr "Lipīgs skatpunkts"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2568,12 +2581,12 @@ msgid "Frame style"
 msgstr "Rāmja stils"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Izvairīties"
+msgid "Dimensions"
+msgstr "Dimensijas"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Ignorēts"
+msgid "Maximized"
+msgstr "Maksimizēts"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2584,12 +2597,21 @@ msgid "Shaded"
 msgstr "Ēnots"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Lipīgs"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "Lipīgs skatpunkts"
+#, fuzzy
+msgid "Never maximize"
+msgstr "Atmaksimizēt"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Izvairīties"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Ignorēts"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2613,30 +2635,13 @@ msgid "Task list skip"
 msgstr "Izlaižamo logu saraksts"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Atmaksimizēt"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "ekrāns"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Unikāls nosaukums"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Auto gravitāte"
+#, fuzzy
+msgid "Window name"
+msgstr "Logs:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2651,13 +2656,8 @@ msgid "Ignore stacking requests"
 msgstr "Ignorēt kraušanas pieprasījumus"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Logs:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Stāvoklis"
+msgid "Auto gravity"
+msgstr "Auto gravitāte"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2730,6 +2730,21 @@ msgstr "Atcerēties _atribūtus"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Aizmirst saglabāto stāvokli"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Sūtīt logu uz"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Sūtīt logu uz"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Aizmirst visu saglabāto loga vēsturi."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2855,18 +2870,6 @@ msgstr "Sūtīt uz darba vietu pa labi"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Sūtīt logu uz darba vietu pa labi no pašreizējās darba vietas"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Kad peles kursors ietekmē ievades fokusu."
@@ -2895,6 +2898,18 @@ msgstr "Automātiski pārlādēt tēmas, kad tās ir atjauninātas."
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Noklusētais fonts: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2945,6 +2960,7 @@ msgid "About GNOME"
 msgstr "Par GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2980,6 +2996,23 @@ msgstr "Atteikšanās no pašreizējās GNOME sesijas."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Atteikšanās no pašreizējās GNOME sesijas."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3451,6 +3484,16 @@ msgstr "Parādīt aplikāciju izvēlni."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Parādīt logu izvēlni"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Parādīt galveno izvēlni."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Sawfish konfigurātors"
 
@@ -3816,16 +3859,6 @@ msgid ""
 msgstr "Slēgt loga stāvokli starp maksimizētu-aizpildītu un atmaksimizētu."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Maksimizēt logu"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Maksimizēts"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Maksimizēt logu pilnekrānā"
 
@@ -4081,17 +4114,17 @@ msgid "Unmark all windows"
 msgstr "Atmaksimizēt logu"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Programma, kura atskaņo mūzikas paraugs. Ja nav uzstādīta, tiek izmantots "
-"ESD iebūvētais atbalsts."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Logs:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4162,13 +4195,16 @@ msgstr ""
 "izmaina jebkura tam esošā pagaidu loga līmeni."
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4177,10 +4213,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Pārvietot grupu uz pašreizējo skatpunktu"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 msgstr ""
-"Pikseļu daudzums, par cik pārvietot kursoru `pārvietot-kursoru-' komandās."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4199,8 +4237,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4682,18 +4720,59 @@ msgstr "Izvēlēties darba vietu interaktīvi"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Pieprasīt darba vietu un pārslēgties uz to."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "un daudzi citi..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish pārvalda jūsu logus paplašināti."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish mājas lapa"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Darba vietu nosaukumi"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Pārvietot logu uz nākamo skatpunktu."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "Vai uzskriet virsū ignorētiem logiem, kad palielina vai samazina."
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Sākt jaunu xterm."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Skatpunkts"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "ekrāns"
+
+#~ msgid "State"
+#~ msgstr "Stāvoklis"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Maksimizēt logu"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Maksimizēts"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Programma, kura atskaņo mūzikas paraugs. Ja nav uzstādīta, tiek izmantots "
+#~ "ESD iebūvētais atbalsts."
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr ""
+#~ "Pikseļu daudzums, par cik pārvietot kursoru `pārvietot-kursoru-' komandās."
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Darba vietu nosaukumi"
 
 #~ msgid "Matched Windows"
 #~ msgstr "Sakrtītošie Logi"
@@ -4995,37 +5074,6 @@ msgstr "Darba vietu nosaukumi"
 #~ "ieslēgsiet,\n"
 #~ "jūs varat lietot `atjaunot-logu' vai kaut ko līdzīgu, lai atgūtu,\n"
 #~ "to atpakaļ tā oriģinālajā izmērā."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Vai un kā pārvietot kursoru, kad samazina logus.\n"
-#~ "\n"
-#~ "`varbūt' nozīmē to, ka kursors tiek pārvietots gar logu, ja\n"
-#~ "kursors atradās loga laukumā pirms samazināšanas.\n"
-#~ "\n"
-#~ "`vienmēr' ierauj kursoru loga centrā, ja tas jau nav\n"
-#~ "pašā logā, tad darbojas kā `varbūt'.\n"
-#~ "\n"
-#~ "`nekad' nozīmē neieraut kursoru."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "Vai uzskriet virsū logiem dažādos dziļumos, kad palielina vai samazina\n"
-#~ "logus.\n"
-#~ "`varbūt' nozīmē tikai izvairīties no logiem citos dziļumos."
 
 #~ msgid "Terminal"
 #~ msgstr "Terminālis"

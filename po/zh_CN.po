@@ -7,25 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2002-01-15 21:42+0800\n"
 "Last-Translator: wangli <charlesw1234@163.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "以及其他许多人..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish 可扩展地管理您的窗口。"
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish 主页"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1493,15 +1481,32 @@ msgstr "从不"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "将窗口移至下一个视域。"
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"归拢窗口时是否及如何移动鼠标光标。\n"
+"\n"
+"‘可能’表示若归拢前鼠标光标在窗口区域内，则鼠标光标随\n"
+"窗口移动。\n"
+"\n"
+"‘总是’表示若归拢前鼠标光标不在窗口区域内，则首先将鼠标\n"
+"光标置于窗口中心，而后再依‘可能’模式移动鼠标光标。\n"
+"\n"
+"‘从不’表示不移动鼠标光标。"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether to bump into fully obscured windows."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1628,6 +1633,51 @@ msgstr "求助显示主页"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "求助关于"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "显示应用菜单。"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "由‘xterm’命令起动的程序。"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "由‘xterm’命令起动的程序。"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "命令："
+
+# ../themer/themer.in
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "浏览..."
+
+# ../lisp/functions.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "启动一个新的 xterm。"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1926,6 +1976,26 @@ msgstr "切换窗口的粘附状态"
 msgid "Halve window size"
 msgstr "使窗口被粘附"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "提升并传递点击"
@@ -2178,59 +2248,6 @@ msgstr "下滑组"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "将窗口组向下移动‘slide-window-increment’个像素。"
 
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "显示应用菜单。"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "由‘xterm’命令起动的程序。"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "由‘xterm’命令起动的程序。"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-# ../lisp/functions.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "启动一个新的 xterm。"
-
-# ../themer/themer.in
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "浏览..."
-
-# ../lisp/functions.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "启动一个新的 xterm。"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "视域"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 #, fuzzy
@@ -2333,10 +2350,6 @@ msgstr "运行 shell 命令。"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "执行给出的 shell 命令。"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "命令："
 
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/commands.jl
@@ -2565,10 +2578,6 @@ msgstr "发送到下一个工作区"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "将当前窗口移动到第 N 个工作区。"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "名称"
@@ -2607,12 +2616,19 @@ msgid "Position"
 msgstr "位置"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "尺寸"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "工作区"
+
+# ../lisp/workspace.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "下一个工作区"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "视域"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2634,21 +2650,13 @@ msgstr "放置加权"
 msgid "Fixed position"
 msgstr "位置"
 
-# ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "已最大化"
-
-# ../lisp/workspace.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "下一个工作区"
+msgid "Sticky"
+msgstr "粘附"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "视域"
+msgid "Sticky viewport"
+msgstr "粘附视域"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2681,12 +2689,13 @@ msgid "Frame style"
 msgstr "窗帧风格"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "避让"
+msgid "Dimensions"
+msgstr "尺寸"
 
+# ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "已忽略"
+msgid "Maximized"
+msgstr "已最大化"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2697,12 +2706,22 @@ msgid "Shaded"
 msgstr "己上卷"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "粘附"
+msgid "Never iconify"
+msgstr ""
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Never maximize"
+msgstr "(从最大化)复原"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "粘附视域"
+msgid "Avoid"
+msgstr "避让"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "已忽略"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2728,31 +2747,13 @@ msgid "Task list skip"
 msgstr "在窗口列表中忽略"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "(从最大化)复原"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "屏幕"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "独有名称"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "自动加权"
+#, fuzzy
+msgid "Window name"
+msgstr "窗口："
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2767,13 +2768,8 @@ msgid "Ignore stacking requests"
 msgstr "忽略堆叠请求"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "窗口："
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "状态"
+msgid "Auto gravity"
+msgstr "自动加权"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2848,6 +2844,21 @@ msgstr "记住属性(_A)"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "忘记已保存的状态(_F)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "将窗口发送到(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "将窗口发送到(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "遗忘所有保存的窗口历史。"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -3004,18 +3015,6 @@ msgstr "发送到工作区"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "在当前工作区之前创建新工作区。"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 # ../lisp/focus.jl
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -3049,6 +3048,18 @@ msgstr "主题更新后自动重新装入。"
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "默认字体：\\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -3106,6 +3117,7 @@ msgid "About GNOME"
 msgstr "关于 GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -3141,6 +3153,23 @@ msgstr "注消当前的 GNOME 会话。"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "注消当前的 GNOME 会话。"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3642,6 +3671,17 @@ msgstr "显示应用菜单。"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "弹出窗口菜单"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "显示主菜单。"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Sawfish 配置工具"
 
@@ -4052,18 +4092,6 @@ msgstr "在窗口的最大填充状态和非最大填充状态间切换。"
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
 #, fuzzy
-msgid "Maximize unframe"
-msgstr "最大化窗口"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "已最大化"
-
-# ../lisp/custom.jl
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window fullscreen"
 msgstr "窗口最大化切换"
 
@@ -4344,15 +4372,17 @@ msgid "Unmark all windows"
 msgstr "窗口(从最大化)复原"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "该程序用于播放音效示例。若未设定，则使用内置 ESD 支持。"
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "窗口："
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4422,13 +4452,16 @@ msgstr ""
 "窗口所拥有的所有临时窗口。"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4437,9 +4470,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "将组移动到当前视域"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "‘move-cursor-’命令移动鼠标光标的像素数。"
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4459,8 +4495,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4993,18 +5029,55 @@ msgstr "交互地选择工作区"
 msgid "Prompt for a workspace and switch to it."
 msgstr "提示选择工作区，并切换到它。"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "以及其他许多人..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish 可扩展地管理您的窗口。"
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish 主页"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "工作区名称"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "将窗口移至下一个视域。"
+
+# ../lisp/functions.jl
+#~ msgid "Start a new xterm."
+#~ msgstr "启动一个新的 xterm。"
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "视域"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "屏幕"
+
+#~ msgid "State"
+#~ msgstr "状态"
+
+# ../lisp/custom.jl
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "最大化窗口"
+
+# ../lisp/menus.jl
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "已最大化"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr "该程序用于播放音效示例。若未设定，则使用内置 ESD 支持。"
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "‘move-cursor-’命令移动鼠标光标的像素数。"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "工作区名称"
 
 # ../lisp/match-window.jl
 #~ msgid "Matched Windows"
@@ -5301,27 +5374,6 @@ msgstr "工作区名称"
 #~ "窗口扩大时是否考虑最大化。当您开启此选项时，\n"
 #~ "您可以用‘窗口(从最大化)复原’或类似的方法\n"
 #~ "恢复到原来的大小。"
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "归拢窗口时是否及如何移动鼠标光标。\n"
-#~ "\n"
-#~ "‘可能’表示若归拢前鼠标光标在窗口区域内，则鼠标光标随\n"
-#~ "窗口移动。\n"
-#~ "\n"
-#~ "‘总是’表示若归拢前鼠标光标不在窗口区域内，则首先将鼠标\n"
-#~ "光标置于窗口中心，而后再依‘可能’模式移动鼠标光标。\n"
-#~ "\n"
-#~ "‘从不’表示不移动鼠标光标。"
 
 # ../lisp/menus.jl
 #, fuzzy

@@ -6,25 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2006-07-19 22:53+0900\n"
 "Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "そしてその他の多くの人々..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish はウィンドウを自在に制御できます"
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish ホームページ"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1419,8 +1407,24 @@ msgstr "絶対にそうしない"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "ウィンドウを次のビューポートに移動"
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"ウィンドウを隅に詰めるときにポインタも移動させるかどうか、\n"
+"あるいはどのように移動するか\n"
+"\n"
+"`場合によっては'では詰める前にポインタがウィンドウ内にあれば\n"
+"ウィンドウと一緒に移動\n"
+"\n"
+"`常に'ではポインタがウィンドウ内になければ`場合によっては'のように\n"
+"ウィンドウの中央に移動\n"
+"\n"
+"`絶対にそうしない'ではポインタを移動しない"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1429,9 +1433,12 @@ msgstr "ウィンドウを拡大/詰める際に隠されているウィンド�
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
-"ウィンドウを拡大/詰める際に無視されているウィンドウにくっつけるかどうか"
+"ウィンドウを拡大/詰める際に異なる深さのウィンドウにくっつけるかどうか\n"
+"'maybe' という意味は他の深さのウィンドウだけをさけることになるということ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1579,6 +1586,48 @@ msgstr "ホームページを表示"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "概要を表示"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "アプリケーションメニューを表示"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "`xterm' コマンドによって起動されるプログラム"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "`xterm' コマンドによって起動されるプログラム"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "コマンド:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "閲覧..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "新規 `xterm' を起動"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1856,6 +1905,26 @@ msgstr "ウィンドウ居座りを切替"
 msgid "Halve window size"
 msgstr "ウィンドウ居座り"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "前面に出してクリックイベントを渡す"
@@ -2099,55 +2168,6 @@ msgstr "グループを下にずらす"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "ウィンドウグループを slide-window-increment ピクセル数だけ下に移動"
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "アプリケーションメニューを表示"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "`xterm' コマンドによって起動されるプログラム"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "`xterm' コマンドによって起動されるプログラム"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "新規 `xterm' を起動"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "閲覧..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "新規 `xterm' を起動"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "ビューポート"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "ビューポートを次へ移動"
@@ -2234,10 +2254,6 @@ msgstr "シェルコマンドを実行"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "与えられたシェルコマンドを実行"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "コマンド:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2444,10 +2460,6 @@ msgstr "次のワークスペースへ送る"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "ウィンドウを N 番目のワークスペースに移動"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "名前"
@@ -2485,12 +2497,18 @@ msgid "Position"
 msgstr "位置"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "大きさ"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "ワークスペース"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "次のワークスペース"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "ビューポート"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2511,18 +2529,12 @@ msgid "Fixed position"
 msgstr "位置"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "最大化された"
+msgid "Sticky"
+msgstr "居座り"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "次のワークスペース"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "ビューポート"
+msgid "Sticky viewport"
+msgstr "ビューポート居座り"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2553,12 +2565,12 @@ msgid "Frame style"
 msgstr "フレームスタイル"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Avoid"
+msgid "Dimensions"
+msgstr "大きさ"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "無視された"
+msgid "Maximized"
+msgstr "最大化された"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2569,12 +2581,21 @@ msgid "Shaded"
 msgstr "シェード"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "居座り"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "ビューポート居座り"
+#, fuzzy
+msgid "Never maximize"
+msgstr "元の大きさに戻す"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Avoid"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "無視された"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2597,30 +2618,13 @@ msgid "Task list skip"
 msgstr "タスクリストスキップ"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "元の大きさに戻す"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "画面"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "固有名"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "人工重力"
+#, fuzzy
+msgid "Window name"
+msgstr "ウィンドウ:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2635,13 +2639,8 @@ msgid "Ignore stacking requests"
 msgstr "スタック要求を無視"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "ウィンドウ:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "状態"
+msgid "Auto gravity"
+msgstr "人工重力"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2714,6 +2713,21 @@ msgstr "属性を記憶(_a)"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "保存された状態を忘れる(_F)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "ウィンドウを送る(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "ウィンドウを送る(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "すべてのウィンドウ履歴を破棄"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2839,18 +2853,6 @@ msgstr "右のワークスペースに送る"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "ウィンドウを現在のワークスペースの右のワークスペースに送る"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "マウスカーソルが入力フォーカスにいつ影響を及ぼすか"
@@ -2879,6 +2881,18 @@ msgstr "テーマ更新時に自動的に再読み込み"
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "標準フォント: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2929,6 +2943,7 @@ msgid "About GNOME"
 msgstr "GNOME について..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2964,6 +2979,23 @@ msgstr "現在のGNOMEセッションからログアウト"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "現在のGNOMEセッションからログアウト"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3438,6 +3470,16 @@ msgstr "アプリケーションメニューを表示"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "ウィンドウメニューをポップアップ"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "メインメニューを表示"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Sawfish 設定ツール"
 
@@ -3804,16 +3846,6 @@ msgstr ""
 "状態を切替"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "ウィンドウを最大化"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "最大化された"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "ウィンドウを全画面表示"
 
@@ -4071,17 +4103,17 @@ msgid "Unmark all windows"
 msgstr "ウィンドウを元の大きさに"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"オーディオサンプルを再生するプログラム. 標準ではサポート組み込みの\n"
-"ESD を使う"
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "ウィンドウ:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4150,13 +4182,16 @@ msgstr ""
 "同じようにする"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4165,9 +4200,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "グループを現在のビューポートに移動"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "`move-cursor-' コマンドでウィンドウを移動するピクセル数"
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4186,8 +4224,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4664,18 +4702,59 @@ msgstr "ワークスペースを対話的に選択"
 msgid "Prompt for a workspace and switch to it."
 msgstr "ワークスペース切替時の表示"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "そしてその他の多くの人々..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish はウィンドウを自在に制御できます"
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish ホームページ"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "ワークスペース名"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "ウィンドウを次のビューポートに移動"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "ウィンドウを拡大/詰める際に無視されているウィンドウにくっつけるかどうか"
+
+#~ msgid "Start a new xterm."
+#~ msgstr "新規 `xterm' を起動"
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "ビューポート"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "画面"
+
+#~ msgid "State"
+#~ msgstr "状態"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "ウィンドウを最大化"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "最大化された"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "オーディオサンプルを再生するプログラム. 標準ではサポート組み込みの\n"
+#~ "ESD を使う"
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "`move-cursor-' コマンドでウィンドウを移動するピクセル数"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "ワークスペース名"
 
 #~ msgid "Matched Windows"
 #~ msgstr "ウィンドウプロパティ"
@@ -4965,37 +5044,6 @@ msgstr "ワークスペース名"
 #~ msgstr ""
 #~ "拡大を最大化とみなすかどうか。設定すると`unmaximize-window'などで\n"
 #~ "そのウィンドウを元の大きさに戻すことができる"
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "ウィンドウを隅に詰めるときにポインタも移動させるかどうか、\n"
-#~ "あるいはどのように移動するか\n"
-#~ "\n"
-#~ "`場合によっては'では詰める前にポインタがウィンドウ内にあれば\n"
-#~ "ウィンドウと一緒に移動\n"
-#~ "\n"
-#~ "`常に'ではポインタがウィンドウ内になければ`場合によっては'のように\n"
-#~ "ウィンドウの中央に移動\n"
-#~ "\n"
-#~ "`絶対にそうしない'ではポインタを移動しない"
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "ウィンドウを拡大/詰める際に異なる深さのウィンドウにくっつけるかどうか\n"
-#~ "'maybe' という意味は他の深さのウィンドウだけをさけることになるということ"
 
 #~ msgid "Terminal"
 #~ msgstr "端末"

@@ -10,25 +10,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2004-05-02 01:47+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "en vele anderen..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish beheert uw vensters."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish Web-pagina"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1532,11 +1520,24 @@ msgstr "misschien"
 msgid "never"
 msgstr "nooit"
 
-# ../lisp/viewport.jl
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Verplaats het venster naar het volgende blikveld."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Of en hoe de muis verplaatst wordt bij het uitvullen van vensters\n"
+"\n"
+"'misschien' betekent dat de muis samen met het venster wordt verplaatst\n"
+"wanneer de muis IN het venster zat wanneer ze uitgevuld worden.\n"
+"\n"
+"'altijd' verplaatst de muis ALTIJD naar het venster bij het uitvullen.\n"
+"\n"
+"'nooit' betekent dat de muis nooit wordt verplaatst."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1547,10 +1548,14 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
-"Of er tegen genegeerde vensters aan gebotst moet worden bij het groeien of "
-"uitvullen."
+"Of er tegen vensters van een ander niveau aan gebotst moet worden bij het "
+"groeien of uitvullen van vensters.\n"
+"'misschien' betekent alleen vensters die ontweken moeten worden van andere "
+"niveaus."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1712,6 +1717,53 @@ msgstr "Help geeft homepage weer"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Help info..."
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Toon het menu met programma's."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+# ../src/sawmill-ui.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Opdracht:"
+
+# ../themer/themer.in
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Bladeren..."
+
+# ../lisp/functions.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Start een nieuwe xterm."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 # ../lisp/slide-window.jl
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
@@ -2038,6 +2090,26 @@ msgstr "Plakkend omschakelen"
 msgid "Halve window size"
 msgstr "Maak vensters plakkend"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Vensterniveau verhogen en muisklik doorgeven"
@@ -2314,60 +2386,6 @@ msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr ""
 "Verplaats de venstergroep `slide-window-increment' puntjes naar beneden."
 
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Toon het menu met programma's."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Het programma wat wordt gestart door de 'xterm' opdracht."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-# ../lisp/functions.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Start een nieuwe xterm."
-
-# ../themer/themer.in
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Bladeren..."
-
-# ../lisp/functions.jl
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Start een nieuwe xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Blikveld"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 # ../lisp/viewport.jl
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
@@ -2471,11 +2489,6 @@ msgstr "Start shell opdracht"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Starten van de opgegeven shell opdracht."
-
-# ../src/sawmill-ui.jl
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Opdracht:"
 
 # urg.
 # ../src/sawmill-ui.jl
@@ -2715,10 +2728,6 @@ msgstr "Stuur naar volgende werkruimte"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Stuur het huidige venster naar de N'de werkruimte."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Naam"
@@ -2757,15 +2766,22 @@ msgstr "Plaatsingsmethode"
 msgid "Position"
 msgstr "Positie"
 
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Dimensies"
-
 # ../lisp/menus.jl
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Werkruimte"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Volgende werkruimte"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "blikveld"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2789,19 +2805,12 @@ msgstr "Positie"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Gemaximaliseerd"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "Volgende werkruimte"
+msgid "Sticky"
+msgstr "Plakkend"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "blikveld"
+msgid "Sticky viewport"
+msgstr "Plakkend blikveld"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2835,13 +2844,13 @@ msgid "Frame style"
 msgstr "Vensterrand thema"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Ontwijk"
+msgid "Dimensions"
+msgstr "Dimensies"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Genegeerd"
+msgid "Maximized"
+msgstr "Gemaximaliseerd"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2853,14 +2862,24 @@ msgstr "Geminimaliseerd"
 msgid "Shaded"
 msgstr "Opgerold"
 
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never iconify"
+msgstr ""
+
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Plakkend"
+#, fuzzy
+msgid "Never maximize"
+msgstr "Formaat herstellen"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "Plakkend blikveld"
+msgid "Avoid"
+msgstr "Ontwijk"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Genegeerd"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2887,31 +2906,14 @@ msgid "Task list skip"
 msgstr "Vensterlijst overslaan"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
+msgid "Unique name"
+msgstr "Unieke naam"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #, fuzzy
-msgid "Never maximize"
-msgstr "Formaat herstellen"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "scherm"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Unique name"
-msgstr "Unieke naam"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Auto zwaartekracht"
+msgid "Window name"
+msgstr "Venster:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2925,15 +2927,9 @@ msgstr "Dialogen erboven"
 msgid "Ignore stacking requests"
 msgstr "Negeer niveau-aanvragen"
 
-# ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Venster:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Staat"
+msgid "Auto gravity"
+msgstr "Auto zwaartekracht"
 
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -3012,6 +3008,23 @@ msgstr "_Attributen onthouden"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Vergeet deze instellingen"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Stuur venster naar"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Stuur venster naar"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Vergeet alle opgeslagen informatie over alle vensters."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -3159,18 +3172,6 @@ msgstr "Een werkruimte naar rechts sturen"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Het venster een werkruimte naar rechts sturen"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 # ../lisp/focus.jl
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -3206,6 +3207,18 @@ msgstr "Herlaad thema's automatisch zodra ze bij de tijd zijn gebracht."
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Standaard lettertype: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -3264,6 +3277,7 @@ msgid "About GNOME"
 msgstr "GNOME Info..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -3302,6 +3316,24 @@ msgstr "Sluit de huidige GNOME sessie."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+# ../lisp/sm-init.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Sluit de huidige GNOME sessie."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3817,6 +3849,17 @@ msgstr "Programma's snelmenu"
 msgid "Display the applications menu."
 msgstr "Toon het menu met programma's."
 
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Popup window list menu"
+msgstr "Venster snelmenu"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Toon het hoofdmenu."
+
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
@@ -4251,18 +4294,6 @@ msgstr "Schakel het venster tussen maximaal-gevuld en niet-gemaximaliseerd."
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Maximaliseer venster"
-
-# ../lisp/menus.jl
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Gemaximaliseerd"
-
-# ../lisp/custom.jl
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Venster maximaliseren"
 
@@ -4549,11 +4580,12 @@ msgid "Unmark all windows"
 msgstr "Herstel vensterformaat"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Het programma om geluiden mee af te spelen. Wanneer u niets heeft gekozen,\n"
-"zal de ingebouwde ESD ondersteuning gebruikt worden."
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
@@ -4562,7 +4594,6 @@ msgstr "Venster:"
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4638,13 +4669,16 @@ msgstr ""
 "verlaag het niveau dan. Til het anders naar de bovenkant van zijn niveau."
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 # ../lisp/viewport.jl
@@ -4653,12 +4687,13 @@ msgstr ""
 msgid "Windows uniconify to the current viewport."
 msgstr "Stuur groep naar huidige blikveld"
 
-# ../lisp/slide-window.jl
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 msgstr ""
-"Aantal puntjes om de muis te verplaatsen met de `verplaats-muis' opdrachten."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4678,8 +4713,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -5251,20 +5286,70 @@ msgstr "Kies zelf werkruimte uit"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Vraag om een werkruimte en ga erheen."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "en vele anderen..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish beheert uw vensters."
+
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish Web-pagina"
+
+# ../lisp/viewport.jl
+#, fuzzy
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Verplaats het venster naar het volgende blikveld."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Of er tegen genegeerde vensters aan gebotst moet worden bij het groeien "
+#~ "of uitvullen."
+
+# ../lisp/functions.jl
+#~ msgid "Start a new xterm."
+#~ msgstr "Start een nieuwe xterm."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Blikveld"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "scherm"
+
+#~ msgid "State"
+#~ msgstr "Staat"
+
+# ../lisp/custom.jl
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Maximaliseer venster"
+
+# ../lisp/menus.jl
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Gemaximaliseerd"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Het programma om geluiden mee af te spelen. Wanneer u niets heeft "
+#~ "gekozen,\n"
+#~ "zal de ingebouwde ESD ondersteuning gebruikt worden."
+
+# ../lisp/slide-window.jl
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr ""
+#~ "Aantal puntjes om de muis te verplaatsen met de `verplaats-muis' "
+#~ "opdrachten."
 
 # ../lisp/menus.jl
 # ../lisp/custom.jl
-#. ../lisp/sawfish/wm/workspace.jl
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Namen van werkruimten"
+#~ msgid "Display workspace name"
+#~ msgstr "Namen van werkruimten"
 
 # ../lisp/match-window.jl
 #~ msgid "Matched Windows"
@@ -5597,37 +5682,6 @@ msgstr "Namen van werkruimten"
 #~ "gebruik maken van 'formaat herstellen' of iets dergelijks om weer terug "
 #~ "te keren\n"
 #~ "naar de originele grootte."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Of en hoe de muis verplaatst wordt bij het uitvullen van vensters\n"
-#~ "\n"
-#~ "'misschien' betekent dat de muis samen met het venster wordt verplaatst\n"
-#~ "wanneer de muis IN het venster zat wanneer ze uitgevuld worden.\n"
-#~ "\n"
-#~ "'altijd' verplaatst de muis ALTIJD naar het venster bij het uitvullen.\n"
-#~ "\n"
-#~ "'nooit' betekent dat de muis nooit wordt verplaatst."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "Of er tegen vensters van een ander niveau aan gebotst moet worden bij het "
-#~ "groeien of uitvullen van vensters.\n"
-#~ "'misschien' betekent alleen vensters die ontweken moeten worden van "
-#~ "andere niveaus."
 
 # ../lisp/menus.jl
 #~ msgid "Terminal"

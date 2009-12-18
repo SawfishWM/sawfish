@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2006-01-10 19:16+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
@@ -16,18 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: LocFactoryEditor 1.6b23\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "và nhiều cái khác..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish quản lý các cửa sổ của bạn một cách mở rộng."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Trang chủ của Sawfish"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1422,8 +1410,23 @@ msgstr "không bao giờ"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Di chuyển cửa sổ sang cổng xem kế tiếp."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Có nên và cách di chuyển con trỏ hay không, khi nén cửa sổ.\n"
+"\n"
+" • có thể\t\tcon trỏ chuyển cùng với cửa sổ,\n"
+"nếu con trỏ ở trong vùng cửa sổ trước khi nén.\n"
+"\n"
+" • luôn luôn\tkéo con trỏ vào trung tâm cửa sổ,\n"
+"nếu nó chưa trong cửa sổ, rồi theo hành vi « có thể ».\n"
+"\n"
+" • không bao giờ\tđừng kéo con trỏ từ chỗ."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1434,10 +1437,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
-"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ."
+"Có nên đâm sầm vào cửa sổ nằm trên độ sâu khác hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ.\n"
+" • có thể\t\tchỉ tránh các cửa sổ nằm trên độ sâu khác."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1595,6 +1601,48 @@ msgstr "Trợ giúp: hiện trang chủ Mạng"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Trợ giúp: giới thiệu"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Hiện trình đơn ứng dụng."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Lệnh:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Duyệt..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Chạy xterm mới."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1875,6 +1923,26 @@ msgstr "Bật/tắt cửa sổ dính"
 msgid "Halve window size"
 msgstr "Lập cửa sổ là dính"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Nâng lên và gởi nhắp qua"
@@ -2118,55 +2186,6 @@ msgstr "Trượt nhóm xuống dưới"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Di chuyển nhóm cửa sổ xuống dưới « slide-window-increment » điểm ảnh."
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Hiện trình đơn ứng dụng."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Chương trình được thực hiện bởi lệnh « xterm »."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Chạy xterm mới."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Duyệt..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Chạy xterm mới."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Cổng xem"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Tới cổng xem kế"
@@ -2253,10 +2272,6 @@ msgstr "Chạy lệnh hệ vỏ"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Thực hiện lệnh hệ vỏ đãone đưa ra."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Lệnh:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2463,10 +2478,6 @@ msgstr "Gởi qua vùng làm việc kế"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Di chuyển cửa sổ hiện thời sang vùng làm việc thứ N."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Tên"
@@ -2504,12 +2515,18 @@ msgid "Position"
 msgstr "Vị trí"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Các chiều"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Vùng làm việc"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Vùng làm việc kế"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "cổng xem"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2530,18 +2547,12 @@ msgid "Fixed position"
 msgstr "Vị trí"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Đã phóng to"
+msgid "Sticky"
+msgstr "Dính"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "Vùng làm việc kế"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "cổng xem"
+msgid "Sticky viewport"
+msgstr "Cổng xem dính"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2572,12 +2583,12 @@ msgid "Frame style"
 msgstr "Kiểu dáng khung"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Tránh"
+msgid "Dimensions"
+msgstr "Các chiều"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Bị bỏ qua"
+msgid "Maximized"
+msgstr "Đã phóng to"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2588,12 +2599,21 @@ msgid "Shaded"
 msgstr "Có bóng"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Dính"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "Cổng xem dính"
+#, fuzzy
+msgid "Never maximize"
+msgstr "Hủy phóng to"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Tránh"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Bị bỏ qua"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2617,30 +2637,13 @@ msgid "Task list skip"
 msgstr "Nhảy danh sách cửa sổ"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Hủy phóng to"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "màn hình"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Tên duy nhất"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Tự động trọng lực"
+#, fuzzy
+msgid "Window name"
+msgstr "Cửa sổ :"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2655,13 +2658,8 @@ msgid "Ignore stacking requests"
 msgstr "Bỏ qua yêu cầu tạo chồng"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Cửa sổ :"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Tình trạng"
+msgid "Auto gravity"
+msgstr "Tự động trọng lực"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2734,6 +2732,21 @@ msgstr "Nhớ _thuộc tính"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "_Quên tính trạng đã lưu"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Chuyển cửa sổ tới"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Chuyển cửa sổ tới"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Quên toàn lược sử cửa sổ đã lưu."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2859,18 +2872,6 @@ msgstr "Gởi qua vùng làm việc bên phải"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Gởi cửa sổ qua vùng làm việc bên phải vùng làm việc hiện thời"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Khi con chuột tác động lên tiêu điểm nhập."
@@ -2901,6 +2902,18 @@ msgstr "Tự động tải lại sắc thái khi được cập nhật"
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Phông chữ mặc định: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2951,6 +2964,7 @@ msgid "About GNOME"
 msgstr "Giới thiệu về GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2986,6 +3000,23 @@ msgstr "Đăng xuất phiên chạy GNOME hiện tại."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3459,6 +3490,16 @@ msgstr "Hiện trình đơn ứng dụng."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Bật trình đơn cửa sổ lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Hiện trình đơn chính."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Bộ cấu hình Sawfish"
 
@@ -3820,16 +3861,6 @@ msgid ""
 msgstr "Bật tắt tính trạng mở rộng vừa của cửa sổ."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Phóng to cửa sổ"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Đã phóng to"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Phóng to cửa sổ toàn màn hình"
 
@@ -4084,17 +4115,17 @@ msgid "Unmark all windows"
 msgstr "Ngừng phóng to cửa sổ"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Chương trình được dùng để phát mẫu âm thanh. Nếu bỏ chọn thì sẽ dùng sự hỗ "
-"trợ ESD có sẵn."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Cửa sổ :"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4163,13 +4194,16 @@ msgstr ""
 "sổ tạm nào của nó."
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4178,9 +4212,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Chuyển nhóm sang cổng xem hiện thời"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "Số điểm ảnh cần chuyển con trỏ trong lệnh « đẩy con trỏ »."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4199,8 +4236,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4687,18 +4724,60 @@ msgstr "Chọn tương tác vùng làm việc"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Nhắc với vùng làm việc và chuyển đổi qua đó."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "và nhiều cái khác..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish quản lý các cửa sổ của bạn một cách mở rộng."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Trang chủ của Sawfish"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Tên vùng làm việc"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Di chuyển cửa sổ sang cổng xem kế tiếp."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+#~ "khi tăng kích cỡ hoặc nén cửa sổ."
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Chạy xterm mới."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Cổng xem"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "màn hình"
+
+#~ msgid "State"
+#~ msgstr "Tình trạng"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Phóng to cửa sổ"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Đã phóng to"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Chương trình được dùng để phát mẫu âm thanh. Nếu bỏ chọn thì sẽ dùng sự "
+#~ "hỗ trợ ESD có sẵn."
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "Số điểm ảnh cần chuyển con trỏ trong lệnh « đẩy con trỏ »."
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Tên vùng làm việc"
 
 #~ msgid "Matched Windows"
 #~ msgstr "Cửa sổ đã khớp"
@@ -4988,37 +5067,6 @@ msgstr "Tên vùng làm việc"
 #~ "Có nên khả năng tăng kích cỡ được xem là việc phóng to.\n"
 #~ "Khi bạn bật khả năng này, có thể sử dụng « unmaximize-window »\n"
 #~ "(hủy phóng to cửa sổ) hay tương tự để trở về kích cỡ gốc."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Có nên và cách di chuyển con trỏ hay không, khi nén cửa sổ.\n"
-#~ "\n"
-#~ " • có thể\t\tcon trỏ chuyển cùng với cửa sổ,\n"
-#~ "nếu con trỏ ở trong vùng cửa sổ trước khi nén.\n"
-#~ "\n"
-#~ " • luôn luôn\tkéo con trỏ vào trung tâm cửa sổ,\n"
-#~ "nếu nó chưa trong cửa sổ, rồi theo hành vi « có thể ».\n"
-#~ "\n"
-#~ " • không bao giờ\tđừng kéo con trỏ từ chỗ."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "Có nên đâm sầm vào cửa sổ nằm trên độ sâu khác hay không,\n"
-#~ "khi tăng kích cỡ hoặc nén cửa sổ.\n"
-#~ " • có thể\t\tchỉ tránh các cửa sổ nằm trên độ sâu khác."
 
 #~ msgid "Terminal"
 #~ msgstr "Thiết bị cuối"

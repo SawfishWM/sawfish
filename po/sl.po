@@ -6,25 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2000-07-03 11:46+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "in mnogi drugi..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish upravlja z vašimi okni."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Domača stran Sawfish"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1426,8 +1414,24 @@ msgstr "nikoli"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Prestavi okno v naslednji pogled."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Kdaj in kako premikati kazalec ob pakiranju oken.\n"
+"\n"
+"`mogoče' pomeni, da se kazalec giblje skupaj z oknom, če je bil\n"
+"pred pakiranjem znotraj območja okna.\n"
+"\n"
+"`vedno' postavi kazalec v središče okna (če ga še ni v oknu) in nato naredi "
+"enako kot 'mogoče'\n"
+"already in the window, then does like `maybe'.\n"
+"\n"
+"`nikoli' pomeni, naj se kazalec ne prestavi v okno."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1439,8 +1443,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"Ali naj se ob povečevanju in zmanjševanju oken zaletim v okna drugih "
+"globin.\n"
+"`maybe' pomeni, da le izogibana okna drugih globin."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1586,6 +1595,48 @@ msgstr "Pomoč pokaže spletno stran"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Pomoč o"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Kaži menu aplikacij."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "Program pognan z ukazom 'xterm'."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "Program pognan z ukazom 'xterm'."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Ukaz:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Brskaj..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Poženi nov xterm."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1865,6 +1916,26 @@ msgstr "Preklopi lepljivost okna"
 msgid "Halve window size"
 msgstr "Naredi okno lepljivo"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Dvigni in posreduj klik naprej"
@@ -2108,55 +2179,6 @@ msgstr "Drsenje skupine navzdol"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Premakni skupino oken za `slide-window-increment' navzdol."
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Kaži menu aplikacij."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "Program pognan z ukazom 'xterm'."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "Program pognan z ukazom 'xterm'."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Poženi nov xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Brskaj..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Poženi nov xterm."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Pogled"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Prestavi pogled naprej"
@@ -2243,10 +2265,6 @@ msgstr "Izvedi ukaz lupine"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Izvedi dan ukaz lupine."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Ukaz:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2453,10 +2471,6 @@ msgstr "Pošlji na naslednjo delovno površino"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Prestavi okno na delovno površino št. N."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Ime"
@@ -2494,12 +2508,18 @@ msgid "Position"
 msgstr "Lega"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Dimenzije"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "Delovna površina"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Naslednja delovna površino"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "pogled"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2520,18 +2540,12 @@ msgid "Fixed position"
 msgstr "Lega"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Razpet"
+msgid "Sticky"
+msgstr "Lepljiv"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "Naslednja delovna površino"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "pogled"
+msgid "Sticky viewport"
+msgstr "Lepljiv pogled"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2562,12 +2576,12 @@ msgid "Frame style"
 msgstr "Slog okvirja"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Izogibaj se"
+msgid "Dimensions"
+msgstr "Dimenzije"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Prezrt"
+msgid "Maximized"
+msgstr "Razpet"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2578,12 +2592,21 @@ msgid "Shaded"
 msgstr "Senčen"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Lepljiv"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "Lepljiv pogled"
+#, fuzzy
+msgid "Never maximize"
+msgstr "Odrazpni"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Izogibaj se"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Prezrt"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2607,30 +2630,13 @@ msgid "Task list skip"
 msgstr "Izpusti v seznamu oken"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Odrazpni"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "zaslon"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Edinstveno ime"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Samodejna privlačnost"
+#, fuzzy
+msgid "Window name"
+msgstr "Okno:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2645,13 +2651,8 @@ msgid "Ignore stacking requests"
 msgstr "Prezri zahtevke po določenem skladanju"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Okno:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Stanje"
+msgid "Auto gravity"
+msgstr "Samodejna privlačnost"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2723,6 +2724,21 @@ msgstr "Pomni _atribute"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "Po_zabi shranjeno stanje"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "P_ošlji okno na"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "P_ošlji okno na"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Pozabi vso zgodovino shranjenih oken."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2864,18 +2880,6 @@ msgstr "Pošlji na delovno površino"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Ustvari novo delovno površino, ki naj bo pred trenutno."
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Kdaj kazalec miške vpliva na fokus."
@@ -2904,6 +2908,18 @@ msgstr "Samodejno znova naloži teme, ko so posodobljene."
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Privzeta pisava: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2954,6 +2970,7 @@ msgid "About GNOME"
 msgstr "O GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2989,6 +3006,23 @@ msgstr "Odjavi se iz trenutne GNOME seje."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Odjavi se iz trenutne GNOME seje."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3452,6 +3486,16 @@ msgstr "Kaži menu aplikacij."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Vklični menu okna"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Kaži glavno okno."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "Sawfish nastavitve"
 
@@ -3815,16 +3859,6 @@ msgid ""
 msgstr "Preklopi stanje med razpeto-polnjeno in nerazpeto."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Razpni okno"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Razpet"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Razpni okno čez cel zaslon"
 
@@ -4078,17 +4112,17 @@ msgid "Unmark all windows"
 msgstr "Odrazpni okno"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Program za igranje zvočnih vzorcev. Če ni nastavljeno bo uporabljena že "
-"vgrajena ESD podpora."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Okno:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4157,13 +4191,16 @@ msgstr ""
 "sicer pa ga dvigni čimbolj na vrh. (spremeni tudi nivo dialogov)"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4172,9 +4209,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Prestavi skupino v trenutni pogled"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "Število pikslov za premik kazalca v 'premakni-kazalec' ukazu."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4193,8 +4233,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4676,18 +4716,58 @@ msgstr "Interaktivno izberi delovno površino"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Vprašaj za delovno površino in preklopi nanjo."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "in mnogi drugi..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish upravlja z vašimi okni."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Domača stran Sawfish"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "Imena delovnih površin"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Prestavi okno v naslednji pogled."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Poženi nov xterm."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Pogled"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "zaslon"
+
+#~ msgid "State"
+#~ msgstr "Stanje"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Razpni okno"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Razpet"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Program za igranje zvočnih vzorcev. Če ni nastavljeno bo uporabljena že "
+#~ "vgrajena ESD podpora."
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "Število pikslov za premik kazalca v 'premakni-kazalec' ukazu."
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "Imena delovnih površin"
 
 #~ msgid "Matched Windows"
 #~ msgstr "Ustrezajoča okna"
@@ -4981,38 +5061,6 @@ msgstr "Imena delovnih površin"
 #~ "Kadar je povečano okno obravnavano kot maximizirano.  Ko prižgete\n"
 #~ "to, lahko uporabite `odrazpni-okno' ali kaj podobnega,\n"
 #~ "da gre nazaj na izhodišno velikost."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Kdaj in kako premikati kazalec ob pakiranju oken.\n"
-#~ "\n"
-#~ "`mogoče' pomeni, da se kazalec giblje skupaj z oknom, če je bil\n"
-#~ "pred pakiranjem znotraj območja okna.\n"
-#~ "\n"
-#~ "`vedno' postavi kazalec v središče okna (če ga še ni v oknu) in nato "
-#~ "naredi enako kot 'mogoče'\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`nikoli' pomeni, naj se kazalec ne prestavi v okno."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "Ali naj se ob povečevanju in zmanjševanju oken zaletim v okna drugih "
-#~ "globin.\n"
-#~ "`maybe' pomeni, da le izogibana okna drugih globin."
 
 #~ msgid "Terminal"
 #~ msgstr "Terminal"

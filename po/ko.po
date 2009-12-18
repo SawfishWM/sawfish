@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2002-06-19 15:18GMT+10.00\n"
 "Last-Translator: Michelle Kim <mkim@brisbane.redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,18 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "그외 많은 사람들.."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "소피쉬는 윈도를 확장성있게 관리합니다."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "소피쉬 홈페이지"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1424,8 +1412,22 @@ msgstr "절대아님"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "창을 다음 뷰포트로 이동"
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"창들을 축소할때 포인터를 움직일지 그리고 어떻게 움직일지.\n"
+"\n"
+"'만약'의 뜻은 만약 창을 축소할때, 포인터가 창주위에 있어서\n"
+"창과 함께 움직였을때를 나타낸다.\n"
+"\n"
+"'항상'은 포인터가 창의 주위에 없을시에, 창의 중앙으로 옮긴후\n"
+"'만약'처럼 행동한다.\n"
+"'절대아님'은 포인터를 끌지 않는다."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1434,8 +1436,13 @@ msgstr "창을 확장하거나 축소할때 완전히 어두운 창에 부딛힐
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"창을 확장하거나 축소할때 다른 깊이의 창에 부딛힐 것인지 여부.\n"
+"\n"
+"'아마도'는 다른 깊이의 창만 회피하기를 의미."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1582,6 +1589,48 @@ msgstr "홈페이지 도움말 보여주기"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "도움말에 관하여"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "애플리케이션 메뉴 표시"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "`xterm'명령으로 실행할 프로그램"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "`xterm'명령으로 실행할 프로그램"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "명령:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "찾아보기..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "새로운 xterm 시작"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1859,6 +1908,26 @@ msgstr "창 고정 여부 토글"
 msgid "Halve window size"
 msgstr "창 고정하기"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr " 클릭하여 올리고 전달하기"
@@ -2102,55 +2171,6 @@ msgstr "그룹 아래쪽으로 움직이기"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "`slide-window-increment' 픽셀만큼 창 그룹을 아래로 이동"
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "애플리케이션 메뉴 표시"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "`xterm'명령으로 실행할 프로그램"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "`xterm'명령으로 실행할 프로그램"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "새로운 xterm 시작"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "찾아보기..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "새로운 xterm 시작"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "뷰포트"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "뷰포트를 다음으로 이동"
@@ -2237,10 +2257,6 @@ msgstr "쉘 명령을 실행합니다."
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "주어진 쉘 명령을 실행합니다."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "명령:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2447,10 +2463,6 @@ msgstr "다음 작업공간으로 보내기"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "현재 창을 N번째 작업공간으로 옮깁니다."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "이름"
@@ -2488,12 +2500,18 @@ msgid "Position"
 msgstr "위치"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "면적"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "작업공간"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "다음 작업공간"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "뷰포트"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2514,18 +2532,12 @@ msgid "Fixed position"
 msgstr "위치"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "최대화됨"
+msgid "Sticky"
+msgstr "고정"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "다음 작업공간"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "뷰포트"
+msgid "Sticky viewport"
+msgstr "고정 뷰포트"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2556,12 +2568,12 @@ msgid "Frame style"
 msgstr "프레임 스타일"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "피하기"
+msgid "Dimensions"
+msgstr "면적"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "무시"
+msgid "Maximized"
+msgstr "최대화됨"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2572,12 +2584,21 @@ msgid "Shaded"
 msgstr "가림"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "고정"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "고정 뷰포트"
+#, fuzzy
+msgid "Never maximize"
+msgstr "최대화않음"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "피하기"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "무시"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2601,30 +2622,13 @@ msgid "Task list skip"
 msgstr "창 목록 건너뛰기"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "최대화않음"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "화면"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "고유 이름"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "자동 중량"
+#, fuzzy
+msgid "Window name"
+msgstr "창:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2639,13 +2643,8 @@ msgid "Ignore stacking requests"
 msgstr "고정 요구 무시"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "창:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "상태"
+msgid "Auto gravity"
+msgstr "자동 중량"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2718,6 +2717,21 @@ msgstr "속성 저장(_a)"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "저장 상태 지움(_F)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "창을 보내기(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "창을 보내기(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "저장된 모든 창기록 잊어버리기."
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2859,18 +2873,6 @@ msgstr "작업공간으로 보내기"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "현재 작업공간 앞에 새로운 공간 만들기"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "마우스 포인터가 입력 초점에 영향을 줄 때는?"
@@ -2901,6 +2903,18 @@ msgstr "테마가 갱신되면 자동으로 다시 읽기"
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "기본 글꼴: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2951,6 +2965,7 @@ msgid "About GNOME"
 msgstr "그놈은..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2986,6 +3001,23 @@ msgstr "현재 그놈 세션에서 로그아웃"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "현재 그놈 세션에서 로그아웃"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3448,6 +3480,16 @@ msgstr "애플리케이션 메뉴 표시"
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "폽업 창 메뉴"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "주 메뉴 표시"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "소피쉬 설정"
 
@@ -3814,16 +3856,6 @@ msgid ""
 msgstr "최대로 채운 상태와 그렇지 않은 상태 사이를 토글합니다."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "창 최대화"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "최대화됨"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "창 전체 화면으로 최대화"
 
@@ -4080,15 +4112,17 @@ msgid "Unmark all windows"
 msgstr "창 최대화 하지 않기"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "오디오 샘플을 연주할 때 사용할 프로그램.  설정하지 않으면 ESD를 사용함"
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "창:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4158,13 +4192,16 @@ msgstr ""
 " "
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4173,9 +4210,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "그룹을 현재 뷰포트로 이동"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "`move-cursor-' 명령에서 포인터를 옮길 픽셀 수"
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4194,8 +4234,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4676,18 +4716,57 @@ msgstr "작업공간 대화식으로 선택하기"
 msgid "Prompt for a workspace and switch to it."
 msgstr "작업공간을 물어서 이동하기"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "그외 많은 사람들.."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "소피쉬는 윈도를 확장성있게 관리합니다."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "소피쉬 홈페이지"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "작업공간 이름"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "창을 다음 뷰포트로 이동"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "창을 확대하거나 축소할때 무시된 창에 부딛힐 것인지 여부."
+
+#~ msgid "Start a new xterm."
+#~ msgstr "새로운 xterm 시작"
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "뷰포트"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "화면"
+
+#~ msgid "State"
+#~ msgstr "상태"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "창 최대화"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "최대화됨"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "오디오 샘플을 연주할 때 사용할 프로그램.  설정하지 않으면 ESD를 사용함"
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "`move-cursor-' 명령에서 포인터를 옮길 픽셀 수"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "작업공간 이름"
 
 #~ msgid "Matched Windows"
 #~ msgstr "일치하는 창"
@@ -4982,36 +5061,6 @@ msgstr "작업공간 이름"
 #~ "확장한 것을 최대화로 간주할 것인가?  설정을 켜면\n"
 #~ "원래의 크기로 돌아가도록 하기 위해 `unmaximize-window' 또는 기타 기능을\n"
 #~ "사용할 수 있습니다."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "창들을 축소할때 포인터를 움직일지 그리고 어떻게 움직일지.\n"
-#~ "\n"
-#~ "'만약'의 뜻은 만약 창을 축소할때, 포인터가 창주위에 있어서\n"
-#~ "창과 함께 움직였을때를 나타낸다.\n"
-#~ "\n"
-#~ "'항상'은 포인터가 창의 주위에 없을시에, 창의 중앙으로 옮긴후\n"
-#~ "'만약'처럼 행동한다.\n"
-#~ "'절대아님'은 포인터를 끌지 않는다."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "창을 확장하거나 축소할때 다른 깊이의 창에 부딛힐 것인지 여부.\n"
-#~ "\n"
-#~ "'아마도'는 다른 깊이의 창만 회피하기를 의미."
 
 #~ msgid "Terminal"
 #~ msgstr "터미널"

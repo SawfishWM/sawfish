@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.gnome-2.az\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2003-10-19 20:29+0300\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azərbaycan Dili <gnome@azətt.com>\n"
@@ -17,18 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.1\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "və daha başqaları..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "Sawfish pəncərələrinizi ehtiramla idarə edər."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "Sawfish ev səhifəsi"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1428,8 +1416,24 @@ msgstr "heç bir vaxt"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "Pəncərəni sonrakı görünüşə daşı ."
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Pancərələr yığcamlaşdırıldığı vaxt oxu hara və necə hərəkət etdirək.\n"
+"\n"
+"`bəlkə' pəncərə yığcamlaşdırılmadan əvvəl pəncərə içində isə, \n"
+"pəncərə ilə bərabər hərəkət etsin deməkdir.\n"
+"\n"
+"`həmişə' ox pəncərə içində deyilsə əvvəlcə oxu pəncərənin mərkəzinə daşıyar "
+"və sonra da\n"
+"`bəlkə' seçənəyində kimi davranar.\n"
+"\n"
+"`heç bir vaxt' oxun yerini dəyişdirmə deməkdir."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1440,9 +1444,12 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
+"Pəncərələrin genişlədilməsi və bağlanması sırasında fərqli dərinliklərə "
+"sahib\n"
 "pəncərənin içinə girilməsi."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1583,6 +1590,48 @@ msgstr "Ev səhifəsini göstər"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "Haqqında yardımı"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "Proqramlar menyunusunu göstər ."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "'xterm' əmri ilə işə salınacaq proqram ."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "'xterm' əmri ilə işə salınacaq proqram ."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "Xterm"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "Əmr :"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "Gəz ..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "Yeni bir \"xterm\" işə sal ."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1862,6 +1911,26 @@ msgstr "Pəncərə yapışqanlığı keçişi"
 msgid "Halve window size"
 msgstr "Pəncərəni yapışqanlaşdır"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Tıqlama ilə yüksəl və keç"
@@ -2105,55 +2174,6 @@ msgstr "Qrupu aşağı sürüşdür"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə alta daşı ."
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "Proqramlar menyunusunu göstər ."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "'xterm' əmri ilə işə salınacaq proqram ."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "'xterm' əmri ilə işə salınacaq proqram ."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "Xterm"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "Yeni bir \"xterm\" işə sal ."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "Gəz ..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "Yeni bir \"xterm\" işə sal ."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "Görünüş Qapısı"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Görünüş nöqtəsini qabağa daşı"
@@ -2246,10 +2266,6 @@ msgstr "Qabıq əmrini işə sal ."
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "Verilən əmri işə sal ."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "Əmr :"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2457,10 +2473,6 @@ msgstr "Sonrakı iş sahəsinə göndər"
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "Pəncərəni N'nci masa üstünə daşı ."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "Ad"
@@ -2498,12 +2510,18 @@ msgid "Position"
 msgstr "Yer"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "Dimensiyaları"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "İş Sahəsi"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "Sonrakı iş sahəsi"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "görünüş"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2524,18 +2542,12 @@ msgid "Fixed position"
 msgstr "Yer"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "Böyüdülmüş"
+msgid "Sticky"
+msgstr "Yapışqan"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "Sonrakı iş sahəsi"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "görünüş"
+msgid "Sticky viewport"
+msgstr "Yapışqan görünüş qapısı"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2566,12 +2578,12 @@ msgid "Frame style"
 msgstr "Çərçivə tərzi"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "Fikir Vermə"
+msgid "Dimensions"
+msgstr "Dimensiyaları"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "Rədd Edilmiş"
+msgid "Maximized"
+msgstr "Böyüdülmüş"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2582,12 +2594,21 @@ msgid "Shaded"
 msgstr "Kölgələnmiş"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "Yapışqan"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "Yapışqan görünüş qapısı"
+#, fuzzy
+msgid "Never maximize"
+msgstr "Kiçilt"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "Fikir Vermə"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "Rədd Edilmiş"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2611,30 +2632,13 @@ msgid "Task list skip"
 msgstr "Pəncərə siyahısını nəzərə alma"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "Kiçilt"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "ekran"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Eyni ad"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "Avtomatik böyümə"
+#, fuzzy
+msgid "Window name"
+msgstr "Pəncərə:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2649,13 +2653,8 @@ msgid "Ignore stacking requests"
 msgstr "Yığılma sorğularını nəzərə alma"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "Pəncərə:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "Hal"
+msgid "Auto gravity"
+msgstr "Avtomatik böyümə"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2729,6 +2728,21 @@ msgstr "X_üsusiyyətləri yadda saxla"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "Yadda saxlanan halı _unut"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "_Pəncərəni göndər"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "_Pəncərəni göndər"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "Bütün qeyd edilmiş pəncərə keçmişini unut"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2854,18 +2868,6 @@ msgstr "Sağ iş sahəsinə göndər"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Pəncərəni hazırkı iş sahəsindən sağındakı iş sahəsinə göndər"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "Siçan oxunun nə vaxt fokusu dəyişəcəyi ."
@@ -2894,6 +2896,18 @@ msgstr "Örtüklər yenilənincə onları avtomatik olaraq yenidən yüklə."
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "Ön qurğulu yazı növü: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2944,6 +2958,7 @@ msgid "About GNOME"
 msgstr "GNOME Haqqında..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2979,6 +2994,23 @@ msgstr "GNOME iclasını qurtar ."
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3440,6 +3472,16 @@ msgstr "Proqramlar menyunusunu göstər ."
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "Pəncərə menüsünü göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Ana menünü göstər."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "\"Sawfish\" quraşdırıcı"
 
@@ -3806,16 +3848,6 @@ msgid ""
 msgstr "Pəncərənin maksimal və minimal doldurulması arasında get gəl ."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "Pəncərəni böyüt"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "Böyüdülmüş"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "Pəncərəni tam ekrana böyüt"
 
@@ -4076,17 +4108,17 @@ msgid "Unmark all windows"
 msgstr "Pəncərəni kiçilt"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"Səs parçalarını çalacaq olan proqram . Bu tapılmazsa, o vaxt sawfish'in öz "
-"ESD dəstəyi ilə sesler çalınacaqdır."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "Pəncərə:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4158,13 +4190,16 @@ msgstr ""
 "o pəncərə ilə birlikdə yüksəlt/alçalt. "
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4173,9 +4208,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "Qrupu cari görünüş nöqtəsinə daşı"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "`move-cursor-' əmrlərində oxunun daşınacaq olduğu piksel miqdarı ."
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4194,8 +4232,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4687,18 +4725,60 @@ msgstr "İş sahəsini qarşılıqlı seç"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Bir masa üstü üçün soruş və oraya keç ."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "və daha başqaları..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "Sawfish pəncərələrinizi ehtiramla idarə edər."
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "Sawfish ev səhifəsi"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "İş sahəsi adları"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "Pəncərəni sonrakı görünüşə daşı ."
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr ""
+#~ "Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
+#~ "pəncərənin içinə girilməsi."
+
+#~ msgid "Start a new xterm."
+#~ msgstr "Yeni bir \"xterm\" işə sal ."
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "Görünüş Qapısı"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "ekran"
+
+#~ msgid "State"
+#~ msgstr "Hal"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "Pəncərəni böyüt"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "Böyüdülmüş"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "Səs parçalarını çalacaq olan proqram . Bu tapılmazsa, o vaxt sawfish'in "
+#~ "öz ESD dəstəyi ilə sesler çalınacaqdır."
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "`move-cursor-' əmrlərində oxunun daşınacaq olduğu piksel miqdarı ."
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "İş sahəsi adları"
 
 #~ msgid "Matched Windows"
 #~ msgstr "Yaxalanmış Pəncərələr "
@@ -4995,38 +5075,6 @@ msgstr "İş sahəsi adları"
 #~ "Böyüklüyü artırmaq üçün uyğun görünsün . Bunu açarsan , o\n"
 #~ "vaxt `unmaximize-window' ya da buna oxşar başqa bir əməliyyatı işlədib \n"
 #~ "pəncərəni original böyüklüyünə gətirə bilərsən ."
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "Pancərələr yığcamlaşdırıldığı vaxt oxu hara və necə hərəkət etdirək.\n"
-#~ "\n"
-#~ "`bəlkə' pəncərə yığcamlaşdırılmadan əvvəl pəncərə içində isə, \n"
-#~ "pəncərə ilə bərabər hərəkət etsin deməkdir.\n"
-#~ "\n"
-#~ "`həmişə' ox pəncərə içində deyilsə əvvəlcə oxu pəncərənin mərkəzinə "
-#~ "daşıyar və sonra da\n"
-#~ "`bəlkə' seçənəyində kimi davranar.\n"
-#~ "\n"
-#~ "`heç bir vaxt' oxun yerini dəyişdirmə deməkdir."
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "Pəncərələrin genişlədilməsi və bağlanması sırasında fərqli dərinliklərə "
-#~ "sahib\n"
-#~ "pəncərənin içinə girilməsi."
 
 #~ msgid "Terminal"
 #~ msgstr "Terminal"

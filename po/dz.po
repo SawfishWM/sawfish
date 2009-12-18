@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2006-12-10 23:05+0530\n"
 "Last-Translator: yangka <yanang_ka@hotmail.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -18,18 +18,6 @@ msgstr ""
 "X-Poedit-Language: Dzongkha\n"
 "X-Poedit-Country: BHUTAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "དང་་གཞན་ཚུ་ལེ་ཤ་..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "སྭ་ཕིཤི་གིས་ཁྱོད་ཀྱི་ཝིནཌོ་ཚུ་རྒྱ་བསྐྱེད་ཅན་སྦེ་འཛིན་སྐྱོང་འབདཝ་ཨིན།"
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "སྭ་ཕིཤི་ཁྱིམ་ཤོག་ལེབ།"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1430,8 +1418,23 @@ msgstr "མ་པ་ལས་རང་།"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "ཝིནཌོ་འདི་ཤུལ་མམ་གྱི་མཐོང་སྣང་མཐོད་ལམ་འདི་ལུ་སྤོ།"
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"ག་དེ་ཡོད་རུང་དང་དཔག་བྱེད་འདི་ཝིནཌོ་ཚུ་སྦུང་ཚན་སྐབས་ག་དེ་སྤོ་ནི་ཨིན་ན།\n"
+"\n"
+"`maybe'དེ་གིས་དཔག་བྱེད་དེ་ཝིནཌོ་འདི་དང་གཅིིག་ཁར་སྤོ་ཡོདཔ་ \n"
+"དཔག་བྱེད་འདི་སྦུང་ཚན་གྱི་ཧེ་མ་ཝིནཌོ་མངའ་ཁོངས་འདིའི་ནང་འཁོད་ཨིན་པ་ཅིན།་\n"
+"\n"
+"`always' གེ་གིས་དཔག་བྱེད་འདི་ཝིནཌོ་གི་དབུས་ལུ་་གཅུ་སྒྲིམ་འབདཝ་\n"
+"འདི་ཧེ་མ་ལས་མེད་པ་ཅིན་དེ་ལས་དེ་བཟུམ་སྦེ་ `maybe'.\n"
+"\n"
+"`never' ཟེར་བ་ཅིན་དཔག་བྱེད་འདི་ལུ་གཅུ་སྒྲིམ་མ་འབད།"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1442,8 +1445,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "སྣང་མེད་འབད་ཡོད་མི་ཝིནཌོ་ཚུ་ཡར་བསྐྱེད་ཡང་་སྦུང་ཚན་སྐབས་སྦོ་སྦོཝ་ལུ་ཨིན་རུང་མེན་རུང་།"
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"ཝིནཌོ་ཚུ་ནང་ན་ཝིནཌོ་ཡར་བསྐྱེད་ཡང་ན་སྦུང་ཚན་སྐབས་གཏིང་་སོ་སོ་ཅིག་གུ་ཨིན་རུང་མེན་རུང་\n"
+"སྦོ་སྦོཝ་ལུ།\n"
+"`maybe'ཟེར་བ་ཅིན་གཞན་གཏིང་ཚུ་ནང་ཟུར་ཡོད་མི་ཝིནཌོ་ཚུ་རྐྱངམ་ཅིག"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1590,6 +1598,48 @@ msgstr "གྲོགས་རམ་ཁྱིམ་ཤོག་ལེབ།"
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "གྲོགས་རམ་སྐོར་ལས།"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "གློག་རིམ་དཀར་ཆག་འདི་ཚུ་བཀྲམ་བཏོན་འབད།"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "ལས་རིམ་འདི་ `xterm' བརྡ་བཀོད་འདི་གིས་གསར་བཙུགས་འབཐ་ཡོད་མི།"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "ལས་རིམ་འདི་ `xterm' བརྡ་བཀོད་འདི་གིས་གསར་བཙུགས་འབཐ་ཡོད་མི།"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "ཨེགསི་ཊམ།"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "བརྡ་བཀོད།:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "བརྡ་འཚོལ..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "ཨེགསི་ཊམ་གསརཔ་ཅིག་འགོ་བཙུགས།"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1868,6 +1918,26 @@ msgstr "ཝིནཌོ་རྩིས་ཅན་སོར་སྟོན་འ
 msgid "Halve window size"
 msgstr "ཝིནཌོ་རྩིས་ཅན་བཟོ།"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "ཆེར་བསྐྱེད་འབད་ནི་དང་ཨེབ་གཏང་བརྒྱུད་རྩིས་སྤྲོད།"
@@ -2111,55 +2181,6 @@ msgstr "སྡེ་ཚན་མར་བཤུད་བརྙན།"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "ཝིནཌོ་སྡེ་ཚན་འདི་ `slide-window-increment' པིག་སེལ་ཚུ་མར་ཕྱོགས་སྤོ།"
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "གློག་རིམ་དཀར་ཆག་འདི་ཚུ་བཀྲམ་བཏོན་འབད།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "ལས་རིམ་འདི་ `xterm' བརྡ་བཀོད་འདི་གིས་གསར་བཙུགས་འབཐ་ཡོད་མི།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "ལས་རིམ་འདི་ `xterm' བརྡ་བཀོད་འདི་གིས་གསར་བཙུགས་འབཐ་ཡོད་མི།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "ཨེགསི་ཊམ།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "ཨེགསི་ཊམ་གསརཔ་ཅིག་འགོ་བཙུགས།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "བརྡ་འཚོལ..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "ཨེགསི་ཊམ་གསརཔ་ཅིག་འགོ་བཙུགས།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "མཐོང་སྣང་མཐུད་ལམ།"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "མཐོང་སྣང་མཐུད་ལམ་ཤུལ་མ་སྤོ།"
@@ -2246,10 +2267,6 @@ msgstr "ཤལ་བརྡ་བཀོད་གཡོག་བཀོལ།"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "བྱིན་ཡོད་མི་ཤལ་བརད་བཀོད་འདི་ལག་ལེན་འཐབ།"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "བརྡ་བཀོད།:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2456,10 +2473,6 @@ msgstr "ཤུལ་མམ་གྱི་ལཱ་གི་ས་སྒོ་ལ
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "ད་ལྟོའི་ཝིནཌོ་འདི་ཨེན་ཊི་ཨེཆ་ལཱ་གི་ས་སྒོ་འདི་ལུ་སྤོ།"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "མིང་།"
@@ -2497,12 +2510,18 @@ msgid "Position"
 msgstr "གནས་ས།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "མཚོན་གྲངས།"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "ལཱ་གི་ས་སྒོ།"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "ཤུལ་མམ་གྱི་ལཱ་གི་ས་སྒོ།"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "མཐོང་སྣང་མཐུད་ལམ།"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2523,18 +2542,12 @@ msgid "Fixed position"
 msgstr "གནས་ས།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "སྦོམ་བཟོ།"
+msgid "Sticky"
+msgstr "རྩིས་ཅན།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "ཤུལ་མམ་གྱི་ལཱ་གི་ས་སྒོ།"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "མཐོང་སྣང་མཐུད་ལམ།"
+msgid "Sticky viewport"
+msgstr "རྩིས་ཅན་མཐོང་སྣང་མཐུད་ལམ།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2565,12 +2578,12 @@ msgid "Frame style"
 msgstr "གཞི་ཁྲམ་བཟོ་རྣམ།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "ཟུར།"
+msgid "Dimensions"
+msgstr "མཚོན་གྲངས།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "སྣང་མེད་ཡོདཔ།"
+msgid "Maximized"
+msgstr "སྦོམ་བཟོ།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2581,12 +2594,21 @@ msgid "Shaded"
 msgstr "ནག་གྲིབ་བཟོ་ཡོདཔ།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "རྩིས་ཅན།"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "རྩིས་ཅན་མཐོང་སྣང་མཐུད་ལམ།"
+#, fuzzy
+msgid "Never maximize"
+msgstr "ཆུང་ཀུ་བཟོ་འབད་བཤོལ།"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "ཟུར།"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "སྣང་མེད་ཡོདཔ།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2610,30 +2632,13 @@ msgid "Task list skip"
 msgstr "ཝིནཌོ་ཐོ་ཡིག་གོམ་འགྱོ།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "ཆུང་ཀུ་བཟོ་འབད་བཤོལ།"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "གསལ་གཞི།"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "མཐུན་མོང་མ་ཡིན་པའི་མིང་།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "རང་བཞིན་གེརིཝིཊི།"
+#, fuzzy
+msgid "Window name"
+msgstr "ཝིནཌོ:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2648,13 +2653,8 @@ msgid "Ignore stacking requests"
 msgstr "བརྩེགས་ཕུང་ཞུ་བ་ཚུ་སྣང་མེད།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "ཝིནཌོ:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "གནས་ལུགས།"
+msgid "Auto gravity"
+msgstr "རང་བཞིན་གེརིཝིཊི།"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2727,6 +2727,21 @@ msgstr "ཁྱད་ཆོས་ཚུ་སེམས་ཁར་བཞག(_a)"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "སྲུངས་བཞག་ཡོད་མི་གནས་ལུགས་བརྗེད་ནི།(_F)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "ལུ་གཏང་ཝིནཌོ།(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "ལུ་གཏང་ཝིནཌོ།(_S)"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "སྲུངས་བཞག་ཡོད་མི་ཝིནཌོ་ལོ་རྒྱུས་ཆ་མཉམ་བརྗེད་ནི།"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2852,18 +2867,6 @@ msgstr "ལཱ་གི་ས་སྒོ་གཡས་ལུ་གཏང་།
 msgid "Send window to the workspace right of the current workspace"
 msgstr "ཝིནཌོ་ད་ལྟོའི་ལཱ་གི་ས་སྒོ་འདི་གི་ལཱ་གི་ས་སྒོ་འདི་ལུ་གཏང་།"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "ནམ་མཱའུསི་དཔག་བྱེད་འདི་གིས་ཨིན་པུཊི་ཆེད་དམིགས་འདི་ཕན་གནོདཔ་སྨོ།"
@@ -2892,6 +2895,18 @@ msgstr "དེ་དུས་མཐུན་བཟོ་ཡོད་པའི་
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "སྔོན་སྒྲིག་ཡིག་གཟུགས: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2942,6 +2957,7 @@ msgid "About GNOME"
 msgstr "སྐོར་ལས་ GNOME..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2977,6 +2993,23 @@ msgstr "ད་ལྟོའི་ཇི་ནོམ་ལཱ་ཡུན་འད
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "ད་ལྟོའི་ཇི་ནོམ་ལཱ་ཡུན་འདི་ལས་ཕྱིར་བསྐྱོད་འབད།"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3440,6 +3473,16 @@ msgstr "གློག་རིམ་དཀར་ཆག་འདི་ཚུ་བ
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "པོཔ་ཨཔ་ཝིནཌོ་དཀར་ཆག"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "དཀར་ཆག་གཙོ་བོ་འདི་བཀྲམ་བཏོན་འབད།"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "སྭ་ཕིཤི་རིམ་སྒྲིག"
 
@@ -3806,16 +3849,6 @@ msgid ""
 msgstr "ཝིནཌོ་འདི་གི་གནས་ལུགས་འདི་སྦོམ་བཟོ་ཡོདཔ་བཀང་དང་སྦོམ་བཟོ་བཤོལ་ཡོདཔ་བར་ན་སོར་སྟོན་འབད།"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "ཝིནཌོ་སྦོམ་བཟོ།"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "སྦོམ་བཟོ།"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "ཝིནཌོ་གསལ་གཞི་གངམ་སྦོམ་བཟོ།"
 
@@ -4074,17 +4107,17 @@ msgid "Unmark all windows"
 msgstr "ཝིནཌོ་སྦོམ་བཟོ་བཤོལ།"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 msgstr ""
-"ལས་རིམ་འདི་གིས་རྣར་ཉན་དཔེ་ཚད་ཚུ་གཏང་ཡོདཔ་ཨིན། གཞི་སྒྲིག་བཤོལ་ཡོད་པ་ཅིན་ནང་སྦྲགས་རྒྱབ་སྐྱོར་ཨི་ཨེསི་ཌི་"
-"གི་དོན་ལུ་ལག་ལེན་འཐབ་ཡོདཔ་ཨིན།"
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "ཝིནཌོ:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4154,13 +4187,16 @@ msgstr ""
 "ཡུ་ཙམ་ཝིནཌོ་ཚུ་གང་རུང་ཡོད་མི་གི་གནས་རིམ་བསྒྱུར་བཅོས་འབདཝ་ཨིན།"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4169,9 +4205,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "སྡེ་ཚན་ད་ལྟོའི་མཐོང་སྣང་མཐུད་ལམ་ལུ་སྤོ།"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "དཔག་བྱེད་ `move-cursor-' བརྡ་བཀོད་ཚུ་ནང་སྤོ་ནི་ལུ་པིག་སེལ་ཚུ་གི་ཨང་།"
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4190,8 +4229,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4668,18 +4707,58 @@ msgstr "ལཱ་གི་ས་སྒོ་ཕན་ཚུན་ཤུགས་
 msgid "Prompt for a workspace and switch to it."
 msgstr "ལཱ་གི་ས་སྒོ་ཅིག་གི་དོན་ལུ་ནུས་སྤེལ་འབད་ནི་དང་འདི་ལུ་ཧོར་བསྒྱུར་འབད།"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "དང་་གཞན་ཚུ་ལེ་ཤ་..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "སྭ་ཕིཤི་གིས་ཁྱོད་ཀྱི་ཝིནཌོ་ཚུ་རྒྱ་བསྐྱེད་ཅན་སྦེ་འཛིན་སྐྱོང་འབདཝ་ཨིན།"
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "སྭ་ཕིཤི་ཁྱིམ་ཤོག་ལེབ།"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "ལཱ་གི་ས་སྒོའི་མིང་ཚུ།"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "ཝིནཌོ་འདི་ཤུལ་མམ་གྱི་མཐོང་སྣང་མཐོད་ལམ་འདི་ལུ་སྤོ།"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "སྣང་མེད་འབད་ཡོད་མི་ཝིནཌོ་ཚུ་ཡར་བསྐྱེད་ཡང་་སྦུང་ཚན་སྐབས་སྦོ་སྦོཝ་ལུ་ཨིན་རུང་མེན་རུང་།"
+
+#~ msgid "Start a new xterm."
+#~ msgstr "ཨེགསི་ཊམ་གསརཔ་ཅིག་འགོ་བཙུགས།"
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "མཐོང་སྣང་མཐུད་ལམ།"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "གསལ་གཞི།"
+
+#~ msgid "State"
+#~ msgstr "གནས་ལུགས།"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "ཝིནཌོ་སྦོམ་བཟོ།"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "སྦོམ་བཟོ།"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "ལས་རིམ་འདི་གིས་རྣར་ཉན་དཔེ་ཚད་ཚུ་གཏང་ཡོདཔ་ཨིན། གཞི་སྒྲིག་བཤོལ་ཡོད་པ་ཅིན་ནང་སྦྲགས་རྒྱབ་སྐྱོར་ཨི་ཨེསི་"
+#~ "ཌི་གི་དོན་ལུ་ལག་ལེན་འཐབ་ཡོདཔ་ཨིན།"
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "དཔག་བྱེད་ `move-cursor-' བརྡ་བཀོད་ཚུ་ནང་སྤོ་ནི་ལུ་པིག་སེལ་ཚུ་གི་ཨང་།"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "ལཱ་གི་ས་སྒོའི་མིང་ཚུ།"
 
 #~ msgid "Matched Windows"
 #~ msgstr "མཐུན་སྒྲིག་འབད་ཡོད་མི་ཝིནཌོ་ཚུ།"
@@ -4971,37 +5050,6 @@ msgstr "ལཱ་གི་ས་སྒོའི་མིང་ཚུ།"
 #~ "ཡར་བསྐྱེད་སྦོམ་བཟོ་ནི་ཨིན་མི་ལུ་ངོས་ལེན་འབད་རུང་མ་འབད་རུང་།  ཁྱོད་ཀྱིས་\n"
 #~ "འདི་གུ་འོང་འབབ་བསྡོམ་པའི་སྐབས་ ཁྱོད་ཀྱིས་ `unmaximize-window'ཡང་ན་ཆ་འདྲ་བ་ག་ཅིག་ཅིག་ \n"
 #~ "ལོག་ཚད་ངོ་མ་འདི་ལུ་ལེན་ནི་ལུ་ལག་ལེན་འཐབ།"
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "ག་དེ་ཡོད་རུང་དང་དཔག་བྱེད་འདི་ཝིནཌོ་ཚུ་སྦུང་ཚན་སྐབས་ག་དེ་སྤོ་ནི་ཨིན་ན།\n"
-#~ "\n"
-#~ "`maybe'དེ་གིས་དཔག་བྱེད་དེ་ཝིནཌོ་འདི་དང་གཅིིག་ཁར་སྤོ་ཡོདཔ་ \n"
-#~ "དཔག་བྱེད་འདི་སྦུང་ཚན་གྱི་ཧེ་མ་ཝིནཌོ་མངའ་ཁོངས་འདིའི་ནང་འཁོད་ཨིན་པ་ཅིན།་\n"
-#~ "\n"
-#~ "`always' གེ་གིས་དཔག་བྱེད་འདི་ཝིནཌོ་གི་དབུས་ལུ་་གཅུ་སྒྲིམ་འབདཝ་\n"
-#~ "འདི་ཧེ་མ་ལས་མེད་པ་ཅིན་དེ་ལས་དེ་བཟུམ་སྦེ་ `maybe'.\n"
-#~ "\n"
-#~ "`never' ཟེར་བ་ཅིན་དཔག་བྱེད་འདི་ལུ་གཅུ་སྒྲིམ་མ་འབད།"
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "ཝིནཌོ་ཚུ་ནང་ན་ཝིནཌོ་ཡར་བསྐྱེད་ཡང་ན་སྦུང་ཚན་སྐབས་གཏིང་་སོ་སོ་ཅིག་གུ་ཨིན་རུང་མེན་རུང་\n"
-#~ "སྦོ་སྦོཝ་ལུ།\n"
-#~ "`maybe'ཟེར་བ་ཅིན་གཞན་གཏིང་ཚུ་ནང་ཟུར་ཡོད་མི་ཝིནཌོ་ཚུ་རྐྱངམ་ཅིག"
 
 #~ msgid "Terminal"
 #~ msgstr "ཊར་མི་ནཱལ།"

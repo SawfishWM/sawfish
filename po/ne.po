@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.HEAD.ne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-18 15:29+0200\n"
+"POT-Creation-Date: 2009-12-18 18:28+0100\n"
 "PO-Revision-Date: 2006-06-16 15:32+0545\n"
 "Last-Translator: Mahesh subedi <submanesh@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -27,18 +27,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms: nplurals=2;plural=(n!=1)\n"
-
-#. ../scripts/sawfish-about.jl
-msgid "and many others..."
-msgstr "र थुप्रै अरुहरू..."
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish manages your windows extensibly."
-msgstr "सफिसले तपाईँको सञ्झ्याललाई एक्सटेन्सिव्लि व्यावस्था गर्दछ"
-
-#. ../scripts/sawfish-about.jl
-msgid "Sawfish homepage"
-msgstr "सफिस मुख्य पाना"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -1435,8 +1423,25 @@ msgstr "कहिले पनि होइन"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether and how to move the pointer."
-msgstr "सञ्झ्याललाई अघिल्लो दृश्यकेन्द्रमा सार्नुहोस्"
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"सञ्झ्यालहरू\n"
+"\n"
+"प्याकिङ गर्द सूचक कसरी र गर्ने नगर्नेले 'सायद' यो अर्थ लागाउछ कि सूचक चाहिँ सञ्झ्यालसँगै "
+"लगिएको छ, यदि \n"
+"सूचक \n"
+"\n"
+"बन्द गर्नुभन्दा पहिले सञ्झ्याल क्षेत्र भित्रै छ भने 'सधै'सूचकलाई सञ्झ्यालको केन्द्रमा वार्प्स "
+"गर्नुहोस् यदि यो \n"
+" पहिले नै सञ्झ्याल भित्र छैन भने, त्यसपछि हुन्छ जस्तै 'सायद' \n"
+"\n"
+"'कहिल्यै पनि होइन' सूचकलाई वार्प नगर्न अर्थ दिन्छ।"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1447,8 +1452,13 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
-msgid "Whether to bump into windows on a different depth."
-msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"सञ्झ्यालहरू बढ्दै गरेको र प्याकिङ गरेको बेलामा पूर्णरूपले अस्पष्ट सञ्झ्यालहरूमा\n"
+"बम्प गर्ने कि।\n"
+"`सायद' ले अन्य गहिराइमा सञ्झ्यालहरू उपक्षित हुन्छ भन्ने हो।"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #, fuzzy
@@ -1595,6 +1605,48 @@ msgstr "सहयोग देखाउनुहोस् मुख्य पृ
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
 msgstr "मद्दतका बारेमा"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "External Applications"
+msgstr "अनुप्रयोग मेनु प्रदर्शन गर्नुहोस्।"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "The program launched by the `browser' function. Interpreted by shell."
+msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Xterm"
+msgstr "एक्सटर्म"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Start xterm. Optional command is passed with -e."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "Command:"
+msgstr "आदेश:"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Browser"
+msgstr "ब्राउज गर्नुहोस्..."
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+#, fuzzy
+msgid "Start browser. Url is optional."
+msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
+
+#. ../lisp/sawfish/wm/commands/launcher.jl
+msgid "url:"
+msgstr ""
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 #, fuzzy
@@ -1876,6 +1928,26 @@ msgstr "टाँसिने सञ्झ्याललाई टगल गर
 msgid "Halve window size"
 msgstr "सञ्झ्याललाई टाँसिने बनाउनुहोस्"
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "क्लिक गरेर बढाउनुहोस् र पास गर्नुहोस्"
@@ -2119,55 +2191,6 @@ msgstr "समूहलाई तलतिर स्लाइड गर्नु
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "'सञ्झ्याल-चिप्ल्याउनु-वृद्धि'सञ्झ्याल समूहलाई पिक्सेल तलतिर सार्नुहोस्"
 
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Default Applications"
-msgstr "अनुप्रयोग मेनु प्रदर्शन गर्नुहोस्।"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "The program launched by the `xterm' command."
-msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "The program launched by the `browser' command."
-msgstr "यो कार्यक्रम 'एक्सटर्म'आदेशवाट सुरु गरिएको हो"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Maximum length of Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "How long to display Clipboard Preview"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Xterm"
-msgstr "एक्सटर्म"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Start a new xterm."
-msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Browser"
-msgstr "ब्राउज गर्नुहोस्..."
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "Start a new browser instance"
-msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-#, fuzzy
-msgid "View clipboard"
-msgstr "दृश्यबिन्दु"
-
-#. ../lisp/sawfish/wm/commands/user.jl
-msgid "Show the contents of the clipboard in a message window"
-msgstr ""
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "अघिल्लो दृश्यबिन्दुमा सार्नुहोस्"
@@ -2256,10 +2279,6 @@ msgstr "शेल आदेश चलाउनुहोस्"
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Execute the given shell command."
 msgstr "दिइएको शेल आदेशलाई पूरा गर्नुहोस्"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command:"
-msgstr "आदेश:"
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2468,10 +2487,6 @@ msgstr "अघिल्लो कार्यस्थानमा पठाउ�
 msgid "Amount to move the cursor after moving the workspace."
 msgstr "एन'थ कार्यक्षेत्रमा चालु सञ्झ्याल सार्नुहोस्"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Stop scrolling at workspace borders (Fixes warp-to-window bugs)."
-msgstr ""
-
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
 msgstr "नाम"
@@ -2509,12 +2524,18 @@ msgid "Position"
 msgstr "स्थिति"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Dimensions"
-msgstr "आयामिकहरू"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Workspace"
 msgstr "कार्यस्थान"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New workspace"
+msgstr "अघिल्लो कार्यस्थान"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "New viewport"
+msgstr "दृश्यबिन्दु"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2535,18 +2556,12 @@ msgid "Fixed position"
 msgstr "स्थिति"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Maximized"
-msgstr "अधिकतम गरिएको"
+msgid "Sticky"
+msgstr "टाँसिने"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New workspace"
-msgstr "अघिल्लो कार्यस्थान"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "New viewport"
-msgstr "दृश्यबिन्दु"
+msgid "Sticky viewport"
+msgstr "टाँसिने दृश्यबिन्दु"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2577,12 +2592,12 @@ msgid "Frame style"
 msgstr "फ्रेमको शैली"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Avoid"
-msgstr "त्याग्नुहोस्"
+msgid "Dimensions"
+msgstr "आयामिकहरू"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Ignored"
-msgstr "उपेक्षित"
+msgid "Maximized"
+msgstr "अधिकतम गरिएको"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Iconified"
@@ -2593,12 +2608,21 @@ msgid "Shaded"
 msgstr "स्याड गरिएको"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky"
-msgstr "टाँसिने"
+msgid "Never iconify"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Sticky viewport"
-msgstr "टाँसिने दृश्यबिन्दु"
+#, fuzzy
+msgid "Never maximize"
+msgstr "सानो पार्नुहोस्"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Avoid"
+msgstr "त्याग्नुहोस्"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Ignored"
+msgstr "उपेक्षित"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Group"
@@ -2622,30 +2646,13 @@ msgid "Task list skip"
 msgstr "सञ्झ्याल सूची फड्काउनुहोस्"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Never iconify"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Never maximize"
-msgstr "सानो पार्नुहोस्"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Fullscreen"
-msgstr "पर्दा"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Fullscreen xinerama"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "अद्धितिय नाम"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "Auto gravity"
-msgstr "स्वत गुरुत्वाकर्षण"
+#, fuzzy
+msgid "Window name"
+msgstr "सञ्झ्याल:"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2660,13 +2667,8 @@ msgid "Ignore stacking requests"
 msgstr "थाक लागेको अनुरोधहरूलाई उपेक्षा गर्नुहोस्"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-msgid "Window name"
-msgstr "सञ्झ्याल:"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-msgid "State"
-msgstr "स्थिति"
+msgid "Auto gravity"
+msgstr "स्वत गुरुत्वाकर्षण"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
@@ -2739,6 +2741,21 @@ msgstr "गुण सम्झिनुहोस्"
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "_Forget saved state"
 msgstr "बचत गरिएको अवस्था बिर्सनुहोस्"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Clear window-istory"
+msgstr "यसमा सञ्झ्याल पठाउनुहोस्"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Save window-history"
+msgstr "यसमा सञ्झ्याल पठाउनुहोस्"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+#, fuzzy
+msgid "_Reload window-history"
+msgstr "सञ्झ्यालमा बचत गरिएका सबै ईतिहासहरू बिर्सनुहोस्।"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2864,18 +2881,6 @@ msgstr "कार्यक्षेत्रमा दायाँ पठाउ�
 msgid "Send window to the workspace right of the current workspace"
 msgstr "सञ्झ्याललाई कार्यक्षेत्रमा चालु कार्यक्षेत्रको दायाँ पठाउनुहोस्"
 
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/extras.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
 msgstr "माउस सूचकले आगत फोकसमा कति बेला असर गर्दछ"
@@ -2904,6 +2909,18 @@ msgstr "स्वाचालित तरिकाले पुन: लोड �
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default font: \\w"
 msgstr "पूर्वनिर्धारित फन्ट: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Edit frame style"
@@ -2954,6 +2971,7 @@ msgid "About GNOME"
 msgstr "जिनोमका बारेमा..."
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2989,6 +3007,23 @@ msgstr "चालु जिनोम भागवाट लगआउट गर�
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "चालु जिनोम भागवाट लगआउट गर्नुहोस्"
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/standalone.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3462,6 +3497,16 @@ msgstr "अनुप्रयोग मेनु प्रदर्शन गर
 
 #. ../lisp/sawfish/wm/menus.jl
 #, fuzzy
+msgid "Popup window list menu"
+msgstr "पपअप सञ्झ्याल मेनु"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "मुख्य मेनु प्रदर्शन गर्नुहोस्।"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
 msgid "S_awfishConfig"
 msgstr "सविस कन्फिगरेटर"
 
@@ -3828,16 +3873,6 @@ msgid ""
 msgstr "वढाईएको-भरिएको र नभरिएको सञ्झ्यालको अवस्थालाई टगल गर्नुहोस्।"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize unframe"
-msgstr "सञ्झ्याल ठूलो बनाउनुहोस्"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
-msgid "Maximize reframe"
-msgstr "अधिकतम गरिएको"
-
-#. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
 msgstr "सञ्झ्यालको पूरापर्दालाई ठूलो पार्नुहोस्"
 
@@ -4097,15 +4132,17 @@ msgid "Unmark all windows"
 msgstr "ठूलो नपारिएको सञ्झ्याल"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
-#, fuzzy
-msgid "The program used to play audio samples."
-msgstr "अडियो कार्यक्रमको नमूना चलाउन यदि नमिलेमा पुर्व निर्मित ESD मद्दत प्रयोग हुन्छ।"
+msgid ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
 msgstr "सञ्झ्याल:"
 
-#. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 #, c-format
 msgid "Workspace %d"
@@ -4175,13 +4212,16 @@ msgstr ""
 "परिवर्तन गर्नुहोस्।"
 
 #. ../lisp/sawfish/wm/viewport.jl
-msgid "Number of columns and rows in each virtual workspace: \\w"
+msgid ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Minimum number of columns and rows in each virtual workspace (if boundary "
-"mode is dynamic): \\w"
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4190,9 +4230,12 @@ msgid "Windows uniconify to the current viewport."
 msgstr "चालु दृश्यकेन्द्रमा समूह सार्नुहोस्"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
-msgid "Number of steps for viewport scrolling."
-msgstr "पिक्सेलका सङ्ख्याहरू, सूचकलाई 'क्रसर-चलाउनुहोस्-'आदेशमा लेजानका लागि"
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4211,8 +4254,8 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
-"Whether to stop or wrap-around or grow the virtual workspace on first/last "
-"viewport"
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4689,18 +4732,57 @@ msgstr "अन्तरक्रियात्मक तवरले कार�
 msgid "Prompt for a workspace and switch to it."
 msgstr "एउटा कार्यक्षेत्रलाई प्रयत्न गर्नुहोस् र यसलाई स्विच गर्नुहोस्"
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Wether to display workspace name upon switch"
-msgstr ""
+#~ msgid "and many others..."
+#~ msgstr "र थुप्रै अरुहरू..."
 
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "How long to display workspace name"
-msgstr ""
+#~ msgid "Sawfish manages your windows extensibly."
+#~ msgstr "सफिसले तपाईँको सञ्झ्याललाई एक्सटेन्सिव्लि व्यावस्था गर्दछ"
 
-#. ../lisp/sawfish/wm/workspace.jl
+#~ msgid "Sawfish homepage"
+#~ msgstr "सफिस मुख्य पाना"
+
 #, fuzzy
-msgid "Display workspace name"
-msgstr "कार्यक्षेत्रको नाम"
+#~ msgid "Whether and how to move the pointer."
+#~ msgstr "सञ्झ्याललाई अघिल्लो दृश्यकेन्द्रमा सार्नुहोस्"
+
+#, fuzzy
+#~ msgid "Whether to bump into windows on a different depth."
+#~ msgstr "बढ्दै गरेको वा प्याकिङ गरेको बेलामा उपेक्षित सञ्झ्यालहरूमा बम्प गर्ने कि।"
+
+#~ msgid "Start a new xterm."
+#~ msgstr "एउटा नयाँ एक्सटर्म सुरु गर्नुहोस्।"
+
+#, fuzzy
+#~ msgid "View clipboard"
+#~ msgstr "दृश्यबिन्दु"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "पर्दा"
+
+#~ msgid "State"
+#~ msgstr "स्थिति"
+
+#, fuzzy
+#~ msgid "Maximize unframe"
+#~ msgstr "सञ्झ्याल ठूलो बनाउनुहोस्"
+
+#, fuzzy
+#~ msgid "Maximize reframe"
+#~ msgstr "अधिकतम गरिएको"
+
+#, fuzzy
+#~ msgid "The program used to play audio samples."
+#~ msgstr ""
+#~ "अडियो कार्यक्रमको नमूना चलाउन यदि नमिलेमा पुर्व निर्मित ESD मद्दत प्रयोग हुन्छ।"
+
+#, fuzzy
+#~ msgid "Number of steps for viewport scrolling."
+#~ msgstr "पिक्सेलका सङ्ख्याहरू, सूचकलाई 'क्रसर-चलाउनुहोस्-'आदेशमा लेजानका लागि"
+
+#, fuzzy
+#~ msgid "Display workspace name"
+#~ msgstr "कार्यक्षेत्रको नाम"
 
 #~ msgid "Matched Windows"
 #~ msgstr "मिलेको सञ्झ्यालहरू"
@@ -4992,39 +5074,6 @@ msgstr "कार्यक्षेत्रको नाम"
 #~ "वृद्धिलाई अधिकतमको रूपमा मानियो कि, जव तपाईँ\n"
 #~ "ले यसलाई अन गर्नुहुन्छ, तपाईँ 'नबढाउने सञ्झ्याल' वा उस्तै केही\n"
 #~ " पुरानो साइजमा फर्किन प्रयोग गर्न सक्नुहुन्छ"
-
-#~ msgid ""
-#~ "Whether and how to move the pointer when packing windows.\n"
-#~ "\n"
-#~ "`maybe' means that the pointer is moved along with the window, if the\n"
-#~ "pointer was within the window area before packing.\n"
-#~ "\n"
-#~ "`always' warps the pointer to the center of the window if it isn't\n"
-#~ "already in the window, then does like `maybe'.\n"
-#~ "\n"
-#~ "`never' means not to warp the pointer."
-#~ msgstr ""
-#~ "सञ्झ्यालहरू\n"
-#~ "\n"
-#~ "प्याकिङ गर्द सूचक कसरी र गर्ने नगर्नेले 'सायद' यो अर्थ लागाउछ कि सूचक चाहिँ सञ्झ्यालसँगै "
-#~ "लगिएको छ, यदि \n"
-#~ "सूचक \n"
-#~ "\n"
-#~ "बन्द गर्नुभन्दा पहिले सञ्झ्याल क्षेत्र भित्रै छ भने 'सधै'सूचकलाई सञ्झ्यालको केन्द्रमा वार्प्स "
-#~ "गर्नुहोस् यदि यो \n"
-#~ " पहिले नै सञ्झ्याल भित्र छैन भने, त्यसपछि हुन्छ जस्तै 'सायद' \n"
-#~ "\n"
-#~ "'कहिल्यै पनि होइन' सूचकलाई वार्प नगर्न अर्थ दिन्छ।"
-
-#~ msgid ""
-#~ "Whether to bump into windows on a different depth when growing or "
-#~ "packing\n"
-#~ "windows.\n"
-#~ "`maybe' means only avoided windows in other depths."
-#~ msgstr ""
-#~ "सञ्झ्यालहरू बढ्दै गरेको र प्याकिङ गरेको बेलामा पूर्णरूपले अस्पष्ट सञ्झ्यालहरूमा\n"
-#~ "बम्प गर्ने कि।\n"
-#~ "`सायद' ले अन्य गहिराइमा सञ्झ्यालहरू उपक्षित हुन्छ भन्ने हो।"
 
 #~ msgid "Terminal"
 #~ msgstr "टर्मिनल"
