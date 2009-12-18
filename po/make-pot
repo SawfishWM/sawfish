@@ -20,6 +20,10 @@
 # along with sawfish; see the file COPYING.  If not, write to
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+if [ ! -e ../DOC ]; then
+	repdoc ../DOC `find ../ \( -name '*.c' -o -name '*.jl' \) -print`
+fi
+
 REP_SRCS="../scripts/*.jl ../themes/*/theme.jl"
 REP_SRCS="$REP_SRCS `find ../lisp -name '*.jl' -print`"
 rm -f sawfish.pot
