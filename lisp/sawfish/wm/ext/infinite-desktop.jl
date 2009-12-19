@@ -1,4 +1,4 @@
-;; infinite-desktop.jl -- make the virtual desktop bigger than the physical
+;; infinite-desktop.jl -- Smooth viewport motion with mouse
 
 ;; Copyright (C) 2008 David T. McWherter <udmcwher@mcs.drexel.edu>
 
@@ -47,26 +47,26 @@
   (defgroup infinite-desktop "Infinite Desktop"
     :group workspace)
 
-  (defcustom infinite-desktop-p 1
-    "Simulate an infinite desktop (Conflicts edge-flipping)."
+  (defcustom infinite-desktop-p t
+    "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-flipping)."
     :group (workspace infinite-desktop)
     :after-set (lambda () (infinite-desktop.infinite-desktop))
     :type boolean)
 
   (defcustom infinite-desktop.move-distance 64
-    "Amount to move the workspace."
+    "Amount to move the viewport when the pointer hits the screen edge."
     :group (workspace infinite-desktop)
     :type number
     :range (1 . nil))
 
   (defcustom infinite-desktop.move-cursor-distance 32
-    "Amount to move the cursor after moving the workspace."
+    "Amount to pull back the cursor after moving the viewport."
     :group (workspace infinite-desktop)
     :type number
     :range (1 . nil))
 
   (define (infinite-desktop.move-right)
-    "Shifts the display `infinite-desktop.move-distance' pixels to the
+    "Shifts the viewport `infinite-desktop.move-distance' pixels to the
 right."
     (let ((dist infinite-desktop.move-distance)
           (cdist infinite-desktop.move-cursor-distance)
@@ -79,7 +79,7 @@ right."
       (move-cursor (- (min dist cdist)) 0)))
 
   (define (infinite-desktop.move-left)
-    "Shifts the display `infinite-desktop.move-distance' pixels to the
+    "Shifts the viewport `infinite-desktop.move-distance' pixels to the
 left."
     (let ((dist (- infinite-desktop.move-distance))
           (cdist (- infinite-desktop.move-cursor-distance))
@@ -92,7 +92,7 @@ left."
       (move-cursor (- (max dist cdist)) 0)))
 
   (define (infinite-desktop.move-top)
-    "Shifts the display `infinite-desktop.move-distance' pixels up."
+    "Shifts the viewport `infinite-desktop.move-distance' pixels up."
     (let ((dist (- infinite-desktop.move-distance))
           (cdist (- infinite-desktop.move-cursor-distance))
           (miny 0))
@@ -104,7 +104,7 @@ left."
       (move-cursor 0 (- (max dist cdist)))))
 
   (define (infinite-desktop.move-bottom)
-    "Shifts the display `infinite-desktop.move-distance' pixels down."
+    "Shifts the viewport `infinite-desktop.move-distance' pixels down."
     (let ((dist infinite-desktop.move-distance)
           (cdist infinite-desktop.move-cursor-distance)
           (maxy (* (screen-height) (1- (cdr viewport-dimensions)))))

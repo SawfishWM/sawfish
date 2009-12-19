@@ -4054,6 +4054,7 @@ dimensions directly.
 @menu
 * Viewport Functions::
 * Dynamic Viewport::       Automatic resizing of workspace.
+* Smooth Viewport::        Nice feature but not always compatible
 * Windows and Viewports::
 @end menu
 
@@ -4146,7 +4147,7 @@ defined by Sawfish call this function, so this variable is important
 for the user.
 @end defvr
 
-@node Dynamic Viewport, Windows and Viewports, Viewport Functions, Viewports
+@node Dynamic Viewport, Smooth Viewport, Viewport Functions, Viewports
 @section Dynamic Viewport
 
 ``Dynamic viewport'' is enabled by setting
@@ -4193,7 +4194,36 @@ those who are not using dynamic viewports do not need to worry about
 Under dynamic viewport, @code{viewport-dimensions} is the current size
 of the current workspace, and does not have the meaning as a user option.
 
-@node Windows and Viewports,  , Dynamic Viewport, Viewports
+@node Smooth Viewport, Windows and Viewports, Dynamic Viewport, Viewports
+@section Smooth Viewport
+@cindex Smooth Viewport
+@cindex Infinite Desktop
+
+``Infinite desktop'' is an intuitive, nice feature. Just move the
+mouse, for example to right, very far. As the pointer hits the screen
+edge, the viewport moves as if it is dragged by mouse motion. Viewport
+moves around by any amount, not limited to by a step of the physical
+screen size.
+
+To enable infinite desktop, put the following in your
+@file{~/.sawfish/rc}:
+
+@lisp
+(require 'sawfish.wm.ext.infinite-desktop)
+@end lisp
+
+Options can be set from the configurator, under @code{Workspace}
+section.
+
+Infinite desktop behavior differs noticeably from the usual viewport
+which lies on grid cells. For example, it does not make sense to ask
+in which viewport a window lies. The design is not complete yet, and
+may change in future. There may be some bugs.
+
+It is called ``infinite desktop'' by historical reason, but in fact
+you can limit the entire desktop size as you like.
+
+@node Windows and Viewports,  , Smooth Viewport, Viewports
 @section Windows and Viewports
 
 @defun window-viewport window
