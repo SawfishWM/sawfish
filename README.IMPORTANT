@@ -23,6 +23,14 @@ sawfish-ui is now sawfish-config
 The sawfish-configuration-tool has been renamed from
 `sawfish-ui' to `sawfish-config'
 
+$prefix/libexecdir -> $prefix/lib directory move
+************************************************
+
+libreps/sawfishs library directory as changes as mentioned above,
+thus you need to recompile anything linked against both, which
+namely means rep-gtk and sawfish-pager, and everything will
+work again as expected.
+
 ------------------------------------------------------------------------
 In Sawfish 1.5.0 there are the following major changes:
 
