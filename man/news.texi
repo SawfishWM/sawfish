@@ -22,7 +22,7 @@ they occurred between. For more detailed information see the
 @item rep-gtk 0.18.4 -> 0.90.0
 @end itemize
 
-@item Removed requirements: LibAudiofile and ESounD
+@item Removed requirements: LibAudioFile and ESounD
 @item Mouse buttons 6 - 9 support is now optional
 
 Support for 6 - 9 mouse buttons is now optional. X.Org/XFree86 headers
@@ -68,11 +68,11 @@ which is used for this purpose, no longer exists.
 
 In Sawfish < 1.6, @code{sawfish.wm.defaults} is loaded by default,
 only if the @file{~/.sawfishrc} lacks. Now, it is always read, so you
-don't have to @code{require} it. It sets up GNOME and KDE support if
-they run, and does @code{(require 'sawfish.wm.ext.error-handler)}.
+don't have to @code{require} it. It sets up GNOME or KDE support if
+found running, and does load the error-handling module.
 
-Since Sawfish 1.5 @code{~/.sawmillrc} is no longer valid.
-From this version on, Sawfish will rename @code{~/.sawmillrc} to
+Since Sawfish 1.5 @code{~/.sawmillrc} is no longer a valid configuration-
+file. From this version on, Sawfish will rename @code{~/.sawmillrc} to
 @code{~/.sawfishrc}, if the former does exist on your system, but the
 latter doesn't.
 
@@ -80,11 +80,10 @@ latter doesn't.
 
 @item Sound support has changed. [Christopher Bratusek]
 
-Sawfish used to rely on esound and libaudiofile to play sound, but we
-stopped it. If you want sound, set the variable
-@code{play-sample-program} to the path of the program capable of
-playing *.wav file. You can set the variable from the Configurator,
-too.
+Sawfish used to rely on ESounD and LibAudioFile to play sound, but we
+dropped that. If you want sound, set the variable @code{play-sample-program}
+to the path of the program capable of playing *.wav file. You can set the
+variable from the Configurator, too. By default `paplay' is beeing used.
 
 You can't set any arguments to pass from this variable. If you want to
 give arguments or redirect output, write a wrapper
@@ -92,28 +91,28 @@ program. (@pxref{FAQ}, ``Sound support'' section.)
 
 @item GNOME integration updates [Christopher Bratusek]
 
-Gnome support is trimmed down. All we offer now is as follows:
+GNOME support is trimmed down. All we offer now is as follows:
 
 If GNOME runs, in @code{session} submenu under Sawfish root menu,
 logout and shutdown from GNOME are added. Don't remove @code{quit} and
-@code{restart} from menu now. Gnome help is available in menu.
+@code{restart} from menu now. GNOME help is available in menu.
 
-Unless set by user, gnome terminal and gnome help browser are used for
+Unless set by user, gnome-terminal.wrapper and gnome-www-browser are used for
 user options @code{xterm-program} and @code{browser-program}.
 
-Most of dropped GNOME integrations are ancient, mainly for 1.x and
+Most of dropped GNOME integrationcode is ancient, mainly for 1.x and
 early 2.x. Files @file{lisp/sawfish/wm/commands/gnome.jl} and
 @file{lisp/sawfish/wm/state/gnome.jl} are deleted.
 
-GNOME-Detection is updated. [Alexey I. Froloff]
+GNOME-Detection has been updated for recent versions. [Alexey I. Froloff]
 
-@item Xterm and browser changes
+@item xterm and browser changes
 
 Module @code{sawfish.wm.commands.xterm} is renamed to
 @code{sawfish.wm.commands.launcher}. Option @code{xterm-args} is
-dropped. If you use it, simply append the value to @code{xterm-program}.
+dropped. If you use it, simply append its value to @code{xterm-program}.
 
-Customization group is changed from @code{misc} to @code{External
+Customization-group is changed from @code{misc} to @code{External
 Applications}.
 
 The functinon @code{display-url} is renamed to @code{browser}, now
@@ -127,7 +126,7 @@ due to library files location change.
 
 @item Deletion of @code{user-level} property
 
-(This affects almost none.) There had been a defcustom property
+(This affects almost none.) There has been a defcustom property
 @code{user-level}. It has been deprecated for years, and it's
 now deleted.
 @end itemize
@@ -149,7 +148,8 @@ collection with @code{rep_PUSHGC} / @code{rep_POPGC}. It also prevents
 @item Random window disapperance prevention
 
 There're reports of sudden, random window disapperance, under Xinerama
-and some other drivers. It is partly prevented, but not completely.
+and some other drivers. It is partly prevented, but not completely, as
+this may also be caused by other libraries or buggy video drivers.
 
 Now in error_handler() in src/display.c, when a window sends request_code
 12 (X_ConfigureWindow), don't auto-assume it to be unmapped. [Janek
@@ -159,37 +159,37 @@ Kozicki]
 @itemize +
 @item Library check: Fix in @code{SMlib} and @code{libICE} check on x11r7 [Christopher Bratusek]
 
-@item @file{.desktop} files fixes: typos fix and removed unneeded entries [Christopher Bratusek]
+@item @file{.desktop} files fixes: typos fixed and unneeded entries removal [Christopher Bratusek]
 
-@item In spec file, fixed repexecdir definition [Christopher Bratusek]
+@item In spec file, repexecdir definition is fixed [Christopher Bratusek]
 
-@item In @file{po/Makefile.in}, fixed wrong call of make-pot [Christopher Bratusek]
+@item In @file{po/Makefile.in}, a wrong call of make-pot is fixed [Christopher Bratusek]
 
-@item Build the FAQ upon make [Christopher Bratusek]
+@item Always build the FAQ upon make [Christopher Bratusek]
 
 @item Expand REP_ENVIRON in scripts/Makefile.in [Luis Rodrigo Gallardo Cruz]
 
 @item Add @code{--tag=CC} to libtool where necessary. It unbrakes compilation on some arches [Gentoo Linux]
 
-@item Use $prefix/lib instead of $prefix/libexecdir, to satify the FHS [Christopher Bratusek]
+@item Use $prefix/lib instead of $prefix/libexecdir, to satisfy the FHS [Christopher Bratusek]
 @end itemize
 @item In configurator,
 
-Strings are fully translatable [Alexey I. Froloff]
+Strings are now fully translatable [Alexey I. Froloff]
 
-SpinButton listens to manual value change. (It's connected to correct signal.)  [Christoper Bratusek]
+SpinButton listens to manual value change. (It's now connected to the correct signal.)  [Christoper Bratusek]
 
 Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 
 @item Fixed Focus issues with KDE4 Menu/Run-Dialog [Timo Korvola]
 
-@item Fix cursor warping in Infinite-Desktop [Jeremy Hankins]
+@item Fix cursor-warping in conjuction with Infinite-Desktop [Jeremy Hankins]
 
 @item Fixed group of the stagger options [Christopher Bratusek]
 
 @item Fixed a call of @code{select-workspace-from-first} [Michal Maruška]
 
-@item In @code{Simple} theme, windows are now resizable from right border [Christopher Bratusek]
+@item In @code{Simple} theme, windows are now resizable from the right border [Christopher Bratusek]
 
 @item Missing exports are now supplied, for shrink-yank functions and @code{send-to-workspace}. [Christopher Bratusek]
 
@@ -197,7 +197,7 @@ Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 
 @item Variable @code{this-command} is @code{nil} outside of command call.
 
-@item Customization option @code{uniconify-to-current-viewport} is valid again. [Teika kazura]
+@item Customization option @code{uniconify-to-current-viewport} has been undeprecated. [Teika kazura]
 @end itemize
 @item New features:
 @itemize @minus
@@ -205,14 +205,16 @@ Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 @item New application menu [Matthew Love, Timo Korvola]
 
 Sawfish now generates application menu automatically, by reading
-@file{/usr/share/applications/*.desktop} files. If you set
-@code{apps-menu}, then it won't be done. If you like to have both your
-own applications menu and auto generated one, then set your own in
-@code{user-apps-menu} instead of @code{apps-menu}.
+@file{/usr/share/applications/*.desktop} files. If you manually set
+@code{apps-menu}, then it won't be. If you like to have both your
+own applications menu and auto the generated one, then refer back to
+@code{user-apps-menu} rather than @code{apps-menu}. In addition you can
+use the variable @code{desktop-directory} to specify a different directory
+to look for *.desktop files, or a set of directories, if desired.
 
-Root and Window-History menus are revamped, too. [Christopher Bratusek]
+Root, and Window-Operations menus are revamped, too. [Christopher Bratusek]
 
-@item Added options to change the font color of window title, independent of used theme [Matthew Love, Christopher Bratusek, Timo Korvola]
+@item Added options to change the font color of window title, independent of the theme in use [Matthew Love, Christopher Bratusek, Timo Korvola]
 
 Internally, a new function @code{remove-frame-part-value} which allows to change/remove values from frame-parts is used. [Timo Korvola]
 
@@ -220,8 +222,8 @@ Internally, a new function @code{remove-frame-part-value} which allows to change
 
 @item Xinerama support for Grow/Pack [Nolan Leake]
 
-Make grow/pack Xinerama aware. The support still remains basic.
-Shrink-yank doesn't yet.
+Make grow/pack Xinerama aware. The support still remains basic, as it only
+supports up to 3 displays. Shrink-yank hasn't been changed at this point.
 
 @item Window rules can be set by lisp
 
@@ -238,9 +240,9 @@ Rules by Matching}. An example usage is like this:
                       (maximize . vertical)))
 @end lisp
 
-In fact, this function has existed, but now it can now specify both
-window name and class, and the grammar has changed. The old syntax is
-still allowed, but deprecated.
+In fact, this function has already existed, but now it can now specify
+both windowname and -class, also the grammar has changed. The old syntax
+is still allowed, but deprecated.
 
 @item Keymap translation [Scott Scriven]
 
@@ -257,14 +259,13 @@ the following lines in your @file{~/.sawfish/rc}:
 Then, when you press @kbd{C-n}, any windows with name ``Terminal''
 receive @kbd{C-S-t}, and so on.
 
-This is part of window rules, but it cannot be set by configurator
-yet.
+This is part of window rules, but it cannot be exposed in the configurator yet.
 
 @item New window rules
 @itemize +
-@item Maximizations @code{fullscreen} and @code{full-xinerama} are available (@pxref{Maximizing Without Borders}) [Jeremy Hankins]
+@item Maximizations @code{fullscreen} and @code{full-xinerama} are available now (@pxref{Maximizing Without Borders}) [Jeremy Hankins]
 @item Window position can also be specified by the direction, like north or east, instead of the coordinates. [Jeremy Hankins]
-@item New placement modes @code{new-workspace} and @code{new-viewport} [Jeremy Hankins]
+@item New window rules @code{new-workspace} and @code{new-viewport}, which place a window on the first empty Workspace or Viewport (if there's none, one will be generated), have been introduced [Jeremy Hankins]
 
 If @code{new-workspace} is chosen, then the window is put in an empty
 workspace, or a new workspace is created if none. A workspace with
@@ -279,29 +280,30 @@ enlarged, and the window is put in a new viewport.
 5 new move-cursor commands, 4 diagonals and 1 to center. (@pxref{Pointer Functions}
 
 Three window manipulation commands, @code{double-window-size}, @code{halve-window-size}, and @code{move-window-center}.
+The former two are based on the @code{resize-by-factor} metafunction.
 
 @code{browser} invokes a browser instance.
 
-@item New funcitons
+@item New functions
 @code{rename-window} changes the window name. [from ``mmc'' fork, Christopher Bratusek]
 
 In practice, it works, but technically speaking, the
-window name is not supposed to be changed in ICCCM.
+window name is not supposed to be changed in ICCCM, by the Window-Manager.
 
 @code{viewport-windows} returns windows in a viewport. [Jeremy Hankins]
 
 @code{get-window-by-class} and @code{get-window-by-class-re} [Christopher Bratusek]
 
-@item Dynamic Viewport Mode [Jeremy Hankins]
+@item Dynamic Viewport-Boundary-Mode [Jeremy Hankins]
 
 When you set @code{viewport-boundary-mode} to @code{dynamic},
 then the workspace grows and shrinks dynamically so that it contains
 all windows and the current viewport. For the details, @xref{Dynamic
 Viewport}.
 
-@item KDE integration module [Christopher Bratusek]
+@item KDE4 integration module [Christopher Bratusek]
 
-KDE is automatically detected. KDE help, and KDE logout, shutdown, and
+KDE4 is automatically detected. KDE help, and KDE logout, shutdown, and
 reboot are provided in the menu. In KDE4 WM Selector, Sawfish is
 added.
 
@@ -310,7 +312,7 @@ Unless set by user, konsole and konqueror are used for user options
 
 @item Poweroff from menu
 
-Added poweroff commands in menu for non KDE/GNOME users.  They are
+Added poweroff commands in menu for non KDE/GNOME users. There are
 reboot, halt, suspend and hibernate. The used shell commands can be
 set from configurator, under ``Misc'' -> ``External Applications''. If
 you don't want it, set @code{want-poweroff-menu} to nil.
@@ -323,8 +325,8 @@ Reboot and halt call @code{before-exit-hook} and do
 halting, to ensure everything is fine on the next startup.
 
 @item New Frame Classes [Christopher Bratusek] @*
-A ``frame class'' defines frame component. There's no user visible
-changes.
+A ``frame class'' defines frame component and are used by themers to add
+buttons or frames to their theme in charge. There are no user visible changes.
 
 @itemize +
 
@@ -355,20 +357,20 @@ changes.
 
 At Sawfish startup including restart, maximized windows and
 position specified windows used to mess up viewport, appearing
-in wrong viewports. It is fixed.
+in wrong viewports. It's fixed now.
 
 @item Renamed @code{after-add-window} to @code{maxmize-after-add-window} @*
 This function is only used in a hook [Teika Kazura]
 
 @item Don't let @code{cycle-class} and @code{cycle-class-backwards} ignore @var{window-order} [Daniel M. German]
 
-@item Docks/panels are unframed, and window type is set to @code{dock} [Timo Korvola]
+@item Docks/panels are unframed, and window type is set to @code{dock} by default [Timo Korvola]
 
 @item You can exit from sawfish-client with @code{,quit} (also @code{C-d}), unlike @code{C-c} it won't kill the WM [Teika Kazura, Timo Korvola]
 
 @item Number widget (GtkSpinButton) can take optional initial value [Teika Kazura]
 
-@item @code{raise-tabs-on-hover} takes effect immediately now [Christopher Bratusek]
+@item Changing @code{raise-tabs-on-hover} takes effect immediately now [Christopher Bratusek]
 
 @item Inactive windows in Crux theme do now have black text for better readability [Christopher Bratusek]
 
@@ -388,10 +390,10 @@ These commands are now available from window operation menu, too.
 
 @item Encoding is unified to utf-8 for all distributed files [Teika Kazura]
 
-@item Squashed all byte compiler warnings [Matthew Love] @*
-Some warnings are superfluous, though.
+@item Squashed all bytecompiler warnings [Matthew Love] @*
+Some warnings were superfluous, though.
 
-@item To info file @file{dir} the section @code{sawfish} is added upon installation [Luis Rodrigo Gallardo Cruz]
+@item To info file @file{dir} the section @code{sawfish} has been added [Luis Rodrigo Gallardo Cruz]
 
 @item Distclean rule for po/Makefile.in [Christopher Bratusek]
 
@@ -411,7 +413,7 @@ Sorry, without reason. Block comment remains allowed.
 
 @item Added new contributors to @code{THANKS} section of @code{CONTRIBUTING} [Christopher Bratusek]
 
-@item Updated OPTIONS [Christopher Bratusek]
+@item Updated OPTIONS and KEYBINDINGS [Christopher Bratusek]
 @item Fixed the license header of tabbed-windowing files [Christopher Bratusek]
 @end itemize
 
