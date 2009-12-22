@@ -26,22 +26,46 @@ Right = Right Arrow Key
 Up = Up Arrow Key
 Down = Down Arrow Key
 
-KP_Left = Keypad Left Arrow Key (4)
-KP_Right = Keypad Right Arrow Key (6)
-KP_Up = Keypad Up Arrow Key (8)
+! Currently sawfish does not differ between
+! Num_Lock beeing activated or not, so always
+! use the keysyms like it would be deactived
+
+When Num_Lock is off:
+
+KP_Insert = Keypad Insert (0)
+KP_End = Keypad End (1)
 KP_Down = Keypad Down Arrow Key (2)
+KP_Next = Keypad Page Down (3)
+KP_Left = Keypad Left Arrow Key (4)
 KP_Begin = Keypad Middle (5)
+KP_Right = Keypad Right Arrow Key (6)
+KP_Home = Keypad Pos1 (7)
+KP_Up = Keypad Up Arrow Key (8)
+KP_Prior = Keypad Page Up (9)
+
+When Num_Lock is on:
+
+KP_0: Keypad 0
+KP_1: Keypad 1
+KP_2: Keypad 2
+KP_3: Keypad 3
+KP_4: Keypad 4
+KP_5: Keypad 5
+KP_6: Keypad 6
+KP_7: Keypad 7
+KP_8: Keypad 8
+KP_9: Keypad 9
+
+Independent of Num_Lock:
+
 KP_Enter = Keypad Enter
 KP_Divide = Keypad /
 KP_Multiply = Keypad *
 KP_Substract = Keypad -
 KP_Add = Keypad +
-KP_Insert = Keypad Insert (0)
 KP_Delete = Keypad Delete (,)
-KP_End = Keypad End (1)
-KP_Next = Keypad Page Down (3)
-KP_Prior = Keypad Page Up (9)
-KP_Home = Keypad Pos1 (7)
+
+Pointer_EnableKeys = Shift + Num_Lock, allows moving the pointer via the KeyPad
 
 BS = Backspace
 DEL = Delete
