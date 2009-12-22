@@ -265,7 +265,7 @@ dnl Check wether to add 9 mouse buttons support
 
 AC_ARG_WITH(nine-mousebuttons,
 	    [ --with-nine-mousebuttons	Add support for mouse-buttons 6 - 9
-	     --without-nine-mouse-buttons], [], [with_nine_mbtns=yes])
+	     --without-nine-mousebuttons], [], [with_nine_mbtns=yes])
 
 if test "$with_nine_mbtns" = "yes"; then
 	AC_DEFINE(HAVE_NINE_MOUSEBUTTONS, 1, [Support for 9 Mouse Buttons])
