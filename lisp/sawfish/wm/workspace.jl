@@ -20,7 +20,7 @@
 
 ;; Commentary:
 
-;; Sawmill's workspace are organised as a 1-dimensional continuum, from
+;; Sawfish's workspace are organised as a 1-dimensional continuum, from
 ;; -infinity to +infinity. Normally the user only sees a small part of
 ;; this continuum, from the first non-empty workspace to the last
 ;; non-empty workspace

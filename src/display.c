@@ -369,7 +369,7 @@ sys_init(char *program_name)
 	    }
 
 	    /* This should _never_ be used in Real Life; only for
-	       debugging. Sawmill tries to work out when the error
+	       debugging. Sawfish tries to work out when the error
 	       handle might be called (i.e. after any XGet, XQuery, XFetch
 	       type function) and then call emit_pending_destroys ()
 	       as soon as possible, so that there's as small as possible

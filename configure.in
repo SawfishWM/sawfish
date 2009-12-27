@@ -68,8 +68,8 @@ _cppflags="${CPPFLAGS}"
 CPPFLAGS="${CPPFLAGS} ${X_CFLAGS}"
 
 AC_ARG_WITH(xorg-x11r7,
-	    [  --with-xorg-x11r7	  Use X.Org X11R7
-	     --without-xorg-x11r7	  Use X.Org/XFree86 X11R6 instead], [], [with_xorg_x11r7=yes])
+  [  --with-xorg-x11r7	  Use X.Org X11R7
+  --without-xorg-x11r7	  Use X.Org/XFree86 X11R6 instead], [], [with_xorg_x11r7=yes])
 
 if test "$with_xorg_x11r7" != "no"; then
 
@@ -176,7 +176,7 @@ fi
 dnl Checks for pango
 
 AC_ARG_WITH(pango,
-  [  --with-pango Use Pango instead of Xft
+  [  --with-pango		  Use Pango instead of Xft
   --without-pango], [], [with_pango=yes])
 
 if test "$with_pango" = "yes"; then
@@ -232,8 +232,8 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
 
 dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
-	    [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
-	     --without-gdk-pixbuf	  Use Imlib1 instead], [], [with_gdk_pixbuf=yes])
+  [  --with-gdk-pixbuf	  Use gdk-pixbuf for image management
+  --without-gdk-pixbuf	  Use Imlib1 instead], [], [with_gdk_pixbuf=yes])
 
 if test "$with_gdk_pixbuf" != "no"; then
 	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}
@@ -264,8 +264,8 @@ fi
 dnl Check wether to add 9 mouse buttons support
 
 AC_ARG_WITH(nine-mousebuttons,
-	    [ --with-nine-mousebuttons	Add support for mouse-buttons 6 - 9
-	     --without-nine-mousebuttons], [], [with_nine_mbtns=yes])
+  [  --with-nine-mousebuttons  Add support for mouse-buttons 6 - 9
+  --without-nine-mousebuttons], [], [with_nine_mbtns=yes])
 
 if test "$with_nine_mbtns" = "yes"; then
 	AC_DEFINE(HAVE_NINE_MOUSEBUTTONS, 1, [Support for 9 Mouse Buttons])
@@ -277,8 +277,8 @@ fi
 dnl Check wether to install mo files
 
 AC_ARG_WITH(nls,
-	   [ --with-nls		Install translations
-	    --without-nls], [], [with_nls=yes])
+  [  --with-nls		  Install translations
+  --without-nls], [], [with_nls=yes])
 
 if test "$with_nls" = "yes"; then
 	SUBDIRS="${SUBDIRS} po"
