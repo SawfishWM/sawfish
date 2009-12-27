@@ -6620,7 +6620,7 @@ suppresses that behavior.
 Called when the window is first adopted by the window manager.  This
 occurs before the window is created, installed or placed.  At this
 early stage, the only safe action is to set properties of the window
-(with @code{window-set}).
+(with @code{window-put}).
 
 @code{add-window-hook} is a deprecated hook, replaced by
 @code{before-add-window-hook}.  It is called immediately after
