@@ -23,8 +23,12 @@ to make it work. [Christopher Bratusek]
 @item Reworked configures help-message for better readability [Kim B. Heino]
 
 @item Configure now uses @code{kde4-config --install data} rather than
-@code{kde4-config --path data}, so no sed-kludge is needed anymore
+@code{kde4-config --path data}, so no sed-kludge is needed anymore.
+
+Make $datadir/kde4/apps/ the fallback path, if KDE4 is not installed
 [Kim B. Heino]
+
+@item Generate debian/changelog from debian/changelog.in [Christopher Bratusek]
 
 @item The spec has been reworked to detect kde4/librep directories while runtime,
 instead of hardcoding those paths from configure, which makes it more portable.
