@@ -7,7 +7,41 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} file in the Sawfish source tree, or git log.
 (See Wiki page for how to access git repository.)
 
-@heading 1.6.0
+@heading 1.6.1 "Astral"
+
+@itemize @bullet
+
+@item The 1.6.1 release brings several bugfixes and improvements
+
+@item Build and Installation
+@itemize @minus
+
+@item The configure option @code{--without-nine-mouse-buttons} is not allowed
+to have 4 hyphens, therefore it's renamed to @code{--without-nine-mousebuttons},
+to make it work. [Christopher Bratusek]
+
+@item Reworked configures help-message for better readability [Kim B. Heino]
+
+@item Configure now uses @code{kde4-config --install data} rather than
+@code{kde4-config --path data}, so no sed-kludge is needed anymore
+[Kim B. Heino]
+
+@item The spec has been reworked to detect kde4/librep directories while runtime,
+instead of hardcoding those paths from configure, which makes it more portable.
+[Kim B. Heino]
+
+@end itemize
+@item Doc
+@itemize @minus
+
+@item Fixed a small doc misstake (refered to window-set instead of window-put)
+[Christopher Bratusek]
+
+@item Last 3 ``sawmill'' replaced by ``sawfish'' [Kim B. Heino]
+@end itemize
+@end itemize
+
+@heading 1.6.0 "Sound Of Thunder"
 
 @itemize @bullet
 
@@ -420,7 +454,7 @@ Sorry, without reason. Block comment remains allowed.
 @end itemize
 @end itemize
 
-@heading 1.5.0
+@heading 1.5.0 "The Hardstyle Factory"
 
 The new release is Sawfish-1.5.0. We don't release 1.4 series for
 historical reason. The next will be 1.6, and 1.5.x are for bugfix
