@@ -348,7 +348,7 @@ dnl install directory for sawfish-ksm.desktop
 KDEDIR="`kde4-config --install data`"
 
 if test "x$KDEDIR" = x; then
-	KDEDIR="/usr/share/apps/"
+	KDEDIR="/usr/share/kde4/apps/"
 fi
 
 gitdate=`date +%y%m%d`
