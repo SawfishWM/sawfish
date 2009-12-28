@@ -345,7 +345,7 @@ fi
 AC_MSG_RESULT($LINGUAS)
 
 dnl install directory for sawfish-ksm.desktop
-KDEDIR="`kde4-config --path data | sed -e 's/.*://g'`"
+KDEDIR="`kde4-config --install data`"
 
 if test "x$KDEDIR" = x; then
 	KDEDIR="/usr/share/apps/"

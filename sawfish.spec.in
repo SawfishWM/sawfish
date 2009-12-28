@@ -12,6 +12,13 @@ Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: gmp-devel texinfo
 Provides: windowmanager
 
+%define rep_execdir %(pkg-config librep --variable=repcommonexecdir)
+%if %(kde4-config; echo $?)
+%define kde_apps %{_datadir}/apps/
+%else
+%define kde_apps %(kde4-config --install data)
+%endif
+
 %description
 Sawfish is an extensible window manager which uses a Lisp-based
 scripting language.  All window decorations are configurable and the
@@ -26,7 +33,7 @@ using a GTK+ interface.  Sawfish is mostly GNOME compliant
 %build
 ./autogen.sh \
 	--x-libraries=%{_libdir} \
-	--x-includes=/usr/include/X11 
+	--x-includes=/usr/include/X11
 
 %configure
 make host_type=%{_target_platform}
@@ -63,13 +70,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sawfish/%{version}
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{_datadir}/applications/sawfish.desktop
-@KDEDIR@/ksmserver/windowmanagers/sawfish.desktop
+%{kde_apps}/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
 %{_datadir}/man/man1/sawfish*.gz
 %{_datadir}/sawfish/sawfish.png
 %{_libdir}/pkgconfig/sawfish.pc
 %{_libdir}/sawfish/%{version}/%{_host}
-@REP_EXECDIR@/sawfish
+%{rep_execdir}/sawfish
 %{_infodir}/sawfish*
 
 %changelog
