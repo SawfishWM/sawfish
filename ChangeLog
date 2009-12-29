@@ -7,6 +7,11 @@
 
 	* man/news.texi: updated
 
+	* configure.in
+	* config.h.in
+	* src/dlmalloc.c: removed our own dlmalloc, as it breaks too many arches,
+	                  and is therefore never in use since several years [Kim B. Heino]
+
 2009-12-28  Christopher Bratusek <zanghar@freenet.de>
 	* configure.in: use `kde4-config --install data' instead of `kde4-config --path data' [Kim B. Heino]
 

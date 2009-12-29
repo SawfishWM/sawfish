@@ -34,6 +34,9 @@ Make $datadir/kde4/apps/ the fallback path, if KDE4 is not installed
 instead of hardcoding those paths from configure, which makes it more portable.
 [Kim B. Heino]
 
+@item Our own implementation of dlmalloc is disabled since 2002, as it breaks
+sawfish on several architectures. From this version on, we don't ship it.
+[Kim B. Heino]
 @end itemize
 @item Doc
 @itemize @minus
