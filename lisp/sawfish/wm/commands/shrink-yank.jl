@@ -8,7 +8,7 @@
 ;; - if the window was partially (or in case of yanking even entirely) outside
 ;;   the screen it will be entirely on the screen,
 ;; - otherwise, if the window intersected with other windows it will intersect
-;;   with one window less,
+;;   with one less window,
 ;; - otherwise the window will not be moved or resized.
 ;;
 ;; If the window reaches its minimum size before this condition can be
@@ -50,41 +50,41 @@
 
   (define (shrink-window-left window)
     "Shrinks WINDOW by moving the right edge to the left until it
-intersects with one window less than before."
+overlaps with one less window than before."
     (shrink-window window 'left))
 
   (define (shrink-window-right window)
     "Shrinks WINDOW by moving the left edge to the right until it
-intersects with one window less than before."
+overlaps with one less window than before."
     (shrink-window window 'right))
 
   (define (shrink-window-up window)
     "Shrinks WINDOW by moving the lower edge upwards until it
-intersects with one window less than before."
+overlaps with one less window than before."
     (shrink-window window 'up))
 
   (define (shrink-window-down window)
     "Shrinks WINDOW by moving the upper edge downwards until it
-intersects with one window less than before."
+overlaps with one less window than before."
     (shrink-window window 'down))
 
   (define (yank-window-left window)
-    "Yanks WINDOW to the left until it inserts with one window less
+    "Yanks WINDOW to the left until it overlaps with one less window
 than before."
     (yank-window window 'left))
 
   (define (yank-window-right window)
-    "Yanks WINDOW to the right until it inserts with one window less
+    "Yanks WINDOW to the right until it overlaps with one less window
 than before."
     (yank-window window 'right))
 
   (define (yank-window-up window)
-    "Yanks WINDOW upwards until it inserts with one window less than
+    "Yanks WINDOW upwards until it overlaps with one less window than
 before."
     (yank-window window 'up))
 
   (define (yank-window-down window)
-    "Yanks WINDOW downwards until it inserts with one window less than
+    "Yanks WINDOW downwards until it overlaps with one less window than
 before."
     (yank-window window 'down))
 
@@ -203,7 +203,7 @@ dimensions of WINDOW."
 
   (define (shrink-window window direction)
     "Shrinks WINDOW by moving the edge opposite to DIRECTION (left, right,
-up or down) towards DIRECTION until it intersects with one window less than
+up or down) towards DIRECTION until it overlaps with one less window than
 before."
     (let* ((wr (window-frame-rect window))
 	   (isect-coord (find-least-intersection window wr direction nil))
@@ -248,7 +248,7 @@ before."
 
   (define (yank-window window direction)
     "Moves WINDOW towards DIRECTION (left, right, up or down) until
-WINDOW intersects with one window less than before."
+WINDOW overlaps with one less window than before."
     (let* ((wr (window-frame-rect window))
 	   (isect-coord (find-least-intersection window wr direction t))
 	   (nleft (left wr))
