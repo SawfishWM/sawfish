@@ -82,6 +82,6 @@ clean :
 	rm -f core *~ *.mo
 
 distclean : clean
-	rm -f Makefile $(PACKAGE).pot
+	rm -f Makefile
 
 .PHONY : all install uninstall clean distclean
