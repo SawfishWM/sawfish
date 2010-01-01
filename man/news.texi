@@ -17,34 +17,46 @@ they occurred between. For more detailed information see the
 @itemize @minus
 
 @item The configure option @code{--without-nine-mouse-buttons} is not allowed
-to have 4 hyphens, therefore it's renamed to @code{--without-nine-mousebuttons},
-to make it work. [Christopher Bratusek]
+to have 4 hyphens, therefore it's renamed to @code{--without-nine-mousebuttons}.
+[Christopher Bratusek]
 
-@item Reworked configures help-message for better readability [Kim B. Heino]
+@item Reworked configures help-message for better readability.
+[Kim B. Heino]
 
 @item Configure now uses @code{kde4-config --install data} rather than
 @code{kde4-config --path data}, so no sed-kludge is needed anymore.
 
-Make $datadir/kde4/apps/ the fallback path, if KDE4 is not installed
+Make $datadir/kde4/apps/ the fallback path, if KDE4 is not installed.
 [Kim B. Heino]
 
-@item Improved debian and rpm packaging scripts. [Christopher Bratusek]
+@item Improved debian and rpm packaging scripts.
+[Christopher Bratusek]
 
 @item The spec has been reworked to detect kde4/librep directories while runtime,
 instead of hardcoding those paths from configure, which makes it more portable.
 [Kim B. Heino]
 
 @item Our own implementation of dlmalloc is disabled since 2002, as it breaks
-sawfish on several architectures. From this version on, we don't ship it.
+sawfish on several architectures. From this version on, we don't ship it anymore.
 [Kim B. Heino]
+
+@item Export the imageloader beeing used by sawfish in the .pc file.
+[Christopher Bratusek]
+
+@item Don't remove the .pot file upon @code{make distclean}.
+[Christopher Bratusek]
 @end itemize
 @item Doc
 @itemize @minus
 
-@item Fixed a small doc misstake (refered to window-set instead of window-put)
+@item Fixed a small doc misstake (refered to window-set instead of window-put).
 [Christopher Bratusek]
 
-@item Last 3 ``sawmill'' replaced by ``sawfish'' [Kim B. Heino]
+@item Fixed the docstrings of shrink and yank.
+[Timo Korvola]
+
+@item Last 3 instances of ``sawmill'' replaced by ``sawfish''.
+[Kim B. Heino]
 @end itemize
 @end itemize
 
