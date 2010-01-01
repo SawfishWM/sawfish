@@ -244,6 +244,7 @@ if test "$with_gdk_pixbuf" != "no"; then
 			  IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
 			  IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
 			  IMAGE_LOADER="GDK Pixbuf Xlib"
+			  imageloader="gdk-pixbuf-xlib"
 			  with_gdk_pixbuf=yes
 			  ,AC_MSG_ERROR([cannot locate gdk-pixbuf-xlib])
 			  with_gdk_pixbuf=no)
@@ -258,6 +259,7 @@ if test "$with_gdk_pixbuf" = "no"; then
 			  IMAGE_CFLAGS='${IMLIB1_CFLAGS}'
 			  IMLIB_VERSION="`pkg-config --modversion imlib`"
 			  IMAGE_LOADER="IMLIB 1"
+			  imageloader="imlib1"
 			  ,AC_MSG_ERROR([cannot locate imlib1 library]))
 fi
 
@@ -349,6 +351,7 @@ AC_SUBST(localedir)
 AC_SUBST(install_sh)
 AC_SUBST(datarootdir)
 AC_SUBST(gitdate)
+AC_SUBST(imageloader)
 AC_SUBST(MAKEDEP)
 AC_SUBST(GNOMEDIR)
 AC_SUBST(KDEDIR)
