@@ -37,6 +37,8 @@ DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/flippers.la \
 	  sawfish/wm/util/x.la sawfish/wm/util/selection.la
 DL_DIRS = sawfish/wm/util
 
+INSTALL_HDRS = sawfish.h sawfish_subrs.h libclient.h server.h keys.h build.h
+
 override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(PANGO_CFLAGS)
 
 all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
@@ -68,6 +70,10 @@ install : all installdirs
 	  $(notdir $(x)) $(DESTDIR)$(sawfishexecdir)/$(dir $(x));)
 	$(rep_INSTALL_ALIASES) -c $(srcdir) $(DESTDIR)$(sawfishexecdir)
 	$(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) client.la $(DESTDIR)$(repexecdir)/sawfish/
+	for i in $(INSTALL_HDRS); do \
+	  $(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(includedir)/sawfish/; \
+	done
+	$(INSTALL_DATA) $(top_srcdir)/config.h $(DESTDIR)$(includedir)/sawfish/sawfish_config.h
 
 uninstall :
 	for p in sawfish; do \
@@ -79,10 +85,12 @@ uninstall :
 	  $(rep_LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${sawfishexecdir}/$$dl; \
 	done
 	$(rep_DL_UNINSTALL) -f $(DESTDIR)$(repexecdir)/sawfish/client.la
+	rm -rf $(DESTDIR)$(includedir)/sawfish/
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(repexecdir)/sawfish \
-	  $(foreach x,$(DL_DIRS),$(DESTDIR)$(sawfishexecdir)/$(x))
+	  $(foreach x,$(DL_DIRS),$(DESTDIR)$(sawfishexecdir)/$(x)) \
+	  $(DESTDIR)$(includedir)/sawfish/
 
 .libexec : $(DL_OBJS)
 	$(SHELL) $(srcdir)/fake-libexec

@@ -5,6 +5,16 @@
 	                 to make use of [required for sawfish-pager 0.8]
 
 	* man/news.texi: revised and updated	
+	
+	* sawfish.pc.in
+	* sawfish.spec.in
+	* debian/sawfish.install
+	* src/Makefile.in: install headers to $includedir/sawfish/
+
+	* src/client.c
+	* src/sawfish.h: updated for librep 0.90.5 header directory change
+
+	* src/sawfish.h: include config.h, if available, else sawfish_config.h
 
 2009-12-30  Timo Korvola <tkorvola@iki.fi>
 	* lisp/sawfish/wm/commands/shrink-yank.jl: fixed docstrings
