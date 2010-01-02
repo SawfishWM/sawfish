@@ -31,12 +31,9 @@ using a GTK+ interface.  Sawfish is mostly GNOME compliant
 %setup -q
 
 %build
-./autogen.sh \
-	--x-libraries=%{_libdir} \
-	--x-includes=/usr/include/X11
-
+./autogen.sh --nocfg
 %configure
-make host_type=%{_target_platform}
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
