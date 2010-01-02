@@ -26,9 +26,11 @@
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
+#else
+#include "sawfish_config.h"
 #endif
 
-#include <rep.h>
+#include <rep/rep.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdarg.h>

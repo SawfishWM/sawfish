@@ -22,7 +22,7 @@
 
 #include "libclient.h"
 #include <stdlib.h>
-#include <rep.h>
+#include <rep/rep.h>
 
 static repv display;
 
