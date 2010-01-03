@@ -3,6 +3,7 @@
 	               + instead of removing generated packging-script files upon
 		        `distclean', remove them on `gitclean'
 		       + call fakeroot debian/rules clean
+		       + remove NEWS and FAQ rules (dupped, as in man/Makefile.in)
 
 2010-01-02  Christopher Bratusek <zanghar@freenet.de>
 	* po/Makefile.in: don't remove sawfish.pot upon distclean

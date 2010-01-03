@@ -27,7 +27,7 @@ VPATH=@srcdir@
 
 SUBDIRS = @SUBDIRS@
 
-all : build.h DOC NEWS FAQ
+all : build.h DOC
 	for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
  	done
@@ -74,12 +74,6 @@ uninstall :
 
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
-
-NEWS : man/news.texi
-	(cd man && $(MAKE) ../NEWS )
-
-FAQ : man/faq.texi
-	(cd man && $(MAKE) ../FAQ )
 
 clean :
 	-for dir in $(SUBDIRS); do \
