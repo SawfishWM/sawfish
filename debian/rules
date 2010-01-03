@@ -56,10 +56,6 @@ clean:
 
 	[ ! -f Makefile ] || $(MAKE) distclean
 
-	rm -rf src/.libexec
-	rm -rf src/.libs
-	rm -rf autom4te.cache/
-
 	dh_clean
 	$(MAKE) -f debian/rules unpatch
 

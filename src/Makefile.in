@@ -98,10 +98,10 @@ installdirs : mkinstalldirs
 clean :
 	rm -f *~ *.o *.lo *.la *.jlc build.h core
 
-distclean: realclean
+distclean: gitclean
 
-realclean : clean
+gitclean : clean
 	rm -f .*.d sawfish sawfish-about.jl Makefile gtk-style
-	rm -rf .libs
+	rm -rf .libs .libexec
 
 -include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)
