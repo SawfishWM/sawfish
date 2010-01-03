@@ -69,9 +69,10 @@ clean :
 	done
 	rm -f *.jlc *.jld *~
 
-distclean: realclean
-
-realclean : clean
+distclean : clean
 	rm -f Makefile
 
-.PHONY : all lisp install uninstall clean realclean
+gitclean : distclean
+	rm -f *.gz
+
+.PHONY : all lisp install uninstall clean gitclean
