@@ -28,13 +28,12 @@ src_unpack() {
 
 src_compile() {
 	set -- \
-		--with-gdk-pixbuf \
-		$(use_with audiofile) \
-		$(use_with esd) 
+		--with-gdk-pixbuf
 
 	if use gnome; then
 		set -- "$@" \
 			--with-gnome-prefix=/usr
+	fi
 
 	if ! use nls; then
 		set -- "$@" \
