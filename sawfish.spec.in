@@ -13,10 +13,10 @@ BuildRequires: gmp-devel texinfo
 Provides: windowmanager
 
 %define rep_execdir %(pkg-config librep --variable=repcommonexecdir)
-%if %(kde4-config; echo $?)
-%define kde_apps %{_datadir}/kde4/apps/
+%if %{?_kde4_appsdir:1}%{!?_kde4_appsdir:0}
+%define kde_apps %{_kde4_appsdir}
 %else
-%define kde_apps %(kde4-config --install data)
+%define kde_apps %{_datadir}/kde4/apps
 %endif
 
 %description
