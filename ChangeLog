@@ -1,11 +1,17 @@
+2010-01-03  Christopher Bratusek <zanghar@freenet.de>
+	* Makefile.in: + add gitclean target
+	               + instead of removing generated packging-script files upon
+		        `distclean', remove them on `gitclean'
+		       + call fakeroot debian/rules clean
+
 2010-01-02  Christopher Bratusek <zanghar@freenet.de>
 	* po/Makefile.in: don't remove sawfish.pot upon distclean
 
 	* sawfish.pc.in: export the imageloader sawfish is configured
 	                 to make use of [required for sawfish-pager 0.7.2]
 
-	* man/news.texi: revised and updated	
-	
+	* man/news.texi: revised and updated
+
 	* sawfish.pc.in
 	* sawfish.spec.in
 	* debian/sawfish.install

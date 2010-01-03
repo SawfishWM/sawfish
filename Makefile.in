@@ -92,8 +92,15 @@ distclean :
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
-	rm -f *~ NEWS DOC* TAGS build.h sawfish.spec sawfish*.ebuild sawfish.pc
-	rm -rf aclocal.m4 autom4te.cache
+	rm -f *~ NEWS DOC* TAGS build.h
+
+gitclean:
+	rm -f aclocal.m4 configure
+	rm -rf autom4te.cache
+	rm -f sawfish.spec sawfish*.ebuild sawfish.pc
+	-fakeroot debian/rules clean
+	rm -f debian/changelog debian/control
+
 
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
