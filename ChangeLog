@@ -11,6 +11,10 @@
 
 	* sawfish.spec.in: don't call autogen.sh
 
+	* debian/rules: don't all autotools
+	                don't remove config.{guess,sub} on rules/clean
+			removed unnecessary bit
+
 2010-01-02  Christopher Bratusek <zanghar@freenet.de>
 	* po/Makefile.in: don't remove sawfish.pot upon distclean
 

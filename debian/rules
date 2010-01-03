@@ -32,12 +32,6 @@ configure: configure-stamp
 configure-stamp: $(QUILT_STAMPFN)
 	dh_testdir
 
-	cp /usr/share/misc/config.guess .
-	cp /usr/share/misc/config.sub .
-
-	aclocal
-	autoconf
-
 	CFLAGS="$(CFLAGS)" ./configure --prefix=/usr --with-readline $(confflags)
 
 # Get rid of rpath
@@ -75,14 +69,6 @@ install: build
 	dh_installdirs
 
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
-
-# Fixup libdir in .la files
-	find debian/tmp -name \*.la | while read file; do \
-	  libdir=`echo $$file | sed -e 's@debian/tmp\(.*\)/[^/]*la$$@\1@' `; \
-	  tmpfile=`mktemp`; \
-	  sed "s@^libdir=.*@libdir='$$libdir'@" $$file >$$tmpfile; \
-	  mv $$tmpfile $$file; \
-	done
 
 # Remove info files installed by Makefile. dh_installinfo will do it again without creating info.dir
 	find debian -type d -name info | xargs rm -rf
