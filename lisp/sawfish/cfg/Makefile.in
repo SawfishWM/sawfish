@@ -95,7 +95,9 @@ clean :
 	rm -f widgets/*~ widgets/*.jlc
 	rm -f layouts/*~ layouts/*.jlc
 
-realclean distclean : clean
+distclean : gitclean
+
+gitclean : clean
 	rm -f Makefile main.jl
 
-.PHONY: all install uninstall clean realclean distclean
+.PHONY: all install uninstall clean gitclean distclean

@@ -91,12 +91,12 @@ clean :
 	done
 	rm -f `find . \( -name '*.jlc' -o -name '*~' -o -name core \) -print`
 
-distclean: realclean
+distclean: gitclean
 
-realclean : clean
+gitclean : clean
 	set -e; for d in $(SUBDIRS); do \
 	  ( cd $$d && $(MAKE) $@ ); \
 	done
 	rm -f Makefile
 
-.PHONY : all lisp install uninstall clean realclean
+.PHONY : all lisp install uninstall clean gitclean

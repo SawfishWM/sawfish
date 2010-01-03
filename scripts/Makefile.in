@@ -62,7 +62,7 @@ installdirs : mkinstalldirs
 clean :
 	rm -f *~ *.jlc core
 
-distclean: realclean
+distclean : gitclean
 
-realclean : clean
+gitclean : clean
 	rm -f sawfish-about.jl Makefile

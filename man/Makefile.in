@@ -67,7 +67,7 @@ uninstall :
 clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.??? *1.gz
 
-distclean: realclean
+distclean : gitclean
 
-realclean : clean
+gitclean : clean
 	rm -f Makefile
