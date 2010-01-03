@@ -31,7 +31,6 @@ using a GTK+ interface.  Sawfish is mostly GNOME compliant
 %setup -q
 
 %build
-./autogen.sh --nocfg
 %configure
 make %{?_smp_mflags}
 
