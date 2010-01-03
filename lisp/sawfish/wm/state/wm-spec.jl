@@ -170,7 +170,16 @@
   (define (update-workspace-hints)
     (let* ((limits (workspace-limits))
 	   (port (screen-viewport))
-	   (port-size viewport-dimensions)
+           ;; Since vp size can vary from workspace to workspace, use
+           ;; the maximum dimensions accross all workspaces.
+	   (port-size (let ((dims (cons viewport-dimensions
+                                        (mapcar (lambda (e)
+                                                  (unless (eq (car e)
+                                                              current-workspace)
+                                                    (nth 3 e)))
+                                                workspace-viewport-data))))
+                        (cons (apply max (mapcar car dims))
+                              (apply max (mapcar cdr dims)))))
 	   (total-workspaces (1+ (- (cdr limits) (car limits))))
 	   (workarea (make-vector (* 4 total-workspaces)))
 	   (showing-desktop (showing-desktop-p)))
@@ -211,8 +220,14 @@
                  (if (= i total-workspaces)
                      (set-x-property 'root '_NET_DESKTOP_VIEWPORT
                                      view 'CARDINAL 32)
-                   (aset view (* i 2) (* (car port) (screen-width)))
-                   (aset view (1+ (* i 2)) (* (cdr port) (screen-height)))
+                   (if (eq i current-workspace)
+                       (progn
+                         (aset view (* i 2) (* (car port) (screen-width)))
+                         (aset view (1+ (* i 2)) (* (cdr port)
+                                                    (screen-height))))
+                     (let ((vp-data (cdr (assoc i workspace-viewport-data))))
+                       (aset view (* i 2) (car vp-data))
+                       (aset view (1+ (* i 2)) (nth 1 vp-data))))
                    (loop (1+ i))))))
 
 	;; _NET_WORKAREA
