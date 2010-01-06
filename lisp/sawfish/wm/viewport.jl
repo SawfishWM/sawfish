@@ -314,8 +314,8 @@ viewport is within `viewport-dimensions'."
       t))
 
   (define (select-workspace-and-viewport space col row)
-    (select-workspace space nil (lambda ()
-				  (set-screen-viewport col row))))
+    (select-workspace space)
+    (set-screen-viewport col row))
 
   ;; returns t if it actually moved the viewport
   (define (move-viewport right down)
