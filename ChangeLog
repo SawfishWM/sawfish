@@ -1,3 +1,8 @@
+2010-01-06  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/viewport.jl: Reset the viewport to 0,0 on exit
+		  for *all* workspaces.  This prevents windows from ending
+		  up in strange places on restart.
+
 2010-01-03  Christopher Bratusek <zanghar@freenet.de>
 	* Makefile.in: + add gitclean target
 	               + instead of removing generated packging-script files upon

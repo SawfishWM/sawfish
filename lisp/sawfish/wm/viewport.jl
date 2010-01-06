@@ -161,7 +161,13 @@ Scroll is done whose steps are `scroll-viewport-steps'."
     (call-hook 'viewport-moved-hook))
 
   (define (viewport-before-exiting)
-    (set-screen-viewport 0 0))
+    ;; Reset all workspaces to viewport 0,0.  This is so that on
+    ;; restart (or if another wm takes over) windows aren't in strange
+    ;; places.
+    (mapc (lambda (ws-data)
+            (select-workspace (car ws-data))
+            (set-screen-viewport 0 0))
+          workspace-viewport-data))
 
   (add-hook 'before-exit-hook viewport-before-exiting t)
 
