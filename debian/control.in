@@ -6,7 +6,7 @@ Standards-Version: 3.8.3
 Build-Depends: gettext (>= 0.10.37),
                debhelper (>= 7.0.0),
                libxinerama-dev,
-               rep-gtk (>= 1:@REP_GTK_MIN_VER@),
+               rep-gtk (>= 1:@REP_GTK_MIN_VER@~@gitdate@),
                libgmp3-dev (>= 4.1.4-8),
                texinfo (<< 4.11) | texinfo (>= 4.11.dfsg.1-3), 
                libgtk2.0-dev (>= @GTK_MIN_VER@),
@@ -15,8 +15,8 @@ Build-Depends: gettext (>= 0.10.37),
                autotools-dev,
                automake,
                quilt (>=0.40),
-               librep-dev (>= @REP_MIN_VER@),
-               rep (>= @REP_MIN_VER@),
+               librep-dev (>= @REP_MIN_VER@~@gitdate@),
+               rep (>= @REP_MIN_VER@~@gitdate@),
                libtool
 Homepage: http://sawfish.wikia.com/
 
