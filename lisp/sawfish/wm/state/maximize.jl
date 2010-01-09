@@ -48,7 +48,8 @@
 	    maximize-window-fullscreen
 	    maximize-window-fullscreen-toggle
 	    maximize-window-fullxinerama
-	    maximize-window-fullxinerama-toggle)
+	    maximize-window-fullxinerama-toggle
+	    maximize-discard)
 
     (open rep
 	  rep.system
@@ -88,7 +89,8 @@ that dimension.")
   (defcustom move-lock-when-maximized t
     "Lock position and size while windows are maximized."
     :type boolean
-    :group min-max)
+    :group min-max
+    :tooltip "Remember that after you resize a maximized window, you can't unmaximize it any more.")
 
   ;; called when a window is maximized, args (W #!optional DIRECTION)
   (defvar window-maximized-hook nil)
@@ -110,6 +112,7 @@ that dimension.")
   (define (window-maximized-vertically-p w)
     (window-get w 'maximized-vertically))
 
+;;; States before maximization
   (define (window-unmaximized-position w)
     (let ((coords (window-position w))
 	  (old-geom (unmaximized-geometry w)))
@@ -137,17 +140,24 @@ that dimension.")
 	(window-put w 'unmaximized-geometry (list (car coords) (cdr coords)
 						  (car dims) (cdr dims))))))
 
+  ;; Returns (x y width height)
+  (define (unmaximized-geometry w)
+    (window-get w 'unmaximized-geometry))
+
+;;; Discard states before maximization
   (define (discard-unmaximized-geometry w)
     (window-put w 'unmaximized-geometry nil)
     (pop-window-type w 'sawfish.wm.state.maximize))
 
-  (define (unmaximized-geometry w)
-    (window-get w 'unmaximized-geometry))
-
-  (define (maximize-discard w #!optional horizontally vertically)
-    (when horizontally
+  (define (maximize-discard w #!optional direction)
+    "Don't treat window as maximized any more, keeping the size and the
+position. You'll be able to move and resize, but won't be able to unmaximize.
+ If the optional argument `direction' is `vertical' or `horizontal', then
+only that direction is unmaximized.
+ If the window is not maximized, nothing happens."
+    (unless (eq direction 'vertical)
       (window-put w 'maximized-horizontally nil))
-    (when vertically
+    (unless (eq direction 'horizontal)
       (window-put w 'maximized-vertically nil))
     (let ((dims (window-dimensions w))
 	  (coords (window-absolute-position w t))
@@ -163,15 +173,35 @@ that dimension.")
 		 (not (window-maximized-horizontally-p w)))
 	(discard-unmaximized-geometry w))))
 
+  (define-command 'maximize-discard maximize-discard
+    #:spec "%W"
+    #:doc "Don't treat window as maximized any more, keeping the size and the position. You'll be able to move and resize, but won't be able to unmaximize."
+    )
+
+  #|
   (define (maximize-discard-move w directions #!key successful)
     (when successful
       (maximize-discard w (memq 'horizontal directions)
 			(memq 'vertical directions))))
 
+  ;; This is now disabled - it doesn't really make sense for moving..
+  ;; (add-hook 'after-move-hook maximize-discard-move)
+  |#
+
   (define (maximize-discard-resize w edges #!key successful)
     (when successful
-      (maximize-discard w (or (memq 'left edges) (memq 'right edges))
-			(or (memq 'top edges) (memq 'bottom edges)))))
+      (let ((horiz (or (memq 'left edges) (memq 'right edges)))
+	    (vert (or (memq 'top edges) (memq 'bottom edges))))
+	(cond
+	 ((and horiz (not vert))
+	  (maximize-discard w 'horizontal))
+	 ((and vert (not horiz))
+	  (maximize-discard w 'vertical))
+	 (t
+	  (maximize-discard w))))))
+
+  ;; After the window is resized, then the original size is meaningless.
+  (add-hook 'after-resize-hook maximize-discard-resize)
 
 ;;; 1D packing
 
@@ -674,11 +704,6 @@ t")
   (add-swapped-properties
    'unmaximized-geometry 'maximized-vertically
    'maximized-horizontally 'maximized-fullscreen)
-
-  ;; This is now disabled - it doesn't really make sense for moving..
-  ;; (add-hook 'after-move-hook maximize-discard-move)
-
-  (add-hook 'after-resize-hook maximize-discard-resize)
 
   (gaol-add window-maximized-p window-maximized-horizontally-p
 	    window-maximized-vertically-p))

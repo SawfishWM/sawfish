@@ -2203,11 +2203,13 @@ Return @code{t} when @var{window} is maximized in any direction.
 @end defun
 
 @defun window-maximized-vertically-p window
-Return @code{t} when @var{window} is vertically maximized.
+Return @code{t} when @var{window} is vertically maximized, regardless
+if it's horizontally maximized or not.
 @end defun
 
 @defun window-maximized-horizontally-p window
-Return @code{t} when @var{window} is horizontally maximized.
+Return @code{t} when @var{window} is horizontally maximized, regardless
+if it's vertically maximized or not.
 @end defun
 
 @menu
@@ -2273,6 +2275,9 @@ the windows along their maximized axes.
 
 For example, a vertically maximized window is vertically locked, so a
 user can slide it left and right, but cannot move it up or down.
+
+If you set this to @code{nil} and resize a maximized window, then
+you can't unmaximize it any more.
 @end defvr
 
 @defun window-locked-vertically-p window
@@ -2426,11 +2431,11 @@ maximization.
 Restore the position and dimensions of @var{window} to their original,
 unmaximized, states.
 
-Positions and dimensions that were not maximized are not affected by
-unmaximizing.
+If the window is maximized for example vertically but not
+horizontally, then only vertical position and dimension are restored.
 
 If defined, @var{direction} is a symbol, either @code{vertical} or
-@code{horizontal}, and maximization will only occur for that
+@code{horizontal}, and unmaximization will only occur for that
 direction.
 @end deffn
 
@@ -2438,18 +2443,29 @@ direction.
 Returns a cons-cell @code{(@var{x} . @var{y})} indicating the position
 that the @code{window} would unmaximize to.
 
-Sawfish preserves the positions of maximized axes only, so a
-vertically maximized window will be restored to its original @var{y}
-coordinate, but its @var{x} coordinate may have changed.
+If the window is maximized for example vertically but not
+horizontally, then @var{y} is the y coordinate before maximization,
+but @var{x} is the window's current x coordinate.
 @end defun
 
 @defun window-unmaximized-dimensions window
 Returns a cons-cell @code{(@var{w} . @var{h})} indicating the
 dimensions that @code{window} would unmaximize to.
 
-Sawfish preserves the dimensions of maximized axes only, so a
-vertically maximized window will be restored to its original @var{h}
-dimension, but its @var{w} coordinate may have changed.
+If the window is maximized for example vertically but not
+horizontally, then @var{y} is the height before maximization, but
+@var{x} is the window's current width.
+@end defun
+
+@defun maximize-discard window &optional direction
+Don't treat window as maximized any more, keeping the size and the
+position. You'll be able to move and resize, but won't be able to
+unmaximize.
+
+If the optional argument `direction' is `vertical' or `horizontal',
+then only that direction is unmaximized.
+
+When @var{window} is not maximized, nothing happens.
 @end defun
 
 @node Cycling Between Windows, Window Rules by Matching, Maximizing Windows, Windows
@@ -6387,7 +6403,7 @@ defined by the variable as follows:
 @item @code{hibernate} @tab @code{hibernate-command}
 @end multitable
 
-When @var{action} is @code{reboot} or @code{halt}, 
+When @var{action} is @code{reboot} or @code{halt},
 @code{before-exit-hook} is called, and @code{delete-windows} is
 applied to each window to ensure we safely quit the current session.
 @end defun
