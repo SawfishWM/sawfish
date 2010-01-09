@@ -36,18 +36,24 @@ all : sawfish.info ../NEWS ../USERDOC ../FAQ
 ../USERDOC : user-doc.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../USERDOC
 
+# Usually this suffices:
+# makeinfo --no-validate  --no-headers news.texi > ../NEWS
 ../NEWS : news.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../NEWS
 
+# Usually this suffices:
+# makeinfo --no-validate  --no-headers news.texi > ../FAQ
 ../FAQ : faq.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../FAQ
 
+# Usually this suffices:
+# makeinfo  -I . sawfish.texi -o sawfish.info
 sawfish.info : $(SRCS)
 	$(MAKEINFO) $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.info
 
 install : sawfish.info installdirs
 	for f in sawfish.info*; do \
- 	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
+	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
 	done
 	-install-info --info-dir=$(DESTDIR)$(infodir) sawfish.info
 	for f in sawfish*.1; do \

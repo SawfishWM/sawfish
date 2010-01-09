@@ -46,6 +46,8 @@
 
   (define-structure-alias shrink-yank sawfish.wm.commands.shrink-yank)
 
+;;; Customization options are defined in grow-pack.jl
+
 ;;; Commands:
 
   (define (shrink-window-left window)
@@ -69,22 +71,22 @@ overlaps with one less window than before."
     (shrink-window window 'down))
 
   (define (yank-window-left window)
-    "Yanks WINDOW to the left until it overlaps with one less window
+    "Moves WINDOW to the left until it overlaps with one less window
 than before."
     (yank-window window 'left))
 
   (define (yank-window-right window)
-    "Yanks WINDOW to the right until it overlaps with one less window
+    "Moves WINDOW to the right until it overlaps with one less window
 than before."
     (yank-window window 'right))
 
   (define (yank-window-up window)
-    "Yanks WINDOW upwards until it overlaps with one less window than
+    "Moves WINDOW upwards until it overlaps with one less window than
 before."
     (yank-window window 'up))
 
   (define (yank-window-down window)
-    "Yanks WINDOW downwards until it overlaps with one less window than
+    "Moves WINDOW downwards until it overlaps with one less window than
 before."
     (yank-window window 'down))
 

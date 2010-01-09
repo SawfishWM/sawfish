@@ -1,4 +1,4 @@
-;; nokogiri-sawfish.jl -- code to load into window manager
+;; nokogiri.jl -- interface to sawfish-config
 ;;
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 ;;

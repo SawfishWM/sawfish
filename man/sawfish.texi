@@ -1,4 +1,7 @@
 \input texinfo  @c -*-Texinfo-*-
+
+@c To compile: makeinfo  -I . sawfish.texi -o sawfish.info
+
 @setfilename sawfish.info
 @settitle sawfish Programming Manual
 @footnotestyle end
@@ -1891,108 +1894,65 @@ resize that window.
 @end deffn
 
 @deffn Command double-window-size window
-Double the size of @var{window}
+@deffnx Command halve-window-size window
+Double / halve the size of @var{window}
 @end deffn
 
-@deffn Command halve-window-size window
-Halve the size of @var{window}
-@end deffn
-
-Sawfish supports increasing a windows size until it bumps into another
+Sawfish supports increasing the windows size until it touches another
 window. This is called ``grow''. ``Shrink'' achieves the opposite,
-i.e. it decreases a windows size, until it does no longer overlap any
-other window, or more precisely, until it overlaps with one less window.
+i.e. it decreases the windows size, until it does no longer overlap any
+other window. More precisely, the grow can be done repeatedly, each
+time until the edge meets another edge, and shrink is done so that
+it overlaps with one less window.
 
 @deffn Command grow-window-up window #!optional arg
-Grows @var{window} upwards until it "bumps into" another window.
-If the top edge was beyond the screen edge, it is brought back in.
-With a universal prefix @var{arg}, maximize upwards instead. With a numeric
-prefix @var{arg}, grow upwards by that many increments specified by
-window or pixels instead.
-@end deffn
-
-@deffn Command grow-window-down window #!optional arg
-Grows @var{window} downwards until it "bumps into" another window.
-See @code{grow-window-up}.
-@end deffn
-
-@deffn Command grow-window-left window #!optional arg
-Grows @var{window} left until it "bumps into" another window.
-See @code{grow-window-up}.
-@end deffn
-
-@deffn Command grow-window-right window #!optional arg
-Grows @var{window} right until it "bumps into" another window.
-See @code{grow-window-up}.
+@deffnx Command grow-window-down window #!optional arg
+@deffnx Command grow-window-left window #!optional arg
+@deffnx Command grow-window-right window #!optional arg
+Grows @var{window} upwards / downwards / left / right until it touches
+another window.  If that edge is beyond the screen edge, it is
+brought back in. With a universal prefix @var{arg}, maximize in that
+direction instead. With a numeric prefix @var{arg}, grow by that many
+increments specified by window or pixels instead.
 @end deffn
 
 @deffn Command shrink-window-up window
-Shrinks @var{window} by moving the lower edge upwards until it
-intersects with one window less than before.
-@end deffn
+@deffnx Command shrink-window-down window
+@deffnx Command shrink-window-left window
+@deffnx Command shrink-window-right window
+Shrinks @var{window} by moving one edge upwards / downwards / left /
+right until it intersects with one window less than before. (So,
+in @code{shrink-window-up} for example, the lower edge is moved.)
 
-@deffn Command shrink-window-down window
-Shrinks @var{window} by moving the upper edge downwards until it
-intersects with one window less than before.
-@end deffn
-
-@deffn Command shrink-window-left window
-Shrinks @var{window} by moving the right edge to the left until it
-intersects with one window less than before.
-@end deffn
-
-@deffn Command shrink-window-right window
-Shrinks @var{window} by moving the left edge to the right until it
-intersects with one window less than before.
+Window won't be made smaller than the minimum size, or
+@code{shrink-window-minimum-size}. More precisely, size truncation
+may make the window smaller than these values.
 @end deffn
 
 Moving counterparts, instead of resizing of ``grow'' and ``shrink'',
-are ``pack'' and ``yank''. So, ``pack'' moves until the window bumps
-into another, and ``yank'' moves until the overlap reduces.
+are ``pack'' and ``yank''. So, ``pack'' moves until the window touches
+another, and ``yank'' moves until the overlap reduces.
 
 @deffn Command pack-window-up window #! optional arg
-Moves @var{window} upwards until it "bumps into" another window.
-If the top edge was beyond the screen edge, it is moved back in.
-With a universal prefix @var{arg}, move upwards maximally instead.
-With a numeric prefix @var{arg}, move upwards by that many pixels instead.
-@end deffn
-
-@deffn Command pack-window-down #!optional arg
-Moves @var{window} downwards until it "bumps into" another window.
-See @code{pack-window-up}.
-@end deffn
-
-@deffn Command pack-window-left window #!optional arg
-Moves @var{window} left until it "bumps into" another window.
-See @code{pack-window-up}.
-@end deffn
-
-@deffn Command pack-window-right window #!optional arg
-Moves @var{window} right until it "bumps into" another window.
-See @code{pack-window-up}.
+@deffnx Command pack-window-down #!optional arg
+@deffnx Command pack-window-left window #!optional arg
+@deffnx Command pack-window-right window #!optional arg
+Moves @var{window} upwards / downwards / left /right until it touches
+another window.  If that edge is beyond the screen edge, it is moved
+back in.  With a universal prefix @var{arg}, move in that direction
+maximally instead.  With a numeric prefix @var{arg}, move by that many
+pixels instead.
 @end deffn
 
 @deffn Command yank-window-up window
-Yanks @var{window} upwards until it inserts with one window less than
-before.
+@deffnx Command yank-window-down window
+@deffnx Command yank-window-left window
+@deffnx Command yank-window-right window
+Yanks @var{window} upwards / downwards / left / right until it
+overlaps with one less window than before.
 @end deffn
 
-@deffn Command yank-window-down window
-Yanks @var{window} downwards until it inserts with one window less than
-before.
-@end deffn
-
-@deffn Command yank-window-left window
-Yanks @var{window} left until it inserts with one window less than
-before.
-@end deffn
-
-@deffn Command yank-window-right window
-Yanks @var{window} right until it inserts with one window less than
-before.
-@end deffn
-
-grow, pack, shrink and yank behavior can be customized through the
+Grow, pack, shrink and yank behavior can be customized through the
 following variables:
 
 @defvar grow-is-maximize
@@ -2034,8 +1994,8 @@ The default value is @code{10}.
 @end defvar
 
 @defvar yank-window-minimum-visible
-The minimum amount of window left visible, if yanked over the edge.
-The default value is @code{10}.
+The minimum amount of window left visible, if yanked over the screen
+edge. The default value is @code{10}.
 @end defvar
 
 @deffn Command move-window-center windows

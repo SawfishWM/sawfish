@@ -1,4 +1,4 @@
-;; compat.jl -- aliases for obsolete functions
+;; compat.jl -- support for obsolete functions and variables
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -35,7 +35,7 @@
 	  sawfish.wm.commands
 	  sawfish.wm.workspace)
 
-;;; obsolete functions
+;;; obsolete functions are collected here
 
   (define (show-message #!optional text font fg bg position)
     (let ((attrs nil))
@@ -49,6 +49,7 @@
 	(setq attrs (cons (cons 'position position) attrs)))
       (display-message text attrs)))
 
+  ;; Define alias for Renamed functions. 
   (define ws-copy-window copy-window-to-workspace)
   (define ws-move-window move-window-to-workspace)
   (define ws-insert-workspace insert-workspace)
@@ -80,6 +81,10 @@
 
 ;;; obsolete options
 
+  ;; 1. If these options are set in ~/.sawfish/custom, then they are
+  ;;    ignored. This means the next time you save the file `custom',
+  ;;    they are removed.
+  ;; 2. You can't set value to them via custom related methods.
   (mapc (lambda (x)
 	  (put x 'custom-obsolete t))
 	'(viewport-columns viewport-rows preallocated-workspaces

@@ -1,4 +1,4 @@
-;; nokogiri-wm.jl -- WM communication
+;; wm.jl -- interface to WM as a server
 ;;
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 ;;

@@ -20,9 +20,9 @@
 
 ;; This package provides functions to `grow' or `pack' a window in four
 ;; directions.  `Growing' means to grow the window in the indicated
-;; direction until it `bumps into' another window or by a given amount.
+;; direction until it touches another window or by a given amount.
 ;; `Packing' means to move the window in the indicated direction until
-;; it `bumps into' another window or by a given amount.
+;; it touches another window or by a given amount.
 
 (define-structure sawfish.wm.commands.grow-pack
 
@@ -101,17 +101,17 @@ Only `avoided' windows are bumped."
   ;; Entry points.
 
   (define (grow-window-left w #!optional arg)
-    "Grows window to the left until it `bumps into' another window.
+    "Grows window to the left until it touches another window.
 See `grow-window-up'."
     (grow-window w 'left arg))
 
   (define (grow-window-right w #!optional arg)
-    "Grows window to the right until it `bumps into' another window.
+    "Grows window to the right until it touches another window.
 See `grow-window-up'."
     (grow-window w 'right arg))
 
   (define (grow-window-up w #!optional arg)
-    "Grows window upwards until it `bumps into' another window.
+    "Grows window upwards until it touches another window.
 If the top edge was beyond the screen edge, it is brought back in.
 With a universal prefix arg, maximize upwards instead.
 With a numeric prefix arg, grow upwards by that many increments specified by
@@ -119,29 +119,29 @@ window or pixels instead."
     (grow-window w 'up arg))
 
   (define (grow-window-down w #!optional arg)
-    "Grows window downwards until it `bumps into' another window.
+    "Grows window downwards until it touches another window.
 See `grow-window-up'."
     (grow-window w 'down arg))
 
   (define (pack-window-left w #!optional arg)
-    "Moves window to the left until it `bumps into' another window.
+    "Moves window to the left until it touches another window.
 See `pack-window-up'."
     (pack-window w 'left arg))
 
   (define (pack-window-right w #!optional arg)
-    "Moves window to the right until it `bumps into' another window.
+    "Moves window to the right until it touches another window.
 See `pack-window-up'."
     (pack-window w 'right arg))
 
   (define (pack-window-up w #!optional arg)
-    "Moves window upwards until it `bumps into' another window.
+    "Moves window upwards until it touches another window.
 If the top edge was beyond the screen edge, it is moved back in.
 With a universal prefix arg, move upwards maximally instead.
 With a numeric prefix arg, move upwards by that many pixels instead."
     (pack-window w 'up arg))
 
   (define (pack-window-down w #!optional arg)
-    "Moves window downwards until it `bumps into' another window.
+    "Moves window downwards until it touches another window.
 See `pack-window-up'."
     (pack-window w 'down arg))
 
