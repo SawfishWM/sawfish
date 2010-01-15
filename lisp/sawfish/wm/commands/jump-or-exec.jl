@@ -44,7 +44,8 @@
 	  rep.regexp
           sawfish.wm.misc
           sawfish.wm.windows
-	  sawfish.wm.util.display-window)
+	  sawfish.wm.util.display-window
+	  sawfish.wm.commands)
 
   (define (jump-or-exec re prog #!optional class onfocused)
     "jump to a window matched by re, or start program otherwise."
@@ -65,4 +66,4 @@
                 (funcall prog)
               (system (concat prog "&")))))))
 
-  (define-command 'jump-or-exec jump-or-exec #:class default))
+  (define-command 'jump-or-exec jump-or-exec #:class 'default))
