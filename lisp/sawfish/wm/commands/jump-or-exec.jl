@@ -46,21 +46,23 @@
           sawfish.wm.windows
 	  sawfish.wm.util.display-window)
 
-(define (jump-or-exec re prog #!optional class onfocused)
-  "jump to a window matched by re, or start program otherwise."
-  (catch 'return
-    (let ((wind (if class
-                  (get-window-by-class-re re)
-                  (get-window-by-name-re re))))
-      (if (functionp onfocused) ; check if already focused
-          (let ((curwin (input-focus)))
-            (if curwin
-                (if (string-match re (window-name curwin))
-                    (progn
-                      (funcall onfocused wind)
-                      (throw 'return))))))
-      (if (windowp wind)
-          (display-window wind)
-        (if (functionp prog)
-            (funcall prog)
-          (system (concat prog "&"))))))))
+  (define (jump-or-exec re prog #!optional class onfocused)
+    "jump to a window matched by re, or start program otherwise."
+    (catch 'return
+      (let ((wind (if class
+                    (get-window-by-class-re re)
+                    (get-window-by-name-re re))))
+        (if (functionp onfocused) ; check if already focused
+            (let ((curwin (input-focus)))
+              (if curwin
+                  (if (string-match re (window-name curwin))
+                      (progn
+                        (funcall onfocused wind)
+                        (throw 'return))))))
+        (if (windowp wind)
+            (display-window wind)
+          (if (functionp prog)
+                (funcall prog)
+              (system (concat prog "&")))))))
+
+  (define-command 'jump-or-exec jump-or-exec #:class default))
