@@ -2187,6 +2187,9 @@ then the window will appear in its shaded state.
 The dimensions of a window may be temporarily @dfn{maximized},
 stretching as far as possible within the screen in one or two dimensions.
 
+If you have multiple monitors, maximization is done within a head,
+unless stated explicitly that it's xinerama.
+
 @defun window-maximizable-p window &optional direcion hints
 Return @code{t} when @var{window} is maximizable. The window property
 @var{never-maximize} prevents maximization.
@@ -4698,9 +4701,17 @@ Remove the edge windows used to implement flipping.
 @cindex Multi-head environments
 @cindex Environments, multi-head
 @cindex Monitors, multiple
+@cindex Xinerama
 
-Sawfish has special functions to support environments with multiple
-monitors displaying a single logical screen (as provided by Xinerama).
+Sawfish supports multiple monitors displaying a single logical screen,
+as provided by Xinerama.
+
+A ``head'' means each physical monitor. When there're multiple heads,
+the word ``screen'' means the entire screen which is the combination
+of all heads. For example the function @code{screen-width} returns the
+width of the ``screen'' in this sense. A viewport contains the entire
+screen.  The only exception is that maximization is done within a
+head, unless stated explicitly that it's xinerama.
 
 @defun find-head x y
 Return a ID for the display head that point (@var{x}, @var{y}) is in.
@@ -4738,7 +4749,7 @@ window.  If @var{window} is supplied and @var{nil}, return
 @end defun
 
 @defun window-head-any-viewport window
-Like @code{current-head}, this will return the ID of the heand
+Like @code{current-head}, this will return the ID of the head
 containing the specified window.  But unlike @code{current-head},
 @code{window-head-any-viewport} returns the head that the window would
 be in if its viewport were the visible viewport.
