@@ -23,6 +23,15 @@ window.
 
 The functinon @code{maximize-discard} has existed, and now it's
 exported.
+
+@item New command @code{jump-or-exec} [Christopher Bratusek]
+
+The thirdparty module jump-or-exec has been merged. It provides
+@code{jump-or-exec}, a command which may be used to focus a window,
+or if it does not exist, start the application. Unlike the original
+version this one also supports matching a window by it's WM_CLASS,
+which makes it more flexible for applications like musicplayer or
+browsers, which tend to change their WM_NAME relatively often.
 @end itemize
 @end itemize
 
