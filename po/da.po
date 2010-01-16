@@ -1,18 +1,34 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Danish translation of Sawfish strings.
+# Copyright (C) 1999, 2000, 01, 02, 09 Free Software Foundation, Inc.
+# Kenneth Christiansen <kenneth@gnome.org>, 1999, 2000.
+# Birger Langkjer <birger.langkjer@image.dk>, 1999.
+# Keld Simonsen <keld@dkuug.dk>, 2000
+# Ole Laursen <olau@hardworking.dk>, 2001, 02.
+# Joe Hansen (joedalton2@yahoo.dk), 2009.
+# Korrekturlæst Ask Hjorth Larsen, 2009.
 #
-#, fuzzy
+# Konventioner:
+#
+#   viewport -> visningsområde
+#   workspace -> arbejdsområde (kan indeholde flere visningsområder)
+#   delete (a window) -> fjerne (et vindue)
+#   destroy (a window) -> dræbe (et vindue)
+#   stacking -> stabling
+#   keymap -> tastekombinationsliste
+#   iconify -> minimere (ikke ikonificere da vinduerne ikke bliver til ikoner)
+#   pass through click -> videresend klik
+#   transient -> midlertidigt [under]vindue
+#   dialog -> meddelelsesvindue
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=sawfish&component=general\n"
 "POT-Creation-Date: 2009-10-24 07:49+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-12-11 12:42+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,171 +36,172 @@ msgstr ""
 #: ../lisp/sawfish/gtk/widgets/alist.jl:36
 #: ../lisp/sawfish/cfg/widgets/keymap.jl:65
 msgid "Key"
-msgstr ""
+msgstr "Tast"
 
 #: ../lisp/sawfish/gtk/widgets/alist.jl:37
 msgid "Value"
-msgstr ""
+msgstr "Værdi"
 
 #: ../lisp/sawfish/gtk/widgets/file.jl:32
 #: ../lisp/sawfish/gtk/widgets/font.jl.in:44
 msgid "Browse..."
-msgstr ""
+msgstr "Gennemse..."
 
 #: ../lisp/sawfish/gtk/widgets/file.jl:42
 msgid "Select file"
-msgstr ""
+msgstr "Vælg fil"
 
 #: ../lisp/sawfish/gtk/widgets/font.jl.in:54
 msgid "Select font"
-msgstr ""
+msgstr "Vælg skrifttype"
 
 #: ../lisp/sawfish/gtk/widgets/list.jl:52
 msgid "Add..."
-msgstr ""
+msgstr "Tilføj..."
 
 #: ../lisp/sawfish/gtk/widgets/list.jl:53
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 #: ../lisp/sawfish/gtk/widgets/list.jl:54
 msgid "Edit..."
-msgstr ""
+msgstr "Redigér..."
 
 #: ../lisp/sawfish/gtk/widgets/list.jl:91
 #: ../lisp/sawfish/gtk/widgets/list.jl:92
 msgid "Add:"
-msgstr ""
+msgstr "Tilføj:"
 
 #: ../lisp/sawfish/gtk/widgets/list.jl:124
 #: ../lisp/sawfish/gtk/widgets/list.jl:126
 msgid "Edit:"
-msgstr ""
+msgstr "Redigér:"
 
 #: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:31
 #: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:35
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: ../lisp/sawfish/gtk/widgets/scheme-boolean.jl:35
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 #: ../lisp/sawfish/gtk/widget.jl:377
 #, librep-format
 msgid "No matching item for %S"
-msgstr ""
+msgstr "Intet matchende punkt til %S"
 
 #: ../lisp/sawfish/gtk/widget.jl:507
 #, librep-format
 msgid "** unknown widget **  "
-msgstr ""
+msgstr "** ukendt kontrol **  "
 
 #: ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl:32
 #: ../lisp/sawfish/cfg/widgets/workspace-geometry.jl:32
 msgid "Workspaces:"
-msgstr ""
+msgstr "Arbejdsområder:"
 
 #: ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl:33
 #: ../lisp/sawfish/cfg/widgets/workspace-geometry.jl:33
 msgid "Columns:"
-msgstr ""
+msgstr "Kolonner:"
 
 #: ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl:34
 #: ../lisp/sawfish/cfg/widgets/workspace-geometry.jl:34
 msgid "Rows:"
-msgstr ""
+msgstr "Rækker:"
 
 #: ../lisp/sawfish/cfg/apply.jl:84
 #, librep-format
 msgid "While changing %s:"
-msgstr ""
+msgstr "Under ændring af %s:"
 
 #: ../lisp/sawfish/cfg/apply.jl:106
 msgid "Sawfish Error"
-msgstr ""
+msgstr "Sawfish-fejl"
 
 #: ../lisp/sawfish/cfg/shell.jl:101 ../lisp/sawfish/cfg/shell.jl:102
 msgid "Sawfish Configurator"
-msgstr ""
+msgstr "Opsætning af Sawfish"
 
 #: ../lisp/sawfish/cfg/layouts/keymaps.jl:52
 msgid "Context:"
-msgstr ""
+msgstr "Kontekst:"
 
 #: ../lisp/sawfish/cfg/widgets/command.jl:51
 #: ../lisp/sawfish/cfg/widgets/keymap.jl:65 ../lisp/sawfish/wm/commands.jl:371
 msgid "Command"
-msgstr ""
+msgstr "Kommando"
 
 #: ../lisp/sawfish/cfg/widgets/command.jl:65
 msgid "Undocumented"
-msgstr ""
+msgstr "Udokumenteret"
 
 #: ../lisp/sawfish/cfg/widgets/event.jl:34
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:52
 msgid "Grab..."
-msgstr ""
+msgstr "Fang..."
 
 #: ../lisp/sawfish/cfg/widgets/keymap.jl:53
 msgid "Edit Binding"
-msgstr ""
+msgstr "Redigér binding"
 
 #: ../lisp/sawfish/cfg/widgets/keymap.jl:84
 msgid "Key:"
-msgstr ""
+msgstr "Tast:"
 
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:41
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:242
 msgid "Matchers"
-msgstr ""
+msgstr "Indfangere"
 
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:119
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:242
 msgid "Actions"
-msgstr ""
+msgstr "Handlinger"
 
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:207
 msgid "not"
-msgstr ""
+msgstr "ikke"
 
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:228
 msgid "Match Window Properties"
-msgstr ""
+msgstr "Tilpas vinduesegenskaber"
 
 #: ../lisp/sawfish/wm/autoload.jl:195 ../lisp/sawfish/wm/autoload.jl:196
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:50
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:62
 msgid "Index:"
-msgstr ""
+msgstr "Indeks:"
 
 #: ../lisp/sawfish/wm/commands.jl:364
 msgid "Command:"
-msgstr ""
+msgstr "Kommando:"
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
-msgstr ""
+msgstr "Hændelse"
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:76
 msgid "Audio file"
-msgstr ""
+msgstr "Lydfil"
 
 #: ../lisp/sawfish/wm/ext/error-handler.jl:82
 msgid "No errors."
-msgstr ""
+msgstr "Ingen fejl."
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:71
 msgid "Placement"
-msgstr ""
+msgstr "Placering"
 
+# forsøg på at koordinere med capplet-tingesterne
 #: ../lisp/sawfish/wm/ext/match-window.jl:89
 msgid "Focus"
-msgstr ""
+msgstr "Fokusopførsel"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:95
 msgid "Appearance"
-msgstr ""
+msgstr "Udseende"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:100
 msgid "State"
@@ -192,428 +209,428 @@ msgstr "Tilstand"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:117
 msgid "Other"
-msgstr ""
+msgstr "Andre"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:82
 msgid "Remember _position"
-msgstr ""
+msgstr "Husk _position"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:83
 msgid "Remember _dimensions"
-msgstr ""
+msgstr "Husk _størrelse"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:84
 msgid "Remember _attributes"
-msgstr ""
+msgstr "Husk _egenskaber"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:86
 msgid "_Forget saved state"
-msgstr ""
+msgstr "_Glem gemte oplysninger"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:376
 msgid "_History"
-msgstr ""
+msgstr "_Historie"
 
 #: ../lisp/sawfish/wm/frames.jl:535
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: ../lisp/sawfish/wm/frames.jl:542
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../lisp/sawfish/wm/frames.jl:545
 msgid "Title-only"
-msgstr ""
+msgstr "Kun titel"
 
 #: ../lisp/sawfish/wm/frames.jl:548
 msgid "Border-only"
-msgstr ""
+msgstr "Kun kant"
 
 #: ../lisp/sawfish/wm/frames.jl:551
 msgid "Top-border"
-msgstr ""
+msgstr "Topkant"
 
 #: ../lisp/sawfish/wm/frames.jl:554
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 #. add some GNOME help menus
 #. add some KDE help menus
 #: ../lisp/sawfish/wm/integration/gnome.jl:42
 #: ../lisp/sawfish/wm/integration/kde.jl:42 ../lisp/sawfish/wm/menus.jl:158
 msgid "_Help"
-msgstr ""
+msgstr "_Hjælp"
 
 #: ../lisp/sawfish/wm/integration/gnome.jl:45
 msgid "_GNOME Help"
-msgstr ""
+msgstr "_GNOME's hjælp"
 
 #: ../lisp/sawfish/wm/integration/gnome.jl:46
 msgid "GNOME Website"
-msgstr ""
+msgstr "GNOME's hjemmeside"
 
 #: ../lisp/sawfish/wm/integration/gnome.jl:47
 msgid "About GNOME"
-msgstr ""
+msgstr "Om GNOME"
 
 #. add gnome-logout menu item
 #. add kde-logout menu item
 #: ../lisp/sawfish/wm/integration/gnome.jl:50
 #: ../lisp/sawfish/wm/integration/kde.jl:49 ../lisp/sawfish/wm/menus.jl:151
 msgid "Sessi_on"
-msgstr ""
+msgstr "_Session"
 
 #: ../lisp/sawfish/wm/integration/gnome.jl:53
 msgid "_Logout from GNOME"
-msgstr ""
+msgstr "_Log ud af GNOME"
 
 #: ../lisp/sawfish/wm/integration/gnome.jl:55
 msgid "_Shutdown from GNOME"
-msgstr ""
+msgstr "_Luk ned fra GNOME"
 
 #: ../lisp/sawfish/wm/integration/kde.jl:45
 msgid "_KDE Help"
-msgstr ""
+msgstr "_KDE's hjælp"
 
 #: ../lisp/sawfish/wm/integration/kde.jl:46
 msgid "KDE Website"
-msgstr ""
+msgstr "KDE's hjemmeside"
 
 #: ../lisp/sawfish/wm/integration/kde.jl:53
 msgid "_Logout from KDE"
-msgstr ""
+msgstr "_Log ud fra KDE"
 
 #: ../lisp/sawfish/wm/integration/kde.jl:55
 msgid "_Reboot from KDE"
-msgstr ""
+msgstr "_Genstart fra KDE"
 
 #: ../lisp/sawfish/wm/integration/kde.jl:57
 msgid "_Shutdown from KDE"
-msgstr ""
+msgstr "_Luk ned fra KDE"
 
 #: ../lisp/sawfish/wm/menus.jl:87
 msgid "Mi_nimize"
-msgstr ""
+msgstr "M_inimér"
 
 #: ../lisp/sawfish/wm/menus.jl:92
 msgid "Unma_ximize"
-msgstr ""
+msgstr "Gend_an"
 
 #: ../lisp/sawfish/wm/menus.jl:93
 msgid "Ma_ximize"
-msgstr ""
+msgstr "M_aksimér"
 
 #: ../lisp/sawfish/wm/menus.jl:97
 msgid "_Move"
-msgstr ""
+msgstr "_Flyt"
 
 #: ../lisp/sawfish/wm/menus.jl:98
 msgid "_Resize"
-msgstr ""
+msgstr "_Ændr størrelse"
 
 #: ../lisp/sawfish/wm/menus.jl:99
 msgid "_Close"
-msgstr ""
+msgstr "_Luk"
 
 #: ../lisp/sawfish/wm/menus.jl:101
 msgid "_Toggle"
-msgstr ""
+msgstr "Slå _til/fra"
 
 #: ../lisp/sawfish/wm/menus.jl:102
 msgid "In _group"
-msgstr ""
+msgstr "Tilhører _gruppe"
 
 #: ../lisp/sawfish/wm/menus.jl:103
 msgid "_Send window to"
-msgstr ""
+msgstr "_Send vindue til"
 
 #: ../lisp/sawfish/wm/menus.jl:104
 msgid "_Previous workspace"
-msgstr ""
+msgstr "_Forrige arbejdsområde"
 
 #: ../lisp/sawfish/wm/menus.jl:105
 msgid "_Next workspace"
-msgstr ""
+msgstr "_Næste arbejdsområde"
 
 #: ../lisp/sawfish/wm/menus.jl:106
 msgid "C_opy window to"
-msgstr ""
+msgstr "_Kopier vindue til"
 
 #: ../lisp/sawfish/wm/menus.jl:107
 msgid "P_revious workspace"
-msgstr ""
+msgstr "_Forrige arbejdsområde"
 
 #: ../lisp/sawfish/wm/menus.jl:108
 msgid "Ne_xt workspace"
-msgstr ""
+msgstr "_Næste arbejdsområde"
 
 #: ../lisp/sawfish/wm/menus.jl:109
 msgid "_Grow & Pack"
-msgstr ""
+msgstr "_Forstør & pak"
 
 #: ../lisp/sawfish/wm/menus.jl:110
 msgid "Grow left"
-msgstr ""
+msgstr "Forstør mod venstre"
 
 #: ../lisp/sawfish/wm/menus.jl:111
 msgid "Grow right"
-msgstr ""
+msgstr "Forstør mod højre"
 
 #: ../lisp/sawfish/wm/menus.jl:112
 msgid "Grow up"
-msgstr ""
+msgstr "Forstør opad"
 
 #: ../lisp/sawfish/wm/menus.jl:113
 msgid "Grow down"
-msgstr ""
+msgstr "Forstør nedad"
 
 #: ../lisp/sawfish/wm/menus.jl:115
 msgid "Pack left"
-msgstr ""
+msgstr "Indpas mod venstre"
 
 #: ../lisp/sawfish/wm/menus.jl:116
 msgid "Pack right"
-msgstr ""
+msgstr "Indpas mod højre"
 
 #: ../lisp/sawfish/wm/menus.jl:117
 msgid "Pack up"
-msgstr ""
+msgstr "Indpas opad"
 
 #: ../lisp/sawfish/wm/menus.jl:118
 msgid "Pack down"
-msgstr ""
+msgstr "Indpas nedad"
 
 #: ../lisp/sawfish/wm/menus.jl:119
 msgid "Shrink & _Yank"
-msgstr ""
+msgstr "Formindsk & _indpas"
 
 #: ../lisp/sawfish/wm/menus.jl:120
 msgid "Shrink left"
-msgstr ""
+msgstr "Formindsk mod venstre"
 
 #: ../lisp/sawfish/wm/menus.jl:121
 msgid "Shrink right"
-msgstr ""
+msgstr "Formindsk mod højre"
 
 #: ../lisp/sawfish/wm/menus.jl:122
 msgid "Shrink up"
-msgstr ""
+msgstr "Formindsk opad"
 
 #: ../lisp/sawfish/wm/menus.jl:123
 msgid "Shrink down"
-msgstr ""
+msgstr "Formindsk nedad"
 
 #: ../lisp/sawfish/wm/menus.jl:125
 msgid "Yank left"
-msgstr ""
+msgstr "Indpas mod venstre"
 
 #: ../lisp/sawfish/wm/menus.jl:126
 msgid "Yank right"
-msgstr ""
+msgstr "Indpas mod højre"
 
 #: ../lisp/sawfish/wm/menus.jl:127
 msgid "Yank up"
-msgstr ""
+msgstr "Indpas opad"
 
 #: ../lisp/sawfish/wm/menus.jl:128
 msgid "Yank down"
-msgstr ""
+msgstr "Indpas nedad"
 
 #: ../lisp/sawfish/wm/menus.jl:129
 msgid "Stac_king"
-msgstr ""
+msgstr "Sta_bling"
 
 #: ../lisp/sawfish/wm/menus.jl:130
 msgid "_Raise"
-msgstr ""
+msgstr "_Hæv"
 
 #: ../lisp/sawfish/wm/menus.jl:131
 msgid "_Lower"
-msgstr ""
+msgstr "_Sænk"
 
 #: ../lisp/sawfish/wm/menus.jl:133
 msgid "_Upper layer"
-msgstr ""
+msgstr "Hæ_v lag"
 
 #: ../lisp/sawfish/wm/menus.jl:134
 msgid "Lo_wer layer"
-msgstr ""
+msgstr "Sænk _lag"
 
 #: ../lisp/sawfish/wm/menus.jl:135
 msgid "Frame ty_pe"
-msgstr ""
+msgstr "Rammet_ype"
 
 #: ../lisp/sawfish/wm/menus.jl:136
 msgid "Frame sty_le"
-msgstr ""
+msgstr "_Rammestil"
 
 #: ../lisp/sawfish/wm/menus.jl:143
 msgid "Sawfish Rootmenu"
-msgstr ""
+msgstr "Sawfishs hovedmenu"
 
 #: ../lisp/sawfish/wm/menus.jl:145
 msgid "_Windows"
-msgstr ""
+msgstr "_Vinduer"
 
 #: ../lisp/sawfish/wm/menus.jl:146
 msgid "Work_spaces"
-msgstr ""
+msgstr "_Arbejdsområder"
 
 #: ../lisp/sawfish/wm/menus.jl:148
 msgid "_Programs"
-msgstr ""
+msgstr "_Programmer"
 
 #: ../lisp/sawfish/wm/menus.jl:149
 msgid "_Customize"
-msgstr ""
+msgstr "_Indstillinger"
 
 #: ../lisp/sawfish/wm/menus.jl:152
 msgid "Display Errors"
-msgstr ""
+msgstr "Vis fejl"
 
 #: ../lisp/sawfish/wm/menus.jl:153
 msgid "Reload Appsmenu"
-msgstr ""
+msgstr "Genindlæs programmenu"
 
 #: ../lisp/sawfish/wm/menus.jl:155
 msgid "Restart Sawfish"
-msgstr ""
+msgstr "Genstart Sawfish"
 
 #: ../lisp/sawfish/wm/menus.jl:156
 msgid "Quit Sawfish"
-msgstr ""
+msgstr "Afslut Sawfish"
 
 #: ../lisp/sawfish/wm/menus.jl:159
 msgid "_FAQ..."
-msgstr ""
+msgstr "_OSS..."
 
 #: ../lisp/sawfish/wm/menus.jl:160
 msgid "_News..."
-msgstr ""
+msgstr "_Nyheder..."
 
 #: ../lisp/sawfish/wm/menus.jl:161
 msgid "_WWW page..."
-msgstr ""
+msgstr "Net_side..."
 
 #: ../lisp/sawfish/wm/menus.jl:162
 msgid "_Manual..."
-msgstr ""
+msgstr "_Manual..."
 
 #: ../lisp/sawfish/wm/menus.jl:164
 msgid "_About Sawfish..."
-msgstr ""
+msgstr "Om S_awfish..."
 
 #: ../lisp/sawfish/wm/menus.jl:166
 msgid "Kill Window"
-msgstr ""
+msgstr "Dræb vindue"
 
 #: ../lisp/sawfish/wm/menus.jl:381
 msgid "S_awfishConfig"
-msgstr ""
+msgstr "Opsætning af _Sawfish"
 
 #: ../lisp/sawfish/wm/menus.jl:388
 msgid "Edit theme..."
-msgstr ""
+msgstr "Ændr tema..."
 
 #: ../lisp/sawfish/wm/state/iconify.jl:255
 msgid "_Sticky"
-msgstr ""
+msgstr "_Klæbrig"
 
 #: ../lisp/sawfish/wm/state/ignored.jl:105
 msgid "_Ignored"
-msgstr ""
+msgstr "_Ignoreret"
 
 #: ../lisp/sawfish/wm/state/ignored.jl:107
 msgid "_Focusable"
-msgstr ""
+msgstr "_Fokusérbar"
 
 #: ../lisp/sawfish/wm/state/ignored.jl:109
 msgid "_Cyclable"
-msgstr ""
+msgstr "I _gennemgangsliste"
 
 #: ../lisp/sawfish/wm/state/ignored.jl:111
 msgid "In _window list"
-msgstr ""
+msgstr "I _vinduesliste"
 
 #: ../lisp/sawfish/wm/state/ignored.jl:113
 msgid "In _task list"
-msgstr ""
+msgstr "I _opgaveliste"
 
 #: ../lisp/sawfish/wm/state/shading.jl:112
 msgid "S_haded"
-msgstr ""
+msgstr "_Oprullet"
 
 #: ../lisp/sawfish/wm/util/groups.jl:153
 msgid "New group"
-msgstr ""
+msgstr "Ny gruppe"
 
 #: ../lisp/sawfish/wm/util/keymap.jl:175
 msgid "Press key..."
-msgstr ""
+msgstr "Tryk en tastekombination..."
 
 #: ../lisp/sawfish/wm/util/keymap.jl:199
 msgid "[Quote]"
-msgstr ""
+msgstr "[Citat]"
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:50
 msgid "Window:"
-msgstr ""
+msgstr "Vindue:"
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:62 ../lisp/sawfish/wm/workspace.jl:982
 #, librep-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "Arbejdsområde %d"
 
 #: ../lisp/sawfish/wm/util/prompt-wm.jl:76 ../lisp/sawfish/wm/workspace.jl:898
 #: ../lisp/sawfish/wm/workspace.jl:906 ../lisp/sawfish/wm/workspace.jl:914
 msgid "Workspace:"
-msgstr ""
+msgstr "Arbejdsområde:"
 
 #: ../lisp/sawfish/wm/viewport.jl:455 ../lisp/sawfish/wm/viewport.jl:465
 msgid "Column:"
-msgstr ""
+msgstr "Kolonne:"
 
 #: ../lisp/sawfish/wm/viewport.jl:456 ../lisp/sawfish/wm/viewport.jl:474
 msgid "Row:"
-msgstr ""
+msgstr "Række:"
 
 #: ../lisp/sawfish/wm/workspace.jl:137
 msgid "Workspace names"
-msgstr ""
+msgstr "Navn på arbejdsområde"
 
 #: ../lisp/sawfish/wm/workspace.jl:154
 msgid "_Insert workspace"
-msgstr ""
+msgstr "_Indsæt arbejdsområde"
 
 #: ../lisp/sawfish/wm/workspace.jl:155
 msgid "Select _next workspace"
-msgstr ""
+msgstr "Vælg _næste arbejdsområde"
 
 #: ../lisp/sawfish/wm/workspace.jl:156
 msgid "Select _previous workspace"
-msgstr ""
+msgstr "Vælg _forrige arbejdsområde"
 
 #: ../lisp/sawfish/wm/workspace.jl:157
 msgid "Merge with next"
-msgstr ""
+msgstr "Flet med næste"
 
 #: ../lisp/sawfish/wm/workspace.jl:158
 msgid "Merge with previous"
-msgstr ""
+msgstr "Flet med forrige"
 
 #: ../lisp/sawfish/wm/workspace.jl:159
 msgid "Move workspace _right"
-msgstr ""
+msgstr "Flyt arbejdsområde til h_øjre"
 
 #: ../lisp/sawfish/wm/workspace.jl:160
 msgid "Move workspace _left"
-msgstr ""
+msgstr "Flyt arbejdsområde til _venstre"
 
 #: ../lisp/sawfish/wm/workspace.jl:643
 #, librep-format
 msgid "space %d"
-msgstr ""
+msgstr "område %d"
 
 msgid "and many others..."
 msgstr "og mange andre..."
@@ -1017,3 +1034,2366 @@ msgstr "Håndtering af fejl"
 
 msgid "Select Icon"
 msgstr "Vælg ikon"
+
+#~ msgid "Crux Theme"
+#~ msgstr "Crux-temaet"
+
+#~ msgid ""
+#~ "Accent color for focused windows (if unset uses the GTK+ selection color)."
+#~ msgstr ""
+#~ "Accentfarve for vinduer med fokus (bruger ellers GTK+-baggrundsfarve)."
+
+#~ msgid "Display the window's icon in its menu button."
+#~ msgstr "Vis vinduets ikon på dets menuknap."
+
+#~ msgid "Display title buttons to mimic: \\w"
+#~ msgstr "Vis titelknapper som efterligner: \\w"
+
+#~ msgid "Gradient Theme"
+#~ msgstr "Overgangstema"
+
+#~ msgid "horizontal"
+#~ msgstr "vandret"
+
+#~ msgid "vertical"
+#~ msgstr "lodret"
+
+#~ msgid "diagonal"
+#~ msgstr "skråt"
+
+#~ msgid "Direction of gradient in `gradient' frame style."
+#~ msgstr "Retningen på overgangen i 'gradient'-rammestilen."
+
+#~ msgid "`From' color of inactive frames in `gradient' frame style."
+#~ msgstr "Fra-farve af inaktive rammer i 'gradient'-rammestil."
+
+#~ msgid "`To' color of inactive frames in `gradient' frame style."
+#~ msgstr "Til-farve af inaktive rammer i 'gradient'-rammestil."
+
+#~ msgid "`From' color of active frames in `gradient' frame style."
+#~ msgstr "Fra-farve af aktive rammer i 'gradient'-rammestil."
+
+#~ msgid "`To' color of active frames in `gradient' frame style."
+#~ msgstr "Til-farve af aktive rammer i 'gradient'-rammestil."
+
+#~ msgid "Use less memory when creating gradients, possibly affecting quality."
+#~ msgstr ""
+#~ "Brug mindre hukommelse til oprettelse af overgange (kan påvirke "
+#~ "kvaliteten)."
+
+#~ msgid "Mono Theme"
+#~ msgstr "Mono-tema"
+
+#~ msgid "Color of inactive frames (if unset use GTK+ background color)."
+#~ msgstr "Inaktive rammers farve (bruger ellers GTK+-baggrundsfarve)."
+
+#~ msgid "Color of active frames (if unset use GTK+ selection color)."
+#~ msgstr "Aktive rammers farve (bruger ellers GTK+ baggrundsfarve)."
+
+#~ msgid "left"
+#~ msgstr "venstrestillet"
+
+#~ msgid "right"
+#~ msgstr "højrestillet"
+
+#~ msgid "center"
+#~ msgstr "centreret"
+
+#~ msgid "Text is \\w justified in window titles."
+#~ msgstr "Tekst i vinduestitler er \\w."
+
+#, fuzzy
+#~ msgid "title"
+#~ msgstr "Tilstand"
+
+#, fuzzy
+#~ msgid "gradient"
+#~ msgstr "midlertidige vinduer"
+
+#, fuzzy
+#~ msgid "colors"
+#~ msgstr "Vælg farve"
+
+#, fuzzy
+#~ msgid "positions 1"
+#~ msgstr "Position"
+
+#, fuzzy
+#~ msgid "positions 2"
+#~ msgstr "Position"
+
+#, fuzzy
+#~ msgid "borders"
+#~ msgstr "Topkant"
+
+#, fuzzy
+#~ msgid "normal"
+#~ msgstr "Normal"
+
+#~ msgid "all"
+#~ msgstr "alle"
+
+#~ msgid "none"
+#~ msgstr "ingen"
+
+#, fuzzy
+#~ msgid "real-center"
+#~ msgstr "centreret"
+
+#, fuzzy
+#~ msgid "custom"
+#~ msgstr "Indstillinger"
+
+#, fuzzy
+#~ msgid "reverse colors"
+#~ msgstr "Vælg farve"
+
+#, fuzzy
+#~ msgid "default-9"
+#~ msgstr "Standard"
+
+#, fuzzy
+#~ msgid "default-12"
+#~ msgstr "Standard"
+
+#, fuzzy
+#~ msgid "ball-9"
+#~ msgstr "alle"
+
+#, fuzzy
+#~ msgid "ball-12"
+#~ msgstr "alle"
+
+#, fuzzy
+#~ msgid "menu button position"
+#~ msgstr "Husk _position"
+
+#, fuzzy
+#~ msgid "shade button position"
+#~ msgstr "oprulningsknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "iconify button position"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "maximize button position"
+#~ msgstr "maksimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "close button position"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "sticky button position"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "previous workspace button position"
+#~ msgstr "Forrige vindue i arbejdsområde"
+
+#, fuzzy
+#~ msgid "next workspace button position"
+#~ msgstr "Næste vindue i arbejdsområde"
+
+#, fuzzy
+#~ msgid "configure button position"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "info button position"
+#~ msgstr "Gem position i vindueshistorie"
+
+#, fuzzy
+#~ msgid "always-on-top button position"
+#~ msgstr "Gem position i vindueshistorie"
+
+#, fuzzy
+#~ msgid "lock button position"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:sticky-button-keymap"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:previous-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:next-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:configure-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:info-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:always-on-top-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "mxflat:lock-button-keymap"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "fake shadow only on focused windows"
+#~ msgstr "Bjælke-billede for vinduer uden fokus"
+
+#, fuzzy
+#~ msgid "north"
+#~ msgstr "ikke"
+
+#, fuzzy
+#~ msgid "south"
+#~ msgstr "ikke"
+
+#, fuzzy
+#~ msgid "north-east"
+#~ msgstr "ikke"
+
+#, fuzzy
+#~ msgid "north-west"
+#~ msgstr "ikke"
+
+#~ msgid "Simple Theme"
+#~ msgstr "Simpelt tema"
+
+#~ msgid "Color of inactive frames in `simple' frame style."
+#~ msgstr "Inaktive rammers farve i `simpel' rammestil."
+
+#~ msgid "Color of active frames in `simple' frame style."
+#~ msgstr "Aktive rammers farve i `simpel' rammestil."
+
+#~ msgid "SMaker Theme"
+#~ msgstr "SMaker-temaet"
+
+#~ msgid "Use black-on-white button images."
+#~ msgstr "Brug sort-på-hvid knapbilleder."
+
+#~ msgid "Color to use when drawing text."
+#~ msgstr "Farve til optegning af tekst."
+
+#~ msgid "Bar image for unfocused windows."
+#~ msgstr "Bjælke-billede for vinduer uden fokus"
+
+#~ msgid "Bar image for focused windows."
+#~ msgstr "Bjælke-billede for vinduer med fokus"
+
+#~ msgid "Bar image for highlighted parts."
+#~ msgstr "Bjælke-billede for fremhævede dele."
+
+#~ msgid "Bar image for clicked parts."
+#~ msgstr "Bjælke-billede for klikkede dele."
+
+#~ msgid "Height of title bar."
+#~ msgstr "Højden af titellinjen."
+
+#~ msgid "Width of window border."
+#~ msgstr "Bredde af vinduets kant."
+
+#~ msgid "Border width of bar images."
+#~ msgstr "Bredde af bjælke-billeders kant."
+
+#, fuzzy
+#~ msgid "Animation Steps"
+#~ msgstr "Handlinger"
+
+#, fuzzy
+#~ msgid "Animation Delay"
+#~ msgstr "Handlinger"
+
+#~ msgid "Window Cycling"
+#~ msgstr "Vinduesgennemgang"
+
+#~ msgid "Sound"
+#~ msgstr "Lydeffekter"
+
+#, fuzzy
+#~ msgid "Window Rules"
+#~ msgstr "_Vinduer"
+
+#~ msgid "Tooltips"
+#~ msgstr "Værktøjstip"
+
+#~ msgid "History"
+#~ msgstr "Historie"
+
+#~ msgid "Next workspace window"
+#~ msgstr "Næste vindue i arbejdsområde"
+
+#~ msgid "Select the next window of the current workspace."
+#~ msgstr "Vælg næste vindue på det aktive arbejdsområde."
+
+#~ msgid "Previous workspace window"
+#~ msgstr "Forrige vindue i arbejdsområde"
+
+#~ msgid "Focus on the previous window of the current workspace."
+#~ msgstr "Giv fokus til det forrige vindue på det aktive arbejdsområde."
+
+#~ msgid "Next window"
+#~ msgstr "Næste vindue"
+
+#~ msgid "Select the next window, cycling through all possible workspaces."
+#~ msgstr "Vælg det næste vindue, skiftende gennem alle mulige arbejdsområder."
+
+#~ msgid "Previous window"
+#~ msgstr "Forrige vindue"
+
+#~ msgid "Select the previous window, cycling through all possible workspaces."
+#~ msgstr ""
+#~ "Vælg det forrige vindue, skiftende gennem alle mulige arbejdsområder."
+
+#~ msgid "Describe symbol"
+#~ msgstr "Beskriv symbol"
+
+#~ msgid "Display the documentation of a specified symbol."
+#~ msgstr "Vis dokumentationen til et givent symbol."
+
+#~ msgid "Apropos function"
+#~ msgstr "Apropos funktion"
+
+#~ msgid "Apropos variable"
+#~ msgstr "Apropos variabel"
+
+#~ msgid "Iconify group"
+#~ msgstr "Minimér gruppe"
+
+#~ msgid "Uniconify group"
+#~ msgstr "Afminimér gruppe"
+
+#~ msgid "Iconify transient group"
+#~ msgstr "Minimér midlertidig gruppe"
+
+#~ msgid "Uniconify transientgroup"
+#~ msgstr "Afminimér midlertidig gruppe"
+
+#~ msgid "Make group sticky"
+#~ msgstr "Gør gruppen klæbrig"
+
+#~ msgid "Make group unsticky"
+#~ msgstr "Fjern klæbrighed fra gruppe"
+
+#~ msgid "Toggle group sticky"
+#~ msgstr "Skift mellem klæbrighedstilstand for gruppe"
+
+#~ msgid "Send group to current workspace"
+#~ msgstr "Send gruppe til det aktive arbejdsområde"
+
+#~ msgid "Send group to next workspace"
+#~ msgstr "Send gruppe til næste arbejdsområde"
+
+#~ msgid "Send group to previous workspace"
+#~ msgstr "Send gruppe til forrige arbejdsområde"
+
+#~ msgid "Move group to current viewport"
+#~ msgstr "Send gruppe til det aktive visningsområde"
+
+#~ msgid "Move group left"
+#~ msgstr "Flyt gruppe til venstre"
+
+#~ msgid "Move group right"
+#~ msgstr "Flyt gruppe til højre"
+
+#~ msgid "Move group up"
+#~ msgstr "Flyt gruppe op"
+
+#~ msgid "Move group down"
+#~ msgstr "Flyt gruppe ned"
+
+#~ msgid "Raise group"
+#~ msgstr "Hæv gruppe"
+
+#~ msgid "Lower group"
+#~ msgstr "Sænk gruppe"
+
+#~ msgid "Raise lower group"
+#~ msgstr "Hæv lavere gruppe"
+
+#~ msgid "Raise group depth"
+#~ msgstr "Hæv gruppedybde"
+
+#~ msgid "Lower group depth"
+#~ msgstr "Sænk gruppedybde"
+
+#~ msgid "Delete group"
+#~ msgstr "Fjern gruppe"
+
+#~ msgid ""
+#~ "Delete all windows in the group that the current window is a member of."
+#~ msgstr "Fjern alle vinduer i den samme gruppe som det aktive vindue."
+
+#~ msgid "always"
+#~ msgstr "altid"
+
+#~ msgid "maybe"
+#~ msgstr "måske"
+
+#~ msgid "never"
+#~ msgstr "aldrig"
+
+#, fuzzy
+#~ msgid "Whether to bump into fully obscured windows."
+#~ msgstr ""
+#~ "Om der skal stødes mod helt skjulte vinduer ved forstørrelse og "
+#~ "indpasning af vinduer."
+
+#, fuzzy
+#~ msgid "Whether to bump into ignored windows."
+#~ msgstr ""
+#~ "Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning "
+#~ "af vinduer."
+
+#~ msgid "Grow window left"
+#~ msgstr "Forstør vindue mod venstre"
+
+#, fuzzy
+#~ msgid ""
+#~ "Grows window to the left until it `bumps into' another window.\n"
+#~ "See `grow-window-up'."
+#~ msgstr ""
+#~ "Forstørrer vinduet til venstre indtil det rammer et andet vindue.\n"
+#~ "Se 'grow-window-up'."
+
+#~ msgid "Grow window right"
+#~ msgstr "Forstør vindue mod højre"
+
+#, fuzzy
+#~ msgid ""
+#~ "Grows window to the right until it `bumps into' another window.\n"
+#~ "See `grow-window-up'."
+#~ msgstr ""
+#~ "Forstørrer vinduet til højre indtil det rammer et andet vindue.\n"
+#~ "Se 'grow-window-up'."
+
+#~ msgid "Grow window up"
+#~ msgstr "Forstør vindue opad"
+
+#~ msgid ""
+#~ "Grows window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is brought back in.\n"
+#~ "With a universal prefix arg, maximize upwards instead.\n"
+#~ "With a numeric prefix arg, grow upwards by that many increments specified "
+#~ "by\n"
+#~ "window or pixels instead."
+#~ msgstr ""
+#~ "Forstørrer vinduet opad indtil det rammer et andet vindue.\n"
+#~ "Hvis den øverste kant var uden for skærmkanten, bliver den bragt tilbage "
+#~ "inden for.\n"
+#~ "Med en universel præfiksparameter, maksimér opad i stedet.\n"
+#~ "Med en numerisk præfiksparameter, forstør opad med så mange forøgelser "
+#~ "som angivet af vinduet eller punkter i stedet."
+
+#~ msgid "Grow window down"
+#~ msgstr "Forstør vindue nedad"
+
+#, fuzzy
+#~ msgid ""
+#~ "Grows window downwards until it `bumps into' another window.\n"
+#~ "See `grow-window-up'."
+#~ msgstr ""
+#~ "Forstørrer vinduet nedad indtil det rammer et andet vindue.\n"
+#~ "Se 'grow-window-up'."
+
+#~ msgid "Pack window left"
+#~ msgstr "Indpas vindue mod venstre"
+
+#, fuzzy
+#~ msgid ""
+#~ "Moves window to the left until it `bumps into' another window.\n"
+#~ "See `pack-window-up'."
+#~ msgstr ""
+#~ "Flytter vinduet til venstre indtil det rammer et andet vindue.\n"
+#~ "Se 'pack-window-up'."
+
+#~ msgid "Pack window right"
+#~ msgstr "Indpas vindue mod højre"
+
+#, fuzzy
+#~ msgid ""
+#~ "Moves window to the right until it `bumps into' another window.\n"
+#~ "See `pack-window-up'."
+#~ msgstr ""
+#~ "Flytter vinduet til højre indtil det rammer et andet vindue.\n"
+#~ "Se 'pack-window-up'."
+
+#~ msgid "Pack window up"
+#~ msgstr "Indpas vindue opad"
+
+#~ msgid ""
+#~ "Moves window upwards until it `bumps into' another window.\n"
+#~ "If the top edge was beyond the screen edge, it is moved back in.\n"
+#~ "With a universal prefix arg, move upwards maximally instead.\n"
+#~ "With a numeric prefix arg, move upwards by that many pixels instead."
+#~ msgstr ""
+#~ "Flytter vinduet opad indtil det rammer et andet vindue.\n"
+#~ "Hvis den øverste kant var uden for skærmkanten, bliver den bragt tilbage "
+#~ "inden for.\n"
+#~ "Med en universel præfiksparameter, flyt maksimalt opad i stedet.\n"
+#~ "Med en numerisk præfiksparameter, flyt opad med så mange punkter i stedet."
+
+#~ msgid "Pack window down"
+#~ msgstr "Indpas vindue nedad"
+
+#, fuzzy
+#~ msgid ""
+#~ "Moves window downwards until it `bumps into' another window.\n"
+#~ "See `pack-window-up'."
+#~ msgstr ""
+#~ "Flytter vinduet nedad indtil det rammer et andet vindue.\n"
+#~ "Se 'pack-window-up'."
+
+#~ msgid "Help show faq"
+#~ msgstr "Vis OSS"
+
+#~ msgid "Help show news"
+#~ msgstr "Vis ændringer"
+
+#~ msgid "Help show programmer manual"
+#~ msgstr "Vis programmeringsvejledningen"
+
+#~ msgid "Help show homepage"
+#~ msgstr "Vis hjemmesiden"
+
+#~ msgid "Help about"
+#~ msgstr "Om Sawfish"
+
+#, fuzzy
+#~ msgid "Number of pixels to move pointer in."
+#~ msgstr "Antal punkter markøren flyttes ved 'move-cursor-'-kommandoer."
+
+#~ msgid "Move cursor right"
+#~ msgstr "Flyt markøren til højre"
+
+#~ msgid "Move the cursor `move-cursor-increment' pixels to the right."
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter til højre."
+
+#~ msgid "Move cursor left"
+#~ msgstr "Flyt markøren til venstre"
+
+#~ msgid "Move the cursor `move-cursor-increment' pixels to the left."
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter til venstre."
+
+#~ msgid "Move cursor up"
+#~ msgstr "Flyt markøren opad"
+
+#~ msgid "Move the cursor `move-cursor-increment' pixels upwards."
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter opad."
+
+#~ msgid "Move cursor down"
+#~ msgstr "Flyt markøren nedad"
+
+#~ msgid "Move the cursor `move-cursor-increment' pixels downwards."
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter nedad."
+
+#~ msgid "Move cursor right fine"
+#~ msgstr "Flyt markøren lidt til højre"
+
+#~ msgid "Move the cursor 1 pixel to the right."
+#~ msgstr "Flyt markøren ét punkt til højre."
+
+#~ msgid "Move cursor left fine"
+#~ msgstr "Flyt markøren lidt til venstre"
+
+#~ msgid "Move the cursor 1 pixel to the left."
+#~ msgstr "Flyt markøren ét punkt til venstre."
+
+#~ msgid "Move cursor up fine"
+#~ msgstr "Flyt markøren lidt til opad"
+
+#~ msgid "Move the cursor 1 pixel upwards."
+#~ msgstr "Flyt markøren ét punkt opad."
+
+#~ msgid "Move cursor down fine"
+#~ msgstr "Flyt markøren lidt til nedad"
+
+#~ msgid "Move the cursor 1 pixel downwards."
+#~ msgstr "Flyt markøren ét punkt nedad."
+
+#, fuzzy
+#~ msgid "Move cursor northwest"
+#~ msgstr "Flyt markøren til højre"
+
+#, fuzzy
+#~ msgid "Move the cursor `move-cursor-increment' pixels northwest"
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter til venstre."
+
+#, fuzzy
+#~ msgid "Move cursor northeast"
+#~ msgstr "Flyt markøren til højre"
+
+#, fuzzy
+#~ msgid "Move the cursor `move-cursor-increment' pixels northeast"
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter til venstre."
+
+#, fuzzy
+#~ msgid "Move cursor southwest"
+#~ msgstr "Flyt markøren til venstre"
+
+#, fuzzy
+#~ msgid "Move the cursor `move-cursor-increment' pixels southwest"
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter til venstre."
+
+#, fuzzy
+#~ msgid "Move cursor southeast"
+#~ msgstr "Flyt markøren til venstre"
+
+#, fuzzy
+#~ msgid "Move the cursor `move-cursor-increment' pixels southeast"
+#~ msgstr "Flyt markøren 'move-cursor-increment' punkter til venstre."
+
+#, fuzzy
+#~ msgid "Move cursor northwest fine"
+#~ msgstr "Flyt markøren lidt til højre"
+
+#, fuzzy
+#~ msgid "Move cursor northeast fine"
+#~ msgstr "Flyt markøren lidt til højre"
+
+#, fuzzy
+#~ msgid "Move cursor southwest fine"
+#~ msgstr "Flyt markøren lidt til venstre"
+
+#, fuzzy
+#~ msgid "Move cursor southeast fine"
+#~ msgstr "Flyt markøren lidt til venstre"
+
+#, fuzzy
+#~ msgid "Move cursor center"
+#~ msgstr "Flyt markøren til venstre"
+
+#, fuzzy
+#~ msgid "Move the cursor to the center of the screen"
+#~ msgstr "Flyt markøren ét punkt til venstre."
+
+#, fuzzy
+#~ msgid "elliptical"
+#~ msgstr "lodret"
+
+#, fuzzy
+#~ msgid "How windows being moved are animated"
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#, fuzzy
+#~ msgid "How windows being resized are animated"
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#, fuzzy
+#~ msgid "Raise windows when they are moved or resized."
+#~ msgstr "Hæv vinduer når de modtager fokus."
+
+#~ msgid "Show current position of windows while moving."
+#~ msgstr "Vis positionen for vinduerne ved flytning."
+
+#~ msgid "Show current dimensions of windows while resizing."
+#~ msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
+
+#, fuzzy
+#~ msgid "border"
+#~ msgstr "Topkant"
+
+#, fuzzy
+#~ msgid "border-grab"
+#~ msgstr "kant-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid "How to choose window edges when resizing."
+#~ msgstr "Vis dimensioner for vinduer ved ændring af størrelse."
+
+#~ msgid ""
+#~ "Distance in pixels before window edges align with each other.\n"
+#~ "\n"
+#~ "When moving a window, this option lets you align one of its edges with an "
+#~ "edge of another window."
+#~ msgstr ""
+#~ "Afstand i punkter før vindueskanter justeres med hinanden.\n"
+#~ "\n"
+#~ "Ved flytning af et vindue lader dette dig justere en af dets kanter med "
+#~ "kanten på et andet vindue."
+
+#, fuzzy
+#~ msgid "Move window center"
+#~ msgstr "Flyt vindue til næste visningsområde"
+
+#~ msgid "Move window interactively"
+#~ msgstr "Flyt vindue interaktivt"
+
+#, fuzzy
+#~ msgid "Move the window interactively, with mouse or keyboard."
+#~ msgstr "Flyt vinduet interaktivt vha. musen."
+
+#~ msgid "Resize window interactively"
+#~ msgstr "Forstør/formindsk vindue interaktivt"
+
+#, fuzzy
+#~ msgid "Resize the window interactively, with mouse or keyboard."
+#~ msgstr "Forstør/formindsk vinduet interaktivt vha. musen."
+
+#~ msgid "Move selected window"
+#~ msgstr "Flyt valgte vinduer"
+
+#, fuzzy
+#~ msgid ""
+#~ "Wait for the user to select a window, then interactively move\n"
+#~ "that window."
+#~ msgstr "Vent på at der vælges et vindue og flyt det så interaktivt."
+
+#~ msgid "Resize selected window"
+#~ msgstr "Forstør/formindsk valgte vinduer"
+
+#, fuzzy
+#~ msgid ""
+#~ "Wait for the user to select a window, then interactively resize\n"
+#~ "that window."
+#~ msgstr ""
+#~ "Vent på at der vælges et vindue og ændr så størrelsen på det interaktivt."
+
+#, fuzzy
+#~ msgid "Double window size"
+#~ msgstr "Skift mellem om vinduet er klæbrigt"
+
+#, fuzzy
+#~ msgid "Halve window size"
+#~ msgstr "Gør vindue klæbrigt"
+
+#~ msgid "Raise and pass through click"
+#~ msgstr "Hæv og videresend klik"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event, then replay any "
+#~ "pointer\n"
+#~ "events that invoked the command."
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+#~ "midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+#~ "startede kommandoen."
+
+#~ msgid "Raise and pass through click if focused"
+#~ msgstr "Hæv og videresend klik hvis har fokus"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window that received the current event (if it's focused), then\n"
+#~ "replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+#~ "midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+#~ "startede kommandoen."
+
+#~ msgid "Raise or pass through click"
+#~ msgstr "Hæv eller videresend klik"
+
+#~ msgid "Raise window and pass through click"
+#~ msgstr "Hæv vindue og videresend klik"
+
+#~ msgid "Raise group and pass through click"
+#~ msgstr "Hæv gruppe og videresend klik"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the group of windows that received the current event, then replay\n"
+#~ "any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+#~ "midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+#~ "startede kommandoen."
+
+#~ msgid "Raise transients and pass through click"
+#~ msgstr "Hæv midlertidige vinduer og videresend klik"
+
+#~ msgid ""
+#~ "Raise the window that received the current event and any transients it\n"
+#~ "has, then replay any pointer events that invoked the command."
+#~ msgstr ""
+#~ "Hæv vinduet som modtog den nuværende handling sammen med dets\n"
+#~ "midlertidige vinduer og genafspil derefter alle markørhandlinger som\n"
+#~ "startede kommandoen."
+
+#, fuzzy
+#~ msgid "Shrink window left"
+#~ msgstr "Flyt vindue mod venstre"
+
+#, fuzzy
+#~ msgid "Shrink window right"
+#~ msgstr "Flyt vindue mod højre"
+
+#, fuzzy
+#~ msgid "Shrink window up"
+#~ msgstr "Flyt vindue opad"
+
+#, fuzzy
+#~ msgid "Shrink window down"
+#~ msgstr "Flyt vindue nedad"
+
+#, fuzzy
+#~ msgid "Yank window left"
+#~ msgstr "Indpas vindue mod venstre"
+
+#, fuzzy
+#~ msgid "Yank window right"
+#~ msgstr "Indpas vindue mod højre"
+
+#, fuzzy
+#~ msgid "Yank window up"
+#~ msgstr "Indpas vindue opad"
+
+#, fuzzy
+#~ msgid "Yank window down"
+#~ msgstr "Indpas vindue nedad"
+
+#~ msgid "Size window add row"
+#~ msgstr "Tilføj række for vindue"
+
+#~ msgid "Increase the size of the current window by one row."
+#~ msgstr "Forstør det aktive vindue med en række."
+
+#~ msgid "Size window subtract row"
+#~ msgstr "Fratræk række for vindue"
+
+#~ msgid "Decrease the size of the current window by one row."
+#~ msgstr "Formindsk det aktive vindue med en række."
+
+#~ msgid "Size window add column"
+#~ msgstr "Tilføj kolonne for vindue"
+
+#~ msgid "Increase the size of the current window by one column."
+#~ msgstr "Forstør det aktive vindue med en kolonne."
+
+#~ msgid "Size window subtract column"
+#~ msgstr "Fratræk kolonne for vindue"
+
+#~ msgid "Decrease the size of the current window by one column."
+#~ msgstr "Formindsk det aktive vindue med en kolonne."
+
+#~ msgid "Slide window left"
+#~ msgstr "Flyt vindue mod venstre"
+
+#~ msgid "Move the window `slide-window-increment' pixels to the left."
+#~ msgstr "Flyt vinduet `slide-window-increment' punkter til venstre."
+
+#~ msgid "Slide window right"
+#~ msgstr "Flyt vindue mod højre"
+
+#~ msgid "Move the window `slide-window-increment' pixels to the right."
+#~ msgstr "Flyt vinduet `slide-window-increment' punkter til højre."
+
+#~ msgid "Slide window up"
+#~ msgstr "Flyt vindue opad"
+
+#~ msgid "Move the window `slide-window-increment' pixels upwards."
+#~ msgstr "Flyt vinduet `slide-window-increment' punkter opad."
+
+#~ msgid "Slide window down"
+#~ msgstr "Flyt vindue nedad"
+
+#~ msgid "Move the window `slide-window-increment' pixels downwards."
+#~ msgstr "Flyt vinduet `slide-window-increment' punkter nedad."
+
+#~ msgid "Slide group left"
+#~ msgstr "Flyt gruppen mod venstre"
+
+#~ msgid "Move the window group `slide-window-increment' pixels to the left."
+#~ msgstr "Flyt vinduesgruppen `slide-window-increment' punkter til venstre."
+
+#~ msgid "Slide group right"
+#~ msgstr "Flyt gruppen mod højre"
+
+#~ msgid "Move the window group `slide-window-increment' pixels to the right."
+#~ msgstr "Flyt vinduesgruppen `slide-window-increment' punkter til højre."
+
+#~ msgid "Slide group up"
+#~ msgstr "Flyt gruppen opad"
+
+#~ msgid "Move the window group `slide-window-increment' pixels upwards."
+#~ msgstr "Flyt vinduesgruppen `slide-window-increment' punkter opad."
+
+#~ msgid "Slide group down"
+#~ msgstr "Flyt gruppen nedad"
+
+#~ msgid "Move the window group `slide-window-increment' pixels downwards."
+#~ msgstr "Flyt vinduesgruppen `slide-window-increment' punkter nedad."
+
+#~ msgid "Xterm"
+#~ msgstr "X-terminal"
+
+#, fuzzy
+#~ msgid "Browser"
+#~ msgstr "Gennemse..."
+
+#~ msgid "Move viewport next"
+#~ msgstr "Flyt til næste visningsområde"
+
+#~ msgid "Move to the next viewport."
+#~ msgstr "Flyt til det næste visningsområde."
+
+#~ msgid "Move viewport previous"
+#~ msgstr "Flyt til forrige visningsområde"
+
+#~ msgid "Move to the previous viewport."
+#~ msgstr "Flyt til det forrige visningsområde."
+
+#~ msgid "Move window previous"
+#~ msgstr "Flyt vindue til forrige visningsområde"
+
+#~ msgid "Move the window to the previous viewport."
+#~ msgstr "Flyt vinduet til det forrige visningsområde."
+
+#~ msgid "Move window next"
+#~ msgstr "Flyt vindue til næste visningsområde"
+
+#, fuzzy
+#~ msgid "Move the window to the next viewport."
+#~ msgstr "Flyt vinduet til det forrige visningsområde."
+
+# håber dette er rigtigt
+#~ msgid "Set viewport linear"
+#~ msgstr "Sæt visningsområde ved lineær adressering"
+
+#~ msgid "Set window viewport linear"
+#~ msgstr "Sæt vinduets visningsområde vha. lineær adressering"
+
+#~ msgid "Display window names and icons while cycling through windows."
+#~ msgstr "Vis vinduesnavne og ikoner når der skiftes mellem vinduer."
+
+#~ msgid "Include iconified windows when cycling."
+#~ msgstr "Medtag minimerede vinduer under gennemgang."
+
+#~ msgid "Include windows on all workspaces when cycling."
+#~ msgstr "Medtag vinduer på alle arbejdsområder under gennemgang."
+
+#~ msgid "Include windows on all viewports when cycling."
+#~ msgstr "Medtag vinduer på alle visningsområder under gennemgang."
+
+#, fuzzy
+#~ msgid "Raise windows while they're temporarily selected during cycling."
+#~ msgstr "Hæv vinduer når de modtager fokus."
+
+#~ msgid "cycle-keymap"
+#~ msgstr "gennemgang-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active only during window cycling operations."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder mens der "
+#~ "skiftes mellem vinduer."
+
+#~ msgid "Call command"
+#~ msgstr "Kald kommando"
+
+#~ msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+#~ msgstr "Kald kommandoen NAVN; evt. med præfiksparameteren PFX-PAR."
+
+#~ msgid "Run shell command"
+#~ msgstr "Kør skalkommando."
+
+#~ msgid "Execute the given shell command."
+#~ msgstr "Kør den angivne skalkommando."
+
+#~ msgid "Command sequence"
+#~ msgstr "Kommandosekvens"
+
+#~ msgid "Invoke the list of commands, one by one."
+#~ msgstr "Kør listen af kommandoer, én efter én."
+
+#~ msgid "Quit"
+#~ msgstr "Afslut"
+
+#~ msgid "Restart"
+#~ msgstr "Genstart"
+
+#~ msgid "Destroy window"
+#~ msgstr "Dræb vindue"
+
+#~ msgid "Kill client"
+#~ msgstr "Dræb klient"
+
+#~ msgid "No operation"
+#~ msgstr "Ingen operation"
+
+#~ msgid "Call command with output to screen"
+#~ msgstr "Kald kommando hvor uddata bliver sendt til skærmen"
+
+#~ msgid ""
+#~ "Prompt for a command, execute it, and print any output to the screen."
+#~ msgstr "Spørg efter en kommando, udfør den, og udskriv uddata på skærmen."
+
+#~ msgid "Move/Resize"
+#~ msgstr "Flytning/størrelsesændring"
+
+#~ msgid "Workspaces"
+#~ msgstr "Arbejdsområder"
+
+# ditto
+#~ msgid "Bindings"
+#~ msgstr "Genveje"
+
+#, fuzzy
+#~ msgid "Mini/Maximizing"
+#~ msgstr "Maksimering/minimering"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Diverse"
+
+#~ msgid "Customize"
+#~ msgstr "Indstillinger"
+
+#~ msgid "3d hack"
+#~ msgstr "3d-hack"
+
+#, fuzzy
+#~ msgid "Update apps menu"
+#~ msgstr "Vis programmenu"
+
+#~ msgid "Play sound effects for window events."
+#~ msgstr "Afspil lydeffekter ved vindueshændelser"
+
+#~ msgid "Auto-Raise"
+#~ msgstr "Auto-hæv"
+
+#, fuzzy
+#~ msgid "Raise windows when they are focused."
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#~ msgid "Delay in milliseconds until focused windows are raised."
+#~ msgstr "Pause i millisekunder inden fokuserede vinduer hæves."
+
+#~ msgid "Edge Flipping"
+#~ msgstr "Kantskiftning"
+
+#~ msgid "Select the next desktop when the pointer hits screen edge."
+#~ msgstr "Skift til det næste område når markøren rammer skærmkanten."
+
+#~ msgid "viewport"
+#~ msgstr "visningsområde"
+
+#~ msgid "workspace"
+#~ msgstr "arbejdsområde"
+
+#~ msgid "Hitting the screen edge selects the next: \\w"
+#~ msgstr "Når skærmkanten rammes vælges næste: \\w"
+
+#~ msgid "Only flip when interactively moving a window."
+#~ msgstr "Skift kun under interaktiv flytning af vinduer."
+
+#~ msgid "Beep when errors occur."
+#~ msgstr "Bip ved fejl."
+
+#~ msgid "nowhere"
+#~ msgstr "ingen steder"
+
+#~ msgid "screen"
+#~ msgstr "skærm"
+
+#~ msgid "standard-error"
+#~ msgstr "standard-fejl"
+
+#, fuzzy
+#~ msgid "both"
+#~ msgstr "ikke"
+
+#~ msgid "Display error messages to: \\w"
+#~ msgstr "Send fejlbeskeder til: \\w"
+
+#~ msgid "Display errors"
+#~ msgstr "Vis fejl"
+
+#~ msgid "Display all errors that have occurred to the screen."
+#~ msgstr "Vis alle de fejl der er sket på skærmen."
+
+#, fuzzy
+#~ msgid "Infinite Desktop"
+#~ msgstr "Fokusér skrivebord"
+
+#~ msgid "Name"
+#~ msgstr "Navn"
+
+#~ msgid "Class"
+#~ msgstr "Klasse"
+
+#~ msgid "Icon Name"
+#~ msgstr "Ikonnavn"
+
+#~ msgid "Role"
+#~ msgstr "Rolle"
+
+#~ msgid "Host"
+#~ msgstr "Vært"
+
+#~ msgid "Locale"
+#~ msgstr "Lokale"
+
+#~ msgid "Ignore program position"
+#~ msgstr "Ignorér programposition"
+
+#~ msgid "Place mode"
+#~ msgstr "Placeringstilstand"
+
+#~ msgid "Position"
+#~ msgstr "Position"
+
+#~ msgid "Dimensions"
+#~ msgstr "Dimensioner"
+
+#~ msgid "Workspace"
+#~ msgstr "Arbejdsområde"
+
+#~ msgid "Viewport"
+#~ msgstr "Visningsområde"
+
+#~ msgid "Depth"
+#~ msgstr "Dybde"
+
+#~ msgid "Placement weight"
+#~ msgstr "Placeringstyngde"
+
+#, fuzzy
+#~ msgid "Fixed position"
+#~ msgstr "Position"
+
+#~ msgid "Maximized"
+#~ msgstr "Maksimeret"
+
+#, fuzzy
+#~ msgid "New workspace"
+#~ msgstr "Næste arbejdsområde"
+
+#, fuzzy
+#~ msgid "New viewport"
+#~ msgstr "visningsområde"
+
+#~ msgid "Raise on focus"
+#~ msgstr "Hæv ved fokusering"
+
+#~ msgid "Focus when mapped"
+#~ msgstr "Fokusér når startet"
+
+#~ msgid "Never focus"
+#~ msgstr "Modtag aldrig fokus"
+
+#~ msgid "Focus click through"
+#~ msgstr "Videresend klik"
+
+#~ msgid "Focus mode"
+#~ msgstr "Fokuseringstilstand"
+
+#~ msgid "Frame type"
+#~ msgstr "Rammet_ype"
+
+#~ msgid "Frame style"
+#~ msgstr "_Rammestil"
+
+#~ msgid "Avoid"
+#~ msgstr "Undgå"
+
+#~ msgid "Ignored"
+#~ msgstr "Ignoreret"
+
+#~ msgid "Iconified"
+#~ msgstr "Minimeret"
+
+#~ msgid "Shaded"
+#~ msgstr "Oprullet"
+
+#~ msgid "Sticky"
+#~ msgstr "Klæbrigt"
+
+#~ msgid "Sticky viewport"
+#~ msgstr "Klæbrigt visningsområde"
+
+#~ msgid "Group"
+#~ msgstr "Gruppe"
+
+#~ msgid "Ungrouped"
+#~ msgstr "Afgrupperet"
+
+#~ msgid "Cycle skip"
+#~ msgstr "Spring over i gennemgang"
+
+#~ msgid "Window list skip"
+#~ msgstr "Spring over til vinduesliste"
+
+#, fuzzy
+#~ msgid "Task list skip"
+#~ msgstr "Spring over til vinduesliste"
+
+#, fuzzy
+#~ msgid "Never maximize"
+#~ msgstr "Gend_an"
+
+#~ msgid "Unique name"
+#~ msgstr "Unikt navn"
+
+#~ msgid "Auto gravity"
+#~ msgstr "Automatisk tyngde"
+
+#~ msgid "Shade hover"
+#~ msgstr "Smart nedrulning"
+
+#~ msgid "Transients above"
+#~ msgstr "Midlertidige vinduer over"
+
+#~ msgid "Ignore stacking requests"
+#~ msgstr "Ignorér stablingsforespørgsler"
+
+#, fuzzy
+#~ msgid "Window name"
+#~ msgstr "Vindue:"
+
+#~ msgid "Shade Hover"
+#~ msgstr "Smart nedrulning"
+
+#~ msgid ""
+#~ "Enable shade-hover mode.\n"
+#~ "\n"
+#~ "(Temporarily unshades windows while the mouse pointer is over them.)"
+#~ msgstr ""
+#~ "Aktivér automatisk nedrulning.\n"
+#~ "\n"
+#~ "(nedruller vinduer midlertidigt når markøren er over dem)"
+
+#~ msgid "Delay in milliseconds before unshading windows."
+#~ msgstr "Pause i millisekunder før nedrulning af vinduer."
+
+#~ msgid "Raise windows when they are unshaded."
+#~ msgstr "Hæv vinduer når de bliver rullet ned."
+
+#~ msgid "Display tooltips for window frames."
+#~ msgstr "Vis værktøjstip til vinduesrammer."
+
+#~ msgid "Show full documentation in tooltips."
+#~ msgstr "Vis fuld dokumentation i værktøjstip."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before displaying tooltips."
+#~ msgstr "Pause i millisekunder før nedrulning af vinduer."
+
+#, fuzzy
+#~ msgid "Number of milliseconds before removing tooltips."
+#~ msgstr "Pause i millisekunder før nedrulning af vinduer."
+
+#~ msgid "Automatically remember window positions."
+#~ msgstr "Husk automatisk vinduespositioner."
+
+#~ msgid "Automatically remember window sizes."
+#~ msgstr "Husk automatisk vinduesstørrelser."
+
+#~ msgid "Automatically remember other window attributes."
+#~ msgstr "Husk automatisk andre vinduesegenskaber."
+
+#~ msgid "Don't automatically remember details of transient windows."
+#~ msgstr "Husk ikke automatisk detaljer om midlertidige vinduer."
+
+#~ msgid "Window history save position"
+#~ msgstr "Gem position i vindueshistorie"
+
+#~ msgid "Remember the current position of the focused window."
+#~ msgstr "Husk positionen af vinduet med fokus."
+
+#~ msgid "Window history save dimensions"
+#~ msgstr "Gem størrelse i vindueshistorie"
+
+#~ msgid "Remember the current dimensions of the focused window."
+#~ msgstr "Husk størrelsen af vinduet med fokus."
+
+#~ msgid "Window history save attributes"
+#~ msgstr "Gem egenskaber i vindueshistorie"
+
+#~ msgid "Remember the current attributes of the focused window."
+#~ msgstr "Husk egenskaberne for vinduet med fokus."
+
+#~ msgid "Window history forget"
+#~ msgstr "Glem vindues historie"
+
+#~ msgid "Forget any persistent state associated with the current window."
+#~ msgstr "Glem alle overlevende oplysninger om det aktive vindue."
+
+#~ msgid "Window history clear"
+#~ msgstr "Ryd vindueshistorie"
+
+#~ msgid "Forget all saved window history."
+#~ msgstr "Glem alt gemt vindueshistorie"
+
+#~ msgid "Workspace down"
+#~ msgstr "Arbejdsområde ned"
+
+#~ msgid "View the workspace below the current workspace"
+#~ msgstr "Vis arbejdsområdet under det aktive"
+
+#~ msgid "Workspace up"
+#~ msgstr "Arbejdsområde op"
+
+#~ msgid "View the workspace above the current workspace"
+#~ msgstr "Vis arbejdsområdet over det aktive"
+
+#~ msgid "Workspace left"
+#~ msgstr "Arbejdsområde til venstre"
+
+#~ msgid "View the workspace to the left of the current workspace"
+#~ msgstr "Vis arbejdsområdet til venstre for det aktive"
+
+#~ msgid "Workspace right"
+#~ msgstr "Arbejdsområde til højre"
+
+#~ msgid "View the workspace to the right of the current workspace"
+#~ msgstr "Vis arbejdsområdet til højre for det aktive"
+
+#~ msgid "Send to workspace down"
+#~ msgstr "Send til arbejdsområde under"
+
+#~ msgid "Send window to the workspace below the current workspace"
+#~ msgstr "Send vindue til arbejdsområdet under det aktive"
+
+#~ msgid "Send to workspace up"
+#~ msgstr "Send til arbejdsområde over"
+
+#~ msgid "Send window to the workspace above the current workspace"
+#~ msgstr "Send vindue til arbejdsområdet over det aktive"
+
+#~ msgid "Send to workspace left"
+#~ msgstr "Send til venstre arbejdsområde "
+
+#~ msgid "Send window to the workspace left of the current workspace"
+#~ msgstr "Send vindue til arbejdsområdet til venstre for det aktive"
+
+#~ msgid "Send to workspace right"
+#~ msgstr "Send til højre arbejdsområde "
+
+#~ msgid "Send window to the workspace right of the current workspace"
+#~ msgstr "Send vindue til arbejdsområdet til højre for det aktive"
+
+#~ msgid "When does the mouse pointer affect the input focus."
+#~ msgstr "Hvornår musemarkøren påvirker tastaturfokuset."
+
+#~ msgid "Click-to-focus mode passes the click through to the application."
+#~ msgstr "Videregiver fokuseringsklikket til vinduet."
+
+#, fuzzy
+#~ msgid "Whether focusing a window doesn't change it's position in the stack."
+#~ msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
+
+#~ msgid "Default frame style:"
+#~ msgstr "Automatisk valgt rammestil:"
+
+#~ msgid "Automatically reload themes when they are updated."
+#~ msgstr "Genindlæs automatisk temaer hvis de bliver opdateret."
+
+#~ msgid "Default font: \\w"
+#~ msgstr "Standard-skrifttype: \\w"
+
+#~ msgid "Edit frame style"
+#~ msgstr "Rediger rammestil"
+
+#~ msgid "global-keymap"
+#~ msgstr "global-tastekombinationsliste"
+
+#~ msgid "Keymap containing bindings active anywhere."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder alle steder"
+
+#~ msgid "window-keymap"
+#~ msgstr "vindue-tastekombinationsliste"
+
+#~ msgid "Keymap containing bindings active when a client window is focused."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder for et "
+#~ "klientvindue med fokus."
+
+#~ msgid "root-window-keymap"
+#~ msgstr "rod-vindue-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the root window\n"
+#~ "(or when no window is focused)."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "befinder sig\n"
+#~ "i rod-vinduet (eller når ingen vinduer har fokus)."
+
+#~ msgid "title-keymap"
+#~ msgstr "titel-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the title of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "titlen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid "border-keymap"
+#~ msgstr "kant-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the border of\n"
+#~ "a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "kanten på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid "close-button-keymap"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the close "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid "iconify-button-keymap"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the iconify\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "minimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
+#~ "brugt)."
+
+#~ msgid "maximize-button-keymap"
+#~ msgstr "maksimérknap-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the maximize\n"
+#~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "maksimeringsknappen på et vindue (i denne liste bliver kun musebindinger "
+#~ "brugt)."
+
+#~ msgid "menu-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the menu button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "menuknappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid "shade-button-keymap"
+#~ msgstr "oprulningsknap-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the shade "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "op-/nedrulningsknappen på et vindue (i denne liste bliver kun "
+#~ "musebindinger brugt)."
+
+#, fuzzy
+#~ msgid "sticky-button-keymap"
+#~ msgstr "minimérknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the sticky "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#, fuzzy
+#~ msgid "lock-button-keymap"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the lock button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#, fuzzy
+#~ msgid "rename-button-keymap"
+#~ msgstr "menuknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the rename "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "menuknappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#, fuzzy
+#~ msgid "move-resize-button-keymap"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the move/resize "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#, fuzzy
+#~ msgid "raise-lower-button-keymap"
+#~ msgstr "lukknap-tastekombinationsliste"
+
+#, fuzzy
+#~ msgid ""
+#~ "Keymap containing bindings active when the pointer is in the raise/lower "
+#~ "button\n"
+#~ "of a window. (Only mouse-bindings are evaluated in this map.)"
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når markøren "
+#~ "er over\n"
+#~ "luk-knappen på et vindue (i denne liste bliver kun musebindinger brugt)."
+
+#~ msgid "Modifier key(s) used for default shortcuts."
+#~ msgstr "Modificeringstaster til standardgenveje i vindueshåndteringen."
+
+#~ msgid "Popup window menu"
+#~ msgstr "Vis vinduesmenu"
+
+#~ msgid "Display the menu listing all window operations."
+#~ msgstr "Vis menu med alle vindueoperationer."
+
+#~ msgid "Popup root menu"
+#~ msgstr "Vis rodmenu"
+
+#~ msgid "Display the main menu."
+#~ msgstr "Vis hovedmenuen."
+
+#~ msgid "Popup apps menu"
+#~ msgstr "Vis programmenu"
+
+#~ msgid "Display the applications menu."
+#~ msgstr "Vis menuen til at starte programmer fra."
+
+#, fuzzy
+#~ msgid "Distance between successive placements in `stagger' placement mode."
+#~ msgstr ""
+#~ "Afstand mellem efterfølgende placeringer i 'stagger'-placeringstilstand."
+
+#~ msgid "Method of placing windows: \\w"
+#~ msgstr "Metode til placering af vinduer: \\w"
+
+#~ msgid "Method of placing dialog windows: \\w"
+#~ msgstr "Metode til placering af meddelelsesvinduer: \\w"
+
+#~ msgid "Stacking"
+#~ msgstr "Sta_bling"
+
+#~ msgid "parents"
+#~ msgstr "forældre"
+
+#~ msgid "Keep transient windows stacked above: \\w"
+#~ msgstr "Sørg for at midlertidige vinduer er stablet over: \\w"
+
+#~ msgid "Raise single window"
+#~ msgstr "Hæv enkelt vindue"
+
+#~ msgid ""
+#~ "Raise the window to its highest allowed position in the stacking order."
+#~ msgstr "Hæv vinduet til den øverst tilladte position i stabelordenen."
+
+#~ msgid "Lower single window"
+#~ msgstr "Sænk enkelt vindue"
+
+#~ msgid ""
+#~ "Lower the window to its lowest allowed position in the stacking order."
+#~ msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
+
+#~ msgid "Raise lower single window"
+#~ msgstr "Hæv/sænk enkelt vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed."
+#~ msgstr ""
+#~ "Hvis vinduet er på dets højeste mulige position, så sænk det til dets\n"
+#~ "lavest mulige position. Ellers hæv det så langt som tilladt. Ændrer\n"
+#~ "også niveauet for alle dets midlertidige vinduer."
+
+#~ msgid "Raise window depth"
+#~ msgstr "Hæv vinduesdybde"
+
+#~ msgid "Put the window in the stacking level above its current level."
+#~ msgstr "Placér vinduet i stablingsniveauet over dets nuværende niveau."
+
+#~ msgid "Lower window depth"
+#~ msgstr "Sænk vinduesdybde"
+
+#~ msgid "Put the window in the stacking level beneath its current level."
+#~ msgstr "Placér vinduet i stablingsniveauet under dets nuværende niveau."
+
+#~ msgid "transients"
+#~ msgstr "midlertidige vinduer"
+
+#~ msgid "group"
+#~ msgstr "gruppen"
+
+#~ msgid "Minimizing a window also removes its: \\w"
+#~ msgstr "Minimering af et vindue fjerner også dets: \\w"
+
+#~ msgid "Unminimizing a window also restores its: \\w"
+#~ msgstr "Gendannelse af et vindue gendanner også dets: \\w"
+
+#~ msgid "Iconify window"
+#~ msgstr "Minimér vindue"
+
+#~ msgid "Minimize the window."
+#~ msgstr "Minimér vinduet."
+
+#~ msgid "Uniconify window"
+#~ msgstr "Gendan vindue"
+
+#~ msgid "Restore the window from its minimized state."
+#~ msgstr "Gendan vinduet fra dets minimerede tilstand."
+
+#~ msgid "Toggle window iconified"
+#~ msgstr "Skift mellem minimeringstilstand"
+
+# W er overflødigt (sammenlign andre tekster)
+#~ msgid "Toggle the iconification of window W."
+#~ msgstr "Skift mellem minimering af vinduet."
+
+#~ msgid "Iconify workspace windows"
+#~ msgstr "Minimér arbejdsområdets vinduer"
+
+#~ msgid "Minimize all windows on the current workspace."
+#~ msgstr "Minimér alle vinduer i det aktive arbejdsområde."
+
+#~ msgid "Make window sticky"
+#~ msgstr "Gør vindue klæbrigt"
+
+#~ msgid "Make window unsticky"
+#~ msgstr "Fjern vinduets klæbrighed"
+
+#~ msgid "Toggle window sticky"
+#~ msgstr "Skift mellem om vinduet er klæbrigt"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the `stickiness' of the window--whether or not it is a member of\n"
+#~ "all workspaces."
+#~ msgstr ""
+#~ "Aktiverer/deaktiverer vinduets klæbrighed - med andre ord om det er "
+#~ "medlem af alle arbejdsområder."
+
+#~ msgid "Make window ignored"
+#~ msgstr "Ignorér vindue"
+
+#~ msgid "Ignore the window."
+#~ msgstr "Ignorér vinduet."
+
+#~ msgid "Make window not ignored"
+#~ msgstr "Undlad at ignorere vindue"
+
+#~ msgid "Unignore the window."
+#~ msgstr "Undlader at ignorere vinduet."
+
+#~ msgid "Toggle window ignored"
+#~ msgstr "Skift mellem om vindue er ignoreret"
+
+#~ msgid "Toggle whether a window is ignored or not."
+#~ msgstr "Skift mellem om vinduet er ignoreret eller ej."
+
+#~ msgid "Toggle window never focus"
+#~ msgstr "Skift mellem aldrig at give fokus til vindue"
+
+#~ msgid "Toggle whether a window is focusable or not."
+#~ msgstr "Skift mellem om vinduet kan fokuseres eller ej."
+
+#~ msgid "Toggle window cycle skip"
+#~ msgstr "Skift mellem overspring ved vinduesgennemgang"
+
+#~ msgid "Toggle whether a window is ignored while window cycling."
+#~ msgstr ""
+#~ "Skift mellem om vinduet ignoreres når der skiftes mellem vinduer eller ej."
+
+#~ msgid "Toggle window list skip"
+#~ msgstr "Skift mellem om vinduet er i vindueslisten"
+
+#~ msgid "Toggle whether a window will be include in the window list."
+#~ msgstr "Skift mellem om vinduet kommer med i vindueslisten eller ej."
+
+#, fuzzy
+#~ msgid "Toggle task list skip"
+#~ msgstr "Skift mellem om vinduet er i vindueslisten"
+
+#, fuzzy
+#~ msgid "Toggle whether a window will be included in the task-list."
+#~ msgstr "Skift mellem om vinduet kommer med i vindueslisten eller ej."
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Lås position og størrelse mens vinduer er maksimeret."
+
+#~ msgid "Maximize window"
+#~ msgstr "Maksimér vindue"
+
+#~ msgid "Maximize the dimensions of the window."
+#~ msgstr "Maksimér vinduesstørrelsen."
+
+#~ msgid "Unmaximize window"
+#~ msgstr "Afmaksimér vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "Restore the dimensions of the window to its original,\n"
+#~ "unmaximized, state."
+#~ msgstr "Gendan til vinduets oprindelige ikke-maksimerede størrelse."
+
+#~ msgid "Maximize window vertically"
+#~ msgstr "Maksimér vindue lodret"
+
+#~ msgid "Maximize the vertical dimension of the window."
+#~ msgstr "Maksimér den lodrette vinduesstørrelse."
+
+#~ msgid "Maximize window horizontally"
+#~ msgstr "Maksimér vindue vandret"
+
+#~ msgid "Maximize the horizontal dimension of the window."
+#~ msgstr "Maksimér den vandrette vinduesstørrelse."
+
+#~ msgid "Maximize window toggle"
+#~ msgstr "Skift mellem maksimeret tilstand"
+
+#~ msgid "Toggle the state of the window between maximized and unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem maksimeret og gendannet."
+
+#~ msgid "Maximize window horizontally toggle"
+#~ msgstr "Skift mellem maksimeret tilstand vandret"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between horizontally maximized and\n"
+#~ "unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem vandret maksimeret og gendannet."
+
+#~ msgid "Maximize window vertically toggle"
+#~ msgstr "Skift mellem maksimeret tilstand lodret"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between vertically maximized and\n"
+#~ "unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem maksimeret og gendannet."
+
+#~ msgid "Maximize fill window"
+#~ msgstr "Maksimér vinduesudfyldning"
+
+#~ msgid "Maximize the window without obscuring any other windows."
+#~ msgstr "Maksimér vinduet uden at dække andre vinduer."
+
+#~ msgid "Maximize fill window vertically"
+#~ msgstr "Maksimér vinduesudfyldning lodret"
+
+#~ msgid "Maximize the window vertically without obscuring any other windows."
+#~ msgstr "Maksimér vinduet lodret uden at dække andre vinduer."
+
+#~ msgid "Maximize fill window horizontally"
+#~ msgstr "Maksimér vinduesudfyldning vandret"
+
+#~ msgid ""
+#~ "Maximize the window horizontally without obscuring any other windows."
+#~ msgstr "Maksimér vinduet vandret uden at dække andre vinduer."
+
+#~ msgid "Maximize fill window toggle"
+#~ msgstr "Skift mellem maksimeret vinduesudfyldningstilstand"
+
+#~ msgid ""
+#~ "Toggle the state of the window between maximized-filled and unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem maksimalt udfyldt og gendannet."
+
+#~ msgid "Maximize fill window horizontally toggle"
+#~ msgstr "Skift mellem maksimeret vinduesudfyldningstilstand vandret"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between horizontally maximized-filled and\n"
+#~ "unmaximized."
+#~ msgstr ""
+#~ "Skift vinduets tilstand mellem maksimalt udfyldt vandret og gendannet."
+
+#~ msgid "Maximize fill window vertically toggle"
+#~ msgstr "Skift mellem maksimeret vinduesudfyldningstilstand lodret"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between vertically maximized-filled and\n"
+#~ "unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem maksimalt udfyldt og gendannet."
+
+#~ msgid "Maximize window fullscreen"
+#~ msgstr "Maksimér vindue til fuldskærm"
+
+#, fuzzy
+#~ msgid "Fullscreen maximize the window."
+#~ msgstr "Minimér vinduet."
+
+#~ msgid "Maximize window fullscreen toggle"
+#~ msgstr "Skift mellem maksimeret fuldskærmstilstand"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between fullscreen maximized and\n"
+#~ "unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem maksimeret og gendannet."
+
+#, fuzzy
+#~ msgid "Maximize window fullxinerama"
+#~ msgstr "Maksimér vindue til fuldskærm"
+
+#, fuzzy
+#~ msgid "Fullscreen maximize the window across all Xinerama screens."
+#~ msgstr "Minimér vinduet."
+
+#, fuzzy
+#~ msgid "Maximize window fullxinerama toggle"
+#~ msgstr "Skift mellem maksimeret fuldskærmstilstand"
+
+#, fuzzy
+#~ msgid ""
+#~ "Toggle the state of the window between fullscreen maximized\n"
+#~ "across all Xinerama and unmaximized."
+#~ msgstr "Skift vinduets tilstand mellem maksimalt udfyldt og gendannet."
+
+#~ msgid "Shade window"
+#~ msgstr "Oprul vindue"
+
+#~ msgid "Display only the title bar of the window."
+#~ msgstr "Vis kun vinduets titellinje."
+
+#~ msgid "Unshade window"
+#~ msgstr "Nedrul vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "If the window is shaded (see `shade-window'), restore it to it's usual\n"
+#~ "state."
+#~ msgstr ""
+#~ "Hvis vinduet er oprullet (se 'shade-window'), rul det ned og gendan det."
+
+#~ msgid "Toggle window shaded"
+#~ msgstr "Skift mellem op-/nedrullet"
+
+#~ msgid ""
+#~ "Toggle the shaded (only the title bar is displayed) state of the window."
+#~ msgstr ""
+#~ "Skift mellem oprullet (kun titellinje ses) og nedrullet tilstand for "
+#~ "vinduet."
+
+#~ msgid "Focus on application windows when they first appear."
+#~ msgstr "Giv fokus til programvinduer når de vises første gang."
+
+# se næste tekst for forklaring
+#~ msgid "Raise window and transients"
+#~ msgstr "Hæv vindue inkl. midlertidige undervinduer"
+
+#~ msgid ""
+#~ "Raise the current window to its highest allowed position in the stacking\n"
+#~ "order. Also raise any transient windows that it has."
+#~ msgstr ""
+#~ "Hæv det nuværende vindue til dets højeste tilladte position i\n"
+#~ "stablingsordenen, og hæv også alle dets midlertidige vinduer."
+
+# se næste tekst for forklaring
+#~ msgid "Lower window and transients"
+#~ msgstr "Sænk vindue inkl. midlertidige undervinduer"
+
+#~ msgid ""
+#~ "Lower the current window to its lowest allowed position in the stacking\n"
+#~ "order. Also lower any transient windows that it has."
+#~ msgstr ""
+#~ "Sænk det nuværende vindue til dets laveste tilladte position i\n"
+#~ "stablingsordenen, og sænk også dets midlertidige vinduer."
+
+#~ msgid "Raise lower window and transients"
+#~ msgstr "Hæv/sænk vindue inkl. midlertidige undervinduer"
+
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it to its\n"
+#~ "lowest possible position. Otherwise raise it as far as allowed. Also "
+#~ "changes\n"
+#~ "the level of any transient windows it has."
+#~ msgstr ""
+#~ "Hvis vinduet er på dets højeste mulige position, så sænk det til dets\n"
+#~ "lavest mulige position. Ellers hæv det så langt som tilladt. Ændrer\n"
+#~ "også niveauet for alle dets midlertidige vinduer."
+
+#, fuzzy
+#~ msgid "Raise Tabs on Hover"
+#~ msgstr "Hæv ved fokusering"
+
+#, fuzzy
+#~ msgid "Tab add to group"
+#~ msgstr "Sænk gruppe"
+
+#, fuzzy
+#~ msgid "Tab release window"
+#~ msgstr "Fjern vindue"
+
+#, fuzzy
+#~ msgid "Release active window from its group"
+#~ msgstr "Gendan vinduet fra dets minimerede tilstand."
+
+#, fuzzy
+#~ msgid "Tab raise left window"
+#~ msgstr "Hæv/sænk vindue"
+
+#, fuzzy
+#~ msgid "Raise left window in current group"
+#~ msgstr "Hæv/sænk vindue inkl. midlertidige undervinduer"
+
+#, fuzzy
+#~ msgid "Tab raise right window"
+#~ msgstr "Hæv enkelt vindue"
+
+#, fuzzy
+#~ msgid "Raise right window in current group"
+#~ msgstr "Hæv/sænk vindue inkl. midlertidige undervinduer"
+
+#~ msgid "Insert workspace"
+#~ msgstr "Indsæt arbejdsområde"
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "Nedrul valgte vinduer."
+
+#~ msgid "Display window without focusing"
+#~ msgstr "Vis vindue uden at give det fokus"
+
+#~ msgid "Display the workspace/viewport containing the window W."
+#~ msgstr "Vis arbejds-/visningsområdet indeholdende vinduet W."
+
+#~ msgid "Display window"
+#~ msgstr "Vis vindue"
+
+#~ msgid "Display the workspace containing the window W, then focus on W."
+#~ msgstr ""
+#~ "Vis arbejdsområdet indeholdende vinduet W og giv derefter fokus til W."
+
+#~ msgid "Gtkrc reload style"
+#~ msgstr "Gtkrc-genindlæsningsstil"
+
+#~ msgid "Reload the gtkrc settings."
+#~ msgstr "Genindlæs gtkrc-indstillinger."
+
+#~ msgid "Describe key"
+#~ msgstr "Beskriv tast"
+
+#~ msgid "Prompt for a key sequence, then print its binding."
+#~ msgstr "Spørg efter en tastesekvens og udskriv derefter dets binding."
+
+#~ msgid "Quote event"
+#~ msgstr "Citér hændelse"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sends the next key event directly to the focused client window, ignoring\n"
+#~ "any window manager bindings that it may have."
+#~ msgstr ""
+#~ "Send den næste tastehændelse direkte til klientvinduet med fokus idet\n"
+#~ "enhver vindueshåndteringsbinding til hændelsen ignoreres."
+
+#, fuzzy
+#~ msgid "Mark window"
+#~ msgstr "Indpas vindue opad"
+
+#, fuzzy
+#~ msgid "Unmark window"
+#~ msgstr "Nedrul vindue"
+
+#, fuzzy
+#~ msgid "Unmark all windows"
+#~ msgstr "Afmaksimér vindue"
+
+#~ msgid "prompt-keymap"
+#~ msgstr "indtastnings-tastekombinationsliste"
+
+#~ msgid ""
+#~ "Keymap containing bindings active when reading a string from the user."
+#~ msgstr ""
+#~ "Tastekombinationsliste som indeholder bindinger der gælder når der "
+#~ "indtastes tekst."
+
+#~ msgid "When raising a window, also raise its: \\w"
+#~ msgstr "Når et vindue hæves, hæves også dets \\w"
+
+#~ msgid "Raise window"
+#~ msgstr "Hæv vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "Raise the window to its highest allowed position in the stacking\n"
+#~ "order."
+#~ msgstr "Hæv vinduet til den øverst tilladte position i stabelordenen."
+
+#~ msgid "Lower window"
+#~ msgstr "Sænk vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "Lower the window to its lowest allowed position in the stacking\n"
+#~ "order."
+#~ msgstr "Sænk vinduet til den lavest tilladte position i stablingsordenen."
+
+#~ msgid "Raise lower window"
+#~ msgstr "Hæv/sænk vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "If the window is at its highest possible position, then lower it\n"
+#~ "to its lowest possible position. Otherwise raise it as far as\n"
+#~ "allowed."
+#~ msgstr ""
+#~ "Hvis vinduet er på dets højeste mulige position, så sænk det til dets\n"
+#~ "lavest mulige position. Ellers hæv det så langt som tilladt. Ændrer\n"
+#~ "også niveauet for alle dets midlertidige vinduer."
+
+#, fuzzy
+#~ msgid "Windows uniconify to the current viewport."
+#~ msgstr "Send gruppe til det aktive visningsområde"
+
+#, fuzzy
+#~ msgid "stop"
+#~ msgstr "Indstillinger"
+
+#~ msgid "Activate viewport"
+#~ msgstr "Aktivér visningsområde"
+
+#~ msgid "Select the specified viewport."
+#~ msgstr "Vælg det angivne visningsområde."
+
+#~ msgid "Activate viewport column"
+#~ msgstr "Aktivér visningsområdekolonne."
+
+#~ msgid "Select the specified viewport column."
+#~ msgstr "Vælg den angivne visningsområdekolonne."
+
+#~ msgid "Activate viewport row"
+#~ msgstr "Aktivér visningsområderække."
+
+#~ msgid "Select the specified viewport row."
+#~ msgstr "Vælg den angivne visningsområderække."
+
+#~ msgid "Move window to viewport"
+#~ msgstr "Flyt vindue til visningsområde"
+
+#~ msgid "Move the current window to the specified viewport."
+#~ msgstr "Flyt det aktive vindue til det angivne visningsområde."
+
+#~ msgid "Move viewport right"
+#~ msgstr "Flyt visningsområde til højre"
+
+#~ msgid "Move the viewport one screen to the right."
+#~ msgstr "Flyt visningsområdet én skærm til højre."
+
+#~ msgid "Move viewport left"
+#~ msgstr "Flyt visningsområde til venstre"
+
+#~ msgid "Move the viewport one screen to the left."
+#~ msgstr "Flyt visningsområdet én skærm til venstre."
+
+#~ msgid "Move viewport up"
+#~ msgstr "Flyt visningsområde op"
+
+#~ msgid "Move the viewport one screen up."
+#~ msgstr "Flyt visningsområdet én skærm op."
+
+#~ msgid "Move viewport down"
+#~ msgstr "Flyt visningsområdet ned"
+
+#~ msgid "Move the viewport one screen down."
+#~ msgstr "Flyt visningsområdet én skærm ned."
+
+#~ msgid "Move window right"
+#~ msgstr "Flyt vindue til højre"
+
+#, fuzzy
+#~ msgid ""
+#~ "Move the window to the viewport on the right, and switch to that\n"
+#~ "viewport."
+#~ msgstr ""
+#~ "Flyt vindueet til visningsområdet til højre, og skift til det "
+#~ "visningsområde."
+
+#~ msgid "Move window left"
+#~ msgstr "Flyt vindue til venstre"
+
+#, fuzzy
+#~ msgid ""
+#~ "Move the window to the viewport on the left, and switch to that\n"
+#~ "viewport."
+#~ msgstr ""
+#~ "Flyt vinduet til visningsområdet til venstre, og skift til det "
+#~ "visningsområde."
+
+#~ msgid "Move window up"
+#~ msgstr "Flyt vindue op"
+
+#, fuzzy
+#~ msgid ""
+#~ "Move the window to the viewport above, and switch to that\n"
+#~ "viewport."
+#~ msgstr ""
+#~ "Flyt vinduet til visningsområdet ovenfor, og skift til det visningsområde."
+
+#~ msgid "Move window down"
+#~ msgstr "Flyt vindue op"
+
+#, fuzzy
+#~ msgid ""
+#~ "Move the window to the viewport below, and switch to that\n"
+#~ "viewport."
+#~ msgstr ""
+#~ "Flyt vinduet til visningsområdet til nedenunder, og skift til det "
+#~ "visningsområde."
+
+#, fuzzy
+#~ msgid "Animation"
+#~ msgstr "Handlinger"
+
+#, fuzzy
+#~ msgid "solid"
+#~ msgstr "Undgå"
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Hæv vinduer når de modtager fokus."
+
+#, fuzzy
+#~ msgid "Whether to enable warping the cursor to windows."
+#~ msgstr ""
+#~ "Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning "
+#~ "af vinduer."
+
+#, fuzzy
+#~ msgid "Whether to not avoid ignored windows by default."
+#~ msgstr ""
+#~ "Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning "
+#~ "af vinduer."
+
+#, fuzzy
+#~ msgid "Whether to avoid any unspecified window by default."
+#~ msgstr ""
+#~ "Om der skal stødes mod ignorerede vinduer ved forstørrelse og indpasning "
+#~ "af vinduer."
+
+#~ msgid "Focus desktop"
+#~ msgstr "Fokusér skrivebord"
+
+#~ msgid "Transfer input focus to the desktop window (if one exists)."
+#~ msgstr "Overfør fokus til skrivebordsvinduet (hvis det eksisterer)."
+
+#~ msgid "Delete window"
+#~ msgstr "Fjern vindue"
+
+#~ msgid "Delete the window."
+#~ msgstr "Fjern vinduet."
+
+#~ msgid "Delete window safely"
+#~ msgstr "Fjern vindue sikkert"
+
+#~ msgid "Delete the window, or beep if the window can't be closed safely."
+#~ msgstr "Fjern vinduet, eller bip hvis vinduet ikke kan lukkes sikkert."
+
+#~ msgid "Uniquify window name"
+#~ msgstr "Gør vinduets navn unikt"
+
+#~ msgid "Force the current window to have a unique title."
+#~ msgstr "Tving det aktive vindue til at have en unik titel."
+
+#, fuzzy
+#~ msgid "Rename window"
+#~ msgstr "Hæv vindue"
+
+#, fuzzy
+#~ msgid "How to act when passing the first or last workspace."
+#~ msgstr "Vis menu med alle arbejdsområder."
+
+#, fuzzy
+#~ msgid ""
+#~ "How to act when passing the first or last workspace, while moving\n"
+#~ "a window"
+#~ msgstr "Vis menu med alle arbejdsområder."
+
+#~ msgid "Popup workspace list"
+#~ msgstr "Vis arbejdsområdeliste"
+
+#~ msgid "Display the menu containing the list of all workspaces."
+#~ msgstr "Vis menu med alle arbejdsområder."
+
+#~ msgid "Popup window list"
+#~ msgstr "Vis vinduesliste"
+
+#~ msgid "Display the menu of all managed windows."
+#~ msgstr "Vis menu med alle håndterede vinduer."
+
+#~ msgid "Next workspace"
+#~ msgstr "Næste arbejdsområde"
+
+#~ msgid "Display the next workspace."
+#~ msgstr "Vis næste arbejdsområde."
+
+#~ msgid "Previous workspace"
+#~ msgstr "Forrige arbejdsområde"
+
+#~ msgid "Display the previous workspace."
+#~ msgstr "Vis forrige arbejdsområde."
+
+#~ msgid "Send to next workspace"
+#~ msgstr "Send til næste arbejdsområde"
+
+#~ msgid "Move the window to the next workspace."
+#~ msgstr "Flyt vindue til næste arbejdsområde."
+
+#~ msgid "Send to previous workspace"
+#~ msgstr "Send til forrige arbejdsområde"
+
+#~ msgid "Move the window to the previous workspace."
+#~ msgstr "Flyt vindue til forrige arbejdsområde."
+
+#~ msgid "Copy to next workspace"
+#~ msgstr "Kopiér til næste arbejdsområde"
+
+#~ msgid "Copy the window to the next workspace."
+#~ msgstr "Kopiér vindue til næste arbejdsområde."
+
+#~ msgid "Copy to previous workspace"
+#~ msgstr "Kopiér til forrige arbejdsområde"
+
+#~ msgid "Copy the window to the previous workspace."
+#~ msgstr "Kopiér vindue til forrige arbejdsområde."
+
+#~ msgid "Append workspace and send"
+#~ msgstr "Tilføj arbejdsområde til slutningen og send vindue"
+
+#~ msgid ""
+#~ "Create a new workspace at the end of the list, and move the window to it."
+#~ msgstr ""
+#~ "Opret et nyt arbejdsområde i slutningen af listen og flyt vinduet dertil."
+
+#~ msgid "Prepend workspace and send"
+#~ msgstr "Tilføj arbejdsområde til begyndelsen og send vindue"
+
+#, fuzzy
+#~ msgid ""
+#~ "Create a new workspace at the start of the list, and move the\n"
+#~ "window to it."
+#~ msgstr ""
+#~ "Opret et nyt arbejdsområde i starten af listen og flyt vinduet derhen."
+
+#~ msgid "Merge next workspace"
+#~ msgstr "Indflet næste arbejdsområde"
+
+#, fuzzy
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the "
+#~ "next\n"
+#~ "workspace."
+#~ msgstr ""
+#~ "Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til næste\n"
+#~ "arbejdsområde."
+
+#~ msgid "Merge previous workspace"
+#~ msgstr "Indflet forrige arbejdsområde"
+
+#~ msgid ""
+#~ "Delete the current workspace. Its member windows are relocated to the\n"
+#~ "previous workspace."
+#~ msgstr ""
+#~ "Fjern det aktive arbejdsområde. Dets medlemsvinduer flyttes til forrige\n"
+#~ "arbejdsområde."
+
+#~ msgid "Insert workspace after"
+#~ msgstr "Indsæt arbejdsområde efter"
+
+#~ msgid "Create a new workspace following the current workspace."
+#~ msgstr "Opret et nyt arbejdsområde lige efter det aktive."
+
+#~ msgid "Insert workspace before"
+#~ msgstr "Indsæt arbejdsområde før"
+
+#~ msgid "Create a new workspace before the current workspace."
+#~ msgstr "Opret et nyt arbejdsområde lige før det aktive."
+
+#~ msgid "Move workspace forwards"
+#~ msgstr "Flyt arbejdsområde fremad"
+
+#~ msgid "Move the current workspace one place to the right."
+#~ msgstr "Flyt det aktive arbejdsområde en plads til højre."
+
+#~ msgid "Move workspace backwards"
+#~ msgstr "Flyt arbejdsområde tilbage"
+
+#~ msgid "Move the current workspace one place to the left."
+#~ msgstr "Flyt det aktive arbejdsområde en plads til venstre."
+
+#~ msgid "Delete empty workspaces"
+#~ msgstr "Fjern tomme arbejdsområder"
+
+#~ msgid "Delete any workspaces that don't contain any windows."
+#~ msgstr "Fjern alle arbejdsområder som ikke indeholder nogen vinduer."
+
+#~ msgid "Delete window instance"
+#~ msgstr "Fjern vinduesinstans"
+
+#, fuzzy
+#~ msgid ""
+#~ "Remove the copy of the window on the current workspace. If this is the\n"
+#~ "last instance remaining, then delete the actual window."
+#~ msgstr ""
+#~ "Fjern kopien af vinduet på det aktive arbejdsområde. Hvis dette er den\n"
+#~ "sidste instans af vinduet, så fjern det helt."
+
+#, fuzzy
+#~ msgid "Show desktop"
+#~ msgstr "Fokusér skrivebord"
+
+#, fuzzy
+#~ msgid "Hide desktop"
+#~ msgstr "Fokusér skrivebord"
+
+#~ msgid "Activate workspace"
+#~ msgstr "Aktivér arbejdsområde"
+
+#~ msgid "Select the N'th workspace."
+#~ msgstr "Vælg det n'te arbejdsområde."
+
+#~ msgid "Send to workspace"
+#~ msgstr "Send til arbejdsområde"
+
+#, fuzzy
+#~ msgid "Move the current window to the N'th workspace."
+#~ msgstr "Kopier det aktive vindue til det n'te arbejdsområde."
+
+#~ msgid "Copy to workspace"
+#~ msgstr "Kopiér til arbejdsområde"
+
+#~ msgid "Copy the current window to the N'th workspace."
+#~ msgstr "Kopier det aktive vindue til det n'te arbejdsområde."
+
+#~ msgid "Select workspace interactively"
+#~ msgstr "Vælg arbejdsområde interaktivt"
+
+#~ msgid "Prompt for a workspace and switch to it."
+#~ msgstr "Spørg efter og skift til arbejdsområde."
