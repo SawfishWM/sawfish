@@ -148,7 +148,7 @@ Keymap for specific application
 it's possible to have a keymap for a specific application only,
 for example, we use `nautilus-keymap' for Nautilus, all other keymaps
 are nil inside Nautilus then, so only what's inside of nautilus-keymap
-is actually existing, as long as Nautilus is focussed:
+is actually existing, as long as Nautilus is focused:
 
 ( define nautilus-keymap ( make-keymap ) )
 ( bind-keys nautilus-keymap
@@ -157,7 +157,7 @@ is actually existing, as long as Nautilus is focussed:
   "C-r" 'raise-window )
 
 ( add-window-matcher '( ( WM_CLASS . "^Nautilus/nautilus$" ) )
-       '( ( keymap . ,nautilus ) ) )
+       '( ( keymap . ,nautilus-keymap ) ) )
 
 So now Sawfish only nows 3 keybindings for Nautilus.
 
