@@ -2,6 +2,9 @@ This is the complete list of default sawfish keybindings.
 You can use xmodmap (among other tools) to change your keyboard layout,
 and xev to check what key and button presses generate.
 
+Key Descriptions
+================
+
 Toggle = Switch Status (Maximized -> Unmaximized ...)
 
 W = Default Modifier Key
@@ -120,6 +123,9 @@ Click1 = Same as Click
 Click2 = When Mouse Button Is Clicked Twice
 Move = When Button Is Clicked and Pointer Moved
 
+Setting Keybindings
+===================
+
 how to set keybindings manually:
 
 ( bind-keys keymap "keybinding" 'action )
@@ -136,6 +142,42 @@ for example:
 
 ( unbind-keys global-keymap "W-Tab" 'cycle-windows )
 
+Keymap for specific application
+===============================
+
+it's possible to have a keymap for a specific application only,
+for example, we use `nautilus-keymap' for Nautilus, all other keymaps
+are nil inside Nautilus then, so only what's inside of nautilus-keymap
+is actually existing, as long as Nautilus is focussed:
+
+( define nautilus-keymap ( make-keymap ) )
+( bind-keys nautilus-keymap
+  "C-q" 'destroy-window-safely
+  "C-l" 'lower-window
+  "C-r" 'raise-window )
+
+( add-window-matcher '( ( WM_CLASS . "^Nautilus/nautilus$" ) )
+       '( ( keymap . ,nautilus ) ) )
+
+So now Sawfish only nows 3 keybindings for Nautilus.
+
+Keymap Transistion
+==================
+
+Sawfish is able to `translate' keystrokes to different ones, for example
+say we want to create a new tab in Guake (a dropdown terminal emulator) by
+pressing C-n instead of C-S-t, when we do:
+
+( add-window-matcher '( ( WM_CLASS . "^Guake.py/guake.py$" ) )
+       '( ( keymap-trans . ( ( "C-n" "C-S-t" ) ) ) ) )
+
+so we do now press C-n inside Guake, but Guake receives C-S-t instead, or in
+other words: no more unconfigurable keybindings. This may also be usefull in
+conjunction with an application specific keymap, to prevent colliding bindings.
+
+Nested Keybindings (Macros)
+===========================
+
 another thing would be nested keybindings (I prefer `macros' instead of `nested keyinbindgs'),
 like in emacs. nested means you first press keys which together act as a new modifier
 (this new modifier works like the compose key does -> you don't have to keep it pressed, like other modifiers),
@@ -151,6 +193,9 @@ then you press another key (or keybinding) to actually perform the desired actio
 ( bind-keys apps-keymap "b" '( system "bluefish &" ) )
 
 now first press "W-e" (as I said no need to keep it pressed) and press b, now bluefish starts.
+
+Default Keymaps and Keybindings
+===============================
 
 Explanation of Keymaps (+ default bindings)
 
