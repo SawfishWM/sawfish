@@ -389,6 +389,4 @@ before killing it.")
 		  (list (_ (cadr sub))
 			(intern (concat "customize:"
 					(symbol-name (car sub))))))
-		(filter consp (cddr custom-groups)))
-      ,@(and (frame-style-editable-p default-frame-style)
-	     (list nil `(,(_ "Edit theme...") edit-frame-style))))))
+		(filter consp (cddr custom-groups))))))
