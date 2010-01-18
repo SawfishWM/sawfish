@@ -3886,19 +3886,6 @@ window update functions will change it behind the scenes.
 When set, the window is not given a frame.
 @end defvr
 
-It is possible to edit certain frame styles in place with
-@code{sawfish-themer}.
-
-@defun frame-style-editable-p style
-Returns @code{t} if @var{style} can be edited interactively,
-@code{nil} otherwise.
-@end defun
-
-@deffn {Command} edit-frame-style style
-Prompts for a frame style (defaulting to the value of @code{default-frame-style}),
-and runs @code{sawfish-themer-program} on it.
-@end deffn
-
 @defun reload-frame-style name
 Reloads the frame style @var{name} from disk if it is already known to
 the system.  All windows with that style are reframed.
