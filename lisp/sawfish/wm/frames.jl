@@ -33,8 +33,6 @@
 	     set-frame-style
 	     apply-frame-style
 	     apply-frame-style-and-save
-	     mark-frame-style-editable
-	     frame-style-editable-p
 	     window-type
 	     set-window-type
 	     push-window-type
@@ -205,9 +203,6 @@ by the current theme, then FALLBACK-TYPE is used instead.")
   ;; files they were loaded from; used to check if the theme needs reloading
   (define frame-style-files nil)
 
-  ;; List of styles that can be edited using sawfish-themer
-  (define editable-frame-styles nil)
-
   (define frame-type-mappers '()
           "List of functions that map (WINDOW FRAME-TYPE) ->
 FRAME-TYPE. Used when deciding which frame type to ask a theme to
@@ -223,8 +218,6 @@ generate.")
 
   (defvar themes-are-gaolled t
     "When non-nil themes are assumed to be malicious.")
-
-  (defvar sawfish-themer-program "sawfish-themer")
 
 ;;; defcustom's for some built-in variables
 
@@ -391,23 +384,6 @@ generate.")
   (define (apply-frame-style-and-save style)
     (when (apply-frame-style style)
       (save-current-frame-style)))
-
-;;; editable frame styles
-
-  (define (mark-frame-style-editable style)
-    (unless (memq style editable-frame-styles)
-      (setq editable-frame-styles (cons style editable-frame-styles))))
-
-  (define (frame-style-editable-p style) (memq style editable-frame-styles))
-
-  (define-command 'edit-frame-style
-    (lambda (style)
-      (if (not (memq style editable-frame-styles))
-	  (error "Frame style isn't editable")
-	(let ((dir (find-frame-style style)))
-	  (when dir
-	    (system (format nil "%s %s &" sawfish-themer-program dir))))))
-    #:spec (lambda () (list default-frame-style)))
 
 ;;; kludge different window decors by modifying the assumed window type
 
@@ -692,10 +668,9 @@ generate.")
   (gaol-add add-frame-style reframe-window rebuild-frames-with-style
 	    reframe-windows-with-style reframe-all-windows window-type
 	    def-frame-class define-frame-class after-setting-frame-option
-	    mark-frame-style-editable  frame-part-get frame-part-put
-	    frame-part-window frame-part-x-window frame-part-position
-	    frame-part-dimensions frame-part-state map-frame-parts
-	    refresh-frame-part refresh-window rebuild-frame-part)
+	    frame-part-get frame-part-put frame-part-window frame-part-x-window
+	    frame-part-position frame-part-dimensions frame-part-state
+	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part)
 
   (add-hook 'add-window-hook reframe-window t)
   (add-hook 'shape-notify-hook reframe-window t)
