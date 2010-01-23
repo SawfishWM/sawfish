@@ -11,28 +11,28 @@ SRC_URI="mirror://sourceforge/sawmill/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="alpha amd64 ia64 ppc ppc64 sparc x86"
-IUSE="gnome nls"
+IUSE="gnome nls pango imlib"
 
 RDEPEND=">=x11-libs/rep-gtk-@REP_GTK_MIN_VER@
 	>=dev-libs/librep-@REP_MIN_VER@
 	>=x11-libs/gtk+-@GTK_MIN_VER@
-	>=x11-libs/pango-@PANGO_MIN_VER@
+	imlib? <=x11-libs/imlib-1.9
+	pango? >=x11-libs/pango-@PANGO_MIN_VER@
 	nls? ( sys-devel/gettext )"
+
 DEPEND="${RDEPEND}
 	>=dev-util/pkgconfig-0.12.0"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-}
-
 src_compile() {
-	set -- \
-		--with-gdk-pixbuf
-
+	
 	if use gnome; then
 		set -- "$@" \
 			--with-gnome-prefix=/usr
+	fi
+
+	if ! use pango; then
+		set -- "$@" \
+			--without-pango
 	fi
 
 	if ! use nls; then
@@ -41,12 +41,22 @@ src_compile() {
 
 	fi
 
+	if use imlib; then
+		set -- "$@" \
+			--without-gdk-pixbuf
+	else	set -- "$@" \
+			--with-gdk-pixbuf
+	fi
+
 	econf "$@" || die "configure failed"
 
 	emake || die "make failed"
+
 }
 
 src_install() {
+
 	emake DESTDIR="${D}" install || die "make install failed"
 	dodoc AUTHORS ChangeLog FAQ NEWS README TODO OPTIONS README.IMPORTANT KEYBINDINGS USERDOC COPYING COPYING.SOUNDS
+
 }
