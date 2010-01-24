@@ -1,16 +1,15 @@
-Summary: An extensible window manager for the X Window System.
+Summary: An extensible window manager for the X Window System
 Name: sawfish
 Version: @version@
 Release: 1%{?dist}
 Requires: librep >= @REP_MIN_VER@, rep-gtk >= @REP_GTK_MIN_VER@
-License: GPL
+License: GPLv2+
 Group: User Interface/Desktops
 Source: http://download.sourceforge.net/sawmill/sawfish-%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
-Packager: Christopher Bratusek <zanghar@freenet.de>
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: gmp-devel texinfo
-Provides: windowmanager
+BuildRequires: gmp-devel, pango-devel, libXft-devel, texinfo
+BuildRequires: librep-devel, rep-gtk-devel
 
 %define rep_execdir %(pkg-config librep --variable=repcommonexecdir)
 %if %{?_kde4_appsdir:1}%{!?_kde4_appsdir:0}
@@ -26,6 +25,14 @@ basic idea is to have as much user-interface policy as possible
 controlled through the Lisp language.  Configuration can be
 accomplished by writing Lisp code in a personal .sawfishrc file, or
 using a GTK+ interface.  Sawfish is mostly GNOME compliant
+
+%package devel
+Summary: Development files for sawfish
+Group: Development/Languages
+Requires: %{name} = %{version}, pkgconfig
+
+%description devel
+Include files for sawfish development.
 
 %prep
 %setup -q
@@ -46,6 +53,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir
+find $RPM_BUILD_ROOT%{_libdir} -name \*.a -exec rm '{}' \;
 
 %post
 /sbin/install-info %{_infodir}/sawfish.info.gz %{_infodir}/dir
@@ -70,13 +78,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xsessions/sawfish.desktop
 %{_datadir}/man/man1/sawfish*.gz
 %{_datadir}/sawfish/sawfish.png
-%{_libdir}/pkgconfig/sawfish.pc
 %{_libdir}/sawfish/%{version}/%{_host}
 %{rep_execdir}/sawfish
 %{_infodir}/sawfish*
+
+%files devel
+%defattr (-,root,root,-)
 %{_includedir}/sawfish/
+%{_libdir}/pkgconfig/sawfish.pc
 
 %changelog
+* Sun Jan 10 2010 Kim B. Heino <b@bbbs.net> - 1.6.2-1
+- fix devel package, fix rpmlint warnings
+
 * Sat Sep 05 2009 Kim B. Heino <b@bbbs.net>
 - add dist-tag, update files list
 
