@@ -20,8 +20,7 @@
 
 (define-structure sawfish.wm.tabs.tab
 
-    (export tab-add-to-group
-            raise-tabs-on-hover-setter)
+    (export raise-tabs-on-hover-setter)
 
     (open rep
           rep.system
