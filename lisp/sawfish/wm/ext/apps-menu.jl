@@ -67,6 +67,7 @@ set this to non-nil.")
 
   (defvar apps-menu-alphabetize t
     "Sort the apps menu alphabetically.")
+
   (defvar apps-menu-lang nil
     "Language for applications menu, in string. Default is set from locale.")
 
@@ -94,8 +95,9 @@ set this to non-nil.")
 	  (do ((mcount 0 (1+ mcount)))
 	      ((or (string= (substring instring mcount (+ mcount 1)) "\n")
 		   (string= (substring instring mcount (+ mcount 1)) key)
-		   (= mcount (- mlength 2))
-		   (= mcount 398)) mcount)))))
+		   (= mcount (- mlength 1))
+		   (= mcount 398)) 
+	       mcount)))))
 
   (define (get-desktop-key instring)
     (if (> (length instring) 3)
@@ -255,7 +257,7 @@ set this to non-nil.")
   ;; list
   (define (build-cat-list line)
     (if (> (length line) 1)
-	(let ((this-cat (prin1-to-string (read-from-string line))))
+	(let ((this-cat (substring line 0 (get-key-break line ";"))))
 	  (cons this-cat
 		(if (< (length this-cat) (length line))
 		    (build-cat-list
@@ -329,7 +331,8 @@ exile it."
     "Generate a menu entry to run the program specified in the the
 .desktop file `desk-file'."
     (if (and (not (file-directory-p desk-file))
-	     (desktop-file-p desk-file))
+	     (desktop-file-p desk-file)
+	     (not (file-symlink-p desk-file)))
 	(let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
 	  (if apps-menu-ignore-no-display
 	      (let ((a (assoc "NoDisplay" fdo-list)))

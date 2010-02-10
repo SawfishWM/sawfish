@@ -1,3 +1,9 @@
+2010-02-10  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/ext/apps-menu.jl: - ignore .desktop files that are symlinks
+	                                    - don't crash if first char of a keyvalue is ;
+					    - don't crash if # is part of the keyvalue
+					    -- [Matthew Love]
+
 2010-02-02  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/cfg/wm.jl
 	* lisp/sawfish/wm/commands/grow-pack.jl

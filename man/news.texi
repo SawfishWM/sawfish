@@ -15,6 +15,15 @@ they occurred between. For more detailed information see the
 
 @item The 1.6.2 release has some improvements.
 
+@item Bugfixes
+@itemize @minus
+@item Apps-menu is more robust now. [Matthew Love]
+
+Sawfish application-menu @code{apps-menu} introduced in 1.6.0, crashed
+if the desktop file was a symlink, or if the keyvalue was malformed
+(say ; as first character or # somewhere inside). Those .desktop files
+no longer let sawfish crash (or stop the startup-process).
+@end itemize
 @item New features
 @itemize @minus
 @item New command @code{maximize-discard} [Teika kazura]
