@@ -17,12 +17,14 @@ they occurred between. For more detailed information see the
 
 @item Bugfixes
 @itemize @minus
-@item Apps-menu is more robust now. [Matthew Love]
+@item Apps-menu is more robust now. [Matthew Love] [Christopher Bratusek]
 
 Sawfish application-menu @code{apps-menu} introduced in 1.6.0, crashed
-if the desktop file was a symlink, or if the keyvalue was malformed
-(say ; as first character or # somewhere inside). Those .desktop files
-no longer let sawfish crash (or stop the startup-process).
+if the desktop file was a symlink, non-readable or if the keyvalue was
+malformed (say ; as first character or # somewhere inside). Those .desktop
+files no longer let sawfish crash (or stop the startup-process).
+
+Files with permissions of 000 still cause that issue.
 @end itemize
 @item New features
 @itemize @minus

@@ -330,9 +330,10 @@ exile it."
   (define (generate-menu-entry desk-file)
     "Generate a menu entry to run the program specified in the the
 .desktop file `desk-file'."
-    (if (and (not (file-directory-p desk-file))
-	     (desktop-file-p desk-file)
-	     (not (file-symlink-p desk-file)))
+    (if (and (file-readable-p desk-file)
+             (not (file-directory-p desk-file))
+             (not (file-symlink-p desk-file))
+	     (desktop-file-p desk-file))
 	(let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
 	  (if apps-menu-ignore-no-display
 	      (let ((a (assoc "NoDisplay" fdo-list)))
