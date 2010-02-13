@@ -22,7 +22,13 @@ they occurred between. For more detailed information see the
 Application menu, introduced in 1.6.0, made Sawfish crash if
 @file{*.desktop} file had a malformed key value (say ; as first
 character or # somewhere inside), or it was unreadable. It is fixed.
+
+@item Minor fix of window placement by direction [Teika kazura]
+
+When the window placement mode is for example @code{east} and the window
+is wider than the screen, then the window was put wrongly. It is fixed.
 @end itemize
+
 @item New features
 @itemize @minus
 @item New command @code{maximize-discard} [Teika kazura]

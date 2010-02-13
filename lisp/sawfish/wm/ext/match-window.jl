@@ -59,6 +59,8 @@
    `((placement ,(_ "Placement")
                 (ignore-program-position boolean)
                 (place-mode ,(lambda () `(choice ,@placement-modes)))
+		;; If for example x is -100, then the right border
+		;; lies 100 pixels away from the right edge of the screen.
                 (position (or
                            (pair (number -65536 65536 0)
                                  (number -65536 65536 0))
@@ -388,7 +390,8 @@
   (define-match-window-setter 'position
     (lambda (w prop value)
       (declare (unused prop))
-      (let* ((size (window-frame-dimensions w))
+      (let* (xx yy
+	     (size (window-frame-dimensions w))
              (vp-offset (viewport-offset-coord (window-viewport w)))
              (x (if (symbolp value)
                     (cond ((memq value '(east south-east north-east))
@@ -397,7 +400,12 @@
                            (- (quotient (screen-width) 2)
                               (quotient (car size) 2)))
                           (t 0))
-                  (car value)))
+		  ;; numeric value
+		  (setq xx (car value))
+		  (if (< xx 0)
+		      (setq xx (+ (- (screen-width) (car size)) xx))
+		    xx)
+		  ))
              (y (if (symbolp value)
                     (cond ((memq value '(south south-east south-west))
                            (- (screen-height) (cdr size)))
@@ -405,7 +413,11 @@
                            (- (quotient (screen-height) 2)
                               (quotient (cdr size) 2)))
                           (t 0))
-                  (cdr value)))
+		  ;; numeric value
+		  (setq yy (cdr value))
+		  (if (< yy 0)
+		      (setq yy (+ (- (screen-height) (cdr size)) yy))
+		    yy)))
              (gravity (cond ((symbolp value)
                              value)
                             ((and (< x 0) (< y 0))
@@ -417,10 +429,6 @@
                             (t nil))))
         (when gravity
           (window-put w 'gravity gravity))
-        (when (< x 0)
-          (setq x (+ (- (screen-width) (car size)) x)))
-        (when (< y 0)
-          (setq y (+ (- (screen-height) (cdr size)) y)))
         (move-window-to w
                         (+ (car vp-offset) x)
                         (+ (cdr vp-offset) y)))))
