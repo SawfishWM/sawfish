@@ -17,14 +17,11 @@ they occurred between. For more detailed information see the
 
 @item Bugfixes
 @itemize @minus
-@item Apps-menu is more robust now. [Matthew Love] [Christopher Bratusek]
+@item Application menu is more robust now.  [Matthew Love, Christopher Bratusek]
 
-Sawfish application-menu @code{apps-menu} introduced in 1.6.0, crashed
-if the desktop file was a symlink, non-readable or if the keyvalue was
-malformed (say ; as first character or # somewhere inside). Those .desktop
-files no longer let sawfish crash (or stop the startup-process).
-
-Files with permissions of 000 still cause that issue.
+Application menu, introduced in 1.6.0, made Sawfish crash if
+@file{*.desktop} file had a malformed key value (say ; as first
+character or # somewhere inside), or it was unreadable. It is fixed.
 @end itemize
 @item New features
 @itemize @minus
@@ -39,12 +36,16 @@ exported.
 
 @item New command @code{jump-or-exec} [Christopher Bratusek]
 
-The thirdparty module jump-or-exec has been merged. It provides
-@code{jump-or-exec}, a command which may be used to focus a window,
-or if it does not exist, start the application. Unlike the original
-version this one also supports matching a window by it's WM_CLASS,
-which makes it more flexible for applications like musicplayer or
-browsers, which tend to change their WM_NAME relatively often.
+The user uploaded module ``jump-or-exec'' has been merged. It
+provides @code{jump-or-exec}, a command which may be used to focus a
+window, or if it does not exist, start the application. 
+
+Unlike the original version this one also supports matching a window
+by its class (returned by @code{window-class} function), which makes
+it more flexible for applications like music player or browsers, which
+tend to change their WM_NAME relatively often.
+
+For usage, see @file{lisp/sawfish/wm/commands/jump-or-exec.jl} file.
 @end itemize
 @item Misc
 @itemize @minus

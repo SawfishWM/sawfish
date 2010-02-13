@@ -78,8 +78,11 @@ set this to non-nil.")
   ;; fdo-desktop-file-parsing
 
   (define (desktop-file-p directory-file)
-    (let ((this-file (open-file directory-file 'read)))
-      (string= (read-line this-file) "[Desktop Entry]\n")))
+    (condition-case nil
+	(let ((this-file (open-file directory-file 'read)))
+	  (string= (read-line this-file) "[Desktop Entry]\n"))
+      ;; unreadable -> return nil
+      (file-error)))
 
   (define (desktop-group-p instring)
     (string= (substring instring 0 1) "["))
@@ -90,41 +93,41 @@ set this to non-nil.")
 	(string= (substring instring 0 1) "\n")))
 
   (define (get-key-break instring key)
-    (if instring
-	(let ((mlength (length instring)))
-	  (do ((mcount 0 (1+ mcount)))
-	      ((or (string= (substring instring mcount (+ mcount 1)) "\n")
-		   (string= (substring instring mcount (+ mcount 1)) key)
-		   (= mcount (- mlength 1))
-		   (= mcount 398)) 
-	       mcount)))))
+    (when instring
+      (let ((mlength (length instring)))
+	(do ((mcount 0 (1+ mcount)))
+	    ((or (string= (substring instring mcount (+ mcount 1)) "\n")
+		 (string= (substring instring mcount (+ mcount 1)) key)
+		 (= mcount (- mlength 1))
+		 (= mcount 398))
+	     mcount)))))
 
   (define (get-desktop-key instring)
-    (if (> (length instring) 3)
-	(let ((break-number (get-key-break instring "=")))
-	  (if (< break-number 20)
-	      (substring instring 0 break-number)))))
+    (when (> (length instring) 3)
+      (let ((break-number (get-key-break instring "=")))
+	(when (< break-number 20)
+	  (substring instring 0 break-number)))))
 
   (define (get-desktop-value instring)
-    (if (> (length instring) 3)
-	(let ((break-number (get-key-break instring "=")))
-	  (if (< break-number 20)
-	      (substring instring (+ 1 break-number))))))
+    (when (> (length instring) 3)
+      (let ((break-number (get-key-break instring "=")))
+	(when (< break-number 20)
+	  (substring instring (+ 1 break-number))))))
 
   (define (get-desktop-group instring)
     (substring instring 1 (- (length instring) 2)))
 
   (define (parse-desktop-file-line infile)
-    (if (setq this-line (read-line infile))
-	(if (not (desktop-skip-line-p this-line))
-	    (cons
-	     (if (desktop-group-p this-line)
-		 (get-desktop-group this-line)
-	       (if (not (desktop-group-p this-line))
-		   (cons (get-desktop-key this-line)
-			 (get-desktop-value this-line))))
-	     (parse-desktop-file-line infile))
-	  (parse-desktop-file-line infile))))
+    (when (setq this-line (read-line infile))
+      (if (not (desktop-skip-line-p this-line))
+	  (cons
+	   (if (desktop-group-p this-line)
+	       (get-desktop-group this-line)
+	     (when (not (desktop-group-p this-line))
+	       (cons (get-desktop-key this-line)
+		     (get-desktop-value this-line))))
+	   (parse-desktop-file-line infile))
+	(parse-desktop-file-line infile))))
 
   (define (parse-desktop-file infile)
     (let ((d-file (open-file infile 'read)))
@@ -133,17 +136,17 @@ set this to non-nil.")
   ;; generic functions
 
   (define (map-desk-files in-desk-files in-directory)
-    (if in-desk-files
-	(cons (expand-file-name (car in-desk-files) in-directory)
-	      (map-desk-files (cdr in-desk-files) in-directory))))
+    (when in-desk-files
+      (cons (expand-file-name (car in-desk-files) in-directory)
+	    (map-desk-files (cdr in-desk-files) in-directory))))
 
   (define (map-dir-files directories)
-    (if directories
-	(if (file-directory-p (car directories))
-	    (let ((desk0 (directory-files (car directories))))
-	      (cons (map-desk-files desk0 (car directories))
-		    (map-dir-files (cdr directories))))
-	  (map-dir-files (cdr directories)))))
+    (when directories
+      (if (file-directory-p (car directories))
+	  (let ((desk0 (directory-files (car directories))))
+	    (cons (map-desk-files desk0 (car directories))
+		  (map-dir-files (cdr directories))))
+	(map-dir-files (cdr directories)))))
 
   (define (flatten input)
     (cond ((null input) nil)
@@ -235,33 +238,33 @@ set this to non-nil.")
 
   ;; Functions for categories
   (define (fix-sub-cats cat-list loc-list)
-    (if cat-list
-	(let ((cat-val (car cat-list)))
-	  (if (assoc cat-val loc-list)
-	      (cons (cdr (assoc cat-val loc-list))
-		    (fix-sub-cats cat-list (remove (assoc cat-val loc-list)
-						   loc-list)))
-	    (fix-sub-cats (cdr cat-list) loc-list)))))
+    (when cat-list
+      (let ((cat-val (car cat-list)))
+	(if (assoc cat-val loc-list)
+	    (cons (cdr (assoc cat-val loc-list))
+		  (fix-sub-cats cat-list (remove (assoc cat-val loc-list)
+						 loc-list)))
+	  (fix-sub-cats (cdr cat-list) loc-list)))))
 
   ;; Associate values from the Master Category list with sub-categories
   ;; from file
   (define (fix-cats cat-list)
-    (if cat-list
-	(let ((cat-val (car (car cat-list)))
-	      (c-list (fix-sub-cats (car cat-list) local-menu)))
-	  (if (car c-list)
-	      (cons (cons cat-val c-list) (fix-cats (cdr cat-list)))
-	    (fix-cats (cdr cat-list))))))
+    (when cat-list
+      (let ((cat-val (car (car cat-list)))
+	    (c-list (fix-sub-cats (car cat-list) local-menu)))
+	(if (car c-list)
+	    (cons (cons cat-val c-list) (fix-cats (cdr cat-list)))
+	  (fix-cats (cdr cat-list))))))
 
   ;; Convert a Categories key value from ; delineated records to a
   ;; list
   (define (build-cat-list line)
-    (if (> (length line) 1)
-	(let ((this-cat (substring line 0 (get-key-break line ";"))))
-	  (cons this-cat
-		(if (< (length this-cat) (length line))
-		    (build-cat-list
-		     (substring line (+ 1 (length this-cat)))))))))
+    (when (> (length line) 1)
+      (let ((this-cat (substring line 0 (get-key-break line ";"))))
+	(cons this-cat
+	      (when (< (length this-cat) (length line))
+		(build-cat-list
+		 (substring line (+ 1 (length this-cat)))))))))
 
   ;; Helper for (parse-desk-line)
   ;; Determine best category to use... :|
@@ -330,31 +333,29 @@ exile it."
   (define (generate-menu-entry desk-file)
     "Generate a menu entry to run the program specified in the the
 .desktop file `desk-file'."
-    (if (and (file-readable-p desk-file)
-             (not (file-directory-p desk-file))
-             (not (file-symlink-p desk-file))
-	     (desktop-file-p desk-file))
-	(let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
-	  (if apps-menu-ignore-no-display
-	      (let ((a (assoc "NoDisplay" fdo-list)))
-		(if a (rplacd a "false\n")
-		  (setq fdo-list (cons (cons "NoDisplay" "false\n")
-				       fdo-list)))))
-	  (if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true\n"))
-	      (list
-	       (parse-cat-list (build-cat-list
-				(trim-end (cdr (assoc "Categories"
-						      fdo-list)))))
-	       (trim-end (cdr (find-lang-in-desktop-file fdo-list)))
-	       (if (string= (cdr (assoc "Terminal" fdo-list))
-			    "true\n")
-		   (list 'system
-			 (concat xterm-program " -e "
-				 (trim-end (cdr (assoc "Exec" fdo-list)))
-				 " &"))
+    (when (and (not (file-directory-p desk-file))
+	       (desktop-file-p desk-file))
+      (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
+	(if apps-menu-ignore-no-display
+	    (let ((a (assoc "NoDisplay" fdo-list)))
+	      (if a (rplacd a "false\n")
+		(setq fdo-list (cons (cons "NoDisplay" "false\n")
+				     fdo-list)))))
+	(if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true\n"))
+	    (list
+	     (parse-cat-list (build-cat-list
+			      (trim-end (cdr (assoc "Categories"
+						    fdo-list)))))
+	     (trim-end (cdr (find-lang-in-desktop-file fdo-list)))
+	     (if (string= (cdr (assoc "Terminal" fdo-list))
+			  "true\n")
 		 (list 'system
-		       (concat (trim-end (cdr (assoc "Exec" fdo-list)))
-			       " &"))))))))
+		       (concat xterm-program " -e "
+			       (trim-end (cdr (assoc "Exec" fdo-list)))
+			       " &"))
+	       (list 'system
+		     (concat (trim-end (cdr (assoc "Exec" fdo-list)))
+			     " &"))))))))
 
   (define (generate-apps-menu)
     "Returns the list of applications menu which can be used for `apps-menu'."
