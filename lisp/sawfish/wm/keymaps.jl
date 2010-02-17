@@ -193,11 +193,15 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 			(lambda ()
 				(if (window-get (current-event-window) 'fixed-position)
 					(window-put (current-event-window) 'fixed-position nil)
-					(window-put (current-event-window) 'fixed-position t)))))
+					(window-put (current-event-window) 'fixed-position t))
+                  (call-window-hook 'window-state-change-hook (current-event-window) (list '(fixed-position))))))
+
+
     "Keymap containing bindings active when the pointer is in the lock button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
+
 
   (defcustom rename-button-keymap (bind-keys (make-keymap)
 				   "Button1-Off" 'rename-window)
