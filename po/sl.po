@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-02-22 11:25+0100\n"
+"PO-Revision-Date: 2010-02-24 12:51+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1225,7 +1225,7 @@ msgstr "Pošlji skupino na predhodno delovno površino"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Move group to current viewport"
-msgstr "Premakni skupino v trenutno gledišče"
+msgstr "Premakni skupino v trenutno vidno polje"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Move group left"
@@ -1324,9 +1324,8 @@ msgstr ""
 "`maybe' pomeni, da le izogibana okna drugih globin."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid "Whether to bump into ignored windows."
-msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+msgstr "Ali naj se okna zaletijo v prezrta okna."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "The minimum height or width to which a window may be shrunk."
@@ -1341,33 +1340,30 @@ msgid "Grow window left"
 msgstr "Povečaj okno levo"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window to the left until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Poveča okno na levo dokler se ne 'zaleti' ob drugo okno.\n"
-"Poglejte `grow-window-up'."
+"Poveča okno na levo dokler se ne 'zaleti' v drugo okno.\n"
+"Poglejte možnost `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window right"
 msgstr "Povečaj okno desno"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window to the right until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Poveča okno na desno dokler se ne 'zaleti' ob drugo okno.\n"
-"Poglejte  `grow-window-up'`"
+"Poveča okno na desno dokler se ne 'zaleti' v drugo okno.\n"
+"Poglejte možnost `grow-window-up'`"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window up"
 msgstr "Povečaj okno gor"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window upwards until it `bumps into' another window.\n"
 "If the top edge was beyond the screen edge, it is brought back in.\n"
@@ -1375,79 +1371,74 @@ msgid ""
 "With a numeric prefix arg, grow upwards by that many increments specified by\n"
 "window or pixels instead."
 msgstr ""
-"Poveča okno navzgor dokler se ne 'zaleti' ob drugo okno.\n"
-"Če je zgornji rob nad robom zaslona ga potegne nazaj.\n"
-"Z univerzalnim predponskim argumentom poveča navzgor največ.\n"
-"S številčnim predponskim argumentom poveča navzgor za določen korak."
+"Poveča okno navzgor dokler se ne 'zaleti' v drugo okno.\n"
+"V kolikor je zgornji rob nad robom zaslona, ga potegne nazaj.\n"
+"S splošno predpono argumenta okno razpne navzgor.\n"
+"S številčno predpono pa poveča navzgor za določen korak."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window down"
 msgstr "Povečaj okno dol"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Grows window downwards until it `bumps into' another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Poveča okno navzdol dokler se ne 'zaleti' ob drugo okno.\n"
-" Poglejte `grow-window-up'`"
+"Poveča okno navzdol dokler se ne 'zaleti' v drugo okno.\n"
+"Poglejte možnost `grow-window-up'`"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window left"
 msgstr "Pomanjšaj okno levo"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window to the left until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Premakne okno levo dokler se ne 'zaleti' ob drugo okno.\n"
-" Poglejte `pack-window-up'."
+"Premakne okno levo dokler se ne 'zaleti' v drugo okno.\n"
+"Poglejte možnost `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window right"
 msgstr "Pomanjšaj okno desno"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window to the right until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Premakne okno desno dokler se ne 'zaleti' ob drugo okno.\n"
-" Poglejte `pack-window-up'."
+"Premakne okno desno dokler se ne 'zaleti' v drugo okno.\n"
+"Poglejte možnost `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window up"
 msgstr "Pomanjšaj okno navzgor"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window upwards until it `bumps into' another window.\n"
 "If the top edge was beyond the screen edge, it is moved back in.\n"
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
-"Poveča okno navzgor dokler se ne 'zaleti' ob drugo okno.\n"
-"Če je zgornji rob nad robom zaslona ga potegne nazaj.\n"
-"Z univerzalnim predponskim argumentom največ poveča navzgor.\n"
-"S številčnim predponskim argumentom poveča navzgor za določen korak."
+"Poveča okno navzgor dokler se ne 'zaleti' v drugo okno.\n"
+"V kolikor je zgornji rob nad robom zaslona, ga potegne nazaj.\n"
+"S splošno predpono argumenta okno razpne navzgor.\n"
+"S številčno predpono pa poveča navzgor za določen korak."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Pack window down"
 msgstr "Pomanjšaj okno navzdol"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Moves window downwards until it `bumps into' another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Premakne okno navzdol dokler se ne 'zaleti' ob drugo okno.\n"
-" Poglejte `pack-window-up'."
+"Premakne okno navzdol dokler se ne 'zaleti' v drugo okno.\n"
+"Poglejte možnost `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help show faq"
@@ -1595,18 +1586,16 @@ msgid "Move cursor southwest"
 msgstr "Premakni kazalnik navzdol in levo"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor `move-cursor-increment' pixels southwest"
-msgstr "Koliko slikovnih točk se lahko premakne kazalec, preden je to obravnavano kot vleka"
+msgstr "Premakni kazalnik za `move-cursor-increment' točk navzdol in levo"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor southeast"
 msgstr "Premakni kazalnik navzdol in desno"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor `move-cursor-increment' pixels southeast"
-msgstr "Koliko slikovnih točk se lahko premakne kazalec, preden je to obravnavano kot vleka"
+msgstr "Premakni kazalnik za `move-cursor-increment' točk navzdol in desno"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor northwest fine"
@@ -1714,40 +1703,40 @@ msgid "Move window interactively"
 msgstr "Interaktivno premakni okno"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Move the window interactively, with mouse or keyboard."
-msgstr "Z uporabo miške interaktivno premikaj okno."
+msgstr "Z uporabo miške ali tipkovnice premakni okno."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
 msgstr "Interaktivno spremeni velikost okna"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Resize the window interactively, with mouse or keyboard."
-msgstr "Z uporabo miške interaktivno spreminjaj velikost okna."
+msgstr "Z uporabo miške ali tipkovnice spremeni velikost okna."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
 msgstr "Premakni izbrano okno"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid ""
 "Wait for the user to select a window, then interactively move\n"
 "that window."
-msgstr "Počakaj, da uporabnik izbere okno, nato interaktivno premikaj to okno."
+msgstr ""
+"Počakaj, da uporabnik izbere okno, nato ga s pomočjo miške ali tipkovnice\n"
+"premikaj."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
 msgstr "Spremeni velikost izbranega okna"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid ""
 "Wait for the user to select a window, then interactively resize\n"
 "that window."
-msgstr "Počakaj, da uporabnik izbere okno, nato interaktivno spreminjaj velikost tega okna."
+msgstr ""
+"Počakaj, da uporabnik izbere okno, nato mu s pomočjo miške ali tipkovnice\n"
+"spreminjaj velikost."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Double window size"
@@ -2016,19 +2005,19 @@ msgstr "Premakni skupino oken za `slide-window-increment' navzdol."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
-msgstr "Premakni gledišče naprej"
+msgstr "Premakni vidno polje naprej"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move to the next viewport."
-msgstr "Premakni v naslednje gledišče."
+msgstr "Premakni v naslednje vidno polje."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport previous"
-msgstr "Premakni gledišče nazaj"
+msgstr "Premakni vidno polje nazaj"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move to the previous viewport."
-msgstr "Premakni v predhodno gledišče."
+msgstr "Premakni v predhodno vidno polje."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window previous"
@@ -2036,7 +2025,7 @@ msgstr "Premakni okno nazaj"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move the window to the previous viewport."
-msgstr "Premakni okno v predhodno gledišče."
+msgstr "Premakni okno v predhodno vidno polje."
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move window next"
@@ -2044,15 +2033,15 @@ msgstr "Premakni okno naprej"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move the window to the next viewport."
-msgstr "Premakni okno v naslednje gledišče."
+msgstr "Premakni okno v naslednje vidno polje."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
-msgstr "Nastavi gledišče vodoravno"
+msgstr "Nastavi vidno polje vodoravno"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set window viewport linear"
-msgstr "Nastavi gledišče oken vodoravno"
+msgstr "Nastavi vidno polje oken vodoravno"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Display window names and icons while cycling through windows."
@@ -2068,7 +2057,7 @@ msgstr "Ob kroženju pokaži okna vseh delovnih površin."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include windows on all viewports when cycling."
-msgstr "Ob kroženju pokaži okna vseh gledišč."
+msgstr "Ob kroženju pokaži okna vseh vidnih polj."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Raise windows while they're temporarily selected during cycling."
@@ -2228,7 +2217,7 @@ msgstr "Preskoči na naslednje namizje, ko kazalec zadane ob rob zaslona."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "viewport"
-msgstr "gledišče"
+msgstr "vidno polje"
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "workspace"
@@ -2244,7 +2233,7 @@ msgstr "Preskoči le kadar se okno interaktivno premika."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Milliseconds to delay before edge flipping."
-msgstr ""
+msgstr "Čas zamika pred preskakovanjem robov v milisekundah"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Beep when errors occur."
@@ -2288,15 +2277,15 @@ msgstr "Neskončno namizje"
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 msgid "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-flipping)."
-msgstr ""
+msgstr "\"Neskončno namizje\", ali gladki prehod gibanja vidnega polja z miško (ni v skladu z preskakovanjem robov)."
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 msgid "Amount to move the viewport when the pointer hits the screen edge."
-msgstr "Premik gledišča, ko se kazalnik dotakne roba zaslona."
+msgstr "Premik vidnega polja, ko se kazalnik dotakne roba zaslona."
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 msgid "Amount to pull back the cursor after moving the viewport."
-msgstr "Premik kazalnika nazaj po premiku gledišča."
+msgstr "Premik kazalnika nazaj po premiku vidnega polja."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
@@ -2344,12 +2333,12 @@ msgstr "Nova delovna površina"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "New viewport"
-msgstr "Novo gledišče"
+msgstr "Novo vidno polje"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Viewport"
-msgstr "Gledišče"
+msgstr "Vidno polje"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Depth"
@@ -2369,7 +2358,7 @@ msgstr "Lepljiv"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Sticky viewport"
-msgstr "Lepljivo gledišče"
+msgstr "Lepljivo vidno polje"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
@@ -2698,7 +2687,7 @@ msgstr "Znižaj okno na dno znotraj njegovega sklada."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
+msgstr "Izbrana možnost omogoči, da vhodni/izhodni dogodki ne spremenijo žarišča."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -3334,13 +3323,12 @@ msgid "Raise lower single window"
 msgstr "Dvigni ali spusti za eno okno"
 
 #. ../lisp/sawfish/wm/stacking.jl
-#, fuzzy
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Če je okno na najvišjem možnem položaju, ga spusti na najnižji možen položaj,\n"
-"sicer pa ga dvigni čimbolj na vrh. (spremeni tudi nivo dialogov)"
+"V kolikor je okno na najvišjem mogočem položaju, ga spusti na najnižji\n"
+"mogoč položaj, sicer pa ga dvigni čimbolj na vrh."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
@@ -3421,13 +3409,12 @@ msgid "Toggle window sticky"
 msgstr "Preklopi lepljivost okna"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
 msgstr ""
-"Preklopi `lepljivost' okna neglede na to ali je član vseh \n"
-"delovnih površin."
+"Preklopi `lepljivost' okna neglede na to ali je prikazano na vseh\n"
+"delovnih površinah."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -3753,19 +3740,19 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
-msgstr ""
+msgstr "Okrašenost širine levega roba zavihka"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's right-edge decoration"
-msgstr ""
+msgstr "Okrašenost širine desnega roba zavihka"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab area's left-edge decoration"
-msgstr ""
+msgstr "Okrašenost širine območja levega roba zavihka"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab area's right-edge decoration"
-msgstr ""
+msgstr "Okrašenost širine območja desnega roba zavihka"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Raise Tabs on Hover"
@@ -3813,7 +3800,7 @@ msgstr "Pokaži okno brez postavljanja v žarišče"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the workspace/viewport containing the window W."
-msgstr "Pokaži delovno površino ali gledišče, ki vsebuje okno W."
+msgstr "Pokaži delovno površino ali vidno polje, ki vsebuje okno W."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
@@ -3968,7 +3955,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Windows uniconify to the current viewport."
-msgstr "Povečaj okna na trenutnem gledišču"
+msgstr "Povečaj okna na trenutnem vidnem polju"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -3998,11 +3985,11 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
-msgstr "Omogoči gledišče"
+msgstr "Omogoči vidno polje"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Select the specified viewport."
-msgstr "Izberi določeno gledišče."
+msgstr "Izberi določeno vidno polje."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Column:"
@@ -4014,59 +4001,59 @@ msgstr "Vrstica:"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport column"
-msgstr "Omogoči stolpec gledišča"
+msgstr "Omogoči stolpec vidnega polja"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Select the specified viewport column."
-msgstr "Izberi določen stolpec gledišča."
+msgstr "Izberi določen stolpec vidnega polja."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport row"
-msgstr "Omogoči vrstico gledišča."
+msgstr "Omogoči vrstico vidnega polja."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Select the specified viewport row."
-msgstr "Izberi določeno vrstico gledišča."
+msgstr "Izberi določeno vrstico vidnega polja."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window to viewport"
-msgstr "Premakni okno v gledišče"
+msgstr "Premakni okno v vidno polje"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the current window to the specified viewport."
-msgstr "Premakni trenutno okno v določeno gledišče."
+msgstr "Premakni trenutno okno v določeno vidno polje."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport right"
-msgstr "Premakni gledišče desno"
+msgstr "Premakni vidno polje desno"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the viewport one screen to the right."
-msgstr "Premakni gledišče za en zaslon desno."
+msgstr "Premakni vidno polje za en zaslon desno."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport left"
-msgstr "Premakni gledišče levo"
+msgstr "Premakni vidno polje levo"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the viewport one screen to the left."
-msgstr "Premakni gledišče en zaslon levo."
+msgstr "Premakni vidno polje en zaslon levo."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport up"
-msgstr "Premakni gledišče navzgor"
+msgstr "Premakni vidno polje navzgor"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the viewport one screen up."
-msgstr "Premakni gledišče en zaslon navzgor."
+msgstr "Premakni vidno polje en zaslon navzgor."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move viewport down"
-msgstr "Premakni gledišče navzdol"
+msgstr "Premakni vidno polje navzdol"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move the viewport one screen down."
-msgstr "Premakni gledišče za en zaslon navzdol."
+msgstr "Premakni vidno polje za en zaslon navzdol."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window right"
@@ -4077,8 +4064,8 @@ msgid ""
 "Move the window to the viewport on the right, and switch to that\n"
 "viewport."
 msgstr ""
-"Premakni okno v gledišče na desni in preklopi na to\n"
-"gledišče."
+"Premakni okno v vidno polje na desni in preklopi na to\n"
+"vidno polje."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
@@ -4089,8 +4076,8 @@ msgid ""
 "Move the window to the viewport on the left, and switch to that\n"
 "viewport."
 msgstr ""
-"Premakni okno v gledišče na levi in preklopi na to\n"
-"gledišče."
+"Premakni okno v vidno polje na levi in preklopi na to\n"
+"vidno polje."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
@@ -4101,8 +4088,8 @@ msgid ""
 "Move the window to the viewport above, and switch to that\n"
 "viewport."
 msgstr ""
-"Premakni okno v gledišče zgoraj in preklopi na to\n"
-"gledišče."
+"Premakni okno v vidno polje zgoraj in preklopi na to\n"
+"vidno polje."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
@@ -4113,8 +4100,8 @@ msgid ""
 "Move the window to the viewport below, and switch to that\n"
 "viewport."
 msgstr ""
-"Premakni okno v gledišče spodaj in preklopi na to\n"
-"gledišče."
+"Premakni okno v vidno polje spodaj in preklopi na to\n"
+"vidno polje."
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "Animation"
@@ -4138,30 +4125,27 @@ msgstr "Postavi okno v žarišče, tudi če okno tega ne zahteva."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Warping"
-msgstr ""
+msgstr "Postavljanje kazalnika"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
+msgstr "Odmik (%) od robov okna med postavljanjem kazalnika."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to enable warping the cursor to windows."
-msgstr "Ali naj bodo zavihki v brskalniku Nautilus omogočeni"
+msgstr "Ali naj se omogoči postavljanje kazalnika na okna."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to not avoid ignored windows by default."
-msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+msgstr "Ali naj se okno privzeto ne izogne kateremukoli prezrtemu oknu."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to avoid any unspecified window by default."
-msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
+msgstr "Ali naj se okno privzeto izogne kateremukoli nedoločenemu oknu."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
-msgstr ""
+msgstr "Oblikuj za ustvarjanje enoznačnih imen oken."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Focus desktop"
@@ -4504,14 +4488,10 @@ msgstr "Vprašaj za delovno površino in preklopi nanjo."
 #~ msgstr ""
 #~ "Program za igranje zvočnih vzorcev. Če ni nastavljeno bo uporabljena že "
 #~ "vgrajena ESD podpora."
-
-#, fuzzy
 #~ msgid "Number of steps for viewport scrolling."
-#~ msgstr "Število pikslov za premik kazalca v 'premakni-kazalec' ukazu."
-
-#, fuzzy
+#~ msgstr "Število korakov desenja vidnega polja."
 #~ msgid "Display workspace name"
-#~ msgstr "Imena delovnih površin"
+#~ msgstr "Pokaži imena delovnih površin"
 #~ msgid "Matched Windows"
 #~ msgstr "Ustrezajoča okna"
 #~ msgid "Invoke the user-customization system."
