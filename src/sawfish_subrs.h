@@ -252,7 +252,8 @@ extern void keys_init (void);
 /* from main.c */
 extern int exit_code;
 extern repv Qsawfish_directory, Qsawfish_lisp_lib_directory,
-    Qsawfish_site_lisp_directory, Qsawfish_exec_directory;
+      Qsawfish_site_lisp_directory, Qsawfish_exec_directory,
+      Qsawfish_user_lisp_directory;
 extern repv Qwindow_error, Qinvalid_pos, Qbad_event_desc;
 extern repv Qbefore_exit_hook, Qfonts_are_fontsets;
 extern bool batch_mode_p (void);

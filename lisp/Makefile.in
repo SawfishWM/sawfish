@@ -31,7 +31,8 @@ REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lis
 sawfish_prog = ../src/sawfish --batch --no-rc
 COMPILE_ENV = SAWFISHLISPDIR=. \
 	      SAWFISHEXECDIR=$(top_builddir)/src/.libexec \
-	      SAWFISHDOCFILE=../DOC
+	      SAWFISHDOCFILE=../DOC \
+	      SAWFISH_USER_LISP_DIR=
 
 SAWFISH_LISP_FILES := sawfish/wm.jlc
 SAWFISH_LISP_DIRS := sawfish/wm

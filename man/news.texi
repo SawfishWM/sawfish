@@ -15,6 +15,21 @@ they occurred between. For more detailed information see the
 
 @item The 1.6.3 release has some improvements.
 
+@itemize @minus
+@item Customizable lisp directory [Teika kazura]
+
+User can add lisp directories to be read with the environmental
+variable @code{SAWFISH_USER_LISP_DIR}. Its value is directories
+separated by colon, like @code{PATH}, and prepended to
+@code{load-path}. If not set, @file{~/.sawfish/lisp} is assumed.
+
+User can override system lisp files. For example, if there is
+@file{~/.sawfish/lisp/sawfish/wm/windows.jl}, then it is read as
+@code{sawfish.wm.windows}, instead of the installed one. In fact, it
+was possible for some lisp files, but now it's guaranteed for all
+files.  Of course, you can define new modules, too.
+
+@end itemize
 @item Other Changes
 @itemize @minus
 @item Then pressing the lock-button also do a state-change of the window

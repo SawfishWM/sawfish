@@ -55,6 +55,7 @@ DEFSYM(sawfish_lisp_lib_directory, "sawfish-lisp-lib-directory");
 DEFSYM(sawfish_site_lisp_directory, "sawfish-site-lisp-directory");
 DEFSYM(sawfish_exec_directory, "sawfish-exec-directory");
 DEFSYM(sawfish_locale_directory, "sawfish-locale-directory");
+DEFSYM(sawfish_user_lisp_directory, "sawfish-user-lisp-directory");
 DEFSYM(sawfish_version, "sawfish-version"); /*
 ::doc:sawfish-directory::
 The directory in which all of sawfish's installed data files live.
@@ -157,10 +158,53 @@ DEFUN ("exit-type", Fexit_type, Sexit_type, (void), rep_Subr0)
     }
 }
 
+static repv split_by_colon(char * str){
+  // Split string at colon, and return lisp list of the strings.
+  repv * elm;
+  repv val;
+  int length, i, from, elm_ind;
+
+  length = 1;
+  i = 0;
+  // first, scan how many colons are there
+  while (str[i] != 0){
+    if(str[i] == ':'){
+      length++;
+    }
+    i++;
+  }
+  // well, sawfish doesn't check malloc failure...
+  elm = (repv *) malloc(sizeof(repv) * length);
+
+  from = 0; i = 0; elm_ind = 0;
+  while(1){
+    if((str[i] == ':') || (str[i] == 0)){
+      if(from < i){
+	// Add it only when non-zero
+	elm[elm_ind] = rep_string_dupn(str + from, i - from);
+	elm_ind++;
+      }
+      from = i + 1;
+    }
+    if(str[i] == 0){
+      break;
+    }
+    i++;
+  }
+
+  // Flist isn't exported...
+  val = Qnil;
+  for(elm_ind--; elm_ind >= 0; elm_ind--){
+    val = Fcons(elm[elm_ind], val);
+  }
+  free(elm);
+  return val;
+}
+
 static void
 sawfish_symbols (void)
 {
-    repv tem;
+    repv tem, tem2;
 
     rep_INTERN_SPECIAL(sawfish_directory);
     if(getenv("SAWFISHDIR") != 0)
@@ -211,9 +255,56 @@ sawfish_symbols (void)
     Fset (Qdocumentation_files, Fcons(Fsymbol_value (Qdocumentation_file, Qt),
 				      Fsymbol_value (Qdocumentation_files, Qt)));
 
-    Fset (Qload_path, Fcons (Fsymbol_value (Qsawfish_lisp_lib_directory, Qt),
-			     Fcons (Fsymbol_value (Qsawfish_site_lisp_directory, Qt),
-				    Fsymbol_value (Qload_path, Qt))));
+    rep_INTERN_SPECIAL(sawfish_user_lisp_directory);
+
+    if(getenv("SAWFISH_USER_LISP_DIR") != 0){
+      Fset(Qsawfish_user_lisp_directory,
+	   split_by_colon(getenv("SAWFISH_USER_LISP_DIR")));
+    }
+    else{
+      Fset(Qsawfish_user_lisp_directory,
+	   split_by_colon("~/.sawfish/lisp"));
+    }
+
+    /* in lisp,
+       (setq load-path
+             (append sawfish-user-lisp-directory
+                     (list sawfish-lisp-lib-directory
+		           sawfish-site-lisp-directory)
+		     load-path)) */
+
+    /* rep_copy_list is not exported...
+       tem =
+         rep_copy_list(Fsymbol_value(Qsawfish_user_lisp_directory, Qt));
+    */
+
+    if(getenv("SAWFISH_USER_LISP_DIR") != 0){
+      tem = split_by_colon(getenv("SAWFISH_USER_LISP_DIR"));
+    }
+    else{
+      tem = split_by_colon("~/.sawfish/lisp");
+    }
+
+    // tem2 will point to load-path
+    if(tem != Qnil){
+      tem2 = tem;
+
+      while(rep_CDR(tem) != Qnil){
+	tem = rep_CDR(tem);
+      }
+      rep_CDR(tem) = Fcons(Fsymbol_value(Qsawfish_lisp_lib_directory, Qt),
+			   Qnil);
+      tem = rep_CDR(tem);
+    }else{
+      tem = Fcons(Fsymbol_value(Qsawfish_lisp_lib_directory, Qt),
+		  Qnil);
+      tem2 = tem;
+    }
+    rep_CDR(tem) = Fcons(Fsymbol_value(Qsawfish_site_lisp_directory, Qt),
+			 Qnil);
+    tem = rep_CDR(tem);
+    rep_CDR(tem) = Fsymbol_value(Qload_path, Qt);
+    Fset(Qload_path, tem2);
 
     Fset (Qdl_load_path, Fcons (Fsymbol_value (Qsawfish_exec_directory, Qt),
 				Fsymbol_value (Qdl_load_path, Qt)));

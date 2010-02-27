@@ -34,7 +34,8 @@ sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
 		../src/sawfish --batch --no-rc
 COMPILE_ENV = SAWFISHLISPDIR=../lisp \
 	      SAWFISHEXECDIR=$(top_builddir)/src/.libs \
-	      SAWFISHDOCFILE=../DOC
+	      SAWFISHDOCFILE=../DOC \
+	      SAWFISH_USER_LISP_DIR=
 
 THEMES := absolute-e Crux brushed-metal gradient gtk microGUI mono simple smaker get-S-tabbed mxflat Elberg-tabbed
 

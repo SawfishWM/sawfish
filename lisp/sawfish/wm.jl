@@ -28,6 +28,10 @@
 ;; this will be changed to 'user later
 (setq *user-structure* 'sawfish.wm)
 
+;; Expand tilde for efficiency. Otherwise, tilde file-handler is called
+;; everytime in path search.
+(setq load-path (mapcar canonical-file-name load-path))
+
 ;; load always-present session-manager stuff
 (require 'sawfish.wm.session.init)
 
@@ -59,10 +63,6 @@
 (defmacro i18n-defvar args (cons 'defvar args))
 (defmacro i18n-define args (cons 'define args))
 (export-bindings '(i18n-defvar i18n-define))
-
-;; add ~/.sawfish/lisp to load-path for user-code (canonicalize it
-;; now to avoid calling tilde file-handler multiple times)
-(setq load-path (cons (canonical-file-name "~/.sawfish/lisp") load-path))
 
 ;; import libraries that may be needed by autoload files
 (require 'sawfish.wm.commands)

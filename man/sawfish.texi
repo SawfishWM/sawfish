@@ -6339,6 +6339,18 @@ example: @code{"/usr/share/sawfish/site-lisp"}. You can override it
 with the environment variable @code{SAWFISHSITELISPDIR}.
 @end defvar
 
+@defvar sawfish-user-lisp-directory
+The list of user's sawfish lisp directories. The default value is
+@code{($HOME/.sawfish/lisp)}. It is prepended to @code{load-path}, so
+that files under these directories are searched prior to
+@code{sawfish-lisp-lib-directory}.
+
+You can override the value with environment variable
+@code{SAWFISH_USER_LISP_DIR}. Paths are seperated by colon, like
+the @code{PATH} environmental variable. Example:
+@code{~/.sawfish/lisp-test:~/.sawfish/lisp}.
+@end defvar
+
 @defun exit-type
 If Sawfish is shutting down, this function returns one of the strings
 @code{"user-quit"}, @code{"user-restart"} or @code{"session-quit"}.

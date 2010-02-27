@@ -34,12 +34,22 @@ exec rep "$0" "$@"
     (open rep
 	  rep.system
 	  rep.io.streams
-	  sawfish.gtk.widget
-	  sawfish.cfg.i18n
-	  sawfish.cfg.shell
-	  sawfish.cfg.group)
-
+	  rep.io.files
+	  rep.regexp)
   (define socket-id nil)
+
+  (when (getenv "SAWFISH_USER_LISP_DIR")
+    (setq load-path
+	  (append
+	   (mapcar canonical-file-name
+		   (string-split ":" (getenv "SAWFISH_USER_LISP_DIR")))
+	   load-path)))
+
+  ;; mapcar fails for compilation 
+  (require 'sawfish.gtk.widget)
+  (require 'sawfish.cfg.i18n)
+  (require 'sawfish.cfg.shell)
+  (require 'sawfish.cfg.group)
 
   (when (get-command-line-option "--help")
     (write standard-output "\
