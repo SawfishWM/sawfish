@@ -1,3 +1,22 @@
+2010-02-27  Teika Kazura <teika@lavabit.com>
+	* lisp/Makefile.in
+	* lisp/sawfish/cfg/main.jl.in
+	* lisp/sawfish/wm.jl
+	* man/news.texi
+	* man/sawfish.texi
+	* src/main.c
+	* src/sawfish_subrs.h
+	* themes/Makefile.in: Implements SAWFISH_USER_LISP_DIR. Like PATH, it's colon seperated directories. Its value will be prepended to load-path. Now it's possible for users to override any installed lisp files. sawfish-config respects it, too. Doc.
+
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/misc.jl
+	* lisp/sawfish/wm/state/iconify.jl
+	* lisp/sawfish/wm/util/with-output.jl
+	* lisp/sawfish/wm/windows.jl
+	* man/news.texi
+	* man/sawfish.texi: Doc. Comments in source to prevent error during init. Comment on _SAWFISH_WM_RAISE_WINDOW and _SAWFISH_WM_LOWER_WINDOW. `select-window' returns nil for the root window.
+
 2010-02-17  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/keymaps.jl: then pressing the lock-button also do a state-change [Fuchur]
 
