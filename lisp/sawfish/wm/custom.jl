@@ -56,6 +56,12 @@
 	  rep.data.tables
 	  rep.structures
 	  rep.system
+	  #|
+	     Don't add more sawfish.wm.* here unless you know what
+	     you're doing. Instead, embed 'require' in
+	     definition. It's because this file is read from
+	     windows.jl. See windows.jl for more.
+	  |#
 	  sawfish.wm.commands
 	  sawfish.wm.gaol
 	  sawfish.wm.colors

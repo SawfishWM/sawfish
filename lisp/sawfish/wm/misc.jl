@@ -24,6 +24,12 @@
 		   rep.regexp
 		   rep.module-system
 		   rep.io.files
+		   #|
+		     Don't add more sawfish.wm.* here unless you know
+		     what you're doing. Instead, embed 'require' in
+		     definition. It's because this file is read
+		     from windows.jl. See windows.jl for more.
+		   |#
 		   sawfish.wm.windows.subrs
 		   sawfish.wm.events))
 

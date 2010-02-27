@@ -1,4 +1,4 @@
-;; iconify.jl -- handling window state
+;; iconify.jl -- iconification & (bah) stickiness
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
@@ -17,6 +17,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+;;; By historical reason, stickiness is here, too.
 
 (define-structure sawfish.wm.state.iconify
 

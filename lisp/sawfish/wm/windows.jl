@@ -62,6 +62,12 @@
     (open rep
 	  rep.system
 	  rep.regexp
+	  #|
+	    Don't add more sawfish.wm.* here unless you know what
+	    you're doing. Instead, embed 'require' in definition.
+	    It's because this file is read in early stage of Sawfish
+	    init.
+	  |#
 	  sawfish.wm.windows.subrs
 	  sawfish.wm.gaol
 	  sawfish.wm.custom
@@ -436,6 +442,8 @@ string `uniquify-name-format' to generate unique names."
   (defvar select-window-cursor-shape 'crosshair)
 
   (define (select-window)
+    "Wait for a click, and returns the clicked window. Nil for the root
+window."
     (allow-events 'async-pointer)
     (when (grab-pointer nil select-window-cursor-shape)
       (unwind-protect

@@ -1339,7 +1339,8 @@ unclear.
 @defun select-window
 Waits for the user to left-click on a window, and returns that window.
 The mouse cursor changes shape, and all normal input events are
-suppressed until a window is selected.
+suppressed until a window is selected. For root window, @code{nil} is
+returned.
 @end defun
 
 @defvar select-window-cursor-shape
@@ -1765,6 +1766,9 @@ If window @var{w} supports the @code{_SAWFISH_WM_LOWER_WINDOW}
 protocol, ask it whether it wants to lower itself or not.  Otherwise,
 lower the window unconditionally.
 @end defun
+
+These two protocols were used in nautilus, but the current situation
+is unknown.
 
 Sawfish has more general operations that raising a window to the top
 or lowering it to the bottom.  It can place a window relative to one
