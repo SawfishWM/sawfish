@@ -6,7 +6,9 @@
 	* man/sawfish.texi
 	* src/main.c
 	* src/sawfish_subrs.h
-	* themes/Makefile.in: Implements SAWFISH_USER_LISP_DIR. Like PATH, it's colon seperated directories. Its value will be prepended to load-path. Now it's possible for users to override any installed lisp files. sawfish-config respects it, too. Doc.
+	* themes/Makefile.in: Implements SAWFISH_USER_LISP_DIR. Like PATH, it's colon seperated directories.
+	                      Its value will be prepended to load-path. Now it's possible for users to override any
+			      installed lisp files. sawfish-config respects it, too. Doc.
 
 	* lisp/sawfish/wm/commands.jl
 	* lisp/sawfish/wm/custom.jl
@@ -15,7 +17,8 @@
 	* lisp/sawfish/wm/util/with-output.jl
 	* lisp/sawfish/wm/windows.jl
 	* man/news.texi
-	* man/sawfish.texi: Doc. Comments in source to prevent error during init. Comment on _SAWFISH_WM_RAISE_WINDOW and _SAWFISH_WM_LOWER_WINDOW. `select-window' returns nil for the root window.
+	* man/sawfish.texi: Doc. Comments in source to prevent error during init. Comment on _SAWFISH_WM_RAISE_WINDOW
+	                    and _SAWFISH_WM_LOWER_WINDOW. `select-window' returns nil for the root window.
 
 2010-02-17  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/keymaps.jl: then pressing the lock-button also do a state-change [Fuchur]
@@ -25,7 +28,8 @@
 
 2010-02-13  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/ext/apps-menu.jl
-	* man/news.texi: The dangerous 'open-file' in apps-menu.jl is protected with condition-case. Symlink is read again. All 'if' are replaced by 'when' when possible.
+	* man/news.texi: The dangerous 'open-file' in apps-menu.jl is protected with condition-case. Symlink is read again.
+	                 All 'if' are replaced by 'when' when possible.
 
 	* lisp/sawfish/gtk/README
 	* src/display.c: Doc. Comments in source. New file lisp/sawfish/gtk/README describes the diretory's contents.
@@ -33,7 +37,8 @@
 	* lisp/sawfish/wm/tabs/tab.jl: Minor fix: delete bogus export in tab.jl.
 
 	* lisp/sawfish/wm/ext/match-window.jl
-	* man/news.texi: Bugfix of window placement by direction. When the window placement mode is for example east and the window is wider than the screen, then the window was put wrongly. It is fixed.
+	* man/news.texi: Bugfix of window placement by direction. When the window placement mode is for example east
+	                 and the window is wider than the screen, then the window was put wrongly. It is fixed.
 
 2010-02-13  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/apps-menu.jl: non-readable .desktop files are no longer stopping sawfish startup
@@ -54,7 +59,9 @@
 	* man/Makefile.in
 	* man/faq.texi
 	* man/news.texi
-	* man/sawfish.texi:  Doc changes. Corrections and descrption / format improvements in grow, pack, shrink and yank. Verbose instruction on how to compile docs. Describes exactly what 'obsolete' variables are. Comments in sourecs. Basic Xinerama doc.
+	* man/sawfish.texi:  Doc changes. Corrections and descrption / format improvements in grow, pack, shrink and yank.
+	                     Verbose instruction on how to compile docs. Describes exactly what 'obsolete' variables are.
+			     Comments in sourecs. Basic Xinerama doc.
 
 2010-01-24  Christopher Bratusek <zanghar@freenet.de>
 	* sawfish.spec.in: improved [Kim B. Heino]
