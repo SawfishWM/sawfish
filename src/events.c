@@ -1364,7 +1364,10 @@ ungrab_pointer (void)
 /* Window-local event handlers */
 
 /* Register that FUN should be called for any events received from
-   the window with id W. */
+   the window with id W.
+
+   Currently used for windows created by Sawfish: edge-flip,
+   display-message, and x-create-window. */
 void
 register_event_handler (Window w, void (*fun)(XEvent *ev))
 {
@@ -1479,7 +1482,11 @@ handle_input_mask(long mask)
     commit_queued_focus_change ();
 }
 
-/* Handle all available X events on file descriptor FD. */
+/* Handle all available X events on file descriptor FD.
+   ... Well, this comment has been around for years, but FD is ignored...
+
+   This is the entrance of Sawfish event loop.
+ */
 void
 handle_sync_input (int fd)
 {

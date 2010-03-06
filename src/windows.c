@@ -1025,8 +1025,11 @@ DEFUN("window-wants-input-p", Fwindow_wants_input_p, Swindow_wants_input_p,
 ::doc:sawfish.wm.windows.subrs#window-wants-input-p::
 window-wants-input-p WINDOW
 
-Return t if the client window associated with object WINDOW has hinted
+Return t if the WINDOW wants focus in X sense, i.e. if it has hinted
 that it would like to be given the input focus when applicable.
+
+If unsure, use `window-really-wants-input-p' which also takes into
+account `never-focus' window property.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
@@ -1087,6 +1090,9 @@ window-visibility WINDOW
 
 Return a symbol defining the visibility of WINDOW. Possible returned
 symbols are `fully-obscured', `partially-obscured' or `unobscured'.
+
+This function is deprecated. Instead use `window-obscured' and
+`stacking-visibility'.
 ::end:: */
 {
     repv sym = Qnil;
@@ -1194,7 +1200,8 @@ DEFUN("window-visible-p", Fwindow_visible_p, Swindow_visible_p,
 ::doc:sawfish.wm.windows.subrs#window-visible-p::
 window-visible-p WINDOW
 
-Return t if WINDOW is currently visible (i.e. not hidden, see `hide-window').
+Return t if WINDOW is not hidden by `hide-window'. Notice there're
+various cases where a window is not visible.
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);

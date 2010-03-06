@@ -37,15 +37,19 @@
 	  sawfish.wm.util.window-order)
 
   (defcustom unshade-selected-windows nil
-    "Unshade selected windows."
+    "Unshade window when selected."
     :type boolean
     :group min-max)
 
 ;;; Activating windows
 
+  ;; No Sawfish code except display-window calls this function.
+  ;; But this is a command, too, so don't delete it.
   (define (display-window-without-focusing
 	   w #!optional preferred-space #!key will-refocus)
-    "Display the workspace/viewport containing the window W."
+    "Display the window, by choosing the workspace/viewport containing
+the window W, and by showing it, i.e. the window is uniconified, or
+unshaded if necessary."
     (when w
       (when (window-iconified-p w)
 	(uniconify-window w))
@@ -64,10 +68,19 @@
     display-window-without-focusing
     #:spec (lambda ()
 	     (require 'sawfish.wm.util.prompt)
-	     (list (prompt-for-window))))
+	     (list (prompt-for-window)))
+    #:doc "Display the window, but don't focus. You're prompted to type in the name."
+    )
 
+  #|
+    Currently, the optional argument `preferred-space' is not used
+    anywhere in the Sawfish code, so I didn't describe it in the texi.
+    Consider removing it, and instead implementing many other options
+    with #!key.
+  |#
   (define (display-window w #!optional preferred-space)
-    "Display the workspace containing the window W, then focus on W."
+    "Do everything necessary to make window W ready for user,
+i.e. display, focus, etc."
     (when w
       (display-window-without-focusing
        w preferred-space
@@ -77,4 +90,5 @@
   (define-command 'display-window display-window
     #:spec (lambda ()
 	     (require 'sawfish.wm.util.prompt)
-	     (list (prompt-for-window)))))
+	     (list (prompt-for-window)))
+    #:doc "Display the window. You're prompted to type in the name."))
