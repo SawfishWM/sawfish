@@ -76,11 +76,6 @@
 	  sawfish.wm.commands)
 
 
-  (defcustom ignore-window-input-hint nil
-    "Give focus to windows even when they haven't asked for it."
-    :type boolean
-    :group focus)
-
   (defgroup warp "Warping" :group misc)
 
   (defcustom warp-to-window-offset (cons -1 -1)
@@ -153,9 +148,7 @@ Returns nil if no such window is found."
   (define (window-really-wants-input-p w)
     "Return nil if window W should never be focused."
     (and (not (window-get w 'never-focus))
-	 (or ignore-window-input-hint
-	     (window-get w 'ignore-window-input-hint)
-	     (window-wants-input-p w))))
+	 (window-wants-input-p w)))
 
   (define (window-transient-p w)
     "Return non-nil if WINDOW is a transient window. The returned value will

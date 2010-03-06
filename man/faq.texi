@@ -250,13 +250,9 @@ Recompile GTK+ using the @samp{--disable-xim} option to configure
 
 @item Why don't some windows ever get focused?
 
-If you don't have the option ``give focus to windows even when they
-haven't asked for it'' set to nil (define-special-variable
-ignore-window-input-hint nil), then windows that don't ask for focus
-don't get it.
-
-Windows ask to receive focus by setting their WM_HINTS property
-appropriately; for example if I xprop a gnome-terminal:
+Because that window doesn't accept it. Technically, windows ask to
+receive focus by setting their WM_HINTS property appropriately; for
+example if I xprop a gnome-terminal:
 
 @example
 WM_HINTS(WM_HINTS):
@@ -290,7 +286,6 @@ $ killall panel
 It means that you're trying to execute Lisp code that was compiled for
 an outdated version of the Lisp virtual machine. Recompile any Lisp
 files that you have installed locally.
-
 
 @item Historical question: Why is it now called @emph{Sawfish}?
 
