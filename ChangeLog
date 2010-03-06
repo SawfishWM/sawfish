@@ -1,3 +1,22 @@
+2010-03-06  Teika Kazura <teika@lavabit.com>
+	* OPTIONS
+	* lisp/sawfish/wm/util/display-window.jl
+	* man/faq.texi
+	* man/news.texi
+	* man/sawfish.texi
+	* src/events.c
+	* src/windows.c: Doc, mainly texi "windows" chapter organization. Groups are revised. New sections: "Getting Windows", "Stacking Vilibility", "Activating Window". Functions `display-window' and `activate-window' are documented. Option `unshade-selected-windows' is documented.  Distinction between 'window-wants-input-p' and 'window-really-wants-input-p' is described. Minor error fix: 'window-transient-p' returns the parent id, not t, when transient.
+			 Docstring with trailing "\\w" puts the widget right to the label in the configurator.
+			 Faq item on per head workspace switching.
+
+	* OPTIONS
+	* lisp/sawfish/wm/windows.jl
+	* man/faq.texi
+	* man/news.texi: Long unsupported option 'ignore-window-input-hint' is deleted, together with related codes.
+
+	* man/news.texi
+	* man/sawfish.texi: In texi, dropped 'edition' number, the date oflast update, and so on. These items tend to be incorrect, since editors often forget touching them.
+
 2010-02-27  Teika Kazura <teika@lavabit.com>
 	* lisp/Makefile.in
 	* lisp/sawfish/cfg/main.jl.in
