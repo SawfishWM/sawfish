@@ -54,8 +54,6 @@
   ;; represents the level of normal windows, negative for windows below
   ;; this level, and positive for windows above the normal level
 
-  (defgroup stacking "Stacking" :group misc)
-
   (defcustom transients-above 'parents
     "Keep transient windows stacked above: \\w"
     :group (misc stacking)

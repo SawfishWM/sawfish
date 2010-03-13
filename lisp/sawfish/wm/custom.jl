@@ -305,7 +305,8 @@ of choices."
            ;; keep on recursing
            (loop (cdr group)
                  (or (assq (car group) (cddr parent))
-                     (error "Unknown group %s" full-group)))
+                     (error
+		      "Unknown customization group: %s.\nIf not typo, its defgroup is not called yet." full-group)))
            (unless (cdr group)
              (rplacd (cdr custom-groups)
                      (nconc (sort (filter consp (cddr custom-groups))
@@ -484,14 +485,18 @@ the user."
 
 ;;; default groups
 
-  (defgroup focus "Focus")
-  (defgroup move "Move/Resize" :require sawfish.wm.commands.move-resize)
+  ;; If you suffer from Sawfish init failure in defcustom / defgroup
+  ;; which is the result of additional "open", then push the defcustom
+  ;; of the parent group here.
   (defgroup appearance "Appearance")
-  (defgroup workspace "Workspaces")
   (defgroup bindings "Bindings")
+  (defgroup focus "Focus")
   (defgroup min-max "Mini/Maximizing")
   (defgroup misc "Miscellaneous")
+  (defgroup move "Move/Resize" :require sawfish.wm.commands.move-resize)
   (defgroup placement "Placement" :group misc)
+  (defgroup stacking "Stacking" :group misc)
+  (defgroup workspace "Workspaces")
 
 ;;; loading user's customisations
 
