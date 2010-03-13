@@ -676,7 +676,7 @@ client window associated with it.
 Basics:
 * Window Attributes::
 * Getting Windows:: Get window by name, class, all, etc.
-* Window Property Lists::
+* Window Property Lists:: Plist attached by Sawfish.
 * Window Types::  Some windows have type, like transient.
 * Input Focus::
 * X Properties::
@@ -765,6 +765,14 @@ dimensions of the client window associated with object @var{window}.
 @defun window-position window
 Returns a cons-cell @code{(@var{x} . @var{y})} defining the position
 relative to the root window of @var{window}.
+@end defun
+
+@defun display-window-position #!optional window
+Display @var{window}'s position and size in a popup. If the argument
+is @code{nil} or called as a command, user chooses the window by cursor
+and click.
+
+This function is defined in @code{sawfish.wm.util.display-wininfo}.
 @end defun
 
 @defun get-window-wm-protocols window

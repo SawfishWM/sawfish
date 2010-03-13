@@ -42,9 +42,11 @@
 
   (defconst icon-size (32 . 32))
 
+  ;; Move this to x-cycle.jl, and add viewport. Leave this undocumented
+  ;; until that.
   (defvar display-wininfo-show-workspace nil)
 
-  ;; window currently displayed, or nil
+  ;; the popup window which currently shows wininfo, or nil
   (define info-window nil)
 
 ;;; utilities
@@ -78,7 +80,9 @@
 	(cons (quotient (- (screen-width) (car dims)) 2)
 	      (quotient (- (screen-height) (cdr dims)) 2)))))
 
-  ;; Returns a list of strings describing window W in some way
+  ;; Returns the list of *one* string which is made of
+  ;; * name, in brackets when iconified
+  ;: * workspace num like <2>, when display-wininfo-show-workspace in non-nil
   (define (window-info w)
     (list (concat (and (window-get w 'iconified) ?[)
                        (window-name w)
@@ -93,14 +97,10 @@
 
 ;;; entry point
 
-  ;; What must be shown?
-  ;;  * The window icon at left.
-  ;;  * At right, the window's title and (maybe) its class.
-
   (define (display-wininfo w)
-    "Shows window information about W. Includes at least window name and
-icon (if available). With a null W any displayed information is removed."
-
+    "Popups a small window with window's informations. It includes
+icon, name, and workspace if `display-wininfo-show-workspace' is non-nil.
+If W is nil previous window is removed."
     ;; if there's an old window, destroy it
     (when info-window
       (x-destroy-window info-window)
@@ -152,4 +152,26 @@ icon (if available). With a null W any displayed information is removed."
 			   `((background . ,(get-color "white"))
 			     (border-color . ,(get-color "black")))
 			   event-handler))
-	(x-map-window info-window)))))
+	(x-map-window info-window))))
+
+  (define (display-window-position #!optional w)
+    "Display window position and size in a popup."
+    (unless (windowp w)
+      (setq w (select-window)))
+    (let (
+	  (coord (window-position w))
+	  (size (window-dimensions w))
+	  str)
+      (setq str (concat "Name: " (window-name w) "\n\n"))
+      (setq str (format nil "%sTop left:     (%s, %s)\n" str
+			(car coord) (cdr coord)))
+      (setq str (format nil "%sRight bottom: (%s, %s)\n" str
+			(+ (car coord) (car size))
+			(+ (cdr coord) (cdr size))))
+      (setq str (format nil "%sSize: %s x %s\n" str
+			(car size) (cdr size)))
+      (display-message (concat str "\nClick to dismiss."))))
+  
+  (define-command 'display-window-position display-window-position
+    #:doc "Choose a window, and prints its position and size in a popup.")
+  )
