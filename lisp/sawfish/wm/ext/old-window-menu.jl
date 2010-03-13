@@ -18,6 +18,9 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+;; This is the "old" window menu. By default, beos-window-menu is used
+;; instead. This file is orphan now.
+
 (define-structure sawfish.wm.ext.old-window-menu
 
     (export old-window-menu)
