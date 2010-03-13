@@ -25,6 +25,7 @@
     (open rep
 	  rep.system
 	  rep.data.records
+	  sawfish.wm.commands
 	  sawfish.wm.colors
 	  sawfish.wm.events
 	  sawfish.wm.fonts
