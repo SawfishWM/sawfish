@@ -1,3 +1,19 @@
+2010-03-13  Teika Kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/util/display-wininfo.jl
+	* man/news.texi
+	* man/sawfish.texi: 'display-window-position' command is implemented.
+
+	* lisp/sawfish/wm/state/maximize.jl: Deleted bogus exports.
+
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/stacking.jl: Fix of a semi-bug. (defgroup stacking)
+	is moved to custom.jl from stacking. Without this, adding 'tab' to
+	open clause of wm.frames breaks the startup. Read git commit
+	928355 log for the details.
+
+	* README
+	* lisp/sawfish/wm/ext/old-window-menu.jl: Minor doc change.
+
 2010-03-06  Teika Kazura <teika@lavabit.com>
 	* OPTIONS
 	* lisp/sawfish/wm/util/display-window.jl
