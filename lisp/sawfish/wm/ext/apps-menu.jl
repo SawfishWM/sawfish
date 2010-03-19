@@ -20,13 +20,18 @@
 
 ;;; Description:
 ;;
-;; Generate applications menu from .desktop files in the directory
+;; Generate applications menu from *.desktop files in the directory
 ;; /usr/share/applications .
 
 ;; "Desktop entry specification", *.desktop files spec, is defined in:
 ;; http://standards.freedesktop.org/desktop-entry-spec/latest/
 
 ;; 'fdo' in some names stands for "freedesktop.org".
+
+;;; Todo:
+;;  * Acquisition of the locale is wrong.
+
+;;; Notes: we don't handle non-utf8 encoding.
 
 ;;; Code:
 
@@ -84,48 +89,32 @@ set this to non-nil.")
       ;; unreadable -> return nil
       (file-error)))
 
-  (define (desktop-group-p instring)
-    (string= (substring instring 0 1) "["))
-
   (define (desktop-skip-line-p instring)
-    (or (not instring)
-	(string= (substring instring 0 1) "#")
-	(string= (substring instring 0 1) "\n")))
+    (or (eq (aref instring 0) ?#)
+	(eq (aref instring 0) ?\n)))
 
-  (define (get-key-break instring key)
-    (when instring
-      (let ((mlength (length instring)))
-	(do ((mcount 0 (1+ mcount)))
-	    ((or (string= (substring instring mcount (+ mcount 1)) "\n")
-		 (string= (substring instring mcount (+ mcount 1)) key)
-		 (= mcount (- mlength 1))
-		 (= mcount 398))
-	     mcount)))))
+  (define (desktop-group-p instring)
+    (eq (aref instring 0) ?\[))
 
-  (define (get-desktop-key instring)
-    (when (> (length instring) 3)
-      (let ((break-number (get-key-break instring "=")))
-	(when (< break-number 20)
-	  (substring instring 0 break-number)))))
-
-  (define (get-desktop-value instring)
-    (when (> (length instring) 3)
-      (let ((break-number (get-key-break instring "=")))
-	(when (< break-number 20)
-	  (substring instring (+ 1 break-number))))))
+  ;; returns (key . value)
+  (define (get-key-value-pair instring)
+    ;; Sorry, \\s doesn't work. Why??
+    (if (string-match "^([^ \t=]+)[ \t]*=[ \t]*([^\n]+)" instring)
+	(cons (expand-last-match "\\1") (expand-last-match "\\2"))
+      ;; Ususally, it doesn't reach here.
+      (cons "" "")))
 
   (define (get-desktop-group instring)
     (substring instring 1 (- (length instring) 2)))
 
+  ;; Returns (group1 (key1 . value1) ... group2 (keyA . valueA) ...)
   (define (parse-desktop-file-line infile)
     (when (setq this-line (read-line infile))
       (if (not (desktop-skip-line-p this-line))
 	  (cons
 	   (if (desktop-group-p this-line)
 	       (get-desktop-group this-line)
-	     (when (not (desktop-group-p this-line))
-	       (cons (get-desktop-key this-line)
-		     (get-desktop-value this-line))))
+	     (get-key-value-pair this-line))
 	   (parse-desktop-file-line infile))
 	(parse-desktop-file-line infile))))
 
@@ -154,12 +143,12 @@ set this to non-nil.")
 	  (t (append (flatten (car input))
 		     (flatten (cdr input))))))
 
-  (define (trim-end string)
-    (cond
-     ((string= (aref string (- (length string) 3)) 37)
-      (substring string 0 (- (length string) 4)))
-     (string
-      (substring string 0 (- (length string) 1)))))
+  ;; Cut the string before % sign if present.
+  ;; In fact, %% means "escaped %". Let's forget :/
+  (define (trim-percent string)
+    (if (string-match "%" string)
+	(substring string 0 (match-start))
+      string))
 
   ;; This is wrong.  Read the desktop entry spec to see how it should
   ;; be done.  It's complicated.
@@ -181,7 +170,7 @@ set this to non-nil.")
 
   ;; The Master Category List
 
-  (defvar menu-cat-alist
+  (defvar desktop-cat-alist
     '(("Desktop" . ("X-Desktop" "X-DesktopApplets" "X-DesktopCountry"
 		    "DesktopSettings" "GNOME" "KDE"
 		    "X-GNOME-PersonalSettings" "X-Xfce-Toplevel"))
@@ -256,31 +245,24 @@ set this to non-nil.")
 	    (cons (cons cat-val c-list) (fix-cats (cdr cat-list)))
 	  (fix-cats (cdr cat-list))))))
 
-  ;; Convert a Categories key value from ; delineated records to a
-  ;; list
-  (define (build-cat-list line)
-    (when (> (length line) 1)
-      (let ((this-cat (substring line 0 (get-key-break line ";"))))
-	(cons this-cat
-	      (when (< (length this-cat) (length line))
-		(build-cat-list
-		 (substring line (+ 1 (length this-cat)))))))))
-
-  ;; Helper for (parse-desk-line)
-  ;; Determine best category to use... :|
-  (define (parse-cat-list cat-list)
-    (if (cdr cat-list)
-	(let ((this-cat (car cat-list)))
-	  (if (or
-	       (string= this-cat "GNOME")
-	       (string= this-cat "GTK")
-	       (string= this-cat "KDE")
-	       (string= this-cat "Qt")
-	       (string= this-cat "X-XFCE")
-	       (string= this-cat "Application"))
-	      (parse-cat-list (cdr cat-list))
-	    this-cat))
-      (car cat-list)))
+  ;; Determine the best :| category to use. This will further be
+  ;; converted with fix-cats.
+  (define (determine-category line)
+    (let loop ((cat-list (string-split ";" line))
+	       this-cat)
+	 (if (cdr cat-list)
+	     (progn
+	       (setq this-cat (car cat-list))
+	       (if (or
+		    (string= this-cat "GNOME")
+		    (string= this-cat "GTK")
+		    (string= this-cat "KDE")
+		    (string= this-cat "Qt")
+		    (string= this-cat "X-XFCE")
+		    (string= this-cat "Application"))
+		   (loop (cdr cat-list) nil)
+		 this-cat))
+	   (car cat-list))))
 
   ;; Alphabetize the entries in the category menus
   (define (alphabetize-entries saw-menu)
@@ -291,7 +273,7 @@ set this to non-nil.")
 
   (define (fdo-exile fdo-list)
     "Exile `fdo-list' -- i.e., mark it as an invalid or garbled
-.desktop file."
+desktop file."
     (let ((exile-comment
 	   (cons "fdo-Comment" "This .desktop file was exiled, use \
 with caution, file may be corrupt.\n"))
@@ -300,20 +282,20 @@ with caution, file may be corrupt.\n"))
       (setq fdo-list
 	    (append fdo-list (list exile-comment)))
       (if (assoc "NoDisplay" fdo-list)
-	  (rplacd (assoc "NoDisplay" fdo-list) "true\n")
+	  (rplacd (assoc "NoDisplay" fdo-list) "true")
 	(setq fdo-list (append fdo-list (cons (cons "NoDisplay"
-						    "true\n")))))
+						    "true")))))
       (when (not (assoc "Exec" fdo-list))
 	(setq fdo-list (append fdo-list (list exile-cmd))))
       (when (and (not (assoc "Name" fdo-list))
 		 (not (assoc (concat name-string apps-menu-lang "]")
 			     fdo-list)))
 	(setq fdo-list (append fdo-list (cons (cons "Name"
-						    "Unknown\n")))))
+						    "Unknown")))))
       (if (assoc "Categories" fdo-list)
-	  (rplacd (assoc "Categories" fdo-list) "Exile\n")
+	  (rplacd (assoc "Categories" fdo-list) "Exile")
 	(setq fdo-list (append fdo-list (cons (cons "Categories"
-						    "Exile\n")))))
+						    "Exile")))))
       fdo-list))
 
   (define (fdo-check-exile fdo-list)
@@ -332,29 +314,28 @@ exile it."
   ;; generate a sawfish menu entry from a .desktop file
   (define (generate-menu-entry desk-file)
     "Generate a menu entry to run the program specified in the the
-.desktop file `desk-file'."
+desktop file `desk-file'."
     (when (and (not (file-directory-p desk-file))
 	       (desktop-file-p desk-file))
       (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
 	(if apps-menu-ignore-no-display
 	    (let ((a (assoc "NoDisplay" fdo-list)))
-	      (if a (rplacd a "false\n")
-		(setq fdo-list (cons (cons "NoDisplay" "false\n")
+	      (if a (rplacd a "false")
+		(setq fdo-list (cons (cons "NoDisplay" "false")
 				     fdo-list)))))
-	(if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true\n"))
+	(if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true"))
 	    (list
-	     (parse-cat-list (build-cat-list
-			      (trim-end (cdr (assoc "Categories"
-						    fdo-list)))))
-	     (trim-end (cdr (find-lang-in-desktop-file fdo-list)))
+	     (determine-category
+	      (cdr (assoc "Categories" fdo-list)))
+	     (cdr (find-lang-in-desktop-file fdo-list))
 	     (if (string= (cdr (assoc "Terminal" fdo-list))
-			  "true\n")
+			  "true")
 		 (list 'system
 		       (concat xterm-program " -e "
-			       (trim-end (cdr (assoc "Exec" fdo-list)))
+			       (trim-percent (cdr (assoc "Exec" fdo-list)))
 			       " &"))
 	       (list 'system
-		     (concat (trim-end (cdr (assoc "Exec" fdo-list)))
+		     (concat (trim-percent (cdr (assoc "Exec" fdo-list)))
 			     " &"))))))))
 
   (define (generate-apps-menu)
@@ -370,8 +351,8 @@ exile it."
 		    (append local-menu
 			    (list (generate-menu-entry x))))) desk-files)
       (if apps-menu-alphabetize
-	  (alphabetize-entries (fix-cats menu-cat-alist))
-	(fix-cats menu-cat-alist))))
+	  (alphabetize-entries (fix-cats desktop-cat-alist))
+	(fix-cats desktop-cat-alist))))
 
   (define (init-apps-menu)
     "If `apps-menu' is nil, then call `update-apps-menu'. This function
