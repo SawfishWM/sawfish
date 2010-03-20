@@ -28,27 +28,30 @@ User can override system lisp files. For example, if there is
 was possible for some lisp files, but now it's guaranteed for all
 files.  Of course, you can define new modules, too.
 
+@end itemize
+@item New Features
+@itemize @minus
 @item New command @code{display-window-position} [Teika kazura]
 
 User chooses a window by cursor and click, and it prints its position
 and size in a popup. Also available as a function, defined in
 @code{sawfish.wm.util.display-wininfo}.
 
-@item Window instance name is accessible [Teika kazura]
+@item New function @code{window-pid} [Teika kazura]
+
+It returns the process id of a window. (@pxref{Window Attributes}
+
+@item Window instance name is now accessible [Teika kazura]
 
 Technically, the window class consists of ``instance'' and ``class'',
 but only the latter was returned previously by the function
 @code{window-class}. Now with the new optional argument, the instance
 is returned too. (@pxref{Window Attributes})
-
-@item New function @code{window-pid} [Teika kazura]
-
-It returns the process id of a window. (@pxref{Window Attributes}
 @end itemize
 @item Bugfixes
 @itemize @minus
-@item Unsupported option @code{ignore-window-input-hint} is deleted [Teika kazura] @*
-It has been invalid for long.
+@item Unsupported option @code{ignore-window-input-hint} is deleted @*
+It has been invalid for long. [Teika kazura]
 
 @item Honor the user option @code{maximize-raises} in @code{maximize-window-fullscreen} and
 @code{maximize-window-fullxinerama}, too, not just in maximize-window
@@ -63,29 +66,31 @@ Phony constants are removed, too.
 @item Other Changes
 @itemize @minus
 @item Info improvements [Teika kazura]
+@itemize +
 
-``Windows'' chapter is partly revised. Function @code{display-window}
+@item ``Windows'' chapter is partly revised. Function @code{display-window}
 is documented. Difference between @code{window-wants-input-p} and
 @code{window-really-wants-input-p} is described.
 
-In past few versions we made more changes which were not described in
+@item In past few versions we made more changes which were not described in
 the news, including clarification in viewport, workspace and event,
 and window matching lisp functions.
 
-Added a faq item on multi-head and workspace.
+@item Added a faq item on multi-head and workspace.
 
-Edition number and the date of last change are dropped from the info.
+@item Edition number and the date of last change are dropped from the info.
 We now edit the info often, so they are not so much meaningful.
+@end itemize
 
 @c The reason that this item is not categorized as ``bugfix'' is that
 @c 1. Lock-button, or more precisely 'fixed-position' property
 @c    lacks precise definition. It forbids moving, but resizing
 @c    is allowed. It also affects window placement, too.
 @c 2. Currently doc of window-state-change-hook is wrong, but
-@c    correction takes long.   
+@c    correction takes long.
 @item Pressing the lock-button does the state-change of the window
 accordingly. [Fuchur]@*
-Any theme shipped with Sawfish doesn't have the lock button yet, though.
+No theme shipped with Sawfish does have the lock-button yet, though.
 @end itemize
 @end itemize
 
@@ -124,7 +129,7 @@ exported.
 
 The user uploaded module ``jump-or-exec'' has been merged. It
 provides @code{jump-or-exec}, a command which may be used to focus a
-window, or if it does not exist, start the application. 
+window, or if it does not exist, start the application.
 
 Unlike the original version this one also supports matching a window
 by its class (returned by @code{window-class} function), which makes
