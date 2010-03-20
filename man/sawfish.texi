@@ -792,6 +792,10 @@ Return true if @var{window} includes @var{atom} in its
 @code{WM_PROTOCOLS} property.
 @end defun
 
+@defun window-pid window
+Returns the window process id, or nil if not available.
+@end defun
+
 @noindent
 Listed here are window visibility predicates:
 @code{stacking-visibility}, @code{window-obscured} (@pxref{Stacking

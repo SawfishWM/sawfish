@@ -35,6 +35,7 @@
 	     mark-window-as-dock
 	     window-in-cycle-p
 	     window-class
+	     window-pid
 	     warp-cursor-to-window
 	     activate-window
 	     constrain-dimension-to-hints
@@ -226,6 +227,11 @@ is returned."
 	   (concat (aref prop 1) "/" (aref prop 0)))
 	  (t
 	   (and prop (> (length prop) 1) (aref prop 1)))))))
+
+  (define (window-pid win)
+    "Returns the window pid, or nil if not available."
+    (when (caddr (get-x-property win '_NET_WM_PID))
+      (aref (caddr (get-x-property win '_NET_WM_PID)) 0)))
 
   (define (get-window-wm-protocols w)
     "Return a list of symbols defining the X11 window manager protocols
