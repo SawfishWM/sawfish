@@ -746,8 +746,8 @@ static struct key_def default_codes[] = {
     { 0, 0, 0 }
 };
 
-/* Puts the integers defining the event described in DESC into CODE
-   and MODS. */
+/* Convert an event described by a string DESC into integers
+   CODE and MODS. */
 static bool
 lookup_event(unsigned long *code, unsigned long *mods, char *desc)
 {

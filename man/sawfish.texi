@@ -5154,30 +5154,35 @@ to it.
 @chapter Events
 @cindex Events
 
-Events refer to input events from X that the window manager receives,
-either for the root window, the window frames it creates, or grabbed
-from the client windows themselves. Each event induced by the mouse or
-keyboard has a Lisp representation.
+Lisp ``event'' object is a representation of input, regardless of actual
+or expected. If it's a keypress for example, it tells which key with
+which modifiers are pressed, and that's all. Please do not confuse it
+with X or other's event which is generated only after keypress or
+other ``event''.
+
+Each X input event induced by the mouse or the keyboard has a Lisp
+representation. X input events that Sawfish receives are either for
+the root window, the window frames it creates, or grabbed from the
+client windows themselves.
+
+Sawfish can respond to X events other than input, most often via
+hooks. (@pxref{Standard Hooks})
 
 @defun eventp object
-This function returns @code{t} if its argument is an input event.
+This function returns @code{t} if its argument is an event.
 @end defun
 
 @menu
-* Event Representation::        Objects versus string names
+* Event Name Representation::   Raw object versus string name
 * Event Modifiers::             Meta, Alt, Buttons
 * Event Actions::               Keys and Clicks
 * Event Matching::
-* Synthetic Events::            Creating events that seem real
+* Synthesis of Events::            Creating events that seem real
 @end menu
 
-@node Event Representation, Event Modifiers, Events, Events
-@section Event Representation
-
-Each input event is represented by a cons cell containing two
-integers, and these integers encode the event. The encoding is opaque;
-the only way to access an event meaningfully is via the functions
-provided.
+@node Event Name Representation, Event Modifiers, Events, Events
+@section Event Name Representation
+@cindex Name, of Event
 
 Each event has a string representation, called its ``name''.  Names
 consist of zero or more modifiers, followed by a key or mouse action
@@ -5188,14 +5193,14 @@ hyphens @samp{-}.  For example, hitting @key{x} while holding down the
 Emacs Lisp's notation.
 
 Functions are available to convert between the name of an event and the
-actual event itself, and vice versa.
+event object itself, and vice versa.
 
 @defun lookup-event event-name
 Create and return a new input event whose name is @var{event-name}.
 
 @lisp
 (lookup-event "C-x")
-    @result{} (120 . 65540)
+    @result{} (120 . 65540) ;; Internally, event is a pair of integers.
 
 (lookup-event "C-M-Button1-Click1")
     @result{} (1 . 131340)
@@ -5211,7 +5216,7 @@ This function returns a string naming the input event @var{event}.
 @end lisp
 @end defun
 
-@node Event Modifiers, Event Actions, Event Representation, Events
+@node Event Modifiers, Event Actions, Event Name Representation, Events
 @section Event Modifiers
 @cindex Event Modifiers
 @cindex Modifiers, for events
@@ -5248,7 +5253,8 @@ The hyper modifier
 
 @item Super
 @itemx s
-The super modifier; note that this is a lowercase @kbd{s}
+The super modifier; note that this is a lowercase @kbd{s}, in order to
+distiguish from shift
 
 @item Mod@var{k}
 The standard X modifiers, for @var{k} between 1 and 5
@@ -5374,7 +5380,7 @@ successive clicks.  Defaults to 250 milliseconds at startup; if
 @code{nil}, Sawfish uses 250 milliseconds.
 @end defvar
 
-@node Event Matching, Synthetic Events, Event Actions, Events
+@node Event Matching, Synthesis of Events, Event Actions, Events
 @section Event Matching
 @cindex Event Matching
 @cindex Matching, Events
@@ -5390,10 +5396,10 @@ Returns @code{t} if events @var{ev1} and @var{ev2} match, @code{nil}
 otherwise.
 @end defun
 
-@node Synthetic Events,  , Event Matching, Events
+@node Synthesis of Events,  , Event Matching, Events
 @section Synthetic Events
-@cindex Synthetic Events
-@cindex Events, Synthetic
+@cindex Synthesis of Events
+@cindex Events, Synthesis
 @cindex Events, Synthesizing
 
 It is possible to create an event inside Sawfish that mimics a real
@@ -5409,7 +5415,7 @@ The current pointer position becomes the position of the event.
 @var{Event} is either an event object, or the string representation of
 an event (such as @code{"A-f"} or @code{"C-M-Button3-Click2"}).
 Strings are parsed into event objects before any work is done.
-@xref{Event Representation}.
+@xref{Event Name Representation}.
 
 If @var{propagate} is true, the event will propagate up the window
 ancestor chain until it is handled.

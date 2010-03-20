@@ -14,7 +14,6 @@ they occurred between. For more detailed information see the
 @itemize @bullet
 
 @item The 1.6.3 release has some improvements.
-
 @itemize @minus
 @item Customizable lisp directory [Teika kazura]
 
@@ -48,16 +47,17 @@ It returns the process id of a window. (@pxref{Window Attributes}
 @end itemize
 @item Bugfixes
 @itemize @minus
-@item Pressing the lock-button does the state-change of the window
-accordingly. [Fuchur]
-
 @item Unsupported option @code{ignore-window-input-hint} is deleted [Teika kazura] @*
 It has been invalid for long.
 
-@item Honor maximize-raises in @code{maximize-window-fullscreen} and
-@code{maximize-window-fullxinerama}, too, not just in maximize-window [Nolan Leake]
+@item Honor the user option @code{maximize-raises} in @code{maximize-window-fullscreen} and
+@code{maximize-window-fullxinerama}, too, not just in maximize-window
+[Nolan Leake]
 
-@item More robustness of our fdo-menu implementation [Teika Kazura]
+@item More robustness in applications menu [Teika Kazura]
+
+It broke for 'R', and whitespace handling didn't follow the specification.
+Phony constants are removed, too.
 @end itemize
 
 @item Other Changes
@@ -69,13 +69,23 @@ is documented. Difference between @code{window-wants-input-p} and
 @code{window-really-wants-input-p} is described.
 
 In past few versions we made more changes which were not described in
-the news, including clarification in viewport and workspace, and window
-matching lisp functions.
+the news, including clarification in viewport, workspace and event,
+and window matching lisp functions.
 
 Added a faq item on multi-head and workspace.
 
-Edition number and the date of last change are dropped form the info.
+Edition number and the date of last change are dropped from the info.
 We now edit the info often, so they are not so much meaningful.
+
+@c The reason that this item is not categorized as ``bugfix'' is that
+@c 1. Lock-button, or more precisely 'fixed-position' property
+@c    lacks precise definition. It forbids moving, but resizing
+@c    is allowed. It also affects window placement, too.
+@c 2. Currently doc of window-state-change-hook is wrong, but
+@c    correction takes long.   
+@item Pressing the lock-button does the state-change of the window
+accordingly. [Fuchur]@*
+Any theme shipped with Sawfish doesn't have the lock button yet, though.
 @end itemize
 @end itemize
 
