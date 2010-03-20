@@ -743,9 +743,16 @@ Change the window's name to @var{name}. This works in practice, but
 technically ICCCM doesn't suppose window name changes.
 @end defun
 
-@defun window-class window
-Return the class that @var{window} belongs to as a string, or nil if
-@var{window} has no associated class.
+@defun window-class window #!optional spec
+If the optional argument @var{spec} is @code{nil}, returns the class
+that @var{window} belongs to as a string, or nil if @var{window} has
+no associated class.
+
+ICCCM class consists of ``Instance'' and ``Class''. If @var{spec} is
+the symbol @code{cons}, then the cons of the form
+@code{(@var{instance} . @var{class})} is returned. If @var{spec} is
+the symbol @code{configurator}, then the string of the form
+``@var{instance}/@var{class}'' is returned.
 @end defun
 
 @defun window-id window
@@ -842,22 +849,22 @@ Return a window object with id @var{xid}, or @code{nil}.
 @end defun
 
 @defun get-window-by-name name
-Return a window object with name @var{name}, or @code{nil}.
+Return a window object with name @var{name}, or @code{nil}.  Even if
+multiple windows are matched, one of them is returned.
 @end defun
 
 @defun get-window-by-name-re name
 Return a window object with name matching regular expression
-@var{name}, or @code{nil}.
+@var{name}, or @code{nil}. Even if multiple windows are matched,
+one of them is returned.
 @end defun
 
-@defun get-window-by-class class
-Return a window object with class @var{class}, or @code{nil}.
-@end defun
-
-@defun get-window-by-class-re class
-Return a window object with class matching regular expression
-@var{class}, or @code{nil}.
-@end defun
+@deffn Function: get-window-by-class class
+@deffnx Function: get-window-by-class-re class
+Same as the above, but the match is done against the window class.
+Here, the class does not include the ``instance''. (See @code{window-class} in
+@xref{Window Attributes}.)
+@end deffn
 
 @defun filter-windows pred
 Return the list of windows (mapped or unmapped) that match the

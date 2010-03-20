@@ -210,11 +210,22 @@ windows."
 	 (not (or (and (not ignore-cycle-skip) (window-get w 'cycle-skip))
 		  (desktop-window-p w)))))
 
-  (define (window-class w)
-    "Return the class that window W belongs to, as a string. Returns `nil' if W
-has no associated class."
+  (define (window-class w #!optional spec)
+    "If SPEC is nil, return the class that window W belongs to,
+as a string. Returns `nil' if W has no associated class.
+
+If SPEC is 'cons, then cons (Instance . Class) is returned.
+If SPEC is 'configurator, then the string of the form \"Instance/Class\"
+is returned."
     (let ((prop (get-x-text-property w 'WM_CLASS)))
-      (and prop (> (length prop) 1) (aref prop 1))))
+      (when (and prop (> (length prop) 1))
+	(case spec
+	  ((cons)
+	   (cons (aref prop 0) (aref prop 1)))
+	  ((configurator)
+	   (concat (aref prop 1) "/" (aref prop 0)))
+	  (t
+	   (and prop (> (length prop) 1) (aref prop 1)))))))
 
   (define (get-window-wm-protocols w)
     "Return a list of symbols defining the X11 window manager protocols

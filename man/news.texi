@@ -35,6 +35,12 @@ User chooses a window by cursor and click, and it prints its position
 and size in a popup. Also available as a function, defined in
 @code{sawfish.wm.util.display-wininfo}.
 
+@item Window instance name is accessible [Teika kazura]
+
+Technically, the window class consists of ``instance'' and ``class'',
+but only the latter was returned previously by the function
+@code{window-class}. Now with the new optional argument, the instance
+is returned too. (@pxref{Window Attributes})
 @end itemize
 @item Bugfixes
 @itemize @minus
