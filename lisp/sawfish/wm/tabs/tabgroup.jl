@@ -18,26 +18,33 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+;; TODO
+;; Tabgroup to tabgroup
+
 (define-structure sawfish.wm.tabs.tabgroup
 
-    (export tab-release-window
-            tab-raise-left-window
+	(export tab-release-window
+	        tab-raise-left-window
             tab-raise-right-window
             tab-find-window
             tab-rank
             tab-group-window-list
             tab-group-window)
 
-    (open rep
-          rep.system
-          rep.data.records
-          sawfish.wm.misc
-          sawfish.wm.custom
-          sawfish.wm.commands
-          sawfish.wm.windows
-          sawfish.wm.state.iconify
-          sawfish.wm.state.shading
-          sawfish.wm.stacking)
+	(open rep
+	      rep.system
+	      rep.data.records
+	      sawfish.wm.misc
+	      sawfish.wm.custom
+	      sawfish.wm.commands
+	      sawfish.wm.windows
+          sawfish.wm.frames
+	      sawfish.wm.state.iconify
+	      sawfish.wm.state.shading
+          sawfish.wm.commands.move-resize
+	      sawfish.wm.stacking
+          sawfish.wm.util.groups
+          sawfish.wm.workspace)
 
   (define-structure-alias tabgroup sawfish.wm.tabs.tabgroup)
 
@@ -45,6 +52,7 @@
 
   (defvar tab-refresh-lock t)
   (defvar tab-move-lock t)
+
 
   (define-record-type :tab-group
     (tab-build-group p d wl)
@@ -97,7 +105,7 @@
     (if (eq elem (car list))
         0
       (+ 1 (tab-rank elem (cdr list)))))
-
+  
   (define (tab-delete-window-from-group win index)
     "Remove a window from a group at given index"
     (let* ((old (nth index tab-groups))
@@ -105,8 +113,10 @@
       (if (null l)
           (setq tab-groups (delete old tab-groups))
         (rplaca (nthcdr index tab-groups)
-                (tab-build-group (tab-group-position old)
-                                 (tab-group-dimensions old) l))
+                (tab-build-group (tab-group-position old) (tab-group-dimensions old) l))
+        ;; releas from sawfish "default" group adopt by tab-group-window
+        (add-window-to-new-group win)
+        (window-put win 'fixed-position nil)
         (tab-refresh-group (car l) 'frame))))
 
   (define (tab-delete-window-from-tab-groups w)
@@ -121,15 +131,13 @@
       (rplaca (nthcdr index tab-groups)
               (tab-build-group (tab-group-position group)
                                (tab-group-dimensions group)
-                               (append (tab-group-window-list group)
-                                       (list win))))
-      (tab-move-resize-frame-window-to win (car pos) (cdr pos)
-                                       (car dim) (cdr dim))
+                               (append (tab-group-window-list group) (list win))))
+      (tab-move-resize-frame-window-to win (car pos) (cdr pos) (car dim) (cdr dim))
       (rebuild-frame win)))
 
   (define (tab-refresh-group win prop)
     "Refresh the entire group containing win according to prop
-  prop can be one of the symbols : frame, move, resize, shade, unshade"
+  prop can be one of the symbols : frame, reframe, reframe-style, move, resize, type, depth, shade, unshade, iconify, uniconify, fixed-position"
     (when tab-refresh-lock
       (setq tab-refresh-lock nil)
       (unwind-protect
@@ -139,19 +147,48 @@
              ((eq prop 'frame)
               (mapcar (lambda (w)
                         (rebuild-frame w)) wins))
+             ((eq prop 'reframe)
+              (mapcar (lambda (w)
+                        (reframe-window w)) wins))
+             ((eq prop 'reframe-style)
+              (let ((group-frame-style (window-get win 'frame-style))
+                     (dim (window-frame-dimensions win))
+                     (pos (window-position win)))
+                (mapcar (lambda (w)
+                          (set-frame-style w group-frame-style)
+                          (tab-move-resize-frame-window-to w (car pos) (cdr pos) (car dim) (cdr dim)) 
+                          (rebuild-frame w)) wins)))
              ((or (eq prop 'move) (eq prop 'resize))
               (let ((dim (window-frame-dimensions win))
                     (pos (window-position win)))
                 (mapcar (lambda (w)
-                          (tab-move-resize-frame-window-to w (car pos)
-                                                           (cdr pos) (car dim)
-                                                           (cdr dim))
+                          (tab-move-resize-frame-window-to w (car pos) (cdr pos) (car dim) (cdr dim))
                           (rebuild-frame w)) wins)
                 (rplaca (nthcdr index tab-groups)
                         (tab-build-group pos dim wins))))
-             ((eq prop 'stick)
+             ((eq prop 'fixed-position)
+              (let ((group-frame-fixed-position (window-get win 'fixed-position)))
               (mapcar (lambda (w)
-                        (toggle-window-sticky w)) wins))
+                        (window-put w 'fixed-position group-frame-fixed-position)
+                        (rebuild-frame w)) wins)))
+             ((eq prop 'type)
+              (let ((group-frame-type (window-get win 'type)))
+              (mapcar (lambda (w)
+                        (window-put w 'type group-frame-type)
+                        (rebuild-frame w)) wins)))
+             ((eq prop 'depth)
+              (let ((group-frame-depth (window-get win 'depth)))
+              (mapcar (lambda (w)
+                        (window-put w 'depth group-frame-depth)
+                        (rebuild-frame w)) wins)))
+             ((eq prop 'iconify)
+              (mapcar (lambda (w)
+                        (iconify-window w)
+                        (rebuild-frame w)) wins))
+             ((eq prop 'uniconify)
+              (mapcar (lambda (w)
+                        (uniconify-window w)
+                        (rebuild-frame w)) wins))
              ((eq prop 'shade)
               (mapcar (lambda (w)
                         (shade-window w)
@@ -161,27 +198,45 @@
                         (unshade-window w)
                         (rebuild-frame w)) wins))))
         (setq tab-refresh-lock t))))
-
+  
   ;; Entry points
   (define (tab-group-window w win)
     "Put active window in pointer-selected group"
+    ;; unshade windows if add/remove
+    (unshade-window w)
+    (unshade-window win)
     (interactive)
     (let* ((index (tab-window-group-index win))
-           (index2 (tab-window-group-index w)))
+           (index2 (tab-window-group-index w))
+           ;; adopt window settings for the new tab
+           (group-frame-style (window-get win 'frame-style))
+           (group-frame-type (window-get win 'type))
+           (group-frame-sticky (window-get win 'sticky))
+           (group-frame-fixed-position (window-get win 'fixed-position))
+           (group-frame-depth (window-get win 'depth))
+           ;; adopt group for the new tab
+           ;; use sawfish's "default" groups
+           (group-id (window-actual-group-id win)))
+      (window-put w 'type group-frame-type)
+      (window-put w 'sticky group-frame-sticky)
+      (window-put w 'depth group-frame-depth)
+      (window-put w 'fixed-position group-frame-fixed-position)
+      (window-put w 'frame-style group-frame-style)
       ;; ugly hack, don't know why it's needed, but new groups are
       ;; listed with pos (0,0):
       (tab-refresh-group win 'move)
+      (add-window-to-group w group-id)
       (tab-put-window-in-group w index)
       (tab-delete-window-from-group w index2)
-      (tab-refresh-group w 'move)))
+      (tab-refresh-group win 'move))) 
 
   (define (tab-release-window w)
     "Release active window from its group"
     (tab-delete-window-from-tab-groups w)
     (tab-make-new-group w))
-
+  
   (define-command 'tab-release-window tab-release-window #:spec "%f")
-
+  
   (define (tab-group-offset win n)
     "Return the window at position (pos+n) in window's group"
     (let* ((gr (tab-group-window-list (tab-find-window win)))
@@ -219,23 +274,26 @@
   (unless batch-mode
     (add-hook 'window-state-change-hook
               (lambda (win args)
-                (if (= 'sticky args)
-                    (tab-refresh-group win 'stick))))
-    (add-hook 'after-move-hook
-              (lambda (win) (tab-refresh-group win 'move)))
-    (add-hook 'while-moving-hook
-              (lambda (win) (tab-refresh-group win 'move)))
-    (add-hook 'after-resize-hook
-              (lambda (win) (tab-refresh-group win 'resize)))
-    (add-hook 'while-resizing-hook
-              (lambda (win) (tab-refresh-group win 'resize)))
-    (add-hook 'window-maximized-hook
-              (lambda (win) (tab-refresh-group win 'resize)))
-    (add-hook 'window-unmaximized-hook
-              (lambda (win) (tab-refresh-group win 'resize)))
-    (add-hook 'shade-window-hook
-              (lambda (win) (tab-refresh-group win 'shade)))
-    (add-hook 'unshade-window-hook
-              (lambda (win) (tab-refresh-group win 'unshade)))
-    (add-hook 'destroy-notify-hook
-              tab-delete-window-from-tab-groups)))
+                (if (= '(fixed-position) args)
+                    (tab-refresh-group win 'fixed-position))))
+    (add-hook 'window-state-change-hook
+              (lambda (win args)
+                (if (= '(frame-style) args)
+                    (tab-refresh-group win 'reframe-style))))
+    (add-hook 'window-state-change-hook
+              (lambda (win args)
+                (if (= '(type) args)
+                    (tab-refresh-group win 'type))))
+    (add-hook 'window-state-change-hook
+              (lambda (win args)
+                (if (= '(stacking) args)
+                    (tab-refresh-group win 'depth))))
+    (add-hook 'after-move-hook (lambda (win) (tab-refresh-group win 'move)))
+    (add-hook 'while-moving-hook (lambda (win) (tab-refresh-group win 'move)))
+    (add-hook 'window-resized-hook (lambda (win) (tab-refresh-group win 'resize)))
+    (add-hook 'shade-window-hook (lambda (win) (tab-refresh-group win 'shade)))
+    (add-hook 'unshade-window-hook (lambda (win) (tab-refresh-group win 'unshade)))
+    (add-hook 'iconify-window-hook (lambda (win) (tab-refresh-group win 'iconify)))
+    (add-hook 'uniconify-window-hook (lambda (win) (tab-refresh-group win 'uniconify)))
+    (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups)
+    (add-hook 'after-framing-hook (lambda (win) (tab-refresh-group win 'reframe)))))

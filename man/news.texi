@@ -29,8 +29,42 @@ was possible for some lisp files, but now it's guaranteed for all
 files.  Of course, you can define new modules, too.
 
 @end itemize
+@item Bugfixes
+@itemize @minus
+@item In tabbed-windows the left/right end is no longer outside the
+window, if that is too small [Fuchur]
+
+@item Unsupported option @code{ignore-window-input-hint} is deleted @*
+It has been invalid for long. [Teika kazura]
+
+@item Honor the user option @code{maximize-raises} in @code{maximize-window-fullscreen} and
+@code{maximize-window-fullxinerama}, too, not just in maximize-window
+[Nolan Leake]
+
+@item More robustness in applications menu [Teika Kazura]
+
+It broke for 'R', and whitespace handling didn't follow the specification.
+Phony constants are removed, too.
+@end itemize
+
 @item New Features
 @itemize @minus
+
+@item Tabbed-Windowing-System [Fuchur]
+@itemize +
+@item Support for transient tab-frames
+
+@item new frame classes:
+@itemize x
+@item tab-s (side tab)
+@item tab-ls (side tab, left/bottom end)
+@item tab-rs (side tab, right/top end)
+@end itemize
+
+@item tabgroups now support a set of new properties and actions:
+type, set-frame-style, fixed-position, iconify. In addition, new
+tabs gain those properties from their parent window.
+@end itemize
 @item New command @code{display-window-position} [Teika kazura]
 
 User chooses a window by cursor and click, and it prints its position
@@ -47,20 +81,6 @@ Technically, the window class consists of ``instance'' and ``class'',
 but only the latter was returned previously by the function
 @code{window-class}. Now with the new optional argument, the instance
 is returned too. (@pxref{Window Attributes})
-@end itemize
-@item Bugfixes
-@itemize @minus
-@item Unsupported option @code{ignore-window-input-hint} is deleted @*
-It has been invalid for long. [Teika kazura]
-
-@item Honor the user option @code{maximize-raises} in @code{maximize-window-fullscreen} and
-@code{maximize-window-fullxinerama}, too, not just in maximize-window
-[Nolan Leake]
-
-@item More robustness in applications menu [Teika Kazura]
-
-It broke for 'R', and whitespace handling didn't follow the specification.
-Phony constants are removed, too.
 @end itemize
 
 @item Other Changes
