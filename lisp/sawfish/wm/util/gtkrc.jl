@@ -78,7 +78,8 @@
       (call-with-server-ungrabbed
        (lambda ()
 	 (unless (zerop (call-process process nil gtkrc-style-program))
-	   (error "Can't start gtkrc-style-program"))))
+	   (error "Can't start gtkrc-style-program: `%s'."
+		  gtkrc-style-program))))
       (setq output (make-string-input-stream
 		    (get-output-stream-string output)))
       (setq gtkrc-style nil)

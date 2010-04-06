@@ -711,7 +711,7 @@ Windows with special properties:
 
 Many attributes are described in the related sections.
 
-First, basic attributes, like name, class, id, etc.
+First, basic attributes, like name, class, ID, etc.
 @defun window-name window
 Return the name associated with @var{window}.
 @end defun
@@ -793,7 +793,7 @@ Return true if @var{window} includes @var{atom} in its
 @end defun
 
 @defun window-pid window
-Returns the window process id, or nil if not available.
+Returns the window process ID, or nil if not available.
 @end defun
 
 @noindent
@@ -849,7 +849,7 @@ Returns the value of the last @var{function} invocation.  If any
 Functions to get specific windows.
 
 @defun get-window-by-id xid
-Return a window object with id @var{xid}, or @code{nil}.
+Return a window object with ID @var{xid}, or @code{nil}.
 @end defun
 
 @defun get-window-by-name name
@@ -5426,9 +5426,9 @@ ancestor chain until it is handled.
 @chapter Commands
 @cindex Commands
 
-A @dfn{command} is a Lisp function which may be called interactively,
-that is, as a result of being bound to an input event.  To support
-this, we mark them with metadata that the runtime system can query.
+A @dfn{command} is a Sawfish lisp notion which can be called from key
+or mouse input. Unlike emacs, a command is not always a Lisp
+function. See following setions for more.
 
 @menu
 * Old-style Command Definition::  Emacs-Lisp style
@@ -5655,23 +5655,27 @@ command.
 
 Sawfish defines several commands by default.
 
-@defun run-shell-command
-The command prompts the user for a string, and executes that string as
-under @code{system}.
-@end defun
+@deffn Command: run-shell-command
+Executes a shell command. This is a wrapper for @code{system}
+function, so in lisp code, use it instead. (@pxref{Shell Commands, ,
+,librep}.)
+@end deffn
 
-@defun quit
-@defunx restart
-@defunx destroy-window
-@defunx kill-client
-@defunx no-operation
+@deffn Command: quit
+@deffnx Command: restart
+Quits and restarts Sawfish. @xref{Sawfish Invocation Functions}.
+@end deffn
 
-Calls the function of the same name.  @code{destroy-window} and
-@code{kill-client} both take @code{%W} as argument.
+@deffn Command: destroy-window
+@deffnx Command: kill-client
+Command @code{destroy-window} calls the function of the same name, and
+command @code{kill-client} calls the function @code{x-kill-client}.
+Both take @code{%W} as argument. @xref{Destroying Windows}.
+@end deffn
 
-(Strictly speaking, @code{kill-client} calls @code{x-kill-client},
-and @code{no-operation} calls @code{nop}.)
-@end defun
+@deffn Command: no-operation
+Does nothing.
+@end deffn
 
 @node Keymaps, Event Loop, Commands, Top
 @chapter Keymaps
@@ -6442,6 +6446,11 @@ the @code{PATH} environmental variable. Example:
 @code{~/.sawfish/lisp-test:~/.sawfish/lisp}.
 @end defvar
 
+@defun quit
+@defunx restart
+Quits and restart Sawfish.
+@end defun
+
 @defun exit-type
 If Sawfish is shutting down, this function returns one of the strings
 @code{"user-quit"}, @code{"user-restart"} or @code{"session-quit"}.
@@ -6590,7 +6599,9 @@ order of elements is not preserved.
 @chapter External Applications
 @cindex External applications
 
-There're some functions and variables for invocation of external applications.
+There're some functions and variables for invocation of external
+applications. They're defined in @code{sawfish.wm.commands.launcher}
+module.
 
 @defvr {Customizable} xterm-program
 The program launched by the @code{xterm} function. Interpreted by shell.

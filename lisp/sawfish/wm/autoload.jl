@@ -101,7 +101,7 @@
 (autoload-command 'move-cursor-southwest-fine 'sawfish.wm.commands.move-cursor)
 (autoload-command 'move-cursor-southeast-fine 'sawfish.wm.commands.move-cursor)
 (autoload-command 'move-cursor-center 'sawfish.wm.commands.move-cursor)
-(autoload-command 'move-window-center 'sawfish.wm.comands.move-resize)
+(autoload-command 'move-window-center 'sawfish.wm.commands.move-resize)
 (autoload-command 'move-window-interactively 'sawfish.wm.commands.move-resize)
 (autoload-command 'resize-window-interactively 'sawfish.wm.commands.move-resize)
 (autoload-command 'move-selected-window 'sawfish.wm.commands.move-resize)

@@ -13,29 +13,12 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
-@item The 1.6.3 release has some improvements.
-@itemize @minus
-@item Customizable lisp directory [Teika kazura]
-
-User can add lisp directories to be read with the environmental
-variable @code{SAWFISH_USER_LISP_DIR}. Its value is directories
-separated by colon, like @code{PATH}, and prepended to
-@code{load-path}. If not set, @file{~/.sawfish/lisp} is assumed.
-
-User can override system lisp files. For example, if there is
-@file{~/.sawfish/lisp/sawfish/wm/windows.jl}, then it is read as
-@code{sawfish.wm.windows}, instead of the installed one. In fact, it
-was possible for some lisp files, but now it's guaranteed for all
-files.  Of course, you can define new modules, too.
-
-@end itemize
 @item Bugfixes
 @itemize @minus
 @item In tabbed-windows the left/right end is no longer outside the
 window, if that is too small [Fuchur]
 
-@item Unsupported option @code{ignore-window-input-hint} is deleted @*
-It has been invalid for long. [Teika kazura]
+@item Unsupported option @code{ignore-window-input-hint} is deleted which has been invalid for long. [Teika kazura]
 
 @item Honor the user option @code{maximize-raises} in @code{maximize-window-fullscreen} and
 @code{maximize-window-fullxinerama}, too, not just in maximize-window
@@ -43,27 +26,28 @@ It has been invalid for long. [Teika kazura]
 
 @item More robustness in applications menu [Teika Kazura]
 
-It broke for 'R', and whitespace handling didn't follow the specification.
-Phony constants are removed, too.
+Before it broke for 'R' (statistics software), and whitespace handling
+didn't follow the specification. Phony constants are removed, too.
 @end itemize
 
 @item New Features
 @itemize @minus
 
-@item Tabbed-Windowing-System [Fuchur]
+@item Tabbed windowing system improvements [Fuchur]
 @itemize +
 @item Support for transient tab-frames
 
-@item new frame classes:
+@item New frame classes:
 @itemize x
 @item tab-s (side tab)
 @item tab-ls (side tab, left/bottom end)
 @item tab-rs (side tab, right/top end)
 @end itemize
 
-@item tabgroups now support a set of new properties and actions:
-type, set-frame-style, fixed-position, iconify. In addition, new
-tabs gain those properties from their parent window.
+@item Tabgroups now support a set of new properties and actions:
+@code{type}, @code{set-frame-style}, @code{fixed-position},
+@code{iconify}. In addition, new tabs gain those properties from their
+parent window.
 @end itemize
 @item New command @code{display-window-position} [Teika kazura]
 
@@ -73,7 +57,7 @@ and size in a popup. Also available as a function, defined in
 
 @item New function @code{window-pid} [Teika kazura]
 
-It returns the process id of a window. (@pxref{Window Attributes}
+It returns the process ID of a window. (@pxref{Window Attributes}
 
 @item Window instance name is now accessible [Teika kazura]
 
@@ -81,6 +65,21 @@ Technically, the window class consists of ``instance'' and ``class'',
 but only the latter was returned previously by the function
 @code{window-class}. Now with the new optional argument, the instance
 is returned too. (@pxref{Window Attributes})
+
+@item Customizable lisp directory [Teika kazura]
+
+User can add lisp directories to be read with the environmental
+variable @code{SAWFISH_USER_LISP_DIR}. Its value is directories
+separated by colon, like @code{PATH}, and prepended to
+@code{load-path}. If not set, @file{~/.sawfish/lisp} is assumed.
+For example, if you define a module @code{sawfish.wm.super-hack}, then
+it can be read from @file{~/.sawfish/lisp/sawfish/wm/super-hack.jl}.
+
+User can override system lisp files, too. For example, if there is
+@file{~/.sawfish/lisp/sawfish/wm/windows.jl}, then it defines
+@code{sawfish.wm.windows}, instead of the installed one. (But this can
+easily break your Sawfish startup.) In fact, it was possible for some
+lisp files, but now it's guaranteed for all files.
 @end itemize
 
 @item Other Changes
