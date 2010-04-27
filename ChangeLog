@@ -2,6 +2,12 @@
 	* configure.in: make xinerama an optional dependency
 			-- [modified patch from Gentoo]
 
+	* lisp/sawfish/wm/ext/apps-menu.jl: Allow whitespace and comments
+	                                    at the beginning of .desktop files
+					    and skip the file, if the first valid
+					    line is not [Desktop Entry].
+					    -- [Matthew Love/Teika Kazura]
+
 2010-04-06  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/autoload.jl
 	* lisp/sawfish/wm/commands.jl

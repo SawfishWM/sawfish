@@ -82,16 +82,24 @@ set this to non-nil.")
 
   ;; fdo-desktop-file-parsing
 
-  (define (desktop-file-p directory-file)
-    (condition-case nil
-	(let ((this-file (open-file directory-file 'read)))
-	  (string= (read-line this-file) "[Desktop Entry]\n"))
-      ;; unreadable -> return nil
-      (file-error)))
-
   (define (desktop-skip-line-p instring)
     (or (eq (aref instring 0) ?#)
 	(eq (aref instring 0) ?\n)))
+
+  (define (check-if-desktop-stream instream)
+    (let ((line (read-line instream)))
+      (when line
+	(if (string= line "[Desktop Entry]\n")
+	    't
+	  (when (desktop-skip-line-p line)
+	    (check-if-desktop-stream instream))))))
+
+  (define (desktop-file-p directory-file)
+    (condition-case nil
+	(let ((this-file (open-file directory-file 'read)))
+	  (check-if-desktop-stream this-file))
+      ;; unreadable -> return nil
+      (file-error)))
 
   (define (desktop-group-p instring)
     (eq (aref instring 0) ?\[))

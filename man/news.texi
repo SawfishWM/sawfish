@@ -24,10 +24,13 @@ window, if that is too small [Fuchur]
 @code{maximize-window-fullxinerama}, too, not just in maximize-window
 [Nolan Leake]
 
-@item More robustness in applications menu [Teika Kazura]
+@item More robustness in applications menu [Teika Kazura] [Matthew Love]
 
 Before it broke for 'R' (statistics software), and whitespace handling
 didn't follow the specification. Phony constants are removed, too.
+
+Allow whitespace and comments at the beginning of .desktop files and skip
+the file, if the first valid line is not [Desktop Entry].
 @end itemize
 
 @item New Features
