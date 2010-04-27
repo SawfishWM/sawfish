@@ -81,10 +81,16 @@ XRANDR_LIBS=""
 XFT_LIBS=""
 XFT_CFLAGS=""
 
+AC_ARG_WITH([xinerama], [AS_HELP_STRING([--with-xinerama], [Include Xinerama support])], [], [with_xinerama=yes])
+
+if test "$with_xinerama" != "no"; then
+
 PKG_CHECK_MODULES(libXineRama, xinerama >= 1.0
 		  ,XINERAMA_LIBS="-lXinerama"
 		  AC_DEFINE(HAVE_X11_EXTENSIONS_XINERAMA_H, 1, [Have xinerama])
 		  ,AC_MSG_ERROR([cannot locate libXineRama]))
+
+fi
 
 PKG_CHECK_MODULES(libXRandR, xrandr >= 1.0
 		  ,XRANDR_LIBS="-lXrandr"
@@ -135,10 +141,14 @@ XRANDR_LIBS=""
 XFT_LIBS=""
 XFT_CFLAGS=""
 
+if test "$with_xinerama" != "no"; then
+
 AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
 	     [XINERAMA_LIBS="-lXinerama"
 	      AC_CHECK_HEADERS(X11/extensions/Xinerama.h)],
 	     [],[$X_LIBS -lX11 -lXext])
+
+fi
 
 AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
 	     [XRANDR_LIBS="-lXrandr"
