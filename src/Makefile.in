@@ -39,14 +39,14 @@ DL_DIRS = sawfish/wm/util
 
 INSTALL_HDRS = sawfish.h sawfish_subrs.h libclient.h server.h keys.h build.h
 
-override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(PANGO_CFLAGS)
+override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(PANGO_CFLAGS) 
 
 all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) --mode=link --tag=CC $(CC) -export-dynamic $(LDFLAGS) \
 	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) $(PANGO_LIBS) \
-	  $(IMAGE_LIBS) $(X11_LIBS) $(EXTRA_X11_LIBS) $(LIBS)
+	  $(IMAGE_LIBS) $(X11_LIBS) $(EXTRA_X11_LIBS) $(LIBS) $(XRANDR_LIBS)
 
 %.la : %.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
@@ -55,10 +55,10 @@ libclient_.lo : libclient.c
 	$(rep_LIBTOOL) --mode=compile --tag=CC $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 client.la : client.lo libclient_.lo
-	$(rep_DL_LD) $(LDFLAGS) -o $@ $^ $(X11_LIBS) $(REP_LIBS) $(LIBS)
+	$(rep_DL_LD) $(LDFLAGS) -o $@ $^ $(X11_LIBS) $(REP_LIBS) $(LIBS) $(XRANDR_LIBS)
 
 gtk-style : gtk-style.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(GTK_CFLAGS) $(LDFLAGS) -o $@ $< $(GTK_LIBS) $(LIBS) $(XRANDR_LIBS)
 
 install : all installdirs
 	for p in sawfish; do \

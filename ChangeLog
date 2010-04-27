@@ -8,6 +8,12 @@
 					    line is not [Desktop Entry].
 					    -- [Matthew Love/Teika Kazura]
 
+	* src/Makefile.in
+	* src/display.c
+	* src/events.c: add a way to response to XRandR changed events
+	                eg resolution changes via randr-change-notify-hook
+			-- [Daniel M. German]
+
 2010-04-06  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/autoload.jl
 	* lisp/sawfish/wm/commands.jl

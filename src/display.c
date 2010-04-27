@@ -45,7 +45,7 @@
 #endif
 
 char *visual_name;
-Display *dpy;
+Display *dpy = NULL;
 int screen_num, screen_width, screen_height;
 Window root_window, no_focus_window;
 int shape_event_base, shape_error_base;
