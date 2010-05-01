@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-04-19 19:25+0200\n"
+"PO-Revision-Date: 2010-05-01 09:49+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -305,6 +305,10 @@ msgid ""
 "With gradient mode vertical or diagonal only the first or last (reversed) 2 "
 "colors in the list are used."
 msgstr ""
+"modo gradiente\n"
+"\n"
+"Con el modo gradiente vertical o diagonal sólo se usan los dos primeros o "
+"últimos (invertido) colores en la lista."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -313,6 +317,10 @@ msgid ""
 "The value here is the factor the calculated gradient image will be scaled "
 "down.  This increases speed but decreases quality."
 msgstr ""
+"calidad del gradiente (1 mejor - 20 peor)\n"
+"\n"
+"El valor aquí es el factor al que se reducirá de escala la imagen gradiente "
+"calculada. Esto aumenta la velocidad pero empeora la calidad."
 
 #. ../themes/mxflat/theme.jl
 msgid "rainbow"
@@ -528,19 +536,19 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
-msgstr ""
+msgstr "escala de los iconos de menú (0 - 1000 píxeles)"
 
 #. ../themes/mxflat/theme.jl
 msgid "button distance (0 - 1000 pixel)"
-msgstr ""
+msgstr "distancia entre botones (0 - 1000 píxeles)"
 
 #. ../themes/mxflat/theme.jl
 msgid "buttons left offset (0 - 1000 pixel)"
-msgstr ""
+msgstr "desplazamiento izquierdo de los botones (0 - 1000 píxeles)"
 
 #. ../themes/mxflat/theme.jl
 msgid "buttons right offset (0 - 1000 pixel)"
-msgstr ""
+msgstr "desplazamiento derecho de los botones (0 - 1000 píxeles)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -553,7 +561,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "title-height"
-msgstr ""
+msgstr "altura del título"
 
 #. ../themes/mxflat/theme.jl
 msgid "pixel"
@@ -754,6 +762,11 @@ msgid ""
 "When you active this you will be able to set custom button colors.  By "
 "default the button colors depend on the titlebar colors."
 msgstr ""
+"personalizar los colores de los botones\n"
+"\n"
+"Al activar esto podrá personalizar los colores de los botones. De forma "
+"predeterminada los colores de los botones dependen de los colores de la "
+"barra de título."
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
@@ -801,6 +814,9 @@ msgid ""
 "\n"
 "set the width border around the window."
 msgstr ""
+"anchura del borde (0 - 1000 píxeles)\n"
+"\n"
+"establecer la anchura del borde alrededor de la ventana."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -829,6 +845,10 @@ msgid ""
 "(NOTE: this works but it is VERY cpu intensive and might slow down your "
 "computer noticably.  So turn it on at your own risk.)"
 msgstr ""
+"anchura del borde para ventanas con el foco (0 - 1000 píxeles)\n"
+"\n"
+"[NOTA: usa MUCHOS recursos del sistema y puede reducir considerablemente la "
+"velocidad de su equipo. Actívelo bajo su propia responsabilidad.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -910,9 +930,8 @@ msgid ""
 msgstr ""
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "fake shadow only on focused windows"
-msgstr "Imagen de la barra en ventanas sin foco."
+msgstr "sombra falsa sólo en las ventanas con el foco"
 
 #. ../themes/mxflat/theme.jl
 msgid "north"
@@ -1206,9 +1225,8 @@ msgstr "E_ncoger y estirar"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 #. ../lisp/sawfish/wm/autoload.jl
-#, fuzzy
 msgid "Window Cycling"
-msgstr "Ignorar la lista de ventanas"
+msgstr "Cambio entre ventanas"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1581,9 +1599,8 @@ msgid "Help about"
 msgstr "Ayuda acerca de"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "External Applications"
-msgstr "Muestra el menú de aplicaciones."
+msgstr "Aplicaciones externas"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "The program launched by the `xterm' function. Interpreted by shell."
@@ -1607,14 +1624,12 @@ msgid "Command:"
 msgstr "Comando:"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "Browser"
 msgstr "Navegador"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "Start browser. Url is optional."
-msgstr "Iniciar un xterm nuevo."
+msgstr "Iniciar el navegador. El URL es opcional."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "url:"
