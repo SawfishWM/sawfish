@@ -79,7 +79,8 @@ static repv next_keymap_path;
 
 DEFSYM(multi_click_delay, "multi-click-delay");
 
-/* The X modifiers being used for Meta, Alt, Hyper, Super */
+/* The X modifiers being used for Meta, Alt, Hyper, Super.
+   Values are bits in key/button event -> state field. */
 static unsigned long meta_mod, alt_mod, hyper_mod, super_mod;
 
 /* The user-customizable modifier; used for default key bindings. This
@@ -103,12 +104,16 @@ static int all_buttons[9] = { Button1, Button2, Button3, Button4, Button5, Butto
 static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
 #endif
 
-/* locks: currently LockMask, num_lock, and scroll_lock */
+/*
+  locks: currently LockMask, num_lock, and scroll_lock.
+  These are used in grabbing. All combinations of lock masks is stored.
+*/
 static int total_lock_combs, all_lock_mask;
 static int all_lock_combs[2*2*2];
 
-/* Translate from X events to Lisp events */
-
+/*
+  Translate modifiers back to raw X 'state' from names like "super".
+ */
 static unsigned long
 direct_modifiers (unsigned long mods)
 {
@@ -128,6 +133,7 @@ direct_modifiers (unsigned long mods)
     return mods;
 }
 
+/* Translate from X 'state' to names like "super". */
 static unsigned long
 indirect_modifiers (unsigned long mods)
 {
@@ -299,7 +305,9 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 }
 
 /* Translate the Lisp key event EV to X keycode *KEYCODE and modifier
-   mask *STATE, returning true if successful. */
+   mask *STATE, returning true if successful.
+   Used by grab and sythesize-event.
+*/
 static bool
 translate_event_to_x_key (repv ev, unsigned int *keycode, unsigned int *state)
 {
@@ -338,7 +346,10 @@ translate_event_to_x_key (repv ev, unsigned int *keycode, unsigned int *state)
 }
 
 /* Translate the Lisp button event EV to X button identifier *BUTTON and
-   modifier mask *STATE, returning true if successful. */
+   modifier mask *STATE, returning true if successful.
+   It doesn't distinguish Click and Button-off, by its nature.
+   Used by synthesize-event and grab.
+*/
 static unsigned int
 translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
 {
@@ -392,6 +403,9 @@ translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
 
 /* Keymap searching */
 
+/* Used by search_keymap() and `event-match'.
+   Notice the asymmetry between 1 and 2.
+ */
 static inline bool
 compare_events (unsigned long code1, unsigned long mods1, unsigned long code2, unsigned long mods2)
 {
@@ -1804,6 +1818,8 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
     }
 }
 
+/* Implements `grab-keymap' and `ungrab-keymap', i.e.,
+   grab all keys registered in keymap `map'. */
 static void
 grab_all_keylist_events (repv map, bool grab)
 {

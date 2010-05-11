@@ -1,25 +1,24 @@
 This is the complete list of default sawfish keybindings.
 You can use xmodmap (among other tools) to change your keyboard layout,
-and xev to check what key and button presses generate.
+and xev to check what key and button presses are generated.
+
+Keyboard features in Sawfish are explained in this file, too.
 
 Key Descriptions
 ================
 
-Toggle = Switch Status (Maximized -> Unmaximized ...)
-
+Modifiers:
 W = Default Modifier Key
 H = Hyper
 M = Meta
 C = Control
 S = Shift
 A = Alt
-Super = Super
+Super
+
+W, the "default modifier"
 
 Mod(5...) = Additional Modifiers, eg: Alt Gr or Compose
-
-ESC = Escape
-
-F(1...12) = F(1...12)
 
 dead_circumflex = ^
 degree = °
@@ -29,10 +28,10 @@ Right = Right Arrow Key
 Up = Up Arrow Key
 Down = Down Arrow Key
 
-! Currently sawfish does not differ between
-! Num_Lock beeing activated or not, so always
-! use the keysyms like it would be deactived
+! Currently sawfish ignores caps lock, num lock, and screen lock.
+! Even if they're on, Sawfish reports as if they're not.
 
+! The following table is not universal. It depends on each keyboard.
 When Num_Lock is off:
 
 KP_Insert = Keypad Insert (0)
@@ -80,6 +79,7 @@ Insert = Insert
 Print = Print
 Home = Pos1
 
+ESC = Escape
 Tab = Tabulator Key
 
 ISO_Left_Tab = Same as Shift + TAB
@@ -109,8 +109,10 @@ X86Search = Search  Key
 XF86Favorites = Favorites Key
 XF86Standby = Sleep Key
 
+! Button mapping depends. For example, left handed people may set
+! the right button as "button 1".
 Button1 = Left Mouse Button
-Button2 = Middle Mouse Button/Scroll Wheel (Button 1 and 3 together should emulate this)
+Button2 = Middle Mouse Button/Scroll Wheel (Often emulated by button presses 1 and 3 at once.)
 Button3 = Right Mouse Button
 Button4 = Scroll Wheel Up
 Button5 = Scroll Wheel Down
@@ -126,9 +128,9 @@ Move = When Button Is Clicked and Pointer Moved
 Setting Keybindings
 ===================
 
-how to set keybindings manually:
+To set keybinding from lisp:
 
-( bind-keys keymap "keybinding" 'action )
+( bind-keys keymap "key" 'action )
 
 for example:
 
@@ -145,10 +147,10 @@ for example:
 Keymap for specific application
 ===============================
 
-it's possible to have a keymap for a specific application only,
-for example, we use `nautilus-keymap' for Nautilus, all other keymaps
-are nil inside Nautilus then, so only what's inside of nautilus-keymap
-is actually existing, as long as Nautilus is focused:
+It's possible to have a keymap for a specific application only.  For
+example, you can use `nautilus-keymap' which is active when Nautilus
+is focused. All other key events are ignored, that is, events not in
+`nautilus-keymap' are not captured by Sawfish, but sent to Nautilus.
 
 ( define nautilus-keymap ( make-keymap ) )
 ( bind-keys nautilus-keymap
@@ -159,21 +161,21 @@ is actually existing, as long as Nautilus is focused:
 ( add-window-matcher '( ( WM_CLASS . "^Nautilus/nautilus$" ) )
        '( ( keymap . ,nautilus-keymap ) ) )
 
-So now Sawfish only nows 3 keybindings for Nautilus.
+So now Sawfish only has 3 keybindings for Nautilus.
 
 Keymap Transistion
 ==================
 
-Sawfish is able to `translate' keystrokes to different ones, for example
-say we want to create a new tab in Guake (a dropdown terminal emulator) by
-pressing C-n instead of C-S-t, when we do:
+Sawfish is also able to `translate' a keypress to different one. For
+example, assume you want to create a new tab in Guake (a dropdown
+terminal emulator) by pressing C-n instead of C-S-t (the Guake
+default). Then put:
 
 ( add-window-matcher '( ( WM_CLASS . "^Guake.py/guake.py$" ) )
        '( ( keymap-trans . ( ( "C-n" "C-S-t" ) ) ) ) )
 
-so we do now press C-n inside Guake, but Guake receives C-S-t instead, or in
-other words: no more unconfigurable keybindings. This may also be usefull in
-conjunction with an application specific keymap, to prevent colliding bindings.
+This is also useful in conjunction with an application specific
+keymap, to prevent colliding bindings.
 
 Nested Keybindings (Macros)
 ===========================
@@ -196,6 +198,7 @@ now first press "W-e" (as I said no need to keep it pressed) and press b, now bl
 
 Default Keymaps and Keybindings
 ===============================
+"Toggle" in the command name means switching between "on" and "off".
 
 Explanation of Keymaps (+ default bindings)
 

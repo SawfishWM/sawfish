@@ -5312,6 +5312,9 @@ A special modifier that matches key release events, not the default
 key press events.  Mouse events never have @key{Release} modifiers;
 they have separate actions instead.  @xref{Event Actions}.
 
+You have to set the variable @code{eval-key-release-events} to
+@code{non-nil} to use this modifier.
+
 @item Button@var{k}
 The @var{k}'th mouse button is currently pressed.
 
@@ -5741,8 +5744,8 @@ Installs zero or more key bindings into the keymap @var{keymap}, then
 returns @var{keymap}.
 
 Each binding is defined by two elements in the list of @var{bindings},
-the first defines the name of the input event (or the event itself) and
-the second defines the command to be associated with the event.
+the first defines the name of an event (or the event itself) and the
+second defines the command to be associated with the event.
 
 For example to bind two keys in the keymap @var{keymap}; the event
 @kbd{C-f} to the command @code{foo} and the event @kbd{C-b} to the
@@ -5753,6 +5756,9 @@ command @code{bar} the following form would be used,
  "C-f" 'foo
  "C-b" 'bar)
 @end lisp
+
+Currently, multiple keystrokes can't be bound with a single
+@code{bind-keys} call. Instead, bind an event to another keymap.
 @end defun
 
 @defun unbind-keys @var{keymap} &rest @var{keys}
