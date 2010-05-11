@@ -76,7 +76,7 @@ For edit history, see @file{ChangeLog} file.
 * Window Frames::		Decorating windows
 * Viewports::			Subdivided desktop areas
 * Workspaces::			Multiple desktop areas
-* Multi-Head Environments::     Multiple monitors
+* RandR and Xinerama::          Many monitors and updates
 * Window Placement::            Controlling placement of new windows
 * Popup Menus::			Displaying menus
 * Events::			Input event types
@@ -4321,7 +4321,7 @@ When true, windows uniconify to the current viewport, rather than to
 the viewport they were iconified on.  Defaults to true.
 @end defvr
 
-@node Workspaces, Multi-Head Environments, Viewports, Top
+@node Workspaces, RandR and Xinerama, Viewports, Top
 @chapter Workspaces
 @cindex Workspaces
 @cindex Desktop workspaces
@@ -4741,21 +4741,43 @@ Add edge windows used to implement flipping.
 Remove the edge windows used to implement flipping.
 @end defun
 
-@node Multi-Head Environments, Window Placement, Workspaces, Top
-@chapter Multi-Head Environments
+@node RandR and Xinerama, Window Placement, Workspaces, Top
+@chapter RandR and Xinerama
+@cindex RandR
+@cindex Xrandr
+@cindex Xinerama
+
+Sawfish supports multiple monitors displaying a single logical screen.
+Partial support of RandR is done.
+
+@defun has-randr-p
+Returns @code{t} if RandR is supported.
+@end defun
+
+@menu
+* Multi-head Environment::
+* Screen Change Notification::
+@end menu
+
+@node Multi-head Environment, Screen Change Notification,, RandR and Xinerama
+@section Multi-head Environment
 @cindex Multi-head environments
 @cindex Environments, multi-head
 @cindex Monitors, multiple
-@cindex Xinerama
 
-Sawfish supports multiple monitors displaying a single logical screen,
-as provided by Xinerama.
+Functions which provide information on monitor geometries are
+available. On the other hand, few user interface functions take them
+into account, so for example, windows often appear across multiple
+monitors.
+
+Currently, monitor geometries are taken from Xinerama only. RandR
+support in this regard is yet to be done.
 
 A ``head'' means each physical monitor. When there're multiple heads,
 the word ``screen'' means the entire screen which is the combination
 of all heads. For example the function @code{screen-width} returns the
 width of the ``screen'' in this sense. A viewport contains the entire
-screen.  The only exception is that maximization is done within a
+screen. The only exception is maximizations which are done within a
 head, unless stated explicitly that it's xinerama.
 
 @defun find-head x y
@@ -4813,8 +4835,29 @@ containing the window @var{window}, or the pointer if @var{window} is
 false).  Returns @code{'(0 . 0)} if no such head can be identified.
 @end defun
 
+@node Screen Change Notification, , Multi-head Environment, RandR and Xinerama
+@section Screen Change Notification
+@cindex Screen change notification
+@cindex Change, of screen
 
-@node Window Placement, Popup Menus, Multi-Head Environments, Top
+If some changes happen to the screen, hot-plugging, removal, or
+resolution change, then you can receive the notification.
+
+One way is to use @code{configure-notify-hook}.(@pxref{X Hooks})
+Then the window argument is set to the symbol @code{root}. The other way
+is to use @code{randr-change-notify-hook} below. Both are called,
+but there's no guarantee of the order.
+
+Notice that both may be called several times for one change. For
+example, ``xrandr'' command invocation from shell triggers three
+calls of both hooks in an author's environment.
+
+@defvr {Hook} randr-change-notify-hook
+Called when screen configuration changes, via RandR extension support.
+When RandR is not supported, then this hook will never be called.
+@end defvr
+
+@node Window Placement, Popup Menus, RandR and Xinerama, Top
 @chapter Window Placement
 @cindex Placement of windows
 
@@ -6859,6 +6902,11 @@ of configure request properties.  This alist may contain items
 and @code{(dimensions . @var{dimensions})}.
 @end defvr
 
+@defvr {Window Hook} configure-notify-hook
+Called when an X @code{ConfigureNotify} event is received, i.e.
+when window configuration request is complete.
+@end defvr
+
 @defvr {Window Hook} property-notify-hook
 Called whenever an X window property (not a Sawfish window property)
 changes.  In addition to the window, the hook is called with the
@@ -6866,7 +6914,7 @@ atom name and one of the symbols @code{new-value} or @code{deleted}.
 @end defvr
 
 @defvr {Window Hook} window-state-change-hook
-Called whenver certain window manager hints change for a window.
+Called whenever certain window manager hints change for a window.
 Currently only @code{urgency} is monitored.  The hint is an additional
 argument to the hook.
 @end defvr
@@ -6970,12 +7018,12 @@ possible.
 @end defvr
 
 @defvr {Hook} viewport-resized-hook
-Called when the number of rows and columns in each virtual workspace is
-changed.
+Hook called when the number of rows and columns in each
+workspace is changed.
 @end defvr
 
 @defvr {Hook} viewport-moved-hook
-Called when the origin of the viewport into the virtual workspace is
+Called when the origin of the viewport into the workspace is
 moved.
 @end defvr
 

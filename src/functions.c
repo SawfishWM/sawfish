@@ -52,7 +52,7 @@ static int xinerama_heads;
 
 #ifdef HAVE_X11_EXTENSIONS_XINERAMA_H
 # include <X11/extensions/Xinerama.h>
-  static XineramaScreenInfo *xinerama_head_info;
+  static XineramaScreenInfo *xinerama_head_info = NULL;
 # ifdef TEST_XINERAMA
    static XineramaScreenInfo debug_heads[2] = {
      { 0, 0, 0, 512, 768 },
@@ -948,7 +948,10 @@ update_xinerama_info (void)
 	if (XineramaQueryExtension (dpy, &xinerama_event_base,
 				    &xinerama_error_base))
 	{
-	    xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
+	  if(xinerama_head_info != NULL){
+	    XFree(xinerama_head_info);
+	  }
+	  xinerama_head_info = XineramaQueryScreens (dpy, &xinerama_heads);
 	}
     }
 # else

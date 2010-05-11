@@ -76,7 +76,7 @@ static int has_randr = FALSE;
 static int randr_event_base; /* Will give us the offset for the xrandr events */
 #endif
 
-
+/* variables */
 DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
 DEFSYM(map_notify_hook, "map-notify-hook");
@@ -97,11 +97,7 @@ DEFSYM(enter_frame_part_hook, "enter-frame-part-hook");
 DEFSYM(leave_frame_part_hook, "leave-frame-part-hook");
 DEFSYM(configure_request_hook, "configure-request-hook");
 DEFSYM(configure_notify_hook, "configure-notify-hook");
-
-#ifdef HAVE_X11_EXTENSIONS_XRANDR_H
 DEFSYM(randr_change_notify_hook, "randr-change-notify-hook");
-#endif
-
 DEFSYM(window_state_change_hook, "window-state-change-hook");
 
 DEFSYM(pointer_motion_threshold, "pointer-motion-threshold");
@@ -1238,6 +1234,26 @@ configure_notify (XEvent *ev)
      }
 }
 
+#ifdef HAVE_X11_EXTENSIONS_XRANDR_H
+static void
+randr_screen_change_notify (XEvent *ev)
+{
+  /* If ev is XRRScreenChangeNotifyEvent, then it's a superior
+     version to XConfigureEvent one.
+  */
+  XRRUpdateConfiguration( ev );
+
+  update_xinerama_info();
+
+  int snum = DefaultScreen(dpy);
+  screen_width = DisplayWidth(dpy, snum);
+  screen_height = DisplayHeight(dpy, snum);
+
+  // Call the hook
+  Fcall_hook(Qrandr_change_notify_hook, Qnil, Qnil);
+}
+#endif
+
 static void
 create_notify (XEvent *ev)
 {
@@ -1277,21 +1293,6 @@ shape_notify (XEvent *ev)
 	Fcall_window_hook (Qshape_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
 }
-
-#ifdef HAVE_X11_EXTENSIONS_XRANDR_H
-static void
-randr_screen_change_notify (XEvent *ev)
-{
-    // Only do it if we are sure we are handling the event
-    if (has_randr) {
-        fprintf(stderr, "Yes, we are handling the screen change event\n");
-        // We should add the call to the hook
-        XRRUpdateConfiguration( ev );
-        // Call the hook
-        Fcall_hook(Qrandr_change_notify_hook, Qnil, Qnil);
-    }
-}
-#endif
 
 static int synthetic_configure_mutex;
 
@@ -1435,8 +1436,9 @@ inner_handle_input (repv arg)
     else if (ev->type == shape_event_base + ShapeNotify)
 	shape_notify (ev);
 #ifdef HAVE_X11_EXTENSIONS_XRANDR_H
-    else if (ev->type == randr_event_base + RRScreenChangeNotify)
-        randr_screen_change_notify(ev);
+    else if (ev->type == randr_event_base + RRScreenChangeNotify){
+      randr_screen_change_notify(ev);
+    }
 #endif
     else 
 	fprintf (stderr, "warning: unhandled event: %d\n", ev->type);
@@ -1701,6 +1703,13 @@ DEFUN("clicked-frame-part", Fclicked_frame_part,
     return (clicked_frame_part != 0) ? rep_VAL (clicked_frame_part) : Qnil;
 }
 
+DEFUN("has-randr-p", Fhas_randr_p,
+      Shas_randr_p, (void), rep_Subr0)
+{
+  return has_randr ? Qt : Qnil;
+}
+
+
 /* initialisation */
 
 void
@@ -1715,14 +1724,13 @@ events_init (void)
 #ifdef HAVE_X11_EXTENSIONS_XRANDR_H
     // This code is executed even in batch mode, in 
     // which case dpy is not set
-    if (dpy != NULL) {
+    if (dpy != 0) {
         has_randr = XRRQueryExtension( dpy, &randr_event_base, &dummy );
         if( has_randr )
         {
            int major, minor;
            XRRQueryVersion( dpy, &major, &minor );
            has_randr = ( major > 1 || ( major == 1 && minor >= 1 ) );
-           fprintf(stderr, "it Has randr %d\n", has_randr);
            XRRSelectInput( dpy, root_window, RRScreenChangeNotifyMask );
         }
     }
@@ -1753,16 +1761,6 @@ events_init (void)
     event_handlers[CreateNotify] = create_notify;
     event_handlers[CirculateNotify] = circulate_notify;
     event_handlers[MappingNotify] = mapping_notify;
-
-#ifdef HAVE_X11_EXTENSIONS_XRANDR_H
-    if (has_randr) 
-    {
-        fprintf(stderr, "Setting handler at event %d\n", randr_event_base + RRScreenChangeNotify);
-        // we can't handle the event in the usual manner because the sizes of the
-        // arrays event_handler and event_names are defined at compile time.
-        rep_INTERN_SPECIAL(randr_change_notify_hook);
-    }
-#endif
 
     event_names[KeyPress] = "KeyPress";
     event_names[KeyRelease] = "KeyRelease";
@@ -1867,6 +1865,7 @@ events_init (void)
     rep_INTERN_SPECIAL(configure_notify_hook);
     rep_INTERN_SPECIAL(configure_request_hook);
     rep_INTERN_SPECIAL(window_state_change_hook);
+    rep_INTERN_SPECIAL(randr_change_notify_hook);
 
     rep_INTERN_SPECIAL(pointer_motion_threshold);
 
