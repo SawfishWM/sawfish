@@ -3,10 +3,8 @@
 			-- [modified patch from Gentoo]
 
 	* lisp/sawfish/wm/ext/apps-menu.jl: Allow whitespace and comments
-	                                    at the beginning of .desktop files
-					    and skip the file, if the first valid
-					    line is not [Desktop Entry].
-					    -- [Matthew Love/Teika Kazura]
+	                                    at the beginning of .desktop files.
+					    -- [Matthew Love, Teika Kazura]
 
 	* src/Makefile.in
 	* src/display.c
@@ -49,7 +47,8 @@
 	* lisp/sawfish/wm/state/maximize.jl: make maximize-/-fullscreen/fullxinerama
 	                                     honor maximize-raises [Nolan Leake]
 
-	* lisp/sawfish/wm/ext/apps-menu.jl: more robustness
+	* lisp/sawfish/wm/ext/apps-menu.jl: Anti-brekage for "R".
+	Removal of phony constants. Some code refactoring. [Teika Kazura]
 
 2010-03-13  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/util/display-wininfo.jl: missing require

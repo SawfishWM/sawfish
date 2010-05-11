@@ -24,13 +24,13 @@ window, if that is too small [Fuchur]
 @code{maximize-window-fullxinerama}, too, not just in maximize-window
 [Nolan Leake]
 
-@item More robustness in applications menu [Teika Kazura] [Matthew Love]
+@item More robustness in applications menu [Teika Kazura, Matthew Love]
 
 Before it broke for 'R' (statistics software), and whitespace handling
-didn't follow the specification. Phony constants are removed, too.
+didn't follow the specification.
 
-Allow whitespace and comments at the beginning of .desktop files and skip
-the file, if the first valid line is not [Desktop Entry].
+Some *.desktop files are not ignored any more either, i.e., leading
+empty lines and comments are allowed.
 @end itemize
 
 @item New Features
@@ -95,7 +95,8 @@ lisp files, but now it's guaranteed for all files.
 
 @item ``Windows'' chapter is partly revised. Function @code{display-window}
 is documented. Difference between @code{window-wants-input-p} and
-@code{window-really-wants-input-p} is described.
+@code{window-really-wants-input-p} is described. Short description on
+the root window.
 
 @item In past few versions we made more changes which were not described in
 the news, including clarification in viewport, workspace and event,

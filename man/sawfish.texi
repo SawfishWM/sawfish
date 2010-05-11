@@ -672,6 +672,11 @@ Returns @code{t} if @var{arg} is a member of the window type, and has a
 client window associated with it.
 @end defun
 
+Since the root window is not a managed client window, it is not
+represented by a window object. Sometimes functions' arguments and
+return value treat the symbol @code{root} as the root window. Window
+hooks are so. But sometimes not.
+
 @menu
 Basics:
 * Window Attributes::
@@ -6684,14 +6689,17 @@ the hooks mechanism. For more details on the hooks mechanism see
 
 As well as using the standard @code{call-hook} function, sawfish also
 provides the @code{call-window-hook} function. This is used to invoke
-hooks which refer to a single window. If the hook has a local value
-defined in the window's property list then this value is used, before
-the default value defined by the actual variable.
+hooks which refer to a single window. Such hook is called ``window
+hook''. If a window hook has a local value defined in the window's
+property list then this value is used, before the default value
+defined by the actual variable.
 
 @defun call-window-hook hook window &optional args hook-type
 Call @var{hook} for @var{window} with further arguments @var{args}. See
 @code{call-hook} for a description of @var{hook-type}. Each function in
 the hook is called with arguments @code{(@var{window} . @var{args})}.
+
+Root window is represented by the symbol @code{root}.
 @end defun
 
 The available hooks are listed below.
