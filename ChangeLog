@@ -1,3 +1,25 @@
+2010-05-11  Teika Kazura <teika@lavabit.com>
+	* man/news.texi
+	* man/sawfish.texi
+	* src/display.c
+	* src/events.c
+	* src/functions.c
+	* src/sawfish_subrs.h: Complets the last RandR edit. At least it's
+	correct if you have only one screen, or if you use Xinerama.
+	Most importantly, XRRUpdateConfiguration is called after
+	XRRScreenChangeNotifyEvent. This ensures update inside of Xlib.
+	Other changes:
+	NULL display check of the RandR is changed to Sawfish conventional
+	way. (Just to be in accordance.) Minor memeory leak fix.
+	Doc.
+
+	* ChangeLog
+	* man/faq.texi
+	* man/news.texi
+	* man/sawfish.texi
+	* KEYBINDINGS
+	* src/keys.c: docs.
+
 2010-04-27  Christopher Bratusek <zanghar@freenet.de>
 	* configure.in: make xinerama an optional dependency
 			-- [modified patch from Gentoo]
