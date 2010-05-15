@@ -6,8 +6,8 @@
 	* src/functions.c
 	* src/sawfish_subrs.h: Complets the last RandR edit. At least it's
 	correct if you have only one screen, or if you use Xinerama.
-	Most importantly, XRRUpdateConfiguration is called after
-	XRRScreenChangeNotifyEvent. This ensures update inside of Xlib.
+	Most importantly, screen size information is updated after
+	XRRScreenChangeNotifyEvent.
 	Other changes:
 	NULL display check of the RandR is changed to Sawfish conventional
 	way. (Just to be in accordance.) Minor memeory leak fix.

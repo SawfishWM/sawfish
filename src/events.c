@@ -1,5 +1,4 @@
 /* events.c -- Event handling
-   $Id$
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 
