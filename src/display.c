@@ -70,10 +70,6 @@ error_handler (Display *dpy, XErrorEvent *ev)
 {
     Lisp_Window *w;
 
-#ifdef DEBUG
-    print_error (ev);
-#endif
-
     if (ev->resourceid != 0
 	&& (ev->error_code == BadWindow || ev->error_code == BadDrawable))
     {
