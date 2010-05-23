@@ -1,5 +1,18 @@
 2010-05-23  Christopher Roy Bratusek <zanghar@freenet.de>
-	* lisp/sawfish/wm/util/prompt.jl: fix an unconfirmed compilation-error that has been reported
+	* lisp/sawfish/wm/util/prompt.jl: fix an unconfirmed compilation-error
+					  that has been reported [Harald van Dijk]
+
+	* man/sawfish.texi
+	* src/events.c
+	* src/frames.c
+	* src/sawfish.h
+	* src/windows.c: Add two new attributes to frame part definition:
+			 border-width and border-color [Alexey I. Froloff]
+
+	* man/news.texi: updated
+
+2010-05-22  Christopher Roy Bratusek <zanghar@freenet.de>
+	* configure.in: bumped version to 1.6.4 "Frozen Flame"
 
 2010-05-16  Christopher Bratusek <zanghar@freenet.de>
 	* src/display.c: allow compilation with -DDEBUG

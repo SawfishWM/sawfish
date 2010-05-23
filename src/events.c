@@ -1317,7 +1317,7 @@ send_synthetic_configure (Lisp_Window *w)
 	}
 	ev.xconfigure.width = w->attr.width;
 	ev.xconfigure.height = w->attr.height;
-	ev.xconfigure.border_width = w->attr.border_width;
+	ev.xconfigure.border_width = w->border_width;
 	ev.xconfigure.above = w->reparented ? w->frame : root_window;
 	ev.xconfigure.override_redirect = False;
 	XSendEvent (dpy, w->id, False, StructureNotifyMask, &ev);

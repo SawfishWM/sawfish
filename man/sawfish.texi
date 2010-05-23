@@ -3630,6 +3630,12 @@ Defines the width of the frame part.
 @item (height . @var{value})
 Defines the height of the frame part.
 
+@item (border-width . @var{value})
+Defines window border width.
+
+@item (border-color . @var{value})
+Defines window border color.
+
 @item (keymap . @var{value})
 Defines the keymap to use when evaluating events originating in this
 frame part.
@@ -3659,10 +3665,14 @@ frame part.
 The values specified for the @code{background}, @code{foreground},
 @code{render-scale}, @code{font}, @code{left-edge}, @code{right-edge},
 @code{top-edge}, @code{bottom-edge}, @code{width}, @code{height},
-@code{cursor}, @code{below-client} and @code{hidden} attributes may
-actually be functions. In which case the function will be called (with
-a single argument, the window object) when the frame is constructed,
-the value returned will be used as the actual value of the attribute.
+@code{border-color}, @code{cursor}, @code{below-client} and
+@code{hidden} attributes may actually be functions. In which case the
+function will be called (with a single argument, the window object)
+when the frame is constructed, the value returned will be used as the
+actual value of the attribute.
+
+The values specified for the @code{border-width} and @code{border-color}
+are applied for the whole window instead of current frame part.
 
 The coordinate system used for specifying the part's position is
 relative to the window edge that the position is defined against.
