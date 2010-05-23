@@ -57,7 +57,8 @@
 	  sawfish.wm.events
 	  sawfish.wm.custom
 	  sawfish.wm.commands
-	  sawfish.wm.fonts)
+	  sawfish.wm.fonts
+	  sawfish.wm.util.prompt)
 
   (defgroup messages "Messages" :group misc)
 
