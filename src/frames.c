@@ -86,6 +86,8 @@ DEFSYM(override_frame_part_classes, "override-frame-part-classes");
 DEFSYM(below_client, "below-client");
 DEFSYM(scale_foreground, "scale-foreground");
 DEFSYM(hidden, "hidden");
+DEFSYM(border_width, "border-width");
+DEFSYM(border_color, "border-color");
 
 static repv state_syms[fps_MAX];
 
@@ -215,6 +217,9 @@ fp_sweep (void)
 	height . PIXELS
 	width . PIXELS
 
+	border-width . NUMBER
+	border-color . COLOR
+
 	keymap . KEYMAP
 	cursor . CURSOR-OR-CURSOR-DEF
 
@@ -338,11 +343,11 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 	XSetWindowAttributes wa;
 	int wamask;
 	wa.colormap = image_cmap;
-	wa.border_pixel = BlackPixel (dpy, screen_num);
+	wa.border_pixel = w->border_pixel;
 	wamask = CWColormap | CWBorderPixel;
 	shape_win = XCreateWindow (dpy, root_window, -100, -100,
 				   w->frame_width, w->frame_height,
-				   0, image_depth, InputOutput,
+				   w->border_width, image_depth, InputOutput,
 				   image_visual, wamask, &wa);
     }
     else
@@ -1246,6 +1251,26 @@ build_frame_part (struct frame_part *fp)
     else
 	fp->renderer = Qnil;
 
+    /* get border width */
+    tem = get_integer_prop (fp, Qborder_width, class_elt, ov_class_elt);
+    if (tem != Qnil) {
+	w->border_width = rep_INT(tem);
+    }
+
+    /* get border color */
+    tem = fp_assq (fp, Qborder_color, class_elt, ov_class_elt);
+    if (tem != Qnil)
+    {
+	tem = rep_CDR(tem);
+	if (Ffunctionp (tem) != Qnil)
+	    tem = call_protectedly_1 (tem, rep_VAL (w), Qnil);
+	if (!COLORP(tem) && tem != Qnil)
+	    tem = call_protectedly (get_color, tem, Qnil);
+	if (COLORP(tem)) {
+	    w->border_pixel = VCOLOR(tem)->pixel;
+	}
+    }
+
     /* get background images or colors */
     if (!get_pattern_prop (fp, fp->bg, get_color,
 			   Qbackground, class_elt, ov_class_elt))
@@ -1487,6 +1512,10 @@ list_frame_generator (Lisp_Window *w)
 
     rep_PUSHGC(gc_win, win);
 
+    /* clear window border */
+    w->border_width = 0;
+    w->border_pixel = BlackPixel (dpy, screen_num);
+
     /* construct the component list, and find the bounding box */
 
     /* if w->destroy_frame is set then we're rebuilding an existing
@@ -1581,12 +1610,12 @@ list_frame_generator (Lisp_Window *w)
 
 	wa.override_redirect = True;
 	wa.colormap = colormap;
-	wa.border_pixel = BlackPixel (dpy, screen_num);
+	wa.border_pixel = w->border_pixel;
 	wa.save_under = w->attr.save_under;
 	wamask = CWOverrideRedirect | CWColormap | CWBorderPixel | CWSaveUnder;
 
 	w->frame = XCreateWindow (dpy, root_window, w->attr.x, w->attr.y,
-				  w->frame_width, w->frame_height, 0,
+				  w->frame_width, w->frame_height, w->border_width,
 				  depth, InputOutput, visual, wamask, &wa);
     }
     else
@@ -1595,6 +1624,8 @@ list_frame_generator (Lisp_Window *w)
 	w->attr.x += w->frame_x - old_x_off;
 	w->attr.y += w->frame_y - old_y_off;
 
+	XSetWindowBorder (dpy, w->frame, w->border_pixel);
+	XSetWindowBorderWidth (dpy, w->frame, w->border_width);
 	XMoveResizeWindow (dpy, w->frame, w->attr.x, w->attr.y,
 			   w->frame_width, w->frame_height);
 
@@ -1966,6 +1997,8 @@ frames_init (void)
     rep_INTERN(below_client);
     rep_INTERN(scale_foreground);
     rep_INTERN(hidden);
+    rep_INTERN(border_width);
+    rep_INTERN(border_color);
 
     rep_INTERN_SPECIAL(frame_part_classes);
     rep_INTERN_SPECIAL(override_frame_part_classes);

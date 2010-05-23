@@ -458,6 +458,7 @@ add_window (Window id)
 	w->name = rep_null_string ();
 	w->net_name = Qnil;
 	w->net_icon_name = Qnil;
+	w->border_pixel = BlackPixel (dpy, screen_num);
 
         /* Don't garbage collect the window before we are done. */
         /* Note: must not return without rep_POPGC. */
@@ -473,6 +474,7 @@ add_window (Window id)
 	XGetWindowAttributes (dpy, id, &w->attr);
 	DB(("  orig: width=%d height=%d x=%d y=%d\n",
 	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
+	w->old_border_width = w->attr.border_width;
 
 	get_window_name(w);
 
@@ -599,7 +601,7 @@ remove_window (Lisp_Window *w, bool destroyed, bool from_error)
 	    remove_window_frame (w);
 
 	    /* Restore original border width of the client */
-	    XSetWindowBorderWidth (dpy, w->id, w->attr.border_width);
+	    XSetWindowBorderWidth (dpy, w->id, w->old_border_width);
 	}
 
 	if (!from_error)
@@ -960,8 +962,8 @@ surrounding WINDOW.
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->reparented)
     {
-	return Fcons (rep_MAKE_INT(VWIN(win)->frame_width),
-		      rep_MAKE_INT(VWIN(win)->frame_height));
+	return Fcons (rep_MAKE_INT(VWIN(win)->frame_width + 2*VWIN(win)->border_width),
+		      rep_MAKE_INT(VWIN(win)->frame_height + 2*VWIN(win)->border_width));
     }
     else
 	return Fwindow_dimensions (win);
@@ -1269,7 +1271,7 @@ window-border-width WINDOW
 ::end:: */
 {
     rep_DECLARE1(win, WINDOWP);
-    return rep_MAKE_INT(VWIN(win)->attr.border_width);
+    return rep_MAKE_INT(VWIN(win)->border_width);
 }
 
 DEFUN("window-size-hints", Fwindow_size_hints, Swindow_size_hints,
