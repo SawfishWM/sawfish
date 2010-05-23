@@ -142,9 +142,6 @@ typedef struct lisp_window {
        But the position is the position of the frame, while the
        dimensions are those of the client */
     XWindowAttributes attr;
-    unsigned int old_border_width;		/* saved border width of window */
-    unsigned int border_width;
-    unsigned long border_pixel;
     XSizeHints hints;
     XWMHints *wmhints;
     Window *cmap_windows;
