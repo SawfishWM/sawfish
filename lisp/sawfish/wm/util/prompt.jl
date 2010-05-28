@@ -57,8 +57,7 @@
 	  sawfish.wm.events
 	  sawfish.wm.custom
 	  sawfish.wm.commands
-	  sawfish.wm.fonts
-	  sawfish.wm.util.prompt)
+	  sawfish.wm.fonts)
 
   (defgroup messages "Messages" :group misc)
 
@@ -122,10 +121,15 @@ displayed. See the `display-message' function for more details.")
   ;; Compilation hack: ensure that the compiler doesn't complain when
   ;; these are treated like functions and passed values.
   (eval-when-compile
-    (setq prompt-completion-fun (lambda (#!rest) nil)
-          prompt-validation-fun (lambda (#!rest) nil)
-          prompt-abbrev-fun (lambda (#!rest) nil)
-          prompt-display-fun (lambda (#!rest) nil)))
+    (progn
+      (defvar prompt-completion-fun nil)
+      (defvar prompt-validation-fun nil)
+      (defvar prompt-abbrev-fun nil)
+      (defvar prompt-display-fun nil)
+      (setq prompt-completion-fun (lambda (#!rest) nil)
+            prompt-validation-fun (lambda (#!rest) nil)
+            prompt-abbrev-fun (lambda (#!rest) nil)
+            prompt-display-fun (lambda (#!rest) nil))))
 
 
   ;; From merlin
