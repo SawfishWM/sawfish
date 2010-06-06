@@ -13,6 +13,13 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Bugfixes
+@itemize @minus
+@item The sawfish.wm.util.prompt no longer makes all of its internals
+available globally, so helper functions must be passed explicitly rather
+than implicitly via let statements.
+@end itemize
+
 @item New Features
 @itemize @minus
 @item Added border_with and border_color frame-part attributes

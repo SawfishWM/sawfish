@@ -24,6 +24,13 @@
 
 (require 'rep.io.files)
 
+(defvar prompt-list-fold-case nil
+  "Whether prompt-from-list should ignore case.")
+
+(defvar prompt-file-exclude '"\\.(o|jlc|x)$|~$|^#.*#$|^\\.\\.?$"
+  "A regexp, if it matches the file being considered for completion, the file
+is rejected.")
+
 ;;; completion/validation functions
 
 (define (prompt-complete-filename word)
@@ -64,24 +71,27 @@
 	 (file-name-nondirectory (directory-file-name name)))
       abbrev)))
 
-(define (prompt-complete-from-list word)
-  (let (out)
-    (mapc (lambda (x)
-	    (when (string-match (concat ?^ (quote-regexp word))
-				x nil prompt-list-fold-case)
-	      (setq out (cons x out)))) prompt-list)
-    out))
-
-(define (prompt-validate-from-list name)
-  (if (null prompt-list-fold-case)
-      (and (member name prompt-list) name)
-    (catch 'exit
+(define (prompt-list-completor prompt-list)
+  (lambda (word)
+    (let (out)
       (mapc (lambda (x)
-	      (when (string-match (concat ?^ (quote-regexp name) ?$) x nil t)
-		(throw 'exit name))) prompt-list))))
+              (when (string-match (concat ?^ (quote-regexp word))
+                                  x nil prompt-list-fold-case)
+                (setq out (cons x out)))) prompt-list)
+      out)))
+
+(define (prompt-list-validator prompt-list)
+  (lambda (name)
+    (if (null prompt-list-fold-case)
+        (and (member name prompt-list) name)
+      (catch 'exit
+        (mapc (lambda (x)
+                (when (string-match (concat ?^ (quote-regexp name) ?$) x nil t)
+                  (throw 'exit name))) prompt-list)))))
 
 ;;; entry points
 
+(define filename-history (prompt-make-history))
 (define (prompt-for-file #!optional title existing start default)
   "Prompt for a file, if EXISTING is t only files which exist are
 allowed to be entered."
@@ -90,14 +100,17 @@ allowed to be entered."
   (setq start (if (stringp start)
 		  (expand-file-name start)
 		(file-name-as-directory default-directory)))
-  (let* ((prompt-completion-fun prompt-complete-filename)
-	 (prompt-validation-fun (and existing prompt-validate-filename))
-	 (prompt-abbrev-fun prompt-abbreviate-filename)
-	 (str (prompt title start)))
+  (let ((str (prompt #:title title
+                     #:start start
+                     #:completion-fun prompt-complete-filename
+                     #:validation-fun (and existing prompt-validate-filename)
+                     #:abbrev-fun prompt-abbreviate-filename
+                     #:history filename-history)))
     (when (and (string= str "") default)
       (setq str default))
     str))
 
+(define directory-name-history (prompt-make-history))
 (define (prompt-for-directory #!optional title existing start default)
   "Prompt for a directory, if EXISTING is t only files which exist are
 allowed to be entered."
@@ -105,10 +118,12 @@ allowed to be entered."
     (setq title "Enter filename:"))
   (unless (stringp start)
     (setq start (file-name-as-directory default-directory)))
-  (let* ((prompt-completion-fun prompt-complete-directory)
-	 (prompt-validation-fun (and existing prompt-validate-directory))
-	 (prompt-abbrev-fun prompt-abbreviate-filename)
-	 (str (prompt title start)))
+  (let ((str (prompt #:title title
+                     #:start start
+                     #:completion-fun prompt-complete-directory
+                     #:validation-fun (and existing prompt-validate-directory)
+                     #:abbrev-fun prompt-abbreviate-filename
+                     #:history directory-name-history)))
     (when (and (string= str "") default)
       (setq str default))
     str))
@@ -117,26 +132,30 @@ allowed to be entered."
   "Return a selected choice from the list of options (strings) OPTIONS.
 PROMPT is the title displayed, START the starting choice.
 Unless DONT-VALIDATE is t, only a member of PROMPT-LIST will be returned."
-  (let ((prompt-list options)
-	(prompt-completion-fun prompt-complete-from-list)
-	(prompt-validation-fun (if dont-validate
-				   nil
-				 prompt-validate-from-list)))
-    (prompt title start)))
+  (prompt #:title title
+          #:start start
+          #:completion-fun (prompt-list-completor options)
+          #:validation-fun (if dont-validate
+                               nil
+                             (prompt-list-validator options))))
 
 (define (prompt-for-string #!optional title start)
-  (let ((prompt-completion-fun prompt-complete-filename)
-	(prompt-validation-fun nil))
-    (prompt (or title "Enter string: ") start)))
+  (prompt #:title (or title "Enter string: ")
+          #:start start
+          ;; XXX: Why is this completing on files???
+          #:completion-fun prompt-complete-filename))
 
 (define (prompt-for-number #!optional title)
   (let (num)
     (while (not (numberp num))
-      (setq num (read-from-string (prompt (or title "Enter number: ")))))
+      (setq num (read-from-string (prompt
+                                   #:title (or title "Enter number: ")))))
     num))
 
 (define (pwd-prompt title)
-  (let ((prompt-display-fun (lambda (string)
-                              (make-string (length string) ?*)))
-	(prompt-history nil))
-    (prompt-for-string title)))
+  "Prompt for a string, hiding the string behind asterisks (e.g., for
+a password)."
+  (prompt #:title title
+          #:history (make-fluid) ; Disable history
+          #:display-fun (lambda (string)
+                          (make-string (length string) ?*))))
