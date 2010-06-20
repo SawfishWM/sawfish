@@ -19,7 +19,8 @@
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ;; This is the "old" window menu. By default, beos-window-menu is used
-;; instead. Maybe can be deleted.
+;; instead. But **DON'T** remove. There sure exist those who use it,
+;; according to a questionnaire.
 
 ;; Usage: add (require 'sawfish.wm.ext.old-window-menu) in your rc file.
 

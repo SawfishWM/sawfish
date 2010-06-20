@@ -1,4 +1,4 @@
-/* libclient.c -- shared code for client program to communicate with server
+/* libclient.h -- shared code for client program to communicate with server
    $Id$
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>

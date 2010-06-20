@@ -3631,10 +3631,11 @@ Defines the width of the frame part.
 Defines the height of the frame part.
 
 @item (border-width . @var{value})
-Defines window border width.
-
-@item (border-color . @var{value})
-Defines window border color.
+@itemx (border-color . @var{value})
+Defines the border width and color. A ``border'' if present surrounds
+the window and all other frame parts. Both width and color are applied
+to the whole window instead of current frame part. (Thus they should
+be properties of window, not frame parts. Sorry.)
 
 @item (keymap . @var{value})
 Defines the keymap to use when evaluating events originating in this
@@ -3670,9 +3671,6 @@ The values specified for the @code{background}, @code{foreground},
 function will be called (with a single argument, the window object)
 when the frame is constructed, the value returned will be used as the
 actual value of the attribute.
-
-The values specified for the @code{border-width} and @code{border-color}
-are applied for the whole window instead of current frame part.
 
 The coordinate system used for specifying the part's position is
 relative to the window edge that the position is defined against.

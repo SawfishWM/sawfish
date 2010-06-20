@@ -343,8 +343,8 @@ sys_init(char *program_name)
 		return FALSE;
 	    }
 
-	    // This is used to prevent two Sawfish running.
-	    // (Not sure for other WMs.)
+	    /* Error handler is used to prevent from two Sawfish running.
+	     * (Not sure for other WMs.) */
 	    XSetErrorHandler (error_other_wm);
 	    XSelectInput (dpy, root_window, ROOT_EVENTS);
 	    XSync (dpy, False);
