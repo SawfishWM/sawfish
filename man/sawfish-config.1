@@ -1,33 +1,37 @@
-.TH "sawfish-config" "1" 
-.SH "NAME" 
-sawfish-config \(em The Sawfish Configurator. 
-.SH "SYNOPSIS" 
-.PP 
-\fBsawfish-config\fR [\fB \-\-group=\fIGROUP-NAME \fR\fP]  [\fB \-\-flatten \fP]  [\fB \-\-single-level \fP]  [\fB \-\-socket-id=\fIWINDOW-ID \fR\fP]  
-.SH "DESCRIPTION" 
-.PP 
-This program can be used to invoke the GUI manually; if GNOME is being 
-used, then the GNOME Control Center can also be used to customize 
-certain classes. 
-.SH "OPTIONS" 
-.IP "\fB\-\-group\fP 	  \fBGROUP-NAME\fP 	" 10 
-Display only \fIGROUP-NAME\fR 
-.IP "" 10 
-\fIGROUP-NAME\fR should be one of these 
-names Sawfish, Appearance, Bindings, Focus, Window Rules, 
-Minimizing/Maximizing, Miscellaneous, Move/Resize, Placement, Sounds, Workspaces 
-.IP "\fB\-\-flatten\fP" 10 
-display sub-groups inline instead of using a tree widget 
-(good for control center). In normal `tree' item, don't put frame 
-the widgets 
-.IP "\fB\-\-single-level\fP" 10 
-Don't display the tree widget. 
-.IP "\fB\-\-socket-id\fP 	  \fBWINDOW-ID\fP 	" 10 
-This option allow the ui to be embedded in the gnome control 
-center. This also disables the ok/cancel/etc buttons and enables 
-a hacky protocol on stdin/stdout 
-.SH "AUTHOR" 
-.PP 
-This manual page was written by Christian Marillat marillat@debian.org for 
-the \fBDebian GNU/Linux\fP system (but may be used by others). 
-.\" created by instant / docbook-to-man, Sat 02 Feb 2008, 23:15 
+.TH "sawfish-config" "1"
+.SH "NAME"
+sawfish-config \(em The Sawfish Configurator.
+.SH "SYNOPSIS"
+.PP
+\fBsawfish-config\fR [\fB \-\-group=\fIGROUP-NAME \fR\fP]  [\fB \-\-flatten \fP]  [\fB \-\-single-level \fP]  [\fB \-\-socket-id=\fIWINDOW-ID \fR\fP]
+.SH "DESCRIPTION"
+.PP
+This program can be used to invoke the Sawfish configurator manually;
+if GNOME is used, then the GNOME Control Center can also be used
+to customize certain classes.
+.SH "OPTIONS"
+.IP "\fB\-\-group=\fIGROUP-NAME\fP 	" 10
+Display only \fIGROUP-NAME\fR.
+.IP "" 10
+\fIGROUP-NAME\fR should be one of these names: Sawfish, Appearance,
+Bindings, Focus, Minimizing/Maximizing, Miscellaneous, Move/Resize,
+Sounds, Window Rules, Workspaces
+.IP "\fB\-\-flatten\fP" 10
+display sub-groups inline instead of using a tree widget
+(good for control center). In normal `tree' item, don't put frame
+the widgets
+.IP "\fB\-\-single-level\fP" 10
+Don't display the tree widget. This option allows the configurator to
+be embedded in the gnome control center. This also disables the
+ok/cancel/etc buttons and enables a hacky protocol on stdin/stdout.
+.IP "\fB\-\-socket-id\fP=\fIsocket-ID\fP 	" 10
+Specifies the socket ID it connects to.
+.IP "\fB\-\-disable-nls\fP" 10
+Disable internationalization of messages.
+.IP "\fB\-\-help\fP" 10
+Prints help.
+.SH "AUTHOR"
+.PP
+This manual page was written by Christian Marillat marillat@debian.org for
+the \fBDebian GNU/Linux\fP system (but may be used by others).
+.\" created by instant / docbook-to-man, Sat 02 Feb 2008, 23:15
