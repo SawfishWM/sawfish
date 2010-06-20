@@ -29,9 +29,11 @@
 	  rep.system
 	  rep.regexp
 	  rep.io.files
+	  rep.io.streams
 	  rep.io.timers
 	  sawfish.gtk.stock
 	  sawfish.gtk.widget
+	  sawfish.cfg.i18n
 	  sawfish.cfg.group
 	  sawfish.cfg.slot
 	  sawfish.cfg.apply
@@ -262,11 +264,40 @@
 	    (gtk-container-remove slot-box-widget w))
 	  (gtk-container-get-children slot-box-widget)))
 
-  (define (run-shell #!optional socket-id)
+  (define (run-shell)
+    (when (get-command-line-option "--help")
+      (write standard-output "\
+usage: sawfish-config [OPTIONS...]\n
+where OPTIONS are any of:\n
+  --group=GROUP-NAME
+  --flatten
+  --single-level
+  --socket-id=WINDOW-ID\n")
+      (throw 'quit 0))
+
+    (let ((group (get-command-line-option "--group" t)))
+      (when group
+	(setq group (read-from-string group))
+	(set-top-group (if (listp group) group `(root ,group)))))
+
+    (when (get-command-line-option "--flatten")
+      (setq *nokogiri-flatten-groups* t))
+
+    (when (get-command-line-option "--single-level")
+      (setq *nokogiri-single-level* t))
+
+    (setq interrupt-mode 'exit)
+    (i18n-init)
+    (add-widget-prefix 'sawfish.cfg.widgets)
+
     (initialize-configs)
-    (initialize-shell socket-id)
+    (let* ((id (get-command-line-option "--socket-id" t))
+	   (socket-id (when id (string->number id))))
+      (initialize-shell socket-id))
+
     (catch 'nokogiri-exit
-      (recursive-edit)))
+      (recursive-edit))
+    (throw 'quit 0))
 
   (add-hook '*nokogiri-slot-changed-hook* set-button-states t)
   (add-hook '*nokogiri-group-selected-hook* add-group-widgets)
