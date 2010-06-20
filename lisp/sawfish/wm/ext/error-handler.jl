@@ -65,10 +65,12 @@
 	((screen)
 	 (display-message text))
 	((standard-error)
+	 (write standard-error "Sawfish error:\n")
 	 (write standard-error text)
 	 (write standard-error #\newline))
 	((both)
 	 (display-message text)
+	 (write standard-error "Sawfish error:\n")
 	 (write standard-error text)
 	 (write standard-error #\newline)))))
 
