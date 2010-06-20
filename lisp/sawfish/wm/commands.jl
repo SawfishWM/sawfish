@@ -363,14 +363,14 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 ;;; some default commands
 
   (define (run-shell-command command)
-    "Execute a shell command. This is a wrapper command for the
-`system' function."
+    "Execute a shell command in the background. This is a wrapper
+command for the `system' function."
     (system (format nil "%s &" command)))
 
   (define-command 'run-shell-command run-shell-command
     #:spec "sCommand:"
     #:type `(and (labelled ,(_ "Command:") string))
-    #:doc "Execute the given shell command.")
+    #:doc "Execute the given shell command in the background.")
 
   (define (command-sequence commands)
     "Invoke the list of commands, one by one."

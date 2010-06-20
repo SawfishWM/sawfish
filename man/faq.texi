@@ -66,12 +66,24 @@ Sawfish < 1.6 reads @file{sawfish-defaults} by default only if
 @file{~/.sawfishrc} lacks, but now it is always read.
 @end table
 
-@item How do I bind a key to execute a shell command?
+@item How can I start an application from Sawfish?
+@itemize @bullet
+@item From a key @*
+Bind a key to the @samp{run-shell-command} command. In the
+configurator, you can enter the command name at the same time.
 
-Bind a key to the @samp{run-shell-command} command; remember to enter
-the shell command you want to execute in the string entry in the
-@samp{Edit binding} dialog window.
+@item From lisp @*
+The function @code{system} invokes a shell. Don't forget to add ``&''
+not to block the Sawfish execution.
+@lisp
+(system "firefox doodle.com &")
+@end lisp
 
+@item At Sawfish startup @*
+You can use lisp, but you don't have to. Simply execute it from, say,
+@file{.Xclient} or any file. See the above item ``How do I customize
+Sawfish?'' for lisp customization.
+@end itemize
 
 @item How do I make clicking on a window raise the window?
 
