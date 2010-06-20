@@ -58,7 +58,8 @@
   (define (server-eval form)
     (let ((print-escape t))
       (condition-case error-data
-	  (progn
+	  ;; This enables backtrace printing inside of sawfish-client
+	  (let ((%in-condition-case nil))
 	    (setq form (read-from-string form))
 	    (format nil "\001%S" (user-eval form)))
 	(error
