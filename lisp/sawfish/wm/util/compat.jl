@@ -106,8 +106,7 @@
           delete-workspaces-when-empty transients-on-parents-workspace
           audio-for-ignored-windows size-window-def-increment
           slide-window-increment default-bevel-percent sp-padding
-          nokogiri-user-level nokogiri-buttons workspace-boundary-mode
-          workspace-send-boundary-mode lock-first-workspace
+          nokogiri-user-level nokogiri-buttons lock-first-workspace
           ignore-window-input-hint workspace-geometry
           pointer-motion-threshold ignore-program-positions
           infinite-desktop.stop-at-workspace-borders))
