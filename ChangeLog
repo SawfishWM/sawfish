@@ -1,4 +1,27 @@
 2010-06-22  Teika kazura <teika@lavabit.com>
+	* man/news.texi
+	* src/functions.c: x-atom-name accepts full 32 unsigned
+	int. Previously only 30 bits are treated, if the architecture is
+	32-bit.
+
+	* lisp/sawfish/wm/server.jl
+	* man/news.texi: Prints backtrace for sawfish-client, too.
+	This makes sense if you're using librep >= 0.90.7. Harmless anyway.
+
+	* lisp/sawfish/cfg/main.jl.in
+	* lisp/sawfish/cfg/shell.jl
+	* man/news.texi: Made `sawfish-config' minimal, moving most the
+	contents to sawfish.cfg.shell.  This facilitates hacks.
+
+	* lisp/sawfish/wm/ext/error-handler.jl
+	* man/news.texi: Better error message.
+	Phrase "Sawfish error:" is prepended to error messages printed to
+	standard error.
+
+	* lisp/sawfish/wm/util/compat.jl
+	* man/news.texi: Restored two options from "obsolete" declaration.
+	They're workspace-boundary-mode and workspace-send-boundary-mode.
+
 	* lisp/sawfish/wm/commands.jl
 	* man/faq.texi
 	* man/news.texi: Manuals (1). All options are now described.
