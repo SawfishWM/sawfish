@@ -1,6 +1,11 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-wm/sawfish/sawfish-@VERSION@.ebuild,v 1.7 2008/10/06 17:13:50 truedfx Exp $
+# $Header: $
+
+# This is *not* an official ebuild of any distributions.
+# After the configure script is run, required package versions are
+# filled in. But other than that, there's no guarantee this is a
+# correct ebuild.
 
 inherit eutils
 
@@ -24,7 +29,7 @@ DEPEND="${RDEPEND}
 	>=dev-util/pkgconfig-0.12.0"
 
 src_compile() {
-	
+
 	if use gnome; then
 		set -- "$@" \
 			--with-gnome-prefix=/usr
