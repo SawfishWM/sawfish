@@ -281,5 +281,4 @@
 	    (remove-hook 'unbound-key-hook thrower)
 	    (3d-destroy))))))
 
-  ;;###autoload
   (define-command '3d-hack 3d-hack #:class 'advanced))
