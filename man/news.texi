@@ -13,6 +13,14 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Bug Fixes
+@itemize @minus
+@item Atom handling fix on 32-bit architecture. [Teika Kazura]
+
+Function @code{x-atom-name} now accepts all 32 bits. Previously only
+30 bits are treated, if the architecture is 32-bit.
+@end itemize
+
 @item New Features
 @itemize @minus
 @item New frame parts @code{border-width} and @code{border-color}

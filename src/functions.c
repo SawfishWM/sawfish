@@ -43,6 +43,7 @@
 #include "sawfish.h"
 #include <string.h>
 #include <X11/Xatom.h>
+#include <stdint.h>
 
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */
@@ -922,8 +923,16 @@ Return the symbol with the same name as the X atom identified by the
 integer ATOM.
 ::end:: */
 {
-    rep_DECLARE1(atom, rep_INTP);
-    return x_atom_symbol (rep_INT(atom));
+  if(rep_INTP(atom)){
+    return x_atom_symbol(rep_INT(atom));
+  }
+  if(rep_INTEGERP(atom)){
+    return x_atom_symbol((uint32_t) rep_get_long_uint(atom));
+  }
+  /* This always returns an error. */
+  rep_DECLARE1(atom, rep_INTEGERP);
+  /* Just to make compiler silent. */
+  return Qnil;
 }
 
 DEFUN("root-window-id", Froot_window_id, Sroot_window_id, (void), rep_Subr0) /*
