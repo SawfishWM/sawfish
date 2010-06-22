@@ -141,7 +141,8 @@ before killing it.")
   (defvar window-menu nil)
 
   (defvar root-menu
-    `((,(_ "Sawfish Rootmenu"))
+    `(()
+      (,(_ "Sawfish Rootmenu"))
       ()
       (,(_ "_Windows") . window-menu)
       (,(_ "Work_spaces") . workspace-menu)
