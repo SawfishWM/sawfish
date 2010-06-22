@@ -43,11 +43,12 @@
                 (if (string-match re (car names))
                     (cons (car names) (names-matching re (cdr names)))
                   (names-matching re (cdr names))))))
-           (prompt-completion-fun
+           (complete-windows
             (lambda (text)
               (names-matching (format nil "^%s" text)
                               (sort (window-names (managed-windows)))))))
-    (let ((window-title (prompt (or title (_ "Window:")))))
+    (let ((window-title (prompt #:title (or title (_ "Window:"))
+                                #:completion-fun complete-windows)))
       (unless (zerop (length window-title))
         (cdr (assoc window-title (mapcar (lambda (w)
 					   (cons (window-name w) w))
@@ -70,10 +71,11 @@
                 (if (string-match re (car names))
                     (cons (car names) (names-matching re (cdr names)))
                   (names-matching re (cdr names))))))
-           (prompt-completion-fun
+           (complete-workspaces
             (lambda (text)
               (names-matching (format nil "^%s" text) (workspaces)))))
-    (let ((ws-title (prompt (or title (_ "Workspace:"))))
+    (let ((ws-title (prompt #:title (or title (_ "Workspace:"))
+                            #:completion-fun complete-workspaces))
           (wsl (workspaces)))
       (unless (zerop (length ws-title))
         (let ((where (member ws-title wsl)))

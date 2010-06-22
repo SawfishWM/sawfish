@@ -19,6 +19,7 @@
 	    prompt-for-function
 	    prompt-for-variable
 	    prompt-for-command
+            prompt-make-history
 
 	    ;; motion / editing commands
 	    prompt-backward-character
@@ -85,51 +86,31 @@
     "Regexp that determines which characters are to be considered part
 of a word when moving.")
 
-  (defvar prompt-file-exclude '"\\.(o|jlc|x)$|~$|^#.*#$|^\\.\\.?$"
-    "A regexp, if it matches the file being considered for completion,
-the file is rejected.")
-
-  (defvar prompt-list nil
-    "List of possible entries for prompt-from-list.")
-
-  (defvar prompt-list-fold-case nil
-    "Whether prompt-from-list should ignore case.")
-
-  (defvar prompt-history (make-ring 16)
-    "Ring buffer containing strings most-recently entered through the `prompt'
-function.")
-
   (defvar prompt-window-position
     (cons (- (quotient (screen-width) 2) 200) -200)
     "A cons cell defining the screen position at which the `prompt' window is
 displayed. See the `display-message' function for more details.")
 
-  (defvar prompt-result nil)
-  (defvar prompt-prompt nil)
-  (defvar prompt-completion-fun nil)
-  (defvar prompt-validation-fun nil)
-  (defvar prompt-abbrev-fun nil)
-  (defvar prompt-display-fun nil)
-  (defvar prompt-position 0)
-  (defvar prompt-completion-position nil)
-  (defvar prompt-completions nil)
-  (defvar prompt-completions-outdated nil)
-  (defvar prompt-history-pos nil)
-  (defvar prompt-saved nil)
-  (defvar prompt-attr nil)
+  (define (prompt-make-history)
+    "Make a receptacle for prompt history."
+    (make-fluid (make-ring 16)))
 
-  ;; Compilation hack: ensure that the compiler doesn't complain when
-  ;; these are treated like functions and passed values.
-  (eval-when-compile
-    (progn
-      (defvar prompt-completion-fun nil)
-      (defvar prompt-validation-fun nil)
-      (defvar prompt-abbrev-fun nil)
-      (defvar prompt-display-fun nil)
-      (setq prompt-completion-fun (lambda (#!rest) nil)
-            prompt-validation-fun (lambda (#!rest) nil)
-            prompt-abbrev-fun (lambda (#!rest) nil)
-            prompt-display-fun (lambda (#!rest) nil))))
+  ;; Internal variables:
+  (define prompt-history-default (prompt-make-history))
+  (define prompt-history nil)
+  (define prompt-result nil)
+  (define prompt-prompt nil)
+  (define prompt-completion-fun nil)
+  (define prompt-validation-fun nil)
+  (define prompt-abbrev-fun nil)
+  (define prompt-display-fun nil)
+  (define prompt-position 0)
+  (define prompt-completion-position nil)
+  (define prompt-completions nil)
+  (define prompt-completions-outdated nil)
+  (define prompt-history-pos nil)
+  (define prompt-saved nil)
+  (define prompt-attr nil)
 
 
   ;; From merlin
@@ -149,11 +130,11 @@ displayed. See the `display-message' function for more details.")
         (assq key alist)
       (cons key default)))
 
-  (defun prompt-exit ()
+  (define (prompt-exit)
     "Cancel string input."
     (throw 'prompt-exit nil))
 
-  (defun prompt-accept ()
+  (define (prompt-accept)
     "End input and accept current string."
     (let ((result (if (not prompt-validation-fun)
 		      prompt-result
@@ -166,7 +147,7 @@ displayed. See the `display-message' function for more details.")
 	    (throw 'prompt-exit result))
 	(beep))))
 
-  (defun prompt-next (count)
+  (define (prompt-next count)
     (interactive "p")
     (when prompt-history
       (setq count (- prompt-history-pos count))
@@ -185,21 +166,21 @@ displayed. See the `display-message' function for more details.")
       (prompt-end-of-line)
       (prompt-update-display)))
 
-  (defun prompt-previous (count)
+  (define (prompt-previous count)
     (interactive "p")
     (prompt-next (- count)))
 
-  (defun prompt-changed ()
+  (define (prompt-changed)
     (setq prompt-completions-outdated t))
 
-  (defun prompt-clear ()
+  (define (prompt-clear)
     "Clear input buffer."
     (setq prompt-result "")
     (setq prompt-position 0)
     (prompt-changed)
     (prompt-update-display))
 
-  (defun prompt-backspace ()
+  (define (prompt-backspace)
     "Remove previous character from buffer."
     (when (> prompt-position 0)
       (let ((cutoff (max (- prompt-position 1) 0)))
@@ -210,20 +191,20 @@ displayed. See the `display-message' function for more details.")
 	(prompt-changed)
 	(prompt-update-display))))
 
-  (defun prompt-kill-line ()
+  (define (prompt-kill-line)
     "Delete rest of line."
     (setq prompt-result (substring prompt-result 0 prompt-position))
     (prompt-changed)
     (prompt-update-display))
 
-  (defun prompt-move (num)
+  (define (prompt-move num)
     "Move NUM characters forward or backward."
     (let ((new-pos (+ prompt-position num)))
       (and (>= new-pos 0) (<= new-pos (length prompt-result))
 	   (setq prompt-position new-pos)
 	   (prompt-update-display))))
 
-  (defun prompt-forward-word ()
+  (define (prompt-forward-word)
     "Move to next non-word character."
     (setq prompt-position (1+ prompt-position))
     (while (and (< prompt-position (length prompt-result))
@@ -234,7 +215,7 @@ displayed. See the `display-message' function for more details.")
 			       (length prompt-result)))
     (prompt-update-display))
 
-  (defun prompt-backward-word ()
+  (define (prompt-backward-word)
     "Move to previous non-word character."
     (setq prompt-position (1- prompt-position))
     (while (and (> prompt-position 0)
@@ -244,25 +225,25 @@ displayed. See the `display-message' function for more details.")
     (setq prompt-position (max prompt-position 0))
     (prompt-update-display))
 
-  (defun prompt-forward-character ()
+  (define (prompt-forward-character)
     "Move forward one character."
     (prompt-move 1))
 
-  (defun prompt-backward-character ()
+  (define (prompt-backward-character)
     "Move backward one character."
     (prompt-move -1))
 
-  (defun prompt-beginning-of-line ()
+  (define (prompt-beginning-of-line)
     "Move to beginning of line."
     (setq prompt-position 0)
     (prompt-update-display))
 
-  (defun prompt-end-of-line ()
+  (define (prompt-end-of-line)
     "Move to end of line."
     (setq prompt-position (length prompt-result))
     (prompt-update-display))
 
-  (defun prompt-complete ()
+  (define (prompt-complete)
     (if (and (not prompt-completions-outdated) prompt-completion-position)
 	(let
 	    ((new (min (max 0 (- (length prompt-completions)
@@ -290,7 +271,7 @@ displayed. See the `display-message' function for more details.")
 	      (setq prompt-completion-position 0))))))
     (prompt-update-display))
 
-  (defun prompt-format-completions ()
+  (define (prompt-format-completions)
     (when (numberp prompt-completion-position)
       (let ((compl (nthcdr prompt-completion-position prompt-completions))
 	    (continued nil))
@@ -307,7 +288,7 @@ displayed. See the `display-message' function for more details.")
 				      compl))
 		continued))))
 
-  (defun prompt-update-display ()
+  (define (prompt-update-display)
     (let ((result (if prompt-display-fun
 		      (prompt-display-fun prompt-result)
                     prompt-result))
@@ -334,7 +315,7 @@ displayed. See the `display-message' function for more details.")
            )))))
 
   ;; Insert all unbound keys to result.
-  (defun prompt-unbound-callback ()
+  (define (prompt-unbound-callback)
     (let ((key (current-event-string)))
       (setq prompt-result
 	    (concat (substring prompt-result 0 prompt-position)
@@ -345,8 +326,20 @@ displayed. See the `display-message' function for more details.")
       (prompt-update-display)
       t))
 
-  (defun prompt (#!optional title start attributes)
-    "Prompt the user for a string."
+  (define (prompt #!key title start attributes completion-fun
+                  validation-fun abbrev-fun display-fun history)
+    "Prompt the user for a string.  All of the keyword options are
+optional and have reasonable defaults.
+
+ - `title' is the message displayed to prompt the user.
+ - `start' is an initial string automatically entered into the prompt.
+ - `attributes' can be used to set text attributes.
+ - `completion-fun' is a function used for tab completion.
+ - `validation-fun' is a function that checks input for validity.
+ - `abbrev-fun' is used to abbreviate possible completions for display.
+ - `display-fun' can be used to change the way entered text is displayed.
+ - `history' contains history.  Use `prompt-make-history' to generate
+   an appropriate value."
     (unless (stringp title)
       (setq title "Enter string:"))
     (unless (string-match " $" title)
@@ -354,52 +347,68 @@ displayed. See the `display-message' function for more details.")
     (call-with-keyboard-grabbed
      (lambda ()
        (unwind-protect
-	   (let* ((override-keymap prompt-keymap)
-		  (prompt-result (or start ""))
-		  (prompt-prompt title)
-		  (prompt-position (length prompt-result))
-		  (prompt-history-pos 0)
-		  (prompt-saved nil)
-		  (prompt-attr attributes)
-		  (prompt-completion-position nil)
-		  (prompt-completions nil)
-		  (prompt-completions-outdated t)
-		  (unbound-key-hook (list prompt-unbound-callback)))
+           (let ((override-keymap prompt-keymap)
+                 (unbound-key-hook (list prompt-unbound-callback)))
+             (setq prompt-history (fluid (or history
+                                             prompt-history-default))
+                   prompt-completion-fun completion-fun
+                   prompt-validation-fun validation-fun
+                   prompt-abbrev-fun abbrev-fun
+                   prompt-display-fun display-fun
+                   prompt-result (or start "")
+                   prompt-prompt title
+                   prompt-position (length prompt-result)
+                   prompt-history-pos 0
+                   prompt-saved nil
+                   prompt-attr attributes
+                   prompt-completion-position nil
+                   prompt-completions nil
+                   prompt-completions-outdated t)
 	     (prompt-update-display)
 	     (catch 'prompt-exit
 	       (recursive-edit)))
 	 (display-message nil)))))
 
-  (defun prompt-for-symbol (#!optional title predicate validator)
-    (let ((prompt-completion-fun
-	   (lambda (x)
-	     (mapcar symbol-name
-		     (apropos (concat ?^ (quote-regexp x)) predicate))))
-	  (prompt-validation-fun
-	   (lambda (x)
-	     (let
-		 ((symbol (intern x)))
-	       (if validator
-		   (and (validator symbol) symbol)
-		 symbol)))))
-      (prompt title)))
+  (define symbol-history (prompt-make-history))
+  (define (prompt-for-symbol #!key title predicate validator history)
+    (prompt #:title title
+            #:completion-fun (lambda (x)
+                               (mapcar symbol-name
+                                       (apropos (concat ?^ (quote-regexp x))
+                                                predicate)))
+            #:validation-fun (lambda (x)
+                               (let
+                                   ((symbol (intern x)))
+                                 (if validator
+                                     (and (validator symbol) symbol)
+                                   symbol)))
+            #:history (or history symbol-history)))
 
-  (defun prompt-for-function (#!optional title)
+  (define function-history (prompt-make-history))
+  (define (prompt-for-function #!optional title)
     "Prompt for a function."
-    (prompt-for-symbol (or title "Enter name of function:")
-		       (lambda (x)
-			 (and (boundp x)
-			      (let ((value (symbol-value x)))
-				(or (functionp value)
-				    (macrop value)
-				    (special-form-p value)))))))
+    (prompt-for-symbol #:title (or title "Enter name of function:")
+                       #:predicate (lambda (x)
+                                     (and (boundp x)
+                                          (let ((value (symbol-value x)))
+                                            (or (functionp value)
+                                                (macrop value)
+                                                (special-form-p value)))))
+                       #:history function-history))
 
-  (defun prompt-for-variable (#!optional title)
+  (define variable-history (prompt-make-history))
+  (define (prompt-for-variable #!optional title)
     "Prompt for a variable."
-    (prompt-for-symbol (or title "Enter name of variable:") boundp))
+    (prompt-for-symbol #:title (or title "Enter name of variable:")
+                       #:predicate boundp
+                       #:history variable-history))
 
-  (defun prompt-for-command (#!optional title)
-    (prompt-for-symbol title commandp commandp))
+  (define command-history (prompt-make-history))
+  (define (prompt-for-command #!optional title)
+    (prompt-for-symbol #:title title
+                       #:predicate commandp
+                       #:validator commandp
+                       #:history command-history))
 
 
 ;;; autoloads

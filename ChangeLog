@@ -58,6 +58,14 @@
 	* lisp/sawfish/wm/util/prompt.jl: Fix compilation error
 	                 -- [Harald van Dijk]
 
+2010-05-23  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/util/prompt-extras.jl
+	* lisp/sawfish/wm/util/prompt-wm.jl
+	* lisp/sawfish/wm/util/prompt.jl: Changed the way prompt is called:
+		helper functions are now passed directly instead of implicitly
+		via let statements.  Also reverts the previous compilation error
+		fix, since it's no longer necessary.
+
 2010-05-23  Christopher Roy Bratusek <zanghar@freenet.de>
 	* man/sawfish.texi
 	* src/events.c

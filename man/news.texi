@@ -26,6 +26,12 @@ They're @code{workspace-boundary-mode} and @code{workspace-send-boundary-mode}.
 @item Added a borderline on the top of the root-menu, which
 prevents it from (accidently) immediately disappearing.
 [Christopher Bratusek]
+
+@item The prompt @code{sawfish.wm.util.prompt} no longer makes all of its
+internals available globally.
+
+So helper functions must be passed explicitly rather than implicitly via
+let statements. [Jeremy Hankins]
 @end itemize
 
 @item New Features
