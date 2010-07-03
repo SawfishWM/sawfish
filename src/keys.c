@@ -98,11 +98,12 @@ DEFSYM(super_keysyms, "super-keysyms");
 static void grab_keymap_event (repv km, long code, long mods, bool grab);
 static void grab_all_keylist_events (repv map, bool grab);
 
-#ifdef HAVE_NINE_MOUSEBUTTONS
+/* Button number support */
+static unsigned int ev_mod_button_mask;
+static unsigned int state_mask;
+static int button_num;
+
 static int all_buttons[9] = { Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9 };
-#else
-static int all_buttons[5] = { Button1, Button2, Button3, Button4, Button5 };
-#endif
 
 /*
   locks: currently LockMask, num_lock, and scroll_lock.
@@ -166,6 +167,7 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 
     case KeyPress:
 	*mods = xev->xkey.state & ~all_lock_mask;
+	*mods &= state_mask;
 	if (xev->type == KeyRelease)
 	    *mods |= EV_MOD_RELEASE;
 	if(*mods & ShiftMask)
@@ -254,6 +256,7 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 
     button:
 	*mods = xev->xbutton.state & ~all_lock_mask;
+	*mods &= state_mask;
 	*mods |= EV_TYPE_MOUSE;
 	switch(xev->xbutton.button)
 	{
@@ -272,7 +275,6 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 	case Button5:
 	    *mods |= Button5Mask;
 	    break;
-#ifdef HAVE_NINE_MOUSEBUTTONS
 	case Button6:
 	    *mods |= Button6Mask;
 	    break;
@@ -285,7 +287,6 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 	case Button9:
 	    *mods |= Button9Mask;
 	    break;
-#endif
 	}
 	ret = TRUE;
 	break;
@@ -293,6 +294,7 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
     case MotionNotify:
 	*code = EV_CODE_MOUSE_MOVE;
 	*mods = xev->xmotion.state & ~all_lock_mask;
+	*mods &= state_mask;
 	*mods |= EV_TYPE_MOUSE;
 	ret = TRUE;
 	break;
@@ -362,17 +364,15 @@ translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
 	    { Button3, Button3Mask },
 	    { Button4, Button4Mask },
 	    { Button5, Button5Mask },
-#ifdef HAVE_NINE_MOUSEBUTTONS
 	    { Button6, Button6Mask },
 	    { Button7, Button7Mask },
 	    { Button8, Button8Mask },
 	    { Button9, Button9Mask },
-#endif
 	    { 0, 0 }
 	};
 	int i;
 
-	for (i = 0; buttons[i].button != 0; i++)
+	for (i = 0; i < button_num  ; i++)
 	{
 	    if (mods & buttons[i].mask)
 	    {
@@ -692,12 +692,10 @@ static struct key_def default_mods[] = {
     { "Button3",  Button3Mask },
     { "Button4",  Button4Mask },
     { "Button5",  Button5Mask },
-#ifdef HAVE_NINE_MOUSEBUTTONS
     { "Button6",  Button6Mask },
     { "Button7",  Button7Mask },
     { "Button8",  Button8Mask },
     { "Button9",  Button9Mask },
-#endif
     { "Any",      EV_MOD_ANY },
     { "Release",  EV_MOD_RELEASE },
     { 0, 0 }
@@ -803,7 +801,7 @@ lookup_event(unsigned long *code, unsigned long *mods, char *desc)
 		*mods |= x->mods;
 		*code = x->code;
 		if ((x->mods == EV_TYPE_MOUSE)
-		    && (*mods & (EV_MOD_BUTTON_MASK | EV_MOD_ANY)) == 0)
+		    && (*mods & (ev_mod_button_mask | EV_MOD_ANY)) == 0)
 		{
 		    /* Button events must include at least one of the button
 		       modifiers (otherwise they can never be generated) */
@@ -1730,11 +1728,7 @@ grab_event (Window grab_win, repv ev)
 	    {
 		/* sawfish treats mouse buttons as modifiers, not as
 		   codes, so for us AnyModifier includes all buttons.. */
-#ifdef HAVE_NINE_MOUSEBUTTONS
-		for (i = 0; i < 9; i++)
-#else
-		for (i = 0; i < 5; i++)
-#endif
+		for (i = 0; i < button_num; i++)
 		{
 		    XGrabButton (dpy, all_buttons[i], AnyModifier,
 				 grab_win, False, POINTER_GRAB_EVENTS,
@@ -1786,12 +1780,10 @@ ungrab_event (Window grab_win, repv ev)
 	    }
 	    else
 	    {
-#ifdef HAVE_NINE_MOUSEBUTTONS
-		for (i = 0; i < 9; i++)
-#else
-		for (i = 0; i < 5; i++)
-#endif
+		for (i = 0; i < button_num; i++)
+		  {
 		    XUngrabButton (dpy, all_buttons[i], AnyModifier, grab_win);
+		  }
 	    }
 	}
     }
@@ -1889,9 +1881,41 @@ keymap_prop_change (Lisp_Window *w, repv prop, repv old, repv new)
 
 /* initialisation */
 
+static void button_num_init(void){
+  if(rep_get_option("--5-buttons", 0)){
+    button_num = 5;
+    ev_mod_button_mask = (Button1Mask | Button2Mask | Button3Mask \
+			  | Button4Mask | Button5Mask);
+    state_mask = (1 << 13) - 1;
+    {
+      /* delete Button6 - 9 entries from default_mods[] */
+      int i, j = 0, k;
+      char str[10];
+      for ( i = 6; i <= 9; i++){
+	snprintf(str, 8, "Button%d", i);
+	for (j = 0; default_mods[j].name != 0; j++){
+	  if ( strncmp(default_mods[j].name, str, 8) == 0){
+	    for( k = j; default_mods[k].name != 0; k++){
+	      default_mods[k] = default_mods[k + 1];
+	    }
+	  }
+	}
+      }
+    }
+  }else{
+    button_num = 9;
+    ev_mod_button_mask = (Button1Mask | Button2Mask | Button3Mask   \
+			  | Button4Mask | Button5Mask | Button6Mask \
+			  | Button7Mask | Button8Mask | Button9Mask);
+    state_mask = 0xffffffff;
+  }
+}
+
 void
 keys_init(void)
 {
+    button_num_init();
+
     repv tem;
 
     rep_INTERN_SPECIAL(global_keymap);

@@ -273,19 +273,6 @@ if test "$with_gdk_pixbuf" = "no"; then
 			  ,AC_MSG_ERROR([cannot locate imlib1 library]))
 fi
 
-dnl Check wether to add 9 mouse buttons support
-
-AC_ARG_WITH(nine-mousebuttons,
-  [  --with-nine-mousebuttons  Add support for mouse-buttons 6 - 9
-  --without-nine-mousebuttons], [], [with_nine_mbtns=yes])
-
-if test "$with_nine_mbtns" = "yes"; then
-	AC_DEFINE(HAVE_NINE_MOUSEBUTTONS, 1, [Support for 9 Mouse Buttons])
-	MOUSE_BUTTONS="9"
-else
-	MOUSE_BUTTONS="5"
-fi
-
 dnl Check wether to install mo files
 
 AC_ARG_WITH(nls,
@@ -478,10 +465,6 @@ echo "
   == == == == == == == == == == == == ==
 
   xserver:	$X_SERVER
-
-  == == == == == == == == == == == == ==
-
-  mouse:	$MOUSE_BUTTONS buttons supported
 
   == == == == == == == == == == == == ==
 

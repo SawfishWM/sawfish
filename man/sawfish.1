@@ -8,14 +8,14 @@ sawfish \(em Sawfish window manager.
 .PP
 Sawfish is a lisp-extensible window manager for X11. Its aim is to
 allow all areas of window management (decoration, manipulation) to be
-customized as far as is possible, yet still remain as fast or faster
-than existing window managers.
+customized as far as is possible, yet still remain as fast as existing
+window managers.
 .SH "OPTIONS"
 .IP "\fB\-\-disable-nls\fP" 10
 Disable internationalization of messages.
 .IP "\fBFILE\fP 	" 10
 Load the Lisp file \fIFILE\fR (from the
-cwd if possible, implies \fI\-\-batch\fR mode).
+cwd if possible, implies \fI\-\-batch\fR).
 .IP "\fB\-\-batch\fP 	" 10
 Batch mode: process options and exit.
 .IP "\fB\-\-interp\fP 	" 10
@@ -30,6 +30,8 @@ Print version details.
 Don't load rc or site-init files.
 .IP "\fB-q, \-\-quit\fP" 10
 Terminate the interpreter process.
+.IP "\fB-\-5-buttons\fP" 10
+Support keyboard layout switching, but drop mouse buttons 6 - 8 support.
 .SS Display Options
 .IP "\fB\-\-display=\fIDPY\fR\fP" 10
 Connect to X display \fIDPY\fR.

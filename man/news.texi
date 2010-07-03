@@ -13,8 +13,33 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
+@item Notice
+
+Sawfish is claimed to support mouse buttons 1 - 9, but it is found
+that drag of buttons 6 - 8 may not work. The button 9 doesn't work at
+all, so we drop it.
+
+@item Build and Installation
+@itemize @minus
+@item Configuration option @code{--with-nine-mousebuttons} is dropped.@*
+See the item ``Keyboard layout switching support'' below.
+@end itemize
+
 @item Bug Fixes
 @itemize @minus
+@item Keyboard layout switching support [Teika Kazura]
+
+Previously, when you switch the keyboard layout, or more correctly
+the keyboard ``group'', which is mainly for multilinguals, keyboard
+and mouse bindings get messed.
+
+Now, this can be prevented by passing a new commandline option
+@code{--5-buttons} at Sawfish invocation.
+
+By doing so, you won't be able to bind Sawfish commands to mouse
+buttons 6 - 8. This may be fixed in future, but not now because
+the current code for buttons 6 - 8 is hackish.
+
 @item Atom handling fix on 32-bit architecture. [Teika Kazura]
 
 Function @code{x-atom-name} now accepts all 32 bits. Previously only
@@ -36,6 +61,9 @@ let statements. [Jeremy Hankins]
 
 @item New Features
 @itemize @minus
+@item New command line option @code{--5-buttons}@*
+See the item ``Keyboard layout switching support'' above.
+
 @item New frame parts @code{border-width} and @code{border-color}
 [Alexey I. Froloff]
 

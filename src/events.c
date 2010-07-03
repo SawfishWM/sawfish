@@ -35,8 +35,10 @@
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
 
+#ifdef DEBUG
 /* Map events to their names for debugging */
 static char *event_names[LASTEvent];
+#endif
 
 /* Map events to the mask selecting them */
 static long event_masks[LASTEvent];
@@ -1761,6 +1763,7 @@ events_init (void)
     event_handlers[CirculateNotify] = circulate_notify;
     event_handlers[MappingNotify] = mapping_notify;
 
+#ifdef DEBUG
     event_names[KeyPress] = "KeyPress";
     event_names[KeyRelease] = "KeyRelease";
     event_names[ButtonPress] = "ButtonPress";
@@ -1794,6 +1797,7 @@ events_init (void)
     event_names[ColormapNotify] = "ColormapNotify";
     event_names[ClientMessage] = "ClientMessage";
     event_names[MappingNotify] = "MappingNotify";
+#endif
 
     event_masks[KeyPress] = KeyPressMask;
     event_masks[KeyRelease] = KeyReleaseMask;
