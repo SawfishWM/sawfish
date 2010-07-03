@@ -1,3 +1,23 @@
+2010-07-03  Teika kazura <teika@lavabit.com>
+	* configure.in
+	* man/news.texi
+	* man/sawfish.1
+	* src/events.c
+	* src/keys.c
+	* src/keys.h: Keyboard layout switching support.
+	In 5-button mode, event's state is masked to drop the key group, and
+	lower 13 = 8 + 5 bits are taken. (8 for modifiers, 5 for buttons.)
+	This fixes the bug that keyboard layout switching messed bindings.
+	5-button is now a command line option, not any more the build-time option.
+
+	* lisp/sawfish/wm/server.jl
+	* man/news.texi
+	* src/server.c: Errors of asynchronous connection are printed
+	to Sawfish's output.
+
+	* man/news.texi
+	* src/client.c: Polished news. A comment in source.
+
 2010-06-22  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/menus.jl: add a separator to the start of the root menu
 	                            the menu might disappear directly due to the
