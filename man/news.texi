@@ -70,8 +70,16 @@ See the item ``Keyboard layout switching support'' above.
 A ``border'' of a window surrounds the window and all other frame
 parts. (@pxref{Frame Part Definition})
 
-@item If you're using librep >= 0.90.7, then the backtrace is printed for
-sawfish-client, too. [Teika Kazura]
+@item More error and backtrace printing [Teika Kazura]
+
+If you're using librep >= 0.90.7, then the backtrace is printed for
+sawfish-client, too.
+
+Previously when you connect to Sawfish as a server asynchronously,
+then the error is not printed. Now it is printed to Sawfish's 
+output. (A client which connects synchronously receives the error
+message.) Practically, this means sawfish-pager's errors are printed
+to Sawfish's output. 
 @end itemize
 
 @item Miscellaneous Changes

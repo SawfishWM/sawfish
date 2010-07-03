@@ -107,7 +107,13 @@ server_handle_request(int fd)
 	   || sock_read(fd, rep_STR(val), len) != len)
 	    goto io_error;
 	rep_STR(val)[len] = 0;
-	val = rep_call_lisp1 (global_symbol_value (Qserver_eval), val);
+	if (req != req_eval_async){
+	  val = rep_call_lisp2 (global_symbol_value (Qserver_eval),
+				val, Qnil);
+	}else{
+	  val = rep_call_lisp2 (global_symbol_value (Qserver_eval),
+				val, Qt);
+	}
 	if (req != req_eval_async)
 	{
 	    if(val && rep_STRINGP(val))

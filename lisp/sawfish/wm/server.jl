@@ -55,7 +55,9 @@
 
   (define server-window nil)
 
-  (define (server-eval form)
+  ;; Set `print-error' to non-nil for example for an async call.
+  ;; Then the error is printed here.
+  (define (server-eval form #!optional print-error)
     (let ((print-escape t))
       (condition-case error-data
 	  ;; This enables backtrace printing inside of sawfish-client
@@ -63,6 +65,10 @@
 	    (setq form (read-from-string form))
 	    (format nil "\001%S" (user-eval form)))
 	(error
+	 (when print-error
+	   (let ((error-handler-beep nil)
+		 (error-destination 'standard-error))
+	     (error-handler-function 'error error-data)))
 	 (format nil "\002%S" error-data)))))
 
   (define (server-client-message-handler w type data)
