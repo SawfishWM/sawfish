@@ -13,11 +13,24 @@ they occurred between. For more detailed information see the
 
 @itemize @bullet
 
-@item Notice
+@item Notices
+@itemize @minus
+
+@item Prompt API change [Jeremy Hankins]
+
+If you have codes which utilize prompt, they are affected. When you
+call the function @code{prompt}, pass helper functions directly
+as the function's arguments. They used to be set to global variables.
+
+The change is straightforward, so you must be able to easily update
+your codes. See @code{sawfish.wm.util.prompt} for the details.
+
+@item Mouse button support state
 
 Sawfish is claimed to support mouse buttons 1 - 9, but it is found
 that drag of buttons 6 - 8 may not work. The button 9 doesn't work at
-all, so we drop it.
+all, so we withdraw it.
+@end itemize
 
 @item Build and Installation
 @itemize @minus
@@ -47,16 +60,6 @@ Function @code{x-atom-name} now accepts all 32 bits. Previously only
 
 @item Two variables are restored from obsoleteness declaration.@*
 They're @code{workspace-boundary-mode} and @code{workspace-send-boundary-mode}.
-
-@item Added a borderline on the top of the root-menu, which
-prevents it from (accidently) immediately disappearing.
-[Christopher Bratusek]
-
-@item The prompt @code{sawfish.wm.util.prompt} no longer makes all of its
-internals available globally.
-
-So helper functions must be passed explicitly rather than implicitly via
-let statements. [Jeremy Hankins]
 @end itemize
 
 @item New Features
@@ -69,30 +72,37 @@ See the item ``Keyboard layout switching support'' above.
 
 A ``border'' of a window surrounds the window and all other frame
 parts. (@pxref{Frame Part Definition})
+@end itemize
 
+@item Miscellaneous Changes
+@itemize @minus
 @item More error and backtrace printing [Teika Kazura]
 
 If you're using librep >= 0.90.7, then the backtrace is printed for
-sawfish-client, too.
+sawfish-client, too. But it is printed to Sawfish's standard error,
+not to sawfish-client's, sorry.
 
 Previously when you connect to Sawfish as a server asynchronously,
 then the error is not printed. Now it is printed to Sawfish's 
 output. (A client which connects synchronously receives the error
 message.) Practically, this means sawfish-pager's errors are printed
 to Sawfish's output. 
-@end itemize
 
-@item Miscellaneous Changes
-@itemize @minus
+Phrase ``Sawfish error:'' is prepended to error messages which are
+printed to standard error.
+
+@item Added a borderline on the top of the root-menu, which
+prevents it from (accidently) immediately disappearing.
+[Christopher Bratusek]
+
+@item Module @code{3d-hack} is not autoloaded any more.
+
 @item Doc improvements@*
 Faq items, on how to hide the mouse pointer, and on application execution.@*
 Manuals (1) describe all options.
 
 @item @code{sawfish-config} is now minimal, moving most of the contents to @code{sawfish.cfg.shell} [Teika Kazura]
 
-@item Better error message [Teika kazura]@*
-Phrase ``Sawfish error:'' is prepended to error messages printed to
-standard error.
 @end itemize
 @end itemize
 

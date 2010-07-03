@@ -1,4 +1,4 @@
-/* client.c -- plugin for sawfish communication
+/* client.c -- Implements Lisp interface to connect to Sawifsh
 
    $Id$
 
