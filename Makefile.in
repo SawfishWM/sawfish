@@ -88,7 +88,7 @@ distclean :
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
 	rm -f *~ NEWS DOC* TAGS build.h sawfish.pc
 
-gitclean :
+gitclean : distclean
 	rm -f aclocal.m4 configure
 	rm -rf autom4te.cache
 	rm -f sawfish.spec sawfish*.ebuild
