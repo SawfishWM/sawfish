@@ -15,7 +15,7 @@ rm -rf ~/.sawfish/custom
 
 #echo "(custom-set-typed-variable (quote default-frame-style) (quote $1) \
 #(quote frame-style))" > ~/.sawfish/custom
-echo "(define-special-variable default-frame-style '$THEME \"Default frame style\")" > ~/.sawfish/rc
+echo "(defvar-setq default-frame-style '$THEME \"Default frame style\")" > ~/.sawfish/rc
 cat >> ~/.sawfish/rc << EOF
 (custom-set-typed-variable
   (quote match-window-profile)

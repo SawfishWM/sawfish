@@ -1,7 +1,7 @@
 To use this theme, you'll need to do slightly more than just unpack it and
 select it.  After untarring, add this to your sawfish config:
 
-  (define-special-variable default-frame-style 'Elberg-tabbed "Default frame style")
+  (defvar-setq default-frame-style 'Elberg-tabbed "Default frame style")
   (custom-set-typed-variable 'tab-left-dec-width '11 'number)
   (custom-set-typed-variable 'tab-right-dec-width '11 'number)
   (custom-set-typed-variable 'tab-left-margin '16 'number)
