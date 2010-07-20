@@ -24,65 +24,65 @@
 
 ;; window animation options
 
-;;  (define-special-variable default-window-animator 'none
+;;  (defvar-setq default-window-animator 'none
 ;;    "The default window animation mode. Options include none,
 ;;wireframe, solid, cross, elliptical and draft.")
 
-;;  (define-special-variable anim-outline-icon-coords
+;;  (defvar-setq anim-outline-icon-coords
 ;;    (cons (screen-width) (screen-height))
 ;;    "A cons cell giving the coordinates of where the minimization animations
 ;;should appear to minimize the window to.")
 
-;;  (define-special-variable anim-outline-steps 16)
-;;  (define-special-variable anim-outline-delay 20)
+;;  (defvar-setq anim-outline-steps 16)
+;;  (defvar-setq anim-outline-delay 20)
 
 ;; customization options
 
 ;;   From sawfish-1.5.0, sawfish-config does use a treeview by default.
 ;;   If you prefer the previous notebook-style instead use:
 ;;   "sawfish-config --flatten"
-;;  (define-special-variable customize-program "sawfish-config"
+;;  (defvar-setq customize-program "sawfish-config"
 ;;    "Command name of the configurator GUI.")
 
-;;  (define-special-variable customize-group-opt "--group")
+;;  (defvar-setq customize-group-opt "--group")
 
-;;  (define-special-variable customize-redirect ">/dev/null 2>&1 </dev/null"
+;;  (defvar-setq customize-redirect ">/dev/null 2>&1 </dev/null"
 ;;    "Redirect the configurator's input & output.")
 
-;;  (define-special-variable customize-show-symbols nil
+;;  (defvar-setq customize-show-symbols nil
 ;;    "Show variable names of each customization option.")
 
-;;  (define-special-variable customize-command-classes '(default)
+;;  (defvar-setq customize-command-classes '(default)
 ;;    "Also include commands of these classes the key bindings panel.)
 
 ;; focus options
 
-;;  (define-special-variable focus-mode 'click
+;;  (defvar-setq focus-mode 'click
 ;;     "When does the mouse pointer affect the input focus. Standard
 ;;modes are click, enter-exit, enter-click, and enter-only.")
 
-;;  (define-special-variable focus-click-through t
+;;  (defvar-setq focus-click-through t
 ;;    "Click-to-focus mode passes the click through to the application.")
 
-;;  (define-special-variable focus-dont-push nil
+;;  (defvar-setq focus-dont-push nil
 ;;    "When true, focusing a window doesn't change it's position in the
 ;;stack of most-recently focused windows.")
 
-;;  (define-special-variable focus-ignore-pointer-events nil
+;;  (defvar-setq focus-ignore-pointer-events nil
 ;;    "When true, pointer in/out events don't cause focus changes.")
 
-;;  (define-special-variable focus-windows-when-mapped t
+;;  (defvar-setq focus-windows-when-mapped t
 ;;    "Focus application windows when they first appear.")
 
 ;; window frame (theme) options
 
-;;  (define-special-variable default-frame-style nil
+;;  (defvar-setq default-frame-style nil
 ;;    "Default frame style")
 
-;;  (define-special-variable reload-themes-when-changed t
+;;  (defvar-setq reload-themes-when-changed t
 ;;    "Automatically reload themes when they are updated.")
 
-;;  (define-special-variable frame-type-fallback-alist
+;;  (defvar-setq frame-type-fallback-alist
 ;;    '((transient . default)
 ;;      (shaped . default)
 ;;      (shaped-transient . shaped)
@@ -99,128 +99,128 @@
 ;;   (required-type . fallback-type). When REQUIRED-TYPE is not supported
 ;;   by the current theme, then FALLBACK-TYPE is used instead.")
 
-;;  (define-special-variable decorate-transients nil
+;;  (defvar-setq decorate-transients nil
 ;;    "Decorate dialog windows similarly to application windows.")
 
-;;  (define-special-variable theme-update-interval 60
+;;  (defvar-setq theme-update-interval 60
 ;;    "Number of seconds between checking if theme files have been modified.")
 
-;;  (define-special-variable user-theme-directory "~/.sawfish/themes"
+;;  (defvar-setq user-theme-directory "~/.sawfish/themes"
 ;;    "Directory containing user-local themes.")
 
-;;  (define-special-variable system-theme-directory
+;;  (defvar-setq system-theme-directory
 ;;    (expand-file-name "../themes" sawfish-lisp-lib-directory)
 ;;    "Directory containing themes from the current sawfish version.")
 
-;;  (define-special-variable site-theme-directory
+;;  (defvar-setq site-theme-directory
 ;;    (expand-file-name "../../themes" sawfish-lisp-lib-directory)
 ;;    "Directory containing system-wide themes.")
 
-;;  (define-special-variable theme-load-path
+;;  (defvar-setq theme-load-path
 ;;    (list user-theme-directory site-theme-directory system-theme-directory)
 ;;    "List of directories search for themes.")
 
-;;  (define-special-variable themes-are-gaolled t
+;;  (defvar-setq themes-are-gaolled t
 ;;    "When non-nil themes are assumed to be malicious.")
 
-;;  (define-special-variable default-font nil
+;;  (defvar-setq default-font nil
 ;;    "Default font.")
 
-;;  (define-special-variable default-bevel-percent nil
+;;  (defvar-setq default-bevel-percent nil
 ;;    "Bevel intensity as a percentage.")
 
-;;  (define-special-variable use-custom-font-color '()
+;;  (defvar-setq use-custom-font-color '()
 ;;    "Use custom font colors for frames")
 
-;;  (define-special-variable frame-font-active-color "black"
+;;  (defvar-setq frame-font-active-color "black"
 ;;    "Font color for active frames")
 
-;;  (define-special-variable frame-font-inactive-color "black"
+;;  (defvar-setq frame-font-inactive-color "black"
 ;;    "Font color for inactive frames")
 
 ;; menu options
 
-;;  (define-special-variable menus-include-shortcuts nil
+;;  (defvar-setq menus-include-shortcuts nil
 ;;    "Display key-binding information in menu items.")
 
-;;  (define-special-variable menu-program
+;;  (defvar-setq menu-program
 ;;    (expand-file-name "sawfish-menu" sawfish-exec-directory)
 ;;    "Location of the program implementing sawfish's menu interface.")
 
-;;  (define-special-variable menu-program-stays-running t
+;;  (defvar-setq menu-program-stays-running t
 ;;    "When non-nil, the menu program is never stopped. If a number,
 ;;then this is taken as the number of seconds to let the process hang
 ;;around unused before killing it.")
 
-;;  (define-special-variable window-ops-menu)
-;;  (define-special-variable window-ops-toggle-menu)
-;;  (define-special-variable window-menu)
-;;  (define-special-variable root-menu)
+;;  (defvar-setq window-ops-menu)
+;;  (defvar-setq window-ops-toggle-menu)
+;;  (defvar-setq window-menu)
+;;  (defvar-setq root-menu)
 
 ;;  Probably you want to set `user-apps-menu', instead of `apps-menu'.
 ;;  See below.
-;;  (define-special-variable apps-menu)
+;;  (defvar-setq apps-menu)
 
-;;  (define-special-variable custom-menu-includes-all-settings t
+;;  (defvar-setq custom-menu-includes-all-settings t
 ;;    "When non-nil, the custom menu includes the `All settings' item.")
 
 ;; Applications menu options
-;;  (define-special-variable apps-menu-autogen t
+;;  (defvar-setq apps-menu-autogen t
 ;;   "If non-nil, `apps-menu' is automatically generated from `user-apps-menu'
 ;; and *.desktop files. If you set `apps-menu', then it won't happen anyway.")
 
-;;  (define-special-variable user-apps-menu '()
+;;  (defvar-setq user-apps-menu '()
 ;;    "Your own applications menu entries. It is followed by auto generated
 ;:  applications menu.")
 
-;; (define-special-variable apps-menu-ignore-no-display nil
+;; (defvar-setq apps-menu-ignore-no-display nil
 ;;    "Some entries are hidden from the menu, especially GNOME Apps like
 ;;  eog, nautilus or evince. If you want to have them added to your menu,
 ;;  set this to non-nil.")
 
-;; (define-special-variable desktop-directory '("/usr/share/applications")
+;; (defvar-setq desktop-directory '("/usr/share/applications")
 ;;   "List of directories to look for *.desktop files")
 
-;; (define-special-variable apps-menu-lang nil
+;; (defvar-setq apps-menu-lang nil
 ;;   "Language for applications menu, in string. Default is set from locale.")
 
-;; (define-special-variable apps-menu-alphabetize 't
+;; (defvar-setq apps-menu-alphabetize 't
 ;;   "Sort the apps menu alphabetically.")
 
-;; (define-special-variable want-poweroff-menu t
+;; (defvar-setq want-poweroff-menu t
 ;;   "Add poweroff menu if you don't use GNOME / KDE.")
 
 ;; window placement options
 
-;;  (define-special-variable place-window-mode 'top-left
+;;  (defvar-setq place-window-mode 'top-left
 ;;    "Method of placing windows. Standard modes include: randomly,
 ;;interactively, centered, centered-on-parent, under-pointer, none,
 ;;top-left, off-center, first-fit, best-fit, stagger.")
 
-;;  (define-special-variable place-transient-mode 'centered-on-parent
+;;  (defvar-setq place-transient-mode 'centered-on-parent
 ;;    "Method of placing dialog windows")
 
-;;  (define-special-variable ignore-program-positions t
+;;  (defvar-setq ignore-program-positions t
 ;;    "Ignore program-specified window placements.")
 
 ;; viewport options
 
-;;  (define-special-variable viewport-dimensions '(1 . 1)
+;;  (defvar-setq viewport-dimensions '(1 . 1)
 ;;    "The number of columns and rows of viewports of the virtual desktop.
 ;; If the dynamic viewport is enabled, this variable is meaningless.")
 
 ;;  (defcustom viewport-minimum-dimensions '(1 . 1)
 ;;    "Minimum number of columns and rows in virtual desktop (if boundary-mode is dynamic).")
 
-;;  (define-special-variable uniconify-to-current-viewport t
+;;  (defvar-setq uniconify-to-current-viewport t
 ;;    "Windows uniconify to the current viewport.")
 
-;;  (define-special-variable viewport-boundary-mode 'stop
+;;  (defvar-setq viewport-boundary-mode 'stop
 ;;    "Decides how to act when you try to go beyond virtual desktop boundary.
 ;; Stop means stop there. Wrap-around means jump to the other edge.
 ;; Dynamic grows the virtual desktop.")
 
-;;  (define-special-variable scroll-viewport-steps 1
+;;  (defvar-setq scroll-viewport-steps 1
 ;;    "When you go to another viewport, the bigger this value,
 ;;  the more smoothly the screen is scrolled.
 ;;  It is the number of steps for scrolling. The value 1 means no scroll, and
@@ -228,30 +228,30 @@
 
 ;; workspace options
 
-;;  (define-special-variable workspace-boundary-mode 'stop
+;;  (defvar-setq workspace-boundary-mode 'stop
 ;;    "How to act when passing the first or last workspace, one of
 ;;`stop', `wrap-around' or `keep-going'")
 
-;;  (define-special-variable workspace-send-boundary-mode 'stop
+;;  (defvar-setq workspace-send-boundary-mode 'stop
 ;;    "How to act when passing the first or last workspace, while
 ;;moving a window, one of `stop', `keep-going', `wrap-around'")
 
-;;  (define-special-variable workspace-names '()
+;;  (defvar-setq workspace-names '()
 ;;    "List of all workspace names. Defines the initial number of workspaces.")
 
-;;  (define-special-variable lock-first-workspace t
+;;  (defvar-setq lock-first-workspace t
 ;;    "Preserve outermost empty workspaces in the pager.")
 
-;;  (define-special-variable static-workspace-menus)
+;;  (defvar-setq static-workspace-menus)
 
 ;; grow/pack options
 
-;;  (define-special-variable grow-is-maximize t
+;;  (defvar-setq grow-is-maximize t
 ;;    "Whether growing is considered to be maximization.  When you turn
 ;;this on, you can use `unmaximize-window' or something similar to get
 ;;back to the original size.")
 
-;;  (define-special-variable pack-warp-pointer 'maybe
+;;  (defvar-setq pack-warp-pointer 'maybe
 ;;    "Whether and how to move the pointer when packing windows.
 ;;`maybe' means that the pointer is moved along with the window, if the
 ;;pointer was within the window area before packing. `always' warps the
@@ -259,7 +259,7 @@
 ;;window, then does like `maybe'.  `never' means not to warp the
 ;;pointer.")
 
-;;  (define-special-variable grow-pack-bump-obscured nil
+;;  (defvar-setq grow-pack-bump-obscured nil
 ;;    "Whether to bump into fully obscured windows when growing or
 ;;packing windows.")
 
@@ -268,74 +268,74 @@
 ;;or packing windows. `maybe' means only avoided windows in other
 ;;depths.")
 
-;;  (define-special-variable grow-pack-bump-ignored t
+;;  (defvar-setq grow-pack-bump-ignored t
 ;;    "Whether to bump into ignored windows when growing or packing.")
 
 ;; window cycling options
 
-;;  (define-special-variable cycle-show-window-names t
+;;  (defvar-setq cycle-show-window-names t
 ;;    "Display window names and icons while cycling through windows.")
 
-;;  (define-special-variable cycle-include-iconified t
+;;  (defvar-setq cycle-include-iconified t
 ;;    "Include iconified windows when cycling.")
 
-;;  (define-special-variable cycle-all-workspaces nil
+;;  (defvar-setq cycle-all-workspaces nil
 ;;    "Include windows on all workspaces when cycling.")
 
-;;  (define-special-variable cycle-all-viewports nil
+;;  (defvar-setq cycle-all-viewports nil
 ;;    "Include windows on all viewports when cycling.")
 
-;;  (define-special-variable cycle-raise-windows t
+;;  (defvar-setq cycle-raise-windows t
 ;;    "Raise windows while they're temporarily selected during cycling.")
 
 ;; move/resize options
 
-;;  (define-special-variable move-outline-mode 'opaque
+;;  (defvar-setq move-outline-mode 'opaque
 ;;    "How windows being moved are animated, either opaque, box, cross, elliptical or draft")
 
-;;  (define-special-variable resize-outline-mode 'opaque
+;;  (defvar-setq resize-outline-mode 'opaque
 ;;    "How windows being resized are animated, either opaque, box, cross, elliptical or draft")
 
-;;  (define-special-variable move-resize-raise-window nil
+;;  (defvar-setq move-resize-raise-window nil
 ;;    "Raise windows when they are moved or resized.")
 
-;;  (define-special-variable move-show-position nil
+;;  (defvar-setq move-show-position nil
 ;;    "Show current position of windows while moving.")
 
-;;  (define-special-variable resize-show-dimensions t
+;;  (defvar-setq resize-show-dimensions t
 ;;    "Show current dimensions of windows while resizing.")
 
-;;  (define-special-variable resize-edge-mode 'border-grab
+;;  (defvar-setq resize-edge-mode 'border-grab
 ;;    "How to choose window edges when resizing. One of `region',
 ;;`border', `grab', `border-grab'")
 
-;;  (define-special-variable move-snap-epsilon 12
+;;  (defvar-setq move-snap-epsilon 12
 ;;    "Distance in pixels before window edges align with each other.")
 
-;;  (define-special-variable move-snap-mode 'resistance
+;;  (defvar-setq move-snap-mode 'resistance
 ;;    "How to snap together window edges, one of `magnetism',
 ;;`resistance', or `attraction'.")
 
-;;  (define-special-variable move-snap-ignored-windows nil
+;;  (defvar-setq move-snap-ignored-windows nil
 ;;    "Snap to otherwise-ignored windows.")
 
-;;  (define-special-variable move-resize-inhibit-configure nil
+;;  (defvar-setq move-resize-inhibit-configure nil
 ;;    "Only update window contents after it has stopped moving.")
 
-;;  (define-special-variable move-cursor-shape 'hand2)
-;;  (define-special-variable resize-cursor-shape 'crosshair)
+;;  (defvar-setq move-cursor-shape 'hand2)
+;;  (defvar-setq resize-cursor-shape 'crosshair)
 
 ;; audio options
 
-;;  (define-special-variable audio-events-enabled nil
+;;  (defvar-setq audio-events-enabled nil
 ;;    "Play sound effects for window events.")
 
-;;  (define-special-variable audio-for-ignored-windows nil
+;;  (defvar-setq audio-for-ignored-windows nil
 ;;    "Play sound effects for unmanaged windows.")
 
-;;  (define-special-variable audio-events-alist)
+;;  (defvar-setq audio-events-alist)
 
-;;  (define-special-variable audio-load-path
+;;  (defvar-setq audio-load-path
 ;;    (list "~/.sawfish/sounds"
 ;;	  (or (getenv "SAWFISHSOUNDSDIR")
 ;;	      (expand-file-name "../sounds" sawfish-lisp-lib-directory))
@@ -344,7 +344,7 @@
 ;;	  ".")
 ;;    "List of directories to search for sound samples.")
 
-;;  (define-special-variable play-sample-program "/usr/bin/paplay"
+;;  (defvar-setq play-sample-program "/usr/bin/paplay"
 ;;    "The program used to play audio samples. Should be capable of
 ;; playing *.wav file.
 ;;   You can't set any arguments to pass from this variable. If you want
@@ -354,28 +354,28 @@
 
 ;;  (require 'sawfish.wm.ext.edge-flip)
 
-;;  (define-special-variable edge-flip-enabled nil
+;;  (defvar-setq edge-flip-enabled nil
 ;;    "Select the next desktop when the pointer hits screen edge.")
 ;;  ;; need to call this function to manually enable edge-flip:
 ;;  (edge-flip-enable)
 
-;;  (define-special-variable edge-flip-type 'workspace
+;;  (defvar-setq edge-flip-type 'workspace
 ;;    "Control what hitting the screen edge selects, workspace or viewport.")
 
-;;  (define-special-variable edge-flip-only-when-moving nil
+;;  (defvar-setq edge-flip-only-when-moving nil
 ;;    "Only flip when interactively moving a window.")
 
-;;  (define-special-variable edge-flip-delay 250
+;;  (defvar-setq edge-flip-delay 250
 ;;    "Milliseconds to delay before edge flipping.")
 
 ;; error handling options
 
 ;;  (require 'sawfish.wm.ext.error-handler)
 
-;;  (define-special-variable error-handler-beep t
+;;  (defvar-setq error-handler-beep t
 ;;    "Beep when errors occur.")
 
-;;  (define-special-variable error-destination 'standard-error
+;;  (defvar-setq error-destination 'standard-error
 ;;    "Where to display error messages; one of nowhere, screen,
 ;;standard-error or both")
 
@@ -383,74 +383,74 @@
 
 ;;  (require 'sawfish.wm.ext.tooltips)
 
-;;  (define-special-variable tooltips-enabled nil
+;;  (defvar-setq tooltips-enabled nil
 ;;    "Display tooltips for window frames.")
 
-;;  (define-special-variable tooltips-show-doc-strings nil
+;;  (defvar-setq tooltips-show-doc-strings nil
 ;;    "Show full documentation in tooltips.")
 
-;;  (define-special-variable tooltips-delay 500
+;;  (defvar-setq tooltips-delay 500
 ;;    "Number of milliseconds before displaying tooltips.")
 
-;;  (define-special-variable tooltips-timeout-delay 5000
+;;  (defvar-setq tooltips-timeout-delay 5000
 ;;    "Number of milliseconds before removing tooltips.")
 
-;;  (define-special-variable tooltips-font nil
+;;  (defvar-setq tooltips-font nil
 ;;    "Font used to display tooltips, or nil for default.")
 
-;;  (define-special-variable tooltips-background-color "grey85"
+;;  (defvar-setq tooltips-background-color "grey85"
 ;;    "Color used for the tooltips background")
 
-;;  (define-special-variable tooltips-foreground-color "black"
+;;  (defvar-setq tooltips-foreground-color "black"
 ;;    "Color used for the tooltips foreground")
 
 ;; window history options
 
 ;;  (require 'sawfish.wm.ext.window-history)
 
-;;  (define-special-variable window-history-file "~/.sawfish/window-history"
+;;  (defvar-setq window-history-file "~/.sawfish/window-history"
 ;;    "Name of the file used to store persistent window state.")
 
-;;  (define-special-variable window-history-states
+;;  (defvar-setq window-history-states
 ;;    '(sticky ignored never-focus type maximized frame-style
 ;;      cycle-skip window-list-skip)
 ;;    "List of states in window-state-change-hook that should be tracked.")
 ;;
-;;  (define-special-variable window-history-key-property 'WM_CLASS
+;;  (defvar-setq window-history-key-property 'WM_CLASS
 ;;    "Window property matched on.")
 
-;;  (define-special-variable window-history-menu)
+;;  (defvar-setq window-history-menu)
 
-;;  (define-special-variable window-history-auto-save-position t
+;;  (defvar-setq window-history-auto-save-position t
 ;;    "Automatically remember window positions.")
 
-;;  (define-special-variable window-history-auto-save-dimensions nil
+;;  (defvar-setq window-history-auto-save-dimensions nil
 ;;    "Automatically remember window sizes.")
 
-;;  (define-special-variable window-history-auto-save-state nil
+;;  (defvar-setq window-history-auto-save-state nil
 ;;    "Automatically remember other window attributes.")
 
-;;  (define-special-variable window-history-ignore-transients t
+;;  (defvar-setq window-history-ignore-transients t
 ;;    "Don't automatically remember details of transient windows.")
 
 ;; auto raise options
 
 ;;  (require 'sawfish.wm.ext.auto-raise)
 
-;;  (define-special-variable raise-windows-on-focus nil
+;;  (defvar-setq raise-windows-on-focus nil
 ;;    "Raise windows when they are focused.")
 
-;;  (define-special-variable raise-window-timeout 500
+;;  (defvar-setq raise-window-timeout 500
 ;;    "Delay in milliseconds until focused windows are raised.")
 
 ;; shade-hover options
 
 ;;  (require 'sawfish.wm.ext.shade-hover)
 
-;;  (define-special-variable shade-hover-mode nil
+;;  (defvar-setq shade-hover-mode nil
 ;;    "Enable shade-hover mode.")
 
-;;  (define-special-variable shade-hover-delay 250
+;;  (defvar-setq shade-hover-delay 250
 ;;    "Delay in milliseconds before unshading windows.")
 
 ;;  (defcustom shade-hover-raise nil
@@ -458,51 +458,51 @@
 
 ;; smart placement modes
 
-;;  (define-special-variable sp-avoided-windows-weight 100)
-;;  (define-special-variable sp-normal-windows-weight 1)
+;;  (defvar-setq sp-avoided-windows-weight 100)
+;;  (defvar-setq sp-normal-windows-weight 1)
 
-;;  (define-special-variable sp-padding 0
+;;  (defvar-setq sp-padding 0
 ;;    "Try to leave at least this many pixels between window edges in
 ;;first/best-fit.")
 
-;;  (define-special-variable sp-max-points 10
+;;  (defvar-setq sp-max-points 10
 ;;    "The maximum number of points to keep in each grid dimension.")
 
-;;  (define-special-variable sp-max-queued-events 256
+;;  (defvar-setq sp-max-queued-events 256
 ;;    "Only when there's fewer X events than this pending do we try to
 ;;do smart placement.")
 
 ;; configure-request handler
 
-;;  (define-special-variable configure-auto-gravity t
+;;  (defvar-setq configure-auto-gravity t
 ;;    "Automatically select window gravity from position on screen.")
 
-;;  (define-special-variable configure-ignore-stacking-requests nil
+;;  (defvar-setq configure-ignore-stacking-requests nil
 ;;    "Ignore requests from applications to change window stacking.")
 
 ;; iconify options
 
-;;  (define-special-variable focus-windows-on-uniconify nil
+;;  (defvar-setq focus-windows-on-uniconify nil
 ;;    "Windows are focused after being minimized.")
 
-;;  (define-special-variable raise-windows-on-uniconify t
+;;  (defvar-setq raise-windows-on-uniconify t
 ;;    "Windows are raised after being unminimized.")
 
-;;  (define-special-variable uniconify-to-current-workspace t
+;;  (defvar-setq uniconify-to-current-workspace t
 ;;    "Move windows to the current workspace when they are unminimized.")
 
-;;  (define-special-variable iconify-ignored nil
+;;  (defvar-setq iconify-ignored nil
 ;;    "Unmanaged windows may be iconified.")
 
-;;  (define-special-variable iconify-group-mode 'transients
+;;  (defvar-setq iconify-group-mode 'transients
 ;;    "When minimizing a window also remove these. One of none,
 ;;transients, or group")
 
-;;  (define-special-variable uniconify-group-mode 'transients
+;;  (defvar-setq uniconify-group-mode 'transients
 ;;    "When unminimizing a window also restore these. One of none,
 ;;transients, or group.")
 
-;;  (define-special-variable raise-windows-when-unshaded nil
+;;  (defvar-setq raise-windows-when-unshaded nil
 ;;    "Raise windows when they are unshaded.")
 
 ;;  (defcustom unshade-selected-windows nil
@@ -510,170 +510,170 @@
 
 ;; maximize options
 
-;;  (define-special-variable maximize-always-expands nil
+;;  (defvar-setq maximize-always-expands nil
 ;;    "Maximizing a window in one dimension must increase the size of
 ;;that dimension.")
 
-;;  (define-special-variable maximize-raises t
+;;  (defvar-setq maximize-raises t
 ;;    "Raise windows when they are maximized.")
 
-;;  (define-special-variable maximize-ignore-when-filling t
+;;  (defvar-setq maximize-ignore-when-filling t
 ;;    "Let unmanaged windows be overlapped when filling windows.")
 
-;;  (define-special-variable maximize-avoid-avoided t
+;;  (defvar-setq maximize-avoid-avoided t
 ;;    "Don't cover `avoided' windows when maximizing.")
 
-;;  (define-special-variable move-lock-when-maximized t
+;;  (defvar-setq move-lock-when-maximized t
 ;;    "Lock position and size while windows are maximized.")
 
 ;; Miscellaneous options
 
-;;  (define-special-variable transients-above 'parents
+;;  (defvar-setq transients-above 'parents
 ;;    "Keep transient windows stacked above")
 
-;;  (define-special-variable dont-avoid-ignored t
+;;  (defvar-setq dont-avoid-ignored t
 ;;    "Whether to not avoid ignored windows by default."
 
-;;  (define-special-variable avoid-by-default nil
+;;  (defvar-setq avoid-by-default nil
 ;;    "When non-nil, any unspecified windows are avoided by default.")
 
-;;  (define-special-variable move-cursor-increment 16
+;;  (defvar-setq move-cursor-increment 16
 ;;    "Number of pixels to move pointer in `move-cursor-' commands.")
 
-;;  (define-special-variable size-window-def-increment 16
+;;  (defvar-setq size-window-def-increment 16
 ;;    "Default increment for size-window commands (when the window
 ;;doesn't specify it's own increments).")
 
-;;  (define-special-variable slide-window-increment 16
+;;  (defvar-setq slide-window-increment 16
 ;;    "Number of pixels to move window in `slide-' commands.")
 
-;;  (define-special-variable warp-to-window-offset (cons -1 -1)
+;;  (defvar-setq warp-to-window-offset (cons -1 -1)
 ;;    "Offset (%) from window edges when warping pointer. A negative
 ;;number means outside the left window edge.")
 
-;;  (define-special-variable warp-to-window-enabled nil
+;;  (defvar-setq warp-to-window-enabled nil
 ;;    "When false, disable warping the cursor to windows.")
-;;  (define-special-variable uniquify-name-format "%s [%d]"
+;;  (defvar-setq uniquify-name-format "%s [%d]"
 ;;    "Format to create unique window names.")
 
-;;  (define-special-variable dock-window-properties
+;;  (defvar-setq dock-window-properties
 ;;    '(window-list-skip cycle-skip fixed-position focus-click-through
 ;;      avoid no-history never-iconify never-maximize sticky
 ;;      stick-viewport placed)
 ;;    "List of properties set (to true) on windows when they are marked as docks.")
 
-;; (define-special-variable desktop-window-properties
+;; (defvar-setq desktop-window-properties
 ;;   '(fixed-position sticky sticky-viewport)
 ;;   "List of properties set (to true) on windows when they are marked as desktops.")
 
-;; (define-special-variable desktop-window-depth -4
+;; (defvar-setq desktop-window-depth -4
 ;;   "The stacking depth of desktop windows.")
 
-;; (define-special-variable dock-window-depth 0
+;; (defvar-setq dock-window-depth 0
 ;;   "The stacking depth of dock windows.")
 
-;;  (define-special-variable select-window-cursor-shape 'crosshair
+;;  (defvar-setq select-window-cursor-shape 'crosshair
 ;;    "Cursor used by select-window function.")
 
-;;  (define-special-variable pointer-motion-threshold 2
+;;  (defvar-setq pointer-motion-threshold 2
 ;;    "Distance in pixels pointer must move before generating motion events.")
 
-;;  (define-special-variable wm-modifier-value (wm-modifier)
+;;  (defvar-setq wm-modifier-value (wm-modifier)
 ;;    "Modifier key(s) used for default window manager shortcuts.")
 
-;;  (define-special-variable transients-are-group-members t
+;;  (defvar-setq transients-are-group-members t
 ;;    "Group transient windows with their parents.")
 
-;;  (define-special-variable persistent-group-ids '()
+;;  (defvar-setq persistent-group-ids '()
 ;;    "List of symbols naming window groups that always exist.")
 
-;;  (define-special-variable xterm-program "xterm"
+;;  (defvar-setq xterm-program "xterm"
 ;;    "The program launched by the `xterm' command.")
 
-;;  (define-special-variable browser-program "www-browser"
+;;  (defvar-setq browser-program "www-browser"
 ;;    "The program launched by the `browser' command.")
 
 ;; prompt options
 
-;;  (define-special-variable prompt-max-display 20
+;;  (defvar-setq prompt-max-display 20
 ;;    "Maximum number of completions to display under the input string.")
 
-;;  (define-special-variable prompt-word-regexp "[0-9a-z_]"
+;;  (defvar-setq prompt-word-regexp "[0-9a-z_]"
 ;;    "Regexp that determines which characters are to be considered
 ;;part of a word when moving.")
 
-;;  (define-special-variable prompt-file-exclude
+;;  (defvar-setq prompt-file-exclude
 ;;    "\\.(o|jlc|x)$|~$|^#.*#$|^\\.\\.?$"
 ;;    "A regexp, if it matches the file being considered for
 ;;completion, the file is rejected.")
 
-;;  (define-special-variable prompt-list-fold-case nil
+;;  (defvar-setq prompt-list-fold-case nil
 ;;    "Whether prompt-from-list should ignore case.")
 
-;;  (define-special-variable prompt-window-position
+;;  (defvar-setq prompt-window-position
 ;;    (cons (- (quotient (screen-width) 2) 200) -200)
 ;;    "A cons cell defining the screen position at which the `prompt'
 ;;window is displayed. See the `display-message' function for more
 ;;details.")
 
-;;  (define-special-variable prompt-font default-font
+;;  (defvar-setq prompt-font default-font
 ;;    "Font for prompt: \\w")
 
-;;  (define-special-variable prompt-color (cons (get-color "black") (get-color "white"))
+;;  (defvar-setq prompt-color (cons (get-color "black") (get-color "white"))
 ;;    "Prompt message's colors.")
 
 ;; tab options
 
 ;; (require 'sawfish.wm.tabs.tab)
 
-;; (define-special-variable tab-left-dec-width 11
+;; (defvar-setq tab-left-dec-width 11
 ;;   "Width of tab's left-edge decoration")
 
-;; (define-special-variable tab-right-dec-width 11
+;; (defvar-setq tab-right-dec-width 11
 ;;   "Width of tab's right-edge decoration")
 
-;; (define-special-variable tab-left-margin 16 
+;; (defvar-setq tab-left-margin 16 
 ;;   "Width of tab area's left-edge decoration")
 
-;; (define-special-variable tab-right-margin 16
+;; (defvar-setq tab-right-margin 16
 ;;   "Width of tab area's right-edge decoration")
 
-;; (define-special-variable tab-raise-on-hover nil
+;; (defvar-setq tab-raise-on-hover nil
 ;;   "Raise Tabs on Hover")    
 ;; ;; need to call this function to make tab-raise-on-hover work
 ;; (raise-tabs-on-hover-setter)
 
 ;; shrink-yank options (in grow-pack.jl)
 
-;; (define-special-variable shrink-window-minimum-size 10
+;; (defvar-setq shrink-window-minimum-size 10
 ;;   "The minimum height or width to which a window may be shrunk.")
 
-;; (define-special-variable yank-window-minimum-visible 10
+;; (defvar-setq yank-window-minimum-visible 10
 ;;   "The minimum amount of window left visible, if yanked over the edge.")
 
 ;; infinite-desktop options
 
 ;; (require 'sawfish.wm.ext.infinite-desktop)
 
-;; (define-special-variable infinite-desktop-p t
+;; (defvar-setq infinite-desktop-p t
 ;;   "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-flipping).")
 
-;; (define-special-variable infinite-desktop.move-distance 64
+;; (defvar-setq infinite-desktop.move-distance 64
 ;;   "Amount to move the viewport when the pointer hits the screen edge.")
 
-;; (define-special-variable infinite-desktop.move-cursor-distance 32
+;; (defvar-setq infinite-desktop.move-cursor-distance 32
 ;;   "Amount to pull back the cursor after moving the viewport.")
 
 ;; poweroff options
 
-;; (define-special-variable reboot-command "sudo shutdown -r now"
+;; (defvar-setq reboot-command "sudo shutdown -r now"
 ;;   "The command used to reboot the computer.")
 
-;; (define-special-variable halt-command "sudo shutdown -h now"
+;; (defvar-setq halt-command "sudo shutdown -h now"
 ;;   "The command used to halt the computer.")
 
-;; (define-special-variable suspend-command "sudo suspend"
+;; (defvar-setq suspend-command "sudo suspend"
 ;;   "The command used to suspend the computer.")
 
-;; (define-special-variable hibernate-command "sudo hibernate"
+;; (defvar-setq hibernate-command "sudo hibernate"
 ;;   "The command used to hibernate the computer.")
