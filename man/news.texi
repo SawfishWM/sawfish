@@ -16,7 +16,7 @@ they occurred between. For more detailed information see the
 @item Update requirements
 @itemize @minus
 
-@item librep 0.90.5 >> 0.90.7
+@item librep 0.90.5 -> 0.90.7
 @end itemize
 @item Notices
 @itemize @minus
@@ -52,7 +52,8 @@ the keyboard ``group'', which is mainly for multilinguals, keyboard
 and mouse bindings get messed.
 
 Now, this can be prevented by passing a new commandline option
-@code{--5-buttons} at Sawfish invocation.
+@code{--5-buttons} at Sawfish invocation. It is assumed that modifiers
+are common among keyboard groups.
 
 By doing so, you won't be able to bind Sawfish commands to mouse
 buttons 6 - 8. This may be fixed in future, but not now because
@@ -83,15 +84,15 @@ parts. (@pxref{Frame Part Definition})
 @itemize @minus
 @item More error and backtrace printing [Teika Kazura]
 
-If you're using librep >= 0.90.7, then the backtrace is printed for
-sawfish-client, too. But it is printed to Sawfish's standard error,
-not to sawfish-client's, sorry.
+Due to librep >= 0.90.7, the backtrace is printed by default on error.
+It is printed for sawfish-client, too, but it's sent to Sawfish's
+standard error, not to sawfish-client's, sorry.
 
 Previously when you connect to Sawfish as a server asynchronously,
 then the error is not printed. Now it is printed to Sawfish's 
-output. (A client which connects synchronously receives the error
-message.) Practically, this means sawfish-pager's errors are printed
-to Sawfish's output. 
+output. (In contrast, a client which connects synchronously receives
+the error message.) Practically, this means sawfish-pager's errors are
+printed to Sawfish's output.
 
 Phrase ``Sawfish error:'' is prepended to error messages which are
 printed to standard error.
@@ -102,9 +103,15 @@ prevents it from (accidently) immediately disappearing.
 
 @item Module @code{3d-hack} is not autoloaded any more.
 
-@item Doc improvements@*
+@item Doc improvements
+
 Faq items, on how to hide the mouse pointer, and on application execution.@*
 Manuals (1) describe all options.
+
+Described functions @code{grab-keymap} and @code{ungrab-keymap}
+(@pxref{Keymaps}), @code{x-raise-window} and @code{x-lower-window}
+(@pxref{Raising and Lowering Windows}), @code{frame-state-mutex}
+(@pxref{Frame Functions}).
 
 @item @code{sawfish-config} is now minimal, moving most of the contents to @code{sawfish.cfg.shell} [Teika Kazura]
 

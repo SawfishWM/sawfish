@@ -20,10 +20,11 @@
 
 (define-structure sawfish.wm.ext.edge-flip
 
-    (export edge-flip-for-edge
+    (export edge-flip-enable
+	    ;; These three functions are not for API, but let's keep 'em.
+	    edge-flip-for-edge
 	    edge-flip-synthesize
-	    edge-flip-while-moving
-	    edge-flip-enable)
+	    edge-flip-while-moving)
 
     (open rep
 	  rep.system

@@ -151,6 +151,9 @@ It's possible to have a keymap for a specific application only.  For
 example, you can use `nautilus-keymap' which is active when Nautilus
 is focused. All other key events are ignored, that is, events not in
 `nautilus-keymap' are not captured by Sawfish, but sent to Nautilus.
+That means that `window-keymap' gets ignored in nautilus. (Internally,
+`window-keymap' is set to all windows when they appear, but a window
+specific keymap simply replaces the default.)
 
 ( define nautilus-keymap ( make-keymap ) )
 ( bind-keys nautilus-keymap

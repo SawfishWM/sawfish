@@ -748,7 +748,7 @@ Change the window's name to @var{name}. This works in practice, but
 technically ICCCM doesn't suppose window name changes.
 @end defun
 
-@defun window-class window #!optional spec
+@defun window-class window @t{#!optional} spec
 If the optional argument @var{spec} is @code{nil}, returns the class
 that @var{window} belongs to as a string, or nil if @var{window} has
 no associated class.
@@ -779,7 +779,7 @@ Returns a cons-cell @code{(@var{x} . @var{y})} defining the position
 relative to the root window of @var{window}.
 @end defun
 
-@defun display-window-position #!optional window
+@defun display-window-position @t{#!optional} window
 Display @var{window}'s position and size in a popup. If the argument
 is @code{nil} or called as a command, user chooses the window by cursor
 and click.
@@ -1690,18 +1690,22 @@ Sets the stacking depth of @var{window} to @var{depth}, then restacks
 the windows to reflect this change.
 @end defun
 
+Functions to change stacking order.
+
 @defun window-on-top-p window
 Returns @code{t} if @var{window} is at the top of its stacking depth.
 @end defun
 
 @defun stack-window-below below above
 Change stacking order of window @var{below} so that it is immediately
-below window @var{above}.
+below window @var{above}. This function alone does not raise / lower
+windows.
 @end defun
 
 @defun stack-window-above above below
 Change stacking order of window @var{above} so that it is immediately
-above window @var{below}.
+above window @var{below}. This function alone does not raise / lower
+windows.
 @end defun
 
 @defmac save-stacking-order &rest forms
@@ -1762,7 +1766,8 @@ the Composite extention, as every window is reported unobscured.  Use
 
 Over time, Sawfish has accumulated several subtle variations of
 functions for raising and lowering windows.  One set of functions
-operates on single windows.
+operates on single windows. Notice how the function name and command
+name for each pair differs slightly.
 
 @deffn Function lower-window window
 @deffnx Command lower-single-window window
@@ -1780,10 +1785,17 @@ If @var{window} is the highest in its stacking level, lower it to the
 bottom of this level, otherwise raise it to the top of its level.
 @end deffn
 
-Notice how the function name and command name for each pair differs
-slightly.  Another set of functions supports operating on multiple windows
-simultaneously.  Again, the function name and command name for each
-pair is different.
+@defun x-raise-window win ref
+@defunx x-lower-window win ref
+Raise / lower window @var{win} so that it is above / below window
+@var{ref}. If @var{ref} is undefined, @var{win} is put at the top
+/ bottom of the stacking order.
+@end defun
+
+Another set of functions supports operating on multiple windows
+simultaneously. You have to import @code{sawfish.wm.util.stacking} to
+use them.  Again, the function name and command name for each pair is
+different.
 
 @deffn Function lower-window* window
 @deffnx Command lower-window window
@@ -1986,10 +1998,10 @@ other window. More precisely, the grow can be done repeatedly, each
 time until the edge meets another edge, and shrink is done so that
 it overlaps with one less window.
 
-@deffn Command grow-window-up window #!optional arg
-@deffnx Command grow-window-down window #!optional arg
-@deffnx Command grow-window-left window #!optional arg
-@deffnx Command grow-window-right window #!optional arg
+@deffn Command grow-window-up window @t{#!optional} arg
+@deffnx Command grow-window-down window @t{#!optional} arg
+@deffnx Command grow-window-left window @t{#!optional} arg
+@deffnx Command grow-window-right window @t{#!optional} arg
 Grows @var{window} upwards / downwards / left / right until it touches
 another window.  If that edge is beyond the screen edge, it is
 brought back in. With a universal prefix @var{arg}, maximize in that
@@ -2015,9 +2027,9 @@ are ``pack'' and ``yank''. So, ``pack'' moves until the window touches
 another, and ``yank'' moves until the overlap reduces.
 
 @deffn Command pack-window-up window #! optional arg
-@deffnx Command pack-window-down #!optional arg
-@deffnx Command pack-window-left window #!optional arg
-@deffnx Command pack-window-right window #!optional arg
+@deffnx Command pack-window-down @t{#!optional} arg
+@deffnx Command pack-window-left window @t{#!optional} arg
+@deffnx Command pack-window-right window @t{#!optional} arg
 Moves @var{window} upwards / downwards / left /right until it touches
 another window.  If that edge is beyond the screen edge, it is moved
 back in.  With a universal prefix @var{arg}, move in that direction
@@ -3796,6 +3808,11 @@ position of frame part @var{part} against its window's frame
 origin.
 @end defun
 
+@defun window-frame-id win
+Returns the numeric id of the framing window associated with object
+@var{window}. Returns nil if the client window has no frame.
+@end defun
+
 @defun frame-part-window part
 Return the window object associated with this frame part.
 @end defun
@@ -3805,9 +3822,18 @@ Return the X11 window ID associated with this frame part.
 @end defun
 
 @defun frame-draw-mutex lock
-Called with @var{lock} equal to @code{t}, frame part redraws will be
-delayed.  The redraws will take place once the function is called with
-@var{lock} set to @code{nil}.
+If @var{lock} equals to @code{t}, frame part redraws
+will be delayed.  The redraws will take place once the function is
+called with @var{lock} set to @code{nil}.
+
+Returns the previous value.
+@end defun
+
+@defun frame-state-mutex lock
+If @var{lock} is non-nil, the state of frame parts will not be altered
+at pointer enter and leave events.
+
+Returns the previous value.
 @end defun
 
 @defun map-frame-parts function window
@@ -4350,8 +4376,8 @@ The word ``virtual desktop'' is sometimes used instead of
 @menu
 * Workspace Intervals::			``Interesting'' workspaces
 * Workspace Manipulation::		Creating, rearranging, deleting
-* Workspaces and Windows::		Adding, removing
-* Edge Flipping::			Moving workspaces using the mouse
+* Workspaces and Windows::
+* Edge Flipping::			Switching workspaces with mouse
 @end menu
 
 @node Workspace Intervals, Workspace Manipulation, Workspaces, Workspaces
@@ -4705,13 +4731,9 @@ otherwise.
 @node Edge Flipping,  , Workspaces and Windows, Workspaces
 @section Edge Flipping
 
-Sawfish provides a way to flip between workspaces (or viewports)
-automatically by moving the mouse to the edge of the screen.  The
-technique is called ``edge flipping''.
-
-These definitions are stored in the @code{sawfish.wm.ext.edge-flip}
-structure.  They can only be enabled through the customization
-interface.
+Sawfish provides an intuitive way, like flipping pages, to switch the
+workspace (or the viewport) by moving the mouse to the edge of the
+screen. This is called ``edge flipping''.
 
 @defvr Customizable edge-flip-enabled nil
 When true, select the next desktop when the pointer hits screen edge.
@@ -4734,25 +4756,38 @@ This variable is not customizable, but it can be edited.
 Milliseconds to delay before edge flipping.  Defaults to 250.
 @end defvar
 
-Flippers are implemented as invisible windows on the edges of the
-display (the windows overlap at the corners).  When the pointer moves
-over any of these windows, Sawfish generates @code{enter-flipper-hook}
-and @code{leave-flipper-hook} events.
+@defvr {Hook} before-edge-flip-hook
+@defvrx {Hook} after-edge-flip-hook
+These hooks are called immediately before / after edge-flipping.
+@end defvr
+
+Edge-flipping is implemented by invisible, pixel-wide windows on the
+edges of the display@footnote{Detecter narrow windows overlap at the
+screen corners.}. When the pointer moves over any of these windows,
+Sawfish calls @code{enter-flipper-hook} and @code{leave-flipper-hook}
+hooks.
 
 Programmers can add their own callbacks to perform other actions with
-the flippers.  This depends on manually enabling the flippers, using
-the following functions in the @code{sawfish.wm.util.flippers}
-structure.  Note that you may have to manually remove the
+the flippers. Note that you may have to manually remove the
 @code{edge-flip-enter} and @code{edge-flip-leave} callbacks from the
 hooks before adding your own callbacks.
 
+These low level functions are stored in the
+@code{sawfish.wm.util.flippers} structure.
+
 @defun enable-flippers
-Add edge windows used to implement flipping.
+@defunx disable-flippers
+Add / remove edge windows used by edge-flip. At sawfish startup,
+`enable-flippers' is called.
 @end defun
 
-@defun disable-flippers
-Remove the edge windows used to implement flipping.
-@end defun
+@defvr {Hook} enter-flipper-hook
+@defvrx {Hook} leave-flipper-hook
+These hooks are called as the pointer enters and leaves the detecter
+windows on the edge of the screen. They're called with a single
+argument, one of the symbols @code{left}, @code{right}, @code{top},
+@code{bottom} indicating the edge in question.
+@end defvr
 
 @node RandR and Xinerama, Window Placement, Workspaces, Top
 @chapter RandR and Xinerama
@@ -5780,6 +5815,23 @@ of the events or the event objects themselves) from the keymap
 @var{keymap}.
 @end defun
 
+Functions @code{bind-keys} and @code{unbind-keys} do not affect the
+bindings of existing windows, because keymaps are set on a window when
+the window is created and begins to be managed by Sawfish. Update
+can be done by following functions.
+
+@defun grab-keymap keymap
+@defunx ungrab-keymap keymap
+All bindings stored in @var{keymap} get into / out of effect of all
+windows, including root, but not of frame parts.
+
+Notice that @code{ungrab-keymap} has to be called BEFORE you change
+the keymap.
+
+If the window foo has its own keymap rather than @code{window-keymap},
+then it is not affected by @code{(grab-keymap window-keymap)}.
+@end defun
+
 @defun search-keymap event keymap
 Search for a binding of the event @var{event} in @var{keymap}. If a
 binding is found a cons cell @code{(@var{command} . @var{event})} is
@@ -6436,7 +6488,8 @@ head on some viewport.
 @cindex Functions, gradients
 
 The @code{gradient} feature allows color gradients to be drawn in
-images. (Evaluate @code{(require 'gradient)} to load this feature.)
+images. Import @code{gradient} or @code{sawfish.wm.util.gradient}
+to use this feature.
 
 @defun draw-vertical-gradient image from to
 Draw a vertical color gradient in @var{image}. The color at the top of
@@ -6669,7 +6722,7 @@ module.
 The program launched by the @code{xterm} function. Interpreted by shell.
 @end defvr
 
-@deffn Function xterm #!optional command
+@deffn Function xterm @t{#!optional} command
 @deffnx Command xterm
 Start a new terminal. Optional argument @var{COMMAND} is passed to the
 terminal with @code{-e} option, so for most, including xterm, it can contain
@@ -6680,7 +6733,7 @@ arguments to be passed.
 The program launched by the @code{browser} function. Interpreted by shell.
 @end defvr
 
-@deffn Function browser #!optional url
+@deffn Function browser @t{#!optional} url
 @deffnx Command browser
 Start a new browser instance. Visit @var{URL} if supplied.
 @end deffn
@@ -7051,13 +7104,8 @@ moved.
 
 @defvr {Hook} enter-flipper-hook
 @defvrx {Hook} leave-flipper-hook
-When viewport edge-flipping is enabled, these hooks are called as the
-pointer enters and leaves the pixel-wide border on the edge of the
-screen. They're called with a single argument, one of the symbols
-@code{left}, @code{right}, @code{top}, @code{bottom} indicating the
-edge in question.
+See @xref{Edge Flipping}.
 @end defvr
-
 
 @node Startup and Shutdown Hooks, Other Hooks, Workspace and Viewport Hooks, Standard Hooks
 @section Startup and Shutdown Hooks
@@ -7351,6 +7399,8 @@ Allowed attribute names are @code{background} and @code{border-color}.
 @node X Selections, X Keysyms, X Windows, Low-level X Interface
 @section X Selections
 
+These functions are defined in @code{sawfish.wm.util.selection}.
+
 @defun x-get-selection sel
 Return the string corresponding to the current value of the X11
 selection defined by @var{sel}, or @code{nil} if the selection
@@ -7399,7 +7449,8 @@ Destroy the X drawable @var{drawable}.
 @end defun
 
 @defun x-drawable-height drawable
-Return the height in pixels of @var{drawable}.
+@defunx x-drawable-width drawable
+Return the height / width in pixels of @var{drawable}.
 @end defun
 
 @defun x-drawable-id drawable
@@ -7409,10 +7460,6 @@ Return the X11 drawable-ID (an integer) associated with
 
 @defun x-drawable-p obj
 Return @code{t} if @var{obj} is an X drawable object.
-@end defun
-
-@defun x-drawable-width drawable
-Return the width in pixels of @var{drawable}.
 @end defun
 
 @defun x-grab-image-from-drawable drawable mask
