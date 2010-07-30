@@ -472,6 +472,7 @@ where OPTIONS are any of:\n\
     --load FILE		load the file of Lisp forms called FILE\n\
     -l FILE\n\
 \n\
+    --5-buttons		ignore buttons 6 - x, fixes kbd layout switching\n
     --version		print version details\n\
     --no-rc		don't load rc or site-init files\n\
     --quit, -q		terminate the interpreter process\n", prog_name);
