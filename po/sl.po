@@ -5,13 +5,12 @@
 # Andraž Tori <andraz.tori1@guest.arnes.si>, 2000.
 # Matej Urbančič <mateju@svn.gnome.org>, 2010.
 # Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2010.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-07-24 12:25+0100\n"
+"PO-Revision-Date: 2010-07-30 21:06+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -769,6 +768,9 @@ msgid ""
 "\n"
 "Adjust the point where the border actually starts.  Many gtk2 apps draw a small black border around their contents window and this is just ugly when sawfish draws another border around the window. With a border offset of -1 the sawfish window border will overlay the gtk2 border exactly."
 msgstr ""
+"odmik robov (-1000 - 1000 točk)\n"
+"\n"
+"Prilagodi točko začetka robu. Veliko programov gtk2 okoli okna z vsebino nariše majhen črn rob, kar je videti grdo, ko sawfish okoli okna nariše še en rob. V primeru da je odmik robov nastavljen na -1, bo rob okna sawfish natančno prekrival rob gtk2.  "
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -776,6 +778,9 @@ msgid ""
 "\n"
 "When shading a window borders and corners will stay where they were and not merge with the titlebar."
 msgstr ""
+"obdrži robove in kote okna na njihovemu mestu ob senčenju okna\n"
+"\n"
+"Ob senčenju okna bodo robovi in koti ostali kjer so in se ne bodo združili z nazivno vrstico."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -783,6 +788,9 @@ msgid ""
 "\n"
 "The corners are used to resize a window in two directions at the same time.  Usually the width and length of window corners are determined by the border width but you can adjust them below."
 msgstr ""
+"pokaži robe oken\n"
+"\n"
+"Koti so uporabljeni za sočasno spremembo velikosti oken v dveh smereh.  Običajno sta širina in dolžina kotov okna določena s širino roba, vendar ju lahko prilagodite spodaj."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -790,6 +798,9 @@ msgid ""
 "\n"
 "Increasing the corner length will grow the window corners along the window border (i.e. make them longer).  With a border width of 1 pixel it is hard to grab the 1 pixel corner to be able to resize the window in two directions; thus, make it bigger."
 msgstr ""
+"prilagoditev dolžine kotov (-1 - 100 točk)\n"
+"\n"
+"Ta možnost poveča dolžino kota v smeri roba okna.  V primeru da je rob širok le 1 točko, je težko zagrabiti kot velikosti 1 točke in spremeniti velikost okna v obeh smereh. Zato je kote priporočljivo podaljšati."
 
 #. ../themes/mxflat/theme.jl
 msgid "outside"
@@ -809,10 +820,13 @@ msgid ""
 "\n"
 "This option makes the window corners broader. with a border width of 1 pixel it is hard to grab this 1 pixel corner to be able to resize the window in two directions; thus, make it bigger."
 msgstr ""
+"prilagoditev širine kotov (0 - 100 točk)\n"
+"\n"
+"Ta možnost razširi kote oken. V primeru da je rob širok le 1 točko, je težko zagrabiti kot velikosti 1 točke in spremeniti velikost okna v obeh smereh. Zato je kote priporočljivo razširiti."
 
 #. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
-msgstr ""
+msgstr "prilagoditev širine kotov razpetih oken (0 - 100 točk)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -820,6 +834,9 @@ msgid ""
 "\n"
 "Draw a small additional border around your windows emulating a solid shadow effect.  Use the options below to adjust its width and direction.  (NOTE: this is VERY cpu intensive and might slow down your computer noticably.  So turn it on at your own risk.)"
 msgstr ""
+"lažna senca (poskusno)\n"
+"\n"
+"Nariše majhen navidezen rob okoli vaših oken ter posnema učinek polne sence. Za prilagoditev širine in smeri sence uporabite možnosti spodaj.  (OPOMBA: ta možnost je ZELO zahtevna do cpe in lahko opazno upočasni vaš računalnik. Zato jo vklopite na lastno tveganje.)"
 
 #. ../themes/mxflat/theme.jl
 msgid "fake shadow only on focused windows"
@@ -863,6 +880,9 @@ msgid ""
 "\n"
 "Set the direction of the fake shadow.  Usually only 2 or 3 borders of your window have a fake shadow.  This depends on where the light comes from."
 msgstr ""
+"vir svetlobe lažne sence\n"
+"\n"
+"Nastavi smer lažne sence. Običajno imajo lažno senco samo 2 ali 3 robovi okna. To je odvisno od smeri prihajanja svetlobe."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -870,10 +890,13 @@ msgid ""
 "\n"
 "This option has only an effect on the north, east, south and west light sources.  The further away the light source is, the smaller will the two 'side' shadows be."
 msgstr ""
+"razdalja svetlobe lažne sence (0 - 100)\n"
+"\n"
+"Ta možnost ima učinek le na vire svetlobe s severa, vzhoda, juga in zahoda. Bolj ko je oddaljen vir svetlobe, manjši sta dve 'stranski' senci."
 
 #. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
-msgstr "širina navidezne sence (0 - 100 točk)"
+msgstr "širina lažne sence (0 - 100 točk)"
 
 #. ../themes/mxflat/theme.jl
 msgid "shadow color"
@@ -3957,6 +3980,10 @@ msgid ""
 "It is the number of steps for scrolling. The value 1 means no scroll, and\n"
 "the change is instantaneous."
 msgstr ""
+"Ob prehodu na drugo vidno polje večja vrednost določi\n"
+"bolj gladko drsanje zaslona.\n"
+"Vrednost predstavlja število korakov za drsanje. Vrednost 1 pomeni brez\n"
+"drsanja. Spremembe so hipne."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4428,333 +4455,4 @@ msgstr "Premakni trenutno okno na n-to delovno površino."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Kopiraj na delovno površino"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Copy the current window to the N'th workspace."
-msgstr "Kopiraj trenutno okno na n-to delovno površino."
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Select workspace interactively"
-msgstr "Interaktivno izberi delovno površino"
-
-#. ../lisp/sawfish/wm/workspace.jl
-msgid "Prompt for a workspace and switch to it."
-msgstr "Vprašaj za delovno površino in preklopi nanjo."
-
-#~ msgid "State"
-#~ msgstr "Stanje"
-#~ msgid "and many others..."
-#~ msgstr "in mnogi drugi..."
-#~ msgid "Sawfish manages your windows extensibly."
-#~ msgstr "Sawfish upravlja z vašimi okni."
-#~ msgid "Sawfish homepage"
-#~ msgstr "Domača stran Sawfish"
-
-#, fuzzy
-#~ msgid "Whether and how to move the pointer."
-#~ msgstr "Prestavi okno v naslednji pogled."
-
-#, fuzzy
-#~ msgid "Whether to bump into windows on a different depth."
-#~ msgstr "Ali naj se ob povečevanju in zmanjševanju zaletim v prezrta okna."
-#~ msgid "Start a new xterm."
-#~ msgstr "Poženi nov xterm."
-
-#, fuzzy
-#~ msgid "View clipboard"
-#~ msgstr "Pogled"
-
-#, fuzzy
-#~ msgid "Amount to move the workspace."
-#~ msgstr "Pošlji na naslednjo delovno površino"
-
-#, fuzzy
-#~ msgid "Fullscreen"
-#~ msgstr "zaslon"
-
-#, fuzzy
-#~ msgid "Maximize unframe"
-#~ msgstr "Razpni okno"
-
-#, fuzzy
-#~ msgid "The program used to play audio samples."
-#~ msgstr ""
-#~ "Program za igranje zvočnih vzorcev. Če ni nastavljeno bo uporabljena že "
-#~ "vgrajena ESD podpora."
-#~ msgid "Number of steps for viewport scrolling."
-#~ msgstr "Število korakov desenja vidnega polja."
-#~ msgid "Display workspace name"
-#~ msgstr "Pokaži imena delovnih površin"
-#~ msgid "Matched Windows"
-#~ msgstr "Ustrezajoča okna"
-#~ msgid "Invoke the user-customization system."
-#~ msgstr "Poženi sistem za prikrajanje nastavitev uporabniku."
-
-#, fuzzy
-#~ msgid "customize title position"
-#~ msgstr "povezave tipk gumba \"razpni\""
-
-#, fuzzy
-#~ msgid "gradient mode"
-#~ msgstr "transistentna okna"
-
-#, fuzzy
-#~ msgid "gradient color mode"
-#~ msgstr "Prelivna tema"
-
-#, fuzzy
-#~ msgid "customize button size"
-#~ msgstr "povezave tipk gumba \"razpni\""
-
-#, fuzzy
-#~ msgid "display window icon on menu button"
-#~ msgstr "Kaži ikono okna v njegovem menuju gumbov."
-
-#, fuzzy
-#~ msgid "button position model"
-#~ msgstr "Pomni _položaj"
-
-#, fuzzy
-#~ msgid "customize sticky button keymap"
-#~ msgstr "povezave tipk gumba \"skrči\""
-
-#, fuzzy
-#~ msgid "customize previous button keymap"
-#~ msgstr "povezave tipk gumba \"menu\""
-
-#, fuzzy
-#~ msgid "customize next button keymap"
-#~ msgstr "povezave tipk gumba \"menu\""
-
-#, fuzzy
-#~ msgid "customize configure button keymap"
-#~ msgstr "povezave tipk gumba \"menu\""
-
-#, fuzzy
-#~ msgid "customize info button keymap"
-#~ msgstr "povezave tipk gumba \"skrči\""
-
-#, fuzzy
-#~ msgid "customize always-on-top button keymap"
-#~ msgstr "povezave tipk gumba \"menu\""
-
-#, fuzzy
-#~ msgid "customize look button keymap"
-#~ msgstr "povezave tipk gumba \"razpni\""
-
-#, fuzzy
-#~ msgid "show window corners"
-#~ msgstr "Povečaj okno dol"
-
-#, fuzzy
-#~ msgid "fake shadow light source"
-#~ msgstr "Naredi okno prezrto"
-#~ msgid "Gnome toggle skip winlist"
-#~ msgstr "Preklopi v seznamu oken GNOME"
-#~ msgid "Toggle the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Preklopi GNOME SKIP_WINLIST namig okna."
-#~ msgid "Gnome set skip winlist"
-#~ msgstr "Postavi v seznam oken GNOME"
-#~ msgid "Set the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Vključi GNOME SKIP_WINLIST namig okna."
-#~ msgid "Gnome clear skip winlist"
-#~ msgstr "Zbriši iz seznama oken GNOEE"
-#~ msgid "Unset the GNOME SKIP_WINLIST hint of the window."
-#~ msgstr "Izključi GNOME SKIP_WINLIST namig okna."
-#~ msgid "Gnome toggle skip tasklist"
-#~ msgstr "Preklopi v seznamu poslov GNOME"
-#~ msgid "Toggle the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Preklopi GNOME SKIP_TASKLIST namig okna."
-#~ msgid "Gnome set skip tasklist"
-#~ msgstr "Postavi v seznam poslov GNOME"
-#~ msgid "Set the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Vključi GNOME SKIP_TASKLIST namig okna."
-#~ msgid "Gnome clear skip tasklist"
-#~ msgstr "Zbriši iz seznama poslov GNOME"
-#~ msgid "Unset the GNOME SKIP_TASKLIST hint of the window."
-#~ msgstr "Izključi GNME SKIP_TASKLIST namig okna."
-#~ msgid "Gnome logout"
-#~ msgstr "Odjava iz GNOME"
-#~ msgid "Gnome www page"
-#~ msgstr "Spletna stran GNOME"
-#~ msgid "Display the WWW page of the GNOME project."
-#~ msgstr "Prikaži spletno stran projekta GNOME."
-#~ msgid "Gnome help browser"
-#~ msgstr "Brskalnik pomoči GNOME"
-#~ msgid "Launch the GNOME help browser."
-#~ msgstr "Poženi brskalnik pomoči GNOME."
-#~ msgid "Gnome about"
-#~ msgstr "O GNOME-u"
-#~ msgid "Launch the GNOME about dialog."
-#~ msgstr "Poženi pogovorno okno \"O GNOME\"."
-
-#, fuzzy
-#~ msgid "Grows window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Poveča okno navzdol dokler se ne 'zaleti' ob drugo okno.\n"
-#~ " Poglejte `grow-window-up'`"
-
-#, fuzzy
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Premakne okno navzdol dokler se ne 'zaleti' ob drugo okno.\n"
-#~ " Poglejte `pack-window-up'."
-
-#, fuzzy
-#~ msgid ""
-#~ "Raise the window that received the current event, then replay any pointer"
-#~ msgstr ""
-#~ "Dvigni okno, ki je prejelo dogodek, nato znova sproži dogodke kazalca,\n"
-#~ "ki so povzročili ukaz."
-
-#, fuzzy
-#~ msgid ""
-#~ "Raise the window that received the current event (if it's focused), then"
-#~ msgstr ""
-#~ "Dvigni okno, ki je prejelo dogodek (če je fokusirano), nato znova \n"
-#~ "sproži dogodke kazalca ki so povzročili ukaz."
-
-#, fuzzy
-#~ msgid ""
-#~ "Raise the group of windows that received the current event, then replay"
-#~ msgstr ""
-#~ "Dvigni skupino oken, ki so prejela trenutni dogodek, nato znova sproži "
-#~ "dogodke kazalca, ki so povzročili ukaz."
-
-#, fuzzy
-#~ msgid ""
-#~ "Raise the window that received the current event and any transients it"
-#~ msgstr ""
-#~ "Dvigni okno, ki je prejelo dogodek, nato znova sproži dogodke kazalca,\n"
-#~ "ki so povzročili ukaz."
-#~ msgid "GNOME WWW..."
-#~ msgstr "GNOME Splet..."
-#~ msgid "Gnome menus update"
-#~ msgstr "Obnovitev menujev GNOME"
-
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the title of"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the border of"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the close button"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
-#, fuzzy
-#~ msgid "Keymap containing bindings active when the pointer is in the iconify"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the maximize"
-#~ msgstr "Mapiranje tipk, ki je aktivno kadar uporabnik vpisuje besedilo."
-
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the menu button"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
-#, fuzzy
-#~ msgid ""
-#~ "Keymap containing bindings active when the pointer is in the shade button"
-#~ msgstr ""
-#~ "Mapiranje tipk, ki je dejavno kadar je kazalec izven oken\n"
-#~ "(ali ni fokusirano nobeno okno)."
-
-#, fuzzy
-#~ msgid "_Restart"
-#~ msgstr "Znova zaženi"
-
-#, fuzzy
-#~ msgid "_Quit"
-#~ msgstr "Končaj"
-
-#, fuzzy
-#~ msgid "_All settings"
-#~ msgstr "Vse nastavitve"
-
-#, fuzzy
-#~ msgid ""
-#~ "If the window is at its highest possible position, then lower it to its"
-#~ msgstr ""
-#~ "Če je okno na najvišjem možnem položaju, ga spusti na najnižji možen "
-#~ "položaj,\n"
-#~ "sicer pa ga dvigni čimbolj na vrh."
-
-#, fuzzy
-#~ msgid "Toggle the state of the window between vertically maximized and"
-#~ msgstr ""
-#~ "Preklopi stanje okna med navpično razpetim in\n"
-#~ "zmanjšanim"
-
-#, fuzzy
-#~ msgid ""
-#~ "Toggle the state of the window between vertically maximized-filled and"
-#~ msgstr "Preklopi stanje med navpično razpeto-polnjeno in nerazpeto."
-
-#, fuzzy
-#~ msgid ""
-#~ "Raise the current window to its highest allowed position in the stacking"
-#~ msgstr "Zvišaj okno na vrh znotraj njegovega sklada."
-
-#, fuzzy
-#~ msgid ""
-#~ "Lower the current window to its lowest allowed position in the stacking"
-#~ msgstr "Znižaj okno na dno znotraj njegovega sklada."
-
-#, fuzzy
-#~ msgid ""
-#~ "Delete the current workspace. Its member windows are relocated to the"
-#~ msgstr ""
-#~ "Zbriši trenutno delovno povšino. Njena okna se prenesejo na naslednjo\n"
-#~ "delovno površino."
-#~ msgid "Select color"
-#~ msgstr "Izberi barvo"
-#~ msgid "Growing and packing of windows"
-#~ msgstr "Povečevanje in zmanjševanje oken"
-
-#, fuzzy
-#~ msgid "Shrinking and Yanking of windows"
-#~ msgstr "Povečevanje in zmanjševanje oken"
-#~ msgid "Arguments given to the `xterm' command."
-#~ msgstr "Argumenti podani k ukazu 'xterm'."
-
-#, fuzzy
-#~ msgid "Copy to p_revious"
-#~ msgstr "Kopiraj nazaj"
-
-#, fuzzy
-#~ msgid "Copy to ne_xt"
-#~ msgstr "Kopiraj naprej"
-#~ msgid ""
-#~ "Whether growing is considered to be maximization.  When you turn\n"
-#~ "this on, you can use `unmaximize-window' or something similar to get\n"
-#~ "back to the original size."
-#~ msgstr ""
-#~ "Kadar je povečano okno obravnavano kot maximizirano.  Ko prižgete\n"
-#~ "to, lahko uporabite `odrazpni-okno' ali kaj podobnega,\n"
-#~ "da gre nazaj na izhodišno velikost."
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-#~ msgid "Error Handling"
-#~ msgstr "Obravnavanje napak"
-#~ msgid "Select Icon"
-#~ msgstr "Izberi ikono"
 
