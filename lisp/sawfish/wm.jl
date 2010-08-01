@@ -113,6 +113,8 @@
 		   sawfish.wm.state.transient
 		   sawfish.wm.state.ignored))
 
+;; Bindings in these modules are exported by sawfish.wm on behalf of
+;; them.
 (export-bindings (parse-interface
 		  '(compound-interface
 		    (structure-interface sawfish.wm.colors)

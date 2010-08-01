@@ -54,6 +54,9 @@
                  (WM_COMMAND . "Command")
                  (WM_LOCALE_NAME . "Locale")))
 
+  ;; Actions (for example, `ignore-program-position') are,
+  ;; if declared by `define-match-window-setter' in this file,
+  ;; handled by it. Otherwise registered with `window-put'.
   (i18n-defvar
    match-window-properties
    `((placement ,(_ "Placement")

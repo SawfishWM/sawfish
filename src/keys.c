@@ -1054,8 +1054,8 @@ DEFUN("grab-keymap", Fgrab_keymap, Sgrab_keymap, (repv map), rep_Subr1) /*
 ::doc:sawfish.wm.events#grab-keymap::
 grab-keymap KEYMAP
 
-Grab any events in KEYMAP that need to be grabbed so that bindings in
-KEYMAP may be serviced.
+Grab any events in KEYMAP on windows, including root, but not
+frame parts. This function is useful after keymap changes.
 ::end:: */
 {
     rep_DECLARE1(map, rep_CONSP);
@@ -1067,8 +1067,8 @@ DEFUN("ungrab-keymap", Fungrab_keymap, Sungrab_keymap, (repv map), rep_Subr1)/*
 ::doc:sawfish.wm.events#ungrab-keymap::
 ungrab-keymap KEYMAP
 
-Ungrab any events in KEYMAP that would have been grabbed so that bindings in
-KEYMAP may be serviced.
+Ungrab any events in KEYMAP on windows, including root, but not
+frame parts. This function is useful before keymap changes.
 ::end:: */
 {
     rep_DECLARE1(map, rep_CONSP);

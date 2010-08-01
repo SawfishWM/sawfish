@@ -1767,8 +1767,9 @@ destroy_window_frame (Lisp_Window *w, bool leave_frame_win)
 DEFUN("frame-draw-mutex", Fframe_draw_mutex,
       Sframe_draw_mutex, (repv arg), rep_Subr1) /*
 ::doc:sawfish.wm.frames.subrs#frame-draw-mutex::
-While this variable is non-nil no frame parts will be redrawn. When it is
-set to nil any pending redraws will take place.
+When called with non-nil, no frame parts will be redrawn. When it is
+set to nil any pending redraws will take place. Returns the previous
+value.
 ::end:: */
 {
     repv ret = frame_draw_mutex ? Qt : Qnil;
@@ -1792,8 +1793,9 @@ set to nil any pending redraws will take place.
 DEFUN("frame-state-mutex", Fframe_state_mutex,
       Sframe_state_mutex, (repv arg), rep_Subr1) /*
 ::doc:sawfish.wm.frames.subrs#frame-state-mutex::
-While this variable is non-nil the state of frame parts will not be
+When called with non-nil, the state of frame parts will not be
 altered when the pointer enters or leaves its window.
+Returns the previous value.
 ::end:: */
 {
     repv ret = frame_state_mutex ? Qt : Qnil;

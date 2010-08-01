@@ -81,7 +81,7 @@ typedef int bool;
 		   | PointerMotionHintMask | EnterWindowMask \
 		   | LeaveWindowMask | KeyPressMask | ExposureMask)
 
-/* Events selected on the frame window */
+/* Events selected on the window including frame */
 #define FRAME_EVENTS (ButtonPressMask | ButtonReleaseMask | KeyPressMask \
 		      | ButtonMotionMask | PointerMotionHintMask \
 		      | EnterWindowMask | LeaveWindowMask | ExposureMask \
@@ -155,7 +155,7 @@ typedef struct lisp_window {
     repv icon_image;
 
     /* Frame data */
-    Window frame;
+    Window frame; /* Reparenter window */
     struct frame_part *frame_parts;
     int frame_x, frame_y;		/* relative to client-window */
     unsigned int frame_width, frame_height;
