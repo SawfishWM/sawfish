@@ -276,7 +276,7 @@ extern void pixmap_cache_set (Lisp_Image *im, int width, int height,
 			      Pixmap p1, Pixmap p2);
 extern void pixmap_cache_flush_image (Lisp_Image *im);
 #endif
-extern repv Fpixmap_cache_control (repv max);
+extern repv Fpixmap_cache_control (repv max, repv reset);
 extern void pixmap_cache_init (void);
 
 /* from property-cache.c */
