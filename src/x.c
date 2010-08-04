@@ -100,6 +100,7 @@ DEFSYM (x, "x");
 DEFSYM (y, "y");
 DEFSYM (border_width, "border-width");
 DEFSYM (border_color, "border-color");
+DEFSYM (save_under, "save-under");
 DEFSYM (expose, "expose");
 DEFSYM (convex, "convex");
 DEFSYM (non_convex, "non-convex");
@@ -592,6 +593,11 @@ x_window_parse_attributes (XSetWindowAttributes *attributes, repv attrs)
 		attributes->border_pixel = VCOLOR (rep_CDR (tem))->pixel;
 		attributesMask |= CWBorderPixel;
 	    }
+            else if ((car == Qsave_under))
+            {
+                attributes->save_under = (rep_CDR(tem) != Qnil)?True:False;
+		attributesMask |= CWSaveUnder;
+            }
 	}
 
 	attrs = rep_CDR (attrs);
@@ -1583,6 +1589,7 @@ rep_dl_init (void)
     rep_INTERN (border_width);
     rep_INTERN (border_color);
     rep_INTERN (expose);
+    rep_INTERN (save_under);
     rep_INTERN (convex);
     rep_INTERN (non_convex);
     rep_INTERN (line_width);
