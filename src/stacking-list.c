@@ -61,7 +61,7 @@ window_in_stacking_list_p (Lisp_Window *w)
 void
 remove_from_stacking_list (Lisp_Window *w)
 {
-    return_if_fail (!WINDOW_IS_GONE_P (w));
+    return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w));
     return_if_fail (window_in_stacking_list_p (w));
 
     /* divert the links around W */
@@ -87,7 +87,7 @@ remove_from_stacking_list (Lisp_Window *w)
 void
 insert_in_stacking_list_above_all (Lisp_Window *w)
 {
-    return_if_fail (!WINDOW_IS_GONE_P (w));
+   return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w));
     return_if_fail (!window_in_stacking_list_p (w));
 
     w->above = 0;
@@ -105,7 +105,7 @@ insert_in_stacking_list_above_all (Lisp_Window *w)
 void
 insert_in_stacking_list_below_all (Lisp_Window *w)
 {
-    return_if_fail (!WINDOW_IS_GONE_P (w));
+    return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w));
     return_if_fail (!window_in_stacking_list_p (w));
 
     w->below = 0;
@@ -123,7 +123,7 @@ insert_in_stacking_list_below_all (Lisp_Window *w)
 void
 insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x)
 {
-    return_if_fail (!WINDOW_IS_GONE_P (w) && !WINDOW_IS_GONE_P (x));
+    return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w) && !WINDOW_IS_GONE_FOR_STACKING_P (x));
     return_if_fail (!window_in_stacking_list_p (w));
     return_if_fail (window_in_stacking_list_p (x));
 
@@ -144,7 +144,7 @@ insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x)
 void
 insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x)
 {
-    return_if_fail (!WINDOW_IS_GONE_P (w) && !WINDOW_IS_GONE_P (x));
+    return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w) && !WINDOW_IS_GONE_FOR_STACKING_P (x));
     return_if_fail (!window_in_stacking_list_p (w));
     return_if_fail (window_in_stacking_list_p (x));
 

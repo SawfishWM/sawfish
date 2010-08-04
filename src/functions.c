@@ -102,9 +102,9 @@ windows isn't affected.
     {
 	Lisp_Window *this = VWIN (rep_CAR (ptr));
 
-	if (!WINDOW_IS_GONE_P (this))
+        if (!WINDOW_IS_GONE_FOR_STACKING_P (this))
 	{
-	    if (pred != 0 && !WINDOW_IS_GONE_P (pred))
+            if (pred != 0 && !WINDOW_IS_GONE_FOR_STACKING_P (pred))
 	    {
 		remove_from_stacking_list (this);
 		insert_in_stacking_list_below (this, pred);
@@ -114,6 +114,12 @@ windows isn't affected.
 		restack_window (this);
 	    }
 	    pred = this;
+        } else {
+            if (!WINDOW_IS_GONE_FOR_STACKING_P(this))
+            {
+                DB(("the window %s is not gone stacking-list -wise, yet we have just ignored it! Not good!\n",
+                    (rep_STR(this->name))));
+            }
 	}
 
 	ptr = rep_CDR (ptr);
@@ -138,11 +144,12 @@ raise WINDOW to the top of the stacking order.
 {
     rep_DECLARE1 (win, WINDOWP);
 
-    if (!WINDOW_IS_GONE_P (VWIN (win)))
+
+    if (!WINDOW_IS_GONE_FOR_STACKING_P (VWIN (win)))
     {
 	if (WINDOWP (above))
 	{
-	    if (!WINDOW_IS_GONE_P (VWIN (above)))
+	    if (!WINDOW_IS_GONE_FOR_STACKING_P (VWIN (above)))
 	    {
 		remove_from_stacking_list (VWIN (win));
 		insert_in_stacking_list_above (VWIN (win), VWIN (above));
@@ -170,11 +177,11 @@ lower WINDOW to the bottom of the stacking order.
 {
     rep_DECLARE1 (win, WINDOWP);
 
-    if (!WINDOW_IS_GONE_P (VWIN (win)))
+    if (!WINDOW_IS_GONE_FOR_STACKING_P (VWIN (win)))
     {
 	if (WINDOWP (below))
 	{
-	    if (!WINDOW_IS_GONE_P (VWIN (below)))
+	    if (!WINDOW_IS_GONE_FOR_STACKING_P (VWIN (below)))
 	    {
 		remove_from_stacking_list (VWIN (win));
 		insert_in_stacking_list_below (VWIN (win), VWIN (below));
