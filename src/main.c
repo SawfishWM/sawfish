@@ -396,6 +396,7 @@ inner_main (repv arg)
 
 	for (ptr = init; res != rep_NULL && *ptr != 0; ptr++)
 	{
+            DB(("rep_bootstrap_structure: %s\n", *ptr));
 	    res = rep_bootstrap_structure (*ptr);
 	}
     }
@@ -405,8 +406,10 @@ inner_main (repv arg)
 	/* final initialisation.. */
 	manage_windows ();
 
+        DB(("event loop()\n"));
 	/* then jump into the event loop.. */
 	res = rep_top_level_recursive_edit ();
+        DB(("rep_top_level_recursive_edit  exited!\n"));
     }
     return res;
 }
