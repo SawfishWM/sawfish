@@ -155,6 +155,7 @@ DEFSYM (orInverted, "or-inverted");
 DEFSYM (nand, "nand");
 DEFSYM (set, "set");
 
+/* Get the Lisp object out of the (X11-protocol) XID */
 static inline repv
 x_window_from_id (Window id)
 {
@@ -168,6 +169,8 @@ x_window_from_id (Window id)
 }
 
 #ifdef HAVE_X11_EXTENSIONS_XDBE_H
+/* Why don't I store the Xpointer in the Lisp_X_Window struct?
+ * Then I would simply x_window_from_id -> dbe_context  !*/
 static inline XdbeBackBuffer
 x_back_buffer_from_id (Window id)
 {
@@ -177,6 +180,7 @@ x_back_buffer_from_id (Window id)
 }
 #endif
 
+/* Translate the Lisp identification of (various types which ultimately are) X11 window, into XID */
 static Window
 window_from_arg (repv arg)
 {
@@ -209,6 +213,7 @@ drawable_from_arg (repv arg)
     return id;
 }
 
+/* GC has a function associated. This translates the Lisp  specification into the X11 function Enum?. */
 static int
 x_function_from_sym (repv sym)
 {
@@ -224,6 +229,7 @@ x_function_from_sym (repv sym)
 
 /* GC Functions */
 
+/* Given a plist in ATTRS, apply it to GC. This function prepares values, for the `XChangeGC' Xlib call. */
 static long
 x_gc_parse_attrs (Lisp_X_GC *gc, XGCValues *values, repv attrs)
 {
@@ -437,6 +443,8 @@ DEFUN ("x-create-root-xor-gc", Fx_create_root_xor_gc,
        Sx_create_root_xor_gc, (void), rep_Subr0) /*
 ::doc:sawfish.wm.util.x#x-create-root-xor-gc:
 x-create-root-xor-gc
+returns a GC to be used on the Root window, with the XOR function.
+Drawing with this inverts planes which differ between white and black.
 ::end:: */
 {
     XGCValues gcv;
@@ -473,6 +481,7 @@ x-change-gc X-GC ATTRS
 
 Sets attributes of the X-GC. ATTRS should be a list of cons cells mapping
 attributes to values. Known attributes are `foreground' and `background'.
+and many others! `line-width'
 ::end:: */
 {
     XGCValues values;
@@ -516,6 +525,11 @@ Return t if ARG is a X-GC object.
 
 /* Window functions */
 
+/* 
+ * This takes the Lisp plist of attributes, and prepares the Xlib
+ * struct XWindowChanges.  Later this *definitive* C struct is used to
+ * change the Lisp data too (Lisp_X_Window) !
+ */
 static long
 x_window_parse_changes (XWindowChanges *changes, repv attrs)
 {
@@ -570,6 +584,7 @@ x_window_note_changes (Lisp_X_Window *w, long mask, XWindowChanges *changes)
 	w->height = changes->height;
 }
 
+/* These are not cached in the Lisp_X_Window? */
 static long
 x_window_parse_attributes (XSetWindowAttributes *attributes, repv attrs)
 {
@@ -770,6 +785,9 @@ DEFUN ("x-configure-window", Fx_configure_window,
        Sx_configure_window, (repv window, repv attrs), rep_Subr2) /*
 ::doc:sawfish.wm.util.x#x-configure-window::
 x-configure-window X-WINDOW ATTRS
+
+This potentially changes the position: the set of visible screen pixels internal to the window.
+Aside from (Un-)Mapping!  Also, for normal clients these would be intercepted.
 
 Reconfigures the X-WINDOW. ATTRS should be an alist mapping attribute
 names to values. Known attributes include the symbols `x', `y',
@@ -1368,6 +1386,8 @@ DEFUN ("x-grab-image-from-drawable", Fx_grab_image_from_drawable,
     Drawable d = drawable_from_arg (drawable);
     Drawable m = drawable_from_arg (mask);
     rep_DECLARE (1, drawable, d != 0);
+   /* mmc: we have just checked things which will be checked once again !!!
+    * and we box the data which will be used unboxed ...hm */
     return Fmake_image_from_x_drawable (rep_MAKE_INT (d),
 					m == 0 ? Qnil : rep_MAKE_INT (m));
 }
@@ -1497,6 +1517,7 @@ x_window_sweep (void)
 {
     Lisp_X_Window *w = x_window_list;
     x_window_list = 0;
+   /* the list will be reversed */
     while (w != 0)
     {
 	Lisp_X_Window *next = w->next;
@@ -1658,6 +1679,8 @@ rep_dl_init (void)
     if (dpy != 0)
     {
 	int major, minor;
+        /* mmc: why is have_dbe not set in display.c ?
+         * in fact it is. So this is useless crap? */
 	if (XdbeQueryExtension (dpy, &major, &minor))
 	{
 	    have_dbe = TRUE;
