@@ -57,6 +57,9 @@ int image_depth;
 DEFSYM(image_load_path, "image-load-path");
 DEFSYM(image_directory, "image-directory");
 
+/* mmc: I want to (put image 'file "source-file"), in C! */
+DEFSYM(file, "file");
+
 DEFSYM(red, "red");
 DEFSYM(green, "green");
 DEFSYM(blue, "blue");
@@ -213,8 +216,11 @@ string). PLIST defines the property list of the image.
 	image_t im = load_image (rep_STR(file));
 	if (delete)
 	    Fdelete_file (file);
-	if (im != 0)
-	    return make_image (im, plist);
+         if (im != 0) {
+             Lisp_Image* lim = VIMAGE(make_image (im, plist));
+             Fimage_put(rep_VAL(lim), Qfile, file);
+             return rep_VAL(lim);
+         }
     }
     return Fsignal (Qerror, rep_list_2(rep_string_dup("no such image"), file));
 }
@@ -1820,6 +1826,7 @@ images_init (void)
     rep_INTERN(red);
     rep_INTERN(green);
     rep_INTERN(blue);
+    rep_INTERN(file);
 }
 
 void
