@@ -511,7 +511,7 @@ the bottom right of the image.
     return image;
 }
 
-DEFUN("image-get", Fimage_get, Simage_get, (repv win, repv prop), rep_Subr2) /*
+DEFUN("image-get", Fimage_get, Simage_get, (repv image, repv prop), rep_Subr2) /*
 ::doc:sawfish.wm.images#image-get::
 image-get IMAGE PROPERTY
 
@@ -519,8 +519,8 @@ Return the value of the property named PROPERTY (a symbol) of IMAGE.
 ::end:: */
 {
     repv plist;
-    rep_DECLARE1(win, IMAGEP);
-    plist = VIMAGE(win)->plist;
+    rep_DECLARE1(image, IMAGEP);
+    plist = VIMAGE(image)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
 	if (rep_CAR(plist) == prop
@@ -535,7 +535,7 @@ Return the value of the property named PROPERTY (a symbol) of IMAGE.
 }
 
 DEFUN("image-put", Fimage_put, Simage_put,
-      (repv win, repv prop, repv val), rep_Subr3) /*
+      (repv image, repv prop, repv val), rep_Subr3) /*
 ::doc:sawfish.wm.images#image-put::
 image-put IMAGE PROPERTY VALUE
 
@@ -543,8 +543,8 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
 ::end:: */
 {
     repv plist;
-    rep_DECLARE1(win, IMAGEP);
-    plist = VIMAGE(win)->plist;
+    rep_DECLARE1(image, IMAGEP);
+    plist = VIMAGE(image)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
 	if (rep_CAR(plist) == prop
@@ -556,9 +556,9 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
 	}
 	plist = rep_CDR(rep_CDR(plist));
     }
-    plist = Fcons(prop, Fcons(val, VIMAGE(win)->plist));
+    plist = Fcons(prop, Fcons(val, VIMAGE(image)->plist));
     if (plist != rep_NULL)
-	VIMAGE(win)->plist = plist;
+	VIMAGE(image)->plist = plist;
     return val;
 }
 
