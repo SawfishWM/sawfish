@@ -66,6 +66,8 @@ window_in_stacking_list_p (Lisp_Window *w)
 void
 remove_from_stacking_list (Lisp_Window *w)
 {
+    if (debug_stacking)
+      DB(("%s%s%s: %s\n", stacking_color,__FUNCTION__, color_reset, rep_STR(w->name)));
     return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w));
     return_if_fail (window_in_stacking_list_p (w));
 
@@ -151,7 +153,20 @@ insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x)
 {
     return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w) && !WINDOW_IS_GONE_FOR_STACKING_P (x));
     return_if_fail (!window_in_stacking_list_p (w));
+    /* this fails: */
+#if 0
     return_if_fail (window_in_stacking_list_p (x));
+#else
+    /* mmc: I want to monitor this failure: */
+    if (!(window_in_stacking_list_p (x)))
+       {
+          DB(("****** %s: %sfailed%s for: %s (while inserting %s)\n", __FUNCTION__,
+              error_color, color_reset,
+              rep_STR(x->name), rep_STR(w->name)));
+          Fbeep();
+          return;
+       }
+#endif
 
     if (x->below != 0)
 	x->below->above = w;
