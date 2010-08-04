@@ -47,6 +47,7 @@ available for reading.
     Atom selection;
     rep_DECLARE1 (sel, rep_SYMBOLP);
     selection = symbol_to_atom (sel);
+    /* if the atom doesn't exist, the selection is not active anyway! */
     return (XGetSelectionOwner (dpy, selection) != None) ? Qt : Qnil;
 }
 
@@ -72,13 +73,15 @@ If the selection currently has no value, nil is returned.
     Window owner;
     rep_DECLARE1 (sel, rep_SYMBOLP);
     selection = symbol_to_atom (sel);
-    owner = XGetSelectionOwner (dpy, selection);
+    owner = XGetSelectionOwner (dpy, selection); /* fixme: this is equal to -active-p !! */
     if (owner != None)
     {
 	XEvent ev;
 	Window sel_window = no_focus_window;
 	XConvertSelection (dpy, selection, XA_STRING,
 			   sawfish_selection, sel_window, last_event_time);
+        /* XConvertSelection can generate BadAtom and BadWindow errors  */
+        /* What if the owner disconnects, shall we receive SelectionClear?  */
 	XIfEvent (dpy, &ev, selnotify_pred, (XPointer) 0);
 	if (ev.xselection.property != None)
 	{
