@@ -510,7 +510,11 @@ where OPTIONS are any of:\n\
 	cursors_init ();
 	frames_init ();
 	windows_init ();
-	keys_init ();
+        key_bind_init ();
+        key_event_init ();
+        /* Must be after key_bind_init
+         * update_keyboard_mapping needs the rep variables initialized! */
+        keys_init ();
 	functions_init ();
 	server_init ();
 
