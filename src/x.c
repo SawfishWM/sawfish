@@ -710,6 +710,22 @@ window is created unmapped.
     return rep_VAL (w);
 }
 
+DEFUN("x-window-select-input", Fx_window_select_input, Sx_window_select_input,
+      (repv win, repv mask), rep_Subr2)
+/*
+  ::doc:sawfish.wm.windows.subrs#x-window-select-input::
+  x-window-select-input WINDOW MASK
+
+  ask the X server for future events on the WINDOW, which are matched by the MASK.
+  ::end:: */
+{
+   rep_DECLARE1 (win, X_WINDOWP);
+   rep_DECLARE2(mask, rep_INTEGERP);
+   XSelectInput (dpy, VX_DRAWABLE (win)->id,  rep_INT(mask));
+   return Qnil;
+}
+
+
 DEFUN ("x-create-pixmap", Fx_create_pixmap,
        Sx_create_pixmap, (repv wh), rep_Subr1)
 {
@@ -1552,6 +1568,7 @@ rep_dl_init (void)
 					   x_window_sweep, x_window_mark,
 					   0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR (Sx_create_window);
+    rep_ADD_SUBR (Sx_window_select_input);
     rep_ADD_SUBR (Sx_create_pixmap);
     rep_ADD_SUBR (Sx_create_bitmap);
     rep_ADD_SUBR (Sx_map_window);
