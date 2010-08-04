@@ -1433,8 +1433,10 @@ image_render (Lisp_Image *image, int width, int height,
     }
 #endif
 
+#if defined HAVE_IMLIB
     /* Imlib sometimes calls XSync (), which could hide events */
     rep_mark_input_pending (ConnectionNumber(dpy));
+#endif
 }
 
 void
