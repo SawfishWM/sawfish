@@ -28,6 +28,16 @@
    height) tuples to rendered pixmaps (both image and mask). This is
    only required when not using Imlib (Imlib has a built-in cache).
 
+   mmc:
+   nodes are the same, just the order / permutation is different:
+
+    |   | <--------> | i/w/h |    ...
+       order by image I
+
+
+       order by time
+    |   | <--------> |      |   ....
+
    It's implemented as two doubly-linked lists, each containing the
    same component nodes, but one list chains all pixmaps associated
    with a particular image object, the other chains all pixmaps in
@@ -49,7 +59,7 @@ struct pixmap_cache_node_struct {
     pixmap_cache_node *newer, *older;
     Lisp_Image *im;
     int width, height;
-    Pixmap p1, p2;
+    Pixmap p1, p2;              /* rename: mask & data */
     int ref_count;
 };
 
@@ -73,7 +83,7 @@ remove_from_age_list (pixmap_cache_node *n)
 static void
 prepend_to_age_list (pixmap_cache_node *n)
 {
-    n->newer = oldest;
+    n->newer = oldest;          /* oldest because it's PRE-pending */
     if (n->newer != 0)
 	n->newer->older = n;
     oldest = n;
@@ -119,6 +129,15 @@ free_node (pixmap_cache_node *n, bool dealloc)
 	rep_free (n);
 }
 
+/*         ^ |
+ *         | v
+ *     +-------+
+ *     |       | <-----
+ * --> |       | ----->
+ *     +-------+
+ *
+ *
+ */
 static void
 delete_node (pixmap_cache_node *n, bool dealloc)
 {
@@ -173,6 +192,9 @@ pixmap_cache_unref (Lisp_Image *im, Pixmap p1, Pixmap p2)
     fprintf (stderr, "warning: unref'ing unknown image in pixmap-cache\n");
 }
 
+/*
+ * Stores in the cache:
+ */
 void
 pixmap_cache_set (Lisp_Image *im, int width, int height,
 		  Pixmap p1, Pixmap p2)
@@ -184,9 +206,12 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
     {
 	/* remove oldest node */
 	pixmap_cache_node *this = oldest;
+        /* walk from the oldest to newest, and delete unused /unreferenced nodes,
+         * until you find enough space.
+         * And, keep the first of the nodes, since we shall use it after: */
 	while (this != 0 && this->ref_count > 0)
 	    this = this->newer;
-	if (this == 0)
+	if (this == 0)          /* we cannot remove */
 	    break;
 	delete_node (this, n != 0);
 	if (n == 0)
@@ -208,13 +233,14 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
     cached_pixels += pixel_count;
 }
 
+/* image is not needed anymore, destroyed, so no point in caching it. */
 void
 pixmap_cache_flush_image (Lisp_Image *im)
 {
     pixmap_cache_node *n, *next;
     for (n = im->pixmap_first; n != 0; n = next)
     {
-	next = n->next;
+        next = n->next;        /* mmc: nice. we have to take it before freeing!  */
 	remove_from_age_list (n);
 	free_node (n, TRUE);
     }
