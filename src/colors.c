@@ -151,14 +151,14 @@ individual values range from zero to 255.
 		       rep_MAKE_INT(VCOLOR(color)->alpha / 256));
 }
 
-DEFUN("colorp", Fcolorp, Scolorp, (repv win), rep_Subr1) /*
+DEFUN("colorp", Fcolorp, Scolorp, (repv color), rep_Subr1) /*
 ::doc:sawfish.wm.colors#colorp::
 colorp ARG
 
 Returns t if ARG is a color object.
 ::end:: */
 {
-    return COLORP(win) ? Qt : Qnil;
+    return COLORP(color) ? Qt : Qnil;
 }
 
 /* type hooks */
