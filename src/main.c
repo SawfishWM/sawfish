@@ -518,7 +518,9 @@ where OPTIONS are any of:\n\
 	server_init ();
 
 	rep_call_with_barrier (inner_main, Qnil, rep_TRUE, 0, 0, 0);
-	rc = rep_top_level_exit ();
+        DB(("calling rep_top_level_exit\n"));
+        rc = rep_top_level_exit ();
+        DB(("going to close\n"));
 
 	/* call all exit funcs... */
 	server_kill ();
@@ -534,10 +536,10 @@ where OPTIONS are any of:\n\
 
 	sys_kill();
 
-	if (exit_code == ec_restart)
+        DB(("calling rep_kill, or do_restart\n"));
+        if (exit_code == ec_restart)
 	    /* This will call rep_kill () itself when ready */
 	    do_restart ();
-
 	rep_kill();
     }
     return rc;
