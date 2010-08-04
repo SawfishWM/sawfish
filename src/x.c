@@ -102,6 +102,7 @@ DEFSYM (border_width, "border-width");
 DEFSYM (border_color, "border-color");
 DEFSYM (save_under, "save-under");
 DEFSYM (expose, "expose");
+DEFSYM (button_press, "button-press");
 DEFSYM (convex, "convex");
 DEFSYM (non_convex, "non-convex");
 DEFSYM (line_width, "line-width");
@@ -623,8 +624,10 @@ x_window_event_handler (XEvent *ev)
 	    if (ev->xexpose.count == 0)
 		type = Qexpose;
 	    break;
-
-	    /* XXX other event types..? */
+        case ButtonPress:
+           type = Qbutton_press;
+           break;
+        /* XXX other event types..? */
 	}
 	if (type != Qnil)
 	{
@@ -1590,6 +1593,7 @@ rep_dl_init (void)
     rep_INTERN (border_color);
     rep_INTERN (expose);
     rep_INTERN (save_under);
+    rep_INTERN (button_press);
     rep_INTERN (convex);
     rep_INTERN (non_convex);
     rep_INTERN (line_width);
