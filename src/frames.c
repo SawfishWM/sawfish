@@ -36,7 +36,7 @@
 #  endif
 # endif
 #endif
-   
+
 #include "sawfish.h"
 #include <string.h>
 #include <X11/Xutil.h>
@@ -94,6 +94,9 @@ static repv state_syms[fps_MAX];
 static bool frame_draw_mutex;
 bool frame_state_mutex;
 
+/* static */
+int debug_frames=0;
+int debug_frame_part=0;
 /* type hooks */
 
 static struct frame_part *
@@ -104,6 +107,8 @@ fp_new (Lisp_Window *win, repv alist)
     memset (fp, 0, sizeof (struct frame_part));
     fp->car = frame_part_type;
     fp->win = win;
+    if (debug_frames & DB_FRAMES_ALLOC)
+       DB(("%s: fp->win = %x, pointer = %x\n", __FUNCTION__, fp->win, fp));
     fp->alist = alist;
     fp->local_alist = Qnil;
     fp->next_alloc = allocated_parts;
@@ -349,9 +354,14 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 				   w->frame_width, w->frame_height,
 				   w->border_width, image_depth, InputOutput,
 				   image_visual, wamask, &wa);
-    }
-    else
+        if (debug_frames & DB_FRAMES_SHAPE)
+            DB(("%s%s%s: %s ATOMIC-> new window %s%x%s\n", frame_color, __FUNCTION__,
+                color_reset, rep_STR(w->name), frame_color, shape_win, color_reset));
+    } else {
 	shape_win = w->frame;
+       if (debug_frames & DB_FRAMES_SHAPE)
+          DB(("%s%s%s: %s not atomic\n", frame_color, __FUNCTION__, color_reset, rep_STR(w->name)));
+    }
 
     nparts = 0;
     for (fp = w->frame_parts; fp != 0; fp = fp->next)
@@ -482,6 +492,8 @@ set_frame_shapes (Lisp_Window *w, bool atomic)
 			    0, 0, shape_win, ShapeInput, ShapeSet);
 #endif
 	XDestroyWindow (dpy, shape_win);
+        if (debug_frames & DB_FRAMES_SHAPE)
+           DB(("   ATOMIC-> now (using & immediately) destroying window %x\n", shape_win));
     }
 
     w->pending_reshape = 0;
@@ -499,6 +511,8 @@ void
 commit_queued_reshapes (void)
 {
     Lisp_Window *w;
+    if (debug_frames & (DB_FRAMES_RE & DB_FRAMES_SHAPE))
+        DB(("%s\n", __FUNCTION__));
     for (w = window_list; w != 0; w = w->next)
     {
 	if (!WINDOW_IS_GONE_P (w) && w->pending_reshape)
@@ -515,28 +529,39 @@ set_frame_part_bg (struct frame_part *fp)
     repv bg = fp->bg[state];
     Lisp_Window *win = fp->win;
 
-    if (fp->id == 0)
-	return;
-
+    if (fp->id == 0) {
+        DB(("%s: %sfp->win = 0%s\n", __FUNCTION__, error_color, color_reset));
+        XBell(dpy,0);
+        return;
+    };
     if (fp->renderer != Qnil && IMAGEP(fp->rendered_image))
     {
-	bg = fp->rendered_image;
+        DB(("----------unexpected--------------\n"));
+        DB(("lisp renderer actually used!\n"));
+        bg = fp->rendered_image;
 	if (fp->rendered_state != state)
 	{
+            DB(("%s: fp changed state!\n", __FUNCTION__));
 	    rep_call_lisp2 (fp->renderer, bg, state_syms[state]);
 	    fp->rendered_state = state;
 	}
 	fp->drawn.bg = Qnil;
     }
 
-    if (WINDOW_IS_GONE_P (win))
-	return;
+   if (WINDOW_IS_GONE_P (win)){
+      DB(("%s: window is gone.\n", __FUNCTION__));
+      return changed;
+   }
 
     if (COLORP(bg))
     {
+        if (debug_frames & DB_FRAMES_DRAW)
+            DB(("%s: %s%s%s only a color!\n", __FUNCTION__, move_color,
+                frame_part_name(fp), color_reset));
 	if (bg != fp->drawn.bg)
 	{
 	    XGCValues gcv;
+            DB(("%s: fp changed bg color!\n", __FUNCTION__));
 	    gcv.foreground = VCOLOR(bg)->pixel;
 	    XChangeGC (dpy, fp->gc, GCForeground, &gcv);
 	    XFillRectangle (dpy, fp->id, fp->gc, 0, 0, fp->width, fp->height);
@@ -582,6 +607,8 @@ set_frame_part_bg (struct frame_part *fp)
 	    rect.x = rect.y = 0;
 	    rect.width = fp->width;
 	    rect.height = fp->height;
+            if (debug_frames & DB_FRAMES_SHAPE)
+                DB(("%s: XShapeCombineMask - ShapeSet to rectangle!\n", __FUNCTION__));
 	    XShapeCombineRectangles (dpy, fp->id, ShapeBounding,
 				     0, 0, &rect, 1, ShapeSet, Unsorted);
 	}
@@ -592,6 +619,8 @@ set_frame_part_bg (struct frame_part *fp)
 		       fp->width, fp->height, 0, 0);
 	    if (bg_mask != 0)
 	    {
+                if (debug_frames & DB_FRAMES_SHAPE)
+                    DB(("%s: XShapeCombineMask - ShapeSet to bg image (not tiled)\n", __FUNCTION__));
 		XShapeCombineMask (dpy, fp->id, ShapeBounding,
 				   0, 0, bg_mask, ShapeSet);
 	    }
@@ -608,6 +637,7 @@ set_frame_part_bg (struct frame_part *fp)
 		wa.colormap = image_cmap;
 		wa.border_pixel = BlackPixel (dpy, screen_num);
 		wamask = CWColormap | CWBorderPixel;
+                DB(("%s: XCreateWindow %d,%d - %d,%d\n", __FUNCTION__, -100,-100,fp->width, fp->height));
 		tem = XCreateWindow (dpy, win->frame, -100, -100,
 				     fp->width, fp->height,
 				     0, image_depth, InputOutput,
@@ -615,6 +645,8 @@ set_frame_part_bg (struct frame_part *fp)
 		rect.x = rect.y = 0;
 		rect.width = fp->width;
 		rect.height = fp->height;
+                if (debug_frames & DB_FRAMES_SHAPE)
+                    DB(("%s: XShapeCombineRectangles -...\n", __FUNCTION__));
 		XShapeCombineRectangles (dpy, tem, ShapeBounding, 0, 0,
 					 &rect, 1, ShapeSubtract, Unsorted);
 	    }
@@ -660,12 +692,17 @@ set_frame_part_bg (struct frame_part *fp)
     }
     else if (Ffunctionp (bg) != Qnil)
     {
+        DB(("----------unexpected--------------\n"));
+        DB(("lisp function theme actually used!\n"));
 	rep_call_lisp1 (bg, rep_VAL(fp));
 	fp->drawn.bg = bg;
 	fp->drawn.fg = rep_NULL;
-    }
-    else
+    } else {
+        if (debug_frames & DB_FRAMES_DRAW)
+            DB(("%s: %s%s%s no background defined!\n", __FUNCTION__,
+                move_color, frame_part_name(fp), color_reset));
 	fp->drawn.bg = Qnil;
+    }
 }
 
 /* Draw the foreground pixels in frame-part FP. */
@@ -683,10 +720,16 @@ set_frame_part_fg (struct frame_part *fp)
 
     if (fg != Qnil && Ffunctionp (fg) != Qnil)
     {
+        if (debug_frames & DB_FRAMES_DRAW)
+            DB(("%s%s%s: %s/%s%s%s ... function!\n", frame_color,__FUNCTION__, color_reset,
+                rep_STR(win->name), move_color, frame_part_name(fp), color_reset));
 	rep_call_lisp1 (fg, rep_VAL(fp));
     }
     else if (IMAGEP(fg) || fp->text != Qnil)
     {
+         if (debug_frames & DB_FRAMES_DRAW)
+            DB(("%s%s%s: %s/%s%s%s ... image or text!\n", frame_color,__FUNCTION__, color_reset,
+                rep_STR(win->name), move_color, frame_part_name(fp), color_reset));
 	if (!COLORP(fg) && !IMAGEP(fg))
 	    fg = global_symbol_value (Qdefault_foreground);
 	if (!FONTP(font))
@@ -698,6 +741,8 @@ set_frame_part_fg (struct frame_part *fp)
 
 	if (IMAGEP(fg))
 	{
+            if (debug_frames & DB_FRAMES_DRAW)
+                DB(("... image.\n"));
 	    if (fp->scale_foreground)
 	    {
 		width = fp->width;
@@ -711,6 +756,8 @@ set_frame_part_fg (struct frame_part *fp)
 	}
 	else
 	{
+            if (debug_frames & DB_FRAMES_DRAW)
+                DB(("... NOT image.\n"));
 	    if (rep_STRINGP(fp->text))
 	    {
 		string = fp->text;
@@ -765,10 +812,14 @@ set_frame_part_fg (struct frame_part *fp)
 		&& fp->drawn.x_justify == fp->x_justify
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
+                if (debug_frames & DB_FRAMES_DRAW)
+                    DB(("but drawn fg is the same!\n"));
 		return;
 	    }
 	    else if (fp->drawn.fg != rep_NULL)
 	    {
+                if (debug_frames & DB_FRAMES_DRAW)
+                    DB(("there's something drawn in this part already, getting the set_frame_part_bg!\n"));
 		/* there's something drawn in this part already,
 		   update the background to clear it */
 		fp->drawn.bg = rep_NULL;
@@ -816,16 +867,29 @@ set_frame_part_fg (struct frame_part *fp)
 	}
 	else if (COLORP(fg) && FONTP(font))
 	{
+            if (debug_frames & DB_FRAMES_DRAW)
+                DB(("fg is a color, and we have a font\n"));
 	    if ((fp->drawn.text == string
 		 || Fequal (fp->drawn.text, string) != Qnil)
 		&& fp->drawn.font == font && fp->drawn.fg == fg
 		&& fp->drawn.x_justify == fp->x_justify
 		&& fp->drawn.y_justify == fp->y_justify)
 	    {
+                if (debug_frames & DB_FRAMES_DRAW)
+                    DB(("the text is the same!\n"));
 		return;
 	    }
  	    else if (fp->drawn.fg != rep_NULL)
 	    {
+                if (debug_frames & DB_FRAMES_DRAW)
+                    DB(("have to change text: %s -> %s (%s%s%s)\n",
+                        (fp->drawn.text && rep_STRINGP(fp->drawn.text))?rep_STR(fp->drawn.text):(u_char*)"",
+                        rep_STRINGP(string)?rep_STR(string):(u_char*)"",
+
+                        (fp->drawn.fg == fg)?"":"fg different",
+                        (fp->drawn.text == string || (Fequal (fp->drawn.text, string) != Qnil))?"":"text differ",
+                        (fp->drawn.x_justify == fp->x_justify)?"":"x_justify"
+                        ));
 		/* there's something drawn in this part already,
 		   update the background to clear it */
 		fp->drawn.bg = rep_NULL;
@@ -838,8 +902,12 @@ set_frame_part_fg (struct frame_part *fp)
 
 	    fp->drawn.text = string;
 	}
+    } else {
+        if (debug_frames & DB_FRAMES_DRAW)
+            DB(("%s%s%s: %s:%s%s%s not image, nor text\n", frame_color,__FUNCTION__, color_reset, rep_STR(win->name),
+                move_color, frame_part_name(fp), color_reset));
     }
-out:
+  out:
     fp->drawn.font = font;
     fp->drawn.fg = fg;
     fp->drawn.x_justify = fp->x_justify;
