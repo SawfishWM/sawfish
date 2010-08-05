@@ -884,7 +884,7 @@ unmap_notify (XEvent *ev)
 	        /* Removing the frame reparents the client window back to
 		   the root. This means that we receive the next MapRequest
 		   for the window. */
-		remove_window_frame (w);
+		remove_window_frame (w, TRUE);
 		destroy_window_frame (w, FALSE);
 	    }
 

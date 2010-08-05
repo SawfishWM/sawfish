@@ -314,7 +314,7 @@ extern void get_window_protocols (Lisp_Window *w);
 extern void before_local_map (Lisp_Window *w);
 extern void after_local_map (Lisp_Window *w);
 extern void install_window_frame (Lisp_Window *w);
-extern void remove_window_frame (Lisp_Window *w);
+extern void remove_window_frame (Lisp_Window *w, bool restack);
 extern Lisp_Window *add_window (Window id);
 extern void mark_window_as_gone (Lisp_Window *w);
 extern void remove_window (Lisp_Window *win, bool destroyed);
