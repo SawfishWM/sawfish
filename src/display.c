@@ -200,6 +200,8 @@ static void
 beep(void)
 {
     XBell(dpy, 0);
+    if (XPending (dpy) > 0)
+	rep_mark_input_pending (ConnectionNumber (dpy));
 }
 
 static void
