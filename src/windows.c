@@ -284,18 +284,6 @@ find_window_by_id (Window id)
     return w;
 }
 
-/* This is different to the above in that it could return a window
-   that doesn't have a client window. */
-Lisp_Window *
-x_find_window_by_id (Window id)
-{
-    Lisp_Window *w;
-    w = window_list;
-    while (w != 0 && w->saved_id != id && w->frame != id)
-	w = w->next;
-    return w;
-}
-
 void
 install_window_frame (Lisp_Window *w)
 {

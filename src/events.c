@@ -739,7 +739,7 @@ expose (XEvent *ev)
 static void
 destroy_notify (XEvent *ev)
 {
-    Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
+    Lisp_Window *w = find_window_by_id (ev->xdestroywindow.window);
     if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
 
