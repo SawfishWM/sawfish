@@ -93,7 +93,7 @@ struct prop_handler {
 /* utilities */
 
 /* Returns true if we should manage window ID */
-bool
+static bool
 mapped_not_override_p (Window id)
 {
     XWindowAttributes wa;
