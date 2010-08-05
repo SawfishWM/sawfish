@@ -803,16 +803,22 @@ map_request (XEvent *ev)
     Lisp_Window *w = find_window_by_id (id);
     if (w == 0)
     {
+        if (debug_events & DB_EVENTS_MAP)
+            DB (("%s %x -> add_window\n", __FUNCTION__,id));
 	/* Also adds the frame. */
 	w = add_window (id);
 	if (w == 0)
 	{
-	    fprintf (stderr, "warning: failed to allocate a window\n");
+            DB(("%s something went wrong in add_window for %x. Returned 0!\n", __FUNCTION__, id));
 	    return;
 	}
     }
     else
     {
+        if (debug_events & DB_EVENTS_MAP) {
+            DB (("%s -> window %x already known\n", __FUNCTION__, id));
+            DB (("under name %s.\n", rep_STR(w->name)));
+        }
 	if (!w->reparented)
 	{
 	    Fgrab_server ();
@@ -823,13 +829,23 @@ map_request (XEvent *ev)
 	w->mapped = TRUE;
 	rep_call_lisp1 (module_symbol_value (rep_VAL (&iconify_mod),
 					     Quniconify_window), rep_VAL(w));
+    };
+    if (!w->client_unmapped) {
+        if (debug_windows){
+            DB(("%s %s-> %s XMapWindow %x%s\n", map_request_color, __FUNCTION__, color_reset,
+                w->id, rep_STR(VWIN(w)->name)));
+        }
+	XMapWindow (dpy, w->id);
     }
 
-    if (!w->client_unmapped)
-	XMapWindow (dpy, w->id);
 
-    if (w->visible)
+    if (w->visible) {
+        if (debug_windows){
+            DB(("%s %s-> %s XMapWindow %x %s(frame)\n",map_request_color, __FUNCTION__, color_reset,
+                w->frame, rep_STR(VWIN(w)->name)));
+        }
 	XMapWindow (dpy, w->frame);
+    }
 
     if (w->client_unmapped)
 	/* wouldn't happen otherwise */
