@@ -64,6 +64,23 @@ typedef int bool;
 
 /* #define DEBUG 1 */
 
+/* mmc: indexes to an array with Atoms. Should be extended to cover all used atoms, imho.
+ * used in selection.c */
+enum {
+    XA_COMPOUND_TEXT = 0,
+    XA_MULTIPLE,
+    XA_TARGETS,
+    XA_TEXT,
+    XA_TIMESTAMP,
+    XA_VT_SELECTION,
+    XA_INCR,
+    XA_WMDELETEWINDOW,
+    XA_DNDPROTOCOL,
+    XA_DNDSELECTION,
+    XA_CLIPBOARD,
+    NUM_XA
+};
+
 /* Event masks */
 
 /* Events selected on client windows */

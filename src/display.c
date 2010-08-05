@@ -279,6 +279,22 @@ choose_visual (void)
     }
 }
 
+/* For handling selection I need these atoms: */
+const char *const xa_names[NUM_XA] = {
+    "COMPOUND_TEXT",
+    "MULTIPLE",
+    "TARGETS",
+    "TEXT",
+    "TIMESTAMP",
+    "VT_SELECTION",
+    "INCR",
+    "WM_DELETE_WINDOW",
+    "DndProtocol",
+    "DndSelection",
+    "CLIPBOARD"
+};
+Atom xatoms[NUM_XA];
+
 /* Called from main(). */
 bool
 sys_init(char *program_name)
@@ -335,7 +351,13 @@ sys_init(char *program_name)
 	    xa_wm_net_name = XInternAtom (dpy, "_NET_WM_NAME", False);
 	    xa_wm_net_icon_name = XInternAtom (dpy, "_NET_WM_ICON_NAME", False);
 	    xa_utf8_string = XInternAtom (dpy, "UTF8_STRING", False);
-
+           /* Get atoms for the selection */
+           {
+              int i;
+              /* fixme:  COMPOUND_TEXT is repeated ^^^^  */
+              for (i = 0; i < NUM_XA; i++)
+                 xatoms[i] = XInternAtom(dpy, xa_names[i], False);
+           }
 	    if (!XShapeQueryExtension (dpy, &shape_event_base,
 				       &shape_error_base))
 	    {
