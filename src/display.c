@@ -357,12 +357,14 @@ sys_init(char *program_name)
 		/* this value is assumed in events.c:get_server_timestamp */
 		attr.event_mask = KeyPressMask;
 		attr.override_redirect = True;
+                attr.do_not_propagate_mask = KeyPress;
 		no_focus_window = XCreateWindow (dpy, root_window,
-						 -10, -10, 10, 10, 0, 0,
-						 InputOnly, CopyFromParent,
+						 10, 10, 10, 10, 0, 0,
+						 InputOutput, CopyFromParent,
 						 CWEventMask
 						 | CWOverrideRedirect,
 						 &attr);
+                XSelectInput (dpy, no_focus_window, KeyPressMask | FocusChangeMask);
 		XMapWindow (dpy, no_focus_window);
 	    }
 
