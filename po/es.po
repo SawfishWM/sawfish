@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-08-01 13:29+0200\n"
+"PO-Revision-Date: 2010-08-05 15:28+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2365,6 +2365,8 @@ msgstr ""
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Select the next desktop when the pointer hits screen edge."
 msgstr ""
+"Seleccionar el siguiente escritorio cuando el puntero llega al borde de la "
+"pantalla."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "viewport"
@@ -2513,9 +2515,8 @@ msgid "Placement weight"
 msgstr "Peso de la colocación"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Fixed position"
-msgstr "Posición"
+msgstr "Posición fija"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Sticky"
@@ -2574,9 +2575,8 @@ msgid "Never iconify"
 msgstr "No iconizar nunca"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Never maximize"
-msgstr "Desma_ximizar"
+msgstr "No maximizar nunca"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Avoid"
@@ -2603,18 +2603,16 @@ msgid "Window list skip"
 msgstr "Ignorar la lista de ventanas"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Task list skip"
-msgstr "Ignorar la lista de ventanas"
+msgstr "Ignorar la lista de tareas"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Nombre único"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Window name"
-msgstr "Ventana:"
+msgstr "Nombre de la ventana"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2846,21 +2844,24 @@ msgstr "Envía la ventana al escritorio situado a la derecha del actual"
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
-msgstr ""
+msgstr "Cuando el puntero del ratón afecta a quién tiene el foco."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Click-to-focus mode passes the click through to the application."
 msgstr ""
+"El modo pulsar-para-dar-el-foco pasa la pulsación a través de la aplicación."
 
 #. ../lisp/sawfish/wm/focus.jl
-#, fuzzy
 msgid "Whether focusing a window doesn't change it's position in the stack."
 msgstr ""
-"Enviar la ventana a su posición más baja posible en el orden de apilamiento."
+"Indica si al dar el foco a una ventana no se cambia su posición de "
+"apilamiento."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When true, pointer in/out events don't cause focus changes."
 msgstr ""
+"Cuando es cierta, los eventos de entrada/salida del puntero no provocan "
+"cambios en el foco."
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Default frame style:"
@@ -3382,9 +3383,8 @@ msgid "Display the applications menu."
 msgstr "Muestra el menú de aplicaciones."
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Popup window list menu"
-msgstr "Abrir menú ventana"
+msgstr "Mostrar el menú de lista de ventanas"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display the window-list menu."
@@ -3450,14 +3450,12 @@ msgid "Raise lower single window"
 msgstr "Traer al frente ventana única del fondo"
 
 #. ../lisp/sawfish/wm/stacking.jl
-#, fuzzy
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
-"Si la ventana está en la posición más alta posible, enviarla a su posición "
-"más baja posible. Sino, subirla tanto como sea posible. También cambia el "
-"nivel de cualquier ventana temporal que tenga."
+"Si la ventana está en la posición más alta posible, enviarla a su posición\n"
+"más baja posible. Sino, subirla tanto como sea posible."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
@@ -3538,13 +3536,12 @@ msgid "Toggle window sticky"
 msgstr "Cambiar permanencia de la ventana"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
 msgstr ""
-"Cambiar la «permanencia» de la ventana - si es o no miembro de todos los "
-"escritorios."
+"Cambiar la «permanencia» de la ventana; si es o no miembro de todos\n"
+"los escritorios."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -3603,9 +3600,8 @@ msgid "Toggle task list skip"
 msgstr "Cambiar ignorar lista de tareas"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
-#, fuzzy
 msgid "Toggle whether a window will be included in the task-list."
-msgstr "Cambiar si una ventana será incluida en la lista de ventanas o no."
+msgstr "Cambiar si una ventana será incluida en la lista de ventanas o no."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -3645,12 +3641,12 @@ msgid "Unmaximize window"
 msgstr "Restaurar ventana"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Restore the dimensions of the window to its original,\n"
 "unmaximized, state."
 msgstr ""
-"Restaurar las dimensiones de la ventana a su estado original, no maximizado."
+"Restaurar las dimensiones de la ventana a su estado original,\n"
+"no maximizado."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
@@ -3681,24 +3677,24 @@ msgid "Maximize window horizontally toggle"
 msgstr "Cambiar maximizar ventana horizontalmente"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between horizontally maximized and\n"
 "unmaximized."
 msgstr ""
-"Cambiar el estado de la ventana entre maximizado en horizontal y no "
-"maximizado."
+"Cambiar el estado de la ventana entre maximizado en horizontal y\n"
+"no maximizado."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically toggle"
 msgstr "Cambiar maximizar ventana verticalmente"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between vertically maximized and\n"
 "unmaximized."
-msgstr "Cambiar el estado de la ventana entre maximizado y no maximizado."
+msgstr ""
+"Cambiar el estado de la ventana entre maximizado verticalmente y\n"
+"no maximizado."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window"
@@ -3815,13 +3811,12 @@ msgid "Unshade window"
 msgstr "Desenrollar ventana"
 
 #. ../lisp/sawfish/wm/state/shading.jl
-#, fuzzy
 msgid ""
 "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
 msgstr ""
-"Si la ventana esta enrollada (ver 'enrollar-ventana'), restaurar su estado "
-"habitual."
+"Si la ventana esta enrollada (ver «enrollar-ventana»), restaurar su\n"
+"estado habitual."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Toggle window shaded"
@@ -3841,6 +3836,7 @@ msgstr "_Enrollada"
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Focus on application windows when they first appear."
 msgstr ""
+"Dar el foco a las ventanas de aplicación cuando aparecen por primera vez."
 
 #. ../lisp/sawfish/wm/state/transient.jl
 msgid "Raise window and transients"
@@ -3907,27 +3903,24 @@ msgid "Tab add to group"
 msgstr "Añadir al grupo"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Tab release window"
-msgstr "Borrar ventana"
+msgstr "El tabulador libera la ventana"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Release active window from its group"
 msgstr "Librear la ventana activa de su grupo"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Tab raise left window"
-msgstr "A primer plano ventana desde el fondo"
+msgstr "El tabulador trae la ventana izquierda"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Raise left window in current group"
 msgstr "Traer a primer plano ventana izquierda en el grupo actual"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Tab raise right window"
-msgstr "Traer ventana única al frente."
+msgstr "El tabulador trae la ventana derecha"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Raise right window in current group"
@@ -3990,13 +3983,13 @@ msgid "Quote event"
 msgstr "Enmascarar evento"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
-#, fuzzy
 msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
 msgstr ""
 "Envia el evento de tecla siguiente directamente a la ventana cliente con "
-"foco, ignorando cualquier combinación de teclas que pueda tener el gestor de "
+"foco,\n"
+"ignorando cualquier combinación de teclas que pueda tener el gestor de "
 "ventanas."
 
 #. ../lisp/sawfish/wm/util/marks.jl
@@ -4060,39 +4053,38 @@ msgid "Raise window"
 msgstr "Traer ventana a primer plano"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid ""
 "Raise the window to its highest allowed position in the stacking\n"
 "order."
 msgstr ""
-"Traer la ventana a su posición más alta posible en el orden de apilamiento."
+"Traer la ventana a su posición más alta posible en el orden de\n"
+"apilamiento."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Lower window"
 msgstr "Enviar ventana al fondo"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid ""
 "Lower the window to its lowest allowed position in the stacking\n"
 "order."
 msgstr ""
-"Traer la ventana a su posición más alta posible en el orden de apilamiento."
+"Traer la ventana a su posición más alta posible en el orden de\n"
+"apilamiento."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Raise lower window"
 msgstr "A primer plano ventana desde el fondo"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid ""
 "If the window is at its highest possible position, then lower it\n"
 "to its lowest possible position. Otherwise raise it as far as\n"
 "allowed."
 msgstr ""
-"Si la ventana está en la posición más alta posible, enviarla a su posición "
-"más baja posible. Sino, subirla tanto como sea posible. También cambia el "
-"nivel de cualquier ventana temporal que tenga."
+"Si la ventana está en la posición más alta posible, enviarla a su\n"
+"posición más baja posible. Sino, subirla tanto como sea posible.\n"
+"También cambia el nivel de cualquier ventana temporal que tenga."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
