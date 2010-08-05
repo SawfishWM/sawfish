@@ -266,7 +266,9 @@ install_colormaps (Lisp_Window *w)
 	int i;
 	for (i = w->n_cmap_windows - 1; i >= 0; i--)
 	{
-	    XGetWindowAttributes (dpy, w->cmap_windows[i], &attr);
+            if (debug_events & DB_EVENTS_COLOR)
+                DB (("XGetWindowAttributes install_colormaps\n"));
+            XGetWindowAttributes (dpy, w->cmap_windows[i], &attr);
 	    XInstallColormap (dpy, attr.colormap);
 	    if (w->cmap_windows[i] == w->id)
 		seen_toplevel = TRUE;
@@ -274,6 +276,8 @@ install_colormaps (Lisp_Window *w)
     }
     if (!seen_toplevel)
     {
+        if (debug_events & DB_EVENTS_COLOR)
+            DB (("XGetWindowAttributes install_colormaps 2\n"));
 	XGetWindowAttributes (dpy, w->id, &attr);
 	XInstallColormap (dpy, attr.colormap);
     }
@@ -309,6 +313,9 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
+   if (debug_keys & DB_KEYS_FLOW)
+      DB (("E: %s/release -> eval_input_event (%s)\n", __FUNCTION__,
+           w ? (char *) rep_STR (w->name) : "unknown"));
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type, 0);
 
     /* Don't look for a context map, frame parts are never focused */
@@ -446,6 +453,8 @@ button_press (XEvent *ev)
 	ungrab_pointer ();
     }
 
+    if (debug_keys || (debug_functions & DB_FUNCTIONS_GRAB))
+        DB (("%s: %s\n", __FUNCTION__, XAllowEvents_string));
     XAllowEvents (dpy, SyncPointer, last_event_time);
 }
 
@@ -479,6 +488,8 @@ motion_notify (XEvent *ev)
 	    eval_input_event (current_context_map ());
     }
 
+   if (debug_keys || (debug_functions & DB_FUNCTIONS_GRAB))
+       DB (("%s %s\n", XAllowEvents_string, __FUNCTION__));
     XAllowEvents (dpy, SyncPointer, last_event_time);
 
     /* Don't call flush_current_context_map (), since we want to
@@ -500,6 +511,7 @@ update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     repv str = Qnil;
     int convert_status;
 
+   DB(("%s: %s\n",__FUNCTION__, rep_STR (w->name)));
     if (xproperty.state != PropertyNewValue
         || XGetWindowProperty (dpy, w->id, xproperty.atom, 0, 200, False,
                                AnyPropertyType, &actual, &format, &nitems,
@@ -600,11 +612,20 @@ property_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     repv w_ = rep_VAL (w);		/* type alias for gc-pro'ing */
+    /* the condition is complex, so eval once:*/
+    int debug = (debug_events & DB_EVENTS_PROPERTY) &&
+        (!( (bad_atoms[0] == ev->xproperty.atom) || ( bad_atoms[1] == ev->xproperty.atom)));
+
     if (w != 0 && ev->xproperty.window == w->id)
     {
 	bool need_refresh = FALSE, changed = TRUE;
 	repv changed_states = Qnil, prop;
 	rep_GC_root gc_w, gc_changed_states;
+
+        if (debug)
+            DB (("%s %s on %s", __FUNCTION__,
+                 (ev->xproperty.atom==XA_WM_ICON_NAME)?"ICON_NAME!!!":"",
+                 XGetAtomName(dpy, ev->xproperty.atom), rep_STR (w->name)));
 
 	switch (ev->xproperty.atom)
 	{
@@ -663,11 +684,15 @@ property_notify (XEvent *ev)
 	if (need_refresh && w->reparented
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
+            if  (debug)
+                DB (("%s: need_refresh property_change",  __FUNCTION__));
 	    w->property_change (w);
 	}
 
 	if (changed)
 	{
+            if  (debug)
+                DB (("changed -> hook\n"));
 	    Fcall_window_hook (Qproperty_notify_hook, rep_VAL(w),
 			       rep_list_2 (prop, ev->xproperty.state
 					   == PropertyNewValue
@@ -675,7 +700,9 @@ property_notify (XEvent *ev)
 	}
 	if (changed_states != Qnil)
 	{
-	    Fcall_window_hook (Qwindow_state_change_hook, rep_VAL (w),
+            if (debug)
+                DB (("changed_states -> hook\n"));
+            Fcall_window_hook (Qwindow_state_change_hook, rep_VAL (w), /* w_ */
 			       rep_LIST_1 (changed_states), Qnil);
 	}
 
