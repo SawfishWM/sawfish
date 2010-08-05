@@ -285,17 +285,13 @@ choose_visual (void)
 bool
 sys_init(char *program_name)
 {
-    char *display_name = 0, *prog_name = 0;
+    char *display_name = 0;
     repv opt;
 
 #ifdef HAVE_UNIX
     if (!batch_mode_p ())
 	setpgid (0, 0);
 #endif
-
-    prog_name = program_name;
-    if (rep_get_option ("--name", &opt))
-	prog_name = strdup (rep_STR(opt));
 
     rep_INTERN_SPECIAL(display_name);
     rep_INTERN_SPECIAL(canonical_display_name);
