@@ -308,6 +308,7 @@ install_window_frame (Lisp_Window *w)
 
 	XSelectInput (dpy, w->frame, FRAME_EVENTS);
 
+        XAddToSaveSet (dpy, w->id);
 	before_local_map (w);
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
@@ -317,7 +318,6 @@ install_window_frame (Lisp_Window *w)
 	if (queued_focus_id == w->id)
 	    queued_focus_id = w->frame;
 
-	XAddToSaveSet (dpy, w->id);
 	restack_frame_parts (w);
 	reset_frame_parts (w);
 
