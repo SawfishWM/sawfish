@@ -30,6 +30,7 @@
 #include <assert.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <X11/XKBlib.h>         /* extensions/XKB.h */
 
 #ifdef HAVE_UNIX
 # ifdef HAVE_FCNTL_H
@@ -61,6 +62,9 @@ Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols, xa_wm_delete_window,
 DEFSYM(display_name, "display-name");
 DEFSYM(canonical_display_name, "canonical-display-name");
 
+int usexkb;                              /* bool */
+int xkb_major_opcode = 0;
+int xkb_event_base;
 /* X error handlers */
 
 /* General error handler. Probably due to lag between windows being
@@ -311,8 +315,31 @@ sys_init(char *program_name)
 
 	if (display_name == 0)
 	    display_name = getenv("DISPLAY");
-
-	dpy = XOpenDisplay(display_name);
+        {
+            int major=1;
+            int minor=0;
+            int error_rtrn;
+            int reason_rtrn;
+            dpy= XkbOpenDisplay (display_name, &xkb_event_base, &error_rtrn, &major, &minor, &reason_rtrn);
+            if (dpy == NULL)            /* or   reason_rtrn != XkbOD_Success. */
+            {
+                switch (reason_rtrn) {
+                    case XkbOD_ConnectionRefused:
+                        /* nothing to do! */
+                        break;
+                    case XkbOD_NonXkbServer:
+                        fprintf(stderr, "sawfish: the server %s doesn't support XKB, trying without.\n",
+                                display_name ? display_name : "");
+                    default:
+                        usexkb = 0;
+                        dpy = XOpenDisplay(display_name);
+                };
+            } else {
+                /* get xkb_major_opcode */
+                XkbQueryExtension(dpy, &xkb_major_opcode, &xkb_event_base, &error_rtrn, &major, &minor);
+                usexkb = 1;
+            }
+        }
 	if(dpy != 0)
 	{
 	    Fset (Qdisplay_name, rep_string_dup (display_name));
