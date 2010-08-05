@@ -317,7 +317,7 @@ install_window_frame (Lisp_Window *w)
 }
 
 void
-remove_window_frame (Lisp_Window *w)
+remove_window_frame (Lisp_Window *w, bool restack)
 {
     DB(("remove_window_frame (%s)\n", rep_STR(w->name)));
     if (w->reparented && !WINDOW_IS_GONE_P (w))
@@ -332,8 +332,9 @@ remove_window_frame (Lisp_Window *w)
 	before_local_map (w);
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
 	w->reparented = FALSE;
-	after_local_map (w);
-	restack_window (w);
+        after_local_map (w);
+        if (restack)
+            restack_window (w);
 
 	if (queued_focus_id == w->frame)
 	    queued_focus_id = w->id;
