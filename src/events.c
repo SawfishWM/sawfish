@@ -742,10 +742,11 @@ destroy_notify (XEvent *ev)
     Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
     if (w == 0 || ev->xdestroywindow.window != w->id)
 	return;
-    remove_window (w, TRUE, FALSE);
+
+    mark_window_as_gone(w);
+    remove_window (w, True);
     property_cache_invalidate_window (rep_VAL (w));
-    emit_pending_destroys ();
-    /* in case the id gets recycled but the window doesn't get gc'd..? */
+    destroy_window (w);
 }
 
 void
@@ -1480,10 +1481,6 @@ handle_input_mask(long mask)
 		break;
 	}
 
-	rep_PUSHGC(gc_old_current_window, old_current_window);
-	emit_pending_destroys ();
-	rep_POPGC;
-
 	if (xev.type == NoExpose || xev.type == GraphicsExpose)
 	    continue;
 
@@ -1511,7 +1508,6 @@ handle_input_mask(long mask)
 	XFlush (dpy);
     }
 
-    emit_pending_destroys ();
     commit_queued_focus_change ();
 }
 

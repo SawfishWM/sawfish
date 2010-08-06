@@ -73,7 +73,7 @@ error_handler (Display *dpy, XErrorEvent *ev)
     if (ev->resourceid != 0
 	&& (ev->error_code == BadWindow || ev->error_code == BadDrawable))
     {
-	w = x_find_window_by_id (ev->resourceid);
+	w = find_window_by_id (ev->resourceid);
 
 	if (w != NULL)
 	{
@@ -92,12 +92,9 @@ error_handler (Display *dpy, XErrorEvent *ev)
                    return 0;
                } else
                {
-                   remove_window (w, TRUE, TRUE);
+                   mark_window_as_gone (w);
                }
            }
-
-	    /* so we call emit_pending_destroys () at some point */
-	    rep_mark_input_pending (ConnectionNumber (dpy)); 
 	}
     }
 
@@ -370,6 +367,7 @@ sys_init(char *program_name)
 	       debugging. Sawfish tries to work out when the error
 	       handle might be called (i.e. after any XGet, XQuery, XFetch
 	       type function) and then call emit_pending_destroys ()
+	       -- fixme: different approach now!
 	       as soon as possible, so that there's as small as possible
 	       delay between the window being destroyed and the hook
 	       being called.. */

@@ -317,9 +317,9 @@ extern void after_local_map (Lisp_Window *w);
 extern void install_window_frame (Lisp_Window *w);
 extern void remove_window_frame (Lisp_Window *w);
 extern Lisp_Window *add_window (Window id);
-extern void remove_window (Lisp_Window *win, bool destroyed, bool from_error);
 extern void mark_window_as_gone (Lisp_Window *w);
-extern void emit_pending_destroys (void);
+extern void remove_window (Lisp_Window *win, bool destroyed);
+extern void destroy_window (Lisp_Window *w);
 extern repv Fwindow_get (repv win, repv prop, repv checker);
 extern void register_property_monitor (repv prop, void (*callback)
 				       (Lisp_Window *, repv, repv, repv));
