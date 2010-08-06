@@ -92,20 +92,7 @@ DEFSYM(sawfish_wm, "sawfish.wm");
 static rep_bool
 on_idle (int since_last)
 {
-    if (print_event_prefix ())
-	return rep_TRUE;
-
-    if (since_last == 0 && rep_recurse_depth == 0)
-    {
-	/* XXX There have been reports of sawfish locking the display,
-	   XXX I've never seen it, but this may help, and shouldn't hurt.. */
-	last_event_time = get_server_timestamp ();
-	ungrab_pointer ();
-	XUngrabKeyboard (dpy, last_event_time);
-	XFlush (dpy);
-    }
-
-    return rep_FALSE;
+    return rep_TRUE;
 }
 
 static void

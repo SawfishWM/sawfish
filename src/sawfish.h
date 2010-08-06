@@ -170,6 +170,17 @@ typedef struct lisp_window {
 #define XWINDOWP(v)	rep_CELL16_TYPEP(v, window_type)
 #define WINDOWP(v)	XWINDOWP(v)
 
+struct focus_request_t
+{
+   bool sent;
+   Time time;
+   unsigned long serial;
+   bool grabbed;
+   Window window;
+};
+
+extern struct focus_request_t focus_request;
+
 #define WINDOW_FOCUSED_P(w) (focus_window == w)
 
 #define WINDOW_IS_GONE_P(w) ((w->gone) || (w->destroyed))

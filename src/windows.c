@@ -28,7 +28,15 @@
 Lisp_Window *window_list;
 int window_type;
 
-Lisp_Window *focus_window;
+Lisp_Window *focus_window;      /* Where is the X focus. Modified on focus_out/in events */
+
+/* Scheduled (Unmapped) window, to be focused right after mapped */
+Lisp_Window *desired_focus_window = NULL;
+
+/* what we requested to focus. If the window is gone in the meanwhile
+ * ..... but we might request another one!
+ * this is useless! unless a `list' */
+Window requested_focus_id;
 
 static bool initialising;
 
@@ -40,6 +48,14 @@ DEFSYM(placed, "placed");
 DEFSYM(after_framing_hook, "after-framing-hook");
 DEFSYM(after_initialization_hook, "after-initialization-hook");
 DEFSYM(remove_window_hook, "remove-window-hook");
+
+/* This is a hack, due to our postponing re-focusing. I still don't know why we do it.
+ * It's used when we focus twice in serving 1 event. */
+DEFSYM(focus_skipped_hook, "focus-skipped-hook");
+DEFSYM(focus_on_hook, "focus-on-hook");
+DEFSYM(focus_off_hook, "focus-off-hook");
+/* the window could not be focused: either gone, or unmapped? */
+DEFSYM(focus_fail_hook, "focus-fail-hook");
 
 /* for visibility-notify-hook */
 DEFSYM(fully_obscured, "fully-obscured");
@@ -110,32 +126,19 @@ window_input_hint_p (Lisp_Window *w)
 	return TRUE;
 }
 
+struct focus_request_t focus_request;
+
 static Window queued_focus_id;
 static bool queued_take_focus;
 static bool queued_set_focus;
 static int queued_focus_revert;
 static Time queued_focus_time;
 
-/* We can lose the focus sometimes, notably after a was-focused
-   window is closed while a keyboard grab exists.. (netscape) */
-static void
-check_for_lost_focus (void)
-{
-    Window focus;
-    int revert_to;
-    XGetInputFocus (dpy, &focus, &revert_to);
-    if (focus == None || focus == PointerRoot)
-    {
-	DB (("lost focus (%ld)\n", focus));
-	focus_on_window (focus_window);
-    }
-}
 
+/* todo: this should be invoked from REPL ... not only after key command */
 void
 commit_queued_focus_change (void)
 {
-    if (0 && queued_focus_id == 0)
-	check_for_lost_focus ();
 
     if (queued_focus_id != 0)
     {
@@ -143,6 +146,13 @@ commit_queued_focus_change (void)
 	{
 	    DB(("  sending WM_TAKE_FOCUS %x %ld\n",
 		(unsigned) queued_focus_id, queued_focus_time));
+
+            focus_request.sent = True;
+            // focus_request.grabbed = FALSE;
+            focus_request.time = queued_focus_time;
+            focus_request.serial = NextRequest(dpy);
+            focus_request.window = queued_focus_id;
+
 	    send_client_message (queued_focus_id,
 				 xa_wm_take_focus,
 				 queued_focus_time);
@@ -153,6 +163,8 @@ commit_queued_focus_change (void)
 		(unsigned) queued_focus_id, queued_focus_time));
 	    XSetInputFocus (dpy, queued_focus_id,
 			    queued_focus_revert, queued_focus_time);
+            /* & Ungrab */
+            
 	}
 	queued_focus_id = 0;
     }
