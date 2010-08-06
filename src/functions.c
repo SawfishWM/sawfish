@@ -248,6 +248,10 @@ root window.
 	return Qnil;
 }
 
+/* When resizing, we can push the resized frame parts immediately,
+ * without waiting for the events.*/
+bool be_proactive_in_move = 1;
+
 DEFUN("move-window-to", Fmove_window_to, Smove_window_to,
       (repv win, repv x, repv y), rep_Subr3) /*
 ::doc:sawfish.wm.windows.subrs#move-window-to::
@@ -263,9 +267,17 @@ Move the top-left corner of window object WINDOW to (X, Y).
     {
 	VWIN(win)->attr.x = rep_INT(x);
 	VWIN(win)->attr.y = rep_INT(y);
+        Fgrab_server ();
 	XMoveWindow (dpy,
 		     VWIN(win)->reparented ? VWIN(win)->frame : VWIN(win)->id,
 		     VWIN(win)->attr.x, VWIN(win)->attr.y);
+        if (be_proactive_in_move) {
+           /* mmc: */
+           DB(("%s: proactive fps redrawing %s\n", __FUNCTION__,
+               rep_STR(VWIN(win)->name)));
+           refresh_frame_parts(VWIN(win));
+        }
+        Fungrab_server ();
 	send_synthetic_configure (VWIN(win));
 	Fcall_window_hook (Qwindow_moved_hook, win, Qnil, Qnil);
     }
