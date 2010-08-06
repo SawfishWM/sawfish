@@ -584,6 +584,18 @@ add_window (Window id)
     return w;
 }
 
+/*
+ * Mark the X client window as gone from the X server, to not issue any more X-requests on it.
+ */
+void
+mark_window_as_gone(Lisp_Window *w)
+{
+   if (WINDOW_IS_GONE_P(w))
+      return;
+   DB(("%s %x %s\n", __FUNCTION__, w->id, rep_STR(w->name)));
+   w->gone = True;
+}
+
 /* Remove W from the managed windows. If DESTROYED is nil and
    the window is currently reparented by us, it will be reparented back to
    the root window */
