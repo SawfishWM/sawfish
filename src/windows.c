@@ -293,7 +293,7 @@ x_find_window_by_id (Window id)
 {
     Lisp_Window *w;
     w = window_list;
-    while (w != 0 && w->saved_id != id && w->frame != id)
+    while (w != 0 && w->id != id && w->frame != id)
 	w = w->next;
     return w;
 }
@@ -451,7 +451,7 @@ add_window (Window id)
 	window_list = w;
 	w->car = window_type;
 	w->id = id;
-	w->saved_id = id;
+        w->gone = FALSE;
 	w->plist = Qnil;
 	w->frame_style = Qnil;;
 	w->icon_image = rep_NULL;

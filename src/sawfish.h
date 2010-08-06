@@ -98,7 +98,8 @@ typedef int bool;
 typedef struct lisp_window {
     repv car;
     struct lisp_window *next;
-    Window id, saved_id;
+    Window id;
+    unsigned int gone :1;
     repv plist;
     repv frame_style;
 

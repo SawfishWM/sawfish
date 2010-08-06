@@ -740,13 +740,12 @@ static void
 destroy_notify (XEvent *ev)
 {
     Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
-    if (w == 0 || ev->xdestroywindow.window != w->saved_id)
+    if (w == 0 || ev->xdestroywindow.window != w->id)
 	return;
     remove_window (w, TRUE, FALSE);
     property_cache_invalidate_window (rep_VAL (w));
     emit_pending_destroys ();
     /* in case the id gets recycled but the window doesn't get gc'd..? */
-    w->saved_id = 0;
 }
 
 void
@@ -1082,7 +1081,7 @@ focus_out (XEvent *ev)
 	}
     }
     else if ((w = x_find_window_by_id (ev->xfocus.window)) != 0
-	     && WINDOW_IS_GONE_P (w) && ev->xfocus.window == w->saved_id)
+	     && WINDOW_IS_GONE_P (w) && ev->xfocus.window == w->id)
     {
 	/* focus-out event from a deleted window */
 	if (focus_window == w)
