@@ -295,9 +295,10 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     rep_DECLARE1(win, WINDOWP);
     rep_DECLARE2(width, rep_INTP);
     rep_DECLARE3(height, rep_INTP);
-    VWIN(win)->attr.width = rep_INT(width);
-    VWIN(win)->attr.height = rep_INT(height);
-    fix_window_size (VWIN(win));
+
+    change_window_size(VWIN(win),
+                       VWIN(win)->attr.x, VWIN(win)->attr.y,
+                       rep_INT(width), rep_INT(height));
     VWIN (win)->pending_configure = 0;
     Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
     return win;
@@ -321,13 +322,9 @@ Reconfigure the geometry of window object WINDOW as specified.
 	     || VWIN(win)->attr.y != rep_INT(y));
     resized = (VWIN(win)->attr.width != rep_INT(width)
 	       || VWIN(win)->attr.height != rep_INT(height));
-    VWIN(win)->attr.x = rep_INT(x);
-    VWIN(win)->attr.y = rep_INT(y);
-    VWIN(win)->attr.width = rep_INT(width);
-    VWIN(win)->attr.height = rep_INT(height);
     if (resized)
     {
-	fix_window_size (VWIN(win));
+        change_window_size(VWIN(win), rep_INT(x), rep_INT(y), rep_INT(width), rep_INT(height));
 	VWIN (win)->pending_configure = 0;
     }
     if (moved && !resized)
