@@ -451,7 +451,7 @@ add_window (Window id)
 	window_list = w;
 	w->car = window_type;
 	w->id = id;
-	w->saved_id = id;
+        w->gone = FALSE;
 	w->plist = Qnil;
 	w->frame_style = Qnil;;
 	w->icon_image = rep_NULL;
