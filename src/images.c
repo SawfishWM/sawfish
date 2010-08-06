@@ -1007,9 +1007,6 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     int src_width, src_height;
     int dst_width, dst_height;
     int x,dst_y;
-#if defined HAVE_IMLIB
-    int src_y;
-#endif
 
     rep_DECLARE1(dst, IMAGEP);
     rep_DECLARE2(src, IMAGEP);
@@ -1021,16 +1018,19 @@ Tile SOURCE-IMAGE into DEST-IMAGE.
     dst_height = image_height (VIMAGE (dst));
 
 #if defined HAVE_IMLIB
-    for (dst_y = src_y = 0; dst_y < dst_height; dst_y++, src_y++)
     {
-	if (src_y >= src_height)
-	    src_y = 0;
-	for (x = 0; x < dst_width; x += src_width)
-	{
-	    memcpy (dst_im->rgb_data + dst_y*dst_width*3 + x*3,
-		    src_im->rgb_data + src_y*src_width*3,
-		    MIN (dst_width - x, src_width) * 3);
-	}
+        int src_y;
+        for (dst_y = src_y = 0; dst_y < dst_height; dst_y++, src_y++)
+        {
+            if (src_y >= src_height)
+                src_y = 0;
+            for (x = 0; x < dst_width; x += src_width)
+            {
+                memcpy (dst_im->rgb_data + dst_y*dst_width*3 + x*3,
+                        src_im->rgb_data + src_y*src_width*3,
+                        MIN (dst_width - x, src_width) * 3);
+            }
+        }
     }
 #elif defined HAVE_GDK_PIXBUF
     for (dst_y = 0; dst_y < dst_height; dst_y += src_height)
