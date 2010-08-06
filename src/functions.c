@@ -272,7 +272,6 @@ Move the top-left corner of window object WINDOW to (X, Y).
 		     VWIN(win)->reparented ? VWIN(win)->frame : VWIN(win)->id,
 		     VWIN(win)->attr.x, VWIN(win)->attr.y);
         if (be_proactive_in_move) {
-           /* mmc: */
            DB(("%s: proactive fps redrawing %s\n", __FUNCTION__,
                rep_STR(VWIN(win)->name)));
            refresh_frame_parts(VWIN(win));
@@ -326,7 +325,13 @@ Reconfigure the geometry of window object WINDOW as specified.
     {
         change_window_size(VWIN(win), rep_INT(x), rep_INT(y), rep_INT(width), rep_INT(height));
 	VWIN (win)->pending_configure = 0;
+    };
+    if (be_proactive_in_move || resized)
+    {
+        DB(("proactive fps redrawing %s\n", rep_STR(VWIN(win)->name)));
+        refresh_frame_parts(VWIN(win));
     }
+
     if (moved && !resized)
     {
 	XMoveWindow (dpy, VWIN(win)->reparented ? VWIN(win)->frame
