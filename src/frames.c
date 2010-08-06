@@ -1466,6 +1466,471 @@ configure_frame_part (struct frame_part *fp)
     }
 }
 
+/* if I want to combine movement+resize w/ frame change, then this has to get back the original code!
+ * i drop it now!*/
+static void
+move_resize_frame(Lisp_Window *win, int x,int y,int w,int h)
+{
+   // we have a frame:
+   repv tem;
+   struct frame_part **last_fp = 0;
+   struct frame_part *fp = 0;
+   rep_GC_root gc_win;
+   repv rep_win = rep_VAL(win);
+
+   bool regen;				/* are we resizing the frame */
+   bool bigger;
+   int nparts = 0;
+   XSetWindowAttributes wa;
+   u_long wamask;
+   int old_x_off, old_y_off;    /* frame relative to the window. */
+
+   /* bounding box of frame */
+   int left_x, top_y, right_x, bottom_y;
+
+   /*  */
+   int dx = x - win->attr.x;
+   int dy = y - win->attr.y;
+   int dw = w - win->attr.width;
+   int dh = h - win->attr.height;
+
+   if (debug_frames & DB_FRAMES_PARTS_CHANGE)
+      DB(("%s (%s) dx/y %d/%d  dw/dh %d/%d\n", __FUNCTION__, rep_STR(win->name),
+          dx,dy,  dw,dh));
+
+   /* this should be exact same behaviour
+    *
+    *  besides, the lisp code executed to get params of the FPs needs to know the current
+    *  desired window size.
+    * */
+   win->attr.width = w;
+   win->attr.height = h;
+
+   /* mmc: this is not used by the fp building code, i hope. B/c we will adjust it! */
+   win->attr.x = x;
+   win->attr.y = y;
+
+   /* i don't look at  hide_client now! */
+
+   /* bounding box: */
+   left_x = top_y = 0;
+   if (!win->client_hidden)
+      {
+         right_x = win->attr.width;
+         bottom_y = win->attr.height;
+      }
+   else
+      right_x = bottom_y = 0;
+
+
+   if (debug_frames & DB_FRAMES_FRAME)
+      DB(("%s (%s) bounding box seems %d/%d - %d/%d \n", __FUNCTION__, rep_STR(win->name),
+          left_x, top_y, right_x, bottom_y));
+
+
+   rep_PUSHGC(gc_win, rep_win);     /* what about gen_list ? ... it's `under' win ? */
+   /* mmc:  why do we fear that the window is gone? */
+
+   /* construct the component list, and find the bounding box */
+
+   /* if (win->destroy_frame) is set then we're rebuilding an existing
+      frame
+
+      mmc: i'd prefer a macro like:  w_framed_p(w)
+   */
+
+   assert(win->destroy_frame);
+
+   if (win->destroy_frame == 0)
+      {
+         last_fp = &win->frame_parts; /* fp is 0 */
+         assert (win->frame_parts == 0);
+         regen = FALSE;
+      }
+   else
+      {
+         fp = win->frame_parts;
+         regen = TRUE;
+      }
+
+
+
+   /* re-calculate the dimensions & positions for the new window dimension.  */
+   if (regen)
+   {
+      /* we have an s-linked-list. We walk it and process the nodes.
+       * occasionally a node is to be removed? or maybe just not rendered??
+       * */
+      struct frame_part **prev = &(win->frame_parts);
+      while (fp != 0)
+         {
+            /* don't g.-collect this (frame) part */
+            rep_GC_root gc_fp;
+            repv fp_;
+
+            fp_ = rep_VAL(fp);
+
+            rep_PUSHGC(gc_fp, fp_);
+
+            /* ---------------------------------------- */
+
+            /* what happens, when we don't overwrite, and
+             * also when we overwrite?  is it all images which are GC-ed ?*/
+            if (build_frame_part (fp))
+               {
+                  /* expand frame bounding box */
+                  left_x = MIN(left_x, fp->x);
+                  right_x = MAX(right_x, fp->x + fp->width);
+                  top_y = MIN(top_y, fp->y);
+                  bottom_y = MAX(bottom_y, fp->y + fp->height);
+
+                  prev = &(fp->next);
+                  nparts++;
+               } else {
+                  DB(("%s: skipping over %x\n", __FUNCTION__, fp));
+                  *prev = fp->next; /* skip over this one */
+                  /* prev = &(fp->next); */
+                  {
+                     /* mmc: fixme:   */
+                     if (fp->id)
+                        XDestroyWindow (dpy, fp->id);
+                     fp->id = 0;
+                     if (fp->gc)
+                        XFreeGC (dpy, fp->gc);
+                     fp->gc = 0;
+                  }
+                  fp->win = 0;
+                  fp->next = 0;
+               }
+            rep_POPGC;			/* fp */
+            fp = fp->next;
+         }
+   }
+
+
+   /* now we have simple values (attributes), no need to execute Lisp */
+   if (debug_frames & DB_FRAMES_FRAME)
+      DB(("\n%s: after %sbuilding the %d parts bounding box seems %d/%d - %d/%d\n",
+          __FUNCTION__, regen?"RE-":"",
+          nparts,
+          left_x, top_y, right_x, bottom_y));
+
+   {
+      /* update the attributes for the frame/client-window dimensions & position: */
+      int new_w = right_x - left_x;
+      int new_h = bottom_y - top_y;
+
+      bigger = (new_w > win->frame_width
+                || new_h > win->frame_height);
+
+      if (debug_frames & DB_FRAMES_FRAME) {
+         if (new_w != win->frame_width || new_h != win->frame_height)
+            DB(("frame size different: %d %d, %d %d\n", win->frame_width, new_w,
+                win->frame_height, new_h));
+         else
+            DB(("frame size remains same\n"));
+      };
+
+
+      /* mmc:  here the problem of mxflat! */
+
+
+      /* adjust frame position to keep absolute client position constant */
+      win->attr.x += left_x  - win->frame_x;
+      win->attr.y += top_y - win->frame_y;
+      /* now we can find the size and offset of the frame. */
+      win->frame_x = left_x;
+      win->frame_y = top_y;
+
+      win->frame_width = new_w;
+      win->frame_height = new_h;
+   }
+
+
+   if (debug_frames & DB_FRAMES_FRAME)
+      DB((" bounding box: x=%d y=%d width=%d height=%d\n",
+          left_x, top_y, win->frame_width, win->frame_height));
+
+   /* when does this happen? */
+   if (win->reparented && bigger) /* mmc: why ....if it's bigger, it's nice to move and indeed see all the contents,
+                                   * if gravity is set suitably. */
+      set_frame_shapes (win, TRUE);
+
+   /* create the child-of-root frame window, or if it already exists,
+      configure it to the correct size.. */
+
+
+
+   {
+      /* here we rely on suitable Gravity of all the windows:
+       *
+       * fp, client  window gravity
+       * frame    bit gravity.  not needed, since we don't draw.
+       *
+       *
+       * */
+
+      /* i know the new & old position, new position of each FP, and the frame-size & movement delta. */
+
+      /* use static gravity instead of north-east iff:
+       * (dx == -dw) && (dy == - dh)
+       *
+       * use static instead of
+       *  (dx == -dw)  East -> static
+       *  (dy ==  dh)  South -> static.
+       */
+
+/* old: i should calculate the displacement of all fps and if it's 0,0 -> make it static geome. */
+
+      /* if growing  `north' ^^ we are moving the window, and resizing (increasing).
+       * so StaticGravity is better than SouthXX
+       *
+       * if growing west,  StaticGravity is better than **West gravity!
+       *
+       *
+       */
+      if (frame_options & 1024)
+         {
+            if (debug_frames & 1024)
+               DB(("position D: %d,%d, size: %d,%d ...frame window (D = delta):\n", dx, dy, dw, dh));
+
+            /* if dx == 0    South gravity, or even West?
+             * if dy == 0    East or even NorthEast ?*/
+            for (fp = win->frame_parts; fp != 0; fp = fp->next)
+               // for now i set gravity unreliably!
+               // if (!fp->gravity)
+
+
+               if (fp->id)      /* otherwise !!! */
+               {
+                  int g = 0;
+                  /* fixme: is  win->frame_x updated ?*/
+                  int fdx = (fp->x - win->frame_x) - fp->drawn.x;
+                  int fdy = (fp->y - win->frame_y) - fp->drawn.y;
+
+                  fp->width_changed = 0;
+
+                  int fdh = fp->height - fp->drawn.height;
+                  int fdw = fp->width - fp->drawn.width;
+
+                  /* shift due the selected gravity */
+                  /* heh, how is it defined??? */
+                  int gdx = dw/2; /* optimize? */
+                  int gdy = dh/2;
+
+                  /* if  fdx = fdw  == dw  use East!  but possibly truncate. */
+
+                  /*  */
+                  if (fdx == 0) /* West */
+                     {
+                        g+= 1;
+                        gdx = 0;
+                     }
+                  else if (fdx == dw) /* relative->  size     East  */
+                     {
+                        g += 2;
+                        gdx = dw;
+                     }
+
+                  if (fdy == 0)
+                     {
+                        g+= 3; /* North */
+                        gdy = 0;
+                     }
+                  else if (fdy == dh) /* South */
+                     {
+                        g+= 6;
+                        gdy = dh;
+                     };
+
+                  int trans[12]={
+                     // 0
+                     0,WestGravity,EastGravity,
+                     // 4:
+                     NorthGravity,
+                     NorthWestGravity,
+                     NorthEastGravity,
+
+                     SouthGravity,
+                     SouthWestGravity,
+                     SouthEastGravity,
+                  };
+
+                  /* if not equal in some  */
+
+                  /*  */
+                  if (debug_frames & 1024)
+                     DB(("position D: %x(req %u): %d,%d, size: %d,%d -> g=%d %s ->D %d,%d (%s%s%s)\n",
+                         fp->id, NextRequest(dpy),
+                         fdx, fdy, fdw, fdh,
+                         g, gravity_name(trans[g]), gdx, gdy,
+                         warning_color,frame_part_name(fp),color_reset));
+
+                  /* fixme:  the client! */
+
+
+                  if (trans[g])
+                     set_window_gravity(fp->id, trans[g]);
+                  else
+                     /* fixme! */
+                     if (debug_frames & 1024)
+                        DB(("%d x %d @ %d,%d -> %d x %d @ %d,%d\n",
+                            fp->drawn.width,fp->drawn.height,
+                            fp->drawn.x, fp->drawn.y,
+                            fp->width, fp->height,
+                            fp->x - win->frame_x, /* + ? */
+                            fp->y - win->frame_y));
+
+                  {
+                     /* why do we keep fp->x relative to the client window?
+                      *
+                      * Now, that we know the bounding box, we don't need it anymore, do we?
+                      * maybe when we change 1 fp?
+                      */
+                     int x = fp->x - win->frame_x;
+                     int y = fp->y - win->frame_y;
+
+                     XWindowChanges attr = {0}; /* bzero! */
+                     unsigned int mask = 0;
+
+
+                     /* if g != 0 */
+                     /* 1 direction! */
+                     if (1 || g == 3 || g == 6) /* relax! */
+                        {
+                           // do we shift wrong?  -> shrink.
+                           if (fp->drawn.x + gdx < x)
+                              {
+                                 mask |= CWX;
+                                 attr.x = x - gdx;
+                              } else
+                                 attr.x = fp->drawn.x;
+
+                           if (fp->drawn.x + fp->drawn.width + gdx > fp->width + x)
+                              {
+                                 mask |= CWWidth;
+                                 attr.width =
+                                    /* max (0, . ) */
+                                    (fp->width + x - gdx) - attr.x;
+
+                                 if (attr.width < 0)
+                                    attr.width = 0;
+                              }
+                        }
+
+
+                     if (1 || g == 1 || g == 2) /* relax! */
+                        {
+                           // do we shift wrong?  -> shrink.
+                           if (fp->drawn.y + gdy < y)
+                              {
+                                 mask |= CWY;
+                                 attr.y = y - gdy;
+                              } else
+                                 attr.y = fp->drawn.y;
+
+                           if (fp->drawn.y + fp->drawn.height + gdy > fp->height + y)
+                              {
+                                 mask |= CWHeight;
+                                 attr.height =
+                                    /* may (0, . ) */
+                                    (fp->height + y - gdy) - attr.y;
+
+                                 if (attr.height < 0)
+                                    attr.height = 0;
+                              }
+                        }
+                     if (mask)
+                        {
+                           if (debug_frames & 1024)
+                              {
+                                 DB(("resizing the FP "));
+                                 if (mask & CWX)
+                                    DB(("x: %d -> %d ", fp->drawn.x, attr.x));
+                                 if (mask & CWY)
+                                    DB(("y: %d -> %d ", fp->drawn.y, attr.y));
+
+                                 if (mask & CWWidth)
+                                    DB(("w: %d -> %d ", fp->drawn.width, attr.width));
+                                 if (mask & CWHeight)
+                                    DB(("h: %d -> %d ", fp->drawn.height, attr.height));
+                                 DB(("\n"));
+                              }
+
+
+                           /* there is a bug! Sometimes the buttons get North, and not NorthEast.
+                            * does the scheme code make errors on rounding ?*/
+                           if (mask & CWHeight) {
+                              if (attr.height ==0) /* <= 0 */
+                                 attr.height = 1;
+                              fp->drawn.height = attr.height;
+                           }
+
+                           if (mask & CWWidth){
+                              if (attr.width ==0) /* <= 0 */
+                                 attr.width = 1;
+                              fp->drawn.width = attr.width;
+                           }
+
+
+                           XConfigureWindow (dpy, fp->id, mask, &attr);
+                        }
+
+                     fp->drawn.x = attr.x + gdx;
+                     fp->drawn.y = attr.y + gdy;
+                  }
+               };
+         };
+
+      if (debug_frames & 1024)
+         DB(("%sXMoveResizeWindow %s: %d x %d  @ %d,%d  request: %d\n", move_color, color_reset,
+             win->id, win->attr.x, win->attr.y, win->frame_width, win->frame_height,
+             NextRequest(dpy)));
+      XMoveResizeWindow (dpy, win->frame, win->attr.x, win->attr.y,
+                         win->frame_width, win->frame_height);
+
+      /* mmc: question: is the final dimensions the one requested by the window? (perhaps in a hint)  */
+      if (win->reparented)
+         XMoveResizeWindow (dpy, win->id, -left_x, -top_y,
+                            win->attr.width, win->attr.height);
+      else
+         /*mmc:  could this happen??? */
+         {
+            XResizeWindow (dpy, win->id, win->attr.width, win->attr.height);
+            assert(0);
+         }
+   }
+
+   if (win->reparented)
+     XLowerWindow (dpy, win->id); /* why?    like restack_frame_parts (Lisp_Window *w) */
+
+
+
+   /* fixme: i should XClearArea of those parts, which have been shrunk! */
+
+   /* ================================================================= */
+   /* create/update windows for each part */
+   if (frame_options & 512)
+      {} else
+         //if ((dx == -dw) || (dy == -dh))
+         for (fp = win->frame_parts; fp != 0; fp = fp->next)
+            configure_frame_part (fp);
+
+   /* ================================================================= */
+   if (!win->reparented || !bigger) /* not bigger? why is that relevant?    it is just to complement
+                                   * the case solved several lines above. we need set_frame_shapes always */
+      set_frame_shapes (win, TRUE);
+
+   /*
+    *   at this point, we have to:  wait for expose & XcopyArea ...
+    *  */
+
+   rep_POPGC;				/* win */
+   if (debug_frames & 1024)
+      DB(("%s: end.---------------------------\n", __FUNCTION__));
+   // return 1;
+}
+
 /* Generate a frame-part frame for window W. If called for a window that
    already has a frame, it will be rebuilt to the current window size. */
 static void
@@ -1640,6 +2105,7 @@ list_frame_generator (Lisp_Window *w)
     w->focus_change = refresh_frame_parts;
     w->rebuild_frame = list_frame_generator;
     w->property_change = refresh_frame_parts;
+    w->move_resize_frame = move_resize_frame;
 
     if (w->reparented)
 	XLowerWindow (dpy, w->id);

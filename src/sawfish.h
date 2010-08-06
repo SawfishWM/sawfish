@@ -163,6 +163,8 @@ typedef struct lisp_window {
     void (*focus_change)(struct lisp_window *w);
     void (*rebuild_frame)(struct lisp_window *w);
     void (*property_change)(struct lisp_window *w);
+    /* mmc: 1.3.3 made away w/ this: */
+    void (*move_resize_frame)(struct lisp_window *win,int x,int y,int w,int h);
 } Lisp_Window;
 
 #define VWIN(v)		((Lisp_Window *)rep_PTR(v))

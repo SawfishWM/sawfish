@@ -623,6 +623,29 @@ remove_window (Lisp_Window *w, bool destroyed, bool from_error)
 }
 
 void
+change_window_size(Lisp_Window *win, int x,int y,int w,int h)
+{
+    Fgrab_server ();
+    if (win->frame != 0 && win->move_resize_frame != 0)
+    {
+        win->move_resize_frame (win, x, y, w, h);
+    }
+    else
+    {
+        XResizeWindow (dpy, win->id, w, h);
+
+        win->attr.width = w;
+        win->attr.height = h;
+
+        XMoveWindow (dpy, win->reparented ? win->frame
+                     : win->id, x, y);
+        win->attr.x = x;
+        win->attr.y = y;
+    }
+    Fungrab_server ();
+};
+
+void
 fix_window_size (Lisp_Window *w)
 {
     Fgrab_server ();
