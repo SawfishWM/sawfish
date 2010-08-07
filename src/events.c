@@ -364,7 +364,7 @@ current_context_map (void)
 	repv map = Qnil;
 
 	/* Only use the context map if the frame part is currently clicked,
-	   and it's window is visible (i.e. not iconified) */
+	   and its window is visible (i.e. not iconified) */
 	if (clicked_frame_part
 	    && clicked_frame_part->clicked
 	    && clicked_frame_part->win != 0
@@ -483,7 +483,8 @@ motion_notify (XEvent *ev)
 
 
 static bool
-update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
+update_window_name(Lisp_Window * w, XPropertyEvent xproperty)
+{
     unsigned char *prop;
     Atom actual;
     int format;
