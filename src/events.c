@@ -810,7 +810,7 @@ reparent_notify (XEvent *ev)
                                rep_VAL(w), Qnil, Qnil);
 
 	    /* Not us doing the reparenting. */
-	    remove_window (w, FALSE, FALSE);
+	    remove_window (w, FALSE);
 	}
         else
             Fcall_window_hook (Qreparent_notify_hook,
