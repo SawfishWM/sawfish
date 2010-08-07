@@ -148,13 +148,17 @@ windows isn't affected.
 	{
             if (pred != 0 && !WINDOW_IS_GONE_FOR_STACKING_P (pred))
 	    {
-		remove_from_stacking_list (this);
-		insert_in_stacking_list_below (this, pred);
+                if (this == pred){
+                    /* skip over! */
+                } else {
+                    remove_from_stacking_list (this);
+                    insert_in_stacking_list_below (this, pred);
 
-		/* This works because it tries to stack relative to
-		   the window above THIS first; which we just set */
-		restack_window (this);
-	    }
+                    /* This works because it tries to stack relative to
+                       the window above THIS first; which we just set */
+                    restack_window (this);
+                }
+            }
 	    pred = this;
         } else {
             if (!WINDOW_IS_GONE_FOR_STACKING_P(this))
