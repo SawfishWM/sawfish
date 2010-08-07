@@ -747,8 +747,10 @@ static void
 expose (XEvent *ev)
 {
     struct frame_part *fp = find_frame_part_by_window (ev->xexpose.window);
-    if (fp != 0)
-	frame_part_exposer (&ev->xexpose, fp);
+   if (fp != 0) {
+       start_timing();
+       frame_part_exposer (&ev->xexpose, fp);
+   }
 }
 
 static void
