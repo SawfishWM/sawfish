@@ -653,6 +653,8 @@ Flush all pending X requests, don't wait for them to finish, unless WAIT
 is true.
 ::end:: */
 {
+   if (debug_functions)
+      DB(("%s\n", __FUNCTION__));
     if (wait == Qnil)
 	XFlush (dpy);
     else
