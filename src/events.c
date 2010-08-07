@@ -88,6 +88,7 @@ DEFSYM(enter_notify_hook, "enter-notify-hook");
 DEFSYM(leave_notify_hook, "leave-notify-hook");
 DEFSYM(focus_in_hook, "focus-in-hook");
 DEFSYM(focus_out_hook, "focus-out-hook");
+DEFSYM(lost_focus_hook, "lost-focus-hook");
 DEFSYM(iconify_window, "iconify-window");
 DEFSYM(uniconify_window, "uniconify-window");
 DEFSYM(client_message_hook, "client-message-hook");
@@ -744,6 +745,13 @@ destroy_notify (XEvent *ev)
 	return;
 
     mark_window_as_gone(w);
+    if (focus_request.window == w->id)
+    {
+        DB(("the window was responsible for focus. Now destroyed!\n"));
+        Fcall_window_hook (Qlost_focus_hook,
+                           w,
+                           Qnil,Qnil); /* Qor? */
+    }
     remove_window (w, True);
     property_cache_invalidate_window (rep_VAL (w));
     destroy_window (w);
@@ -1858,6 +1866,7 @@ events_init (void)
     rep_INTERN_SPECIAL(leave_notify_hook);
     rep_INTERN_SPECIAL(focus_in_hook);
     rep_INTERN_SPECIAL(focus_out_hook);
+    rep_INTERN_SPECIAL(lost_focus_hook);
     rep_INTERN_SPECIAL(client_message_hook);
     rep_INTERN_SPECIAL(window_moved_hook);
     rep_INTERN_SPECIAL(window_resized_hook);
