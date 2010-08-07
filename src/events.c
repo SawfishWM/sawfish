@@ -778,6 +778,12 @@ destroy_notify (XEvent *ev)
     if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
     remove_window (w, TRUE, FALSE);
+
+    if (ev->xdestroywindow.event != ev->xdestroywindow.window)
+    {
+        DB(("reported by the frame: i'm not interested though!"));
+        return;
+    };
     property_cache_invalidate_window (rep_VAL (w));
     emit_pending_destroys ();
     /* in case the id gets recycled but the window doesn't get gc'd..? */
