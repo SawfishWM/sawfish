@@ -994,7 +994,7 @@ enter_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && !WINDOW_IS_GONE_P (w))
+        if (tem && rep_CONSP(tem) && (w) && !WINDOW_IS_GONE_P (w))
 	{
 	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
 			       rep_list_2 (rep_VAL(fp), mode), Qnil);
@@ -1040,7 +1040,7 @@ leave_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && !WINDOW_IS_GONE_P (w))
+        if (tem && rep_CONSP(tem) && (w) && !WINDOW_IS_GONE_P (w))
 	{
 	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
 			       rep_LIST_2 (rep_VAL(fp), mode), Qnil);
