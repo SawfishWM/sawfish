@@ -72,6 +72,48 @@ DEFSYM(spacing, "spacing");
 DEFSYM(window, "window");
 DEFSYM(head, "head");
 
+/* used by `restack_window' to do nothing. That is called from various x-lower/raise calls
+ * in this file: */
+
+
+/* fixme:   put in a .h file ! */
+extern void push_stacking_list_to_server(Lisp_Window**, int len);
+
+DEFUN("commit-restacking", Fcommit_restacking, Scommit_restacking,
+      (repv list), rep_Subr1) /*
+::doc:sawfish.wm.events::commit-restacking
+
+(commit-restacking old-stacking-list)
+called with the _old_ stacking order, which should be _still_ present in X.
+Pushes the delayed stacking order modifications to the X server.
+::end:: */
+{
+   int i = 0;
+   repv ptr;
+   /* make the C array: */
+   rep_DECLARE1(list, rep_LISTP);
+
+   if (list == Qnil)
+      return Qt;   /* fixme: what if we have something now?
+                      mmc: the 2 vectors have to contain the `same' set of windows. */
+   {
+      /* we want to operate on 2 vectors: move the list in a C array: */
+      int len = rep_list_length(list);  /* fixme!!!! was Flength*/
+      Lisp_Window** stacking_on_server = alloca((len +1) * sizeof(Lisp_Window*)); /* ??? why + 1*/
+
+      for (ptr = list; rep_CONSP (ptr); ptr = rep_CDR (ptr)) /* i could use len. */
+         {
+            if (!WINDOWP (rep_CAR (ptr)))
+               return rep_signal_arg_error (list, 1);
+            stacking_on_server[i++] = (Lisp_Window*) rep_CAR (ptr);
+         }
+
+      push_stacking_list_to_server(stacking_on_server, i);
+      Fcall_hook (Qafter_restacking_hook, Qnil, Qnil); /* mmc */
+      return Qt;
+   }
+}
+
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
 ::doc:sawfish.wm.windows.subrs#restack-windows::
@@ -1372,6 +1414,7 @@ functions_init (void)
     repv tem;
 
     tem = rep_push_structure ("sawfish.wm.windows.subrs");
+    rep_ADD_SUBR(Scommit_restacking);
     rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR(Sx_raise_window);
     rep_ADD_SUBR(Sx_lower_window);
