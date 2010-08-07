@@ -757,6 +757,24 @@ static void
 destroy_notify (XEvent *ev)
 {
     Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
+    /* dw for debug only */
+    Lisp_Window *dw = w?:
+        (find_window_by_frame (ev->xdestroywindow.window)?:
+         find_window_by_frame_part (ev->xdestroywindow.window));
+
+    if (debug_events){
+        DB(("%s: %s %s\n", __FUNCTION__, (w?"w is ok":"w is zero"),
+            (dw?"dw is ok":"dw is zero")));
+
+        DB (("%s: %x ->%s/%s reporter: %x pending_destroys: %d\n",
+             __FUNCTION__,
+             ev->xdestroywindow.window,
+             dw ? (char *) rep_STR (dw->name) : "unknown",
+             dw ? window_relation_desc(dw,ev->xdestroywindow.window): "",
+             ev->xdestroywindow.event,
+             pending_destroys));
+    }
+
     if (w == 0 || ev->xdestroywindow.window != w->saved_id)
 	return;
     remove_window (w, TRUE, FALSE);
