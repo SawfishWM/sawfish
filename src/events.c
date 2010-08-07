@@ -811,7 +811,7 @@ reparent_notify (XEvent *ev)
                                rep_VAL(w), Qnil, Qnil);
 
 	    /* Not us doing the reparenting. */
-	    remove_window (w, FALSE, FALSE);
+	    remove_window (w, FALSE);
 	}
         else
             Fcall_window_hook (Qreparent_notify_hook,
@@ -830,7 +830,8 @@ map_notify (XEvent *ev)
 	if (wa.override_redirect)
 	{
 	    /* arrgh, the window changed its override redirect status.. */
-	    remove_window (w, FALSE, FALSE);
+	    remove_window (w, FALSE);
+            destroy_window (w);
 #if 0
 	    fprintf(stderr, "warning: I've had it with window %#lx\n",
 		    (long)(w->id));
@@ -905,7 +906,7 @@ unmap_notify (XEvent *ev)
 	if (being_reparented)
 	    reparent_notify(&reparent_ev);
 	else
-	    remove_window (w, FALSE, FALSE);
+	    remove_window (w, FALSE);
 
 	/* This lets the client know that we are done, in case it wants
 	   to reuse the window. */
