@@ -778,7 +778,9 @@ map_request (XEvent *ev)
 	{
 	    fprintf (stderr, "warning: failed to allocate a window\n");
 	    return;
-	}
+        };
+        if (debug_events & DB_EVENTS_MAP)
+            DB (("window pointer is %x\n", id));
     }
     else
     {
@@ -792,20 +794,32 @@ map_request (XEvent *ev)
 	w->mapped = TRUE;
 	rep_call_lisp1 (module_symbol_value (rep_VAL (&iconify_mod),
 					     Quniconify_window), rep_VAL(w));
+    };
+    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w)) {
+        if (debug_windows){
+            DB(("%s %s-> %s XMapWindow %x%s\n", map_request_color, __FUNCTION__, color_reset,
+                w->id, window_name (w)));
+        }
+       XMapWindow (dpy, w->id);
     }
 
-    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w))
-    {
-	XMapWindow (dpy, w->id);
+    if (w->visible) {
+        if (debug_windows){
+            DB(("%s %s-> %s XMapWindow %x %s(frame)\n",map_request_color, __FUNCTION__,
+                color_reset, w->frame, window_name (w)));
+        }
+        XMapWindow (dpy, w->frame);
     }
-
-    if (w->visible)
-	XMapWindow (dpy, w->frame);
 
     if (w->client_unmapped)
-	/* wouldn't happen otherwise */
-	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+       /* wouldn't happen otherwise */
+       Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
+    if ((debug_windows & DB_WINDOWS_ADD)
+        || (debug_events & DB_EVENTS_MAP))
+    {
+        DB(("end processing %s.\n", __FUNCTION__));
+    }
 }
 
 static void
