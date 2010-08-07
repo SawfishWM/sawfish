@@ -303,10 +303,16 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
+    Lisp_Window *w = find_window_by_id (ev->xkey.window);
+    if (debug_keys & DB_KEYS_FLOW)
+        DB (("E: %s [%s %u @ %lu]-> eval_input_event (%s)\n", __FUNCTION__,
+             ev->type == KeyPress? "keyPress": "keyRelease",
+             ev->xkey.keycode, ev->xkey.time, 
+             window_name (w)));
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type, 0);
 
     /* Don't look for a context map, frame parts are never focused */
-    eval_input_event (Qnil);
+    eval_input_event (Qnil); /* the event is handed over in the current_x_event var */
 
     XAllowEvents (dpy, SyncKeyboard, last_event_time);
 }
