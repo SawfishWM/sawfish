@@ -112,6 +112,7 @@ DEFSYM(new_value, "new-value");
 DEFSYM(deleted, "deleted");
 
 DEFSYM(urgency, "urgency");
+DEFSYM(refresh, "refresh");
 
 DEFSYM(stack, "stack");
 DEFSYM(above, "above");
@@ -667,7 +668,15 @@ property_notify (XEvent *ev)
 	if (need_refresh && w->reparented
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
-	    w->property_change (w);
+            repv tem;
+            if  (debug)
+                DB (("%s: need_refresh property_change",  __FUNCTION__));
+            tem = Fwindow_get (w_, Qrefresh); /* fixme:  w -> w_ */
+            if (!(tem && tem != Qnil))
+            {
+                /* mmc: i think i raised this on ML year(s) ago... */
+                w->property_change (w);
+            }
 	}
 
 	if (changed)
@@ -2015,6 +2024,7 @@ events_init (void)
     rep_INTERN(new_value);
     rep_INTERN(deleted);
     rep_INTERN(urgency);
+    rep_INTERN(refresh);
 
     rep_INTERN(stack);
     rep_INTERN(above);
