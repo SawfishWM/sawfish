@@ -600,7 +600,9 @@ property_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     repv w_ = rep_VAL (w);		/* type alias for gc-pro'ing */
-    if (w != 0 && ev->xproperty.window == w->id)
+
+    if (w != 0 && !WINDOW_IS_GONE_P(w)
+        && ev->xproperty.window == w->id) /* not frame */
     {
 	bool need_refresh = FALSE, changed = TRUE;
 	repv changed_states = Qnil, prop;
