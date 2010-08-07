@@ -1328,10 +1328,12 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 	    attr.border_pixel = BlackPixel(dpy, screen_num);
 	    attr.event_mask = ExposureMask | ButtonPressMask;
 	    attr.colormap = image_cmap;
+            attr.save_under = True;
 	    message_win = XCreateWindow (dpy, root_window, x, y,
 					 message.width, height, 1,
 					 image_depth, InputOutput,
 					 image_visual,
+                                         CWSaveUnder |
 					 CWBackPixel | CWBorderPixel
 					 | CWOverrideRedirect | CWEventMask
 					 | CWColormap, &attr);
