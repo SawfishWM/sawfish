@@ -778,8 +778,9 @@ map_request (XEvent *ev)
 	rep_call_lisp1 (module_symbol_value (rep_VAL (&iconify_mod),
 					     Quniconify_window), rep_VAL(w));
     };
-    if (!w->client_unmapped) {
-        if (debug_windows){
+    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w))
+    {
+        if (debug_windows) {
             DB(("%s %s-> %s XMapWindow %x%s\n", map_request_color, __FUNCTION__, color_reset,
                 w->id, window_name (w)));
         }
