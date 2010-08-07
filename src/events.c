@@ -301,8 +301,8 @@ colormap_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xcolormap.window);
     if (w != 0 && ev->xcolormap.window == w->id && ev->xcolormap.new)
     {
-	if (w == focus_window)
-	    install_colormaps (w);
+        if (WINDOW_FOCUSED_P(w))
+            install_colormaps (w);
     }
 }
 
@@ -645,7 +645,7 @@ property_notify (XEvent *ev)
 		{
 		    w->n_cmap_windows = 0;
 		}
-		if (w == focus_window)
+                if (WINDOW_FOCUSED_P(w))
 		    install_colormaps (w);
 	    }
 	    else if (ev->xproperty.atom == xa_wm_protocols)
