@@ -271,6 +271,15 @@ Move the top-left corner of window object WINDOW to (X, Y).
     {
 	VWIN(win)->attr.x = rep_INT(x);
 	VWIN(win)->attr.y = rep_INT(y);
+        if (debug_functions & DB_FUNCTIONS_MOVE)
+        {
+            DB (("%s: %s -> @ %d,%d\n",
+                 __FUNCTION__,
+                 rep_STR(VWIN(win)->name),
+                 rep_INT(x),
+                 rep_INT(y)));
+            Fbacktrace(Fstderr_file());
+        }
 	XMoveWindow (dpy,
 		     VWIN(win)->reparented ? VWIN(win)->frame : VWIN(win)->id,
 		     VWIN(win)->attr.x, VWIN(win)->attr.y);
@@ -293,6 +302,19 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     rep_DECLARE3(height, rep_INTP);
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
+    if (debug_functions & DB_FUNCTIONS_MOVE)
+    {
+        DB (("%s: %s  resize: %d,%d -> %d,%d:  --- %d,%d\n",
+             __FUNCTION__,
+             rep_STR(VWIN(win)->name),
+             VWIN(win)->attr.width,
+             VWIN(win)->attr.height,
+             rep_INT(width),
+             rep_INT(height),
+             rep_INT(width) - VWIN(win)->attr.width,
+             rep_INT(height) - VWIN(win)->attr.height
+             ));
+    };
     fix_window_size (VWIN(win));
     VWIN (win)->pending_configure = 0;
     Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
@@ -321,6 +343,23 @@ Reconfigure the geometry of window object WINDOW as specified.
     VWIN(win)->attr.y = rep_INT(y);
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
+    if (debug_functions & DB_FUNCTIONS_MOVE)
+    {
+        DB (("%s: %s @ %d,%d ->%d,%d  --- %s%d, %d%s\nsize: %d,%d ->%d,%d  --- %s%d, %d%s\n",
+             __FUNCTION__,
+             rep_STR(VWIN(win)->name),
+             VWIN(win)->attr.x, VWIN(win)->attr.y,
+             rep_INT(x), rep_INT(y),
+             functions_color,
+             rep_INT(x) - VWIN(win)->attr.x, rep_INT(y) - VWIN(win)->attr.y,
+             color_reset,
+             VWIN(win)->attr.width, VWIN(win)->attr.height,
+             rep_INT(width), rep_INT(height),
+             functions_color,
+             rep_INT(width) - VWIN(win)->attr.width,
+             rep_INT(height) - VWIN(win)->attr.height,
+             color_reset));
+    }
     if (resized)
     {
 	fix_window_size (VWIN(win));
