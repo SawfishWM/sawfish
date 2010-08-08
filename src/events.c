@@ -1205,6 +1205,21 @@ configure_request (XEvent *ev)
 static void
 gravity_notify (XEvent *ev)
 {
+    XGravityEvent* x = &(ev->xgravity);
+
+    if (x->window == x->event)
+    {
+        struct frame_part *fp;
+        fp = find_frame_part_by_window (x->window);
+        if (fp)
+        {
+            if (fp->drawn.x != x->x || fp->drawn.y != x->y)
+            {
+                fp->drawn.x = x->x;
+                fp->drawn.y = x->y;
+            }
+        }
+    };
 }
 
 static void
