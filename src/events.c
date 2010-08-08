@@ -806,6 +806,9 @@ reparent_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xreparent.window);
 
+    if (debug_events & DB_EVENTS_MISC)
+        DB(("%s%s: %x %x%s\n", reparent_color, __FUNCTION__, ev->xreparent.window,
+            ev->xreparent.parent, color_reset));
     if (w != 0 && !WINDOW_IS_GONE_P(w)
 	&& (ev->xreparent.event == ev->xreparent.window))
     {
