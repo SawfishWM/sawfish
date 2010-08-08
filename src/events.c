@@ -1607,9 +1607,11 @@ inner_handle_input (repv arg)
 {
     XEvent *ev = (XEvent *) rep_PTR (arg);
 
+    /* try to get a Special handler of the window */
     void (*handler)(XEvent *) = window_event_handler (ev->xany.window);
     if (handler != 0)
 	(*handler) (ev);
+    /* The global one: */
     else if (ev->type < LASTEvent && event_handlers[ev->type] != 0)
 	event_handlers[ev->type] (ev);
     else if (ev->type == shape_event_base + ShapeNotify)
