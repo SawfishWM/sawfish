@@ -820,6 +820,7 @@ reparent_notify (XEvent *ev)
 	       reparent it to the root. -- thk */
 	    w->reparented = FALSE;
 	    XRemoveFromSaveSet (dpy, w->id);
+            /* mmc: IOW this will instruct remove_window->remove_window_frame to skip ...*/
 
             Fcall_window_hook (Qreparent_notify_hook,
                                rep_VAL(w), Qnil, Qnil);
