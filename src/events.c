@@ -1028,7 +1028,7 @@ report_focus_change (Lisp_Window *w)
 static void
 focus_in (XEvent *ev)
 {
-    Lisp_Window *w = find_window_by_id (ev->xfocus.window);
+    Lisp_Window *w = find_window_by_frame (ev->xfocus.window);
     if (ev->xfocus.detail == NotifyPointer)
 	return;
     if (w != 0 && w->visible)
