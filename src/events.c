@@ -1095,7 +1095,7 @@ configure_request (XEvent *ev)
 	xwc.stack_mode = ev->xconfigurerequest.detail;
 	XConfigureWindow (dpy, ev->xconfigurerequest.window, xwcm, &xwc);
     }
-    else if (w != 0)
+    else
     {
 	unsigned long mask = ev->xconfigurerequest.value_mask;
 	repv alist = Qnil;
