@@ -840,7 +840,7 @@ static void
 unmap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
-    if (w != 0 && ev->xunmap.window == w->id
+    if (w != 0 && ! WINDOW_IS_GONE_P(w)
 	&& (ev->xunmap.event == w->id || ev->xunmap.send_event))
     {
 	int being_reparented = FALSE;
