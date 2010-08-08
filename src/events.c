@@ -1301,6 +1301,12 @@ randr_screen_change_notify (XEvent *ev)
 static void
 create_notify (XEvent *ev)
 {
+    Window id = ev->xcreatewindow.window;
+    if (debug_windows & DB_WINDOWS_ADD)
+        DB (("%s on %s new window %x  %s\n", __FUNCTION__,
+             (ev->xcreatewindow.parent == root_window)?"root":"???",
+             id,
+             ev->xcreatewindow.override_redirect?"override!":""));
 }
 
 static void
