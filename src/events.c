@@ -1441,6 +1441,10 @@ inner_handle_input (repv arg)
       randr_screen_change_notify(ev);
     }
 #endif
+#ifdef USE_XKB    
+   else if (usexkb && (ev->type == xkb_event_base))
+   {}
+#endif
     else 
 	fprintf (stderr, "warning: unhandled event: %d\n", ev->type);
     return Qnil;
@@ -1762,6 +1766,10 @@ events_init (void)
     event_handlers[CreateNotify] = create_notify;
     event_handlers[CirculateNotify] = circulate_notify;
     event_handlers[MappingNotify] = mapping_notify;
+#if USE_XKB
+    event_handlers[XkbMapNotify] = mapping_notify;
+#endif
+    event_handlers[SelectionRequest] = send_selection;
 
 #ifdef DEBUG
     event_names[KeyPress] = "KeyPress";
@@ -1797,8 +1805,9 @@ events_init (void)
     event_names[ColormapNotify] = "ColormapNotify";
     event_names[ClientMessage] = "ClientMessage";
     event_names[MappingNotify] = "MappingNotify";
+#if USE_XKB
+    event_names[XkbMapNotify] = "XkbMapNotify";
 #endif
-
     event_masks[KeyPress] = KeyPressMask;
     event_masks[KeyRelease] = KeyReleaseMask;
     event_masks[ButtonPress] = ButtonPressMask;
@@ -1835,6 +1844,9 @@ events_init (void)
     event_masks[ColormapNotify] = ColormapChangeMask;
     event_masks[ClientMessage] = 0;
     event_masks[MappingNotify] = StructureNotifyMask | SubstructureNotifyMask;
+#if USE_XKB
+    event_masks[XkbMapNotify] = 0;
+#endif
 
     tem = rep_push_structure ("sawfish.wm.events");
     rep_ADD_SUBR(Squery_pointer);
