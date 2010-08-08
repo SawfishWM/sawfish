@@ -1640,7 +1640,7 @@ handle_input_mask(long mask)
 
 	if (mask == 0)
 	{
-	    if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
+	    if (XEventsQueued(dpy, QueuedAfterReading) <= 0)
 		break;
 	    XNextEvent(dpy, &xev);
 	}
@@ -1655,7 +1655,13 @@ handle_input_mask(long mask)
 	rep_POPGC;
 
 	if (xev.type == NoExpose || xev.type == GraphicsExpose)
-	    continue;
+        {
+            if (debug_events & DB_EVENTS_FLOW)  /*  & DB_EVENTS_TIME */
+                DB (("** Event: serial:%s%d%s %s .... ignoring\n",
+                     serial_color,xev.xany.serial, color_reset,
+                     xev.type < LASTEvent ?event_names[xev.type]:"unknown event"));
+            continue;
+        }
 
 #ifdef DEBUG
 	do {
