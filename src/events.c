@@ -1021,7 +1021,7 @@ report_focus_change (Lisp_Window *w)
     }
 }
 
-/* X server confirms/announces focus change. */
+/* Tell the Lisp about the change in focus. And also Frame theme. */
 static void
 focus_change (Lisp_Window* previous_focus, Lisp_Window* w, int mode)
 {
@@ -1052,7 +1052,8 @@ focus_change (Lisp_Window* previous_focus, Lisp_Window* w, int mode)
         report_focus_change (previous_focus);
 }
 
-/* We asked a client to accept focus. Now we receive the FocusIn. */
+/* We asked a client (which might handle more windows) to accept focus. Now we receive the FocusIn.
+ * Only now can we Ungrab the keyboard. */
 static void
 accept_asked_focus (XEvent *ev, Lisp_Window* previous_focus, Lisp_Window* w,
                     struct focus_request_t *focus_request)
