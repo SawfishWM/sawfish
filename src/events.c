@@ -1710,6 +1710,86 @@ DEFUN("has-randr-p", Fhas_randr_p,
   return has_randr ? Qt : Qnil;
 }
 
+repv selection_text;
+Time selection_time;
+
+/* static */
+extern Atom xatoms[NUM_XA];
+
+static void
+send_selection (XEvent *e)
+{
+    const XSelectionRequestEvent *rq = &(e->xselectionrequest);
+    XSelectionEvent ev;
+
+    Atom          target_list[3];
+    Atom            target;
+    XTextProperty   ct;
+    XICCEncodingStyle style;
+    char           *cl[2];       /* , dummy[1] */
+
+    ev.type = SelectionNotify;
+    ev.property = None;
+    ev.display = dpy;
+    ev.requestor = rq->requestor;
+    ev.selection = rq->selection;
+    ev.target = rq->target;
+    ev.time = rq->time;
+
+    /* requester asks for available formats:  */
+
+    if (rq->target == xatoms[XA_TARGETS]) {
+        /* I can answer these targets:  */
+        target_list[0] = (Atom) xatoms[XA_TARGETS];
+        target_list[1] = (Atom) XA_STRING;
+        target_list[2] = (Atom) xatoms[XA_TEXT];
+
+        XChangeProperty(dpy, rq->requestor, rq->property, XA_ATOM,
+                        /* why 8* ?? */
+                        (8 * sizeof(target_list[0])), PropModeReplace,
+                        (unsigned char *)target_list,
+                        (sizeof(target_list) / sizeof(target_list[0])));
+        ev.property = rq->property;
+    }
+
+
+    else if (rq->target == xatoms[XA_MULTIPLE]) {
+        /* TODO: Handle MULTIPLE */
+        DB(("%s: cannot handle (target=) MULTIPLE!\n", __FUNCTION__));
+    }
+
+    else if (rq->target == xatoms[XA_TIMESTAMP]) { /* fixme:  && r->selection.text */
+        XChangeProperty(dpy, rq->requestor, rq->property, XA_INTEGER,
+                        (8 * sizeof(Time)), PropModeReplace,
+                        (unsigned char *)&selection_time, 1);
+        ev.property = rq->property;
+    } else if (rq->target == XA_STRING
+               || rq->target == xatoms[XA_COMPOUND_TEXT]
+               || rq->target == xatoms[XA_TEXT]
+               ) {
+        int             selectlen;
+        target = XA_STRING;
+        style = XStringStyle;
+
+        char* text = rep_STRINGP(selection_text)?rep_STR(selection_text):(char*)"";
+
+        cl[0] = text;
+        selectlen = strlen(cl[0]);
+        {
+            ct.value = (unsigned char *)cl[0];
+            ct.nitems = selectlen;
+        }
+
+        XChangeProperty(dpy, rq->requestor, rq->property,
+                        target, 8, PropModeReplace,
+                        ct.value, (int)ct.nitems);
+        ev.property = rq->property;
+    } else {
+        DB(("%s: unexpected target!!\n", __FUNCTION__));
+    }
+
+    XSendEvent(dpy, rq->requestor, False, 0L, (XEvent *)&ev);
+}
 
 /* initialisation */
 
@@ -1762,7 +1842,7 @@ events_init (void)
     event_handlers[CreateNotify] = create_notify;
     event_handlers[CirculateNotify] = circulate_notify;
     event_handlers[MappingNotify] = mapping_notify;
-
+    event_handlers[SelectionRequest] = send_selection;
 #ifdef DEBUG
     event_names[KeyPress] = "KeyPress";
     event_names[KeyRelease] = "KeyRelease";
@@ -1901,6 +1981,9 @@ events_init (void)
 	xa_sawfish_timestamp = XInternAtom (dpy, "_SAWFISH_TIMESTAMP", False);
 	last_event_time = get_server_timestamp ();
     }
+
+    selection_text = Qnil;
+    rep_mark_static (&selection_text);
 }
 
 void

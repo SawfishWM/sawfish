@@ -122,6 +122,49 @@ If the selection currently has no value, nil is returned.
     return res;
 }
 
+
+/* Here starts the implementation of x-set-selection */
+/* The call sets this variable, and when X event - request for the selection
+ * arrives, we return/answer from this variable. */
+extern repv selection_text;
+extern Time selection_time;
+
+
+/* Time comes from the last key-event .. reasonable. But from REPL!
+ * When called from sawfish-client, take CurrentTime, otherwise the last event! */
+DEFUN ("x-set-selection", Fx_set_selection,
+       Sx_set_selection, (repv sel, repv text), rep_Subr2) /* 
+::doc:sawfish.wm.util.selection#x-set-selection::
+x-set-selection SELECTION
+
+Returns the string corresponding to the current value of the X11
+selection defined by the symbol SELECTION.
+
+If the selection currently has no value, nil is returned.
+::end:: */
+{
+    Atom selection;
+    Window sel_window = no_focus_window;
+
+    rep_DECLARE1 (sel, rep_SYMBOLP);
+    rep_DECLARE2 (text, rep_STRINGP);
+    selection = symbol_to_atom (sel);
+
+    /* fixme! use it if from repl!
+     * i.e. repl should set last_event_time = CurrentTime !*/
+
+    selection_time = last_event_time;
+
+    if (!rep_STRINGP(text))
+       DB(("%s: not a text!\n", __FUNCTION__));
+    else
+       {
+          selection_text = text;
+          XSetSelectionOwner(dpy, selection, sel_window, selection_time);
+       } 
+    return Qt;
+}
+
 /* dl hooks */
 
 repv
@@ -132,6 +175,7 @@ rep_dl_init (void)
     rep_alias_structure ("selection");
     rep_ADD_SUBR (Sx_selection_active_p);
     rep_ADD_SUBR (Sx_get_selection);
+    rep_ADD_SUBR (Sx_set_selection);
 
     if (dpy != 0)
 	sawfish_selection = XInternAtom (dpy, "SAWFISH_SELECTION", False);
