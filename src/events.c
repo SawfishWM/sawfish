@@ -1092,6 +1092,9 @@ focus_in (XEvent *ev)
         || (ev->xfocus.mode == NotifyUngrab))
         return;
 
+    /* Todo: I should have a list of what I expect. if something different occurs
+     *    -> an application intervened.
+     * otherwise no point in delaying.  But we SEND take_focus! */
     if (w != 0 && w->visible)
     {
 	Lisp_Window *old = focus_window;
