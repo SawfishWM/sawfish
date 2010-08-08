@@ -823,34 +823,16 @@ static void
 map_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xmap.window);
-    if (w != 0 && ev->xmap.window == w->id && ev->xmap.event == w->id)
+    if (w != 0 && !WINDOW_IS_GONE_P(w) && ev->xmap.window == ev->xmap.event) /*  == w->id */
     {
-	XWindowAttributes wa;
-	XGetWindowAttributes (dpy, w->id, &wa);
-	if (wa.override_redirect)
-	{
-	    /* arrgh, the window changed its override redirect status.. */
-	    remove_window (w, FALSE);
-            destroy_window (w);
-#if 0
-	    fprintf(stderr, "warning: I've had it with window %#lx\n",
-		    (long)(w->id));
-#endif
-	}
-	else
-	{
-	    /* copy in some of the new values */
-	    w->attr.width = wa.width;
-	    w->attr.height = wa.height;
-
-	    w->mapped = TRUE;
-	    /* This should not happen.  The window should have been
-	       framed at the map request. -- thk */
-	    if (w->frame == 0)
-		fprintf (stderr, "warning: window %#1x has no frame\n",
-			 (uint)(w->id));
-	    Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
-	}
+        if (ev->xmap.override_redirect)
+        {
+            remove_window (w, FALSE);
+        }
+        else
+        {
+            Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+        }
     }
 }
 
