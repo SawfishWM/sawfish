@@ -1339,6 +1339,8 @@ shape_notify (XEvent *ev)
     {
 	if (sev->kind == ShapeBounding)
 	    w->shaped = sev->shaped ? 1 : 0;
+        DB(("%s: %s%s%s\n",  __FUNCTION__, warning_color, w->shaped?"shaped":"NO MORE shaped",
+            color_reset));
 	queue_reshape_frame (w);
 	Fcall_window_hook (Qshape_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
