@@ -1119,12 +1119,25 @@ static void
 configure_request (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xconfigurerequest.window);
+    if (debug_events & DB_EVENTS_FLOW)
+       DB (("%s%s%s   %x/%s\n",
+            configure_color, __FUNCTION__, color_reset,
+            ev->xconfigurerequest.window, /* ?? */
+            window_name (w)));
     if (w == 0)
     {
 	XWindowChanges xwc;
 	unsigned int xwcm = (ev->xconfigurerequest.value_mask & 
 		      (CWX | CWY | CWWidth | CWHeight
 		       | CWStackMode | CWSibling));
+          if (debug_events & DB_EVENTS_CONFIGURE)
+             DB(("%s %s the request: %s%s%s\n",
+                 __FUNCTION__,
+                 (xwcm == ev->xconfigurerequest.value_mask)?"passing along":"filtering",
+                 (ev->xconfigurerequest.value_mask & CWStackMode)?"stack-mode ":"",
+                 (ev->xconfigurerequest.value_mask & CWWidth)?"width ":"",
+                 (ev->xconfigurerequest.value_mask & CWSibling)?"sibling ":""
+                 ));
 	xwc.x = ev->xconfigurerequest.x;
 	xwc.y = ev->xconfigurerequest.y;
 	xwc.width = ev->xconfigurerequest.width;
@@ -1194,6 +1207,11 @@ configure_request (XEvent *ev)
 				  Fcons ((mask & CWX) ? rep_MAKE_INT (x) : Qnil,
 					 (mask & CWY) ? rep_MAKE_INT (y) : Qnil)),
 			   alist);
+            if (debug_events & DB_EVENTS_CONFIGURE)
+                DB(("%s %s\tposition: %d/%d %s\n", __FUNCTION__, window_name (w),
+                    (mask & CWX)?x:-1,
+                    (mask & CWY)?y:-1,
+                    ev->xconfigurerequest.send_event?"synthetic! ":""));
 	}
 	if ((mask & CWWidth) || (mask & CWHeight))
 	{
