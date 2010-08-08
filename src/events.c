@@ -796,8 +796,9 @@ static void
 reparent_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xreparent.window);
-    if (w != 0 && ev->xreparent.window == w->id
-	&& ev->xreparent.event == w->id)
+
+    if (w != 0 && !WINDOW_IS_GONE_P(w)
+	&& (ev->xreparent.event == ev->xreparent.window))
     {
 	if (ev->xreparent.parent != root_window
 	    && ev->xreparent.parent != w->frame)
