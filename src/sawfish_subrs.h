@@ -60,6 +60,7 @@ extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_compound_text, xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string,
     xa_manager, xa_wm_sn;
 extern Time startup_time;
+extern Atom ignore_atoms[2];    /* _WIN_AREA  _WIN_WORKSPACE */
 extern int shape_event_base, shape_error_base;
 extern repv Qdisplay_name, Qcanonical_display_name;
 extern bool sys_init (char *program_name);
