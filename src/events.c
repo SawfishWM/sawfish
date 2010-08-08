@@ -1500,7 +1500,18 @@ handle_input_mask(long mask)
 void
 handle_sync_input (int fd)
 {
-    handle_input_mask (0);
+    while ((rep_throw_value == rep_NULL)
+           && (XEventsQueued(dpy, QueuedAfterFlush)))
+        handle_input_mask (0);
+    /* This might exit due to Exception.
+     * But some event might still be alread read, yet to be processed. */
+    if (rep_throw_value != rep_NULL)
+    {
+        if (XEventsQueued(dpy, QueuedAlready))
+        {
+            rep_mark_input_pending (ConnectionNumber(dpy));
+        };
+    }
 }
 
 /* Lisp functions */
