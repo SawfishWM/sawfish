@@ -82,6 +82,7 @@ DEFSYM(visibility_notify_hook, "visibility-notify-hook");
 DEFSYM(destroy_notify_hook, "destroy-notify-hook");
 DEFSYM(map_notify_hook, "map-notify-hook");
 DEFSYM(unmap_notify_hook, "unmap-notify-hook");
+DEFSYM(frame_unmap_notify_hook, "frame-unmap-notify-hook");
 DEFSYM(reparent_notify_hook, "reparent-notify-hook");
 DEFSYM(property_notify_hook, "property-notify-hook");
 DEFSYM(enter_notify_hook, "enter-notify-hook");
@@ -909,6 +910,20 @@ unmap_notify (XEvent *ev)
 	/* This lets the client know that we are done, in case it wants
 	   to reuse the window. */
 	XDeleteProperty (dpy, ev->xunmap.window, xa_wm_state);
+    }
+    else if ((w = find_window_by_frame (ev->xunmap.window)))
+    {
+        if (ev->xunmap.event == root_window) /* why: to not act twice!*/
+            Fcall_window_hook (Qframe_unmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+    }
+    else if ((w = find_window_by_frame_part (ev->xunmap.window)))
+    {
+        /* a frame part unmapped */
+    }
+    else
+    {
+        /* maybe the lisp structure --- pointers from a lisp window to X windows
+         * /frame parts ---was already destroyed */
     }
 }
 
@@ -1853,6 +1868,7 @@ events_init (void)
     rep_INTERN_SPECIAL(destroy_notify_hook);
     rep_INTERN_SPECIAL(map_notify_hook);
     rep_INTERN_SPECIAL(unmap_notify_hook);
+    rep_INTERN_SPECIAL(frame_unmap_notify_hook);
     rep_INTERN_SPECIAL(reparent_notify_hook);
     rep_INTERN_SPECIAL(property_notify_hook);
     rep_INTERN_SPECIAL(enter_notify_hook);
