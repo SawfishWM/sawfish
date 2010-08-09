@@ -438,6 +438,21 @@ lookup_event_binding (unsigned long code, unsigned long mods, repv context_map)
     return lookup_binding(code, mods, eval_input_callback, context_map, w);
 }
 
+/* If something goes wrong, the input should go a window, which has all keys grabbed */
+void
+ungrab_into_focused_window (void)
+{
+    if (focus_request.sent)
+    {
+        /* fixme: I should remark that we keep grab! */
+        focus_request.grabbed = TRUE;
+    }
+    else
+    {
+        Fungrab_keyboard ();
+    }
+}
+
 /* Process the event CODE+MODS. OS-INPUT-MSG is the raw input event
    from the window-system, this is only used to cook a string from.  */
 repv
