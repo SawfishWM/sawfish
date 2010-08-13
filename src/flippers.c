@@ -96,7 +96,7 @@ event_handler (XEvent *ev)
     }
 }
 
-DEFUN("flippers-after-restacking", Fflippers_after_restacking, 
+DEFUN("flippers-after-restacking", Fflippers_after_restacking,
       Sflippers_after_restacking, (void), rep_Subr0)
 {
     /* Must keep edge windows raised so they always get the pointer */
@@ -126,6 +126,22 @@ create_flipper (Window parent, int x, int y, int width, int height)
     return w;
 }
 
+DEFUN("create-flippers", Fcreate_flippers,
+      Screate_flippers, (void), rep_Subr0)
+{
+
+	edge_left = create_flipper (root_window, 0, 0, 1, screen_height);
+	edge_right = create_flipper (root_window, screen_width - 1, 0,
+				     1, screen_height);
+
+	edge_top = create_flipper (root_window, 0, 0, screen_width, 1);
+	edge_bottom = create_flipper (root_window, 0, screen_height - 1,
+				      screen_width, 1);
+
+	return Qt;
+
+}
+
 repv
 rep_dl_init (void)
 {
@@ -134,6 +150,7 @@ rep_dl_init (void)
     rep_ADD_SUBR(Senable_flippers);
     rep_ADD_SUBR(Sdisable_flippers);
     rep_ADD_SUBR(Sflippers_after_restacking);
+    rep_ADD_SUBR(Screate_flippers);
 
     rep_INTERN (left);
     rep_INTERN (right);
@@ -144,15 +161,13 @@ rep_dl_init (void)
 
     if (!batch_mode_p ())
     {
-	edge_left = create_flipper (root_window, 0, 0, 1, screen_height);
-	edge_right = create_flipper (root_window, screen_width - 1, 0,
-				     1, screen_height);
-	edge_top = create_flipper (root_window, 0, 0, screen_width, 1);
-	edge_bottom = create_flipper (root_window, 0, screen_height - 1,
-				      screen_width, 1);
+
+	Fcreate_flippers();
 
 	add_hook (Qafter_restacking_hook, rep_VAL(&Sflippers_after_restacking));
-	Fenable_flippers ();
+
+	Fenable_flippers();
+
     }
 
     return rep_pop_structure (tem);
