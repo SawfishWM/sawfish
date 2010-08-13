@@ -149,9 +149,6 @@
   (sawfish-load-all "sawfish/wm/autoload")
   (sawfish-load-all (concat "os-" (symbol-name operating-system))))
 
-;; do user-level initialization
-(load "sawfish/wm/user")
-
 (let ((session-id     (get-command-line-option "--sm-client-id" t))
       (session-prefix (get-command-line-option "--sm-prefix" t)))
 
@@ -159,3 +156,6 @@
   ;; connect until they're ready to handle the later priority levels
   (when (and (not batch-mode) (getenv "SESSION_MANAGER"))
     (sm-init session-id session-prefix)))
+
+;; do user-level initialization
+(load "sawfish/wm/user")
