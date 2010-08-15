@@ -45,6 +45,12 @@ See the item ``Keyboard layout switching support'' below.
 
 @item Bug Fixes
 @itemize @minus
+@item Maximized windows overlapping avoided windows bugfix
+
+Sometimes maximized windows would overlap avoided windows (e.g., the
+gnome taskbar, or a trayer) on restart.  Sawfish now waits until
+initialization is complete to maximize windows, preventing this problem.
+
 @item Viewport initialization bugfix
 
 Under certain circumstances windows could end up outside of the

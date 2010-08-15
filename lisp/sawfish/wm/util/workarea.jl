@@ -66,15 +66,28 @@
       ;; the rectangle mustn't overlap any avoided windows
       ;; or span multiple heads, or be on a different head
       ;; to that requested
-      (let loop ((rest avoided))
-           (cond ((null rest) (rect-within-head-p rect head))
-                 ((> (rect-2d-overlap
-                      (window-frame-dimensions (car rest))
-                      (window-position (car rest))
-                      rect)
-                     0)
-                  nil)
-                 (t (loop (cdr rest))))))
+      (let* ((viewport (viewport-at (nth 0 rect)
+                                    (nth 1 rect)))
+             (cur-vp (screen-viewport))
+             (x-offset (and viewport (* (screen-width)
+                                        (- (car viewport)
+                                           (car cur-vp)))))
+             (y-offset (and viewport (* (screen-height)
+                                        (- (cdr viewport)
+                                           (cdr cur-vp))))))
+        (let loop ((rest avoided))
+             (cond ((null rest) (rect-within-head-p rect head))
+                   ((> (rect-2d-overlap
+                        (window-frame-dimensions (car rest))
+                        (let ((pos (window-position (car rest))))
+                          (if (window-get (car rest) 'sticky-viewport)
+                              (cons (+ (car pos) x-offset)
+                                    (+ (cdr pos) y-offset))
+                            pos))
+                        rect)
+                       0)
+                    nil)
+                   (t (loop (cdr rest)))))))
 
     (let* ((grid (grid-from-edges (car edges) (cdr edges)))
 	   ;; find all possible rectangles

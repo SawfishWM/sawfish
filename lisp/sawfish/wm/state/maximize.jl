@@ -647,8 +647,6 @@ t")
                                    (vert 'vertical)
 				   (horiz 'horizontal))))))))
 
-  (add-hook 'after-add-window-hook maximize-after-add-window)
-
   ;; before exiting, return all windows to their unmaximized
   ;; geometries. But _don't_ change any of the properties (either
   ;; wm-local or X) that mark the window as being maximized
@@ -675,10 +673,12 @@ t")
   (add-hook 'after-initialization-hook
 	    (lambda ()
 	      (map-windows check-if-maximizable)
+              (map-windows maximize-after-add-window)
 	      ;; Don't install this hook until after all windows have
 	      ;; initially been adopted, to avoid maximizing over
 	      ;; avoided windows
-	      (add-hook 'add-window-hook check-if-maximizable)))
+	      (add-hook 'add-window-hook check-if-maximizable)
+              (add-hook 'after-add-window-hook maximize-after-add-window)))
 
   (add-hook 'sm-window-save-functions
 	    (lambda (w)
