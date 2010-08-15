@@ -23,23 +23,23 @@ they occurred between. For more detailed information see the
 
 @item Prompt API change [Jeremy Hankins]
 
-If you have codes which utilize prompt, they are affected. When you
+If you have code which utilizes prompt, it is affected. When you
 call the function @code{prompt}, pass helper functions directly
-as the function's arguments. They used to be set to global variables.
+as the function's arguments. They used to be set as global variables.
 
-The change is straightforward, so you must be able to easily update
-your codes. See @code{sawfish.wm.util.prompt} for the details.
+The change is straightforward, so you should be able to easily update
+your code. See @code{sawfish.wm.util.prompt} for details.
 
-@item Mouse button support state
+@item Mouse-button support state
 
-Sawfish is claimed to support mouse buttons 1 - 9, but it is found
+Sawfish is claimed to support mouse-buttons 1 - 9, but it is known
 that drag of buttons 6 - 8 may not work. The button 9 doesn't work at
 all, so we withdraw it.
 @end itemize
 
 @item Build and Installation
 @itemize @minus
-@item Configuration option @code{--with-nine-mousebuttons} is dropped.@*
+@item Configure-option @code{--with-nine-mousebuttons} is dropped.@*
 See the item ``Keyboard layout switching support'' below.
 @end itemize
 
@@ -48,7 +48,7 @@ See the item ``Keyboard layout switching support'' below.
 @item Maximized windows overlapping avoided windows bugfix
 
 Sometimes maximized windows would overlap avoided windows (e.g., the
-gnome taskbar, or a trayer) on restart.  Sawfish now waits until
+gnome-panel, or a trayer) on restart.  Sawfish now waits until
 initialization is complete to maximize windows, preventing this problem.
 
 @item Viewport initialization bugfix
@@ -57,13 +57,13 @@ Under certain circumstances windows could end up outside of the
 accessible viewport space when sawfish was restarted.  This has been
 fixed.
 
-@item Keyboard layout switching support [Teika Kazura]
+@item Keyboard-layout switching support [Teika Kazura]
 
-Previously, when you switch the keyboard layout, or more correctly
-the keyboard ``group'', which is mainly for multilinguals, keyboard
-and mouse bindings get messed.
+Previously, when you switched the keyboard-layout, or more correctly
+the keyboard-``group'', which is mainly for multilinguals, keyboard-
+and mouse-bindings got messed-up.
 
-Now, this can be prevented by passing a new commandline option
+Now, this can be prevented by passing a new commandline-option
 @code{--5-buttons} at Sawfish invocation. It is assumed that modifiers
 are common among keyboard groups.
 
@@ -74,12 +74,12 @@ the current code for buttons 6 - 8 is hackish.
 @item Atom handling fix on 32-bit architecture. [Teika Kazura]
 
 Function @code{x-atom-name} now accepts all 32 bits. Previously only
-30 bits are treated, if the architecture is 32-bit.
+30 bits were treated, if the architecture was 32-bit.
 
-@item Two variables are restored from obsoleteness declaration.@*
-They're @code{workspace-boundary-mode} and @code{workspace-send-boundary-mode}.
+@item The following two variables are no longer declared obsolete:@*
+@code{workspace-boundary-mode} and @code{workspace-send-boundary-mode}.
 
-@item Edge-Flip now works after resolution-change. [Christopher Bratusek]
+@item Edge-Flip now still works after resolution-change. [Christopher Bratusek]
 
 @item Sawfish now starts up correctly when receiving a session-id or
 session-prefix from GNOME-Session [Christopher Bratusek]
@@ -87,10 +87,10 @@ session-prefix from GNOME-Session [Christopher Bratusek]
 
 @item New Features
 @itemize @minus
-@item New command line option @code{--5-buttons}@*
-See the item ``Keyboard layout switching support'' above.
+@item New commandline-option @code{--5-buttons}@*
+See the item ``Keyboard-layout switching support'' above.
 
-@item New frame parts @code{border-width} and @code{border-color}
+@item New frame-parts @code{border-width} and @code{border-color}
 [Alexey I. Froloff]
 
 A ``border'' of a window surrounds the window and all other frame
@@ -105,8 +105,8 @@ Due to librep >= 0.90.7, the backtrace is printed by default on error.
 It is printed for sawfish-client, too, but it's sent to Sawfish's
 standard error, not to sawfish-client's, sorry.
 
-Previously when you connect to Sawfish as a server asynchronously,
-then the error is not printed. Now it is printed to Sawfish's 
+Previously when you connected to Sawfish as a server asynchronously,
+then the error was not printed. Now it is printed to Sawfish's 
 output. (In contrast, a client which connects synchronously receives
 the error message.) Practically, this means sawfish-pager's errors are
 printed to Sawfish's output.
@@ -118,11 +118,11 @@ printed to standard error.
 prevents it from (accidently) immediately disappearing.
 [Christopher Bratusek]
 
-@item Module @code{3d-hack} is not autoloaded any more.
+@item Module @code{3d-hack} is not autoloaded anymore.
 
 @item Doc improvements
 
-Faq items, on how to hide the mouse pointer, and on application execution.@*
+FAQ items, on how to hide the mouse-pointer, and on application execution.@*
 Manuals (1) describe all options.
 
 Described functions @code{grab-keymap} and @code{ungrab-keymap}
