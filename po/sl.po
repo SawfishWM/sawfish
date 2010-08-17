@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-08-05 17:14+0100\n"
+"PO-Revision-Date: 2010-08-17 14:07+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -206,6 +206,9 @@ msgid ""
 "\n"
 "The string you insert here will be your new title string.  Variables always start with a dollar-sign ($) and are replaced with their actual values.  To get the value of an environment variable use $(variable), eg $(DISPLAY).  To get the value of an rep/sawfish function use $[fuction], eg $[current-time-string].  The following vars are built-in: $name, $fullname, $width, $width-content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and $last-ws. (NOTE: I hope the redrawing problems with this option are solved.  If not, write an email please!"
 msgstr ""
+"nazivni niz\n"
+"\n"
+"Niz, ki določa nov niz naziva okna. Spremenljivke se vedno začnejo z znakom $ in bodo zamenjane s pravimi vrednostmi. Za pridobitev vrednosti okoljske spremenljivke je treba uporabiti možnost $(variable); na primer $(DISPLAY). Za vrednost funkcije sawfish uporabite $[fuction]; na primer $[current-time-string]. Nekatere spremenljivke pa so vgrajene: $name, $fullname, $width, $width-content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws in $last-ws. (Opomba: v kolikor se pojavijo težave z izrisovanjem, pošljite poročilo o hrošču!)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -257,6 +260,9 @@ msgid ""
 "\n"
 "'real-center' means to take the whole titlebar into account while centering the string. when selecting 'center' only the distance between the buttons is taken into account."
 msgstr ""
+"vodoravna poravnava nazivnega niza\n"
+"\n"
+"'prava sredina' med središčenjem niza upošteva celotno nazivno vrstico . pri izbiri 'sredina' je upoštevana le razdalja med gumbi."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -264,6 +270,9 @@ msgid ""
 "\n"
 "The horizontal position of the title string can only be adjusted if the horizontal alignment is not 'center'.  The range also depends on the setting of the option above.  It the title string is already aligned left, you cannot adjust it to be even further left because there are button in the way."
 msgstr ""
+"prilagoditev vodoravne poravnave nazivnega niza (- 10000 - 10000 točk)\n"
+"\n"
+"Vodoraven položaj nazivnega niza je mogoče prilagoditi le, če vodoravna poravnava ni 'sredina'. Obseg je odvisen od nastavitve zgornje možnosti. V primeru da je nazivna vrstica že poravnana levo je ne morete premakniti bolj levo, ker so gumbi v napoto."
 
 #. ../themes/mxflat/theme.jl
 msgid "top"
@@ -287,6 +296,9 @@ msgid ""
 "\n"
 "When activating the gradient background the normal titlebar background colors will be ignored.  Besides the button background colors will be ignored.  (NOTE: This can be very cpu intensive if you set the quality to a low value, i.e., high quality.)"
 msgstr ""
+"ozadje preliva nazivne vrstice (preizkusno)\n"
+"\n"
+"Med omogočanjem preliva ozadja, bodo običajne barve ozadja prezrte. (Opomba: možnost lahko močno obremeni delovanje cpe, v kolikor je določena spodnja vrednost zelo nizko, torej je učinek visoka kakovost.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -294,6 +306,9 @@ msgid ""
 "\n"
 "With gradient mode vertical or diagonal only the first or last (reversed) 2 colors in the list are used."
 msgstr ""
+"način preliva\n"
+"\n"
+"Za navpični ali diagonalni preliv sta uporabljeni le prvi ali zadnji (obrnjeno) dve barvi seznama."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -301,6 +316,9 @@ msgid ""
 "\n"
 "The value here is the factor the calculated gradient image will be scaled down.  This increases speed but decreases quality."
 msgstr ""
+"kakovost preliva (1 najvišja - 20 najnižja)\n"
+"\n"
+"Vrednost je faktor za izračun prilagajanja velikosti preliva. S tem se poveča hitrost delovanja, vendar se zmanjša kakovost prikaza."
 
 #. ../themes/mxflat/theme.jl
 msgid "rainbow"
@@ -324,6 +342,9 @@ msgid ""
 "\n"
 "the custom mode will respect the colors set in the list below."
 msgstr ""
+"način barve preliva\n"
+"\n"
+"način po meri upošteva barve določene v seznamu."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -689,6 +710,9 @@ msgid ""
 "\n"
 "When you active this you will be able to set custom button colors.  By default the button colors depend on the titlebar colors."
 msgstr ""
+"prilagodi barve-gumbov\n"
+"\n"
+"Izbrana možnost omogoči nastavljanje barv gumbov po meri. Privzeto je barva gumbov odvisna od barv nazivne vrstice."
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
@@ -746,6 +770,9 @@ msgid ""
 "\n"
 "When you like having a big border around your windows you might have noticed that sawfish still draws that big border when the window is maximized.  If you don't want that, set the border width for maximized windows smaller than the border width for unmaximized windows.  (NOTE: this feature is still buggy as sawfish does not resize the windows correctly yet, so the best might be to set it to the normal border width.)"
 msgstr ""
+"širina robu za razpeta okna (0 - 1000 točk)\n"
+"\n"
+"V primeru da želite imeti okoli svojih oken velik rob, boste opazili da sawfish nariše velik rob tudi ko je okno razpeto. V primeru da tega ne želite, nastavite rob za razpeta okna manjši kot za ne-razpeta okna. (OPOMBA: ta zmožnost je še vedno hroščata, ker sawfish velikosti okna še ne spreminja pravilno, zato je morda najboljše nastaviti običajno širino okna.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -2735,7 +2762,7 @@ msgstr "Kdaj kazalec miške vpliva na žarišče."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Ali način klik-za-fokus pošlje klik naprej programu."
+msgstr "Ali način klik-za-žarišče pošlje klik naprej programu."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Whether focusing a window doesn't change it's position in the stack."
