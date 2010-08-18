@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-08-18 09:33+0100\n"
+"PO-Revision-Date: 2010-08-18 14:29+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -298,7 +298,7 @@ msgid ""
 msgstr ""
 "ozadje preliva nazivne vrstice (preizkusno)\n"
 "\n"
-"Med omogočanjem preliva ozadja, bodo običajne barve ozadja prezrte. (Opomba: možnost lahko močno obremeni delovanje cpe, v kolikor je določena spodnja vrednost zelo nizko, torej je učinek visoka kakovost.)"
+"Med omogočanjem preliva ozadja, bodo običajne barve ozadja prezrte. (Opomba: možnost lahko močno obremeni delovanje CPE, v kolikor je določena spodnja vrednost zelo nizko, torej je učinek visoka kakovost.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -354,7 +354,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"V načinu preloma navpično ali diagonalno, sta uporabljeni le pravi ali zadnji (obrnjeno) dve barvi seznama. Ob tem je treba omogočiti tudi barvni način na prilagojeno omogočenje seznama."
+"V načinu preloma navpično ali diagonalno, sta uporabljeni le pravi ali zadnji (obrnjeno) dve barvi seznama. Ob tem je treba omogočiti tudi barvni način na prilagojeno omogočanje seznama."
 
 #. ../themes/mxflat/theme.jl
 msgid "reverse colors"
@@ -368,7 +368,7 @@ msgid ""
 msgstr ""
 "poudarjen odtenek nazivne vrstice, ki ni v žarišču (0 - 360)\n"
 "\n"
-"Vrednost spreminja odtenek barve v stoponjah (0 - 360) glede na barvni krog. Vrednost 180 stopinj, na primer, prikaže nasprotno barvo."
+"Vrednost spreminja odtenek barve v stopinjah (0 - 360) glede na barvni krog. Vrednost 180 stopinj, na primer, prikaže nasprotno barvo."
 
 #. ../themes/mxflat/theme.jl
 #, c-format
@@ -848,7 +848,7 @@ msgid ""
 msgstr ""
 "širina robu za razpeta okna (0 - 1000 točk)\n"
 "\n"
-"V primeru da želite imeti okoli svojih oken velik rob, boste opazili da sawfish nariše velik rob tudi ko je okno razpeto. V primeru da tega ne želite, nastavite rob za razpeta okna manjši kot za ne-razpeta okna. (OPOMBA: ta zmožnost je še vedno hroščata, ker sawfish velikosti okna še ne spreminja pravilno, zato je morda najboljše nastaviti običajno širino okna.)"
+"V primeru da želite imeti okoli svojih oken velik rob, boste opazili da sawfish nariše velik rob tudi ko je okno razpeto. V primeru da tega ne želite, nastavite rob za razpeta okna manjši kot za ne-razpeta okna. (OPOMBA: ta zmožnost še vedno povzroča težave, ker program velikosti okna ne spreminja pravilno. Morda je najbolje nastaviti običajno širino okna.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -954,7 +954,7 @@ msgid ""
 msgstr ""
 "lažna senca (poskusno)\n"
 "\n"
-"Nariše majhen navidezen rob okoli vaših oken ter posnema učinek polne sence. Za prilagoditev širine in smeri sence uporabite možnosti spodaj.  (OPOMBA: ta možnost je ZELO zahtevna do cpe in lahko opazno upočasni vaš računalnik. Zato jo vklopite na lastno tveganje.)"
+"Nariše majhen navidezen rob okoli vaših oken ter posnema učinek polne sence. Za prilagoditev širine in smeri sence uporabite možnosti spodaj.  (OPOMBA: ta možnost je ZELO zahtevna do CPE in lahko opazno upočasni vaš računalnik. Zato jo vklopite na lastno tveganje.)"
 
 #. ../themes/mxflat/theme.jl
 msgid "fake shadow only on focused windows"
@@ -1646,7 +1646,7 @@ msgstr "Zaženi brskalnik z izbranim naslovom URL."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "url:"
-msgstr "URL:"
+msgstr "Naslov URL:"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Number of pixels to move pointer in."
@@ -2524,7 +2524,7 @@ msgstr "Lepljivo vidno polje"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Raise on focus"
-msgstr "Dvigni med žariščenjem"
+msgstr "Dvigni med postavljanjem v žarišče"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Focus when mapped"
@@ -2842,7 +2842,7 @@ msgstr "Ali način klik-za-žarišče pošlje klik naprej programu."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "Whether focusing a window doesn't change it's position in the stack."
-msgstr "Ali žariščenje okna spremeni njegov položaj v skladu."
+msgstr "Ali postavljanje okna v žarišče spremeni njegov položaj v skladu."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When true, pointer in/out events don't cause focus changes."
@@ -4573,4 +4573,16 @@ msgstr "Premakni trenutno okno na n-to delovno površino."
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
 msgstr "Kopiraj na delovno površino"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Copy the current window to the N'th workspace."
+msgstr "Kopiraj trenutno okno na N-to delovno površino."
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Select workspace interactively"
+msgstr "Interaktivni izbor delovne površine"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "Prompt for a workspace and switch to it."
+msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 
