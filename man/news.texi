@@ -83,6 +83,13 @@ Function @code{x-atom-name} now accepts all 32 bits. Previously only
 
 @item Sawfish now starts up correctly when receiving a session-id or
 session-prefix from GNOME-Session [Christopher Bratusek]
+
+@item Draft Animator bugfix. [Christopher Bratusek]
+The draft animator had two issues, on one hand the numbers drawn by it
+where always black (therefore possibly invisible), on the other hand those
+numbers weren't erased from the screen (unless you used a desktop-shell
+which on it's own refreshes the screen regularly). Both issues have been
+fixed by introducing the @code{x-draw-text} function.
 @end itemize
 
 @item New Features
@@ -95,6 +102,12 @@ See the item ``Keyboard-layout switching support'' above.
 
 A ``border'' of a window surrounds the window and all other frame
 parts. (@pxref{Frame Part Definition})
+
+@item @code{x-draw-text} function [Christopher Bratusek]
+This function is a replacement for @code{x-draw-string} currently
+only used in the draft-animator (to fix it's bugs). Generally, if
+you use a @code{display-message} like message, rely on @code{x-draw-string},
+but if you want to draw on the screen directly use @code{x-draw-text}.
 @end itemize
 
 @item Miscellaneous Changes
@@ -106,7 +119,7 @@ It is printed for sawfish-client, too, but it's sent to Sawfish's
 standard error, not to sawfish-client's, sorry.
 
 Previously when you connected to Sawfish as a server asynchronously,
-then the error was not printed. Now it is printed to Sawfish's 
+then the error was not printed. Now it is printed to Sawfish's
 output. (In contrast, a client which connects synchronously receives
 the error message.) Practically, this means sawfish-pager's errors are
 printed to Sawfish's output.
