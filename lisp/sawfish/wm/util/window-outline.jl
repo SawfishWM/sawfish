@@ -155,7 +155,7 @@ drawn, currently it may only be `box' for a 3x3 grid."
     (if (= pta-x ptb-x)
 	(progn ; vertical
 	 (if dim-p
-	     (x-draw-string rw gc (cons (+ pta-x x-dim-offset)
+	     (x-draw-text rw gc (cons (+ pta-x x-dim-offset)
 					(+ pta-y (quotient delta-y 2))
 					)
 			    (format nil "%d" delta-y)))
@@ -169,7 +169,7 @@ drawn, currently it may only be `box' for a 3x3 grid."
 	 )
 	(progn ; horizontal
          (if dim-p
-	   (x-draw-string rw gc (cons (+ pta-x (quotient delta-x 2))
+	   (x-draw-text rw gc (cons (+ pta-x (quotient delta-x 2))
 				      (- pta-y y-dim-offset)
 				      )
 			    (format nil "%d" delta-x)))
