@@ -7548,7 +7548,16 @@ using the graphics context @var{gc}.
 @defun x-draw-string window gc (x . y) string &optional font
 Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
 using the graphics context @var{gc}.  If @var{font} is specified use
-that font.
+that font. If you need to write on the root-window directly, use
+@code{x-draw-text}, if you need a message like @code{display-message}
+use this function instead.
+@end defun
+
+@defun x-draw-string window gc (x . y) string
+Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
+using the graphics context @var{gc}. If you need to write a message like
+@code{display-message} use @code{x-draw-string}, if you need to write on
+the root-window directly, use this function instead.
 @end defun
 
 @defun x-fill-arc window gc (x . y) (width . height) (angle1 . angle2)

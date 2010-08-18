@@ -39,7 +39,7 @@
 #  endif
 # endif
 #endif
-   
+
 #include "sawfish.h"
 #include <string.h>
 #include <X11/Xresource.h>
@@ -213,7 +213,7 @@ static int
 x_function_from_sym (repv sym)
 {
     int i;
-    
+
     for (i = 0; i < N_FNS; i++)
     {
         if (sym == r_fns[i])
@@ -834,7 +834,7 @@ Destroys the X-DRAWABLE.
     XDeleteContext (dpy, VX_DRAWABLE (drawable)->id, x_drawable_context);
     if (X_WINDOWP (drawable))
     {
-	deregister_event_handler (VX_DRAWABLE (drawable)->id); 
+	deregister_event_handler (VX_DRAWABLE (drawable)->id);
 	XDestroyWindow (dpy, VX_DRAWABLE (drawable)->id);
     }
     else if (X_PIXMAPP (drawable) || X_BITMAPP (drawable))
@@ -1040,6 +1040,37 @@ specified font in the window associated with WINDOW.
     return Qt;
 }
 
+DEFUN ("x-draw-text", Fx_draw_text, Sx_draw_text,
+       (repv window, repv gc, repv xy, repv string), rep_Subr5) /*
+::doc:sawfish.wm.util.x#x-draw-text::
+x-draw-text WINDOW GC (X . Y) STRING
+
+Draws the specified string at the specified location in the window
+* associated with WINDOW.
+::end:: */
+{
+    Drawable id = drawable_from_arg (window);
+    int x = 0;
+    int y = 0;
+    char *str;
+
+    rep_DECLARE (1, window, id != 0);
+    rep_DECLARE (2, gc, X_VALID_GCP (gc, id));
+    rep_DECLARE (3, xy, rep_CONSP (xy)
+                 && rep_INTP (rep_CAR (xy)) && rep_INTP (rep_CDR (xy)));
+    rep_DECLARE4 (string, rep_STRINGP);
+
+    x = rep_INT (rep_CAR (xy));
+    y = rep_INT (rep_CDR (xy));
+    str = rep_STR (string);
+
+    XTextItem text={str,strlen(str),0,0};
+
+    XDrawText (dpy, id, VX_GC (gc)->gc, x, y, &text, 1);
+
+    return Qt;
+}
+
 DEFUN ("x-draw-line", Fx_draw_line, Sx_draw_line,
        (repv window, repv gc, repv start, repv end), rep_Subr4) /*
 ::doc:sawfish.wm.util.x#x-draw-line::
@@ -1135,7 +1166,7 @@ Draws a single circular or elliptical arc. Each arc is specified by a
 rectangle and two angles.
 
 The center of the circle or ellipse is the center of the rectangle, and
-the major and minor axes are specified by the width and height. 
+the major and minor axes are specified by the width and height.
 Positive angles indicate counter-clockwise motion, and negative angles
 indicate clockwise motion.
 
@@ -1176,7 +1207,7 @@ Draws a single filled circular or elliptical arc. Each arc is specified
 by a rectangle and two angles.
 
 The center of the circle or ellipse is the center of the rectangle, and
-the major and minor axes are specified by the width and height. 
+the major and minor axes are specified by the width and height.
 Positive angles indicate counter-clockwise motion, and negative angles
 indicate clockwise motion.
 
@@ -1354,7 +1385,7 @@ the offset.
 
     int i;
     repv tmp;
-    
+
     rep_DECLARE1 (_gc, X_GCP);
     rep_DECLARE2 (_dash_list, rep_LISTP);
     offset = rep_INTP (_offset) ? rep_INT (_offset) : 0;
@@ -1529,6 +1560,7 @@ rep_dl_init (void)
 
     rep_ADD_SUBR (Sx_clear_window);
     rep_ADD_SUBR (Sx_draw_string);
+    rep_ADD_SUBR (Sx_draw_text);
     rep_ADD_SUBR (Sx_draw_line);
     rep_ADD_SUBR (Sx_draw_rectangle);
     rep_ADD_SUBR (Sx_fill_rectangle);
