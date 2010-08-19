@@ -1,3 +1,8 @@
+2010-08-19  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/ext/apps-menu.jl: correctly alphabetize menu-entries.
+	Previously they were sorted [A-Z][a-z] (first all upper- then all loser-case
+	entries), now it's done properly [aA-zZ]. [Matthew Love]
+
 2010-08-18  Christopher Bratusek <zanghar@freenet.de>
 	* src/x.c
 	* lisp/sawfish/wm/util/window-outline.jl: added x-draw-text function for properly

@@ -18,7 +18,7 @@ they occurred between. For more detailed information see the
 
 @item librep 0.90.5 -> 0.90.7
 @end itemize
-@item Notices
+@item Notes
 @itemize @minus
 
 @item Prompt API change [Jeremy Hankins]
@@ -79,12 +79,18 @@ Function @code{x-atom-name} now accepts all 32 bits. Previously only
 @item The following two variables are no longer declared obsolete:@*
 @code{workspace-boundary-mode} and @code{workspace-send-boundary-mode}.
 
+@item Apps-Menu bugfix [Matthew Love]
+
+correctly alphabetize menu-entries, previously they were sorted [A-Z][a-z]
+(first all upper- then all loser-case entries). Now it's done properly [aA-zZ].
+
 @item Edge-Flip now still works after resolution-change. [Christopher Bratusek]
 
 @item Sawfish now starts up correctly when receiving a session-id or
 session-prefix from GNOME-Session [Christopher Bratusek]
 
 @item Draft Animator bugfix. [Christopher Bratusek]
+
 The draft animator had two issues, on one hand the numbers drawn by it
 where always black (therefore possibly invisible), on the other hand those
 numbers weren't erased from the screen (unless you used a desktop-shell
@@ -104,6 +110,7 @@ A ``border'' of a window surrounds the window and all other frame
 parts. (@pxref{Frame Part Definition})
 
 @item @code{x-draw-text} function [Christopher Bratusek]
+
 This function is a replacement for @code{x-draw-string} currently
 only used in the draft-animator (to fix it's bugs). Generally, if
 you use a @code{display-message} like message, rely on @code{x-draw-string},

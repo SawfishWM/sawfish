@@ -276,7 +276,9 @@ set this to non-nil.")
   (define (alphabetize-entries saw-menu)
     (if saw-menu
 	(cons (cons (car (car saw-menu))
-		    (sort (cdr (car saw-menu)) string<))
+		    (sort (cdr (car saw-menu)) 
+			  (lambda (a b) 
+			    (string< (string-downcase (car a)) (string-downcase (car b))))))
 	      (alphabetize-entries (cdr saw-menu)))))
 
   (define (fdo-exile fdo-list)
