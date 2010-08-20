@@ -20,9 +20,7 @@
 
 (define-structure sawfish.cfg.shell
 
-    (export initialize-shell
-	    destroy-shell
-	    run-shell)
+    (export run-shell)
 
     (open rep
 	  gui.gtk-2.gtk
@@ -38,7 +36,8 @@
 	  sawfish.cfg.slot
 	  sawfish.cfg.apply
 	  sawfish.cfg.layout
-	  sawfish.cfg.config)
+	  sawfish.cfg.config
+	  sawfish.cfg.wm)
 
   (defvar *nokogiri-flatten-groups* nil)
   (defvar *nokogiri-single-level* nil)
@@ -264,7 +263,29 @@
 	    (gtk-container-remove slot-box-widget w))
 	  (gtk-container-get-children slot-box-widget)))
 
+  (define (sawfish-absent)
+    ;; Prints error and never returns.
+    (let ((window (gtk-window-new 'toplevel))
+	  (vbox (gtk-vbox-new nil box-spacing))
+	  (label (gtk-label-new "Sawfish configurator needs a running Sawfish. Aborting."))
+	  (button (stock-button 'ok))
+	  (func (lambda () (throw 'quit 1))))
+      (g-signal-connect window "delete_event" func)
+      (gtk-container-add window vbox)
+      (g-signal-connect button "clicked" func)
+      (gtk-container-add vbox label)
+      (gtk-container-add vbox button)
+
+      (gtk-widget-show-all window)
+
+      (setq interrupt-mode 'exit)
+      (recursive-edit)
+      (throw 'quit 1)))
+
   (define (run-shell)
+    (condition-case nil
+	(wm-locale-dir)
+      (error (sawfish-absent)))
     (when (get-command-line-option "--help")
       (write standard-output "\
 usage: sawfish-config [OPTIONS...]\n
