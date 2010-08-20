@@ -1,3 +1,43 @@
+2010-08-21  Teika kazura <teika@lavabit.com>
+	* README.IMPORTANT
+	* lisp/sawfish/wm.jl
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/frames.jl
+	* man/news.texi
+	* man/sawfish.texi: Doc, including news improvements.
+
+	* src/keys.c
+	* src/keys.h
+	* src/main.c: Dropped button9 support. It has been broken.
+	Proof: in src/keys.h,
+        Button9Mask = 1 << 16 = EV_TYPE_KEY = 0x10000;
+
+	* lisp/sawfish/cfg/shell.jl
+	* man/news.texi: When configurator is executed and Sawfish WM is
+	not run, prints a message window.  No care is taken for its
+	appearance.
+
+	* lisp/sawfish/wm/commands/x-cycle.jl
+	* man/news.texi: Minor warp fix in x-cycle. This reduces warping
+	for some cases.  Previously, the necessity of a warp is judged by
+	the geometry before the raise is done. Now the updated one is
+	used.
+
+	* lisp/sawfish/wm/commands/raise-commands.jl
+	* lisp/sawfish/wm/ext/auto-raise.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* lisp/sawfish/wm/util/stacking.jl
+	* man/news.texi
+	* man/sawfish.texi: Functions maybe-raise-window and
+	maybe-lower-window are now obsolete.
+	They're now aliases to raise-window* and lower-window*. The only
+	difference is that the obsolete version supports a nautilus
+	feature which was dropped long ago.
+
+	* lisp/sawfish/wm/commands/launcher.jl
+	* man/news.texi: Command `xterm' bugfix.
+	It didn't run if the optional argument as a command is not set.
+
 2010-08-19  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/apps-menu.jl: correctly alphabetize menu-entries.
 	Previously they were sorted [A-Z][a-z] (first all upper- then all loser-case
