@@ -45,17 +45,18 @@ See the item ``Keyboard layout switching support'' below.
 
 @item Bug Fixes
 @itemize @minus
-@item Maximized windows overlapping avoided windows bugfix
+@item Maximized windows wrongly covering other windows on startup [Jeremy Hankins]
 
-Sometimes maximized windows would overlap avoided windows (e.g., the
-gnome-panel, or a trayer) on restart.  Sawfish now waits until
-initialization is complete to maximize windows, preventing this problem.
+Sometimes maximized windows would overlap ``avoided'' windows (e.g.,
+the gnome-panel, or a trayer) on startup. Sawfish now waits until
+initialization is complete to maximize windows, preventing this
+problem.
 
-@item Viewport initialization bugfix
+@item Viewport initialization bugfix [Jeremy Hankins]
 
-Under certain circumstances windows could end up outside of the
-accessible viewport space when sawfish was restarted.  This has been
-fixed.
+Under certain circumstances viewport slots were wrongly shifted when
+sawfish was restarted, ending up with some windows outside of the
+virtual desktop. This has been fixed.
 
 @item Keyboard-layout switching support [Teika Kazura]
 
@@ -76,26 +77,32 @@ the current code for buttons 6 - 8 is hackish.
 Function @code{x-atom-name} now accepts all 32 bits. Previously only
 30 bits were treated, if the architecture was 32-bit.
 
-@item The following two variables are no longer declared obsolete:@*
-@code{workspace-boundary-mode} and @code{workspace-send-boundary-mode}.
+It used to cause ``Bad argument'' error, most notably on Java
+applications.
 
-@item Apps-Menu bugfix [Matthew Love]
+@item De-obsoletion of two variables [Teika Kazura]
 
-correctly alphabetize menu-entries, previously they were sorted [A-Z][a-z]
-(first all upper- then all loser-case entries). Now it's done properly [aA-zZ].
+User options @code{workspace-boundary-mode} and
+@code{workspace-send-boundary-mode} couldn't be set from the
+configurator, but this is fixed.
 
-@item Edge-Flip now still works after resolution-change. [Christopher Bratusek]
+@item Applications menu bugfix [Matthew Love]
+
+Correct alphabetic ordering of menu-entries is done. Previously they
+were sorted [A-Z][a-z] (first all upper- then all loser-case entries).
+
+@item Edge-flip now still works after resolution-change. [Christopher Bratusek]
 
 @item Sawfish now starts up correctly when receiving a session-id or
 session-prefix from GNOME-Session [Christopher Bratusek]
 
-@item Draft Animator bugfix. [Christopher Bratusek]
+@item Draft animator bugfix. [Christopher Bratusek]
 
-The draft animator had two issues, on one hand the numbers drawn by it
-where always black (therefore possibly invisible), on the other hand those
-numbers weren't erased from the screen (unless you used a desktop-shell
-which on it's own refreshes the screen regularly). Both issues have been
-fixed by introducing the @code{x-draw-text} function.
+The ``draft'' animator had two issues, on one hand the drawn numbers were
+always black (therefore possibly invisible), on the other hand those
+numbers weren't erased from the screen (unless you used a
+desktop-shell which on it's own refreshes the screen regularly). Both
+issues have been fixed by introducing the @code{x-draw-text} function.
 @end itemize
 
 @item New Features
@@ -421,11 +428,12 @@ viewport when displaying all workspaces.
 @item Removed requirements: LibAudioFile and ESounD
 @item Mouse buttons 6 - 9 support is now optional
 
-Support for 6 - 9 mouse buttons is now optional. X.Org/XFree86 headers
-only define up to 5 buttons, and we use a working but somewhat hackish
-workaround for getting buttons 6 - 9 which is suspected to cause some
-problems with modifiers. Support for them is enabled by default. If
-you want to disable it, add the following flag to configure:
+(This item is no longer valid from 1.7.0.)  Support for 6 - 9 mouse
+buttons is now optional. X.Org/XFree86 headers only define up to 5
+buttons, and we use a working but somewhat hackish workaround for
+getting buttons 6 - 9 which is suspected to cause some problems with
+modifiers. Support for them is enabled by default. If you want to
+disable it, add the following flag to configure:
 
 @code{--without-nine-mousebuttons}
 @c Well, ``code'' gives ugly (back)quote, but otherwise the first hyphen is dropped.
@@ -750,9 +758,10 @@ buttons or frames to their theme in charge. There are no user visible changes.
 
 @item Startup window placement improvement [Jeremy Hankins]
 
-At Sawfish startup including restart, maximized windows and
-position specified windows used to mess up viewport, appearing
-in wrong viewports. It's fixed now.
+(Later this item was found wrong. The true fix was done in 1.7.0.)  At
+Sawfish startup including restart, maximized windows and position
+specified windows used to mess up viewport, appearing in wrong
+viewports. It's fixed now.
 
 @item Renamed @code{after-add-window} to @code{maxmize-after-add-window} @*
 This function is only used in a hook [Teika Kazura]

@@ -3,20 +3,6 @@ lists only important changes.
 
 In Sawfish 1.6.0 there are the following major changes:
 
-9 mouse button support
-**********************
-
-Support for 6 - 9 mouse buttons is now optional. X.Org/XFree86 headers
-only define up to 5 buttons, and we use a working but somewhat hackish
-workaround for getting buttons 6 - 9 which is suspected to cause some
-problems with modifiers. Support for them is enabled by default. If
-you want to disable it, add the following flag to configure:
-
---without-nine-mousebuttons
-
-If you drop it, then you can't use mouse button 8 to, for example,
-drag windows.
-
 sawfish-ui is now sawfish-config
 ********************************
 
@@ -97,5 +83,3 @@ but: the old ui is -of course- still available, use:
 
 sawfish-config --flatten [in a terminal]
 (defvar-setq customize-program "sawfish-config --flatten") [in your config-file]
-
-- Christopher Bratusek <zanghar@freenet.de>

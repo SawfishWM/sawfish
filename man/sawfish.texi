@@ -4733,7 +4733,9 @@ otherwise.
 
 Sawfish provides an intuitive way, like flipping pages, to switch the
 workspace (or the viewport) by moving the mouse to the edge of the
-screen. This is called ``edge flipping''.
+screen. This is called ``edge flipping''. To use it, add
+@code{(require 'sawfish.wm.ext.edge-flip)} in your
+@file{~/.sawfish/rc} file, and use the configurator.
 
 @defvr Customizable edge-flip-enabled nil
 When true, select the next desktop when the pointer hits screen edge.
@@ -5520,9 +5522,10 @@ ancestor chain until it is handled.
 @chapter Commands
 @cindex Commands
 
-A @dfn{command} is a Sawfish lisp notion which can be called from key
-or mouse input. Unlike emacs, a command is not always a Lisp
-function. See following setions for more.
+@dfn{Command} is a Sawfish lisp notion. A command is what can be
+called from key or mouse input. Unlike emacs, a command is not always
+in one-to-one correspondence to a Lisp function. See following
+sections for more.
 
 @menu
 * Old-style Command Definition::  Emacs-Lisp style

@@ -239,7 +239,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 
 ;;; switching on spec codes
 
-  ;; codes local to sawfish
+  ;; codes local to sawfish, i.e. "%X" case, where X is one of:
   (define (local-codes code prompt)
     (case code
       ((#\f)

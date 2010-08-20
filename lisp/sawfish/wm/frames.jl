@@ -132,7 +132,7 @@ that overrides settings set elsewhere.")
     "Frame definition used for unframed windows.")
 
   (defcustom default-frame-style nil
-    "Default frame style:"
+    "Theme"
     :type frame-style
     :widget-flags (expand-vertically)
     :group appearance
