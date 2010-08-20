@@ -68,7 +68,7 @@
 				      (if disable-auto-raise
 					  (set-timer timer)
 					(setq rw-timer nil)
-					(maybe-raise-window rw-window))))
+					(raise-window* rw-window))))
 		    (delay (max 1 raise-window-timeout)))
 		(setq rw-timer (make-timer timer-callback
 					   (quotient delay 1000)

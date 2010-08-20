@@ -24,9 +24,7 @@
 
     (export raise-window*
 	    lower-window*
-	    raise-lower-window*
-	    maybe-raise-window
-	    maybe-lower-window)
+	    raise-lower-window*)
 
     (open rep
 	  sawfish.wm.windows
@@ -72,36 +70,4 @@ allowed."
   (define-command 'lower-window lower-window* #:spec "%W")
   (define-command 'raise-lower-window raise-lower-window* #:spec "%W")
 
-;;; application-assisted stacking functions
-
-  (define (maybe-raise-window w)
-    "If window W supports the _SAWFISH_WM_RAISE_WINDOW protocol, ask
-it whether it wants to raise itself or not. Else, raise the window
-unconditionally."
-
-    ;; this only works symmetrically because the configure handler
-    ;; uses raise-window*
-
-    (if (window-supports-wm-protocol-p w '_SAWFISH_WM_RAISE_WINDOW)
-	(send-client-message w 'WM_PROTOCOLS
-			     (vector (x-atom '_SAWFISH_WM_RAISE_WINDOW)
-				     ;; See windows.c:focus_on_window
-				     ;; for why the 1- is necessary..
-				     (1- (x-server-timestamp))) 32)
-      (raise-window* w)))
-
-  (define (maybe-lower-window w)
-    "If window W supports the _SAWFISH_WM_LOWER_WINDOW protocol, ask
-it whether it wants to lower itself or not. Else, lower the window
-unconditionally."
-
-    ;; this only works symmetrically because the configure handler
-    ;; uses lower-window*
-
-    (if (window-supports-wm-protocol-p w '_SAWFISH_WM_LOWER_WINDOW)
-	(send-client-message w 'WM_PROTOCOLS
-			     (vector (x-atom '_SAWFISH_WM_LOWER_WINDOW)
-				     ;; See windows.c:focus_on_window
-				     ;; for why the 1- is necessary..
-				     (1- (x-server-timestamp))) 32)
-      (lower-window* w))))
+  )

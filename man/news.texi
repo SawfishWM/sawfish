@@ -35,6 +35,13 @@ your code. See @code{sawfish.wm.util.prompt} for details.
 Sawfish is claimed to support mouse-buttons 1 - 9, but it is known
 that drag of buttons 6 - 8 may not work. The button 9 doesn't work at
 all, so we withdraw it.
+
+@item Functions @code{maybe-raise-window} and @code{maybe-lower-window} are
+now obsolete. [Teika Kazura]
+
+Replace them with @code{raise-window*} and @code{lower-window*} defined
+in @code{sawfish.wm.util.stacking}. Only difference is that the obsolete
+version supports a nautilus feature which was dropped long ago.
 @end itemize
 
 @item Build and Installation

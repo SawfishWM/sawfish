@@ -27,13 +27,16 @@
 	    ws-remove-workspace
 	    custom-set-color
 	    custom-set-font
-	    custom-set-frame-style)
+	    custom-set-frame-style
+	    maybe-raise-window
+	    maybe-lower-window)
 
     (open rep
 	  sawfish.wm.misc
 	  sawfish.wm.custom
 	  sawfish.wm.commands
-	  sawfish.wm.workspace)
+	  sawfish.wm.workspace
+	  sawfish.wm.util.stacking)
 
 ;;; obsolete functions are collected here
 
@@ -54,6 +57,9 @@
   (define ws-move-window move-window-to-workspace)
   (define ws-insert-workspace insert-workspace)
   (define ws-remove-workspace remove-workspace)
+
+  (define maybe-raise-window raise-window*)
+  (define maybe-lower-window lower-window*)
 
 ;;; obsolete commands
 

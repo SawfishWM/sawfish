@@ -47,19 +47,19 @@
     "Raise the window that received the current event, then replay any pointer
 events that invoked the command."
     (when (windowp w)
-      (maybe-raise-window w))
+      (raise-window* w))
     (replay-pointer w))
 
   (define (and-pass-through-click-if-focused w)
     "Raise the window that received the current event (if it's focused), then
 replay any pointer events that invoked the command."
     (when (and (windowp w) (eq w (input-focus)))
-      (maybe-raise-window w))
+      (raise-window* w))
     (replay-pointer w))
 
   (define (or-pass-through-click w)
     (if (and (windowp w) (not (window-on-top-p w)))
-	(maybe-raise-window w)
+	(raise-window* w)
       (replay-pointer w)))
 
   ;;###autoload

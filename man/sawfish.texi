@@ -1833,21 +1833,6 @@ affected.
 @end table
 @end defvr
 
-@defun maybe-raise-window w
-If window @var{w} supports the @code{_SAWFISH_WM_RAISE_WINDOW}
-protocol, ask it whether it wants to raise itself or not.  Otherwise,
-raise the window unconditionally.
-@end defun
-
-@defun maybe-lower-window w
-If window @var{w} supports the @code{_SAWFISH_WM_LOWER_WINDOW}
-protocol, ask it whether it wants to lower itself or not.  Otherwise,
-lower the window unconditionally.
-@end defun
-
-These two protocols were used in nautilus, but the current situation
-is unknown.
-
 Sawfish has more general operations that raising a window to the top
 or lowering it to the bottom.  It can place a window relative to one
 or more other managed windows.
