@@ -110,6 +110,10 @@ always black (therefore possibly invisible), on the other hand those
 numbers weren't erased from the screen (unless you used a
 desktop-shell which on it's own refreshes the screen regularly). Both
 issues have been fixed by introducing the @code{x-draw-text} function.
+
+@item Command @code{xterm} fix [Teika kazura]@*
+It didn't run if the optional ``command'' argument was unset by the
+configurator, i.e. if it was an empty string.
 @end itemize
 
 @item New Features

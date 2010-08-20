@@ -51,7 +51,8 @@
     "Start a new terminal. Optional argument `COMMAND' is passed to the
 terminal with -e option, so for most, including xterm, it can contain
 arguments to be passed."
-    (if (not command)
+    (if (or (not command)
+	    (equal "" command))
 	(system (format nil "%s >/dev/null 2>&1 </dev/null &"
 			xterm-program))
       ;; Note that -e has to be the last argument. See man xterm.
