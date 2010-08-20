@@ -103,7 +103,7 @@ static unsigned int ev_mod_button_mask;
 static unsigned int state_mask;
 static int button_num;
 
-static int all_buttons[9] = { Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9 };
+static int all_buttons[8] = { Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8 };
 
 /*
   locks: currently LockMask, num_lock, and scroll_lock.
@@ -284,9 +284,6 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 	case Button8:
 	    *mods |= Button8Mask;
 	    break;
-	case Button9:
-	    *mods |= Button9Mask;
-	    break;
 	}
 	ret = TRUE;
 	break;
@@ -367,7 +364,6 @@ translate_event_to_x_button (repv ev, unsigned int *button, unsigned int *state)
 	    { Button6, Button6Mask },
 	    { Button7, Button7Mask },
 	    { Button8, Button8Mask },
-	    { Button9, Button9Mask },
 	    { 0, 0 }
 	};
 	int i;
@@ -695,7 +691,6 @@ static struct key_def default_mods[] = {
     { "Button6",  Button6Mask },
     { "Button7",  Button7Mask },
     { "Button8",  Button8Mask },
-    { "Button9",  Button9Mask },
     { "Any",      EV_MOD_ANY },
     { "Release",  EV_MOD_RELEASE },
     { 0, 0 }
@@ -1888,10 +1883,10 @@ static void button_num_init(void){
 			  | Button4Mask | Button5Mask);
     state_mask = (1 << 13) - 1;
     {
-      /* delete Button6 - 9 entries from default_mods[] */
+      /* delete Button6 - 8 entries from default_mods[] */
       int i, j = 0, k;
       char str[10];
-      for ( i = 6; i <= 9; i++){
+      for ( i = 6; i <= 8; i++){
 	snprintf(str, 8, "Button%d", i);
 	for (j = 0; default_mods[j].name != 0; j++){
 	  if ( strncmp(default_mods[j].name, str, 8) == 0){
@@ -1903,10 +1898,10 @@ static void button_num_init(void){
       }
     }
   }else{
-    button_num = 9;
+    button_num = 8;
     ev_mod_button_mask = (Button1Mask | Button2Mask | Button3Mask   \
 			  | Button4Mask | Button5Mask | Button6Mask \
-			  | Button7Mask | Button8Mask | Button9Mask);
+			  | Button7Mask | Button8Mask );
     state_mask = 0xffffffff;
   }
 }

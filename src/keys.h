@@ -1,4 +1,4 @@
-/* keys.h -- Event structures
+/* keys.h -- Event macros and constants.
    $Id$
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
@@ -71,7 +71,7 @@ enum {
     EV_VIRT_MOD_MASK = 0x0ff00000
 };
 
-/* Support for buttons 6, 7, 8 and 9.
+/* Support for buttons 6, 7, 8.
 
    <X11/X.h> doesn't define these, even though XFree supports them.. */
 
@@ -94,13 +94,6 @@ enum {
 #endif
 #ifndef Button8Mask
 # define Button8Mask (1<<15)
-#endif
-
-#ifndef Button9
-# define Button9 9
-#endif
-#ifndef Button9Mask
-# define Button9Mask (1<<16)
 #endif
 
 /* In key maps, a `key' is (COMMAND . EVENT) */
