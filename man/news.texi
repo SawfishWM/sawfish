@@ -151,6 +151,12 @@ If you run the configurator but the Sawfish window manager is absent,
 then an alert window is displayed before abortion. The appearance is
 poor, though.
 
+@item Pointer warping in window cycling [Teika Kazura]
+
+In window cycling, some unnecessary pointer warping is avoided.
+Previously, the necessity of a warp was judged by the geometry before
+the raise was done. Now the updated one is used.
+
 @item Module @code{3d-hack} is not autoloaded anymore.
 
 @item Doc improvements

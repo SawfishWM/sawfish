@@ -205,8 +205,8 @@
         (show-window win))
       (when cycle-raise-windows
         (fluid-set x-cycle-stacking (stacking-order))
-        (warp-pointer-if-necessary win)
-        (raise-window* win))
+        (raise-window* win)
+	(warp-pointer-if-necessary win))
       (when cycle-show-window-names
         (cycle-display-message))
       (when (window-really-wants-input-p win)
