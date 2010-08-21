@@ -1,4 +1,4 @@
-;; gnome-int.jl -- more GNOME integration
+;; gnome.jl -- more GNOME integration
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -40,18 +40,21 @@
   (unless (variable-customized-p 'browser-program)
     (setq browser-program "gnome-www-browser"))
 
-  ;; add some GNOME help menus
+  ;; add some GNOME menu-entries
   (let ((menu (assoc (_ "_Help") root-menu)))
     (when menu
       (nconc menu `(()
 		    (,(_ "_GNOME Help") (system "yelp &"))
-		    (,(_ "GNOME Website") (browser "http://www.gnome.org"))
-		    (,(_ "About GNOME") (system "gnome-about &"))))))
+		    (,(_ "GNOME _Website") (browser "http://www.gnome.org"))
+		    (,(_ "_About GNOME") (system "gnome-about &"))))))
 
-  ;; add gnome-logout menu item
+
+  ;; add gnome-logout and customize menu-entries
   (let ((menu (assoc (_ "Sessi_on") root-menu)))
     (when menu
       (nconc menu `(()
+                    (,(_ "_Customize GNOME") (system "gnome-control-center &"))
+                    ()
                     (,(_ "_Logout from GNOME")
                      (system "gnome-session-save --logout-dialog &"))
                     (,(_ "_Shutdown from GNOME")
