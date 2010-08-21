@@ -31,6 +31,7 @@
   (define-structure-alias kde-int sawfish.wm.integration.kde)
 
   (defvar-setq want-poweroff-menu nil)
+  (defvar-setq desktop-environment "kde")
 
   ;; invoke the KDE terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)

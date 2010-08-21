@@ -30,6 +30,8 @@
 
   (define-structure-alias standalone-int sawfish.wm.integration.standalone)
 
+  (defvar-setq desktop-environment "none")
+
   (defvar want-poweroff-menu t
     "Add poweroff menu if you don't use GNOME / KDE.")
 

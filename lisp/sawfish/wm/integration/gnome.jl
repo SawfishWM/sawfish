@@ -31,6 +31,7 @@
   (define-structure-alias gnome-int sawfish.wm.integration.gnome)
 
   (defvar-setq want-poweroff-menu nil)
+  (defvar-setq desktop-environment "gnome")
 
   ;; invoke the GNOME terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
