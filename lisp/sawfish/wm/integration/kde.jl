@@ -45,13 +45,15 @@
     (when menu
       (nconc menu `(()
 		    (,(_ "_KDE Help") (system "khelpcenter &"))
-		    (,(_ "KDE Website") (browser "http://www.kde.org"))))))
+		    (,(_ "KDE _Website") (browser "http://www.kde.org"))))))
 
   ;; add kde-logout menu item
   (let ((menu (assoc (_ "Sessi_on") root-menu))
         (kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout"))
     (when menu
       (nconc menu `(()
+                    (,(_ "_Customize KDE") (system "systemsettings &"))
+                    ()
                     (,(_ "_Logout from KDE")
                      (system ,(concat kde-logout-cmd " 1 0 -1 &")))
                     (,(_ "_Reboot from KDE")
