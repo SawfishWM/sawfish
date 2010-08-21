@@ -20,6 +20,15 @@
 	* lisp/sawfish/wm/menus.jl: added accelerators for all menu-entries,
 	betters strings for sawfish-help menu-entries
 
+	* lisp/sawfish/wm/menus.jl: revert ba60d1e51c6420a3e3d07b1417d9d4ee30cf849a
+
+	* lisp/sawfish/wm/integration/gnome.jl
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/integration/standalone.jl
+	* lisp/sawfish/wm/integration/xfce.jl: added `desktop-environment' variable
+	which might be used by DE-dependent scripts to check which one is running
+	or `none'
+
 	* man/news.texi: updated
 
 2010-08-21  Teika kazura <teika@lavabit.com>

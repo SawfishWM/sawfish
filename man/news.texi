@@ -167,11 +167,9 @@ printed to standard error.
 
 All extra menu-entries for GNOME/KDE4 do now have accelerators. Entries
 for invoking @code{gnome-control-center} or @code{systemsettings} have been
-added. The way KDE4 is detected has been improved.
-
-@item Added a borderline on the top of the root-menu, which
-prevents it from (accidently) immediately disappearing.
-[Christopher Bratusek]
+added. The way KDE4 is detected has been improved. Besides a new variable
+@var{desktop-environment} has been introduced, which might be checked to
+determine which one (gnome, kde, xfce or none) is running.
 
 @item Configurator invocation without running Sawfish [Teika Kazura]
 
