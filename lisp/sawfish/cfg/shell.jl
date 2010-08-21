@@ -271,6 +271,7 @@
 	  (button (stock-button 'ok))
 	  (func (lambda () (throw 'quit 1))))
       (gtk-window-set-title window "SawfishConfig error")
+      (gtk-window-set-icon-name window "gtk-info")
       (gtk-container-set-border-width window 10)
       (gtk-label-set-line-wrap label t)
       (gtk-widget-set-size-request label 225 45)
