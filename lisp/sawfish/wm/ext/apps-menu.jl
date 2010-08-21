@@ -158,23 +158,26 @@ set this to non-nil.")
 	(substring string 0 (match-start))
       string))
 
-  ;; This is wrong.  Read the desktop entry spec to see how it should
-  ;; be done.  It's complicated.
+  (defmacro simplify-mlang (mlang mlevel)
+    `(and
+      ,(if (or (= 0 mlevel) (not mlevel))
+	   `(or (string-looking-at "([a-z]*)(_?)([A-Z]*?)(@)([A-Z]*[a-z]*)?" ,mlang)
+		(string-looking-at "([a-z]*)(_..)|([a-z]*)?" ,mlang)
+		(string-looking-at "([a-z]*)?" ,mlang))
+	 (if (= 1 mlevel)
+	     `(string-looking-at "([a-z]*)(_?)([A-Z]*?)(@)([A-Z]*[a-z]*)?" ,mlang)
+	   (if (= 2 mlevel)
+	       `(string-looking-at "([a-z]*)(_..)|([a-z]*)?" ,mlang)
+	     (if (= 3 mlevel)
+		 `(string-looking-at "([a-z]*)?" ,mlang)))))
+      (expand-last-match "\&")))
+
   (define (find-lang-string)
-    (define (simplify mlang)
-      ;; N.B.: returns nil if mlang is "C" or "POSIX",
-      ;; "fi" if it is "finnish", "sw" if it is "swedish"
-      ;; Swedes can set locale to "sv_SE" or start learning Swahili.
-      (and (string-looking-at "([a-z][a-z])(_..)?" mlang)
-	   (expand-last-match "\\0")))
-    (or
-     (let loop ((lang-vars '("LC_ALL" "LC_MESSAGES" "LANG")))
-	  (and lang-vars
-	       (let ((mlang (getenv (car lang-vars))))
-		 (if mlang (simplify mlang)
-		   (loop (cdr lang-vars))))))
-     ;; Kluge to keep braindead code from breaking.
-     "xx"))
+    (let loop ((lang-vars '("LC_ALL" "LC_MESSAGES" "LANG")))
+	 (and lang-vars
+	      (let ((mlang (getenv (car lang-vars))))
+		(if mlang (simplify-mlang mlang 0)
+		  (loop (cdr lang-vars)))))))
 
   ;; The Master Category List
 
@@ -220,17 +223,15 @@ set this to non-nil.")
       ("Exiles" . ("Exile"))))
 
   ;; Get the correct Name entry based on language settings
-  ;; This is wrong.  Read the desktop entry spec to see how it should
-  ;; be done.  It's complicated.
-  (define (find-lang-in-desktop-file fdo-list)
-    (or (and apps-menu-lang
-	     (or (assoc (concat name-string apps-menu-lang "]")
-			fdo-list)
-		 (and (> (length apps-menu-lang) 2)
-		      (assoc (concat name-string
-				     (substring apps-menu-lang 0 2)
-				     "]")
-			     fdo-list))))
+  ;; Get the correct Name entry based on language settings
+  (define (find-desktop-name fdo-list)
+    (or (when apps-menu-lang
+	  (let ((mlang-1 (concat name-string (simplify-mlang apps-menu-lang 1) "]"))
+		(mlang-2 (concat name-string (simplify-mlang apps-menu-lang 2) "]"))
+		(mlang-3 (concat name-string (simplify-mlang apps-menu-lang 3) "]")))
+	    (or (assoc mlang-1 fdo-list)
+		(assoc mlang-2 fdo-list)
+		(assoc mlang-3 fdo-list))))
 	(assoc "Name" fdo-list)))
 
   ;; Functions for categories
@@ -337,7 +338,7 @@ desktop file `desk-file'."
 	    (list
 	     (determine-category
 	      (cdr (assoc "Categories" fdo-list)))
-	     (cdr (find-lang-in-desktop-file fdo-list))
+	     (cdr (find-desktop-name fdo-list))
 	     (if (string= (cdr (assoc "Terminal" fdo-list))
 			  "true")
 		 (list 'system
@@ -353,8 +354,6 @@ desktop file `desk-file'."
     (unless apps-menu-lang
       (setq apps-menu-lang (find-lang-string)))
     (setq local-menu nil)
-    (if (< (length apps-menu-lang) 2)
-	(setq apps-menu-lang "xx"))
     (let ((desk-files (flatten (map-dir-files desktop-directory))))
       (mapc (lambda (x)
 	      (setq local-menu
