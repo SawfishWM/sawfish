@@ -1,4 +1,4 @@
-;; standalone.jl - For those who don't have GNOME / KDE
+;; standalone.jl - For those who don't have GNOME, XFCE or KDE
 
 ;; Copyright (C) 2009 Christopher Roy Bratusek <zanghar@freenet.de>
 
