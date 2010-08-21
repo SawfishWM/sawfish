@@ -37,8 +37,13 @@
 
 ;; if it looks like KDE is the desktop environment, then load the
 ;; extra KDE integration module
-  (if (getenv "KDE_SESSION_VERSION")
-      (require 'sawfish.wm.integration.kde))))
+  (if (getenv "KDE_FULL_SESSION")
+      (require 'sawfish.wm.integration.kde)
+      
+;; if it looks like XFCE is the desktop environment, then load the
+;; extra XFCE integration module
+  (if (get-x-property 'root '_DT_SAVE_MODE)
+      (require 'sawfish.wm.integration.xfce)))))
 
 ;; save errors to aid debugging
 (require 'sawfish.wm.ext.error-handler)
