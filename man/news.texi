@@ -138,6 +138,12 @@ you use a @code{display-message} like message, rely on @code{x-draw-string},
 but if you want to draw on the screen directly use @code{x-draw-text}.
 @end itemize
 
+@item XFCE integration module [Christopher Bratusek]
+
+The XFCE integration module behaves just like the GNOME/KDE4 ones:
+it sets xterm-program/browser-program unless already set by user and
+it adds XFCE logout/help/customization menu-entries to the root-menu
+
 @item Miscellaneous Changes
 @itemize @minus
 @item More error and backtrace printing [Teika Kazura]
@@ -154,6 +160,14 @@ printed to Sawfish's output.
 
 Phrase ``Sawfish error:'' is prepended to error messages which are
 printed to standard error.
+
+@item All menu-entries do now have accelerators [Christopher Bratusek]
+
+@item GNOME/KDE4 integration updates [Christopher Bratusek]
+
+All extra menu-entries for GNOME/KDE4 do now have accelerators. Entries
+for invoking @code{gnome-control-center} or @code{systemsettings} have been
+added. The way KDE4 is detected has been improved.
 
 @item Added a borderline on the top of the root-menu, which
 prevents it from (accidently) immediately disappearing.
