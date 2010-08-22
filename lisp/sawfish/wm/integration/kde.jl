@@ -32,6 +32,7 @@
 
   (defvar-setq want-poweroff-menu nil)
   (defvar-setq desktop-environment "kde")
+  (defvar-setq desktop-directory '("/usr/share/applications/" "/usr/share/applications/kde4/"))
 
   ;; invoke the KDE terminal instead of xterm
   (unless (variable-customized-p 'xterm-program)
