@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-08-05 15:28+0200\n"
+"PO-Revision-Date: 2010-08-22 12:33+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -3126,9 +3126,8 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "raise-lower-button-keymap"
-msgstr "combinaciones-de-tecla-de-botón-cerrar"
+msgstr "combinaciones-de-tecla-de-botón-subir-bajar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -3136,6 +3135,11 @@ msgid ""
 "button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de subir/bajar de una ventana. (En este mapa sólo se evalúan "
+"las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
@@ -3400,7 +3404,7 @@ msgstr "Editar tema..."
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
-msgstr ""
+msgstr "Distancia entre las sucesivas ubicaciones en el modo «escalonado»."
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Method of placing windows: \\w"
@@ -3424,7 +3428,7 @@ msgstr "padres"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Keep transient windows stacked above: \\w"
-msgstr ""
+msgstr "Mantener las ventanas temporales apiladas encima: \\w"
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise single window"
@@ -3440,10 +3444,9 @@ msgid "Lower single window"
 msgstr "Enviar al fondo ventana única"
 
 #. ../lisp/sawfish/wm/stacking.jl
-#, fuzzy
 msgid "Lower the window to its lowest allowed position in the stacking order."
 msgstr ""
-"Traer la ventana a su posición más alta posible en el orden de apilamiento."
+"Enviar la ventana a su posición más baja posible en el orden de apilamiento."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise lower single window"
@@ -3760,9 +3763,8 @@ msgid "Maximize window fullscreen"
 msgstr "Maximiza la ventana a pantalla completa"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Fullscreen maximize the window."
-msgstr "Minimiza la ventana."
+msgstr "Maximizar la pantalla a pantalla completa."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
@@ -3791,12 +3793,12 @@ msgid "Maximize window fullxinerama toggle"
 msgstr "Cambia el maximizado de la ventana a pantalla completa"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between fullscreen maximized\n"
 "across all Xinerama and unmaximized."
 msgstr ""
-"Cambiar el estado de la ventana entre maximizado-rellenando y no maximizado."
+"Cambiar el estado de la ventana entre pantalla completa maximizada\n"
+"en todo Xinerama y desmaximizada."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
@@ -4011,6 +4013,11 @@ msgid ""
 "  You can't set any arguments to pass from this variable. If you want\n"
 "to give arguments or redirect output, write a wrapper program."
 msgstr ""
+"El programa usado para reproducir muestras de sonido. Debería ser capaz\n"
+"de reproducir archivos *.wav.\n"
+"No puede establecer ningún argumento que pasar para esta variable. Si\n"
+"quiere pasar argumentos o redireccionar la salida, escriba un programa\n"
+"envolvente."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
@@ -4092,6 +4099,9 @@ msgid ""
 "\n"
 "This is meaningless if dynamic viewport is enabled."
 msgstr ""
+"El número de columnas y filas del escritorio virtual: \\w\n"
+"\n"
+"No tiene sentido si está activado el espacio de trabajo dinámico."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -4102,9 +4112,8 @@ msgstr ""
 "es dinámico): \\w"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid "Windows uniconify to the current viewport."
-msgstr "Mover grupo al espacio de trabajo actual"
+msgstr "Las ventanas se restauran en el espacio de trabajo actual."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
