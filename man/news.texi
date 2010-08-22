@@ -144,6 +144,12 @@ but if you want to draw on the screen directly use @code{x-draw-text}.
 The XFCE integration module behaves just like the GNOME/KDE4 ones:
 it sets xterm-program/browser-program unless already set by user and
 it adds XFCE logout/help/customization menu-entries to the root-menu
+
+@item Apps-Menu improvements [Matthew Love]
+
+Our freedesktop.org menu-implementation does now honor the OnlyShowIn
+and NotShowIn fields. This is done via @code{desktop-environment} set
+in sawfish.wm.integration.* on startup.
 @end itemize
 
 @item Miscellaneous Changes
