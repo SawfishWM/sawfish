@@ -66,7 +66,7 @@ applications menu.")
     "Some entries are hidden from the menu, especially GNOME Apps like
 eog, nautilus or evince. If you want to have them added to your menu,
 set this to non-nil.")
-
+  
   (defvar desktop-directory '("/usr/share/applications")
     "List of directories to look for *.desktop files.")
 
@@ -223,16 +223,15 @@ set this to non-nil.")
       ("Exiles" . ("Exile"))))
 
   ;; Get the correct Name entry based on language settings
-  ;; Get the correct Name entry based on language settings
-  (define (find-desktop-name fdo-list)
+  (define (determine-desktop-name fdo-list)
     (or (when apps-menu-lang
 	  (let ((mlang-1 (concat name-string (simplify-mlang apps-menu-lang 1) "]"))
 		(mlang-2 (concat name-string (simplify-mlang apps-menu-lang 2) "]"))
 		(mlang-3 (concat name-string (simplify-mlang apps-menu-lang 3) "]")))
-	    (or (assoc mlang-1 fdo-list)
-		(assoc mlang-2 fdo-list)
-		(assoc mlang-3 fdo-list))))
-	(assoc "Name" fdo-list)))
+	    (or (cdr (assoc mlang-1 fdo-list))
+		(cdr (assoc mlang-2 fdo-list))
+		(cdr (assoc mlang-3 fdo-list)))))
+	(cdr (assoc "Name" fdo-list))))
 
   ;; Functions for categories
   (define (fix-sub-cats cat-list loc-list)
@@ -256,7 +255,7 @@ set this to non-nil.")
 
   ;; Determine the best :| category to use. This will further be
   ;; converted with fix-cats.
-  (define (determine-category line)
+  (define (determine-desktop-category line)
     (let loop ((cat-list (string-split ";" line))
 	       this-cat)
 	 (if (cdr cat-list)
@@ -322,32 +321,52 @@ exile it."
 	  (fdo-exile fdo-list)
 	fdo-list)))
 
-  ;; generate a sawfish menu entry from a .desktop file
-  (define (generate-menu-entry desk-file)
-    "Generate a menu entry to run the program specified in the the
-desktop file `desk-file'."
+  (define (determine-desktop-exec fdo-list)
+    "Determine the correct `(system exec)' function from the given fdo alist"
+    (if (string= (cdr (assoc "Terminal" fdo-list))
+		 "true")
+	(list 'system
+	      (concat xterm-program " -e "
+		      (trim-percent (cdr (assoc "Exec" fdo-list)))
+		      " &"))
+      (list 'system
+	    (concat (trim-percent (cdr (assoc "Exec" fdo-list)))
+		    " &"))))
+
+  (define (desk-file->alist desk-file)
+    "Parse a desktop file `desk-file' into an alist."
     (when (and (not (file-directory-p desk-file))
 	       (desktop-file-p desk-file))
       (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
-	(if apps-menu-ignore-no-display
-	    (let ((a (assoc "NoDisplay" fdo-list)))
-	      (if a (rplacd a "false")
-		(setq fdo-list (cons (cons "NoDisplay" "false")
-				     fdo-list)))))
-	(if (not (string= (cdr (assoc "NoDisplay" fdo-list)) "true"))
-	    (list
-	     (determine-category
-	      (cdr (assoc "Categories" fdo-list)))
-	     (cdr (find-desktop-name fdo-list))
-	     (if (string= (cdr (assoc "Terminal" fdo-list))
-			  "true")
-		 (list 'system
-		       (concat xterm-program " -e "
-			       (trim-percent (cdr (assoc "Exec" fdo-list)))
-			       " &"))
-	       (list 'system
-		     (concat (trim-percent (cdr (assoc "Exec" fdo-list)))
-			     " &"))))))))
+	(let ((a (assoc "NoDisplay" fdo-list))
+	      (b (assoc "OnlyShowIn" fdo-list))
+	      (c (assoc "NotShowIn" fdo-list)))
+	  (if (or (not a) apps-menu-ignore-no-display)
+	      (setq fdo-list (append fdo-list (cons (cons "apps-menu-no-display?" "false"))))
+	    (setq fdo-list (append fdo-list (cons (cons "apps-menu-no-display?" (cdr a))))))
+	  (when b
+	    (if (string-match (concat (quote-regexp desktop-environment) "*")
+			      (string-downcase (cdr b)))
+		(rplacd (assoc "apps-menu-no-display?" fdo-list) "false")
+	      (rplacd (assoc "apps-menu-no-display?" fdo-list) "true")))
+	  (when c
+	    (if (string-match (concat (quote-regexp desktop-environment) "*")
+			      (string-downcase (cdr c)))
+		(rplacd (assoc "apps-menu-no-display?" fdo-list) "true")
+	      (rplacd (assoc "apps-menu-no-display?" fdo-list) "false")))
+	  fdo-list))))
+
+  ;; generate a sawfish menu entry from a .desktop file
+  (define (generate-menu-entry fdo-list)
+    "Generate a menu entry to run the program specified in the the
+desktop file `desk-file'."
+    (when (and fdo-list
+	       (string= (cdr (assoc "apps-menu-no-display?" fdo-list)) "false"))
+      (list
+       (determine-desktop-category
+	(cdr (assoc "Categories" fdo-list)))
+       (determine-desktop-name fdo-list)
+       (determine-desktop-exec fdo-list))))
 
   (define (generate-apps-menu)
     "Returns the list of applications menu which can be used for `apps-menu'."
@@ -358,7 +377,7 @@ desktop file `desk-file'."
       (mapc (lambda (x)
 	      (setq local-menu
 		    (append local-menu
-			    (list (generate-menu-entry x))))) desk-files)
+			    (list (generate-menu-entry (desk-file->alist x)))))) desk-files)
       (if apps-menu-alphabetize
 	  (alphabetize-entries (fix-cats desktop-cat-alist))
 	(fix-cats desktop-cat-alist))))
