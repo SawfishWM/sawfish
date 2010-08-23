@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-12-21 18:05+0100\n"
-"PO-Revision-Date: 2010-08-22 12:33+0200\n"
+"PO-Revision-Date: 2010-08-23 19:41+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2650,16 +2650,12 @@ msgstr ""
 "(Desenrollar temporalmente las ventanas si el puntero está sobre ellas.)"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-#, fuzzy
 msgid "Delay in milliseconds before unshading windows."
-msgstr ""
-"Retardo en milisegundos hasta que las ventanas enfocadas\n"
-"se envían a primer plano."
+msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
-#, fuzzy
 msgid "Raise windows when they are unshaded."
-msgstr "Poner ventana y temporales en primer plano"
+msgstr "Traer al frente ventanas cuando están desenrolladas."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 #, fuzzy
@@ -2986,7 +2982,7 @@ msgstr "_Hibernar el sistema"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
-msgstr "combinaciones-de-teclas-globales"
+msgstr "combinación-de-teclas-globales"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active anywhere."
@@ -2994,7 +2990,7 @@ msgstr "Mapa de teclado que contiene vínculos activos en cualquier sitio."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "window-keymap"
-msgstr "combinaciones-de-teclas-de-ventana"
+msgstr "combinación-de-teclas-de-ventana"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap containing bindings active when a client window is focused."
@@ -3002,7 +2998,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "root-window-keymap"
-msgstr "combinaciones-de-tecla-de-la-ventana-raíz"
+msgstr "combinación-de-teclas-de-ventana-raíz"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -3022,7 +3018,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
-msgstr "combinaciones-tecla-de-borde"
+msgstr "combinación-de-teclas-de-borde"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -3032,7 +3028,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
-msgstr "combinaciones-de-tecla-de-botón-cerrar"
+msgstr "combinación-de-teclas-de-botón-cerrar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -3042,23 +3038,31 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
-msgstr "combinaciones-de-teclas-de-botón-minimizar"
+msgstr "combinación-de-teclas-de-botón-minimizar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the iconify\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de minimizar de una ventana. (En este mapa sólo se evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
-msgstr "combinación-de-teclas-botón-maximizar"
+msgstr "combinación-de-teclas-de-botón-maximizar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the maximize\n"
 "button of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de maximizar de una ventana. (En este mapa sólo se evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
@@ -3069,6 +3073,10 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the menu button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de menú de una ventana. (En este mapa sólo se evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
@@ -3079,6 +3087,10 @@ msgid ""
 "Keymap containing bindings active when the pointer is in the shade button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de sombra de una ventana. (En este mapa sólo se evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
@@ -3092,31 +3104,36 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "lock-button-keymap"
-msgstr "combinaciones-de-tecla-de-botón-cerrar"
+msgstr "combinación-de-teclas-de-botón-bloquear"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the lock button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de bloquear de una ventana. (En este mapa sólo se evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "rename-button-keymap"
-msgstr "combinacion-de-teclas-de-botón-menú"
+msgstr "combinación-de-teclas-de-botón-renombrar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
 "Keymap containing bindings active when the pointer is in the rename button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de renombrar de una ventana. (En este mapa sólo se evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "move-resize-button-keymap"
-msgstr "combinaciones-de-tecla-de-botón-cerrar"
+msgstr "combinación-de-teclas-de-botón-mover-redimensionar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -3124,10 +3141,15 @@ msgid ""
 "button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
+"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
+"está\n"
+"en el botón de mover/redimensionar de una ventana. (En este mapa sólo se "
+"evalúan las\n"
+"combinaciones del ratón.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "raise-lower-button-keymap"
-msgstr "combinaciones-de-tecla-de-botón-subir-bajar"
+msgstr "combinación-de-teclas-de-botón-subir-bajar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid ""
@@ -4122,6 +4144,10 @@ msgid ""
 "It is the number of steps for scrolling. The value 1 means no scroll, and\n"
 "the change is instantaneous."
 msgstr ""
+"Al ir a otro espacio de trabajo, cuanto más grande es este valor,\n"
+"más suavemente se desplaza la pantalla.\n"
+"Es el número de pasos de desplazamiento. El valor 1 significa\n"
+"sin desplazamiento, y el cambio es instantáneo."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
@@ -4142,6 +4168,8 @@ msgid ""
 "Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
 "desktop edge."
 msgstr ""
+"Parar, ajustar alrededor o aumentar el escritorio virtual al ir más allá del "
+"borde del escritorio virtual."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
@@ -4273,7 +4301,7 @@ msgstr "sólida"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "wireframe"
-msgstr ""
+msgstr "marco de alambre"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "The default window animation mode"
