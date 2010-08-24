@@ -42,10 +42,10 @@ DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
 DEFUN("disable-flippers", Fdisable_flippers, Sdisable_flippers,
       (void), rep_Subr0)
 {
-    XUnmapWindow (dpy, edge_left);
-    XUnmapWindow (dpy, edge_right);
-    XUnmapWindow (dpy, edge_top);
-    XUnmapWindow (dpy, edge_bottom);
+    XDestroyWindow (dpy, edge_left);
+    XDestroyWindow (dpy, edge_right);
+    XDestroyWindow (dpy, edge_top);
+    XDestroyWindow (dpy, edge_bottom);
     return Qt;
 }
 
