@@ -62,7 +62,7 @@ and *.desktop files. If you set `apps-menu', then it won't happen anyway.")
     "Your own applications menu entries. It is followed by auto generated
 applications menu.")
 
-  (defvar apps-menu-ignore-no-display nil
+  (defvar apps-menu-show-all nil
     "Some entries are hidden from the menu, especially GNOME Apps like
 eog, nautilus or evince. If you want to have them added to your menu,
 set this to non-nil.")
@@ -333,35 +333,55 @@ exile it."
 	    (concat (trim-percent (cdr (assoc "Exec" fdo-list)))
 		    " &"))))
 
-  (define (desk-file->alist desk-file)
-    "Parse a desktop file `desk-file' into an alist."
-    (when (and (not (file-directory-p desk-file))
-	       (desktop-file-p desk-file))
-      (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
-	(let ((a (assoc "NoDisplay" fdo-list))
-	      (b (assoc "OnlyShowIn" fdo-list))
-	      (c (assoc "NotShowIn" fdo-list)))
-	  (if (or (not a) apps-menu-ignore-no-display)
-	      (setq fdo-list (append fdo-list (cons (cons "apps-menu-no-display?" "false"))))
-	    (setq fdo-list (append fdo-list (cons (cons "apps-menu-no-display?" (cdr a))))))
-	  (when b
-	    (if (string-match (concat (quote-regexp desktop-environment) "*")
-			      (string-downcase (cdr b)))
-		(rplacd (assoc "apps-menu-no-display?" fdo-list) "false")
-	      (rplacd (assoc "apps-menu-no-display?" fdo-list) "true")))
-	  (when c
-	    (if (string-match (concat (quote-regexp desktop-environment) "*")
-			      (string-downcase (cdr c)))
-		(rplacd (assoc "apps-menu-no-display?" fdo-list) "true")
-	      (rplacd (assoc "apps-menu-no-display?" fdo-list) "false")))
-	  fdo-list))))
+  (define (desk-file->fdo-list desk-file)
+    (when (desktop-file-p desk-file)
+       (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
+	 (let ((a (assoc "NoDisplay" fdo-list))
+	       (b (assoc "OnlyShowIn" fdo-list))
+	       (c (assoc "NotShowIn" fdo-list))
+	       (d (assoc "Hidden" fdo-list)))
+	   ;; 't
+	   (setq fdo-list (append fdo-list (cons (cons "apps-menu-display?" "true"))))
+	   ;; 'maybe
+	   (when (eq apps-menu-show-all 'maybe)
+	     (when b
+	       (if (string-match (concat (quote-regexp desktop-environment) "*")
+				 (string-downcase (cdr b)))
+		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	     (when c
+	       (if (string-match (concat (quote-regexp desktop-environment) "*")
+				 (string-downcase (cdr c)))
+		   (rplacd (assoc "apps-menu-display?" fdo-list) "false")
+		 (rplacd (assoc "apps-menu-display?" fdo-list) "true"))))
+	   ;; 'nil
+	   (when (or (eq apps-menu-show-all 'nil) (not apps-menu-show-all))
+	     (when a
+	       (if (string-match "[Ff]" (cdr a))
+		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	     (when d
+	       (if (string-match "[Ff]" (cdr d))
+		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	     (when b
+	       (if (string-match (concat (quote-regexp desktop-environment) "*")
+				 (string-downcase (cdr b)))
+		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	     (when c
+	       (if (string-match (concat (quote-regexp desktop-environment) "*")
+				 (string-downcase (cdr c)))
+		   (rplacd (assoc "apps-menu-display?" fdo-list) "false")
+		 (rplacd (assoc "apps-menu-display?" fdo-list) "true")))))
+	   fdo-list)))
 
   ;; generate a sawfish menu entry from a .desktop file
   (define (generate-menu-entry fdo-list)
     "Generate a menu entry to run the program specified in the the
 desktop file `desk-file'."
     (when (and fdo-list
-	       (string= (cdr (assoc "apps-menu-no-display?" fdo-list)) "false"))
+	       (string= (cdr (assoc "apps-menu-display?" fdo-list)) "true"))
       (list
        (determine-desktop-category
 	(cdr (assoc "Categories" fdo-list)))
@@ -377,7 +397,7 @@ desktop file `desk-file'."
       (mapc (lambda (x)
 	      (setq local-menu
 		    (append local-menu
-			    (list (generate-menu-entry (desk-file->alist x)))))) desk-files)
+			    (list (generate-menu-entry (desk-file->fdo-list x)))))) desk-files)
       (if apps-menu-alphabetize
 	  (alphabetize-entries (fix-cats desktop-cat-alist))
 	(fix-cats desktop-cat-alist))))
