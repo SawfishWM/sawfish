@@ -173,10 +173,14 @@
 ;;    "Your own applications menu entries. It is followed by auto generated
 ;:  applications menu.")
 
-;; (defvar-setq apps-menu-ignore-no-display nil
+;; (defvar-setq apps-menu-show-all nil
 ;;    "Some entries are hidden from the menu, especially GNOME Apps like
-;;  eog, nautilus or evince. If you want to have them added to your menu,
-;;  set this to non-nil.")
+;;     eog, nautilus or evince. Settings this variable to 'nil will generate
+;;     a menu that honours NoDisplay, Hidden OnlyShowIn and NotShowIn fields.
+;;     In other words it generates the same menu like GNOME or KDE.
+;;     If this variable is set to 'maybe the NoDisplay and Hidden fields are
+;;     ignored, while NotShowIn and OnlyShowIn are respected.
+;;     At last if you choose 't all four fields are ignored.")
 
 ;; (defvar-setq desktop-directory '("/usr/share/applications")
 ;;   "List of directories to look for *.desktop files")
