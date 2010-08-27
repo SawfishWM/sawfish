@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-21 18:05+0100\n"
+"POT-Creation-Date: 2010-08-27 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -885,34 +886,42 @@ msgstr ""
 msgid "fake shadow only on focused windows"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "north"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "east"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "south"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "west"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "north-east"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "north-west"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "south-east"
 msgstr ""
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "south-west"
 msgstr ""
@@ -1404,7 +1413,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
+"Grows window to the left until it touches another window.\n"
 "See `grow-window-up'."
 msgstr ""
 
@@ -1414,7 +1423,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
+"Grows window to the right until it touches another window.\n"
 "See `grow-window-up'."
 msgstr ""
 
@@ -1424,7 +1433,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
+"Grows window upwards until it touches another window.\n"
 "If the top edge was beyond the screen edge, it is brought back in.\n"
 "With a universal prefix arg, maximize upwards instead.\n"
 "With a numeric prefix arg, grow upwards by that many increments specified "
@@ -1438,7 +1447,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
+"Grows window downwards until it touches another window.\n"
 "See `grow-window-up'."
 msgstr ""
 
@@ -1448,7 +1457,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
+"Moves window to the left until it touches another window.\n"
 "See `pack-window-up'."
 msgstr ""
 
@@ -1458,7 +1467,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
+"Moves window to the right until it touches another window.\n"
 "See `pack-window-up'."
 msgstr ""
 
@@ -1468,7 +1477,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
+"Moves window upwards until it touches another window.\n"
 "If the top edge was beyond the screen edge, it is moved back in.\n"
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
@@ -1480,7 +1489,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
+"Moves window downwards until it touches another window.\n"
 "See `pack-window-up'."
 msgstr ""
 
@@ -1502,6 +1511,14 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/help.jl
 msgid "Help about"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "Jump or exec"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "jump to a window matched by re, or start program otherwise."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
@@ -1859,7 +1876,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the right edge to the left until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
@@ -1869,7 +1886,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the left edge to the right until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
@@ -1879,7 +1896,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the lower edge upwards until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
@@ -1889,7 +1906,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the upper edge downwards until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
@@ -1898,7 +1915,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW to the left until it inserts with one window less\n"
+"Moves WINDOW to the left until it overlaps with one less window\n"
 "than before."
 msgstr ""
 
@@ -1908,7 +1925,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW to the right until it inserts with one window less\n"
+"Moves WINDOW to the right until it overlaps with one less window\n"
 "than before."
 msgstr ""
 
@@ -1918,7 +1935,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW upwards until it inserts with one window less than\n"
+"Moves WINDOW upwards until it overlaps with one less window than\n"
 "before."
 msgstr ""
 
@@ -1928,7 +1945,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than\n"
+"Moves WINDOW downwards until it overlaps with one less window than\n"
 "before."
 msgstr ""
 
@@ -2110,7 +2127,7 @@ msgid "Run shell command"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
+msgid "Execute the given shell command in the background."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands.jl
@@ -2151,25 +2168,17 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr ""
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
 msgid "Appearance"
-msgstr ""
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Bindings"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Focus"
 msgstr ""
 
 #. ../lisp/sawfish/wm/custom.jl
@@ -2180,9 +2189,21 @@ msgstr ""
 msgid "Miscellaneous"
 msgstr ""
 
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr ""
+
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Placement"
+msgstr ""
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Stacking"
+msgstr ""
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
 msgstr ""
 
 #. ../lisp/sawfish/wm/customize.jl
@@ -2710,7 +2731,7 @@ msgid "When true, pointer in/out events don't cause focus changes."
 msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
+msgid "Theme"
 msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
@@ -2731,10 +2752,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Font color for inactive frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
 msgstr ""
 
 #. ../lisp/sawfish/wm/frames.jl
@@ -2762,6 +2779,7 @@ msgid "None"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "_Help"
@@ -2772,18 +2790,23 @@ msgid "_GNOME Help"
 msgstr ""
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "GNOME Website"
+msgid "GNOME _Website"
 msgstr ""
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "About GNOME"
+msgid "_About GNOME"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
 #. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Customize GNOME"
 msgstr ""
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
@@ -2799,7 +2822,11 @@ msgid "_KDE Help"
 msgstr ""
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-msgid "KDE Website"
+msgid "KDE _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Customize KDE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/integration/kde.jl
@@ -2828,6 +2855,34 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/integration/standalone.jl
 msgid "_Hibernate System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_XFCE Help"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "XFCE _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_About XFCE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Customize XFCE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Logout from XFCE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Reboot from XFCE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Shutdown from XFCE"
 msgstr ""
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3159,43 +3214,43 @@ msgid "_Customize"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Display Errors"
+msgid "Display _Errors"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Reload Appsmenu"
+msgid "_Reload Appsmenu"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Restart Sawfish"
+msgid "Restart _Sawfish"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Quit Sawfish"
+msgid "_Quit Sawfish"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
+msgid "Sawfish _FAQ"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
+msgid "Sawfish _News"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
+msgid "Sawfish _Wiki"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
+msgid "Sawfish _Manual"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
+msgid "_About Sawfish"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "Kill Window"
+msgid "_Kill Window"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
@@ -3234,8 +3289,16 @@ msgstr ""
 msgid "S_awfishConfig"
 msgstr ""
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
+#. ../lisp/sawfish/wm/placement/dockapp.jl
+msgid "Dockapps"
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement/dockapp.jl
+msgid "Dockapp placement origin: \\w"
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement/dockapp.jl
+msgid "Dockapp placement direction: \\w"
 msgstr ""
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
@@ -3252,10 +3315,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Ignore program-specified window placements."
-msgstr ""
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Stacking"
 msgstr ""
 
 #. ../lisp/sawfish/wm/stacking.jl
@@ -3457,7 +3516,21 @@ msgid "In _task list"
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Lock position and size while windows are maximized."
+msgid ""
+"Lock position and size while windows are maximized.\n"
+"\n"
+"Remember that after you resize a maximized window, you can't unmaximize it "
+"any more."
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize discard"
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Don't treat window as maximized any more, keeping the size and the position. "
+"You'll be able to move and resize, but won't be able to unmaximize."
 msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -3695,6 +3768,14 @@ msgid "Width of tab area's right-edge decoration"
 msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge-transient decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge-transient decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Raise Tabs on Hover"
 msgstr ""
 
@@ -3731,7 +3812,7 @@ msgid "Insert workspace"
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Unshade selected windows."
+msgid "Unshade window when selected."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
@@ -3739,7 +3820,8 @@ msgid "Display window without focusing"
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace/viewport containing the window W."
+msgid ""
+"Display the window, but don't focus. You're prompted to type in the name."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
@@ -3747,7 +3829,15 @@ msgid "Display window"
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace containing the window W, then focus on W."
+msgid "Display the window. You're prompted to type in the name."
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+msgid "Display window position"
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+msgid "Choose a window, and prints its position and size in a popup."
 msgstr ""
 
 #. ../lisp/sawfish/wm/util/groups.jl
@@ -4044,10 +4134,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "The default window animation mode"
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Give focus to windows even when they haven't asked for it."
 msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
