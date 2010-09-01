@@ -1,18 +1,21 @@
 # British Translation
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Robert Brady <rwb197@zepler.org> 2000
-#
+# Bruce Cowan <bruce@bcowan.me.uk>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish CVS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-18 18:28+0100\n"
-"PO-Revision-Date: 2004-04-16 12:19-0400\n"
-"Last-Translator: Gareth Owen <gowen72@yahoo.com>\n"
-"Language-Team: British English\n"
+"POT-Creation-Date: 2010-08-27 17:36+0200\n"
+"PO-Revision-Date: 2010-09-01 15:06+0100\n"
+"Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
+"Language-Team: British English <en@li.org>\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.6.1\n"
 
 #. ../themes/Crux/theme.jl
 msgid "Crux Theme"
@@ -117,65 +120,58 @@ msgstr "Text is \\w justified in window titles."
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat"
-msgstr ""
+msgstr "mxflat"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "title"
-msgstr "State"
+msgstr "title"
 
 #. ../themes/mxflat/theme.jl
 msgid "basic"
-msgstr ""
+msgstr "basic"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "gradient"
-msgstr "transients"
+msgstr "gradient"
 
 # ../src/sawmill-ui.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "colors"
-msgstr "Select colour"
+msgstr "colours"
 
 #. ../themes/mxflat/theme.jl
 msgid "buttons"
-msgstr ""
+msgstr "buttons"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "positions 1"
-msgstr "Position"
+msgstr "positions 1"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "positions 2"
-msgstr "Position"
+msgstr "positions 2"
 
 #. ../themes/mxflat/theme.jl
 msgid "keymaps 1"
-msgstr ""
+msgstr "keymaps 1"
 
 #. ../themes/mxflat/theme.jl
 msgid "keymaps 2"
-msgstr ""
+msgstr "keymaps 2"
 
 # ../lisp/menus.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "borders"
-msgstr "Top-border"
+msgstr "borders"
 
 #. ../themes/mxflat/theme.jl
 msgid "extended"
-msgstr ""
+msgstr "extended"
 
 # ../lisp/menus.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "normal"
-msgstr "Normal"
+msgstr "normal"
 
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../themes/mxflat/theme.jl
@@ -200,10 +196,17 @@ msgid ""
 "transients only have a contents-border.  This option is for reimplementing a "
 "sawfish feature that is gone in the latest version."
 msgstr ""
+"decoration mode\n"
+"\n"
+"Set the mode 'when to draw a titlebar and window buttons'.  The decoration "
+"mode 'all' means that all windows, even transients/dialogues, will get a "
+"titlebar and buttons.  None means no window will get any :-).  Usually "
+"transients only have a contents-border.  This option is for reimplementing a "
+"sawfish feature that is gone in the latest version."
 
 #. ../themes/mxflat/theme.jl
 msgid "titlebar height (9 - 1000 pixel)"
-msgstr ""
+msgstr "titlebar height (9 - 1000 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -213,6 +216,11 @@ msgid ""
 "(NOTE: I hope the redrawing problems with this option are solved.  If not, "
 "write an email please!)"
 msgstr ""
+"customise title string\n"
+"\n"
+"See the tooltip for the 'title string' option below for more information.  "
+"(NOTE: I hope the redrawing problems with this option are solved.  If not, "
+"write an e-mail please!)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -227,6 +235,16 @@ msgid ""
 "$last-ws. (NOTE: I hope the redrawing problems with this option are solved.  "
 "If not, write an email please!"
 msgstr ""
+"title string\n"
+"\n"
+"The string you insert here will be your new title string.  Variables always "
+"start with a dollar-sign ($) and are replaced with their actual values.  To "
+"get the value of an environment variable use $(variable), eg $(DISPLAY).  To "
+"get the value of an rep/sawfish function use $[fuction], eg $[current-time-"
+"string].  The following vars are built-in: $name, $fullname, $width, $width-"
+"content, $height, $height-content, $depth, $x-pos, $y-pos, $current-ws and "
+"$last-ws. (NOTE: I hope the redrawing problems with this option are solved. "
+" If not, write an e-mail please!"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -235,6 +253,10 @@ msgid ""
 "This is useful if your title string changes without user interaction (eg "
 "because it displays the current time or something like that)."
 msgstr ""
+"update title string periodically\n"
+"\n"
+"This is useful if your title string changes without user interaction (eg "
+"because it displays the current time or something like that)."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -243,6 +265,10 @@ msgid ""
 "This is useful if your title string changes without user interaction (e.g., "
 "because it displays the current time or something like that)."
 msgstr ""
+"title string update interval (1 - 1000000 s)\n"
+"\n"
+"This is useful if your title string changes without user interaction (e.g., "
+"because it displays the current time or something like that)."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -250,6 +276,9 @@ msgid ""
 "\n"
 "You should really choose a better font.  Verdana bold 8 pt looks nice."
 msgstr ""
+"title string font\n"
+"\n"
+"You should really choose a better font.  Verdana bold 8 pt looks nice."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -257,11 +286,13 @@ msgid ""
 "\n"
 "By default the title string is centered horizontally and vertically."
 msgstr ""
+"customise title position\n"
+"\n"
+"By default the title string is centred horizontally and vertically."
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "real-center"
-msgstr "centre"
+msgstr "real-centre"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -271,6 +302,11 @@ msgid ""
 "the string. when selecting 'center' only the distance between the buttons is "
 "taken into account."
 msgstr ""
+"title string horizontal alignment\n"
+"\n"
+"'real-centre' means to take the whole titlebar into account while centring "
+"the string. when selecting 'centre' only the distance between the buttons is "
+"taken into account."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -281,22 +317,29 @@ msgid ""
 "of the option above.  It the title string is already aligned left, you "
 "cannot adjust it to be even further left because there are button in the way."
 msgstr ""
+"title string horizontal align adjustment (-10000 - 10000 pixel)\n"
+"\n"
+"The horizontal position of the title string can only be adjusted if the "
+"horizontal alignment is not 'centre'.  The range also depends on the setting "
+"of the option above.  It the title string is already aligned left, you "
+"cannot adjust it to be even further left because there are button in the "
+"way."
 
 #. ../themes/mxflat/theme.jl
 msgid "top"
-msgstr ""
+msgstr "top"
 
 #. ../themes/mxflat/theme.jl
 msgid "bottom"
-msgstr ""
+msgstr "bottom"
 
 #. ../themes/mxflat/theme.jl
 msgid "title string vertical alignment"
-msgstr ""
+msgstr "title string vertical alignment"
 
 #. ../themes/mxflat/theme.jl
 msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
-msgstr ""
+msgstr "title string vertical align adjustment (-10000 - 10000 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -307,6 +350,12 @@ msgid ""
 "ignored.  (NOTE: This can be very cpu intensive if you set the quality to a "
 "low value, i.e., high quality.)"
 msgstr ""
+"gradient titlebar background (experimental)\n"
+"\n"
+"When activating the gradient background the normal titlebar background "
+"colours will be ignored.  Besides the button background colours will be "
+"ignored.  (NOTE: This can be very cpu intensive if you set the quality to a "
+"low value, i.e., high quality.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -315,6 +364,10 @@ msgid ""
 "With gradient mode vertical or diagonal only the first or last (reversed) 2 "
 "colors in the list are used."
 msgstr ""
+"gradient mode\n"
+"\n"
+"With gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colours in the list are used."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -323,24 +376,27 @@ msgid ""
 "The value here is the factor the calculated gradient image will be scaled "
 "down.  This increases speed but decreases quality."
 msgstr ""
+"gradient quality (1 best - 20 worst)\n"
+"\n"
+"The value here is the factor the calculated gradient image will be scaled "
+"down.  This increases speed but decreases quality."
 
 #. ../themes/mxflat/theme.jl
 msgid "rainbow"
-msgstr ""
+msgstr "rainbow"
 
 #. ../themes/mxflat/theme.jl
 msgid "jamaica"
-msgstr ""
+msgstr "jamaica"
 
 #. ../themes/mxflat/theme.jl
 msgid "rgb"
-msgstr ""
+msgstr "rgb"
 
 # ../lisp/menus.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "custom"
-msgstr "Customise"
+msgstr "custom"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -348,6 +404,9 @@ msgid ""
 "\n"
 "the custom mode will respect the colors set in the list below."
 msgstr ""
+"gradient colour mode\n"
+"\n"
+"the custom mode will respect the colours set in the list below."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -357,12 +416,16 @@ msgid ""
 "colors in the list are used.  Besides the gradient color mode must be set to "
 "custom to activate this list."
 msgstr ""
+"\n"
+"\n"
+"With gradient mode vertical or diagonal only the first or last (reversed) 2 "
+"colours in the list are used.  Besides the gradient colour mode must be set "
+"to custom to activate this list."
 
 # ../src/sawmill-ui.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "reverse colors"
-msgstr "Select colour"
+msgstr "reverse colours"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -371,6 +434,10 @@ msgid ""
 "This value changes the hue of a color, by moving (0 - 360) degress around "
 "the color cycle...180 for example inverts the color"
 msgstr ""
+"unfocused/highlighted titlebar colours hue (0 - 360)\n"
+"\n"
+"This value changes the hue of a colour, by moving (0 - 360) degrees around "
+"the colour cycle...180 for example inverts the colour"
 
 #. ../themes/mxflat/theme.jl
 #, c-format
@@ -380,6 +447,10 @@ msgid ""
 "\n"
 "The saturation of a color is a measurement of the color intensity"
 msgstr ""
+"unfocused/highlighted titlebar colours saturation (0 - 100% of the focused "
+"colour)\n"
+"\n"
+"The saturation of a colour is a measurement of the colour intensity"
 
 #. ../themes/mxflat/theme.jl
 #, c-format
@@ -387,6 +458,8 @@ msgid ""
 "unfocused/highlighted titlebar colors brightness (0 - 100% of the focused "
 "color)"
 msgstr ""
+"unfocused/highlighted titlebar colours brightness (0 - 100% of the focused "
+"colour)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -396,6 +469,11 @@ msgid ""
 "extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
+"  focused titlebar colour\n"
+"\n"
+"This is one of the 4 base colours.  You can set these 4 colours and keep the "
+"extended colours deactivated.  All other colour options of the theme will "
+"then depend on these 4 colours."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -405,6 +483,11 @@ msgid ""
 "extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
+"unfocused titlebar colour\n"
+"\n"
+"This is one of the 4 base colours.  You can set these 4 colours and keep the "
+"extended colours deactivated.  All other colour options of the theme will "
+"then depend on these 4 colours."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -414,6 +497,11 @@ msgid ""
 "extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
+"  focused title string colour\n"
+"\n"
+"This is one of the 4 base colours.  You can set these 4 colours and keep the "
+"extended colours deactivated.  All other colour options of the theme will "
+"then depend on these 4 colours."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -423,6 +511,11 @@ msgid ""
 "extended colors deactivated.  All other color options of the theme will then "
 "depend on these 4 colors."
 msgstr ""
+"unfocused title string colour\n"
+"\n"
+"This is one of the 4 base colours.  You can set these 4 colours and keep the "
+"extended colours deactivated.  All other colour options of the theme will "
+"then depend on these 4 colours."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -431,64 +524,64 @@ msgid ""
 "You can customize additional colors of the title string.  If you deactivate "
 "this, these colors will be set to the focused title string color."
 msgstr ""
+"customize extended title string colours\n"
+"\n"
+"You can customise additional colours of the title string.  If you deactivate "
+"this, these colours will be set to the focused title string colour."
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
-msgstr ""
+msgstr "  focused highlighted title string colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused highlighted title string color"
-msgstr ""
+msgstr "unfocused highlighted title string colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused clicked title string color"
-msgstr ""
+msgstr "  focused clicked title string colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused clicked title string color"
-msgstr ""
+msgstr "unfocused clicked title string colour"
 
 # ../lisp/frames.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "default-9"
-msgstr "Default"
+msgstr "default-9"
 
 # ../lisp/frames.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "default-12"
-msgstr "Default"
+msgstr "default-12"
 
 #. ../themes/mxflat/theme.jl
 msgid "square-6"
-msgstr ""
+msgstr "square-6"
 
 #. ../themes/mxflat/theme.jl
 msgid "square-9"
-msgstr ""
+msgstr "square-9"
 
 #. ../themes/mxflat/theme.jl
 msgid "square-12"
-msgstr ""
+msgstr "square-12"
 
 #. ../themes/mxflat/theme.jl
 msgid "square-15"
-msgstr ""
+msgstr "square-15"
 
 #. ../themes/mxflat/theme.jl
 msgid "square-18"
-msgstr ""
+msgstr "square-18"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "ball-9"
-msgstr "all"
+msgstr "ball-9"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "ball-12"
-msgstr "all"
+msgstr "ball-12"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -497,6 +590,11 @@ msgid ""
 "The number at the end is the width/height of the button icons in the icon "
 "set.  (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
 msgstr ""
+"button icon set (experimental)\n"
+"\n"
+"The number at the end is the width/height of the button icons in the icon "
+"set.  (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON "
+"SET!)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -505,6 +603,10 @@ msgid ""
 "By default the button size follows the size of the titlebar, but by "
 "activating this you can set it to something different."
 msgstr ""
+"customize button size\n"
+"\n"
+"By default the button size follows the size of the titlebar, but by "
+"activating this you can set it to something different."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -512,6 +614,9 @@ msgid ""
 "\n"
 "A buttons size that is bigger than your current titlebar height is ignored."
 msgstr ""
+"buttons size (1 - 1000 pixel)\n"
+"\n"
+"A buttons size that is bigger than your current titlebar height is ignored."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -520,6 +625,10 @@ msgid ""
 "If a button is smaller than the titlebar you might want to set its vertical "
 "alignment."
 msgstr ""
+"button vertical alignment\n"
+"\n"
+"If a button is smaller than the titlebar you might want to set its vertical "
+"alignment."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -528,6 +637,11 @@ msgid ""
 "In case you don't like the default size of 9 pixel you might activate button-"
 "scaling.  YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!"
 msgstr ""
+"scale button icons (experimental)\n"
+"\n"
+"In case you don't like the default size of 9 pixel you might activate "
+"button-scaling.  YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON "
+"SCALE!"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -536,6 +650,11 @@ msgid ""
 "in case you don't like the default size of 9 pixel you might activate button-"
 "scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON SCALE!)"
 msgstr ""
+"button icon scale; changes here need a restart of sawfish (0 - 1000 pixel)\n"
+"\n"
+"in case you don't like the default size of 9 pixel you might activate "
+"button-scaling. (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON "
+"SCALE!)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -545,22 +664,27 @@ msgid ""
 "icon is defined by the application itself and is also shown in your pager "
 "and task-list."
 msgstr ""
+"display window icon on menu button\n"
+"\n"
+"Many people like having the window-icon displayed on the menu-button.  This "
+"icon is defined by the application itself and is also shown in your pager "
+"and task-list."
 
 #. ../themes/mxflat/theme.jl
 msgid "menu icon scale (0 - 1000 pixel)"
-msgstr ""
+msgstr "menu icon scale (0 - 1000 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid "button distance (0 - 1000 pixel)"
-msgstr ""
+msgstr "button distance (0 - 1000 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid "buttons left offset (0 - 1000 pixel)"
-msgstr ""
+msgstr "buttons left offset (0 - 1000 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid "buttons right offset (0 - 1000 pixel)"
-msgstr ""
+msgstr "buttons right offset (0 - 1000 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -570,14 +694,19 @@ msgid ""
 "titlebar manually.  A negative/positiv value means the button will be drawn "
 "on left/right side of the titlebar."
 msgstr ""
+"customise button position (-1 -2 -3 .. title string .. +3 +2 +1)\n"
+"\n"
+"Enabling this will allow you to set the positon of each button in the "
+"titlebar manually.  A negative/positive value means the button will be drawn "
+"on left/right side of the titlebar."
 
 #. ../themes/mxflat/theme.jl
 msgid "title-height"
-msgstr ""
+msgstr "title-height"
 
 #. ../themes/mxflat/theme.jl
 msgid "pixel"
-msgstr ""
+msgstr "pixel"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -588,66 +717,60 @@ msgid ""
 "mind that several buttons might slide on top of each other. 'none' means no "
 "buttons at all."
 msgstr ""
+"button position model\n"
+"\n"
+"'title-height' means calculate position as multiple of title height. when "
+"selecting 'pixel' you can adjust the button position pixelwise, but keep in "
+"mind that several buttons might slide on top of each other. 'none' means no "
+"buttons at all."
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "menu button position"
-msgstr "Remember _position"
+msgstr "menu button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "shade button position"
-msgstr "shade-button-keymap"
+msgstr "shade button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "iconify button position"
-msgstr "iconify-button-keymap"
+msgstr "iconify button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "maximize button position"
-msgstr "maximise-button-keymap"
+msgstr "maximise button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "close button position"
-msgstr "close-button-keymap"
+msgstr "close button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "sticky button position"
-msgstr "iconify-button-keymap"
+msgstr "sticky button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "previous workspace button position"
-msgstr "Previous workspace window"
+msgstr "previous workspace button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "next workspace button position"
-msgstr "Next workspace window"
+msgstr "next workspace button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "configure button position"
-msgstr "iconify-button-keymap"
+msgstr "configure button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "info button position"
-msgstr "Window history save position"
+msgstr "info button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "always-on-top button position"
-msgstr "Window history save position"
+msgstr "always-on-top button position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "lock button position"
-msgstr "close-button-keymap"
+msgstr "lock button position"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -656,11 +779,14 @@ msgid ""
 "By default a button will work as it's name suggests.\n"
 "Button1: toggle sticky state of window"
 msgstr ""
+"customise sticky button keymap\n"
+"\n"
+"By default a button will work as its name suggests.\n"
+"Button1: toggle sticky state of window"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:sticky-button-keymap"
-msgstr "iconify-button-keymap"
+msgstr "mxflat:sticky-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -670,11 +796,15 @@ msgid ""
 "previous workspace - button2 workspace-list - button3 send window to first "
 "workspace - button6 pack window left"
 msgstr ""
+"customise previous button keymap\n"
+"\n"
+"By default a button will work as its name suggests. Button1: send window to "
+"previous workspace - button2 workspace-list - button3 send window to first "
+"workspace - button6 pack window left"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:previous-button-keymap"
-msgstr "menu-button-keymap"
+msgstr "mxflat:previous-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -684,11 +814,15 @@ msgid ""
 "next workspace - button2 workspace-list - button3 send window to last "
 "workspace - button6 pack window right"
 msgstr ""
+"customise next button keymap\n"
+"\n"
+"By default a button will work as its name suggests. Button1: send window to "
+"next workspace - button2 workspace-list - button3 send window to last "
+"workspace - button6 pack window right"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:next-button-keymap"
-msgstr "menu-button-keymap"
+msgstr "mxflat:next-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -697,6 +831,10 @@ msgid ""
 "button1: send window to next workspace - button2 workspace-list - button3 "
 "send window to last workspace - button6 pack window right"
 msgstr ""
+"\n"
+"\n"
+"button1: send window to next workspace - button2 workspace-list - button3 "
+"send window to last workspace - button6 pack window right"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -705,11 +843,14 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: start sawfish-"
 "config - button3: toggle custom title string"
 msgstr ""
+"customise configure button keymap\n"
+"\n"
+"By default a button will work as its name suggests. Button1: start sawfish-"
+"config - button3: toggle custom title string"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:configure-button-keymap"
-msgstr "menu-button-keymap"
+msgstr "mxflat:configure-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -717,6 +858,9 @@ msgid ""
 "\n"
 "Button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
+"\n"
+"\n"
+"Button1: start sawfish-config - button3: toggle custom title string"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -725,11 +869,14 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: window list - "
 "button3 window snooper (not included by default)"
 msgstr ""
+"customise info button keymap\n"
+"\n"
+"By default a button will work as its name suggests. Button1: window list - "
+"button3 window snooper (not included by default)"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:info-button-keymap"
-msgstr "menu-button-keymap"
+msgstr "mxflat:info-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -740,6 +887,12 @@ msgid ""
 "other windows, a negative value means below.  Keep it at a positive value in "
 "order to have the always-on-top button do it's job."
 msgstr ""
+"always on top depth (-1000 - 1000)\n"
+"\n"
+"A window will have this depth after you have pressed the always-on-top "
+"button.  0 is the normal window level.  Every positive value means above "
+"other windows, a negative value means below.  Keep it at a positive value in "
+"order to have the always-on-top button do its job."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -748,11 +901,14 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: sets window "
 "depth to the adjusted value."
 msgstr ""
+"customise always-on-top button keymap\n"
+"\n"
+"By default a button will work as its name suggests. Button1: sets window "
+"depth to the adjusted value."
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:always-on-top-button-keymap"
-msgstr "menu-button-keymap"
+msgstr "mxflat:always-on-top-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -761,11 +917,14 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: lock window "
 "position"
 msgstr ""
+"customise look button keymap\n"
+"\n"
+"By default a button will work as its name suggests. Button1: lock window "
+"position"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "mxflat:lock-button-keymap"
-msgstr "close-button-keymap"
+msgstr "mxflat:lock-button-keymap"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -774,46 +933,50 @@ msgid ""
 "When you active this you will be able to set custom button colors.  By "
 "default the button colors depend on the titlebar colors."
 msgstr ""
+"customise button-colors\n"
+"\n"
+"When you active this you will be able to set custom button colours.  By "
+"default the button colours depend on the titlebar colours."
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused button background color"
-msgstr ""
+msgstr "  focused button background colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused button background color"
-msgstr ""
+msgstr "unfocused button background colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused highlighted button background color"
-msgstr ""
+msgstr "  focused highlighted button background colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused highlighted button background color"
-msgstr ""
+msgstr "unfocused highlighted button background colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused clicked button background color"
-msgstr ""
+msgstr "  focused clicked button background colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused clicked button background color"
-msgstr ""
+msgstr "unfocused clicked button background colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused button foreground color"
-msgstr ""
+msgstr "  focused button foreground colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused button foreground color"
-msgstr ""
+msgstr "unfocused button foreground colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused highlighted button foreground color"
-msgstr ""
+msgstr "  focused highlighted button foreground colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused clicked button foreground color"
-msgstr ""
+msgstr "  focused clicked button foreground colour"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -821,6 +984,9 @@ msgid ""
 "\n"
 "set the width border around the window."
 msgstr ""
+"border width (0 - 1000 pixel)\n"
+"\n"
+"set the width border around the window."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -833,6 +999,14 @@ msgid ""
 "buggy as sawfish does not resize the windows correctly yet, so the best "
 "might be to set it to the normal border width.)"
 msgstr ""
+"border width for maximized windows (0 - 1000 pixel)\n"
+"\n"
+"When you like having a big border around your windows you might have noticed "
+"that sawfish still draws that big border when the window is maximised.  If "
+"you don't want that, set the border width for maximised windows smaller than "
+"the border width for unmaximised windows.  (NOTE: this feature is still "
+"buggy as sawfish does not resize the windows correctly yet, so the best "
+"might be to set it to the normal border width.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -841,6 +1015,10 @@ msgid ""
 "(NOTE: this works but it is VERY cpu intensive and might slow down your "
 "computer noticably.  So turn it on at your own risk.)"
 msgstr ""
+"customize border for focused windows (experimental)\n"
+"\n"
+"(NOTE: this works but it is VERY CPU intensive and might slow down your "
+"computer noticeably.  So turn it on at your own risk.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -849,6 +1027,10 @@ msgid ""
 "(NOTE: this works but it is VERY cpu intensive and might slow down your "
 "computer noticably.  So turn it on at your own risk.)"
 msgstr ""
+"border width for focused windows (0 - 1000 pixel)\n"
+"\n"
+"(NOTE: this works but it is VERY CPU intensive and might slow down your "
+"computer noticeably.  So turn it on at your own risk.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -856,6 +1038,9 @@ msgid ""
 "\n"
 "Sets the widths of the line between titlebar and contents window"
 msgstr ""
+"title-contents border width (0 - 1000 pixel)\n"
+"\n"
+"Sets the widths of the line between titlebar and contents window"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -866,6 +1051,12 @@ msgid ""
 "sawfish draws another border around the window. With a border offset of -1 "
 "the sawfish window border will overlay the gtk2 border exactly."
 msgstr ""
+"border offset (-1000 - 1000 pixel)\n"
+"\n"
+"Adjust the point where the border actually starts.  Many gtk2 apps draw a "
+"small black border around their contents window and this is just ugly when "
+"sawfish draws another border around the window. With a border offset of -1 "
+"the sawfish window border will overlay the gtk2 border exactly."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -874,6 +1065,10 @@ msgid ""
 "When shading a window borders and corners will stay where they were and not "
 "merge with the titlebar."
 msgstr ""
+"keep window borders and corners at their place when shading a window\n"
+"\n"
+"When shading a window borders and corners will stay where they were and not "
+"merge with the titlebar."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -883,6 +1078,11 @@ msgid ""
 "Usually the width and length of window corners are determined by the border "
 "width but you can adjust them below."
 msgstr ""
+"show window corners\n"
+"\n"
+"The corners are used to resize a window in two directions at the same time. "
+" Usually the width and length of window corners are determined by the "
+"border width but you can adjust them below."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -893,18 +1093,24 @@ msgid ""
 "to grab the 1 pixel corner to be able to resize the window in two "
 "directions; thus, make it bigger."
 msgstr ""
+"corners length adjustement (-1 - 100 pixel)\n"
+"\n"
+"Increasing the corner length will grow the window corners along the window "
+"border (i.e. make them longer).  With a border width of 1 pixel it is hard "
+"to grab the 1 pixel corner to be able to resize the window in two "
+"directions; thus, make it bigger."
 
 #. ../themes/mxflat/theme.jl
 msgid "outside"
-msgstr ""
+msgstr "outside"
 
 #. ../themes/mxflat/theme.jl
 msgid "inside"
-msgstr ""
+msgstr "inside"
 
 #. ../themes/mxflat/theme.jl
 msgid "corner direction"
-msgstr ""
+msgstr "corner direction"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -914,10 +1120,15 @@ msgid ""
 "it is hard to grab this 1 pixel corner to be able to resize the window in "
 "two directions; thus, make it bigger."
 msgstr ""
+"corners width adjustement (0 - 100 pixel)\n"
+"\n"
+"This option makes the window corners broader. with a border width of 1 pixel "
+"it is hard to grab this 1 pixel corner to be able to resize the window in "
+"two directions; thus, make it bigger."
 
 #. ../themes/mxflat/theme.jl
 msgid "corners width adjustement for maximized windows (0 - 100 pixel)"
-msgstr ""
+msgstr "corners width adjustment for maximised windows (0 - 100 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -928,48 +1139,57 @@ msgid ""
 "this is VERY cpu intensive and might slow down your computer noticably.  So "
 "turn it on at your own risk.)"
 msgstr ""
+"fake shadow (experimental)\n"
+"\n"
+"Draw a small additional border around your windows emulating a solid shadow "
+"effect.  Use the options below to adjust its width and direction.  (NOTE: "
+"this is VERY CPU intensive and might slow down your computer noticeably.  So "
+"turn it on at your own risk.)"
 
 # ../themes/smaker/theme.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "fake shadow only on focused windows"
-msgstr "Bar image for unfocused windows."
+msgstr "fake shadow only on focused windows"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "north"
-msgstr "not"
+msgstr "north"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "east"
-msgstr ""
+msgstr "east"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "south"
-msgstr "not"
+msgstr "south"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "west"
-msgstr ""
+msgstr "west"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "north-east"
-msgstr "not"
+msgstr "north-east"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
-#, fuzzy
 msgid "north-west"
-msgstr "not"
+msgstr "north-west"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "south-east"
-msgstr ""
+msgstr "south-east"
 
+#. ../lisp/sawfish/wm/placement/dockapp.jl
 #. ../themes/mxflat/theme.jl
 msgid "south-west"
-msgstr ""
+msgstr "south-west"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -978,6 +1198,10 @@ msgid ""
 "Set the direction of the fake shadow.  Usually only 2 or 3 borders of your "
 "window have a fake shadow.  This depends on where the light comes from."
 msgstr ""
+"fake shadow light source\n"
+"\n"
+"Set the direction of the fake shadow.  Usually only 2 or 3 borders of your "
+"window have a fake shadow.  This depends on where the light comes from."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -987,14 +1211,19 @@ msgid ""
 "sources.  The further away the light source is, the smaller will the two "
 "'side' shadows be."
 msgstr ""
+"fake shadow light distance (0 - 100)\n"
+"\n"
+"This option has only an effect on the north, east, south and west light "
+"sources.  The further away the light source is, the smaller will the two "
+"'side' shadows be."
 
 #. ../themes/mxflat/theme.jl
 msgid "fake shadow width (0 - 100 pixel)"
-msgstr ""
+msgstr "fake shadow width (0 - 100 pixel)"
 
 #. ../themes/mxflat/theme.jl
 msgid "shadow color"
-msgstr ""
+msgstr "shadow colour"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -1003,30 +1232,34 @@ msgid ""
 "You can customize your border colors here. If you deactivate this, these "
 "colors will be set to the focused title string color."
 msgstr ""
+"customize border colors\n"
+"\n"
+"You can customize your border colours here. If you deactivate this, these "
+"colours will be set to the focused title string colour."
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused border color"
-msgstr ""
+msgstr "  focused border colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused border color"
-msgstr ""
+msgstr "unfocused border colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused highlighted border color"
-msgstr ""
+msgstr "  focused highlighted border colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused highlighted border color"
-msgstr ""
+msgstr "unfocused highlighted border colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused clicked border color"
-msgstr ""
+msgstr "  focused clicked border colour"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused clicked border color"
-msgstr ""
+msgstr "unfocused clicked border colour"
 
 #. ../themes/simple/theme.jl
 msgid "Simple Theme"
@@ -1239,24 +1472,22 @@ msgstr "No"
 
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
-msgstr ""
+msgstr "Animation Outline Coordinates"
 
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/animation/outline.jl
-#, fuzzy
 msgid "Animation Steps"
-msgstr "Actions"
+msgstr "Animation Steps"
 
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/animation/outline.jl
-#, fuzzy
 msgid "Animation Delay"
-msgstr "Actions"
+msgstr "Animation Delay"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Grow, Pack, Shrink & Yank"
-msgstr ""
+msgstr "Grow, Pack, Shrink & Yank"
 
 # ../lisp/x-cycle.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
@@ -1267,7 +1498,7 @@ msgstr "Window Cycling"
 #. ../lisp/sawfish/wm/tabs/tab.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Tabs"
-msgstr ""
+msgstr "Tabs"
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1276,9 +1507,8 @@ msgstr "Sound"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/autoload.jl
-#, fuzzy
 msgid "Window Rules"
-msgstr "_Windows"
+msgstr "Window Rules"
 
 # ../lisp/tooltips.jl
 #. ../lisp/sawfish/wm/ext/tooltips.jl
@@ -1294,7 +1524,7 @@ msgstr "History"
 #. ../lisp/sawfish/wm/util/prompt.jl
 #. ../lisp/sawfish/wm/autoload.jl
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1444,7 +1674,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Whether growing is considered to be maximization."
-msgstr ""
+msgstr "Whether growing is considered to be maximisation."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "always"
@@ -1459,7 +1689,6 @@ msgid "never"
 msgstr "never"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Whether and how to move the pointer when packing windows.\n"
 "`maybe' means that the pointer is moved along with the window, if the\n"
@@ -1469,56 +1698,46 @@ msgid ""
 "pointer."
 msgstr ""
 "Whether and how to move the pointer when packing windows.\n"
-"\n"
 "`maybe' means that the pointer is moved along with the window, if the\n"
-"pointer was within the window area before packing.\n"
-"\n"
-"`always' warps the pointer to the center of the window if it isn't\n"
-"already in the window, then does like `maybe'.\n"
-"\n"
-"`never' means not to warp the pointer."
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the centre of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Whether to bump into fully obscured windows when growing or packing\n"
-"windows."
+msgstr "Whether to bump into fully obscured windows."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
 "Whether to bump into windows on a different depth. When 'maybe,\n"
 "Only `avoided' windows are bumped."
 msgstr ""
-"Whether to bump into windows on a different depth when growing or packing\n"
-"windows.\n"
-"`maybe' means only avoided windows in other depths."
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid "Whether to bump into ignored windows."
-msgstr "Whether to bump into ignored windows when growing or packing."
+msgstr "Whether to bump into ignored windows."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "The minimum height or width to which a window may be shrunk."
-msgstr ""
+msgstr "The minimum height or width to which a window may be shrunk."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
+msgstr "The minimum amount of window left visible, if yanked over the edge."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid "Grow window left"
 msgstr "Grow window left"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
+"Grows window to the left until it touches another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Grows window to the left until it `bumps into' another window.\n"
+"Grows window to the left until it touches another window.\n"
 "See `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1526,12 +1745,11 @@ msgid "Grow window right"
 msgstr "Grow window right"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
+"Grows window to the right until it touches another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Grows window to the right until it `bumps into' another window.\n"
+"Grows window to the right until it touches another window.\n"
 "See `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1540,18 +1758,17 @@ msgstr "Grow window up"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
+"Grows window upwards until it touches another window.\n"
 "If the top edge was beyond the screen edge, it is brought back in.\n"
 "With a universal prefix arg, maximize upwards instead.\n"
 "With a numeric prefix arg, grow upwards by that many increments specified "
 "by\n"
 "window or pixels instead."
 msgstr ""
-"Grows window upwards until it `bumps into' another window.\n"
+"Grows window upwards until it touches another window.\n"
 "If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximise upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified by\n"
 "window or pixels instead."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1559,12 +1776,11 @@ msgid "Grow window down"
 msgstr "Grow window down"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
+"Grows window downwards until it touches another window.\n"
 "See `grow-window-up'."
 msgstr ""
-"Grows window downwards until it `bumps into' another window.\n"
+"Grows window downwards until it touches another window.\n"
 "See `grow-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1572,12 +1788,11 @@ msgid "Pack window left"
 msgstr "Pack window left"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
+"Moves window to the left until it touches another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Moves window to the left until it `bumps into' another window.\n"
+"Moves window to the left until it touches another window.\n"
 "See `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1585,12 +1800,11 @@ msgid "Pack window right"
 msgstr "Pack window right"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
+"Moves window to the right until it touches another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Moves window to the right until it `bumps into' another window.\n"
+"Moves window to the right until it touches another window.\n"
 "See `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1599,12 +1813,12 @@ msgstr "Pack window up"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
+"Moves window upwards until it touches another window.\n"
 "If the top edge was beyond the screen edge, it is moved back in.\n"
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
 msgstr ""
-"Moves window upwards until it `bumps into' another window.\n"
+"Moves window upwards until it touches another window.\n"
 "If the top edge was beyond the screen edge, it is moved back in.\n"
 "With a universal prefix arg, move upwards maximally instead.\n"
 "With a numeric prefix arg, move upwards by that many pixels instead."
@@ -1614,12 +1828,11 @@ msgid "Pack window down"
 msgstr "Pack window down"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
 msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
+"Moves window downwards until it touches another window.\n"
 "See `pack-window-up'."
 msgstr ""
-"Moves window downwards until it `bumps into' another window.\n"
+"Moves window downwards until it touches another window.\n"
 "See `pack-window-up'."
 
 #. ../lisp/sawfish/wm/commands/help.jl
@@ -1642,21 +1855,26 @@ msgstr "Help show homepage"
 msgid "Help about"
 msgstr "Help about"
 
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "Jump or exec"
+msgstr "Jump or exec"
+
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "jump to a window matched by re, or start program otherwise."
+msgstr "jump to a window matched by re, or start program otherwise."
+
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "External Applications"
-msgstr "Display the applications menu."
+msgstr "External Applications"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "The program launched by the `xterm' function. Interpreted by shell."
-msgstr "The program launched by the `xterm' command."
+msgstr "The program launched by the `xterm' function. Interpreted by shell."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "The program launched by the `browser' function. Interpreted by shell."
-msgstr "The program launched by the `xterm' command."
+msgstr "The program launched by the `browser' function. Interpreted by shell."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "Xterm"
@@ -1664,7 +1882,7 @@ msgstr "Xterm"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "Start xterm. Optional command is passed with -e."
-msgstr ""
+msgstr "Start xterm. Optional command is passed with -e."
 
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/wm/commands/launcher.jl
@@ -1673,24 +1891,21 @@ msgstr "Command:"
 
 # ../themer/themer.in
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "Browser"
-msgstr "Browse..."
+msgstr "Browser"
 
 # ../lisp/functions.jl
 #. ../lisp/sawfish/wm/commands/launcher.jl
-#, fuzzy
 msgid "Start browser. Url is optional."
-msgstr "Start a new xterm."
+msgstr "Start browser. Url is optional."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "url:"
-msgstr ""
+msgstr "url:"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Number of pixels to move pointer in."
-msgstr "Number of pixels to move pointer in `move-cursor-' commands."
+msgstr "Number of pixels to move pointer in."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
 msgid "Move cursor right"
@@ -1757,116 +1972,98 @@ msgid "Move the cursor 1 pixel downwards."
 msgstr "Move the cursor 1 pixel downwards."
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor northwest"
-msgstr "Move cursor right"
+msgstr "Move cursor northwest"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor `move-cursor-increment' pixels northwest"
-msgstr "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Move the cursor `move-cursor-increment' pixels northwest"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor northeast"
-msgstr "Move cursor right"
+msgstr "Move cursor northeast"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor `move-cursor-increment' pixels northeast"
-msgstr "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Move the cursor `move-cursor-increment' pixels northeast"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor southwest"
-msgstr "Move cursor left"
+msgstr "Move cursor southwest"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor `move-cursor-increment' pixels southwest"
-msgstr "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Move the cursor `move-cursor-increment' pixels southwest"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor southeast"
-msgstr "Move cursor left"
+msgstr "Move cursor southeast"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor `move-cursor-increment' pixels southeast"
-msgstr "Move the cursor `move-cursor-increment' pixels to the left."
+msgstr "Move the cursor `move-cursor-increment' pixels southeast"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor northwest fine"
-msgstr "Move cursor right fine"
+msgstr "Move cursor northwest fine"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor northeast fine"
-msgstr "Move cursor right fine"
+msgstr "Move cursor northeast fine"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor southwest fine"
-msgstr "Move cursor left fine"
+msgstr "Move cursor southwest fine"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor southeast fine"
-msgstr "Move cursor left fine"
+msgstr "Move cursor southeast fine"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move cursor center"
-msgstr "Move cursor left"
+msgstr "Move cursor centre"
 
 #. ../lisp/sawfish/wm/commands/move-cursor.jl
-#, fuzzy
 msgid "Move the cursor to the center of the screen"
-msgstr "Move the cursor 1 pixel to the left."
+msgstr "Move the cursor to the centre of the screen"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
-msgstr ""
+msgstr "opaque"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "box"
-msgstr ""
+msgstr "box"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "cross"
-msgstr ""
+msgstr "cross"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "elliptical"
-msgstr "vertical"
+msgstr "elliptical"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "draft"
-msgstr ""
+msgstr "draft"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "How windows being moved are animated"
-msgstr "Raise windows when they are unshaded."
+msgstr "How windows being moved are animated"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "How windows being resized are animated"
-msgstr "Raise windows when they are unshaded."
+msgstr "How windows being resized are animated"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Raise windows when they are moved or resized."
-msgstr "Raise windows when they are focused."
+msgstr "Raise windows when they are moved or resized."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Show current position of windows while moving."
@@ -1878,27 +2075,24 @@ msgstr "Show current dimensions of windows while resizing."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "region"
-msgstr ""
+msgstr "region"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "border"
-msgstr "Top-border"
+msgstr "border"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "grab"
-msgstr ""
+msgstr "grab"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "border-grab"
-msgstr "border-keymap"
+msgstr "border-grab"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "How to choose window edges when resizing."
-msgstr "Show current dimensions of windows while resizing."
+msgstr "How to choose window edges when resizing."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid ""
@@ -1913,9 +2107,8 @@ msgstr ""
 "edge of another window."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Move window center"
-msgstr "Move window next"
+msgstr "Move window centre"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window interactively"
@@ -1923,9 +2116,8 @@ msgstr "Move window interactively"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Move the window interactively, with mouse or keyboard."
-msgstr "Move the window interactively using the mouse."
+msgstr "Move the window interactively, with mouse or keyboard."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window interactively"
@@ -1933,9 +2125,8 @@ msgstr "Resize window interactively"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Resize the window interactively, with mouse or keyboard."
-msgstr "Resize the window interactively using the mouse."
+msgstr "Resize the window interactively, with mouse or keyboard."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
@@ -1943,12 +2134,12 @@ msgstr "Move selected window"
 
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid ""
 "Wait for the user to select a window, then interactively move\n"
 "that window."
 msgstr ""
-"Wait for the user to select a window, then interactively move that window."
+"Wait for the user to select a window, then interactively move\n"
+"that window."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize selected window"
@@ -1956,68 +2147,64 @@ msgstr "Resize selected window"
 
 # ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid ""
 "Wait for the user to select a window, then interactively resize\n"
 "that window."
 msgstr ""
-"Wait for the user to select a window, then interactively resize that window."
+"Wait for the user to select a window, then interactively resize\n"
+"that window."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Double window size"
-msgstr "Toggle window sticky"
+msgstr "Double window size"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "Halve window size"
-msgstr "Make window sticky"
+msgstr "Halve window size"
 
 #. ../lisp/sawfish/wm/commands/poweroff.jl
 msgid "The command used to reboot the computer."
-msgstr ""
+msgstr "The command used to reboot the computer."
 
 #. ../lisp/sawfish/wm/commands/poweroff.jl
 msgid "The command used to halt the computer."
-msgstr ""
+msgstr "The command used to halt the computer."
 
 #. ../lisp/sawfish/wm/commands/poweroff.jl
 msgid "The command used to suspend the computer."
-msgstr ""
+msgstr "The command used to suspend the computer."
 
 #. ../lisp/sawfish/wm/commands/poweroff.jl
 msgid "The command used to hibernate the computer."
-msgstr ""
+msgstr "The command used to hibernate the computer."
 
 #. ../lisp/sawfish/wm/commands/poweroff.jl
 msgid "Poweroff"
-msgstr ""
+msgstr "Poweroff"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click"
 msgstr "Raise and pass through click"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
 msgstr ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Raise and pass through click if focused"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
 msgstr ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -2032,13 +2219,12 @@ msgid "Raise group and pass through click"
 msgstr "Raise group and pass through click"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the group of windows that received the current event, then replay\n"
 "any pointer events that invoked the command."
 msgstr ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
@@ -2053,92 +2239,100 @@ msgstr ""
 "has, then replay any pointer events that invoked the command."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Shrink window left"
-msgstr "Slide window left"
+msgstr "Shrink window left"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the right edge to the left until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
+"Shrinks WINDOW by moving the right edge to the left until it\n"
+"overlaps with one less window than before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Shrink window right"
-msgstr "Slide window right"
+msgstr "Shrink window right"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the left edge to the right until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
+"Shrinks WINDOW by moving the left edge to the right until it\n"
+"overlaps with one less window than before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Shrink window up"
-msgstr "Slide window up"
+msgstr "Shrink window up"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the lower edge upwards until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
+"Shrinks WINDOW by moving the lower edge upwards until it\n"
+"overlaps with one less window than before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Shrink window down"
-msgstr "Slide window down"
+msgstr "Shrink window down"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
 "Shrinks WINDOW by moving the upper edge downwards until it\n"
-"intersects with one window less than before."
+"overlaps with one less window than before."
 msgstr ""
+"Shrinks WINDOW by moving the upper edge downwards until it\n"
+"overlaps with one less window than before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Yank window left"
-msgstr "Pack window left"
+msgstr "Yank window left"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW to the left until it inserts with one window less\n"
+"Moves WINDOW to the left until it overlaps with one less window\n"
 "than before."
 msgstr ""
+"Moves WINDOW to the left until it overlaps with one less window\n"
+"than before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Yank window right"
-msgstr "Pack window right"
+msgstr "Yank window right"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW to the right until it inserts with one window less\n"
+"Moves WINDOW to the right until it overlaps with one less window\n"
 "than before."
 msgstr ""
+"Moves WINDOW to the right until it overlaps with one less window\n"
+"than before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Yank window up"
-msgstr "Pack window up"
+msgstr "Yank window up"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW upwards until it inserts with one window less than\n"
+"Moves WINDOW upwards until it overlaps with one less window than\n"
 "before."
 msgstr ""
+"Moves WINDOW upwards until it overlaps with one less window than\n"
+"before."
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
 msgid "Yank window down"
-msgstr "Pack window down"
+msgstr "Yank window down"
 
 #. ../lisp/sawfish/wm/commands/shrink-yank.jl
 msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than\n"
+"Moves WINDOW downwards until it overlaps with one less window than\n"
 "before."
 msgstr ""
+"Moves WINDOW downwards until it overlaps with one less window than\n"
+"before."
 
 #. ../lisp/sawfish/wm/commands/size-window.jl
 msgid "Size window add row"
@@ -2273,9 +2467,8 @@ msgid "Move window next"
 msgstr "Move window next"
 
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
-#, fuzzy
 msgid "Move the window to the next viewport."
-msgstr "Move the window to the previous viewport."
+msgstr "Move the window to the next viewport."
 
 #. ../lisp/sawfish/wm/commands/viewport-linear.jl
 msgid "Set viewport linear"
@@ -2306,9 +2499,8 @@ msgstr "Include windows on all viewports when cycling."
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-#, fuzzy
 msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Raise windows when they are focused."
+msgstr "Raise windows while they're temporarily selected during cycling."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
@@ -2333,8 +2525,8 @@ msgid "Run shell command"
 msgstr "Run shell command"
 
 #. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "Execute the given shell command."
+msgid "Execute the given shell command in the background."
+msgstr "Execute the given shell command in the background."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Command sequence"
@@ -2377,25 +2569,8 @@ msgstr "Prompt for a command, execute it, and print any output to the screen."
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "Focus"
-
-# ../lisp/custom.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "Move/Resize"
-
-# ../lisp/custom.jl
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
 msgid "Appearance"
 msgstr "Appearance"
-
-# ../lisp/menus.jl
-# ../lisp/custom.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "Workspaces"
 
 # ../lisp/keymaps.jl
 # ../lisp/custom.jl
@@ -2405,10 +2580,15 @@ msgid "Bindings"
 msgstr "Bindings"
 
 # ../lisp/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
-#, fuzzy
+msgid "Focus"
+msgstr "Focus"
+
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/custom.jl
 msgid "Mini/Maximizing"
-msgstr "Minimising and Maximising"
+msgstr "Mini/Maximising"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -2416,10 +2596,25 @@ msgid "Miscellaneous"
 msgstr "Miscellaneous"
 
 # ../lisp/custom.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Move/Resize"
+
+# ../lisp/custom.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Placement"
 msgstr "Placement"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Stacking"
+msgstr "Stacking"
+
+# ../lisp/menus.jl
+# ../lisp/custom.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Workspaces"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/customize.jl
@@ -2428,22 +2623,23 @@ msgstr "Customise"
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Invoke the configurator GUI."
-msgstr ""
+msgstr "Invoke the configurator GUI."
 
 #. ../lisp/sawfish/wm/ext/3d-hack.jl
 msgid "3d hack"
 msgstr "3d hack"
 
 #. ../lisp/sawfish/wm/ext/apps-menu.jl
-#, fuzzy
 msgid "Update apps menu"
-msgstr "Popup apps menu"
+msgstr "Update apps menu"
 
 #. ../lisp/sawfish/wm/ext/apps-menu.jl
 msgid ""
 "Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
 "append the auto generated one."
 msgstr ""
+"Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
+"append the auto generated one."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Play sound effects for window events."
@@ -2463,9 +2659,8 @@ msgstr "Auto-Raise"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
-#, fuzzy
 msgid "Raise windows when they are focused."
-msgstr "Raise windows when they are unshaded."
+msgstr "Raise windows when they are focused."
 
 # ../lisp/auto-raise.jl
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
@@ -2499,7 +2694,7 @@ msgstr "Only flip when interactively moving a window."
 
 #. ../lisp/sawfish/wm/ext/edge-flip.jl
 msgid "Milliseconds to delay before edge flipping."
-msgstr ""
+msgstr "Milliseconds to delay before edge flipping."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Beep when errors occur."
@@ -2518,9 +2713,8 @@ msgid "standard-error"
 msgstr "standard-error"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
-#, fuzzy
 msgid "both"
-msgstr "not"
+msgstr "both"
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display error messages to: \\w"
@@ -2539,23 +2733,24 @@ msgid "Display all errors that have occurred to the screen."
 msgstr "Display all errors that have occurred to the screen."
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
 msgid "Infinite Desktop"
-msgstr "Focus desktop"
+msgstr "Infinite Desktop"
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Simulate an infinite desktop (Conflicts edge-flipping)."
+msgid ""
+"\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-"
+"flipping)."
 msgstr ""
+"\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-"
+"flipping)."
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Amount to move the workspace."
-msgstr "Send to next workspace"
+msgid "Amount to move the viewport when the pointer hits the screen edge."
+msgstr "Amount to move the viewport when the pointer hits the screen edge."
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Amount to move the cursor after moving the workspace."
-msgstr "Move the current window to the N'th workspace."
+msgid "Amount to pull back the cursor after moving the viewport."
+msgstr "Amount to pull back the cursor after moving the viewport."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
@@ -2598,14 +2793,12 @@ msgid "Workspace"
 msgstr "Workspace"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "New workspace"
-msgstr "Next workspace"
+msgstr "New workspace"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "New viewport"
-msgstr "viewport"
+msgstr "New viewport"
 
 #. ../lisp/sawfish/wm/viewport.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
@@ -2622,9 +2815,8 @@ msgid "Placement weight"
 msgstr "Placement weight"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Fixed position"
-msgstr "Position"
+msgstr "Fixed position"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Sticky"
@@ -2683,13 +2875,12 @@ msgstr "Shaded"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Never iconify"
-msgstr ""
+msgstr "Never iconify"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Never maximize"
-msgstr "Unmaximise"
+msgstr "Never maximise"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Avoid"
@@ -2716,18 +2907,16 @@ msgid "Window list skip"
 msgstr "Window list skip"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Task list skip"
-msgstr "Window list skip"
+msgstr "Task list skip"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Unique name"
 msgstr "Unique name"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 msgid "Window name"
-msgstr "Window:"
+msgstr "Window name"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Shade hover"
@@ -2782,26 +2971,24 @@ msgid "Show full documentation in tooltips."
 msgstr "Show full documentation in tooltips."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-#, fuzzy
 msgid "Number of milliseconds before displaying tooltips."
-msgstr "Delay in milliseconds before unshading windows."
+msgstr "Number of milliseconds before displaying tooltips."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
-#, fuzzy
 msgid "Number of milliseconds before removing tooltips."
-msgstr "Delay in milliseconds before unshading windows."
+msgstr "Number of milliseconds before removing tooltips."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Font used to display tooltips, or nil for default."
-msgstr ""
+msgstr "Font used to display tooltips, or nil for default."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Color used for the tooltips background"
-msgstr ""
+msgstr "Colour used for the tooltips background"
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Color used for the tooltips foreground"
-msgstr ""
+msgstr "Colour used for the tooltips foreground"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Remember _position"
@@ -2820,19 +3007,16 @@ msgid "_Forget saved state"
 msgstr "_Forget saved state"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
 msgid "_Clear window-istory"
-msgstr "_Send window to"
+msgstr "_Clear window-history"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
 msgid "_Save window-history"
-msgstr "_Send window to"
+msgstr "_Save window-history"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
 msgid "_Reload window-history"
-msgstr "Forget all saved window history."
+msgstr "_Reload window-history"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
 msgid "Automatically remember window positions."
@@ -2970,17 +3154,16 @@ msgid "Click-to-focus mode passes the click through to the application."
 msgstr "Click-to-focus mode passes the click through to the application."
 
 #. ../lisp/sawfish/wm/focus.jl
-#, fuzzy
 msgid "Whether focusing a window doesn't change it's position in the stack."
-msgstr "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Whether focusing a window doesn't change its position in the stack."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
+msgstr "When true, pointer in/out events don't cause focus changes."
 
 #. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "Default frame style:"
+msgid "Theme"
+msgstr "Theme"
 
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -2993,19 +3176,15 @@ msgstr "Default font: \\w"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Use custom font colors for frames"
-msgstr ""
+msgstr "Use custom font colours for frames"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Font color for active frames"
-msgstr ""
+msgstr "Font colour for active frames"
 
 #. ../lisp/sawfish/wm/frames.jl
 msgid "Font color for inactive frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "Edit frame style"
+msgstr "Font colour for inactive frames"
 
 # ../lisp/frames.jl
 #. ../lisp/sawfish/wm/frames.jl
@@ -3038,80 +3217,114 @@ msgid "None"
 msgstr "None"
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "_Help"
 msgstr "_Help"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
 msgid "_GNOME Help"
-msgstr "_GNOME Help..."
+msgstr "_GNOME Help"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "GNOME Website"
-msgstr ""
+msgid "GNOME _Website"
+msgstr "GNOME _Website"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "About GNOME"
-msgstr "About GNOME..."
+msgid "_About GNOME"
+msgstr "_About GNOME"
 
 #. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
 #. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
-msgstr ""
+msgstr "Sessi_on"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Customize GNOME"
+msgstr "_Customise GNOME"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
 msgid "_Logout from GNOME"
-msgstr "Logout from the current GNOME session."
+msgstr "_Logout from GNOME"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "_Shutdown from GNOME"
-msgstr ""
+msgstr "_Shutdown from GNOME"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
 msgid "_KDE Help"
-msgstr "_Help"
+msgstr "_KDE Help"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-msgid "KDE Website"
-msgstr ""
+msgid "KDE _Website"
+msgstr "KDE _Website"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Customize KDE"
+msgstr "_Customise KDE"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
 msgid "_Logout from KDE"
-msgstr "Logout from the current GNOME session."
+msgstr "_Logout from KDE"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
 msgid "_Reboot from KDE"
-msgstr "Logout from the current GNOME session."
+msgstr "_Reboot from KDE"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
-msgstr ""
+msgstr "_Shutdown from KDE"
 
 #. ../lisp/sawfish/wm/integration/standalone.jl
-#, fuzzy
 msgid "_Reboot System"
-msgstr "Logout from the current GNOME session."
+msgstr "_Reboot System"
 
 #. ../lisp/sawfish/wm/integration/standalone.jl
 msgid "_Shutdown System"
-msgstr ""
+msgstr "_Shutdown System"
 
 #. ../lisp/sawfish/wm/integration/standalone.jl
 msgid "S_uspend System"
-msgstr ""
+msgstr "S_uspend System"
 
 #. ../lisp/sawfish/wm/integration/standalone.jl
 msgid "_Hibernate System"
-msgstr ""
+msgstr "_Hibernate System"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_XFCE Help"
+msgstr "_XFCE Help"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "XFCE _Website"
+msgstr "XFCE _Website"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_About XFCE"
+msgstr "_About XFCE"
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Customize XFCE"
+msgstr "_Customise XFCE"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Logout from XFCE"
+msgstr "_Logout from XFCE"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Reboot from XFCE"
+msgstr "_Reboot from XFCE"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Shutdown from XFCE"
+msgstr "_Shutdown from XFCE"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
@@ -3137,7 +3350,6 @@ msgstr "root-window-keymap"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the root window\n"
 "(or when no window is focused)."
@@ -3237,80 +3449,72 @@ msgstr ""
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "sticky-button-keymap"
-msgstr "iconify-button-keymap"
+msgstr "sticky-button-keymap"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the sticky button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Keymap containing bindings active when the pointer is in the close button\n"
+"Keymap containing bindings active when the pointer is in the sticky button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "lock-button-keymap"
-msgstr "close-button-keymap"
+msgstr "lock-button-keymap"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the lock button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Keymap containing bindings active when the pointer is in the close button\n"
+"Keymap containing bindings active when the pointer is in the lock button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "rename-button-keymap"
-msgstr "menu-button-keymap"
+msgstr "rename-button-keymap"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the rename button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
+"Keymap containing bindings active when the pointer is in the rename button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "move-resize-button-keymap"
-msgstr "close-button-keymap"
+msgstr "move-resize-button-keymap"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the move/resize "
 "button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Keymap containing bindings active when the pointer is in the close button\n"
+"Keymap containing bindings active when the pointer is in the move/resize "
+"button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid "raise-lower-button-keymap"
-msgstr "close-button-keymap"
+msgstr "raise-lower-button-keymap"
 
 # ../lisp/keymaps.jl
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 msgid ""
 "Keymap containing bindings active when the pointer is in the raise/lower "
 "button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 msgstr ""
-"Keymap containing bindings active when the pointer is in the close button\n"
+"Keymap containing bindings active when the pointer is in the raise/lower "
+"button\n"
 "of a window. (Only mouse-bindings are evaluated in this map.)"
 
 #. ../lisp/sawfish/wm/keymaps.jl
@@ -3319,31 +3523,27 @@ msgstr "Modifier key(s) used for default shortcuts."
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Mi_nimize"
-msgstr "Minimise"
+msgstr "Mi_nimise"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Unma_ximize"
-msgstr "Unmaximise"
+msgstr "Unma_ximise"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Ma_ximize"
-msgstr "Maximise"
+msgstr "Ma_ximise"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Move"
-msgstr ""
+msgstr "_Move"
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "_Resize"
-msgstr "Move/Resize"
+msgstr "_Resize"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -3370,23 +3570,20 @@ msgid "_Next workspace"
 msgstr "_Next workspace"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "C_opy window to"
-msgstr "_Send window to"
+msgstr "C_opy window to"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "P_revious workspace"
-msgstr "Previous workspace"
+msgstr "P_revious workspace"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Ne_xt workspace"
-msgstr "Next workspace"
+msgstr "Ne_xt workspace"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Grow & Pack"
-msgstr ""
+msgstr "_Grow & Pack"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Grow left"
@@ -3422,93 +3619,77 @@ msgstr "Pack down"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Shrink & _Yank"
-msgstr ""
+msgstr "Shrink & _Yank"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Shrink left"
-msgstr "Slide window left"
+msgstr "Shrink left"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Shrink right"
-msgstr "Slide window right"
+msgstr "Shrink right"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Shrink up"
-msgstr "Slide window up"
+msgstr "Shrink up"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Shrink down"
-msgstr "Slide window down"
+msgstr "Shrink down"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Yank left"
-msgstr "Pack left"
+msgstr "Yank left"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Yank right"
-msgstr "Pack right"
+msgstr "Yank right"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Yank up"
-msgstr "Pack up"
+msgstr "Yank up"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Yank down"
-msgstr "Pack down"
+msgstr "Yank down"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Stac_king"
-msgstr "Stacking"
+msgstr "Stac_king"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "_Raise"
-msgstr "Raise"
+msgstr "_Raise"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "_Lower"
-msgstr "Lower"
+msgstr "_Lower"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "_Upper layer"
-msgstr "Upper layer"
+msgstr "_Upper layer"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Lo_wer layer"
-msgstr "Lower layer"
+msgstr "Lo_wer layer"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Frame ty_pe"
-msgstr "Frame type"
+msgstr "Frame ty_pe"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Frame sty_le"
-msgstr "Frame style"
+msgstr "Frame sty_le"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Sawfish Rootmenu"
-msgstr "Sawfish homepage"
+msgstr "Sawfish Rootmenu"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Windows"
@@ -3528,50 +3709,45 @@ msgid "_Customize"
 msgstr "_Customise"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Display Errors"
-msgstr "Display errors"
+msgid "Display _Errors"
+msgstr "Display _Errors"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Reload Appsmenu"
-msgstr "Popup apps menu"
+msgid "_Reload Appsmenu"
+msgstr "_Reload Appsmenu"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Restart Sawfish"
-msgstr "Restart"
+msgid "Restart _Sawfish"
+msgstr "Restart _Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Quit Sawfish"
-msgstr "_About Sawfish..."
+msgid "_Quit Sawfish"
+msgstr "_Quit Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "_FAQ..."
+msgid "Sawfish _FAQ"
+msgstr "Sawfish _FAQ"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "_News..."
+msgid "Sawfish _News"
+msgstr "Sawfish _News"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "_WWW page..."
+msgid "Sawfish _Wiki"
+msgstr "Sawfish _Wiki"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "_Manual..."
+msgid "Sawfish _Manual"
+msgstr "Sawfish _Manual"
 
 #. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "_About Sawfish..."
+msgid "_About Sawfish"
+msgstr "_About Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Kill Window"
-msgstr "_Windows"
+msgid "_Kill Window"
+msgstr "_Kill Window"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -3601,27 +3777,31 @@ msgid "Display the applications menu."
 msgstr "Display the applications menu."
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Popup window list menu"
-msgstr "Popup window menu"
+msgstr "Popup window list menu"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "Display the window-list menu."
-msgstr "Display the main menu."
+msgstr "Display the window-list menu."
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "S_awfishConfig"
-msgstr "Sawfish Configurator"
+msgstr "S_awfishConfig"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "Edit theme..."
+#. ../lisp/sawfish/wm/placement/dockapp.jl
+msgid "Dockapps"
+msgstr "Dockapps"
+
+#. ../lisp/sawfish/wm/placement/dockapp.jl
+msgid "Dockapp placement origin: \\w"
+msgstr "Dockapp placement origin: \\w"
+
+#. ../lisp/sawfish/wm/placement/dockapp.jl
+msgid "Dockapp placement direction: \\w"
+msgstr "Dockapp placement direction: \\w"
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
-#, fuzzy
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "Distance between successive placements in `stagger' placement mode."
 
@@ -3635,11 +3815,7 @@ msgstr "Method of placing dialog windows: \\w"
 
 #. ../lisp/sawfish/wm/placement.jl
 msgid "Ignore program-specified window placements."
-msgstr ""
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Stacking"
-msgstr "Stacking"
+msgstr "Ignore program-specified window placements."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "parents"
@@ -3671,15 +3847,12 @@ msgid "Raise lower single window"
 msgstr "Raise lower single window"
 
 #. ../lisp/sawfish/wm/stacking.jl
-#, fuzzy
 msgid ""
 "If the window is at its highest possible position, then lower it to its\n"
 "lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
 "If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
+"lowest possible position. Otherwise raise it as far as allowed."
 
 #. ../lisp/sawfish/wm/stacking.jl
 msgid "Raise window depth"
@@ -3765,7 +3938,6 @@ msgstr "Toggle window sticky"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
 msgid ""
 "Toggle the `stickiness' of the window--whether or not it is a member of\n"
 "all workspaces."
@@ -3829,14 +4001,12 @@ msgid "Toggle whether a window will be include in the window list."
 msgstr "Toggle whether a window will be include in the window list."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
-#, fuzzy
 msgid "Toggle task list skip"
-msgstr "Toggle window list skip"
+msgstr "Toggle task list skip"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
-#, fuzzy
 msgid "Toggle whether a window will be included in the task-list."
-msgstr "Toggle whether a window will be include in the window list."
+msgstr "Toggle whether a window will be included in the task-list."
 
 #. ../lisp/sawfish/wm/state/ignored.jl
 msgid "_Ignored"
@@ -3855,14 +4025,33 @@ msgid "In _window list"
 msgstr "In _window list"
 
 #. ../lisp/sawfish/wm/state/ignored.jl
-#, fuzzy
 msgid "In _task list"
-msgstr "In GNOME _task list"
+msgstr "In _task list"
 
-# ../lisp/move-resize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr "Lock position and size while windows are maximised."
+msgid ""
+"Lock position and size while windows are maximized.\n"
+"\n"
+"Remember that after you resize a maximized window, you can't unmaximize it "
+"any more."
+msgstr ""
+"Lock position and size while windows are maximised.\n"
+"\n"
+"Remember that after you resize a maximised window, you can't unmaximise it "
+"any more."
+
+# ../lisp/menus.jl
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid "Maximize discard"
+msgstr "Maximise discard"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Don't treat window as maximized any more, keeping the size and the position. "
+"You'll be able to move and resize, but won't be able to unmaximize."
+msgstr ""
+"Don't treat window as maximised any more, keeping the size and the position. "
+"You'll be able to move and resize, but won't be able to unmaximise."
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -3881,12 +4070,12 @@ msgstr "Unmaximise window"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Restore the dimensions of the window to its original,\n"
 "unmaximized, state."
 msgstr ""
-"Restore the dimensions of the window to its original, unmaximised, state."
+"Restore the dimensions of the window to its original,\n"
+"unmaximised, state."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window vertically"
@@ -3922,12 +4111,11 @@ msgstr "Maximise window horizontally toggle"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between horizontally maximized and\n"
 "unmaximized."
 msgstr ""
-"Toggle the state of the window between horizontally maximised and "
+"Toggle the state of the window between horizontally maximized and\n"
 "unmaximised."
 
 # ../lisp/maximize.jl
@@ -3937,11 +4125,12 @@ msgstr "Maximise window vertically toggle"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between vertically maximized and\n"
 "unmaximized."
-msgstr "Toggle the state of the window between maximised and unmaximised."
+msgstr ""
+"Toggle the state of the window between vertically maximised and\n"
+"unmaximised."
 
 # ../lisp/custom.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
@@ -3988,7 +4177,6 @@ msgstr "Maximise fill window horizontally toggle"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between horizontally maximized-filled and\n"
 "unmaximized."
@@ -4003,12 +4191,12 @@ msgstr "Maximise fill window vertically toggle"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
 msgstr ""
-"Toggle the state of the window between maximised-filled and unmaximised."
+"Toggle the state of the window between vertically maximised-filled and\n"
+"unmaximised."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -4016,9 +4204,8 @@ msgstr "Maximise window fullscreen"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Fullscreen maximize the window."
-msgstr "Minimise the window."
+msgstr "Fullscreen maximise the window."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen toggle"
@@ -4026,36 +4213,34 @@ msgstr "Maximise window fullscreen toggle"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between fullscreen maximized and\n"
 "unmaximized."
-msgstr "Toggle the state of the window between maximised and unmaximised."
+msgstr ""
+"Toggle the state of the window between fullscreen maximised and\n"
+"unmaximised."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window fullxinerama"
-msgstr "Maximise window fullscreen"
+msgstr "Maximise window fullxinerama"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Fullscreen maximize the window across all Xinerama screens."
-msgstr "Minimise the window."
+msgstr "Fullscreen maximise the window across all Xinerama screens."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid "Maximize window fullxinerama toggle"
-msgstr "Maximise window fullscreen toggle"
+msgstr "Maximise window fullxinerama toggle"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between fullscreen maximized\n"
 "across all Xinerama and unmaximized."
 msgstr ""
-"Toggle the state of the window between maximised-filled and unmaximised."
+"Toggle the state of the window between fullscreen maximised\n"
+"across all Xinerama and unmaximised."
 
 #. ../lisp/sawfish/wm/state/shading.jl
 msgid "Shade window"
@@ -4072,12 +4257,11 @@ msgstr "Unshade window"
 
 # ../lisp/shading.jl
 #. ../lisp/sawfish/wm/state/shading.jl
-#, fuzzy
 msgid ""
 "If the window is shaded (see `shade-window'), restore it to it's usual\n"
 "state."
 msgstr ""
-"If the window is shaded (see `shade-window'), restore it to it's usual\n"
+"If the window is shaded (see `shade-window'), restore it to its usual\n"
 "state."
 
 #. ../lisp/sawfish/wm/state/shading.jl
@@ -4142,87 +4326,95 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's left-edge decoration"
-msgstr ""
+msgstr "Width of tab's left-edge decoration"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab's right-edge decoration"
-msgstr ""
+msgstr "Width of tab's right-edge decoration"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab area's left-edge decoration"
-msgstr ""
+msgstr "Width of tab area's left-edge decoration"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Width of tab area's right-edge decoration"
-msgstr ""
+msgstr "Width of tab area's right-edge decoration"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
-#, fuzzy
+msgid "Width of tab area's left-edge-transient decoration"
+msgstr "Width of tab area's left-edge-transient decoration"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge-transient decoration"
+msgstr "Width of tab area's right-edge-transient decoration"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
 msgid "Raise Tabs on Hover"
-msgstr "Raise on focus"
+msgstr "Raise Tabs on Hover"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
-#, fuzzy
 msgid "Tab add to group"
-msgstr "Lower group"
+msgstr "Tab add to group"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Tab release window"
-msgstr "Delete window"
+msgstr "Tab release window"
 
 # ../lisp/maximize.jl
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Release active window from its group"
-msgstr "Restore the window from its minimised state."
+msgstr "Release active window from its group"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Tab raise left window"
-msgstr "Raise lower window"
+msgstr "Tab raise left window"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Raise left window in current group"
-msgstr "Raise lower window and transients"
+msgstr "Raise left window in current group"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Tab raise right window"
-msgstr "Raise single window"
+msgstr "Tab raise right window"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 msgid "Raise right window in current group"
-msgstr "Raise lower window and transients"
+msgstr "Raise right window in current group"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
 msgstr "Insert workspace"
 
-# ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Unshade selected windows."
-msgstr "Unshade selected windows."
+msgid "Unshade window when selected."
+msgstr "Unshade window when selected."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
 msgstr "Display window without focusing"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace/viewport containing the window W."
-msgstr "Display the workspace/viewport containing the window W."
+msgid ""
+"Display the window, but don't focus. You're prompted to type in the name."
+msgstr ""
+"Display the window, but don't focus. You're prompted to type in the name."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Display window"
 
-# ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Display the workspace containing the window W, then focus on W."
+msgid "Display the window. You're prompted to type in the name."
+msgstr "Display the window. You're prompted to type in the name."
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+msgid "Display window position"
+msgstr "Display window position"
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+msgid "Choose a window, and prints its position and size in a popup."
+msgstr "Choose a window, and prints its position and size in a popup."
 
 # ../lisp/group-funs.jl
 #. ../lisp/sawfish/wm/util/groups.jl
@@ -4260,7 +4452,6 @@ msgid "Quote event"
 msgstr "Quote event"
 
 #. ../lisp/sawfish/wm/util/keymap.jl
-#, fuzzy
 msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
@@ -4269,20 +4460,17 @@ msgstr ""
 "any window manager bindings that it may have."
 
 #. ../lisp/sawfish/wm/util/marks.jl
-#, fuzzy
 msgid "Mark window"
-msgstr "Pack window up"
+msgstr "Mark window"
 
 #. ../lisp/sawfish/wm/util/marks.jl
-#, fuzzy
 msgid "Unmark window"
-msgstr "Unshade window"
+msgstr "Unmark window"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/util/marks.jl
-#, fuzzy
 msgid "Unmark all windows"
-msgstr "Unmaximise window"
+msgstr "Unmark all windows"
 
 #. ../lisp/sawfish/wm/util/play-audio.jl
 msgid ""
@@ -4291,6 +4479,10 @@ msgid ""
 "  You can't set any arguments to pass from this variable. If you want\n"
 "to give arguments or redirect output, write a wrapper program."
 msgstr ""
+"The program used to play audio samples. Should be capable of\n"
+"playing *.wav file.\n"
+"  You can't set any arguments to pass from this variable. If you want\n"
+"to give arguments or redirect output, write a wrapper program."
 
 #. ../lisp/sawfish/wm/util/prompt-wm.jl
 msgid "Window:"
@@ -4308,11 +4500,11 @@ msgstr "Workspace:"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Font for prompt: \\w"
-msgstr ""
+msgstr "Font for prompt: \\w"
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Prompt message's colors."
-msgstr ""
+msgstr "Prompt message's colours."
 
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
@@ -4331,39 +4523,38 @@ msgid "Raise window"
 msgstr "Raise window"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid ""
 "Raise the window to its highest allowed position in the stacking\n"
 "order."
 msgstr ""
-"Raise the window to its highest allowed position in the stacking order."
+"Raise the window to its highest allowed position in the stacking\n"
+"order."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Lower window"
 msgstr "Lower window"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid ""
 "Lower the window to its lowest allowed position in the stacking\n"
 "order."
-msgstr "Lower the window to its lowest allowed position in the stacking order."
+msgstr ""
+"Lower the window to its lowest allowed position in the stacking\n"
+"order."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 msgid "Raise lower window"
 msgstr "Raise lower window"
 
 #. ../lisp/sawfish/wm/util/stacking.jl
-#, fuzzy
 msgid ""
 "If the window is at its highest possible position, then lower it\n"
 "to its lowest possible position. Otherwise raise it as far as\n"
 "allowed."
 msgstr ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed. Also "
-"changes\n"
-"the level of any transient windows it has."
+"If the window is at its highest possible position, then lower it\n"
+"to its lowest possible position. Otherwise raise it as far as\n"
+"allowed."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -4371,17 +4562,21 @@ msgid ""
 "\n"
 "This is meaningless if dynamic viewport is enabled."
 msgstr ""
+"The number of columns and rows of the virtual desktop: \\w\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
 "Minimum number of columns and rows of virtual desktop (if boundary mode is "
 "dynamic): \\w"
 msgstr ""
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\w"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid "Windows uniconify to the current viewport."
-msgstr "Move group to current viewport"
+msgstr "Windows uniconify to the current viewport."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -4390,28 +4585,33 @@ msgid ""
 "It is the number of steps for scrolling. The value 1 means no scroll, and\n"
 "the change is instantaneous."
 msgstr ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
 
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "wrap-around"
-msgstr ""
+msgstr "wrap-around"
 
 # ../lisp/menus.jl
 #. ../lisp/sawfish/wm/workspace.jl
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid "stop"
-msgstr "Customise"
+msgstr "stop"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "dynamic"
-msgstr ""
+msgstr "dynamic"
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
 "Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
 "desktop edge."
 msgstr ""
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Activate viewport"
@@ -4494,98 +4694,89 @@ msgid "Move window right"
 msgstr "Move window right"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid ""
 "Move the window to the viewport on the right, and switch to that\n"
 "viewport."
 msgstr ""
-"Move the window to the viewport on the right, and switch to that viewport."
+"Move the window to the viewport on the right, and switch to that\n"
+"viewport."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window left"
 msgstr "Move window left"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid ""
 "Move the window to the viewport on the left, and switch to that\n"
 "viewport."
 msgstr ""
-"Move the window to the viewport on the left, and switch to that viewport."
+"Move the window to the viewport on the left, and switch to that\n"
+"viewport."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window up"
 msgstr "Move window up"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid ""
 "Move the window to the viewport above, and switch to that\n"
 "viewport."
-msgstr "Move the window to the viewport above, and switch to that viewport."
+msgstr ""
+"Move the window to the viewport above, and switch to that\n"
+"viewport."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid "Move window down"
 msgstr "Move window down"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid ""
 "Move the window to the viewport below, and switch to that\n"
 "viewport."
-msgstr "Move the window to the viewport below, and switch to that viewport."
+msgstr ""
+"Move the window to the viewport below, and switch to that\n"
+"viewport."
 
 # ../src/sawmill-ui.jl
 #. ../lisp/sawfish/wm/window-anim.jl
-#, fuzzy
 msgid "Animation"
-msgstr "Actions"
+msgstr "Animation"
 
 #. ../lisp/sawfish/wm/window-anim.jl
-#, fuzzy
 msgid "solid"
-msgstr "Avoid"
+msgstr "solid"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "wireframe"
-msgstr ""
+msgstr "wireframe"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "The default window animation mode"
-msgstr ""
-
-# ../lisp/maximize.jl
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Raise windows when they are focused."
+msgstr "The default window animation mode"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Warping"
-msgstr ""
+msgstr "Warping"
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
+msgstr "Offset (%) from window edges when warping pointer."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to enable warping the cursor to windows."
-msgstr "Whether to bump into ignored windows when growing or packing."
+msgstr "Whether to enable warping the cursor to windows."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to not avoid ignored windows by default."
-msgstr "Whether to bump into ignored windows when growing or packing."
+msgstr "Whether to not avoid ignored windows by default."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to avoid any unspecified window by default."
-msgstr "Whether to bump into ignored windows when growing or packing."
+msgstr "Whether to avoid any unspecified window by default."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
-msgstr ""
+msgstr "Format to create unique window names."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Focus desktop"
@@ -4620,27 +4811,26 @@ msgid "Force the current window to have a unique title."
 msgstr "Force the current window to have a unique title."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Rename window"
-msgstr "Raise window"
+msgstr "Rename window"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
-msgstr ""
+msgstr "keep-going"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "How to act when passing the first or last workspace."
-msgstr "Display the menu containing the list of all workspaces."
+msgstr "How to act when passing the first or last workspace."
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid ""
 "How to act when passing the first or last workspace, while moving\n"
 "a window"
-msgstr "Display the menu containing the list of all workspaces."
+msgstr ""
+"How to act when passing the first or last workspace, while moving\n"
+"a window"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Workspace names"
@@ -4648,7 +4838,7 @@ msgstr "Workspace names"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Preserve outermost empty workspaces in the pager."
-msgstr ""
+msgstr "Preserve outermost empty workspaces in the pager."
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
@@ -4775,12 +4965,12 @@ msgstr "Prepend workspace and send"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid ""
 "Create a new workspace at the start of the list, and move the\n"
 "window to it."
 msgstr ""
-"Create a new workspace at the start of the list, and move the window to it."
+"Create a new workspace at the start of the list, and move the\n"
+"window to it."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Merge next workspace"
@@ -4788,7 +4978,6 @@ msgstr "Merge next workspace"
 
 # ../lisp/workspace.jl
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid ""
 "Delete the current workspace. Its member windows are relocated to the next\n"
 "workspace."
@@ -4859,7 +5048,6 @@ msgid "Delete window instance"
 msgstr "Delete window instance"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid ""
 "Remove the copy of the window on the current workspace. If this is the\n"
 "last instance remaining, then delete the actual window."
@@ -4868,22 +5056,20 @@ msgstr ""
 "last instance remaining, then delete the actual window."
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Show desktop"
-msgstr "Focus desktop"
+msgstr "Show desktop"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Hide all windows except the desktop window."
-msgstr ""
+msgstr "Hide all windows except the desktop window."
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Hide desktop"
-msgstr "Focus desktop"
+msgstr "Hide desktop"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Undoes the effect of the `show-desktop' command."
-msgstr ""
+msgstr "Undoes the effect of the `show-desktop' command."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Activate workspace"
@@ -4898,9 +5084,8 @@ msgid "Send to workspace"
 msgstr "Send to workspace"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#, fuzzy
 msgid "Move the current window to the N'th workspace."
-msgstr "Copy the current window to the N'th workspace."
+msgstr "Move the current window to the N'th workspace."
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Copy to workspace"
@@ -4917,6 +5102,51 @@ msgstr "Select workspace interactively"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Prompt for a workspace and switch to it."
+
+#, fuzzy
+#~ msgid "Amount to move the workspace."
+#~ msgstr "Send to next workspace"
+
+#~ msgid "Default frame style:"
+#~ msgstr "Default frame style:"
+
+#~ msgid "Edit frame style"
+#~ msgstr "Edit frame style"
+
+#~ msgid "_FAQ..."
+#~ msgstr "_FAQ..."
+
+#~ msgid "_News..."
+#~ msgstr "_News..."
+
+#~ msgid "_WWW page..."
+#~ msgstr "_WWW page..."
+
+#~ msgid "_Manual..."
+#~ msgstr "_Manual..."
+
+#~ msgid "Edit theme..."
+#~ msgstr "Edit theme..."
+
+# ../lisp/move-resize.jl
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Lock position and size while windows are maximised."
+
+# ../lisp/workspace.jl
+#~ msgid "Unshade selected windows."
+#~ msgstr "Unshade selected windows."
+
+#~ msgid "Display the workspace/viewport containing the window W."
+#~ msgstr "Display the workspace/viewport containing the window W."
+
+# ../lisp/workspace.jl
+#~ msgid "Display the workspace containing the window W, then focus on W."
+#~ msgstr "Display the workspace containing the window W, then focus on W."
+
+# ../lisp/maximize.jl
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Raise windows when they are focused."
 
 #~ msgid "and many others..."
 #~ msgstr "and many others..."
@@ -5110,12 +5340,6 @@ msgstr "Prompt for a workspace and switch to it."
 #~ msgstr ""
 #~ "Grows window downwards until it `bumps into' another window.\n"
 #~ "See `grow-window-up'."
-
-#, fuzzy
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Moves window downwards until it `bumps into' another window.\n"
-#~ "See `pack-window-up'."
 
 # ../lisp/stacking.jl
 #, fuzzy
