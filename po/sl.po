@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-08-27 17:36+0200\n"
-"PO-Revision-Date: 2010-09-03 13:37+0100\n"
+"PO-Revision-Date: 2010-09-10 20:38+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1625,9 +1625,8 @@ msgid "Jump or exec"
 msgstr "Skoči ali izvedi"
 
 #. ../lisp/sawfish/wm/commands/jump-or-exec.jl
-#, fuzzy
 msgid "jump to a window matched by re, or start program otherwise."
-msgstr "skoči na okno."
+msgstr "skoči na skladno okno ali pa zaženi program."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "External Applications"
@@ -3382,9 +3381,8 @@ msgid "Display _Errors"
 msgstr "Prikaži _napake"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
 msgid "_Reload Appsmenu"
-msgstr "Ponovno naloži _datoteko"
+msgstr "Ponovno naloži _programski meni"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Restart _Sawfish"
@@ -3455,19 +3453,16 @@ msgid "S_awfishConfig"
 msgstr "_Sawfish nastavitve"
 
 #. ../lisp/sawfish/wm/placement/dockapp.jl
-#, fuzzy
 msgid "Dockapps"
 msgstr "Sidrni programi"
 
 #. ../lisp/sawfish/wm/placement/dockapp.jl
-#, fuzzy
 msgid "Dockapp placement origin: \\w"
-msgstr "Mesto izvora predmeta."
+msgstr "Izvor postavitve sidrnih programov: \\w"
 
 #. ../lisp/sawfish/wm/placement/dockapp.jl
-#, fuzzy
 msgid "Dockapp placement direction: \\w"
-msgstr "Smer krčenja menijske vrstice"
+msgstr "Smer postavitve sidrnih programov: \\w"
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
@@ -3693,6 +3688,9 @@ msgid ""
 "\n"
 "Remember that after you resize a maximized window, you can't unmaximize it any more."
 msgstr ""
+"Zakleni položaj in velikost, ko so okna razpeta.\n"
+"\n"
+"Po spreminjanju velikosti razpetega okna, tega ni več mogoče pomanjšati."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize discard"
@@ -3700,7 +3698,7 @@ msgstr "Prezri razpenjanje"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Don't treat window as maximized any more, keeping the size and the position. You'll be able to move and resize, but won't be able to unmaximize."
-msgstr ""
+msgstr "Okno naj ne bo upravljano kot razpeto z ohranjanjem velikosti in položaja. Okno bo mogoče premikati in mu spremeniti velikost, ne bo pa mogoče okna pomanjšati."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window"
@@ -4010,7 +4008,7 @@ msgstr "Pokaži okno brez postavljanja v žarišče"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the window, but don't focus. You're prompted to type in the name."
-msgstr ""
+msgstr "Prikaz okna brez žarišča z vpisom njegovega imena v pojavno okno."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
@@ -4018,7 +4016,7 @@ msgstr "Pokaži okno"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display the window. You're prompted to type in the name."
-msgstr ""
+msgstr "Prikaz okna z vpisom njegovega imena v pojavno okno."
 
 #. ../lisp/sawfish/wm/util/display-wininfo.jl
 msgid "Display window position"
@@ -4026,7 +4024,7 @@ msgstr "Pokaži položaj okna"
 
 #. ../lisp/sawfish/wm/util/display-wininfo.jl
 msgid "Choose a window, and prints its position and size in a popup."
-msgstr ""
+msgstr "Izbor okna in izpiši podatke položaja in velikosti v pojavnem oknu."
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -4675,37 +4673,27 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 
 #~ msgid "Default frame style:"
 #~ msgstr "Privzet slog okvirjev:"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Uredi slog okvirja"
-
 #~ msgid "_FAQ..."
 #~ msgstr "_FAQ..."
-
 #~ msgid "_News..."
 #~ msgstr "_Novice ..."
-
 #~ msgid "_WWW page..."
 #~ msgstr "_Spletišče ..."
-
 #~ msgid "_Manual..."
 #~ msgstr "P_riročnik ..."
-
 #~ msgid "Edit theme..."
 #~ msgstr "Uredi temo..."
-
 #~ msgid "Lock position and size while windows are maximized."
 #~ msgstr "Zakleni položaj in velikost med razpenjanjem okna."
-
 #~ msgid "Unshade selected windows."
 #~ msgstr "Odstrani senčenje izbranih oken."
-
 #~ msgid "Display the workspace/viewport containing the window W."
 #~ msgstr "Pokaži delovno površino ali vidno polje, ki vsebuje okno W."
-
 #~ msgid "Display the workspace containing the window W, then focus on W."
 #~ msgstr ""
 #~ "Pokaži delovno površino, ki vsebuje okno W in ga nato postavi v žarišče."
-
 #~ msgid "Give focus to windows even when they haven't asked for it."
 #~ msgstr "Postavi okno v žarišče, tudi če okno tega ne zahteva."
+
