@@ -1,11 +1,9 @@
 -*- indented-text -*-
 
-
 IMPORTANT:
 
 This file is probably out of date. Use bugzilla.gnome.org instead. See
-the file `BUGS' for instructions on reporting sawfish bugs.
-
+the file `CONTRIBUTING' for instructions on reporting sawfish bugs.
 
 --
 
@@ -14,11 +12,6 @@ TODO list for sawfish
 
 Bugs are marked !, things that should be done soon are marked +,
 and longer-term ideas are marked -
-
-
-Before next release
-===================
-
 
 Outstanding bugs
 ================
@@ -32,7 +25,9 @@ Outstanding bugs
     [ I added some code with high kludge-quotient, but still need a
       real solution ]
 
-  ! uses a really kludgey method of getting command documentation
+  ! uses a really kludgey method of getting command documentation.
+    In some cases it falls back to keying off the name associated with
+    the closure object.
 
   ! need better error handling in sawfish-config (e.g. values that don't
     match widget types)
@@ -45,11 +40,17 @@ Outstanding bugs
   ! in xdvi with emulate3buttons, press and hold right, then press
     left, the wm root menu appears?!
 
-  ! `:type (or ...)' doesn't get serialized (and can't be)
+  ! `:type (or ...)' doesn't get serialized (and can't be) The
+    type-system for config items serializes and deserializes to/from
+    strings for types with no read syntax. The `:or' widget breaks
+    this scheme since there's no way to infer the type from the
+    object.
 
-  ! running multiple instances of the wm loses
+    The workaround is to avoid declaring :or types whose components
+    have no read syntax..
 
-    (because they share the same ~/.sawfish/custom file)
+  ! running multiple instances of the wm loses,
+    because they share the same ~/.sawfish/custom file
 
   ! keeping unshown windows unmapped isn't so great?
 
@@ -74,9 +75,8 @@ Outstanding bugs
     clock rate..
 
   ! swapped-out window properties aren't saved with session
-
-    [ this also means that a window in different viewports in different
-      workspaces will get saved in the single swapped-in viewport ]
+    This also means that a window in different viewports in different
+    workspaces will get saved in the single swapped-in viewport.
 
   ! I bring up an exmh transient, and place it so it's totally enclosed
     by the exmh parent window.  I put my mouse in the middle of the
@@ -92,6 +92,10 @@ Outstanding bugs
     window and _hold_ button1, it gets raised, but the window
     decoration is not drawn, only if i move the window or release the
     button
+
+  + Window history problems
+    - Saved old histories can cause problems. See
+      http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=114945&repeatmerged=yes
 
   + write documentation: workspaces, viewports, window groups, alist
     frame patterns, frame parts as objects, placement, focus modes,
@@ -113,10 +117,8 @@ Window manager tasks
 
   + commands to forward buttons 4&5 (mouse wheel) to the focused
     window. My first attempt at this doesn't work..
-
+    
   + make command list hierarchical?
-
-  + aspect ratio hints
 
   + look into tear-off menus
 
@@ -239,6 +241,23 @@ Window manager tasks
 
     (didn't NeWS allow this kind of thing, must do research..)
 
+   - Doc todos
+     workspaces, viewports, window groups, alist frame patterns,
+     frame parts as objects, placement, focus modes, symbolic event
+     structures...
+
+   - While choosing the theme, only the default type can be
+     previewed. One workaround is to temporarily change the `default'
+     mapping. Another is to print sample 4 types of windows.
+     * highlight the current frame part somehow
+     * clicking/hovering on a frame part selects that definition
+       <- But frame parts are defined inside of an entire design.
+     * auto-update, either after each change, or from the idle-hook?
+
+   - User customization of frame parts
+     Possibly add an `(extra sexp)' field that is evaluated then added
+     to the end of the frame part definition. But this is a horrible
+     kludge..
 
 configurator tasks
 ========
@@ -260,7 +279,7 @@ configurator tasks
 
   + split theme menu by first letter, if many themes to show
 
-  + another idea: textual search for options/commands
+  + textual search for options/commands
 
 --
 
