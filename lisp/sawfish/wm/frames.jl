@@ -21,6 +21,8 @@
 (define-structure sawfish.wm.frames
 
     (compound-interface
+     ;; Subrs are stored in sawfish.wm.frames.subrs, but
+     ;; this module re-exports them for convenience.
      (structure-interface sawfish.wm.frames.subrs)
      (export after-setting-frame-option
 	     define-frame-type-mapper

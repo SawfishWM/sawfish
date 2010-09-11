@@ -31,7 +31,7 @@
   (define-structure-alias describe sawfish.wm.commands.describe)
 
   (define (describe-symbol fun)
-    "Display the documentation of a specified symbol."
+    "Print the documentation of a specified symbol to the standard output ."
     (describe-value (symbol-value fun t) fun)
     (format standard-output "\n%s\n"
 	    (or (documentation fun nil (symbol-value fun t)) "Undocumented.")))
@@ -40,7 +40,8 @@
   (define-command 'describe-symbol describe-symbol
     #:spec "SSymbol:" #:class 'advanced)
   (define-command-to-screen 'describe-symbol-to-screen describe-symbol
-    #:spec "SSymbol:" #:class 'advanced)
+    #:spec "SSymbol:" #:class 'advanced
+    #:doc "Enter a name of var/func, and prints its doc.")
 
   (define (apropos-output symbols)
     (let ((separator (make-string 72 ?-)))

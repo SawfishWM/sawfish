@@ -1,31 +1,32 @@
 BUGS
 ****
 
-If you think you have found a bug, first check for newer versions of sawfish 
-and/or librep/rep-gtk and update, if it still happens with the latest versions: 
+If you think you have found a bug,
 
-Report Bugs in the GNOME BugZilla (http://bugzilla.gnome.org), we 
-prefer this over the mailing-list, because it's easier to find older
-reports in the BugZilla Database than in the Mailinglist-Archives
+1. Check if it'll be a new report.
+First check for newer versions of sawfish and librep/rep-gtk.  If it
+still happens with the latest versions, search for similar bugs by web
+searching / in GNOME Bugzilla (http://bugzilla.gnome.org).
 
-As product choose: Other -> Sawfish
+All open bugs in Bugzilla are found at:
+https://bugzilla.gnome.org/buglist.cgi?bug_status=__open__&product=Sawfish&order=Bug+Number
 
-Then choose the version you're using: 
-	- pre-1.3.x (obsolete)
-	- 1.3.x 
-	- 1.5.x
+For search from a browser (like firefox "smart keyword"), use this URL:
+https://bugzilla.gnome.org/buglist.cgi?bug_status=__open__&product=Sawfish&order=Bug+Number&content=%s
 
-At last choose the sawfish component you want to report the bug for:
-	- config tool
-	- general
-	- theme editor (obsolete)
-	- window-manager
+If it already has been reported, simply reply to the existing report,
+rather than opening a new one.
+
+2. Ok, it's a new bug.
+Please report it to our Mailing list
+(http://sawfish.wikia.com/wiki/Mailing_list). It will be viewed by
+much more people than to report it in Bugzilla. Bugzilla submission
+howto is explained later.
 
 When reporting bugs try to include as much relevant information as
 possible:
 
- - Most importantly: a reliable method for triggering the bug. (Once
-   the bug can be reproduced it's often straightforward to fix.)
+ - Most importantly: a reliable method for triggering the bug.
 
  - If you hear beeping sounds while the problem manifests itself it may
    mean that sawfish's Lisp interpreter is printing error messages to
@@ -33,8 +34,10 @@ possible:
    ~/.gnomerc-errors). Include any such messages in your bug report.
 
  - If sawfish crashes it will try to print information describing the
-   position at which it did so, look for any `backtrace' messages in
-   the error output and include them
+   position at which it did so. Please start Sawfish again with the
+   command line option "--interp"; it'll take a little bit to start,
+   but more information is printed at crash. Look for any "backtrace"
+   messages in the error output and include them.
 
  - The operating system type and version (including distribution details)
 
@@ -43,13 +46,25 @@ possible:
    from, and what are their version numbers?
 
  - Any other information you feel may be relevant. E.g. the values of
-   customization options that you feel may affect the problem
+   customization options that you feel may affect the problem.
 
 Also please make sure to not report bugs multiple times, first check if
-there's already a report for your issue. If it already has been reported,
-simply reply to the existing report, rather than opening a new one.
+there's already a report for your issue.
 
-The full bug-database is here: http://bugzilla.gnome.org/buglist.cgi?product=sawfish
+To report a bug to the Bugzilla
+-------------------------------
+Go to https://bugzilla.gnome.org/enter_bug.cgi
+
+As product choose: Other -> Sawfish
+
+Then choose the version you're using, for example, pre-1.3.x (obsolete),
+1.5.x, and so on.
+
+At last choose the sawfish component you want to report the bug for:
+	- config tool
+	- general
+	- window-manager
+	- theme editor (This item is obsolete)
 
 DEVELOPMENT
 ***********
@@ -230,4 +245,3 @@ Apologies if I've missed any names, mail me if you should be listed.
 
 Thanks also to the numerous people who have contributed bug reports and
 feature suggestions, too many to list individually.
-

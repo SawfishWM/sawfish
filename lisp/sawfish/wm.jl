@@ -1,4 +1,4 @@
-;; sawfish.wm bootstrap
+;; Initiates lisp part of Sawfish.
 ;;
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 ;;
@@ -64,7 +64,7 @@
 (defmacro i18n-define args (cons 'define args))
 (export-bindings '(i18n-defvar i18n-define))
 
-;; import libraries that may be needed by autoload files
+;; import libraries needed by autoload
 (require 'sawfish.wm.commands)
 (require 'sawfish.wm.custom)
 (require 'sawfish.wm.focus)
@@ -114,7 +114,7 @@
 		   sawfish.wm.state.ignored))
 
 ;; Bindings in these modules are exported by sawfish.wm on behalf of
-;; them.
+;; them. User scripts have to import only sawfish.wm for core functions.
 (export-bindings (parse-interface
 		  '(compound-interface
 		    (structure-interface sawfish.wm.colors)

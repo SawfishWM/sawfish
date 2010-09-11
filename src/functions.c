@@ -192,7 +192,14 @@ lower WINDOW to the bottom of the stacking order.
 }
 
 DEFUN("x-kill-client", Fx_kill_client, Sx_kill_client,
-      (repv win), rep_Subr1)
+      (repv win), rep_Subr1) /*
+::doc:sawfish.wm.windows.subrs#x-kill-client::
+x-kill-client WINDOW
+
+Kill the client that created WINDOW. 
+
+WINDOW may be a window object or a numeric window id.
+::end:: */
 {
     Window w = x_win_from_arg (win);
     if (w == 0)
@@ -205,7 +212,7 @@ DEFUN_INT("destroy-window", Fdestroy_window, Sdestroy_window, (repv win), rep_Su
 ::doc:sawfish.wm.windows.subrs#destroy-window::
 destroy-window WINDOW
 
-Destroy WINDOW with out giving the owning application any warning.
+Destroy WINDOW without giving the owning application any warning.
 
 WINDOW may be a window object or a numeric window id.
 ::end:: */

@@ -3,14 +3,17 @@
 ;; OPTIONS
 ;; =======
 
-;; This file lists all of sawfish's low-level configuration options,
-;; including both those that can be set through the UI can those that
-;; can't. For most options it also shows their default value, or how
-;; that value is initially computed.
+;; This file lists all of sawfish's low-level configuration options.
+;; Some of them can be set from the configurator GUI, the rest not.
+;; For most options it also shows their default value, or how that
+;; value is initially computed.
 
-;; To use this file, either copy it to ~/.sawfishrc and uncomment and
+;; It is recommended to try first the configurator, which can be invoked
+;; by middle-clicking the root window (= background).
+
+;; To use this file, either copy it to ~/.sawfish/rc and uncomment and
 ;; change the lines containing the options you want to modify, or just
-;; use it as a reference when editing your own .sawfishrc
+;; use it as a reference when editing your own .sawfish/rc
 
 ;; Note that some of the pages of options start with a commented out
 ;; "require" statement. If you change any of those options you'll also
@@ -53,7 +56,8 @@
 ;;    "Show variable names of each customization option.")
 
 ;;  (defvar-setq customize-command-classes '(default)
-;;    "Also include commands of these classes the key bindings panel.)
+;;    "In configurator \"binding\" section, also include commands of these
+;;  classes. Possible keys are default, advanced, viewport, and deprecated.")
 
 ;; focus options
 

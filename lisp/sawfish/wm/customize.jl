@@ -42,7 +42,10 @@
   (defvar customize-redirect ">/dev/null 2>&1 </dev/null"
     "Redirect the configurator's input & output.")
 
+  ;; Stores the content of ~/.sawfish/custom, both for
+  ;; parsing and writing.
   (define customize-user-forms nil)
+
   (define customize-user-file-read nil)
   (define customize-user-file-dirty nil)
 
@@ -61,7 +64,10 @@
 
 ;;; setting variables
 
+  ;; Currently only called from `customize-set' below.
   (define (customize-read-user-file)
+    "Read the file which saves user customization. A configurator
+instance can read it only once."
     (unless customize-user-file-read
       (let ((filename
 	     (cond ((file-exists-p custom-user-file) custom-user-file)

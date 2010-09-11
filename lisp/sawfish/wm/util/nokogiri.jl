@@ -40,7 +40,9 @@
     "Show variable names of each customization option.")
 
   (defvar customize-command-classes '(default)
-    "Also include commands of these classes the key bindings panel.")
+    "In configurator \"binding\" section, also include commands of
+these classes. Possible keys are default, advanced, viewport, and
+deprecated.")
 
 ;;; interfaces
 

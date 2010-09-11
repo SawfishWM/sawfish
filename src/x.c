@@ -1015,6 +1015,8 @@ x-draw-string WINDOW GC (X . Y) STRING [FONT]
 
 Draws the specified string at the specified location in the optional
 specified font in the window associated with WINDOW.
+
+Read info for comparison to x-draw-text.
 ::end:: */
 {
     Drawable id = drawable_from_arg (window);
@@ -1046,7 +1048,9 @@ DEFUN ("x-draw-text", Fx_draw_text, Sx_draw_text,
 x-draw-text WINDOW GC (X . Y) STRING
 
 Draws the specified string at the specified location in the window
-* associated with WINDOW.
+associated with WINDOW.
+
+Read info for comparison to x-draw-string.
 ::end:: */
 {
     Drawable id = drawable_from_arg (window);

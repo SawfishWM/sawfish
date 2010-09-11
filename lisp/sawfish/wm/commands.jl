@@ -379,10 +379,14 @@ command for the `system' function."
   (define-command 'command-sequence command-sequence
     #:type `(and (quoted (list command ,(_ "Command")))))
 
-  (define-command 'quit quit)
-  (define-command 'restart restart)
-  (define-command 'destroy-window destroy-window #:spec "%W")
-  (define-command 'kill-client x-kill-client #:spec "%W")
+  (define-command 'quit quit
+    #:doc "Quit sawfish.")
+  (define-command 'restart restart
+    #:doc "Restart sawfish.")
+  (define-command 'destroy-window destroy-window #:spec "%W"
+    #:doc "Destroy a window.")
+  (define-command 'kill-client x-kill-client #:spec "%W"
+    #:doc "Kill the client that created the specified window.")
   (define-command 'no-operation nop)
 
   (define (call-command-with-output-to-screen command)

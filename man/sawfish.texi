@@ -6551,7 +6551,11 @@ the @code{PATH} environmental variable. Example:
 
 @defun quit
 @defunx restart
-Quits and restart Sawfish.
+Quits and restart Sawfish. 
+
+Restart does exec (3), replacing the current process. All command line
+arguments are used again, except that session management related ones
+are updated.
 @end defun
 
 @defun exit-type
@@ -6631,7 +6635,7 @@ Sawfish.  For example: @code{":0"}, or @code{"foo:0.0"}.
 
 @defvar saved-command-line-args
 Holds a list of all of the command line arguments (including the
-executable name).
+executable name), except options related to session mangement.
 @end defvar
 
 @defun call-with-error-handler thunk
@@ -6684,7 +6688,7 @@ Return @var{x} clamped between @var{lower} and @var{upper}.  If
 than @var{upper} return @var{upper}.  Otherwise return @var{x}.
 @end defun
 
-@defun clamp* x y lower upper
+@defun clamp* x w lower upper
 Return the interval (@var{x}, @var{x}+@var{w}) clamped between
 @var{lower} and @var{upper}.  If @var{x} is less than @var{lower},
 return @var{lower}.  If @var{x}+@var{w} is larger than @var{upper},
@@ -7533,21 +7537,6 @@ and dimensions @code{(@var{width}, @var{height})} in @var{window}
 using the graphics context @var{gc}.
 @end defun
 
-@defun x-draw-string window gc (x . y) string &optional font
-Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
-using the graphics context @var{gc}.  If @var{font} is specified use
-that font. If you need to write on the root-window directly, use
-@code{x-draw-text}, if you need a message like @code{display-message}
-use this function instead.
-@end defun
-
-@defun x-draw-string window gc (x . y) string
-Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
-using the graphics context @var{gc}. If you need to write a message like
-@code{display-message} use @code{x-draw-string}, if you need to write on
-the root-window directly, use this function instead.
-@end defun
-
 @defun x-fill-arc window gc (x . y) (width . height) (angle1 . angle2)
 Draw a single filled circular or elliptical arc in @var{window} using
 the graphics context @var{gc}.  The center of the circle or ellipse is
@@ -7602,6 +7591,20 @@ Swap the fore and back buffers of the window associated with
 function quietly does nothing.
 @end defun
 
+Two functions to draw strings are there. If you need to write a
+message like @code{display-message} use @code{x-draw-string}. If you
+need to write on the root-window directly, use @code{x-draw-text}.
+
+@defun x-draw-string window gc (x . y) string &optional font
+Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
+using the graphics context @var{gc}.  If @var{font} is specified use
+that font. See also @code{x-draw-text}.
+@end defun
+
+@defun x-draw-text window gc (x . y) string
+Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
+using the graphics context @var{gc}. See also @code{x-draw-string}.
+@end defun
 
 @node Available X Symbols,  , X Drawing, Low-level X Interface
 @section Available X Symbols

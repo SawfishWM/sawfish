@@ -21,6 +21,8 @@
 (define-structure sawfish.wm.windows
 
     (compound-interface
+     ;; Subrs are stored in sawfish.wm.windows.subrs, but
+     ;; this module re-exports them for convenience.
      (structure-interface sawfish.wm.windows.subrs)
      (export get-window-by-name
 	     get-window-by-name-re

@@ -1,4 +1,4 @@
-;; nokogiri-no-gnome.jl -- workaround lack of GNOME widgets -*- lisp -*-
+;; stock.jl -- gtk stock and so on -*- lisp -*-
 ;;
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 ;;
@@ -17,6 +17,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+;; This file was delete once by mistake, in the commit dbe8c2235, and
+;; it had been called "lisp/sawfish/gtk/stock.jl.gtk".
+;; Re-added in the commit ce7e6c.
 
 (define-structure sawfish.gtk.stock
 
