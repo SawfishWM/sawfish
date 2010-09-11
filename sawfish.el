@@ -1,20 +1,67 @@
 ;;; sawfish.el --- Sawfish mode.
-;; Copyright 1999,2000,2001,2002,2003,2004 by Dave Pearson <davep@davep.org>
-;; $Revision: 1.32 $
+;; Copyright 1999 - 2004 by Dave Pearson <davep@davep.org>
+;;           2010 Sawfish Community
+;; Revision: Aug 2010
 
 ;; sawfish.el is free software distributed under the terms of the GNU
 ;; General Public Licence, version 2. For details see the file COPYING.
 
-;;; Commentary:
+;;; Introduction:
 ;;
-;; sawfish.el is an emacs mode for writing code for the sawfish window
-;; manager <URL:http://sawmill.sourceforge.net/>. As well as providing a
-;; programming mode it also allows for direct interaction with the running
-;; window manager.
+;; "sawfish.el" provides
+;; * A major mode for writing Sawfish code.
+;;   This include symbol / var / func completion and help access,
+;;   both from doc-string and info file.
+;; * sawfish-client wrapper, i.e. an interface to interact with
+;;   running Sawfish window manager.
 ;;
 ;; The latest sawfish.el is always available from:
 ;;
-;;   <URL:http://www.davep.org/emacs/#sawfish.el>
+;;   <URL:http://git.gnome.org/browse/sawfish/tree/sawfish.el>
+
+;;; INSTALLATION:
+;;
+;; o Drop sawfish.el somwehere into your `load-path', e.g. site-lisp
+;;   directory (you might also want to byte-compile the file).
+;;
+;; o Add autoloads for the various sawfish functions to ~/.emacs. At the
+;;   very least you want to do something like:
+;;
+;;   (autoload 'sawfish-mode "sawfish" "sawfish-mode" t)
+;;
+;; o Add the following to ~/.emacs to ensure that sawfish mode is used when
+;;   you go to edit sawfish code:
+;;
+;;   (setq auto-mode-alist (cons '("\\.sawfishrc$"  . sawfish-mode) auto-mode-alist)
+;;         auto-mode-alist (cons '("\\.jl$"         . sawfish-mode) auto-mode-alist)
+;;         auto-mode-alist (cons '("\\.sawfish/rc$" . sawfish-mode) auto-mode-alist))
+
+;;; List of commands:
+;; o lisp evalutation:
+;;    sawfish-eval-region
+;;    sawfish-eval-buffer
+;;    sawfish-eval-defun
+;;    sawfish-eval-expression
+;;    sawfish-eval-last-sexp
+;;    sawfish-eval-print-last-sexp
+;; o Sawfish counterparts of Emacs lisp helper
+;;    sawfish-describe-function
+;;    sawfish-describe-variable
+;;    sawfish-describe-function
+;;    sawfish-describe-variable
+;; o others
+;;    sawfish-info-function, sawfish-info-variable:
+;;      Find the docstring of func / var from info.
+;;    sawfish-info, sawfish-rep-info:
+;;      View the sawfish / librep info file.
+;;    sawfish-console:
+;;      Open a buffer in which sawfish-client is run. (Think of `shell'.)
+;;    sawfish-interaction:
+;;      Sawfish version of lisp-interaction-mode
+;;    sawfish-load-symbols:
+;;      If you need an update of the list of sawfish symbols, e.g. for
+;;      sawfish-describe-variable or sawfish-describe-function,
+;;      call this.
 
 ;;; THANKS:
 ;;
@@ -37,32 +84,20 @@
 ;;
 ;; o The handling of the apropos buffer totally breaks down under XEmacs.
 ;;
-;; o sawfish.el needs a total rewrite. When I started this mode rep (the
-;;   lisp that sawfish is based around) was an elisp-a-like. Since then it
-;;   has turned into a scheme-a-like that happens to retain some
-;;   elisp-a-like bits. Ideally a new sawfish.el would be written in terms
-;;   of a librep.el which would be a ground-up-rewritten mode for dealing
+;; o sawfish.el needs a total rewrite. When I started this mode librep
+;;   was an elisp-a-like. Since then it has turned into a
+;;   scheme-a-like that happens to retain some elisp-a-like
+;;   bits. Ideally a new sawfish.el would be written in terms of a
+;;   librep.el which would be a ground-up-rewritten mode for dealing
 ;;   with rep.
-
-;;; INSTALLATION:
-;;
-;; o Drop sawfish.el somwehere into your `load-path'. Try your site-lisp
-;;   directory for example (you might also want to byte-compile the file).
-;;
-;; o Add autoloads for the various sawfish functions to ~/.emacs. At the
-;;   very least you want to do something like:
-;;
-;;   (autoload 'sawfish-mode "sawfish" "sawfish-mode" t)
-;;
-;; o Add the following to ~/.emacs to ensure that sawfish mode is used when
-;;   you go to edit sawfish code:
-;;
-;;   (setq auto-mode-alist (cons '("\\.sawfishrc$"  . sawfish-mode) auto-mode-alist)
-;;         auto-mode-alist (cons '("\\.jl$"         . sawfish-mode) auto-mode-alist)
-;;         auto-mode-alist (cons '("\\.sawfish/rc$" . sawfish-mode) auto-mode-alist))
+;; o sawfish-pp is not complete. The challange is that we want to
+;;   `read' sawfish sexp. It can fail if there're #f and #t. So
+;;   it's tried to replace them temporarily, but it may transform
+;;   say "#f".
 
 ;;; Code:
 
+;; Wait for some 35 lines until defcustom...
 ;; Things we need:
 (eval-when-compile
   (require 'cl)
@@ -142,7 +177,7 @@ window manager."
   :group 'sawfish)
 
 (defcustom sawfish-buffer-symbol-lists t
-  "*Buffer the lists of function and variable names?"
+  "*Cache the lists of function and variable names?"
   :type  'boolean
   :group 'sawfish)
 
@@ -188,7 +223,7 @@ Highlight these expressions with `font-lock-keyword-face'."
   :type '(repeat (string :tag "Keyword: ")))
 
 (defcustom sawfish-warning-keyword-list 
-  '("fixme" "FIXME" "Fixme" "fix me" "Fix me" "!!!" "Grrr" "Bummer")
+  '("fixme" "FIXME" "Fixme" "fix me" "Fix me" "XXX")
   "List of keywords for Sawfish used in highlighting.
 Highlight these expressions with `font-lock-warning-face' even if
 already fontified."
@@ -308,17 +343,13 @@ Special commands:
       ;; XEmacs appears to do something like this...
       (put 'sawfish-mode 'font-lock-defaults 
            (get 'emacs-lisp-mode 'font-lock-defaults))
-    ;; ...with GNU Emacs we need to pull it from `font-lock-defaults-alist'.
-    (unless font-lock-defaults
-      (set (make-local-variable 'font-lock-defaults)
-           (cdr (assoc 'emacs-lisp-mode font-lock-defaults-alist)))
-      ;; Add the additional font-lock pattern to `font-lock-defaults'
-      ;; only once
-      (unless (memq 'sawfish-additional-keywords (car font-lock-defaults))
+    ;; Add the additional font-lock pattern to `font-lock-defaults'
+    ;; only once
+    (unless (memq 'sawfish-additional-keywords (car font-lock-defaults))
         (setq font-lock-defaults (copy-alist font-lock-defaults))
         (setcar font-lock-defaults 
                 (append (car font-lock-defaults) 
-                        '(sawfish-additional-keywords))))))
+                        '(sawfish-additional-keywords)))))
   ;; Menu stuff.
   (if (and (boundp 'running-xemacs) (symbol-value 'running-xemacs))
       ;; XEmacs.
@@ -360,9 +391,15 @@ If passed the result of the evaluation is inserted into TARGET-BUFFER."
   (call-process sawfish-client nil target-buffer nil sawfish-exec-parameter
                 (if (stringp sexp) sexp (format "%S" sexp))))
 
+;; It's better to `read' if possible. Otherwise the result printed
+;; in the echo area is put in double-quotes.
 (defun sawfish-string-readable-p (sexp)
   "Can string SEXP be safely `read'?"
-  (not (string-match "#<\\w+" sexp)))
+  (condition-case nil
+      (progn
+	(read sexp)
+	t)
+    (error nil)))
 
 (defun sawfish-buffer-readable-p (&optional buffer)
   "Can the content of BUFFER be safely `read'?"
@@ -384,6 +421,36 @@ SEXP can either be a list or a string."
     (if (sawfish-string-readable-p result)
         (read result)
       result)))
+
+(defun sawfish-pp (sexp &optional output)
+  "Pretty-prints SEXP to OUTPUT, using `read'. If it's impossible,
+then returns nil.
+
+It's not always possible, since evaluating a closure, for example,
+returns the string #<closure foo @ sawfish.bar.baz> which can't be
+`read'."
+  (condition-case nil
+      (progn
+	(pp (read sexp) output)
+	t ;; Success
+	)
+    (error ;; Failure
+     ;; It may be due to #f and #t which are unreadable to emacs.
+     (condition-case nil
+	 (progn
+	   (setq sexp
+		 (replace-regexp-in-string "#f" "__numberF" sexp))
+	   (setq sexp
+		 (replace-regexp-in-string "#t" "__numberT" sexp))
+	   (setq sexp (pp-to-string (read sexp)))
+	   (setq sexp
+		 (replace-regexp-in-string "__numberT" "#t" sexp))
+	   (setq sexp
+		 (replace-regexp-in-string "__numberF" "#f" sexp))
+	   (princ sexp (or output standard-output))
+	   t
+	   )
+       (error nil)))))
 
 ;;;###autoload
 (defun sawfish-eval-region (start end &optional target-buffer)
@@ -461,7 +528,8 @@ set by the variable `sawfish-result-buffer'"
                       (point-min))      ; the display.
                    (frame-width)))
            (setf (point) (point-min))
-           (replace-string "\n" "")     ; Strip any trailing EOLs.
+	   (while (search-forward "\n" nil t)
+	     (replace-match "" nil t))  ; Strip any trailing EOLs.
            (when (get-buffer-window sawfish-result-buffer)
              ;; The long result buffer is visible, delete it.
              (delete-window (get-buffer-window sawfish-result-buffer)))
@@ -469,17 +537,16 @@ set by the variable `sawfish-result-buffer'"
           (t                            ; Too large for message area, use a buffer.
            (with-output-to-temp-buffer sawfish-result-buffer
              (with-current-buffer sawfish-result-buffer
-               (if (sawfish-string-readable-p output)
-                   (pp (read output) (current-buffer))
-                 (setf (buffer-string) (format "%s" (with-current-buffer temp-buffer
-                                                      (buffer-string)))))
+	       (unless (sawfish-pp output (current-buffer))
+                 (setf (buffer-string)
+		       (format "%s" (with-current-buffer temp-buffer
+				      (buffer-string)))))
                (shrink-window-if-larger-than-buffer (display-buffer (current-buffer))))
              (bury-buffer (current-buffer)))))))))
 
 (defun sawfish-insert (string)
   "Insert STRING into `current-buffer', pretty print if at all possible."
-  (if (sawfish-string-readable-p string)
-      (pp (read string) (current-buffer))
+  (unless (sawfish-pp string (current-buffer))
     (insert string)))
 
 ;;;###autoload
@@ -496,8 +563,8 @@ set by the variable `sawfish-result-buffer'"
                                (point)
                                temp-buffer)
           (funcall (if to-buffer
-                       #'sawfish-insert
-                     #'sawfish-output)
+                       'sawfish-insert
+                     'sawfish-output)
                    (with-current-buffer temp-buffer (buffer-string))))))))
 
 ;;;###autoload
@@ -507,18 +574,27 @@ set by the variable `sawfish-result-buffer'"
   (sawfish-eval-last-sexp t))
 
 (defmacro sawfish-code (&rest body)
-  "Pass BODY to sawfish for evaluation."
+  "Pass BODY to sawfish for evaluation.
+For example, evaluate the following as elisp, and a new x terminal
+starts.
+  (sawfish-code
+    (require 'sawfish.wm.commands.launcher)
+    (xterm))"
   `(sawfish-eval-read (cons 'progn (quote ,body))))
 
 (defun sawfish-load-helpers ()
   "Load modules that help us work with sawfish."
   (sawfish-code
     (require 'rep.structures)
-    (require 'lisp-doc)))
+    (require 'rep.lang.doc)))
 
-(defun sawfish-load-symbols (&optional force)
-  "Loads the names of the sawfish functions and variables."
-  (unless (and (not (or force (not sawfish-buffer-symbol-lists)))
+(defun sawfish-load-symbols (&optional update)
+  "Loads the names of the sawfish functions and variables, and cache them.
+When called interactively, re-reads them."
+  (interactive)
+  (unless (and (not (or update
+			(not sawfish-buffer-symbol-lists)
+			(called-interactively-p)))
                sawfish-function-list sawfish-variable-list)
     (setq sawfish-function-list nil
           sawfish-variable-list nil)
@@ -536,18 +612,25 @@ set by the variable `sawfish-result-buffer'"
 
 (defun sawfish-documentation (symbol &optional is-variable)
   "Get the documentation for SYMBOL."
-  (sawfish-eval-read `(documentation (quote ,symbol) ,is-variable)))
+  (if is-variable
+      (sawfish-eval-read `(documentation (quote ,symbol)))
+    (sawfish-eval-read `(documentation (quote ,symbol) nil ,symbol))))
 
 (defun sawfish-funcall-at-point ()
   "Try and work out the function being called at or near `point'."
   ;; `thing-at-point', when trying to grab a list, doesn't appear to do what
   ;; I need most of the time. I need to figure out what is wrong or write
   ;; something better.
-  (let ((list (thing-at-point 'list)))
-    (when list
-      (let ((fun (symbol-name (car (read list)))))
-        (when (assoc fun sawfish-function-list)
-          fun)))))
+
+  ;; Sometimes `read' fails, because of the syntax difference between
+  ;; elisp and librep, so guard with condition-case.
+  (condition-case nil
+      (let ((list (thing-at-point 'list)))
+	(when list
+	  (let ((fun (symbol-name (car (read list)))))
+	    (when (assoc fun sawfish-function-list)
+	      fun))))
+    (error nil)))
 
 (defun sawfish-variable-at-point ()
   "Try and work out the variable being called at or near `point'."
@@ -572,11 +655,11 @@ default value for the read."
 
 (defun sawfish-describe-ask-function ()
   "Ask for a function name."
-  (sawfish-describe-ask #'sawfish-funcall-at-point "function" 'sawfish-function-list))
+  (sawfish-describe-ask 'sawfish-funcall-at-point "function" 'sawfish-function-list))
 
 (defun sawfish-describe-ask-variable ()
   "Ask for a variable name."
-  (sawfish-describe-ask #'sawfish-variable-at-point "variable" 'sawfish-variable-list))
+  (sawfish-describe-ask 'sawfish-variable-at-point "variable" 'sawfish-variable-list))
 
 (defun sawfish-info-function-index (info-file)
   "Return the name of the function index from INFO-FILE.
@@ -594,7 +677,7 @@ variable `sawfish-info-files'."
 
 (defun sawfish-info-index-function (is-variable)
   "Return the a function for accessing the info file list."
-  (if is-variable #'sawfish-info-variable-index #'sawfish-info-function-index))
+  (if is-variable 'sawfish-info-variable-index 'sawfish-info-function-index))
 
 (defun sawfish-describe-show (symbol &optional is-variable)
   "Show the sawfish description for SYMBOL."
@@ -603,7 +686,9 @@ variable `sawfish-info-files'."
                    (sawfish-eval-read `(,sawfish-describe-symbol (quote ,symbol)))))
     (when is-variable
       (princ "\n\nValue:\n\n")
-      (pp (sawfish-eval-read symbol)))
+      (unless (sawfish-pp (sawfish-eval-noread symbol))
+	(princ (sawfish-eval-noread symbol))))
+
     (princ "\n\nDocumentation:\n\n")
     (let ((doc (or (sawfish-documentation symbol is-variable)
                    (sawfish-search-and-grab-info (sawfish-info-index-function is-variable) symbol))))
@@ -717,11 +802,11 @@ function is used to access the lists in `sawfish-info-files'."
 
 (defun sawfish-search-info-files-for-function (function)
   "Search for info documentation for FUNCTION."
-  (sawfish-search-info-files #'sawfish-info-function-index function))
+  (sawfish-search-info-files 'sawfish-info-function-index function))
 
 (defun sawfish-search-info-files-for-variable (variable)
   "Search for info documentation for VARIABLE."
-  (sawfish-search-info-files #'sawfish-info-variable-index variable))
+  (sawfish-search-info-files 'sawfish-info-variable-index variable))
 
 ;;;###autoload
 (defun sawfish-info-function (function)
@@ -793,7 +878,7 @@ returned."
           (desc      `(lambda ()
                        (interactive)
                        (,(if (sawfish-apropos-variable-p sym)
-                             #'sawfish-describe-variable #'sawfish-describe-function)
+                             'sawfish-describe-variable 'sawfish-describe-function)
                         (quote ,(sawfish-apropos-symbol sym))))))
       (define-key local-map [mouse-2] desc)
       (define-key local-map [return] desc)
@@ -902,38 +987,38 @@ returned."
   (sawfish-interaction-mode))
 
 ;; Define the sawfish-mode keymap.
-(define-key sawfish-mode-map [(control x) (control e)]             #'sawfish-eval-last-sexp)
-(define-key sawfish-mode-map [(meta control x)]                    #'sawfish-eval-defun)
-(define-key sawfish-mode-map [(meta :)]                            #'sawfish-eval-expression)
-(define-key sawfish-mode-map [(control c) (control h) ?a]          #'sawfish-apropos)
-(define-key sawfish-mode-map [(control c) (control h) ?f]          #'sawfish-describe-function)
-(define-key sawfish-mode-map [(control c) (control h) (control f)] #'sawfish-info-function)
-(define-key sawfish-mode-map [(control c) (control h) ?v]          #'sawfish-describe-variable)
-(define-key sawfish-mode-map [(control c) (control h) (control v)] #'sawfish-info-variable)
-(define-key sawfish-mode-map [(meta tab)]                          #'sawfish-complete-symbol)
-(define-key sawfish-mode-map [(control c) (control h) ?i]          #'sawfish-info)
-(define-key sawfish-mode-map [(control meta :)]                    #'eval-expression)
+(define-key sawfish-mode-map [(control x) (control e)]             'sawfish-eval-last-sexp)
+(define-key sawfish-mode-map [(meta control x)]                    'sawfish-eval-defun)
+(define-key sawfish-mode-map [(meta :)]                            'sawfish-eval-expression)
+(define-key sawfish-mode-map [(control c) (control h) ?a]          'sawfish-apropos)
+(define-key sawfish-mode-map [(control c) (control h) ?f]          'sawfish-describe-function)
+(define-key sawfish-mode-map [(control c) (control h) (control f)] 'sawfish-info-function)
+(define-key sawfish-mode-map [(control c) (control h) ?v]          'sawfish-describe-variable)
+(define-key sawfish-mode-map [(control c) (control h) (control v)] 'sawfish-info-variable)
+(define-key sawfish-mode-map [(meta tab)]                          'sawfish-complete-symbol)
+(define-key sawfish-mode-map [(control c) (control h) ?i]          'sawfish-info)
+(define-key sawfish-mode-map [(control meta :)]                    'eval-expression)
 
 ;; Define the minibuffer keymap.
 (unless sawfish-read-expression-map
   (setq sawfish-read-expression-map (make-sparse-keymap))
   (set-keymap-parent sawfish-read-expression-map minibuffer-local-map)
-  (define-key sawfish-read-expression-map [(meta tab)] #'sawfish-complete-symbol))
+  (define-key sawfish-read-expression-map [(meta tab)] 'sawfish-complete-symbol))
 
 ;; Define the sawfish-interaction keymap.
 (unless sawfish-interaction-mode-map
   (setq sawfish-interaction-mode-map (make-sparse-keymap))
   (set-keymap-parent sawfish-interaction-mode-map sawfish-mode-map)
-  (define-key sawfish-interaction-mode-map [(control j)] #'sawfish-eval-print-last-sexp))
+  (define-key sawfish-interaction-mode-map [(control j)] 'sawfish-eval-print-last-sexp))
 
 ;; Further define the sawfish-console-mode keymap. It is initialised already
 ;; because of define-derived-mode.
-(define-key sawfish-console-mode-map [(tab)]                               #'sawfish-complete-symbol)
-(define-key sawfish-console-mode-map [(control c) (control h) ?a]          #'sawfish-apropos)
-(define-key sawfish-console-mode-map [(control c) (control h) ?f]          #'sawfish-describe-function)
-(define-key sawfish-console-mode-map [(control c) (control h) (control f)] #'sawfish-info-function)
-(define-key sawfish-console-mode-map [(control c) (control h) ?v]          #'sawfish-describe-variable)
-(define-key sawfish-console-mode-map [(control c) (control h) (control v)] #'sawfish-info-variable)
+(define-key sawfish-console-mode-map [(tab)]                               'sawfish-complete-symbol)
+(define-key sawfish-console-mode-map [(control c) (control h) ?a]          'sawfish-apropos)
+(define-key sawfish-console-mode-map [(control c) (control h) ?f]          'sawfish-describe-function)
+(define-key sawfish-console-mode-map [(control c) (control h) (control f)] 'sawfish-info-function)
+(define-key sawfish-console-mode-map [(control c) (control h) ?v]          'sawfish-describe-variable)
+(define-key sawfish-console-mode-map [(control c) (control h) (control v)] 'sawfish-info-variable)
 
 ;; Indentation hints for macros and functions provided by sawfish.el
 (put 'sawfish-code 'lisp-indent-function 0)

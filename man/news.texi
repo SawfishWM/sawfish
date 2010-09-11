@@ -167,6 +167,19 @@ if @code{apps-menu-show-all} is set to 't, then: fields @code{Hidden},
 @code{NoDisplay}, @code{NotShowIn} and @code{OnlyShowIn} are ignored
 (Sawfish lists all existing menu-entries)
 
+@item Update of emacs major mode @file{sawfish.el} [Teika kazura]
+
+It is now distributed with Sawfish window manager. Improvements are:
+
+@itemize
+@item Evaluation used to choke when it encountered @code{#f} or @code{#t}. This is fixed.
+@item Highlighting of the keywords like @code{define} works again.
+@item @code{describe-function} have been broken, but it works again.
+@item In @code{describe-variable}, the value of the variable is pretty-printed.
+@item @code{sawfish-load-symbols} can be called interactively to update the cached symbols.
+@item Better introductory part.
+@end itemize
+
 @item New frame-parts @code{border-width} and @code{border-color}
 [Alexey I. Froloff]
 
