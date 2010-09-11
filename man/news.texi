@@ -34,8 +34,8 @@ If you have code which utilizes prompt, it is affected. When you
 call the function @code{prompt}, pass helper functions directly
 as the function's arguments. They used to be set as global variables.
 
-The change is straightforward, so it be easy to update your code. See
-@code{sawfish.wm.util.prompt} for details.
+The change is straightforward, so it must be easy to update your
+code. See @code{sawfish.wm.util.prompt} for details.
 
 @item Mouse-button support state
 
@@ -95,12 +95,6 @@ Function @code{x-atom-name} now accepts all 32 bits. Previously only
 It used to cause ``Bad argument'' error, most notably on Java
 applications.
 
-@item Resurrection of two variables [Teika Kazura]
-
-User options @code{workspace-boundary-mode} and
-@code{workspace-send-boundary-mode} couldn't be set from the
-configurator, but this is fixed.
-
 @item Applications menu bugfix [Matthew Love]
 
 Correct alphabetic ordering of menu-entries is done. Previously they
@@ -123,6 +117,12 @@ desktop-shell which on it's own refreshes the screen regularly). Both
 have been fixed by introducing the @code{x-draw-text} function, which
 is described below.
 
+@item Resurrection of two variables [Teika Kazura]
+
+User options @code{workspace-boundary-mode} and
+@code{workspace-send-boundary-mode} couldn't be set from the
+configurator, but this is fixed.
+
 @item Command @code{xterm} fix [Teika kazura]@*
 It couldn't be invoked as a key binging if the optional ``command''
 argument was unset by the configurator, i.e. if it was an empty
@@ -131,22 +131,6 @@ string.
 
 @item New Features
 @itemize @minus
-@item New commandline-option @code{--5-buttons}@*
-See the item ``Keyboard-layout switching support'' above.
-
-@item New frame-parts @code{border-width} and @code{border-color}
-[Alexey I. Froloff]
-
-A ``border'' of a window surrounds the window and all other frame
-parts. (@pxref{Frame Part Definition})
-
-@item @code{x-draw-text} function [Christopher Bratusek]
-
-It is similar to @code{x-draw-string}. Generally, if you use a
-@code{display-message} like message, rely on @code{x-draw-string}, but
-if you want to draw on the screen directly use @code{x-draw-text}
-(@pxref{X Drawing}.)
-
 @item Desktop environment integrations [Christopher Bratusek]
 
 The new support of XFCE integration is just like the GNOME/KDE4 ones:
@@ -182,6 +166,22 @@ and @code{NoDisplay} are ignored, but fields @code{OnlyShowIn} and
 if @code{apps-menu-show-all} is set to 't, then: fields @code{Hidden},
 @code{NoDisplay}, @code{NotShowIn} and @code{OnlyShowIn} are ignored
 (Sawfish lists all existing menu-entries)
+
+@item New frame-parts @code{border-width} and @code{border-color}
+[Alexey I. Froloff]
+
+A ``border'' of a window surrounds the window and all other frame
+parts. (@pxref{Frame Part Definition})
+
+@item New commandline-option @code{--5-buttons}@*
+See the item ``Keyboard-layout switching support'' above.
+
+@item @code{x-draw-text} function [Christopher Bratusek]
+
+It is similar to @code{x-draw-string}. Generally, if you use a
+@code{display-message} like message, rely on @code{x-draw-string}, but
+if you want to draw on the screen directly use @code{x-draw-text}
+(@pxref{X Drawing}.)
 @end itemize
 
 @item Updated translations
@@ -210,23 +210,11 @@ printed to Sawfish's output.
 Phrase ``Sawfish error:'' is prepended to error messages which are
 printed to standard error.
 
-@item Root-Menu improvements [Christopher Bratusek]
-
-All menu-entries do now have accelerators. Labels for the sawfish-help
-menu-entries have been improved.
-
-@item Configurator invocation without running Sawfish [Teika Kazura]
-
-If you run the configurator but the Sawfish window manager is absent,
-then an alert window is displayed before abortion.
-
 @item Pointer warping in window cycling [Teika Kazura]
 
 In window cycling, some unnecessary pointer warping is avoided.
 Previously, the necessity of a warp was judged by the geometry before
 the raise was done. Now the updated one is used.
-
-@item Module @code{3d-hack} is not autoloaded anymore.
 
 @item Doc improvements
 
@@ -237,6 +225,18 @@ Described functions @code{grab-keymap} and @code{ungrab-keymap}
 (@pxref{Keymaps}), @code{x-raise-window} and @code{x-lower-window}
 (@pxref{Raising and Lowering Windows}), @code{frame-state-mutex}
 (@pxref{Frame Functions}).
+
+@item Root-Menu improvements [Christopher Bratusek]
+
+All menu-entries do now have accelerators. Labels for the sawfish-help
+menu-entries have been improved.
+
+@item Configurator invocation without running Sawfish [Teika Kazura]
+
+If you run the configurator but the Sawfish window manager is absent,
+then an alert window is displayed before abortion.
+
+@item Module @code{3d-hack} is not autoloaded anymore.
 
 @item @code{sawfish-config} is now minimal, moving most of the contents to @code{sawfish.cfg.shell} [Teika Kazura]
 
