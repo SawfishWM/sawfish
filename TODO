@@ -64,8 +64,6 @@ Outstanding bugs
     [ I have a patch to do this, and it totally breaks the workspace
       handling of desk-guide and the tasklist ]
 
-  ! play-sample.c doesn't seem to work on solaris (esdplay does)
-
   ! anim-outline just guesses where windows will be iconified to, so it
     usually gets it wrong
 
@@ -96,10 +94,6 @@ Outstanding bugs
   + Window history problems
     - Saved old histories can cause problems. See
       http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=114945&repeatmerged=yes
-
-  + write documentation: workspaces, viewports, window groups, alist
-    frame patterns, frame parts as objects, placement, focus modes,
-    symbolic event structures...
 
   + allow enter/leave-notify events to be suppressed?
 
@@ -135,9 +129,7 @@ Window manager tasks
 
   + look at kde khotkeys for ideas
 
-  + support the new GNOME/KDE wm interaction protocols
-
-    [ I've implemented most of the draft spec now ]
+  + Full support of ewmh 
 
   + sound themes
 
@@ -280,56 +272,3 @@ configurator tasks
   + split theme menu by first letter, if many themes to show
 
   + textual search for options/commands
-
---
-
-Configurator items that have been committed:
-
-  + refresh groups after committing changes
-
-    (since this may cause slots to be added)
-
-  + decide whether to use GNOME widgets or not
-
-    [ all GNOME-specific code must either be in nokogiri-gnome or in
-      separate files in nokogiri-widgets, with Gtk+ equivalents in
-      nokogiri-no-gnome ]
-
-  + support arguments to commands in keymaps
-
-  + support for loading groups on demand
-
-    only fetch the current group's information
-    (which may have been cached from the previous time)
-
-  + method of autoloading group details when demanded
-
-  + more widgets:
-
-	(alist ("KEY" WIDGET)
-	       ("VALUE" WIDGET))
-
-	(list "NAME" WIDGET)
-
-	(file)
-	(progam)
-
-  + proper revert
-
-  + choice of `apply/revert/cancel/ok', `revert/cancel/ok', or just `ok'
-
-  + autoload widget definitions (e.g. if requesting widget type `foo'
-    that is unavailable, look for a module nokogiri-widget-foo)
-
-  + nautilus-like ``user levels'' controlling when options get enabled
-
-  + rewrite sawfish-config to use ``items'' as in sawfish-themer (complex
-    widgets represented by functional data types). This would allow
-    more complex custom types, i.e. `(or number string)' etc...
-
-  + also, add provisions for extensibility (i.e. adding new item types
-    at run-time)
-
-  + also, add simple dependences (i.e. widgets can be activated by a
-    separate boolean option)
-
