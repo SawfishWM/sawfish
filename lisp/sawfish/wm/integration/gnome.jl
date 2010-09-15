@@ -1,4 +1,4 @@
-;; gnome.jl -- more GNOME integration
+;; gnome.jl -- GNOME integration
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -20,43 +20,49 @@
 
 (define-structure sawfish.wm.integration.gnome
 
-    (export )
+    (export detect-gnome)
 
     (open rep
+	  rep.system
           sawfish.wm.menus
+	  sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
   (define-structure-alias gnome-int sawfish.wm.integration.gnome)
 
-  (defvar-setq want-poweroff-menu nil)
-  (defvar-setq desktop-environment "gnome")
+  ;; Returns t or nil. If detected, do also gnome support init.
+  (define (detect-gnome)
+    (if (getenv "GNOME_DESKTOP_SESSION_ID")
+	(let (menu)
+	  (setq desktop-environment "gnome")
+	  (setq want-poweroff-menu nil)
 
-  ;; invoke the GNOME terminal instead of xterm
-  (unless (variable-customized-p 'xterm-program)
-    (setq xterm-program "gnome-terminal.wrapper"))
+	  ;; invoke the GNOME terminal instead of xterm
+	  (unless (variable-customized-p 'xterm-program)
+	    (setq xterm-program "gnome-terminal.wrapper"))
 
-  ;; use the GNOME help browser and url launcher
-  (unless (variable-customized-p 'browser-program)
-    (setq browser-program "gnome-www-browser"))
+	  ;; use the GNOME help browser and url launcher
+	  (unless (variable-customized-p 'browser-program)
+	    (setq browser-program "gnome-www-browser"))
 
-  ;; add some GNOME menu-entries
-  (let ((menu (assoc (_ "_Help") root-menu)))
-    (when menu
-      (nconc menu `(()
-		    (,(_ "_GNOME Help") (system "yelp &"))
-		    (,(_ "GNOME _Website") (browser "http://www.gnome.org"))
-		    (,(_ "_About GNOME") (system "gnome-about &"))))))
+	  ;; add some GNOME menu-entries
+	  (when (setq menu (assoc (_ "_Help") root-menu))
+	    (nconc menu `(()
+			  (,(_ "_GNOME Help") (system "yelp &"))
+			  (,(_ "GNOME _Website") (browser "http://www.gnome.org"))
+			  (,(_ "_About GNOME") (system "gnome-about &")))))
 
-
-  ;; add gnome-logout and customize menu-entries
-  (let ((menu (assoc (_ "Sessi_on") root-menu)))
-    (when menu
-      (nconc menu `(()
-                    (,(_ "_Customize GNOME") (system "gnome-control-center &"))
-                    ()
-                    (,(_ "_Logout from GNOME")
-                     (system "gnome-session-save --logout-dialog &"))
-                    (,(_ "_Shutdown from GNOME")
-                     (system "gnome-session-save --shutdown-dialog &")))))))
+	  ;; add gnome-logout and customize menu-entries
+	  (when (setq menu (assoc (_ "Sessi_on") root-menu))
+	    (nconc menu `(()
+			  (,(_ "_Customize GNOME") (system "gnome-control-center &"))
+			  ()
+			  (,(_ "_Logout from GNOME")
+			   (system "gnome-session-save --logout-dialog &"))
+			  (,(_ "_Shutdown from GNOME")
+			   (system "gnome-session-save --shutdown-dialog &")))))
+	  t)
+      ;; no, gnome not found
+      nil)))

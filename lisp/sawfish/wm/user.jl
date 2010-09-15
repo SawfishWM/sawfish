@@ -39,6 +39,7 @@
     ((open rep
 	   rep.regexp
 	   rep.system
+	   rep.structures
 	   rep.io.files
 	   rep.io.processes
 	   sawfish.wm
@@ -48,9 +49,21 @@
 	   sawfish.wm.ext.error-handler
 	   sawfish.wm.ext.apps-menu
 	   sawfish.wm.frames
-	   sawfish.wm.integration.standalone
-	   sawfish.wm.commands.poweroff)
+	   sawfish.wm.menus)
+     (access sawfish.wm.integration.kde
+	     sawfish.wm.integration.gnome
+	     sawfish.wm.integration.xfce)
+
      (set-binds))
+
+  ;; "none" looks ugly, but if you are to change it to "", fix
+  ;; apps-menu, too, or it will break. 
+  (defvar desktop-environment "none"
+    "Running desktop environment, detected by Sawfish.
+Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
+
+  (defvar want-poweroff-menu t
+    "Add poweroff menu if you don't use GNOME / KDE / XFCE.")
 
   (setq *user-structure* 'user)
 
@@ -83,7 +96,21 @@
       (message "Renamed file ~/.sawmillrc -> ~/.sawfishrc"))
     )
 
+  ;; Detect desktop environment
+  (define (detect-desktop-environment)
+    (or (sawfish.wm.integration.gnome#detect-gnome)
+	(sawfish.wm.integration.kde#detect-kde)
+	(sawfish.wm.integration.xfce#detect-xfce))
+    )
+
+  ;; Don't signal an error even if user "require" them. These modules
+  ;; existed in the past.
+  (provide 'sawfish-defaults)
+  (provide 'sawfish.wm.defaults)
+
 ;;; From here, executed at startup.
+
+  ;; load ~/.sawfish/rc
   (unless (get-command-line-option "--no-rc")
     (condition-case error-data
 	(progn
@@ -96,8 +123,8 @@
 
 	  (unless batch-mode
 	    (rename-old-stuff)
-	    ;; load these before customized settings
-	    (load "sawfish/wm/defaults" t)
+	    ;; detect DE before loading rc
+	    (detect-desktop-environment)
 
 	    ;; then the customized options
 	    (condition-case data

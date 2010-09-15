@@ -6730,6 +6730,12 @@ The program launched by the @code{browser} function. Interpreted by shell.
 Start a new browser instance. Visit @var{URL} if supplied.
 @end deffn
 
+Sawfish detects some desktop environments.
+@defvar desktop-environment
+Running desktop environment, detected by Sawfish.
+Possible values are "kde", "gnome", "xfce", or "none".
+@end defvar
+
 @node Standard Hooks, Standard Properties, External Applications, Top
 @chapter Standard Hooks
 @cindex Standard hooks

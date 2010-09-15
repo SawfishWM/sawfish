@@ -28,6 +28,7 @@
 	    popup-root-menu
 	    popup-apps-menu
 	    add-window-menu-toggle
+	    add-poweroff-menu
 	    custom-menu)
 
     (open rep
@@ -167,6 +168,21 @@ before killing it.")
       (,(_ "_Kill Window") (system "xkill &"))))
 
   (defvar apps-menu)
+
+  (define (add-poweroff-menu)
+    "Add poweroff related menu items to Session sub-menu."
+    (require 'sawfish.wm.commands.poweroff)
+    (let ((menu (assoc (_ "Sessi_on") root-menu)))
+      (when menu
+	(nconc menu `(()
+		      (,(_ "_Reboot System")
+		       (poweroff 'reboot))
+		      (,(_ "_Shutdown System")
+		       (poweroff 'halt))
+		      (,(_ "S_uspend System")
+		       (poweroff 'suspend))
+		      (,(_ "_Hibernate System")
+		       (poweroff 'hibernate)))))))
 
   (define (menu-start-process)
     (when menu-timer

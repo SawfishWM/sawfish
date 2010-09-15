@@ -1,4 +1,4 @@
-;; kde-int.jl -- more KDE integration
+;; kde-int.jl -- KDE integration
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -20,45 +20,60 @@
 
 (define-structure sawfish.wm.integration.kde
 
-    (export )
+    (export detect-kde)
 
     (open rep
+	  rep.system
           sawfish.wm.menus
+	  sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.commands
-          sawfish.wm.commands.launcher)
+          sawfish.wm.commands.launcher
+	  sawfish.wm.ext.apps-menu)
 
   (define-structure-alias kde-int sawfish.wm.integration.kde)
 
-  (defvar-setq want-poweroff-menu nil)
-  (defvar-setq desktop-environment "kde")
-  (defvar-setq desktop-directory '("/usr/share/applications/" "/usr/share/applications/kde4/"))
+  (defvar kde-desktop-directories
+    '("/usr/share/applications/kde4/")
+    "KDE specific directories where *.desktop files are stored.")
 
-  ;; invoke the KDE terminal instead of xterm
-  (unless (variable-customized-p 'xterm-program)
-    (setq xterm-program "konsole"))
+  ;; Returns t or nil. If detected, do also kde support init.
+  (define (detect-kde)
+  (if (getenv "KDE_FULL_SESSION")
+      (let (menu
+	    kde-logout-cmd)
+	(setq desktop-environment "kde")
+	(setq want-poweroff-menu nil)
+	(setq desktop-directory
+	      (append desktop-directory kde-desktop-directories))
 
-  ;; use the KDE Browser
-  (unless (variable-customized-p 'browser-program)
-    (setq browser-program "konqueror"))
+	;; invoke the KDE terminal instead of xterm
+	(unless (variable-customized-p 'xterm-program)
+	  (setq xterm-program "konsole"))
 
-  ;; add some KDE help menus
-  (let ((menu (assoc (_ "_Help") root-menu)))
-    (when menu
-      (nconc menu `(()
-		    (,(_ "_KDE Help") (system "khelpcenter &"))
-		    (,(_ "KDE _Website") (browser "http://www.kde.org"))))))
+	;; use the KDE Browser
+	(unless (variable-customized-p 'browser-program)
+	  (setq browser-program "konqueror"))
 
-  ;; add kde-logout menu item
-  (let ((menu (assoc (_ "Sessi_on") root-menu))
-        (kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout"))
-    (when menu
-      (nconc menu `(()
-                    (,(_ "_Customize KDE") (system "systemsettings &"))
-                    ()
-                    (,(_ "_Logout from KDE")
-                     (system ,(concat kde-logout-cmd " 1 0 -1 &")))
-                    (,(_ "_Reboot from KDE")
-                     (system ,(concat kde-logout-cmd " 1 1 -1 &")))
-                    (,(_ "_Shutdown from KDE")
-                     (system ,(concat kde-logout-cmd " 1 2 -1 &"))))))))
+	;; add some KDE help menus
+	(when (setq menu (assoc (_ "_Help") root-menu))
+	  (nconc menu `(()
+			(,(_ "_KDE Help") (system "khelpcenter &"))
+			(,(_ "KDE _Website") (browser "http://www.kde.org")))))
+
+	;; add kde-logout menu item
+	  (when (setq menu (assoc (_ "Sessi_on") root-menu))
+	    (setq kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout")
+	    (nconc menu `(()
+			  (,(_ "_Customize KDE") (system "systemsettings &"))
+			  ()
+			  (,(_ "_Logout from KDE")
+			   (system ,(concat kde-logout-cmd " 1 0 -1 &")))
+			  (,(_ "_Reboot from KDE")
+			   (system ,(concat kde-logout-cmd " 1 1 -1 &")))
+			  (,(_ "_Shutdown from KDE")
+			   (system ,(concat kde-logout-cmd " 1 2 -1 &"))))))
+	  t)
+    ;; no, kde is not found.
+    nil
+    )))
