@@ -44,6 +44,3 @@
 ;; extra XFCE integration module
   (if (get-x-property 'root '_DT_SAVE_MODE)
       (require 'sawfish.wm.integration.xfce)))))
-
-;; save errors to aid debugging
-(require 'sawfish.wm.ext.error-handler)
