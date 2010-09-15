@@ -46,7 +46,7 @@
   (define (show-programmer-manual)
     (help-display-info-function "sawfish" "Top"))
 
-  (define (show-homepage) (browser "http://sawfish.sourceforge.net/"))
+  (define (show-homepage) (browser "http://sawfish.wikia.com/"))
 
   (define (show-about)
     (system (format nil "%s >/dev/null 2>&1 </dev/null &"
