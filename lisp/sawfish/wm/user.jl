@@ -109,7 +109,10 @@
 	    (let loop ((rest rc-files))
 		 (when rest
 		   (if (file-exists-p (car rest))
-		       (safe-load (car rest) t t t)
+		       ;; Print stack trace on error during exeuction
+		       ;; of ~/.sawfish/rc
+		       (let ((%in-condition-case nil))
+			 (safe-load (car rest) t t t))
 		     (loop (cdr rest)))))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
