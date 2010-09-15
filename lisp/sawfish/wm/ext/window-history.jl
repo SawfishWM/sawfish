@@ -85,7 +85,7 @@
       (,(_ "Remember _attributes") window-history-save-attributes)
       (,(_ "_Forget saved state") window-history-forget)
       ()
-      (,(_ "_Clear window-istory") window-history-clear)
+      (,(_ "_Clear window-history") window-history-clear)
       (,(_ "_Save window-history") window-history-save)
       (,(_ "_Reload window-history") window-history-load)))
 

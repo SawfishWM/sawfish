@@ -102,12 +102,12 @@ Only `avoided' windows are bumped."
 
   (define (grow-window-left w #!optional arg)
     "Grows window to the left until it touches another window.
-See `grow-window-up'."
+See `grow-window-up' for full doc."
     (grow-window w 'left arg))
 
   (define (grow-window-right w #!optional arg)
     "Grows window to the right until it touches another window.
-See `grow-window-up'."
+See `grow-window-up' for full doc."
     (grow-window w 'right arg))
 
   (define (grow-window-up w #!optional arg)
@@ -120,17 +120,17 @@ window or pixels instead."
 
   (define (grow-window-down w #!optional arg)
     "Grows window downwards until it touches another window.
-See `grow-window-up'."
+See `grow-window-up' for full doc."
     (grow-window w 'down arg))
 
   (define (pack-window-left w #!optional arg)
     "Moves window to the left until it touches another window.
-See `pack-window-up'."
+See `pack-window-up' for full doc."
     (pack-window w 'left arg))
 
   (define (pack-window-right w #!optional arg)
     "Moves window to the right until it touches another window.
-See `pack-window-up'."
+See `pack-window-up' for full doc."
     (pack-window w 'right arg))
 
   (define (pack-window-up w #!optional arg)
@@ -142,7 +142,7 @@ With a numeric prefix arg, move upwards by that many pixels instead."
 
   (define (pack-window-down w #!optional arg)
     "Moves window downwards until it touches another window.
-See `pack-window-up'."
+See `pack-window-up' for full doc."
     (pack-window w 'down arg))
 
   ;; Command defs

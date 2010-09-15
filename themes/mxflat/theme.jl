@@ -995,7 +995,7 @@ Button1: sets window depth to the adjusted value."
 
 (defcustom mxflat:customize-lock-keymap
   nil
-  "customize look button keymap"
+  "customize lock button keymap"
   :tooltip "By default a button will work as it's name suggests. \
 Button1: lock window position"
   :group (appearance mxflat:group mxflat:buttons-group

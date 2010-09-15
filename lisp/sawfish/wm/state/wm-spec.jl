@@ -1,4 +1,4 @@
-;; wm-spec.jl -- implement the new (GNOME/KDE) wm hints spec
+;; wm-spec.jl -- ewmh support
 
 ;; Copyright (C) 1999, 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -43,10 +43,6 @@
   ;;  - _NET_WM_MOVERESIZE changes
   ;;  - _NET_SHOWING_DESKTOP?
   ;;  - _NET_MOVERESIZE_WINDOW
-
-  ;; maybe add some state extensions for things the spec doesn't
-  ;; cover but existed in the old GNOME spec; e.g. _GNOME_WM_STATE_FOO
-  ;; for FOO being DO_NOT_COVER, SKIP_FOCUS, ..?
 
 ;;; constants
 

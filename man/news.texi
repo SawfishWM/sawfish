@@ -87,13 +87,15 @@ By doing so, you won't be able to bind Sawfish commands to mouse
 buttons 6 - 8. This may be fixed in future, but not now because
 the current code for buttons 6 - 8 is hackish.
 
-@item Atom handling fix on 32-bit architecture. [Teika Kazura]
+@item Atom handling fix on 32-bit architecture (Java fix). [Teika Kazura]
 
 Function @code{x-atom-name} now accepts all 32 bits. Previously only
-30 bits were treated, if the architecture was 32-bit.
+30 bits were treated, if the architecture was 32-bit. 64-bit systems
+had not this bug.
 
 It used to cause ``Bad argument'' error, most notably on Java
-applications.
+applications. (In theory, an atom is set by X server, not a client.
+But Java applications seem to be affected often by this bug.)
 
 @item Applications menu bugfix [Matthew Love]
 
@@ -255,8 +257,8 @@ then an alert window is displayed before abortion.
 
 @item All translation files are now in UTF-8 [Teika Kazura]
 
-Affected files are en_GB, Galician, Italian, Romanian, and Turkish.
-
+Almost all were already UTF-8. The rest, Galician, Italian, Romanian,
+and Turkish are changed this time.
 @end itemize
 @end itemize
 
