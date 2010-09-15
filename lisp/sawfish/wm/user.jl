@@ -162,8 +162,6 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
   (unless (and (boundp 'window-menu) window-menu)
     (require 'sawfish.wm.ext.beos-window-menu))
 
-  (load-module 'sawfish.wm.state.wm-spec)
-
   ;; Use all arguments which are left.
   (let ((do-load (lambda (name)
 		   (cond ((file-exists-p name)

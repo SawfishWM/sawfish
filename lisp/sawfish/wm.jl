@@ -86,7 +86,8 @@
 			 sawfish.wm.state.shading
 			 sawfish.wm.state.iconify
 			 sawfish.wm.state.ignored
-			 sawfish.wm.server))
+			 sawfish.wm.server
+			 sawfish.wm.state.wm-spec))
 
 ;; create the exports from sawfish.wm
 (open-structures '(sawfish.wm.colors
