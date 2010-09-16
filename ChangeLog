@@ -1,3 +1,47 @@
+2010-09-16  Teika kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands/grow-pack.jl
+	* lisp/sawfish/wm/ext/window-history.jl
+	* lisp/sawfish/wm/state/wm-spec.jl
+	* man/news.texi
+	* themes/mxflat/theme.jl: Minor doc, including news.
+
+	* lisp/sawfish/wm/defaults.jl
+	* lisp/sawfish/wm/user.jl: Cleanups around user.jl.
+        Deleted fake support of ~/.sawfish/rc{,.jl,.jlc}. A file with a
+	suffix was never read, but the code was in the guise of supporting
+	them.
+	Renaming of "sawmill" is not done when batch-mode. The code is
+	pushed into a function.
+	Deleted (require 'sawfish.wm.ext.error-handler) from
+	`defaults.jl'. It is now meaningless because it's already opened
+	by user.jl.
+
+	* lisp/sawfish/wm/user.jl: Print stack trace on error during
+	~/.sawfish/rc execution.
+
+	* OPTIONS
+	* lisp/sawfish/wm/defaults.jl
+	* lisp/sawfish/wm/integration/gnome.jl
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/integration/standalone.jl
+	* lisp/sawfish/wm/integration/xfce.jl
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/user.jl
+	* man/news.texi
+	* man/sawfish.texi: Desktop environmet detection cleanup.
+	defaults.jl is deleted.
+	DE detection are done by each module, e.g. kde detection is done
+	in kde.jl
+	defvar of `desktop-environment' and `want-poweroff-menu' are
+	centralized to .jl
+	Each DE support module doesn't defvar them, but simple setq.
+	standalone.jl is deleted. Adding poweroff menu is moved to menus.jl
+	Doc.
+
+	* lisp/sawfish/wm.jl
+	* lisp/sawfish/wm/user.jl: Cleanup; loading of wm-spec
+	is moved to wm.jl
+
 2010-09-11  Teika kazura <teika@lavabit.com>
 	* configure.in
 	* man/news.texi: Librep version re-bump. 0.90.7 -> 0.91.0
