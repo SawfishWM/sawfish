@@ -13,6 +13,9 @@
 	Window matched by this can't be resized by the `resize-window-interactively',
 	`halve-window-size' or `double-window-size' functions, but by maximize-*.
 
+	* lisp/sawfish/wm/keymaps.jl: by default the close-buttons calls `delete-window-safely'
+	rather than `delete-window'.
+
 2010-09-16  Teika kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands/grow-pack.jl
 	* lisp/sawfish/wm/ext/window-history.jl
