@@ -98,7 +98,6 @@
 		 (shaded boolean)
 		 (never-iconify boolean)
 		 (never-maximize boolean)
-		 (never-delete boolean)
 		 )
      (other ,(_ "Other")
             (avoid boolean)
@@ -115,6 +114,8 @@
             (transients-above (choice all parents none))
             (ignore-stacking-requests boolean)
 	    (auto-gravity boolean)
+	    (never-delete boolean)
+	    (fixed-size boolean)
 	    )))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp

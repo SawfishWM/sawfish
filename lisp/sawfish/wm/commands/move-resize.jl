@@ -527,10 +527,12 @@ its edges with an edge of another window.")
       (resize-window-with-hints* win new-wid new-hgt)))
 
   (define (double-window-size w)
-    (resize-by-factor w 2))
+    (if (not (window-get w 'fixed-size))
+      (resize-by-factor w 2)))
 
   (define (halve-window-size w)
-    (resize-by-factor w 0.5))
+    (if (not (window-get w 'fixed-size))
+      (resize-by-factor w 0.5)))
 
 ;;; hook functions
 
@@ -549,7 +551,8 @@ its edges with an edge of another window.")
 
   (define (resize-window-interactively w)
     "Resize the window interactively, with mouse or keyboard."
-    (do-move-resize w 'resize))
+    (if (not (window-get w 'fixed-size))
+      (do-move-resize w 'resize)))
 
   (define (move-selected-window)
     "Wait for the user to select a window, then interactively move
