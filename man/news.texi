@@ -177,6 +177,18 @@ then the window is focussed, when @code{toggle-or-exec} is called while the
 pointer is inside the matching window, it will be hidden. Optionally the
 window may also be hidden when the pointer leaves it.
 
+@item New window-matchers [Christopher Bratusek]
+
+@itemize
+@item @code{fixed-size}: this window-matcher prevents the window from being
+resized by the @code{resize-window-interactively}, @code{halve-window-size}
+and @code{double-window-size} functions, maximize-* functions, still do. See
+@code{never-maximize} window-matcher to prevent this, too.
+
+@item @code{never-close}: this window-matcher prevents the window brom being
+closed by the @code{delete-window-safely} function. @code{delete-window} still does.
+@end itemize
+
 @item Update of emacs major mode @file{sawfish.el} [Teika kazura]
 
 It is now distributed with Sawfish window manager. Improvements are:
@@ -238,6 +250,12 @@ printed to standard error.
 In window cycling, some unnecessary pointer warping is avoided.
 Previously, the necessity of a warp was judged by the geometry before
 the raise was done. Now the updated one is used.
+
+@item Minor change in default keymap [Christopher Bratusek]
+
+The close-button of a window now calls @code{delete-window-safely}
+rather than @code{delete-window}. It's less aggressive and honours
+the @code{never-close} window-matcher, too.
 
 @item Doc improvements
 
