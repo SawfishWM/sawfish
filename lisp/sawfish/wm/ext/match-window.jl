@@ -98,6 +98,7 @@
 		 (shaded boolean)
 		 (never-iconify boolean)
 		 (never-maximize boolean)
+		 (never-delete boolean)
 		 )
      (other ,(_ "Other")
             (avoid boolean)

@@ -416,7 +416,8 @@ use. Otherwise (window-size-hints W) is used."
 
   (define (delete-window-safely w)
     "Delete the window, or beep if the window can't be closed safely."
-    (delete-window w t))
+    (if (not (window-get w 'never-delete))
+      (delete-window w t)))
 
   (define-command 'delete-window-safely delete-window-safely #:spec "%W")
 
