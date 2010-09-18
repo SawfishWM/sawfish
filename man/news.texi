@@ -125,6 +125,11 @@ User options @code{workspace-boundary-mode} and
 @code{workspace-send-boundary-mode} couldn't be set from the
 configurator, but this is fixed.
 
+@item Removed wrong export [Christopher Bratusek]
+
+The function @code{make-url-widget}, which has been removed in
+version 1.6.0 was still exported by it's former modules, it's fixed.
+
 @item Command @code{xterm} fix [Teika kazura]@*
 It couldn't be invoked as a key binging if the optional ``command''
 argument was unset by the configurator, i.e. if it was an empty
@@ -209,6 +214,20 @@ It is similar to @code{x-draw-string}. Generally, if you use a
 @code{display-message} like message, rely on @code{x-draw-string}, but
 if you want to draw on the screen directly use @code{x-draw-text}
 (@pxref{X Drawing}.)
+@end itemize
+
+@item Removed Features
+
+@itemize @minus
+@item @code{about-dialog} function [Christopher Bratusek]
+
+The custom @code{about-dialog} function has been replaced by
+gtk-about-dialog in version 1.6.0. Now the function is removed.
+
+@item @code{stock-button} function [Christopher Bratusek]
+
+The @code{stock-button} function has been replaced by directly
+using gtk-button-new-from-stock.
 @end itemize
 
 @item Updated translations

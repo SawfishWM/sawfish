@@ -1,3 +1,16 @@
+2010-09-18  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/gtk/widgets/simple-dialog.jl: renamed sawfish.gtk.stock
+	to sawfish.gtk.widgets.simple-dialog as the functions `about-dialog'
+	-(replaced by native gtk-about-dialog) and `stock-button' (replaced by
+	native gtk-button-new-from-stock) have been removed and `simple-dialog'
+	is the only remaining function. A wrong export has been removed, too.
+
+	* lisp/sawfish/cfg/shell.jl
+	* lisp/sawfish/cfg/apply.jl
+	* lisp/sawfish/cfg/widgets/keymap.jl
+	* lisp/sawfish/cfg/widgets/match-window.jl
+	* lisp/sawfish/gtk/widget-dialog.jl: updated for above change
+
 2010-09-17  Christopher Brautsek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/match-window.jl
 	* lisp/sawfish/wm/windows.jl: added `never-delete' window-matcher.
