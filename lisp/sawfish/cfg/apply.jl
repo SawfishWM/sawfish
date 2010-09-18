@@ -31,7 +31,7 @@
 	  rep.data.tables
 	  gui.gtk-2.gtk
 	  sawfish.gtk.widget
-	  sawfish.gtk.stock
+	  sawfish.gtk.widgets.simple-dialog
 	  sawfish.cfg.slot
 	  sawfish.cfg.group
 	  sawfish.cfg.wm)

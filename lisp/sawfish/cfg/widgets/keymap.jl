@@ -25,7 +25,7 @@
     (open rep
           gui.gtk-2.gtk
           rep.regexp
-          sawfish.gtk.stock
+          sawfish.gtk.widgets.simple-dialog
           sawfish.gtk.widget)
 
 ;;; widget for representing keymaps

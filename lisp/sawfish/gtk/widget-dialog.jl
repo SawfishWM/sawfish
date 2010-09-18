@@ -24,7 +24,7 @@
 
     (open rep
 	  gui.gtk-2.gtk
-	  sawfish.gtk.stock
+	  sawfish.gtk.widgets.simple-dialog
 	  sawfish.gtk.widget)
 
   (define (widget-dialog title spec callback

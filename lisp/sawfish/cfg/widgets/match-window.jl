@@ -26,7 +26,7 @@
           gui.gtk-2.gtk
           rep.regexp
           sawfish.gtk.widget
-          sawfish.gtk.stock
+          sawfish.gtk.widgets.simple-dialog
           sawfish.cfg.wm)
 
   (defconst matcher-count 3)
