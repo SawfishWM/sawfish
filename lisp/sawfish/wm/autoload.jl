@@ -214,4 +214,5 @@
 (autoload-command 'set-viewport-linear:9 'sawfish.wm.commands.viewport-linear)
 (autoload-command 'set-window-viewport-linear:9 'sawfish.wm.commands.viewport-linear)
 (autoload-command 'jump-or-exec 'sawfish.wm.commands.jump-or-exec)
+(autoload-command 'cycle-or-exec 'sawfish.wm.commands.cycle-or-exec)
 ;;; ::autoload-end::
