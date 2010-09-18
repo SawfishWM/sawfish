@@ -29,8 +29,7 @@ VPATH=@srcdir@:@top_srcdir@
 
 REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lisp
 
-SRCS :=	stock.jl		\
-	widget.jl		\
+SRCS :=	widget.jl		\
 	widget-dialog.jl	\
 	widget-test.jl
 
@@ -41,6 +40,7 @@ W_SRCS := widgets/alist.jl	\
 	widgets/list.jl		\
 	widgets/pair.jl		\
 	widgets/program.jl	\
+	widgets/simple-dialog.jl\
 	widgets/scheme-boolean.jl
 
 OBJS := $(SRCS:.jl=.jlc)
