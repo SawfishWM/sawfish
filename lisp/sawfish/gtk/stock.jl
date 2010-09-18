@@ -22,35 +22,21 @@
 ;; it had been called "lisp/sawfish/gtk/stock.jl.gtk".
 ;; Re-added in the commit ce7e6c.
 
-(define-structure sawfish.gtk.stock
+(define-structure sawfish.gtk.simple-dialog
 
-    (export stock-button
-            simple-dialog)
+    (export simple-dialog)
 
     (open rep
           gui.gtk-2.gtk
           sawfish.gtk.widget)
-
-  ;; same as in gnome now
-  (define (stock-button type)
-    (gtk-button-new-from-stock
-     (case type
-       ((ok) "gtk-ok")
-       ((cancel) "gtk-cancel")
-       ((revert) "gtk-revert-to-saved")
-       ((apply) "gtk-apply")
-       ((yes) "gtk-yes")
-       ((no) "gtk-no")
-       ((close) "gtk-close")
-       ((help) "gtk-help"))))
 
   (define (simple-dialog title widget #!optional ok-callback main-window)
 
     (let ((window (gtk-window-new 'toplevel))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (hbbox (gtk-hbutton-box-new))
-	  (ok (stock-button 'ok))
-	  (cancel (and ok-callback (stock-button 'cancel))))
+	  (ok (gtk-button-new-from-stock "gtk-ok"))
+	  (cancel (and ok-callback (gtk-button-new-from-stock "gtk-cancel"))))
 
       (define (on-cancel)
 	(gtk-widget-destroy window))

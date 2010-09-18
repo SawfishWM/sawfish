@@ -29,7 +29,6 @@
 	  rep.io.files
 	  rep.io.streams
 	  rep.io.timers
-	  sawfish.gtk.stock
 	  sawfish.gtk.widget
 	  sawfish.cfg.i18n
 	  sawfish.cfg.group
@@ -97,8 +96,8 @@
 	  (gtk-container-add vbox (or s-scroller slot-box-widget))))
 
       (unless socket-id
-	(setq ok-widget (stock-button 'close))
-	(setq revert-widget (stock-button 'revert))
+	(setq ok-widget (gtk-button-new-from-stock "gtk-close"))
+	(setq revert-widget (gtk-button-new-from-stock "gtk-undo"))
 	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish Configurator"))
 	(gtk-window-set-wmclass main-window "sawfish-configurator"
@@ -268,7 +267,7 @@
     (let ((window (gtk-window-new 'toplevel))
 	  (vbox (gtk-vbox-new nil box-spacing))
 	  (label (gtk-label-new "Sawfish's configurator needs a running Sawfish. Aborting."))
-	  (button (stock-button 'ok))
+	  (button (gtk-button-new-from-stock "gtk-ok"))
 	  (func (lambda () (throw 'quit 1))))
       (gtk-window-set-title window "SawfishConfig error")
       (gtk-window-set-icon-name window "gtk-info")
