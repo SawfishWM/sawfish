@@ -30,7 +30,6 @@ VPATH=@srcdir@:@top_srcdir@
 REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lisp
 
 SRCS :=	widget.jl		\
-	widget-dialog.jl	\
 	widget-test.jl
 
 W_SRCS := widgets/alist.jl	\
@@ -74,7 +73,7 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/gtk \
 	  $(DESTDIR)$(lispdir)/sawfish/gtk/widgets
 
-clean : 
+clean :
 	rm -f *.jlc *~ core
 	rm -f widgets/*~ widgets/*.jlc
 

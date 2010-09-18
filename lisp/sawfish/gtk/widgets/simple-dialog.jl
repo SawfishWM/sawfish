@@ -24,7 +24,8 @@
 
 (define-structure sawfish.gtk.simple-dialog
 
-    (export simple-dialog)
+    (export simple-dialog
+            widget-dialog)
 
     (open rep
           gui.gtk-2.gtk
@@ -71,4 +72,22 @@
       (gtk-window-set-modal window t)
       (gtk-widget-grab-focus widget)
 
-      window)))
+      window))
+
+  (define (widget-dialog title spec callback
+			 #!optional initial-value main-window)
+
+    (let* ((widget (make-widget spec))
+	   (vbox (gtk-vbox-new nil box-spacing))
+	   (hbox (gtk-hbox-new nil 0)))
+
+      (when initial-value
+	(widget-set widget initial-value))
+
+      (gtk-box-pack-start hbox (gtk-label-new title))
+      (gtk-container-add vbox hbox)
+      (gtk-container-add vbox (widget-gtk-widget widget))
+      (gtk-widget-show-all vbox)
+      (simple-dialog title vbox
+		     (lambda () (callback (widget-ref widget)))
+		     main-window))))

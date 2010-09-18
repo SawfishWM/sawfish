@@ -25,7 +25,7 @@
     (open rep
           gui.gtk-2.gtk
           sawfish.gtk.widget
-          sawfish.gtk.widget-dialog)
+          sawfish.gtk.widgets.simple-dialog)
 
   ;; (alist (KEY-SPEC "KEY-TITLE") (VALUE-SPEC "VALUE-TITLE"))
 
