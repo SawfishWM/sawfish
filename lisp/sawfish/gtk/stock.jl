@@ -26,8 +26,7 @@
 
     (export stock-button
             simple-dialog
-            about-dialog
-            make-url-widget)
+            about-dialog)
 
     (open rep
           gui.gtk-2.gtk
