@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-27 17:36+0200\n"
-"PO-Revision-Date: 2010-08-28 15:12+0200\n"
+"POT-Creation-Date: 2010-09-19 07:55+0200\n"
+"PO-Revision-Date: 2010-09-19 14:00+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -287,6 +287,8 @@ msgstr "alineación vertical de la cadena de título"
 #. ../themes/mxflat/theme.jl
 msgid "title string vertical align adjustment (-10000 - 10000 pixel)"
 msgstr ""
+"ajuste de la alineación vertical de la cadena te título (-10000 - 10000 "
+"píxel)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -726,7 +728,7 @@ msgstr "mxflat:mapa de teclado del botón de siempre encima"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize look button keymap\n"
+"customize lock button keymap\n"
 "\n"
 "By default a button will work as it's name suggests. Button1: lock window "
 "position"
@@ -1292,7 +1294,9 @@ msgid "Describe symbol"
 msgstr "Describir símbolo"
 
 #. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Display the documentation of a specified symbol."
+#, fuzzy
+#| msgid "Display the documentation of a specified symbol."
+msgid "Print the documentation of a specified symbol to the standard output ."
 msgstr "Mostrar la documentación de un símbolo especificado."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
@@ -1454,9 +1458,13 @@ msgid "Grow window left"
 msgstr "Ampliar la ventana por la izquierda"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+#| msgid ""
+#| "Grows window to the left until it touches another window.\n"
+#| "See `grow-window-up'."
 msgid ""
 "Grows window to the left until it touches another window.\n"
-"See `grow-window-up'."
+"See `grow-window-up' for full doc."
 msgstr ""
 "Amplía la ventana por la izquierda hasta que toca a otra ventana.\n"
 "Vea «ampliar la ventana por arriba»."
@@ -1466,9 +1474,13 @@ msgid "Grow window right"
 msgstr "Ampliar la ventana por la derecha"
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+#| msgid ""
+#| "Grows window to the right until it touches another window.\n"
+#| "See `grow-window-up'."
 msgid ""
 "Grows window to the right until it touches another window.\n"
-"See `grow-window-up'."
+"See `grow-window-up' for full doc."
 msgstr ""
 "Amplía la ventana por la derecha hasta que toca a otra ventana.\n"
 "Vea «ampliar la ventana por arriba»."
@@ -1509,7 +1521,7 @@ msgstr "Ampliar la ventana por abajo"
 #, fuzzy
 msgid ""
 "Grows window downwards until it touches another window.\n"
-"See `grow-window-up'."
+"See `grow-window-up' for full doc."
 msgstr ""
 "Amplía la ventana por abajo hasta que «tropieza» con otra ventana.\n"
 "Vea «ampliar ventana»."
@@ -1522,7 +1534,7 @@ msgstr "Mover ventana a la izquierda"
 #, fuzzy
 msgid ""
 "Moves window to the left until it touches another window.\n"
-"See `pack-window-up'."
+"See `pack-window-up' for full doc."
 msgstr ""
 "Mueve la ventana hacia la izquierda hasta que «tropieza» con otra ventana.\n"
 "Vea «ampliar ventana»."
@@ -1535,7 +1547,7 @@ msgstr "Mover ventana a la derecha"
 #, fuzzy
 msgid ""
 "Moves window to the right until it touches another window.\n"
-"See `pack-window-up'."
+"See `pack-window-up' for full doc."
 msgstr ""
 "Mueve la ventana a la derecha hasta que «tropieza» con otra ventana.\n"
 "Vea «desplazar ventana»."
@@ -1570,7 +1582,7 @@ msgstr "Mover ventana abajo"
 #, fuzzy
 msgid ""
 "Moves window downwards until it touches another window.\n"
-"See `pack-window-up'."
+"See `pack-window-up' for full doc."
 msgstr ""
 "Mueve la ventana abajo hasta que «encuentra» a otra ventana.\n"
 "Vea «mover ventana»."
@@ -2174,6 +2186,18 @@ msgstr "Deslizar grupo hacia abajo"
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr "Mover el grupo de ventanas `slide-window-increment' puntos abajo."
 
+#. ../lisp/sawfish/wm/commands/toggle-or-exec.jl
+#, fuzzy
+#| msgid "Toggle window never focus"
+msgid "Toggle or exec"
+msgstr "Cambiar ventana nunca tiene foco"
+
+#. ../lisp/sawfish/wm/commands/toggle-or-exec.jl
+msgid ""
+"Jump to a window matched by regular expression RE, or start\n"
+"program otherwise. Turn the window into an drop-down-window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Mover a espacio de trabajo siguiente"
@@ -2277,16 +2301,37 @@ msgid "Quit"
 msgstr "Salir"
 
 #. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+#| msgid "_Quit Sawfish"
+msgid "Quit sawfish."
+msgstr "_Salir de Sawfish"
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Restart"
 msgstr "Reiniciar"
+
+#. ../lisp/sawfish/wm/commands.jl
+#| msgid "Restart _Sawfish"
+msgid "Restart sawfish."
+msgstr "Reiniciar Sawfish."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "Destroy window"
 msgstr "Destruir ventana"
 
 #. ../lisp/sawfish/wm/commands.jl
+#| msgid "Destroy window"
+msgid "Destroy a window."
+msgstr "Destruir una ventana."
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Kill client"
 msgstr "Matar cliente"
+
+#. ../lisp/sawfish/wm/commands.jl
+#| msgid "Move the current window to the specified viewport."
+msgid "Kill the client that created the specified window."
+msgstr "Matar el cliente que ha creado la ventana especificada."
 
 #. ../lisp/sawfish/wm/commands.jl
 msgid "No operation"
@@ -2307,9 +2352,8 @@ msgstr "Apariencia"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 #. ../lisp/sawfish/wm/custom.jl
-#, fuzzy
 msgid "Bindings"
-msgstr "Editar combinación"
+msgstr "Combinaciones"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -2350,10 +2394,6 @@ msgstr "Personalizar"
 msgid "Invoke the configurator GUI."
 msgstr "Invocar el IGU de configuración."
 
-#. ../lisp/sawfish/wm/ext/3d-hack.jl
-msgid "3d hack"
-msgstr "Hack 3d"
-
 #. ../lisp/sawfish/wm/ext/apps-menu.jl
 msgid "Update apps menu"
 msgstr "Actualizar el menú de aplicaciones"
@@ -2365,9 +2405,8 @@ msgid ""
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
-#, fuzzy
 msgid "Play sound effects for window events."
-msgstr "Mostrar el menú con el listado de todas las operaciones de ventana."
+msgstr "Reproducir efectos de sonido para eventos de ventanas."
 
 #. ../lisp/sawfish/wm/ext/audio-events.jl
 msgid "Event"
@@ -2459,6 +2498,54 @@ msgstr "Mostrar errores"
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
 msgstr "Mostrar todos los errores que hayan ocurrido en la ventana."
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "Hot Spots"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "Milliseconds to delay before activating hot-spot."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+#, fuzzy
+#| msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgid "The program launched when hitting the left-edge."
+msgstr "El programa lanzado por la función «xterm». Interpretado por la «shell»."
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the top-left-corner."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+#, fuzzy
+#| msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgid "The program launched when hitting the top-edge."
+msgstr "El programa lanzado por la función «xterm». Interpretado por la «shell»."
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the top-right-corner."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+#, fuzzy
+#| msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgid "The program launched when hitting the right-edge."
+msgstr "El programa lanzado por la función «xterm». Interpretado por la «shell»."
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the bottom-right-corner."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+#, fuzzy
+#| msgid "The program launched by the `xterm' function. Interpreted by shell."
+msgid "The program launched when hitting the bottom-edge."
+msgstr "El programa lanzado por la función «xterm». Interpretado por la «shell»."
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the bottom-left-corner."
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 msgid "Infinite Desktop"
@@ -2659,6 +2746,15 @@ msgid "Auto gravity"
 msgstr "Autogravedad"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never delete"
+msgstr "No eliminar nunca"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#| msgid "Fixed position"
+msgid "Fixed size"
+msgstr "Tamaño fijo"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "Otros"
 
@@ -2687,19 +2783,19 @@ msgstr "Traer al frente ventanas cuando están desenrolladas."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Display tooltips for window frames."
-msgstr "Mostrar consejos para los marcos de las ventanas."
+msgstr "Mostrar sugerencias para los marcos de las ventanas."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Show full documentation in tooltips."
-msgstr ""
+msgstr "Mostrar toda la documentación en las sugerencias."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Number of milliseconds before displaying tooltips."
-msgstr ""
+msgstr "Número de milisegundos antes de mostrar las sugerencias."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Number of milliseconds before removing tooltips."
-msgstr ""
+msgstr "Número de milisegundos antes de quitar las sugerencias."
 
 #. ../lisp/sawfish/wm/ext/tooltips.jl
 msgid "Font used to display tooltips, or nil for default."
@@ -2731,7 +2827,8 @@ msgid "_Forget saved state"
 msgstr "_Olvidar estado guardado"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_Clear window-istory"
+#| msgid "_Clear window-istory"
+msgid "_Clear window-history"
 msgstr "_Limpiar el histórico de ventanas"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
@@ -2888,7 +2985,6 @@ msgstr ""
 "cambios en el foco."
 
 #. ../lisp/sawfish/wm/frames.jl
-#| msgid "Crux Theme"
 msgid "Theme"
 msgstr "Tema"
 
@@ -2948,25 +3044,21 @@ msgid "_GNOME Help"
 msgstr "Ayuda de _GNOME"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-#| msgid "GNOME Website"
 msgid "GNOME _Website"
 msgstr "Página _web de GNOME"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-#| msgid "About GNOME"
 msgid "_About GNOME"
 msgstr "Acerca _de GNOME"
 
 #. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
 msgstr "S_esión"
 
 #. ../lisp/sawfish/wm/integration/gnome.jl
-#| msgid "_Customize"
 msgid "_Customize GNOME"
 msgstr "_Personalizar GNOME"
 
@@ -2983,12 +3075,10 @@ msgid "_KDE Help"
 msgstr "Ayuda de _KDE"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-#| msgid "KDE Website"
 msgid "KDE _Website"
 msgstr "Página _web de KDE"
 
 #. ../lisp/sawfish/wm/integration/kde.jl
-#| msgid "_Customize"
 msgid "_Customize KDE"
 msgstr "_Personalizar KDE"
 
@@ -3004,54 +3094,31 @@ msgstr "_Reiniciar desde KDE"
 msgid "_Shutdown from KDE"
 msgstr "_Apagar desde KDE"
 
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Reboot System"
-msgstr "_Reiniciar el sistema"
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Shutdown System"
-msgstr "_Apagar el sistema"
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "S_uspend System"
-msgstr "Suspender el sistema"
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Hibernate System"
-msgstr "_Hibernar el sistema"
-
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "_KDE Help"
 msgid "_XFCE Help"
 msgstr "Ayuda de _XFCE"
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "KDE Website"
 msgid "XFCE _Website"
 msgstr "Página _web de XFCE"
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "About GNOME"
 msgid "_About XFCE"
 msgstr "_Acerca de XFCE"
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "_Customize"
 msgid "_Customize XFCE"
 msgstr "_Personalizar XFCE"
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "_Logout from KDE"
 msgid "_Logout from XFCE"
 msgstr "_Salir de la sesión de XFCE"
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "_Reboot from KDE"
 msgid "_Reboot from XFCE"
 msgstr "_Reiniciar desde XFCE"
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#| msgid "_Shutdown from KDE"
 msgid "_Shutdown from XFCE"
 msgstr "_Apagar desde XFCE"
 
@@ -3441,54 +3508,60 @@ msgid "_Customize"
 msgstr "_Configurar"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Display Errors"
 msgid "Display _Errors"
 msgstr "Mostrar _errores"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Reload Appsmenu"
 msgid "_Reload Appsmenu"
 msgstr "_Recargar el menú de aplicaciones"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Restart Sawfish"
 msgid "Restart _Sawfish"
 msgstr "Reiniciar _Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Quit Sawfish"
 msgid "_Quit Sawfish"
 msgstr "_Salir de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Sawfish Error"
 msgid "Sawfish _FAQ"
 msgstr "_P+F de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Sawfish Rootmenu"
 msgid "Sawfish _News"
 msgstr "_Noticias de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Sawfish Error"
 msgid "Sawfish _Wiki"
 msgstr "_Wiki de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Sawfish Rootmenu"
 msgid "Sawfish _Manual"
 msgstr "Man_ual de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "_About Sawfish..."
 msgid "_About Sawfish"
 msgstr "Acerca _de Sawfish"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Kill Window"
 msgid "_Kill Window"
 msgstr "_Matar la ventana"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Reboot System"
+msgstr "_Reiniciar el sistema"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Shutdown System"
+msgstr "_Apagar el sistema"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "S_uspend System"
+msgstr "Suspender el sistema"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Hibernate System"
+msgstr "_Hibernar el sistema"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Popup window menu"
@@ -3528,15 +3601,15 @@ msgstr "Configuración de S_awfish"
 
 #. ../lisp/sawfish/wm/placement/dockapp.jl
 msgid "Dockapps"
-msgstr ""
+msgstr "Aplicaciones acopladas"
 
 #. ../lisp/sawfish/wm/placement/dockapp.jl
 msgid "Dockapp placement origin: \\w"
-msgstr ""
+msgstr "Origen de ubicación de la aplicación acoplada: \\w"
 
 #. ../lisp/sawfish/wm/placement/dockapp.jl
 msgid "Dockapp placement direction: \\w"
-msgstr ""
+msgstr "Dirección de ubicación de la aplicación acoplada: \\w"
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 msgid "Distance between successive placements in `stagger' placement mode."
@@ -3771,7 +3844,6 @@ msgstr ""
 "desmaximizarla."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#| msgid "Maximized"
 msgid "Maximize discard"
 msgstr "Descartar maximizado"
 
@@ -3890,25 +3962,24 @@ msgid "Maximize fill window horizontally toggle"
 msgstr "Cambiar maximizar ventana rellenando horizontalmente"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between horizontally maximized-filled and\n"
 "unmaximized."
 msgstr ""
-"Cambiar el estado de la ventana entre maximizado-rellenando horizontalmente "
-"y no maximizado."
+"Cambiar el estado de la ventana entre maximizada-rellenanda horizontalmente\n"
+"y desmaximizada."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize fill window vertically toggle"
 msgstr "Cambiar maximizar ventana rellenando en vertical"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-#, fuzzy
 msgid ""
 "Toggle the state of the window between vertically maximized-filled and\n"
 "unmaximized."
 msgstr ""
-"Cambiar el estado de la ventana entre maximizado-rellenando y no maximizado."
+"Cambiar el estado de la ventana entre maximizada rellenanda-verticalmente\n"
+"y desmaximizada."
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window fullscreen"
@@ -4046,14 +4117,12 @@ msgid "Width of tab area's right-edge decoration"
 msgstr "Anchura de la decoración del borde derecho del área de la solapa"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
-#| msgid "Width of tab area's left-edge decoration"
 msgid "Width of tab area's left-edge-transient decoration"
 msgstr ""
 "Anchura de la decoración transitoria del borde izquierdo del área de la "
 "solapa"
 
 #. ../lisp/sawfish/wm/tabs/tab.jl
-#| msgid "Width of tab area's right-edge decoration"
 msgid "Width of tab area's right-edge-transient decoration"
 msgstr ""
 "Anchura de la decoración transitoria del borde derecho del área de la solapa"
@@ -4095,7 +4164,6 @@ msgid "Insert workspace"
 msgstr "Insertar escritorio"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-#| msgid "Unshade window"
 msgid "Unshade window when selected."
 msgstr "Desenrollar ventana al seleccionarla."
 
@@ -4119,7 +4187,6 @@ msgid "Display the window. You're prompted to type in the name."
 msgstr "Mostrar la ventana. Se le preguntará para que escriba el nombre."
 
 #. ../lisp/sawfish/wm/util/display-wininfo.jl
-#| msgid "Display window"
 msgid "Display window position"
 msgstr "Mostrar posición de la ventana"
 
@@ -4798,6 +4865,9 @@ msgstr "Elegir escritorio de forma interactiva"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Preguntar por un escritorio y cambiar a él."
+
+#~ msgid "3d hack"
+#~ msgstr "Hack 3d"
 
 #~ msgid "Default frame style:"
 #~ msgstr "Estilo predeterminado del marco:"
