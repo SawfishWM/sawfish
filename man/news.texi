@@ -225,6 +225,19 @@ The @code{old-window-menu} was replaced by @code{beos-window-menu}
 a long time ago in version 0.28.1. Now it is removed. If you still
 want to use it, download it from the wiki.
 
+@item Capplets code [Christopher Bratusek]
+
+The capplets where used in very early GNOME 2.x to setup application-
+properties via GNOME-Control-Center. The capplets aren't used for years
+and already removed from Sawfish since version 1.5.0. Non-removed capplet
+fragments from SawfishConfig are removed now. Therefore the command-line
+option @code{--socket-id} for SawfishConfig is no longer available.
+
+@item SawfishConfig Single-Level [Christopher Bratusek]
+
+The command-line option @code{--single-level} for SawfishConfig was broken,
+and therefore removed.
+
 @item @code{3d-hack} [Christopher Bratusek]
 
 The @code{3d-hack} module provides two functions similar to @code{glxgears},
@@ -291,6 +304,18 @@ the @code{never-close} window-matcher, too.
 Previously the functions @code{remove-newlines} and
 @code{beautify-symbol-name} were defined in several modules. No
 there are only defined once in @code{sawfish.cfg.utils}
+
+@item Small UI-changes in SawfishConfig [Christopher Bratusek]
+
+@itemize @minus
+@item set window-icon to @code{sawfish-config} (and added an icon);
+if the icon does not show up, then run @code{gtk-update-icon-cache
+/usr/share/icons/hicolor/} first, it will then work.
+
+@item set the root-containers shadow-type to etched-in
+
+@item use nicer stock-buttons with icons instead of plain buttons
+@end itemize
 
 @item Doc improvements
 

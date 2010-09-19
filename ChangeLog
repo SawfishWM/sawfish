@@ -24,10 +24,20 @@
 	* lisp/sawfish/gtk/widgets/list.jl: use the nicer gtk-stock-buttons rather
 	than plain ones
 
-	* lisp/sawfish/cfg/shell.jl: the default window-size of SawfishConfig
-	differed depending on wethere there's a socket-id or not. Now both are
-	equal. Besides the shadow-type of the root-container was changed from out
-	to etched-in.
+	* lisp/sawfish/cfg/shell.jl: the shadow-type of the root-container was
+	changed from out to etched-in. The command-line option --single-level
+	was removed, as it was broken and somewhat useless. Early GNOME-ControlCenter
+	did use capplets to start configuration. Capplets aren't in use for years
+	anymore and have been removed from Sawfish 1.5.0. Now some remaining
+	fragments from SawfishConfig are removed, too, with them the --socket-id
+	command-line option. Set window-icon to "sawfish-config"
+
+	* lisp/sawfish/cfg/sawfish-config.png: default window-icon for SawfishConfig
+	If it doesn't show up, run `gtk-update-icon-cache /usr/share/icons/hicolor/'
+	first and restart SawfishConfig, it will be displayed then.
+
+	* lisp/sawfish/cfg/monitor.png: removed. was used by the capplets and those
+	where removed a long time ago.
 
 2010-09-18  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/gtk/widgets/simple-dialog.jl: renamed sawfish.gtk.stock
