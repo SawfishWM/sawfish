@@ -286,6 +286,12 @@ The close-button of a window now calls @code{delete-window-safely}
 rather than @code{delete-window}. It's less aggressive and honours
 the @code{never-close} window-matcher, too.
 
+@item @code{sawfish.cfg.utils} module [Christopher Bratusek]
+
+Previously the functions @code{remove-newlines} and
+@code{beautify-symbol-name} were defined in several modules. No
+there are only defined once in @code{sawfish.cfg.utils}
+
 @item Doc improvements
 
 FAQ items, on how to hide the mouse-pointer, and on application execution.@*
