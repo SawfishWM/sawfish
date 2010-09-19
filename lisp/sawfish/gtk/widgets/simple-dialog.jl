@@ -22,7 +22,7 @@
 ;; it had been called "lisp/sawfish/gtk/stock.jl.gtk".
 ;; Re-added in the commit ce7e6c.
 
-(define-structure sawfish.gtk.simple-dialog
+(define-structure sawfish.gtk.widgets.simple-dialog
 
     (export simple-dialog
             widget-dialog)
