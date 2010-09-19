@@ -27,7 +27,8 @@
           rep.regexp
           sawfish.gtk.widget
           sawfish.gtk.widgets.simple-dialog
-          sawfish.cfg.wm)
+          sawfish.cfg.wm
+	  sawfish.cfg.utils)
 
   (defconst matcher-count 3)
 
@@ -178,18 +179,6 @@
     (let ((hbox (gtk-hbox-new nil 0)))
       (gtk-box-pack-start hbox (gtk-label-new string))
       hbox))
-
-  ;; also in sawfish-xgettext
-  (define (beautify-symbol-name symbol)
-    (cond ((stringp symbol) symbol)
-	  ((not (symbolp symbol)) (format "%s" symbol))
-	  (t
-	   (let ((name (copy-sequence (symbol-name symbol))))
-	     (while (string-match "[-:]" name)
-	       (setq name (concat (substring name 0 (match-start))
-				  ?  (substring name (match-end)))))
-	     (aset name 0 (char-upcase (aref name 0)))
-	     (_ name)))))
 
 ;;; the main widget
 

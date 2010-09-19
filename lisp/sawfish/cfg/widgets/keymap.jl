@@ -26,7 +26,8 @@
           gui.gtk-2.gtk
           rep.regexp
           sawfish.gtk.widgets.simple-dialog
-          sawfish.gtk.widget)
+          sawfish.gtk.widget
+	  sawfish.cfg.utils)
 
 ;;; widget for representing keymaps
 
@@ -85,17 +86,4 @@
 			t t (start . middle))
 		 changed-callback))
 
-  (define-widget-type 'keymap:binding make-keymap:binding-item)
-
-;;; utils
-
-  (define (beautify-symbol-name symbol)
-    (cond ((stringp symbol) symbol)
-	  ((not (symbolp symbol)) (format "%s" symbol))
-	  (t
-	   (let ((name (copy-sequence (symbol-name symbol))))
-	     (while (string-match "[-:]" name)
-	       (setq name (concat (substring name 0 (match-start))
-				  ?  (substring name (match-end)))))
-	     (aset name 0 (char-upcase (aref name 0)))
-	     (_ name))))))
+  (define-widget-type 'keymap:binding make-keymap:binding-item))
