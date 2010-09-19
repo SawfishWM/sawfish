@@ -61,12 +61,12 @@
 			  (gtk-window-new 'toplevel)))
       (if socket-id
 	  (progn
-	    (gtk-window-set-default-size main-window 400 300)
+	    (gtk-window-set-default-size main-window 550 400)
 	    (setq root-container main-window))
 	(gtk-window-set-resizable main-window t)
 	(gtk-window-set-default-size main-window 550 400)
 	(setq root-container (gtk-frame-new))
-	(gtk-frame-set-shadow-type root-container 'out)
+	(gtk-frame-set-shadow-type root-container 'etched-in)
 	(gtk-container-add main-window root-container))
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
