@@ -78,12 +78,10 @@ install : all installdirs
 	set -e; for p in $(L_SRCS) $(L_OBJS); do \
 	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg/layouts; \
 	done
-	$(INSTALL_DATA) monitor.png $(DESTDIR)${lispdir}/..
 	$(INSTALL_SCRIPT) main.jlc $(DESTDIR)${bindir}/sawfish-config
 
 uninstall :
 	rm -rf $(DESTDIR)${lispdir}/sawfish/cfg
-	rm -f $(DESTDIR)${lispdir}/../monitor.png
 	rm -f $(DESTDIR)${bindir}/sawfish-config
 
 installdirs : $(top_srcdir)/mkinstalldirs
