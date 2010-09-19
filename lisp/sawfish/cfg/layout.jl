@@ -23,7 +23,6 @@
     (export define-layout-type
 	    layout-slots
 	    document-slot
-	    remove-newlines
 	    make-label)
 
     ((open rep
