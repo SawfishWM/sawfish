@@ -39,7 +39,6 @@
 	  sawfish.cfg.wm)
 
   (defvar *nokogiri-flatten-groups* nil)
-  (defvar *nokogiri-single-level* nil)
 
   (define main-window)
   (define group-tree-widget)
@@ -80,7 +79,6 @@
       (let ((group (get-group top-group)))
 	(fetch-group group)
 	(if (and (not *nokogiri-flatten-groups*)
-		 (not *nokogiri-single-level*)
 		 (group-sub-groups group))
 	    (let ((paned (gtk-hpaned-new))
 		  (g-scroller (gtk-scrolled-window-new)))
@@ -215,10 +213,7 @@
       (when slots
 	(let ((layout (layout-slots (group-layout group) slots)))
 	  (add-active-slots slots)
-	  (if (not *nokogiri-single-level*)
-	      (gtk-notebook-append-page
-	       book layout (gtk-label-new (_ (group-real-name group))))
-	    (gtk-box-pack-start book layout))
+          (gtk-box-pack-start book layout)
 	  (when (gtk-container-p layout)
 	    (gtk-container-set-border-width layout box-border))))
       (mapc (lambda (sub)
@@ -228,12 +223,7 @@
 		  (iter book sub slots))))
 	    (get-sub-groups group)))
 
-    (let ((notebook (if (not *nokogiri-single-level*)
-			(let ((x (gtk-notebook-new)))
-			  (gtk-notebook-set-scrollable x 1)
-			  (gtk-notebook-popup-enable x)
-			  x)
-		      (gtk-vbox-new nil 0))))
+    (let ((notebook (gtk-vbox-new nil 0)))
       (iter notebook group (get-slots group))
       (gtk-widget-show notebook)
       (gtk-container-add slot-box-widget notebook)))
@@ -296,7 +286,6 @@ usage: sawfish-config [OPTIONS...]\n
 where OPTIONS are any of:\n
   --group=GROUP-NAME
   --flatten
-  --single-level
   --socket-id=WINDOW-ID\n")
       (throw 'quit 0))
 
@@ -307,9 +296,6 @@ where OPTIONS are any of:\n
 
     (when (get-command-line-option "--flatten")
       (setq *nokogiri-flatten-groups* t))
-
-    (when (get-command-line-option "--single-level")
-      (setq *nokogiri-single-level* t))
 
     (setq interrupt-mode 'exit)
     (i18n-init)
