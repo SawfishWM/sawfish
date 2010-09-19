@@ -58,6 +58,7 @@
       (setq main-window (gtk-window-new 'toplevel))
 
 	(gtk-window-set-resizable main-window t)
+	(gtk-window-set-icon-name main-window "sawfish-config")
 	(gtk-window-set-default-size main-window 550 400)
 	(setq root-container (gtk-frame-new))
 	(gtk-frame-set-shadow-type root-container 'etched-in)
