@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-27 17:36+0200\n"
+"POT-Creation-Date: 2010-09-19 07:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -710,7 +710,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize look button keymap\n"
+"customize lock button keymap\n"
 "\n"
 "By default a button will work as it's name suggests. Button1: lock window "
 "position"
@@ -1260,7 +1260,7 @@ msgid "Describe symbol"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Display the documentation of a specified symbol."
+msgid "Print the documentation of a specified symbol to the standard output ."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/describe.jl
@@ -1414,7 +1414,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Grows window to the left until it touches another window.\n"
-"See `grow-window-up'."
+"See `grow-window-up' for full doc."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1424,7 +1424,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Grows window to the right until it touches another window.\n"
-"See `grow-window-up'."
+"See `grow-window-up' for full doc."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1448,7 +1448,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Grows window downwards until it touches another window.\n"
-"See `grow-window-up'."
+"See `grow-window-up' for full doc."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1458,7 +1458,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Moves window to the left until it touches another window.\n"
-"See `pack-window-up'."
+"See `pack-window-up' for full doc."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1468,7 +1468,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Moves window to the right until it touches another window.\n"
-"See `pack-window-up'."
+"See `pack-window-up' for full doc."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
@@ -1490,7 +1490,7 @@ msgstr ""
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 msgid ""
 "Moves window downwards until it touches another window.\n"
-"See `pack-window-up'."
+"See `pack-window-up' for full doc."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/help.jl
@@ -2045,6 +2045,16 @@ msgstr ""
 msgid "Move the window group `slide-window-increment' pixels downwards."
 msgstr ""
 
+#. ../lisp/sawfish/wm/commands/toggle-or-exec.jl
+msgid "Toggle or exec"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/toggle-or-exec.jl
+msgid ""
+"Jump to a window matched by regular expression RE, or start\n"
+"program otherwise. Turn the window into an drop-down-window"
+msgstr ""
+
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr ""
@@ -2143,7 +2153,15 @@ msgid "Quit"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Quit sawfish."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Restart"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart sawfish."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands.jl
@@ -2151,7 +2169,15 @@ msgid "Destroy window"
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy a window."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
 msgid "Kill client"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill the client that created the specified window."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands.jl
@@ -2212,10 +2238,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Invoke the configurator GUI."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/3d-hack.jl
-msgid "3d hack"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/apps-menu.jl
@@ -2314,6 +2336,46 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Display all errors that have occurred to the screen."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "Hot Spots"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "Milliseconds to delay before activating hot-spot."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the left-edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the top-left-corner."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the top-edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the top-right-corner."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the right-edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the bottom-right-corner."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the bottom-edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/hot-spots.jl
+msgid "The program launched when hitting the bottom-left-corner."
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/infinite-desktop.jl
@@ -2512,6 +2574,14 @@ msgid "Auto gravity"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never delete"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Fixed size"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr ""
 
@@ -2579,7 +2649,7 @@ msgid "_Forget saved state"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_Clear window-istory"
+msgid "_Clear window-history"
 msgstr ""
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
@@ -2799,7 +2869,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 #. ../lisp/sawfish/wm/integration/xfce.jl
-#. ../lisp/sawfish/wm/integration/standalone.jl
 #. ../lisp/sawfish/wm/integration/kde.jl
 #. ../lisp/sawfish/wm/integration/gnome.jl
 msgid "Sessi_on"
@@ -2839,22 +2908,6 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/integration/kde.jl
 msgid "_Shutdown from KDE"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Reboot System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Shutdown System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "S_uspend System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/integration/xfce.jl
@@ -3251,6 +3304,22 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Kill Window"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Reboot System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Hibernate System"
 msgstr ""
 
 #. ../lisp/sawfish/wm/menus.jl
