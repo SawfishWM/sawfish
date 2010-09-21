@@ -8,6 +8,17 @@
 
 	* debian/sawfish-data.install.in: remove monitor.png from here, too.
 
+2010-09-21  Teika kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/windows.jl: window-property 'never-delete'
+	spec change.
+	It was only used in delete-window-safely. But now, this property
+	is valid for some others too, but only when they are called
+	interactively. This allows user to choose the mouse binding of
+	"close-button".
+        The key binding of "close-button" is reverted to 'delete-window',
+	the previous.
+
 2010-09-19  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/ext/old-window-menu.jl: removed. it has been replaced
 	by beos-window-menu in version 0.28.1

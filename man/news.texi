@@ -182,8 +182,8 @@ resized by the @code{resize-window-interactively}, @code{halve-window-size}
 and @code{double-window-size} functions, maximize-* functions, still do. See
 @code{never-maximize} window-matcher to prevent this, too.
 
-@item @code{never-close}: this window-matcher prevents the window brom being
-closed by the @code{delete-window-safely} function. @code{delete-window} still does.
+@item @code{never-close}: this window-matcher prevents the windows brom being
+closed when calling the deletion-function interactively.
 @end itemize
 
 @item Update of emacs major mode @file{sawfish.el} [Teika kazura]
@@ -293,12 +293,6 @@ In window cycling, some unnecessary pointer warping is avoided.
 Previously, the necessity of a warp was judged by the geometry before
 the raise was done. Now the updated one is used.
 
-@item Minor change in default keymap [Christopher Bratusek]
-
-The close-button of a window now calls @code{delete-window-safely}
-rather than @code{delete-window}. It's less aggressive and honours
-the @code{never-close} window-matcher, too.
-
 @item @code{sawfish.cfg.utils} module [Christopher Bratusek]
 
 Previously the functions @code{remove-newlines} and
@@ -315,6 +309,10 @@ if the icon does not show up, then run @code{gtk-update-icon-cache
 @item set the root-containers shadow-type to etched-in
 
 @item use nicer stock-buttons with icons instead of plain buttons
+
+@item change the boolean buttons in @code{Window Rules} to display
+Enable rather than Yes and No. This improves the thing a bit. A
+real solution (read: revised UI) will come with Sawfish 3.0.0.
 @end itemize
 
 @item Doc improvements

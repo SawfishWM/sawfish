@@ -138,7 +138,7 @@ a window. (Only mouse-bindings are evaluated in this map.)"
   (defcustom close-button-keymap (bind-keys (make-keymap)
 				   "Button3-Click1" 'popup-window-menu
 				   "S-Button1-Off" 'delete-group
-				   "Button1-Off" 'delete-window-safely)
+				   "Button1-Off" 'delete-window)
     "Keymap containing bindings active when the pointer is in the close button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings

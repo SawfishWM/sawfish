@@ -404,20 +404,24 @@ use. Otherwise (window-size-hints W) is used."
 ;;; deleting windows
 
   (define (delete-window w #!optional safely)
-    "Delete the window."
-    (cond
-     ((window-supports-wm-protocol-p w 'WM_DELETE_WINDOW)
-      (send-client-message w 'WM_PROTOCOLS (vector (x-atom 'WM_DELETE_WINDOW)
-						   (x-server-timestamp)) 32))
-     (safely (beep))
-     (t (x-kill-client w))))
+    "Delete a window. If the window does not support that protocol,
+kill the client."
+    (unless (and (memq this-command
+		       '(delete-window delete-window-safely
+			 delete-group delete-window-instance))
+		 (window-get w 'never-delete))
+      (cond
+       ((window-supports-wm-protocol-p w 'WM_DELETE_WINDOW)
+	(send-client-message w 'WM_PROTOCOLS (vector (x-atom 'WM_DELETE_WINDOW)
+						     (x-server-timestamp)) 32))
+       (safely (beep))
+       (t (x-kill-client w)))))
 
   (define-command 'delete-window delete-window #:spec "%W")
 
   (define (delete-window-safely w)
-    "Delete the window, or beep if the window can't be closed safely."
-    (if (not (window-get w 'never-delete))
-      (delete-window w t)))
+    "Delete a window, or beep if the window can't be closed safely."
+    (delete-window w t))
 
   (define-command 'delete-window-safely delete-window-safely #:spec "%W")
 
