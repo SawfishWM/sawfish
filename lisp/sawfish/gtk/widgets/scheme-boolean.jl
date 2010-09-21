@@ -25,7 +25,7 @@
     (open rep
           gui.gtk-2.gtk
           sawfish.gtk.widget
-          sawfish.gtk.widget-dialog)
+          sawfish.gtk.widgets.simple-dialog)
 
   (define (make-item changed-callback)
     (let ((widget (gtk-toggle-button-new-with-label (_ "Yes"))))
