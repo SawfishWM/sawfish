@@ -28,17 +28,12 @@
           sawfish.gtk.widgets.simple-dialog)
 
   (define (make-item changed-callback)
-    (let ((widget (gtk-toggle-button-new-with-label (_ "Yes"))))
-      (define (update-label)
-	(gtk-label-set-text (car (gtk-container-get-children widget))
-			    (if (gtk-toggle-button-get-active widget)
-				(_ "Yes") (_ "No"))))
+    (let ((widget (gtk-toggle-button-new-with-label (_ "Enable"))))
       (gtk-label-set-justify (car (gtk-container-get-children widget)) 'left)
       (gtk-toggle-button-set-active widget t)
       (g-signal-connect
        widget "toggled"
        (lambda ()
-	 (update-label)
 	 (when changed-callback
 	   (call-callback changed-callback))))
       (gtk-widget-show widget)
