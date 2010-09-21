@@ -23,6 +23,7 @@
     (export edge-flip-enable
 	    restart-flippers
 	    ;; These three functions are not for API, but let's keep 'em.
+	    ;;; XXX Why? Proposed for non-export during 2.90.0
 	    edge-flip-for-edge
 	    edge-flip-synthesize
 	    edge-flip-while-moving)
@@ -80,9 +81,11 @@
 
   (defvar before-edge-flip-hook '()
     "Hook called immediately before edge-flipping.")
+
   (defvar after-edge-flip-hook '()
     "Hook called immediately after edge-flipping.")
 
+  ;;; XXX This function will be moved to C-part during 2.90.0 cycle!
   (define (restart-flippers)
     (if edge-flip-enabled
       (progn
@@ -90,6 +93,9 @@
         (create-flippers)
         (enable-flippers))))
 
+  ;;; XXX This function will be moved to an other module during
+  ;;; XXX 2.90.0 cycle! (so that infinite-desktop or others don't
+  ;;; XXX depend on edge-flip and enable it)
   (define (edge-flip-enable)
     (if (and edge-flip-enabled (not edge-flip-only-when-moving))
 	(progn
@@ -177,6 +183,8 @@
 	    (call-hook 'leave-flipper-hook (list ef-current-edge)))))))
 
 ;;; ugly hacks to make flipping work while dragging windows
+;;; XXX xrefresh() to fix rubberband-traces? maybe a user-option
+;;; XXX whether to do so? We'll see...
 
   ;; current-workspace before flipping
   (define original-space)
