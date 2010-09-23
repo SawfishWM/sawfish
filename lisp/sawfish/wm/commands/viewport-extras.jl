@@ -4,7 +4,8 @@
 
 (define-structure sawfish.wm.commands.viewport-extras
 
-    (export )
+    (export move-viewport-next
+	    move-viewport-previous)
 
     (open rep
           sawfish.wm.viewport
