@@ -1,4 +1,4 @@
-;; simple-dialog.jl -*- lisp -*-
+;; simple-dialog.jl
 ;;
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 ;;
@@ -17,6 +17,12 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+
+;;; History
+;; This file was delete once by mistake, in the commit dbe8c2235, and
+;; it had been called "lisp/sawfish/gtk/stock.jl.gtk".
+;; Re-added in the commit ce7e6c, as "lisp/sawfish/gtk/stock.jl".
+;; Then renamed again in commit a22557030.
 
 (define-structure sawfish.gtk.widgets.simple-dialog
 
