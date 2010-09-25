@@ -5,9 +5,9 @@ Release: 1%{?dist}
 Requires: librep >= @REP_MIN_VER@, rep-gtk >= @REP_GTK_MIN_VER@
 License: GPLv2+
 Group: User Interface/Desktops
-Source: http://download.sourceforge.net/sawmill/sawfish-%{version}.tar.bz2
+Source0: http://download.tuxfamily.org/sawfish/%{name}/%{name}-%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
-Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: gmp-devel, pango-devel, libXft-devel, texinfo
 BuildRequires: librep-devel, rep-gtk-devel
 
@@ -68,18 +68,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc README NEWS FAQ TODO OPTIONS README.IMPORTANT KEYBINDINGS USERDOC COPYING COPYING.SOUNDS
-%{_bindir}/*
+%doc COPYING COPYING.SOUNDS FAQ KEYBINDINGS NEWS OPTIONS
+%doc README README.IMPORTANT TODO USERDOC
 %dir %{_datadir}/sawfish
+%{_bindir}/*
 %{_datadir}/sawfish/%{version}
+%{_datadir}/sawfish/sawfish.png
+%{_libdir}/sawfish/
+%{rep_execdir}/sawfish
+%{_desktopdir}/sawfish.desktop
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
-%{_datadir}/applications/sawfish.desktop
 %{kde_apps}/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
-%{_datadir}/man/man1/sawfish*.gz
-%{_datadir}/sawfish/sawfish.png
-%{_libdir}/sawfish/%{version}/%{_host}
-%{rep_execdir}/sawfish
+%{_iconsbasedir}/32x32/apps/sawfish-config.png
+%{_mandir}/man1/sawfish*.gz
 %{_infodir}/sawfish*
 
 %files devel
@@ -88,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/sawfish.pc
 
 %changelog
+* Sat Sep 25 2010 Kim B. Heino <b@bbbs.net> - 1.7.0-1
+- fix url, icons, misc fixes
+
 * Sun Jan 10 2010 Kim B. Heino <b@bbbs.net> - 1.6.2-1
 - fix devel package, fix rpmlint warnings
 
