@@ -197,15 +197,15 @@ PANGO_MODULES="pango "
 
 PKG_CHECK_MODULES(PANGO, pango >= ${PANGO_MIN_VER}
 		  ,AC_DEFINE(HAVE_PANGO, 1, [Have pango]) FONT_LOADER="Pango"
-		  ,AC_MSG_ERROR([cannot locate pango]))
+		  ,AC_MSG_ERROR([cannot locate pango >= $PANGO_MIN_VER]))
 
 PKG_CHECK_MODULES(PANGOX, pangox >= ${PANGO_MIN_VER}
 		  ,AC_DEFINE(HAVE_PANGO_X, 1, [Have pangox]) PANGO_MODULES="${PANGO_MODULES} pangox" FONT_LOADER="Pango X"
-		  ,AC_MSG_WARN([pango x support not available]))
+		  ,AC_MSG_WARN([pango x support not available >= $PANGO_MIN_VER]))
 
 PKG_CHECK_MODULES(PANGOXFT, pangoxft >= ${PANGO_MIN_VER}
 		  ,AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft]) PANGO_MODULES="${PANGO_MODULES} pangoxft" have_pango_xft="yes" FONT_LOADER="Pango XFT" AC_SUBST(have_pango_xft)
-		  ,AC_MSG_WARN([pango xft support not available]))
+		  ,AC_MSG_WARN([pango xft support not available $PANGO_MIN_VER]))
 
 PANGO_LIBS=`pkg-config --libs $PANGO_MODULES`
 PANGO_CFLAGS=`pkg-config --cflags $PANGO_MODULES`
@@ -222,14 +222,14 @@ PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  REP_LIBS="`pkg-config --libs librep`"
 		  REP_MSGFMT="`which msgfmt`"
 		  REP_VERSION="`pkg-config --variable=version librep`"
-		  ,AC_MSG_ERROR([cannot locate librep]))
+		  ,AC_MSG_ERROR([cannot locate librep >= $REP_MIN_VER]))
 
 dnl Check for rep-gtk
 REP_GTK_MIN_VER="0.90.4"
 
 PKG_CHECK_MODULES(REP_GTK, rep-gtk >= ${REP_GTK_MIN_VER}
 		  ,
-		  ,AC_MSG_ERROR([cannot locate rep-gtk]))
+		  ,AC_MSG_ERROR([cannot locate rep-gtk >= $REP_GTK_MIN_VER]))
 
 dnl Check for GTK+2
 GTK_MIN_VER="2.12.0"
@@ -238,7 +238,7 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
 		  ,GTK_LIBS="`pkg-config --libs gtk+-2.0`"
 		  GTK_CFLAGS="`pkg-config --cflags gtk+-2.0`"
 		  AC_DEFINE(HAVE_GTK, 1, [Have GTK])
-		  ,AC_MSG_ERROR([cannot locate gtk+2]))
+		  ,AC_MSG_ERROR([cannot locate gtk+ >= $GTK_MIN_VER]))
 
 dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
@@ -256,7 +256,7 @@ if test "$with_gdk_pixbuf" != "no"; then
 			  IMAGE_LOADER="GDK Pixbuf Xlib"
 			  imageloader="gdk-pixbuf-xlib"
 			  with_gdk_pixbuf=yes
-			  ,AC_MSG_ERROR([cannot locate gdk-pixbuf-xlib])
+			  ,AC_MSG_ERROR([cannot locate gdk-pixbuf-xlib >= $GTK_MIN_VER])
 			  with_gdk_pixbuf=no)
 fi
 
