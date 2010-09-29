@@ -10,7 +10,8 @@ Key Descriptions
 Modifiers:
 W = Default Modifier Key
 H = Hyper
-M = Meta
+M = Meta (if no Meta key is available Sawfish uses Alt instead)
+         (on some keyboards Shift + Alt = Meta)
 C = Control
 S = Shift
 A = Alt
@@ -18,7 +19,7 @@ Super
 
 W, the "default modifier"
 
-Mod(5...) = Additional Modifiers, eg: Alt Gr or Compose
+Mod(5...) = Additional Modifiers, eg: Alt Gr or Multi_key
 
 dead_circumflex = ^
 degree = °
@@ -65,7 +66,13 @@ KP_Divide = Keypad /
 KP_Multiply = Keypad *
 KP_Substract = Keypad -
 KP_Add = Keypad +
-KP_Delete = Keypad Delete (,)
+KP_Delete = Keypad Delete
+KP_Separator = Shift + Keypad Delete
+
+XF86Ungrab = Shift + KP_Divide
+XF86ClearGrab = Shift + KP_Multiply
+XF86_Prev_VMode = Shift + KP_Substract
+XF86_Next_VMode = Shift + KP_Add
 
 Pointer_EnableKeys = Shift + Num_Lock, allows moving the pointer via the KeyPad
 
@@ -75,8 +82,10 @@ Next = Page Down
 Prior = Page Up
 End = End
 Pause = Pause
+Break = Shift + Pause
 Insert = Insert
 Print = Print
+Sys_Req = Shift + Print
 Home = Pos1
 
 ESC = Escape
@@ -100,7 +109,7 @@ XF86AudioNext = Next Track Key
 
 XF86Back = Back Key
 XF86Forward = Next Key
-XF86Stop = Cancel Key
+XF86Stop = Cancel Key (on some keyboards it's called Cancel instead)
 XF86Reload = Reload Key
 
 XF86WWW = Browser Key
@@ -108,6 +117,12 @@ XF86Mail = Mail Key
 X86Search = Search  Key
 XF86Favorites = Favorites Key
 XF86Standby = Sleep Key
+
+XF86HomePage = Home key
+XF86Mail = Mail key
+XF86Tools = Toos key (on some keyboards it's the Mediaplayer key)
+XF86Explorer = Computer key
+XF86Calculator = Calculator key
 
 ! Button mapping depends. For example, left handed people may set
 ! the right button as "button 1".
