@@ -243,15 +243,15 @@ translate_event(unsigned long *code, unsigned long *mods, XEvent *xev)
 	switch (click_count)
 	{
 	case 2:
-	    *code = EV_CODE_MOUSE_UP2;
+	    *code = EV_CODE_MOUSE_OFF2;
 	    break;
 
 	case 3:
-	    *code = EV_CODE_MOUSE_UP3;
+	    *code = EV_CODE_MOUSE_OFF3;
 	    break;
 
 	default:
-	    *code = EV_CODE_MOUSE_UP1;
+	    *code = EV_CODE_MOUSE_OFF1;
 	}
 
     button:
@@ -701,12 +701,13 @@ static struct key_def default_codes[] = {
     { "Click1",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK1 },
     { "Click2",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK2 },
     { "Click3",   EV_TYPE_MOUSE, EV_CODE_MOUSE_CLICK3 },
-    { "Off",      EV_TYPE_MOUSE, EV_CODE_MOUSE_UP1 },
-    { "Off1",     EV_TYPE_MOUSE, EV_CODE_MOUSE_UP1 },
-    { "Off2",     EV_TYPE_MOUSE, EV_CODE_MOUSE_UP2 },
-    { "Off3",     EV_TYPE_MOUSE, EV_CODE_MOUSE_UP3 },
+    { "Off",      EV_TYPE_MOUSE, EV_CODE_MOUSE_OFF1 },
+    { "Off1",     EV_TYPE_MOUSE, EV_CODE_MOUSE_OFF1 },
+    { "Off2",     EV_TYPE_MOUSE, EV_CODE_MOUSE_OFF2 },
+    { "Off3",     EV_TYPE_MOUSE, EV_CODE_MOUSE_OFF3 },
     { "Move",     EV_TYPE_MOUSE, EV_CODE_MOUSE_MOVE },
 
+    /* XXX why SPC and Space? */
     { "SPC",      EV_TYPE_KEY, XK_space },
     { "Space",    EV_TYPE_KEY, XK_space },
     { "TAB",      EV_TYPE_KEY, XK_Tab },
