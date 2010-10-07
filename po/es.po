@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-19 07:55+0200\n"
-"PO-Revision-Date: 2010-09-19 14:00+0200\n"
+"POT-Creation-Date: 2010-09-28 15:41+0200\n"
+"PO-Revision-Date: 2010-10-07 18:14+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -430,19 +430,19 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused highlighted title string color"
-msgstr ""
+msgstr "  color de la cadena de título resaltada con el foco"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused highlighted title string color"
-msgstr ""
+msgstr "color de la cadena de título resaltada sin el foco"
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused clicked title string color"
-msgstr ""
+msgstr "  color de la cadena de título pulsada con el foco"
 
 #. ../themes/mxflat/theme.jl
 msgid "unfocused clicked title string color"
-msgstr ""
+msgstr "color de la cadena de título pulsada sin el foco"
 
 #. ../themes/mxflat/theme.jl
 msgid "default-9"
@@ -1169,18 +1169,6 @@ msgstr "Selecciona archivo"
 #. ../lisp/sawfish/gtk/widgets/font.jl
 msgid "Select font"
 msgstr "Selecciona tipografía"
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Add..."
-msgstr "Añadir..."
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Delete"
-msgstr "Eliminar"
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Edit..."
-msgstr "Editar..."
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add:"
@@ -2311,7 +2299,6 @@ msgid "Restart"
 msgstr "Reiniciar"
 
 #. ../lisp/sawfish/wm/commands.jl
-#| msgid "Restart _Sawfish"
 msgid "Restart sawfish."
 msgstr "Reiniciar Sawfish."
 
@@ -2320,7 +2307,6 @@ msgid "Destroy window"
 msgstr "Destruir ventana"
 
 #. ../lisp/sawfish/wm/commands.jl
-#| msgid "Destroy window"
 msgid "Destroy a window."
 msgstr "Destruir una ventana."
 
@@ -2329,7 +2315,6 @@ msgid "Kill client"
 msgstr "Matar cliente"
 
 #. ../lisp/sawfish/wm/commands.jl
-#| msgid "Move the current window to the specified viewport."
 msgid "Kill the client that created the specified window."
 msgstr "Matar el cliente que ha creado la ventana especificada."
 
@@ -2422,7 +2407,7 @@ msgstr "Elevar automáticamente"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Raise windows when they are focused."
-msgstr ""
+msgstr "Elevar ventanas al enfocarlas."
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
@@ -2750,7 +2735,6 @@ msgid "Never delete"
 msgstr "No eliminar nunca"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#| msgid "Fixed position"
 msgid "Fixed size"
 msgstr "Tamaño fijo"
 
@@ -2827,7 +2811,6 @@ msgid "_Forget saved state"
 msgstr "_Olvidar estado guardado"
 
 #. ../lisp/sawfish/wm/ext/window-history.jl
-#| msgid "_Clear window-istory"
 msgid "_Clear window-history"
 msgstr "_Limpiar el histórico de ventanas"
 
@@ -4568,21 +4551,26 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window"
-msgstr "Borrar ventana"
+msgstr "Eliminar ventana"
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "Borrar la ventana."
+msgid ""
+"Delete a window. If the window does not support that protocol,\n"
+"kill the client."
+msgstr ""
+"Eliminar una ventana. Si la ventana no soporta ese protocolo,\n"
+"matar el cliente."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Delete window safely"
-msgstr "Borrar ventana de forma segura"
+msgstr "Eliminar ventana de forma segura"
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
+#| msgid "Delete the window, or beep if the window can't be closed safely."
+msgid "Delete a window, or beep if the window can't be closed safely."
 msgstr ""
-"Borrar la ventana, o emitir sonido (beep) si ésta no puede ser cerrada de "
-"forma segura."
+"Eliminar una ventana, o emitir pitido si ésta no se puede cerrar de forma "
+"segura."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Uniquify window name"
@@ -4865,6 +4853,18 @@ msgstr "Elegir escritorio de forma interactiva"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Preguntar por un escritorio y cambiar a él."
+
+#~ msgid "Add..."
+#~ msgstr "Añadir..."
+
+#~ msgid "Delete"
+#~ msgstr "Eliminar"
+
+#~ msgid "Edit..."
+#~ msgstr "Editar..."
+
+#~ msgid "Delete the window."
+#~ msgstr "Borrar la ventana."
 
 #~ msgid "3d hack"
 #~ msgstr "Hack 3d"
