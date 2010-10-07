@@ -8,7 +8,13 @@ Group: User Interface/Desktops
 Source0: http://download.tuxfamily.org/sawfish/%{name}/%{name}-%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: gmp-devel, pango-devel, libXft-devel, texinfo
+BuildRequires: gmp-devel, pango-devel, libXft-devel, texinfo, gettext
+BuildRequires: libICE-devel, libSM-devel
+%if 0%{?el6}
+BuildRequires: gtk2-devel
+%else
+BuildRequires: gdk-pixbuf2-devel
+%endif
 BuildRequires: librep-devel, rep-gtk-devel
 
 %define rep_execdir %(pkg-config librep --variable=repcommonexecdir)
@@ -76,11 +82,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sawfish/sawfish.png
 %{_libdir}/sawfish/
 %{rep_execdir}/sawfish
-%{_desktopdir}/sawfish.desktop
+%{_datadir}/applications/sawfish.desktop
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{kde_apps}/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
-%{_iconsbasedir}/32x32/apps/sawfish-config.png
+%{_datadir}/icons/hicolor/32x32/apps/sawfish-config.png
 %{_mandir}/man1/sawfish*.gz
 %{_infodir}/sawfish*
 
