@@ -96,7 +96,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
       (message "Renamed file ~/.sawmillrc -> ~/.sawfishrc"))
     )
 
-  ;; Detect desktop environment
+  ;; Detect desktop environment.
+  ;; These functions have to non-nil if it detects a DE, otherwise nil.
+  ;; It should also initialize, and set `desktop-environment',
+  ;; and probably `want-poweroff-menu', too.
   (define (detect-desktop-environment)
     (or (sawfish.wm.integration.gnome#detect-gnome)
 	(sawfish.wm.integration.kde#detect-kde)
