@@ -59,27 +59,28 @@
   ;; handled by it. Otherwise registered with `window-put'.
   (i18n-defvar
    match-window-properties
-   `((placement ,(_ "Placement")
-                (ignore-program-position boolean)
-                (place-mode ,(lambda () `(choice ,@placement-modes)))
-		;; If for example x is -100, then the right border
-		;; lies 100 pixels away from the right edge of the screen.
-                (position (or
-                           (pair (number -65536 65536 0)
-                                 (number -65536 65536 0))
-                           (choice center east north north-east
-                                   north-west south south-east
-                                   south-west west)))
-                (workspace (number 1))
-		(new-workspace boolean)
-                (new-viewport boolean)
-                (viewport (pair (number 1) (number 1)))
-                (depth (number -16 16 0))
-                (placement-weight (number 0))
-                (fixed-position boolean)
-		(sticky boolean)
-		(sticky-viewport boolean)
-		)
+   `((geometry ,(_ "Geometry")
+	       (ignore-program-position boolean)
+	       (place-mode ,(lambda () `(choice ,@placement-modes)))
+	       ;; If for example x is -100, then the right border
+	       ;; lies 100 pixels away from the right edge of the screen.
+	       (position (or
+			  (pair (number -65536 65536 0)
+				(number -65536 65536 0))
+			  (choice center east north north-east
+				  north-west south south-east
+				  south-west west)))
+	       (workspace (number 1))
+	       (new-workspace boolean)
+	       (new-viewport boolean)
+	       (viewport (pair (number 1) (number 1)))
+	       (depth (number -16 16 0))
+	       (placement-weight (number 0))
+	       (fixed-position boolean)
+	       (fixed-size boolean)
+	       (sticky boolean)
+	       (sticky-viewport boolean)
+	       )
      (focus ,(_ "Focus")
             (raise-on-focus boolean)
             (focus-when-mapped boolean)
@@ -96,6 +97,7 @@
 				    fullscreen full-xinerama))
 		 (iconified boolean)
 		 (shaded boolean)
+		 (shade-hover boolean)
 		 (never-iconify boolean)
 		 (never-maximize boolean)
 		 )
@@ -110,12 +112,10 @@
             (task-list-skip boolean)
             (unique-name boolean)
             (window-name string)
-            (shade-hover boolean)
             (transients-above (choice all parents none))
             (ignore-stacking-requests boolean)
 	    (auto-gravity boolean)
 	    (never-delete boolean)
-	    (fixed-size boolean)
 	    )))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp

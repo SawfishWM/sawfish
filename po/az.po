@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.gnome-2.az\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-18 18:28+0100\n"
+"POT-Creation-Date: 2010-10-05 16:53+0900\n"
 "PO-Revision-Date: 2003-10-19 20:29+0300\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azərbaycan Dili <gnome@azətt.com>\n"
@@ -176,9 +176,9 @@ msgid "all"
 msgstr "hamısı"
 
 #. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
 msgstr "heç biri"
@@ -745,7 +745,7 @@ msgstr "menyu-düymə-açar xəritəsi"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize look button keymap\n"
+"customize lock button keymap\n"
 "\n"
 "By default a button will work as it's name suggests. Button1: lock window "
 "position"
@@ -1068,100 +1068,14 @@ msgstr "Ad çubuğunun eni ."
 msgid "Border width of bar images."
 msgstr "Çubuq rəsmləinin kənar qalınlığı ."
 
-#. ../lisp/sawfish/cfg/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "%s dəyişdirilərkən:"
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Bəli"
 
-#. ../lisp/sawfish/cfg/apply.jl
-msgid "Sawfish Error"
-msgstr "\"Sawfish\" Xətası"
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Xeyir"
 
-#. ../lisp/sawfish/cfg/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Çərçivə :"
-
-#. ../lisp/sawfish/cfg/shell.jl
-#, fuzzy
-msgid "Sawfish Configurator"
-msgstr "\"Sawfish\" quraşdırıcı"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-#. ../lisp/sawfish/cfg/widgets/command.jl
-msgid "Command"
-msgstr "Əmr"
-
-#. ../lisp/sawfish/cfg/widgets/command.jl
-msgid "Undocumented"
-msgstr "Sənədsiz"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-#. ../lisp/sawfish/cfg/widgets/event.jl
-msgid "Grab..."
-msgstr "Yaxala ..."
-
-#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Masa üstləri :"
-
-#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Sütunlar :"
-
-#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Sıralar :"
-
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-#, fuzzy
-msgid "Edit Binding"
-msgstr "Bağları düzəlt"
-
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-msgid "Key"
-msgstr "Düymə"
-
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-msgid "Key:"
-msgstr "Düymə :"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "Matchers"
-msgstr "Yaxalayıcılar"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "Actions"
-msgstr "Gedişlər"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "not"
-msgstr "yox"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-#, fuzzy
-msgid "Match Window Properties"
-msgstr "Pəncərə xüsusiyyətlərini yaxala"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#, c-format
-msgid "No matching item for %S"
-msgstr "%S-yə uyğun gələn vahid yoxdur"
-
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "** namə'lum pəncərəcik ** "
-
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Value"
-msgstr "Qiymət"
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Browse..."
 msgstr "Gəz ..."
@@ -1170,21 +1084,14 @@ msgstr "Gəz ..."
 msgid "Select file"
 msgstr "Fayl seç"
 
-#. ../lisp/sawfish/gtk/widgets/font.jl
-msgid "Select font"
-msgstr "Yazı növünü seç"
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+msgid "Key"
+msgstr "Düymə"
 
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Add..."
-msgstr "Əlavə Et ..."
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Delete"
-msgstr "Sil"
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Edit..."
-msgstr "Düzəlt..."
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+msgid "Value"
+msgstr "Qiymət"
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add:"
@@ -1194,13 +1101,14 @@ msgstr "Əlavə Et:"
 msgid "Edit:"
 msgstr "Düzəlt:"
 
-#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
-msgid "Yes"
-msgstr "Bəli"
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "%S-yə uyğun gələn vahid yoxdur"
 
-#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
-msgid "No"
-msgstr "Xeyir"
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "** namə'lum pəncərəcik ** "
 
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
@@ -1215,52 +1123,6 @@ msgstr "Gedişlər"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "Gedişlər"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Grow, Pack, Shrink & Yank"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Window Cycling"
-msgstr "Pəncərə Fırlanması"
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Tabs"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Sound"
-msgstr "Səs"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/autoload.jl
-#, fuzzy
-msgid "Window Rules"
-msgstr "_Pəncərələr"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Tooltips"
-msgstr "Balonlu kömək"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "History"
-msgstr "Keçmiş"
-
-#. ../lisp/sawfish/wm/util/prompt.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Messages"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Indeks :"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next workspace window"
@@ -1293,22 +1155,6 @@ msgstr "Əvvəlki pəncərə"
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
 msgstr "Bütün masa üstlərində bir pəncərə geri get ."
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Describe symbol"
-msgstr "Simvolu təsvir et"
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Display the documentation of a specified symbol."
-msgstr "Bildirilən simvolun sənədlərini göstər."
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Apropos function"
-msgstr "Apropos funksiyası"
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Apropos variable"
-msgstr "Apropos dəyişgəni"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1398,198 +1244,13 @@ msgstr "Qrupu ləğv et"
 msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Hazırkı pəncərənin qrupunun pəncərələrini sil."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing is considered to be maximization."
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "Jump or exec"
 msgstr ""
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "always"
-msgstr "həmişə"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
-msgstr "bəlkə"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "never"
-msgstr "heç bir vaxt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Whether and how to move the pointer when packing windows.\n"
-"`maybe' means that the pointer is moved along with the window, if the\n"
-"pointer was within the window area before packing. `always' warps the\n"
-"pointer to the center of the window if it isn't already in the\n"
-"window, then does like `maybe'.  `never' means not to warp the\n"
-"pointer."
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "jump to a window matched by re, or start program otherwise."
 msgstr ""
-"Pancərələr yığcamlaşdırıldığı vaxt oxu hara və necə hərəkət etdirək.\n"
-"\n"
-"`bəlkə' pəncərə yığcamlaşdırılmadan əvvəl pəncərə içində isə, \n"
-"pəncərə ilə bərabər hərəkət etsin deməkdir.\n"
-"\n"
-"`həmişə' ox pəncərə içində deyilsə əvvəlcə oxu pəncərənin mərkəzinə daşıyar "
-"və sonra da\n"
-"`bəlkə' seçənəyində kimi davranar.\n"
-"\n"
-"`heç bir vaxt' oxun yerini dəyişdirmə deməkdir."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında tamamilə qaralmış\n"
-"pəncərənin içinə girilməsi."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Whether to bump into windows on a different depth. When 'maybe,\n"
-"Only `avoided' windows are bumped."
-msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında fərqli dərinliklərə "
-"sahib\n"
-"pəncərənin içinə girilməsi."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
-"pəncərənin içinə girilməsi."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "The minimum height or width to which a window may be shrunk."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window left"
-msgstr "Pəncərəni sola böyüt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
-msgstr ""
-"Başqa bir pəncərənin içinə girənə qədər pəncərə sola tərəf böyüyər.\n"
-"Baxın `grow-window-up'"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window right"
-msgstr "Pəncərəni sağa böyüt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
-msgstr ""
-"Başqa bir pəncərənin içinə girənə qədər pəncərə sağa tərəf böyüyər.\n"
-"Baxın `grow-window-up'"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window up"
-msgstr "Pəncərəni yuxarı böyüt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
-msgstr "Başqa pəncərənin içinə girənə dək pəncərəni yuxarı doğru böyüdür."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window down"
-msgstr "Qrupu aşağı böyüt"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
-msgstr ""
-"Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf böyüyər.\n"
-"Baxın `grow-window-up'"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window left"
-msgstr "Pəncərəni sola yığışdır"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
-msgstr ""
-"Başqa bir pəncərənin içinə girənə qədər pəncərə sola tərəf daşınar.\n"
-"Baxın `pack-window-up'"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window right"
-msgstr "Pəncərəni sağa yığışdır"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
-msgstr ""
-"Başqa bir pəncərənin içinə girənə qədər pəncərə sağa tərəf daşınar.\n"
-"Baxın `pack-window-up'"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window up"
-msgstr "Pəncərəni yuxarı yığcamlaşdır"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr "Başqa pəncərənin içinə girənə dək pəncərəni yuxarı doğru daşıyır."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "Pəncərəni aşağı yığcamlaşdır"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
-msgstr ""
-"Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf daşınar.\n"
-"Baxın `pack-window-up'"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show faq"
-msgstr "SSS yardımı"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show news"
-msgstr "Xəbərlər yardımı"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show programmer manual"
-msgstr "Proqramçı bələdçisi yardımı"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show homepage"
-msgstr "Ev səhifəsini göstər"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help about"
-msgstr "Haqqında yardımı"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 #, fuzzy
@@ -1772,6 +1433,550 @@ msgstr "Oxu sola daşı"
 msgid "Move the cursor to the center of the screen"
 msgstr "Oxu 1 piksel sola daşı ."
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click"
+msgstr "Tıqlama ilə yüksəl və keç"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
+"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click if focused"
+msgstr "Tıqlama ilə fokuslama varsa, yüksəl və keç"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
+"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise or pass through click"
+msgstr "Tıqlama ilə yüksəl ya da keç"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise window and pass through click"
+msgstr "Pəncərəni yüksəlt və tıqlamdan keçir"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise group and pass through click"
+msgstr "Qrupu yüksəlt və tıqlamdan keçir"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
+"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise transients and pass through click"
+msgstr "Transienti yüksəlt və tıqlamdan keçir"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
+"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window left"
+msgstr "Pəncərəni sola sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window right"
+msgstr "Pəncərəni sağa sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window up"
+msgstr "Pəncərəni yuxaı sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window down"
+msgstr "Pəncərəni aşağı sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window left"
+msgstr "Pəncərəni sola yığışdır"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW to the left until it overlaps with one less window\n"
+"than before."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə sola tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window right"
+msgstr "Pəncərəni sağa yığışdır"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW to the right until it overlaps with one less window\n"
+"than before."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə sağa tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window up"
+msgstr "Pəncərəni yuxarı yığcamlaşdır"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW upwards until it overlaps with one less window than\n"
+"before."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window down"
+msgstr "Pəncərəni aşağı yığcamlaşdır"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW downwards until it overlaps with one less window than\n"
+"before."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add row"
+msgstr "Pəncərəni bir sətir böyüt"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Hazırkı pəncərənin böyüklüyünü bir cərgə böyüt ."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract row"
+msgstr "Pəncərəni bir sətir balacalaşdır"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Hazırkı pəncərənin böyüklüyünü bir cərgə kiçilt ."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add column"
+msgstr "Pəncərəni bir sütun böyüt"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Hazırkı pəncərənin böyüklüyünü bir sütun böyüt ."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract column"
+msgstr "Pəncərəni bir sütun balacalşdır"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Hazırkı pəncərənin böyüklüyünü bir sütun kiçilt ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window left"
+msgstr "Pəncərəni sola sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə sola daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window right"
+msgstr "Pəncərəni sağa sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə sağa daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window up"
+msgstr "Pəncərəni yuxaı sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə üstə daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window down"
+msgstr "Pəncərəni aşağı sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə alta daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group left"
+msgstr "Qrupu sola sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə sola daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group right"
+msgstr "Qrupu sağa sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə sağa daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group up"
+msgstr "Qrupu yuxarı sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə üstə daşı ."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group down"
+msgstr "Qrupu aşağı sürüşdür"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə alta daşı ."
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set viewport linear"
+msgstr "Görünüş qapısını linear et"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Index:"
+msgstr "Indeks :"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set window viewport linear"
+msgstr "Pəncərə görünüş nöqtəsini linear et"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Window Cycling"
+msgstr "Pəncərə Fırlanması"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Display window names and icons while cycling through windows."
+msgstr ""
+"Pəncərələrin arasında gəzərkən pəncərələrin timsallarını və adlarını göstər."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include iconified windows when cycling."
+msgstr ""
+"Pəncərələrin arasında gəzərkən timsallaşdırılmış pəncərələri de nəzərə al."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all workspaces when cycling."
+msgstr "Hər masa üstündəki pəncərələri gəzərkən nəzərə al."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all viewports when cycling."
+msgstr "Hər sahədəki pəncərələri gəzərkən nəzərə al."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Pəncərələr nişanlanınca onları yüksəlt ."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "cycle-keymap"
+msgstr "dövr-açar-xəritəsi"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr ""
+"Təkcə pəncərələr arasında gəzərkən fəal olan bağları daxil edən düymə "
+"xəritəsi ."
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Describe symbol"
+msgstr "Simvolu təsvir et"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+#, fuzzy
+msgid "Print the documentation of a specified symbol to the standard output ."
+msgstr "Bildirilən simvolun sənədlərini göstər."
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos function"
+msgstr "Apropos funksiyası"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos variable"
+msgstr "Apropos dəyişgəni"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show faq"
+msgstr "SSS yardımı"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show news"
+msgstr "Xəbərlər yardımı"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show programmer manual"
+msgstr "Proqramçı bələdçisi yardımı"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show homepage"
+msgstr "Ev səhifəsini göstər"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help about"
+msgstr "Haqqında yardımı"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "həmişə"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "bəlkə"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "heç bir vaxt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Pancərələr yığcamlaşdırıldığı vaxt oxu hara və necə hərəkət etdirək.\n"
+"\n"
+"`bəlkə' pəncərə yığcamlaşdırılmadan əvvəl pəncərə içində isə, \n"
+"pəncərə ilə bərabər hərəkət etsin deməkdir.\n"
+"\n"
+"`həmişə' ox pəncərə içində deyilsə əvvəlcə oxu pəncərənin mərkəzinə daşıyar "
+"və sonra da\n"
+"`bəlkə' seçənəyində kimi davranar.\n"
+"\n"
+"`heç bir vaxt' oxun yerini dəyişdirmə deməkdir."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Pəncərələrin genişlədilməsi və bağlanması sırasında tamamilə qaralmış\n"
+"pəncərənin içinə girilməsi."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"Pəncərələrin genişlədilməsi və bağlanması sırasında fərqli dərinliklərə "
+"sahib\n"
+"pəncərənin içinə girilməsi."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
+"pəncərənin içinə girilməsi."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window left"
+msgstr "Pəncərəni sola böyüt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window to the left until it touches another window.\n"
+"See `grow-window-up' for full doc."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə sola tərəf böyüyər.\n"
+"Baxın `grow-window-up'"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window right"
+msgstr "Pəncərəni sağa böyüt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window to the right until it touches another window.\n"
+"See `grow-window-up' for full doc."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə sağa tərəf böyüyər.\n"
+"Baxın `grow-window-up'"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window up"
+msgstr "Pəncərəni yuxarı böyüt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window upwards until it touches another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr "Başqa pəncərənin içinə girənə dək pəncərəni yuxarı doğru böyüdür."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window down"
+msgstr "Qrupu aşağı böyüt"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window downwards until it touches another window.\n"
+"See `grow-window-up' for full doc."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf böyüyər.\n"
+"Baxın `grow-window-up'"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window left"
+msgstr "Pəncərəni sola yığışdır"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window to the left until it touches another window.\n"
+"See `pack-window-up' for full doc."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə sola tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window right"
+msgstr "Pəncərəni sağa yığışdır"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window to the right until it touches another window.\n"
+"See `pack-window-up' for full doc."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə sağa tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window up"
+msgstr "Pəncərəni yuxarı yığcamlaşdır"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window upwards until it touches another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr "Başqa pəncərənin içinə girənə dək pəncərəni yuxarı doğru daşıyır."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window down"
+msgstr "Pəncərəni aşağı yığcamlaşdır"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window downwards until it touches another window.\n"
+"See `pack-window-up' for full doc."
+msgstr ""
+"Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf daşınar.\n"
+"Baxın `pack-window-up'"
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1911,269 +2116,6 @@ msgstr "Pəncərə yapışqanlığı keçişi"
 msgid "Halve window size"
 msgstr "Pəncərəni yapışqanlaşdır"
 
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to reboot the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to halt the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to suspend the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to hibernate the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "Poweroff"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise and pass through click"
-msgstr "Tıqlama ilə yüksəl və keç"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
-msgstr ""
-"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
-"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise and pass through click if focused"
-msgstr "Tıqlama ilə fokuslama varsa, yüksəl və keç"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
-msgstr ""
-"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
-"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise or pass through click"
-msgstr "Tıqlama ilə yüksəl ya da keç"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise window and pass through click"
-msgstr "Pəncərəni yüksəlt və tıqlamdan keçir"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise group and pass through click"
-msgstr "Qrupu yüksəlt və tıqlamdan keçir"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
-msgstr ""
-"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
-"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise transients and pass through click"
-msgstr "Transienti yüksəlt və tıqlamdan keçir"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
-msgstr ""
-"Bu əməliyyatı alan pəncərəni və pəncərələri yüksəlt və \n"
-"ondan sonra ox əməliyyatlarına yol açan əmrləri təkrarla ."
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window left"
-msgstr "Pəncərəni sola sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window right"
-msgstr "Pəncərəni sağa sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window up"
-msgstr "Pəncərəni yuxaı sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window down"
-msgstr "Pəncərəni aşağı sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window left"
-msgstr "Pəncərəni sola yığışdır"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less\n"
-"than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window right"
-msgstr "Pəncərəni sağa yığışdır"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less\n"
-"than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window up"
-msgstr "Pəncərəni yuxarı yığcamlaşdır"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW upwards until it inserts with one window less than\n"
-"before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window down"
-msgstr "Pəncərəni aşağı yığcamlaşdır"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than\n"
-"before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window add row"
-msgstr "Pəncərəni bir sətir böyüt"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Increase the size of the current window by one row."
-msgstr "Hazırkı pəncərənin böyüklüyünü bir cərgə böyüt ."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window subtract row"
-msgstr "Pəncərəni bir sətir balacalaşdır"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Decrease the size of the current window by one row."
-msgstr "Hazırkı pəncərənin böyüklüyünü bir cərgə kiçilt ."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window add column"
-msgstr "Pəncərəni bir sütun böyüt"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Increase the size of the current window by one column."
-msgstr "Hazırkı pəncərənin böyüklüyünü bir sütun böyüt ."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window subtract column"
-msgstr "Pəncərəni bir sütun balacalşdır"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Decrease the size of the current window by one column."
-msgstr "Hazırkı pəncərənin böyüklüyünü bir sütun kiçilt ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window left"
-msgstr "Pəncərəni sola sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels to the left."
-msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə sola daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window right"
-msgstr "Pəncərəni sağa sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels to the right."
-msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə sağa daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window up"
-msgstr "Pəncərəni yuxaı sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels upwards."
-msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə üstə daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window down"
-msgstr "Pəncərəni aşağı sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels downwards."
-msgstr "Pəncərəni `pəncərəni-azalt-it' əmri ilə alta daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group left"
-msgstr "Qrupu sola sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə sola daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group right"
-msgstr "Qrupu sağa sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə sağa daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group up"
-msgstr "Qrupu yuxarı sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels upwards."
-msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə üstə daşı ."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group down"
-msgstr "Qrupu aşağı sürüşdür"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels downwards."
-msgstr "Pəncərə qrupunu  `pəncərəni-azalt-it' əmri ilə alta daşı ."
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Görünüş nöqtəsini qabağa daşı"
@@ -2207,175 +2149,6 @@ msgstr "Pəncərəni qabağa daşı"
 msgid "Move the window to the next viewport."
 msgstr "Pəncərəni əvvəlki görünüşə daşı ."
 
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-msgid "Set viewport linear"
-msgstr "Görünüş qapısını linear et"
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-msgid "Set window viewport linear"
-msgstr "Pəncərə görünüş nöqtəsini linear et"
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names and icons while cycling through windows."
-msgstr ""
-"Pəncərələrin arasında gəzərkən pəncərələrin timsallarını və adlarını göstər."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Include iconified windows when cycling."
-msgstr ""
-"Pəncərələrin arasında gəzərkən timsallaşdırılmış pəncərələri de nəzərə al."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Include windows on all workspaces when cycling."
-msgstr "Hər masa üstündəki pəncərələri gəzərkən nəzərə al."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Include windows on all viewports when cycling."
-msgstr "Hər sahədəki pəncərələri gəzərkən nəzərə al."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Pəncərələr nişanlanınca onları yüksəlt ."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "cycle-keymap"
-msgstr "dövr-açar-xəritəsi"
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr ""
-"Təkcə pəncərələr arasında gəzərkən fəal olan bağları daxil edən düymə "
-"xəritəsi ."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command"
-msgstr "Əmri çağır"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr ""
-"Əmr adını çağırın: istəyə bağlı olaraq PFX-ARG önlüyü ilə də çağlra "
-"bilərsiniz."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Run shell command"
-msgstr "Qabıq əmrini işə sal ."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "Verilən əmri işə sal ."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command sequence"
-msgstr "Əmr sekvensiyası"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Invoke the list of commands, one by one."
-msgstr "Əmrlərin siyahısını bir bir işə sal ."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Quit"
-msgstr "Çıx"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Restart"
-msgstr "Yenidən başla"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Destroy window"
-msgstr "Pəncərəni dağıt"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Kill client"
-msgstr "Alıcını öldür"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "No operation"
-msgstr "Fəaliyyət yoxdur"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command with output to screen"
-msgstr "Æmri yekunu ekrana yazaraq çağır"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Prompt for a command, execute it, and print any output to the screen."
-msgstr ""
-"Bir əmr üçün soruş, o əmri işə sal və o amrin nəticəsini ekranda göstər ."
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "Nişanlama"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "Daşı / Böyüklüyünü Dəyişdir"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Appearance"
-msgstr "Görünüş"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "Masa Üstləri"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Bindings"
-msgstr "Bağlar"
-
-#. ../lisp/sawfish/wm/custom.jl
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Kiçiltmə və Böyütmə"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Miscellaneous"
-msgstr "Qarışıq"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "Yerləşdirmə"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Customize"
-msgstr "Xüsusiləşdir"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the configurator GUI."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/3d-hack.jl
-msgid "3d hack"
-msgstr "3d hack"
-
-#. ../lisp/sawfish/wm/ext/apps-menu.jl
-#, fuzzy
-msgid "Update apps menu"
-msgstr "Proqramlar menüsünü göstər"
-
-#. ../lisp/sawfish/wm/ext/apps-menu.jl
-msgid ""
-"Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
-"append the auto generated one."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for window events."
-msgstr "Pəncərə əməliyyatları üçün səs effektləri istifadə et ."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Event"
-msgstr "Əməliyyat"
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Audio file"
-msgstr "Audio fayl"
-
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Auto-Raise"
 msgstr "Avtomatik-Üstə Gətir"
@@ -2388,34 +2161,6 @@ msgstr "Pəncərələr açılınca onları yüksəlt ."
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Yüksəltmə arası ( rəqəm olaraq (ms) ) ."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Edge Flipping"
-msgstr "Kənar Hoppanması"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Ox ekran kənarına gələndə qabağımızdakı masa üstünü seç ."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "viewport"
-msgstr "görünüş"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "workspace"
-msgstr "iş sahələri"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Ekran kənarına dəymək qabağımızdakını seçər : \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Only flip when interactively moving a window."
-msgstr "Sadəcə olaraq pəncərəni interaktiv kənarında tullan ."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Beep when errors occur."
@@ -2454,24 +2199,40 @@ msgstr "Xətaları göstər"
 msgid "Display all errors that have occurred to the screen."
 msgstr "Bütün baş verən xətaları ekranda göstər"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Infinite Desktop"
-msgstr "Masa üstünü fokusa al"
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Tooltips"
+msgstr "Balonlu kömək"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Simulate an infinite desktop (Conflicts edge-flipping)."
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr "Pəncərə kənarları üçün balonlu köməyi göstər ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr "Balonlu köməklərində bütün kömək ismarıclarını göstər ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Pəncərələri açma arası ( millisaniyə olaraq (ms) ) ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Pəncərələri açma arası ( millisaniyə olaraq (ms) ) ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Font used to display tooltips, or nil for default."
 msgstr ""
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Amount to move the workspace."
-msgstr "Sonrakı iş sahəsinə göndər"
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr ""
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Amount to move the cursor after moving the workspace."
-msgstr "Pəncərəni N'nci masa üstünə daşı ."
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
@@ -2492,6 +2253,13 @@ msgstr "Rolu"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Host"
 msgstr "Qovşaq"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Command"
+msgstr "Əmr"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Locale"
@@ -2657,8 +2425,55 @@ msgid "Auto gravity"
 msgstr "Avtomatik böyümə"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never delete"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed size"
+msgstr "Yer"
+
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Placement"
+msgstr "Yerləşdirmə"
+
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus"
+msgstr "Nişanlama"
+
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Appearance"
+msgstr "Görünüş"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "Digərləri"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window Rules"
+msgstr "_Pəncərələr"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Sound"
+msgstr "Səs"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for window events."
+msgstr "Pəncərə əməliyyatları üçün səs effektləri istifadə et ."
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Event"
+msgstr "Əməliyyat"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Audio file"
+msgstr "Audio fayl"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
@@ -2682,127 +2497,6 @@ msgstr "Pəncərələri açma arası ( millisaniyə olaraq (ms) ) ."
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr "Pəncərələr açılınca onları yüksəlt ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Display tooltips for window frames."
-msgstr "Pəncərə kənarları üçün balonlu köməyi göstər ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Show full documentation in tooltips."
-msgstr "Balonlu köməklərində bütün kömək ismarıclarını göstər ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Pəncərələri açma arası ( millisaniyə olaraq (ms) ) ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Pəncərələri açma arası ( millisaniyə olaraq (ms) ) ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _position"
-msgstr "_Yeri yadda saxla"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _dimensions"
-msgstr "_Ölçüləri yadda saxla"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _attributes"
-msgstr "X_üsusiyyətləri yadda saxla"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_Forget saved state"
-msgstr "Yadda saxlanan halı _unut"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
-msgid "_Clear window-istory"
-msgstr "_Pəncərəni göndər"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
-msgid "_Save window-history"
-msgstr "_Pəncərəni göndər"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
-msgid "_Reload window-history"
-msgstr "Bütün qeyd edilmiş pəncərə keçmişini unut"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember window positions."
-msgstr "Pəncərələrin yerini avtomatik olaraq yadda saxla ."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember window sizes."
-msgstr "Pəncərə böyüklüyünü avtomatik olaraq yadda saxla ."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember other window attributes."
-msgstr "Digər pəncərə xüsusiyyətlərini avtomatik olaraq yadda saxla."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Don't automatically remember details of transient windows."
-msgstr "Müvəqqəti pəncərələrin yerini avtomatik olaraq yadda saxlama."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history save position"
-msgstr "Pəncərə keçmişi qeyd etmə yeri"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current position of the focused window."
-msgstr "Nişanlanmış pəncərənin hazırkı yerini yadda saxla."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history save dimensions"
-msgstr "Pəncərə keçmişi qeyd etmə dimensiyaları"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current dimensions of the focused window."
-msgstr "Nişanlanmış pəncərənin hazırkı koordinatlarını yadda saxla."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history save attributes"
-msgstr "Pəncərə keçmişi qeyd etmə atributları"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current attributes of the focused window."
-msgstr "Nişanlanmış pəncərənin hazırkı atributlarını yadda saxla."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history forget"
-msgstr "Pəncərə keçmişi unudulması"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Forget any persistent state associated with the current window."
-msgstr "Hazırkı pəncərə ilə əlaqəli olan qalıcı halı unut ."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history clear"
-msgstr "Pəncərə keçmişi təmizliyi"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Forget all saved window history."
-msgstr "Bütün qeyd edilmiş pəncərə keçmişini unut"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_History"
-msgstr "_Keçmiş"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace down"
@@ -2868,702 +2562,166 @@ msgstr "Sağ iş sahəsinə göndər"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Pəncərəni hazırkı iş sahəsindən sağındakı iş sahəsinə göndər"
 
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Siçan oxunun nə vaxt fokusu dəyişəcəyi ."
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _position"
+msgstr "_Yeri yadda saxla"
 
-#. ../lisp/sawfish/wm/focus.jl
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr "Fokus-üçün-tıqla modu tıqlamanı proqrama ötürür."
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _dimensions"
+msgstr "_Ölçüləri yadda saxla"
 
-#. ../lisp/sawfish/wm/focus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _attributes"
+msgstr "X_üsusiyyətləri yadda saxla"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "_Forget saved state"
+msgstr "Yadda saxlanan halı _unut"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
-msgid "Whether focusing a window doesn't change it's position in the stack."
-msgstr "Pəncərəni yapışıq olduğu səviyyədə ən alta daşı."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "Ön qurğulu çərçivə böyüklüyü:"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Automatically reload themes when they are updated."
-msgstr "Örtüklər yenilənincə onları avtomatik olaraq yenidən yüklə."
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default font: \\w"
-msgstr "Ön qurğulu yazı növü: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "Çərçivə tərzini düzəlt"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default"
-msgstr "Ön qurğulu"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Normal"
-msgstr "Normal"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Title-only"
-msgstr "Sırf başlıq"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Border-only"
-msgstr "Sırf kənar"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Top-border"
-msgstr "Üst-kənar"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "None"
-msgstr "Heç biri"
-
-#. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/integration/kde.jl
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "_Help"
-msgstr "_Yardım"
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "_GNOME Help"
-msgstr "_GNOME Köməyi..."
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "GNOME Website"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "About GNOME"
-msgstr "GNOME Haqqında..."
-
-#. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/integration/standalone.jl
-#. ../lisp/sawfish/wm/integration/kde.jl
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "Sessi_on"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "_Logout from GNOME"
-msgstr "GNOME iclasını qurtar ."
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "_Shutdown from GNOME"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
-msgid "_KDE Help"
-msgstr "_Yardım"
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-msgid "KDE Website"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
-msgid "_Logout from KDE"
-msgstr "GNOME iclasını qurtar ."
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
-msgid "_Reboot from KDE"
-msgstr "GNOME iclasını qurtar ."
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-msgid "_Shutdown from KDE"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-#, fuzzy
-msgid "_Reboot System"
-msgstr "GNOME iclasını qurtar ."
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Shutdown System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "S_uspend System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Hibernate System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "global-keymap"
-msgstr "global-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active anywhere."
-msgstr "Bütün fəal bağları  daxil edən düymə xəritəsi ."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "window-keymap"
-msgstr "pəncərə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Nişanlanmış pəncərədəki fəal bağları  daxil edən düymə xəritəsi ."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "root-window-keymap"
-msgstr "kök-pəncərə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Ana pəncərə nişanlanmış ikən fəal bağları  daxil edən düymə xəritəsi \n"
-"( və ya hiç bir pəncərə seçilmədiyi vaxt da istifadə ediləcək ) ."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "title-keymap"
-msgstr "başlıq-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin başlığında hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "border-keymap"
-msgstr "kənar açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin kənarında hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "close-button-keymap"
-msgstr "bağla-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "iconify-button-keymap"
-msgstr "timsallaşdır-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin timsallaşdırma düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "maximize-button-keymap"
-msgstr "böyüt-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin böyütmə düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "menu-button-keymap"
-msgstr "menyu-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin menyu düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "shade-button-keymap"
-msgstr "kölgələ-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin kölgələmə düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "sticky-button-keymap"
-msgstr "timsallaşdır-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the sticky button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "lock-button-keymap"
-msgstr "bağla-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the lock button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "rename-button-keymap"
-msgstr "menyu-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the rename button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin menyu düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "move-resize-button-keymap"
-msgstr "bağla-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the move/resize "
-"button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "raise-lower-button-keymap"
-msgstr "bağla-düymə-açar xəritəsi"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the raise/lower "
-"button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
-"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Ön qurğulu qısa yollar üçün istifadə edilən düymə(lər)."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Mi_nimize"
-msgstr "Kiçilt"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Unma_ximize"
-msgstr "Kiçilt"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Ma_ximize"
-msgstr "Böyüt"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Move"
-msgstr ""
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Resize"
-msgstr "Daşı / Böyüklüyünü Dəyişdir"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Close"
-msgstr "_Bağla"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Toggle"
-msgstr "_Get-Gəl"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "In _group"
-msgstr "_Qrupda"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Send window to"
+msgid "_Clear window-history"
 msgstr "_Pəncərəni göndər"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Previous workspace"
-msgstr "_Arxadakı masa üstü"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Next workspace"
-msgstr "_Qabaqdakı masa üstü"
-
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
-msgid "C_opy window to"
+msgid "_Save window-history"
 msgstr "_Pəncərəni göndər"
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
-msgid "P_revious workspace"
-msgstr "Əvvəlki iş sahəsi"
+msgid "_Reload window-history"
+msgstr "Bütün qeyd edilmiş pəncərə keçmişini unut"
 
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Ne_xt workspace"
-msgstr "Sonrakı iş sahəsi"
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "History"
+msgstr "Keçmiş"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Grow & Pack"
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window positions."
+msgstr "Pəncərələrin yerini avtomatik olaraq yadda saxla ."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window sizes."
+msgstr "Pəncərə böyüklüyünü avtomatik olaraq yadda saxla ."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember other window attributes."
+msgstr "Digər pəncərə xüsusiyyətlərini avtomatik olaraq yadda saxla."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Don't automatically remember details of transient windows."
+msgstr "Müvəqqəti pəncərələrin yerini avtomatik olaraq yadda saxlama."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save position"
+msgstr "Pəncərə keçmişi qeyd etmə yeri"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Nişanlanmış pəncərənin hazırkı yerini yadda saxla."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save dimensions"
+msgstr "Pəncərə keçmişi qeyd etmə dimensiyaları"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Nişanlanmış pəncərənin hazırkı koordinatlarını yadda saxla."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save attributes"
+msgstr "Pəncərə keçmişi qeyd etmə atributları"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Nişanlanmış pəncərənin hazırkı atributlarını yadda saxla."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history forget"
+msgstr "Pəncərə keçmişi unudulması"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Hazırkı pəncərə ilə əlaqəli olan qalıcı halı unut ."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history clear"
+msgstr "Pəncərə keçmişi təmizliyi"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Bütün qeyd edilmiş pəncərə keçmişini unut"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "_History"
+msgstr "_Keçmiş"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Kənar Hoppanması"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Ox ekran kənarına gələndə qabağımızdakı masa üstünü seç ."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "görünüş"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "iş sahələri"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Ekran kənarına dəymək qabağımızdakını seçər : \\w"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "Sadəcə olaraq pəncərəni interaktiv kənarında tullan ."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Milliseconds to delay before edge flipping."
 msgstr ""
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow left"
-msgstr "Sola böyüt"
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Infinite Desktop"
+msgstr "Masa üstünü fokusa al"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow right"
-msgstr "Sağa böyüt"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow up"
-msgstr "Yuxarı böyüt"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow down"
-msgstr "Aşağı böyüt"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack left"
-msgstr "Sola daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack right"
-msgstr "Sağa daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack up"
-msgstr "Yuxarı daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack down"
-msgstr "Alta daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Shrink & _Yank"
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid ""
+"\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-"
+"flipping)."
 msgstr ""
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
-msgid "Shrink left"
-msgstr "Pəncərəni sola sürüşdür"
+msgid "Amount to move the viewport when the pointer hits the screen edge."
+msgstr "Ox ekran kənarına gələndə qabağımızdakı masa üstünü seç ."
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
-msgid "Shrink right"
-msgstr "Pəncərəni sağa sürüşdür"
+msgid "Amount to pull back the cursor after moving the viewport."
+msgstr "Pəncərəni N'nci masa üstünə daşı ."
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/apps-menu.jl
 #, fuzzy
-msgid "Shrink up"
-msgstr "Pəncərəni yuxaı sürüşdür"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Shrink down"
-msgstr "Pəncərəni aşağı sürüşdür"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank left"
-msgstr "Sola daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank right"
-msgstr "Sağa daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank up"
-msgstr "Yuxarı daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank down"
-msgstr "Alta daşı"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Stac_king"
-msgstr "Yıǧışdırılır"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Raise"
-msgstr "Yüksəlt"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Lower"
-msgstr "Alçalt"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Upper layer"
-msgstr "Səviyyə yüksəlt"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Lo_wer layer"
-msgstr "Səviyyə alçalt"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Frame ty_pe"
-msgstr "Görünüş növü"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Frame sty_le"
-msgstr "Çərçivə tərzi"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Sawfish Rootmenu"
-msgstr "Sawfish ev səhifəsi"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Windows"
-msgstr "_Pəncərələr"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Work_spaces"
-msgstr "_Masa üstləri"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Programs"
-msgstr "_Proqramlar"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Customize"
-msgstr "_Xüsusiləşdir"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Display Errors"
-msgstr "Xətaları göstər"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Reload Appsmenu"
+msgid "Update apps menu"
 msgstr "Proqramlar menüsünü göstər"
 
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Restart Sawfish"
-msgstr "Yenidən başla"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Quit Sawfish"
-msgstr "\"Sawfish\" _Haqqında..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "_SSS..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "_Xəbərlər..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "_WWW səhifəsi"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "_Bələdçi..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "\"Sawfish\" _Haqqında..."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Kill Window"
-msgstr "_Pəncərələr"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup window menu"
-msgstr "Pəncərə menüsünü göstər"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the menu listing all window operations."
-msgstr "Menünü bütün pəncərə əməliyyatlarının nümayişi ilə göstər ."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup root menu"
-msgstr "Ana menünü göstər"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the main menu."
-msgstr "Ana menünü göstər."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup apps menu"
-msgstr "Proqramlar menüsünü göstər"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the applications menu."
-msgstr "Proqramlar menyunusunu göstər ."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Popup window list menu"
-msgstr "Pəncərə menüsünü göstər"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Display the window-list menu."
-msgstr "Ana menünü göstər."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "S_awfishConfig"
-msgstr "\"Sawfish\" quraşdırıcı"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "Örtünü düzəlt..."
+#. ../lisp/sawfish/wm/ext/apps-menu.jl
+msgid ""
+"Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
+"append the auto generated one."
+msgstr ""
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 #, fuzzy
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "'Stagger' yerləşdirmə növündə müvəffəqiyyətli yerləşdirmələr arası ."
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing windows: \\w"
-msgstr "Pəncərələri yerləşdirmə növü : \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing dialog windows: \\w"
-msgstr "Dialoq pəncərələrini yerləşdirmə növü : \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Stacking"
-msgstr "Yıǧışdırılır"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "parents"
-msgstr "yaxınlar"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Kiçik pəncərələri, bunlardan üstdə tut : \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise single window"
-msgstr "Tək pəncərəni yüksəlt"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Pəncərəni yapışıq olduğu səviyyədə ən üstə gətir."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower single window"
-msgstr "Tək pəncərəni alçalt"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Pəncərəni yapışıq olduğu səviyyədə ən alta daşı."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise lower single window"
-msgstr "Alçaq tək pəncərəni yüksəlt"
-
-#. ../lisp/sawfish/wm/stacking.jl
-#, fuzzy
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
-"Pəncərə mümkün olan ən üst yerdə isə, mümkün olan ən altdakı yerinə daşı .\n"
-"Yoxsa onu mümkün olduğu qədəri yüksəlt və bu pəncərəyə bağlı olan kiçik "
-"pəncərələrini də\n"
-"o pəncərə ilə birlikdə yüksəlt/alçalt. "
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise window depth"
-msgstr "Pəncərə dərinliyini artır"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level above its current level."
-msgstr "Yapışıq  səviyyədə olan pəncərəni hökmlü səviyyənin üstünə qoy ."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower window depth"
-msgstr "Pəncərə dərinliyini azalt"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level beneath its current level."
-msgstr "Yapışıq  səviyyədə olan pəncərəni hökmlü səviyyənin yanına qoy ."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -3720,8 +2878,23 @@ msgid "In _task list"
 msgstr "GNOME Və_zifə siyahısında"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr "Pəncərə böyüdüləndə pəncərənin böyüklüyünü və yerini qıfılla ."
+msgid ""
+"Lock position and size while windows are maximized.\n"
+"\n"
+"Remember that after you resize a maximized window, you can't unmaximize it "
+"any more."
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize discard"
+msgstr "Böyüdülmüş"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Don't treat window as maximized any more, keeping the size and the position. "
+"You'll be able to move and resize, but won't be able to unmaximize."
+msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window"
@@ -3970,85 +3143,82 @@ msgstr ""
 "pəncərələrini də\n"
 "o pəncərə ilə birlikdə yüksəlt/alçalt. "
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab's left-edge decoration"
-msgstr ""
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "When raising a window, also raise its: \\w"
+msgstr "Bir pəncərəni yüksəldəndə, bunları da yüksəlt: \\w"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab's right-edge decoration"
-msgstr ""
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise window"
+msgstr "Pəncərəni yüksəlt"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab area's left-edge decoration"
-msgstr ""
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab area's right-edge decoration"
-msgstr ""
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
-msgid "Raise Tabs on Hover"
-msgstr "Fokuslanınca yüksəl"
+msgid ""
+"Raise the window to its highest allowed position in the stacking\n"
+"order."
+msgstr "Pəncərəni yapışıq olduğu səviyyədə ən üstə gətir."
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-#, fuzzy
-msgid "Tab add to group"
-msgstr "Qrupu alçalt"
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Lower window"
+msgstr "Pəncərəni alçalt"
 
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
-msgid "Tab release window"
-msgstr "Pəncərəni ləğv et"
+msgid ""
+"Lower the window to its lowest allowed position in the stacking\n"
+"order."
+msgstr "Pəncərəni yapışıq olduğu səviyyədə ən alta daşı."
 
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Release active window from its group"
-msgstr "Timsallaşdırılmış pəncərəni böyüt."
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Tab raise left window"
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise lower window"
 msgstr "Alçaq pəncərəni yüksəlt"
 
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
-msgid "Raise left window in current group"
-msgstr "Alçaq pəncərə və transientləri yüksəlt"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Tab raise right window"
-msgstr "Tək pəncərəni yüksəlt"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Raise right window in current group"
-msgstr "Alçaq pəncərə və transientləri yüksəlt"
+msgid ""
+"If the window is at its highest possible position, then lower it\n"
+"to its lowest possible position. Otherwise raise it as far as\n"
+"allowed."
+msgstr ""
+"Pəncərə mümkün olan ən üst yerdə isə, mümkün olan ən altdakı yerinə daşı .\n"
+"Yoxsa onu mümkün olduğu qədəri yüksəlt və bu pəncərəyə bağlı olan kiçik "
+"pəncərələrini də\n"
+"o pəncərə ilə birlikdə yüksəlt/alçalt. "
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
 msgstr "Bir iş sahəsi əlavə et"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Unshade selected windows."
-msgstr "Seçilmiş olan pəncərələri normallaştir ."
+#, fuzzy
+msgid "Unshade window when selected."
+msgstr "Pəncərəni kölgədən çıxart"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
 msgstr "Pəncərəni nişanlamadan göstər"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace/viewport containing the window W."
-msgstr "Wyi daxil edən masa üstünü/sahəni göstər ."
+msgid ""
+"Display the window, but don't focus. You're prompted to type in the name."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Pəncərəni göstər"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Wyi daxil edən masa üstünə keç və Wyə fokus ver ."
+msgid "Display the window. You're prompted to type in the name."
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+#, fuzzy
+msgid "Display window position"
+msgstr "Pəncərəni göstər"
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+msgid "Choose a window, and prints its position and size in a popup."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -4129,6 +3299,11 @@ msgstr "İş Sahəsu %d"
 msgid "Workspace:"
 msgstr "İş sahəsi:"
 
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Font for prompt: \\w"
 msgstr ""
@@ -4147,47 +3322,598 @@ msgstr ""
 "Düymə xəritələrini daxil edən bağlar , istifadəçidən mətn alarkən fəal "
 "olsun ."
 
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "When raising a window, also raise its: \\w"
-msgstr "Bir pəncərəni yüksəldəndə, bunları da yüksəlt: \\w"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "Raise window"
-msgstr "Pəncərəni yüksəlt"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
-msgid ""
-"Raise the window to its highest allowed position in the stacking\n"
-"order."
-msgstr "Pəncərəni yapışıq olduğu səviyyədə ən üstə gətir."
+msgid "Theme"
+msgstr "\"Crux\" Örtüsü"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "Lower window"
-msgstr "Pəncərəni alçalt"
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Örtüklər yenilənincə onları avtomatik olaraq yenidən yüklə."
 
-#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Ön qurğulu yazı növü: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default"
+msgstr "Ön qurğulu"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Normal"
+msgstr "Normal"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Title-only"
+msgstr "Sırf başlıq"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Border-only"
+msgstr "Sırf kənar"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Top-border"
+msgstr "Üst-kənar"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "None"
+msgstr "Heç biri"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Bağlar"
+
+#. ../lisp/sawfish/wm/custom.jl
 #, fuzzy
-msgid ""
-"Lower the window to its lowest allowed position in the stacking\n"
-"order."
-msgstr "Pəncərəni yapışıq olduğu səviyyədə ən alta daşı."
+msgid "Mini/Maximizing"
+msgstr "Kiçiltmə və Böyütmə"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "Raise lower window"
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Qarışıq"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Daşı / Böyüklüyünü Dəyişdir"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Stacking"
+msgstr "Yıǧışdırılır"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Masa Üstləri"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Tabs"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge-transient decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge-transient decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Raise Tabs on Hover"
+msgstr "Fokuslanınca yüksəl"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
+msgstr "Qrupu alçalt"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab release window"
+msgstr "Pəncərəni ləğv et"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Release active window from its group"
+msgstr "Timsallaşdırılmış pəncərəni böyüt."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise left window"
 msgstr "Alçaq pəncərəni yüksəlt"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise left window in current group"
+msgstr "Alçaq pəncərə və transientləri yüksəlt"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise right window"
+msgstr "Tək pəncərəni yüksəlt"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Alçaq pəncərə və transientləri yüksəlt"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "global-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Bütün fəal bağları  daxil edən düymə xəritəsi ."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "pəncərə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Nişanlanmış pəncərədəki fəal bağları  daxil edən düymə xəritəsi ."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "kök-pəncərə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid ""
-"If the window is at its highest possible position, then lower it\n"
-"to its lowest possible position. Otherwise raise it as far as\n"
-"allowed."
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Ana pəncərə nişanlanmış ikən fəal bağları  daxil edən düymə xəritəsi \n"
+"( və ya hiç bir pəncərə seçilmədiyi vaxt da istifadə ediləcək ) ."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "başlıq-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin başlığında hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "kənar açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin kənarında hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "bağla-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "timsallaşdır-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin timsallaşdırma düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "böyüt-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin böyütmə düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "menyu-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin menyu düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "kölgələ-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin kölgələmə düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "sticky-button-keymap"
+msgstr "timsallaşdır-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the sticky button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "lock-button-keymap"
+msgstr "bağla-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the lock button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "rename-button-keymap"
+msgstr "menyu-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the rename button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin menyu düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "move-resize-button-keymap"
+msgstr "bağla-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the move/resize "
+"button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "raise-lower-button-keymap"
+msgstr "bağla-düymə-açar xəritəsi"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the raise/lower "
+"button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Pəncərələrin bağlama düyməsinin üstündə hökmlü olan düymə xəritəsi ;\n"
+"( Sadəcə olaraq siçan hərəkətləri analiz edilir .) "
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Ön qurğulu qısa yollar üçün istifadə edilən düymə(lər)."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Warping"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Whether to enable warping the cursor to windows."
+msgstr ""
+"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
+"pəncərənin içinə girilməsi."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Whether to not avoid ignored windows by default."
+msgstr ""
+"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
+"pəncərənin içinə girilməsi."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
+msgstr ""
+"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
+"pəncərənin içinə girilməsi."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Format to create unique window names."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "Masa üstünü fokusa al"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Giriş fokusunu masa üstü pəncərəsinə daşı (varsa)."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Pəncərəni ləğv et"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid ""
+"Delete a window. If the window does not support that protocol,\n"
+"kill the client."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Pəncərəni etibarlı ləğv et"
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Delete a window, or beep if the window can't be closed safely."
+msgstr "Pəncərəni sil , və pəncərə qapana bilmirsə səs çıxart ."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Pəncərə adlarını eyniləşdir"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Hazırkı pəncərəni yeganə olan bir başlıq sahib olmasına imkan ver."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Pəncərəni yüksəlt"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Siçan oxunun nə vaxt fokusu dəyişəcəyi ."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr "Fokus-üçün-tıqla modu tıqlamanı proqrama ötürür."
+
+#. ../lisp/sawfish/wm/focus.jl
+#, fuzzy
+msgid "Whether focusing a window doesn't change it's position in the stack."
+msgstr "Pəncərəni yapışıq olduğu səviyyədə ən alta daşı."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Help"
+msgstr "_Yardım"
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_GNOME Help"
+msgstr "_GNOME Köməyi..."
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "GNOME _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_About GNOME"
+msgstr "GNOME Haqqında..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "Sessi_on"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Customize GNOME"
+msgstr "_Xüsusiləşdir"
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Logout from GNOME"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Shutdown from GNOME"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_KDE Help"
+msgstr "_Yardım"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "KDE _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Customize KDE"
+msgstr "_Xüsusiləşdir"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Logout from KDE"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Reboot from KDE"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_XFCE Help"
+msgstr "_Yardım"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "XFCE _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_About XFCE"
+msgstr "GNOME Haqqında..."
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_Customize XFCE"
+msgstr "_Xüsusiləşdir"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_Logout from XFCE"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_Reboot from XFCE"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Shutdown from XFCE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Pəncərələri yerləşdirmə növü : \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "Dialoq pəncərələrini yerləşdirmə növü : \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "yaxınlar"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Kiçik pəncərələri, bunlardan üstdə tut : \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Tək pəncərəni yüksəlt"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Pəncərəni yapışıq olduğu səviyyədə ən üstə gətir."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Tək pəncərəni alçalt"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Pəncərəni yapışıq olduğu səviyyədə ən alta daşı."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Alçaq tək pəncərəni yüksəlt"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#, fuzzy
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
 "Pəncərə mümkün olan ən üst yerdə isə, mümkün olan ən altdakı yerinə daşı .\n"
 "Yoxsa onu mümkün olduğu qədəri yüksəlt və bu pəncərəyə bağlı olan kiçik "
 "pəncərələrini də\n"
 "o pəncərə ilə birlikdə yüksəlt/alçalt. "
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Pəncərə dərinliyini artır"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Yapışıq  səviyyədə olan pəncərəni hökmlü səviyyənin üstünə qoy ."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Pəncərə dərinliyini azalt"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Yapışıq  səviyyədə olan pəncərəni hökmlü səviyyənin yanına qoy ."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -4373,81 +4099,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "The default window animation mode"
 msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Pəncərələr nişanlanınca onları yüksəlt ."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Warping"
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Whether to enable warping the cursor to windows."
-msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
-"pəncərənin içinə girilməsi."
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Whether to not avoid ignored windows by default."
-msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
-"pəncərənin içinə girilməsi."
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Whether to avoid any unspecified window by default."
-msgstr ""
-"Pəncərələrin genişlədilməsi və bağlanması sırasında rədd edilmiş\n"
-"pəncərənin içinə girilməsi."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Format to create unique window names."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Focus desktop"
-msgstr "Masa üstünü fokusa al"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr "Giriş fokusunu masa üstü pəncərəsinə daşı (varsa)."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window"
-msgstr "Pəncərəni ləğv et"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "Pəncərəni sil ."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window safely"
-msgstr "Pəncərəni etibarlı ləğv et"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr "Pəncərəni sil , və pəncərə qapana bilmirsə səs çıxart ."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Uniquify window name"
-msgstr "Pəncərə adlarını eyniləşdir"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Force the current window to have a unique title."
-msgstr "Hazırkı pəncərəni yeganə olan bir başlıq sahib olmasına imkan ver."
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Rename window"
-msgstr "Pəncərəni yüksəlt"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -4725,6 +4376,522 @@ msgstr "İş sahəsini qarşılıqlı seç"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Bir masa üstü üçün soruş və oraya keç ."
 
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Xüsusiləşdir"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the configurator GUI."
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Mi_nimize"
+msgstr "Kiçilt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Unma_ximize"
+msgstr "Kiçilt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ma_ximize"
+msgstr "Böyüt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Move"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Resize"
+msgstr "Daşı / Böyüklüyünü Dəyişdir"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "_Bağla"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Toggle"
+msgstr "_Get-Gəl"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "In _group"
+msgstr "_Qrupda"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Send window to"
+msgstr "_Pəncərəni göndər"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Previous workspace"
+msgstr "_Arxadakı masa üstü"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Next workspace"
+msgstr "_Qabaqdakı masa üstü"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "C_opy window to"
+msgstr "_Pəncərəni göndər"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "P_revious workspace"
+msgstr "Əvvəlki iş sahəsi"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "Sonrakı iş sahəsi"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "Sola böyüt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "Sağa böyüt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "Yuxarı böyüt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "Aşağı böyüt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "Sola daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "Sağa daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "Yuxarı daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "Alta daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "Pəncərəni sola sürüşdür"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "Pəncərəni sağa sürüşdür"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "Pəncərəni yuxaı sürüşdür"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "Pəncərəni aşağı sürüşdür"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "Sola daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "Sağa daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "Yuxarı daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "Alta daşı"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Stac_king"
+msgstr "Yıǧışdırılır"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Raise"
+msgstr "Yüksəlt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Lower"
+msgstr "Alçalt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Upper layer"
+msgstr "Səviyyə yüksəlt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Lo_wer layer"
+msgstr "Səviyyə alçalt"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Frame ty_pe"
+msgstr "Görünüş növü"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Frame sty_le"
+msgstr "Çərçivə tərzi"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "Sawfish ev səhifəsi"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Windows"
+msgstr "_Pəncərələr"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Work_spaces"
+msgstr "_Masa üstləri"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Programs"
+msgstr "_Proqramlar"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Customize"
+msgstr "_Xüsusiləşdir"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display _Errors"
+msgstr "Xətaları göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Reload Appsmenu"
+msgstr "Proqramlar menüsünü göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Restart _Sawfish"
+msgstr "Yenidən başla"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Quit Sawfish"
+msgstr "\"Sawfish\" _Haqqında..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _FAQ"
+msgstr "\"Sawfish\" Xətası"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _News"
+msgstr "Sawfish ev səhifəsi"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _Wiki"
+msgstr "\"Sawfish\" Xətası"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _Manual"
+msgstr "Sawfish ev səhifəsi"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_About Sawfish"
+msgstr "\"Sawfish\" _Haqqında..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "_Pəncərələr"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "GNOME iclasını qurtar ."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Hibernate System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Pəncərə menüsünü göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Menünü bütün pəncərə əməliyyatlarının nümayişi ilə göstər ."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Ana menünü göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Ana menünü göstər."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Proqramlar menüsünü göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Proqramlar menyunusunu göstər ."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Popup window list menu"
+msgstr "Pəncərə menüsünü göstər"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Ana menünü göstər."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "S_awfishConfig"
+msgstr "\"Sawfish\" quraşdırıcı"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Əmri çağır"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr ""
+"Əmr adını çağırın: istəyə bağlı olaraq PFX-ARG önlüyü ilə də çağlra "
+"bilərsiniz."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Qabıq əmrini işə sal ."
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Execute the given shell command in the background."
+msgstr "Verilən əmri işə sal ."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Əmr sekvensiyası"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Əmrlərin siyahısını bir bir işə sal ."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Çıx"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Quit sawfish."
+msgstr "\"Sawfish\" _Haqqında..."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Yenidən başla"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Restart sawfish."
+msgstr "Yenidən başla"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Pəncərəni dağıt"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Destroy a window."
+msgstr "Pəncərəni dağıt"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Alıcını öldür"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Kill the client that created the specified window."
+msgstr "Hazırkı pəncərəni bildirilən görünüşə daşı ."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Fəaliyyət yoxdur"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Æmri yekunu ekrana yazaraq çağır"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr ""
+"Bir əmr üçün soruş, o əmri işə sal və o amrin nəticəsini ekranda göstər ."
+
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Çərçivə :"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Yaxala ..."
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Masa üstləri :"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Sütunlar :"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Sıralar :"
+
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Sənədsiz"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#, fuzzy
+msgid "Edit Binding"
+msgstr "Bağları düzəlt"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Düymə :"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "Yaxalayıcılar"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Gedişlər"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "yox"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#, fuzzy
+msgid "Match Window Properties"
+msgstr "Pəncərə xüsusiyyətlərini yaxala"
+
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "%s dəyişdirilərkən:"
+
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "\"Sawfish\" Xətası"
+
+#. ../lisp/sawfish/cfg/shell.jl
+#, fuzzy
+msgid "Sawfish Configurator"
+msgstr "\"Sawfish\" quraşdırıcı"
+
+#~ msgid "Select font"
+#~ msgstr "Yazı növünü seç"
+
+#~ msgid "Add..."
+#~ msgstr "Əlavə Et ..."
+
+#~ msgid "Delete"
+#~ msgstr "Sil"
+
+#~ msgid "Edit..."
+#~ msgstr "Düzəlt..."
+
+#~ msgid "3d hack"
+#~ msgstr "3d hack"
+
+#, fuzzy
+#~ msgid "Amount to move the workspace."
+#~ msgstr "Sonrakı iş sahəsinə göndər"
+
+#~ msgid "Default frame style:"
+#~ msgstr "Ön qurğulu çərçivə böyüklüyü:"
+
+#~ msgid "Edit frame style"
+#~ msgstr "Çərçivə tərzini düzəlt"
+
+#~ msgid "_FAQ..."
+#~ msgstr "_SSS..."
+
+#~ msgid "_News..."
+#~ msgstr "_Xəbərlər..."
+
+#~ msgid "_WWW page..."
+#~ msgstr "_WWW səhifəsi"
+
+#~ msgid "_Manual..."
+#~ msgstr "_Bələdçi..."
+
+#~ msgid "Edit theme..."
+#~ msgstr "Örtünü düzəlt..."
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Pəncərə böyüdüləndə pəncərənin böyüklüyünü və yerini qıfılla ."
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "Seçilmiş olan pəncərələri normallaştir ."
+
+#~ msgid "Display the workspace/viewport containing the window W."
+#~ msgstr "Wyi daxil edən masa üstünü/sahəni göstər ."
+
+#~ msgid "Display the workspace containing the window W, then focus on W."
+#~ msgstr "Wyi daxil edən masa üstünə keç və Wyə fokus ver ."
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Pəncərələr nişanlanınca onları yüksəlt ."
+
+#~ msgid "Delete the window."
+#~ msgstr "Pəncərəni sil ."
+
 #~ msgid "and many others..."
 #~ msgstr "və daha başqaları..."
 
@@ -4908,12 +5075,6 @@ msgstr "Bir masa üstü üçün soruş və oraya keç ."
 #~ msgstr ""
 #~ "Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf böyüyər.\n"
 #~ "Baxın `grow-window-up'"
-
-#, fuzzy
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Başqa bir pəncərənin içinə girənə qədər pəncərə alta tərəf daşınar.\n"
-#~ "Baxın `pack-window-up'"
 
 #, fuzzy
 #~ msgid ""

@@ -286,10 +286,10 @@ DIMS and POINT, and the list of rectangles RECTS when placed at POINT."
     "Return the number of screen heads that rectangle RECT appears on."
     (let loop ((head 0)
 	       (count 0))
-         (if (= head (head-count))
-             count
-           (loop (1+ head)
-                 (if (> (rect-2d-overlap (head-dimensions head)
-                                         (head-offset head) rect) 0)
-                     (1+ count)
-                   count))))))
+      (if (= head (head-count))
+	  count
+	(loop (1+ head)
+	      (if (> (rect-2d-overlap (head-dimensions head)
+				      (head-offset head) rect) 0)
+		  (1+ count)
+		count))))))

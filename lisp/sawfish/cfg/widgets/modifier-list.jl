@@ -48,9 +48,9 @@
     (and (listp x)
 	 (not (null x))
 	 (let loop ((rest x))
-              (cond ((null rest) t)
-                    ((not (memq (car rest) modifiers)) nil)
-                    (t (loop (cdr rest)))))))
+	   (cond ((null rest) t)
+		 ((not (memq (car rest) modifiers)) nil)
+		 (t (loop (cdr rest)))))))
 
   (define (make-item changed-callback)
     (let (base)

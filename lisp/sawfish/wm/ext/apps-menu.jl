@@ -174,10 +174,10 @@ set this to non-nil.")
 
   (define (find-lang-string)
     (let loop ((lang-vars '("LC_ALL" "LC_MESSAGES" "LANG")))
-	 (and lang-vars
-	      (let ((mlang (getenv (car lang-vars))))
-		(if mlang (simplify-mlang mlang 0)
-		  (loop (cdr lang-vars)))))))
+      (and lang-vars
+	   (let ((mlang (getenv (car lang-vars))))
+	     (if mlang (simplify-mlang mlang 0)
+	       (loop (cdr lang-vars)))))))
 
   ;; The Master Category List
 
@@ -258,19 +258,19 @@ set this to non-nil.")
   (define (determine-desktop-category line)
     (let loop ((cat-list (string-split ";" line))
 	       this-cat)
-	 (if (cdr cat-list)
-	     (progn
-	       (setq this-cat (car cat-list))
-	       (if (or
-		    (string= this-cat "GNOME")
-		    (string= this-cat "GTK")
-		    (string= this-cat "KDE")
-		    (string= this-cat "Qt")
-		    (string= this-cat "X-XFCE")
-		    (string= this-cat "Application"))
-		   (loop (cdr cat-list) nil)
-		 this-cat))
-	   (car cat-list))))
+      (if (cdr cat-list)
+	  (progn
+	    (setq this-cat (car cat-list))
+	    (if (or
+		 (string= this-cat "GNOME")
+		 (string= this-cat "GTK")
+		 (string= this-cat "KDE")
+		 (string= this-cat "Qt")
+		 (string= this-cat "X-XFCE")
+		 (string= this-cat "Application"))
+		(loop (cdr cat-list) nil)
+	      this-cat))
+	(car cat-list))))
 
   ;; Alphabetize the entries in the category menus
   (define (alphabetize-entries saw-menu)

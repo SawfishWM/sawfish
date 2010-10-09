@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-18 18:28+0100\n"
+"POT-Creation-Date: 2010-10-05 16:53+0900\n"
 "PO-Revision-Date: 2006-01-10 19:16+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
@@ -173,9 +173,9 @@ msgid "all"
 msgstr "tất cả"
 
 #. ../lisp/sawfish/wm/window-anim.jl
+#. ../lisp/sawfish/wm/stacking.jl
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
-#. ../lisp/sawfish/wm/stacking.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
 msgstr "không"
@@ -742,7 +742,7 @@ msgstr "Ánh xạ nút trình đơn"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
-"customize look button keymap\n"
+"customize lock button keymap\n"
 "\n"
 "By default a button will work as it's name suggests. Button1: lock window "
 "position"
@@ -1065,97 +1065,14 @@ msgstr "Độ rộng của viền cửa sổ."
 msgid "Border width of bar images."
 msgstr "Độ rộng viền của ảnh thanh ngang."
 
-#. ../lisp/sawfish/cfg/apply.jl
-#, c-format
-msgid "While changing %s:"
-msgstr "Khi thay đổi %s:"
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "Yes"
+msgstr "Có"
 
-#. ../lisp/sawfish/cfg/apply.jl
-msgid "Sawfish Error"
-msgstr "Lỗi Sawfish"
+#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
+msgid "No"
+msgstr "Không"
 
-#. ../lisp/sawfish/cfg/layouts/keymaps.jl
-msgid "Context:"
-msgstr "Ngữ cảnh:"
-
-#. ../lisp/sawfish/cfg/shell.jl
-msgid "Sawfish Configurator"
-msgstr "Bộ cấu hình Sawfish"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/commands.jl
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-#. ../lisp/sawfish/cfg/widgets/command.jl
-msgid "Command"
-msgstr "Lệnh"
-
-#. ../lisp/sawfish/cfg/widgets/command.jl
-msgid "Undocumented"
-msgstr "Không có tài liệu"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-#. ../lisp/sawfish/cfg/widgets/event.jl
-msgid "Grab..."
-msgstr "Bắt..."
-
-#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
-msgid "Workspaces:"
-msgstr "Vùng làm việc:"
-
-#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
-msgid "Columns:"
-msgstr "Cột:"
-
-#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
-#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
-msgid "Rows:"
-msgstr "Hàng:"
-
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-msgid "Edit Binding"
-msgstr "Sửa đổi tổ hợp"
-
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-msgid "Key"
-msgstr "Phím"
-
-#. ../lisp/sawfish/cfg/widgets/keymap.jl
-msgid "Key:"
-msgstr "Phím:"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "Matchers"
-msgstr "Bộ khớp"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "Actions"
-msgstr "Hành động"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "not"
-msgstr "không"
-
-#. ../lisp/sawfish/cfg/widgets/match-window.jl
-msgid "Match Window Properties"
-msgstr "Khớp thuộc tính cửa sổ"
-
-#. ../lisp/sawfish/gtk/widget.jl
-#, c-format
-msgid "No matching item for %S"
-msgstr "Không có mục nào khớp với %S"
-
-#. ../lisp/sawfish/gtk/widget.jl
-msgid "** unknown widget **  "
-msgstr "•• ô điều khiển lạ ••  "
-
-#. ../lisp/sawfish/gtk/widgets/alist.jl
-msgid "Value"
-msgstr "Giá trị"
-
-#. ../lisp/sawfish/gtk/widgets/font.jl
 #. ../lisp/sawfish/gtk/widgets/file.jl
 msgid "Browse..."
 msgstr "Duyệt..."
@@ -1164,21 +1081,14 @@ msgstr "Duyệt..."
 msgid "Select file"
 msgstr "Chọn tập tin"
 
-#. ../lisp/sawfish/gtk/widgets/font.jl
-msgid "Select font"
-msgstr "Chọn phông chữ"
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+msgid "Key"
+msgstr "Phím"
 
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Add..."
-msgstr "Thêm..."
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Delete"
-msgstr "Xóa bỏ"
-
-#. ../lisp/sawfish/gtk/widgets/list.jl
-msgid "Edit..."
-msgstr "Sửa..."
+#. ../lisp/sawfish/gtk/widgets/alist.jl
+msgid "Value"
+msgstr "Giá trị"
 
 #. ../lisp/sawfish/gtk/widgets/list.jl
 msgid "Add:"
@@ -1188,13 +1098,14 @@ msgstr "Thêm:"
 msgid "Edit:"
 msgstr "Sửa:"
 
-#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
-msgid "Yes"
-msgstr "Có"
+#. ../lisp/sawfish/gtk/widget.jl
+#, c-format
+msgid "No matching item for %S"
+msgstr "Không có mục nào khớp với %S"
 
-#. ../lisp/sawfish/gtk/widgets/scheme-boolean.jl
-msgid "No"
-msgstr "Không"
+#. ../lisp/sawfish/gtk/widget.jl
+msgid "** unknown widget **  "
+msgstr "•• ô điều khiển lạ ••  "
 
 #. ../lisp/sawfish/wm/animation/outline.jl
 msgid "Animation Outline Coordinates"
@@ -1209,52 +1120,6 @@ msgstr "Hành động"
 #, fuzzy
 msgid "Animation Delay"
 msgstr "Hành động"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Grow, Pack, Shrink & Yank"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Window Cycling"
-msgstr "Xoay vòng cửa sổ"
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Tabs"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Sound"
-msgstr "Âm thanh"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/autoload.jl
-#, fuzzy
-msgid "Window Rules"
-msgstr "_Cửa sổ"
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Tooltips"
-msgstr "Mẹo công cụ"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "History"
-msgstr "Lược sử"
-
-#. ../lisp/sawfish/wm/util/prompt.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Messages"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-#. ../lisp/sawfish/wm/autoload.jl
-msgid "Index:"
-msgstr "Chỉ mục:"
 
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Next workspace window"
@@ -1287,22 +1152,6 @@ msgstr "Cửa sổ trước"
 #. ../lisp/sawfish/wm/commands/cycle.jl
 msgid "Select the previous window, cycling through all possible workspaces."
 msgstr "Chọn cửa sổ trước, xoay vòng qua mọi vùng làm việc có thể."
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Describe symbol"
-msgstr "Mô tả ký hiệu"
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Display the documentation of a specified symbol."
-msgstr "Hiện tài liệu về một ký hiệu xác định."
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Apropos function"
-msgstr "Hàm Apropos"
-
-#. ../lisp/sawfish/wm/commands/describe.jl
-msgid "Apropos variable"
-msgstr "Biến Apropos"
 
 #. ../lisp/sawfish/wm/commands/groups.jl
 msgid "Iconify group"
@@ -1392,215 +1241,13 @@ msgstr "Xóa bỏ nhóm"
 msgid "Delete all windows in the group that the current window is a member of."
 msgstr "Xóa bỏ mọi cửa sổ trong nhóm chứa cửa sổ hiện thời."
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Whether growing is considered to be maximization."
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "Jump or exec"
 msgstr ""
 
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "always"
-msgstr "luôn luôn"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "maybe"
-msgstr "có thể"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "never"
-msgstr "không bao giờ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Whether and how to move the pointer when packing windows.\n"
-"`maybe' means that the pointer is moved along with the window, if the\n"
-"pointer was within the window area before packing. `always' warps the\n"
-"pointer to the center of the window if it isn't already in the\n"
-"window, then does like `maybe'.  `never' means not to warp the\n"
-"pointer."
+#. ../lisp/sawfish/wm/commands/jump-or-exec.jl
+msgid "jump to a window matched by re, or start program otherwise."
 msgstr ""
-"Có nên và cách di chuyển con trỏ hay không, khi nén cửa sổ.\n"
-"\n"
-" • có thể\t\tcon trỏ chuyển cùng với cửa sổ,\n"
-"nếu con trỏ ở trong vùng cửa sổ trước khi nén.\n"
-"\n"
-" • luôn luôn\tkéo con trỏ vào trung tâm cửa sổ,\n"
-"nếu nó chưa trong cửa sổ, rồi theo hành vi « có thể ».\n"
-"\n"
-" • không bao giờ\tđừng kéo con trỏ từ chỗ."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Whether to bump into fully obscured windows."
-msgstr ""
-"Có nên đâm sầm vào cửa sổ bị lấp hoàn toàn hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Whether to bump into windows on a different depth. When 'maybe,\n"
-"Only `avoided' windows are bumped."
-msgstr ""
-"Có nên đâm sầm vào cửa sổ nằm trên độ sâu khác hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ.\n"
-" • có thể\t\tchỉ tránh các cửa sổ nằm trên độ sâu khác."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid "Whether to bump into ignored windows."
-msgstr ""
-"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "The minimum height or width to which a window may be shrunk."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "The minimum amount of window left visible, if yanked over the edge."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window left"
-msgstr "Nới bên trái cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Grows window to the left until it `bumps into' another window.\n"
-"See `grow-window-up'."
-msgstr ""
-"Tăng kích cỡ của cửa sổ bên trái cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Xem « nới bên trên cửa sổ »."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window right"
-msgstr "Nới bên phải cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Grows window to the right until it `bumps into' another window.\n"
-"See `grow-window-up'."
-msgstr ""
-"Tăng kích cỡ của cửa sổ bên phải cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Xem « nới bên trên cửa sổ »."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window up"
-msgstr "Nới bên trên cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Grows window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is brought back in.\n"
-"With a universal prefix arg, maximize upwards instead.\n"
-"With a numeric prefix arg, grow upwards by that many increments specified "
-"by\n"
-"window or pixels instead."
-msgstr ""
-"Tăng kích cỡ của cửa sổ bên trên cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
-"Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
-"Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
-"bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Grow window down"
-msgstr "Nới bên dưới cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Grows window downwards until it `bumps into' another window.\n"
-"See `grow-window-up'."
-msgstr ""
-"Tăng kích cỡ của cửa sổ bên dưới cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Xem « nới bên trên cửa sổ »."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window left"
-msgstr "Nén bên trái cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Moves window to the left until it `bumps into' another window.\n"
-"See `pack-window-up'."
-msgstr ""
-"Chuyển cửa sổ bên trái cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Xem « nén bên trên cửa sổ »."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window right"
-msgstr "Nén bên phải cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Moves window to the right until it `bumps into' another window.\n"
-"See `pack-window-up'."
-msgstr ""
-"Chuyển cửa sổ bên phải cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Xem « nén bên trên cửa sổ »."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window up"
-msgstr "Nén bên trên cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid ""
-"Moves window upwards until it `bumps into' another window.\n"
-"If the top edge was beyond the screen edge, it is moved back in.\n"
-"With a universal prefix arg, move upwards maximally instead.\n"
-"With a numeric prefix arg, move upwards by that many pixels instead."
-msgstr ""
-"Chuyển của cửa sổ bên trên cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
-"Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
-"Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
-"bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-msgid "Pack window down"
-msgstr "Nén bên dưới cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/grow-pack.jl
-#, fuzzy
-msgid ""
-"Moves window downwards until it `bumps into' another window.\n"
-"See `pack-window-up'."
-msgstr ""
-"Chuyển cửa sổ bên dưới cho đến khi\n"
-"nó « đâm sầm vào » một cửa sổ khác.\n"
-"Xem « nén bên trên cửa sổ »."
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show faq"
-msgstr "Trợ giúp: hiện Hỏi Đáp"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show news"
-msgstr "Trợ giúp: hiện tin tức"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show programmer manual"
-msgstr "Trợ giúp: hiện sổ tay lập trình"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help show homepage"
-msgstr "Trợ giúp: hiện trang chủ Mạng"
-
-#. ../lisp/sawfish/wm/commands/help.jl
-msgid "Help about"
-msgstr "Trợ giúp: giới thiệu"
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 #, fuzzy
@@ -1783,6 +1430,567 @@ msgstr "Đẩy con trỏ sang trái"
 msgid "Move the cursor to the center of the screen"
 msgstr "Di chuyển con trỏ sang trái một điểm ảnh."
 
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to reboot the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to halt the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to suspend the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "The command used to hibernate the computer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/poweroff.jl
+msgid "Poweroff"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click"
+msgstr "Nâng lên và gởi nhắp qua"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
+msgid ""
+"Raise the window that received the current event, then replay any pointer\n"
+"events that invoked the command."
+msgstr ""
+"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
+"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise and pass through click if focused"
+msgstr "Nâng lên và gởi nhắp qua nếu có tiêu điểm"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
+msgid ""
+"Raise the window that received the current event (if it's focused), then\n"
+"replay any pointer events that invoked the command."
+msgstr ""
+"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
+"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise or pass through click"
+msgstr "Nâng lên hay gởi nhắp qua"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise window and pass through click"
+msgstr "Nâng cửa sổ lên và gởi nhắp qua"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise group and pass through click"
+msgstr "Nâng nhóm lên và gởi nhắp qua"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+#, fuzzy
+msgid ""
+"Raise the group of windows that received the current event, then replay\n"
+"any pointer events that invoked the command."
+msgstr ""
+"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
+"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid "Raise transients and pass through click"
+msgstr "Nâng điều tạm lên và gởi nhắp qua"
+
+#. ../lisp/sawfish/wm/commands/raise-commands.jl
+msgid ""
+"Raise the window that received the current event and any transients it\n"
+"has, then replay any pointer events that invoked the command."
+msgstr ""
+"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
+"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window left"
+msgstr "Trượt cửa sổ sang trái"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the right edge to the left until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window right"
+msgstr "Trượt cửa sổ sang phải"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the left edge to the right until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window up"
+msgstr "Trượt cửa sổ lên trên"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the lower edge upwards until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Shrink window down"
+msgstr "Trượt cửa sổ xuống dưới"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+msgid ""
+"Shrinks WINDOW by moving the upper edge downwards until it\n"
+"overlaps with one less window than before."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window left"
+msgstr "Nén bên trái cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW to the left until it overlaps with one less window\n"
+"than before."
+msgstr ""
+"Chuyển cửa sổ bên trái cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window right"
+msgstr "Nén bên phải cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW to the right until it overlaps with one less window\n"
+"than before."
+msgstr ""
+"Chuyển cửa sổ bên phải cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window up"
+msgstr "Nén bên trên cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW upwards until it overlaps with one less window than\n"
+"before."
+msgstr ""
+"Chuyển cửa sổ bên dưới cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid "Yank window down"
+msgstr "Nén bên dưới cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/shrink-yank.jl
+#, fuzzy
+msgid ""
+"Moves WINDOW downwards until it overlaps with one less window than\n"
+"before."
+msgstr ""
+"Chuyển cửa sổ bên dưới cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add row"
+msgstr "Tăng cửa sổ thêm hàng"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one row."
+msgstr "Tăng kích cỡ của cửa sổ hiện thời bằng một hàng."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract row"
+msgstr "Giảm cửa sổ trừ hàng"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one row."
+msgstr "Giảm kích cỡ của cửa sổ hiện thời bằng một hàng."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window add column"
+msgstr "Tăng cửa sổ thêm cột"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Increase the size of the current window by one column."
+msgstr "Tăng kích cỡ của cửa sổ hiện thời bằng một cột."
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Size window subtract column"
+msgstr "Giảm cửa sổ trừ cột"
+
+#. ../lisp/sawfish/wm/commands/size-window.jl
+msgid "Decrease the size of the current window by one column."
+msgstr "Giảm kích cỡ của cửa sổ hiện thời bằng một cột."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window left"
+msgstr "Trượt cửa sổ sang trái"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the left."
+msgstr "Di chuyền cửa sổ sang trái « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window right"
+msgstr "Trượt cửa sổ sang phải"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels to the right."
+msgstr "Di chuyền cửa sổ sang phải « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window up"
+msgstr "Trượt cửa sổ lên trên"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels upwards."
+msgstr "Di chuyền cửa sổ lên trên « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide window down"
+msgstr "Trượt cửa sổ xuống dưới"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window `slide-window-increment' pixels downwards."
+msgstr "Di chuyền cửa sổ xuống dưới « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group left"
+msgstr "Trượt nhóm sang trái"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the left."
+msgstr "Di chuyển nhóm cửa sổ sang trái « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group right"
+msgstr "Trượt nhóm sang phải"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels to the right."
+msgstr "Di chuyển nhóm cửa sổ sang phải « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group up"
+msgstr "Trượt nhóm lên trên"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels upwards."
+msgstr "Di chuyển nhóm cửa sổ lên trên « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Slide group down"
+msgstr "Trượt nhóm xuống dưới"
+
+#. ../lisp/sawfish/wm/commands/slide-window.jl
+msgid "Move the window group `slide-window-increment' pixels downwards."
+msgstr "Di chuyển nhóm cửa sổ xuống dưới « slide-window-increment » điểm ảnh."
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set viewport linear"
+msgstr "Lập cổng xem tuyến"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Index:"
+msgstr "Chỉ mục:"
+
+#. ../lisp/sawfish/wm/commands/viewport-linear.jl
+msgid "Set window viewport linear"
+msgstr "Lập cửa sổ cổng xem là tuyến"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Window Cycling"
+msgstr "Xoay vòng cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Display window names and icons while cycling through windows."
+msgstr "Hiển thị tên cửa sổ và biểu tượng trong khi xoay vòng các cửa sổ."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include iconified windows when cycling."
+msgstr "Xoay vòng cả cửa sổ thu nhỏ."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all workspaces when cycling."
+msgstr "Xoay vòng cửa sổ trên mọi vùng làm việc."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "Include windows on all viewports when cycling."
+msgstr "Xoay vòng cửa sổ trên mọi cổng xem."
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+#, fuzzy
+msgid "Raise windows while they're temporarily selected during cycling."
+msgstr "Nâng cửa sổ nhận tiêu điểm lên"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid "cycle-keymap"
+msgstr "ánh xạ phím xoay vòng"
+
+#. ../lisp/sawfish/wm/commands/x-cycle.jl
+msgid ""
+"Keymap containing bindings active only during window cycling operations."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động chỉ trong khi xoay vòng cửa sổ."
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Describe symbol"
+msgstr "Mô tả ký hiệu"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+#, fuzzy
+msgid "Print the documentation of a specified symbol to the standard output ."
+msgstr "Hiện tài liệu về một ký hiệu xác định."
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos function"
+msgstr "Hàm Apropos"
+
+#. ../lisp/sawfish/wm/commands/describe.jl
+msgid "Apropos variable"
+msgstr "Biến Apropos"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show faq"
+msgstr "Trợ giúp: hiện Hỏi Đáp"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show news"
+msgstr "Trợ giúp: hiện tin tức"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show programmer manual"
+msgstr "Trợ giúp: hiện sổ tay lập trình"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help show homepage"
+msgstr "Trợ giúp: hiện trang chủ Mạng"
+
+#. ../lisp/sawfish/wm/commands/help.jl
+msgid "Help about"
+msgstr "Trợ giúp: giới thiệu"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow, Pack, Shrink & Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Whether growing is considered to be maximization."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "always"
+msgstr "luôn luôn"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "maybe"
+msgstr "có thể"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "never"
+msgstr "không bao giờ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Whether and how to move the pointer when packing windows.\n"
+"`maybe' means that the pointer is moved along with the window, if the\n"
+"pointer was within the window area before packing. `always' warps the\n"
+"pointer to the center of the window if it isn't already in the\n"
+"window, then does like `maybe'.  `never' means not to warp the\n"
+"pointer."
+msgstr ""
+"Có nên và cách di chuyển con trỏ hay không, khi nén cửa sổ.\n"
+"\n"
+" • có thể\t\tcon trỏ chuyển cùng với cửa sổ,\n"
+"nếu con trỏ ở trong vùng cửa sổ trước khi nén.\n"
+"\n"
+" • luôn luôn\tkéo con trỏ vào trung tâm cửa sổ,\n"
+"nếu nó chưa trong cửa sổ, rồi theo hành vi « có thể ».\n"
+"\n"
+" • không bao giờ\tđừng kéo con trỏ từ chỗ."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into fully obscured windows."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị lấp hoàn toàn hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Whether to bump into windows on a different depth. When 'maybe,\n"
+"Only `avoided' windows are bumped."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ nằm trên độ sâu khác hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ.\n"
+" • có thể\t\tchỉ tránh các cửa sổ nằm trên độ sâu khác."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid "Whether to bump into ignored windows."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum height or width to which a window may be shrunk."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "The minimum amount of window left visible, if yanked over the edge."
+msgstr ""
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window left"
+msgstr "Nới bên trái cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window to the left until it touches another window.\n"
+"See `grow-window-up' for full doc."
+msgstr ""
+"Tăng kích cỡ của cửa sổ bên trái cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nới bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window right"
+msgstr "Nới bên phải cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window to the right until it touches another window.\n"
+"See `grow-window-up' for full doc."
+msgstr ""
+"Tăng kích cỡ của cửa sổ bên phải cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nới bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window up"
+msgstr "Nới bên trên cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window upwards until it touches another window.\n"
+"If the top edge was beyond the screen edge, it is brought back in.\n"
+"With a universal prefix arg, maximize upwards instead.\n"
+"With a numeric prefix arg, grow upwards by that many increments specified "
+"by\n"
+"window or pixels instead."
+msgstr ""
+"Tăng kích cỡ của cửa sổ bên trên cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
+"Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
+"Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
+"bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Grow window down"
+msgstr "Nới bên dưới cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Grows window downwards until it touches another window.\n"
+"See `grow-window-up' for full doc."
+msgstr ""
+"Tăng kích cỡ của cửa sổ bên dưới cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nới bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window left"
+msgstr "Nén bên trái cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window to the left until it touches another window.\n"
+"See `pack-window-up' for full doc."
+msgstr ""
+"Chuyển cửa sổ bên trái cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window right"
+msgstr "Nén bên phải cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window to the right until it touches another window.\n"
+"See `pack-window-up' for full doc."
+msgstr ""
+"Chuyển cửa sổ bên phải cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window up"
+msgstr "Nén bên trên cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window upwards until it touches another window.\n"
+"If the top edge was beyond the screen edge, it is moved back in.\n"
+"With a universal prefix arg, move upwards maximally instead.\n"
+"With a numeric prefix arg, move upwards by that many pixels instead."
+msgstr ""
+"Chuyển của cửa sổ bên trên cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Nếu cạnh trên đã qua cạnh màn hình, nó được kéo vào lại.\n"
+"Đối số tiền tố chung gây ra nó phóng to lên trên thay thế.\n"
+"Đối số tiền tố thuộc số gây ra nó tăng kích cỡ lên trên\n"
+"bằng số lượng gia được xác định theo cửa sổ hay điểm ảnh thay thế."
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+msgid "Pack window down"
+msgstr "Nén bên dưới cửa sổ"
+
+#. ../lisp/sawfish/wm/commands/grow-pack.jl
+#, fuzzy
+msgid ""
+"Moves window downwards until it touches another window.\n"
+"See `pack-window-up' for full doc."
+msgstr ""
+"Chuyển cửa sổ bên dưới cho đến khi\n"
+"nó « đâm sầm vào » một cửa sổ khác.\n"
+"Xem « nén bên trên cửa sổ »."
+
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "opaque"
 msgstr ""
@@ -1923,269 +2131,6 @@ msgstr "Bật/tắt cửa sổ dính"
 msgid "Halve window size"
 msgstr "Lập cửa sổ là dính"
 
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to reboot the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to halt the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to suspend the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "The command used to hibernate the computer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/poweroff.jl
-msgid "Poweroff"
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise and pass through click"
-msgstr "Nâng lên và gởi nhắp qua"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid ""
-"Raise the window that received the current event, then replay any pointer\n"
-"events that invoked the command."
-msgstr ""
-"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
-"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise and pass through click if focused"
-msgstr "Nâng lên và gởi nhắp qua nếu có tiêu điểm"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid ""
-"Raise the window that received the current event (if it's focused), then\n"
-"replay any pointer events that invoked the command."
-msgstr ""
-"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
-"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise or pass through click"
-msgstr "Nâng lên hay gởi nhắp qua"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise window and pass through click"
-msgstr "Nâng cửa sổ lên và gởi nhắp qua"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise group and pass through click"
-msgstr "Nâng nhóm lên và gởi nhắp qua"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
-msgid ""
-"Raise the group of windows that received the current event, then replay\n"
-"any pointer events that invoked the command."
-msgstr ""
-"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
-"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid "Raise transients and pass through click"
-msgstr "Nâng điều tạm lên và gởi nhắp qua"
-
-#. ../lisp/sawfish/wm/commands/raise-commands.jl
-msgid ""
-"Raise the window that received the current event and any transients it\n"
-"has, then replay any pointer events that invoked the command."
-msgstr ""
-"Nâng cửa sổ (và điều tạm nào của nó) lên mà nhận dữ kiện hiện thời,\n"
-"rồi làm lại dữ kiện con trỏ nào đã gọi lệnh này."
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window left"
-msgstr "Trượt cửa sổ sang trái"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the right edge to the left until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window right"
-msgstr "Trượt cửa sổ sang phải"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the left edge to the right until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window up"
-msgstr "Trượt cửa sổ lên trên"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the lower edge upwards until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Shrink window down"
-msgstr "Trượt cửa sổ xuống dưới"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Shrinks WINDOW by moving the upper edge downwards until it\n"
-"intersects with one window less than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window left"
-msgstr "Nén bên trái cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the left until it inserts with one window less\n"
-"than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window right"
-msgstr "Nén bên phải cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW to the right until it inserts with one window less\n"
-"than before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window up"
-msgstr "Nén bên trên cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW upwards until it inserts with one window less than\n"
-"before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-#, fuzzy
-msgid "Yank window down"
-msgstr "Nén bên dưới cửa sổ"
-
-#. ../lisp/sawfish/wm/commands/shrink-yank.jl
-msgid ""
-"Yanks WINDOW downwards until it inserts with one window less than\n"
-"before."
-msgstr ""
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window add row"
-msgstr "Tăng cửa sổ thêm hàng"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Increase the size of the current window by one row."
-msgstr "Tăng kích cỡ của cửa sổ hiện thời bằng một hàng."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window subtract row"
-msgstr "Giảm cửa sổ trừ hàng"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Decrease the size of the current window by one row."
-msgstr "Giảm kích cỡ của cửa sổ hiện thời bằng một hàng."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window add column"
-msgstr "Tăng cửa sổ thêm cột"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Increase the size of the current window by one column."
-msgstr "Tăng kích cỡ của cửa sổ hiện thời bằng một cột."
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Size window subtract column"
-msgstr "Giảm cửa sổ trừ cột"
-
-#. ../lisp/sawfish/wm/commands/size-window.jl
-msgid "Decrease the size of the current window by one column."
-msgstr "Giảm kích cỡ của cửa sổ hiện thời bằng một cột."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window left"
-msgstr "Trượt cửa sổ sang trái"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels to the left."
-msgstr "Di chuyền cửa sổ sang trái « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window right"
-msgstr "Trượt cửa sổ sang phải"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels to the right."
-msgstr "Di chuyền cửa sổ sang phải « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window up"
-msgstr "Trượt cửa sổ lên trên"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels upwards."
-msgstr "Di chuyền cửa sổ lên trên « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide window down"
-msgstr "Trượt cửa sổ xuống dưới"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window `slide-window-increment' pixels downwards."
-msgstr "Di chuyền cửa sổ xuống dưới « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group left"
-msgstr "Trượt nhóm sang trái"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels to the left."
-msgstr "Di chuyển nhóm cửa sổ sang trái « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group right"
-msgstr "Trượt nhóm sang phải"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels to the right."
-msgstr "Di chuyển nhóm cửa sổ sang phải « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group up"
-msgstr "Trượt nhóm lên trên"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels upwards."
-msgstr "Di chuyển nhóm cửa sổ lên trên « slide-window-increment » điểm ảnh."
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Slide group down"
-msgstr "Trượt nhóm xuống dưới"
-
-#. ../lisp/sawfish/wm/commands/slide-window.jl
-msgid "Move the window group `slide-window-increment' pixels downwards."
-msgstr "Di chuyển nhóm cửa sổ xuống dưới « slide-window-increment » điểm ảnh."
-
 #. ../lisp/sawfish/wm/commands/viewport-extras.jl
 msgid "Move viewport next"
 msgstr "Tới cổng xem kế"
@@ -2219,168 +2164,6 @@ msgstr "Cửa sổ tới kế"
 msgid "Move the window to the next viewport."
 msgstr "Di chuyển cửa số qua cổng xem trước."
 
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-msgid "Set viewport linear"
-msgstr "Lập cổng xem tuyến"
-
-#. ../lisp/sawfish/wm/commands/viewport-linear.jl
-msgid "Set window viewport linear"
-msgstr "Lập cửa sổ cổng xem là tuyến"
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Display window names and icons while cycling through windows."
-msgstr "Hiển thị tên cửa sổ và biểu tượng trong khi xoay vòng các cửa sổ."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Include iconified windows when cycling."
-msgstr "Xoay vòng cả cửa sổ thu nhỏ."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Include windows on all workspaces when cycling."
-msgstr "Xoay vòng cửa sổ trên mọi vùng làm việc."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "Include windows on all viewports when cycling."
-msgstr "Xoay vòng cửa sổ trên mọi cổng xem."
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-#, fuzzy
-msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Nâng cửa sổ nhận tiêu điểm lên"
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid "cycle-keymap"
-msgstr "ánh xạ phím xoay vòng"
-
-#. ../lisp/sawfish/wm/commands/x-cycle.jl
-msgid ""
-"Keymap containing bindings active only during window cycling operations."
-msgstr "Ánh xạ phím chứa tổ hợp hoạt động chỉ trong khi xoay vòng cửa sổ."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command"
-msgstr "Gọi lệnh"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
-msgstr "Gọi lệnh TÊN lệnh; tùy chọn với đối số tiền tố « PFX-ARG »."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Run shell command"
-msgstr "Chạy lệnh hệ vỏ"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Execute the given shell command."
-msgstr "Thực hiện lệnh hệ vỏ đãone đưa ra."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Command sequence"
-msgstr "Chuỗi lệnh"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Invoke the list of commands, one by one."
-msgstr "Gọi một chuỗi lệnh, từng cái một."
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Quit"
-msgstr "Thoát"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Restart"
-msgstr "Khởi động lại"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Destroy window"
-msgstr "Hủy cửa sổ"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Kill client"
-msgstr "Kết thúc trình khách"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "No operation"
-msgstr "Không thao tác"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Call command with output to screen"
-msgstr "Gọi lệnh sẽ xuất ra màn hình"
-
-#. ../lisp/sawfish/wm/commands.jl
-msgid "Prompt for a command, execute it, and print any output to the screen."
-msgstr "Nhắc với lệnh, thực hiện nó, và hiển thị dữ liệu xuất nào lên màn hình"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Focus"
-msgstr "Tiêu điểm"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Move/Resize"
-msgstr "Chuyển/Đổi cỡ"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Appearance"
-msgstr "Diện mạo"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Workspaces"
-msgstr "Vùng làm việc"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Bindings"
-msgstr "Tổ hợp"
-
-#. ../lisp/sawfish/wm/custom.jl
-#, fuzzy
-msgid "Mini/Maximizing"
-msgstr "Thu nhỏ/Phóng to"
-
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Miscellaneous"
-msgstr "Linh tinh"
-
-#. ../lisp/sawfish/wm/ext/match-window.jl
-#. ../lisp/sawfish/wm/custom.jl
-msgid "Placement"
-msgstr "Vị trí"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Customize"
-msgstr "Tùy chỉnh"
-
-#. ../lisp/sawfish/wm/customize.jl
-msgid "Invoke the configurator GUI."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/3d-hack.jl
-msgid "3d hack"
-msgstr "Việc cố chỉnh sửa ba chiều"
-
-#. ../lisp/sawfish/wm/ext/apps-menu.jl
-#, fuzzy
-msgid "Update apps menu"
-msgstr "Bật trình đơn ứng dụng lên"
-
-#. ../lisp/sawfish/wm/ext/apps-menu.jl
-msgid ""
-"Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
-"append the auto generated one."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Play sound effects for window events."
-msgstr "Phát hiệu ứng âm thanh khi xảy ra dữ kiện cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Event"
-msgstr "Dữ kiện"
-
-#. ../lisp/sawfish/wm/ext/audio-events.jl
-msgid "Audio file"
-msgstr "Tập tin âm thanh"
-
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Auto-Raise"
 msgstr "Tự động nâng lên"
@@ -2393,34 +2176,6 @@ msgstr "Hiện cửa sổ khi bị bỏ bóng."
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr "Trễ theo mili-giây trước khi nâng cửa sổ có tiêu điểm lên."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Edge Flipping"
-msgstr "Lật cạnh"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Select the next desktop when the pointer hits screen edge."
-msgstr "Chọn màn hình nền tiếp khi con trỏ chạm cạnh màn hình."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "viewport"
-msgstr "cổng xem"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "workspace"
-msgstr "vùng làm việc"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Hitting the screen edge selects the next: \\w"
-msgstr "Chạm cạnh màn hình thì chọn điều kế: \\w"
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Only flip when interactively moving a window."
-msgstr "Chỉ lật khi di chuyển tương tác cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/edge-flip.jl
-msgid "Milliseconds to delay before edge flipping."
-msgstr ""
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Beep when errors occur."
@@ -2459,24 +2214,40 @@ msgstr "Hiển thị lỗi"
 msgid "Display all errors that have occurred to the screen."
 msgstr "Hiển thị mọi lỗi đã xảy ra trên màn hình."
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Infinite Desktop"
-msgstr "Đặt tiêu điểm vào màn hình nền"
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Tooltips"
+msgstr "Mẹo công cụ"
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-msgid "Simulate an infinite desktop (Conflicts edge-flipping)."
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Display tooltips for window frames."
+msgstr "Hiện mẹo công cụ cho các khung cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Show full documentation in tooltips."
+msgstr "Hiện toàn bộ tài liệu trong mẹo công cụ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before displaying tooltips."
+msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+#, fuzzy
+msgid "Number of milliseconds before removing tooltips."
+msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Font used to display tooltips, or nil for default."
 msgstr ""
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Amount to move the workspace."
-msgstr "Gởi qua vùng làm việc kế"
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips background"
+msgstr ""
 
-#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
-#, fuzzy
-msgid "Amount to move the cursor after moving the workspace."
-msgstr "Di chuyển cửa sổ hiện thời sang vùng làm việc thứ N."
+#. ../lisp/sawfish/wm/ext/tooltips.jl
+msgid "Color used for the tooltips foreground"
+msgstr ""
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Name"
@@ -2497,6 +2268,13 @@ msgstr "Vai trò"
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Host"
 msgstr "Máy chủ"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+#. ../lisp/sawfish/cfg/widgets/command.jl
+#. ../lisp/sawfish/wm/commands.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Command"
+msgstr "Lệnh"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Locale"
@@ -2662,8 +2440,55 @@ msgid "Auto gravity"
 msgstr "Tự động trọng lực"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Never delete"
+msgstr ""
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Fixed size"
+msgstr "Vị trí"
+
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Placement"
+msgstr "Vị trí"
+
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Focus"
+msgstr "Tiêu điểm"
+
+#. ../lisp/sawfish/wm/custom.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+msgid "Appearance"
+msgstr "Diện mạo"
+
+#. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Other"
 msgstr "Khác"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
+#, fuzzy
+msgid "Window Rules"
+msgstr "_Cửa sổ"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Sound"
+msgstr "Âm thanh"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Play sound effects for window events."
+msgstr "Phát hiệu ứng âm thanh khi xảy ra dữ kiện cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Event"
+msgstr "Dữ kiện"
+
+#. ../lisp/sawfish/wm/ext/audio-events.jl
+msgid "Audio file"
+msgstr "Tập tin âm thanh"
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Shade Hover"
@@ -2686,127 +2511,6 @@ msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
 msgstr "Hiện cửa sổ khi bị bỏ bóng."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Display tooltips for window frames."
-msgstr "Hiện mẹo công cụ cho các khung cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Show full documentation in tooltips."
-msgstr "Hiện toàn bộ tài liệu trong mẹo công cụ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-#, fuzzy
-msgid "Number of milliseconds before displaying tooltips."
-msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-#, fuzzy
-msgid "Number of milliseconds before removing tooltips."
-msgstr "Khoảng chờ (mili giây) trước khi bỏ bóng cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Font used to display tooltips, or nil for default."
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips background"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/tooltips.jl
-msgid "Color used for the tooltips foreground"
-msgstr ""
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _position"
-msgstr "Nhớ _vị trí"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _dimensions"
-msgstr "Nhớ _các chiều"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember _attributes"
-msgstr "Nhớ _thuộc tính"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_Forget saved state"
-msgstr "_Quên tính trạng đã lưu"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
-msgid "_Clear window-istory"
-msgstr "_Chuyển cửa sổ tới"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
-msgid "_Save window-history"
-msgstr "_Chuyển cửa sổ tới"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-#, fuzzy
-msgid "_Reload window-history"
-msgstr "Quên toàn lược sử cửa sổ đã lưu."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember window positions."
-msgstr "Tự động nhớ vị trí các cửa sổ"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember window sizes."
-msgstr "Tự động nhớ kích thước các cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Automatically remember other window attributes."
-msgstr "Tự động nhớ các thuộc tính khác của cửa sổ."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Don't automatically remember details of transient windows."
-msgstr "Không tự động nhớ chi tiết các cửa sổ tạm."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history save position"
-msgstr "Lược sử cửa sổ : lưu vị trí"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current position of the focused window."
-msgstr "Nhớ vị trí hiện thời của cửa sổ có tiêu điểm."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history save dimensions"
-msgstr "Lược sử cửa sổ : lưu các chiều"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current dimensions of the focused window."
-msgstr "Nhó các chiều hiện tại của cửa sổ có tiêu điểm."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history save attributes"
-msgstr "Lược sử cửa sổ : lưu thuộc tính"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Remember the current attributes of the focused window."
-msgstr "Nhó thuộc tính hiện tại của cửa sổ có tiêu điểm."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history forget"
-msgstr "Lược sử cửa sổ : quên"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Forget any persistent state associated with the current window."
-msgstr "Quên bất kỳ tính trạng bền vững nào liên quan đến cửa sổ hiện thời."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Window history clear"
-msgstr "Lược sử cửa sổ : xóa"
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "Forget all saved window history."
-msgstr "Quên toàn lược sử cửa sổ đã lưu."
-
-#. ../lisp/sawfish/wm/ext/window-history.jl
-msgid "_History"
-msgstr "_Lược sử"
 
 #. ../lisp/sawfish/wm/ext/workspace-grid.jl
 msgid "Workspace down"
@@ -2872,715 +2576,166 @@ msgstr "Gởi qua vùng làm việc bên phải"
 msgid "Send window to the workspace right of the current workspace"
 msgstr "Gởi cửa sổ qua vùng làm việc bên phải vùng làm việc hiện thời"
 
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When does the mouse pointer affect the input focus."
-msgstr "Khi con chuột tác động lên tiêu điểm nhập."
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _position"
+msgstr "Nhớ _vị trí"
 
-#. ../lisp/sawfish/wm/focus.jl
-msgid "Click-to-focus mode passes the click through to the application."
-msgstr ""
-"Chế độ nhắp để được tiêu điểm (click-to-focus) gởi tín hiệu nhấn chuột sang "
-"cho ứng dụng"
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _dimensions"
+msgstr "Nhớ _các chiều"
 
-#. ../lisp/sawfish/wm/focus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember _attributes"
+msgstr "Nhớ _thuộc tính"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "_Forget saved state"
+msgstr "_Quên tính trạng đã lưu"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
-msgid "Whether focusing a window doesn't change it's position in the stack."
-msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
-
-#. ../lisp/sawfish/wm/focus.jl
-msgid "When true, pointer in/out events don't cause focus changes."
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default frame style:"
-msgstr "Kiểu dáng khung mặc định:"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Automatically reload themes when they are updated."
-msgstr "Tự động tải lại sắc thái khi được cập nhật"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default font: \\w"
-msgstr "Phông chữ mặc định: \\w"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Use custom font colors for frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Font color for active frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Font color for inactive frames"
-msgstr ""
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Edit frame style"
-msgstr "Sửa kiểu dáng khung"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Default"
-msgstr "Mặc định"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Normal"
-msgstr "Bình thường"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Title-only"
-msgstr "Chỉ có tựa"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Border-only"
-msgstr "Chỉ có viền"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "Top-border"
-msgstr "Viền trên"
-
-#. ../lisp/sawfish/wm/frames.jl
-msgid "None"
-msgstr "Không"
-
-#. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/integration/kde.jl
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "_Help"
-msgstr "Trợ _giúp"
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "_GNOME Help"
-msgstr "Trợ giúp của _GNOME..."
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "GNOME Website"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "About GNOME"
-msgstr "Giới thiệu về GNOME..."
-
-#. ../lisp/sawfish/wm/menus.jl
-#. ../lisp/sawfish/wm/integration/standalone.jl
-#. ../lisp/sawfish/wm/integration/kde.jl
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "Sessi_on"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-#, fuzzy
-msgid "_Logout from GNOME"
-msgstr "Đăng xuất phiên chạy GNOME hiện tại."
-
-#. ../lisp/sawfish/wm/integration/gnome.jl
-msgid "_Shutdown from GNOME"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
-msgid "_KDE Help"
-msgstr "Trợ _giúp"
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-msgid "KDE Website"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
-msgid "_Logout from KDE"
-msgstr "Đăng xuất phiên chạy GNOME hiện tại."
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-#, fuzzy
-msgid "_Reboot from KDE"
-msgstr "Đăng xuất phiên chạy GNOME hiện tại."
-
-#. ../lisp/sawfish/wm/integration/kde.jl
-msgid "_Shutdown from KDE"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-#, fuzzy
-msgid "_Reboot System"
-msgstr "Đăng xuất phiên chạy GNOME hiện tại."
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Shutdown System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "S_uspend System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/integration/standalone.jl
-msgid "_Hibernate System"
-msgstr ""
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "global-keymap"
-msgstr "ánh xạ phím toàn cục"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active anywhere."
-msgstr "Ánh xạ phím chứa tổ hợp hoạt động suốt nơi."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "window-keymap"
-msgstr "ánh xạ cửa sổ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Keymap containing bindings active when a client window is focused."
-msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi cửa sổ khách nhận tiêu điểm."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "root-window-keymap"
-msgstr "ánh xạ cửa sổ gốc"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the root window\n"
-"(or when no window is focused)."
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
-"(hoặc khi không có cửa sổ nhận tiêu điểm)."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "title-keymap"
-msgstr "ánh xạ tựa"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the title of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trong tựa đề của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "border-keymap"
-msgstr "Ánh xạ viền"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the border of\n"
-"a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên viền của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "close-button-keymap"
-msgstr "Ánh xạ nút đóng"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the close button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút đóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "iconify-button-keymap"
-msgstr "Ánh xạ nút làm hình nhỏ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the iconify\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút co lại thành biểu tượng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này."
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "maximize-button-keymap"
-msgstr "Ánh xạ nút phóng to"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the maximize\n"
-"button of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút phóng to của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "menu-button-keymap"
-msgstr "Ánh xạ nút trình đơn"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the menu button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút trình đơn của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "shade-button-keymap"
-msgstr "Ánh xạ nút bóng"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid ""
-"Keymap containing bindings active when the pointer is in the shade button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút bóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "sticky-button-keymap"
-msgstr "Ánh xạ nút làm hình nhỏ"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the sticky button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút đóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "lock-button-keymap"
-msgstr "Ánh xạ nút đóng"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the lock button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút đóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "rename-button-keymap"
-msgstr "Ánh xạ nút trình đơn"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the rename button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút trình đơn của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "move-resize-button-keymap"
-msgstr "Ánh xạ nút đóng"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the move/resize "
-"button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút đóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid "raise-lower-button-keymap"
-msgstr "Ánh xạ nút đóng"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-msgid ""
-"Keymap containing bindings active when the pointer is in the raise/lower "
-"button\n"
-"of a window. (Only mouse-bindings are evaluated in this map.)"
-msgstr ""
-"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
-"có trên cái nút đóng của cửa sổ.\n"
-"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
-
-#. ../lisp/sawfish/wm/keymaps.jl
-msgid "Modifier key(s) used for default shortcuts."
-msgstr "Phím sửa đổi dùng cho phím tắt mặc định."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Mi_nimize"
-msgstr "Thu nhỏ"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Unma_ximize"
-msgstr "Hủy phóng to"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Ma_ximize"
-msgstr "Phóng to"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Move"
-msgstr ""
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Resize"
-msgstr "Chuyển/Đổi cỡ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Close"
-msgstr "_Đóng"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Toggle"
-msgstr "_Bật/tắt"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "In _group"
-msgstr "Trong _nhóm"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Send window to"
+msgid "_Clear window-history"
 msgstr "_Chuyển cửa sổ tới"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Previous workspace"
-msgstr "Vùng làm việc _trước"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Next workspace"
-msgstr "Vùng làm việc _kế"
-
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
-msgid "C_opy window to"
+msgid "_Save window-history"
 msgstr "_Chuyển cửa sổ tới"
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
 #, fuzzy
-msgid "P_revious workspace"
-msgstr "Vùng làm việc trước"
+msgid "_Reload window-history"
+msgstr "Quên toàn lược sử cửa sổ đã lưu."
 
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Ne_xt workspace"
-msgstr "Vùng làm việc kế"
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "History"
+msgstr "Lược sử"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Grow & Pack"
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window positions."
+msgstr "Tự động nhớ vị trí các cửa sổ"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember window sizes."
+msgstr "Tự động nhớ kích thước các cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Automatically remember other window attributes."
+msgstr "Tự động nhớ các thuộc tính khác của cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Don't automatically remember details of transient windows."
+msgstr "Không tự động nhớ chi tiết các cửa sổ tạm."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save position"
+msgstr "Lược sử cửa sổ : lưu vị trí"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current position of the focused window."
+msgstr "Nhớ vị trí hiện thời của cửa sổ có tiêu điểm."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save dimensions"
+msgstr "Lược sử cửa sổ : lưu các chiều"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current dimensions of the focused window."
+msgstr "Nhó các chiều hiện tại của cửa sổ có tiêu điểm."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history save attributes"
+msgstr "Lược sử cửa sổ : lưu thuộc tính"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Remember the current attributes of the focused window."
+msgstr "Nhó thuộc tính hiện tại của cửa sổ có tiêu điểm."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history forget"
+msgstr "Lược sử cửa sổ : quên"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget any persistent state associated with the current window."
+msgstr "Quên bất kỳ tính trạng bền vững nào liên quan đến cửa sổ hiện thời."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Window history clear"
+msgstr "Lược sử cửa sổ : xóa"
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "Forget all saved window history."
+msgstr "Quên toàn lược sử cửa sổ đã lưu."
+
+#. ../lisp/sawfish/wm/ext/window-history.jl
+msgid "_History"
+msgstr "_Lược sử"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Edge Flipping"
+msgstr "Lật cạnh"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Select the next desktop when the pointer hits screen edge."
+msgstr "Chọn màn hình nền tiếp khi con trỏ chạm cạnh màn hình."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "viewport"
+msgstr "cổng xem"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "workspace"
+msgstr "vùng làm việc"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Hitting the screen edge selects the next: \\w"
+msgstr "Chạm cạnh màn hình thì chọn điều kế: \\w"
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Only flip when interactively moving a window."
+msgstr "Chỉ lật khi di chuyển tương tác cửa sổ."
+
+#. ../lisp/sawfish/wm/ext/edge-flip.jl
+msgid "Milliseconds to delay before edge flipping."
 msgstr ""
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow left"
-msgstr "Nới bên trái"
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+#, fuzzy
+msgid "Infinite Desktop"
+msgstr "Đặt tiêu điểm vào màn hình nền"
 
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow right"
-msgstr "Nới bên phải"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow up"
-msgstr "Nới lên"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Grow down"
-msgstr "Nới xuống"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack left"
-msgstr "Nén bên trái"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack right"
-msgstr "Nén bên phải"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack up"
-msgstr "Nén bên trên"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Pack down"
-msgstr "Nén bên dưới"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Shrink & _Yank"
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
+msgid ""
+"\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-"
+"flipping)."
 msgstr ""
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
-msgid "Shrink left"
-msgstr "Trượt cửa sổ sang trái"
+msgid "Amount to move the viewport when the pointer hits the screen edge."
+msgstr "Chọn màn hình nền tiếp khi con trỏ chạm cạnh màn hình."
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/infinite-desktop.jl
 #, fuzzy
-msgid "Shrink right"
-msgstr "Trượt cửa sổ sang phải"
+msgid "Amount to pull back the cursor after moving the viewport."
+msgstr "Di chuyển cửa sổ hiện thời sang vùng làm việc thứ N."
 
-#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/ext/apps-menu.jl
 #, fuzzy
-msgid "Shrink up"
-msgstr "Trượt cửa sổ lên trên"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Shrink down"
-msgstr "Trượt cửa sổ xuống dưới"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank left"
-msgstr "Nén bên trái"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank right"
-msgstr "Nén bên phải"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank up"
-msgstr "Nén bên trên"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Yank down"
-msgstr "Nén bên dưới"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Stac_king"
-msgstr "Cách làm chồng"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Raise"
-msgstr "Nâng lên"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Lower"
-msgstr "Hạ thấp"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "_Upper layer"
-msgstr "Lớp cao hơn"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Lo_wer layer"
-msgstr "Lớp thấp hơn"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Frame ty_pe"
-msgstr "Kiểu khung"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Frame sty_le"
-msgstr "Kiểu dáng khung"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Sawfish Rootmenu"
-msgstr "Trang chủ của Sawfish"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Windows"
-msgstr "_Cửa sổ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Work_spaces"
-msgstr "_Vùng làm việc"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Programs"
-msgstr "_Chương trình"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Customize"
-msgstr "_Tùy chỉnh"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Display Errors"
-msgstr "Hiển thị lỗi"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Reload Appsmenu"
+msgid "Update apps menu"
 msgstr "Bật trình đơn ứng dụng lên"
 
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Restart Sawfish"
-msgstr "Khởi động lại"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Quit Sawfish"
-msgstr "_Giới thiệu về Sawfish..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_FAQ..."
-msgstr "_Hỏi Đáp..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_News..."
-msgstr "_Tin tức..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_WWW page..."
-msgstr "Trang _Mạng..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_Manual..."
-msgstr "_Sổ tay..."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "_About Sawfish..."
-msgstr "_Giới thiệu về Sawfish..."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Kill Window"
-msgstr "_Cửa sổ"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup window menu"
-msgstr "Bật trình đơn cửa sổ lên"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the menu listing all window operations."
-msgstr "Hiện trình đơn liệt kê các thao tác trên mọi cửa sổ."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup root menu"
-msgstr "Bật trình đơn gốc lên"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the main menu."
-msgstr "Hiện trình đơn chính."
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Popup apps menu"
-msgstr "Bật trình đơn ứng dụng lên"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Display the applications menu."
-msgstr "Hiện trình đơn ứng dụng."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Popup window list menu"
-msgstr "Bật trình đơn cửa sổ lên"
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "Display the window-list menu."
-msgstr "Hiện trình đơn chính."
-
-#. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-msgid "S_awfishConfig"
-msgstr "Bộ cấu hình Sawfish"
-
-#. ../lisp/sawfish/wm/menus.jl
-msgid "Edit theme..."
-msgstr "Sửa sắc thái..."
+#. ../lisp/sawfish/wm/ext/apps-menu.jl
+msgid ""
+"Set `apps-menu' to `user-apps-menu', and if `apps-menu-autogen' is non-nil,\n"
+"append the auto generated one."
+msgstr ""
 
 #. ../lisp/sawfish/wm/placement/stagger.jl
 #, fuzzy
 msgid "Distance between successive placements in `stagger' placement mode."
 msgstr "Khoảng cách giữa hai lần để vị trí trong chế độ để « chéo nhau »."
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing windows: \\w"
-msgstr "Cách đặt cửa sổ : \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Method of placing dialog windows: \\w"
-msgstr "Cách đặt cửa sổ hộp thoại: \\w"
-
-#. ../lisp/sawfish/wm/placement.jl
-msgid "Ignore program-specified window placements."
-msgstr ""
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Stacking"
-msgstr "Cách làm chồng"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "parents"
-msgstr "cha"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Keep transient windows stacked above: \\w"
-msgstr "Giữ cửa sổ tạm đặt trên: \\w"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise single window"
-msgstr "Nâng cửa sổ đơn lên"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise the window to its highest allowed position in the stacking order."
-msgstr "Nâng cửa sổ lên vị trí cao nhất được phép trong thứ tự chồng."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower single window"
-msgstr "Hạ thấp cửa sổ đơn thấp"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower the window to its lowest allowed position in the stacking order."
-msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise lower single window"
-msgstr "Nâng cửa sổ đơn thấp hơn lên"
-
-#. ../lisp/sawfish/wm/stacking.jl
-#, fuzzy
-msgid ""
-"If the window is at its highest possible position, then lower it to its\n"
-"lowest possible position. Otherwise raise it as far as allowed."
-msgstr ""
-"Nếu cửa sổ tại vị trí cao nhất có thể, hạ thấp nó xuống vị trí thấp nhất có "
-"thể. Nếu không thì nâng nó lên cao nhất được phép. Cũng thay đổi lớp của cửa "
-"sổ tạm nào của nó."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Raise window depth"
-msgstr "Nâng độ sâu cửa sổ lên"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level above its current level."
-msgstr "Nâng cửa sổ lên một lớp trong chồng."
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Lower window depth"
-msgstr "Hạ thấp độ sâu cửa sổ"
-
-#. ../lisp/sawfish/wm/stacking.jl
-msgid "Put the window in the stacking level beneath its current level."
-msgstr "Hạ thấp cửa sổ một lớp trong chồng."
 
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
@@ -3737,8 +2892,23 @@ msgid "In _task list"
 msgstr "Trong danh sách _tác vụ GNOME"
 
 #. ../lisp/sawfish/wm/state/maximize.jl
-msgid "Lock position and size while windows are maximized."
-msgstr "Khóa vị trí và kích thước khi đang phóng to."
+msgid ""
+"Lock position and size while windows are maximized.\n"
+"\n"
+"Remember that after you resize a maximized window, you can't unmaximize it "
+"any more."
+msgstr ""
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+#, fuzzy
+msgid "Maximize discard"
+msgstr "Đã phóng to"
+
+#. ../lisp/sawfish/wm/state/maximize.jl
+msgid ""
+"Don't treat window as maximized any more, keeping the size and the position. "
+"You'll be able to move and resize, but won't be able to unmaximize."
+msgstr ""
 
 #. ../lisp/sawfish/wm/state/maximize.jl
 msgid "Maximize window"
@@ -3978,85 +3148,81 @@ msgstr ""
 "thể. Nếu không thì nâng nó lên cao nhất được phép. Cũng thay đổi lớp của cửa "
 "sổ tạm nào của nó."
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab's left-edge decoration"
-msgstr ""
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "When raising a window, also raise its: \\w"
+msgstr "Khi nâng cửa sổ lên, cũng nâng lên điều của nó: \\w"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab's right-edge decoration"
-msgstr ""
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise window"
+msgstr "Nâng cửa sổ lên"
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab area's left-edge decoration"
-msgstr ""
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
-msgid "Width of tab area's right-edge decoration"
-msgstr ""
-
-#. ../lisp/sawfish/wm/tabs/tab.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
-msgid "Raise Tabs on Hover"
-msgstr "Nâng lên khi nhận tiêu điểm"
+msgid ""
+"Raise the window to its highest allowed position in the stacking\n"
+"order."
+msgstr "Nâng cửa sổ lên vị trí cao nhất được phép trong thứ tự chồng."
 
-#. ../lisp/sawfish/wm/tabs/tab.jl
-#, fuzzy
-msgid "Tab add to group"
-msgstr "Hạ thấp nhóm"
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Lower window"
+msgstr "Hạ thấp cửa sổ"
 
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
-msgid "Tab release window"
-msgstr "Xóa bỏ cửa sổ"
+msgid ""
+"Lower the window to its lowest allowed position in the stacking\n"
+"order."
+msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
 
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Release active window from its group"
-msgstr "Trả cửa sổ về tính trạng trước khi bị thu nhỏ."
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Tab raise left window"
+#. ../lisp/sawfish/wm/util/stacking.jl
+msgid "Raise lower window"
 msgstr "Nâng/hạ thấp cửa sổ"
 
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#. ../lisp/sawfish/wm/util/stacking.jl
 #, fuzzy
-msgid "Raise left window in current group"
-msgstr "Nâng lên/hạ thấp cửa sổ và các điều tạm lên"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Tab raise right window"
-msgstr "Nâng cửa sổ đơn lên"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-msgid "Raise right window in current group"
-msgstr "Nâng lên/hạ thấp cửa sổ và các điều tạm lên"
+msgid ""
+"If the window is at its highest possible position, then lower it\n"
+"to its lowest possible position. Otherwise raise it as far as\n"
+"allowed."
+msgstr ""
+"Nếu cửa sổ tại vị trí cao nhất có thể, hạ thấp nó xuống vị trí thấp nhất có "
+"thể. Nếu không thì nâng nó lên cao nhất được phép. Cũng thay đổi lớp của cửa "
+"sổ tạm nào của nó."
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
 msgstr "Chèn vùng làm việc"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Unshade selected windows."
-msgstr "Bỏ bóng các cửa sổ đã chọn."
+#, fuzzy
+msgid "Unshade window when selected."
+msgstr "Bỏ bóng cửa sổ"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window without focusing"
 msgstr "Hiện cửa sổ không có tiêu điểm"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace/viewport containing the window W."
-msgstr "Hiển thị vùng làm việc/cổng xem chứa cửa sổ W."
+msgid ""
+"Display the window, but don't focus. You're prompted to type in the name."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Display window"
 msgstr "Hiện cửa sổ"
 
 #. ../lisp/sawfish/wm/util/display-window.jl
-msgid "Display the workspace containing the window W, then focus on W."
-msgstr "Hiện vùng làm việc chứa cửa sổ W, sau đó chuyển tiêu điểm cho W."
+msgid "Display the window. You're prompted to type in the name."
+msgstr ""
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+#, fuzzy
+msgid "Display window position"
+msgstr "Hiện cửa sổ"
+
+#. ../lisp/sawfish/wm/util/display-wininfo.jl
+msgid "Choose a window, and prints its position and size in a popup."
+msgstr ""
 
 #. ../lisp/sawfish/wm/util/groups.jl
 msgid "New group"
@@ -4136,6 +3302,11 @@ msgstr "Vùng làm việc %d"
 msgid "Workspace:"
 msgstr "Vùng làm việc:"
 
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Messages"
+msgstr ""
+
 #. ../lisp/sawfish/wm/util/prompt.jl
 msgid "Font for prompt: \\w"
 msgstr ""
@@ -4152,46 +3323,613 @@ msgstr "nhắc ánh xạ phím"
 msgid "Keymap containing bindings active when reading a string from the user."
 msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi đọc chuỗi từ người dùng."
 
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "When raising a window, also raise its: \\w"
-msgstr "Khi nâng cửa sổ lên, cũng nâng lên điều của nó: \\w"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "Raise window"
-msgstr "Nâng cửa sổ lên"
-
-#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/frames.jl
 #, fuzzy
-msgid ""
-"Raise the window to its highest allowed position in the stacking\n"
-"order."
-msgstr "Nâng cửa sổ lên vị trí cao nhất được phép trong thứ tự chồng."
+msgid "Theme"
+msgstr "Sắc thái Crux"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "Lower window"
-msgstr "Hạ thấp cửa sổ"
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Automatically reload themes when they are updated."
+msgstr "Tự động tải lại sắc thái khi được cập nhật"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default font: \\w"
+msgstr "Phông chữ mặc định: \\w"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Use custom font colors for frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for active frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Font color for inactive frames"
+msgstr ""
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Default"
+msgstr "Mặc định"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Normal"
+msgstr "Bình thường"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Title-only"
+msgstr "Chỉ có tựa"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Border-only"
+msgstr "Chỉ có viền"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "Top-border"
+msgstr "Viền trên"
+
+#. ../lisp/sawfish/wm/frames.jl
+msgid "None"
+msgstr "Không"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Bindings"
+msgstr "Tổ hợp"
+
+#. ../lisp/sawfish/wm/custom.jl
 #, fuzzy
-msgid ""
-"Lower the window to its lowest allowed position in the stacking\n"
-"order."
-msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
+msgid "Mini/Maximizing"
+msgstr "Thu nhỏ/Phóng to"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
-msgid "Raise lower window"
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Miscellaneous"
+msgstr "Linh tinh"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Move/Resize"
+msgstr "Chuyển/Đổi cỡ"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Stacking"
+msgstr "Cách làm chồng"
+
+#. ../lisp/sawfish/wm/custom.jl
+msgid "Workspaces"
+msgstr "Vùng làm việc"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Tabs"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's left-edge-transient decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+msgid "Width of tab area's right-edge-transient decoration"
+msgstr ""
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Raise Tabs on Hover"
+msgstr "Nâng lên khi nhận tiêu điểm"
+
+#. ../lisp/sawfish/wm/tabs/tab.jl
+#, fuzzy
+msgid "Tab add to group"
+msgstr "Hạ thấp nhóm"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab release window"
+msgstr "Xóa bỏ cửa sổ"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Release active window from its group"
+msgstr "Trả cửa sổ về tính trạng trước khi bị thu nhỏ."
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise left window"
 msgstr "Nâng/hạ thấp cửa sổ"
 
-#. ../lisp/sawfish/wm/util/stacking.jl
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise left window in current group"
+msgstr "Nâng lên/hạ thấp cửa sổ và các điều tạm lên"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Tab raise right window"
+msgstr "Nâng cửa sổ đơn lên"
+
+#. ../lisp/sawfish/wm/tabs/tabgroup.jl
+#, fuzzy
+msgid "Raise right window in current group"
+msgstr "Nâng lên/hạ thấp cửa sổ và các điều tạm lên"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "global-keymap"
+msgstr "ánh xạ phím toàn cục"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active anywhere."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động suốt nơi."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "window-keymap"
+msgstr "ánh xạ cửa sổ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Keymap containing bindings active when a client window is focused."
+msgstr "Ánh xạ phím chứa tổ hợp hoạt động khi cửa sổ khách nhận tiêu điểm."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "root-window-keymap"
+msgstr "ánh xạ cửa sổ gốc"
+
+#. ../lisp/sawfish/wm/keymaps.jl
 #, fuzzy
 msgid ""
-"If the window is at its highest possible position, then lower it\n"
-"to its lowest possible position. Otherwise raise it as far as\n"
-"allowed."
+"Keymap containing bindings active when the pointer is in the root window\n"
+"(or when no window is focused)."
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ có trong cửa sổ gốc\n"
+"(hoặc khi không có cửa sổ nhận tiêu điểm)."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "title-keymap"
+msgstr "ánh xạ tựa"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the title of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trong tựa đề của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "border-keymap"
+msgstr "Ánh xạ viền"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the border of\n"
+"a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên viền của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "close-button-keymap"
+msgstr "Ánh xạ nút đóng"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the close button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút đóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "iconify-button-keymap"
+msgstr "Ánh xạ nút làm hình nhỏ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the iconify\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút co lại thành biểu tượng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này."
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "maximize-button-keymap"
+msgstr "Ánh xạ nút phóng to"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the maximize\n"
+"button of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút phóng to của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "menu-button-keymap"
+msgstr "Ánh xạ nút trình đơn"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the menu button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút trình đơn của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "shade-button-keymap"
+msgstr "Ánh xạ nút bóng"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid ""
+"Keymap containing bindings active when the pointer is in the shade button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút bóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "sticky-button-keymap"
+msgstr "Ánh xạ nút làm hình nhỏ"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the sticky button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút đóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "lock-button-keymap"
+msgstr "Ánh xạ nút đóng"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the lock button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút đóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "rename-button-keymap"
+msgstr "Ánh xạ nút trình đơn"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the rename button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút trình đơn của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "move-resize-button-keymap"
+msgstr "Ánh xạ nút đóng"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the move/resize "
+"button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút đóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid "raise-lower-button-keymap"
+msgstr "Ánh xạ nút đóng"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+#, fuzzy
+msgid ""
+"Keymap containing bindings active when the pointer is in the raise/lower "
+"button\n"
+"of a window. (Only mouse-bindings are evaluated in this map.)"
+msgstr ""
+"Ánh xạ phím chứa tổ hợp hoạt động khi con trỏ\n"
+"có trên cái nút đóng của cửa sổ.\n"
+"(Chỉ tính ra tổ hợp con chuột trong ánh xạ này.)"
+
+#. ../lisp/sawfish/wm/keymaps.jl
+msgid "Modifier key(s) used for default shortcuts."
+msgstr "Phím sửa đổi dùng cho phím tắt mặc định."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Warping"
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Offset (%) from window edges when warping pointer."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Whether to enable warping the cursor to windows."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Whether to not avoid ignored windows by default."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Whether to avoid any unspecified window by default."
+msgstr ""
+"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
+"khi tăng kích cỡ hoặc nén cửa sổ."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Format to create unique window names."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Focus desktop"
+msgstr "Đặt tiêu điểm vào màn hình nền"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Transfer input focus to the desktop window (if one exists)."
+msgstr "Chuyển đổi tiêu điểm nhập vào cửa sổ (nếu có) trên màn hình nền."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window"
+msgstr "Xóa bỏ cửa sổ"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid ""
+"Delete a window. If the window does not support that protocol,\n"
+"kill the client."
+msgstr ""
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Delete window safely"
+msgstr "Xóa bỏ an toàn cửa sổ"
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Delete a window, or beep if the window can't be closed safely."
+msgstr ""
+"Xóa bỏ cửa sổ, hoặc kêu bíp nếu cửa sổ không thể được đóng lại một cách an "
+"toàn."
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Uniquify window name"
+msgstr "Làm cho tên cửa sổ duy nhất"
+
+#. ../lisp/sawfish/wm/windows.jl
+msgid "Force the current window to have a unique title."
+msgstr "Ép cửa sổ hiện thời có tựa đề duy nhất."
+
+#. ../lisp/sawfish/wm/windows.jl
+#, fuzzy
+msgid "Rename window"
+msgstr "Nâng cửa sổ lên"
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When does the mouse pointer affect the input focus."
+msgstr "Khi con chuột tác động lên tiêu điểm nhập."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "Click-to-focus mode passes the click through to the application."
+msgstr ""
+"Chế độ nhắp để được tiêu điểm (click-to-focus) gởi tín hiệu nhấn chuột sang "
+"cho ứng dụng"
+
+#. ../lisp/sawfish/wm/focus.jl
+#, fuzzy
+msgid "Whether focusing a window doesn't change it's position in the stack."
+msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
+
+#. ../lisp/sawfish/wm/focus.jl
+msgid "When true, pointer in/out events don't cause focus changes."
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Help"
+msgstr "Trợ _giúp"
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_GNOME Help"
+msgstr "Trợ giúp của _GNOME..."
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "GNOME _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_About GNOME"
+msgstr "Giới thiệu về GNOME..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#. ../lisp/sawfish/wm/integration/kde.jl
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "Sessi_on"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Customize GNOME"
+msgstr "_Tùy chỉnh"
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+#, fuzzy
+msgid "_Logout from GNOME"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/integration/gnome.jl
+msgid "_Shutdown from GNOME"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_KDE Help"
+msgstr "Trợ _giúp"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "KDE _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Customize KDE"
+msgstr "_Tùy chỉnh"
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Logout from KDE"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+#, fuzzy
+msgid "_Reboot from KDE"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/integration/kde.jl
+msgid "_Shutdown from KDE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_XFCE Help"
+msgstr "Trợ _giúp"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "XFCE _Website"
+msgstr ""
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_About XFCE"
+msgstr "Giới thiệu về GNOME..."
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_Customize XFCE"
+msgstr "_Tùy chỉnh"
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_Logout from XFCE"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+#, fuzzy
+msgid "_Reboot from XFCE"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/integration/xfce.jl
+msgid "_Shutdown from XFCE"
+msgstr ""
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing windows: \\w"
+msgstr "Cách đặt cửa sổ : \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Method of placing dialog windows: \\w"
+msgstr "Cách đặt cửa sổ hộp thoại: \\w"
+
+#. ../lisp/sawfish/wm/placement.jl
+msgid "Ignore program-specified window placements."
+msgstr ""
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "parents"
+msgstr "cha"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Keep transient windows stacked above: \\w"
+msgstr "Giữ cửa sổ tạm đặt trên: \\w"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise single window"
+msgstr "Nâng cửa sổ đơn lên"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise the window to its highest allowed position in the stacking order."
+msgstr "Nâng cửa sổ lên vị trí cao nhất được phép trong thứ tự chồng."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower single window"
+msgstr "Hạ thấp cửa sổ đơn thấp"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower the window to its lowest allowed position in the stacking order."
+msgstr "Hạ thấp cửa sổ xuống vị trí thấp nhất được phép trong thứ tự chồng."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise lower single window"
+msgstr "Nâng cửa sổ đơn thấp hơn lên"
+
+#. ../lisp/sawfish/wm/stacking.jl
+#, fuzzy
+msgid ""
+"If the window is at its highest possible position, then lower it to its\n"
+"lowest possible position. Otherwise raise it as far as allowed."
 msgstr ""
 "Nếu cửa sổ tại vị trí cao nhất có thể, hạ thấp nó xuống vị trí thấp nhất có "
 "thể. Nếu không thì nâng nó lên cao nhất được phép. Cũng thay đổi lớp của cửa "
 "sổ tạm nào của nó."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Raise window depth"
+msgstr "Nâng độ sâu cửa sổ lên"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level above its current level."
+msgstr "Nâng cửa sổ lên một lớp trong chồng."
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Lower window depth"
+msgstr "Hạ thấp độ sâu cửa sổ"
+
+#. ../lisp/sawfish/wm/stacking.jl
+msgid "Put the window in the stacking level beneath its current level."
+msgstr "Hạ thấp cửa sổ một lớp trong chồng."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -4374,83 +4112,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/window-anim.jl
 msgid "The default window animation mode"
 msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Give focus to windows even when they haven't asked for it."
-msgstr "Nâng cửa sổ nhận tiêu điểm lên"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Warping"
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Offset (%) from window edges when warping pointer."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Whether to enable warping the cursor to windows."
-msgstr ""
-"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ."
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Whether to not avoid ignored windows by default."
-msgstr ""
-"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ."
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Whether to avoid any unspecified window by default."
-msgstr ""
-"Có nên đâm sầm vào cửa sổ bị bỏ qua hay không,\n"
-"khi tăng kích cỡ hoặc nén cửa sổ."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Format to create unique window names."
-msgstr ""
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Focus desktop"
-msgstr "Đặt tiêu điểm vào màn hình nền"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Transfer input focus to the desktop window (if one exists)."
-msgstr "Chuyển đổi tiêu điểm nhập vào cửa sổ (nếu có) trên màn hình nền."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window"
-msgstr "Xóa bỏ cửa sổ"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window."
-msgstr "Xóa bỏ cửa sổ."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete window safely"
-msgstr "Xóa bỏ an toàn cửa sổ"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Delete the window, or beep if the window can't be closed safely."
-msgstr ""
-"Xóa bỏ cửa sổ, hoặc kêu bíp nếu cửa sổ không thể được đóng lại một cách an "
-"toàn."
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Uniquify window name"
-msgstr "Làm cho tên cửa sổ duy nhất"
-
-#. ../lisp/sawfish/wm/windows.jl
-msgid "Force the current window to have a unique title."
-msgstr "Ép cửa sổ hiện thời có tựa đề duy nhất."
-
-#. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
-msgid "Rename window"
-msgstr "Nâng cửa sổ lên"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -4724,6 +4385,516 @@ msgstr "Chọn tương tác vùng làm việc"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Nhắc với vùng làm việc và chuyển đổi qua đó."
 
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Customize"
+msgstr "Tùy chỉnh"
+
+#. ../lisp/sawfish/wm/customize.jl
+msgid "Invoke the configurator GUI."
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Mi_nimize"
+msgstr "Thu nhỏ"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Unma_ximize"
+msgstr "Hủy phóng to"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ma_ximize"
+msgstr "Phóng to"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Move"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Resize"
+msgstr "Chuyển/Đổi cỡ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Close"
+msgstr "_Đóng"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Toggle"
+msgstr "_Bật/tắt"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "In _group"
+msgstr "Trong _nhóm"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Send window to"
+msgstr "_Chuyển cửa sổ tới"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Previous workspace"
+msgstr "Vùng làm việc _trước"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Next workspace"
+msgstr "Vùng làm việc _kế"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "C_opy window to"
+msgstr "_Chuyển cửa sổ tới"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "P_revious workspace"
+msgstr "Vùng làm việc trước"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Ne_xt workspace"
+msgstr "Vùng làm việc kế"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Grow & Pack"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow left"
+msgstr "Nới bên trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow right"
+msgstr "Nới bên phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow up"
+msgstr "Nới lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Grow down"
+msgstr "Nới xuống"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack left"
+msgstr "Nén bên trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack right"
+msgstr "Nén bên phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack up"
+msgstr "Nén bên trên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Pack down"
+msgstr "Nén bên dưới"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Shrink & _Yank"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink left"
+msgstr "Trượt cửa sổ sang trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink right"
+msgstr "Trượt cửa sổ sang phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink up"
+msgstr "Trượt cửa sổ lên trên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Shrink down"
+msgstr "Trượt cửa sổ xuống dưới"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank left"
+msgstr "Nén bên trái"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank right"
+msgstr "Nén bên phải"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank up"
+msgstr "Nén bên trên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Yank down"
+msgstr "Nén bên dưới"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Stac_king"
+msgstr "Cách làm chồng"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Raise"
+msgstr "Nâng lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Lower"
+msgstr "Hạ thấp"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Upper layer"
+msgstr "Lớp cao hơn"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Lo_wer layer"
+msgstr "Lớp thấp hơn"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Frame ty_pe"
+msgstr "Kiểu khung"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Frame sty_le"
+msgstr "Kiểu dáng khung"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish Rootmenu"
+msgstr "Trang chủ của Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Windows"
+msgstr "_Cửa sổ"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Work_spaces"
+msgstr "_Vùng làm việc"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Programs"
+msgstr "_Chương trình"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Customize"
+msgstr "_Tùy chỉnh"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display _Errors"
+msgstr "Hiển thị lỗi"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Reload Appsmenu"
+msgstr "Bật trình đơn ứng dụng lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Restart _Sawfish"
+msgstr "Khởi động lại"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Quit Sawfish"
+msgstr "_Giới thiệu về Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _FAQ"
+msgstr "Lỗi Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _News"
+msgstr "Trang chủ của Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _Wiki"
+msgstr "Lỗi Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Sawfish _Manual"
+msgstr "Trang chủ của Sawfish"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_About Sawfish"
+msgstr "_Giới thiệu về Sawfish..."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Kill Window"
+msgstr "_Cửa sổ"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "_Reboot System"
+msgstr "Đăng xuất phiên chạy GNOME hiện tại."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Shutdown System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "S_uspend System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "_Hibernate System"
+msgstr ""
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup window menu"
+msgstr "Bật trình đơn cửa sổ lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the menu listing all window operations."
+msgstr "Hiện trình đơn liệt kê các thao tác trên mọi cửa sổ."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup root menu"
+msgstr "Bật trình đơn gốc lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the main menu."
+msgstr "Hiện trình đơn chính."
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Popup apps menu"
+msgstr "Bật trình đơn ứng dụng lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+msgid "Display the applications menu."
+msgstr "Hiện trình đơn ứng dụng."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Popup window list menu"
+msgstr "Bật trình đơn cửa sổ lên"
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "Display the window-list menu."
+msgstr "Hiện trình đơn chính."
+
+#. ../lisp/sawfish/wm/menus.jl
+#, fuzzy
+msgid "S_awfishConfig"
+msgstr "Bộ cấu hình Sawfish"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command"
+msgstr "Gọi lệnh"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call the command NAME; optionally with the prefix argument PFX-ARG."
+msgstr "Gọi lệnh TÊN lệnh; tùy chọn với đối số tiền tố « PFX-ARG »."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Run shell command"
+msgstr "Chạy lệnh hệ vỏ"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Execute the given shell command in the background."
+msgstr "Thực hiện lệnh hệ vỏ đãone đưa ra."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Command sequence"
+msgstr "Chuỗi lệnh"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Invoke the list of commands, one by one."
+msgstr "Gọi một chuỗi lệnh, từng cái một."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Quit"
+msgstr "Thoát"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Quit sawfish."
+msgstr "_Giới thiệu về Sawfish..."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Restart"
+msgstr "Khởi động lại"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Restart sawfish."
+msgstr "Khởi động lại"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Destroy window"
+msgstr "Hủy cửa sổ"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Destroy a window."
+msgstr "Hủy cửa sổ"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Kill client"
+msgstr "Kết thúc trình khách"
+
+#. ../lisp/sawfish/wm/commands.jl
+#, fuzzy
+msgid "Kill the client that created the specified window."
+msgstr "Chuyển cửa sổ hiện thới sang cổng xem xác định."
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "No operation"
+msgstr "Không thao tác"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Call command with output to screen"
+msgstr "Gọi lệnh sẽ xuất ra màn hình"
+
+#. ../lisp/sawfish/wm/commands.jl
+msgid "Prompt for a command, execute it, and print any output to the screen."
+msgstr "Nhắc với lệnh, thực hiện nó, và hiển thị dữ liệu xuất nào lên màn hình"
+
+#. ../lisp/sawfish/cfg/layouts/keymaps.jl
+msgid "Context:"
+msgstr "Ngữ cảnh:"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+#. ../lisp/sawfish/cfg/widgets/event.jl
+msgid "Grab..."
+msgstr "Bắt..."
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Workspaces:"
+msgstr "Vùng làm việc:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Columns:"
+msgstr "Cột:"
+
+#. ../lisp/sawfish/cfg/widgets/workspace-geometry.jl
+#. ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl
+msgid "Rows:"
+msgstr "Hàng:"
+
+#. ../lisp/sawfish/cfg/widgets/command.jl
+msgid "Undocumented"
+msgstr "Không có tài liệu"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Edit Binding"
+msgstr "Sửa đổi tổ hợp"
+
+#. ../lisp/sawfish/cfg/widgets/keymap.jl
+msgid "Key:"
+msgstr "Phím:"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Matchers"
+msgstr "Bộ khớp"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Actions"
+msgstr "Hành động"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "not"
+msgstr "không"
+
+#. ../lisp/sawfish/cfg/widgets/match-window.jl
+msgid "Match Window Properties"
+msgstr "Khớp thuộc tính cửa sổ"
+
+#. ../lisp/sawfish/cfg/apply.jl
+#, c-format
+msgid "While changing %s:"
+msgstr "Khi thay đổi %s:"
+
+#. ../lisp/sawfish/cfg/apply.jl
+msgid "Sawfish Error"
+msgstr "Lỗi Sawfish"
+
+#. ../lisp/sawfish/cfg/shell.jl
+msgid "Sawfish Configurator"
+msgstr "Bộ cấu hình Sawfish"
+
+#~ msgid "Select font"
+#~ msgstr "Chọn phông chữ"
+
+#~ msgid "Add..."
+#~ msgstr "Thêm..."
+
+#~ msgid "Delete"
+#~ msgstr "Xóa bỏ"
+
+#~ msgid "Edit..."
+#~ msgstr "Sửa..."
+
+#~ msgid "3d hack"
+#~ msgstr "Việc cố chỉnh sửa ba chiều"
+
+#, fuzzy
+#~ msgid "Amount to move the workspace."
+#~ msgstr "Gởi qua vùng làm việc kế"
+
+#~ msgid "Default frame style:"
+#~ msgstr "Kiểu dáng khung mặc định:"
+
+#~ msgid "Edit frame style"
+#~ msgstr "Sửa kiểu dáng khung"
+
+#~ msgid "_FAQ..."
+#~ msgstr "_Hỏi Đáp..."
+
+#~ msgid "_News..."
+#~ msgstr "_Tin tức..."
+
+#~ msgid "_WWW page..."
+#~ msgstr "Trang _Mạng..."
+
+#~ msgid "_Manual..."
+#~ msgstr "_Sổ tay..."
+
+#~ msgid "Edit theme..."
+#~ msgstr "Sửa sắc thái..."
+
+#~ msgid "Lock position and size while windows are maximized."
+#~ msgstr "Khóa vị trí và kích thước khi đang phóng to."
+
+#~ msgid "Unshade selected windows."
+#~ msgstr "Bỏ bóng các cửa sổ đã chọn."
+
+#~ msgid "Display the workspace/viewport containing the window W."
+#~ msgstr "Hiển thị vùng làm việc/cổng xem chứa cửa sổ W."
+
+#~ msgid "Display the workspace containing the window W, then focus on W."
+#~ msgstr "Hiện vùng làm việc chứa cửa sổ W, sau đó chuyển tiêu điểm cho W."
+
+#, fuzzy
+#~ msgid "Give focus to windows even when they haven't asked for it."
+#~ msgstr "Nâng cửa sổ nhận tiêu điểm lên"
+
+#~ msgid "Delete the window."
+#~ msgstr "Xóa bỏ cửa sổ."
+
 #~ msgid "and many others..."
 #~ msgstr "và nhiều cái khác..."
 
@@ -4908,13 +5079,6 @@ msgstr "Nhắc với vùng làm việc và chuyển đổi qua đó."
 #~ "Tăng kích cỡ của cửa sổ bên dưới cho đến khi\n"
 #~ "nó « đâm sầm vào » một cửa sổ khác.\n"
 #~ "Xem « nới bên trên cửa sổ »."
-
-#, fuzzy
-#~ msgid "Moves window upwards until it `bumps into' another window."
-#~ msgstr ""
-#~ "Chuyển cửa sổ bên dưới cho đến khi\n"
-#~ "nó « đâm sầm vào » một cửa sổ khác.\n"
-#~ "Xem « nén bên trên cửa sổ »."
 
 #, fuzzy
 #~ msgid ""

@@ -86,17 +86,17 @@ milliseconds (defaults to 1 second), false otherwise."
       ;; a returning ping (pong?)
       (let ((id (aref data 1)))
 	(let loop ((rest pings-in-transit))
-             (cond ((null loop)
-                    (format
-                     standard-error "Received stray _NET_WM_PING: %s\n" data))
+	  (cond ((null loop)
+		 (format
+		  standard-error "Received stray _NET_WM_PING: %s\n" data))
 
-                   ((eql (ping-id (car rest)) id)
-                    ;; found our ping
-                    (let ((this (car rest)))
-                      (setq pings-in-transit (delq this pings-in-transit))
-                      ((ping-callback this) t)))
+		((eql (ping-id (car rest)) id)
+		 ;; found our ping
+		 (let ((this (car rest)))
+		   (setq pings-in-transit (delq this pings-in-transit))
+		     ((ping-callback this) t)))
 
-                   (t (loop (cdr rest))))))
+		(t (loop (cdr rest))))))
       t))
 
   (add-hook 'client-message-hook client-message-handler))

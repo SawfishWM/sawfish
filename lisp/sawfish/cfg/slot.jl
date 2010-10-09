@@ -122,31 +122,32 @@
     ;; the nil spaces.
     (define (merge slots extra)
       (let loop ((rest slots))
-           (if (null rest)
-               slots
-             (when (null (car rest))
-               (rplaca rest (apply make-slot (car extra)))
-               (setq extra (cdr extra)))
-             (loop (cdr rest)))))
+	(if (null rest)
+	    slots
+	  (when (null (car rest))
+	    (rplaca rest (apply make-slot (car extra)))
+	    (setq extra (cdr extra)))
+	  (loop (cdr rest)))))
 
     ;; find which slots still need to be loaded
     (let ((slots (mapcar get-slot names)))
-      (let loop ((names-rest names)
-		 (slots-rest slots)
-		 (to-fetch '()))
-           (if (null names-rest)
-               (if to-fetch
-                   ;; load and merge the required slots
-                   (merge slots (wm-load-slots (nreverse to-fetch)))
-                 slots)
-             (if (null (car slots-rest))
-                 ;; slot not loaded yet
-                 (loop (cdr names-rest)
-                       (cdr slots-rest)
-                       (cons (car names-rest) to-fetch))
-               (loop (cdr names-rest)
-                     (cdr slots-rest)
-                     to-fetch))))))
+      (let loop
+	  ((names-rest names)
+	   (slots-rest slots)
+	   (to-fetch '()))
+	(if (null names-rest)
+	    (if to-fetch
+		;; load and merge the required slots
+		(merge slots (wm-load-slots (nreverse to-fetch)))
+	      slots)
+	  (if (null (car slots-rest))
+	      ;; slot not loaded yet
+	      (loop (cdr names-rest)
+		    (cdr slots-rest)
+		    (cons (car names-rest) to-fetch))
+	    (loop (cdr names-rest)
+		  (cdr slots-rest)
+		  to-fetch))))))
 
 ;;; misc
 

@@ -90,22 +90,22 @@
       (let ((w-depth (window-depth w)))
 	(setq parents (delete-if (lambda (x)
 				   (> (window-depth x) w-depth)) parents))
-	(setq children (delete-if (lambda (x)
-				    (< (window-depth x) w-depth)) children)))
+	  (setq children (delete-if (lambda (x)
+				      (< (window-depth x) w-depth)) children)))
 
-      (lambda (above below)
-	(and (or (null parents)
-		 ;; All parents must be below W
-		 (let loop ((rest parents))
-                      (cond ((null rest) t)
-                            ((memq (car rest) above) nil)
-                            (t (loop (cdr rest))))))
-	     (or (null children)
-		 ;; All children must be above W
-		 (let loop ((rest children))
-                      (cond ((null rest) t)
-                            ((memq (car rest) below) nil)
-                            (t (loop (cdr rest))))))))))
+	(lambda (above below)
+	  (and (or (null parents)
+		   ;; All parents must be below W
+		   (let loop ((rest parents))
+		     (cond ((null rest) t)
+			   ((memq (car rest) above) nil)
+			   (t (loop (cdr rest))))))
+	       (or (null children)
+		   ;; All children must be above W
+		   (let loop ((rest children))
+		     (cond ((null rest) t)
+			   ((memq (car rest) below) nil)
+			   (t (loop (cdr rest))))))))))
 
   (define (stacking-constraint:transients-above-all w)
     (let ((w-depth (window-depth w)))
@@ -115,27 +115,27 @@
 	  (lambda (above below)
 	    (declare (unused below))
 	    (let loop ((rest above))
-                 (cond ((null rest) t)
-                       ((and (not (window-transient-p (car rest)))
-                             (<= (window-depth (car rest)) w-depth)) nil)
-                       (t (loop (cdr rest))))))
+	      (cond ((null rest) t)
+		    ((and (not (window-transient-p (car rest)))
+			  (<= (window-depth (car rest)) w-depth)) nil)
+		    (t (loop (cdr rest))))))
 	;; ensure no transients below W, unless they're depth < W
 	(lambda (above below)
 	  (declare (unused above))
 	  (let loop ((rest below))
-               (cond ((null rest) t)
-                     ((and (window-transient-p (car rest))
-                           (>= (window-depth (car rest)) w-depth)) nil)
-                     (t (loop (cdr rest)))))))))
+	    (cond ((null rest) t)
+		  ((and (window-transient-p (car rest))
+			(>= (window-depth (car rest)) w-depth)) nil)
+		  (t (loop (cdr rest)))))))))
 
   (define (combine-constraints constraints)
     "Combine the list of secondary constraint functions into a single
 function (using logical `and' combinator)."
     (lambda (above below)
       (let loop ((rest constraints))
-           (cond ((null rest) t)
-                 ((not ((car rest) above below)) nil)
-                 (t (loop (cdr rest)))))))
+	(cond ((null rest) t)
+	      ((not ((car rest) above below)) nil)
+	      (t (loop (cdr rest)))))))
 
   (defvar basic-stacking-constraints (list stacking-constraint:layer)
     "List of stacking constraint functions to adhere to (excluding transient
@@ -168,14 +168,14 @@ reverse order), and the list of windows occurring in LST after PIVOT.
 LST is destructively modified by this procedure."
     (let loop ((rest lst)
 	       (before '()))
-         (cond ((null rest)
-                (cons before rest))
-               ((eq (car rest) pivot)
-                (cons before (cdr rest)))
-               (t
-                (let ((next (cdr rest)))
-                  (rplacd rest before)
-                  (loop next rest))))))
+      (cond ((null rest)
+	     (cons before rest))
+	    ((eq (car rest) pivot)
+	     (cons before (cdr rest)))
+	    (t
+	     (let ((next (cdr rest)))
+	       (rplacd rest before)
+		 (loop next rest))))))
 
   (define (stack-rotate-upwards cell)
     "Given a cons cell containing two lists of windows `(ABOVE . BELOW)',
@@ -186,9 +186,9 @@ the empty list."
 	nil
       (let ((next (car cell)))
 	(rplaca cell (cdar cell))
-	(rplacd next (cdr cell))
-	(rplacd cell next)
-	cell)))
+	  (rplacd next (cdr cell))
+	  (rplacd cell next)
+	  cell)))
 
   (define (stack-rotate-downwards cell)
     "Given a cons cell containing two lists of windows `(ABOVE . BELOW)',
@@ -199,9 +199,9 @@ the empty list."
 	nil
       (let ((next (cdr cell)))
 	(rplacd cell (cddr cell))
-	(rplacd next (car cell))
-	(rplaca cell next)
-	cell)))
+	  (rplacd next (car cell))
+	  (rplaca cell next)
+	  cell)))
 
   (define (mapped-stacking-order)
     (delete-if-not window-mapped-p (stacking-order)))
@@ -216,18 +216,18 @@ fully obscure WINDOW."
     (define ws (nearest-workspace-with-window w current-workspace))
     (let loop ((stack (stacking-order))
                (obs nil))
-         (if (null stack)               ; Should not happen
-             obs
-           (let ((w2 (car stack)))
-             (cond ((eq w2 w) obs)
-                   ((and (window-visible-p w2)
-                         (window-appears-in-workspace-p w2 ws))
-                    (case (apply rect-obscured
-                                 (rectangles-from-windows (list w w2)))
-                      ((unobscured) (loop (cdr stack) obs))
-                      ((fully-obscured) t)
-                      (t (loop (cdr stack) (cons w2 obs))))) ; Partially
-                   (t (loop (cdr stack) obs)))))))
+      (if (null stack)               ; Should not happen
+	  obs
+	(let ((w2 (car stack)))
+	  (cond ((eq w2 w) obs)
+		((and (window-visible-p w2)
+		      (window-appears-in-workspace-p w2 ws))
+		 (case (apply rect-obscured
+			      (rectangles-from-windows (list w w2)))
+		   ((unobscured) (loop (cdr stack) obs))
+		   ((fully-obscured) t)
+		   (t (loop (cdr stack) (cons w2 obs))))) ; Partially
+		(t (loop (cdr stack) obs)))))))
 
   (define (stacking-visibility window)
     "Compute the visibility of WINDOW from the stacking order.  This should
@@ -262,16 +262,16 @@ distinction, window-obscured should be faster."
     (let ((constraint (make-constraint w))
 	  (stack (cons '() (delq w (stacking-order)))))
       (let loop ()
-           (cond ((constraint (car stack) (cdr stack))
-                  (if (car stack)
-                      (x-lower-window w (car (car stack)))
-                    (x-raise-window w (car (cdr stack)))))
-                 ((null (cdr stack))
-                  ;; no position
-                  nil)
-                 (t
-                  (stack-rotate-downwards stack)
-                  (loop))))))
+	(cond ((constraint (car stack) (cdr stack))
+	       (if (car stack)
+		   (x-lower-window w (car (car stack)))
+		 (x-raise-window w (car (cdr stack)))))
+	      ((null (cdr stack))
+	       ;; no position
+	       nil)
+	      (t
+	       (stack-rotate-downwards stack)
+	       (loop))))))
 
   (define (lower-window w)
     "Lower the window to its lowest allowed position in the stacking order."
@@ -279,17 +279,17 @@ distinction, window-obscured should be faster."
 	  (stack (cons (nreverse (delq w (stacking-order))) '())))
       ;; work upwards from bottom
       (let loop ()
-           (cond ((constraint (car stack) (cdr stack))
-                  ;; found the lowest position
-                  (if (cdr stack)
-                      (x-raise-window w (car (cdr stack)))
-                    (x-lower-window w (car (car stack)))))
-                 ((null (car stack))
-                  ;; no possible position..
-                  nil)
-                 (t
-                  (stack-rotate-upwards stack)
-                  (loop))))))
+	(cond ((constraint (car stack) (cdr stack))
+	       ;; found the lowest position
+	       (if (cdr stack)
+		   (x-raise-window w (car (cdr stack)))
+		 (x-lower-window w (car (car stack)))))
+	      ((null (car stack))
+	       ;; no possible position..
+	       nil)
+	      (t
+	       (stack-rotate-upwards stack)
+	       (loop))))))
 
   (define (stack-window-above above below)
     "Change the stacking of window ABOVE so that it is as closely above window
@@ -298,18 +298,18 @@ BELOW as possible."
 	  (stack (break-window-list
 		  (delq above (stacking-order)) below)))
       (rplacd stack (cons below (cdr stack)))
-      (let loop ()
-           (cond ((constraint (car stack) (cdr stack))
-                  ;; found a suitable position
-                  (if (car stack)
-                      (x-lower-window above (car (car stack)))
-                    (x-raise-window above (car (cdr stack)))))
-                 ((null (car stack))
-                  ;; reached the top
-                  nil)
-                 (t
-                  (stack-rotate-upwards stack)
-                  (loop))))))
+	(let loop ()
+	  (cond ((constraint (car stack) (cdr stack))
+		 ;; found a suitable position
+		 (if (car stack)
+		     (x-lower-window above (car (car stack)))
+		   (x-raise-window above (car (cdr stack)))))
+		((null (car stack))
+		 ;; reached the top
+		 nil)
+		(t
+		 (stack-rotate-upwards stack)
+		 (loop))))))
 
   (define (stack-window-below below above)
     "Change the stacking of window BELOW so that it is as closely below window
@@ -318,17 +318,17 @@ ABOVE as possible."
 	  (stack (break-window-list
 		  (delq below (stacking-order)) above)))
       (rplaca stack (cons above (car stack)))
-      (let loop ()
-           (cond ((constraint (car stack) (cdr stack))
-                  (if (cdr stack)
-                      (x-raise-window below (car (cdr stack)))
-                    (x-lower-window below (car (car stack)))))
-                 ((null (cdr stack))
-                  ;; reached the bottom
-                  nil)
-                 (t
-                  (stack-rotate-downwards stack)
-                  (loop))))))
+	(let loop ()
+	  (cond ((constraint (car stack) (cdr stack))
+		 (if (cdr stack)
+		     (x-raise-window below (car (cdr stack)))
+		   (x-lower-window below (car (car stack)))))
+		((null (cdr stack))
+		 ;; reached the bottom
+		 nil)
+		(t
+		 (stack-rotate-downwards stack)
+		 (loop))))))
 
   (define (restack-window w)
     "Assuming that the current stacking order is in a consistent state
@@ -353,14 +353,14 @@ order they are stacked within the layer (top to bottom)."
     "Set the stacking depth of window W to DEPTH."
     (let ((old (window-depth w)))
       (window-put w 'depth depth)
-      (cond ((> old depth)
-	     ;; window's going downwards
-	     (raise-window w))
-	    ((< old depth)
-	     ;; window's going upwards
-	     (lower-window w)))
-      (call-window-hook 'window-depth-change-hook w (list depth))
-      (call-window-hook 'window-state-change-hook w (list '(stacking)))))
+	(cond ((> old depth)
+	       ;; window's going downwards
+	       (raise-window w))
+	      ((< old depth)
+	       ;; window's going upwards
+	       (lower-window w)))
+	(call-window-hook 'window-depth-change-hook w (list depth))
+	(call-window-hook 'window-state-change-hook w (list '(stacking)))))
 
   (define (window-on-top-p w)
     "Return t if window W is as high as it can legally go in the
@@ -376,12 +376,12 @@ stacking order."
 	   (old-posn (- (length order) (length (memq w order))))
 	   (stack (cons '() (delq w order))))
       (let loop ()
-           (if (or (constraint (car stack) (cdr stack))
-                   (null (cdr stack)))
-               ;; found highest position
-               (= (length (car stack)) old-posn)
-             (stack-rotate-downwards stack)
-             (loop)))))
+	(if (or (constraint (car stack) (cdr stack))
+		(null (cdr stack)))
+	    ;; found highest position
+	    (= (length (car stack)) old-posn)
+	  (stack-rotate-downwards stack)
+	  (loop)))))
 
   (define (raise-lower-window w)
     "If the window is at its highest possible position, then lower it to its
@@ -433,20 +433,20 @@ lowest possible position. Otherwise raise it as far as allowed."
       ;; find the first window in ORDER that is allowed
       ;; to be above all other windows in ORDER...
       (let loop ((rest order))
-           (cond ((null rest) nil)
-                 (((make-constraint (car rest)) '() (remq (car rest) order))
-                  (car rest))
-                 (t (loop (cdr rest))))))
+	(cond ((null rest) nil)
+	      (((make-constraint (car rest)) '() (remq (car rest) order))
+	       (car rest))
+	      (t (loop (cdr rest))))))
 
     ;; Cons up the new order (in reverse), by picking the most-raisable
     ;; each time until no windows are left, then commit that ordering
     (let loop ((rest (cons w (remq w order)))
 	       (out '()))
-         (if (null rest)
-             (apply-group-order (nreverse out) raise-window stack-window-below)
-           (let ((highest (or (highest-window rest)
-                              (error "Stacking constraint failed"))))
-             (loop (delq highest rest) (cons highest out))))))
+      (if (null rest)
+	  (apply-group-order (nreverse out) raise-window stack-window-below)
+	(let ((highest (or (highest-window rest)
+			   (error "Stacking constraint failed"))))
+	  (loop (delq highest rest) (cons highest out))))))
 
   (define (lower-windows w order)
 
@@ -455,28 +455,28 @@ lowest possible position. Otherwise raise it as far as allowed."
       ;; windows in ORDER
       (let ((reversed (reverse order)))
 	(let loop ((rest reversed))
-             (cond ((null rest) nil)
-                   (((make-constraint (car rest))
-                     (remq (car rest) reversed) '()) (car rest))
-                   (t (loop (cdr rest)))))))
+	  (cond ((null rest) nil)
+		(((make-constraint (car rest))
+		  (remq (car rest) reversed) '()) (car rest))
+		(t (loop (cdr rest)))))))
 
     (let loop ((rest (nconc (remq w order) (list w)))
 	       (out '()))
-         (if (null rest)
-             (apply-group-order (nreverse out) lower-window stack-window-above)
-           (let ((lowest (or (lowest-window rest)
-                             (error "Stacking constraint failed"))))
-             (loop (delq lowest rest) (cons lowest out))))))
+      (if (null rest)
+	  (apply-group-order (nreverse out) lower-window stack-window-above)
+	(let ((lowest (or (lowest-window rest)
+			  (error "Stacking constraint failed"))))
+	  (loop (delq lowest rest) (cons lowest out))))))
 
   (define (raise-lower-windows w order)
     (if (or (not (window-obscured w))
 	    (and (window-on-top-p (car order))
 		 ;; look for the group as a block.. this is a heuristic
 		 (let loop ((rest (memq (car order) (stacking-order))))
-                      (cond ((null rest) nil)
-                            ((eq (car rest) w) t)
-                            ((memq (car rest) order) (loop (cdr rest)))
-                            (t nil)))))
+		   (cond ((null rest) nil)
+			 ((eq (car rest) w) t)
+			 ((memq (car rest) order) (loop (cdr rest)))
+			 (t nil)))))
 	(lower-windows w order)
       (raise-windows w order)))
 

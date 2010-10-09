@@ -39,7 +39,6 @@
     ((open rep
 	   rep.regexp
 	   rep.system
-	   rep.structures
 	   rep.io.files
 	   rep.io.processes
 	   sawfish.wm
@@ -96,7 +95,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
       (message "Renamed file ~/.sawmillrc -> ~/.sawfishrc"))
     )
 
-  ;; Detect desktop environment
+  ;; Detect desktop environment.
+  ;; These functions have to non-nil if it detects a DE, otherwise nil.
+  ;; It should also initialize, and set `desktop-environment',
+  ;; and probably `want-poweroff-menu', too.
   (define (detect-desktop-environment)
     (or (sawfish.wm.integration.gnome#detect-gnome)
 	(sawfish.wm.integration.kde#detect-kde)
@@ -134,13 +136,13 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
 
 	    ;; then the sawfish specific user configuration
 	    (let loop ((rest rc-files))
-		 (when rest
-		   (if (file-exists-p (car rest))
-		       ;; Print stack trace on error during exeuction
-		       ;; of ~/.sawfish/rc
-		       (let ((%in-condition-case nil))
-			 (safe-load (car rest) t t t))
-		     (loop (cdr rest)))))))
+	      (when rest
+		(if (file-exists-p (car rest))
+		    ;; Print stack trace on error during exeuction
+		    ;; of ~/.sawfish/rc
+		    (let ((%in-condition-case nil))
+		      (safe-load (car rest) t t t))
+		  (loop (cdr rest)))))))
       (error
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 

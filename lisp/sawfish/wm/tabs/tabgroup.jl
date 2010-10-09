@@ -80,26 +80,26 @@
   (define (tab-find-window win)
     "Return a group containing win"
     (let loop ((gr tab-groups))
-         (cond
-          ((null gr)
-           (tab-make-new-group win)
-           )
-          ((member win (tab-group-window-list (car gr)))
-           (car gr))
-          (t
-           (loop (cdr gr))))))
+      (cond
+       ((null gr)
+	(tab-make-new-group win)
+	)
+       ((member win (tab-group-window-list (car gr)))
+	(car gr))
+       (t
+	(loop (cdr gr))))))
 
   (define (tab-window-group-index win)
     "Return the index of the group containing win"
     (let loop ((index 0))
-         (cond
-          ((eq index (length tab-groups))
-           (tab-make-new-group win)
-           index)
-          ((member win (tab-group-window-list (nth index tab-groups)))
-           index)
-          (t
-           (loop (+ index 1))))))
+      (cond
+       ((eq index (length tab-groups))
+	(tab-make-new-group win)
+	index)
+       ((member win (tab-group-window-list (nth index tab-groups)))
+	index)
+       (t
+	(loop (+ index 1))))))
 
   (define (tab-rank elem list)
     (if (eq elem (car list))

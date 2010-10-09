@@ -108,6 +108,7 @@
 (require 'pp)
 (require 'easymenu)
 (require 'inf-lisp)
+(require 'scheme)
 
 ;; Shut the compiler up.
 (eval-when-compile
@@ -346,10 +347,10 @@ Special commands:
     ;; Add the additional font-lock pattern to `font-lock-defaults'
     ;; only once
     (unless (memq 'sawfish-additional-keywords (car font-lock-defaults))
-        (setq font-lock-defaults (copy-alist font-lock-defaults))
-        (setcar font-lock-defaults 
-                (append (car font-lock-defaults) 
-                        '(sawfish-additional-keywords)))))
+      (setq font-lock-defaults (copy-alist font-lock-defaults))
+      (setcar font-lock-defaults 
+	      (append (car font-lock-defaults) 
+		      '(sawfish-additional-keywords)))))
   ;; Menu stuff.
   (if (and (boundp 'running-xemacs) (symbol-value 'running-xemacs))
       ;; XEmacs.
@@ -371,16 +372,29 @@ Special commands:
   ;; (rep is a sort of elisp/scheme hybrid with some extra stuff of its own,
   ;; we inherit from emacs-lisp-mode so we need to add a sprinkle of scheme
   ;; support).
+  (make-local-variable 'lisp-indent-function)
+  (setq lisp-indent-function 'sawfish-indent-function)
+  ;; `let' is handled specially. See sawfish-indent-function.
+  (put 'let 'lisp-indent-function 'scheme-let-indent)
   (loop for sym in '((define                  . 1)
                      (define-interface        . 1)
                      (define-record-discloser . 1)
                      (define-record-type      . 1)
                      (define-structure        . 3)
                      (letrec                  . 1)
+		     (let-fluids              . 1)
+		     (let . 'scheme-let-indent)
                      (structure               . 2)
                      (with-output-to-screen   . 0))
         do (unless (get (car sym) 'lisp-indent-function)
              (put (car sym) 'lisp-indent-function (cdr sym)))))
+
+(defun sawfish-indent-function (indent-point state)
+  (condition-case nil
+      (lisp-indent-function indent-point state)
+    ;; This handles indent of `let'.
+    (wrong-number-of-arguments
+     (scheme-indent-function indent-point state))))
 
 (defun sawfish-eval (sexp &optional target-buffer)
   "Pass SEXP to sawfish for evaluation.

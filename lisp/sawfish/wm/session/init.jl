@@ -143,15 +143,15 @@ that feature off, allowing some broken clients to be session managed.")
   (define (remove-sm-options)
     ;; remove any sm options from saved-command-line-args
     (let loop ((args saved-command-line-args))
-         (when (cdr args)
-           (if (string-match "^(--sm-client-id|-clientId|--sm-prefix)"
-                             (cadr args))
-               (progn
-                 (if (string-match "=" (cadr args))
-                     (rplacd args (cddr args))
-                   (rplacd args (cdddr args)))
-                 (loop args))
-             (loop (cdr args))))))
+      (when (cdr args)
+	(if (string-match "^(--sm-client-id|-clientId|--sm-prefix)"
+			  (cadr args))
+	    (progn
+	      (if (string-match "=" (cadr args))
+		  (rplacd args (cddr args))
+		(rplacd args (cdddr args)))
+	      (loop args))
+	  (loop (cdr args))))))
 
   (define (set-discard-command)
     (sm-set-property

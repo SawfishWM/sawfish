@@ -75,17 +75,17 @@
 				  (red-rest red-luts)
 				  (green-rest green-luts)
 				  (blue-rest blue-luts))
-                            (when rest
-                              (let ((index (nth (car rest) pixel)))
-                                (if (not (zerop index))
-                                    (list (aref (car red-rest) index)
-                                          (aref (car green-rest) index)
-                                          (aref (car blue-rest) index)
-                                          (nth alpha-channel pixel))
-                                  (loop (cdr rest)
-                                        (cdr red-rest)
-                                        (cdr green-rest)
-                                        (cdr blue-rest))))))))
+			 (when rest
+			   (let ((index (nth (car rest) pixel)))
+			     (if (not (zerop index))
+				 (list (aref (car red-rest) index)
+				       (aref (car green-rest) index)
+				       (aref (car blue-rest) index)
+				       (nth alpha-channel pixel))
+			       (loop (cdr rest)
+				     (cdr red-rest)
+				     (cdr green-rest)
+				     (cdr blue-rest))))))))
 		   image))))
 
   (define (make-image-recolorer color #!key

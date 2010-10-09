@@ -32,39 +32,41 @@
 
   (define-structure-alias xfce-int sawfish.wm.integration.xfce)
 
-  ;; Returns t or nil. If detected, do also xfce support init.
+  (define (init)
+    (let (menu)
+      (setq desktop-environment "xfce")
+      (setq want-poweroff-menu nil)
+
+      ;; invoke the GNOME terminal instead of xterm
+      (unless (variable-customized-p 'xterm-program)
+	(setq xterm-program "xfce4-terminal"))
+
+      ;; use the GNOME help browser and url launcher
+      (unless (variable-customized-p 'browser-program)
+	(setq browser-program "midori"))
+
+      ;; add some GNOME help menus
+      (when (setq menu (assoc (_ "_Help") root-menu))
+	(nconc menu `(()
+		      (,(_ "_XFCE Help") (system "xfhelp4 &"))
+		      (,(_ "XFCE _Website") (browser "http://www.xfce.org"))
+		      (,(_ "_About XFCE") (system "xfce4-about &")))))
+
+      ;; add gnome-logout menu item
+      (when (setq menu (assoc (_ "Sessi_on") root-menu))
+	(nconc menu `(()
+		      (,(_ "_Customize XFCE") (system "xfce4-settings-manager &"))
+		      ()
+		      (,(_ "_Logout from XFCE")
+		       (system "xfce4-session-logout --logout &"))
+		      (,(_ "_Reboot from XFCE")
+		       (system "xfce4-session-logout --reboot &"))
+		      (,(_ "_Shutdown from XFCE")
+		       (system "xfce4-session-logout --halt &")))))))
+
+  ;; Returns nil if xfce is not found.
+  ;; If detected, returns t, and do also xfce support init.
   (define (detect-xfce)
-    (if (get-x-property 'root '_DT_SAVE_MODE)
-	(let (menu)
-	  (setq desktop-environment "xfce")
-	  (setq want-poweroff-menu nil)
-
-	  ;; invoke the GNOME terminal instead of xterm
-	  (unless (variable-customized-p 'xterm-program)
-	    (setq xterm-program "xfce4-terminal"))
-
-	  ;; use the GNOME help browser and url launcher
-	  (unless (variable-customized-p 'browser-program)
-	    (setq browser-program "midori"))
-
-	  ;; add some GNOME help menus
-	  (when (setq menu (assoc (_ "_Help") root-menu))
-	    (nconc menu `(()
-			  (,(_ "_XFCE Help") (system "xfhelp4 &"))
-			  (,(_ "XFCE _Website") (browser "http://www.xfce.org"))
-			  (,(_ "_About XFCE") (system "xfce4-about &")))))
-
-	  ;; add gnome-logout menu item
-	  (when (setq menu (assoc (_ "Sessi_on") root-menu))
-	      (nconc menu `(()
-			    (,(_ "_Customize XFCE") (system "xfce4-settings-manager &"))
-			    ()
-			    (,(_ "_Logout from XFCE")
-			     (system "xfce4-session-logout --logout &"))
-			    (,(_ "_Reboot from XFCE")
-			     (system "xfce4-session-logout --reboot &"))
-			    (,(_ "_Shutdown from XFCE")
-			     (system "xfce4-session-logout --halt &")))))
-	  t)
-      ;; No, xfce isn't running
-      nil)))
+    (when (get-x-property 'root '_DT_SAVE_MODE)
+      (init)
+      t)))

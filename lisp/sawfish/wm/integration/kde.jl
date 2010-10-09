@@ -37,43 +37,44 @@
     '("/usr/share/applications/kde4/")
     "KDE specific directories where *.desktop files are stored.")
 
-  ;; Returns t or nil. If detected, do also kde support init.
+  (define (init)
+    (let (menu
+	  kde-logout-cmd)
+      (setq desktop-environment "kde")
+      (setq want-poweroff-menu nil)
+      (setq desktop-directory
+	    (append desktop-directory kde-desktop-directories))
+
+      ;; invoke the KDE terminal instead of xterm
+      (unless (variable-customized-p 'xterm-program)
+	(setq xterm-program "konsole"))
+
+      ;; use the KDE Browser
+      (unless (variable-customized-p 'browser-program)
+	(setq browser-program "konqueror"))
+
+      ;; add some KDE help menus
+      (when (setq menu (assoc (_ "_Help") root-menu))
+	(nconc menu `(()
+		      (,(_ "_KDE Help") (system "khelpcenter &"))
+		      (,(_ "KDE _Website") (browser "http://www.kde.org")))))
+
+      ;; add kde-logout menu item
+      (when (setq menu (assoc (_ "Sessi_on") root-menu))
+	(setq kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout")
+	(nconc menu `(()
+		      (,(_ "_Customize KDE") (system "systemsettings &"))
+		      ()
+		      (,(_ "_Logout from KDE")
+		       (system ,(concat kde-logout-cmd " 1 0 -1 &")))
+		      (,(_ "_Reboot from KDE")
+		       (system ,(concat kde-logout-cmd " 1 1 -1 &")))
+		      (,(_ "_Shutdown from KDE")
+		       (system ,(concat kde-logout-cmd " 1 2 -1 &"))))))))
+  
+  ;; Returns nil if kde is not found.
+  ;; If detected, returns t, and do also kde support init.
   (define (detect-kde)
-  (if (getenv "KDE_FULL_SESSION")
-      (let (menu
-	    kde-logout-cmd)
-	(setq desktop-environment "kde")
-	(setq want-poweroff-menu nil)
-	(setq desktop-directory
-	      (append desktop-directory kde-desktop-directories))
-
-	;; invoke the KDE terminal instead of xterm
-	(unless (variable-customized-p 'xterm-program)
-	  (setq xterm-program "konsole"))
-
-	;; use the KDE Browser
-	(unless (variable-customized-p 'browser-program)
-	  (setq browser-program "konqueror"))
-
-	;; add some KDE help menus
-	(when (setq menu (assoc (_ "_Help") root-menu))
-	  (nconc menu `(()
-			(,(_ "_KDE Help") (system "khelpcenter &"))
-			(,(_ "KDE _Website") (browser "http://www.kde.org")))))
-
-	;; add kde-logout menu item
-	  (when (setq menu (assoc (_ "Sessi_on") root-menu))
-	    (setq kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout")
-	    (nconc menu `(()
-			  (,(_ "_Customize KDE") (system "systemsettings &"))
-			  ()
-			  (,(_ "_Logout from KDE")
-			   (system ,(concat kde-logout-cmd " 1 0 -1 &")))
-			  (,(_ "_Reboot from KDE")
-			   (system ,(concat kde-logout-cmd " 1 1 -1 &")))
-			  (,(_ "_Shutdown from KDE")
-			   (system ,(concat kde-logout-cmd " 1 2 -1 &"))))))
-	  t)
-    ;; no, kde is not found.
-    nil
-    )))
+    (when (getenv "KDE_FULL_SESSION")
+      (init)
+      t)))

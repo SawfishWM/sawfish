@@ -385,13 +385,13 @@ before killing it.")
     (let ((item (list* label command
 		       (and predicate (list (cons 'check predicate))))))
       (let loop ((rest window-ops-toggle-menu))
-         (cond
-          ((null rest)
-           (setq window-ops-toggle-menu (nconc window-ops-toggle-menu
-                                               (list item))))
-          ((eq (cadar rest) command)
-           (rplaca rest item))
-          (t (loop (cdr rest)))))))
+	(cond
+	 ((null rest)
+	  (setq window-ops-toggle-menu (nconc window-ops-toggle-menu
+					      (list item))))
+	 ((eq (cadar rest) command)
+	  (rplaca rest item))
+	 (t (loop (cdr rest)))))))
 
 ;;; customize menu
 
