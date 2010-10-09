@@ -87,11 +87,11 @@
 WINDOWS argument is given it should be a list of windows, in this case the
 function will restrict its search to the elements of this list."
     (let loop ((rest (window-order current-workspace nil)))
-         (cond ((null rest) nil)
-               ((or (window-get (car rest) 'never-focus)
-                    (and (listp windows) (not (memq (car rest) windows))))
-                (loop (cdr rest)))
-               (t (car rest)))))
+      (cond ((null rest) nil)
+	    ((or (window-get (car rest) 'never-focus)
+		 (and (listp windows) (not (memq (car rest) windows))))
+	     (loop (cdr rest)))
+	    (t (car rest)))))
 
   (define (window-order-focus-most-recent)
     (set-input-focus (window-order-most-recent)))

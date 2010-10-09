@@ -159,6 +159,6 @@
 
   (define (command-index lst x)
     (let loop ((i 0) (rest lst))
-         (cond ((null rest) nil)
-               ((eq (or (caar rest) (car rest)) x) i)
-               (t (loop (1+ i) (cdr rest)))))))
+      (cond ((null rest) nil)
+	    ((eq (or (caar rest) (car rest)) x) i)
+	    (t (loop (1+ i) (cdr rest)))))))

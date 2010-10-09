@@ -145,11 +145,11 @@
 
   (define (widget-set item value)
     (let-fluids ((callback-enabled nil))
-                ((item 'set) value)))
+      ((item 'set) value)))
 
   (define (widget-clear item)
     (let-fluids ((callback-enabled nil))
-                ((item 'clear))))
+      ((item 'clear))))
 
   (define (widget-gtk-widget item) (item 'gtk-widget))
 
@@ -192,18 +192,18 @@
 	  (value (or (caar options) (car options))))
       (let loop ((rest options)
 		 (last nil))
-           (when rest
-             (let ((button (gtk-radio-menu-item-new-with-label-from-widget
-                            last (_ (or (cadar rest)
-                                        (symbol-name (car rest)))))))
-               (gtk-menu-shell-append menu button)
-               (gtk-widget-show button)
-               (g-signal-connect button "toggled"
-                                 (lambda (w)
-                                   (when (gtk-check-menu-item-active w)
-                                     (setq value (or (caar rest) (car rest)))
-                                     (call-callback changed-callback))))
-               (loop (cdr rest) button))))
+	(when rest
+	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
+			 last (_ (or (cadar rest)
+				     (symbol-name (car rest)))))))
+	    (gtk-menu-shell-append menu button)
+	      (gtk-widget-show button)
+	      (g-signal-connect button "toggled"
+				(lambda (w)
+				  (when (gtk-check-menu-item-active w)
+				    (setq value (or (caar rest) (car rest)))
+				    (call-callback changed-callback))))
+	      (loop (cdr rest) button))))
       (gtk-option-menu-set-menu omenu menu)
       (gtk-widget-show-all omenu)
       (lambda (op)
@@ -431,11 +431,11 @@
 
   (define-widget-type 'h-and (lambda (#!rest args)
 			       (let-fluids ((and-direction 'horizontal))
-                                           (apply make-and-item args))))
+				 (apply make-and-item args))))
 
   (define-widget-type 'v-and (lambda (#!rest args)
 			       (let-fluids ((and-direction 'vertical))
-                                           (apply make-and-item args))))
+				 (apply make-and-item args))))
 
   (define (make-labelled-item changed-callback label item)
     (let ((box (gtk-hbox-new nil box-spacing)))
@@ -523,6 +523,6 @@
 
   (define (option-index lst x)
     (let loop ((i 0) (rest lst))
-         (cond ((null rest) nil)
-               ((eq (or (caar rest) (car rest)) x) i)
-               (t (loop (1+ i) (cdr rest)))))))
+      (cond ((null rest) nil)
+	    ((eq (or (caar rest) (car rest)) x) i)
+	    (t (loop (1+ i) (cdr rest)))))))

@@ -63,9 +63,9 @@
 
   (define (assoc-case x map)
     (let loop ((rest map))
-         (cond ((null rest) nil)
-               ((string-equal x (caar rest)) (car rest))
-               (t (loop (cdr rest))))))
+      (cond ((null rest) nil)
+	    ((string-equal x (caar rest)) (car rest))
+	    (t (loop (cdr rest))))))
 
   (define (face-style face style)
     (cdr (assoc-case style (face-styles face))))
@@ -107,19 +107,19 @@
       ;; extract styles
       (let loop ((rest (cdr fields))
 		 (styles '()))
-           (if (null rest)
-               (make-face family size (nreverse styles))
-             (cond ((string-match "\\s*=\\s*" (car rest))
-                    (loop (cdr rest)
-                          (cons (cons (substring (car rest) 0 (match-start))
-                                      (substring (car rest) (match-end)))
-                                styles)))
-                   ((assoc-case (car rest) xft-abbrev-map)
-                    (loop (cdr rest)
-                          (cons (cdr (assoc-case (car rest)
-                                                 xft-abbrev-map)) styles)))
-                   ;; drop unknown single words..
-                   (t (loop (cdr rest) styles)))))))
+	(if (null rest)
+	    (make-face family size (nreverse styles))
+	  (cond ((string-match "\\s*=\\s*" (car rest))
+		 (loop (cdr rest)
+		       (cons (cons (substring (car rest) 0 (match-start))
+				   (substring (car rest) (match-end)))
+			     styles)))
+		((assoc-case (car rest) xft-abbrev-map)
+		 (loop (cdr rest)
+		       (cons (cdr (assoc-case (car rest)
+					      xft-abbrev-map)) styles)))
+		;; drop unknown single words..
+		(t (loop (cdr rest) styles)))))))
 
   (define (face->xft-description face)
     (let ((families (string-replace "-" "\\-" (face-families face)))
@@ -203,23 +203,23 @@
   (define (face->pango-description face)
     (let loop ((rest (face-styles face))
 	       (out '()))
-         (if (null rest)
-             (let* ((family (face-families face))
-                    (regexp (concat "^" (last (string-split "\\s+" family)))))
-               (when (and (not (string-equal family ""))
-                          (assoc-grep regexp pango-style-map t))
-                 (setq family (concat family ",")))
-               (mapconcat identity
-                          (nconc (list family)
-                                 (nreverse out)
-                                 (and (face-size face)
-                                      (list
-                                       (format nil "%d" (face-size face)))))
-                          #\space))
-           (let ((tem (rassoc (car rest) pango-style-map)))
-             (if tem
-                 (loop (cdr rest) (cons (car tem) out))
-               (loop (cdr rest) out))))))
+      (if (null rest)
+	  (let* ((family (face-families face))
+		 (regexp (concat "^" (last (string-split "\\s+" family)))))
+	    (when (and (not (string-equal family ""))
+		       (assoc-grep regexp pango-style-map t))
+	      (setq family (concat family ",")))
+	    (mapconcat identity
+		       (nconc (list family)
+			      (nreverse out)
+			      (and (face-size face)
+				   (list
+				    (format nil "%d" (face-size face)))))
+		       #\space))
+	(let ((tem (rassoc (car rest) pango-style-map)))
+	  (if tem
+	      (loop (cdr rest) (cons (car tem) out))
+	    (loop (cdr rest) out))))))
 
   ;; XLFD naming scheme
 

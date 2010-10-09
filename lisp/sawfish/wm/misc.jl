@@ -48,15 +48,15 @@
 server is currently grabbed, ungrab it first, restoring the original grab
 status after the call to THUNK returns."
   (let loop ((counter 0))
-       (if (server-grabbed-p)
-           (progn
-             (ungrab-server)
-             (loop (1+ counter)))
-         (unwind-protect
-             (thunk)
-           (do ((i 0 (1+ i)))
-               ((= i counter))
-             (grab-server))))))
+    (if (server-grabbed-p)
+	(progn
+	  (ungrab-server)
+	  (loop (1+ counter)))
+      (unwind-protect
+	  (thunk)
+	(do ((i 0 (1+ i)))
+	    ((= i counter))
+	  (grab-server))))))
 
 (define grab-counter 0)
 
@@ -89,10 +89,10 @@ to grab the keyboard then THUNK won't be called."
   "Search for a file called FILENAME in any of the directories named by the
 list of strings DIRS."
   (let loop ((rest dirs))
-       (cond ((null rest) nil)
-             ((file-exists-p (expand-file-name filename (car rest)))
-              (expand-file-name filename (car rest)))
-             (t (loop (cdr rest))))))
+    (cond ((null rest) nil)
+	  ((file-exists-p (expand-file-name filename (car rest)))
+	   (expand-file-name filename (car rest)))
+	  (t (loop (cdr rest))))))
 
 (define (clamp x lower upper)
   (cond ((< x lower) lower)
@@ -184,13 +184,13 @@ vector of strings representing the contents of the property."
 	(let loop ((start 0)
 		   (point 0)
 		   (out '()))
-             (cond ((= point (length string))
-                    (apply vector (nreverse (cons (substring
-                                                   string start point) out))))
-                   ((= (aref string point) 0)
-                    (loop (1+ point) (1+ point)
-                          (cons (substring string start point) out)))
-                   (t (loop start (1+ point) out))))))))
+	  (cond ((= point (length string))
+		 (apply vector (nreverse (cons (substring
+						string start point) out))))
+		((= (aref string point) 0)
+		 (loop (1+ point) (1+ point)
+		       (cons (substring string start point) out)))
+		(t (loop start (1+ point) out))))))))
 
 (define (set-x-text-property w prop seq #!optional (encoding 'STRING))
   "Set the X property named PROP on window W to the text property obtained

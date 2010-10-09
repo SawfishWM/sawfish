@@ -38,9 +38,10 @@
 	     (_ name)))))
 
   (define (remove-newlines string)
-    (let loop ((point 0)
-	       (out '()))
-         (if (string-match "\n" string point)
-             (loop (match-end)
-                   (list* #\space (substring string point (match-start)) out))
-           (apply concat (nreverse (cons (substring string point) out)))))))
+    (let loop
+	((point 0)
+	 (out '()))
+      (if (string-match "\n" string point)
+	  (loop (match-end)
+		(list* #\space (substring string point (match-start)) out))
+	(apply concat (nreverse (cons (substring string point) out)))))))

@@ -253,8 +253,9 @@
 
   ;; return the union of lists X and Y, using `eq' for comparisons
   (define (unionq x y)
-    (let loop ((rest x)
-	       (out '()))
-         (cond ((null rest) (nreverse out))
-               ((memq (car rest) y) (loop (cdr rest) (cons (car rest) out)))
-               (t (loop (cdr rest) out))))))
+    (let loop
+	((rest x)
+	 (out '()))
+      (cond ((null rest) (nreverse out))
+	    ((memq (car rest) y) (loop (cdr rest) (cons (car rest) out)))
+	    (t (loop (cdr rest) out))))))

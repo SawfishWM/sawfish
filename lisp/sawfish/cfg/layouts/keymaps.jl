@@ -55,25 +55,26 @@
 	(gtk-widget-relate-label omenu label-ptr)
 	(gtk-box-pack-start vbox hbox)
 
-	(let loop ((rest keymap-slots)
-		   (last nil))
-             (when rest
-               (let* ((slot (car rest))
-                      (button (gtk-radio-menu-item-new-with-label-from-widget
-                               last (beautify-keymap-name (slot-name slot)))))
-                 (gtk-menu-shell-append menu button)
-                 (gtk-widget-show button)
-                 (g-signal-connect button "toggled"
-                                   (lambda (w)
-                                     (when (gtk-check-menu-item-active w)
-                                       (when active
-                                         (gtk-container-remove
-                                          km-vbox (slot-gtk-widget active)))
-                                       (setq active slot)
-                                       (gtk-box-pack-start
-                                        km-vbox (slot-gtk-widget active) t t))))
-                 (set-slot-layout slot (slot-gtk-widget slot))
-                 (loop (cdr rest) button))))
+	(let loop
+	    ((rest keymap-slots)
+	     (last nil))
+	  (when rest
+	    (let* ((slot (car rest))
+		   (button (gtk-radio-menu-item-new-with-label-from-widget
+			    last (beautify-keymap-name (slot-name slot)))))
+	      (gtk-menu-shell-append menu button)
+	      (gtk-widget-show button)
+	      (g-signal-connect button "toggled"
+				(lambda (w)
+				  (when (gtk-check-menu-item-active w)
+				    (when active
+				      (gtk-container-remove
+				       km-vbox (slot-gtk-widget active)))
+				    (setq active slot)
+				    (gtk-box-pack-start
+				     km-vbox (slot-gtk-widget active) t t))))
+	      (set-slot-layout slot (slot-gtk-widget slot))
+	      (loop (cdr rest) button))))
 
 	(gtk-option-menu-set-menu omenu menu)
 

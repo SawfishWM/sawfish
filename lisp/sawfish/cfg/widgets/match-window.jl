@@ -95,19 +95,19 @@
 	   (lambda ()
 	     (let loop ((cells widgets)
 			(out '()))
-                  (if (null cells)
-                      (nreverse out)
-                    (let ((name (gtk-entry-get-text
-                                 (gtk-combo-entry (caar cells))))
-                          (value (gtk-entry-get-text (cdar cells))))
-                      (if (or (string= name "") (string= value ""))
-                          (loop (cdr cells) out)
-                        (let ((prop (rassoc name l10n-x-properties)))
-                          (if prop
-                              (setq name (car prop))
-                            (setq name (intern name))))
-                        (loop (cdr cells)
-                              (cons (cons name value) out))))))))
+	       (if (null cells)
+		   (nreverse out)
+		 (let ((name (gtk-entry-get-text
+			      (gtk-combo-entry (caar cells))))
+		       (value (gtk-entry-get-text (cdar cells))))
+		   (if (or (string= name "") (string= value ""))
+		       (loop (cdr cells) out)
+		     (let ((prop (rassoc name l10n-x-properties)))
+		       (if prop
+			   (setq name (car prop))
+			 (setq name (intern name))))
+		     (loop (cdr cells)
+			   (cons (cons name value) out))))))))
 	  ((validp) listp)))))
 
   (define-widget-type 'match-window:matchers make-match-window:matchers)
@@ -166,12 +166,12 @@
 	   (lambda ()
 	     (let loop ((rest widgets)
 			(out '()))
-                  (if (null rest)
-                      (nreverse out)
-                    (let ((value (widget-ref (cdar rest))))
-                      (if value
-                          (loop (cdr rest) (cons (cons (caar rest) value) out))
-                        (loop (cdr rest) out)))))))))))
+	       (if (null rest)
+		   (nreverse out)
+		 (let ((value (widget-ref (cdar rest))))
+		   (if value
+		       (loop (cdr rest) (cons (cons (caar rest) value) out))
+		     (loop (cdr rest) out)))))))))))
 
   (define-widget-type 'match-window:actions make-match-window:actions)
 

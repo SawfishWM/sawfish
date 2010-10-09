@@ -130,13 +130,13 @@
     (define (set-prop lst prop)
       (let loop ((rest lst)
 		 (collected '()))
-           (cond ((null rest)
-                  (set-x-property 'root prop
-                                  (apply vector (nreverse collected))
-                                  'WINDOW 32))
-                 ((window-mapped-p (car rest))
-                  (loop (cdr rest) (cons (window-id (car rest)) collected)))
-                 (t (loop (cdr rest) collected)))))
+	(cond ((null rest)
+	       (set-x-property 'root prop
+			       (apply vector (nreverse collected))
+			       'WINDOW 32))
+	      ((window-mapped-p (car rest))
+	       (loop (cdr rest) (cons (window-id (car rest)) collected)))
+	      (t (loop (cdr rest) collected)))))
     (unless only-stacking-list
       (set-prop (managed-windows) '_NET_CLIENT_LIST))
     (set-prop (nreverse (stacking-order)) '_NET_CLIENT_LIST_STACKING))
@@ -213,18 +213,18 @@
 	(unless (equal last-area port)
 	  (let ((view (make-vector (* total-workspaces 2))))
 	    (let loop ((i 0))
-                 (if (= i total-workspaces)
-                     (set-x-property 'root '_NET_DESKTOP_VIEWPORT
-                                     view 'CARDINAL 32)
-                   (if (eq i current-workspace)
-                       (progn
-                         (aset view (* i 2) (* (car port) (screen-width)))
-                         (aset view (1+ (* i 2)) (* (cdr port)
-                                                    (screen-height))))
-                     (let ((vp-data (cdr (assoc i workspace-viewport-data))))
-                       (aset view (* i 2) (car vp-data))
-                       (aset view (1+ (* i 2)) (nth 1 vp-data))))
-                   (loop (1+ i))))))
+	      (if (= i total-workspaces)
+		  (set-x-property 'root '_NET_DESKTOP_VIEWPORT
+				  view 'CARDINAL 32)
+		(if (eq i current-workspace)
+		    (progn
+		      (aset view (* i 2) (* (car port) (screen-width)))
+		      (aset view (1+ (* i 2)) (* (cdr port)
+						 (screen-height))))
+		  (let ((vp-data (cdr (assoc i workspace-viewport-data))))
+		    (aset view (* i 2) (car vp-data))
+		      (aset view (1+ (* i 2)) (nth 1 vp-data))))
+		(loop (1+ i))))))
 
 	;; _NET_WORKAREA
 	(unless (equal last-workarea workarea)
@@ -246,9 +246,9 @@
 	(let ((area (calculate-workarea-from-struts
 		     #:workspace (+ i (car limits)))))
 	  (aset workarea (+ (* i 4) 0) (nth 0 area))
-	  (aset workarea (+ (* i 4) 1) (nth 1 area))
-	  (aset workarea (+ (* i 4) 2) (- (nth 2 area) (nth 0 area)))
-	  (aset workarea (+ (* i 4) 3) (- (nth 3 area) (nth 1 area)))))
+	    (aset workarea (+ (* i 4) 1) (nth 1 area))
+	    (aset workarea (+ (* i 4) 2) (- (nth 2 area) (nth 0 area)))
+	    (aset workarea (+ (* i 4) 3) (- (nth 3 area) (nth 1 area)))))
 
       ;; apparently some pagers don't like it if we place windows
       ;; on (temporarily) non-existent workspaces
@@ -280,7 +280,7 @@
 			 (call-state-fun w x 'get))
 		(setq state (cons x state))))
 	    supported-states)
-      (set-x-property w '_NET_WM_STATE (apply vector state) 'ATOM 32)))
+	(set-x-property w '_NET_WM_STATE (apply vector state) 'ATOM 32)))
 
 ;;; honouring the initially set window state hints
 
@@ -310,10 +310,10 @@
 	;; _NET_WM_WINDOW_TYPE is a vector of atoms, the first atom
 	;; about which we know something is the type we'll use
 	(let loop ((i 0))
-             (cond ((= i (length type)))
-                   ((get (aref type i) 'wm-spec-type)
-                    ((get (aref type i) 'wm-spec-type) w))
-                   (t (loop (1+ i)))))))
+	  (cond ((= i (length type)))
+		((get (aref type i) 'wm-spec-type)
+		 ((get (aref type i) 'wm-spec-type) w))
+		(t (loop (1+ i)))))))
 
     (let ((state (get-x-property w '_NET_WM_STATE)))
       (when state
@@ -500,27 +500,27 @@
 	   (let ((mode (aref data 2)))
 	     ;; don't want grabs failing, sigh
 	     (x-server-timestamp t t)
-	     (if (or (eq mode _NET_WM_MOVERESIZE_MOVE)
-		     (eq mode _NET_WM_MOVERESIZE_MOVE_KEYBOARD))
-		 (move-window-interactively w)
-	       (let ((move-resize-moving-edges
-		      (cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT)
-                             '(top left))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOP)
-                             '(top))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPRIGHT)
-                             '(top right))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT)
-                             '(bottom left))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOM)
-                             '(bottom))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT)
-                             '(bottom right))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_LEFT)
-                             '(left))
-			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT)
-                             '(right)))))
-		 (resize-window-interactively w))))))
+	       (if (or (eq mode _NET_WM_MOVERESIZE_MOVE)
+		       (eq mode _NET_WM_MOVERESIZE_MOVE_KEYBOARD))
+		   (move-window-interactively w)
+		 (let ((move-resize-moving-edges
+			(cond ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPLEFT)
+			       '(top left))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_TOP)
+			       '(top))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_TOPRIGHT)
+			       '(top right))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMLEFT)
+			       '(bottom left))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOM)
+			       '(bottom))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_BOTTOMRIGHT)
+			       '(bottom right))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_LEFT)
+			       '(left))
+			      ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT)
+			       '(right)))))
+		   (resize-window-interactively w))))))
 
 	((_NET_NUMBER_OF_DESKTOPS)
 	 (set-number-of-workspaces (aref data 0)))
@@ -545,9 +545,9 @@
 	 (setq data (aref data 0))
 	 (let loop ((i 0)
 		    (out '()))
-              (if (= i (length data))
-                  (setq workspace-names (nreverse out))
-                (loop (1+ i) (cons (aref data i) out)))))
+	   (if (= i (length data))
+	       (setq workspace-names (nreverse out))
+	     (loop (1+ i) (cons (aref data i) out)))))
 
 	((_NET_ACTIVE_WINDOW)
 	 (require 'sawfish.wm.util.display-window)
@@ -570,10 +570,10 @@
 			    (eq atom1 '_NET_WM_STATE_MAXIMIZED_HORZ)))
 	       (setq atom1 '_NET_WM_STATE_MAXIMIZED)
 	       (setq atom2 nil))
-	     (when atom1
-	       (call-state-fun w atom1 mode))
-	     (when atom2
-	       (call-state-fun w atom2 mode)))))
+	       (when atom1
+		 (call-state-fun w atom1 mode))
+	       (when atom2
+		 (call-state-fun w atom2 mode)))))
 
 	((_NET_WM_DESKTOP)
 	 (when (windowp w)
@@ -586,7 +586,7 @@
 	       (send-window-to-workspace-from-first w desktop nil)))))
 
 	(t (setq handled nil)))
-      handled))
+	handled))
 
 ;;; property changes
 

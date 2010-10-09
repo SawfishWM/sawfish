@@ -40,33 +40,33 @@ FROM-MAP to the keymap TO-MAP."
 	       (to-rest (cdr (sort-keymap to-map)))
 	       (diff '()))
 
-         (cond ((and (null from-rest) (null to-rest))
-                ;; both lists ended
-                (cons 'keymap-diff (nreverse diff)))
+      (cond ((and (null from-rest) (null to-rest))
+	     ;; both lists ended
+	     (cons 'keymap-diff (nreverse diff)))
 
-               ((null from-rest)
-                ;; from ended, so need to add rest of to
-                (loop '() (cdr to-rest) (cons (list '+ (car to-rest)) diff)))
+	    ((null from-rest)
+	     ;; from ended, so need to add rest of to
+	     (loop '() (cdr to-rest) (cons (list '+ (car to-rest)) diff)))
 
-               ((null to-rest)
-                ;; to ended, so need to subtract rest of from
-                (loop (cdr from-rest)
-                      '()
-                      (cons (list '- (car from-rest)) diff)))
+	    ((null to-rest)
+	     ;; to ended, so need to subtract rest of from
+	     (loop (cdr from-rest)
+		   '()
+		   (cons (list '- (car from-rest)) diff)))
 
-               ((equal (car from-rest) (car to-rest))
-                ;; both equal, keep going
-                (loop (cdr from-rest) (cdr to-rest) diff))
+	    ((equal (car from-rest) (car to-rest))
+	     ;; both equal, keep going
+	     (loop (cdr from-rest) (cdr to-rest) diff))
 
-               ((< (car from-rest) (car to-rest))
-                ;; extra item in from list, so subtract it
-                (loop (cdr from-rest) to-rest
-                      (cons (list '- (car from-rest)) diff)))
+	    ((< (car from-rest) (car to-rest))
+	     ;; extra item in from list, so subtract it
+	     (loop (cdr from-rest) to-rest
+		   (cons (list '- (car from-rest)) diff)))
 
-               ((> (car from-rest) (car to-rest))
-                ;; extra item in to list, so add it
-                (loop from-rest (cdr to-rest)
-                      (cons (list '+ (car to-rest)) diff))))))
+	    ((> (car from-rest) (car to-rest))
+	     ;; extra item in to list, so add it
+	     (loop from-rest (cdr to-rest)
+		   (cons (list '+ (car to-rest)) diff))))))
 
   (define (patch-keymap map diff)
     "Returns a new copy of the keymap MAP, transformed following by the list

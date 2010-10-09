@@ -264,23 +264,23 @@ generate.")
     ;; 1. map window type to actual frame type
     (let loop-1 ((rest frame-type-mappers)
 		 (type (window-type w)))
-         (if (null rest)
-             ;; found the final frame type, so,
-             ;; 2. find the closest type that the style implements to this
-             (let loop-2 ((type type)
-                          (seen (list type)))
-                  (cond ((eq type 'unframed) nil-frame)
-                        ((style w type))
-                        (t (let ((next (or
-                                        (cdr (assq type
-                                                   frame-type-fallback-alist))
-                                        'unframed)))
-                             (if (memq next seen)
-                                 ;; been here before..
-                                 nil-frame
-                               (loop-2 next (cons next seen)))))))
-           ;; else, apply this transformation and keep looping
-           (loop-1 (cdr rest) ((car rest) w type)))))
+      (if (null rest)
+	  ;; found the final frame type, so,
+	  ;; 2. find the closest type that the style implements to this
+	  (let loop-2 ((type type)
+		       (seen (list type)))
+	    (cond ((eq type 'unframed) nil-frame)
+		  ((style w type))
+		  (t (let ((next (or
+				  (cdr (assq type
+					     frame-type-fallback-alist))
+				  'unframed)))
+		       (if (memq next seen)
+			   ;; been here before..
+			   nil-frame
+			 (loop-2 next (cons next seen)))))))
+	;; else, apply this transformation and keep looping
+	(loop-1 (cdr rest) ((car rest) w type)))))
 
 ;;; managing frame styles
 

@@ -444,12 +444,12 @@ the user."
   (define (custom-serialize value type)
     "Convert VALUE of TYPE to a printable value."
     (let-fluids ((custom-converter-property 'custom-serializer))
-                (custom-convert value type)))
+      (custom-convert value type)))
 
   (define (custom-deserialize value type)
     "Convert VALUE of TYPE back from a printable value."
     (let-fluids ((custom-converter-property 'custom-deserializer))
-                (custom-convert value type)))
+      (custom-convert value type)))
 
   (define (define-custom-serializer type fun)
     (put type 'custom-serializer fun))

@@ -252,9 +252,9 @@ supported by client window W."
 	   (data (and prop (eq (car prop) 'ATOM) (nth 2 prop))))
       (when data
 	(let loop ((i 0))
-             (cond ((= i (length data)) nil)
-                   ((eq (aref data i) atom) t)
-                   (t (loop (1+ i))))))))
+	  (cond ((= i (length data)) nil)
+		((eq (aref data i) atom) t)
+		(t (loop (1+ i))))))))
 
 ;;; warping
 
