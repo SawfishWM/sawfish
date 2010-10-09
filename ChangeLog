@@ -1,3 +1,116 @@
+2010-10-09  Teika kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/integration/gnome.jl
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/integration/xfce.jl
+	* lisp/sawfish/wm/user.jl: Desktop detection minor cleanup.
+	Detection and inintialization are separated. This makes less likely
+	to err when further changes are done.
+
+	* lisp/sawfish/gtk/widgets/scheme-boolean.jl
+	* lisp/sawfish/wm/user.jl: Minor cleanup. Deleted bogus imports.
+
+	* po/make-pot: bugfix; requires "make all" prior to this.
+	po/make-pot needs the file "DOC", but it used to generate it in
+	wrong way, resulting in sawfish.pot which lacks some strings.
+	Now po/make-pot doesn't generate DOC, but it simply aborts if it's
+	absent, printing instruction message.
+
+	* po/sawfish.pot: Deleted bogus entries.
+
+	* po/README: Added. It is the manual for translators.
+
+	* po/update.sh: accepts both ja and ja.po.
+
+	* po/am.po
+	* po/ar.po
+	* po/az.po
+	* po/be.po
+	* po/bg.po
+	* po/bs.po
+	* po/ca.po
+	* po/cs.po
+	* po/da.po
+	* po/de.po
+	* po/dz.po
+	* po/el.po
+	* po/en_CA.po
+	* po/en_GB.po
+	* po/es.po
+	* po/et.po
+	* po/eu.po
+	* po/fi.po
+	* po/fr.po
+	* po/ga.po
+	* po/gl.po
+	* po/hu.po
+	* po/id.po
+	* po/it.po
+	* po/ja.po
+	* po/ko.po
+	* po/lv.po
+	* po/mk.po
+	* po/ms.po
+	* po/nb.po
+	* po/ne.po
+	* po/nl.po
+	* po/nn.po
+	* po/no.po
+	* po/oc.po
+	* po/pa.po
+	* po/pl.po
+	* po/pt.po
+	* po/pt_BR.po
+	* po/ro.po
+	* po/ru.po
+	* po/rw.po
+	* po/sk.po
+	* po/sl.po
+	* po/sr.po
+	* po/sr@Latn.po
+	* po/sv.po
+	* po/tr.po
+	* po/uk.po
+	* po/vi.po
+	* po/wa.po
+	* po/zh_CN.po
+	* po/zh_TW.po: Updated against new sawfish.pot
+
+	* sawfish.el: Supports indent for 'let-fluids' and let-loop.
+
+	* lisp/sawfish/cfg/group.jl
+	* lisp/sawfish/cfg/layouts/keymaps.jl
+	* lisp/sawfish/cfg/slot.jl
+	* lisp/sawfish/cfg/utils.jl
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/cfg/widgets/match-window.jl
+	* lisp/sawfish/cfg/widgets/modifier-list.jl
+	* lisp/sawfish/gtk/widget.jl
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/ext/apps-menu.jl
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/misc.jl
+	* lisp/sawfish/wm/session/init.jl
+	* lisp/sawfish/wm/stacking.jl
+	* lisp/sawfish/wm/state/transient.jl
+	* lisp/sawfish/wm/state/wm-spec.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl
+	* lisp/sawfish/wm/user.jl
+	* lisp/sawfish/wm/util/font.jl
+	* lisp/sawfish/wm/util/keymap-diff.jl
+	* lisp/sawfish/wm/util/ping.jl
+	* lisp/sawfish/wm/util/recolor-image.jl
+	* lisp/sawfish/wm/util/rects.jl
+	* lisp/sawfish/wm/util/window-order.jl
+	* lisp/sawfish/wm/util/workarea.jl
+	* lisp/sawfish/wm/windows.jl: Indents.
+	Let-loop and let-fluids are correctly indented, making them more
+	readable.
+
+	* lisp/sawfish/wm/ext/match-window.jl: Two items group changed.
+	Group "Placement" is renamed to "Geometry".
+
 2010-09-25  Teika kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/ext/old-window-menu.jl: Resurrected. It was
 	removed in commit cf79775e.
