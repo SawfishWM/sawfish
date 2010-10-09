@@ -1,0 +1,111 @@
+Translation howto
+=================
+This README is a manual for Sawfish translators.
+
+Contents:
+* Translation introduction
+* General Workflow
+* Sawfish specific issues
+
+Translation introduction
+========================
+Like other open source, you can help us by translating Sawfish into
+your language. (And if have noticed anything regarding translation,
+please let us know.)
+
+French translation, for example, is stored in 
+<sawfish source dir>/po/fr.po. It's your language po file that you edit.
+
+Translation is done by "gettext" software. You don't necessarily need
+it to translate. Po file grammar is explained in gettext doc. For
+technical details consult it.
+
+General Workflow
+================
+
+1. (Optional) Update your language po file.
+2. Edit your po file.
+3. Send it to a GNOME translation team.
+
+Each step is explained below.
+
+Updating a po file
+------------------
+This step is desired, but optional. You need to have gettext
+installed. Or, you can ask us to do it.
+
+If you can, first update sawfish.pot, which is the base of all
+po files:
+
+    $ # download the latest sawfish, and extract it.
+    $ cd <sawfish source>
+    $ ./configure    # If it's git source, do instead ./autogen.sh
+    $ make all
+    $ cd po/
+    $ ./make-pot     # This updates sawfish.pot
+
+Update your language po file by:
+
+    $ cd <sawfish source>/po/
+    $ ./update.sh zh_CN.po # Or your language po file.
+
+Editing
+-------
+Recommended tools are for example "poedit" and emacs "po-mode". The
+latter is included in the gettext package. Your distributor
+may ship it as a seperate package.
+
+Submission
+----------
+You have to send it to the GNOME translation team of your language.
+They'll review and commit it to the source. The precise procedure
+may depend on languages. (Don't ask them Sawfish specific questions.)
+
+Web:
+First go to the GNOME translation home[1], and check your language
+team. Register there, go to the Sawfish page[2], "reserve for
+translation", and paste your po file.
+
+[1]: http://l10n.gnome.org/
+[2]: http://l10n.gnome.org/module/sawfish/
+
+Email:
+At http://mail.gnome.org , check the mailing-list for your
+language, like gnome-<lang>. If one does not exist, use gnome-i18n.
+
+Thanks!
+
+Sawfish specific issues
+=======================
+For several reasons, Sawifsh extracts strings to be translated in a
+complicated manner.
+
+String origin
+-------------
+Where does the string come from? You may want to know it, for example,
+when you want to confirm the validity of a string marked "fuzzy".
+
+Sawfish extracts strings from lisp sources which are under lisp/, 
+themes/*/theme.jl, and scripts/. (It seems that the extraction script
+uses C sources too, but the author of this README couldn't find
+strings from C. C sources are under src/, for your information.)
+
+In order to search the origin of a string, "ack" is helpful. (In
+Debian, it's call "ack-grep".) If you can use git, "git grep" is your
+friend.
+
+Command names are translated, too, but they are often brief and
+difficult to get the meaning, without reading the documentation of
+that command. Notice that command `foo-bar-baz' appears as "Foo bar
+baz" in msgid.
+
+Not all are translated
+----------------------
+Please expand this list of untranslated strings.
+
+* Event names like "Button1-Off". (This is difficult to support, so
+  we won't fix it in near future.)
+
+Po file comments
+----------------
+Please ignore `c-format' flag. We can't disable it.
