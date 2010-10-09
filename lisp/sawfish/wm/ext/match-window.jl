@@ -77,6 +77,7 @@
                 (depth (number -16 16 0))
                 (placement-weight (number 0))
                 (fixed-position boolean)
+		(fixed-size boolean)
 		(sticky boolean)
 		(sticky-viewport boolean)
 		)
@@ -96,6 +97,7 @@
 				    fullscreen full-xinerama))
 		 (iconified boolean)
 		 (shaded boolean)
+		 (shade-hover boolean)
 		 (never-iconify boolean)
 		 (never-maximize boolean)
 		 )
@@ -110,12 +112,10 @@
             (task-list-skip boolean)
             (unique-name boolean)
             (window-name string)
-            (shade-hover boolean)
             (transients-above (choice all parents none))
             (ignore-stacking-requests boolean)
 	    (auto-gravity boolean)
 	    (never-delete boolean)
-	    (fixed-size boolean)
 	    )))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
