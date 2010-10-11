@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-05 16:53+0900\n"
-"PO-Revision-Date: 2010-10-10 23:40+0200\n"
+"PO-Revision-Date: 2010-10-11 15:41+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,7 +171,7 @@ msgstr "normal"
 #. ../lisp/sawfish/wm/stacking.jl
 #. ../themes/mxflat/theme.jl
 msgid "all"
-msgstr "todas"
+msgstr "todos"
 
 #. ../lisp/sawfish/wm/window-anim.jl
 #. ../lisp/sawfish/wm/stacking.jl
@@ -191,6 +191,15 @@ msgid ""
 "transients only have a contents-border.  This option is for reimplementing a "
 "sawfish feature that is gone in the latest version."
 msgstr ""
+"modo de decoración\n"
+"\n"
+"Establecer el modo «cuándo dibujar una barra de título y los botones de "
+"ventana». El modo de decoración «todos» significa que todas las ventanas, "
+"incluso diálogos o transitorias, obtendrán un título de ventana y botones. "
+"«ninguno» significa que ninguna ventana los obtendrá. Generalmente las "
+"transitorias sólo tienen borde de contenido. Esta opción es para "
+"reimplementar una característica de sawfish que ha desaparecido en la última "
+"versión."
 
 #. ../themes/mxflat/theme.jl
 msgid "titlebar height (9 - 1000 pixel)"
@@ -204,6 +213,11 @@ msgid ""
 "(NOTE: I hope the redrawing problems with this option are solved.  If not, "
 "write an email please!)"
 msgstr ""
+"personalizar la cadena de título\n"
+"\n"
+"Para obtener más información consultar el consejo para la opción «cadena de "
+"título». (NOTA: se espera que los problemas de redibujado con esta opción "
+"estén solucionados, de lo contrario escribir un correo al desarrollador.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -487,6 +501,11 @@ msgid ""
 "The number at the end is the width/height of the button icons in the icon "
 "set.  (NOTE: YOU NEED TO RESTART SAWFISH AFTER CHANGING THE BUTTON ICON SET!)"
 msgstr ""
+"conjunto de iconos de botones (experimental)\n"
+"\n"
+"El número al final es la anchura/altura de los iconos de botón en el "
+"conjunto de botones. (NOTA: debe reiniciar sawfish después de cambiar el "
+"conjunto de botones.)"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -495,6 +514,10 @@ msgid ""
 "By default the button size follows the size of the titlebar, but by "
 "activating this you can set it to something different."
 msgstr ""
+"personalizar el tamaño de botones\n"
+"\n"
+"De forma predeterminada el tamaño de los botones sigue el tamaño de la barra "
+"de título, pero al activar esto puede configurarlo a algo diferente."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -502,6 +525,10 @@ msgid ""
 "\n"
 "A buttons size that is bigger than your current titlebar height is ignored."
 msgstr ""
+"tamaño de botones (1 - 1000 píxeles)\n"
+"\n"
+"Se ignora un tamaño de botones mayor que la altura actual de la barra de "
+"título."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -510,6 +537,10 @@ msgid ""
 "If a button is smaller than the titlebar you might want to set its vertical "
 "alignment."
 msgstr ""
+"alineación vertical de botón\n"
+"\n"
+"Si un botón es más pequeño que la barra de título puede querer establecer su "
+"alineación vertical."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -982,6 +1013,10 @@ msgid ""
 "You can customize your border colors here. If you deactivate this, these "
 "colors will be set to the focused title string color."
 msgstr ""
+"personalizar colores del borde\n"
+"\n"
+"Aquí puede personalizar los colores del borde. Si desactiva esto, los "
+"colores se establecerán al color de la cadena de título con el foco."
 
 #. ../themes/mxflat/theme.jl
 msgid "  focused border color"
@@ -1433,28 +1468,25 @@ msgid "Raise and pass through click"
 msgstr "Traer a primer plano y pasar click"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the window that received the current event, then replay any pointer\n"
 "events that invoked the command."
 msgstr ""
-"Traer a primer plano la ventana que haya recibido el evento actual y "
-"cualquier temporal que tenga, después reproducir cualquier evento de puntero "
-"que haya invocado el comando."
+"Traer a primer plano la ventana que haya recibido el evento actual,\n"
+"después reproducir cualquier evento de puntero que haya invocado el comando."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise and pass through click if focused"
 msgstr "Traer a primer plano y pasar click si tiene el foco"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the window that received the current event (if it's focused), then\n"
 "replay any pointer events that invoked the command."
 msgstr ""
-"Traer a primer plano la ventana que haya recibido el evento actual y "
-"cualquier temporal que tenga, después reproducir cualquier evento de puntero "
-"que haya invocado el comando."
+"Traer a primer plano la ventana que haya recibido el evento actual (si tiene "
+"el foco),\n"
+"después reproducir cualquier evento de puntero que haya invocado el comando."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise or pass through click"
@@ -1469,14 +1501,13 @@ msgid "Raise group and pass through click"
 msgstr "Traer a primer plano grupo y pasar click"
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
-#, fuzzy
 msgid ""
 "Raise the group of windows that received the current event, then replay\n"
 "any pointer events that invoked the command."
 msgstr ""
-"Traer a primer plano la ventana que haya recibido el evento actual y "
-"cualquier temporal que tenga, después reproducir cualquier evento de puntero "
-"que haya invocado el comando."
+"Traer a primer plano el grupo de ventanas que haya recibido el evento "
+"actual,\n"
+"después reproducir cualquier evento de puntero que haya invocado el comando."
 
 #. ../lisp/sawfish/wm/commands/raise-commands.jl
 msgid "Raise transients and pass through click"
@@ -1719,9 +1750,10 @@ msgid "Include windows on all viewports when cycling."
 msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
-#, fuzzy
 msgid "Raise windows while they're temporarily selected during cycling."
-msgstr "Poner ventana y temporales en primer plano"
+msgstr ""
+"Poner las ventanas en primer plano si están seleccionadas temporalmente al "
+"cambiar entre ventanas."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
@@ -1737,9 +1769,9 @@ msgid "Describe symbol"
 msgstr "Describir símbolo"
 
 #. ../lisp/sawfish/wm/commands/describe.jl
-#, fuzzy
 msgid "Print the documentation of a specified symbol to the standard output ."
-msgstr "Mostrar la documentación de un símbolo especificado."
+msgstr ""
+"Mostrar la documentación de un símbolo especificado en la salida estándar."
 
 #. ../lisp/sawfish/wm/commands/describe.jl
 msgid "Apropos function"
