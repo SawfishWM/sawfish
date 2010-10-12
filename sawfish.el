@@ -374,8 +374,6 @@ Special commands:
   ;; support).
   (make-local-variable 'lisp-indent-function)
   (setq lisp-indent-function 'sawfish-indent-function)
-  ;; `let' is handled specially. See sawfish-indent-function.
-  (put 'let 'lisp-indent-function 'scheme-let-indent)
   (loop for sym in '((define                  . 1)
                      (define-interface        . 1)
                      (define-record-discloser . 1)
@@ -383,7 +381,6 @@ Special commands:
                      (define-structure        . 3)
                      (letrec                  . 1)
 		     (let-fluids              . 1)
-		     (let . 'scheme-let-indent)
                      (structure               . 2)
                      (with-output-to-screen   . 0))
         do (unless (get (car sym) 'lisp-indent-function)
