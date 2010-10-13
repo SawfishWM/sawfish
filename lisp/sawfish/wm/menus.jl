@@ -171,18 +171,18 @@ before killing it.")
 
   (define (add-poweroff-menu)
     "Add poweroff related menu items to Session sub-menu."
-    (user-eval '(access-structures '(sawfish.wm.commands.poweroff)))
+    (user-require 'sawfish.wm.commands.poweroff)
     (let ((menu (assoc (_ "Sessi_on") root-menu)))
       (when menu
 	(nconc menu `(()
 		      (,(_ "_Reboot System")
-		       (sawfish.wm.commands.poweroff#poweroff 'reboot))
+		       (poweroff 'reboot))
 		      (,(_ "_Shutdown System")
-		       (sawfish.wm.commands.poweroff#poweroff 'halt))
+		       (poweroff 'halt))
 		      (,(_ "S_uspend System")
-		       (sawfish.wm.commands.poweroff#poweroff 'suspend))
+		       (poweroff 'suspend))
 		      (,(_ "_Hibernate System")
-		       (sawfish.wm.commands.poweroff#poweroff 'hibernate)))))))
+		       (poweroff 'hibernate)))))))
 
   (define (menu-start-process)
     (when menu-timer
