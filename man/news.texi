@@ -24,10 +24,14 @@ accessible by the user, this has been fixed.
 @itemize @minus
 
 @item Window-operation menu improvement [Christopher Bratusek]
-The window-operation menu now honours window-matchers.
+
+@itemize +
+@item The window-operation menu now honours window-matchers.
 For example, if you have a window matched with @code{fixed-size} the
 window-operations menu-entry @code{Resize} becomes unclickable.
-
+@item The entries for moving and copying windows to the previous or
+next workspace are now bundled in the new @code{Workspace} sub-menu.
+@end itemize
 @item Cleaned-up desktop-environment detection [Teika Kazura]
 
 @item Sawfish emacs major-mode now indents let-fluids [Teika Kazura]
