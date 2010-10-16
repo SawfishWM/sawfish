@@ -9,6 +9,54 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} file in the Sawfish source tree, or git log.
 (See Wiki page on how to access git repository.)
 
+@heading 1.7.1 "Heaven"
+
+@itemize @bullet
+
+@item Bug fixes
+@itemize @minus
+
+@item Poweroff-menu fix [Teika Kazura, Christopher Bratusek]
+When running standalone the poweroff menu-items in the Session menu were not
+accessible by the user, this has been fixed.
+@end itemize
+@item Misc Changes
+@itemize @minus
+
+@item Window-operation menu improvement [Christopher Bratusek]
+The window-operation menu now honours window-matchers.
+For example, if you have a window matched with @code{fixed-size} the
+window-operations menu-entry @code{Resize} becomes unclickable.
+
+@item Cleaned-up desktop-environment detection [Teika Kazura]
+
+@item Sawfish emacs major-mode now indents let-fluids [Teika Kazura]
+
+@item Translation related changes [Teika Kazura]
+
+@itemize +
+@item revised make-pot update.sh
+@item cleaned-up sawfish.pot
+@item added po/README translator instructions
+@item the spanish translations has been updated [gnome-es translation-team]
+@end itemize
+
+@item SawfishConfig changes [Teika Kazura]
+
+@itemize +
+@item renamed window-rules category @code{Placement} to @code{Geometry}
+@item moved window-rule @code{shade-hover} to @code{appearance} category
+@item moved window-rule @code{fixed-size} to @code{geometry} category
+@end itemize
+@item Spec-File compatibility for RHEL 6beta [Kim B. Heino]
+
+@item Removed a bogus import from scheme-boolean.jl [Teika Kazura]
+
+@item Overall indention fixes for better code-readability [Teika Kazura]
+
+@item In xfce-integration module replace GNOME with XFCE in comments [Christopher Bratusek]
+@end itemize
+@end itemize
 @heading 1.7.0 "Frozen Flame"
 
 @itemize @bullet
