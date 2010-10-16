@@ -37,22 +37,22 @@
       (setq desktop-environment "xfce")
       (setq want-poweroff-menu nil)
 
-      ;; invoke the GNOME terminal instead of xterm
+      ;; invoke the XFCE terminal instead of xterm
       (unless (variable-customized-p 'xterm-program)
 	(setq xterm-program "xfce4-terminal"))
 
-      ;; use the GNOME help browser and url launcher
+      ;; use the XFCE help browser and url launcher
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "midori"))
 
-      ;; add some GNOME help menus
+      ;; add some XFCE help menus
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
 		      (,(_ "_XFCE Help") (system "xfhelp4 &"))
 		      (,(_ "XFCE _Website") (browser "http://www.xfce.org"))
 		      (,(_ "_About XFCE") (system "xfce4-about &")))))
 
-      ;; add gnome-logout menu item
+      ;; add xfce-logout menu item
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_Customize XFCE") (system "xfce4-settings-manager &"))
