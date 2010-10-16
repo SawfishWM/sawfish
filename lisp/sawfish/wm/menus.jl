@@ -88,17 +88,25 @@ before killing it.")
   (defvar window-ops-menu
     `((,(_ "Mi_nimize") iconify-window
        (insensitive . ,(lambda (w)
-                         (not (window-iconifiable-p w)))))
+                         (not (or (window-iconifiable-p w)
+				  (not (window-get w 'never-iconify)))))))
       (,(lambda (w)
           (if (window-maximized-p w)
               (_ "Unma_ximize")
             (_ "Ma_ximize"))) maximize-window-toggle
             (insensitive . ,(lambda (w)
                               (not (or (window-maximized-p w)
-                                       (window-maximizable-p w))))))
-      (,(_ "_Move") move-window-interactively)
-      (,(_ "_Resize") resize-window-interactively)
-      (,(_ "_Close") delete-window)
+                                       (window-maximizable-p w)
+				       (not (window-get w 'never-maximize)))))))
+      (,(_ "_Move") move-window-interactively
+       (insensitive . ,(lambda (w)
+			 (window-get w 'fixed-position))))
+      (,(_ "_Resize") resize-window-interactively
+       (insensitive . ,(lambda (w)
+			 (window-get w 'fixed-size))))
+      (,(_ "_Close") delete-window
+       (insensitive . ,(lambda (w)
+			 (window-get w 'never-delete))))
       ()
       (,(_ "_Toggle") . window-ops-toggle-menu)
       (,(_ "In _group") . window-group-menu)
