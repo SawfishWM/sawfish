@@ -63,8 +63,8 @@ may depend on languages. (Don't ask them Sawfish specific questions.)
 
 Web:
 First go to the GNOME translation home[1], and check your language
-team. Register there, go to the Sawfish page[2], "reserve for
-translation", and paste your po file.
+team. Register there, go to the Sawfish page[2], choose "Review
+required", and paste your po file.
 
 [1]: http://l10n.gnome.org/
 [2]: http://l10n.gnome.org/module/sawfish/
@@ -99,13 +99,15 @@ difficult to get the meaning, without reading the documentation of
 that command. Notice that command `foo-bar-baz' appears as "Foo bar
 baz" in msgid.
 
+c-format are probably not c
+---------------------------
+`c-format' flags are probably wrong, but we can't disable it. You may
+have to change them to `no-c-format' to submit a po file to GNOME web
+page.
+
 Not all are translated
 ----------------------
 Please expand this list of untranslated strings.
 
 * Event names like "Button1-Off". (This is difficult to support, so
   we won't fix it in near future.)
-
-Po file comments
-----------------
-Please ignore `c-format' flag. We can't disable it.
