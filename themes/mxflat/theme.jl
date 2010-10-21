@@ -475,7 +475,7 @@ degress around the color cycle...180 for example inverts the color"
 
 (defcustom mxflat:color-saturation
   50
-  "unfocused/highlighted titlebar colors saturation (0 - 100% of the \
+  "unfocused/highlighted titlebar colors saturation (0 - 100 percent of the \
 focused color)"
   :tooltip "The saturation of a color is a measurement of the color \
 intensity"
@@ -487,7 +487,7 @@ intensity"
 
 (defcustom mxflat:color-brightness
   90
-  "unfocused/highlighted titlebar colors brightness (0 - 100% of the \
+  "unfocused/highlighted titlebar colors brightness (0 - 100 percent of the \
 focused color)"
   :group (appearance mxflat:group mxflat:title-group
                      mxflat:title-gradient-group)

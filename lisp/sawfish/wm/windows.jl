@@ -82,7 +82,7 @@
   (defgroup warp "Warping" :group misc)
 
   (defcustom warp-to-window-offset (cons -1 -1)
-    "Offset (%) from window edges when warping pointer."
+    "Offset (percent) from window edges when warping pointer."
     :type (pair (number 1) (number 1))
     :group (misc warp))
 
