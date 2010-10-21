@@ -1,6 +1,6 @@
-# Makefile.in for sawfish version 4
-# Copyright (C) 1998 John Harper <john@dcs.warwick.ac.uk>
-# $Id: Makefile.in,v 1.31 2003/04/03 02:24:42 jsh Exp $
+# Makefile.in for sawfish
+# Copyright (C) 1998 - 2008 John Harper
+#               2008 - 2010 Sawfish Community
 #
 # This file is part of sawfish.
 #
@@ -30,7 +30,7 @@ SUBDIRS = @SUBDIRS@
 all : build.h DOC
 	for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
- 	done
+	done
 
 # this depends on config.status so it's rebuilt if configure is re-run
 build.h : build-info config.status
@@ -72,6 +72,8 @@ uninstall :
 	rm -f $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/sawfish-wm.desktop
 	rm -f $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop
 
+# At this stage, DOC file omits some docstrings. (Only small portion,
+# though.) Byte compilation makes it complete.
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
 

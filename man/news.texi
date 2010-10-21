@@ -4,10 +4,38 @@
 
 @chapter News
 
-This lists the user-visible changes made to Sawfish, and which releases
-they occurred between. For more detailed information see the
-@file{ChangeLog} file in the Sawfish source tree, or git log.
-(See Wiki page on how to access git repository.)
+This lists user-visible changes, and which releases they occurred
+between. For more detailed information see the @file{ChangeLog} file
+in the Sawfish source tree, or git log.  (See Wiki page on how to
+access git repository.)
+
+@c @heading x.y.z ``Code name''
+@c @itemize @bullet
+
+@c @item Update dependencies
+@c @itemize @minus
+@c @end itemize
+
+@c @item Notes
+@c @itemize @minus
+@c @end itemize
+
+@c @item Build and Installation
+@c @itemize @minus
+@c @end itemize
+
+@c @item Bug Fixes
+@c @itemize @minus
+@c @end itemize
+
+@c @item New Features
+@c @itemize @minus
+@c @end itemize
+
+@c @item Miscellaneous Changes
+@c @itemize @minus
+@c @end itemize
+@c @end itemize
 
 @heading 1.7.1 "Heaven"
 
@@ -17,12 +45,13 @@ they occurred between. For more detailed information see the
 @itemize @minus
 
 @item Poweroff-menu fix [Teika Kazura, Christopher Bratusek]
-When running standalone the poweroff menu-items in the Session menu were not
-accessible by the user, this has been fixed.
+
+In Sawfish-1.7.0, poweroff related items in the popup menu couldn't be
+invoked, if run without any desktop environment. Fixed it.
 
 @item Correctly build SawfishPager [Christopher Bratusek]
-The sawfish.pc file was improved, so that it is ensured that SawfishPager does
-build correctly.
+
+It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc} file.
 @end itemize
 @item Misc Changes
 @itemize @minus
@@ -30,41 +59,37 @@ build correctly.
 @item Window-operation menu improvement [Christopher Bratusek]
 
 @itemize +
-@item The window-operation menu now honours window-matchers.
-For example, if you have a window matched with @code{fixed-size} the
+@item The window-operation menu now honours window rules better.
+For example, if you have a window with @code{fixed-size} flag, the
 window-operations menu-entry @code{Resize} becomes unclickable.
-@item The entries for moving and copying windows to the previous or
-next workspace are now bundled in the new @code{Workspace} sub-menu.
+@item The entries for moving and copying windows to another workspace are
+now bundled in the new @code{Workspace} sub-menu.
 @end itemize
-@item Cleaned-up desktop-environment detection [Teika Kazura]
-
-@item Sawfish emacs major-mode now indents let-fluids [Teika Kazura]
 
 @item Translation related changes [Teika Kazura]
 
 @itemize +
-@item revised make-pot update.sh
-@item cleaned-up sawfish.pot
-@item added po/README translator instructions
-@item the spanish translations has been updated [gnome-es translation-team]
+@item Added translator instructions in @file{po/README} file.
+@item Before you run @file{po/make-pot} to generate @file{sawfish.pot}, you
+now have to do @code{make all} at the top directory. Previously it was
+possible to produce wrong @file{sawfish.pot}.
+@item Banished some bogus items in @file{sawfish.pot}
+@item the Spanish translations has been updated [gnome-es translation-team]
 @end itemize
 
-@item SawfishConfig changes [Teika Kazura]
+@item Emacs sawfish-mode now indents let-fluids correctly [Teika Kazura]
 
-@itemize +
-@item renamed window-rules category @code{Placement} to @code{Geometry}
-@item moved window-rule @code{shade-hover} to @code{appearance} category
-@item moved window-rule @code{fixed-size} to @code{geometry} category
-@end itemize
+@item SawfishConfig ``Window rules'' section changes [Teika Kazura]
+
+Category @code{Placement} is renamed to @code{Geometry}.  The item
+@code{shade-hover} is moved to @code{appearance} category, and
+@code{fixed-size} to @code{geometry}.
+
 @item Spec-File compatibility for RHEL 6beta [Kim B. Heino]
 
-@item Removed a bogus import from scheme-boolean.jl [Teika Kazura]
-
-@item Overall indention fixes for better code-readability [Teika Kazura]
-
-@item In xfce-integration module replace GNOME with XFCE in comments [Christopher Bratusek]
 @end itemize
 @end itemize
+
 @heading 1.7.0 "Frozen Flame"
 
 @itemize @bullet
