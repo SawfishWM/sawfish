@@ -71,6 +71,7 @@
 				sawfish.wm.util.gradient
 				sawfish.wm.util.recolor-image
 				sawfish.wm.theming.make-theme
+				sawfish.wm.tabs.util
 				;; compatibility
 				timers gradient make-theme))
 
