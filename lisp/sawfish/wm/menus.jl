@@ -171,7 +171,7 @@ before killing it.")
 
   (define (add-poweroff-menu)
     "Add poweroff related menu items to Session sub-menu."
-    (require 'sawfish.wm.commands.poweroff)
+    (user-require 'sawfish.wm.commands.poweroff)
     (let ((menu (assoc (_ "Sessi_on") root-menu)))
       (when menu
 	(nconc menu `(()
