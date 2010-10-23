@@ -10,3 +10,6 @@ Name: sawfish
 Description: The Sawfish X11 Window Manager
 Version: @version@
 Requires: librep rep-gtk
+
+Cflags: -I${includedir}
+Libs: -L${libdir} -lX11
