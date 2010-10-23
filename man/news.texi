@@ -9,6 +9,24 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} file in the Sawfish source tree, or git log.
 (See Wiki page on how to access git repository.)
 
+@heading 1.7.0.1 "Night Power"
+
+@itemize @bullet
+
+@item Bug Fixes
+@itemize @minus
+
+@item Poweroff-menu fix [Teika Kazura, Christopher Bratusek]
+
+In Sawfish-1.7.0, poweroff related items in the popup menu couldn't be
+invoked, if run without any desktop environment. Fixed it
+
+@item Correctly build SawfishPager [Christopher Bratusek]
+
+It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc} file.
+@end itemize
+@end itemize
+
 @heading 1.7.0 "Frozen Flame"
 
 @itemize @bullet
