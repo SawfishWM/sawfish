@@ -474,12 +474,20 @@ echo "
 
   font loader:	$FONT_LOADER
 
+  == == == == == == == == == == == == =="
+
+tput setaf 1 && echo "
+  == == == == == == == == == == == == ==
+  
+  !This version of Sawfish is unstable!
+
   == == == == == == == == == == == == ==
 
-  Please read README.IMPORTANT
+     Be sure to read README.IMPORTANT!
 
   == == == == == == == == == == == == ==
   "
+tput sgr0
 
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
