@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.ext.infinite-desktop
+(define-structure sawfish.wm.edge.infinite-desktop
 
     (export infinite-desktop-enable)
 
@@ -29,10 +29,11 @@
           sawfish.wm.commands.move-cursor
           sawfish.wm.viewport
           sawfish.wm.util.prompt
-          sawfish.wm.util.flippers
-          sawfish.wm.ext.edge-flip)
+          sawfish.wm.edge.flippers
+	  sawfish.wm.edge.util
+	  sawfish.wm.edge.flip)
 
-  (define-structure-alias infinite-desktop sawfish.wm.ext.infinite-desktop)
+  (define-structure-alias infinite-desktop sawfish.wm.edge.infinite-desktop)
 
   (defgroup infinite-desktop "Infinite Desktop"
     :group workspace)
@@ -43,25 +44,23 @@
     :after-set (lambda () (infinite-desktop-enable))
     :type boolean)
 
-  ;;; NOTE: the `.' from the option will be removed during 2.90.0 cylce!
-  (defcustom infinite-desktop.move-distance 64
+  (defcustom infinite-desktop-move-distance 64
     "Amount to move the viewport when the pointer hits the screen edge."
     :group (workspace infinite-desktop)
     :type number
     :range (1 . nil))
 
-  ;;; NOTE: the `.' from the option will be removed during 2.90.0 cylce!
-  (defcustom infinite-desktop.move-cursor-distance 32
+  (defcustom infinite-desktop-move-cursor-distance 32
     "Amount to pull back the cursor after moving the viewport."
     :group (workspace infinite-desktop)
     :type number
     :range (1 . nil))
 
   (define (infinite-desktop-move-right)
-    "Shifts the viewport `infinite-desktop.move-distance' pixels to the
+    "Shifts the viewport `infinite-desktop-move-distance' pixels to the
 right."
-    (let ((dist infinite-desktop.move-distance)
-          (cdist infinite-desktop.move-cursor-distance)
+    (let ((dist infinite-desktop-move-distance)
+          (cdist infinite-desktop-move-cursor-distance)
           (maxx (* (screen-width) (1- (car viewport-dimensions)))))
       (if
           (and (viewport-honor-workspace-edges)
@@ -71,10 +70,10 @@ right."
       (move-cursor (- (min dist cdist)) 0)))
 
   (define (infinite-desktop-move-left)
-    "Shifts the viewport `infinite-desktop.move-distance' pixels to the
+    "Shifts the viewport `infinite-desktop-move-distance' pixels to the
 left."
-    (let ((dist (- infinite-desktop.move-distance))
-          (cdist (- infinite-desktop.move-cursor-distance))
+    (let ((dist (- infinite-desktop-move-distance))
+          (cdist (- infinite-desktop-move-cursor-distance))
           (minx 0))
       (if
           (and (viewport-honor-workspace-edges)
@@ -84,9 +83,9 @@ left."
       (move-cursor (- (max dist cdist)) 0)))
 
   (define (infinite-desktop-move-top)
-    "Shifts the viewport `infinite-desktop.move-distance' pixels up."
-    (let ((dist (- infinite-desktop.move-distance))
-          (cdist (- infinite-desktop.move-cursor-distance))
+    "Shifts the viewport `infinite-desktop-move-distance' pixels up."
+    (let ((dist (- infinite-desktop-move-distance))
+          (cdist (- infinite-desktop-move-cursor-distance))
           (miny 0))
       (if
           (and (viewport-honor-workspace-edges)
@@ -96,9 +95,9 @@ left."
       (move-cursor 0 (- (max dist cdist)))))
 
   (define (infinite-desktop-move-bottom)
-    "Shifts the viewport `infinite-desktop.move-distance' pixels down."
-    (let ((dist infinite-desktop.move-distance)
-          (cdist infinite-desktop.move-cursor-distance)
+    "Shifts the viewport `infinite-desktop-move-distance' pixels down."
+    (let ((dist infinite-desktop-move-distance)
+          (cdist infinite-desktop-move-cursor-distance)
           (maxy (* (screen-height) (1- (cdr viewport-dimensions)))))
       (if
           (and (viewport-honor-workspace-edges)
@@ -120,7 +119,15 @@ desktop."
   (define (infinite-desktop-enable)
     "Turn on infinite-desktop if `infinite-desktop-p' is true."
     (if infinite-desktop-p
-        (enable-flippers)))
+        (progn
+	  (unless (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
+            (add-hook 'enter-flipper-hook infinite-desktop-hook))
+	  (unless edge-flip-enabled
+	    (flippers-activate t)))
+      (if (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
+	(remove-hook 'enter-flipper-hook infinite-desktop-hook)
+      (unless edge-flip-enabled
+	(flippers-activate nil)))))
 
-  (unless batch-mode
-    (add-hook 'enter-flipper-hook infinite-desktop-hook)))
+(unless batch-mode
+  (infinite-desktop-enable)))
