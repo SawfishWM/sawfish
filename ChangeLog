@@ -31,7 +31,7 @@
 	infinite-desktop-move-cursor-distance (note `.' VS `-')
 	                                            improved infinite-desktop-enable
 						    ported get-active-edge function
-						    no longer open edge.flip (still required!)
+						    no longer depends on edge.flip
 
 	* README.IMPORTANT: updated
 
@@ -40,6 +40,7 @@
 	* lisp/sawfish/wm/edge/flip.jl: move add-hook calls to edge-flip-enable
 
 	* lisp/sawfish/wm/edge/hot-spots.jl: added hot-spots version 2.0.0
+	                                     no longer depends on edge.flip
 
 2010-10-23  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/tabs/util.jl: set-tab-adjustment function for tabbed-themes
