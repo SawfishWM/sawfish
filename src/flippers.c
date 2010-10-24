@@ -29,6 +29,8 @@ DEFSYM(top, "top");
 DEFSYM(bottom, "bottom");
 DEFSYM(enter_flipper_hook, "enter-flipper-hook");
 DEFSYM(leave_flipper_hook, "leave-flipper-hook");
+/* perhaps edges-activated is better, if ID and HS 
+ * become independent of EF? */
 DEFSYM(edge_flip_enabled, "edge-flip-enabled");
 
 DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
@@ -164,7 +166,7 @@ DEFUN("recreate-flippers", Frecreate_flippers,
 repv
 rep_dl_init (void)
 {
-    repv tem = rep_push_structure ("sawfish.wm.util.flippers");
+    repv tem = rep_push_structure ("sawfish.wm.edge.flippers");
 
     rep_ADD_SUBR(Senable_flippers);
     rep_ADD_SUBR(Sdisable_flippers);
