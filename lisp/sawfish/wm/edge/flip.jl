@@ -18,10 +18,9 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.ext.edge-flip
+(define-structure sawfish.wm.edge.flip
 
-    (export edge-flip-enable
-	    flippers-activate)
+    (export edge-flip-enable)
 
     (open rep
 	  rep.system
@@ -34,18 +33,19 @@
 	  sawfish.wm.workspace
 	  sawfish.wm.commands.move-resize
 	  sawfish.wm.ext.workspace-grid
-	  sawfish.wm.util.flippers)
+	  sawfish.wm.edge.flippers
+	  sawfish.wm.edge.util)
 
-  (define-structure-alias edge-flip sawfish.wm.ext.edge-flip)
+  (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
   (defgroup edge-flip "Edge Flipping"
     :group workspace
-    :require sawfish.wm.ext.edge-flip)
+    :require sawfish.wm.edge.flip)
 
   (defcustom edge-flip-enabled nil
     "Select the next desktop when the pointer hits screen edge."
     :type boolean
-    :require sawfish.wm.ext.edge-flip
+    :require sawfish.wm.edge.flip
     :group (workspace edge-flip)
     :after-set (lambda () (edge-flip-enable)))
 
@@ -78,23 +78,6 @@
   (defvar after-edge-flip-hook '()
     "Hook called immediately after edge-flipping.")
 
-  (define (flippers-activate enable)
-    (if enable
-        (progn
-	  (recreate-flippers)
-	  (unless (in-hook-p 'after-restacking-hook flippers-after-restacking)
-	    (add-hook 'after-restacking-hook flippers-after-restacking))
-	  (unless (in-hook-p 'randr-change-notify-hook recreate-flippers)
-	    (add-hook 'randr-change-notify-hook recreate-flippers)))
-      (disable-flippers)
-      (if (in-hook-p 'after-restacking-hook flippers-after-restacking)
-	(remove-hook 'after-restacking-hook flippers-after-restacking))
-      (if (in-hook-p 'randr-change-notify-hook recreate-flippers)
-	(remove-hook 'randr-change-notify-hook recreate-flippers))))
-
-  ;;; XXX This function will be moved to an other module during
-  ;;; XXX 2.90.0 cycle! (so that infinite-desktop or others don't
-  ;;; XXX depend on edge-flip and enable it)
   (define (edge-flip-enable)
     (if (and edge-flip-enabled (not edge-flip-only-when-moving))
 	  (flippers-activate t)
@@ -201,6 +184,8 @@
     (when edge-flip-enabled
       (edge-flip-synthesize)))
 
+  ;; XXX split all that stuff from edge-flip, so that
+  ;; XXX HS and ID work, even if EF is disabled
   (add-hook 'before-edge-flip-hook before-flip)
   (add-hook 'after-edge-flip-hook after-flip)
   (add-hook 'while-moving-hook edge-flip-while-moving)
@@ -210,5 +195,5 @@
   (add-hook 'enter-flipper-hook edge-flip-enter)
   (add-hook 'leave-flipper-hook edge-flip-leave)
 
-  (unless batch-mode
-    (edge-flip-enable)))
+(unless batch-mode
+  (edge-flip-enable)))
