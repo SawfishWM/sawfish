@@ -20,12 +20,15 @@
 
 (define-structure sawfish.wm.edge.util
 
-    (export flippers-activate)
+    (export flippers-activate
+	    get-active-corner
+	    get-active-edge)
 
     (open rep
 	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
+	  sawfish.wm.custom
 	  sawfish.wm.edge.flippers)
 
   (define-structure-alias edge-util sawfish.wm.edge.util)
@@ -42,4 +45,55 @@
       (if (in-hook-p 'after-restacking-hook flippers-after-restacking)
 	(remove-hook 'after-restacking-hook flippers-after-restacking))
       (if (in-hook-p 'randr-change-notify-hook recreate-flippers)
-	(remove-hook 'randr-change-notify-hook recreate-flippers)))))
+	(remove-hook 'randr-change-notify-hook recreate-flippers))))
+
+  (defgroup hot-spot "Hot Spots" :group workspace)
+
+  (defcustom hot-spot-delay 150
+    "Milliseconds to delay before activating hot-spot."
+    :type number
+    :group (workspace hot-spot))
+
+  (defcustom hot-spots-area 50
+    "Lenght in px (in both x and y direction) wich is used as hot-spots-area."
+    :type number
+    :range (5 . 500)
+    :group (workspace hot-spot))
+
+   (define (get-active-corner)
+    (let ((cursor-x (car (query-pointer)))
+	  (cursor-y (cdr (query-pointer))))
+      (cond ((or (and (< cursor-x hot-spots-area)
+		    (<= cursor-y 1))
+		 (and (<= cursor-x 1)
+		    (< cursor-y hot-spots-area)))
+		   'top-left)
+
+	    ((or (and (> cursor-x (- (screen-width) hot-spots-area))
+		    (<= cursor-y 1))
+		 (and (>= cursor-x (- (screen-width) 1))
+		    (< cursor-y hot-spots-area)))
+		   'top-right)
+
+	    ((or (and (> cursor-x (- (screen-width) hot-spots-area))
+		    (>= cursor-y (- (screen-height) 1)))
+		 (and (>= cursor-x (- (screen-width) 1))
+		    (> cursor-y (- (screen-height) hot-spots-area))))
+		   'bottom-right)
+
+	    ((or (and (< cursor-x hot-spots-area)
+		    (>= cursor-y (- (screen-height) 1)))
+		 (and (<= cursor-x 1)
+		    (> cursor-y (- (screen-height) hot-spots-area))))
+		   'bottom-left))))
+
+  (define (get-active-edge)
+    (let ((cursor (query-pointer)))
+      (cond ((zerop (car cursor))
+	      'left)
+	    ((= (car cursor) (1- (screen-width)))
+	     'right)
+	    ((zerop (cdr cursor))
+	     'top)
+	    ((= (cdr cursor) (1- (screen-height)))
+	     'bottom)))))
