@@ -1,4 +1,19 @@
-2010-10-22  Christopher Bratusek <zanghar@freenet.de>
+2010-10-24  Christopher Bratusek <zanghar@freenet.de>
+	* src/flippers.c: add edge-flip-enabled as global symbol
+	                  add recreate-flippers function
+			  don't auto-enable flippers when loading
+
+	* src/sawfish_subrs.h
+	* lisp/sawfish/wm/gaol.jl: add edge-flip-eanbled
+
+	* lisp/sawfish/wm/ext/edge-flip.jl: open sawfish.wm.util.flippers
+	                                    remove the eval-when-compile call
+					    removed three unneeded exports
+					    remove restart-flippers
+					    add flippers-activate (=> user-modules should use THIS,
+					    not recreate-flippers (as it handles the hooks))
+
+2010-10-23  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/tabs/util.jl: set-tab-adjustment function for tabbed-themes
 
 	* lisp/sawfish/wm/gaol.jl: added tabs/util to gaolled modules
