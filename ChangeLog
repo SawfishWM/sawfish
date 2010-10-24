@@ -18,8 +18,12 @@
 	* lisp/sawfish/wm/ext/edge-flip.jl
 	* lisp/sawfish/wm/edge/flip.jl: moved file
 
-	* lisp/sawfish/wm/edge/util.jl: added, contains flippers-activate (=> user-modules
+	* lisp/sawfish/wm/edge/util.jl: added. flippers-activate (=> user-modules
 	should use THIS, not recreate-flippers (as it handles the hooks))
+	                                added get-active-corner function
+					added get-active-edge function
+					added defcustom for hot-spots-area here
+					 -- (as it's used by get-active-corner)
 
 	* OPTIONS
 	* src/fake-libexec
@@ -30,10 +34,16 @@
 	infinite-desktop-move-distance and renamed infinite-desktop.move-cursor-distance to
 	infinite-desktop-move-cursor-distance (note `.' VS `-')
 	                                            improved infinite-desktop-enable
+						    ported get-active-edge function
+						    no longer open edge.flip (still required!)
 
 	* README.IMPORTANT: updated
 
 	* configure.in: display a red warning
+
+	* lisp/sawfish/wm/edge/flip.jl: move add-hook calls to edge-flip-enable
+
+	* lisp/sawfish/wm/edge/hot-spots.jl: added hot-spots version 2.0.0
 
 2010-10-23  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/tabs/util.jl: set-tab-adjustment function for tabbed-themes

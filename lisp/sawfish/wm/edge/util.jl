@@ -49,11 +49,6 @@
 
   (defgroup hot-spot "Hot Spots" :group workspace)
 
-  (defcustom hot-spot-delay 150
-    "Milliseconds to delay before activating hot-spot."
-    :type number
-    :group (workspace hot-spot))
-
   (defcustom hot-spots-area 50
     "Lenght in px (in both x and y direction) wich is used as hot-spots-area."
     :type number
