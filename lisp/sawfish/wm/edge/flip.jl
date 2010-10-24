@@ -80,8 +80,31 @@
 
   (define (edge-flip-enable)
     (if (and edge-flip-enabled (not edge-flip-only-when-moving))
-	  (flippers-activate t)
-      (flippers-activate nil)))
+	(progn
+          (flippers-activate t)
+	  ;; XXX split all that stuff from edge-flip, so that
+	  ;; XXX HS and ID work, even if EF is disabled
+	  (unless (in-hook-p 'before-edge-lip-hook before-flip)
+	    (add-hook 'before-edge-flip-hook before-flip))
+	  (unless (in-hook-p 'after-edge-flip-hook after-flip)
+	    (add-hook 'after-edge-flip-hook after-flip))
+	  (unless (in-hook-p 'while-moving-hook edge-flip-while-moving)
+	    (add-hook 'while-moving-hook edge-flip-while-moving))
+	  (unless (in-hook-p 'enter-flipper-hook edge-flip-enter)
+	    (add-hook 'enter-flipper-hook edge-flip-enter))
+	  (unless (in-hook-p 'leave-flipper-hook edge-flip-leave)
+	    (add-hook 'leave-flipper-hook edge-flip-leave)))
+      (flippers-activate nil)
+      (if (in-hook-p 'before-edge-lip-hook before-flip)
+	(remove-hook 'before-edge-flip-hook before-flip))
+      (if (in-hook-p 'after-edge-flip-hook after-flip)
+	(remove-hook 'after-edge-flip-hook after-flip))
+      (if (in-hook-p 'while-moving-hook edge-flip-while-moving)
+	(remove-hook 'while-moving-hook edge-flip-while-moving))
+      (if (in-hook-p 'enter-flipper-hook edge-flip-enter)
+	(remove-hook 'enter-flipper-hook edge-flip-enter))
+      (if (in-hook-p 'leave-flipper-hook edge-flip-leave)
+	(remove-hook 'leave-flipper-hook edge-flip-leave))))
 
   (define (edge-flip-enter edge)
     (if (<= edge-flip-delay 0)
@@ -183,17 +206,6 @@
     (declare (unused w))
     (when edge-flip-enabled
       (edge-flip-synthesize)))
-
-  ;; XXX split all that stuff from edge-flip, so that
-  ;; XXX HS and ID work, even if EF is disabled
-  (add-hook 'before-edge-flip-hook before-flip)
-  (add-hook 'after-edge-flip-hook after-flip)
-  (add-hook 'while-moving-hook edge-flip-while-moving)
-
-;;; init
-
-  (add-hook 'enter-flipper-hook edge-flip-enter)
-  (add-hook 'leave-flipper-hook edge-flip-leave)
 
 (unless batch-mode
   (edge-flip-enable)))
