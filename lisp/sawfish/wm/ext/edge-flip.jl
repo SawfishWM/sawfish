@@ -21,12 +21,7 @@
 (define-structure sawfish.wm.ext.edge-flip
 
     (export edge-flip-enable
-	    restart-flippers
-	    ;; These three functions are not for API, but let's keep 'em.
-	    ;;; XXX Why? Proposed for non-export during 2.90.0
-	    edge-flip-for-edge
-	    edge-flip-synthesize
-	    edge-flip-while-moving)
+	    flippers-activate)
 
     (open rep
 	  rep.system
@@ -38,12 +33,10 @@
 	  sawfish.wm.viewport
 	  sawfish.wm.workspace
 	  sawfish.wm.commands.move-resize
-	  sawfish.wm.ext.workspace-grid)
+	  sawfish.wm.ext.workspace-grid
+	  sawfish.wm.util.flippers)
 
   (define-structure-alias edge-flip sawfish.wm.ext.edge-flip)
-
-  ;; for the compiler's benefit
-  (eval-when-compile (require 'sawfish.wm.util.flippers))
 
   (defgroup edge-flip "Edge Flipping"
     :group workspace
@@ -85,25 +78,27 @@
   (defvar after-edge-flip-hook '()
     "Hook called immediately after edge-flipping.")
 
-  ;;; XXX This function will be moved to C-part during 2.90.0 cycle!
-  (define (restart-flippers)
-    (if edge-flip-enabled
-      (progn
-        (disable-flippers)
-        (create-flippers)
-        (enable-flippers))))
+  (define (flippers-activate enable)
+    (if enable
+        (progn
+	  (recreate-flippers)
+	  (unless (in-hook-p 'after-restacking-hook flippers-after-restacking)
+	    (add-hook 'after-restacking-hook flippers-after-restacking))
+	  (unless (in-hook-p 'randr-change-notify-hook recreate-flippers)
+	    (add-hook 'randr-change-notify-hook recreate-flippers)))
+      (disable-flippers)
+      (if (in-hook-p 'after-restacking-hook flippers-after-restacking)
+	(remove-hook 'after-restacking-hook flippers-after-restacking))
+      (if (in-hook-p 'randr-change-notify-hook recreate-flippers)
+	(remove-hook 'randr-change-notify-hook recreate-flippers))))
 
   ;;; XXX This function will be moved to an other module during
   ;;; XXX 2.90.0 cycle! (so that infinite-desktop or others don't
   ;;; XXX depend on edge-flip and enable it)
   (define (edge-flip-enable)
     (if (and edge-flip-enabled (not edge-flip-only-when-moving))
-	(progn
-	  (require 'sawfish.wm.util.flippers)
-	  (enable-flippers)
-	  (add-hook 'randr-change-notify-hook restart-flippers))
-      (when (featurep 'sawfish.wm.util.flippers)
-	(disable-flippers))))
+	  (flippers-activate t)
+      (flippers-activate nil)))
 
   (define (edge-flip-enter edge)
     (if (<= edge-flip-delay 0)
