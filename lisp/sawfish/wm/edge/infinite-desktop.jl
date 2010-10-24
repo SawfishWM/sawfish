@@ -30,8 +30,7 @@
           sawfish.wm.viewport
           sawfish.wm.util.prompt
           sawfish.wm.edge.flippers
-	  sawfish.wm.edge.util
-	  sawfish.wm.edge.flip)
+	  sawfish.wm.edge.util)
 
   (define-structure-alias infinite-desktop sawfish.wm.edge.infinite-desktop)
 
@@ -106,15 +105,13 @@ left."
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (min dist cdist)))))
 
-  (define (infinite-desktop-hook w)
-    "Called when a desktop flipper is triggered to shift the visible
-desktop."
-    (if infinite-desktop-p
-        (cond ((eq w 'right) (infinite-desktop-move-right))
-              ((eq w 'left) (infinite-desktop-move-left))
-              ((eq w 'bottom) (infinite-desktop-move-bottom))
-              ((eq w 'top) (infinite-desktop-move-top))
-              (t (display-message "move-unknown")))))
+  (define (infinite-desktop-hook)
+    "Called when a desktop flipper is triggered to shift the visible desktop."
+    (let ((edge (get-active-edge)))  
+      (cond ((eq edge 'right) (infinite-desktop-move-right))
+            ((eq edge 'left) (infinite-desktop-move-left))
+            ((eq edge 'bottom) (infinite-desktop-move-bottom))
+            ((eq edge 'top) (infinite-desktop-move-top)))))
 
   (define (infinite-desktop-enable)
     "Turn on infinite-desktop if `infinite-desktop-p' is true."
@@ -122,12 +119,10 @@ desktop."
         (progn
 	  (unless (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
             (add-hook 'enter-flipper-hook infinite-desktop-hook))
-	  (unless edge-flip-enabled
-	    (flippers-activate t)))
+	  (flippers-activate t))
       (if (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
 	(remove-hook 'enter-flipper-hook infinite-desktop-hook)
-      (unless edge-flip-enabled
-	(flippers-activate nil)))))
+      (flippers-activate nil))))
 
 (unless batch-mode
   (infinite-desktop-enable)))
