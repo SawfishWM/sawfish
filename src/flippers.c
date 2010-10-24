@@ -29,6 +29,7 @@ DEFSYM(top, "top");
 DEFSYM(bottom, "bottom");
 DEFSYM(enter_flipper_hook, "enter-flipper-hook");
 DEFSYM(leave_flipper_hook, "leave-flipper-hook");
+DEFSYM(edge_flip_enabled, "edge-flip-enabled");
 
 DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
 {
@@ -36,6 +37,7 @@ DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
     XMapRaised (dpy, edge_right);
     XMapRaised (dpy, edge_top);
     XMapRaised (dpy, edge_bottom);
+
     return Qt;
 }
 
@@ -46,6 +48,7 @@ DEFUN("disable-flippers", Fdisable_flippers, Sdisable_flippers,
     XDestroyWindow (dpy, edge_right);
     XDestroyWindow (dpy, edge_top);
     XDestroyWindow (dpy, edge_bottom);
+
     return Qt;
 }
 
@@ -142,6 +145,22 @@ DEFUN("create-flippers", Fcreate_flippers,
 
 }
 
+/* user-modules should depend on flippers-activate not on recreate-flippers */
+DEFUN("recreate-flippers", Frecreate_flippers,
+      Srecreate_flippers, (void), rep_Subr0)
+{
+	if (!rep_NILP(global_symbol_value (Qedge_flip_enabled)))
+	{
+
+		Fdisable_flippers();
+		Fcreate_flippers();
+		Fenable_flippers();
+
+	}
+
+	return Qt;
+}
+
 repv
 rep_dl_init (void)
 {
@@ -151,6 +170,7 @@ rep_dl_init (void)
     rep_ADD_SUBR(Sdisable_flippers);
     rep_ADD_SUBR(Sflippers_after_restacking);
     rep_ADD_SUBR(Screate_flippers);
+    rep_ADD_SUBR(Srecreate_flippers);
 
     rep_INTERN (left);
     rep_INTERN (right);
@@ -158,17 +178,7 @@ rep_dl_init (void)
     rep_INTERN (bottom);
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
-
-    if (!batch_mode_p ())
-    {
-
-	Fcreate_flippers();
-
-	add_hook (Qafter_restacking_hook, rep_VAL(&Sflippers_after_restacking));
-
-	Fenable_flippers();
-
-    }
+    rep_INTERN_SPECIAL (edge_flip_enabled);
 
     return rep_pop_structure (tem);
 }
