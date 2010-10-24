@@ -103,9 +103,6 @@ extern repv Fcurrent_event_window (repv win);
 extern void events_init (void);
 extern void events_kill (void);
 
-/* from flippers.c */
-extern repv Qedge_flip_enable;
-
 /* from fonts.c */
 extern int font_type;
 extern repv Qdefault_font;

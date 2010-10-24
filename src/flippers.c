@@ -29,9 +29,6 @@ DEFSYM(top, "top");
 DEFSYM(bottom, "bottom");
 DEFSYM(enter_flipper_hook, "enter-flipper-hook");
 DEFSYM(leave_flipper_hook, "leave-flipper-hook");
-/* perhaps edges-activated is better, if ID and HS 
- * become independent of EF? */
-DEFSYM(edge_flip_enabled, "edge-flip-enabled");
 
 DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
 {
@@ -151,14 +148,9 @@ DEFUN("create-flippers", Fcreate_flippers,
 DEFUN("recreate-flippers", Frecreate_flippers,
       Srecreate_flippers, (void), rep_Subr0)
 {
-	if (!rep_NILP(global_symbol_value (Qedge_flip_enabled)))
-	{
-
-		Fdisable_flippers();
-		Fcreate_flippers();
-		Fenable_flippers();
-
-	}
+	Fdisable_flippers();
+	Fcreate_flippers();
+	Fenable_flippers();
 
 	return Qt;
 }
@@ -180,7 +172,6 @@ rep_dl_init (void)
     rep_INTERN (bottom);
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
-    rep_INTERN_SPECIAL (edge_flip_enabled);
 
     return rep_pop_structure (tem);
 }

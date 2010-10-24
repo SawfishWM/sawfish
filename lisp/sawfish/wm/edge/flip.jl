@@ -81,7 +81,7 @@
   (define (edge-flip-enable)
     (if (and edge-flip-enabled (not edge-flip-only-when-moving))
 	(progn
-          (flippers-activate t)
+	  (flippers-activate t)
 	  ;; XXX split all that stuff from edge-flip, so that
 	  ;; XXX HS and ID work, even if EF is disabled
 	  (unless (in-hook-p 'before-edge-lip-hook before-flip)
