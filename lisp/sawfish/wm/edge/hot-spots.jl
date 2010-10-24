@@ -1,4 +1,4 @@
-;; hot-spots.jl 2.0.0 -- perform actions when hitting the screen-edge
+;; hot-spots.jl 2.1.0 -- perform actions when hitting the screen-edge
 
 ;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 
@@ -20,7 +20,7 @@
 
 (define-structure sawfish.wm.edge.hot-spots
 
-    (export )
+    (export hot-spots-activate)
 
     (open rep
 	  rep.system
@@ -58,10 +58,25 @@
   (defvar bottom-left-corner-program nil
     "The program launched when hitting the bottom-left-corner.")
 
+  (defcustom hot-spots-enable nil
+    "Whether to enable sensitive spots on the screen-edge."
+    :type boolean
+    :group (workspace hot-spot)
+    :after-set (lambda () hot-spots-activate))
+
   (defcustom hot-spot-delay 150
     "Milliseconds to delay before activating hot-spot."
     :type number
     :group (workspace hot-spot))
+
+  (define (hot-spots-activate)
+    (if hot-spots-enable
+        (unless (in-hook-p 'enter-flipper-hook hot-spots-hook)
+	  (add-hook 'enter-flipper-hook hot-spots-hook)
+	(flippers-activate t))
+      (if (in-hook-p 'enter-flipper-hook hot-spots-hook)
+	(remove-hook 'enter-flipper-hook hot-spots-hook))
+      (flippers-activate nil)))
 
   (define hs-timer nil)
 
@@ -122,7 +137,6 @@
              (if (functionp bottom-edge-program)
                    (funcall bottom-edge-program)
                  (system (concat bottom-edge-program " &")))))))
-  
-  ;; init
+
   (unless batch-mode
-    (add-hook 'enter-flipper-hook hot-spots-hook)))
+    (hot-spots-activate)))
