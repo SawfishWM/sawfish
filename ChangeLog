@@ -2,6 +2,7 @@
 	* src/flippers.c: add edge-flip-enabled as global symbol
 	                  add recreate-flippers function
 			  don't auto-enable flippers when loading
+			  renamed module to sawfish.wm.edge.flippers
 
 	* src/sawfish_subrs.h
 	* lisp/sawfish/wm/gaol.jl: add edge-flip-eanbled
@@ -10,8 +11,25 @@
 	                                    remove the eval-when-compile call
 					    removed three unneeded exports
 					    remove restart-flippers
-					    add flippers-activate (=> user-modules should use THIS,
-					    not recreate-flippers (as it handles the hooks))
+
+	* lisp/sawfish/wm/ext/infinite-desktop.jl
+	* lisp/sawfish/wm/edge/infinite-desktop.jl: moved file
+
+	* lisp/sawfish/wm/ext/edge-flip.jl
+	* lisp/sawfish/wm/edge/flip.jl: moved file
+
+	* lisp/sawfish/wm/edge/util.jl: added, contains flippers-activate (=> user-modules
+	should use THIS, not recreate-flippers (as it handles the hooks))
+
+	* OPTIONS
+	* src/fake-libexec
+	* lisp/Makefile.in
+	* src/Makefile.in: updated
+
+	* lisp/sawfish/wm/edge/infinite-desktop.jl: renamed infinite-desktop.move-distance to
+	infinite-desktop-move-distance and renamed infinite-desktop.move-cursor-distance to
+	infinite-desktop-move-cursor-distance (note `.' VS `-')
+	                                            improved infinite-desktop-enable
 
 2010-10-23  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/tabs/util.jl: set-tab-adjustment function for tabbed-themes
