@@ -46,20 +46,21 @@
 ;; => application dolphin matched on it's WM_NAME 
 ;;  => will be iconified when key pressed while it's focused
 ;;  ( bind-keys global-keymap "Home" 
-;;    `( jump-or-exec "Dolphin" "dolphin ~" #:iconify-on-leave t ) 
+;;    `( jump-or-exec "Dolphin" "dolphin ~" #:onfocused jump-or-exec-leave ) 
 ;;
 ;; => application konsole matched on it's WM_CLASS
 ;;  => will be iconified when key pressed while it's focused
 ;;  => will also be iconified when the cursor leaves it
 ;;  ( bind-keys global-keymap "F12"
-;;    `( jump-or-exec "Konsole" "konsole" #:match-class t #:iconify-on-leave t ) 
+;;    `( jump-or-exec "Konsole" "konsole" #:match-class t #:onfocused jump-or-exec-leave ) 
 ;;
 ;;  ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
 ;;    '( ( iconify-on-leave .t ) ) )
 
 (define-structure sawfish.wm.commands.jump-or-exec
 
-    (export jump-or-exec)
+    (export jump-or-exec
+	    jump-or-exec-leave)
 
     (open rep
           rep.system
@@ -71,20 +72,12 @@
 	  sawfish.wm.util.display-window
 	  sawfish.wm.commands)
 
-  (define (jump-or-exec re prog #!key match-class onfocused iconify-on-leave)
+  (define (jump-or-exec re prog #!key match-class onfocused)
     "jump to a window matched by re, or start program otherwise."
     (catch 'return
       (let ((wind (if match-class
                     (get-window-by-class-re re)
                     (get-window-by-name-re re))))
-	(if iconify-on-leave
-	  (let ((curwin (input-focus)))
-	    (if (or (string-match re (window-class curwin))
-	            (string-match re (window-name curwin)))
-	        (progn
-		  (let ((default-window-animator 'none))
-		    (iconify-window (input-focus))
-		    (throw 'return))))))
         (if (functionp onfocused) ; check if already focused
             (let ((curwin (input-focus)))
               (if curwin
@@ -101,6 +94,10 @@
               (system (concat prog "&")))))))
 
   (define-command 'jump-or-exec jump-or-exec #:class 'default)
+
+  (define (jump-or-exec-leave)
+    (let ((default-window-animator 'none))
+      (iconify-window (input-focus))))
 
   (define (jump-or-exec-hook)
     (if (and (not (eq (current-event-window) 'root)) ;; may error on startup else

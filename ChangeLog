@@ -7,7 +7,8 @@
 	* lisp/sawfish/wm/edge/flip.jl
 	* lisp/sawfish/wm/edge/hot-spots.jl
 	* lisp/sawfish/wm/edge/infinite-desktop.jl: don't auto-enable infinit-desktop by just loading the module
-	                                            export hook-functions
+	                                            export hook-functions and also check on window-class before
+						    calling `onfocused' function
 
 2010-10-24  Christopher Bratusek <zanghar@freenet.de>
 	* src/flippers.c: add recreate-flippers function
