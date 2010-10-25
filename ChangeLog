@@ -1,3 +1,14 @@
+2010-10-25  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/ext/match-window.jl: add iconify-on-leave window-matcher
+
+	* lisp/sawfish/wm/commands/jump-or-exec.jl: syntax change (read the introduction in the file)
+	                                            merged toggle-or-exec into it
+
+	* lisp/sawfish/wm/edge/flip.jl
+	* lisp/sawfish/wm/edge/hot-spots.jl
+	* lisp/sawfish/wm/edge/infinite-desktop.jl: don't auto-enable infinit-desktop by just loading the module
+	                                            export hook-functions
+
 2010-10-24  Christopher Bratusek <zanghar@freenet.de>
 	* src/flippers.c: add recreate-flippers function
 			  don't auto-enable flippers when loading
