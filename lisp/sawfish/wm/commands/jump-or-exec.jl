@@ -1,4 +1,4 @@
-;;; jump-or-exec.jl --- flexible application shortcut keys (v0.2)
+;;; jump-or-exec.jl 1.0.0 -- flexible application shortcut keys
 
 ;; Copyright (C) 2002 Damien Elmes <resolve@repose.cx>
 
@@ -25,15 +25,37 @@
 ;;
 ;; Examples:
 ;;
-;; NOTE: the `t' tells jump-or-exec to match on WM_CLASS
+;; => application gnome-run-dialog matched on it's WM_CLASS
 ;; ( bind-keys global-keymap "W-F2"
-;;   `( jump-or-exec "Gnome-run-dialog" "gnome-run-dialog" t ) )
+;;   `( jump-or-exec "Gnome-run-dialog" "gnome-run-dialog" #:match-class t ) )
 ;;
-;; NOTE: a missing `t' or a `nil' (the later is required if making
-;;       use of the `onfocused' arguement) tells jump-or-exec to
-;;       match on WM_NAME
+;; => application geany matched on it's WM_NAME
 ;; ( bind-keys global-keymap "W-F10"
-;;   `( jump-or-exec "Geany" "geany" nil ) )
+;;   `( jump-or-exec "Geany" "geany" #:match-class nil ) )
+;;
+;; NOTE: `#:match-class nil' can be skipped, as it's nil by default
+;;
+;; In version 1.0.0 toggle-or-exec was merged into jump-or-exec. It's basically
+;; the same, but it turns windows into drop-down-terminal like ones, that means
+;; then you press the key while on the corresponding window, it will be hidden.
+;; Optionally you may add a window-matcher, wich will also hide the window when
+;; you leave it (not done by default).
+;;
+;; Examples:
+;;
+;; => application dolphin matched on it's WM_NAME 
+;;  => will be iconified when key pressed while it's focused
+;;  ( bind-keys global-keymap "Home" 
+;;    `( jump-or-exec "Dolphin" "dolphin ~" #:iconify-on-leave t ) 
+;;
+;; => application konsole matched on it's WM_CLASS
+;;  => will be iconified when key pressed while it's focused
+;;  => will also be iconified when the cursor leaves it
+;;  ( bind-keys global-keymap "F12"
+;;    `( jump-or-exec "Konsole" "konsole" #:match-class t #:iconify-on-leave t ) 
+;;
+;;  ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
+;;    '( ( iconify-on-leave .t ) ) )
 
 (define-structure sawfish.wm.commands.jump-or-exec
 
@@ -44,20 +66,32 @@
 	  rep.regexp
           sawfish.wm.misc
           sawfish.wm.windows
+	  sawfish.wm.events
+	  sawfish.wm.state.iconify
 	  sawfish.wm.util.display-window
 	  sawfish.wm.commands)
 
-  (define (jump-or-exec re prog #!optional class onfocused)
+  (define (jump-or-exec re prog #!key match-class onfocused iconify-on-leave)
     "jump to a window matched by re, or start program otherwise."
     (catch 'return
-      (let ((wind (if class
+      (let ((wind (if match-class
                     (get-window-by-class-re re)
                     (get-window-by-name-re re))))
+	(if iconify-on-leave
+	  (let ((curwin (input-focus)))
+	    (if (or (string-match re (window-class curwin))
+	            (string-match re (window-name curwin)))
+	        (progn
+		  (let ((default-window-animator 'none))
+		    (iconify-window (input-focus))
+		    (throw 'return))))))
         (if (functionp onfocused) ; check if already focused
             (let ((curwin (input-focus)))
               (if curwin
-                  (if (string-match re (window-name curwin))
-                      (progn
+                  (if (or (string-match re (window-class curwin))
+			  (string-match re (window-name curwin)))
+		      (progn
+			;; shouldn't it be curwin
                         (funcall onfocused wind)
                         (throw 'return))))))
         (if (windowp wind)
@@ -66,4 +100,12 @@
                 (funcall prog)
               (system (concat prog "&")))))))
 
-  (define-command 'jump-or-exec jump-or-exec #:class 'default))
+  (define-command 'jump-or-exec jump-or-exec #:class 'default)
+
+  (define (jump-or-exec-hook)
+    (if (and (not (eq (current-event-window) 'root)) ;; may error on startup else
+	     (window-get (current-event-window) 'iconify-on-leave))
+      (let ((default-window-animator 'none)) ;; no animator
+	(iconify-window (current-event-window)))))
+
+  (add-hook 'leave-notify-hook jump-or-exec-hook))
