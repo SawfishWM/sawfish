@@ -20,7 +20,8 @@
 
 (define-structure sawfish.wm.edge.flip
 
-    (export edge-flip-enable)
+    (export edge-flip-enable
+	    edge-flip-enter)
 
     (open rep
 	  rep.system

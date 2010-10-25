@@ -20,7 +20,8 @@
 
 (define-structure sawfish.wm.edge.hot-spots
 
-    (export hot-spots-activate)
+    (export hot-spots-activate
+	    hot-spots-hook)
 
     (open rep
 	  rep.system
