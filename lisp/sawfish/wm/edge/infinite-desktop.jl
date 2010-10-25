@@ -20,7 +20,8 @@
 
 (define-structure sawfish.wm.edge.infinite-desktop
 
-    (export infinite-desktop-enable)
+    (export infinite-desktop-enable
+	    infinite-desktop-hook)
 
     (open rep
           rep.system
@@ -37,7 +38,7 @@
   (defgroup infinite-desktop "Infinite Desktop"
     :group workspace)
 
-  (defcustom infinite-desktop-p t
+  (defcustom infinite-desktop-p nil
     "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-flipping)."
     :group (workspace infinite-desktop)
     :after-set (lambda () (infinite-desktop-enable))
