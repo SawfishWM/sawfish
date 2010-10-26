@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-21 18:17+0200\n"
-"PO-Revision-Date: 2010-10-22 14:52+0200\n"
+"PO-Revision-Date: 2010-10-26 10:59+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -798,7 +798,7 @@ msgid ""
 msgstr ""
 "personalizar mapa de teclado del botón anterior\n"
 "\n"
-"De forma predeterminada un botón funcionará como su nombre indica. Botón1: "
+"De forma predeterminada un botón funcionará como su nombre indica. botón1: "
 "enviar ventana al escritorio anterior; botón2: lista de escritorios; botón3: "
 "enviar ventana al primer escritorio; botón6: mover ventana a la izquierda"
 
@@ -816,7 +816,7 @@ msgid ""
 msgstr ""
 "personalizar mapa de teclado del siguiente botón\n"
 "\n"
-"De forma predeterminada un botón funcionará como su nombre indica. Botón1: "
+"De forma predeterminada un botón funcionará como su nombre indica. botón1: "
 "enviar ventana al siguiente escritorio; botón2: lista de escritorios; "
 "botón3: enviar ventana al último escritorio; botón6: mover ventana a la "
 "derecha"
@@ -832,6 +832,11 @@ msgid ""
 "button1: send window to next workspace - button2 workspace-list - button3 "
 "send window to last workspace - button6 pack window right"
 msgstr ""
+"\n"
+"\n"
+"botón1: enviar la ventana al siguiente escritorio; botón2: lista de "
+"escritorios; botón3: enviar la ventana al último escritorio; botón6: mover "
+"ventana a la derecha"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -840,6 +845,11 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: start sawfish-"
 "config - button3: toggle custom title string"
 msgstr ""
+"personalizar el mapa de teclado del botón de configuración\n"
+"\n"
+"De forma predeterminada un botón funcionará como su nombre indica. botón1: "
+"lanzar la configuración de sawfish; botón3: cambiar la cadena de título "
+"personalizada"
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:configure-button-keymap"
@@ -851,6 +861,10 @@ msgid ""
 "\n"
 "Button1: start sawfish-config - button3: toggle custom title string"
 msgstr ""
+"\n"
+"\n"
+"botón1: lanzar la configuración de sawfish; botón3: cambiar la cadena de "
+"título personalizada"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -859,6 +873,11 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: window list - "
 "button3 window snooper (not included by default)"
 msgstr ""
+"personalizar el mapa de teclado del botón de información\n"
+"\n"
+"De forma predeterminada un botón funcionará como su nombre indica. botón1: "
+"lista de ventanas; botón3: investigador de ventanas (no incluido de forma "
+"predeterminada)"
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:info-button-keymap"
@@ -873,6 +892,12 @@ msgid ""
 "other windows, a negative value means below.  Keep it at a positive value in "
 "order to have the always-on-top button do it's job."
 msgstr ""
+"profundidad siempre encima (-1000 - 1000)\n"
+"\n"
+"Una ventana tendrá esta profundidad después de que pulse el botón siempre "
+"encima. 0 es el nivel de ventana normal. Cada valor positivo significa por "
+"encima de otras ventanas, un valor negativo significa por debajo. Mantenga "
+"un valor positivo para que el botón siempre encima funcione correctamente."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -881,6 +906,10 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: sets window "
 "depth to the adjusted value."
 msgstr ""
+"personalizar el mapa de teclado del botón de siempre encima\n"
+"\n"
+"De forma predeterminada un botón funcionará como su nombre indica. botón1: "
+"establece la profundidad de la ventana al valor configurado."
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:always-on-top-button-keymap"
@@ -893,6 +922,10 @@ msgid ""
 "By default a button will work as it's name suggests. Button1: lock window "
 "position"
 msgstr ""
+"personalizar el mapa de teclado de botón pegajoso\n"
+"\n"
+"De forma predeterminada un botón funciona como su nombre indica. botón1: "
+"bloquear la posición de la ventana"
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:lock-button-keymap"
@@ -1739,6 +1772,8 @@ msgstr "Saltar o ejecutar"
 #. ../lisp/sawfish/wm/commands/jump-or-exec.jl
 msgid "jump to a window matched by re, or start program otherwise."
 msgstr ""
+"saltar a una ventana coincidente con la exp. reg. o, de otra forma, iniciar "
+"un programa."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "External Applications"
@@ -1957,11 +1992,11 @@ msgstr "borde"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "grab"
-msgstr ""
+msgstr "agarre"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "border-grab"
-msgstr ""
+msgstr "agarre del borde"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "How to choose window edges when resizing."
@@ -3423,27 +3458,22 @@ msgid "In _group"
 msgstr "Poner en _grupo"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Workspace"
 msgid "_Workspace"
 msgstr "_Escritorio"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Send to previous workspace"
 msgid "Move to _Previous workspace"
 msgstr "Enviar al escritorio _anterior"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Send to next workspace"
 msgid "Move to _Next workspace"
 msgstr "Enviar al _siguiente escritorio"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Copy to previous workspace"
 msgid "Copy to P_revious workspace"
 msgstr "Copiar al escritorio a_nterior"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Copy to next workspace"
 msgid "Copy to Ne_xt workspace"
 msgstr "Copiar a sig_uiente escritorio"
 
@@ -4581,7 +4611,6 @@ msgid "Warping"
 msgstr "Deformación"
 
 #. ../lisp/sawfish/wm/windows.jl
-#| msgid "Offset (%) from window edges when warping pointer."
 msgid "Offset (percent) from window edges when warping pointer."
 msgstr ""
 "Desplazamiento (por ciento) desde los bordes de la ventana al deformar el "
