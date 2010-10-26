@@ -46,13 +46,13 @@
 ;; => application dolphin matched on it's WM_NAME 
 ;;  => will be iconified when key pressed while it's focused
 ;;  ( bind-keys global-keymap "Home" 
-;;    `( jump-or-exec "Dolphin" "dolphin ~" #:onfocused jump-or-exec-leave ) 
+;;    `( toggle-or-exec "Dolphin" "dolphin ~" ) 
 ;;
 ;; => application konsole matched on it's WM_CLASS
 ;;  => will be iconified when key pressed while it's focused
 ;;  => will also be iconified when the cursor leaves it
 ;;  ( bind-keys global-keymap "F12"
-;;    `( jump-or-exec "Konsole" "konsole" #:match-class t #:onfocused jump-or-exec-leave ) 
+;;    `( toggle-or-exec "Konsole" "konsole" #:match-class t ) 
 ;;
 ;;  ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
 ;;    '( ( iconify-on-leave .t ) ) )
@@ -60,7 +60,8 @@
 (define-structure sawfish.wm.commands.jump-or-exec
 
     (export jump-or-exec
-	    jump-or-exec-leave)
+	    jump-or-exec-leave
+	    toggle-or-exec)
 
     (open rep
           rep.system
@@ -98,6 +99,11 @@
   (define (jump-or-exec-leave)
     (let ((default-window-animator 'none))
       (iconify-window (input-focus))))
+
+  (define (toggle-or-exec re prog #!key match-class)
+    (if match-class
+        (jump-or-exec re prog #:match-class t #:onfocused jump-or-exec-leave)
+      (jump-or-exec re prog #:onfocused jump-or-exec-leave)))
 
   (define (jump-or-exec-hook)
     (if (and (not (eq (current-event-window) 'root)) ;; may error on startup else
