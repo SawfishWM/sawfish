@@ -108,11 +108,16 @@ left."
 
   (define (infinite-desktop-hook)
     "Called when a desktop flipper is triggered to shift the visible desktop."
-    (let ((edge (get-active-edge)))  
+    (let ((edge (get-active-edge)))
       (cond ((eq edge 'right) (infinite-desktop-move-right))
             ((eq edge 'left) (infinite-desktop-move-left))
             ((eq edge 'bottom) (infinite-desktop-move-bottom))
             ((eq edge 'top) (infinite-desktop-move-top)))))
+
+  (define (infinite-desktop-while-moving w)
+    (declare (unused w))
+    (if infinite-desktop-p
+        (infinite-desktop-hook)))
 
   (define (infinite-desktop-enable)
     "Turn on infinite-desktop if `infinite-desktop-p' is true."
@@ -120,9 +125,13 @@ left."
         (progn
 	  (unless (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
             (add-hook 'enter-flipper-hook infinite-desktop-hook))
+	  (unless (in-hook-p 'while-moving-hook infinite-desktop-while-moving)
+	    (add-hook 'while-moving-hook infinite-desktop-while-moving))
 	  (flippers-activate t))
       (if (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
 	(remove-hook 'enter-flipper-hook infinite-desktop-hook)
+      (if (in-hook-p 'while-moving-hook infinite-desktop-while-moving)
+	(remove-hook 'while-moving-hook infinite-desktop-while-moving))
       (flippers-activate nil))))
 
 (unless batch-mode
