@@ -46,7 +46,7 @@ access git repository.)
 
 @item Poweroff-menu fix [Teika Kazura, Christopher Bratusek]
 
-In Sawfish-1.7.0, poweroff related items in the popup menu couldn't be
+Poweroff related items in the popup menu couldn't be
 invoked, if run without any desktop environment. Fixed it.
 
 @item Correctly build SawfishPager [Christopher Bratusek]
@@ -73,11 +73,11 @@ second press while the cursor is in the window. Optionally the window can also b
 leaves it.)
 
 @item @code{iconify-on-leave} window-matcher [Christopher Bratusek]
-This window-matcher is used by @code{toggle-or-exec} to determin whether a window which the cursor
+This window-matcher is used by @code{toggle-or-exec} to determine whether a window which the cursor
 left needs to be iconified or not.
 
 @end itemize
-@item Grand Edge-Actions rework [Christopher Bratusek]
+@item Major Edge-Actions rework [Christopher Bratusek]
 @itemize @minus
 @item Module restructureing:
 @itemize +
@@ -87,11 +87,13 @@ left needs to be iconified or not.
 @end itemize
 
 @item Edge-Utils
+
 The new module @code{sawfish.wm.edge.util} has been added. It contains helper functions for
 Hot-Spots and Infinite-Desktop, which help to drop their requirement on Edge-Flip to be active.
 Functions are @code{flippers-activate}, @code{get-active-corner} and @code{get-active-edge}.
 
 @item Hot-Spots added
+
 Hot-Spots brings the concept of sensitive spots of edges to Sawfish. 8 spots are defined (the 4
 corners and the 4 sides). The size of the corner hot-spots and the delay can be adjusted. This
 allows you -for example- to start a given application by hitting the top-left corner with the cursor.
