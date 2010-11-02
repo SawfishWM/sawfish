@@ -24,6 +24,7 @@
 
     (open rep
 	  rep.system
+	  rep.io.timers
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom
@@ -86,13 +87,21 @@
 	  (hot-spot-activate corner)
 	(setq func nil)
 	(cond ((eq edge 'left)
-	       (edge-action-call left-edge-func edge))
+	       (make-timer (lambda () (edge-action-call left-edge-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))
 	      ((eq edge 'right)
-               (edge-action-call right-edge-func edge))
+               (make-timer (lambda () (edge-action-call right-edge-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))
 	      ((eq edge 'top)
-	       (edge-action-call top-edge-func edge))
+	       (make-timer (lambda () (edge-action-call top-edge-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))
 	      ((eq edge 'bottom)
-	       (edge-action-call bottom-edge-func edge))))))
+	       (make-timer (lambda () (edge-action-call bottom-edge-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))))))
 
   (define (edges-activate)
     (if edge-actions-enabled
