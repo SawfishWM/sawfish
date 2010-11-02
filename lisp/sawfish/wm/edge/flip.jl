@@ -32,19 +32,11 @@
 	  sawfish.wm.viewport
 	  sawfish.wm.workspace
 	  sawfish.wm.commands.move-resize
-	  sawfish.wm.ext.workspace-grid
-	  sawfish.wm.edge.flippers
-	  sawfish.wm.edge.util)
+	  sawfish.wm.ext.workspace-grid)
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
   (define ef-current-edge nil)
-
-  (defvar before-edge-flip-hook '()
-    "Hook called immediately before edge-flipping.")
-
-  (defvar after-edge-flip-hook '()
-    "Hook called immediately after edge-flipping.")
 
   (define (edge-flip-activate edge type)
     (let ((ptr (query-pointer t)))

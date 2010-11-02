@@ -1,6 +1,6 @@
-;; edge-util.jl -- common utils for EdgeFlip/InfiniteDesktop/HotSpots
+;; edge-util.jl -- common utils for EdgeActions
 
-;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 
 ;; This file is part of sawfish.
 
@@ -47,13 +47,11 @@
       (if (in-hook-p 'randr-change-notify-hook recreate-flippers)
 	(remove-hook 'randr-change-notify-hook recreate-flippers))))
 
-  (defgroup hot-spot "Hot Spots" :group workspace)
-
   (defcustom hot-spots-area 50
     "Lenght in px (in both x and y direction) wich is used as hot-spots-area."
     :type number
     :range (5 . 500)
-    :group (workspace hot-spot))
+    :group edge-actions)
 
    (define (get-active-corner)
     (let ((cursor-x (car (query-pointer)))

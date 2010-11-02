@@ -27,32 +27,24 @@
           sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.commands.move-cursor
-          sawfish.wm.viewport
-          sawfish.wm.util.prompt
-          sawfish.wm.edge.flippers
-	  sawfish.wm.edge.util)
+          sawfish.wm.viewport)
 
-  (define-structure-alias infinite-desktop sawfish.wm.edge.infinite-desktop)
-
-  (defgroup infinite-desktop "Infinite Desktop" :group workspace)
-
-  (defcustom infinite-desktop-move-distance 64
-    "Amount to move the viewport when the pointer hits the screen edge."
-    :group (workspace infinite-desktop)
+  (defcustom viewport-drag-distance 64
+    "Amount to drag the viewport when the pointer hits the screen edge."
+    :group edge-actions
     :type number
     :range (1 . nil))
 
-  (defcustom infinite-desktop-move-cursor-distance 32
-    "Amount to pull back the cursor after moving the viewport."
-    :group (workspace infinite-desktop)
+  (defcustom viewport-drag-cursor-distance 32
+    "Amount to pull back the cursor after dragging the viewport."
+    :group edge-actions
     :type number
     :range (1 . nil))
 
-  (define (infinite-desktop-move-right)
-    "Shifts the viewport `infinite-desktop-move-distance' pixels to the
-right."
-    (let ((dist infinite-desktop-move-distance)
-          (cdist infinite-desktop-move-cursor-distance)
+  (define (viewport-drag-right)
+    "Shifts the viewport `viewport-drag-distance' pixels to the right."
+    (let ((dist viewport-drag-distance)
+          (cdist viewport-drag-cursor-distance)
           (maxx (* (screen-width) (1- (car viewport-dimensions)))))
       (if
           (and (viewport-honor-workspace-edges)
@@ -61,11 +53,10 @@ right."
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
       (move-cursor (- (min dist cdist)) 0)))
 
-  (define (infinite-desktop-move-left)
-    "Shifts the viewport `infinite-desktop-move-distance' pixels to the
-left."
-    (let ((dist (- infinite-desktop-move-distance))
-          (cdist (- infinite-desktop-move-cursor-distance))
+  (define (viewport-drag-left)
+    "Shifts the viewport `viewport-drag-distance' pixels to the left."
+    (let ((dist (- viewport-drag-distance))
+          (cdist (- viewport-drag-cursor-distance))
           (minx 0))
       (if
           (and (viewport-honor-workspace-edges)
@@ -74,10 +65,10 @@ left."
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
       (move-cursor (- (max dist cdist)) 0)))
 
-  (define (infinite-desktop-move-top)
-    "Shifts the viewport `infinite-desktop-move-distance' pixels up."
-    (let ((dist (- infinite-desktop-move-distance))
-          (cdist (- infinite-desktop-move-cursor-distance))
+  (define (viewport-drag-top)
+    "Shifts the viewport `viewport-drag-distance' pixels up."
+    (let ((dist (- viewport-drag-distance))
+          (cdist (- viewport-drag-cursor-distance))
           (miny 0))
       (if
           (and (viewport-honor-workspace-edges)
@@ -86,10 +77,10 @@ left."
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (max dist cdist)))))
 
-  (define (infinite-desktop-move-bottom)
-    "Shifts the viewport `infinite-desktop-move-distance' pixels down."
-    (let ((dist infinite-desktop-move-distance)
-          (cdist infinite-desktop-move-cursor-distance)
+  (define (viewport-drag-bottom)
+    "Shifts the viewport `viewport-drag-distance' pixels down."
+    (let ((dist viewport-drag-distance)
+          (cdist viewport-drag-cursor-distance)
           (maxy (* (screen-height) (1- (cdr viewport-dimensions)))))
       (if
           (and (viewport-honor-workspace-edges)
@@ -98,10 +89,10 @@ left."
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (min dist cdist)))))
 
-  (define (infinite-desktop-activate)
+  (define (infinite-desktop-activate edge)
     "Called when a desktop flipper is triggered to shift the visible desktop."
-    (let ((edge (get-active-edge)))
-      (cond ((eq edge 'right) (infinite-desktop-move-right))
-            ((eq edge 'left) (infinite-desktop-move-left))
-            ((eq edge 'bottom) (infinite-desktop-move-bottom))
-            ((eq edge 'top) (infinite-desktop-move-top))))))
+    (case edge
+      ((left) (viewport-drag-left))
+      ((top) (viewport-drag-top))
+      ((right) (viewport-drag-right))
+      ((bottom) (viewport-drag-bottom)))))
