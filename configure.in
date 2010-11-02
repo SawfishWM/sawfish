@@ -29,9 +29,9 @@ AM_PROG_LIBTOOL
 #IT_PROG_INTLTOOL([0.40.0])
 
 dnl Release versioning info
-version="2.90.0"
+version="1.8.0"
 subversion=""
-codename="Excelsior"
+codename="Unity Without Words"
 
 VERSION=${version}
 
@@ -474,20 +474,12 @@ echo "
 
   font loader:	$FONT_LOADER
 
-  == == == == == == == == == == == == =="
-
-tput setaf 1 && echo "
-  == == == == == == == == == == == == ==
-  
-  !This version of Sawfish is unstable!
-
   == == == == == == == == == == == == ==
 
      Be sure to read README.IMPORTANT!
 
   == == == == == == == == == == == == ==
   "
-tput sgr0
 
 dnl If it doesn't look like GNU Make is being used, give a friendly warning
 tem=`make --version -f /dev/null 2>&1 | grep GNU`
