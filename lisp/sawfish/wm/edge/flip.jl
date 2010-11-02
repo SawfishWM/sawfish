@@ -20,8 +20,7 @@
 
 (define-structure sawfish.wm.edge.flip
 
-    (export edge-flip-enable
-	    edge-flip-enter)
+    (export edge-flip-activate)
 
     (open rep
 	  rep.system
@@ -39,39 +38,7 @@
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
-  (defgroup edge-flip "Edge Flipping"
-    :group workspace
-    :require sawfish.wm.edge.flip)
-
-  (defcustom edge-flip-enabled nil
-    "Select the next desktop when the pointer hits screen edge."
-    :type boolean
-    :require sawfish.wm.edge.flip
-    :group (workspace edge-flip)
-    :after-set (lambda () (edge-flip-enable)))
-
-  (defcustom edge-flip-type 'workspace
-    "Hitting the screen edge selects the next: \\w"
-    :type (choice viewport workspace)
-    :depends edge-flip-enabled
-    :group (workspace edge-flip))
-
-  (defcustom edge-flip-only-when-moving nil
-    "Only flip when interactively moving a window."
-    :type boolean
-    :depends edge-flip-enabled
-    :group (workspace edge-flip)
-    :after-set (lambda () (edge-flip-enable)))
-
-  (defcustom edge-flip-delay 250
-    "Milliseconds to delay before edge flipping."
-    :type number
-    :depends edge-flip-enabled
-    :group (workspace edge-flip)
-    :after-set (lambda () (edge-flip-enable)))
-
   (define ef-current-edge nil)
-  (define ef-timer nil)
 
   (defvar before-edge-flip-hook '()
     "Hook called immediately before edge-flipping.")
@@ -79,57 +46,10 @@
   (defvar after-edge-flip-hook '()
     "Hook called immediately after edge-flipping.")
 
-  (define (edge-flip-enable)
-    (if (and edge-flip-enabled (not edge-flip-only-when-moving))
-	(progn
-	  (flippers-activate t)
-	  ;; XXX split all that stuff from edge-flip, so that
-	  ;; XXX HS and ID work, even if EF is disabled
-	  (unless (in-hook-p 'before-edge-lip-hook before-flip)
-	    (add-hook 'before-edge-flip-hook before-flip))
-	  (unless (in-hook-p 'after-edge-flip-hook after-flip)
-	    (add-hook 'after-edge-flip-hook after-flip))
-	  (unless (in-hook-p 'while-moving-hook edge-flip-while-moving)
-	    (add-hook 'while-moving-hook edge-flip-while-moving))
-	  (unless (in-hook-p 'enter-flipper-hook edge-flip-enter)
-	    (add-hook 'enter-flipper-hook edge-flip-enter))
-	  (unless (in-hook-p 'leave-flipper-hook edge-flip-leave)
-	    (add-hook 'leave-flipper-hook edge-flip-leave)))
-      (flippers-activate nil)
-      (if (in-hook-p 'before-edge-lip-hook before-flip)
-	(remove-hook 'before-edge-flip-hook before-flip))
-      (if (in-hook-p 'after-edge-flip-hook after-flip)
-	(remove-hook 'after-edge-flip-hook after-flip))
-      (if (in-hook-p 'while-moving-hook edge-flip-while-moving)
-	(remove-hook 'while-moving-hook edge-flip-while-moving))
-      (if (in-hook-p 'enter-flipper-hook edge-flip-enter)
-	(remove-hook 'enter-flipper-hook edge-flip-enter))
-      (if (in-hook-p 'leave-flipper-hook edge-flip-leave)
-	(remove-hook 'leave-flipper-hook edge-flip-leave))))
-
-  (define (edge-flip-enter edge)
-    (if (<= edge-flip-delay 0)
-	(edge-flip-for-edge edge)
-      (setq ef-current-edge edge)
-      (if ef-timer
-	  (set-timer ef-timer)
-	(setq ef-timer (make-timer (lambda ()
-				     (setq ef-timer nil)
-				     (edge-flip-for-edge ef-current-edge))
-				   (quotient edge-flip-delay 1000)
-				   (mod edge-flip-delay 1000))))))
-
-  (define (edge-flip-leave edge)
-    (declare (unused edge))
-    (setq ef-current-edge nil)
-    (when ef-timer
-      (delete-timer ef-timer)
-      (setq ef-timer nil)))
-
-  (define (edge-flip-for-edge edge)
+  (define (edge-flip-activate edge type)
     (let ((ptr (query-pointer t)))
-      (call-hook 'before-edge-flip-hook)
-      (if (eq edge-flip-type 'viewport)
+      (before-flip)
+      (if (eq type 'viewport)
 	  (progn
 	    (cond ((eq edge 'left)
 		   (when (move-viewport -1 0)
@@ -160,31 +80,10 @@
 		 (rplacd ptr 1)))
 	  (unless (= current-workspace orig)
 	    (warp-cursor (car ptr) (cdr ptr)))))
-      (call-hook 'after-edge-flip-hook)))
-
-  ;; this is a hack -- while the pointer's grabbed the flipper windows
-  ;; won't get enter/leave notify events (this is normally the right
-  ;; thing to do), so synthesize them ourselves while interactively
-  ;; moving windows
-  ;; XXX this probably doesn't handle the screen corners correctly
-  (define (edge-flip-synthesize)
-    (when edge-flip-enabled
-      (let ((ptr (query-pointer))
-	    edge)
-	(cond ((zerop (car ptr))
-	       (setq edge 'left))
-	      ((= (car ptr) (1- (screen-width)))
-	       (setq edge 'right))
-	      ((zerop (cdr ptr))
-	       (setq edge 'top))
-	      ((= (cdr ptr) (1- (screen-height)))
-	       (setq edge 'bottom)))
-	(unless (eq edge ef-current-edge)
-	  (if edge
-	      (call-hook 'enter-flipper-hook (list edge))
-	    (call-hook 'leave-flipper-hook (list ef-current-edge)))))))
+      (after-flip type)))
 
 ;;; ugly hacks to make flipping work while dragging windows
+
 ;;; XXX xrefresh() to fix rubberband-traces? maybe a user-option
 ;;; XXX whether to do so? We'll see...
 
@@ -195,18 +94,10 @@
     (when move-resize-window
       (setq original-space current-workspace)))
 
-  (define (after-flip)
+  (define (after-flip type)
     (let ((w move-resize-window))
       (when w
-	(when (and (eq edge-flip-type 'workspace)
+	(when (and (eq type 'workspace)
 		   (/= original-space current-workspace)
 		   (not (window-get w 'sticky)))
-	  (move-window-to-workspace w original-space current-workspace t)))))
-
-  (define (edge-flip-while-moving w)
-    (declare (unused w))
-    (when edge-flip-enabled
-      (edge-flip-synthesize)))
-
-(unless batch-mode
-  (edge-flip-enable)))
+	  (move-window-to-workspace w original-space current-workspace t))))))

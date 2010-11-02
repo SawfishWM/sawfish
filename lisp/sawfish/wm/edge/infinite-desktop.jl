@@ -20,8 +20,7 @@
 
 (define-structure sawfish.wm.edge.infinite-desktop
 
-    (export infinite-desktop-enable
-	    infinite-desktop-hook)
+    (export infinite-desktop-activate)
 
     (open rep
           rep.system
@@ -35,14 +34,7 @@
 
   (define-structure-alias infinite-desktop sawfish.wm.edge.infinite-desktop)
 
-  (defgroup infinite-desktop "Infinite Desktop"
-    :group workspace)
-
-  (defcustom infinite-desktop-p nil
-    "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-flipping)."
-    :group (workspace infinite-desktop)
-    :after-set (lambda () (infinite-desktop-enable))
-    :type boolean)
+  (defgroup infinite-desktop "Infinite Desktop" :group workspace)
 
   (defcustom infinite-desktop-move-distance 64
     "Amount to move the viewport when the pointer hits the screen edge."
@@ -106,33 +98,10 @@ left."
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (min dist cdist)))))
 
-  (define (infinite-desktop-hook)
+  (define (infinite-desktop-activate)
     "Called when a desktop flipper is triggered to shift the visible desktop."
     (let ((edge (get-active-edge)))
       (cond ((eq edge 'right) (infinite-desktop-move-right))
             ((eq edge 'left) (infinite-desktop-move-left))
             ((eq edge 'bottom) (infinite-desktop-move-bottom))
-            ((eq edge 'top) (infinite-desktop-move-top)))))
-
-  (define (infinite-desktop-while-moving w)
-    (declare (unused w))
-    (if infinite-desktop-p
-        (infinite-desktop-hook)))
-
-  (define (infinite-desktop-enable)
-    "Turn on infinite-desktop if `infinite-desktop-p' is true."
-    (if infinite-desktop-p
-        (progn
-	  (unless (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
-            (add-hook 'enter-flipper-hook infinite-desktop-hook))
-	  (unless (in-hook-p 'while-moving-hook infinite-desktop-while-moving)
-	    (add-hook 'while-moving-hook infinite-desktop-while-moving))
-	  (flippers-activate t))
-      (if (in-hook-p 'enter-flipper-hook infinite-desktop-hook)
-	(remove-hook 'enter-flipper-hook infinite-desktop-hook)
-      (if (in-hook-p 'while-moving-hook infinite-desktop-while-moving)
-	(remove-hook 'while-moving-hook infinite-desktop-while-moving))
-      (flippers-activate nil))))
-
-(unless batch-mode
-  (infinite-desktop-enable)))
+            ((eq edge 'top) (infinite-desktop-move-top))))))
