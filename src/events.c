@@ -1727,6 +1727,8 @@ the server, otherwise it's taken from the current event (if possible).
 	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
 			 &x, &y, &tmp, &tmp, &tmpu))
 	{
+            if (debug_events & DB_EVENTS_MISC)
+                DB (("query-pointer: XQueryPointer: %d, %d\n", x, y));
 	    record_mouse_position (x, y, -1, 0);
 	}
     }
