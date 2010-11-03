@@ -792,8 +792,10 @@ map_request (XEvent *ev)
 					     Quniconify_window), rep_VAL(w));
     }
 
-    if (!w->client_unmapped)
+    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w))
+    {
 	XMapWindow (dpy, w->id);
+    }
 
     if (w->visible)
 	XMapWindow (dpy, w->frame);
