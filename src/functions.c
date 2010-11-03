@@ -527,9 +527,10 @@ ungrab-keyboard
 Release the grab on the keyboard.
 ::end:: */
 {
-    DB(("ungrab-keyboard: time=%lu\n", last_event_time));
-    XUngrabKeyboard (dpy, last_event_time);
-    return Qt;
+   int status;
+   DB(("ungrab-keyboard: time=%lu\n", last_event_time));
+   status = XUngrabKeyboard (dpy, last_event_time);
+   return (status == Success)? Qt : Qnil; /* fixme: should be an exception! */
 }
 
 DEFUN("screen-width", Fscreen_width, Sscreen_width, (void), rep_Subr0) /*
