@@ -338,9 +338,11 @@ remove_window_frame (Lisp_Window *w, bool restack)
 
 	if (queued_focus_id == w->frame)
 	    queued_focus_id = w->id;
-
 	if (!w->mapped)
 	    XRemoveFromSaveSet (dpy, w->id);
+    } else {
+        if (debug_windows & DB_WINDOWS_FRAME)
+            DB (("%s: window is gone, or reparented outside, doing nothing\n", __FUNCTION__));
     }
 }
 
