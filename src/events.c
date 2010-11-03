@@ -1215,6 +1215,12 @@ gravity_notify (XEvent *ev)
         {
             if (fp->drawn.x != x->x || fp->drawn.y != x->y)
             {
+                if (frame_part_traced(fp) ||  debug_frames & DB_FRAMES_PARTS_CHANGE)
+                    DB(("%s: (serial %d) %s: %s %d %d was at: %d %d\n", __FUNCTION__,
+                        x->serial,
+                        frame_part_name(fp),
+                        rep_STR(rep_SYM(gravity_map[fp->gravity])->name),
+                        x->x, x->y, fp->drawn.x, fp->drawn.y));
                 fp->drawn.x = x->x;
                 fp->drawn.y = x->y;
             }
