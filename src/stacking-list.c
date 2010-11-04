@@ -212,3 +212,9 @@ make_stacking_list (void)
 	out = Fcons (rep_VAL (ptr), out);
     return out;
 }
+
+Lisp_Window*
+bottom_window()
+{
+   return  lowest_window;
+}
