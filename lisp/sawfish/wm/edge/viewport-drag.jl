@@ -1,6 +1,7 @@
-;; infinite-desktop.jl -- Smooth viewport motion with mouse
+;; viewport-drag.jl -- Smooth viewport motion with mouse
 
 ;; Copyright (C) 2008 David T. McWherter <udmcwher@mcs.drexel.edu>
+;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freent.de>
 
 ;; This file is part of sawfish.
 
@@ -18,9 +19,9 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.edge.infinite-desktop
+(define-structure sawfish.wm.edge.viewport-drag
 
-    (export infinite-desktop-activate)
+    (export viewport-drag-activate)
 
     (open rep
           rep.system
@@ -28,6 +29,8 @@
           sawfish.wm.custom
           sawfish.wm.commands.move-cursor
           sawfish.wm.viewport)
+
+  (define-structure-alias viewport-drag sawfish.wm.edge.viewport-drag)
 
   (defcustom viewport-drag-distance 64
     "Amount to drag the viewport when the pointer hits the screen edge."
@@ -89,7 +92,7 @@
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
       (move-cursor 0 (- (min dist cdist)))))
 
-  (define (infinite-desktop-activate edge)
+  (define (viewport-drag-activate edge)
     "Called when a desktop flipper is triggered to shift the visible desktop."
     (case edge
       ((left) (viewport-drag-left))
