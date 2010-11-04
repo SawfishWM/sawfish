@@ -221,9 +221,9 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
     (raise-window w))
 
   (define (raise-tabs-on-hover-setter)
-    (if (eq tab-raise-on-hover 't)
+    (if tab-raise-on-hover
         (add-hook 'enter-frame-part-hook raise-tabs-on-hover-action)
-      (when (add-hook 'enter-frame-part-hook raise-tabs-on-hover-action)
+      (when (in-hook-p 'enter-frame-part-hook raise-tabs-on-hover-action)
         (remove-hook 'enter-frame-part-hook raise-tabs-on-hover-action))))
 
   (define (focus-click)
