@@ -659,6 +659,12 @@ generate.")
   (define-frame-class 'title `((keymap . title-keymap)
 			       (cursor . ,(cursor-for-frame-part 'title))))
 
+  (define-frame-class 'tabbar-horizontal `((keymap . tabbar-keymap)
+			       (cursor . ,(cursor-for-frame-part 'title))))
+
+  (define-frame-class 'tabbar-vertical `((keymap . tabbar-keymap)
+			       (cursor . ,(cursor-for-frame-part 'title))))
+
   (mapc (lambda (x)
 	  (define-frame-class x `((cursor . ,(cursor-for-frame-part x))
 				  (keymap . border-keymap))))

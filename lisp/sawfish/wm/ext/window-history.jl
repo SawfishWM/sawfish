@@ -74,7 +74,7 @@
   ;; list of states in window-state-change-hook that should be tracked
   (defvar window-history-states '(sticky ignored never-focus type maximized
                                          frame-style cycle-skip
-                                         window-list-skip))
+                                         window-list-skip title-position))
 
   ;; property matched on
   (defvar window-history-key-property '(WM_CLASS WM_WINDOW_ROLE))

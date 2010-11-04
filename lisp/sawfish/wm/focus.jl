@@ -23,11 +23,12 @@
     (export define-focus-mode
 	    autoload-focus-mode
 	    focus-mode
+        raise-tabs-on-hover-setter
 	    set-focus-mode
 	    focus-push-map
 	    focus-pop-map
 	    warp-pointer-if-necessary
-            focus-revert
+        focus-revert
 	    focus-within-click-event)
 
     (open rep
@@ -50,6 +51,12 @@
     :group focus
     :before-set (lambda () (focus-mode-changed 'before))
     :after-set (lambda () (focus-mode-changed 'after)))
+
+  (defcustom tab-raise-on-hover nil
+    "Raise tabs on hover"
+    :group focus
+    :type boolean
+    :after-set (lambda () (raise-tabs-on-hover-setter)))
 
   (defcustom focus-click-through t
     "Click-to-focus mode passes the click through to the application."
@@ -208,6 +215,16 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
          (when (or (null w)
                    (window-really-wants-input-p w))
            (set-input-focus w))))))
+
+  (define (raise-tabs-on-hover-action w)
+    (require 'sawfish.wm.stacking)
+    (raise-window w))
+
+  (define (raise-tabs-on-hover-setter)
+    (if (eq tab-raise-on-hover 't)
+        (add-hook 'enter-frame-part-hook raise-tabs-on-hover-action)
+      (when (add-hook 'enter-frame-part-hook raise-tabs-on-hover-action)
+        (remove-hook 'enter-frame-part-hook raise-tabs-on-hover-action))))
 
   (define (focus-click)
     (let ((w (current-event-window))
