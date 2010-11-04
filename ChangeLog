@@ -1,3 +1,45 @@
+2010-11-04  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/edge/infinite-desktop
+	* lisp/sawfish/wm/edge/viewport-drag.jl: renamed module (and remaining functions)
+						 added structure-alias
+
+	* lisp/sawfish/wm/edge/actions.jl: updated for above change
+
+	* lisp/sawfish/wm/tabs/util.jl: removed => check new tabs-ng branch
+
+2010-11-02  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/edge/flip.jl: removed all defcustoms
+					removed now unused variables
+					removed most functions (only before-flip, after-flip
+					and edge-flip-activate remain)
+					changed the way it's activated
+					removed the delay timer
+
+	* lisp/sawfish/wm/edge/hot-spots.jl: removed all defcustoms
+					     renamed hot-spot-call to hot-spot-activate
+					     removed hot-spot-hook function
+					     changed the way it's activated
+					     removed the delay timer
+
+	* lisp/sawfish/wm/edge/infinite-desktop.jl: removed most defcustoms (only for distances are
+	left and moved from "Edge Flip/Infinite Desktop" to "Edge Actions" group in SawfishConfig)
+						    began to rename to viewport-drag
+						    removed infinite-desktop-enable
+						    renamed infinite-desktop-hook to infinite-desktop-activate
+						    changed the way it's activated
+
+	* lisp/sawfish/wm/edge/actions.jl: added edge-actions (unified edge-flip, hot-spots and
+	viewport-drag (ex infinite-desktop)). Each edge can now have a different action. Currently
+	there are: - hot-spot
+		   - flip-workspace
+		   - flip-viewport
+		   - viewort-drag
+		   - none
+	corners are preserved to hot-spot. edge-action is also responsible for properly activating
+	the eges and adding the required hooks to make flip and viewpor-drag work while moving a window
+	too. Now only one timer is being used to delay the activation (same for all actions now).
+	All configuration options now reside in the "Edge Actions" group in SawfishConfig.
+
 2010-10-28  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/edge/infinite-desktop.jl: make infinite-desktop work while moving a window
 

@@ -1,6 +1,7 @@
 ;; edge-flip.jl -- move viewports by pushing pointer against screen edges
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
+;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 
 ;; This file is part of sawfish.
 
