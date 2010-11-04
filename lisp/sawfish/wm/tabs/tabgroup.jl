@@ -287,7 +287,7 @@
       (make-group-unsticky w)))
 
   (unless batch-mode
-    (add-hook 'focus-in-hook raise-tab-group)
+    ;(add-hook 'focus-in-hook raise-tab-group)
     (add-hook 'window-state-change-hook
               (lambda (win args)
                 (if (= '(sticky) args)
