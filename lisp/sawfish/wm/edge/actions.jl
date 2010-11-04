@@ -31,7 +31,7 @@
 	  sawfish.wm.edge.util
 	  sawfish.wm.edge.flip
 	  sawfish.wm.edge.hot-spots
-	  sawfish.wm.edge.infinite-desktop)
+	  sawfish.wm.edge.viewport-drag)
 
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
 
@@ -74,7 +74,7 @@
       ((hot-spot)
        (hot-spot-activate edge))
       ((viewport-drag)
-       (infinite-desktop-activate edge))
+       (viewport-drag-activate edge))
       ((flip-workspace)
        (edge-flip-activate edge 'workspace))
       ((flip-viewport)
