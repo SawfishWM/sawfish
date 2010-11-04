@@ -325,16 +325,18 @@ specified by the user."
     (call-window-hook 'activate-window-hook w))
 
 ;;; resizing windows in accordance with their size hints
+  (define (aget x y)
+    (cdr (assq x y)))
 
   (define (constrain-dimension-to-hints x dimension hints)
-    (let ((base (cdr (assq (if (eq dimension 'x)
-			       'base-width 'base-height) hints)))
-	  (minimum (cdr (assq (if (eq dimension 'x)
-				  'min-width 'min-height) hints)))
-	  (maximum (or (cdr (assq (if (eq dimension 'x)
-				      'max-width 'max-height) hints)) 65535))
-	  (inc (or (cdr (assq (if (eq dimension 'x)
-				  'width-inc 'height-inc) hints)) 1)))
+    (let ((base (aget (if (eq dimension 'x)
+                               'base-width 'base-height) hints))
+          (minimum (aget (if (eq dimension 'x)
+                                  'min-width 'min-height) hints))
+          (maximum (or (aget (if (eq dimension 'x)
+                                 'max-width 'max-height) hints) 65535))
+          (inc (or (aget (if (eq dimension 'x)
+                             'width-inc 'height-inc) hints) 1)))
       (let ((bottom (or base minimum 1)))
 	(unless (= (mod (- x bottom) inc) 0)
 	  (setq x (inexact->exact
@@ -381,7 +383,7 @@ use. Otherwise (window-size-hints W) is used."
 
   (define (window-gravity w #!optional hints)
     (or (window-get w 'gravity)
-	(cdr (assq 'window-gravity (or hints (window-size-hints w))))
+        (aget 'window-gravity (or hints (window-size-hints w)))
 	;; default gravity is NorthWest (from ICCCM)
 	'north-west))
 
