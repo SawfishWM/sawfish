@@ -133,8 +133,7 @@
            (margin-l (nth 2 (get-tab-pos win)))
            (dim-y (nth 1 (get-tab-pos win))))
       (when (> dim-y margin-l) ;; don't display outside from frame
-        ;; use double size for icon support 
-        (+ top margin-l (- (* tabbar-right-dec-width 2))))))
+        (+ top margin-l (- tabbar-right-dec-width)))))
 
   (define (tab-title-left-edge win)
     "Compute left edge of tab by horizontal titlebar themes"
