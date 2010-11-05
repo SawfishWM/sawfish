@@ -174,6 +174,7 @@ the command is found in the list of keymaps KEYMAPS."
 			 (throw 'read-event (current-event))))))
 	     (display-message (or prompt (_ "Press key...")))
 	     (catch 'read-event
+	       (allow-events 'sync-keyboard)
 	       (recursive-edit)))
 	 (display-message nil)))))
 
@@ -187,8 +188,7 @@ any window manager bindings that it may have."
 				      (if (eq 'key (car ev))
 					  (progn
 					    (allow-events 'replay-keyboard)
-					    (throw 'quote-event))
-					(allow-events 'sync-keyboard)))))))
+					    (throw 'quote-event))))))))
       ;; grab on the client window, so that the events get replayed
       ;; to that window, not to our frame (thus avoiding any passive
       ;; grabs on the window)
