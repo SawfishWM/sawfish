@@ -82,6 +82,21 @@ prepend_to_age_list (pixmap_cache_node *n)
 	newest = n;
 }
 
+/* Symmetric case: add NODE as the Newest node (in the doubly linked list). */
+static void
+append_to_age_list (pixmap_cache_node *node)
+{
+    node->older = newest;          /* Oldest, because appending */
+    if (node->older != 0)
+	node->older->newer = node;
+    newest = node;
+
+    node->newer = 0;
+    if (oldest == 0)
+	oldest = node;
+}
+
+/* 1  chain per file!  */
 static void
 remove_from_image (pixmap_cache_node *n)
 {
@@ -142,7 +157,7 @@ pixmap_cache_ref (Lisp_Image *im, int width, int height,
 	    remove_from_image (n);
 	    prepend_to_image (n);
 	    remove_from_age_list (n);
-	    prepend_to_age_list (n);
+            append_to_age_list (n);
 	    n->ref_count++;
 	    *p1 = n->p1;
 	    *p2 = n->p2;
@@ -204,7 +219,7 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
     n->ref_count = 1;
 
     prepend_to_image (n);
-    prepend_to_age_list (n);
+    append_to_age_list (n);
     cached_pixels += pixel_count;
 }
 
