@@ -844,10 +844,14 @@ unmap_notify (XEvent *ev)
             {
                 if (w->visible)
                 {
+                    if ((debug_events & DB_EVENTS_UNMAP) || debug_frames) /* || debug_frames ?  */
+                        DB(("XUnmapWindow of the frame %x\n", w->frame));
                     XUnmapWindow (dpy, w->frame);
                     w->visible = FALSE;
                     reset_frame_parts (w);
                 }
+                if (debug_events & DB_EVENTS_UNMAP)
+                    DB (("%s: reparented, so: destroying the frame as well", __FUNCTION__));
                 /* Removing the frame reparents the client window back to
                    the root. This means that we receive the next MapRequest
                    for the window. */
@@ -864,6 +868,8 @@ unmap_notify (XEvent *ev)
                     after_local_map (w);
                 }
             }
+            if (debug_events  & DB_EVENTS_UNMAP)
+                DB (("+%s: calling unmap-notify-hook\n", __FUNCTION__));
             Fcall_window_hook (Qunmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
             /* This lets the client know that we are done, in case it wants
