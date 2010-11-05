@@ -1128,9 +1128,14 @@ static void
 focus_out (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
+    if (debug_events  & DB_EVENTS_FOCUS)
+        describe_focus_out(ev,w);
+
     if (ev->xfocus.detail == NotifyPointer
         || ev->xfocus.mode == NotifyGrab || ev->xfocus.mode == NotifyUngrab)
     {
+        if (debug_events & DB_EVENTS_FOCUS)
+            DB(("%s disregarding....it's a grab!\n", __FUNCTION__));
 	return;
     }
     if (w)
@@ -1154,11 +1159,16 @@ focus_out (XEvent *ev)
                 if ((ev->xfocus.mode == NotifyNormal)
                     || (ev->xfocus.mode == NotifyWhileGrabbed))
                 {
+                    if (debug_events & DB_EVENTS_FOCUS)
+                        DB (("%s C varible <focus_window> is thus 0. until the next focus_in event\n",
+                             __FUNCTION__));
                     focus_window = 0;
                 }
                 report_focus_change (w);
 
 
+                if (debug_events  & DB_EVENTS_FOCUS)
+                    DB (("%s->Qfocus_out_hook\n", __FUNCTION__));
                 Fcall_window_hook (Qfocus_out_hook, rep_VAL(w),
                                    rep_LIST_1 (mode_to_sym (ev->xfocus.mode)), Qnil);
             }
