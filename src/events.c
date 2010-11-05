@@ -1040,6 +1040,9 @@ focus_change (Lisp_Window* previous_focus, Lisp_Window* w, int mode)
             install_colormaps (w);
             report_focus_change (w);
 
+            if (debug_events & DB_EVENTS_FOCUS)
+                DB (("%s-> %s Qfocus_in_hook\n", __FUNCTION__,
+                     rep_STR(w->name)));
             Fcall_window_hook (Qfocus_in_hook, rep_VAL(w),
                                rep_LIST_1 (mode_to_sym(mode)),
                                Qnil);
