@@ -1087,6 +1087,8 @@ static void
 focus_in (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xfocus.window);
+    if ((debug_events & DB_EVENTS_FOCUS))
+        describe_focus_in(ev,w);
     if (ev->xfocus.detail == NotifyPointer)
 	return;
     if ((ev->xfocus.mode == NotifyGrab)
