@@ -46,6 +46,8 @@ static unsigned long hits, misses;
 #include "debug-colors.h"
 int debug_cache;
 
+extern int frame_options;
+#define BIT_CACHE_DIRECTION 4
 #ifdef NEED_PIXMAP_CACHE
 
 struct pixmap_cache_node_struct {
@@ -182,7 +184,10 @@ pixmap_cache_ref (Lisp_Image *im, int width, int height,
 	    remove_from_image (n);
 	    prepend_to_image (n);
 	    remove_from_age_list (n);
-            append_to_age_list (n);
+            if (frame_options & BIT_CACHE_DIRECTION)
+               append_to_age_list (n);
+            else
+               prepend_to_age_list (n);
 	    n->ref_count++;
             if (debug_cache & DB_CACHE_REF)
                DB(("%s now: %d\n", __FUNCTION__, n->ref_count)); 
@@ -257,7 +262,10 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
     n->ref_count = 1;
 
     prepend_to_image (n);
-    append_to_age_list (n);
+    if (frame_options & BIT_CACHE_DIRECTION)
+       append_to_age_list (n);
+    else
+       prepend_to_age_list (n);
     cached_pixels += pixel_count;
 }
 
