@@ -587,6 +587,10 @@ property_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     repv w_ = rep_VAL (w);		/* type alias for gc-pro'ing */
+    /* the condition is complex, so eval once:*/
+    int debug = (debug_events & DB_EVENTS_PROPERTY) &&
+       (!( (ignore_atoms[0] == ev->xproperty.atom) || (ignore_atoms[1] == ev->xproperty.atom)));
+
     if (w != 0 && ev->xproperty.window == w->id)
     {
 	bool need_refresh = FALSE, changed = TRUE;
