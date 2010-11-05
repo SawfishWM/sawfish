@@ -418,6 +418,11 @@ lcs_myers_with_trace (int M, int N, element *a1, element a2[], int max,
 
                if ((x >= M) && (y >= N))
                   {
+                     if (debug_stacking)
+                        DB(("%sreturning %d at %d %d (limits %d,%d) k= %d%s\n",
+                            stacking_color,
+                            d, x, y, M, N, k,
+                            color_reset));
                      *return_k = k;
                      return d;
                   }
@@ -468,6 +473,8 @@ myers_trace (int V[], int max, int d, int k, int x, element s1[], element s2[], 
     * */
 
 
+   if (debug_stacking & DB_STACKING_ALGO)
+      DB(("\n** %s: max=%d d=%d k=%d x = %d\n", __FUNCTION__, max, d, k, x));
 
    if (d == 0) /* the whole prefix is equal in both sequences. nothing more to do */
       return;
@@ -486,10 +493,22 @@ myers_trace (int V[], int max, int d, int k, int x, element s1[], element s2[], 
    int up   = (k==d)? -1: get(V, max, d-1 , k+1);
    int left = (-k==d)?-1: get(V, max, d-1, k-1);
 
+   if (debug_stacking & DB_STACKING_ALGO)
+      DB(("comparing up: %d (%d %d) left: %d (%d %d)\n", up, d-1, k+1, left, d-1, k-1));
 
+   /* fixme:  what is this?  */
+   if (up > s2_len)
+      if (debug_stacking & DB_STACKING_ALGO)
+         DB(("up was taken from max %d d %d k+1 %d, and is %d\n", max, d-1, k+1, up));
+
+   if (left > s2_len)           /* fixme! */
+      if (debug_stacking & DB_STACKING_ALGO)
+         DB(("left was taken from max %d d %d k-1 %d, and is %d\n", max, d-1, k-1, left));
 
 
    int y = left - (k-1);    /* fixme: we grow by 1 y  ??? */
+   if (debug_stacking & DB_STACKING_ALGO)
+      DB(("x %d, up: %d, left %d(y: %d)\n", x, up, left, y));
 
 
    /* \ o
@@ -518,6 +537,8 @@ myers_trace (int V[], int max, int d, int k, int x, element s1[], element s2[], 
                {
                   last_fix = s1[up];
                   /* fixme: this is a non-issue: revert !!! */
+                  if (debug_stacking & DB_STACKING_ALGO)
+                     DB(("new last_fix: %d %s\n", up, rep_STR(last_fix->name)));
                }
 
          };
@@ -532,6 +553,16 @@ myers_trace (int V[], int max, int d, int k, int x, element s1[], element s2[], 
 
       element this = s2[y]; /* why -1 ??   b/c  we start w/ 0, but the  */
 
+      if (debug_stacking & DB_STACKING_ALGO)
+         DB(("going up\n\tskipping backwards %d, insert at %d %s%s%s", x - up, up,
+             // info_about(s2, y-1)  ))
+             functions_color, rep_STR(this->name), color_reset));
+
+      if (debug_stacking & DB_STACKING_ALGO)
+         DB((" below %s%s%s\n",
+             functions_color,
+             (last_fix)?rep_STR(last_fix->name):(u_char*)"TOP", color_reset));
+         /* fixme: ??? info_about(s1, up) */
 
       if (!last_fix)         /* only at the top! */
          {
@@ -547,10 +578,16 @@ myers_trace (int V[], int max, int d, int k, int x, element s1[], element s2[], 
 
       myers_trace(V, max, d-1, k+1, up, s1, s2, s2_len, this);
    } else {
+      if (debug_stacking & DB_STACKING_ALGO)
+         DB(("skipping backwards equal %d elements (snake), then delete %d (%s) from the server list."
+             "But we will move it elsewhere, so...\n",
+             x - left -1, left, info_about(s1,left)));
 
       if (x - (left + 1) > 0)      /* we found some alligned elements: use the last one as the 'above' */
          {
             last_fix = s1[left + 1]; /* or + 2 ??? fixme! */
+            if (debug_stacking & DB_STACKING_ALGO)
+               DB(("setting last_fix to: %d %s\n", last_fix, rep_STR(last_fix->name)));
          };
 
       myers_trace(V, max, d-1, k-1, left, s1, s2, s2_len, last_fix);
@@ -615,6 +652,9 @@ push_stacking_list_to_server (Lisp_Window** current_server_stacking, int len)
      * allocate on the stack! */
     int* level_matrix = (int*) alloca(temp_matrix_size); /* bzero not needed! */
 
+    if (debug_stacking & DB_STACKING_ALGO)
+        DB(("%s: comparing 2 arrays with %d and %d elemens. matrix with %d bytes.\n", __FUNCTION__,
+            len, current_stacking_len, temp_matrix_size));
 
     /* Find the difference */
     d = lcs_myers_with_trace(len, current_stacking_len,
@@ -625,6 +665,9 @@ push_stacking_list_to_server (Lisp_Window** current_server_stacking, int len)
     /* `k' should be 0, because both the stackings have the same # of
      * elements. But we don't care. */
 
+    if (debug_stacking & DB_STACKING_ALGO)
+        DB(("the difference is %d, the lenght of lcs is %d\n",
+            d, current_stacking_len - (d / 2)));
 
     /* walk the difference, and emit the XRestackWindows */
     /* both lenghts should be equal, right?? */
