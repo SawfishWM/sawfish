@@ -739,7 +739,8 @@ expose (XEvent *ev)
 static void
 destroy_notify (XEvent *ev)
 {
-    Lisp_Window *w = x_find_window_by_id (ev->xdestroywindow.window);
+
+    Lisp_Window *w = find_window_by_id (ev->xdestroywindow.window);
     if (w == 0 || ev->xdestroywindow.window != w->id)
 	return;
 
@@ -1081,7 +1082,7 @@ focus_out (XEvent *ev)
 	    }
 	}
     }
-    else if ((w = x_find_window_by_id (ev->xfocus.window)) != 0
+    else if ((w = find_window_by_id (ev->xfocus.window)) != 0
 	     && WINDOW_IS_GONE_P (w) && ev->xfocus.window == w->id)
     {
 	/* focus-out event from a deleted window */
@@ -1486,7 +1487,7 @@ handle_input_mask(long mask)
 
 #ifdef DEBUG
 	do {
-	    Lisp_Window *w = x_find_window_by_id (xev.xany.window);
+	    Lisp_Window *w = find_window_by_id (xev.xany.window);
 	    DB(("** Event: %s (win %lx: %s)\n",
 		xev.type < LASTEvent ? event_names[xev.type] : "unknown",
 		(long)xev.xany.window, w ? (char *) rep_STR (w->name) : "unknown"));

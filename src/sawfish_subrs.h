@@ -310,7 +310,6 @@ extern void focus_on_window (Lisp_Window *w);
 extern void focus_off_window (Lisp_Window *w);
 extern void fix_window_size (Lisp_Window *w);
 extern Lisp_Window *find_window_by_id (Window id);
-extern Lisp_Window *x_find_window_by_id (Window id);
 extern void get_window_protocols (Lisp_Window *w);
 extern void before_local_map (Lisp_Window *w);
 extern void after_local_map (Lisp_Window *w);
