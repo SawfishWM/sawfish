@@ -1,3 +1,37 @@
+2010-11-06  Teika kazura <teika@lavabit.com>
+	* man/news.texi
+	* sawfish.el: supports let-loop indent.
+
+	* lisp/sawfish/gtk/widget.jl
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/state/wm-spec.jl
+	* lisp/sawfish/wm/util/ping.jl: Corrected indents of 'let' using
+	new sawfish.el.
+
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/user.jl
+	* man/news.texi: Bugfix: It was impossible for users to override
+	`kde-desktop-directories'.
+
+	* lisp/sawfish/wm/autoload.jl
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* man/news.texi: Renamed popup-window-menu to popup-window-ops-menu.
+	Old name is supported, too.
+
+	* OPTIONS
+	* lisp/sawfish/wm/menus.jl
+	* man/news.texi
+	* man/sawfish.texi
+	* po/README
+	* sawfish.spec.in: Doc.
+	Section of "popup menu" is rewritten.
+	"commandp" doc correction; t can be returned only for symbols.
+	Minor po/README update.
+	RPM spec file is declared to be unofficial.
+
 2010-10-23  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/windows.jl: remove desktop check from rename-window-func
 
