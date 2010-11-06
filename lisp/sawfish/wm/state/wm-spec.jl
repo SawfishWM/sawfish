@@ -223,7 +223,7 @@
 						 (screen-height))))
 		  (let ((vp-data (cdr (assoc i workspace-viewport-data))))
 		    (aset view (* i 2) (car vp-data))
-		      (aset view (1+ (* i 2)) (nth 1 vp-data))))
+		    (aset view (1+ (* i 2)) (nth 1 vp-data))))
 		(loop (1+ i))))))
 
 	;; _NET_WORKAREA

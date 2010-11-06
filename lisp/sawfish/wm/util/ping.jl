@@ -94,7 +94,7 @@ milliseconds (defaults to 1 second), false otherwise."
 		 ;; found our ping
 		 (let ((this (car rest)))
 		   (setq pings-in-transit (delq this pings-in-transit))
-		     ((ping-callback this) t)))
+		   ((ping-callback this) t)))
 
 		(t (loop (cdr rest))))))
       t))
