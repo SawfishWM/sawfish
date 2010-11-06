@@ -78,6 +78,9 @@ extern int button_num;
 extern int all_lock_mask;
 extern struct key_def default_mods[];
 
+DEFSYM(grab_counter, "grab-counter");
+extern repv Qsync_keyboard;
+
 /* The user-customizable modifier; used for default key bindings. This
    shouldn't include any bits that don't have a fixed meaning. */
 
@@ -461,8 +464,20 @@ eval_input_event(repv context_map)
     unsigned long code, mods;
     repv result = Qnil, cmd, orig_next_keymap_path = next_keymap_path;
 
+    if (current_x_event->type == KeyRelease &&
+       (global_symbol_value (Qeval_key_release_events) == Qnil))
+    {
+        /* we need the next event (instead of this one). */
+        Fallow_events(Qsync_keyboard);
+        return Qnil;
+    }
+
     if (!translate_event (&code, &mods, current_x_event))
-	return Qnil;
+    {
+        /* this should mean that we wanted something else */
+        Fallow_events(Qsync_keyboard);
+        return Qnil;
+    }
 
     event_buf[event_index++] = code;
     event_buf[event_index++] = mods;
@@ -487,6 +502,13 @@ eval_input_event(repv context_map)
     {
 	/* Found a binding for this event; evaluate it. */
 	result = rep_call_lisp1 (Fsymbol_value (Qcall_command, Qt), cmd);
+
+        if (rep_INT(global_symbol_value(Qgrab_counter)) == 0)
+            ungrab_into_focused_window();
+        else
+        {
+            Fallow_events(Qsync_keyboard);
+        }
     }
     else if(next_keymap_path != rep_NULL)
     {
@@ -496,6 +518,7 @@ eval_input_event(repv context_map)
 
 	/* Grab the input devices for the next event */
 	Fgrab_keyboard (focus_window ? rep_VAL(focus_window) : Qnil, Qt, Qt);
+        Fallow_events(Qsync_keyboard);
     }
     else if(orig_next_keymap_path != rep_NULL
 	    && orig_next_keymap_path != Qglobal_keymap)
@@ -504,6 +527,7 @@ eval_input_event(repv context_map)
 	   argument for the next command and beep. */
 	Fset (Qprefix_arg, Qnil);
 	Fbeep();
+        Fungrab_keyboard();
     }
     else
     {
@@ -511,7 +535,19 @@ eval_input_event(repv context_map)
 
 	repv hook = global_symbol_value (Qunbound_key_hook);
 	if (!rep_VOIDP (hook) && hook != Qnil)
-	    result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
+        {
+            /* Lisp must handle  allow-event / ungrab-keyboard ! */
+            result = Fcall_hook(Qunbound_key_hook, Qnil, Qor);
+
+            if (!(rep_INT(global_symbol_value(Qgrab_counter))))
+                ungrab_into_focused_window();
+            else
+                if (!rep_throw_value)
+                    Fallow_events (Qsync_keyboard);
+                else
+                    DB(("%s: lisp throwing, we don't allow_events now.\n", __FUNCTION__));
+        }
+        /* fixme! oh this seems serious! But i think it never happened to me.*/
 	else if (rep_recurse_depth == 0
 		 && (mods & (EV_TYPE_KEY | EV_MOD_RELEASE)) == EV_TYPE_KEY)
 	{
@@ -526,7 +562,8 @@ eval_input_event(repv context_map)
 
     /* Out of a multi-key sequence, ungrab */
     if (orig_next_keymap_path && !next_keymap_path)
-	Fungrab_keyboard ();
+    {};
+    
 
     last_event[0] = current_event[0];
     last_event[1] = current_event[1];
@@ -661,6 +698,8 @@ keys_init(void)
 
     rep_INTERN_SPECIAL(multi_click_delay);
     Fset (Qmulti_click_delay, rep_MAKE_INT(DEFAULT_DOUBLE_CLICK_TIME));
+    rep_INTERN_SPECIAL(grab_counter);
+    Fset (Qgrab_counter, rep_MAKE_INT(0));
 
     rep_INTERN_SPECIAL(this_command);
     rep_INTERN_SPECIAL(last_command);

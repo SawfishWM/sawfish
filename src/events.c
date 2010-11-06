@@ -313,8 +313,6 @@ key_press (XEvent *ev)
 
     /* Don't look for a context map, frame parts are never focused */
     eval_input_event (Qnil);
-
-    XAllowEvents (dpy, SyncKeyboard, last_event_time);
 }
 
 static void
