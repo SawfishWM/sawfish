@@ -54,20 +54,40 @@
     :group edge-actions
     :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
+  (defcustom left-edge-move-func 'none
+    "Action for the left screen-edge while moving a window."
+    :group edge-actions
+    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+
   (defcustom top-edge-func 'none
     "Action for the top screen-edge."
     :group edge-actions
     :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+
+  (defcustom top-edge-move-func 'none
+    "Action for the top screen-edge while moving."
+    :group edge-actions
+    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
   (defcustom right-edge-func 'none
     "Action for the right screen-edge."
     :group edge-actions
     :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
+  (defcustom right-edge-move-func 'none
+    "Action for the right screen-edge."
+    :group edge-actions
+    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+
   (defcustom bottom-edge-func 'none
     "Action for the bottom screen-edge."
     :group edge-actions
     :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+
+  (defcustom bottom-edge-move-func 'none
+    "Action for the bottom screen-edge while moving."
+    :group edge-actions
+    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
   (define (edge-action-call func edge)
     (case func
@@ -103,16 +123,39 @@
 		  (quotient edge-actions-delay 1000)
 		  (mod edge-actions-delay 1000)))))))
 
+  (define (edge-action-move-init)
+    (let ((corner (get-active-corner))
+	  (edge (get-active-edge)))
+      (if corner
+	  (hot-spot-activate corner)
+	(setq func nil)
+	(cond ((eq edge 'left)
+	       (make-timer (lambda () (edge-action-call left-edge-move-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))
+	      ((eq edge 'right)
+               (make-timer (lambda () (edge-action-call right-edge-move-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))
+	      ((eq edge 'top)
+	       (make-timer (lambda () (edge-action-call top-edge-move-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))
+	      ((eq edge 'bottom)
+	       (make-timer (lambda () (edge-action-call bottom-edge-move-func edge))
+		  (quotient edge-actions-delay 1000)
+		  (mod edge-actions-delay 1000)))))))
+
   (define (edges-activate)
     (if edge-actions-enabled
 	(progn
 	  (flippers-activate t)
 	  (unless (in-hook-p 'enter-flipper-hook edge-action-init)
 	      (add-hook 'enter-flipper-hook edge-action-init))
-	  (unless (in-hook-p 'while-moving-hook edge-action-init)
-	      (add-hook 'while-moving-hook edge-action-init)))
+	  (unless (in-hook-p 'while-moving-hook edge-action-move-init)
+	      (add-hook 'while-moving-hook edge-action-move-init)))
       (flippers-activate nil)
       (if (in-hook-p 'enter-flipper-hook edge-action-init)
 	  (remove-hook 'enter-flipper-hook edge-action-init))
-      (if (in-hook-p 'while-moving-hook edge-action-init)
-	  (remove-hook 'while-moving-hook edge-action-init)))))
+      (if (in-hook-p 'while-moving-hook edge-action-move-init)
+	  (remove-hook 'while-moving-hook edge-action-move-init)))))
