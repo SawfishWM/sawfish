@@ -295,8 +295,37 @@ pixmap-cache-control  max-pixels reset
     return result;
 }
 
+DEFUN ("pixmap-cache-images", Fpixmap_cache_images, Spixmap_cache_images, (void), rep_Subr0)
+/*
+::doc:sawfish.wm.windows.subrs#pixmap-cache-images::
+pixmap-cache-images
+
+return the list of all the images in cache
+::end:: */
+
+{
+   /* make & return a list of all the (image scale)  */
+   
+    repv out = Qnil;
+    rep_GC_root gc_out;
+    rep_PUSHGC(gc_out, out);
+
+    pixmap_cache_node *this = oldest;
+
+    for (this = oldest; this != 0; this = this->newer)
+       /* images could get GC-ed! */
+       out = Fcons (rep_LIST_3 (
+                       rep_MAKE_INT (this->width),
+                       rep_MAKE_INT (this->height),
+                       (repv)this->im),
+                    out);
+    rep_POPGC;
+    return out;
+}
+
 void
 pixmap_cache_init (void)
 {
     rep_ADD_SUBR (Spixmap_cache_control);
+    rep_ADD_SUBR (Spixmap_cache_images);
 }
