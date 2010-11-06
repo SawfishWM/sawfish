@@ -23,7 +23,7 @@
     (export menu-start-process
 	    menu-stop-process
 	    popup-menu
-	    popup-window-menu
+	    popup-window-ops-menu
 	    popup-window-list-menu
 	    popup-root-menu
 	    popup-apps-menu
@@ -364,7 +364,7 @@ before killing it.")
            (setq menu-active nil)
            (apply signal error-data))))))
 
-  (define (popup-window-menu w)
+  (define (popup-window-ops-menu w)
     "Display the menu listing all window operations."
     (let-fluids ((menu-args (list w)))
        (popup-menu window-ops-menu)))
@@ -382,7 +382,7 @@ before killing it.")
     (popup-menu apps-menu))
 
   ;;###autoload
-  (define-command 'popup-window-menu popup-window-menu #:spec "%W")
+  (define-command 'popup-window-ops-menu popup-window-ops-menu #:spec "%W")
   (define-command 'popup-root-menu popup-root-menu)
   (define-command 'popup-apps-menu popup-apps-menu)
   (define-command 'popup-window-list-menu popup-window-list-menu)

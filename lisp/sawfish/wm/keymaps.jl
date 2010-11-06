@@ -97,7 +97,7 @@
 			     "W-Up" 'raise-window
 			     "W-Down" 'lower-window
 			     "W-Button3-Click1" 'raise-lower-window
-			     "W-Button2-Click1" 'popup-window-menu
+			     "W-Button2-Click1" 'popup-window-ops-menu
 			     "W-Button1-Move" 'move-window-interactively
 			     "Button1-Click1" 'raise-and-pass-through-click
 			     "W-ISO_Left_Tab" 'tab-raise-left-window
@@ -136,7 +136,7 @@ a window. (Only mouse-bindings are evaluated in this map.)"
     :type keymap)
 
   (defcustom close-button-keymap (bind-keys (make-keymap)
-				   "Button3-Click1" 'popup-window-menu
+				   "Button3-Click1" 'popup-window-ops-menu
 				   "S-Button1-Off" 'delete-group
 				   "Button1-Off" 'delete-window)
     "Keymap containing bindings active when the pointer is in the close button
@@ -145,7 +145,7 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
     :type keymap)
 
   (defcustom iconify-button-keymap (bind-keys (make-keymap)
-				     "Button3-Click1" 'popup-window-menu
+				     "Button3-Click1" 'popup-window-ops-menu
 				     "Button1-Off" 'iconify-window)
     "Keymap containing bindings active when the pointer is in the iconify
 button of a window. (Only mouse-bindings are evaluated in this map.)"
@@ -163,7 +163,7 @@ button of a window. (Only mouse-bindings are evaluated in this map.)"
 
   (defcustom menu-button-keymap (bind-keys (make-keymap)
 				  "Button3-Off" 'delete-window
-				  "Button1-Click1" 'popup-window-menu)
+				  "Button1-Click1" 'popup-window-ops-menu)
     "Keymap containing bindings active when the pointer is in the menu button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings

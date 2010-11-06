@@ -27,7 +27,7 @@
 
 ;;; ::autoload-start::
 (autoload-command 'customize 'sawfish.wm.customize)
-(autoload-command 'popup-window-menu 'sawfish.wm.menus)
+(autoload-command 'popup-window-ops-menu 'sawfish.wm.menus)
 (autoload-command 'popup-root-menu 'sawfish.wm.menus)
 (autoload-command 'popup-apps-menu 'sawfish.wm.menus)
 (autoload-command 'popup-window-list-menu 'sawfish.wm.menus)
