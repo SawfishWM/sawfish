@@ -1,0 +1,44 @@
+2010-11-06  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/DarkTab/*: improved DarkTab theme [fuchur]
+
+2010-11-05  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/tabs/tab.jl: small fix for margin-l [fuchur]
+
+	* themes/DarkTab/*: added DarkTab theme by fuchur
+
+	* lisp/sawfish/wm/user.jl: set DarkTab as default theme
+
+	* themes/Makefile.in: updated
+
+2010-11-04  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/autoload.jl: removed tab-system from autoload [fuchur]
+
+	* lisp/sawfish/wm/tabs/tab.jl: added set-tab-adjustments function
+				       remove defcustoms
+				       renamed several classes [fuchur]
+				       removed cursor, x/y-justify from classes [fuchur]
+				       removed keymap from classes [fuchur]
+
+	* lisp/sawfish/wm/tabs/tabgroup.jl: add settings for state-changed title-position [fuchur]
+					    raise all windows automatically if one window in the
+					    tabgroup gets focus [fuchur] -- temporarly removed
+					    make all windows automatically sticky if one window in
+					    the tabgroup gets sticky [fuchur]
+					    improved hooks (faster tabgroups) [fuchur]
+					    some preparative work and small fixes [fuchur]
+
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/frames.jl: add keymaps and bindings for tabbar-horizontal and
+	tabbar-vertical [fuchur]
+
+	* lisp/sawfish/wm/focus.jl: add tab-raise-on-hver here (needs fixing, though) [fuchur]
+				    -- improved setter func
+
+	* lisp/sawfish/wm/gaol.jl: add sawfish.wm.tabs.tab to gaol'd modules [fuchur]
+
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/ext/window-history.jl: add title-position window matcher
+						 add title-position to remembered properties
+
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: major rework for above changes [fuchur]
