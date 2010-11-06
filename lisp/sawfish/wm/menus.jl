@@ -86,6 +86,9 @@ before killing it.")
   (define menu-timer nil)
 
   (defvar window-ops-menu
+    ;; Mysterious underscore "_" before a string offers (human
+    ;; langugage) translation. The one inside of a string is
+    ;; a shortcut key.
     `((,(_ "Mi_nimize") iconify-window
        (insensitive . ,(lambda (w)
                          (not (or (window-iconifiable-p w)
@@ -147,9 +150,13 @@ before killing it.")
 
   (defvar window-ops-toggle-menu '())
 
+  ;; Window list menu
   (defvar window-menu nil)
 
   (defvar root-menu
+    ;; Mysterious underscore "_" before a stringoffers (human
+    ;; langugage) translation. The one inside of a string
+    ;; specifies shortcut key.
     `((,(_ "Sawfish Rootmenu"))
       ()
       (,(_ "_Windows") . window-menu)
@@ -251,6 +258,7 @@ before killing it.")
   (define (nicknamep arg) (fixnump arg))
   (define (nickname-ref nick) (table-ref nickname-table nick))
 
+  ;; Currently only use is to pass the window object.
   (define menu-args (make-fluid '()))
   (define where-is-fun (make-fluid '()))
 
@@ -310,6 +318,7 @@ before killing it.")
 	  (current-event-window orig-win))
 	(cond ((commandp result)
 	       (call-command result))
+	      ;; This supports (define (func) (interactive) ...)
 	      ((functionp result)
 	       (result))
 	      ((consp result)

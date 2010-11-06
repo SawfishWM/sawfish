@@ -5032,36 +5032,230 @@ structure @var{structure-name} (a symbol) when first referenced.  The
 @cindex Popup menus
 @cindex Menus, popup
 
-Popup menus are one of the two main methods through which the user may
-invoke Lisp code (the other is via keymaps, @pxref{Keymaps}). The
-@code{popup-menu} function is invoked with a list of menu item
-definitions and the associated Lisp function to call for each item.
-This starts a subprocess to display the menu, then at a later date the
-chosen menu item is received and evaluated.
+Sawfish provieds @dfn{popup menus}. Each line of a popup menu is
+either an action or the parent of a submenu. Together with key and
+mouse bindings, popup menus offer a command invocation method to
+users.
 
-Each menu item is specified by a list, the first element of which is a
-string providing the label for the menu item, the second element is a
-function to be called if that item is selected by the user. If this
-function has an interactive specification it will be invoked using the
-@code{call-command} function, otherwise @code{funcall} will be used.
-Alternatively the second element may be a lisp form to evaluate. So,
-for example, a single-level menu could be defined by:
+@menu
+* Ready-made Popups:: User options on ready-made popups.
+* Applications Menu:: 
+* Popup Definitions:: How to manually define popup menus.
+@end menu
+
+@node Ready-made Popups, Applications Menu, , Popup Menus
+@section Ready-made Popups
+
+First let's see popup menus available out-of-box. There are root menu,
+window operation menu, window list menu, applications menu, and
+others.
+
+The @dfn{root menu} is obviously the most important one. Many things can be
+done from the root menu, including other menus invocation.  By
+default, you can call the root menu by middle-clicking the background
+screen, i.e., anywhere outside of all windows.
+
+The @dfn{window operation menu} is what the name describes. You can call it
+from window's frames like buttons or the title bar, depending on
+themes.
+
+The @dfn{window list menu} lets you choose a window. When selected,
+that window is shown, raised, and focused.
+
+The @dfn{applications menu} lets you invoke softwares. Many options are
+available, and it's explained in the next section. (@pxref{Applications
+Menu})
+
+Popup menu invocation functions can be called from keyboard or mouse.
+
+@defun popup-root-menu
+Display the main menu.
+@end defun
+
+@defun popup-window-ops-menu
+Display the window operation menu. This has several
+bindings by default. In particular, clicking on a window's menu
+button displays this menu.
+@end defun
+
+@defun popup-window-list-menu
+Display the menu containing the list of all open windows.
+@end defun
+
+@defun popup-apps-menu
+Popup the applications menu.
+@end defun
+
+Here are popup menu options.
+
+@defvar menus-include-shortcuts
+When true, menu items also display the key-binding. Defaults
+to false.
+@end defvar
+
+The actual creation of a popup menu is performed by an auxiliary
+process. By default, it stays after menu use is done, and reused
+at the next menu invocation.
+
+@defvar menu-program-stays-running
+Defines if and how long the menu program stays alive after the
+last menu has completed. If @code{nil}, the program is terminated
+immediately. This means each time the popup menu is invoked, menu
+program is executed.
+
+If it's @code{t} it is left running indefinitely, if an integer then
+the program may last for that many seconds.
+@end defvar
+
+You can modify menus. @xref{Popup Definitions}.
+
+@node Applications Menu, Popup Definitions, Ready-made Popups, Popup Menus
+@section Applications Menu
+
+The applications menu lets you invoke installed applications. Sawfish
+generates applications menu from @file{*.desktop} files at Sawfish startup.
+
+Options are described first.
+
+@defvar apps-menu-autogen
+If non-nil, the applications menu is automatically generated from
+@code{user-apps-menu} and @file{*.desktop} files, and stored in the
+variable @code{apps-menu}. Default is @code{t}.
+
+If you set the applications menu manually to the variable
+@code{apps-menu}, then it won't happen anyway.
+@end defvar
+
+@defvar apps-menu-show-all
+Some entries are hidden from the menu, for example GNOME specific
+applications like eog, nautilus or evince. If you want to have them
+added to your menu, set this to non-nil. Default is @code{nil}.
+See the file @file{OPTIONS} for alternate choices.
+
+Improvement of this option is planned. The variable name and
+choices may change.
+@end defvar
+
+@defvar desktop-directory
+List of directories to look for *.desktop files. Default is
+@code{'("/usr/share/applications")}.
+@end defvar
+
+@defvar kde-desktop-directories
+KDE specific directories where *.desktop files are stored.
+@end defvar
+
+@defvar apps-menu-alphabetize
+Sort the generated apps menu alphabetically. Defaults to @code{t}.
+@end defvar
+
+@defvar apps-menu-lang
+Human language for applications menu generation, in
+string, like ``en''. Default is set from the locale.
+@end defvar
+
+Here are functions for applications menu.
+
+@defun popup-apps-menu
+Display the applications menu.
+@end defun
+
+@defun update-apps-menu
+Set @code{apps-menu} to @code{user-apps-menu}, and if
+@code{apps-menu-autogen} is non-nil, append the auto generated one.
+@end defun
+
+@defun generate-apps-menu
+Return the applications menu (a list), generated from @file{*.desktop}
+files which can be set to @code{apps-menu}.
+@end defun
+
+You can prepend anything to the applications menu, by setting the
+variable @code{user-apps-menu}. An example definition:
 
 @lisp
-(("Item 1" function-1)
- ("Item 2" function-2)
- ()
- ("Item 3" function-3))
+(("_xterm" (system "xterm &"))
+ ("Emacs" (system "emacs &"))
+ ("Firefox" (system "firefox &"))
+ ("The _GIMP" (system "gimp &"))
+ () ; Seperation horizontal bar
+ ) ;; Auto generated menu will follow.
 @end lisp
 
 @noindent
-The null item will create a separator line in the displayed menu.
+The @code{system} function simply executes its single argument using
+@file{/bin/sh}. The underscore defines the keyboard shortcut.
 
-If the cdr of first element of any item is a symbol, then the rest of
-the item is defined by the value of the named variable. If this value
-is functional then the definition is found by calling the function.
+Or, if you set value to @code{apps-menu}, Sawfish doesn't generate
+applications menu from @file{*.desktop}.
 
-Consider the following definition:
+@defvar apps-menu
+The variable containing the definition of the applications menu. If
+you set this, it is exclusively used, and Sawfish doesn't generate
+its applications menu.
+@end defvar
+
+@defvar user-apps-menu
+Your own applications menu entries. In the applications menu, this is
+followed by auto generated applications menu.
+@end defvar
+
+@node Popup Definitions, , Applications Menu, Popup Menus
+@section Popup Definitions
+@cindex Popup definitions
+@cindex Definitions, popup
+
+Sawfish comes with ready-made popup menus. This section describes
+how you can modify them.
+
+An entire popup menu is specified by a list. Each element corresponds
+to a menu item, in the displayed order from top to bottom. Example:
+
+@lisp
+(("Item _1" command-1)   ;; list for a command.
+ ("Item _2" . submenu-2) ;; cons for a submenu.
+ ()                      ;; nil makes a seperator line
+ ("_xterm" (system "xterm &")) ;; lisp expression is possible too.
+@end lisp
+
+Each menu item is typically specified by a list with two elements.
+The first is the name; it's a string, and displayed in the menu.
+An underscore (_) before a character defines an accelerator, or
+a shortcut key.
+
+The second element specifies the action to take. Possible choices are:
+
+@table @asis
+@item Command
+If it's a command name (a symbol), then that command is invoked. 
+In the window operation menu, if that command takes a window as the
+argument, it's passed.
+
+@item Lisp expression
+If it's a lisp expression, then it's evaluated inside of the
+@code{user} module.
+
+@item Function
+If it's a function (a closure or a subr), then it's invoked with
+no argument.
+@end table
+
+@noindent
+If an item is nil (instead of a list with two elements), then it's
+printed as a seperator line.
+
+
+An item can invoke a submenu. In this case, the item is a cons. The
+car is the printed name. The cdr is a symbol which is the name of a
+variable. That variable specifies another menu's contents.  Or the
+variable refers to a function, it's invoked, and the return value is
+used. Notice that this variable has to be special, or dynamically
+scoped, so that its value can be seen inside of the involved module.
+
+It's possible to pass a list with more than two elements as an item,
+but it is not explained. (Read the code and please tell us the usage.)
+
+Let's see one more example:
 
 @lisp
 (("Workspaces" . workspace-menu)
@@ -5075,157 +5269,45 @@ Consider the following definition:
 @end lisp
 
 @noindent
-This is the old definition of Sawfish's root menu. We can see
-that four submenus are created dynamically by dereferencing variables
-(in fact, three of this variables contain functions)
-(@code{workspace-menu}, @code{window-menu}, @code{apps-menu} and
-@code{custom-menu}). Note that these must be special variables,
-i.e. initially declared using the @code{defvar} special form.
-
-User can set @code{apps-menu} as they like. If it is unset, then
-Sawfish generates applications menu from @file{*.desktop} files. In
-that case, user can use @code{user-apps-menu} variable to define their
-own applications menu, and it is appended by auto generated one.
-Example of @code{user-apps-menu} definition can be as follows:
-
-@lisp
-(("_xterm" (system "xterm &"))
- ("Emacs" (system "emacs &"))
- ("Firefox" (system "firefox &"))
- ("The _GIMP" (system "gimp &"))
- () ; Seperation horizontal bar
- )
-@end lisp
-
-@noindent
-The @code{system} function simply executes its single argument using
-@file{/bin/sh}. The underscore defines the keyboard shortcut.
-
-When displaying a menu item, it is possible to also display the
-corresponding keyboard shortcut in the menu.
-
-@defvar menus-include-shortcuts
-When true, menu items also display key-binding information.  Defaults
-to false.
-@end defvar
-
-The actual creation of a menu is performed by an auxiliary process,
-distributed with Sawfish.  Since the overhead of starting the menu
-subprocess may be noticeable on some systems, it is possible to leave
-it running between menu requests.
-
-@defvar menu-program
-Location of the program implementing Sawfish's menu interface.
-@end defvar
-
-@defvar menu-program-stays-running
-This variable defines if, and for how long, the menu subprocess is
-allowed to remain executing for after the last menu has completed. If
-@code{nil}, the program is terminated immediately, if @code{t} it is
-left running indefinitely, if an integer then the program will run for
-that many seconds (unless another menu is displayed).
-@end defvar
-
-The actual interface to invoke the external menu program is hidden in
-the @code{popup-menu} function.
+This is the old definition of Sawfish's root menu. We can see that
+four submenus are created by seeing the value of variables.
+They contain functions, and they're invoked.
 
 @defun popup-menu spec
 Displays a menu defined by the list of item definitions @var{spec}.
 @end defun
 
-In addition, Sawfish provides various canned menus, and functions to
-display those menus.
-
-@defvar popup-window-list-menu
-Display the menu containing the list of all open windows.
-@end defvar
-
 @defvar root-menu
 Contains the root menu definition.
 @end defvar
 
-@defun popup-root-menu
-Display the main menu.  By default, this is bound to Button2-click on
-the root window.
-@end defun
-
-@defvar apps-menu
-The variable containing the definition of the applications submenu of
-the root menu.  The default root menu includes this as a child menu.
-@end defvar
-
-@defun popup-apps-menu
-Display the applications menu.
-@end defun
-
-Sawfish generates applications menu from @file{*.desktop} files.
-
-@defvar apps-menu-autogen
-If non-nil, @code{apps-menu} is automatically generated from
-@code{user-apps-menu} and @file{*.desktop} files. If you set
-@code{apps-menu}, then it won't happen anyway.
-
-Default is @code{t}.
-@end defvar
-
-@defvar user-apps-menu
-Your own application menu entries. It is followed by auto generated
-applications menu.
-@end defvar
-
-@defvar apps-menu-ignore-no-display
-Some entries are hidden from the menu, especially GNOME Apps like
-eog, nautilus or evince. If you want to have them added to your menu,
-set this to non-nil. Default is @code{nil}.
-@end defvar
-
-@defvar desktop-directory
-List of directories to look for *.desktop files. Default is
-@code{'("/usr/share/applications")}.
-@end defvar
-
-@defvar apps-menu-alphabetize
-Sort the generated apps menu alphabetically. Defaults to @code{t}.
-@end defvar
-
-@defvar apps-menu-lang
-Language for applications menu auto generation, in string. Default is
-set from locale.
-@end defvar
-
-@deffn Function update-apps-menu
-@deffnx Comand update-apps-menu
-Set @code{apps-menu} to @code{user-apps-menu}, and if
-@code{apps-menu-autogen} is non-nil, append the auto generated one.
-@end deffn
-
-@deffn Function generate-apps-menu
-Return the applications menu list, generated from @file{*.desktop} files.
-@end deffn
-
-@defun window-ops-menu
+@defvar window-ops-menu
 The variable containing the definition of all window operations.
-@end defun
+@end defvar
 
-@defun popup-window-menu
-Display the menu listing all window operations.  This has several
-bindings by default.  In particular, clicking on a window's menu
-button displays this menu.
-@end defun
+Popup menu is made by making a seperate process.
+
+@defvar menu-program
+Location of the program implementing Sawfish's menu interface.
+@end defvar
+
+Mainly for developers, one more esoteric thing, ``toggle menu'', is
+explained.
 
 @defvar window-ops-toggle-menu
-A list of flags describing windows, e.g., ``sticky'' or ``shaded''.
-This list is displayed in a menu, and by selecting items in this menu
-a user can turn the flags on and off for a given window.
+The toggle type submenu of window operations, like ``sticky'' or
+``shaded''. By selecting items in this menu, a user can turn the flags
+on and off for a given window.
 @end defvar
 
 @defun add-window-menu-toggle label command &optional predicate
-Add additional flags to @code{window-ops-toggle-menu}.  The
-@var{command} is a function (or a symbol pointing to a function) that
-gets run when the menu item is selected.  If @var{predicate} is
-non-nil, it must be a function taking a window as argument.  If
-@var{predicate} return true, the menu item will have a check mark next
-to it.
+Add an item to @code{window-ops-toggle-menu}.  The @var{command} is a
+function (or a symbol pointing to a function) that gets run when the
+menu item is selected.
+
+If @var{predicate} is non-nil, it must be a function taking a window
+as argument.  If @var{predicate} return true, the menu item will have
+a check mark next to it.
 @end defun
 
 @node Events, Commands, Popup Menus, Top
@@ -5664,14 +5746,8 @@ this returns @code{nil} or @code{root}, the currently focused window.
 Once a command has been defined, we can extract certain information
 about it.
 
-@defun commandp @var{object}
-This function returns @code{t} if its argument may be called interactively.
-If @var{object} is a function (i.e. a symbol or a lambda-expression) it
-is a command if it contains an interactive declaration
-
-The only other object which is a command is a function call form; the
-use of these types of commands is discouraged but they can be useful
-sometimes.
+@defun commandp @var{symbol}
+Returns @code{t} if @var{symbol} is a command name.
 @end defun
 
 @defun command-documentation name
@@ -5936,7 +6012,9 @@ Extract the owning window of the current X event (this is a window
 object, or the symbol @code{root} for the root window, or @code{nil}
 if there is no window or no event).  This is stored internally as the
 current event window, and returned.
-@c FIXME-DLU: why does this function take a WIN parameter?
+
+If the optional argument @var{win} is a window, then it will be
+returned as the current event window.
 @end defun
 
 @defun last-event
@@ -6585,6 +6663,10 @@ When @var{action} is @code{reboot} or @code{halt},
 applied to each window to ensure we safely quit the current session.
 @end defun
 
+@defvar want-poweroff-menu
+If you don't use GNOME, KDE, nor XFCE, power off related actions
+are added under the root menu -> ``Sessions''.
+@end defvar
 
 @node Other Functions, , Sawfish Invocation Functions, Miscellaneous Functions
 @section Other Functions

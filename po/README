@@ -51,9 +51,10 @@ Update your language po file by:
 
 Editing
 -------
-Recommended tools are for example "poedit" and emacs "po-mode". The
-latter is included in the gettext package. Your distributor
-may ship it as a seperate package.
+Recommended tools are for example Gtranslator, KBabel or Lokalize.
+
+Old tools "poedit" and emacs "po-mode" are less preferable, but also
+available. The latter is included in the gettext package.
 
 Submission
 ----------
@@ -82,7 +83,7 @@ complicated manner.
 
 String origin
 -------------
-Where does the string come from? You may want to know it, for example,
+Where do strings come from? You may want to know it, for example,
 when you want to confirm the validity of a string marked "fuzzy".
 
 Sawfish extracts strings from lisp sources which are under lisp/, 
@@ -90,9 +91,9 @@ themes/*/theme.jl, and scripts/. (It seems that the extraction script
 uses C sources too, but the author of this README couldn't find
 strings from C. C sources are under src/, for your information.)
 
-In order to search the origin of a string, "ack" is helpful. (In
-Debian, it's call "ack-grep".) If you can use git, "git grep" is your
-friend.
+In order to search the origin of a string, "ack" is a helpful
+tool. (In Debian, it's call "ack-grep".) If you can use git, "git
+grep" is your friend.
 
 Command names are translated, too, but they are often brief and
 difficult to get the meaning, without reading the documentation of
@@ -107,7 +108,8 @@ page.
 
 Not all are translated
 ----------------------
-Please expand this list of untranslated strings.
+Please expand this list of untranslated strings. We don't know the
+exact status.
 
 * Event names like "Button1-Off". (This is difficult to support, so
   we won't fix it in near future.)

@@ -89,11 +89,17 @@ property of a window.
 @item Before you run @file{po/make-pot} to generate @file{sawfish.pot}, you
 now have to do @code{make all} at the top directory. Previously it was
 possible to produce wrong @file{sawfish.pot}.
-@item Banished some bogus items in @file{sawfish.pot}
 @item The Spanish translation has been updated [gnome-es translation-team]
+@item Updated @file{sawfish.pot} and subsequently all @file{*.po}. Banished some bogus items in @file{sawfish.pot}. (Developer's personal extensios had sneaked into.)
 @end itemize
 
 @item Emacs sawfish-mode now indents @code{let-fluids} and let-loop correctly [Teika Kazura]
+
+@item Documentations [Teika kazura]
+@itemize
+@item Section on popup menus is rewritten. (@pxref{Popup Menus})
+@item Correction: The function @code{commandp} can only take symbols as its argument. (@pxref{Operations on Commands})
+@end itemize
 
 @item SawfishConfig ``Window rules'' section changes [Teika Kazura]
 
