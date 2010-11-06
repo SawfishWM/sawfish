@@ -509,6 +509,7 @@ where OPTIONS are any of:\n\
 	fonts_init ();
 	cursors_init ();
 	frames_init ();
+	flippers_init ();
 	windows_init ();
 	keys_init ();
 	functions_init ();
@@ -522,6 +523,7 @@ where OPTIONS are any of:\n\
 	functions_kill ();
 	windows_kill ();
 	frames_kill ();
+	flippers_kill ();
 	cursors_kill ();
 	fonts_kill ();
 	colors_kill ();

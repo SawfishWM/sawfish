@@ -20,16 +20,18 @@
 
 (define-structure sawfish.wm.edge.util
 
-    (export flippers-activate
-	    get-active-corner
-	    get-active-edge)
+    (compound-interface
+      (structure-interface sawfish.wm.edge.subrs)
+      (export flippers-activate
+	      get-active-corner
+	      get-active-edge))
 
     (open rep
 	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom
-	  sawfish.wm.edge.flippers)
+	  sawfish.wm.edge.subrs)
 
   (define-structure-alias edge-util sawfish.wm.edge.util)
 

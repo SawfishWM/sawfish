@@ -26,7 +26,7 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
-SRCS :=	colors.c cursors.c display.c events.c fonts.c frames.c \
+SRCS :=	colors.c cursors.c display.c events.c fonts.c frames.c flippers.c \
 	functions.c images.c keys.c main.c multihead.c pixmap-cache.c \
 	property-cache.c server.c session.c stacking-list.c windows.c
 OBJS := $(SRCS:.c=.o)
@@ -36,16 +36,11 @@ DL_OBJS := $(DL_SRCS:%.c=%.la) client.la
 DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/x.la sawfish/wm/util/selection.la
 DL_DIRS = sawfish/wm/util
 
-FLIPPER_DL_SRC := flippers.c
-FLIPPER_DL_OBJS := flippers.la
-FLIPPER_DL_DSTS = sawfish/wm/edge/flippers.la
-FLIPPER_DL_DIRS = sawfish/wm/edge
-
 INSTALL_HDRS = sawfish.h sawfish_subrs.h libclient.h server.h keys.h build.h
 
 override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(PANGO_CFLAGS) 
 
-all : sawfish libclient.o $(DL_OBJS) $(FLIPPER_DL_OBJS) .libexec gtk-style
+all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_LIBTOOL) --mode=link --tag=CC $(CC) -export-dynamic $(LDFLAGS) \
@@ -69,7 +64,7 @@ install : all installdirs
 	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
 	$(rep_DL_INSTALL) gtk-style $(DESTDIR)${sawfishexecdir}
-	$(foreach x,$(DL_DSTS) $(FLIPPER_DL_DSTS),\
+	$(foreach x,$(DL_DSTS),\
 	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) \
 	  $(notdir $(x)) $(DESTDIR)$(sawfishexecdir)/$(dir $(x));)
 	$(rep_INSTALL_ALIASES) -c $(srcdir) $(DESTDIR)$(sawfishexecdir)
@@ -94,10 +89,9 @@ uninstall :
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(repexecdir)/sawfish \
 	  $(foreach x,$(DL_DIRS),$(DESTDIR)$(sawfishexecdir)/$(x)) \
-	  $(DESTDIR)$(sawfishexecdir)/$(FLIPPER_DL_DIRS) \
 	  $(DESTDIR)$(includedir)/sawfish/
 
-.libexec : $(DL_OBJS) $(FLIPPER_DL_OBJS)
+.libexec : $(DL_OBJS)
 	$(SHELL) $(srcdir)/fake-libexec
 
 clean :

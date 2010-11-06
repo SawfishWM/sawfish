@@ -155,16 +155,18 @@ DEFUN("recreate-flippers", Frecreate_flippers,
 	return Qt;
 }
 
-repv
-rep_dl_init (void)
+void
+flippers_init (void)
 {
-    repv tem = rep_push_structure ("sawfish.wm.edge.flippers");
+    repv tem = rep_push_structure ("sawfish.wm.edge.subrs");
 
     rep_ADD_SUBR(Senable_flippers);
     rep_ADD_SUBR(Sdisable_flippers);
     rep_ADD_SUBR(Sflippers_after_restacking);
     rep_ADD_SUBR(Screate_flippers);
     rep_ADD_SUBR(Srecreate_flippers);
+
+    rep_pop_structure (tem);
 
     rep_INTERN (left);
     rep_INTERN (right);
@@ -173,5 +175,9 @@ rep_dl_init (void)
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
 
-    return rep_pop_structure (tem);
 }
+
+void
+flippers_kill(void)
+{
+};
