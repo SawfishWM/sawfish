@@ -1,7 +1,6 @@
 ;;; sawfish.el --- Sawfish mode.
 ;; Copyright 1999 - 2004 by Dave Pearson <davep@davep.org>
 ;;           2010 Sawfish Community
-;; Revision: Aug 2010
 
 ;; sawfish.el is free software distributed under the terms of the GNU
 ;; General Public Licence, version 2. For details see the file COPYING.
@@ -109,6 +108,7 @@
 (require 'easymenu)
 (require 'inf-lisp)
 (require 'scheme)
+(require 'lisp-mode)
 
 ;; Shut the compiler up.
 (eval-when-compile
@@ -368,10 +368,6 @@ Special commands:
   (modify-syntax-entry ?# "' 14b")      ; quote or comment (style b)
   (modify-syntax-entry ?| "_ 23b")      ; symbol or comment (style b)
   (modify-syntax-entry ?\n ">a")        ; end comment (style a)
-  ;; The following adds some indentation information to help sawfish-mode
-  ;; (rep is a sort of elisp/scheme hybrid with some extra stuff of its own,
-  ;; we inherit from emacs-lisp-mode so we need to add a sprinkle of scheme
-  ;; support).
   (make-local-variable 'lisp-indent-function)
   (setq lisp-indent-function 'sawfish-indent-function)
   (loop for sym in '((define                  . 1)
@@ -379,19 +375,56 @@ Special commands:
                      (define-record-discloser . 1)
                      (define-record-type      . 1)
                      (define-structure        . 3)
+		     (let . 'scheme-let-indent)
                      (letrec                  . 1)
 		     (let-fluids              . 1)
                      (structure               . 2)
                      (with-output-to-screen   . 0))
-        do (unless (get (car sym) 'lisp-indent-function)
-             (put (car sym) 'lisp-indent-function (cdr sym)))))
+        do (unless (get (car sym) 'sawfish-indent-function)
+             (put (car sym) 'sawfish-indent-function (cdr sym)))))
 
+;; Copied from scheme-indent-function which copied lisp-indent-function.
+;; The only object is the support of scheme-let-indent.
 (defun sawfish-indent-function (indent-point state)
-  (condition-case nil
-      (lisp-indent-function indent-point state)
-    ;; This handles indent of `let'.
-    (wrong-number-of-arguments
-     (scheme-indent-function indent-point state))))
+  (let ((normal-indent (current-column)))
+    (goto-char (1+ (elt state 1)))
+    (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
+    (if (and (elt state 2)
+             (not (looking-at "\\sw\\|\\s_")))
+        ;; car of form doesn't seem to be a symbol
+        (progn
+          (if (not (> (save-excursion (forward-line 1) (point))
+                      calculate-lisp-indent-last-sexp))
+	      (progn (goto-char calculate-lisp-indent-last-sexp)
+		     (beginning-of-line)
+		     (parse-partial-sexp (point)
+					 calculate-lisp-indent-last-sexp 0 t)))
+	  ;; Indent under the list or under the first sexp on the same
+	  ;; line as calculate-lisp-indent-last-sexp.  Note that first
+	  ;; thing on that line has to be complete sexp since we are
+          ;; inside the innermost containing sexp.
+          (backward-prefix-chars)
+          (current-column))
+      (let ((function (buffer-substring (point)
+					(progn (forward-sexp 1) (point))))
+	    method)
+	(setq method (or (get (intern-soft function) 'sawfish-indent-function)
+			 (get (intern-soft function) 'lisp-indent-function)
+			 (get (intern-soft function) 'lisp-indent-hook)))
+	(cond ((or (eq method 'defun)
+		   (and (null method)
+			(> (length function) 3)
+			(string-match "\\`def" function)))
+	       (lisp-indent-defform state indent-point))
+	      ((and (listp method)
+		    (listp (cdr method))
+		    (eq (cadr method) 'scheme-let-indent))
+	       (funcall 'scheme-let-indent state indent-point normal-indent))
+	      ((integerp method)
+	       (lisp-indent-specform method state
+				     indent-point normal-indent))
+	      (method
+	       (funcall method indent-point state)))))))
 
 (defun sawfish-eval (sexp &optional target-buffer)
   "Pass SEXP to sawfish for evaluation.
@@ -440,6 +473,7 @@ then returns nil.
 It's not always possible, since evaluating a closure, for example,
 returns the string #<closure foo @ sawfish.bar.baz> which can't be
 `read'."
+  ;; Simple replacement of #< doesn't work.
   (condition-case nil
       (progn
 	(pp (read sexp) output)
@@ -605,7 +639,7 @@ When called interactively, re-reads them."
   (interactive)
   (unless (and (not (or update
 			(not sawfish-buffer-symbol-lists)
-			(called-interactively-p)))
+			(called-interactively-p 'any)))
                sawfish-function-list sawfish-variable-list)
     (setq sawfish-function-list nil
           sawfish-variable-list nil)
