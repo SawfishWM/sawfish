@@ -1,25 +1,6 @@
 For full changes, read the news section in info. This file
 lists only important changes.
 
-In Sawfish 1.8.0 there are the following major changes:
-
-grand edge refactoring
-**********************
-
-Location changes:
-sawfish.wm.ext.edge-flip => sawfish.wm.edge.flip
-sawfish.wm.ext.infinite-desktop => sawfish.wm.edge.infinite-desktop
-sawfish.wm.util.flippers => sawfish.wm.edge.flippers
-
-Be sure to update your sawfishrc accordingly! Besides the following
-manual adjustments are required to make Sawfish 2.90.0 work properly:
-
-- remove any reference to the old files from .sawfish/custom while SawfishConfig
-  is not running (sawfish.wm.ext.edge-flip might appear in it!)
-
-- if you use SawfishPager, update to version 0.90.1 before restarting Sawfish
-
-------------------------------------------------------------------------
 In Sawfish 1.6.0 there are the following major changes:
 
 sawfish-ui is now sawfish-config
