@@ -5,6 +5,11 @@
 	* src/Makefile.in
 	* lisp/sawfish/wm/edge/util.jl: updated
 
+	* lisp/sawfish/wm/edge/actions.jl: customizable actions for while-moving-hook
+	-- actions for when the pointer hits the edge and when a moving window hits the
+	   edge can now be setup differently (while-moving actions don't delay!)
+					   simplified edge-action-init function
+
 2010-11-04  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/edge/infinite-desktop
 	* lisp/sawfish/wm/edge/viewport-drag.jl: renamed module (and remaining functions)
