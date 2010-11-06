@@ -37,7 +37,7 @@ access git repository.)
 @c @end itemize
 @c @end itemize
 
-@heading 2.90.0 "Excelsior"
+@heading 1.7.1 "Heaven"
 
 @itemize @bullet
 
@@ -46,72 +46,12 @@ access git repository.)
 
 @item Poweroff-menu fix [Teika Kazura, Christopher Bratusek]
 
-Poweroff related items in the popup menu couldn't be
+In Sawfish-1.7.0, poweroff related items in the popup menu couldn't be
 invoked, if run without any desktop environment. Fixed it.
 
 @item Correctly build SawfishPager [Christopher Bratusek]
 
 It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc} file.
-@end itemize
-@item New Features
-@itemize @minus
-
-@item @code{set-tab-adjustments} function [Christopher Bratusek]
-This function for tab-enabled themes allows them to change the decoration margins on their
-own, rather than having the user to calculat them. [NOT YET IN USE]
-
-@item Jump-Or-Exec rework [Christopher Bratusek]
-The syntax of @code{jump-or-exec} has changed a bit. See the introduction part of the file
-@code{lisp/sawfish/wm/commands/jump-or-exec.jl} for more informations.
-
-Previously the optional @code{onfocused}-function was only called when the name of the window
-matched the regex given to @code{jump-or-exec}, now it also checks the window-class.
-
-@code{toggle-or-exec} was merged into @code{jump-or-exec}. It turns windows into drop-down-terminal-like
-ones. (This means, it starts the application or foucses the window on first key-press, and hides it on
-second press while the cursor is in the window. Optionally the window can also be hidden when the cursor
-leaves it.)
-
-@item @code{iconify-on-leave} window-matcher [Christopher Bratusek]
-This window-matcher is used by @code{toggle-or-exec} to determine whether a window which the cursor
-left needs to be iconified or not.
-
-@end itemize
-@item Major Edge-Actions rework [Christopher Bratusek]
-@itemize @minus
-@item Module restructureing:
-@itemize +
-@item moved @code{sawfish.wm.util.flippers} to @code{sawfish.wm.edge.flippers}
-@item moved @code{sawfish.wm.ext.edge-flip} to @code{sawfish.wm.edge.flip}
-@item moved @code{sawfish.wm.ext.infinite-desktop} to @code{sawfish.wm.edge.infinite-desktop}
-@end itemize
-
-@item Edge-Utils
-
-The new module @code{sawfish.wm.edge.util} has been added. It contains helper functions for
-Hot-Spots and Infinite-Desktop, which help to drop their requirement on Edge-Flip to be active.
-Functions are @code{flippers-activate}, @code{get-active-corner} and @code{get-active-edge}.
-
-@item Hot-Spots added
-
-Hot-Spots brings the concept of sensitive spots of edges to Sawfish. 8 spots are defined (the 4
-corners and the 4 sides). The size of the corner hot-spots and the delay can be adjusted. This
-allows you -for example- to start a given application by hitting the top-left corner with the cursor.
-
-@item Infinite-Desktop refinements
-@itemize +
-@item Infinite-Desktop now no longer depends on Edge-Flip to be enabled
-@item Infinite-Desktop now works while moving a window
-@item improved the hook-function and the initialization
-@item renamed option @code{infinite-desktop.move-distance} to @code{infinite-desktop-move-distance}
-@item renamed option @code{infinite-desktop.move-cursor-distance} to @code{infinite-desktop-move-cursor-distance}
-@item do not auto-enable Infinite-Desktop by just loading the file
-@end itemize
-
-@item Edge-Flip refinements
-@item improved initialization
-@item removed some code deprecated by @code{sawfish.wm.edge.util}
-@item do not auto-enable Edge-Flip by just loading the file
 @end itemize
 @item Misc Changes
 @itemize @minus
@@ -128,7 +68,7 @@ now bundled in the new @code{Workspace} sub-menu.
 
 @item @code{rename-window} function behavior-change [Christopher Bratusek]
 The function @code{rename-window} does now also change the _NET_WM_VISIBLE_NAME
-property of a window.
+property of a window. 
 
 @item Translation related changes [Teika Kazura]
 
