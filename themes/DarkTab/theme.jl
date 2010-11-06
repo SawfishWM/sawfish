@@ -99,272 +99,272 @@
 (defcustom darktab:top-left-buttons `((menu ,t) (shade ,t) (sticky ,nil))
   "Top Titlebar Left Buttons (from left to right)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:top-buttons-group DarkTab:top-left-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:top-right-buttons `((close ,t) (maximize ,nil) (minimize ,nil))
   "Top Titlebar Right Buttons (from right to left)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:top-buttons-group DarkTab:top-right-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:bottom-left-buttons `((menu ,t) (shade ,t) (sticky ,nil))
   "Bottom Titlebar Left Buttons (from left to right)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:bottom-buttons-group DarkTab:bottom-left-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:bottom-right-buttons `((close ,t) (maximize ,nil) (minimize ,nil))
   "Bottom Titlebar Right Buttons (from right to left)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:bottom-buttons-group DarkTab:bottom-right-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:left-top-buttons `((menu ,t) (shade ,t) (sticky ,nil))
   "Left Titlebar Top Buttons (from top to bottom)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:left-buttons-group DarkTab:left-top-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:left-bottom-buttons `((close ,t) (maximize ,nil) (minimize ,nil))
   "Left Titlebar Bottom Buttons (from bottom to top)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:left-buttons-group DarkTab:left-bottom-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:right-top-buttons `((menu ,t) (shade ,t) (sticky ,nil))
   "Right Titlebar Top Buttons (from top to bottom)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:right-buttons-group DarkTab:right-top-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
 (defcustom darktab:right-bottom-buttons `((close ,t) (maximize ,nil) (minimize ,nil))
   "Right Titlebar Bottom Buttons (from bottom to top)"
   :group (appearance DarkTab:group DarkTab:buttons-group DarkTab:right-buttons-group DarkTab:right-bottom-buttons-group)
-  :type (v-and (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))
-               (h-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
@@ -1906,10 +1906,11 @@
 (define title-hight-s (lambda (w) (- darktab:title-dimension 2)))
 (define title-edge (lambda (w) (- darktab:title-dimension)))
 (define title-edge-s (lambda (w) (- (- darktab:title-dimension 2))))
-(define top-frame-button-width (lambda (w) (+ darktab:title-dimension 8)))
-(define bottom-frame-button-width (lambda (w) (+ darktab:title-dimension 8)))
-(define left-frame-button-height (lambda (w) (+ darktab:title-dimension 8)))
-(define right-frame-button-height (lambda (w) (+ darktab:title-dimension 8)))
+(define button-width-add 8)
+(define top-frame-button-width (lambda (w) (+ darktab:title-dimension button-width-add)))
+(define bottom-frame-button-width (lambda (w) (+ darktab:title-dimension button-width-add)))
+(define left-frame-button-height (lambda (w) (+ darktab:title-dimension button-width-add)))
+(define right-frame-button-height (lambda (w) (+ darktab:title-dimension button-width-add)))
 
 (define-frame-class 'prev-button '((keymap . prev-button-keymap)))
 (define-frame-class 'next-button '((keymap . next-button-keymap)))
@@ -2206,21 +2207,21 @@
      (left-edge . ,title-edge)
      (bottom-edge . 0)
      (width . 2))
+    ((class . tabbar-vertical-top-edge)
+     (foreground . ,(lambda (w) (window-icon w)))
+     (background . ,left-frame-tab-top-images)
+     (cursor . hand2)
+     (height . ,title-hight-s)
+     (width . ,title-hight-s)
+     (left-edge . ,title-edge-s)
+     (y-justify . 4)
+     (x-justify . 2))
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
      (background . ,left-frame-tab-images)
      (left-edge . ,title-edge-s)
      (width . ,title-hight-s))
-    ((class . tabbar-vertical-top-edge)
-     (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,left-frame-tab-top-images)
-     (cursor . hand2)
-     (height . 30)
-     (width . ,title-hight-s)
-     (left-edge . ,title-edge-s)
-     (y-justify . 4)
-     (x-justify . 2))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,left-frame-tab-bottom-icon-images)
@@ -2237,21 +2238,21 @@
      (right-edge . -2)
      (bottom-edge . 0)
      (width . 2))
+    ((class . tabbar-vertical-top-edge)
+     (foreground . ,(lambda (w) (window-icon w)))
+     (background . ,right-frame-tab-top-images)
+     (cursor . hand2)
+     (height . ,title-hight-s)
+     (width . ,title-hight-s)
+     (right-edge . ,title-edge)
+     (y-justify . 4)
+     (x-justify . 2))
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
      (background . ,right-frame-tab-images)
      (right-edge . ,title-edge)
      (width . ,title-hight-s))
-    ((class . tabbar-vertical-top-edge)
-     (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,right-frame-tab-top-images)
-     (cursor . hand2)
-     (height . 30)
-     (width . ,title-hight-s)
-     (right-edge . ,title-edge)
-     (y-justify . 4)
-     (x-justify . 2))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,right-frame-tab-bottom-icon-images)
@@ -2923,40 +2924,40 @@
                          (loop (cdr rest) (+ pos pos-inc) (append (list new-btn) result))))))))
 
 		   (top-frame-normal-buttons-left 
-            (make-button-list nil darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
            (top-frame-normal-buttons-right
-            (make-button-list nil darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
            (top-frame-transient-buttons-left
-            (make-button-list t darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
            (top-frame-transient-buttons-right
-            (make-button-list t darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
 
            (bottom-frame-normal-buttons-left 
-            (make-button-list nil darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
            (bottom-frame-normal-buttons-right
-            (make-button-list nil darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
            (bottom-frame-transient-buttons-left
-            (make-button-list t darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
            (bottom-frame-transient-buttons-right
-            (make-button-list t darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
 
            (left-frame-normal-buttons-left 
-            (make-button-list nil darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
            (left-frame-normal-buttons-right
-            (make-button-list nil darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add)))
            (left-frame-transient-buttons-left
-            (make-button-list t darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
            (left-frame-transient-buttons-right
-            (make-button-list t darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add)))
 
            (right-frame-normal-buttons-left 
-            (make-button-list nil darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
            (right-frame-normal-buttons-right
-            (make-button-list nil darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension 8)))
+            (make-button-list nil darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add)))
            (right-frame-transient-buttons-left
-            (make-button-list t darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension 8)))
+            (make-button-list t darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
            (right-frame-transient-buttons-right
-            (make-button-list t darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension 8))))
+            (make-button-list t darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add))))
 
       (require 'sawfish.wm.tabs.tab)
       (when (eq current-title 'top)
@@ -2964,16 +2965,16 @@
               (top-right-d-w 3)
               (top-left-m
                (if (numberp (cdr (car (car top-frame-normal-buttons-left))))
-                   (+ (cdr (car (car top-frame-normal-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car top-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (top-rigth-m
                (if (numberp (cdr (car (car top-frame-normal-buttons-right))))
-                   (+ (cdr (car (car top-frame-normal-buttons-right))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car top-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
               (top-left-m-t
                (if (numberp (cdr (car (car top-frame-transient-buttons-left))))
-                   (+ (cdr (car (car top-frame-transient-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car top-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (top-right-m-t
                (if (numberp (cdr (car (car top-frame-transient-buttons-right))))
-                   (+ (cdr (car (car top-frame-transient-buttons-right))) (+ darktab:title-dimension 8)) 0)))
+                   (+ (cdr (car (car top-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
           (set-tab-adjustments #:theme-left-dec-width top-left-d-w #:theme-right-dec-width top-right-d-w #:theme-left-margin top-left-m
                                #:theme-right-margin top-rigth-m #:theme-left-margin-transient top-left-m-t
                                #:theme-right-margin-transient top-right-m-t))
@@ -2995,16 +2996,16 @@
               (bottom-right-d-w 3)
               (bottom-left-m
                (if (numberp (cdr (car (car bottom-frame-normal-buttons-left))))
-                   (+ (cdr (car (car bottom-frame-normal-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car bottom-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (bottom-rigth-m
                (if (numberp (cdr (car (car bottom-frame-normal-buttons-right))))
-                   (+ (cdr (car (car bottom-frame-normal-buttons-right))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car bottom-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
               (bottom-left-m-t
                (if (numberp (cdr (car (car bottom-frame-transient-buttons-left))))
-                   (+ (cdr (car (car bottom-frame-transient-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car bottom-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (bottom-right-m-t
                (if (numberp (cdr (car (car bottom-frame-transient-buttons-right))))
-                   (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ darktab:title-dimension 8)) 0)))
+                   (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
           (set-tab-adjustments #:theme-left-dec-width bottom-left-d-w #:theme-right-dec-width bottom-right-d-w #:theme-left-margin bottom-left-m
                                #:theme-right-margin bottom-rigth-m #:theme-left-margin-transient bottom-left-m-t
                                #:theme-right-margin-transient bottom-right-m-t))
@@ -3023,19 +3024,19 @@
       
       (when (eq current-title 'left)
         (let ((left-left-d-w 11)
-              (left-right-d-w 30)
+              (left-right-d-w (- darktab:title-dimension 2))
               (left-left-m
                (if (numberp (cdr (car (car left-frame-normal-buttons-left))))
-                   (+ (cdr (car (car left-frame-normal-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car left-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (left-rigth-m
                (if (numberp (cdr (car (car left-frame-normal-buttons-right))))
-                   (+ (cdr (car (car left-frame-normal-buttons-right))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car left-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
               (left-left-m-t
                (if (numberp (cdr (car (car left-frame-transient-buttons-left))))
-                   (+ (cdr (car (car left-frame-transient-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car left-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (left-right-m-t
                (if (numberp (cdr (car (car left-frame-transient-buttons-right))))
-                   (+ (cdr (car (car left-frame-transient-buttons-right))) (+ darktab:title-dimension 8)) 0)))
+                   (+ (cdr (car (car left-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
           (set-tab-adjustments #:theme-left-dec-width left-left-d-w #:theme-right-dec-width left-right-d-w #:theme-left-margin left-left-m
                                #:theme-right-margin left-rigth-m #:theme-left-margin-transient left-left-m-t
                                #:theme-right-margin-transient left-right-m-t))
@@ -3054,19 +3055,19 @@
       
       (when (eq current-title 'right)
         (let ((right-left-d-w 11)
-              (right-right-d-w 30)
+              (right-right-d-w (- darktab:title-dimension 2))
               (right-left-m
                (if (numberp (cdr (car (car right-frame-normal-buttons-left))))
-                   (+ (cdr (car (car right-frame-normal-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car right-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (right-rigth-m
                (if (numberp (cdr (car (car right-frame-normal-buttons-right))))
-                   (+ (cdr (car (car right-frame-normal-buttons-right))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car right-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
               (right-left-m-t
                (if (numberp (cdr (car (car right-frame-transient-buttons-left))))
-                   (+ (cdr (car (car right-frame-transient-buttons-left))) (+ darktab:title-dimension 8)) 0))
+                   (+ (cdr (car (car right-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
               (right-right-m-t
                (if (numberp (cdr (car (car right-frame-transient-buttons-right))))
-                   (+ (cdr (car (car right-frame-transient-buttons-right))) (+ darktab:title-dimension 8)) 0)))
+                   (+ (cdr (car (car right-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
           (set-tab-adjustments #:theme-left-dec-width right-left-d-w #:theme-right-dec-width right-right-d-w #:theme-left-margin right-left-m
                                #:theme-right-margin right-rigth-m #:theme-left-margin-transient right-left-m-t
                                #:theme-right-margin-transient right-right-m-t))
