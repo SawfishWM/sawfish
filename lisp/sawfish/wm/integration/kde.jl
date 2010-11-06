@@ -20,7 +20,8 @@
 
 (define-structure sawfish.wm.integration.kde
 
-    (export detect-kde)
+    (export detect-kde
+	    kde-late-init)
 
     (open rep
 	  rep.system
@@ -42,8 +43,6 @@
 	  kde-logout-cmd)
       (setq desktop-environment "kde")
       (setq want-poweroff-menu nil)
-      (setq desktop-directory
-	    (append desktop-directory kde-desktop-directories))
 
       ;; invoke the KDE terminal instead of xterm
       (unless (variable-customized-p 'xterm-program)
@@ -77,4 +76,9 @@
   (define (detect-kde)
     (when (getenv "KDE_FULL_SESSION")
       (init)
-      t)))
+      t))
+
+  ;; Should be called after user customization is read.
+  (define (kde-late-init)
+    (setq desktop-directory
+	  (append desktop-directory kde-desktop-directories))))
