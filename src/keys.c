@@ -451,11 +451,15 @@ ungrab_into_focused_window (void)
 {
     if (focus_request.sent)
     {
+        if (debug_keys)
+            DB(("not ungrabbing immediately, will wait for FocusIn\n"));
         /* fixme: I should remark that we keep grab! */
         focus_request.grabbed = TRUE;
     }
     else
     {
+        if (debug_keys)
+            DB(("no need for commit_queued_focus_change (no change in focus)-> we can simply: Fungrab_keyboard\n"));
         Fungrab_keyboard ();
     }
 }
