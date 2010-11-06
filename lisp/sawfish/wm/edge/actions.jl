@@ -36,6 +36,7 @@
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
 
   (define func nil)
+  (define no-enter nil)
 
   (defcustom edge-actions-enabled nil
     "Activate the screen-edges."
@@ -101,6 +102,7 @@
        (edge-flip-activate edge 'viewport))))
 
   (define (edge-action-init)
+    (unless no-enter
     (let ((corner (get-active-corner))
 	  (edge (get-active-edge)))
       (if corner
@@ -121,10 +123,11 @@
 	      ((eq edge 'bottom)
 	       (make-timer (lambda () (edge-action-call bottom-edge-func edge))
 		  (quotient edge-actions-delay 1000)
-		  (mod edge-actions-delay 1000)))))))
+		  (mod edge-actions-delay 1000))))))))
 
   (define (edge-action-move-init)
     (setq func nil)
+    (setq no-enter t)
     (case (get-active-edge)
       ((left)
        (edge-action-call left-edge-move-func 'left))
@@ -133,7 +136,8 @@
       ((top)
        (edge-action-call top-edge-move-func 'top))
       ((bottom)
-       (edge-action-call bottom-edge-move-func 'bottom))))
+       (edge-action-call bottom-edge-move-func 'bottom)))
+    (setq no-enter nil))
 
   (define (edges-activate)
     (if edge-actions-enabled
