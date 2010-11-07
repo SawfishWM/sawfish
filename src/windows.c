@@ -647,6 +647,8 @@ destroy_window (Lisp_Window *w)
     /* this is important: all calls from the destroy-notify-hook should know this! */
     w->destroyed = 1;           /* fixme: but then I should protect against GC! */
 
+    if (debug_windows)
+        DB (("%s -> destroy_notify_hook\n", __FUNCTION__)); /* mmc: have we already provided a .. */
 
     Fcall_window_hook (Qdestroy_notify_hook,
                        rep_VAL(w), Qnil, Qnil);
