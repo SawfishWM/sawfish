@@ -1490,10 +1490,6 @@
   `((focused . ,(make-image "right-frame-bottom-border-f.png"))
     (inactive . ,(make-image "right-frame-bottom-border-i.png"))))
 
-(define right-frame-right-border-cursor-images
-  `((focused . ,(make-image "right-frame-right-border-cursor-f.png"))
-    (inactive . ,(make-image "right-frame-right-border-cursor-i.png"))))
-
 (define right-frame-menu-button-images 
   `((focused . ,(make-image "right-frame-menu-button-f.png"))
 	(highlighted . ,(make-image "right-frame-menu-button-h.png"))
@@ -1970,13 +1966,7 @@
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
-    ((class . title)
-     (background . ,left-frame-title-images)
-     (left-edge . ,title-edge-s)
-     (top-edge . 0)
-     (height . 2)
-     (width . ,title-hight-s))))
+     (width . ,title-hight))))
 
 (define right-frame-default-border-corner-group
   `(((class . bottom-right-corner)
@@ -1990,13 +1980,7 @@
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
-    ((class . title)
-     (background . ,right-frame-title-images)
-     (right-edge . ,title-edge)
-     (top-edge . 0)
-     (height . 2)
-     (width . ,title-hight-s))))
+     (width . ,title-hight))))
 
 (define top-frame-border-group
   `(((class . left-border)
@@ -2232,10 +2216,11 @@
      (x-justify . 2))))
 
 (define right-frame-title-group
-  `(((class . title)
+  `(((class . right-border)
      (background . ,right-frame-right-border-images)
+     (cursor . sb_h_double_arrow)
      (top-edge . 0)
-     (right-edge . -2)
+     (right-edge . ,title-edge)
      (bottom-edge . 0)
      (width . 2))
     ((class . tabbar-vertical-top-edge)
@@ -2244,19 +2229,19 @@
      (cursor . hand2)
      (height . ,title-hight-s)
      (width . ,title-hight-s)
-     (right-edge . ,title-edge)
+     (right-edge . ,title-edge-s)
      (y-justify . 4)
      (x-justify . 2))
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
      (background . ,right-frame-tab-images)
-     (right-edge . ,title-edge)
+     (right-edge . ,title-edge-s)
      (width . ,title-hight-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,right-frame-tab-bottom-icon-images)
-     (right-edge . ,title-edge)
+     (right-edge . ,title-edge-s)
      (height . ,title-hight-s)
      (width . ,title-hight-s)
      (y-justify . 1)
@@ -2270,15 +2255,6 @@
      (bottom-edge . ,title-edge)
      (right-edge . 0)
      (height . 2))))
-
-(define right-frame-title-cursor-images
-  `(((class . right-border)
-     (background . ,right-frame-right-border-cursor-images)
-     (cursor . sb_h_double_arrow)
-     (top-edge . 0)
-     (right-edge . ,title-edge)
-     (bottom-edge . 0)
-     (width . 2))))
 
 (define top-frame-close-button
   `((class . close-button)
@@ -2308,7 +2284,7 @@
   `((class . close-button)
     (background . ,right-frame-close-button-images)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2340,7 +2316,7 @@
   `((class . menu-button)
     (background . ,right-frame-menu-button-images)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2372,7 +2348,7 @@
   `((class . iconify-button)
     (background . ,right-frame-iconify-button-images)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2404,7 +2380,7 @@
   `((class . maximize-button)
     (background . ,right-frame-maximize-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2436,7 +2412,7 @@
   `((class . shade-button)
     (background . ,right-frame-shade-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2468,7 +2444,7 @@
   `((class . sticky-button)
     (background . ,right-frame-sticky-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2496,7 +2472,7 @@
 (define right-frame-space-button
   `((class . title)
     (background . ,right-frame-title-images)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2528,7 +2504,7 @@
   `((class . prev-button)
     (background . ,right-frame-prev-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2560,7 +2536,7 @@
   `((class . next-button)
     (background . ,right-frame-next-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2592,7 +2568,7 @@
   `((class . lock-button)
     (background . ,right-frame-lock-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2624,7 +2600,7 @@
   `((class . raise-lower-button)
     (background . ,right-frame-raise-lower-image-set)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2656,7 +2632,7 @@
   `((class . move-resize-button)
     (background . ,right-frame-move-resize-button-images)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2688,7 +2664,7 @@
   `((class . rename-button)
     (background . ,right-frame-rename-button-images)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2720,7 +2696,7 @@
   `((class . frame-typ-button)
     (background . ,right-frame-frame-typ-button-images)
     (cursor . hand2)
-    (right-edge . ,title-edge)
+    (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
 
@@ -2780,13 +2756,7 @@
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
-    ((class . title)
-     (background . ,left-frame-title-images)
-     (left-edge . ,title-edge-s)
-     (top-edge . 0)
-     (height . 2)
-     (width . ,title-hight-s))))
+     (width . ,title-hight))))
 
 (define right-frame-shaped-border-corner-group
   `(((class . bottom-right-corner)
@@ -2795,18 +2765,12 @@
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-hight))
-    ((class . top-left-corner)
+    ((class . top-right-corner)
      (background . ,right-frame-top-right-corner-shaped-images)
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
-    ((class . title)
-     (background . ,right-frame-title-images)
-     (right-edge . ,title-edge)
-     (top-edge . 0)
-     (height . 2)
-     (width . ,title-hight-s))))
+     (width . ,title-hight))))
 
 (define top-button-alist
   `((close  . ,top-frame-close-button)
@@ -3073,16 +3037,16 @@
                                #:theme-right-margin-transient right-right-m-t))
         (setq normal-frame
               (append right-frame-title-group right-frame-normal-buttons-left right-frame-default-border-corner-group 
-                      right-frame-border-group right-frame-normal-buttons-right right-frame-title-cursor-images))
+                      right-frame-border-group right-frame-normal-buttons-right))
         (setq shaped-frame
               (append right-frame-title-group right-frame-normal-buttons-left right-frame-shaped-border-corner-group 
-                      right-frame-normal-buttons-right right-frame-title-cursor-images))
+                      right-frame-normal-buttons-right))
         (setq transient-frame
               (append right-frame-title-group right-frame-transient-buttons-left right-frame-default-border-corner-group 
-                      right-frame-border-group right-frame-transient-buttons-right right-frame-title-cursor-images))
+                      right-frame-border-group right-frame-transient-buttons-right))
         (setq shaped-transient-frame
               (append right-frame-title-group right-frame-transient-buttons-left right-frame-shaped-border-corner-group 
-                      right-frame-transient-buttons-right right-frame-title-cursor-images))))))
+                      right-frame-transient-buttons-right))))))
 
 (create-frames)
 
