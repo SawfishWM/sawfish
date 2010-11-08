@@ -103,4 +103,11 @@ enum {
 #define KEY_EVENT(v)	rep_CDR(v)
 #define MAKE_KEY(e, c)	Fcons(c, e)
 
+
+/* Translate text->event and vice versa */
+struct key_def {
+    const char *name;
+    unsigned long mods, code;
+};
+
 #endif /* SAWFISH_KEYS_H */

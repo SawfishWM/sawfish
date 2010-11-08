@@ -251,6 +251,10 @@ extern void keys_init (void);
 /* keys-* */
 extern void key_event_init(void);
 
+extern void key_bind_init (void);
+extern bool lookup_event (u_long *code, u_long *mods, char *desc);
+bool lookup_event_name (char *buf, unsigned long code, unsigned long mods);
+
 /* from main.c */
 extern int exit_code;
 extern repv Qsawfish_directory, Qsawfish_lisp_lib_directory,
