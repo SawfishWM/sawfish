@@ -2231,7 +2231,7 @@
      (width . ,title-hight-s)
      (right-edge . ,title-edge-s)
      (y-justify . 4)
-     (x-justify . 2))
+     (x-justify . 4))
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
@@ -2245,7 +2245,7 @@
      (height . ,title-hight-s)
      (width . ,title-hight-s)
      (y-justify . 1)
-     (x-justify . 2))))
+     (x-justify . 4))))
 
 (define bottom-frame-title-cursor-images
   `(((class . bottom-border)
