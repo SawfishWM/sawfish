@@ -61,37 +61,42 @@
   :type number
   :range (16 . 32))
 
+(defcustom darktab:button-width 8 "Width of Buttons. Default 8"
+  :group (appearance DarkTab:group DarkTab:settings-group)
+  :type number
+  :range (4 . 12))
+
 (defcustom darktab:borders-dimension 4 "Width of window border. Default 4"
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type number
   :range (0 . 10))
 
-(defcustom darktab:focused-color "#FEFEFE"
+(defcustom darktab:focused-color "#F2F2F2"
   "Focused title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
-(defcustom darktab:highlighted-color "#E5E5E5"
+(defcustom darktab:highlighted-color "#FEFEFE"
   "Highlighted title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
-(defcustom darktab:clicked-color "#CBCBCB"
+(defcustom darktab:clicked-color "#F2F2F2"
   "Clicked title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
-(defcustom darktab:inactive-color "#B2B2B2"
+(defcustom darktab:inactive-color "#CCCCCC"
   "Inactive title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
-(defcustom darktab:inactive-highlighted-color "#989898"
+(defcustom darktab:inactive-highlighted-color "#D9D9D9"
   "Inactive Highlighted title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
-(defcustom darktab:inactive-clicked "#808080"
+(defcustom darktab:inactive-clicked "#E6E6E6"
   "Inactive Clicked title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
@@ -1902,11 +1907,10 @@
 (define title-hight-s (lambda (w) (- darktab:title-dimension 2)))
 (define title-edge (lambda (w) (- darktab:title-dimension)))
 (define title-edge-s (lambda (w) (- (- darktab:title-dimension 2))))
-(define button-width-add 8)
-(define top-frame-button-width (lambda (w) (+ darktab:title-dimension button-width-add)))
-(define bottom-frame-button-width (lambda (w) (+ darktab:title-dimension button-width-add)))
-(define left-frame-button-height (lambda (w) (+ darktab:title-dimension button-width-add)))
-(define right-frame-button-height (lambda (w) (+ darktab:title-dimension button-width-add)))
+(define top-frame-button-width (lambda (w) (+ darktab:title-dimension darktab:button-width)))
+(define bottom-frame-button-width (lambda (w) (+ darktab:title-dimension darktab:button-width)))
+(define left-frame-button-height (lambda (w) (+ darktab:title-dimension darktab:button-width)))
+(define right-frame-button-height (lambda (w) (+ darktab:title-dimension darktab:button-width)))
 
 (define-frame-class 'prev-button '((keymap . prev-button-keymap)))
 (define-frame-class 'next-button '((keymap . next-button-keymap)))
@@ -2888,40 +2892,40 @@
                          (loop (cdr rest) (+ pos pos-inc) (append (list new-btn) result))))))))
 
 		   (top-frame-normal-buttons-left 
-            (make-button-list nil darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (top-frame-normal-buttons-right
-            (make-button-list nil darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension darktab:button-width)))
            (top-frame-transient-buttons-left
-            (make-button-list t darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:top-left-buttons 'left-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (top-frame-transient-buttons-right
-            (make-button-list t darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:top-right-buttons 'right-edge 0 (+ darktab:title-dimension darktab:button-width)))
 
            (bottom-frame-normal-buttons-left 
-            (make-button-list nil darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (bottom-frame-normal-buttons-right
-            (make-button-list nil darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension darktab:button-width)))
            (bottom-frame-transient-buttons-left
-            (make-button-list t darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:bottom-left-buttons 'left-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (bottom-frame-transient-buttons-right
-            (make-button-list t darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:bottom-right-buttons 'right-edge 0 (+ darktab:title-dimension darktab:button-width)))
 
            (left-frame-normal-buttons-left 
-            (make-button-list nil darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (left-frame-normal-buttons-right
-            (make-button-list nil darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension darktab:button-width)))
            (left-frame-transient-buttons-left
-            (make-button-list t darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:left-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (left-frame-transient-buttons-right
-            (make-button-list t darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:left-top-buttons 'top-edge 0 (+ darktab:title-dimension darktab:button-width)))
 
            (right-frame-normal-buttons-left 
-            (make-button-list nil darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (right-frame-normal-buttons-right
-            (make-button-list nil darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list nil darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension darktab:button-width)))
            (right-frame-transient-buttons-left
-            (make-button-list t darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension button-width-add)))
+            (make-button-list t darktab:right-bottom-buttons 'bottom-edge  0 (+ darktab:title-dimension darktab:button-width)))
            (right-frame-transient-buttons-right
-            (make-button-list t darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension button-width-add))))
+            (make-button-list t darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension darktab:button-width))))
 
       (require 'sawfish.wm.tabs.tab)
       (when (eq current-title 'top)
@@ -2929,16 +2933,16 @@
               (top-right-d-w 3)
               (top-left-m
                (if (numberp (cdr (car (car top-frame-normal-buttons-left))))
-                   (+ (cdr (car (car top-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car top-frame-normal-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (top-rigth-m
                (if (numberp (cdr (car (car top-frame-normal-buttons-right))))
-                   (+ (cdr (car (car top-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car top-frame-normal-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0))
               (top-left-m-t
                (if (numberp (cdr (car (car top-frame-transient-buttons-left))))
-                   (+ (cdr (car (car top-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car top-frame-transient-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (top-right-m-t
                (if (numberp (cdr (car (car top-frame-transient-buttons-right))))
-                   (+ (cdr (car (car top-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
+                   (+ (cdr (car (car top-frame-transient-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0)))
           (set-tab-adjustments #:theme-left-dec-width top-left-d-w #:theme-right-dec-width top-right-d-w #:theme-left-margin top-left-m
                                #:theme-right-margin top-rigth-m #:theme-left-margin-transient top-left-m-t
                                #:theme-right-margin-transient top-right-m-t))
@@ -2960,16 +2964,16 @@
               (bottom-right-d-w 3)
               (bottom-left-m
                (if (numberp (cdr (car (car bottom-frame-normal-buttons-left))))
-                   (+ (cdr (car (car bottom-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car bottom-frame-normal-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (bottom-rigth-m
                (if (numberp (cdr (car (car bottom-frame-normal-buttons-right))))
-                   (+ (cdr (car (car bottom-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car bottom-frame-normal-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0))
               (bottom-left-m-t
                (if (numberp (cdr (car (car bottom-frame-transient-buttons-left))))
-                   (+ (cdr (car (car bottom-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car bottom-frame-transient-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (bottom-right-m-t
                (if (numberp (cdr (car (car bottom-frame-transient-buttons-right))))
-                   (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
+                   (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0)))
           (set-tab-adjustments #:theme-left-dec-width bottom-left-d-w #:theme-right-dec-width bottom-right-d-w #:theme-left-margin bottom-left-m
                                #:theme-right-margin bottom-rigth-m #:theme-left-margin-transient bottom-left-m-t
                                #:theme-right-margin-transient bottom-right-m-t))
@@ -2991,16 +2995,16 @@
               (left-right-d-w (- darktab:title-dimension 2))
               (left-left-m
                (if (numberp (cdr (car (car left-frame-normal-buttons-left))))
-                   (+ (cdr (car (car left-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car left-frame-normal-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (left-rigth-m
                (if (numberp (cdr (car (car left-frame-normal-buttons-right))))
-                   (+ (cdr (car (car left-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car left-frame-normal-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0))
               (left-left-m-t
                (if (numberp (cdr (car (car left-frame-transient-buttons-left))))
-                   (+ (cdr (car (car left-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car left-frame-transient-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (left-right-m-t
                (if (numberp (cdr (car (car left-frame-transient-buttons-right))))
-                   (+ (cdr (car (car left-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
+                   (+ (cdr (car (car left-frame-transient-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0)))
           (set-tab-adjustments #:theme-left-dec-width left-left-d-w #:theme-right-dec-width left-right-d-w #:theme-left-margin left-left-m
                                #:theme-right-margin left-rigth-m #:theme-left-margin-transient left-left-m-t
                                #:theme-right-margin-transient left-right-m-t))
@@ -3022,16 +3026,16 @@
               (right-right-d-w (- darktab:title-dimension 2))
               (right-left-m
                (if (numberp (cdr (car (car right-frame-normal-buttons-left))))
-                   (+ (cdr (car (car right-frame-normal-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car right-frame-normal-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (right-rigth-m
                (if (numberp (cdr (car (car right-frame-normal-buttons-right))))
-                   (+ (cdr (car (car right-frame-normal-buttons-right))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car right-frame-normal-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0))
               (right-left-m-t
                (if (numberp (cdr (car (car right-frame-transient-buttons-left))))
-                   (+ (cdr (car (car right-frame-transient-buttons-left))) (+ darktab:title-dimension button-width-add)) 0))
+                   (+ (cdr (car (car right-frame-transient-buttons-left))) (+ darktab:title-dimension darktab:button-width)) 0))
               (right-right-m-t
                (if (numberp (cdr (car (car right-frame-transient-buttons-right))))
-                   (+ (cdr (car (car right-frame-transient-buttons-right))) (+ darktab:title-dimension button-width-add)) 0)))
+                   (+ (cdr (car (car right-frame-transient-buttons-right))) (+ darktab:title-dimension darktab:button-width)) 0)))
           (set-tab-adjustments #:theme-left-dec-width right-left-d-w #:theme-right-dec-width right-right-d-w #:theme-left-margin right-left-m
                                #:theme-right-margin right-rigth-m #:theme-left-margin-transient right-left-m-t
                                #:theme-right-margin-transient right-right-m-t))
@@ -3130,6 +3134,7 @@
 (custom-set-property 'darktab:inactive-highlighted-color ':after-set reframe-all)
 (custom-set-property 'darktab:inactive-clicked ':after-set reframe-all)
 (custom-set-property 'darktab:title-dimension ':after-set reframe-all-clean)
+(custom-set-property 'darktab:button-width ':after-set reframe-all)
 (custom-set-property 'darktab:borders-dimension ':after-set reframe-all)
 (custom-set-property 'darktab:titlebar-place ':after-set reframe-all)
 (custom-set-property 'darktab:top-left-buttons ':after-set reframe-all)
