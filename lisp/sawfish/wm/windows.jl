@@ -61,7 +61,11 @@
 	     call-after-property-changed
 	     call-after-state-changed
 	     rename-window-func
-	     rename-window-interactive))
+	     rename-window-interactive
+	     
+	     ;; dummy
+	     get-window-by-class-re
+	     get-window-by-name-re))
 
     (open rep
 	  rep.system
@@ -141,6 +145,9 @@ is being checked instead. Returns nil if no such window is found."
         (car (filter-windows (lambda (w)
   			       (string= (window-name w) name)))))))
 
+  (define (get-window-by-name-re name)
+    (get-window-by-name name #:regex t))
+
   (define (get-window-by-class class #!key regex)
     "Find a window object whose window-class is CLASS. If REGEX is set then find
 a window object whose window-class matches CLASS. Returns nil if no such window
@@ -150,6 +157,9 @@ is found."
 			       (string-match class (window-class w)))))
       (car (filter-windows (lambda (w)
   			     (string= (window-class w) class))))))
+
+  (define (get-window-by-class-re class)
+    (get-window-by-class class #:regex t))
 
   (define (get-window-by-id id #!key regex)
     "Find a window object whose window-id is ID. If REGEX is set then find
