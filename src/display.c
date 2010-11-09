@@ -31,6 +31,7 @@
 #include <stdarg.h>
 #include <ctype.h>
 
+#include <X11/Xproto.h>
 #ifdef HAVE_UNIX
 # ifdef HAVE_FCNTL_H
 #  include <fcntl.h>
@@ -71,12 +72,50 @@ DEFSYM(canonical_display_name, "canonical-display-name");
 
 /* X error handlers */
 
+static const char*
+request_name (int request)
+{
+   request--;
+   /* return a string with the name,  or NULL */
+   if ((request >= 0) &&
+       (request < (sizeof(request_names)/sizeof(request_names[0]))))
+      return request_names[request];
+   else
+      return NULL;
+}
+
+static void
+print_error (XErrorEvent *ev)
+{
+    char buf[256];
+    const char* name = request_name(ev->request_code);
+
+    XGetErrorText(dpy, ev->error_code, buf, sizeof(buf));
+    fprintf(stderr, "X Error: %s\n", buf);
+
+    if (name)
+       fprintf(stderr, "The request was: %s, serial %lu\n", name, ev->serial);
+    else
+       fprintf(stderr, "The request was from some extension)!\n");
+
+    fprintf(stderr, "  Request Major code: %d\n", ev->request_code);
+    fprintf(stderr, "  Request Minor code: %d\n", ev->minor_code);
+    fprintf(stderr, "  ResourceId 0x%x (%d)\n", (unsigned int)ev->resourceid,
+            (unsigned int)ev->resourceid);
+                       /* i prefer to see both decimal and hexadecimal */
+}
+
 /* General error handler. Probably due to lag between windows being
    killed and us receiving DestroyNotify events */
 static int
 error_handler (Display *dpy, XErrorEvent *ev)
 {
     Lisp_Window *w;
+
+    DB(("%s%s%s serial %u, XID %" FMT_XID ", type %d, %s\n", error_color, __FUNCTION__, color_reset,
+        ev->serial, ev->resourceid, ev->type, request_name(ev->request_code)));
+    if (debug_display & DB_DISPLAY_ERROR)
+        print_error (ev);
 
     if (ev->resourceid != 0
 	&& (ev->error_code == BadWindow || ev->error_code == BadDrawable))
