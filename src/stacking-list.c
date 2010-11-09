@@ -228,6 +228,39 @@ bottom_window()
 
 /* new restacking */
 
+/* push the whole list  to X.
+ *
+ *
+ * fixme: this might fail, if some window is gone?
+ * */
+void
+restack_all_windows ()
+{
+    /* make a list of not GONE_P windows
+     * */
+    int nwindows=0;
+    Lisp_Window *ptr;
+
+    /* could use  stacking_list_length */
+    int len = 0;
+    for (ptr = highest_window; ptr != 0; ptr = ptr->below)
+    {
+        if (!WINDOW_IS_GONE_P (ptr))
+            len++;
+    };
+
+    Window* windows = alloca(len  * sizeof(Window));
+
+    for (ptr = highest_window; ptr != 0; ptr = ptr->below)
+    {
+        if (!WINDOW_IS_GONE_P (ptr))
+            windows[nwindows++] = stackable_window_id (ptr);
+    };
+    XRaiseWindow(dpy, windows[0]);
+    XRestackWindows(dpy, windows, nwindows);
+};
+
+
 /* mmc's stacking:  using algorithm described here:
  * http://citeseer.ist.psu.edu/myers86ond.html
  */

@@ -114,6 +114,26 @@ Pushes the delayed stacking order modifications to the X server.
    }
 }
 
+/* mmc: not useful! maybe on mess -> recover? */
+DEFUN("restack-windows-fast", Frestack_windows_fast, Srestack_windows_fast,
+      (void), rep_Subr0) /*
+::doc:sawfish.wm.windows.subrs#restack-windows-fast::
+restack-windows-fast
+
+Restack all windows in X according to our stacking-list. Fast, since it pushes the entire list
+in 1 xlib call.
+::end:: */
+{
+   DB(("==============  running %s ===============\n", __FUNCTION__));
+   Fgrab_server ();
+   XSelectInput (dpy, root_window, ROOT_EVENTS & ~SubstructureNotifyMask);
+
+   restack_all_windows ();
+   XSelectInput (dpy, root_window, ROOT_EVENTS);
+   Fungrab_server ();
+   return Qt;
+}
+
 DEFUN("restack-windows", Frestack_windows, Srestack_windows,
       (repv list), rep_Subr1) /*
 ::doc:sawfish.wm.windows.subrs#restack-windows::
@@ -1419,6 +1439,7 @@ functions_init (void)
 
     tem = rep_push_structure ("sawfish.wm.windows.subrs");
     rep_ADD_SUBR(Scommit_restacking);
+    rep_ADD_SUBR(Srestack_windows_fast);
     rep_ADD_SUBR(Srestack_windows);
     rep_ADD_SUBR(Sx_raise_window);
     rep_ADD_SUBR(Sx_lower_window);
