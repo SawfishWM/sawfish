@@ -1412,6 +1412,8 @@ description of HOOK-TYPE.
     tem = Fwindow_get (win, hook, Qnil);
     if (tem && tem != Qnil)
     {
+        if (debug_windows & DB_WINDOWS_HOOKS)
+            DB (("W: call-window-hook: private %s\n", window_name (VWIN(win))));
 	tem = Fcall_hook (tem, args, type);
 	if (!tem || (type == Qand && tem == Qnil)
 	    || (type == Qor && tem != Qnil))
@@ -1419,7 +1421,11 @@ description of HOOK-TYPE.
 	    goto out;
 	}
     }
+    if (debug_windows & DB_WINDOWS_HOOKS)
+        DB (("W: call-window-hook: public %s\n",  window_name (VWIN(win))));
     tem = Fcall_hook (hook, args, type);
+    if (debug_windows & DB_WINDOWS_HOOKS)
+        DB (("W: call-window-hook: end %s\n",  window_name (VWIN(win))));
 out:
     rep_POPGC; rep_POPGC; rep_POPGC;
     return tem;
