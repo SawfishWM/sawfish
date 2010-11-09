@@ -176,10 +176,10 @@ is found."
 find a window object whose window-role matches ROLE. Returns nil if no such
 window is found."
     (if regex
-        (car filter-windows (lambda (w)
-			      (string-match role (window-role w))))
-      (car filter-windows (lambda (w)
-			    (string= (window-role w) role)))))
+        (car (filter-windows (lambda (w)
+			      (string-match role (window-role w)))))
+      (car (filter-windows (lambda (w)
+			    (string= (window-role w) role))))))
 
   (define (window-really-wants-input-p w)
     "Return nil if window W should never be focused."

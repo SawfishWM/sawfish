@@ -51,7 +51,7 @@
     "jump to a window matched by re, or start program otherwise."
     (catch 'return
       (let ((wind (if class
-                    (get-window-by-clase re #:regex t)
+                    (get-window-by-class re #:regex t)
                     (get-window-by-name re #:regex t))))
         (if (functionp onfocused) ; check if already focused
             (let ((curwin (input-focus)))
