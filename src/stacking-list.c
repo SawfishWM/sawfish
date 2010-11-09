@@ -256,6 +256,10 @@ restack_all_windows ()
         if (!WINDOW_IS_GONE_P (ptr))
             windows[nwindows++] = stackable_window_id (ptr);
     };
+#if mmc
+    if (debug_stacking)
+        DB (("%sSL: XRestackWindows %d%s\n", stacking_color, nwindows, color_reset));
+#endif
     XRaiseWindow(dpy, windows[0]);
     XRestackWindows(dpy, windows, nwindows);
 };
