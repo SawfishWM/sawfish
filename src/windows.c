@@ -1578,16 +1578,22 @@ static void
 window_prin (repv stream, repv win)
 {
     char buf[128];
-    sprintf (buf, "#<window %lx>", VWIN(win)->id);
+    snprintf (buf, sizeof(buf), "#<window %" FMT_WIN " %s>", VWIN(win)->id, rep_STR(VWIN(win)->name));
     rep_stream_puts (stream, buf, -1, FALSE);
 }
 
 static void
 window_mark (repv win)
 {
+    if (debug_windows & DB_WINDOWS_GC)
+        DB(("%s: %p %s\n", __FUNCTION__, (void*) win, rep_STR(VWIN(win)->name)));
     rep_MARKVAL(VWIN(win)->plist);
     rep_MARKVAL(VWIN(win)->frame_style);
+    if (debug_windows & DB_WINDOWS_GC)
+       DB(("%s: now frame parts\n", __FUNCTION__));
     mark_frame_parts (VWIN(win));
+    if (debug_windows & DB_WINDOWS_GC)
+       DB(("%s: now strings\n", __FUNCTION__));
     rep_MARKVAL(VWIN(win)->name);
     rep_MARKVAL(VWIN(win)->full_name);
     rep_MARKVAL(VWIN(win)->icon_name);
@@ -1605,6 +1611,10 @@ window_mark_type (void)
     {
 	if (!WINDOW_IS_GONE_P (w) || !w->destroyed)
 	    rep_MARKVAL(rep_VAL(w));
+         else
+             if (debug_windows & DB_WINDOWS_GC)
+                 DB(("%s: %snot marking%s %p %s\n", __FUNCTION__, warning_color, color_reset,
+                     w, rep_STR(w->name)));
     }
     for (ph = prop_handlers; ph != 0; ph = ph->next)
 	rep_MARKVAL (ph->prop);
@@ -1615,12 +1625,17 @@ static void
 window_sweep (void)
 {
     Lisp_Window **ptr = &window_list;
+
+    if (debug_windows & DB_WINDOWS_GC)
+       DB(("%s\n", __FUNCTION__));
     while (*ptr != 0)
     {
 	Lisp_Window *w = *ptr;
 	if (!rep_GC_CELL_MARKEDP(rep_VAL(w)))
 	{
 	    assert (!window_in_stacking_list_p (w));
+            if (debug_windows & DB_WINDOWS_GC)
+                DB(("%s another window gone pointer: %p\n", __FUNCTION__, w));
 	    destroy_window_frame (w, FALSE);
 	    if (w->wmhints != 0)
 		XFree (w->wmhints);
@@ -1635,6 +1650,8 @@ window_sweep (void)
 	    rep_GC_CLR_CELL(rep_VAL(w));
 	}
     }
+    if (debug_windows & DB_WINDOWS_GC)
+        DB(("%s END\n", __FUNCTION__));
 }
 
 /* initialisation */
