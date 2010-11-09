@@ -108,9 +108,12 @@ make_image (image_t im, repv plist)
     Lisp_Image *f;
     for (f = image_list; f != 0; f = f->next)
     {
-	if (f->image == im)
+        if (f->image == im){
+            if (debug_images & DB_IMAGES_CREATE)
+                DB(("%s: image already known!\n", __FUNCTION__));
 	    /* XXX do what with the plist..? */
 	    return rep_VAL(f);
+        }
     }
     f = rep_ALLOC_CELL(sizeof(Lisp_Image));
     rep_data_after_gc += sizeof (Lisp_Image) + IMAGE_T_SIZE (im);
@@ -212,6 +215,8 @@ string). PLIST defines the property list of the image.
     rep_DECLARE1(file, rep_STRINGP);
     if (dpy == 0)
 	return Qnil;
+    if (debug_images & DB_IMAGES_CREATE)
+        DB(("%s %s\n", __FUNCTION__, rep_STR(file)));
     rep_PUSHGC(gc_plist, plist);
     file = find_image_file (file, &delete);
     rep_POPGC;
@@ -242,6 +247,8 @@ make-image-from-x-drawable ID [MASK-ID]
    unsigned w, h, bdr, dp;
    image_t im;
 
+   if (debug_images & DB_IMAGES_CREATE)
+      DB(("%s\n", __FUNCTION__));
    rep_DECLARE1 (id, rep_INTP);
    d = rep_INT (id);
    if (rep_INTP (mask_id))
@@ -388,6 +395,8 @@ Return a new image object, a clone of SOURCE-IMAGE.
 {
     image_t im;
     rep_DECLARE1(source, IMAGEP);
+    if (debug_images & DB_IMAGES_OPS)
+       DB(("%s\n", __FUNCTION__));
 #if defined HAVE_IMLIB
     im = Imlib_clone_image (imlib_id, VIMAGE(source)->image);
 #elif defined HAVE_GDK_PIXBUF
@@ -525,6 +534,9 @@ Return the value of the property named PROPERTY (a symbol) of IMAGE.
     repv plist;
     rep_DECLARE1(image, IMAGEP);
     plist = VIMAGE(image)->plist;
+    if (debug_images & DB_IMAGES_GET)
+        DB(("%s %s\n", __FUNCTION__, rep_SYMBOLP(prop)? rep_STR(rep_SYM(prop)->name)
+            :(u_char*)"not a symbol"));
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
 	if (rep_CAR(plist) == prop
@@ -549,6 +561,8 @@ Set the value of the property named PROPERTY (a symbol) of IMAGE to VALUE.
     repv plist;
     rep_DECLARE1(image, IMAGEP);
     plist = VIMAGE(image)->plist;
+    if (debug_images & DB_IMAGES_GET)
+        DB(("%s\n", __FUNCTION__));
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
 	if (rep_CAR(plist) == prop
@@ -585,7 +599,8 @@ Return (WIDTH . HEIGHT) representing the dimensions in pixels of IMAGE.
 ::end:: */
 {
     rep_DECLARE1(img, IMAGEP);
-
+    if (debug_images & DB_IMAGES_GET)
+       DB(("%s\n", __FUNCTION__));
     return Fcons (rep_MAKE_INT(image_width(VIMAGE(img))),
 		  rep_MAKE_INT(image_height(VIMAGE(img))));
 }
@@ -670,6 +685,8 @@ are resized.
 ::end:: */
 {
     rep_DECLARE1(img, IMAGEP);
+    if (debug_images & DB_IMAGES_GET)
+       DB(("%s\n", __FUNCTION__));
 #if !defined (HAVE_IMLIB)
     VIMAGE(img)->border[0] = rep_INTP (left) ? rep_INT (left) : 0;
     VIMAGE(img)->border[1] = rep_INTP (right) ? rep_INT (right) : 0;
@@ -977,6 +994,8 @@ defines the color of its pixels.
 					   rep_INT(width), rep_INT(height));
 	rep_free (data);
 #elif defined HAVE_GDK_PIXBUF
+    if (debug_images & DB_IMAGES_CREATE)
+        DB(("make-sized-image: gdk constant color!\n"));
     data = rep_alloc (rep_INT(width) * rep_INT(height) * 4);
     if (data != 0)
     {
@@ -1064,6 +1083,8 @@ to WIDTH by HEIGHT pixels.
 {
     image_t copy;
 
+    if (debug_images & DB_IMAGES_OPS)
+       DB(("%s\n", __FUNCTION__));
     rep_DECLARE1 (img, IMAGEP);
     rep_DECLARE (2, w, rep_INTP (w) && rep_INT (w) > 0);
     rep_DECLARE (3, h, rep_INTP (h) && rep_INT (h) > 0);
@@ -1256,6 +1277,8 @@ image_channels (Lisp_Image *im)
 void
 image_changed (Lisp_Image *im)
 {
+   if (debug_images)
+      DB(("%s %x\n", __FUNCTION__, im));
 #if defined NEED_PIXMAP_CACHE
     pixmap_cache_flush_image (im);
 #endif
@@ -1292,6 +1315,7 @@ do_scale (GdkPixbuf *src, int src_x, int src_y, int src_w, int src_h,
 }
 #endif
 
+extern int debug_cache;
 void
 image_render (Lisp_Image *image, int width, int height,
 	      Pixmap *pixmap, Pixmap *mask)
@@ -1316,6 +1340,17 @@ image_render (Lisp_Image *image, int width, int height,
 
 	if (pixmap_cache_ref (image, width, height, pixmap, mask))
 	    return;
+        else {
+            if ((debug_images & DB_IMAGES_RENDER) || debug_cache)
+            {
+                repv name = Fimage_get(image, Qfile);
+                DB(("%s: %s%s (w %d h %d) not found%s in the cache\n", __FUNCTION__,
+                    image_color,rep_STRINGP(name)?rep_STR(name):"???", width, height,color_reset));
+            }
+            else
+                if (debug_images)
+                    DB(("%s$%s",image_color, color_reset)); /* dollars -> cache miss ? */
+        }
 
 	/* XXX handle cases where combined image borders are larger
 	   XXX than the destination image.. */
@@ -1323,8 +1358,12 @@ image_render (Lisp_Image *image, int width, int height,
 	if (im_width != width || im_height != height)
 	{
 	    /* need to scale to width by height */
-
 	    int border[4];
+
+            if (debug_images & DB_IMAGES_CREATE)
+               DB(("%s: need to scale to width by height\n", __FUNCTION__));
+            else if (debug_images)
+               DB(("%s=%s",image_color, color_reset)); /* dollars -> cache miss ? */
 	    border[0] = image->border[0];
 	    border[1] = image->border[1];
 	    border[2] = image->border[2];
@@ -1446,6 +1485,8 @@ image_render (Lisp_Image *image, int width, int height,
 void
 image_free_pixmaps (Lisp_Image *image, Pixmap pixmap, Pixmap mask)
 {
+   if (debug_images & DB_IMAGES_GC)
+      DB(("%s\n", __FUNCTION__));
 #if defined NEED_PIXMAP_CACHE
     pixmap_cache_unref (image, pixmap, mask);
 #endif
@@ -1722,6 +1763,8 @@ image_prin (repv stream, repv obj)
 static void
 image_mark (repv obj)
 {
+   if (debug_images & DB_WINDOWS_GC)
+      DB(("%s\n", __FUNCTION__));
     rep_MARKVAL(VIMAGE(obj)->plist);
 }
 
@@ -1739,10 +1782,16 @@ image_sweep (void)
 	    pixmap_cache_flush_image (w);
 #endif
 #if defined HAVE_IMLIB
+           if (debug_images)
+              DB(("%s -> Imlib_kill_image \n", __FUNCTION__));
 	    Imlib_kill_image (imlib_id, w->image);
 #elif defined HAVE_GDK_PIXBUF
+           if (debug_images)
+              DB(("%s -> gdk_pixbuf_unref\n", __FUNCTION__));
 	    gdk_pixbuf_unref (w->image);
 #endif
+           if (debug_images)
+              DB(("%s freeing %x\n", __FUNCTION__, w));
 	    rep_FREE_CELL(w);
 	}
 	else
