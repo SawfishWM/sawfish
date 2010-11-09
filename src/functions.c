@@ -89,12 +89,14 @@ windows isn't affected.
     repv ptr;
     Lisp_Window *pred;
 
+    /* check that it's a list of _windows_ */
     rep_DECLARE1(list, rep_LISTP);
     for (ptr = list; rep_CONSP (ptr); ptr = rep_CDR (ptr))
     {
 	if (!WINDOWP (rep_CAR (ptr)))
 	    return rep_signal_arg_error (list, 1);
     }
+    /* end of the check*/
 
     if (list == Qnil)
 	return Qt;
@@ -102,6 +104,8 @@ windows isn't affected.
     ptr = list;
     pred = 0;
 
+    if (debug_stacking)
+        DB (("%s%s%s\n", functions_color, __FUNCTION__, color_reset));
     while (rep_CONSP (ptr))
     {
 	Lisp_Window *this = VWIN (rep_CAR (ptr));
