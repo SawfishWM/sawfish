@@ -484,9 +484,11 @@ add_window (Window id)
 
 	XSelectInput (dpy, id, CLIENT_EVENTS);
 	XGetWindowAttributes (dpy, id, &w->attr);
-	DB(("  orig: width=%d height=%d x=%d y=%d\n",
-	    w->attr.width, w->attr.height, w->attr.x, w->attr.y));
 	w->old_border_width = w->attr.border_width;
+        if (debug_windows & DB_WINDOWS_ADD)
+            DB (("W:   orig: width=%d height=%d x=%d y=%d %s\n",
+                 w->attr.width, w->attr.height, w->attr.x, w->attr.y,
+                 (w->attr.override_redirect)?"override!":""));
 
 	get_window_name(w);
 
@@ -572,7 +574,9 @@ add_window (Window id)
 	}
 	else
         {
+            DB (("W: add_window GONE\n"));
         }
+
 	if (!WINDOW_IS_GONE_P (w))
 	{
             repv tem = Fwindow_get (rep_VAL(w), Qplaced, Qnil);
