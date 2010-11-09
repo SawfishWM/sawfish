@@ -26,7 +26,6 @@
      (structure-interface sawfish.wm.windows.subrs)
      (export get-window-by-name
 	     get-window-by-class
-	     get-window-by-id
 	     get-window-by-role
 	     window-really-wants-input-p
 	     window-transient-p
@@ -160,16 +159,6 @@ is found."
 
   (define (get-window-by-class-re class)
     (get-window-by-class class #:regex t))
-
-  (define (get-window-by-id id #!key regex)
-    "Find a window object whose window-id is ID. If REGEX is set then find
-a window object whose window-id matches ID. Returns nil if no such window
-is found."
-    (if regex
-        (car (filter-windows (lambda (w)
-			       (string-match id (window-id w)))))
-      (car (filter-windows (lambda (w)
-			     (string= (window-id w) id))))))
 
   (define (get-window-by-role role #!key regex)
     "Find a window object whose window-role is ROLE. If REGEX is set then
