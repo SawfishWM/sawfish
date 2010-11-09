@@ -318,7 +318,8 @@ x_find_window_by_id (Window id)
 void
 install_window_frame (Lisp_Window *w)
 {
-    DB(("install_window_frame (%s)\n", rep_STR(w->name)));
+    if ((debug_windows & DB_WINDOWS_FRAME) || debug_frames)
+        DB (("%s%s%s on %s\n", reparent_color,__FUNCTION__, color_reset, rep_STR(w->name)));
     if (!w->reparented && w->frame != 0 && !WINDOW_IS_GONE_P (w))
     {
 	XSetWindowAttributes wa;
@@ -326,6 +327,9 @@ install_window_frame (Lisp_Window *w)
 	XSelectInput (dpy, w->frame, FRAME_EVENTS);
 
 	before_local_map (w);
+        if (debug_windows & DB_WINDOWS_FRAME)
+            DB(("%sXReparentWindow: %" FMT_WIN " %s -> %" FMT_WIN "%s\n", reparent_color,
+                w->id, rep_STR(w->name), w->frame, color_reset));
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
 	after_local_map (w);
@@ -341,16 +345,18 @@ install_window_frame (Lisp_Window *w)
 	wa.win_gravity = StaticGravity;
 	XChangeWindowAttributes (dpy, w->id, CWWinGravity, &wa);
 
-	DB(("  reparented to %lx [%dx%d%+d%+d]\n",
-	    w->frame, w->frame_width, w->frame_height,
-	    w->frame_x, w->frame_y));
+        if (debug_windows & DB_WINDOWS_FRAME)
+            DB(("  reparented to %" FMT_WIN " [%dx%d%+d%+d]\n",
+                w->frame, w->frame_width, w->frame_height,
+                w->frame_x, w->frame_y));
     }
 }
 
 void
 remove_window_frame (Lisp_Window *w)
 {
-    DB(("remove_window_frame (%s)\n", rep_STR(w->name)));
+    if (debug_windows & DB_WINDOWS_FRAME)
+        DB (("%s%s%s %s\n", reparent_color, __FUNCTION__, color_reset, rep_STR(w->name)));
     if (w->reparented && !WINDOW_IS_GONE_P (w))
     {
 	XSetWindowAttributes wa;
@@ -360,6 +366,8 @@ remove_window_frame (Lisp_Window *w)
 	wa.win_gravity = w->attr.win_gravity;
 	XChangeWindowAttributes (dpy, w->id, CWWinGravity, &wa);
 
+        DB(("%sXReparentWindow: %" FMT_WIN " %s%s -> root_window at %s%d,%d%s\n", reparent_color,
+            w->id, rep_STR(w->name), color_reset, reparent_color, w->attr.x, w->attr.y, color_reset));
 	before_local_map (w);
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
 	w->reparented = FALSE;
@@ -371,6 +379,9 @@ remove_window_frame (Lisp_Window *w)
 
 	if (!w->mapped)
 	    XRemoveFromSaveSet (dpy, w->id);
+    } else {
+        if (debug_windows & DB_WINDOWS_FRAME)
+            DB (("%s: window is gone, or reparented outside, doing nothing\n", __FUNCTION__));
     }
 }
 
@@ -911,6 +922,12 @@ new frame constructed as specified by FRAME.
 {
     rep_DECLARE1(win, WINDOWP);
     rep_DECLARE2(frame, rep_LISTP);
+
+    if (debug_frames && debug_windows) {
+        DB(("%s:%s\n", __FUNCTION__, rep_STR(VWIN(win)->name)));
+        Fbacktrace(Fstderr_file());
+    }
+
     Fgrab_server ();
 
     if (VWIN(win)->reparented)
@@ -936,6 +953,11 @@ Reinitialises and recalibrates the window frame of WINDOW.
     rep_DECLARE1(win, WINDOWP);
     if (VWIN(win)->frame != 0 && VWIN(win)->rebuild_frame != 0)
     {
+        if (debug_frames || (debug_windows & DB_WINDOWS_FRAME))
+            DB(("%s: %s->rebuild_frame %d %d\n", __FUNCTION__,
+                rep_STR(VWIN(win)->name),
+                VWIN(win)->attr.width,VWIN(win)->attr.height));
+
 	VWIN(win)->rebuild_frame (VWIN(win));
 	refresh_frame_parts (VWIN(win));
 	Fcall_window_hook (Qafter_framing_hook, win, Qnil, Qnil);
