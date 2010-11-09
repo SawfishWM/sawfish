@@ -774,6 +774,11 @@ Note that these are Lisp properties not X properties.
 {
     repv plist;
     rep_DECLARE1(win, XWINDOWP);
+    if (debug_windows & DB_WINDOWS_PUT){
+       DB(("%s %s prop: %s\n", __FUNCTION__, rep_STR(VWIN(win)->name),
+           rep_SYMBOLP(prop)? (char*)rep_STR(rep_SYM(prop)->name):"not a symbol"));
+       /* Fbacktrace(Fstderr_file()); //Fbacktrace(Qnil);*/
+    }
     plist = VWIN(win)->plist;
     while (rep_CONSP(plist) && rep_CONSP(rep_CDR(plist)))
     {
