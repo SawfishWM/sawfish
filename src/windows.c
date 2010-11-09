@@ -104,6 +104,10 @@ mapped_not_override_p (Window id)
     XWindowAttributes wa;
 
     XGetWindowAttributes(dpy, id, &wa);
+    if (debug_windows & DB_WINDOWS_REST)
+       DB (("%s %" FMT_WIN " %s %s\n", __FUNCTION__, id,
+            (wa.map_state == IsUnmapped)?"is unmapped!":"",
+            (wa.override_redirect == True)?"has override!":""));
     return ((wa.map_state != IsUnmapped) && (wa.override_redirect != True));
 }
 
@@ -148,7 +152,7 @@ commit_queued_focus_change (void)
     {
 	if (queued_take_focus)
 	{
-	    DB(("  sending WM_TAKE_FOCUS %x %ld\n",
+	    DB(("  sending WM_TAKE_FOCUS %" FMT_WIN " %ld\n",
 		(unsigned) queued_focus_id, queued_focus_time));
 	    send_client_message (queued_focus_id,
 				 xa_wm_take_focus,
@@ -156,7 +160,7 @@ commit_queued_focus_change (void)
 	}
 	if (queued_set_focus)
 	{
-	    DB(("  focusing %x %ld\n",
+	    DB(("  focusing %" FMT_WIN " %ld\n",
 		(unsigned) queued_focus_id, queued_focus_time));
 	    XSetInputFocus (dpy, queued_focus_id,
 			    queued_focus_revert, queued_focus_time);
@@ -236,6 +240,8 @@ get_window_protocols (Lisp_Window *w)
     int n;
     w->does_wm_take_focus = 0;
     w->does_wm_delete_window = 0;
+    if (debug_windows & DB_WINDOWS_REST)
+        DB (("W: %s: %s\n",__FUNCTION__,rep_STR(w->name)));
     if (XGetWMProtocols (dpy, w->id, &prot, &n) != 0)
     {
 	int i;
@@ -244,12 +250,14 @@ get_window_protocols (Lisp_Window *w)
 	    if (prot[i] == xa_wm_take_focus)
 	    {
 		w->does_wm_take_focus = 1;
-		DB(("  WM_TAKE_FOCUS is set\n"));
+                if (debug_windows & DB_WINDOWS_PROT)
+                    DB (("W:   WM_TAKE_FOCUS is set\n"));
 	    }
 	    if (prot[i] == xa_wm_delete_window)
 	    {
 		w->does_wm_delete_window = 1;
-		DB(("  WM_DELETE_WINDOW is set\n"));
+                if (debug_windows & DB_WINDOWS_PROT)
+                    DB (("W:   WM_DELETE_WINDOW is set\n"));
 	    }
 	}
 	XFree (prot);
@@ -284,8 +292,12 @@ find_window_by_id (Window id)
 {
     Lisp_Window *w;
     w = window_list;
+    if (debug_windows & DB_WINDOWS_FIND)
+        DB(("%s searching for %" FMT_WIN "\n", __FUNCTION__, id));
     while (w != 0 && w->id != id && w->frame != id)
 	w = w->next;
+    if (debug_windows & DB_WINDOWS_FIND)
+        DB(("%s %sfound\n", __FUNCTION__, (w)?"":"not "));
     if (w != 0 && WINDOW_IS_GONE_P (w))
 	w = 0;
     return w;
@@ -435,6 +447,13 @@ Lisp_Window *
 add_window (Window id)
 {
     Lisp_Window *w = rep_ALLOC_CELL(sizeof (Lisp_Window));
+
+    if (debug_windows & DB_WINDOWS_ADD) {
+        if (id == root_window)
+            DB (("W: add_window (ROOT)\n"));
+        else
+            DB (("W: add_window (%" FMT_WIN ")\n", id));
+    };
     if (w != 0)
     {
 	rep_GC_root gc_win;
@@ -442,11 +461,6 @@ add_window (Window id)
 	XWindowChanges xwc;
 	unsigned int xwcm;
 	long supplied;
-
-	DB(("add_window (%lx)\n", id));
-
-	if (id == root_window)
-	    DB(("  ** adding root window!?\n"));
 
 	rep_data_after_gc += sizeof (Lisp_Window);
 	memset (w, 0, sizeof (Lisp_Window));
@@ -504,9 +518,10 @@ add_window (Window id)
 	    w->shaped = bounding ? 1 : 0;
 	}
 
-	DB(("  name=`%s' x=%d y=%d width=%d height=%d\n",
-	    rep_STR(w->name), w->attr.x, w->attr.y,
-	    w->attr.width, w->attr.height));
+         if (debug_windows & DB_WINDOWS_ADD)
+             DB (("W:   name=`%s' x=%d y=%d width=%d height=%d\n",
+                  rep_STR(w->name), w->attr.x, w->attr.y,
+                  w->attr.width, w->attr.height));
 
 	xwcm = CWX | CWX | CWWidth | CWHeight | CWBorderWidth;
 	xwc.x = w->attr.x;
@@ -1613,6 +1628,8 @@ manage_windows (void)
     unsigned int nchildren, i;
     int revert_to;
 
+    if (debug_windows & DB_WINDOWS_REST)
+        DB(("%s\n", __FUNCTION__));
     Fgrab_server ();
 
     XGetInputFocus (dpy, &focus, &revert_to);
@@ -1632,8 +1649,13 @@ manage_windows (void)
 	}
 	focus = child;
     }
+   else if (debug_windows & DB_WINDOWS_REST)
+       DB(("%s: (focus != PointerRoot)\n", __FUNCTION__));
 
     XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren);
+    if (debug_windows & DB_WINDOWS_REST)
+        DB(("%s: XQueryTree returned %d children\n",__FUNCTION__, nchildren));
+
     initialising = TRUE;
     for (i = 0; i < nchildren; i++)
     {
