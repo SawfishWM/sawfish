@@ -62,7 +62,7 @@ typedef int bool;
    one of rep's buffers. Send the sawfish process a SIGUSR2 to print
    the last 4k or so to stderr. */
 
-/* #define DEBUG 1 */
+#define DEBUG 1
 
 /* Event masks */
 
