@@ -673,6 +673,8 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
     rep_DECLARE2(atom, rep_SYMBOLP);
     if (w == 0)
 	return WINDOWP(win) ? atom : rep_signal_arg_error (win, 1);
+   if (debug_functions)
+       DB (("F: %sXDeleteProperty%s: atom=\n", property_color, color_reset));
     XDeleteProperty (dpy, w,
 		     XInternAtom (dpy, rep_STR(rep_SYM(atom)->name), False));
     if (WINDOWP (win))
@@ -857,6 +859,16 @@ converted to their numeric X atoms.
     rep_DECLARE4(type, rep_SYMBOLP);
     a_type = XInternAtom (dpy, rep_STR(rep_SYM(type)->name), False);
     rep_DECLARE5(format, rep_INTP);
+
+    if (debug_functions & DB_FUNCTIONS_PROP)
+       DB (("F: %s%s%s: %s: %s =  %s(type: %s, format %d)\n",
+            property_color, __FUNCTION__, color_reset,
+            WINDOWP (win)? rep_STR(VWIN(win)->name):"?window?",
+            rep_STR(rep_SYM(prop)->name),
+            rep_STRINGP(data)?rep_STR(data):"vectorp",
+            rep_STR(rep_SYM(type)->name),
+            rep_INT(format)));
+
     if (w == 0)
 	return WINDOWP(win) ? prop : rep_signal_arg_error (win, 1);
 
@@ -931,6 +943,8 @@ FORMAT sized quantities (8, 16 or 32).
     XClientMessageEvent ev;
     Window w = x_win_from_arg (win);
 
+    if (debug_functions)
+       DB (("F: %s%s%s:\n", message_color, __FUNCTION__, color_reset));
     rep_DECLARE2(type, rep_SYMBOLP);
     rep_DECLARE(3, data, rep_STRINGP(data) || rep_VECTORP(data));
     rep_DECLARE4(format, rep_INTP);
