@@ -249,6 +249,8 @@ root window.
     {
 	XWarpPointer (dpy, None, root_window,
 		      0, 0, 0, 0, rep_INT(x), rep_INT(y));
+        if (debug_functions & DB_FUNCTIONS_MOUSE)
+            DB (("warp-cursor: XWarpPointer: %d, %d\n", rep_INT(x), rep_INT(y)));
 	invalidate_cached_mouse_position ();
 	return Qt;
     }
