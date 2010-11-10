@@ -1219,15 +1219,28 @@ refresh_message_window ()
 		ptr++;
 	}
     }
+    else
+    {
+        if (debug_functions)
+            DB (("F: %s%s%s: the message_window is NULL!\n", message_color, __FUNCTION__, color_reset));
+    }
 }
 
 static void
 message_event_handler (XEvent *ev)
 {
     if (ev->type == Expose && ev->xexpose.count == 0)
-	refresh_message_window ();
+      {
+          if (debug_functions & DB_FUNCTIONS_MESSAGE)
+              DB (("F: %s%s%s: Expose!\n", message_color,__FUNCTION__, color_reset));
+          refresh_message_window ();
+      }
     else if (ev->type == ButtonPress)
-	Fdisplay_message (Qnil, Qnil);
+      {
+          if (debug_functions & DB_FUNCTIONS_MESSAGE)
+              DB (("F: %s%s%s:  ButtonPress\n", message_color,__FUNCTION__, color_reset));
+          Fdisplay_message (Qnil, Qnil);
+      };
 }
 
 DEFSTRING(white, "white");
@@ -1238,6 +1251,9 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 {
     if (text == Qnil)
     {
+        if (debug_functions & DB_FUNCTIONS_MESSAGE){
+            DB (("F: %s%s%s: removing!\n", message_color, __FUNCTION__, color_reset));
+        };
 	if (message_win != 0)
 	{
 	    deregister_event_handler (message_win);
