@@ -166,7 +166,8 @@ find a window object whose window-role matches ROLE. Returns nil if no such
 window is found."
     (if regex
         (car (filter-windows (lambda (w)
-			      (string-match role (window-role w)))))
+			       (when (window-role w)
+				 (string-match role (window-role w))))))
       (car (filter-windows (lambda (w)
 			    (string= (window-role w) role))))))
 
