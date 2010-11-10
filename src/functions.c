@@ -154,6 +154,9 @@ windows isn't affected.
             if (pred != 0 && !WINDOW_IS_GONE_FOR_STACKING_P (pred))
 	    {
                 if (this == pred){
+                    DB(("----------unexpected--------------\n"));
+                    DB(("%srestack-windows: a window is twice in the provided link!%s\n",
+                        error_color, color_reset));
                     /* skip over! */
                 } else {
                     remove_from_stacking_list (this);
