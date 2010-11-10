@@ -571,11 +571,7 @@ STATES has been changed. STATES may also be a single symbol."
 
   (define (rename-window-func window new-name)
       (set-x-text-property window 'WM_NAME (vector new-name))
-      (set-x-text-property window 'WM_ICON_NAME (vector new-name))
-      ;; XXX doesn't have any effect?
-      (set-x-text-property window '_NET_WM_VISIBLE_NAME (vector new-name))
-      (set-x-text-property window '_NET_WM_NAME (vector new-name))
-      (set-x-text-property window '_NET_WM_ICON_NAME (vector new-name)))
+      (set-x-text-property window 'WM_ICON_NAME (vector new-name)))
 
   (define (rename-window-interactive w)
     (require 'sawfish.wm.util.prompt)
