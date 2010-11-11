@@ -1609,7 +1609,8 @@ manage_windows (void)
     int revert_to;
 
     Fgrab_server ();
-
+    /* avoid Unmap events */
+    XSelectInput (dpy, root_window, ROOT_EVENTS & ~SubstructureNotifyMask);
     XGetInputFocus (dpy, &focus, &revert_to);
     if (focus == PointerRoot)
     {
@@ -1639,9 +1640,9 @@ manage_windows (void)
 	    fake.xmaprequest.window = children[i];
 	    /* Make sure the window is initially unmapped. We expect to
 	       get map-notify events when we later remap it.. #67601 */
-	    XUnmapWindow (dpy, children[i]);
+	    // XUnmapWindow (dpy, children[i]);
 	    map_request (&fake);
-	    w = find_window_by_id (children[i]);
+	    // w = find_window_by_id (children[i]);
 	}
     }
     initialising = FALSE;
@@ -1657,6 +1658,7 @@ manage_windows (void)
 	    focus_on_window (w);
     }
 
+    XSelectInput (dpy, root_window, ROOT_EVENTS);
     Fungrab_server ();
     Fcall_hook (Qafter_initialization_hook, Qnil, Qnil);
 }
