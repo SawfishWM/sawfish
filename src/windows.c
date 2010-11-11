@@ -25,6 +25,11 @@
 #include <X11/extensions/shape.h>
 #include <glib.h>
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_windows;
+
+
 Lisp_Window *window_list;
 int window_type;
 

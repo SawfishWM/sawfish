@@ -367,4 +367,14 @@ extern void insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x);
 extern void restack_window (Lisp_Window *w);
 extern repv make_stacking_list (void);
 
+/* from mmc.c */
+extern const char* window_name (Lisp_Window *w);
+extern const char* window_name_or (Lisp_Window *w, const char* fallback);
+extern char* my_timestamp(Time t);
+extern void describe_focus_out(XEvent *ev, Lisp_Window *w);
+extern void describe_focus_in(XEvent *ev,Lisp_Window *w);
+
+extern void set_init (void);
+
+
 #endif /* SAWFISH_SUBRS_H */
