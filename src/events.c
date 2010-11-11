@@ -32,6 +32,10 @@
 #include <glib.h>
 #include <stdio.h>
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_events;
+
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
 

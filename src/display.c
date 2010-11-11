@@ -50,6 +50,14 @@ int screen_num, screen_width, screen_height;
 Window root_window, no_focus_window;
 int shape_event_base, shape_error_base;
 
+int debug_display;
+/* A table of strings, probably in Xlib already? */
+#include "errors.h"
+#include "debug.h"
+#include "debug-colors.h"
+int debug_display = DB_DISPLAY_ERROR; /* a good default! */
+
+
 Visual *preferred_visual;
 int preferred_depth;
 
