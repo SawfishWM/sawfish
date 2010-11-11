@@ -821,8 +821,7 @@ ungrab_event (Window grab_win, repv ev)
 				grab_win);
 		}
 	    }
-	    else
-		XUngrabKey (dpy, code, state, grab_win);
+            XUngrabKey (dpy, code, state, grab_win);
 	}
 	break;
 
@@ -867,8 +866,24 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
 	    repv tem = Fwindow_get (rep_VAL(w), Qkeymap, Qnil);
 	    if (rep_SYMBOLP(tem) && tem != Qnil)
 		tem = Fsymbol_value (tem, Qt);
-	    if (km == global || tem == km)
-		(grab ? grab_event : ungrab_event) (w->id, ev);
+
+            /* If this keymap concerns the window ..*/
+            if (km == global || tem == km)
+            {
+                /* .. If a key+modifier is not in one of the 2 relevant keymaps,
+                 * it's NOT sufficient to conclude it should be ungrabbed.
+                 * It's OR, so we have to test both keymaps! so here the 2nd one:
+                 * How about W- vs. other modifiers? it's also OR. */
+                if (((km == global) ?
+                     search_keymap(tem, code, mods, 0) :
+                     (search_keymap(global, code,  mods, 0))))
+                {
+                }
+                else
+                {
+                    (grab ? grab_event : ungrab_event) (w->id, ev);
+                }
+            }
 	}
     }
 }
