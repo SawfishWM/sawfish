@@ -366,6 +366,7 @@ optional and have reasonable defaults.
                    prompt-completions-outdated t)
 	     (prompt-update-display)
 	     (catch 'prompt-exit
+	       (allow-events 'sync-keyboard)
 	       (recursive-edit)))
 	 (display-message nil)))))
 
