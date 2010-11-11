@@ -928,13 +928,20 @@ grab_keymap_events (Window grab_win, repv keymap, bool grab)
 void
 grab_window_events (Lisp_Window *w, bool grab)
 {
-    repv tem;
-    tem = Fsymbol_value (Qglobal_keymap, Qt);
-    if (tem != Qnil && !rep_VOIDP(tem) && !WINDOW_IS_GONE_P (w))
-	grab_keymap_events (w->id, tem, grab);
-    tem = Fwindow_get (rep_VAL(w), Qkeymap, Qnil);
-    if (tem && tem != Qnil && !WINDOW_IS_GONE_P (w))
-	grab_keymap_events (w->id, tem, grab);
+    if (grab == FALSE) {
+        if (!WINDOW_IS_GONE_P (w))
+            /* mmc: one of my first improvements.... */
+            XUngrabKey (dpy, AnyKey,AnyModifier, w->id);
+    } else {
+        repv tem;
+
+        tem = Fsymbol_value (Qglobal_keymap, Qt);
+        if (tem != Qnil && !rep_VOIDP(tem) && !WINDOW_IS_GONE_P (w))
+            grab_keymap_events (w->id, tem, grab);
+        tem = Fwindow_get (rep_VAL(w), Qkeymap, Qnil);
+        if (tem && tem != Qnil && !WINDOW_IS_GONE_P (w))
+            grab_keymap_events (w->id, tem, grab);
+    }
 }
 
 static void
