@@ -45,6 +45,10 @@
 #include <X11/Xatom.h>
 #include <stdint.h>
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_functions=0;
+
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */
 static int server_grabs;

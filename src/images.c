@@ -50,6 +50,10 @@ static ImlibData *imlib_id;
 GdkInterpType interp_type = GDK_INTERP_BILINEAR;
 #endif
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_images = 0;
+
 Colormap image_cmap;
 Visual *image_visual;
 int image_depth;

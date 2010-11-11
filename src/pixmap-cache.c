@@ -42,6 +42,10 @@
 static unsigned long cached_pixels, max_cached_pixels = 64 * 1024;
 static unsigned long hits, misses;
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_cache;
+
 #ifdef NEED_PIXMAP_CACHE
 
 struct pixmap_cache_node_struct {

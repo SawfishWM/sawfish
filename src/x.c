@@ -50,6 +50,9 @@
 
 static int have_dbe;
 
+#include "debug.h"
+#include "debug-colors.h"
+
 /* An allocated x-gc */
 typedef struct lisp_x_gc {
     repv car;
