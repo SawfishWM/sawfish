@@ -971,6 +971,8 @@ grab_window_events (Lisp_Window *w, bool grab)
             XUngrabKey (dpy, AnyKey,AnyModifier, w->id);
     } else {
         repv tem;
+        if (debug_keys && DB_KEYS_WINDOW)
+            DB(("%s %s\n", __FUNCTION__, rep_STR(w->name)));
 
         tem = Fsymbol_value (Qglobal_keymap, Qt);
         if (tem != Qnil && !rep_VOIDP(tem) && !WINDOW_IS_GONE_P (w))
@@ -984,6 +986,8 @@ grab_window_events (Lisp_Window *w, bool grab)
 static void
 keymap_prop_change (Lisp_Window *w, repv prop, repv old, repv new)
 {
+    if (debug_keys)
+        DB(("======= %s (%s)\n", __FUNCTION__,  rep_STR(w->name)));
     if (prop == Qkeymap && !WINDOW_IS_GONE_P (w))
     {
 	/* A bit of a hack */
