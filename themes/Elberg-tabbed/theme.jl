@@ -492,24 +492,6 @@
     (when (eq (window-get w 'current-frame-style) 'Elberg-tabbed)
       (create-frames))))
 
-(define (reframe-one w)
-    (when (eq (window-get w 'current-frame-style) 'Elberg-tabbed)
-      (create-frames)
-      (reframe-window w)))
-
-(define (reframe-group w)
-  (when (eq (window-get w 'current-frame-style) 'Elberg-tabbed)
-    (map-window-group
-     (lambda (x)
-       (reframe-one x)) w)))
-
-;; create only frames when focus a window don't draw
-;;
-(add-hook 'focus-in-hook create-frames-only)
-(add-hook 'add-window-hook create-frames-only)
-
-(call-after-property-changed '(WM_HINTS WM_NAME _NET_WM_NAME _NET_WM_STATE _NET_WM_DESKTOP) reframe-one)
-
-;; tabgroup.jl call
-;;
-(call-after-state-changed '(title-position) reframe-group)
+;; Create only frames, don't rebuild-frame/reframe-window.
+;; Tabthemes will reframe/rebuild windows call from tabgroup.jl.
+(call-after-state-changed '(title-position) create-frames-only)

@@ -81,11 +81,6 @@
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
-(defcustom darktab:clicked-color "#F2F2F2"
-  "Clicked title text color."
-  :group (appearance DarkTab:group DarkTab:settings-group)
-  :type color)
-
 (defcustom darktab:inactive-color "#CCCCCC"
   "Inactive title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
@@ -93,11 +88,6 @@
 
 (defcustom darktab:inactive-highlighted-color "#D9D9D9"
   "Inactive Highlighted title text color."
-  :group (appearance DarkTab:group DarkTab:settings-group)
-  :type color)
-
-(defcustom darktab:inactive-clicked "#E6E6E6"
-  "Inactive Clicked title text color."
   :group (appearance DarkTab:group DarkTab:settings-group)
   :type color)
 
@@ -411,6 +401,7 @@
         (lambda (x)
           (window-put x 'title-position 'left)) (current-event-window))
        (call-window-hook 'window-state-change-hook (current-event-window) (list '(title-position)))
+       (map-window-group (lambda (x) (reframe-window x)) (current-event-window))
        (move-window-to (current-event-window) pos-x pos-y)
        (resize-window-to (current-event-window) dim-x dim-y))))
   (bind-keys
@@ -445,6 +436,7 @@
           (lambda (x)
             (window-put x 'title-position 'top)) (current-event-window)))
        (call-window-hook 'window-state-change-hook (current-event-window) (list '(title-position)))
+       (map-window-group (lambda (x) (reframe-window x)) (current-event-window))
        (move-window-to (current-event-window) pos-x pos-y)
        (resize-window-to (current-event-window) dim-x dim-y))))
   (bind-keys
@@ -482,6 +474,7 @@
         (lambda (x)
           (window-put x 'title-position 'right)) (current-event-window))
        (call-window-hook 'window-state-change-hook (current-event-window) (list '(title-position)))
+       (map-window-group (lambda (x) (reframe-window x)) (current-event-window))
        (move-window-to (current-event-window) pos-x pos-y)
        (resize-window-to (current-event-window) dim-x dim-y)))))
 
@@ -534,6 +527,7 @@
           (lambda (x)
             (window-put x 'title-position 'bottom)) (current-event-window)))
        (call-window-hook 'window-state-change-hook (current-event-window) (list '(title-position)))
+       (map-window-group (lambda (x) (reframe-window x)) (current-event-window))
        (move-window-to (current-event-window) pos-x pos-y)
        (resize-window-to (current-event-window) dim-x dim-y))))
   (bind-keys
@@ -569,6 +563,7 @@
         (lambda (x)
           (window-put x 'title-position 'top)) (current-event-window))
        (call-window-hook 'window-state-change-hook (current-event-window) (list '(title-position)))
+       (map-window-group (lambda (x) (reframe-window x)) (current-event-window))
        (move-window-to (current-event-window) pos-x pos-y)
        (resize-window-to (current-event-window) dim-x dim-y))))
   (bind-keys
@@ -620,6 +615,7 @@
           (lambda (x)
             (window-put x 'title-position 'bottom)) (current-event-window)))
        (call-window-hook 'window-state-change-hook (current-event-window) (list '(title-position)))
+       (map-window-group (lambda (x) (reframe-window x)) (current-event-window))
        (move-window-to (current-event-window) pos-x pos-y)
        (resize-window-to (current-event-window) dim-x dim-y)))))
 
@@ -1677,10 +1673,10 @@
   (lambda ()
     `((focused . ,darktab:focused-color)
       (highlighted . ,darktab:highlighted-color)
-      (clicked . ,darktab:clicked-color)
+      (clicked . ,darktab:highlighted-color)
       (inactive . ,darktab:inactive-color)
       (inactive-highlighted . ,darktab:inactive-highlighted-color)
-      (inactive-clicked . ,darktab:inactive-clicked))))
+      (inactive-clicked . ,darktab:inactive-highlighted-color))))
 
 (define top-frame-sticky-image-set
   (lambda (w)
@@ -3092,40 +3088,17 @@
   (lambda ()
     (reframe-windows theme-name)))
 
+;; also reset icon cache
+;;
 (define reframe-all-clean
   (lambda ()
     (setq icon-table (make-weak-table eq-hash eq))
     (reframe-all)))
 
-(define (reframe-one w)
-  (when (eq (window-get w 'current-frame-style) theme-name)
-    (current-title-w w)
-    (reframe-window w)))
-
-(define (reframe-group w)
-  (when (eq (window-get w 'current-frame-style) theme-name)
-    (map-window-group
-     (lambda (x)
-       (reframe-one x)) w)))
-
-;; create only frames when focus a window don't draw
+;; Create only frames, don't rebuild-frame/reframe-window.
+;; Tabthemes will reframe/rebuild windows call from tabgroup.jl. 
 ;;
-(add-hook 'focus-in-hook create-frames-only)
-(add-hook 'add-window-hook create-frames-only)
-
-(call-after-property-changed '(WM_HINTS WM_NAME _NET_WM_NAME _NET_WM_STATE _NET_WM_DESKTOP) reframe-one)
-
-;; theme-title icon switch
-;;
-;;(call-after-state-changed '(title-position) reframe-one)
-(call-after-state-changed '(title-position) reframe-group)
-
-;; when the window is sent to another workspace
-;; redraw it to update the buttons and titlebar if necessary
-;;
-(add-hook 'remove-from-workspace-hook
-          (lambda (w)
-            (reframe-window w)))
+(call-after-state-changed '(title-position) create-frames-only)
 
 (custom-set-property 'darktab:focused-color ':after-set reframe-all)
 (custom-set-property 'darktab:highlighted-color ':after-set reframe-all)
