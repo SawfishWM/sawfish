@@ -8,6 +8,9 @@
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
+#include "debug.h"
+#include "debug-colors.h"
+
 DEFSTRING(meta_l, "Meta_L");
 DEFSTRING(meta_r, "Meta_R");
 DEFSTRING(alt_l, "Alt_L");
