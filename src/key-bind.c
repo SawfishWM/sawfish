@@ -891,7 +891,9 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
     repv global = Fsymbol_value (Qglobal_keymap, Qt);
     if (rep_SYMBOLP(km))
 	km = Fsymbol_value (km, Qt);
-    for (w = window_list; w != 0; w = w->next)
+   if (debug_keys & DB_KEYS_GRAB)
+      DB(("%s: %s\n", __FUNCTION__, grab?"grab": "ungrab"));
+   for (w = window_list; w != 0; w = w->next) /* in ALL windows ??? */
     {
 	if (!WINDOW_IS_GONE_P (w))
 	{
@@ -910,6 +912,9 @@ grab_keymap_event (repv km, long code, long mods, bool grab)
                      search_keymap(tem, code, mods, 0) :
                      (search_keymap(global, code,  mods, 0))))
                 {
+                    DB(("%s: not Xungrabbing! It is still in %s keymap.\n",
+                        __FUNCTION__,
+                        (km == global) ? "local" : "global"));
                 }
                 else
                 {
