@@ -701,6 +701,9 @@ update_keyboard_mapping (void)
     {
         Lisp_Window *w;
          
+        /* mmc: on start up also! why?*/
+        DB(("Some modifiers changed. We have to ungrab & regrab all keys on all windows\n"));
+         
         /* I would like to do it lazily. That is only when a window is focused! */
         Fgrab_keyboard (Qnil, Qt, Qt);
         for (w = window_list; w != 0; w = w->next)
