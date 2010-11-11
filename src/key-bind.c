@@ -676,8 +676,39 @@ build_lock_mods (void)
 void
 update_keyboard_mapping (void)
 {
+    /* Store the current (i.e. old values) */
+    unsigned long  x_meta_mod, x_alt_mod, x_hyper_mod, x_super_mod;
+
+    x_meta_mod = meta_mod;
+    x_alt_mod = alt_mod;
+    x_hyper_mod = hyper_mod;
+    x_super_mod = super_mod;
+
+    /* now find the new ones: */
     find_meta ();
     build_lock_mods ();
+
+    /* if anything changed, regrab: */
+    if (! ( (x_meta_mod == meta_mod)
+           && (x_alt_mod == alt_mod)
+           && (x_hyper_mod == hyper_mod)
+           && (x_super_mod == super_mod)))
+    {
+        Lisp_Window *w;
+         
+        /* I would like to do it lazily. That is only when a window is focused! */
+        Fgrab_keyboard (Qnil, Qt, Qt);
+        for (w = window_list; w != 0; w = w->next)
+        {
+            if (!WINDOW_IS_GONE_P (w))
+            {
+                grab_window_events (w, FALSE);
+                /* re-grab! */
+                grab_window_events (w, TRUE);
+            }
+        }
+        Fungrab_keyboard ();
+    }
 }
 
 static void
