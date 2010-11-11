@@ -158,7 +158,7 @@
                 (mapcar (lambda (w)
                           (set-frame-style w group-frame-style)
                           (tab-move-resize-frame-window-to w (car pos) (cdr pos) (car dim) (cdr dim)) 
-                          (rebuild-frame w)) wins)))
+                          (reframe-window w)) wins)))
              ((or (eq prop 'move) (eq prop 'resize))
               (let ((dim (window-frame-dimensions win))
                     (pos (window-position win)))
@@ -219,23 +219,24 @@
            ;; adopt group for the new tab
            ;; use sawfish's "default" groups
            (group-id (window-actual-group-id win)))
-      (window-put w 'type group-frame-type)
-      (window-put w 'sticky group-frame-sticky)
-      (window-put w 'depth group-frame-depth)
-      (window-put w 'fixed-position group-frame-fixed-position)
-      (window-put w 'title-position group-frame-title-position)
-      (window-put w 'frame-style group-frame-style)
-      ;; ugly hack, don't know why it's needed, but new groups are
-      ;; listed with pos (0,0):
-      (tab-refresh-group w 'reframe)
-      (tab-refresh-group win 'move)
-      (add-window-to-group w group-id)
-      (tab-put-window-in-group w index)
-      ;;
-      ;; call hook to redraw tablength from theme file
-      (call-window-hook 'window-state-change-hook w (list '(title-position)))
-      (tab-delete-window-from-group w index2)
-      (tab-refresh-group win 'move)))
+      (when (not (eq index index2))
+        (window-put w 'frame-style group-frame-style)
+        (window-put w 'type group-frame-type)
+        (window-put w 'title-position group-frame-title-position)
+        ;; reframe w with new frame-style , type, title-position.
+        ;; tab-move-resize-frame-window-to, tab-refresh-group expectet
+        ;; the same frame for w and win
+        (reframe-window w)
+        (window-put w 'sticky group-frame-sticky)
+        (window-put w 'depth group-frame-depth)
+        (window-put w 'fixed-position group-frame-fixed-position)
+        ;; ugly hack, don't know why it's needed, but new groups are
+        ;; listed with pos (0,0):
+        (tab-refresh-group win 'move)
+        (add-window-to-group w group-id)
+        (tab-put-window-in-group w index)
+        (tab-delete-window-from-group w index2)
+        (tab-refresh-group win 'frame))))
 
   (define (tab-release-window w)
     "Release active window from its group"
@@ -278,20 +279,17 @@
              (lambda (w) (eq w win))
              (tab-group-window-list (tab-find-window win)))) )
 
-  (define (raise-tab-group w)
-    (raise-group w))
-
   (define (tab-group-sticky w)
     (if (window-get w 'sticky)
         (make-group-sticky w)
       (make-group-unsticky w)))
 
   (unless batch-mode
-    ;(add-hook 'focus-in-hook raise-tab-group)
     (add-hook 'window-state-change-hook
               (lambda (win args)
-                (if (= '(sticky) args)
-                    (tab-group-sticky win))))
+                (when (= '(sticky) args)
+                  (tab-group-sticky win)
+                  (tab-refresh-group win 'frame))))
     (add-hook 'window-state-change-hook
               (lambda (win args)
                 (if (= '(fixed-position) args)
@@ -299,6 +297,7 @@
     (add-hook 'window-state-change-hook
               (lambda (win args)
                 (if (= '(frame-style) args)
+                    (adjustment-title win)
                     (tab-refresh-group win 'reframe-style))))
     (add-hook 'window-state-change-hook
               (lambda (win args)
@@ -308,6 +307,7 @@
               (lambda (win args)
                 (if (= '(stacking) args)
                     (tab-refresh-group win 'depth))))
+    (add-hook 'before-move-hook (lambda (win) (adjustment-title win)))
     (add-hook 'after-move-hook (lambda (win) (tab-refresh-group win 'move)))
     (add-hook 'after-resize-hook (lambda (win) (tab-refresh-group win 'resize)))
     ;; only update tabs by move if opaque move mode (opaque = slow)
@@ -317,7 +317,14 @@
       )
     (add-hook 'window-resized-hook (lambda (win) (tab-refresh-group win 'resize)))
     (add-hook 'shade-window-hook (lambda (win) (tab-refresh-group win 'shade)))
-    (add-hook 'unshade-window-hook (lambda (win) (tab-refresh-group win 'unshade)))
+    (add-hook 'unshade-window-hook 
+              (lambda (win) 
+                (adjustment-title win)
+                (tab-refresh-group win 'unshade)))
     (add-hook 'iconify-window-hook (lambda (win) (tab-refresh-group win 'iconify)))
-    (add-hook 'uniconify-window-hook (lambda (win) (tab-refresh-group win 'uniconify)))
+    (add-hook 'uniconify-window-hook 
+              (lambda (win) 
+                (adjustment-title win)
+                (tab-refresh-group win 'uniconify)))
+    (add-hook 'add-to-workspace-hook (lambda (win) (tab-refresh-group win 'frame)))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups)))
