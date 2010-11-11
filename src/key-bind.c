@@ -54,6 +54,7 @@ DEFSYM(super_keysyms, "super-keysyms");
 static unsigned long
 direct_modifiers (unsigned long mods)
 {
+    /* mmc: wm_mod is the bit in X modmap. */
     /* Do this first, since it may contain other indirect mods */
     if (wm_mod != 0 && (mods & EV_MOD_WM))
 	mods = (mods & ~EV_MOD_WM) | wm_mod;
@@ -70,6 +71,7 @@ direct_modifiers (unsigned long mods)
     return mods;
 }
 
+/* why not another struct for modifiers? */
 struct key_def default_mods[] = {
     { "S",	  ShiftMask },
     { "Shift",	  ShiftMask },
