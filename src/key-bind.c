@@ -561,10 +561,20 @@ find_meta(void)
     Fset (Qhyper_keysyms, Qnil);
     Fset (Qsuper_keysyms, Qnil);
 
+    if (debug_keys)
+        DB(("%s: -> XGetKeyboardMapping\n", __FUNCTION__));
+   
     syms = XGetKeyboardMapping(dpy, min_code, max_code - min_code + 1,
 			       &syms_per_code);
+    if (!syms)
+    {
+        DB(("XGetKeyboardMapping failed\n"));
+        exit(-1);
+    }
     mods = XGetModifierMapping(dpy);
 
+    if (debug_keys)
+        DB(("XGetModifierMapping: max_keypermod: %d \n", mods->max_keypermod));
     {
 	int row, col;
 
@@ -587,18 +597,26 @@ find_meta(void)
 		    switch(sym)
 		    {
 		    case XK_Meta_L: case XK_Meta_R:
-			meta_mod = 1 << row;
+                        if (debug_keys)
+                            DB(("\tfound Meta: on keycode: %d, sym %d, -> bit %d, %d-th\n",
+                                code, sym, row, col));
+                        /* found the Real modifier for META */
+                        meta_mod = 1 << row; 
 			meta_syms = Fcons (sym == XK_Meta_L ? rep_VAL(&meta_l)
 					   : rep_VAL(&meta_r), meta_syms);
 			break;
 
 		    case XK_Alt_L: case XK_Alt_R:
+                     if (debug_keys)                              
+                       DB(("\tfound Alt: on keycode: %d, sym %d, -> bit %d, %d-th\n", code, sym, row, col));
 			alt_mod = 1 << row;
 			alt_syms = Fcons (sym == XK_Alt_L ? rep_VAL(&alt_l)
 					  : rep_VAL(&alt_r), alt_syms);
 			break;
 
 		    case XK_Hyper_L: case XK_Hyper_R:
+                     if (debug_keys)
+                       DB(("\tfound Hyper: on keycode: %d, sym %d, -> bit %d, %d-th\n", code, sym, row, col));
 			hyper_mod = 1 << row;
 			hyper_syms = Fcons (sym == XK_Hyper_L
 					    ? rep_VAL(&hyper_l)
@@ -606,6 +624,8 @@ find_meta(void)
 			break;
 
 		    case XK_Super_L: case XK_Super_R:
+                     if (debug_keys)
+                       DB(("\tfound super: on keycode: %d, sym %d, -> bit %d, %d-th\n", code, sym, row, col));
 			super_mod = 1 << row;
 			super_syms = Fcons (sym == XK_Super_L
 					    ? rep_VAL(&super_l)
@@ -613,10 +633,14 @@ find_meta(void)
 			break;
 
 		    case XK_Num_Lock:
+                     if (debug_keys)
+                       DB(("\tfound numlock: on keycode: %d, sym %d, -> bit %d, %d-th\n", code, sym, row, col));
 			num_lock_mod = 1 << row;
 			break;
 
 		    case XK_Scroll_Lock:
+                     if (debug_keys)
+                       DB(("\tfound scroll-loc: on keycode: %d, sym %d, -> bit %d, %d-th\n", code, sym, row, col));
 			scroll_lock_mod = 1 << row;
 			break;
 		    }
