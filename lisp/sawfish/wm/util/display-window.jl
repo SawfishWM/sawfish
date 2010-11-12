@@ -29,7 +29,7 @@
 	  sawfish.wm.workspace
 	  sawfish.wm.custom
 	  sawfish.wm.commands
-	  sawfish.wm.viewport
+	  sawfish.wm.viewport-hi
 	  sawfish.wm.util.stacking
 	  sawfish.wm.state.shading
 	  sawfish.wm.state.iconify

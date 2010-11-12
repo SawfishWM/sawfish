@@ -52,6 +52,7 @@
 	  sawfish.wm.state.transient
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
+	  sawfish.wm.viewport-hi
 	  sawfish.wm.stacking
 	  sawfish.wm.frames)
 
