@@ -591,16 +591,58 @@ a window"
       (call-window-hook 'add-to-workspace-hook w (list new))
       (call-hook 'workspace-state-change-hook)))
 
+  (define (select-workspace-adt old space)
+    ;; Every win has alist of ws -> data  and current data
+    (store-ws old)
+    (let ((order (stacking-order)))     ;why in that order?
+      (mapc (lambda (w)
+              (when (or (window-get w 'sticky)
+                        (window-in-workspace-p w space))
+                (swap-in w space)))
+            order)p)
+    (restore-ws space))
+
+  ;; do the real switch of windows
+  (define (select-workspace-x old-space space)
+    (declare (unused old-space))
+    
+    (let ((order (stacking-order)))
+      ;; the server grabs are just for optimisation (each call to
+      ;; show-window or hide-window may also grab the server semaphore)
+      (with-server-grabbed
+       ;; first map new windows top-to-bottom -- to avoid useless exposures.
+       (mapc (lambda (w)
+               ;; show the new (not sticky)  windows
+               (when (and
+		      ;;(not (window-get w 'sticky)) ; these don't need it
+                      (window-appears-in-workspace-p w space)
+		      ;; a bit hacky: a window can be in a WS but not be placed ??
+                      (window-get w 'placed)) 
+                 (if (window-viewable-p w)
+                     (progn
+                       (show-window w))
+                   (hide-window w))))
+             order)
+       ;; then unmap old-windows bottom-to-top
+       (mapc (lambda (w)
+               (when (and
+                      (not (window-appears-in-workspace-p w space))
+                      (window-get w 'placed))
+                 (hide-window w)))
+             (nreverse order)))))
+
+
   ;; switch to workspace with id SPACE
-  (define (select-workspace* space #!key dont-focus inner-thunk force)
+  (define (select-workspace space #!optional dont-focus inner-thunk)
     "Activate workspace number SPACE (from zero)."
-    (when (or force (/= current-workspace space))
+    (unless (= current-workspace space)
       (when current-workspace
 	(call-hook 'leave-workspace-hook (list current-workspace)))
-      (let ((order (stacking-order)))
+      (let ((old-space current-workspace))
 
 	;; install the new workspace id
 	(setq current-workspace space)
+        (select-workspace-adt old-space space)
 
 	;; this used to be called between unmapping old windows and
 	;; mapping new windows, but we don't do that anymore. This
@@ -608,28 +650,8 @@ a window"
 	(when inner-thunk
 	  (inner-thunk))
 
-	;; the server grabs are just for optimisation (each call to
-	;; show-window or hide-window may also grab the server semaphore)
-	(with-server-grabbed
-
-	 ;; first map new windows top-to-bottom
-	 (mapc (lambda (w)
-		 (when (window-appears-in-workspace-p w current-workspace)
-		   (swap-in w current-workspace))
-		 (when (and (window-appears-in-workspace-p w current-workspace)
-			    (window-get w 'placed))
-		   (if (window-viewable-p w)
-		       (show-window w)
-		     (hide-window w))))
-	       order)
-
-	 ;; then unmap old-windows bottom-to-top
-	 (mapc (lambda (w)
-		 (when (and (not (window-appears-in-workspace-p
-				  w current-workspace))
-			    (window-get w 'placed))
-		   (hide-window w)))
-	       (nreverse order)))
+	;; unmap & map:
+	(select-workspace-x old-space space)
 
 	;; focus the correct window in the new workspace
 	(unless (or dont-focus (eq focus-mode 'enter-exit))
@@ -641,9 +663,6 @@ a window"
 	  (call-hook 'enter-workspace-hook (list current-workspace)))
 	(call-hook 'workspace-state-change-hook))))
 
-  (define (select-workspace space #!optional dont-focus inner-thunk)
-    (select-workspace* space #:dont-focus dont-focus
-                       #:inner-thunk inner-thunk))
 
   ;; return a list of all windows on workspace index SPACE
   (define (workspace-windows
@@ -943,13 +962,13 @@ last instance remaining, then delete the actual window."
     "Hide all windows except the desktop window."
     (unless showing-desktop
       (setq showing-desktop t)
-      (select-workspace* current-workspace #:force t)))
+      (select-workspace current-workspace)))
 
   (define (hide-desktop)
     "Undoes the effect of the `show-desktop' command."
     (when showing-desktop
       (setq showing-desktop nil)
-      (select-workspace* current-workspace #:force t)))
+      (select-workspace current-workspace)))
 
   (define (showing-desktop-p)
     "Returns true when in `showing desktop' mode."
