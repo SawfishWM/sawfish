@@ -145,8 +145,10 @@ a window"
   ;; Currently active workspace, an integer
   (define current-workspace 0)
 
-  (define first-interesting-workspace nil)
-  (define last-interesting-workspace nil)
+  (defvar current-workspace 0 "Currently active workspace, an integer")
+
+  (defvar first-interesting-workspace nil)
+  (defvar last-interesting-workspace nil)
 
   (defvar static-workspace-menus
     `((,(_ "_Insert workspace") insert-workspace-after)
@@ -171,12 +173,11 @@ a window"
   (defvar remove-from-workspace-hook '())
 
   ;; window properties whose values may differ on different workspaces
-  (define workspace-local-properties '())
+  (defvar workspace-local-properties '())
 
   ;; true when in "show desktop" mode
-  (define showing-desktop nil)
-
 ;;; Workspace ``swapping''
+  (defvar showing-desktop nil)
 
   ;; Property swapping is done on demand, and for each window
   ;; individually. This ensures that only the minimum required data is
