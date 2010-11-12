@@ -62,7 +62,7 @@
   (defconst _NET_WM_STATE_ADD 1)
   (defconst _NET_WM_STATE_TOGGLE 2)
 
-  (define wm-spec-window-id nil)
+  (defvar wm-spec-window-id nil)
 
   (define supported-atoms
     [_NET_ACTIVE_WINDOW
