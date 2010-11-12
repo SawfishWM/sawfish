@@ -36,10 +36,10 @@
   (define-structure-alias window-order sawfish.wm.util.window-order)
 
   ;; window order high-water-mark
-  (define window-order-highest 1)
+  (defvar window-order-highest 1)
 
   ;; return windows in MRU order
-  (define (window-order #!optional workspace allow-iconified all-viewports)
+  (define (window-order #!optional workspace allow-iconified all-viewports general-filter)
     (let ((windows (managed-windows)))
       (setq windows (delete-if (lambda (w)
 				 (or (not (window-mapped-p w))
@@ -50,8 +50,22 @@
 					  (not (window-appears-in-workspace-p
 						w workspace)))))
 			       windows))
-      (unless all-viewports
+      (cond
+       ((not all-viewports)
 	(setq windows (delete-if window-outside-viewport-p windows)))
+       ((and
+	 ;; all-viewports is  (xx . yy)
+	 ;; then see if it is in the viewport given by those start coordinates
+	 (consp all-viewports)
+	 (integerp (car all-viewports))
+	 (integerp (cdr all-viewports)))
+	(setq windows
+	      (delete-if (lambda (w)
+			   (window-outside-shifted-viewport-p w all-viewports))
+		windows))))
+      
+      (if general-filter
+          (setq windows (delete-if general-filter windows)))
       (sort windows (lambda (x y)
 		      (setq x (window-get x 'order))
 		      (setq y (window-get y 'order))
