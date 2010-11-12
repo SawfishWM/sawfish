@@ -488,9 +488,8 @@
                          ((shaped-transient) shaped-transient-frame))))
 
 (define (create-frames-only w)
-  (lambda ()
     (when (eq (window-get w 'current-frame-style) 'Elberg-tabbed)
-      (create-frames))))
+      (create-frames)))
 
 ;; Create only frames, don't rebuild-frame/reframe-window.
 ;; Tabthemes will reframe/rebuild windows call from tabgroup.jl.
