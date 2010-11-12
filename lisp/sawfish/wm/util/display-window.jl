@@ -57,10 +57,14 @@ unshaded if necessary."
 		(not (window-in-workspace-p w preferred-space)))
 	(setq preferred-space
 	      (nearest-workspace-with-window w current-workspace)))
-      (when preferred-space
-	(select-workspace preferred-space will-refocus))
-      (move-viewport-to-window w)
-      (move-window-to-current-viewport w)
+      (if preferred-space
+          (select-workspace preferred-space will-refocus
+                            (lambda ()
+                              (raise-window* w)
+                              (move-viewport-to-window w)
+			      ;;(set-screen-viewport col row))
+			      ))
+	(move-viewport-to-window w))
       (when (and unshade-selected-windows (window-get w 'shaded))
 	(unshade-window w))))
 
@@ -82,10 +86,11 @@ unshaded if necessary."
     "Do everything necessary to make window W ready for user,
 i.e. display, focus, etc."
     (when w
-      (display-window-without-focusing
-       w preferred-space
-       #:will-refocus (window-really-wants-input-p w))
-      (activate-window w)))
+      (with-server-grabbed
+       (display-window-without-focusing
+	w preferred-space
+	#:will-refocus (window-really-wants-input-p w))
+      (activate-window w))))
 
   (define-command 'display-window display-window
     #:spec (lambda ()
