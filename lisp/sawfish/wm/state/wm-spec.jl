@@ -216,7 +216,7 @@
 	      (if (= i total-workspaces)
 		  (set-x-property 'root '_NET_DESKTOP_VIEWPORT
 				  view 'CARDINAL 32)
-		(if (eq i current-workspace)
+		(if (= i current-workspace)
 		    (progn
 		      (aset view (* i 2) (* (car port) (screen-width)))
 		      (aset view (1+ (* i 2)) (* (cdr port)
