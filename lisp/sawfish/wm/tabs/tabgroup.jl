@@ -164,7 +164,7 @@
                     (pos (window-position win)))
                 (mapcar (lambda (w)
                           (tab-move-resize-frame-window-to w (car pos) (cdr pos) (car dim) (cdr dim))
-                          (reframe-window w)) wins)
+                          (rebuild-frame w)) wins)
                 (rplaca (nthcdr index tab-groups)
                         (tab-build-group pos dim wins))))
              ((eq prop 'fixed-position)
