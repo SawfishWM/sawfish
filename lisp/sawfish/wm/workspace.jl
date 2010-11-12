@@ -68,6 +68,7 @@
 	    workspace-limits
 	    workspace-id-to-logical
 	    workspace-id-from-logical
+	    workspace-name
 	    move-window-to-workspace
 	    copy-window-to-workspace
 	    insert-workspace
@@ -115,7 +116,13 @@
 	  sawfish.wm.commands
 	  sawfish.wm.custom
 	  sawfish.wm.session.init
-	  sawfish.wm.commands.launcher)
+	  sawfish.wm.commands.launcher
+
+          sawfish.wm.adt
+	  sawfish.wm.viewport
+	  sawfish.wm.viewport-hi
+          sawfish.wm.util.x
+	  )
 
 ;;; Options and variables
 
@@ -142,8 +149,21 @@ a window"
     :type boolean
     :group workspace)
 
-  ;; Currently active workspace, an integer
-  (define current-workspace 0)
+  ;; How to identify workspaces:
+  ;; WS were previously implemented mainly by storing numbers into properties of Windows.
+  ;; I now added a list of objects (records) --- ws-list
+  ;; That way, I can keep all the information in 1 place, rather than in separate lists:
+  ;; name, current vieport
+
+
+  ;; How a WS can be identified:
+  ;; * Numbering  SF starts w/ 1 WS  0.  you may add both ....-1 and 1.....
+  ;;    This is used in data: windows have these indexes associated.
+  ;; * logical: workspace-id-to-logical 0 1 ....  it's the position in an (ordered) list.
+  ;;   Hyper-F1 should switch to which one?
+  ;; * User numbering: user should indicate numers  1 2 ....
+  ;;             so there is a conversion function   1-  !
+  ;; * names
 
   (defvar current-workspace 0 "Currently active workspace, an integer")
 
@@ -176,8 +196,60 @@ a window"
   (defvar workspace-local-properties '())
 
   ;; true when in "show desktop" mode
-;;; Workspace ``swapping''
   (defvar showing-desktop nil)
+
+;;; Workspace ``swapping'':
+  (define (set-nth! list n value)
+    (rplaca (nthcdr n list) value))
+
+  ;; ADT: infinite array ?
+  (define (nth-or-create n list new)
+    ;; wrong API. Should take a procedure to create, rather than a value.
+    ;; list must be NOT VOID:
+    (let ((available (length list)))
+      (if (<= available n)
+          (let ((complement (make-list (+ 1 (- n available)) new))) ; make the intermediate
+            (nconc list complement)))
+      (nth n list)))
+
+  ;; given workspaces-names ... make the ADT for current WSs
+  (defvar ws-list
+    (let ((wlist
+	   (mapcar make-workspace workspace-names)))
+      (if (null wlist)
+	  (list (make-workspace))
+	wlist)))
+
+  (define (ws->ws n)
+    ;; get the WS object from number
+    (let* ((real-index (workspace-id-to-logical n))
+           (ws (nth-or-create real-index
+			      ws-list #f)))
+      (unless (workspace? ws)
+        (setq ws (make-workspace))
+        (set-nth! ws-list n ws))
+      ws))
+
+  ;; before leaving WS:
+  (define (store-ws n)
+    (let* ((ws (ws->ws n))
+           (vp (viewport-of ws)))
+      (unless (viewport? vp)
+        (setq vp (make-viewport))
+        (set-viewport! ws vp))
+      (save-current-viewport vp)))
+
+  ;; entering:
+  (define (restore-ws n)
+    (let* ((ws (ws->ws n))
+           (vp (viewport-of ws)))
+      (if (viewport? vp)
+          (restore-current-viewport vp))))
+
+  (define (workspace-name ws)
+    ;;(message (format #f "workspace-name %d" ws))
+    (or (nth ws workspace-names)
+        (format nil (_ "Workspace %d") ws)))
 
   ;; Property swapping is done on demand, and for each window
   ;; individually. This ensures that only the minimum required data is
