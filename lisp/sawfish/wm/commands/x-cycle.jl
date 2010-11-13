@@ -352,9 +352,24 @@ Any extra arguments are passed to each call to define-command."
     'cycle-among-groups 'cycle-among-groups-backwards
     (lambda ()
       "Only cycle the top members of each group."
-      (delete-if-not window-in-cycle-p
-                     (mapcar (lambda (gid) (car (windows-by-group gid t)))
-                             (window-group-ids)))))
+      (let loop
+	  ((wl (window-order
+		(if cycle-all-workspaces
+		    nil
+		  current-workspace)
+		cycle-include-iconified cycle-all-viewports))
+	   grps
+	   retval)
+	(when (and (window-in-cycle-p (car wl))
+		   (not (memq (window-group-id (car wl)) grps)))
+	  (when (window-group-id (car wl))
+	    ;; Some windows don't have group.
+	    (setq grps (cons (window-group-id (car wl)) grps)))
+	  (setq retval (cons (car wl) retval)))
+	(if (cdr wl)
+	    (loop (cdr wl) grps retval)
+	  (nreverse retval)
+	  ))))
 
   (define-cycle-command-pair
     'cycle-prefix 'cycle-prefix-backwards
