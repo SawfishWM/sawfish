@@ -5565,8 +5565,9 @@ keyboard or mouse event.
 
 @defun synthesize-event event window &optional propagate
 Generate a synthetic key press or button press and send it to the X
-window bound to the @var{window} object.  This press is automatically
-followed by the appropriate release event.
+window bound to the @var{window} object. Pass the symbol @code{root}
+for the root window. This press is automatically followed by the
+appropriate release event.
 
 The current pointer position becomes the position of the event.
 
