@@ -688,5 +688,6 @@ generate.")
 
   (sm-add-saved-properties 'ignored 'frame-style)
   (sm-add-restored-properties 'type)
-  (add-swapped-properties 'frame-active-color 'frame-inactive-color)
+  ;; dependency cycle
+  ; (add-swapped-properties 'frame-active-color 'frame-inactive-color)
   )

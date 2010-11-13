@@ -498,4 +498,5 @@ lowest possible position. Otherwise raise it as far as allowed."
   (add-hook 'map-notify-hook restack-window t)
 
   (sm-add-saved-properties 'depth)
-  (add-swapped-properties 'depth))
+  ;(add-swapped-properties 'depth)
+)
