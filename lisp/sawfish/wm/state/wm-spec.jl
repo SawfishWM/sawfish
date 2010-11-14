@@ -28,6 +28,8 @@
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.windows
+
+	  sawfish.wm.adt
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
 	  sawfish.wm.state.iconify
@@ -163,6 +165,7 @@
 	  (delete-x-property w '_NET_WM_DESTOP))
 	(window-put w 'wm-spec/last-workspace vec))))
 
+#|
   (define (update-workspace-hints)
     (let* ((limits (workspace-limits))
 	   (port (screen-viewport))
@@ -259,6 +262,114 @@
 
       (when (>= last-workspace-count total-workspaces)
 	(set-ws-hints))))
+|#
+
+(define (update-workspace-hints)
+    (let* ((limits (workspace-limits))
+           (port (screen-viewport))
+           (port-size viewport-dimensions)
+           (total-workspaces (1+ (- (cdr limits) (car limits))))
+           (workarea (make-vector (* 4 total-workspaces)))
+           (showing-desktop (showing-desktop-p)))
+
+      (define (set-ws-hints)
+        ;; _NET_NUMBER_OF_DESKTOPS
+        (unless (equal last-workspace-count total-workspaces)
+          (setq last-workspace-count total-workspaces)
+          (set-x-property 'root '_NET_NUMBER_OF_DESKTOPS
+                          (vector total-workspaces) 'CARDINAL 32))
+
+        ;; _NET_DESKTOP_NAMES
+        (unless (equal last-workspace-names workspace-names)
+          (setq last-workspace-names
+                (apply list workspace-names)) ;fixme: i change the names in place !!
+          (message "sending ws names")
+          (set-x-text-property 'root '_NET_DESKTOP_NAMES
+                               (apply vector workspace-names)
+                               'UTF8_STRING))
+
+        ;; _NET_CURRENT_DESKTOP
+        (unless (equal last-workspace
+                       (- current-workspace (car limits)))
+          (setq last-workspace (- current-workspace (car limits)))
+          (set-x-property 'root '_NET_CURRENT_DESKTOP
+                          (vector last-workspace) 'CARDINAL 32))
+
+        ;; _NET_DESKTOP_GEOMETRY
+        (unless (equal last-area-count port-size)
+          (setq last-area-count port-size)
+          (set-x-property 'root '_NET_DESKTOP_GEOMETRY
+                          (vector (* (car port-size) (screen-width))
+                                  (* (cdr port-size) (screen-height)))
+                          'CARDINAL 32))
+
+        ;; _NET_DESKTOP_VIEWPORT
+        ;; mmc: fixme: too often!
+        (when #t                      ;mmc (equal last-area port)
+          (let ((view (make-vector (* total-workspaces 2) 0)))
+            (let loop ((i 0))
+                 (if (= i total-workspaces)
+                     (progn
+                       ;(DB "sending vp positions %s\n" view)
+                       (set-x-property 'root '_NET_DESKTOP_VIEWPORT
+                                       view 'CARDINAL 32))
+                   ;; ws-list
+                   (if (and
+                        (nth i ws-list)
+                        (workspace? (nth i ws-list))
+                        (viewport? (viewport-of (nth i ws-list))))
+                       (let ((v (viewport-of (nth i ws-list))))
+                         (if (= i current-workspace)
+                             (progn
+                               (aset view (* i 2)        (* (car port) (screen-width)))
+                               (aset view (1+ (* i 2))   (* (cdr port)
+							    (screen-height))))
+                           (progn
+                             (aset view (* i 2)        (x-of v))
+                             (aset view (1+ (* i 2))   (y-of v)))
+                           '(message (format #f "using adt! %d %d"
+                                            (aref view (* i 2))
+                                            (aref view (1+ (* i 2)))))))
+		     ;; else:
+		     ;;(message "NOT using adt!!")
+                     (aset view (* i 2) (* (car port) (screen-width)))
+                     (aset view (1+ (* i 2)) (* (cdr port) (screen-height))))
+                   (loop (1+ i))))))
+
+        ;; _NET_WORKAREA
+        (unless (equal last-workarea workarea)
+          (set-x-property 'root '_NET_WORKAREA workarea 'CARDINAL 32)
+          (setq last-workarea workarea))
+
+        ;; _NET_SHOWING_DESKTOP
+        (unless (equal showing-desktop last-showing-desktop)
+          (set-x-property 'root '_NET_SHOWING_DESKTOP
+                          (vector (if showing-desktop 1 0)) 'CARDINAL 32)
+          (setq last-showing-desktop showing-desktop)))
+
+      (define (set-window-hints w)
+        (update-window-workspace-hints w #:limits limits))
+
+;; calculate workareas
+      (do ((i 0 (1+ i)))
+          ((= i total-workspaces))
+        (let ((area (calculate-workarea-from-struts
+                     #:workspace (+ i (car limits)))))
+          (aset workarea (+ (* i 4) 0) (nth 0 area))
+          (aset workarea (+ (* i 4) 1) (nth 1 area))
+          (aset workarea (+ (* i 4) 2) (- (nth 2 area) (nth 0 area)))
+          (aset workarea (+ (* i 4) 3) (- (nth 3 area) (nth 1 area)))))
+		 
+;; apparently some pagers don't like it if we place windows
+;; on (temporarily) non-existent workspaces
+      (when (< last-workspace-count total-workspaces)
+        (set-ws-hints))
+
+;; mmc:    w/o this   H-x restart will lose the WS -> window mapping !!
+      (map-windows set-window-hints)
+
+      (when (>= last-workspace-count total-workspaces)
+        (set-ws-hints))))
 
 ;;; setting the focus hints
 
