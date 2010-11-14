@@ -825,8 +825,13 @@ map_request (XEvent *ev)
 	XMapWindow (dpy, w->id);
     }
 
-    if (w->visible)
+    if (w->visible) {
+        if (debug_windows){
+            DB(("%s %s-> %s XMapWindow %x %s(frame)\n",map_request_color, __FUNCTION__,
+                color_reset, w->frame, rep_STR(VWIN(w)->name)));
+        }
 	XMapWindow (dpy, w->frame);
+    }
 
     if (w->client_unmapped)
 	/* wouldn't happen otherwise */
