@@ -599,7 +599,7 @@ a window"
               (when (or (window-get w 'sticky)
                         (window-in-workspace-p w space))
                 (swap-in w space)))
-            order)p)
+            order))
     (restore-ws space))
 
   ;; do the real switch of windows
