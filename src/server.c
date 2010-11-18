@@ -88,7 +88,7 @@ server_handle_request(int fd)
 	goto disconnect;
 
     /* Need this in case the client code tries to execute a grab */
-    save_timestamp (get_server_timestamp ());
+    save_timestamp (CurrentTime);
 
     switch(req)
     {

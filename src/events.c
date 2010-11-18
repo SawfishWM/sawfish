@@ -51,7 +51,9 @@ static int button_press_mouse_x = -1, button_press_mouse_y = -1;
 static Window button_press_window;
 static bool pointer_in_motion;
 
-/* Most recently seen server timestamp. */
+/* Most recently seen server timestamp.
+ * todo: should be per-input-device. This is only for Focus/Grab handling.
+ * And we don't guarantee they all arrive with the same timeout.*/
 Time last_event_time;
 
 /* Current XEvent or a null pointer */
@@ -151,24 +153,8 @@ subtract_timestamps (Time t2, Time t1)
 void
 save_timestamp (Time t)
 {
-    if (subtract_timestamps (t, last_event_time) >= 0)
-	last_event_time = t;
-    else
-    {
-	Time real = get_server_timestamp ();
-
-	/* If the difference between T and the real server time is
-	   less than that between LAST-EVENT-TIME and the server time,
-	   then set LAST-EVENT-TIME to T. */
-
-	if (labs (subtract_timestamps (real, t))
-	    < labs (subtract_timestamps (real, last_event_time)))
-	{
-	    last_event_time = t;
-	}
-    }
-
-    DB(("  last_event_time=%lu\n", last_event_time));
+    last_event_time = t;
+    return;
 }
 
 /* Where possible record the timestamp from event EV */
@@ -184,6 +170,7 @@ record_event_time (XEvent *ev)
 
     case ButtonPress:
     case ButtonRelease:
+        // these times are per device!
 	save_timestamp (ev->xbutton.time);
 	break;
 
@@ -193,11 +180,11 @@ record_event_time (XEvent *ev)
 
     case EnterNotify:
     case LeaveNotify:
-	save_timestamp (ev->xcrossing.time);
+	// save_timestamp (ev->xcrossing.time);
 	break;
 
     case PropertyNotify:
-	save_timestamp (ev->xproperty.time);
+	// save_timestamp (ev->xproperty.time);
 	break;
     }
 }
@@ -796,8 +783,9 @@ static void
 reparent_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xreparent.window);
-    if (w != 0 && ev->xreparent.window == w->id
-	&& ev->xreparent.event == w->id)
+
+    if (w != 0 && !WINDOW_IS_GONE_P(w)
+	&& (ev->xreparent.event == ev->xreparent.window))
     {
 	if (ev->xreparent.parent != root_window
 	    && ev->xreparent.parent != w->frame)
@@ -840,8 +828,7 @@ static void
 unmap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
-    if (w != 0 && ev->xunmap.window == w->id
-	&& (ev->xunmap.event == w->id || ev->xunmap.send_event))
+    if (w)
     {
 	int being_reparented = FALSE;
 	XEvent reparent_ev;
@@ -1092,7 +1079,7 @@ configure_request (XEvent *ev)
 	xwc.stack_mode = ev->xconfigurerequest.detail;
 	XConfigureWindow (dpy, ev->xconfigurerequest.window, xwcm, &xwc);
     }
-    else if (w != 0)
+    else
     {
 	unsigned long mask = ev->xconfigurerequest.value_mask;
 	repv alist = Qnil;
@@ -1435,17 +1422,6 @@ inner_handle_input (repv arg)
 void
 handle_input_mask(long mask)
 {
-    static time_t last_time;
-
-    time_t current_time = time (0);
-    if (current_time < last_time)
-    {
-	/* Hmm. Looks like the clock's been turned backwards. Refetch the
-	   server timestamp so we don't ignore any following timestamps */
-	last_event_time = get_server_timestamp ();
-    }
-    last_time = current_time;
-
     /* Read all events in the input queue. */
     while(rep_throw_value == rep_NULL)
     {
@@ -1503,7 +1479,18 @@ handle_input_mask(long mask)
 void
 handle_sync_input (int fd)
 {
-    handle_input_mask (0);
+    while ((rep_throw_value == rep_NULL)
+           && (XEventsQueued(dpy, QueuedAfterFlush)))
+        handle_input_mask (0);
+    /* This might exit due to Exception.
+     * But some event might still be alread read, yet to be processed. */
+    if (rep_throw_value != rep_NULL)
+    {
+        if (XEventsQueued(dpy, QueuedAlready))
+        {
+            rep_mark_input_pending (ConnectionNumber(dpy));
+        };
+    }
 }
 
 /* Lisp functions */
