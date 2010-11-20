@@ -43,7 +43,8 @@
 
   (defcustom edge-actions-delay 250
     "Delay (in miliseconds) before the edges are activated.
-hot-spots are activated in half that time."
+hot-spots are activated in half that time, viewport-drag is
+activated immediately, aswell as actions for while-moving a window."
     :group edge-actions
     :type number
     :range (50 . nil))
