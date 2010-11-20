@@ -147,8 +147,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
        (format (stderr-file) "error in local config--> %S\n" error-data))))
 
   ;; generate apps-menu from *.desktop files
+  ;; initialize the screen-edges
   (unless batch-mode
-    (init-apps-menu))
+    (init-apps-menu)
+    (edges-activate t))
 
   ;; apply customized font-colors
   (if use-custom-font-color

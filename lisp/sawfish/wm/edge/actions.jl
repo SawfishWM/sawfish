@@ -38,9 +38,6 @@
   (define func nil)
   (define no-enter nil)
 
-  ;; initialize the screen edges
-  (edges-activate t)
-
   (defcustom edge-actions-delay 250
     "Delay (in miliseconds) before the edges are activated.
 hot-spots are activated in half that time, viewport-drag is
