@@ -46,43 +46,23 @@ activated immediately, aswell as actions for while-moving a window."
     :type number
     :range (50 . nil))
 
-  (defcustom left-edge-func 'none
-    "Action for the left screen-edge."
+  (defcustom left-right-edge-func 'none
+    "Action for the left and right screen-edge."
     :group edge-actions
     :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
-  (defcustom left-edge-move-func 'none
-    "Action for the left screen-edge while moving a window."
+  (defcustom left-right-edge-move-func 'none
+    "Action for the left and right screen-edge while moving a window."
     :group edge-actions
     :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
-  (defcustom top-edge-func 'none
-    "Action for the top screen-edge."
+  (defcustom top-bottom-edge-func 'none
+    "Action for the top and bottom screen-edge."
     :group edge-actions
     :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
-  (defcustom top-edge-move-func 'none
-    "Action for the top screen-edge while moving."
-    :group edge-actions
-    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
-
-  (defcustom right-edge-func 'none
-    "Action for the right screen-edge."
-    :group edge-actions
-    :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
-
-  (defcustom right-edge-move-func 'none
-    "Action for the right screen-edge."
-    :group edge-actions
-    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
-
-  (defcustom bottom-edge-func 'none
-    "Action for the bottom screen-edge."
-    :group edge-actions
-    :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
-
-  (defcustom bottom-edge-move-func 'none
-    "Action for the bottom screen-edge while moving."
+  (defcustom top-bottom-edge-move-func 'none
+    "Action for the top and bottom screen-edge while moving."
     :group edge-actions
     :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
 
@@ -116,27 +96,23 @@ activated immediately, aswell as actions for while-moving a window."
 	  (if corner
 	      (hot-spot-activate corner)
 	    (setq func nil)
-	    (cond ((eq edge 'left)
-	           (edge-action-call left-edge-func edge))
-	          ((eq edge 'right)
-		   (edge-action-call right-edge-func edge))
-		  ((eq edge 'top)
-		   (edge-action-call top-edge-func edge))
-		  ((eq edge 'bottom)
-		   (edge-action-call bottom-edge-func edge)))))))
+	    (cond ((or (eq edge 'left)
+		       (eq edge 'right))
+	           (edge-action-call left-right-edge-func edge))
+		  ((or (eq edge 'top)
+		       (eq edge 'bottom))
+		   (edge-action-call top-bottom-edge-func edge)))))))
 
   (define (edge-action-move-init)
     (setq func nil)
     (setq no-enter t)
-    (case (get-active-edge)
-      ((left)
-       (edge-action-call left-edge-move-func 'left))
-      ((right)
-       (edge-action-call right-edge-move-func 'right))
-      ((top)
-       (edge-action-call top-edge-move-func 'top))
-      ((bottom)
-       (edge-action-call bottom-edge-move-func 'bottom)))
+    (let ((edge (get-active-edge)))
+      (cond ((or (eq edge 'left)
+		 (eq edge 'right))
+	     (edge-action-call left-right-edge-move-func edge))
+	    ((or (eq edge 'top)
+		 (eq edge 'bottom))
+	     (edge-action-call top-bottom-edge-move-func edge))))
     (setq no-enter nil))
 
   (define (edges-activate init)
