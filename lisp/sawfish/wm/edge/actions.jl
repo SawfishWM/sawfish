@@ -94,7 +94,11 @@ activated immediately, aswell as actions for while-moving a window."
       (let ((corner (get-active-corner))
 	    (edge (get-active-edge)))
 	  (if corner
-	      (hot-spot-activate corner)
+	      ;; halve the delay for hot-spots
+	      (make-timer (lambda ()
+		  (hot-spot-activate corner))
+		(quotient edge-actions-delay 2000)
+		(mod edge-actions-delay 2000))
 	    (setq func nil)
 	    (cond ((or (eq edge 'left)
 		       (eq edge 'right))
