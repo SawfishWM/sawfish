@@ -38,14 +38,12 @@
   (define func nil)
   (define no-enter nil)
 
-  (defcustom edge-actions-enabled nil
-    "Activate the screen-edges."
-    :group edge-actions
-    :type boolean
-    :after-set (lambda () (edges-activate)))
+  ;; initialize the screen edges
+  (edges-activate t)
 
   (defcustom edge-actions-delay 250
-    "Delay (in miliseconds) before the edges are activated."
+    "Delay (in miliseconds) before the edges are activated.
+hot-spots are activated in half that time."
     :group edge-actions
     :type number
     :range (50 . nil))
@@ -131,8 +129,8 @@
        (edge-action-call bottom-edge-move-func 'bottom)))
     (setq no-enter nil))
 
-  (define (edges-activate)
-    (if edge-actions-enabled
+  (define (edges-activate init)
+    (if init
 	(progn
 	  (flippers-activate t)
 	  (unless (in-hook-p 'enter-flipper-hook edge-action-init)
