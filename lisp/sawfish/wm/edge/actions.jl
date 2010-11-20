@@ -91,13 +91,25 @@ hot-spots are activated in half that time."
   (define (edge-action-call func edge)
     (case func
       ((hot-spot)
-       (hot-spot-activate edge))
+       ;; halve the edge delay for hot-spots
+       (make-timer (lambda ()
+           (hot-spot-activate edge))
+	 (quotient edge-actions-delay 2000)
+	 (mod edge-actions-delay 2000)))
       ((viewport-drag)
+       ;; no delay for viewport-drag
        (viewport-drag-activate edge))
+      ;; full delay for flipping
       ((flip-workspace)
-       (edge-flip-activate edge 'workspace))
+       (make-timer (lambda ()
+	   (edge-flip-activate edge 'workspace))
+	 (quotient edge-actions-delay 1000)
+	 (mod edge-actions-delay 1000)))
       ((flip-viewport)
-       (edge-flip-activate edge 'viewport))))
+       (make-timer (lambda ()
+           (edge-flip-activate edge 'viewport))
+	 (quotient edge-actions-delay 1000)
+	 (mod edge-actions-delay 1000)))))
 
   (define (edge-action-init)
     (unless no-enter
