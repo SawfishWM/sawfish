@@ -42,7 +42,7 @@
     "Activate the screen-edges."
     :group edge-actions
     :type boolean
-    :after-set (lambda () edges-activate))
+    :after-set (lambda () (edges-activate)))
 
   (defcustom edge-actions-delay 250
     "Delay (in miliseconds) before the edges are activated."
