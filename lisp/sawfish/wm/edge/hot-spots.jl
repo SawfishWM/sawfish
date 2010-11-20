@@ -33,28 +33,28 @@
 
   (define-structure-alias hot-spots sawfish.wm.edge.hot-spots)
 
-  (defvar left-edge-program nil
+  (defvar left-edge-program (lambda () t)
     "The program launched when hitting the left-edge.")
 
-  (defvar top-left-corner-program nil
+  (defvar top-left-corner-program (lambda () t)
     "The program launched when hitting the top-left-corner.")
 
-  (defvar top-edge-program nil
+  (defvar top-edge-program (lambda () t)
     "The program launched when hitting the top-edge.")
 
-  (defvar top-right-corner-program nil
+  (defvar top-right-corner-program (lambda () t)
     "The program launched when hitting the top-right-corner.")
 
-  (defvar right-edge-program nil
+  (defvar right-edge-program (lambda () t)
     "The program launched when hitting the right-edge.")
 
-  (defvar bottom-right-corner-program nil
+  (defvar bottom-right-corner-program (lambda () t)
     "The program launched when hitting the bottom-right-corner.")
 
-  (defvar bottom-edge-program nil
+  (defvar bottom-edge-program (lambda () t)
     "The program launched when hitting the bottom-edge.")
 
-  (defvar bottom-left-corner-program nil
+  (defvar bottom-left-corner-program (lambda () t)
     "The program launched when hitting the bottom-left-corner.")
 
   (define (hot-spot-activate spot)
