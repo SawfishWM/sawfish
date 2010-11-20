@@ -87,7 +87,8 @@
 			 sawfish.wm.state.iconify
 			 sawfish.wm.state.ignored
 			 sawfish.wm.server
-			 sawfish.wm.state.wm-spec))
+			 sawfish.wm.state.wm-spec
+			 sawfish.wm.edge.actions))
 
 ;; create the exports from sawfish.wm
 (open-structures '(sawfish.wm.colors
@@ -112,7 +113,8 @@
 		   sawfish.wm.state.iconify
 		   sawfish.wm.state.shading
 		   sawfish.wm.state.transient
-		   sawfish.wm.state.ignored))
+		   sawfish.wm.state.ignored
+		   sawfish.wm.edge.actions))
 
 ;; Bindings in these modules are exported by sawfish.wm on behalf of
 ;; them. User scripts have to import only sawfish.wm for core functions.
@@ -140,7 +142,8 @@
 		    (structure-interface sawfish.wm.state.iconify)
 		    (structure-interface sawfish.wm.state.shading)
 		    (structure-interface sawfish.wm.state.transient)
-		    (structure-interface sawfish.wm.state.ignored))))
+		    (structure-interface sawfish.wm.state.ignored)
+		    (structure-interface sawfish.wm.edge.actions))))
 
 (let ((sawfish-load-all (lambda (s)
 			  ;; ensure files are loaded in the correct structure
