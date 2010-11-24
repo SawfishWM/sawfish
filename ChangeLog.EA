@@ -1,3 +1,22 @@
+2010-11-20  Christopher Bratusek <zanghar@freent.de>
+	* lisp/sawfish/wm.jl: load & export edge-actions from here
+
+	* lisp/sawfish/wm/user.jl: init flippers from here automatically
+
+	* lisp/sawfish/wm/edge/hot-spots.jl: improved fallback values for
+	actions (no error messages with latest edge-actions)
+
+	* lisp/sawfish/wm/edge/actions.jl: removed edge-actions-enabled option
+					   simplified the code a bit
+					   combined actions for left & right edge
+					   combined actions for top & bottom edge
+					   also delay Hot-Spots for corners
+					   string-change for delay option
+					   changed in the action delay:
+					   	- Viewport-Drag = no delay
+						- Hot-Spot = half delay
+						- Edge-Flip = full delay
+
 2010-11-13  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/edge/hot-spots.jl: simplified hot-spots (now only takes funcs)
 
