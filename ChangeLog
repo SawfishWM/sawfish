@@ -1,3 +1,25 @@
+2010-11-27  Teika kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands.jl
+	* man/news.texi: Minor bugfix of interactive "call-command".
+	It used to print an error message when you cancel an interactive
+	call of `call-command' with the escape key, but it doesn't any
+	more.
+
+	* OPTIONS
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/util/nokogiri.jl
+	* man/news.texi
+	* man/sawfish.texi: New function `report-commands'.
+
+	* man/sawfish.texi: Revised "commands" section a bit.
+
+	* lisp/sawfish/wm/commands.jl
+	* man/news.texi
+	* man/sawfish.texi
+	* sawfish.el: Dropped two outdated featuers in command definition.
+	Function 'define-command-args' is deleted. In 'define-command',
+	'doc-key' arg is dropped.
+
 2010-11-13  Teika kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands/x-cycle.jl
 	* man/news.texi: cycle-among-groups bugfix.
