@@ -288,7 +288,7 @@ already fontified."
              ;; mean that you'd have to have sawfish running at the time
              ;; that this constant is defined.
              (list 
-              "define" "define-command-args" "define-command-to-screen"
+              "define" "define-command-to-screen"
               "define-custom-deserializer" "define-custom-serializer"
               "define-custom-setter" "define-datum-printer"
               "define-file-handler" "define-focus-mode"

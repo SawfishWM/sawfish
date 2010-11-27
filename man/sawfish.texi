@@ -5613,7 +5613,7 @@ The default value is @code{(default)}.
 @node Command Definition, Old-style Command Definition, , Commands
 @section Command Definition
 
-@defun define-command name fun #!key spec type doc doc-key class
+@defun define-command name fun #!key spec type doc class
 Define a command called @var{name} (a symbol).  The function @var{fun}
 will be called to execute the command.
 
@@ -5632,20 +5632,14 @@ set in ``Bindings'' section of the configurator. (The doc is lacking.)
 @code{advanced}. Users can choose which commands are shown in the
 configurator according to @var{class}. See the documetation
 of @code{customize-command-classes} (@pxref{Commands}.)
-
-The command-documentation may be stored in the doc file, rather than
-in the code itself; if it exists, the @var{doc-key} will be used to
-look up the doc file entry.  If it's provided together with @var{doc},
-both will be stored.  But the @code{command-documentation} function
-favors the built-in doc string over the doc file entry.
 @end defun
 
-@defun define-command-to-screen name fun #!key spec type doc doc-key class
+@defun define-command-to-screen name fun #!key spec type doc class
 As @code{define-command}, but any printed output of @var{fun} is sent
 to the screen, i.e. @code{standard-output} is redirected.
 @end defun
 
-@defun autoload-command name module #!key spec type doc doc-key class
+@defun autoload-command name module #!key spec type doc class
 Record that loading the module called @var{module} (a symbol) will provde a
 command called @var{name}.
 

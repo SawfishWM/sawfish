@@ -21,7 +21,6 @@
 (define-structure sawfish.wm.commands
 
     (export define-command
-	    define-command-args
 	    autoload-command
 	    command-ref
 	    command-type
@@ -87,15 +86,13 @@ evaluated.")
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
-  (define (apply-command-keys name #!key spec type doc doc-key class)
+  (define (apply-command-keys name #!key spec type doc class)
     (when spec
       (put name 'command-spec spec))
     (when type
       (put name 'custom-command-args type))
     (when doc
       (put name 'command-doc doc))
-    (when doc-key
-      (put name 'command-doc-key doc-key))
     (when class
       (put name 'command-class class)))
 
@@ -106,10 +103,6 @@ be used to define the arguments expected by the command. (an
 interactive specification and a custom-type specification respectively)."
     (setter name fun)
     (apply apply-command-keys name keys))
-
-  ;; obsolete, use define-command
-  (define (define-command-args name spec)
-    (put name 'custom-command-args spec))
 
   (define (autoload-command name module . keys)
     "Record that loading the module called MODULE (a symbol) will provde a
@@ -356,8 +349,6 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   (define (command-documentation name)
     "Return the documentation associated with the command called NAME."
     (cond ((get name 'command-doc))
-	  ((get name 'command-doc-key)
-	   (doc-file-ref (get name 'command-doc-key)))
 	  (t
 	   (let ((value (command-ref name)))
 	     ;; assume that the command has the same name as
