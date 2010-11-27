@@ -5585,27 +5585,83 @@ ancestor chain until it is handled.
 @chapter Commands
 @cindex Commands
 
-@dfn{Command} is a Sawfish lisp notion. A command is what can be
-called from key or mouse input. Unlike emacs, a command is not always
-in one-to-one correspondence to a Lisp function. See following
-sections for more.
+A @dfn{command} is a lisp function which can be called from key or
+mouse input. This, however, requires a different way to specify how
+arguments are passed, so Sawfish distinguishes the notion of commands
+from functions.
+
+The name space of commands are independent of that of bindings (which
+includes functions.)
+
+@defvar customize-command-classes
+In configurator "binding" section, show commands of these
+classes. It is a list. Possible keys are @code{default}, @code{advanced},
+@code{viewport}, and @code{deprecated}.
+
+The default value is @code{(default)}.
+@end defvar
 
 @menu
-* Old-style Command Definition::  Emacs-Lisp style
-* New-style Command Definition::  Common-Lisp style
+* Command Definition::          Common-Lisp style
+* Old-style Command Definition:: Emacs-Lisp style (deprecated)
 * Interactive Calling Specification::
 * Operations on Commands::	Accessors and the like
-* Invoking Commands::           call-commmand, command hooks
+* Invoking Commands::           Invocation in lisp side
 * Default Commands::            Sawfish ships with a few commands
 @end menu
 
-@node Old-style Command Definition, New-style Command Definition, Commands, Commands
+@node Command Definition, Old-style Command Definition, , Commands
+@section Command Definition
+
+@defun define-command name fun #!key spec type doc doc-key class
+Define a command called @var{name} (a symbol).  The function @var{fun}
+will be called to execute the command.
+
+@var{spec} defines how the arguments are passed by the interactive
+call of the command. @xref{Interactive Calling Specification}.
+
+@var{doc} is the documentation string associated with the command.
+If it's lacking, that of the function @var{fun} will be looked up.
+
+Other arguments are mostly for internal use.
+
+@var{type} specifies arguments, too. These arguments are statically
+set in ``Bindings'' section of the configurator. (The doc is lacking.)
+
+@var{class} is a symbol which annotates the command, for example
+@code{advanced}. Users can choose which commands are shown in the
+configurator according to @var{class}. See the documetation
+of @code{customize-command-classes} (@pxref{Commands}.)
+
+The command-documentation may be stored in the doc file, rather than
+in the code itself; if it exists, the @var{doc-key} will be used to
+look up the doc file entry.  If it's provided together with @var{doc},
+both will be stored.  But the @code{command-documentation} function
+favors the built-in doc string over the doc file entry.
+@end defun
+
+@defun define-command-to-screen name fun #!key spec type doc doc-key class
+As @code{define-command}, but any printed output of @var{fun} is sent
+to the screen, i.e. @code{standard-output} is redirected.
+@end defun
+
+@defun autoload-command name module #!key spec type doc doc-key class
+Record that loading the module called @var{module} (a symbol) will provde a
+command called @var{name}.
+
+The keyword values have the same meanings as for
+@code{define-command}.  Defining those properties as part of the
+autoload provides useful feedback to the user without having to do
+loading.
+@end defun
+
+@node Old-style Command Definition, Interactive Calling Specification, Command Definition, Commands
 @section Old-style Command Definition
 
-The old-style command declaration syntax looks very much like that of
-GNU Emacs Lisp.  Commands are defined like any other function (using
-@code{defun}), but the first form in the body must be an
-@dfn{interactive declaration}.  This marks that the function may be
+GNU Emacs-like command definition is a deprecated, old-syntax, but
+still supported. There command definition is included in function
+definition. The first form in the function body must be an
+@dfn{interactive declaration} which marks that the function may be
 called interactively and tells the @code{call-command} function how to
 compute the argument values to apply to the command.
 
@@ -5637,64 +5693,20 @@ declaration:
 The @var{calling-spec} is defined in @xref{Interactive Calling
 Specification}.
 
-@node New-style Command Definition, Interactive Calling Specification, Old-style Command Definition, Commands
-@section New-style Command Definition
-
-The new syntax does not depend on special magic in @code{defun}.
-Instead, it uses keyword arguments to indicate the calling
-specification and other properties.
-
-@defun define-command name fun #!key spec type doc doc-key class
-Define a window managed command called @var{name} (a symbol).  The
-function @var{fun} will be called to execute the command.
-
-@var{spec} and @var{type} may be used to define the arguments expected
-by the command; @var{spec} is an interactive specification and
-@var{type} is a custom-type specification.  @xref{Interactive Calling
-Specification}.
-
-@var{doc} is the documentation string associated with the command.
-The command-documentation may be stored in the doc file, rather than
-in the code itself; if it exists, the @var{doc-key} will be used to
-look up the doc file entry.  If both arguments are provided, both will
-be stored.  But the @code{command-documentation} function favors the
-built-in doc string over the doc file entry.
-
-@var{class} is an annotation for the command.  It allows the
-definition to mark the class as @code{'advanced}, for example.  Other
-parts of Sawfish can then take advantage of this note.
-@end defun
-
-@defun define-command-to-screen name fun #!key spec type doc doc-key class
-As @code{define-command}, but any printed output of @var{fun} is sent
-to the screen.
-@end defun
-
-@defun autoload-command name module #!key spec type doc doc-key class
-Record that loading the module called @var{module} (a symbol) will provde a
-command called @var{name}.
-
-The keyword values have the same meanings as for
-@code{define-command}.  Defining those properties as part of the
-autoload provides useful feedback to the user without having to do
-loading.
-@end defun
-
-@node Interactive Calling Specification, Operations on Commands, New-style Command Definition, Commands
+@node Interactive Calling Specification, Operations on Commands, Old-style Command Definition, Commands
 @section Interactive Calling Specification
 
-The @var{calling-spec} argument to @code{interactive} or
-@code{define-command} defines the argument values applied to the
-command when it is called interactively.  It may be one of:
+The @var{spec} argument to @code{interactive} or @code{define-command}
+defines the argument values applied to the command when it is called
+interactively.  It may be one of:
 
-@itemize @bullet
-@item @code{nil} or undefined (i.e. @code{(interactive)})
-No arguments are given to the command, this type of interactive
-declaration just shows that the function may be called interactively.
+@table @asis
+@item @code{nil} or undefined
+No arguments are given to the command.
 
 @item A string
-This is interpreted as zero or more lines (each separated by a newline
-character).  Each line defines how to compute one argument value.  The
+It consists of zero or more lines (each separated by a newline
+character). Each line defines how to compute one argument value.  The
 first one or two characters of each line is a prefix defining exactly
 how to compute the argument, the rest of the line is an optional
 argument which some prefixes may use.  See below for a list of
@@ -5703,7 +5715,7 @@ prefixes.  A null line produces an argument value of @code{nil}.
 @item Anything else
 The form is evaluated and expected to return a @emph{list} of
 arguments to apply to the command.
-@end itemize
+@end table
 
 The currently available prefixes are,
 
