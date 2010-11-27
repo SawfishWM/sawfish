@@ -39,11 +39,6 @@
   (defvar customize-show-symbols nil
     "Show variable names of each customization option.")
 
-  (defvar customize-command-classes '(default)
-    "In configurator \"binding\" section, also include commands of
-these classes. Possible keys are default, advanced, viewport, and
-deprecated.")
-
 ;;; interfaces
 
   (define (nokogiri-report-slot symbol)
@@ -106,15 +101,7 @@ deprecated.")
 	  changes))
 
   (define (nokogiri-report-commands)
-    (mapcar (lambda (sym)
-	      (let ((params (command-type sym)))
-		(if params
-		    (list sym #:type params)
-		  sym)))
-	    (sort (apropos "" (lambda (x)
-				(and (commandp x)
-				     (memq (command-class x)
-					   customize-command-classes)))))))
+    (report-commands t))
 
   (define (nokogiri-grab-key) (event-name (read-event)))
 

@@ -31,6 +31,7 @@
 	    prefix-numeric-argument
 	    commandp
 	    command-documentation
+	    report-commands
 
 	    ;; autoloaded from with-output.jl
 	    call-command-with-output-to-screen
@@ -51,6 +52,13 @@
 	  sawfish.wm.events
 	  sawfish.wm.windows.subrs
 	  sawfish.wm.util.with-output)
+
+  (defvar customize-command-classes '(default)
+    "In configurator \"binding\" section, show commands of
+these classes. For possible keys, see `command-classes-all'".)
+
+  (defvar command-classes-all '(default advanced viewport deprecated)
+    "List of all command classes.")
 
   (defvar pre-command-hook '()
     "Hook called before calling each command.")
@@ -360,6 +368,29 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 		 (and (closurep value) (closure-name value)
 		      (documentation (intern (closure-name value))
 				     nil value)))))))
+
+  (define (report-commands #!optional type all)
+    "Returns the list of commands. Each element is the symbol of
+a command name, and they're sorted alphabetically.
+
+The optional argument TYPE is for internal use. When it's non-nil,
+(command-name #:type type-param) is returned for commands with
+\"type\", instead of a symbol.
+
+If the optional argument ALL is nil, returns commands only user wants,
+i.e. those specified by `customize-command-class' are included. Else,
+all commands are returned."
+    (let ((classes (if all
+		       command-classes-all
+		     customize-command-classes)))
+      (mapcar (lambda (sym)
+		(let ((params (command-type sym)))
+		  (if (and type params)
+		      (list sym #:type params)
+		    sym)))
+	      (sort (apropos "" (lambda (x)
+				  (and (commandp x)
+				       (memq (command-class x) classes))))))))
 
 ;;; some default commands
 

@@ -5739,8 +5739,7 @@ this returns @code{nil} or @code{root}, the currently focused window.
 @node Operations on Commands, Invoking Commands, Interactive Calling Specification, Commands
 @section Operations on Commands
 
-Once a command has been defined, we can extract certain information
-about it.
+We can extract certain information about commands.
 
 @defun commandp @var{symbol}
 Returns @code{t} if @var{symbol} is a command name.
@@ -5759,6 +5758,19 @@ name.
 @defunx command-class name
 Return the specification, type or class (respectively) of the named
 command.
+@end defun
+
+@defun report-commands #!optional type all
+Returns the list of commands. Each element is the symbol of a command
+name, and they're sorted alphabetically.
+
+The optional argument @var{type} is for internal use. when it's non-nil,
+@code{(command-name #:type type-param)} is returned for commands with
+``type'', instead of a symbol.
+
+If the optional argument @var{all} is nil, returns commands only user
+wants, i.e. those specified by @code{customize-command-class} are
+included. Else, all commands are returned.
 @end defun
 
 @node Invoking Commands, Default Commands, Operations on Commands, Commands
