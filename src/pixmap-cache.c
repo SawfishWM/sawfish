@@ -42,6 +42,10 @@
 static unsigned long cached_pixels, max_cached_pixels = 64 * 1024;
 static unsigned long hits, misses;
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_cache;
+
 #ifdef NEED_PIXMAP_CACHE
 
 struct pixmap_cache_node_struct {
@@ -144,12 +148,16 @@ pixmap_cache_ref (Lisp_Image *im, int width, int height,
 	    remove_from_age_list (n);
 	    prepend_to_age_list (n);
 	    n->ref_count++;
+            if (debug_cache & DB_CACHE_REF)
+               DB(("%s now: %d\n", __FUNCTION__, n->ref_count)); 
 	    *p1 = n->p1;
 	    *p2 = n->p2;
 	    hits++;
 	    return TRUE;
 	}
     }
+    if (debug_cache & DB_CACHE_MISS)
+       DB(("%s missed!\n", __FUNCTION__));
     misses++;
     return FALSE;
 }
@@ -163,6 +171,8 @@ pixmap_cache_unref (Lisp_Image *im, Pixmap p1, Pixmap p2)
 	if (n->p1 == p1 && n->p2 == p2)
 	{
 	    n->ref_count--;
+            if (debug_cache & DB_CACHE_REF)
+               DB(("%s remain %d\n", __FUNCTION__, n->ref_count));
 #ifdef DISABLE_CACHE
 	    if (n->ref_count == 0)
 		delete_node (n, TRUE);
@@ -170,6 +180,8 @@ pixmap_cache_unref (Lisp_Image *im, Pixmap p1, Pixmap p2)
 	    return;
 	}
     }
+    if (debug_cache)
+       DB(("%s\n", __FUNCTION__));
     fprintf (stderr, "warning: unref'ing unknown image in pixmap-cache\n");
 }
 
@@ -179,7 +191,9 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
 {
     int pixel_count = width * height;
     pixmap_cache_node *n = 0;
+    int deleted = 0;
 
+    /* shring the cache: */
     while (pixel_count + cached_pixels > max_cached_pixels)
     {
 	/* remove oldest node */
@@ -189,9 +203,12 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
 	if (this == 0)
 	    break;
 	delete_node (this, n != 0);
+        ++deleted;
 	if (n == 0)
 	    n = this;
     }
+    if (debug_cache & DB_CACHE_DELETE)
+       DB(("%s had to delete %d nodes.\n", __FUNCTION__, deleted));
 
     if (n == 0)
 	n = rep_alloc (sizeof (pixmap_cache_node));
@@ -212,6 +229,8 @@ void
 pixmap_cache_flush_image (Lisp_Image *im)
 {
     pixmap_cache_node *n, *next;
+    if (debug_cache)
+        DB(("%s %p\n", __FUNCTION__, im));
     for (n = im->pixmap_first; n != 0; n = next)
     {
 	next = n->next;
