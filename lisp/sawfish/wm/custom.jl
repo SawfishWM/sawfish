@@ -497,6 +497,7 @@ the user."
   (defgroup placement "Placement" :group misc)
   (defgroup stacking "Stacking" :group misc)
   (defgroup workspace "Workspaces")
+  (defgroup edge-actions "Edge Actions")
 
 ;;; loading user's customisations
 

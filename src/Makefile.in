@@ -26,15 +26,14 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
-SRCS :=	colors.c cursors.c display.c events.c fonts.c frames.c \
+SRCS :=	colors.c cursors.c display.c events.c fonts.c frames.c flippers.c \
 	functions.c images.c keys.c main.c multihead.c pixmap-cache.c \
 	property-cache.c server.c session.c stacking-list.c windows.c
 OBJS := $(SRCS:.c=.o)
 
-DL_SRCS := gradient.c flippers.c x.c selection.c
+DL_SRCS := gradient.c x.c selection.c
 DL_OBJS := $(DL_SRCS:%.c=%.la) client.la
-DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/flippers.la \
-	  sawfish/wm/util/x.la sawfish/wm/util/selection.la
+DL_DSTS = sawfish/wm/util/gradient.la sawfish/wm/util/x.la sawfish/wm/util/selection.la
 DL_DIRS = sawfish/wm/util
 
 INSTALL_HDRS = sawfish.h sawfish_subrs.h libclient.h server.h keys.h build.h

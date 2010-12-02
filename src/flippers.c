@@ -36,6 +36,7 @@ DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
     XMapRaised (dpy, edge_right);
     XMapRaised (dpy, edge_top);
     XMapRaised (dpy, edge_bottom);
+
     return Qt;
 }
 
@@ -46,6 +47,7 @@ DEFUN("disable-flippers", Fdisable_flippers, Sdisable_flippers,
     XDestroyWindow (dpy, edge_right);
     XDestroyWindow (dpy, edge_top);
     XDestroyWindow (dpy, edge_bottom);
+
     return Qt;
 }
 
@@ -142,15 +144,29 @@ DEFUN("create-flippers", Fcreate_flippers,
 
 }
 
-repv
-rep_dl_init (void)
+/* user-modules should depend on flippers-activate not on recreate-flippers */
+DEFUN("recreate-flippers", Frecreate_flippers,
+      Srecreate_flippers, (void), rep_Subr0)
 {
-    repv tem = rep_push_structure ("sawfish.wm.util.flippers");
+	Fdisable_flippers();
+	Fcreate_flippers();
+	Fenable_flippers();
+
+	return Qt;
+}
+
+void
+flippers_init (void)
+{
+    repv tem = rep_push_structure ("sawfish.wm.edge.subrs");
 
     rep_ADD_SUBR(Senable_flippers);
     rep_ADD_SUBR(Sdisable_flippers);
     rep_ADD_SUBR(Sflippers_after_restacking);
     rep_ADD_SUBR(Screate_flippers);
+    rep_ADD_SUBR(Srecreate_flippers);
+
+    rep_pop_structure (tem);
 
     rep_INTERN (left);
     rep_INTERN (right);
@@ -159,16 +175,9 @@ rep_dl_init (void)
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
 
-    if (!batch_mode_p ())
-    {
-
-	Fcreate_flippers();
-
-	add_hook (Qafter_restacking_hook, rep_VAL(&Sflippers_after_restacking));
-
-	Fenable_flippers();
-
-    }
-
-    return rep_pop_structure (tem);
 }
+
+void
+flippers_kill(void)
+{
+};
