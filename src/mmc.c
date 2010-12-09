@@ -21,7 +21,9 @@ const char*
 window_name (Lisp_Window *w)
 {
     /* todo:  root_window or no_focus_window ? */
-    return ((w && w->name) ? (char *) rep_STR(w->name) : "unknown");
+    repv name = (w)?(w->net_name != Qnil ? w->net_name : w->name) : NULL;
+    /* stolen from window-name */
+    return (name ? (char *) rep_STR(name) : (w?"unknown":"NULL"));
 }
 
 const char*
