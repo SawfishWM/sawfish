@@ -29,6 +29,7 @@
 
     (open rep
 	  rep.system
+	  rep.trace
 	  sawfish.wm.windows
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace
@@ -39,6 +40,7 @@
   ;; window order high-water-mark
   (defvar window-order-highest 1)
 
+  (define debug t)
   ;; return windows in MRU order
   (define (window-order #!optional workspace allow-iconified all-viewports general-filter)
     (let ((windows (managed-windows)))
@@ -51,6 +53,7 @@
 					  (not (window-appears-in-workspace-p
 						w workspace)))))
 			       windows))
+      (DB "%s\n" windows)
       (cond
        ((not all-viewports)
 	(setq windows (delete-if window-outside-viewport-p windows)))

@@ -446,6 +446,7 @@ optional and have reasonable defaults.
              "C-a" prompt-beginning-of-line
              "C-e" prompt-end-of-line
              "TAB" prompt-complete
+	     "C-i" prompt-complete
              "RET" prompt-accept
 	     "Up" prompt-previous
 	     "Down" prompt-next

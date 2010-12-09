@@ -98,14 +98,16 @@
 	  sawfish.wm.util.display-window
 
           rep.trace
-          ;;mmc.my-simple                         ;for  push!   i should resume using the code there.
+          ;;mmc.my-simple  for  push!   i should resume using the code there.
           )
   (define-structure-alias x-cycle sawfish.wm.commands.x-cycle)
+
+
 
   (defvar debug-x-cycle 0 "0 don't print tracing info.")
   (define debug #t "used by rep.trace macros")
 
-;;rep.mmc: 
+  ;;rep.mmc: 
   (defmacro push! (symbol item)
     `(setq ,symbol (cons ,item ,symbol)))
 
@@ -258,36 +260,37 @@ Workspaces are just the indexes."
 
 
 ;; todo: move it in another module!
-(defmacro restack-atomically (#!rest body)
-  "stop restacking windows, run BODY, and then push all the changes in 1 X request."
-  `(progn
-    (set-restack-fast 1)
-    (DB "x-cycle: restack-atomically!\n")
-    (let ((current-stacking-on-server (stacking-order)))
-      ,@body
-      (set-restack-fast 0)
-                                        ;(set-debug-stacking debug)
-      ;;fixme: needed: sure, we could stop x-cycle now, and ...  but it could be moved after restack ?
-      (commit-restacking (reverse current-stacking-on-server))
-      ;;(restack-windows-fast)  ;; my previous version of pushing all restacking to the X server
-      )))
+  (defmacro restack-atomically (#!rest body)
+    "stop restacking windows, run BODY, and then push all the changes in 1 X request."
+    `(progn
+       (set-restack-fast 1)
+       (DB "x-cycle: restack-atomically!\n")
+       (let ((current-stacking-on-server (stacking-order)))
+	 ,@body
+	 (set-restack-fast 0)
+	 ;;(set-debug-stacking debug)
+	 ;;fixme: needed: sure, we could stop x-cycle now, and ...
+	 ;; but it could be moved after restack ?
+	 (commit-restacking (reverse current-stacking-on-server))
+	 ;;(restack-windows-fast)
+	 ;; my previous version of pushing all restacking to the X server
+	 )))
 
 
   ;;  Select the next window to cycle-to:
-(define (cycle-next windows count)
-  (DB "cycle-next %d %s:%s  intersect with:  %d  and make %d steps.\n"
-      count
-      (if cycle-all-workspaces
-          "WS-global"
-        "WS-local")
-      (if cycle-all-viewports
-          "vp-global"
-        "vp-local")
-      (length windows)
-      count)
-  
-    ;(DB  "cycle-next %s" (mapconcat window-name windows "\n"))
-                                        ;(format (stderr-file) "cycle-next\n")
+  (define (cycle-next windows count)
+    (DB "cycle-next %d %s:%s  intersect with:  %d  and make %d steps.\n"
+	count
+	(if cycle-all-workspaces
+	    "WS-global"
+	  "WS-local")
+	(if cycle-all-viewports
+	    "vp-global"
+	  "vp-local")
+	(length windows)
+	count)
+    ;;(DB  "cycle-next %s" (mapconcat window-name windows "\n"))
+    ;;(format (stderr-file) "cycle-next\n")
     ;; we keep windows even outside window-order !!!!
     (fluid-set x-cycle-windows windows)
     (let ((win (window-order (if cycle-all-workspaces
@@ -298,12 +301,13 @@ Workspaces are just the indexes."
                              (not (memq w windows))) win))
 
       '(DB "cycle-next after delete-if: %s" (mapconcat window-name win "\n"))
-      ;;; win ??? 
+      ;; win ??? 
       (unless win
         (DB "cycle-next: no windows in the intersection!\n")
         (throw 'x-cycle-exit t))
       ;; here starts the real  cycle-next
       (cycle-to win count)))
+
 
 
 ;;  win-list, count, and current-position (in the list, or 0)....
@@ -374,11 +378,9 @@ Workspaces are just the indexes."
           (DB "cycle-to: i am confused: taking HEAD\n"))
         (setq win (car win))))
     ;; reposition ws/vp:
-    (fluid-set x-cycle-current win) ; ???
-
+    (fluid-set x-cycle-current win)
 
     (print-debug "Showing the window %s!\n" (window-name win))
-
     (let ((do-restacking
            (lambda ()
              ;; take a snapshot of what we have now. (on the server)
@@ -386,13 +388,13 @@ Workspaces are just the indexes."
               (when (fluid x-cycle-stacking)
                 (restack-windows (fluid x-cycle-stacking)) ;  restore the  original order ??
                 (fluid-set x-cycle-stacking nil))          ;no more !
-              
-
+    
               ;; [18 feb 05]
               ;; raise 
               (when cycle-raise-windows
                 ;; this might be always the same?
-                (fluid-set x-cycle-stacking (stacking-order)) ; why:  we have possibly changed workspace, viewport.
+                (fluid-set x-cycle-stacking (stacking-order))
+		;; why:  we have possibly changed workspace, viewport.
 
                 ;; bug: we have just exposed windows in the ws/vp, but only now we raise the window!
                 (DB "now raising window %s\n" (window-name win))
@@ -418,7 +420,7 @@ Workspaces are just the indexes."
 		   ;;(show-window win))           ;does this break?
 		   (move-viewport-to-window win)) ;(sync-server)
 	       (progn
-		 (set-future-input-focus win)
+		 ;; fixme: (set-future-input-focus win)
 		 (select-workspace (nearest-workspace-with-window
 				    ;; ---- the last one used w/ that window !!
 				    win current-workspace)
@@ -441,7 +443,6 @@ Workspaces are just the indexes."
 	   (when (window-get win 'iconified)
 	     (show-window win))		;does this break?
 	   ))))
-
 
     ;; inform
     (when cycle-show-window-names
@@ -494,13 +495,15 @@ Workspaces are just the indexes."
                   (beep)
                   (throw 'x-cycle-exit nil)))
             (request-another-key-event)))
-                                        ; mmc:  is it correct?  maybe we have already issuead such, and an event is on the way to
+                                        ;; mmc:  is it correct?  maybe we have already
+					; issued such, and an event is on the way to
                                         ; in fact i don't think it's correct!
 
         (define (map-fun w)             ;see `focus-dont-push' below !!!
           ;; with the hooks, the window is put to stacking order, and even order.
           ;; But we are keeping our copy!
-                                        ;(message (format #f "x-cycle:map-fun: %a\n" (window-name w)))
+                                        ;(message (format #f "x-cycle:map-fun: %a\n"
+					;(window-name w)))
           (DB "x-cycle: new window mapped %s\n" (window-name w))
           ;; fluid-push!
 
@@ -645,7 +648,8 @@ Workspaces are just the indexes."
                             (recursive-edit))
                           (if (fluid x-cycle-current)
                               (progn
-                                (DB "x-cycle: exiting ....%s\n" (window-name (fluid x-cycle-current)))
+                                (DB "x-cycle: exiting ....%s\n" (window-name
+								 (fluid x-cycle-current)))
                                 (display-window (fluid x-cycle-current)))
                             (DB "x-cycle: exiting, but no final window selected!\n"))) ;???
                       (remove-message)
@@ -768,28 +772,6 @@ Any extra arguments are passed to each call to define-command."
   (define-cycle-command
     'cycle-modulo-ws                    ;'cycle-modulo-ws-backwards
     (lambda ()
-<<<<<<< HEAD
-      "Only cycle the top members of each group."
-      (let loop
-	  ((wl (window-order
-		(if cycle-all-workspaces
-		    nil
-		  current-workspace)
-		cycle-include-iconified cycle-all-viewports))
-	   grps
-	   retval)
-	(when (and (window-in-cycle-p (car wl))
-		   (not (memq (window-group-id (car wl)) grps)))
-	  (when (window-group-id (car wl))
-	    ;; Some windows don't have group.
-	    (setq grps (cons (window-group-id (car wl)) grps)))
-	  (setq retval (cons (car wl) retval)))
-	(if (cdr wl)
-	    (loop (cdr wl) grps retval)
-	  (nreverse retval)
-	  ))))
-
-=======
       ;(unless (zerop debug-x-cycle) (DB "cycle-modulo-ws:\n"))
       (if (fluid x-cycle-active)        ; if _already_ IN,
 
@@ -812,7 +794,6 @@ Any extra arguments are passed to each call to define-command."
             (display-message #f))))))
 
   ;;;
->>>>>>> replacing with my lisp files
   (define-cycle-command-pair
     'cycle-prefix 'cycle-prefix-backwards
     (lambda (w)

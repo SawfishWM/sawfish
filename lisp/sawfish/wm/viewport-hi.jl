@@ -48,8 +48,14 @@
      ;rep.data.records
      )
 
-  
 
+  ;; fixme!
+  (define (set-proactive-move ignore)
+    1
+    )
+
+  (define (set-future-input-focus ignore)
+    )
   (define debug #f "used by rep.trace macros")
   (defvar viewport-debug 0 "")
   (define viewport-debug-lists 2)
@@ -99,7 +105,7 @@
 			     (stacking-order))))
 		  (inside '())
 		  (outside '()))
-
+	    (DB "ok")
 	    (cond
 	     ((null rest)
 	      ;; this is the final step:
@@ -112,6 +118,7 @@
 			    (cons
 			     (- viewport-x-offset x)
 			     (- viewport-y-offset y)))))
+
 		      (when new-focus
 			(DB "new focus will be %s" (window-name new-focus))
 			;; fixme: useless?

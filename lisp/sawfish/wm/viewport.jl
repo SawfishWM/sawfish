@@ -80,7 +80,8 @@
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
     :tooltip "This is meaningless if dynamic viewport is enabled."
-    :after-set (lambda () (viewport-size-changed t)))
+    ;fixme: :after-set (lambda () (viewport-size-changed t))
+    )
 
   (defcustom viewport-minimum-dimensions '(1 . 1)
     "Minimum number of columns and rows of virtual desktop (if boundary mode is dynamic): \\w"
