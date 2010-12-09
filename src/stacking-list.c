@@ -67,7 +67,8 @@ void
 remove_from_stacking_list (Lisp_Window *w)
 {
     if (debug_stacking)
-      DB(("%s%s%s: %s\n", stacking_color,__FUNCTION__, color_reset, rep_STR(w->name)));
+      DB(("%s%s%s: %s\n", stacking_color,__FUNCTION__, color_reset,
+          window_name (w)));
     return_if_fail (!WINDOW_IS_GONE_FOR_STACKING_P (w));
     return_if_fail (window_in_stacking_list_p (w));
 
@@ -240,7 +241,7 @@ restack_window (Lisp_Window *w)
              XConfigureWindow (dpy, stackable_window_id (w), mask, &wc);
         }
         if (debug_stacking)
-            DB (("SL: XConfigureWindow %s%s %" FMT_XID "%s: %s %s%s%s\n",
+            DB (("St: XConfigureWindow %s%s %" FMT_XID "%s: %s %s%s%s\n",
                  stacking_color, rep_STR(w->name),
                  stackable_window_id (w), color_reset,
                  (wc.stack_mode==Above)?"Above":"Below",
