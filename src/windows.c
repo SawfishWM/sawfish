@@ -279,8 +279,6 @@ find_window_by_id (Window id)
     w = window_list;
     while (w != 0 && w->id != id && w->frame != id)
 	w = w->next;
-    if (w != 0 && WINDOW_IS_GONE_P (w))
-	w = 0;
     return w;
 }
 
