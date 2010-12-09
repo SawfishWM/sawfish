@@ -3,6 +3,17 @@
 	* lisp/sawfish/cfg/Makefile.in: fix installation for non-root-users by
 	not hardcoding /usr for icons and kde4-prefix [Stefano Sabatini]
 
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/viewport-drag.jl
+	* lisp/sawfish/wm/edge/hot-spots.jl
+	* lisp/sawfish/wm/edge/flip.jl: renamed functions and variables so that
+	they are easier to understand (activate/call/init confusion is gone now)
+	- options none and hot-spot merged together (none/hot-spot)
+	- code-cleanup in hot-spots
+	- corrected copyright header of viewport-drag
+	- some doc / indention fixes 
+	-- Teika Kazura
+
 2010-11-27  Teika kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands.jl
 	* man/news.texi: Minor bugfix of interactive "call-command".

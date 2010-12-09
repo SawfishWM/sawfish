@@ -21,7 +21,7 @@
 
 (define-structure sawfish.wm.edge.flip
 
-    (export edge-flip-activate)
+    (export edge-flip-invoke)
 
     (open rep
 	  rep.system
@@ -37,9 +37,19 @@
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
-  (define ef-current-edge nil)
+  (defcustom edge-flip-delay 250
+    "Delay (in milliseconds) of flipping of viewport / workspace."
+    :group edge-actions
+    :type number
+    :range (0 . nil))
 
-  (define (edge-flip-activate edge type)
+  (define (edge-flip-invoke edge type)
+    (make-timer (lambda ()
+		  (flip-core edge type))
+		(quotient edge-flip-delay 1000)
+		(mod edge-flip-delay 1000)))
+
+  (define (flip-core edge type)
     (let ((ptr (query-pointer t)))
       (before-flip)
       (if (eq type 'viewport)

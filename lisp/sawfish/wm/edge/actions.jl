@@ -24,7 +24,6 @@
 
     (open rep
 	  rep.system
-	  rep.io.timers
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom
@@ -35,100 +34,69 @@
 
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
 
-  (define func nil)
-  (define no-enter nil)
-
-  (defcustom edge-actions-delay 250
-    "Delay (in miliseconds) before the edges are activated.
-hot-spots are activated in half that time, viewport-drag is
-activated immediately, aswell as actions for while-moving a window."
-    :group edge-actions
-    :type number
-    :range (50 . nil))
-
-  (defcustom left-right-edge-func 'none
+  (defcustom left-right-edge-action 'none/hot-spot
     "Action for the left and right screen-edge."
     :group edge-actions
-    :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
-  (defcustom left-right-edge-move-func 'none
+  (defcustom left-right-edge-move-action 'none/hot-spot
     "Action for the left and right screen-edge while moving a window."
     :group edge-actions
-    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+    :type  (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
-  (defcustom top-bottom-edge-func 'none
+  (defcustom top-bottom-edge-action 'none/hot-spot
     "Action for the top and bottom screen-edge."
     :group edge-actions
-    :type (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
-  (defcustom top-bottom-edge-move-func 'none
+  (defcustom top-bottom-edge-move-action 'none/hot-spot
     "Action for the top and bottom screen-edge while moving."
     :group edge-actions
-    :type  (choice hot-spot viewport-drag flip-workspace flip-viewport none))
+    :type  (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
   (define (edge-action-call func edge)
     (case func
-      ((hot-spot)
-       ;; halve the edge delay for hot-spots
-       (make-timer (lambda ()
-           (hot-spot-activate edge))
-	 (quotient edge-actions-delay 2000)
-	 (mod edge-actions-delay 2000)))
       ((viewport-drag)
-       ;; no delay for viewport-drag
-       (viewport-drag-activate edge))
-      ;; full delay for flipping
+       (viewport-drag-invoke edge))
       ((flip-workspace)
-       (make-timer (lambda ()
-	   (edge-flip-activate edge 'workspace))
-	 (quotient edge-actions-delay 1000)
-	 (mod edge-actions-delay 1000)))
+       (edge-flip-invoke edge 'workspace))
       ((flip-viewport)
-       (make-timer (lambda ()
-           (edge-flip-activate edge 'viewport))
-	 (quotient edge-actions-delay 1000)
-	 (mod edge-actions-delay 1000)))))
+       (edge-flip-invoke edge 'viewport))
+      (t (hot-spot-invoke edge))))
 
-  (define (edge-action-init)
-    (unless no-enter
-      (let ((corner (get-active-corner))
-	    (edge (get-active-edge)))
-	  (if corner
-	      ;; halve the delay for hot-spots
-	      (make-timer (lambda ()
-		  (hot-spot-activate corner))
-		(quotient edge-actions-delay 2000)
-		(mod edge-actions-delay 2000))
-	    (setq func nil)
-	    (cond ((or (eq edge 'left)
-		       (eq edge 'right))
-	           (edge-action-call left-right-edge-func edge))
-		  ((or (eq edge 'top)
-		       (eq edge 'bottom))
-		   (edge-action-call top-bottom-edge-func edge)))))))
+  ;; Entry point without dragging 
+  (define (edge-action-hook-func)
+    (let ((corner (get-active-corner))
+	  (edge (get-active-edge)))
+      (if corner
+	  (hot-spot-invoke corner)
+	(cond ((or (eq edge 'left)
+		   (eq edge 'right))
+	       (edge-action-call left-right-edge-action edge))
+	      ((or (eq edge 'top)
+		   (eq edge 'bottom))
+	       (edge-action-call top-bottom-edge-action edge))))))
 
-  (define (edge-action-move-init)
-    (setq func nil)
-    (setq no-enter t)
+  ;; Entry point for window dragging
+  (define (edge-action-move-hook-func)
     (let ((edge (get-active-edge)))
       (cond ((or (eq edge 'left)
 		 (eq edge 'right))
-	     (edge-action-call left-right-edge-move-func edge))
+	     (edge-action-call left-right-edge-move-action edge))
 	    ((or (eq edge 'top)
 		 (eq edge 'bottom))
-	     (edge-action-call top-bottom-edge-move-func edge))))
-    (setq no-enter nil))
+	     (edge-action-call top-bottom-edge-move-action edge)))))
 
   (define (edges-activate init)
     (if init
 	(progn
 	  (flippers-activate t)
-	  (unless (in-hook-p 'enter-flipper-hook edge-action-init)
-	      (add-hook 'enter-flipper-hook edge-action-init))
-	  (unless (in-hook-p 'while-moving-hook edge-action-move-init)
-	      (add-hook 'while-moving-hook edge-action-move-init)))
+	  (unless (in-hook-p 'enter-flipper-hook edge-action-hook-func)
+	    (add-hook 'enter-flipper-hook edge-action-hook-func))
+	  ;; While the pointer is grabbed, window enter/leave events
+	  ;; are not generated.
+	  (unless (in-hook-p 'while-moving-hook edge-action-move-hook-func)
+	    (add-hook 'while-moving-hook edge-action-move-hook-func)))
       (flippers-activate nil)
-      (if (in-hook-p 'enter-flipper-hook edge-action-init)
-	  (remove-hook 'enter-flipper-hook edge-action-init))
-      (if (in-hook-p 'while-moving-hook edge-action-move-init)
-	  (remove-hook 'while-moving-hook edge-action-move-init)))))
+      (remove-hook 'enter-flipper-hook edge-action-hook-func)
+      (remove-hook 'while-moving-hook edge-action-move-hook-func))))

@@ -1,4 +1,4 @@
-;; hot-spots.jl 3.0.0 -- perform actions when hitting the screen-edge
+;; hot-spots.jl 3.0.0 -- Invoke user functions when hitting the screen-edge
 
 ;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 
@@ -20,7 +20,7 @@
 
 (define-structure sawfish.wm.edge.hot-spots
 
-    (export hot-spot-activate)
+    (export hot-spot-invoke)
 
     (open rep
 	  rep.system
@@ -33,45 +33,60 @@
 
   (define-structure-alias hot-spots sawfish.wm.edge.hot-spots)
 
-  (defvar left-edge-program (lambda () t)
-    "The program launched when hitting the left-edge.")
+  (defcustom hot-spot-delay 250
+    "Delay (in milliseconds) of hot-spot."
+    :group edge-actions
+    :type number
+    :range (0 . nil))
 
-  (defvar top-left-corner-program (lambda () t)
-    "The program launched when hitting the top-left-corner.")
+  (defvar left-edge-function nil
+    "The function launched when hitting the left-edge.")
 
-  (defvar top-edge-program (lambda () t)
-    "The program launched when hitting the top-edge.")
+  (defvar top-left-corner-function nil
+    "The function launched when hitting the top-left-corner.")
 
-  (defvar top-right-corner-program (lambda () t)
-    "The program launched when hitting the top-right-corner.")
+  (defvar top-edge-function nil
+    "The function launched when hitting the top-edge.")
 
-  (defvar right-edge-program (lambda () t)
-    "The program launched when hitting the right-edge.")
+  (defvar top-right-corner-function nil
+    "The function launched when hitting the top-right-corner.")
 
-  (defvar bottom-right-corner-program (lambda () t)
-    "The program launched when hitting the bottom-right-corner.")
+  (defvar right-edge-function nil
+    "The function launched when hitting the right-edge.")
 
-  (defvar bottom-edge-program (lambda () t)
-    "The program launched when hitting the bottom-edge.")
+  (defvar bottom-right-corner-function nil
+    "The function launched when hitting the bottom-right-corner.")
 
-  (defvar bottom-left-corner-program (lambda () t)
-    "The program launched when hitting the bottom-left-corner.")
+  (defvar bottom-edge-function nil
+    "The function launched when hitting the bottom-edge.")
 
-  (define (hot-spot-activate spot)
-    (case spot
-      ((top-left)
-       (funcall top-left-corner-program))
-      ((top-right)
-       (funcall top-right-corner-program))
-      ((bottom-right)
-       (funcall bottom-right-corner-program))
-      ((bottom-left)
-       (funcall bottom-left-corner-program))
-      ((left)
-       (funcall left-edge-program))
-      ((top)
-       (funcall top-edge-program))
-      ((right)
-       (funcall right-edge-program))
-      ((bottom)
-       (funcall bottom-edge-program)))))
+  (defvar bottom-left-corner-function nil
+    "The function launched when hitting the bottom-left-corner.")
+
+  (define (hot-spot-invoke spot)
+    (let ((func (case spot
+		  ((top-left)
+		   top-left-corner-function)
+		  ((top-right)
+		   top-right-corner-function)
+		  ((bottom-right)
+		   bottom-right-corner-function)
+		  ((bottom-left)
+		   bottom-left-corner-function)
+		  ((left)
+		   left-edge-function)
+		  ((top)
+		   top-edge-function)
+		  ((right)
+		   right-edge-function)
+		  ((bottom)
+		   bottom-edge-function))))
+      (if (functionp func)
+	  (make-timer (lambda ()
+			(funcall func))
+		      (quotient hot-spot-delay 1000)
+		      (mod hot-spot-delay 1000))
+	(when func
+	  ;; non-nil, but not a function?
+	  (error "In hot-spot, you configuration of `%s' is wrong; it should be a function." spot))
+	))))
