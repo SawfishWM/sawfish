@@ -57,7 +57,8 @@ unshaded if necessary."
 		(not (window-in-workspace-p w preferred-space)))
 	(setq preferred-space
 	      (nearest-workspace-with-window w current-workspace)))
-      (if preferred-space
+      (if (and preferred-space
+	       (not (= preferred-space current-workspace)))
           (select-workspace preferred-space will-refocus
                             (lambda ()
                               (raise-window* w)
