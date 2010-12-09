@@ -380,6 +380,7 @@ DEFUN("set-dont-allow-events", Fset_dont_allow_events, Sset_dont_allow_events, (
     DB(("set-dont-allow-events %d -> %d (now)\n", dont_allow_events, rep_INT(debug)));
     return set_int_variable(&dont_allow_events, debug);
 }
+#endif
 
 int frame_options;
 
@@ -405,7 +406,6 @@ set-frame-options 0/1
    return set_int_variable(&window_options, debug);
 }
 
-#endif
 
 
 
