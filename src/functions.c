@@ -95,17 +95,17 @@ Pushes the delayed stacking order modifications to the X server.
                       mmc: the 2 vectors have to contain the `same' set of windows. */
    {
       /* we want to operate on 2 vectors: move the list in a C array: */
+      /* convert a list into C array? */
       int len = rep_list_length(list);  /* fixme!!!! was Flength*/
       Lisp_Window** stacking_on_server = alloca((len +1) * sizeof(Lisp_Window*)); /* ??? why + 1*/
-
-      for (ptr = list; rep_CONSP (ptr); ptr = rep_CDR (ptr)) /* i could use len. */
+      for (ptr = list; rep_CONSP (ptr); ptr = rep_CDR (ptr)) /* I could use len. */
          {
             if (!WINDOWP (rep_CAR (ptr)))
                return rep_signal_arg_error (list, 1);
             stacking_on_server[i++] = (Lisp_Window*) rep_CAR (ptr);
          }
 
-      push_stacking_list_to_server(stacking_on_server, i);
+      push_stacking_list_to_server (stacking_on_server, i);
       Fcall_hook (Qafter_restacking_hook, Qnil, Qnil); /* mmc */
       return Qt;
    }
