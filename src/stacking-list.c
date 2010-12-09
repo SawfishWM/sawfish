@@ -239,6 +239,12 @@ restack_window (Lisp_Window *w)
              mask = CWStackMode | CWSibling;
              XConfigureWindow (dpy, stackable_window_id (w), mask, &wc);
         }
+        if (debug_stacking)
+            DB (("SL: XConfigureWindow %s%s %" FMT_XID "%s: %s %s%s%s\n",
+                 stacking_color, rep_STR(w->name),
+                 stackable_window_id (w), color_reset,
+                 (wc.stack_mode==Above)?"Above":"Below",
+                 stacking_color, rep_STR(sibling->name), color_reset));
     }
 }
 
