@@ -179,7 +179,7 @@ focus_on_window (Lisp_Window *w)
 
     if (w != 0 && !WINDOW_IS_GONE_P (w) && w->visible)
     {
-	DB(("focus_on_window (%s)\n", rep_STR(w->name)));
+	DB(("focus_on_window (%s)\n", window_name(w)));
 	if (!w->client_unmapped)
 	{
 	    queued_focus_id = w->id;
@@ -239,7 +239,7 @@ get_window_protocols (Lisp_Window *w)
     w->does_wm_take_focus = 0;
     w->does_wm_delete_window = 0;
     if (debug_windows & DB_WINDOWS_REST)
-        DB (("W: %s: %s\n",__FUNCTION__,rep_STR(w->name)));
+        DB (("W: %s: %s\n",__FUNCTION__,window_name(w)));
     if (XGetWMProtocols (dpy, w->id, &prot, &n) != 0)
     {
 	int i;
@@ -301,7 +301,7 @@ void
 install_window_frame (Lisp_Window *w)
 {
     if ((debug_windows & DB_WINDOWS_FRAME) || debug_frames)
-        DB (("%s%s%s on %s\n", reparent_color,__FUNCTION__, color_reset, rep_STR(w->name)));
+        DB (("%s%s%s on %s\n", reparent_color,__FUNCTION__, color_reset, window_name(w)));
     if (!w->reparented && w->frame != 0 && !WINDOW_IS_GONE_P (w))
     {
 	XSetWindowAttributes wa;
@@ -311,7 +311,7 @@ install_window_frame (Lisp_Window *w)
 	before_local_map (w);
         if (debug_windows & DB_WINDOWS_FRAME)
             DB(("%sXReparentWindow: %" FMT_WIN " %s -> %" FMT_WIN "%s\n", reparent_color,
-                w->id, rep_STR(w->name), w->frame, color_reset));
+                w->id, window_name(w), w->frame, color_reset));
 	XReparentWindow (dpy, w->id, w->frame, -w->frame_x, -w->frame_y);
 	w->reparented = TRUE;
 	after_local_map (w);
@@ -338,7 +338,7 @@ void
 remove_window_frame (Lisp_Window *w, bool restack)
 {
     if (debug_windows & DB_WINDOWS_FRAME)
-        DB (("%s%s%s %s\n", reparent_color, __FUNCTION__, color_reset, rep_STR(w->name)));
+        DB (("%s%s%s %s\n", reparent_color, __FUNCTION__, color_reset, window_name(w)));
     if (w->reparented && !WINDOW_IS_GONE_P (w))
     {
 	XSetWindowAttributes wa;
@@ -349,7 +349,7 @@ remove_window_frame (Lisp_Window *w, bool restack)
 	XChangeWindowAttributes (dpy, w->id, CWWinGravity, &wa);
 
         DB(("%sXReparentWindow: %" FMT_WIN " %s%s -> root_window at %s%d,%d%s\n", reparent_color,
-            w->id, rep_STR(w->name), color_reset, reparent_color, w->attr.x, w->attr.y, color_reset));
+            w->id, window_name(w), color_reset, reparent_color, w->attr.x, w->attr.y, color_reset));
 	before_local_map (w);
 	XReparentWindow (dpy, w->id, root_window, w->attr.x, w->attr.y);
 	w->reparented = FALSE;
@@ -515,7 +515,7 @@ add_window (Window id)
 
          if (debug_windows & DB_WINDOWS_ADD)
              DB (("W:   name=`%s' x=%d y=%d width=%d height=%d\n",
-                  rep_STR(w->name), w->attr.x, w->attr.y,
+                  window_name(w), w->attr.x, w->attr.y,
                   w->attr.width, w->attr.height));
 
 	xwcm = CWX | CWX | CWWidth | CWHeight | CWBorderWidth;
@@ -609,7 +609,7 @@ mark_window_as_gone(Lisp_Window *w)
 {
    if (WINDOW_IS_GONE_P(w))
       return;
-   DB(("%s %x %s\n", __FUNCTION__, w->id, rep_STR(w->name)));
+   DB(("%s %x %s\n", __FUNCTION__, w->id, window_name(w)));
    w->gone = True;
 }
 
@@ -620,7 +620,7 @@ void
 remove_window (Lisp_Window *w, bool destroyed)
 {
     DB(("remove_window (%s, %s)\n",
-	rep_STR(w->name), destroyed ? "destroyed" : "not-destroyed"));
+	window_name(w), destroyed ? "destroyed" : "not-destroyed"));
 
     remove_from_stacking_list (w);
     if (w->id != 0)
@@ -1608,7 +1608,7 @@ window_mark_type (void)
          else
              if (debug_windows & DB_WINDOWS_GC)
                  DB(("%s: %snot marking%s %p %s\n", __FUNCTION__, warning_color, color_reset,
-                     w, rep_STR(w->name)));
+                     w, window_name(w)));
     }
     for (ph = prop_handlers; ph != 0; ph = ph->next)
 	rep_MARKVAL (ph->prop);
