@@ -159,38 +159,40 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
       (setq pfx-arg current-prefix-arg)
 
       ;; call
-      (cond ((null name))
+      (catch 'command-canceled
+        (progn
+	  (cond ((null name))
 
-	    ((commandp name)
-	     ;; a named command
-	     (command-ref name)			;so spec is loaded
-	     (let ((spec (command-spec name))
-		   args)
-	       (when spec
-		 (setq args (build-arg-list spec name)))
-	       ;; reinitialize current-prefix-arg in case it got overwritten
-	       (setq current-prefix-arg pfx-arg)
-	       (apply-command name args)))
+		((commandp name)
+		 ;; a named command
+		 (command-ref name)	;so spec is loaded
+		 (let ((spec (command-spec name))
+		       args)
+		   (when spec
+		     (setq args (build-arg-list spec name)))
+		   ;; reinitialize current-prefix-arg in case it got overwritten
+		   (setq current-prefix-arg pfx-arg)
+		   (apply-command name args)))
 
-	    ((commandp (car name))
-	     (apply-command (car name) (mapcar user-eval (cdr name))))
+		((commandp (car name))
+		 (apply-command (car name) (mapcar user-eval (cdr name))))
 
-	    ((functionp name)
-	     (let ((spec (function-spec name)))
-	       (if spec
-		   ;; function has an embedded spec, so use it
-		   (let ((args (build-arg-list (cadr spec) name)))
-		     (setq current-prefix-arg pfx-arg)
-		     (apply name args))
-		 ;; no spec, just call it
-		 (name))))
+		((functionp name)
+		 (let ((spec (function-spec name)))
+		   (if spec
+		       ;; function has an embedded spec, so use it
+		       (let ((args (build-arg-list (cadr spec) name)))
+			 (setq current-prefix-arg pfx-arg)
+			 (apply name args))
+		     ;; no spec, just call it
+		     (name))))
 
-	    (t (user-eval name)))		;just eval it
+		(t (user-eval name)))	;just eval it
 
-      ;; postfix
-      (call-hook 'post-command-hook (list name))
-      (setq last-command this-command)
-      (setq this-command nil)
+	  ;; postfix
+	  (call-hook 'post-command-hook (list name))
+	  (setq last-command this-command)
+	  (setq this-command nil)))
       (setq current-prefix-arg nil)))
 
   (define-command 'call-command call-command
