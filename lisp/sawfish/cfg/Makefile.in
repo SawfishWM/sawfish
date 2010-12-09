@@ -79,18 +79,18 @@ install : all installdirs
 	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg/layouts; \
 	done
 	$(INSTALL_SCRIPT) main.jlc $(DESTDIR)${bindir}/sawfish-config
-	$(INSTALL_DATA) sawfish-config.png $(DESTDIR)/usr/share/icons/hicolor/32x32/apps/
+	$(INSTALL_DATA) sawfish-config.png $(DESTDIR)${datadir}/icons/hicolor/32x32/apps/
 
 uninstall :
 	rm -rf $(DESTDIR)${lispdir}/sawfish/cfg
-	rm -f $(DESTDIR)/usr/share/icons/hicolor/32x32/apps/sawfish-config.png
+	rm -f $(DESTDIR)${datadir}/icons/hicolor/32x32/apps/sawfish-config.png
 	rm -f $(DESTDIR)${bindir}/sawfish-config
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/cfg \
 	  $(DESTDIR)$(lispdir)/sawfish/cfg/widgets \
 	  $(DESTDIR)$(lispdir)/sawfish/cfg/layouts $(DESTDIR)$(bindir) \
-	  $(DESTDIR)/usr/share/icons/hicolor/32x32/apps/
+	  $(DESTDIR)${datadir}/icons/hicolor/32x32/apps/
 
 clean : 
 	rm -f *.jlc *~ core
