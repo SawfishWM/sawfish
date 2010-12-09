@@ -616,7 +616,7 @@ void
 destroy_window (Lisp_Window *w)
 {
     /* this is important: all calls from the destroy-notify-hook should know this! */
-    w->destroyed = 1;
+    w->destroyed = 1;           /* fixme: but then I should protect against GC! */
 
 
     Fcall_window_hook (Qdestroy_notify_hook,
@@ -1540,7 +1540,8 @@ window_mark_type (void)
     struct prop_handler *ph;
     for (w = window_list; w != 0; w = w->next)
     {
-	if (!WINDOW_IS_GONE_P (w) || !w->destroyed)
+            //    !(a || b) || ! b = ! (a || b &&  b)
+        if (! (w->destroyed && (w->id == 0))) // (!WINDOW_IS_GONE_P (w) || !w->destroyed)
 	    rep_MARKVAL(rep_VAL(w));
     }
     for (ph = prop_handlers; ph != 0; ph = ph->next)
