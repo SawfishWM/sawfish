@@ -366,5 +366,6 @@ extern void insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x);
 extern void insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x);
 extern void restack_window (Lisp_Window *w);
 extern repv make_stacking_list (void);
+extern void push_stacking_list_to_server(Lisp_Window**, int len);
 
 #endif /* SAWFISH_SUBRS_H */

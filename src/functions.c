@@ -76,9 +76,6 @@ DEFSYM(head, "head");
  * in this file: */
 
 
-/* fixme:   put in a .h file ! */
-extern void push_stacking_list_to_server(Lisp_Window**, int len);
-
 DEFUN("commit-restacking", Fcommit_restacking, Scommit_restacking,
       (repv list), rep_Subr1) /*
 ::doc:sawfish.wm.events::commit-restacking
