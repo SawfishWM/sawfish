@@ -449,6 +449,7 @@ ungrab_into_focused_window (void)
     {
         /* fixme: I should remark that we keep grab! */
         focus_request.grabbed = TRUE;
+        focus_request.sent = FALSE;
     }
     else
     {
