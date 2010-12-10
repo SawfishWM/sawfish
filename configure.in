@@ -283,6 +283,35 @@ if test "$with_nls" = "yes"; then
 	SUBDIRS="${SUBDIRS} po"
 fi
 
+dnl session files stuff
+
+AC_ARG_WITH(kde4session,
+  [  --with-kde4session 	install kde4 session files
+  --without-kde4session], [], [with_kde4session=yes])
+
+KDE4_SESSION="$with_kde4session"
+
+if test "$with_kde4session" = "yes"; then
+	KDEDIR="`kde4-config --install data`"
+fi
+
+dnl fallback
+if test "x$KDEDIR" = x; then
+	KDEDIR="${datadir}/kde4/apps/"
+fi
+
+AC_ARG_WITH(gnome2session,
+  [  --with-gnome2session 	install gnome2 session files
+  --without-gnome2session], [], [with_gnome2session=yes])
+
+GNOME2_SESSION="$with_gnome2session"
+
+AC_ARG_WITH(xdmsession,
+  [  --with-xdmsession 	install xdm session files
+  --without-xdmsession], [], [with_xdmsession=yes])
+
+XDM_SESSION="$with_xdmsession"
+
 dnl Check for GNOME location
 AC_ARG_WITH(gnome_prefix,
  [  --with-gnome-prefix=DIR Root of GNOME installation], [],
@@ -328,13 +357,6 @@ if test $REP_MSGFMT = true; then
   LINGUAS=""
 fi
 AC_MSG_RESULT($LINGUAS)
-
-dnl install directory for sawfish-ksm.desktop
-KDEDIR="`kde4-config --install data`"
-
-if test "x$KDEDIR" = x; then
-	KDEDIR="${datadir}/kde4/apps/"
-fi
 
 gitdate=`date +%y%m%d`
 
@@ -387,6 +409,9 @@ AC_SUBST(VERSION)
 AC_SUBST(PACKAGE)
 AC_SUBST(GETTEXT_PACKAGE)
 AC_SUBST(LINGUAS)
+AC_SUBST(KDE4_SESSION)
+AC_SUBST(GNOME2_SESSION)
+AC_SUBST(XDM_SESSION)
 
 dnl Build all files
 AC_CONFIG_FILES([
