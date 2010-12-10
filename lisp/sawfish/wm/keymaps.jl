@@ -126,6 +126,17 @@ a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
+  (defcustom tabbar-keymap (bind-keys (make-keymap)
+			    "Button1-Off2" 'toggle-window-shaded
+                "Button1-Move" 'move-window-interactively
+			    "C-Button1-Off" 'tab-add-to-group
+			    "C-Button1-Click" 'tab-release-window
+			    "C-Button1-Move" 'move-window-interactively)
+    "Keymap containing bindings active when the pointer is in the tabbar of
+a window. (Only mouse-bindings are evaluated in this map.)"
+    :group bindings
+    :type keymap)
+
   (defcustom border-keymap (bind-keys (make-keymap)
 			     "Button3-Off" 'raise-lower-window
 			     "Button2-Move" 'move-window-interactively

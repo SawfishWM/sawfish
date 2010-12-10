@@ -67,7 +67,7 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
   (setq *user-structure* 'user)
 
   ;; frame-style loaded if user hasn't set their own
-  (define fallback-frame-style 'Crux)
+  (define fallback-frame-style 'DarkTab)
 
   (define rc-files '("~/.sawfishrc" "~/.sawfish/rc"))
 

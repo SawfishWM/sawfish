@@ -93,6 +93,7 @@
                                 `(choice ,@(mapcar car match-window-types))))
                  (frame-style ,(lambda ()
                                  `(symbol ,@(find-all-frame-styles t))))
+		 (title-position (choice top bottom right left))
 		 (dimensions (pair (number 1) (number 1)))
 		 (maximized (choice all vertical horizontal
 				    fullscreen full-xinerama))

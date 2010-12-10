@@ -128,7 +128,6 @@
 (autoload-command 'slide-group-down 'sawfish.wm.commands.slide-window)
 (defgroup gpsy "Grow, Pack, Shrink & Yank" :group move :require sawfish.wm.commands.grow-pack)
 (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
-(defgroup tabs "Tabs" :require sawfish.wm.tabs.tab)
 (autoload-command 'cycle-windows 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-windows-backwards 'sawfish.wm.commands.x-cycle)
 (autoload-command 'cycle-group 'sawfish.wm.commands.x-cycle)

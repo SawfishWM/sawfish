@@ -36,6 +36,7 @@
 	     apply-frame-style
 	     apply-frame-style-and-save
 	     window-type
+         adjustment-title
 	     set-window-type
 	     push-window-type
 	     pop-window-type
@@ -326,9 +327,13 @@ generate.")
 		  (reload-frame-style style))))
 	    frame-style-files)))
 
+  (define (adjustment-title w)
+    (call-window-hook 'window-state-change-hook w (list '(title-position))))
+
 ;;; applying frame styles to windows
 
   (define (reframe-window w)
+    (adjustment-title w)
     (if (window-get w 'ignored)
 	(progn
 	  (window-put w 'current-frame-style nil)
@@ -657,6 +662,12 @@ generate.")
   (define-frame-class 'raise-lower-button '((keymap . raise-lower-button-keymap)))
 
   (define-frame-class 'title `((keymap . title-keymap)
+			       (cursor . ,(cursor-for-frame-part 'title))))
+
+  (define-frame-class 'tabbar-horizontal `((keymap . tabbar-keymap)
+			       (cursor . ,(cursor-for-frame-part 'title))))
+
+  (define-frame-class 'tabbar-vertical `((keymap . tabbar-keymap)
 			       (cursor . ,(cursor-for-frame-part 'title))))
 
   (mapc (lambda (x)
