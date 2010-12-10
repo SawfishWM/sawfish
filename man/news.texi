@@ -9,6 +9,74 @@ they occurred between. For more detailed information see the
 @file{ChangeLog} file in the Sawfish source tree, or git log.
 (See Wiki page on how to access git repository.)
 
+@c @heading x.y.z ``Code name''
+@c @itemize @bullet
+
+@c @item Update dependencies
+@c @itemize @minus
+@c @end itemize
+
+@c @item Notes
+@c @itemize @minus
+@c @end itemize
+
+@c @item Build and Installation
+@c @itemize @minus
+@c @end itemize
+
+@c @item Bug Fixes
+@c @itemize @minus
+@c @end itemize
+
+@c @item New Features
+@c @itemize @minus
+@c @end itemize
+
+@c @item Miscellaneous Changes
+@c @itemize @minus
+@c @end itemize
+@c @end itemize
+
+@heading 1.7.1 "Chewing Drum"
+@itemize @bullet
+
+@item Build and Installation
+@itemize @minus
+@item Fixed installation for non-root users [Stefano Sabatini]
+Previously when installing to a private directory as an ordinary user,
+the installation failed, because some files were forced to be installed
+in /usr. This is fixed now.
+
+@item Chooseable session files [Christopher Bratusek]
+Now you can choose what session files to install. This is done by a tripplet
+of configure-options:
+
+@itemize *
+@item --with/out-kde4session: enable or disable the installation of session
+files for KDE4. Default: enabled
+
+@item --with/out-gnome2session: enable or disable the installation of session
+files for GNOME2. Default: enabled
+
+@item --with/out-xdmsession: enable or disable the installation of session files
+for XDM (or other display-managers like KDM/GDM). Default: enabled
+@end itemize
+@end itemize
+
+@item Bug Fixes
+@itemize @minus
+@item Interactive @code{call-command} [Teika Kazura]
+Interactive @code{call-command} used to print an error-message when cancelled
+via pressing escape. It doesn't anymore.
+@end itemize
+
+@item Misc Changes
+@itemize @minus
+@item Turn @code{focus-ignore-pointer-events} into an internal variable (has
+wrongly been a user-option before) [Teika Kazura]
+@end itemize
+@end itemize
+
 @heading 1.7.0.1 "Night Power"
 
 @itemize @bullet
