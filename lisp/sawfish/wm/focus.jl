@@ -61,10 +61,10 @@
     :type boolean
     :group focus)
 
-  (defcustom focus-ignore-pointer-events nil
-    "When true, pointer in/out events don't cause focus changes."
-    :type boolean
-    :group focus)
+
+  ;; Only used by x-cycle.jl
+  (defvar focus-ignore-pointer-events nil
+    "When true, pointer in/out events don't cause focus changes.")
 
   (define focus-within-click-event (make-fluid nil)
           "When true, the current command is being called from within
