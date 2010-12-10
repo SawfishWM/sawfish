@@ -163,7 +163,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
 
 	    ((commandp name)
 	     ;; a named command
-	     (command-ref name)			;so spec is loaded
+	     (command-ref name) ;so spec is loaded
 	     (let ((spec (command-spec name))
 		   args)
 	       (when spec
@@ -268,6 +268,7 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
        (prompt-for-function prompt))
 
       ((#\C)
+       (fluid-set arg-can-be-nil t)
        (require 'sawfish.wm.util.prompt)
        (prompt-for-command prompt))
 
