@@ -1,3 +1,17 @@
+2010-12-10  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/commands.jl: It used to print an error message when
+	you cancel an interactive call of `call-command' with the escape key,
+	but it doesn't any more. [Teika Kazura]
+
+	* lisp/sawfish/wm/focus.jl
+	* lisp/sawfish/wm/compat.jl: `focus-ignore-pointer-events'
+	was customizable, but is no longer. [Teika Kazura]
+
+	* configure.in: tuneable session files installation
+
+	* man/sawfish.texi
+	* man/news.texi: updated
+
 2010-12-09  Christopher Bratusek <zanghar@freenet.de>
 	* configure.in
 	* lisp/sawfish/cfg/Makefile.in: fix installation for non-root-users by
