@@ -129,6 +129,8 @@ DEFSYM(normal, "normal");
 DEFSYM(grab, "grab");
 DEFSYM(ungrab, "ungrab");
 
+extern repv Qeval_key_release_events;
+
 repv Fsynthetic_configure_mutex (repv);
 
 /* `Time' will always be 32-bits, due to underlying wire protocol (?) */
@@ -313,6 +315,12 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
+    Lisp_Window *w = find_window_by_id (ev->xkey.window);
+    if (debug_keys & DB_KEYS_FLOW)
+        DB (("E: %s [%s %u @ %lu]-> eval_input_event (%s)\n", __FUNCTION__,
+             ev->type == KeyPress? "keyPress": "keyRelease",
+             ev->xkey.keycode, ev->xkey.time,
+             window_name (w)));
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type, 0);
 
     /* Don't look for a context map, frame parts are never focused */
@@ -1450,6 +1458,133 @@ inner_handle_input (repv arg)
     return Qnil;
 }
 
+
+static void
+report_event (XEvent *xev)
+{
+#ifdef USE_XKB
+    /*  indeed!! */
+    if (debug_events)
+        report_xkb_event(xev);
+#endif
+    /* debugging + skipping Release */
+    switch (xev->type)
+    {
+        case KeyRelease:
+        case KeyPress:
+        {
+            char buf[256]; /* static ? */
+            u_long code, mods;
+
+            /* mmc: I prefer to see (the key combination pressed/release) here,
+             * se I run the lookup here:  */
+            if (!translate_event (&code, &mods, &xev))
+                break;         /*  why ??? */
+
+            lookup_event_name(buf, code, mods);
+
+
+            char* name = "unknown window";
+            /* do i need to protect it from GC? */
+            Lisp_Window* kw = find_window_by_id(xev->xkey.window);
+            if (kw)
+                name = (char *) rep_STR (kw->name);
+            else if (xev->xkey.window == no_focus_window)
+                name = "no_focus_window";
+            else if (xev->xkey.window == root_window)
+                name = (xev->xkey.subwindow == no_focus_window ) ?
+                    "no_focus_window via root_window" : "root_window";
+
+            // xev->xkey.subwindow
+            if (debug_keys)  /*  & DB_EVENTS_TIME */
+                DB (("** Key: serial:%s%d%s %s %s time: %u %s%s%s/%d %d\n",
+                     keys_color ,xev->xkey.serial, color_reset,
+                     xev->type < LASTEvent ?event_names[xev->type]:"unknown event",
+                     buf,
+                     xev->xkey.time, /*my_timestamp(xev->xkey.time),*/
+                     name,
+
+                     (kw && (kw->id == xev->xkey.window)) ? "window (grab?)" :
+                     ((kw && (kw->frame == xev->xkey.window)) ? "frame" : ""),
+
+                     (xev->xkey.subwindow == xev->xkey.window) ? "" : "->subwindow"
+                     ,xev->xkey.window, xev->xkey.subwindow
+                     /*xev->xkey.time*/
+                     ));
+            if (xev->type==KeyRelease
+                && (global_symbol_value (Qeval_key_release_events) == Qnil));
+            /* why ?? ... so assert? */
+            break;
+        }
+        default:
+            if (! ((xev->type == Expose)
+                   // ||  (xev->type == PropertyNotify)
+                   ||  (xev->type == VisibilityNotify)
+
+                   /* if i set DB_EVENTS_MISC -> i want to see even those */
+                   || (!(debug_events & DB_EVENTS_MISC)
+                       &&
+                       (((xev->type == UnmapNotify)
+                         || (xev->type == ConfigureNotify)
+                         || (xev->type == MapNotify))
+                        && (xev->xany.window == root_window)))
+                   /* 64 root_window ... this means, that the event is reported to the root.*/
+                   ))
+            {
+                /* do */
+                if (debug_events & DB_EVENTS_FLOW)
+                {
+                    /* i'm not interested that the event arrived via root_window !! */
+                    Window id = xev->xany.window;
+                    Window event = xev->xany.window;
+
+                    switch (xev->type){
+                        case UnmapNotify:
+                            id = xev->xunmap.window;
+                            break;
+                        case MapNotify:
+                            id = xev->xmap.window;
+                            break;
+                        case ConfigureNotify:
+                            id = xev->xconfigure.window;
+                            break;
+                        case ConfigureRequest:
+                            id = xev->xconfigurerequest.window;
+                            break;
+                            /* Garbagge collection !!!! am i losing prompt b/c of that? */
+                        case CreateNotify: /*  */
+                            id = xev->xcreatewindow.window;
+                            break;
+                        case DestroyNotify:
+                            id = xev->xdestroywindow.window;
+                            /* premature here? */
+                            break;
+                        case MapRequest:
+                            id = xev->xmaprequest.window;
+                            break;
+                        default:
+                            id = xev->xany.window;
+                    };
+                    Lisp_Window *w = find_window_by_id (id)? : find_window_by_frame(id);
+
+                    DB (("** Event: serial:%s%d%s: %s%s%s (event: %x win %x: %s)\n",
+                         event_color, xev->xkey.serial, color_reset,
+                         event_name_color,
+                         xev->type < LASTEvent ? event_names[xev->type] : "unknown", color_reset,
+                         event, id,
+                         (w) ? rep_STR (w->name) : (u_char *)"unknown"));
+                }
+            } else {
+                /* give a small hint at the quantity.*/
+                DB(("%s%s%s", events_color,
+                    (xev->xany.window == no_focus_window) ? "F":
+                    (xev->xany.window == root_window) ? "R": "@", color_reset
+                    )); /* @ */
+            }
+    };
+
+}
+
 /* Handle all available X events matching event mask MASK. Or any events
    if MASK is zero. */
 void
@@ -1492,15 +1627,7 @@ handle_input_mask(long mask)
 	if (xev.type == NoExpose || xev.type == GraphicsExpose)
 	    continue;
 
-#ifdef DEBUG
-	do {
-	    Lisp_Window *w = x_find_window_by_id (xev.xany.window);
-	    DB(("** Event: %s (win %lx: %s)\n",
-		xev.type < LASTEvent ? event_names[xev.type] : "unknown",
-		(long)xev.xany.window, w ? (char *) rep_STR (w->name) : "unknown"));
-	} while (0);
-#endif
-
+        report_event (&xev);
 	record_event_time (&xev);
 	current_x_event = &xev;
 	invalidate_cached_mouse_position ();
