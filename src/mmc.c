@@ -607,4 +607,5 @@ set_init (void)
 
     get_int_variable_from_env("SAWFISH_DEBUG_EVENTS", &debug_events);
     get_int_variable_from_env("SAWFISH_DEBUG_KEYS", &debug_keys);
+    get_int_variable_from_env("SAWFISH_DEBUG_FRAMES", &debug_frames);
 }
