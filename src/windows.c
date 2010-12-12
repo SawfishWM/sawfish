@@ -25,6 +25,8 @@
 #include <X11/extensions/shape.h>
 #include <glib.h>
 
+
+extern int restack_fast;
 Lisp_Window *window_list;
 int window_type;
 
@@ -1630,6 +1632,7 @@ manage_windows (void)
 
     XQueryTree (dpy, root_window, &root, &parent, &children, &nchildren);
     initialising = TRUE;
+    restack_fast = TRUE;
     for (i = 0; i < nchildren; i++)
     {
 	if (mapped_not_override_p (children[i]))
@@ -1645,6 +1648,9 @@ manage_windows (void)
 	}
     }
     initialising = FALSE;
+    restack_fast = FALSE;
+    // restack_all_windows();
+
     if (nchildren > 0)
 	XFree (children);
 
