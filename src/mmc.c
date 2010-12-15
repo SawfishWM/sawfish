@@ -27,11 +27,14 @@ window_name (Lisp_Window *w)
 }
 
 const char*
-window_name_or (Lisp_Window *w, const char* fallback)
+window_name_id (Lisp_Window *w, Window id)
 {
-    return ((w && w->name) ? (char *) rep_STR(w->name) : fallback);
+    if (w)
+        return window_name(w);
+    else 
+        return ((id == no_focus_window) ? "no_focus_window"
+                : ((id == root_window) ? "Root_window" : "unknown"));
 }
-
 
 /* mmc: make a nice string format from the Time T
  * only for debugging
@@ -129,24 +132,18 @@ describe_focus_in(XEvent *ev,Lisp_Window *w)
 {
    assert (ev->xfocus.detail < 8); /* what is 8? */
 
-   char* window_name = "root_window";
-   if (!(ev->xfocus.window == root_window))
-   {
-         window_name = w ? (char *) rep_STR(w->name) :
-            ((ev->xfocus.window == no_focus_window) ? "no_focus_window" : "unknown");
-         /* mmc: w never references no_focus_window !!! */
-      };
    int color= ((ev->xfocus.mode) == NotifyGrab)?145:
       (((ev->xfocus.mode) == NotifyUngrab)?146:147);
          
-   DB (("%s%s received %lu win = %s(%s) mode: %s%s%s detail: %s%s%s\n",
+   DB (("%s%s received %lu win = %" FMT_WIN ":%s(%s) mode: %s%s%s detail: %s%s%s\n",
         color_fg("\x1b[38;5;",color),
         /* "%s received %d win = %s mode: %s detail:\n", */
         //(ev->xfocus.type == FocusIn)? "focus_in": "focus_out",
         __FUNCTION__,
 
         ev->xfocus.serial,
-        window_name,
+        w->id,
+        window_name_id (w, ev->xfocus.window),
         (w) ? window_relation_desc (w,ev->xfocus.window):"",
 
         color_fg("\x1b[38;5;", 116+ev->xfocus.mode),
@@ -171,9 +168,7 @@ describe_focus_out(XEvent *ev, Lisp_Window *w)
     if (!w)
         w = find_window_by_frame (ev->xfocus.window);
    
-    char* window_name = w ? (char *) rep_STR(w->name) :
-        ((ev->xfocus.window == no_focus_window) ? "no_focus_window" :
-         (ev->xfocus.window == root_window) ? "root_window" : "unknown");
+    char* window_name = window_name_id (w,ev->xfocus.window);
     int color= ((ev->xfocus.mode) == NotifyGrab)? 36:
         (((ev->xfocus.mode) == NotifyUngrab)?34:33);
 
