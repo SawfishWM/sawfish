@@ -376,7 +376,7 @@ extern repv make_stacking_list (void);
 
 /* from mmc.c */
 extern const char* window_name (Lisp_Window *w);
-extern const char* window_name_or (Lisp_Window *w, const char* fallback);
+extern const char* window_name_id (Lisp_Window *w, Window id);
 extern char* my_timestamp(Time t);
 extern void describe_focus_out(XEvent *ev, Lisp_Window *w);
 extern void describe_focus_in(XEvent *ev,Lisp_Window *w);
