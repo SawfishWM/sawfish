@@ -145,6 +145,9 @@ commit_queued_focus_change (void)
             focus_request.serial = NextRequest(dpy);
             focus_request.window = queued_focus_id;
 
+            /* so that the change occurs! */
+            XSetInputFocus (dpy, no_focus_window, queued_focus_revert,
+                            queued_focus_time);
 	    send_client_message (queued_focus_id,
 				 xa_wm_take_focus,
 				 queued_focus_time);
