@@ -190,6 +190,14 @@
               (mapcar (lambda (w)
                         (uniconify-window w)
                         (rebuild-frame w)) wins))
+             ((eq prop 'sticky)
+              (mapcar (lambda (w)
+                        (make-window-sticky w)
+                        (rebuild-frame w)) wins))
+             ((eq prop 'unsticky)
+              (mapcar (lambda (w)
+                        (make-window-unsticky w)
+                        (rebuild-frame w)) wins))
              ((eq prop 'shade)
               (mapcar (lambda (w)
                         (shade-window w)
@@ -279,17 +287,16 @@
              (lambda (w) (eq w win))
              (tab-group-window-list (tab-find-window win)))) )
 
-  (define (tab-group-sticky w)
-    (if (window-get w 'sticky)
-        (make-group-sticky w)
-      (make-group-unsticky w)))
+  (define (tab-group-sticky win)
+    (if (window-get win 'sticky)
+        (tab-refresh-group win 'sticky)
+      (tab-refresh-group win 'unsticky)))
 
   (unless batch-mode
     (add-hook 'window-state-change-hook
               (lambda (win args)
-                (when (= '(sticky) args)
-                  (tab-group-sticky win)
-                  (tab-refresh-group win 'frame))))
+                (if (= '(sticky) args)
+                  (tab-group-sticky win))))
     (add-hook 'window-state-change-hook
               (lambda (win args)
                 (if (= '(fixed-position) args)
