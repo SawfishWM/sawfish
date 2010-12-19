@@ -59,6 +59,27 @@ struct pixmap_cache_node_struct {
 
 static pixmap_cache_node *oldest, *newest;
 
+/* for debugging:
+ * return number of cache entries, and
+ * REFS is filled with Sum of the # of references. */
+inline int cache_length(int *refs)
+{
+   pixmap_cache_node* i;
+   int count = 0;
+   int total_ref_count = 0;
+   
+    /* length */
+   
+   for (i= oldest; i != newest; i=i->newer)
+      {
+         total_ref_count +=  i->ref_count;
+         count++;
+      }
+
+   *refs = total_ref_count;
+   return count;
+}
+
 /* list manipulators */
 
 static void
@@ -86,6 +107,21 @@ prepend_to_age_list (pixmap_cache_node *n)
 	newest = n;
 }
 
+/* Symmetric case: add NODE as the Newest node (in the doubly linked list). */
+static void
+append_to_age_list (pixmap_cache_node *node)
+{
+    node->older = newest;          /* Oldest, because appending */
+    if (node->older != 0)
+	node->older->newer = node;
+    newest = node;
+
+    node->newer = 0;
+    if (oldest == 0)
+	oldest = node;
+}
+
+/* 1  chain per file!  */
 static void
 remove_from_image (pixmap_cache_node *n)
 {
@@ -146,7 +182,7 @@ pixmap_cache_ref (Lisp_Image *im, int width, int height,
 	    remove_from_image (n);
 	    prepend_to_image (n);
 	    remove_from_age_list (n);
-	    prepend_to_age_list (n);
+            append_to_age_list (n);
 	    n->ref_count++;
             if (debug_cache & DB_CACHE_REF)
                DB(("%s now: %d\n", __FUNCTION__, n->ref_count)); 
@@ -221,7 +257,7 @@ pixmap_cache_set (Lisp_Image *im, int width, int height,
     n->ref_count = 1;
 
     prepend_to_image (n);
-    prepend_to_age_list (n);
+    append_to_age_list (n);
     cached_pixels += pixel_count;
 }
 
@@ -243,18 +279,72 @@ pixmap_cache_flush_image (Lisp_Image *im)
 #endif /* NEED_PIXMAP_CACHE */
 
 DEFUN ("pixmap-cache-control", Fpixmap_cache_control,
-       Spixmap_cache_control, (repv max), rep_Subr1)
+       Spixmap_cache_control, (repv max, repv reset), rep_Subr2)
+/*
+::doc:sawfish.wm.windows.subrs#pixmap-cache-images::
+pixmap-cache-control  max-pixels reset
+
+::end:: */
+
 {
+    int total_refs, total_nodes;
+    repv result = Qnil;
+    rep_GC_root gc_result;
+
     if (rep_INTP (max) && rep_INT (max) > 0)
 	max_cached_pixels = rep_INT (max);
 
-    return rep_list_4 (rep_MAKE_INT (max_cached_pixels),
-		       rep_MAKE_INT (cached_pixels),
-		       rep_MAKE_INT (hits), rep_MAKE_INT (misses));
+    total_nodes = cache_length(&total_refs);
+
+    rep_PUSHGC(gc_result, result);
+    result = rep_LIST_5 (
+        rep_MAKE_INT (cached_pixels),
+        rep_MAKE_INT (hits), rep_MAKE_INT (misses),
+        rep_MAKE_INT (total_nodes),
+        rep_MAKE_INT (total_refs));
+
+    result = Fcons(rep_MAKE_INT (max_cached_pixels), result);
+    if (reset != Qnil)
+    {
+        DB(("%s: resetting!\n", __FUNCTION__));
+        misses = hits = 0;
+    };
+    
+    rep_POPGC;
+    return result;
+}
+
+DEFUN ("pixmap-cache-images", Fpixmap_cache_images, Spixmap_cache_images, (void), rep_Subr0)
+/*
+::doc:sawfish.wm.windows.subrs#pixmap-cache-images::
+pixmap-cache-images
+
+return the list of all the images in cache
+::end:: */
+
+{
+   /* make & return a list of all the (image scale)  */
+   
+    repv out = Qnil;
+    rep_GC_root gc_out;
+    rep_PUSHGC(gc_out, out);
+
+    pixmap_cache_node *this = oldest;
+
+    for (this = oldest; this != 0; this = this->newer)
+       /* images could get GC-ed! */
+       out = Fcons (rep_LIST_3 (
+                       rep_MAKE_INT (this->width),
+                       rep_MAKE_INT (this->height),
+                       (repv)this->im),
+                    out);
+    rep_POPGC;
+    return out;
 }
 
 void
 pixmap_cache_init (void)
 {
     rep_ADD_SUBR (Spixmap_cache_control);
+    rep_ADD_SUBR (Spixmap_cache_images);
 }
