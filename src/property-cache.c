@@ -50,20 +50,16 @@ property_cache_ref (repv id, repv prop)
 
     h = CACHE_HASH (id, prop) * CACHE_ASSOC;
 
-    DB (("prop ref: 0x%x,%s (%d) -> ", id, rep_STR (rep_SYM (prop)->name), h));
-
     for (i = h; i < h + CACHE_ASSOC; i++)
     {
 	if (cache_ids[i] == id && cache_props[i] == prop)
 	{
 	    cache_hits++;
-	    DB (("hit\n"));
 	    cache_ages[i] = ++cache_clock;
 	    return cache_values[i];
 	}
     }
 
-    DB (("miss\n"));
     cache_misses++;
     return rep_NULL;
 }
@@ -106,16 +102,11 @@ property_cache_set (repv id, repv prop, repv value, int invals)
 
     assert (oldest != -1);
 
-    if (cache_ids[oldest] != 0)
-	DB (("prop eject: 0x%x (%d)\n", cache_ids[oldest], oldest));
-
     cache_ids[oldest] = id;
     cache_props[oldest] = prop;
     cache_values[oldest] = value;
     cache_ages[oldest] = ++cache_clock;
     cache_updates[oldest] = invals;
-
-    DB (("set: 0x%x,%s (%d)\n", id, rep_STR (rep_SYM (prop)->name), oldest));
 }
 
 void

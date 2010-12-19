@@ -27,6 +27,10 @@
 #include <X11/keysym.h>
 #include <X11/Xutil.h>
 
+#include "debug.h"
+#include "debug-colors.h"
+int debug_keys;
+
 /* max number of milliseconds between successive-clicks */
 #define DEFAULT_DOUBLE_CLICK_TIME 250
 
