@@ -50,6 +50,9 @@
 
 static int have_dbe;
 
+#include "debug.h"
+#include "debug-colors.h"
+
 /* An allocated x-gc */
 typedef struct lisp_x_gc {
     repv car;
@@ -750,8 +753,11 @@ x-map-window X-WINDOW [UNRAISED]
     rep_DECLARE1 (win, X_WINDOWP);
     if (unraised == Qnil)
 	XMapRaised (dpy, VX_DRAWABLE (win)->id);
-    else
+    else {
+        if (debug_windows & DB_WINDOWS_REST)
+            DB (("%s%s%s: mapping\n", map_request_color, __FUNCTION__, color_reset));
 	XMapWindow (dpy, VX_DRAWABLE (win)->id);
+    }
     return Qt;
 }
 
@@ -762,6 +768,8 @@ x-unmap-window X-WINDOW
 ::end:: */
 {
     rep_DECLARE1 (win, X_WINDOWP);
+    if (debug_windows & DB_WINDOWS_REST)
+       DB (("%s%s%s: UN-mapping\n", unmap_request_color, __FUNCTION__, color_reset));
     XUnmapWindow (dpy, VX_DRAWABLE (win)->id);
     return Qt;
 }
@@ -835,6 +843,9 @@ Destroys the X-DRAWABLE.
     if (X_WINDOWP (drawable))
     {
 	deregister_event_handler (VX_DRAWABLE (drawable)->id);
+        if (debug_windows & DB_WINDOWS_REST)
+            DB (("%s%s%s: destroying %x\n", unmap_request_color, __FUNCTION__, color_reset,
+                 VX_DRAWABLE (drawable)->id));
 	XDestroyWindow (dpy, VX_DRAWABLE (drawable)->id);
     }
     else if (X_PIXMAPP (drawable) || X_BITMAPP (drawable))
@@ -957,8 +968,10 @@ DEFUN ("x-window-back-buffer", Fx_window_back_buffer,
     buf = x_back_buffer_from_id (id);
     if (buf == 0)
     {
+        DB(("%s XdbeAllocateBackBufferName ...", __FUNCTION__));
 	buf = XdbeAllocateBackBufferName (dpy, id, XdbeBackground);
 	XSaveContext (dpy, id, x_dbe_context, (XPointer) buf);
+        DB(("-> %p\n", buf));
     }
 
     if (buf == 0)

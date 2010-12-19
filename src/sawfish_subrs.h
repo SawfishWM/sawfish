@@ -58,6 +58,7 @@ extern Window root_window, no_focus_window;
 extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_wm_delete_window, xa_wm_colormap_windows, xa_wm_take_focus,
   xa_compound_text, xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string;
+extern Atom ignore_atoms[2];    /* _WIN_AREA  _WIN_WORKSPACE */
 extern int shape_event_base, shape_error_base;
 extern repv Qdisplay_name, Qcanonical_display_name;
 extern bool sys_init (char *program_name);
@@ -367,5 +368,15 @@ extern void insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x);
 extern void restack_window (Lisp_Window *w);
 extern repv make_stacking_list (void);
 extern void push_stacking_list_to_server(Lisp_Window**, int len);
+
+/* from mmc.c */
+extern const char* window_name (Lisp_Window *w);
+extern const char* window_name_id (Lisp_Window *w, Window id);
+extern char* my_timestamp(Time t);
+extern void describe_focus_out(XEvent *ev, Lisp_Window *w);
+extern void describe_focus_in(XEvent *ev,Lisp_Window *w);
+
+extern void set_init (void);
+
 
 #endif /* SAWFISH_SUBRS_H */
