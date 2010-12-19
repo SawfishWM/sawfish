@@ -24,6 +24,10 @@
 
 #include "sawfish.h"
 #include <assert.h>
+#include "debug.h"
+#include "debug-colors.h"
+int debug_stacking;
+
 
 static Lisp_Window *lowest_window, *highest_window;
 
