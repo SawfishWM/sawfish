@@ -85,6 +85,22 @@
 
 	* po/*: Added a note to translators.
 
+2010-11-12  Christopher Bratusek <zanghar@freenet.de>
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: updated
+
+2010-11-11  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/tabs/tabgroup.jl: reframe windows from here [fuchur]
+					    remember title-position on uniconify [fuchur]
+					    reset tab-adjustments of themes (if required) [fuchur]
+					    small fixes [fuchur]
+
+	* lisp/sawfish/wm/frames.jl: call window-state-changed-hook while reframing a window,
+	updating the title-position [fuchur]
+
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: updated
+
 2010-11-10  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/windows.jl: make get-window-by-role return nil if matching using a
 				      regex, rather than throwing an error
@@ -101,6 +117,14 @@
 
 	* lisp/sawfish/wm/commands/jump-or-exec.jl: updated
 
+2010-11-08  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/DarkTab/theme.jl: small fix in right tabbar [fuchur]
+					    change default values for font colors [fuchur]
+					    added possibilty to change button-width [fuchur]
+
+2010-11-07  Christopher Bratusek <zanghar@freent.de>
+	* lisp/sawfish/wm/DarkTab/theme.jl: make right tabbar look like others [fuchur]
+
 2010-11-06  Christopher Bratusek <zanghar@freenet.de>
 	* src/flippers.c: build into sawfish and rename module to sawfish.wm.edge.subrs
 
@@ -112,6 +136,8 @@
 	-- actions for when the pointer hits the edge and when a moving window hits the
 	   edge can now be setup differently (while-moving actions don't delay!)
 					   simplified edge-action-init function
+
+	* lisp/sawfish/wm/DarkTab/*: improved DarkTab theme [fuchur]
 
 2010-11-06  Teika kazura <teika@lavabit.com>
 	* man/news.texi
@@ -147,7 +173,48 @@
 	Minor po/README update.
 	RPM spec file is declared to be unofficial.
 
+2010-11-05  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/tabs/tab.jl: small fix for margin-l [fuchur]
+
+	* themes/DarkTab/*: added DarkTab theme by fuchur
+
+	* lisp/sawfish/wm/user.jl: set DarkTab as default theme
+
+	* themes/Makefile.in: updated
+
 2010-11-04  Christopher Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/autoload.jl: removed tab-system from autoload [fuchur]
+
+	* lisp/sawfish/wm/tabs/tab.jl: added set-tab-adjustments function
+				       remove defcustoms
+				       renamed several classes [fuchur]
+				       removed cursor, x/y-justify from classes [fuchur]
+				       removed keymap from classes [fuchur]
+
+	* lisp/sawfish/wm/tabs/tabgroup.jl: add settings for state-changed title-position [fuchur]
+					    raise all windows automatically if one window in the
+					    tabgroup gets focus [fuchur] -- temporarly removed
+					    make all windows automatically sticky if one window in
+					    the tabgroup gets sticky [fuchur]
+					    improved hooks (faster tabgroups) [fuchur]
+					    some preparative work and small fixes [fuchur]
+
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/frames.jl: add keymaps and bindings for tabbar-horizontal and
+	tabbar-vertical [fuchur]
+
+	* lisp/sawfish/wm/focus.jl: add tab-raise-on-hver here (needs fixing, though) [fuchur]
+				    -- improved setter func
+
+	* lisp/sawfish/wm/gaol.jl: add sawfish.wm.tabs.tab to gaol'd modules [fuchur]
+
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/ext/window-history.jl: add title-position window matcher
+						 add title-position to remembered properties
+
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: major rework for above changes [fuchur]
+
 	* lisp/sawfish/wm/edge/infinite-desktop
 	* lisp/sawfish/wm/edge/viewport-drag.jl: renamed module (and remaining functions)
 						 added structure-alias
