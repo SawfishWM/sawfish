@@ -41,7 +41,7 @@ access git repository.)
 
 @itemize @bullet
 
-@item Notice
+@item Notes
 @itemize @minus
 @item Renamed function @code{popup-window-menu} to @code{popup-window-ops-menu} [Teika kazura]
 
@@ -51,7 +51,29 @@ but it's recommended to update your configuration.
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
 @end itemize
+@item Build and Installation
+@itemize @minus
 
+@item Fixed installation for non-root users [Stefano Sabatini]
+
+Previously when installing to a private directory as an ordinary user, the installation failed, because some files
+were forced to be installed in /usr. This is fixed now. 
+
+@item Chooseable session files [Christopher Bratusek]
+
+Now you can choose what session files to install. This is done by a tripplet of configure-options:
+
+@itemize *
+@item --with/out-kde4session: enable or disable the installation of session files for KDE4. Default: enabled
+@item --with/out-gnome2session: enable or disable the installation of session files for GNOME2. Default: enabled
+@item --with/out-xdmsession: enable or disable the installation of session files for XDM (or other display-managers like
+KDM/GDM). Default: enabled
+@end itemize
+
+
+@item Spec-File compatibility for RHEL 6 beta [Kim B. Heino]
+@item Debian-Scripts compatibility for Debian/Experimental [Christopher Bratusek]
+@end itemize
 @item Bug fixes
 @itemize @minus
 
@@ -66,8 +88,7 @@ It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc}
 
 @item KDE *.desktop files location [Teika Kazura]
 
-Previously, user's change of the variable
-@code{kde-desktop-directories} was ignored, but this is fixed.
+Previously, user's change of the variable @code{kde-desktop-directories} was ignored, but this is fixed.
 
 @item Window cycle among groups [Teika Kazura]
 
@@ -78,10 +99,98 @@ Some windows were skipped in window cycles among groups. This is fixed.
 It used to print an error message when you cancel an interactive call of
 @code{call-command} with the escape key, but it doesn't any more.
 @end itemize
+@item New Features
+@itemize @minus
+
+@item EdgeActions [Christopher Bratusek, Teika Kazura]
+
+EdgeActions is a centralized way for performing actions with your screen-edges. Lots of internal and
+user-visiable changes have been made.
+
+Internal changes:
+@itemize *
+
+@item Some functions have been moved from Lisp to C-Part. Also EdgeFlip has been highly revised, so that
+other technics (namely ViewportDrag and HotSpots) do no longer depend on active EdgeFlip (no more conflicts)
+@item The module @code{sawfish.wm.edge.actions} contains the EdgeAction infrastructure and most options
+@item The module @code{sawfish.wm.edge.util} contains helper functions for EdgeActions
+@item The module @code{sawfish.wm.edge.subrs} contains the C-Part subroutines for EdgeActions
+@item InfiniteDesktop is renamed to ViewportDrag (more self-descriptive)
+@item General code-revision. Less but more powerful code is now in use
+
+User-visible changes:
+
+@item Centralized customization ("Edge Actions" group in SawfishConfig)
+@item EdgeFlip changes. Additionally to the above stated internal changes, EdgeFlip has been split into
+EdgeFlip/Viewport and EdgeFlip/Workspace, giving you more customizability.
+@item HotSpots have been added. HotSpots let you call functions when hitting either the corners or the edges.
+By default the corners extend by 50 px in both directions along the edge, this value is changable.
+
+HotSpot functions need to be set via @file{~/.sawfishrc}, like this:
+
+( defvar-setq top-left-corner-function
+  ( lambda () ( display-message "hello world" ) ) )
+
+the lambda is very important -- it won't work else. Function names are pretty self-descriptive:
+position (eg: top-left or bottom) + variant (edge or corner) + "function".
+
+@item ViewportDrag now also works while moving a window.
+@item Delay-timer changes. ViewportDrag doesn't have a delay anymore (doesn't quite make sense). 
+HotSpots and EdgeFlip have both their own, customizable timer.
+@item Actions are now split as follows:
+
+top-bottom (normal)
+top-bottom (while moving)
+
+left-right (normal)
+left-right (while moving)
+
+That means that you have better control what to do and when, as actions for when hitting the edge/corner with
+the pointer ("normal") and for when hitting the edge/corner while moving a window are split now.
+
+You can choose from the following actions:
+@itemize →
+@item flip-viewport (traditional EdgeFlip for Viewports)
+@item flip-workspace (traditional EdgeFlip for Workspaces)
+@item viewport-drag (drag Viewport to pseudo-increase it's size making it "infinite")
+@item none/hot-spots (either perform nothing or -if user-set- a HotSpot function)
+@end itemize
+
+By default nothing is done.
+@end itemize
+
+@item New function @code{report-commands} [Teika kazura]@*
+It returns the list of all commands. (@pxref{Operations on Commands}).
+@end itemize
 @item Misc Changes
 @itemize @minus
 
-@item Window-operation menu improvement [Christopher Bratusek]
+@item Tabs-NG [fuchur]
+
+Tabs-NG is a revised version of Sawfish's Tabbed-Windowing-System. Most changes are internal, but a few user-visible
+ones have been done, too. When a lot of windows are open, it should now be more responsive.
+
+You now no longer need to change the tab-adjustments via SawfishConfig, when changing or customizing tab-enabled themes
+(this is now done internally).
+
+Also there are now vertical and horizontal tabbar-prototypes available (see @code{DarkTab} theme), with a keymap both.
+The window-matcher @code{title-position} ensures that the position of the title will be restored, when using the @code{DarkTab} theme.
+
+Several smaller fixes have been done. (check @file{ChangeLog} for more detailed infos)
+
+@item The themes @code{Elberg-Tabbed} and @code{Get-S-Tabbed} have been updated to work
+with Tabs-NG. The theme @code{DarkTab} made by fuchur" is now the default theme.
+
+@item revised @code{get-window-by-*} functions [Christopher Bratusek]
+@itemize *
+@item added @code{window-role} function (return NET_WM_ROLE)
+@item added @code{get-window-by-role} function (takes #:regex switch)
+@item merged @code{get-window-by-name-re} as #:regex switch into @code{get-window-by-name} (the old name is still supported)
+@item merged @code{get-window-by-class-re} as #:regex switch into @code{get-window-by-class} (the old name is still supported)
+@item added #:icon switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
+@end itemize
+
+@item Window-operation menu improvements [Christopher Bratusek]
 
 @itemize +
 @item The window-operation menu now honours window rules better.
@@ -103,14 +212,15 @@ property of a window.
 now have to do @code{make all} at the top directory. Previously it was
 possible to produce wrong @file{sawfish.pot}.
 @item The Spanish translation has been updated [gnome-es translation-team]
-@item Updated @file{sawfish.pot} and subsequently all @file{*.po}. Banished some bogus items in @file{sawfish.pot}. (Developer's personal extensios had sneaked into.)
+@item The German translation has been updated [gnome-de translation-team]
+@item The Simplified-Chinese translation has been updated [gnome-zh_tw team]
+@item The Norwegian/bokmål translation has been updated [gnome-no team]
+@item Updated @file{sawfish.pot} and subsequently all @file{*.po}. Banished some bogus items in @file{sawfish.pot}.
+(Developer's personal extensions had sneaked in.)
 @end itemize
 
-@item New function @code{report-commands} [Teika kazura]@*
-It returns the list of all commands. (@pxref{Operations on Commands}).
-
 @item Emacs sawfish-mode now indents @code{let-fluids} and let-loop correctly [Teika Kazura]
-
+@item Turn `focus-ignore-pointer-events' into an internal variable (has wrongly been a user-option before) [Teika Kazura]
 @item Documentations [Teika kazura]
 @itemize
 @item Section on popup menus is rewritten. (@pxref{Popup Menus})
@@ -123,7 +233,6 @@ Category @code{Placement} is renamed to @code{Geometry}.  The item
 @code{shade-hover} is moved to @code{appearance} category, and
 @code{fixed-size} to @code{geometry}.
 
-@item Spec-File compatibility for RHEL 6beta [Kim B. Heino]
 @item Deletion of outdated features in command definition [Teika Kazura]
 
 Function @code{define-command-args} is deleted. In @code{define-command}
