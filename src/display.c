@@ -117,9 +117,9 @@ error_other_wm (Display *dpy, XErrorEvent *ev)
 
 
 static void
-replace_race_error
+replace_race_error ()
 {
-    fputs ("It is getting kind of crowded here.\n", strerr);
+    fputs ("It is getting kind of crowded here.\n", stderr);
     exit (1);
 }
 
@@ -291,16 +291,20 @@ choose_visual (void)
 }
 
 
-/* Acquire the manager selection, replacing its previous owner if any. */
+/* Acquire the manager selection, replacing its previous owner sel_owner
+   (can be None). */
 static void
 acquire_manager_selection(Window sel_owner)
 {
-    startup_time = get_server_timestamp();
     XClientMessageEvent cm;
+    startup_time = get_server_timestamp();
     if (sel_owner != None)
     {
         Window sel2;
         XSelectInput (dpy, sel_owner, StructureNotifyMask);
+	/* Make sure that sel_owner still owns the selection.  The window
+	   might have been destroyed before the XSelectInput call above,
+	   and we would never hear from it. */
         sel2 = XGetSelectionOwner (dpy, xa_wm_sn);
         if (sel2 == None)
         {
@@ -312,15 +316,15 @@ acquire_manager_selection(Window sel_owner)
             /* Somebody else has taken over, so we quit. */
             replace_race_error ();
     }
-    XSetSelectionOwner (dpy, xa_wm_sn, no_focus_window, time);
+    XSetSelectionOwner (dpy, xa_wm_sn, no_focus_window, startup_time);
     if (XGetSelectionOwner (dpy, xa_wm_sn) != no_focus_window)
     {
-        fputs ("Could not acquire manager selection.\n", strerr);
+        fputs ("Could not acquire manager selection.\n", stderr);
         exit (1);
     }
     if (sel_owner != None)
     {
-        fputs ("Waiting for the previous manager to go away.\n", strerr);
+        fputs ("Waiting for the previous manager to go away.\n", stderr);
         /* This may hang. */
         for (;;)
         {
@@ -330,15 +334,15 @@ acquire_manager_selection(Window sel_owner)
             if (ev.type == DestroyNotify
                 && ev.xdestroywindow.window == sel_owner)
                 break;
-            fputs ("Wrong event!  Still waiting.\n", strerr);
+            fputs ("Wrong event!  Still waiting.\n", stderr);
         }
     }
     cm.message_type = xa_manager;
     cm.format = 32;
-    cm.data.l[0] = time;
+    cm.data.l[0] = startup_time;
     cm.data.l[1] = xa_wm_sn;
     cm.data.l[2] = no_focus_window;
-    XSendEvent (dpy, root_window, False, StructureNotifyMask, &cm);
+    XSendEvent (dpy, root_window, False, StructureNotifyMask, (XEvent *) &cm);
 }
 
 
