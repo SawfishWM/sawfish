@@ -490,6 +490,7 @@ sys_kill (void)
     if(!batch_mode_p ())
     {
 	XSetInputFocus (dpy, PointerRoot, 0, last_event_time);
+	XSelectInput (dpy, root_window, 0);
 	XDestroyWindow (dpy, no_focus_window);
 	XCloseDisplay (dpy);
     }

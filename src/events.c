@@ -1277,6 +1277,23 @@ mapping_notify (XEvent *ev)
 }
 
 static void
+selection_clear (XEvent *ev)
+{
+    XSelectionClearEvent *scev = &ev->xselectionclear;
+    if (scev->selection == xa_wm_sn && scev->window == no_focus_window)
+	Fquit ();
+}
+
+static void
+selection_request (XEvent *ev)
+{
+    XSelectionRequestEvent *srev = &ev->xselectionrequest;
+    if (srev->selection == xa_wm_sn)
+    {
+    }
+}
+
+static void
 shape_notify (XEvent *ev)
 {
     XShapeEvent *sev = (XShapeEvent *)ev;
@@ -1761,6 +1778,8 @@ events_init (void)
     event_handlers[ReparentNotify] = reparent_notify;
     event_handlers[CreateNotify] = create_notify;
     event_handlers[CirculateNotify] = circulate_notify;
+    event_handlers[SelectionClear] = selection_clear;
+    event_handlers[SelectionRequest] = selection_request;
     event_handlers[MappingNotify] = mapping_notify;
 
 #ifdef DEBUG
