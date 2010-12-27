@@ -69,7 +69,7 @@ static bool pointer_is_grabbed;
 
 static XID event_handler_context;
 
-static Atom xa_sawfish_timestamp, xa_targets, xa_multiple, xa_timestamp,
+static Atom xa_sawfish_timestamp = None, xa_targets, xa_multiple, xa_timestamp,
     xa_version, xa_atom_pair;
 
 /* is there xrand support? */
@@ -1471,6 +1471,8 @@ get_server_timestamp (void)
     /* XXX There must be an easier method.. */
     while (XCheckWindowEvent (dpy, w, PropertyChangeMask, &ev)) ;
     XSelectInput (dpy, w, PropertyChangeMask | NO_FOCUS_EVENTS);
+    if (xa_sawfish_timestamp == None)
+	xa_sawfish_timestamp = XInternAtom (dpy, "_SAWFISH_TIMESTAMP", False);
     XChangeProperty (dpy, w, xa_sawfish_timestamp,
 		     XA_STRING, 8, PropModeReplace, (unsigned char *)"foo", 3);
     XSelectInput (dpy, w, NO_FOCUS_EVENTS);
