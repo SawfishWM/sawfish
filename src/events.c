@@ -1366,8 +1366,8 @@ selection_request (XEvent *ev)
     /* Refuse by default. */
     reply.property = None;
     reply.time = req->time;
-    if (req->selection == xa_wm_sn
-	&& req->owner == no_focus_window && req->time >= startup_time)
+    if (req->selection == xa_wm_sn && req->owner == no_focus_window
+	&& (req->time == CurrentTime || req->time >= startup_time))
     {
 	Atom prop = req->property;
 	if (prop == None && req->target != xa_multiple)
@@ -1375,6 +1375,11 @@ selection_request (XEvent *ev)
 	if (convert_selection(req->requestor, req->target, prop))
 	    reply.property = prop;
     }
+    else
+        fprintf(stderr, "Selection request for %s, %s.\n",
+		XGetAtomName(dpy, req->selection),
+		req->time == CurrentTime ? "CurrentTime"
+		: req->time < startup_time ? "early" : "normal time");
     XSendEvent(dpy, req->requestor, False, 0, (XEvent *) &reply);
 }
 

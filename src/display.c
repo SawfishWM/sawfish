@@ -334,7 +334,6 @@ acquire_manager_selection(Window sel_owner)
             if (ev.type == DestroyNotify
                 && ev.xdestroywindow.window == sel_owner)
                 break;
-            fputs ("Wrong event!  Still waiting.\n", stderr);
         }
     }
     cm.message_type = xa_manager;
