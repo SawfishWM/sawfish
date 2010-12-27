@@ -264,9 +264,9 @@
 
   (define last-focus nil)
 
-  (define (update-focus-state)
+  (define (update-focus-state w mode)
     (let ((focus (input-focus)))
-      (unless (eq last-focus focus)
+      (unless (or (eq mode 'grab) (eq mode 'ungrab) (eq last-focus focus))
 	(setq last-focus focus)
 	(set-x-property 'root '_NET_ACTIVE_WINDOW
 			(vector (if focus (window-id focus) 0)) 'WINDOW 32))))

@@ -125,6 +125,7 @@ DEFSYM(dimensions, "dimensions");
 DEFSYM(normal, "normal");
 DEFSYM(grab, "grab");
 DEFSYM(ungrab, "ungrab");
+DEFSYM(while_grabbed, "while-grabbed");
 
 repv Fsynthetic_configure_mutex (repv);
 
@@ -918,7 +919,9 @@ mode_to_sym (int mode)
 {
     return (mode == NotifyNormal ? Qnormal
 	    : mode == NotifyGrab ? Qgrab
-	    : Qungrab);
+	    : mode == NotifyUngrab ? Qungrab
+	    : mode == NotifyWhileGrabbed ? Qwhile_grabbed
+	    : Qnil);
 }
 
 static void
