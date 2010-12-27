@@ -456,6 +456,7 @@ where OPTIONS are any of:\n\
 \n\
     --display=DPY	Connect to X display DPY\n\
     --multihead		Fork a copy of sawfish for each screen\n\
+    --replace		Replace the running window manager\n\
     --visual=VISUAL	Preferred visual type\n\
     --depth=DEPTH	Preferred color depth\n\
     --disable-nls	Disable internationalization of messages\n\
