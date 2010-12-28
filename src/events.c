@@ -2004,7 +2004,8 @@ events_init (void)
     rep_INTERN(normal);
     rep_INTERN(grab);
     rep_INTERN(ungrab);
-
+    rep_INTERN(while_grabbed);
+    
     rep_mark_static (&current_event_window);
     rep_mark_static (&saved_current_context_map);
 
