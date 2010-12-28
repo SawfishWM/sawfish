@@ -412,7 +412,8 @@ sys_init(char *program_name)
             xa_manager = XInternAtom (dpy, "MANAGER", False);
 
             sel_owner = XGetSelectionOwner (dpy, xa_wm_sn);
-            if (sel_owner != None && !rep_get_option ("--replace", 0))
+	    /* Order is significant: rep_get_option must get called. */
+            if (!rep_get_option ("--replace", 0) && sel_owner != None)
             {
                 fputs ("A window manager is already running but "
                        "--replace was not given.\n", stderr);
