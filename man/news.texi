@@ -50,12 +50,12 @@ but it's recommended to update your configuration.
 
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
-@end itemize
 
 @item Syntax-change in @code{jump-or-exec} [Christopher Bratusek]
 The @code{class} and @code{onfocused} parameters are now keys, so pass them as
 #:class ''value'' or #:onfocused ''value''. Check @file{jump-or-exec.jl} for
 more detailed examples.
+@end itemize
 @item Build and Installation
 @itemize @minus
 
@@ -122,9 +122,10 @@ other technics (namely ViewportDrag and HotSpots) do no longer depend on active 
 @item The module @code{sawfish.wm.edge.subrs} contains the C-Part subroutines for EdgeActions
 @item InfiniteDesktop is renamed to ViewportDrag (more self-descriptive)
 @item General code-revision. Less but more powerful code is now in use
+@end itemize
 
 User-visible changes:
-
+@itemize *
 @item Centralized customization ("Edge Actions" group in SawfishConfig)
 @item EdgeFlip changes. Additionally to the above stated internal changes, EdgeFlip has been split into
 EdgeFlip/Viewport and EdgeFlip/Workspace, giving you more customizability.
