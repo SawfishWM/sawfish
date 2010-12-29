@@ -51,6 +51,11 @@ but it's recommended to update your configuration.
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
 @end itemize
+
+@item Syntax-change in @code{jump-or-exec} [Christopher Bratusek]
+The @code{class} and @code{onfocused} parameters are now keys, so pass them as
+#:class ''value'' or #:onfocused ''value''. Check @file{jump-or-exec.jl} for
+more detailed examples.
 @item Build and Installation
 @itemize @minus
 
@@ -166,6 +171,18 @@ ICCCM has been added.
 @item NotifyWhileGrabbed event [Harald van Dijk]
 Sawfish does now recognize (and handle) the NotifyWhileGrabbed event.
 Additionally NotifyUngrab is now handled explicitly.
+
+@item Toggle-Or-Exec wrapper added to Jump-Or-Exec [Christopher Bratusek]
+@code{toggle-or-exec} is similar to jump-or-exec, but turns windows into
+quake-like drop-down/pop-up-windows. That means, when you have the toggle-window
+focused and press it's keybinding again, it will be hidden.
+
+See the file @file{jump-or-exec.jl} for more detailed examples.
+
+@item @code{iconify-on-leave} window-matcher [Christopher Bratusek]
+This new window-matcher is a companion to @code{toggle-or-exec}. When a window
+matched against it, looses the focus, it is beeing hidden. Use this together
+with @code{toggle-or-exec} for greater toggle-window experience.
 
 @item New function @code{report-commands} [Teika kazura]@*
 It returns the list of all commands. (@pxref{Operations on Commands}).
