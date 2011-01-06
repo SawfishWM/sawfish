@@ -22,6 +22,7 @@
 
     (export move-window-interactively
 	    resize-window-interactively
+	    resize-window-to-dimensions
 	    move-selected-window
 	    resize-selected-window
 	    double-window-size
@@ -554,6 +555,12 @@ its edges with an edge of another window.")
     (if (not (window-get w 'fixed-size))
       (do-move-resize w 'resize)))
 
+  (define (resize-window-to-dimensions x y #!key window)
+    "Resize the current window to the specified dimensions"
+    (if window
+        (resize-window-with-hints* window x y)
+      (resize-window-with-hints* (current-event-window) x y)))
+
   (define (move-selected-window)
     "Wait for the user to select a window, then interactively move
 that window."
@@ -584,6 +591,11 @@ that window."
     move-window-interactively #:spec "%W")
   (define-command 'resize-window-interactively
     resize-window-interactively #:spec "%W")
+  (define-command 'resize-window-to-dimensions
+     resize-window-to-dimensions
+     #:spec "NNew width:\nNNew height:"
+     #:type '(and (labelled "New width:" (number 100))
+                  (labelled "New height:" (number 100))))
   (define-command 'move-selected-window
     move-selected-window)
   (define-command 'resize-selected-window

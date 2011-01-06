@@ -107,6 +107,9 @@ before killing it.")
       (,(_ "_Resize") resize-window-interactively
        (insensitive . ,(lambda (w)
 			 (window-get w 'fixed-size))))
+      (,(_ "_Resize to") resize-window-to-dimensions
+       (insensitive . ,(lambda (w)
+			 (window-get w 'fixed-size))))
       (,(_ "_Close") delete-window
        (insensitive . ,(lambda (w)
 			 (window-get w 'never-delete))))
