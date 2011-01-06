@@ -150,10 +150,13 @@ a window"
 
   (defvar static-workspace-menus
     `((,(_ "_Insert workspace") insert-workspace-after)
+      ()
       (,(_ "Select _next workspace") next-workspace)
       (,(_ "Select _previous workspace") previous-workspace)
+      ()
       (,(_ "Merge with next") merge-next-workspace)
       (,(_ "Merge with previous") merge-previous-workspace)
+      ()
       (,(_ "Move workspace _right") move-workspace-forwards)
       (,(_ "Move workspace _left") move-workspace-backwards)))
 
