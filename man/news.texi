@@ -6,7 +6,7 @@
 
 This lists user-visible changes, and which releases they occurred
 between. For more detailed information see the @file{ChangeLog} file
-in the Sawfish source tree, or git log.  (See Wiki page on how to
+in the Sawfish source tree, or git log.  (See the Wiki on how to
 access git repository.)
 
 @c @heading x.y.z ``Code name''
@@ -45,13 +45,15 @@ access git repository.)
 @itemize @minus
 @item Renamed function @code{popup-window-menu} to @code{popup-window-ops-menu} [Teika kazura]
 
-Both the function and the command are renamed. The old name is still supported,
-but it's recommended to update your configuration.
+It popups operations on a window. Both the function and the command
+are renamed. The old name is still supported, but it's recommended to
+update your configuration.
 
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
 
 @item Syntax-change in @code{jump-or-exec} [Christopher Bratusek]
+
 The @code{class} and @code{onfocused} parameters are now keys, so pass them as
 #:class ''value'' or #:onfocused ''value''. Check @file{jump-or-exec.jl} for
 more detailed examples.
@@ -64,14 +66,14 @@ more detailed examples.
 Previously when installing to a private directory as an ordinary user, the installation failed, because some files
 were forced to be installed in /usr. This is fixed now. 
 
-@item Chooseable session files [Christopher Bratusek]
+@item Session files installation [Christopher Bratusek]
 
-Now you can choose what session files to install. This is done by a tripplet of configure-options:
+Now you can choose which session files to install with these configure-options:
 
 @itemize *
-@item --with/out-kde4session: enable or disable the installation of session files for KDE4. Default: enabled
-@item --with/out-gnome2session: enable or disable the installation of session files for GNOME2. Default: enabled
-@item --with/out-xdmsession: enable or disable the installation of session files for XDM (or other display-managers like
+@item @code{--with/out-kde4session}: enable or disable the installation of session files for KDE4. Default: enabled
+@item @code{--with/out-gnome2session}: enable or disable the installation of session files for GNOME2. Default: enabled
+@item @code{--with/out-xdmsession}: enable or disable the installation of session files for XDM (or other display-managers like
 KDM/GDM). Default: enabled
 @end itemize
 
@@ -95,6 +97,12 @@ It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc}
 
 Previously, user's change of the variable @code{kde-desktop-directories} was ignored, but this is fixed.
 
+@item At focus in/out, correctly reported the mode [Timo Korvola]
+
+When @code{focus-in-hook} / @code{focus-out-hook} are called,
+Sawfish wrongly reported a focus change during a grab as
+``ungrabbed''. Now it's reported as @code{while-grabbed}.
+
 @item Window cycle among groups [Teika Kazura]
 
 Some windows were skipped in window cycles among groups. This is fixed.
@@ -110,7 +118,7 @@ It used to print an error message when you cancel an interactive call of
 @item EdgeActions [Christopher Bratusek, Teika Kazura]
 
 EdgeActions is a centralized way for performing actions with your screen-edges. Lots of internal and
-user-visiable changes have been made.
+user-visible changes have been made.
 
 Internal changes:
 @itemize *
@@ -137,7 +145,7 @@ HotSpot functions need to be set via @file{~/.sawfishrc}, like this:
 ( defvar-setq top-left-corner-function
   ( lambda () ( display-message "hello world" ) ) )
 
-the lambda is very important -- it won't work else. Function names are pretty self-descriptive:
+the lambda is very important - it won't work else. Function names are pretty self-descriptive:
 position (eg: top-left or bottom) + variant (edge or corner) + "function".
 
 @item ViewportDrag now also works while moving a window.
@@ -165,24 +173,24 @@ You can choose from the following actions:
 By default nothing is done.
 @end itemize
 
-@item ICCCM Manager Selection Support [Timo Korvola]
-Support for interchanging the Window-Manager via @code{--replace} flag, according to
-ICCCM has been added.
-
-@item NotifyWhileGrabbed event [Harald van Dijk]
-Sawfish does now recognize (and handle) the NotifyWhileGrabbed event.
-Additionally NotifyUngrab is now handled explicitly.
+@item Replace running window manager with Sawfish [Timo Korvola]@*
+New command line option @code{--replace} is added. With it, Sawfish
+replace will replace the currently running window manager. It's 
+done by ``manager selection'' defined in ICCCM secs 2.8 and 4.3.
 
 @item Toggle-Or-Exec wrapper added to Jump-Or-Exec [Christopher Bratusek]
-@code{toggle-or-exec} is similar to jump-or-exec, but turns windows into
-quake-like drop-down/pop-up-windows. That means, when you have the toggle-window
-focused and press it's keybinding again, it will be hidden.
+
+@code{toggle-or-exec} is similar to jump-or-exec, but turns windows
+into quake-like drop-down/pop-up-windows. That means, when you have
+the toggle-window focused and press its keybinding again, it will be
+hidden. 
 
 See the file @file{jump-or-exec.jl} for more detailed examples.
 
 @item @code{iconify-on-leave} window-matcher [Christopher Bratusek]
-This new window-matcher is a companion to @code{toggle-or-exec}. When a window
-matched against it, looses the focus, it is beeing hidden. Use this together
+
+This new window-matcher is a companion to @code{toggle-or-exec}. When
+a window matched loses the focus, it gets hidden. Use this together
 with @code{toggle-or-exec} for greater toggle-window experience.
 
 @item New function @code{report-commands} [Teika kazura]@*
@@ -193,19 +201,23 @@ It returns the list of all commands. (@pxref{Operations on Commands}).
 
 @item Tabs-NG [fuchur]
 
-Tabs-NG is a revised version of Sawfish's Tabbed-Windowing-System. Most changes are internal, but a few user-visible
+Sawfish's tabbed window system is revised. Most changes are internal, but a few user-visible
 ones have been done, too. When a lot of windows are open, it should now be more responsive.
 
-You now no longer need to change the tab-adjustments via SawfishConfig, when changing or customizing tab-enabled themes
+You no longer need to change the tab-adjustments via SawfishConfig, when changing or customizing tab-enabled themes
 (this is now done internally).
 
 Also there are now vertical and horizontal tabbar-prototypes available (see @code{DarkTab} theme), with a keymap both.
 The window-matcher @code{title-position} ensures that the position of the title will be restored, when using the @code{DarkTab} theme.
 
-Several smaller fixes have been done. (check @file{ChangeLog} for more detailed infos)
-
 @item The themes @code{Elberg-Tabbed} and @code{Get-S-Tabbed} have been updated to work
-with Tabs-NG. The theme @code{DarkTab} made by fuchur" is now the default theme.
+with Tabs-NG. The theme @code{DarkTab} made by fuchur is now the default theme.
+
+@item Behavior modification at focus-in [Harald van Dijk]
+
+In order to support ``gnome2-globalmenu'', the reaction behavior to
+@code{XFocusInEvent} is slightly modified. Sawfish doesn't emit
+@code{_NET_ACTIVE_WINDOW} if it's done by (un)grabbing the pointer.
 
 @item revised @code{get-window-by-*} functions [Christopher Bratusek]
 @itemize *
@@ -226,22 +238,14 @@ window-operations menu-entry @code{Resize} becomes unclickable.
 now bundled in the new @code{Workspace} sub-menu.
 @end itemize
 
-@item @code{rename-window} function behavior-change [Christopher Bratusek]
-The function @code{rename-window} does now also change the _NET_WM_VISIBLE_NAME
-property of a window. 
-
 @item Translation related changes [Teika Kazura]
-
 @itemize +
 @item Added translator instructions in @file{po/README} file.
 @item Before you run @file{po/make-pot} to generate @file{sawfish.pot}, you
 now have to do @code{make all} at the top directory. Previously it was
 possible to produce wrong @file{sawfish.pot}.
-@item The Spanish translation has been updated [gnome-es translation-team]
-@item The German translation has been updated [gnome-de translation-team]
-@item The Simplified-Chinese translation has been updated [gnome-zh_tw team]
-@item The Norwegian/bokmål translation has been updated [gnome-no team]
-@item The Slovenian translation has been updated [gnome-sl team]
+@item Translation updates: Spanish [gnome-es team], German [gnome-de team],
+Simplified-Chinese [gnome-zh_CN team, Wang Lei], Norwegian/bokmål [gnome-no team], and Slovenian [gnome-sl team].
 @item Updated @file{sawfish.pot} and subsequently all @file{*.po}. Banished some bogus items in @file{sawfish.pot}.
 (Developer's personal extensions had sneaked in.)
 @end itemize

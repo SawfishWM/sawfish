@@ -1,7 +1,8 @@
 ;; viewport-drag.jl -- Smooth viewport motion with mouse
 
-;; Originally written by David T. McWherter <udmcwher@mcs.drexel.edu>
-
+;; Based on dtm-infinite-desktop.jl in public domain, written by
+;; David T. McWherter <udmcwher@mcs.drexel.edu>
+;; 
 ;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freent.de>
 
 ;; This file is part of sawfish.

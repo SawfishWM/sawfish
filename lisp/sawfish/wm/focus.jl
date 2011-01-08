@@ -136,7 +136,8 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	(window-put w 'keymap saved)
 	(window-put w 'focus-saved-keymap nil))))
 
-  ;; W is the focused window. Warp to it if a good idea
+  ;; W is the focused window. Warp to it if it conforms to
+  ;; the focus mode.
   (define (warp-pointer-if-necessary #!optional (w (input-focus)))
     (focus-invoke-mode w 'warp-if-necessary))
 

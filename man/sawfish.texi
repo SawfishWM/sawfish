@@ -770,13 +770,15 @@ Returns the numeric ID of the root window of the managed screen.
 @end defun
 
 @defun window-dimensions window
-Returns a cons cell @code{(@var{width} . @var{height})} defining the
-dimensions of the client window associated with object @var{window}.
+Returns the size of the window @var{window} in a cons cell
+@code{(@var{width} . @var{height})}. This does @emph{not} include the
+frame. The size including the frame is returned by
+@code{window-frame-dimensions}. (@pxref{Frame Functions})
 @end defun
 
 @defun window-position window
-Returns a cons-cell @code{(@var{x} . @var{y})} defining the position
-relative to the root window of @var{window}.
+Returns the position of the window decorated with the frame in a
+cons-cell @code{(@var{x} . @var{y})}.
 @end defun
 
 @defun display-window-position @t{#!optional} window
@@ -3752,18 +3754,17 @@ and recalibrated.
 @end defun
 
 @defun window-frame-dimensions window
-Return a cons cell @code{(@var{width} . @var{height})} defining the
-dimensions of the frame associated with @var{window}. These will always
-be greater than or equal to the dimensions of the client window.
+Return the size of the window @var{window} including the frame, in a
+cons cell @code{(@var{width} . @var{height})}.
 
-If @var{window} is not framed, then this function returns the same
-values as @code{window-dimensions} would.
+The size excluding the frame is returned by
+@code{window-dimensions}. (@pxref{Window Attributes})
 @end defun
 
 @defun window-frame-offset window
 Return a cons cell @code{(@var{x} . @var{y})} defining the offset from
 the origin of the client window associated with @var{window} to the
-origin of its frame.
+origin of its frame. That is, their values are negative integers.
 @end defun
 
 @defun window-border-width window
@@ -6883,9 +6884,9 @@ The available hooks are listed below.
 The hook functions are passed one argument which is the command name.
 
 @defvr {Hook} pre-command-hook
-Called before each command is evaluated. If you set the value
-@code{this-command} to @code{nil} in this hook, then the command
-won't be executed.
+Called before invocation of each command. You can modify
+@code{this-command} here. In particular, if it's set to @code{nil} in
+this hook, then the command won't be executed.
 @end defvr
 
 @defvr {Hook} post-command-hook
@@ -7088,73 +7089,46 @@ Currently only @code{urgency} is monitored.  The hint is an additional
 argument to the hook.
 @end defvr
 
-
 @node Pointer Motion Hooks, Workspace and Viewport Hooks, X Hooks, Standard Hooks
 @section Pointer Motion Hooks
 @cindex Pointer Motion Hooks
 @cindex Hooks, Pointer Motion
 
-In the hooks below, @var{focus-mode} is one of the symbols
-@code{normal}, @code{grab} or @code{ungrab}.
-
 @defvr {Window Hook} enter-notify-hook
 @defvrx {Window Hook} enter-frame-part-hook
-Called when the pointer enters a window (including the root window).
+@defvrx {Window Hook} leave-notify-hook
+@defvrx {Window Hook} leave-frame-part-hook
+Called when the pointer enters or leaves a window, respectively.
 
 If the window was part of a frame, then @code{enter-frame-part-hook}
-is called with three arguments: the window, the frame part class
-(@pxref{Frame Part Classes}), and @var{focus-mode}.
+or @code{leave-frame-part-hook} is called with three arguments: the
+window, the frame part class (@pxref{Frame Part Classes}), and
+@var{mode}. @var{mode} is one of the symbols @code{normal},
+@code{grab} or @code{ungrab}.
 
-Otherwise @code{enter-notify-hook} is called with two arguments: the
-window and @var{focus-mode}.
+Otherwise @code{enter-notify-hook} or @code{leave-notify-hook} is
+called with two arguments: the window and @var{mode}.
 
-The root window is considered to be a valid window for this hook.
-Sawfish will report entering the root window.
-@end defvr
-
-@defvr {Window Hook} leave-notify-hook
-@defvrx {Window Hook} leave-frame-part-hook
-Called when the pointer leaves a window (including the root window).
-
-If the window was part of a frame, then @code{leave-frame-part-hook}
-is called with three arguments: the window, the frame part class
-(@pxref{Frame Part Classes}), and @var{focus-mode}.
-
-Otherwise @code{leave-notify-hook} is called with two arguments: the
-window and @var{focus-mode}.
-
-The root window is considered to be a valid window for this hook.
-Sawfish will report leaving the root window.
+Entering the root window is reported, too. In that case, the
+symbol @code{root} is returned in place of a window object.
 @end defvr
 
 @defvr {Window Hook} focus-in-hook
-Called when focus gains focus.  The hook functions take two arguments:
-the window that received focus, and @var{focus-mode}.
+@defvrx {Window Hook} focus-out-hook
+Called when a window gains or loses focus, respectively.  The hook
+function receives two arguments: the window that received / lost
+focus, and @var{mode}. @var{mode} is one of the symbols @code{normal},
+@code{grab}, @code{ungrab} or @code{while-grabbed}.
 
-If your @var{focus-mode} is set to @code{enter-exit}, your window
+If your @code{focus-mode} is set to @code{enter-exit}, your window
 focus is tightly bound to your pointer position; focus-related hooks
 and enter/leave hooks will be called in lockstep.  For other values of
 @code{focus-mode}, Sawfish will trigger fewer focus-related hook calls
 than enter/leave hook calls.
 
 This hook is never called for the root window, because the root window
-never gets focus.
+never gets nor loses focus.
 @end defvr
-
-@defvr {Window Hook} focus-out-hook
-Called when a window loses focus.  The hook functions take two
-arguments: the window that lost focus, and @var{focus-mode}.
-
-If your @var{focus-mode} is set to @code{enter-exit}, your window
-focus is tightly bound to your pointer position; focus-related hooks
-and enter/leave hooks will be called in lockstep.  For other values of
-@code{focus-mode}, Sawfish will trigger fewer focus-related hook calls
-than enter/leave hook calls.
-
-This hook is never called for the root window, because the root window
-never gets focus.
-@end defvr
-
 
 @node Workspace and Viewport Hooks, Startup and Shutdown Hooks, Pointer Motion Hooks, Standard Hooks
 @section Workspace and Viewport Hooks

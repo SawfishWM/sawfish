@@ -1,4 +1,4 @@
-;; commands.jl -- managing the command database
+;; commands.jl -- manages commands
 ;;
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 ;;
@@ -74,15 +74,10 @@ evaluated.")
 
 ;;; defining commands
 
-  ;; each command has two properties: 'command-spec and 'command-fun
-
-  ;; (define-command 'foo
-  ;;   (lambda () ...))
-
   ;; spec is cadr of old (interactive ...) style thing
 
-  (define (getter symbol) (get symbol 'command-fun))
-  (define (setter symbol value) (put symbol 'command-fun value))
+  (define (getter name) (get name 'command-fun))
+  (define (setter name fun) (put name 'command-fun fun))
   (define autoloader (make-autoloader getter setter))
   (define real-getter (autoloader-ref getter))
 
@@ -191,7 +186,6 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
       ;; postfix
       (call-hook 'post-command-hook (list name))
       (setq last-command this-command)
-      (setq this-command nil)
       (setq current-prefix-arg nil)))
 
   (define-command 'call-command call-command
