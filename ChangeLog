@@ -1,3 +1,49 @@
+2011-01-08  Teika Kazura <teika@lavabit.com>
+	* src/sawfish_subrs.h: Exports symbols in src/flippers.c.
+
+	* lisp/sawfish/wm/util/compat.jl: Added old variables from
+	former edge-flip and infinite-desktop.
+
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/edge/viewport-drag.jl
+	* lisp/sawfish/wm/focus.jl
+	* man/news.texi
+	* man/sawfish.1
+	* man/sawfish.texi
+	* sawfish.doap
+	* src/main.c: Minor doc.
+	Clarification in families of functions which return window geometry,
+	with and without frame parts.
+	Minor correction in "Pointer Motion Hooks".
+	News brushup. (Not complete yet.)
+
+	* lisp/sawfish/wm/commands.jl: Deleted one meaningless line.
+
+	* lisp/sawfish/cfg/main.jl.in
+	* scripts/sawfish-about.jl.in
+	* scripts/sawfish-client.jl
+	* scripts/sawfish-menu.jl: Updated Emacs auto mode setting upon
+	finding file.
+
+	* lisp/sawfish/wm/commands/jump-or-exec.jl
+	* man/sawfish.texi: Jump-or-exec cleanup.
+	Wrote a thorough documentation.
+	Handling of arguments "prog" and "onfocused" is extended in lucid way.
+	They can be a command-name or a lisp expression, too.
+	Code is cleaned.
+
+	* lisp/sawfish/wm/windows.jl: In `rename-window-func', the 1.6.0
+	code is restored, reverting all edits after 1.6.0.
+	In fact, revert was intended, but this version is correct.
+
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* lisp/sawfish/wm/windows.jl
+	* man/news.texi: Renamed window-rename functions.
+	'rename-window-func' is renamed to 'rename-window'. Old name is
+	supported. 'rename-window-interactive' is deleted. Update
+	instruction is written in news.texi.
+
 2011-01-06  Christopher Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/commands/move-resize.jl
 	* lisp/sawfish/wm/menus.jl: added a function to resize either the
