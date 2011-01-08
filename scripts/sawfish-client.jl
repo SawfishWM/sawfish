@@ -150,6 +150,7 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 
 (main)
 
+;; Emacs support
 ;; Local variables:
-;; major-mode: lisp-mode
+;; mode: sawfish
 ;; End:

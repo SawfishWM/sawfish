@@ -120,6 +120,7 @@ exec rep "$0" "$@"
   (end-of-stream))
 
 
+;; Emacs support
 ;; Local Variables:
-;; major-mode: lisp-mode
+;; mode: sawfish
 ;; End:
