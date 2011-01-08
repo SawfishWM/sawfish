@@ -121,6 +121,11 @@ extern repv Ffontp (repv font);
 extern void fonts_init (void);
 extern void fonts_kill (void);
 
+/* from flippers.c */
+extern repv Qenter_flipper_hook, Qleave_flipper_hook;
+extern void flippers_init(void);
+extern void flippers_kill(void);
+
 /* from frames.c */
 extern int frame_part_type;
 extern repv Qdefault_frame, Qnil_frame;
