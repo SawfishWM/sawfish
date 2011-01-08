@@ -518,7 +518,7 @@
     (lambda (w prop value)
       (declare (unused prop))
       (when value
-        (rename-window-func w value))))
+        (rename-window w value))))
 
   (define-match-window-setter 'maximized
     (lambda (w prop value)

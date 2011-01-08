@@ -32,6 +32,7 @@
 	    maybe-lower-window)
 
     (open rep
+	  sawfish.wm.windows
 	  sawfish.wm.menus
 	  sawfish.wm.misc
 	  sawfish.wm.custom
@@ -53,7 +54,7 @@
 	(setq attrs (cons (cons 'position position) attrs)))
       (display-message text attrs)))
 
-  ;; Define alias for Renamed functions. 
+  ;; Define alias for renamed functions.
   (define ws-copy-window copy-window-to-workspace)
   (define ws-move-window move-window-to-workspace)
   (define ws-insert-workspace insert-workspace)
@@ -63,6 +64,8 @@
   (define maybe-lower-window lower-window*)
 
   (define popup-window-menu popup-window-ops-menu)
+  (define rename-window-func rename-window)
+
 ;;; obsolete commands
 
   (define (define-commands index)

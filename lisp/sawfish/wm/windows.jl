@@ -59,8 +59,7 @@
 	     avoided-windows
 	     call-after-property-changed
 	     call-after-state-changed
-	     rename-window-func
-	     rename-window-interactive
+	     rename-window
 	     
 	     ;; dummy
 	     get-window-by-class-re
@@ -569,20 +568,16 @@ STATES has been changed. STATES may also be a single symbol."
 		 ((cdr cell) w relevant))))
            state-changes)))
 
-  (define (rename-window-func window new-name)
+  (define (rename-window window new-name)
     "Renames WINDOW to NEW-NAME."
     (set-x-text-property window 'WM_NAME (vector new-name))
     (set-x-text-property window '_NET_WM_NAME (vector new-name))
     (set-x-text-property window 'WM_ICON_NAME (vector new-name))
     (set-x-text-property window '_NET_WM_ICON_NAME (vector new-name)))
 
-  (define (rename-window-interactive w)
-    (require 'sawfish.wm.util.prompt)
-    (let ((new-name (prompt-for-string "Enter new window title:"
-				       (window-name w))))
-      (rename-window-func w new-name)))
+  (define-command 'rename-window rename-window
+    #:spec "%W\nsEnter new window name:")
 
-  (define-command 'rename-window rename-window-interactive #:spec "%W")
   ;;; gaollable functions
 
   (gaol-add window-really-wants-input-p window-class window-avoided-p

@@ -43,11 +43,13 @@ access git repository.)
 
 @item Notes
 @itemize @minus
-@item Renamed function @code{popup-window-menu} to @code{popup-window-ops-menu} [Teika kazura]
+@item Function renames [Teika kazura]
+@itemize
+@item Popup of operations on a window, from @code{popup-window-menu} to @code{popup-window-ops-menu} (both the function and command). Old names are still available.
+@item Window rename, from @code{rename-window-func} to @code{rename-window}. (Old name is still avialable.) The function @code{rename-window-interactive} is deleted. Use @code{(call-command 'rename-window)} instead.
+@end itemize
 
-It popups operations on a window. Both the function and the command
-are renamed. The old name is still supported, but it's recommended to
-update your configuration.
+Even if the old names still remain, it is recommended to update.
 
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
