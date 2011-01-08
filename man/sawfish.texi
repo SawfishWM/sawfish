@@ -6803,6 +6803,57 @@ order of elements is not preserved.
 @chapter External Applications
 @cindex External applications
 
+In this chapter relation to external applications is described.
+See also @xref{Applications Menu}, which is a popup to execute applications.
+
+@menu
+* Application Invocation::
+* Common Applications::         terminal, browser, and so on.
+@end menu
+
+@node Application Invocation, Common Applications,, External Applications
+@section Application Invocation
+
+See also the function @code{system} which invokes a command from a shell.
+(@pxref{Shell Commands,,, librep, The Librep Manual})
+
+@defun jump-or-exec regex prog #!key match-class onfocused
+Jump to a window, or if it doesn't exist, start a program. Main use of
+this function is as a binding to keys. Defined in the
+module @code{sawfish.wm.commands.jump-or-exec}.
+
+Window is searched by matching the name with a regex @var{regex}, or
+if @var{match-class} is non-nil, by window's WM_CLASS. When no window
+matches, action specified by @var{prog} is taken.
+
+If @var{prog} is a string, then it should be a program name, and
+executed from a shell in the background. (I.e. Sawfish adds ''&''.)
+Otherwise, it should be one of a function, command name, or lisp
+expression. The function is called without any argument. The lisp
+expression will be evaluated in the @code{user} module.
+
+If the optional argument @var{onfocused} is non-nil, it defines the
+action when the window is already focused, in the same manner as
+@var{prog}, but the function will receive the focused windows as the
+argument. This can't be a string.
+
+@lisp
+;; Examples:
+
+;; Jump to a window named "Geany". When not found, invoke "geany" 
+;; from a shell.
+(bind-keys global-keymap "W-F10"
+  '(jump-or-exec "Geany" "geany"))
+
+;; Jump to a window with the class "Gnome-run-dialog".
+(bind-keys global-keymap "W-F2"
+  '(jump-or-exec "Gnome-run-dialog" "gnome-run-dialog" #:match-class t ))
+@end lisp
+
+@end defun
+
+@node Common Applications,, Application Invocation, External Applications
+@section Common Applications
 There're some functions and variables for invocation of external
 applications. They're defined in @code{sawfish.wm.commands.launcher}
 module.
