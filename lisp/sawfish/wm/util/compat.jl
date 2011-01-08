@@ -123,7 +123,10 @@
           nokogiri-user-level nokogiri-buttons lock-first-workspace
           ignore-window-input-hint workspace-geometry
           pointer-motion-threshold ignore-program-positions
-          infinite-desktop.stop-at-workspace-borders))
+          infinite-desktop.stop-at-workspace-borders
+	  edge-flip-enabled edge-flip-type edge-flip-only-when-moving
+	  infinite-desktop-p infinite-desktop.move-distance
+	  infinite-desktop.move-cursor-distance ))
 
 ;;; obsolete custom setters
 
