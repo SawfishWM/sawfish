@@ -45,11 +45,11 @@ access git repository.)
 @itemize @minus
 @item Function renames [Teika kazura]
 @itemize
-@item Popup of operations on a window, from @code{popup-window-menu} to @code{popup-window-ops-menu} (both the function and command). Old names are still available.
+@item Popup of operations-menu on a window, from @code{popup-window-menu} to @code{popup-window-ops-menu} (both the function and command). Old names are still available.
 @item Window rename, from @code{rename-window-func} to @code{rename-window}. (Old name is still avialable.) The function @code{rename-window-interactive} is deleted. Use @code{(call-command 'rename-window)} instead.
 @end itemize
 
-Even if the old names still remain, it is recommended to update.
+Even if the old names still remain, it is highly recommended to update.
 
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
@@ -70,13 +70,12 @@ were forced to be installed in /usr. This is fixed now.
 
 @item Session files installation [Christopher Bratusek]
 
-Now you can choose which session files to install with these configure-options:
+Now you can choose which session files (default: all) to install with these configure-options:
 
 @itemize *
-@item @code{--with/out-kde4session}: enable or disable the installation of session files for KDE4. Default: enabled
-@item @code{--with/out-gnome2session}: enable or disable the installation of session files for GNOME2. Default: enabled
-@item @code{--with/out-xdmsession}: enable or disable the installation of session files for XDM (or other display-managers like
-KDM/GDM). Default: enabled
+@item @code{--with/out-kde4session}: enable or disable the installation of session files for KDE4.
+@item @code{--with/out-gnome2session}: enable or disable the installation of session files for GNOME2.
+@item @code{--with/out-xdmsession}: enable or disable the installation of session files for XDM (or other display-managers).
 @end itemize
 
 
@@ -147,7 +146,7 @@ HotSpot functions need to be set via @file{~/.sawfishrc}, like this:
 ( defvar-setq top-left-corner-function
   ( lambda () ( display-message "hello world" ) ) )
 
-the lambda is very important - it won't work else. Function names are pretty self-descriptive:
+the lambda is required - it won't work else. Function names are pretty self-descriptive:
 position (eg: top-left or bottom) + variant (edge or corner) + "function".
 
 @item ViewportDrag now also works while moving a window.
@@ -247,7 +246,8 @@ now bundled in the new @code{Workspace} sub-menu.
 now have to do @code{make all} at the top directory. Previously it was
 possible to produce wrong @file{sawfish.pot}.
 @item Translation updates: Spanish [gnome-es team], German [gnome-de team],
-Simplified-Chinese [gnome-zh_CN team, Wang Lei], Norwegian/bokmål [gnome-no team], and Slovenian [gnome-sl team].
+Simplified-Chinese [gnome-zh_CN team, Wang Lei], Norwegian/bokmål [gnome-no
+team] French [gnome-fr team], and Slovenian [gnome-sl team].
 @item Updated @file{sawfish.pot} and subsequently all @file{*.po}. Banished some bogus items in @file{sawfish.pot}.
 (Developer's personal extensions had sneaked in.)
 @end itemize
