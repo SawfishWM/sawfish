@@ -265,6 +265,7 @@
   (define last-focus nil)
 
   (define (update-focus-state w mode)
+    (declare (unused w))
     (let ((focus (input-focus)))
       (unless (or (eq mode 'grab) (eq mode 'ungrab) (eq last-focus focus))
 	(setq last-focus focus)

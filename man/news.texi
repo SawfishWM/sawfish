@@ -98,7 +98,7 @@ It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc}
 
 Previously, user's change of the variable @code{kde-desktop-directories} was ignored, but this is fixed.
 
-@item At focus in/out, correctly reported the mode [Timo Korvola]
+@item At focus in/out, correctly reports the mode [Timo Korvola]
 
 When @code{focus-in-hook} / @code{focus-out-hook} are called,
 Sawfish wrongly reported a focus change during a grab as
@@ -176,7 +176,7 @@ By default nothing is done.
 
 @item Replace running window manager with Sawfish [Timo Korvola]@*
 New command line option @code{--replace} is added. With it, Sawfish
-replace will replace the currently running window manager. It's 
+will replace the currently running window manager. It's 
 done by ``manager selection'' defined in ICCCM secs 2.8 and 4.3.
 
 @item Toggle-Or-Exec wrapper added to Jump-Or-Exec [Christopher Bratusek]
@@ -216,7 +216,7 @@ with Tabs-NG. The theme @code{DarkTab} made by fuchur is now the default theme.
 
 @item Behavior modification at focus-in [Harald van Dijk]
 
-In order to support ``gnome2-globalmenu'', the reaction behavior to
+In order to support ``gnome2-globalmenu'', the reaction policy to
 @code{XFocusInEvent} is slightly modified. Sawfish doesn't emit
 @code{_NET_ACTIVE_WINDOW} if it's done by (un)grabbing the pointer.
 

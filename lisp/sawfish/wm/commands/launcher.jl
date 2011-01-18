@@ -48,9 +48,11 @@
     :group (misc apps))
 
   (define (xterm #!optional command)
-    "Start a new terminal. Optional argument `COMMAND' is passed to the
-terminal with -e option, so for most, including xterm, it can contain
-arguments to be passed."
+    "Start a new terminal specified by the option `xterm-program'.
+
+Optional argument `COMMAND' is passed to the terminal with -e option,
+so for most terminals, including xterm, it can contain arguments to be
+passed."
     (if (or (not command)
 	    (equal "" command))
 	(system (format nil "%s >/dev/null 2>&1 </dev/null &"
@@ -71,11 +73,11 @@ arguments to be passed."
   (define-command 'xterm xterm #:class 'default
     #:spec "sCommand:"
     #:type `(and (labelled ,(_ "Command:") string))
-    #:doc "Start xterm. Optional command is passed with -e."
+    #:doc "Start a terminal. Optional command is passed with -e. The terminal is specified by variable `xterm-program' in Config -> Misc -> External Applications."
     )
   (define-command 'browser browser #:class 'default
     #:spec "sUrl:"
     #:type `(and (labelled ,(_ "url:") string))
-    #:doc "Start browser. Url is optional."
+    #:doc "Start browser. Url is optional. Browser program is specified by variable `browser-program' in Config -> Misc -> External Applications."
     )
   )

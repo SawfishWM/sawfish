@@ -165,7 +165,7 @@ between Lisp functions.
 Returns @code{t} when @var{arg} is a member of the color type.
 @end defun
 
-@defun get-color name &optional alpha
+@defun get-color name @t{#!optional} alpha
 Returns the color object representing the color specified by the string
 @var{name}. This is according to the standard X11 color specifiers,
 either a named color from the @file{rgb.txt} database, or a string
@@ -179,7 +179,7 @@ the returned color.  It is passed through to @code{get-color-rgb}.
 Signals an error if no known color has the name @var{name}.
 @end defun
 
-@defun get-color-rgb red green blue &optional alpha
+@defun get-color-rgb red green blue @t{#!optional} alpha
 Return the color object representing the color with RGB components as
 specified (each component ranging from 0 to 65535).
 
@@ -281,17 +281,17 @@ Returns the bounding height of glyphs in the font represented by object
 @var{font}.
 @end defun
 
-@defun font-ascent &optional font
+@defun font-ascent @t{#!optional} font
 Returns the ascent of glyphs rendered using the font represented by
 @var{font}.  If no font argument is given, use the default font.
 @end defun
 
-@defun font-descent &optional font
+@defun font-descent @t{#!optional} font
 Returns the descent of glyphs rendered using the font represented by
 @var{font}.  If no font argument is given, use the default font.
 @end defun
 
-@defun text-width string &optional font
+@defun text-width string @t{#!optional} font
 Returns the number of horizontal pixels that would be required to
 display the text @var{string} using font object @var{font} (or the
 value of the @code{default-font} variable if @var{font} is undefined).
@@ -337,7 +337,7 @@ dynamically.
 Returns @code{t} when @var{arg} is a member of the image type.
 @end defun
 
-@defun make-image file-name &optional plist
+@defun make-image file-name @t{#!optional} plist
 Creates and returns an image object containing the image defined by the
 contents of the file named @var{file-name} (a string). The
 @code{image-load-path} directory provides the search path used while
@@ -364,13 +364,13 @@ loading images.  By default, this is @code{("."
 modify @var{image-load-path}.
 @end defvar
 
-@defun make-sized-image width height &optional color
+@defun make-sized-image width height @t{#!optional} color
 Create and return a new image, of size @var{width},  @var{height}. If
 @var{color} is defined it specifies the color of all pixels in the
 image. If undefined, all pixels will be black.
 @end defun
 
-@defun make-image-from-x-drawable id &optional mask-id
+@defun make-image-from-x-drawable id @t{#!optional} mask-id
 Create and return an new image.  The image is constructed by copying
 an X Drawable (identified by @var{id}) into a Sawfish image object.
 The function automatically handles depth conversion.
@@ -484,7 +484,7 @@ Set the image modifier of @var{image} defined by @var{type}.
 
 There are also several other functions manipulating images:
 
-@defun bevel-image image border upwards &optional bevel-percent
+@defun bevel-image image border upwards @t{#!optional} bevel-percent
 Transform the edgemost pixels of @var{image} to give it a ``bevelled''
 effect. @var{BORDER} is an integer defining the width of the bevel. If
 @var{upwards} is non-nil the bevel is raised, otherwise it is lowered.
@@ -498,7 +498,7 @@ from the @code{default-bevel-percent} variable.
 Default height of drawn bevels, as a percentage.  Normally 50%.
 @end defvar
 
-@defun clear-image image &optional color
+@defun clear-image image @t{#!optional} color
 Set all pixels in @var{image} to @var{color} (or black if @var{color}
 is undefined).
 @end defun
@@ -513,7 +513,7 @@ Return a copy of @var{image}, scaled to @var{width} by @var{height}
 pixels.
 @end defun
 
-@defun composite-images image1 image2 &optional x y
+@defun composite-images image1 image2 @t{#!optional} x y
 Copy the contents of @var{image2} into @var{image1}.  @var{Image2} is
 cropped to fit.  Arguments @var{x} and @var{y} indicate the position
 in @var{image1} of the top-left corner of @var{image2}.  If not
@@ -619,7 +619,7 @@ Change the colors of the cursor object @var{cursor} to @var{fg} and
 @var{bg} (either color objects or the names of colors).
 @end defun
 
-@defun default-cursor &optional cursor
+@defun default-cursor @t{#!optional} cursor
 Set the cursor object displayed in the root window, and in parts of
 window frames that have no other cursor specified, to @var{cursor}.
 
@@ -910,7 +910,7 @@ window object @var{window} to @var{value}.  Note that these are Lisp
 properties not X properties.
 @end defun
 
-@defun window-get window property &optional checker
+@defun window-get window property @t{#!optional} checker
 Return the window property named @var{property} (a symbol) associated
 with the window object @var{window}, or @code{nil} if no such property
 exists.  Note that these are Lisp properties not X properties.
@@ -978,19 +978,19 @@ Return true if window @var{descendant} is (directly or indirectly) a
 transient for window @var{ancestor}, false otherwise.
 @end defun
 
-@defun transient-parents child &optional indirectly
+@defun transient-parents child @t{#!optional} indirectly
 Return the list of windows that window @var{child} is a transient
 for.  If @var{indirectly} is true, then return the list of all
 ancestors rather than parents.
 @end defun
 
-@defun transient-children parent &optional indirectly
+@defun transient-children parent @t{#!optional} indirectly
 Return the list of windows that are transients for window
 @var{parent}.  If @var{indirectly} is true, then return the list of
 all descendants rather than children.
 @end defun
 
-@defun transient-group window &optional by-depth
+@defun transient-group window @t{#!optional} by-depth
 Return the list of windows which is either a transient window for
 window @var{window}, or a window which @var{window} is a transient
 for.  This always includes W.  The `transient window for' relation holds
@@ -1147,7 +1147,7 @@ It is possible to add additional focus modes by defining your own
 handler function.  The handler function must obey a
 ``focus-mode-handler'' protocol.
 
-@deftp {Function Protocol} focus-mode-handler window event-name &optional args
+@deftp {Function Protocol} focus-mode-handler window event-name @t{#!optional} args
 A function that implements the @code{focus-mode-handler} protocol can
 be used to define a focus mode.  A @code{focus-mode-handler} responds
 to events associated with windows.
@@ -1255,7 +1255,7 @@ This is a fluid object, not an ordinary variable.
 Sawfish also maintains the order in which windows were recently
 focused.
 
-@defun window-order &optional workspace allow-iconified all-viewports
+@defun window-order @t{#!optional} workspace allow-iconified all-viewports
 Return a list of windows, in most-recently-focused order.
 
 If @var{workspace} is an integer, then only windows on that workspace
@@ -1274,7 +1274,7 @@ Push window object @var{window} onto the top of the focus stack.
 Remove window object @var{window} from the focus stack.
 @end defun
 
-@defun window-order-most-recent &optional windows
+@defun window-order-most-recent @t{#!optional} windows
 Return the most-recently focused window in the current workspace.  If
 the optional argument @var{windows} is given, it must be a list of
 windows.  In that case, the function will return the most-recently
@@ -1501,13 +1501,13 @@ This means that a window is, at the very least, part of its own group.
 Each of the following functions operates on the ``actual group ID'' as
 returned by the above function.
 
-@defun windows-by-group group-id &optional by-depth
+@defun windows-by-group group-id @t{#!optional} by-depth
 Return the list of windows in the group with id @var{group-id}.
 If @var{by-depth} is non-nil, then return the windows in order of
 stacking, from topmost to bottommost.
 @end defun
 
-@defun windows-in-group w &optional by-depth
+@defun windows-in-group w @t{#!optional} by-depth
 Return the list of windows in the same group as window @var{w}.
 If @var{by-depth} is non-nil, then return the windows in order of
 stacking, from topmost to bottommost.
@@ -1525,7 +1525,7 @@ same group as window @var{w}.  Note that @var{fun} needs to operate
 using side-effects, rather than returning values.
 @end defun
 
-@defun window-group-menu &optional w
+@defun window-group-menu @t{#!optional} w
 Return a menu definition suitable for @code{popup-menu}.  This menu
 will allow the user to assign the window @var{w} into any group of a
 managed window, or into a brand new group.  The window's current group
@@ -1911,8 +1911,8 @@ Move the top-left corner of the window frame of @var{window} to
 (@var{width}, @var{height}).
 @end defun
 
-@defun resize-window-with-hints window cols rows &optional hints
-@defunx resize-window-with-hints* window width height &optional hints
+@defun resize-window-with-hints window cols rows @t{#!optional} hints
+@defunx resize-window-with-hints* window width height @t{#!optional} hints
 Resize the window associated with object @var{window} so that it has
 certain X and Y dimensions.  For the first function, the dimensions
 are @var{cols} columns and @var{rows} rows.   For the second function,
@@ -1942,12 +1942,14 @@ focused window.
 Sawfish honors the @code{min-aspect} and @code{max-aspect} window
 hints when interactively resizing a window.
 
-@deffn Command move-window-interactively window
+@deffn Function move-window-interactively window
+@deffnx Command move-window-interactively window
 Move @var{window} interactively using the mouse. Releasing any mouse
 button places the window at its current position.
 @end deffn
 
-@deffn Command resize-window-interactively window
+@deffn Function resize-window-interactively window
+@deffnx Command resize-window-interactively window
 Resize @var{window} interactively using the mouse. Releasing any mouse
 button places the window at its current position.
 
@@ -1958,19 +1960,22 @@ the mouse pointer gives the direction to resize in. If the pointer is
 in the central rectangle the bottom and right edges are moved.
 @end deffn
 
-@deffn Command move-selected-window
+@deffn Function move-selected-window
+@deffnx Command move-selected-window
 Wait for the user to select a window using the mouse, then
 interactively move that window.
 @end deffn
 
-@deffn Command resize-selected-window
+@deffn Function resize-selected-window
+@deffnx Command resize-selected-window
 Wait for the user to select a window with the mouse, then interactively
 resize that window.
 @end deffn
 
 @deffn Command double-window-size window
 @deffnx Command halve-window-size window
-Double / halve the size of @var{window}
+Double / halve the size of @var{window} in both direction, i.e.
+the area will be 4 or 1/4 times.
 @end deffn
 
 Sawfish supports increasing the windows size until it touches another
@@ -1980,21 +1985,23 @@ other window. More precisely, the grow can be done repeatedly, each
 time until the edge meets another edge, and shrink is done so that
 it overlaps with one less window.
 
-@deffn Command grow-window-up window @t{#!optional} arg
-@deffnx Command grow-window-down window @t{#!optional} arg
-@deffnx Command grow-window-left window @t{#!optional} arg
-@deffnx Command grow-window-right window @t{#!optional} arg
+@deffn Function grow-window-up window @t{#!optional} arg
+@deffnx Function grow-window-down window @t{#!optional} arg
+@deffnx Function grow-window-left window @t{#!optional} arg
+@deffnx Function grow-window-right window @t{#!optional} arg
 Grows @var{window} upwards / downwards / left / right until it touches
 another window.  If that edge is beyond the screen edge, it is
 brought back in. With a universal prefix @var{arg}, maximize in that
 direction instead. With a numeric prefix @var{arg}, grow by that many
 increments specified by window or pixels instead.
+
+There are commands, too, with the same name.
 @end deffn
 
-@deffn Command shrink-window-up window
-@deffnx Command shrink-window-down window
-@deffnx Command shrink-window-left window
-@deffnx Command shrink-window-right window
+@deffn Function shrink-window-up window
+@deffnx Function shrink-window-down window
+@deffnx Function shrink-window-left window
+@deffnx Function shrink-window-right window
 Shrinks @var{window} by moving one edge upwards / downwards / left /
 right until it intersects with one window less than before. (So,
 in @code{shrink-window-up} for example, the lower edge is moved.)
@@ -2002,29 +2009,35 @@ in @code{shrink-window-up} for example, the lower edge is moved.)
 Window won't be made smaller than the minimum size, or
 @code{shrink-window-minimum-size}. More precisely, size truncation
 may make the window smaller than these values.
+
+There are commands, too, with the same name.
 @end deffn
 
 Moving counterparts, instead of resizing of ``grow'' and ``shrink'',
 are ``pack'' and ``yank''. So, ``pack'' moves until the window touches
 another, and ``yank'' moves until the overlap reduces.
 
-@deffn Command pack-window-up window #! optional arg
-@deffnx Command pack-window-down @t{#!optional} arg
-@deffnx Command pack-window-left window @t{#!optional} arg
-@deffnx Command pack-window-right window @t{#!optional} arg
+@deffn Function pack-window-up window @t{#!optional} arg
+@deffnx Function pack-window-down @t{#!optional} arg
+@deffnx Function pack-window-left window @t{#!optional} arg
+@deffnx Function pack-window-right window @t{#!optional} arg
 Moves @var{window} upwards / downwards / left /right until it touches
 another window.  If that edge is beyond the screen edge, it is moved
 back in.  With a universal prefix @var{arg}, move in that direction
 maximally instead.  With a numeric prefix @var{arg}, move by that many
 pixels instead.
+
+There are commands, too, with the same name.
 @end deffn
 
-@deffn Command yank-window-up window
-@deffnx Command yank-window-down window
-@deffnx Command yank-window-left window
-@deffnx Command yank-window-right window
+@deffn Function yank-window-up window
+@deffnx Function yank-window-down window
+@deffnx Function yank-window-left window
+@deffnx Function yank-window-right window
 Yanks @var{window} upwards / downwards / left / right until it
 overlaps with one less window than before.
+
+There are commands, too, with the same name.
 @end deffn
 
 Grow, pack, shrink and yank behavior can be customized through the
@@ -2073,9 +2086,10 @@ The minimum amount of window left visible, if yanked over the screen
 edge. The default value is @code{10}.
 @end defvar
 
-@deffn Command move-window-center windows
-Place @var{window} in the middle of the screen
-(frame-size is respected while calculating position)
+@deffn Function move-window-center window
+@deffnx Command move-window-center window
+Place @var{window} in the middle of the screen (frame-size is
+respected while calculating position)
 @end deffn
 
 The interactive move and resize behavior can be customized through the
@@ -2115,7 +2129,7 @@ the value, the more adhesive windows get.
 Windows have a ``gravity'' property, which affect how they are placed
 in particular positions.
 
-@defun window-gravity window &optional hints
+@defun window-gravity window @t{#!optional} hints
 Returns the gravity of window.  The order of precedence is Sawfish
 @code{gravity} window property, explicit @var{hints} argument, X
 window size hints.  The default gravity when nothing else is specified
@@ -2128,25 +2142,30 @@ is @code{north-west} (specified by ICCCM).
 @cindex Hiding and showing windows
 @cindex Windows, showing and hiding
 
-Sawfish provides two low-level functions for withdrawing client windows
+Sawfish provides two low-level functions for (un)withdrawing client windows
 from the display. These are used to implement both workspaces
 (@pxref{Workspaces}) and iconification (@pxref{Iconifying Windows}).
 
 @defun hide-window window
-Prevent object @var{window} from being displayed.  See
-@code{show-window}.
+Prevent object @var{window} from being displayed.
+
+This function is low-level and mainly for internal use. You should
+probably use @code{iconify-window}. (@pxref{Iconifying Windows})
 @end defun
 
 @defun show-window window
-Ensure that @var{window} (if it has been mapped, and is within the
-screen boundary) is visible.  See @code{hide-window}.
+Ensure that @var{window} is visible, (provided that it has been
+mapped, and is within the screen boundary).
+
+This function is low-level and mainly for internal use. For
+interactive use, you should probably use
+@code{display-window}. (@pxref{Activating Window})
 @end defun
 
 @defun window-visible-p window
 Returns @code{t} if object @var{window} has not been hidden by the
 @code{hide-window} function.
 @end defun
-
 
 @node Destroying Windows, Shading Windows, Showing and Hiding Windows, Windows
 @section Destroying Windows
@@ -2157,27 +2176,31 @@ There are several methods through which X11 client windows may be
 removed from the display. These differ in the level ``politeness'' they
 show the window and its owning application.
 
-@deffn Command delete-window window
+@deffn Function delete-window window
+@deffnx Command delete-window window
 Delete @var{window}, i.e. send a @code{WM_DELETE_WINDOW} client-message
 if possible, or just kill the associated X11 client if not.
 @var{window} may be a window object or a numeric window id.
 @end deffn
 
-@deffn Command delete-window-safely window
+@deffn Function delete-window-safely window
+@deffnx Command delete-window-safely window
 If the application owning @var{window} supports it, send a
 @code{WM_DELETE_WINDOW} message to @var{window}. Otherwise just emit a
 beep.
 @end deffn
 
-@deffn Command destroy-window window
+@deffn Function destroy-window window
+@deffnx Command destroy-window window
 Destroy @var{window} without giving the owning application any warning.
 @var{window} may be a window object or a numeric window id.
 @end deffn
 
-@defun x-kill-client window
+@deffn Function x-kill-client window
+@deffnx Command kill-client window
 Force a close down of the X11 client that created the window specified
 by @var{window} (a window object, or numeric id).
-@end defun
+@end deffn
 
 When a managed window is destroyed, the @code{destroy-notify-hook} will
 subsequently be invoked (@pxref{Standard Hooks}).
@@ -2194,15 +2217,18 @@ state only the title bar of the window is visible.
 Returns true when @var{window} is shaded, false otherwise.
 @end defun
 
-@deffn Command shade-window window
+@deffn Function shade-window window
+@deffnx Command shade-window window
 Arrange for only the title bar of @var{window} to be visible.
 @end deffn
 
-@deffn Command unshade-window window
+@deffn Function unshade-window window
+@deffnx Command unshade-window window
 If the window is shaded, restore it to it's original state.
 @end deffn
 
-@deffn Command toggle-window-shaded
+@deffn Function toggle-window-shade window
+@deffnx Command toggle-window-shaded window
 Toggle the shaded state of the window.
 @end deffn
 
@@ -2225,7 +2251,7 @@ stretching as far as possible within the screen in one or two dimensions.
 If you have multiple monitors, maximization is done within a head,
 unless stated explicitly that it's xinerama.
 
-@defun window-maximizable-p window &optional direcion hints
+@defun window-maximizable-p window @t{#!optional} direcion hints
 Return @code{t} when @var{window} is maximizable. The window property
 @var{never-maximize} prevents maximization.
 
@@ -2263,7 +2289,7 @@ if it's vertically maximized or not.
 Ordinary maximization occurs on the current screen, and possibly
 rounding down to fit character sizes.
 
-@deffn Function maximize-window window &optional direction only-1d
+@deffn Function maximize-window window @t{#!optional} direction only-1d
 @deffnx Command maximize-window window
 Maximize both dimensions of @var{window} on the screen.
 
@@ -2276,15 +2302,12 @@ The optional argument @var{only-1d} is for internal use. Don't use it.
 
 @deffn Function maximize-window-vertically window
 @deffnx Command maximize-window-vertically window
-Maximize the vertical dimension of @var{window} in the screen.
+@deffnx Function maximize-window-horizontally window
+@deffnx Command maximize-window-horizontally Windows
+Maximize the vertical or horizontal dimension of @var{window} in the screen.
 @end deffn
 
-@deffn Function maximize-window-horizontally window
-@deffnx Command maximize-window-horizontally window
-Maximize the horizontal dimension of @var{window} in the screen.
-@end deffn
-
-@deffn Function maximize-window-toggle window &optional direction
+@deffn Function maximize-window-toggle window @t{#!optional} direction
 @deffnx Command maximize-window-toggle window
 Toggle the state of @var{window} between maximized and unmaximized
 in the screen.
@@ -2361,7 +2384,7 @@ maximize without overlap to any other windows, except ``ignored'' ones.
 In addition, they don't shrink the window even if it is already bigger
 than the screen size.
 
-@deffn Function maximize-fill-window window &optional direction
+@deffn Function maximize-fill-window window @t{#!optional} direction
 @deffnx Command maximize-fill-window window
 Maximize both dimensions of @var{window} without overlapping other
 windows.
@@ -2465,7 +2488,8 @@ the window edges flush with the screen sides.
 One command restores windows from all the different types of
 maximization.
 
-@deffn Command unmaximize-window window &optional direction
+@deffn Function unmaximize-window window @t{#!optional} direction
+@deffnx Command unmaximize-window window
 Restore the position and dimensions of @var{window} to their original,
 unmaximized, states.
 
@@ -2495,7 +2519,7 @@ horizontally, then @var{y} is the height before maximization, but
 @var{x} is the window's current width.
 @end defun
 
-@defun maximize-discard window &optional direction
+@defun maximize-discard window @t{#!optional} direction
 Don't treat window as maximized any more, keeping the size and the
 position. You'll be able to move and resize, but won't be able to
 unmaximize.
@@ -2639,7 +2663,7 @@ to denote all cyclable windows.
 Any extra arguments are passed to each call to define-command.
 @end defun
 
-@defun window-order &optional workspace allow-iconified all-viewports
+@defun window-order @t{#!optional} workspace allow-iconified all-viewports
 Return managed windows in most-recently used order.
 
 If @var{workspace} is non-nil, then only managed windows in that
@@ -2765,24 +2789,27 @@ controlled by animator function @var{animator}.
 @cindex Windows, iconifying
 
 X defines an iconic state for windows, often windows in this state are
-displayed as small icons. Sawfish does not display these icons, instead
-iconified windows are shown slightly differently in the menu of all
-windows.
+displayed as small icons. Sawfish does not display these icons. Use
+softwares called ``trayers'' and / or ``pagers'' for such things.
 
-@deffn Command iconify-window window
+@deffn Function iconify-window window
+@deffnx Command iconify-window window
 Iconify the window associated with object @var{window}.
 @end deffn
 
-@deffn Command uniconify-window window
+@deffn Function uniconify-window window
+@deffnx Command uniconify-window window
 Return the window associated with @var{window} from its iconified state.
 @end deffn
 
-@deffn Command toggle-window-iconified window
+@deffn Function toggle-window-iconified window
+@deffnx Command toggle-window-iconified window
 Minimize the window associated with @var{window}, or restore it if it
 is already minimized.
 @end deffn
 
-@deffn Command iconify-workspace-windows
+@deffn Function iconify-workspace-windows
+@deffnx Command iconify-workspace-windows
 Minimize all windows in the current workspace.
 @end deffn
 
@@ -2945,26 +2972,30 @@ Returns true if the window has the @code{ignored} property, false
 otherwise.
 @end defun
 
-@deffn Command make-window-ignored window
+@deffn Function make-window-ignored window
+@deffnx Command make-window-ignored window
 Ignore the window @var{window}.
 @end deffn
 
-@deffn Command make-window-not-ignored window
+@deffn Function make-window-not-ignored window
+@deffnx Command make-window-not-ignored window
 Unignore the window @var{window}.
 @end deffn
 
-@deffn Command toggle-window-ignored window
+@deffn Function toggle-window-ignored window
+@deffnx Command toggle-window-ignored window
 If @code{window-ignored-p} would return true for @var{window}, make it
 unignored.  Otherwise make it ignored.
 @end deffn
 
 The remaining flags only have toggle functions implemented right now:
 
-@deffn Command toggle-window-never-focus window
-@deffnx Command toggle-window-cycle-skip window
-@deffnx Command toggle-window-list-skip window
-@deffnx Command toggle-task-list-skip window
-Toggle the appropriate flag on @var{window}.
+@deffn Function toggle-window-never-focus window
+@deffnx Function toggle-window-cycle-skip window
+@deffnx Function toggle-window-list-skip window
+@deffnx Function toggle-task-list-skip window
+Toggle the appropriate flag on @var{window}. They have the same
+name commands.
 @end deffn
 
 All five of the flags are available through the window menu's
@@ -3014,7 +3045,7 @@ unless @code{dont-avoid-ignored} is non-nil.
 @end enumerate
 @end defun
 
-@defun avoided-windows &optional window
+@defun avoided-windows @t{#!optional} window
 Returns a list of all windows that are avoided. If
 @var{window} is defined, then it is excluded from the returned list.
 @end defun
@@ -3041,11 +3072,16 @@ for hand-editing, Sawfish has a specialized system allowing all
 customizations to be made through a GUI, and then automatically
 reloaded each time that the window manager is started.
 
-@deffn Command customize &optional group
+@deffn Function customize @t{#!optional} group
+@deffnx Command customize
 Invoke the user-customization GUI. @var{group} defines the class of
 customization variables to configure, or all classes if @var{group} is
 undefined.
 @end deffn
+
+There also exists the command, for example, @code{customize:appearance},
+i.e. for each top-level customization group, the command to customize
+only it and its subgroups.
 
 The @file{sawfish-config} program can be used to invoke the GUI manually;
 if GNOME is being used, then the GNOME Control Center can also be used
@@ -3226,7 +3262,7 @@ of its actual type. This is only supported by the @code{string},
 @item :set @var{function}
 Specifies that the variable must be set by calling @var{function}
 instead of the default @code{custom-set-variable}. The function should
-accept three arguments: @code{(@var{variable} @var{value} &optional
+accept three arguments: @code{(@var{variable} @var{value} @t{#!optional}
 @var{require})}.
 
 The usual action of this function is to translate the value into the
@@ -3484,7 +3520,7 @@ In some cases it might be valuable to be able to override pre-defined
 frame part properties. For example, it might be your preference that
 text in window title bars is always blue.
 
-@defun define-frame-class class alist-form &optional with-keymap
+@defun define-frame-class class alist-form @t{#!optional} with-keymap
 Creates a new frame part class named by the symbol @var{class}.
 
 Unlike @code{def-frame-class}, the trailing argument is just a boolean
@@ -3506,7 +3542,7 @@ style itself.
 The following function may be used to simplify the customization of
 these two variables:
 
-@defun set-frame-part-value class key value &optional override
+@defun set-frame-part-value class key value @t{#!optional} override
 Associate @var{value} with property @var{key} for all frame parts of
 class @var{class}.
 
@@ -4302,7 +4338,7 @@ Returns a cons cell @code{(@var{col} . @var{row})} of the viewport
 holding the top-left corner of @var{window}.
 @end defun
 
-@defun window-outside-viewport-p window &optional viewport
+@defun window-outside-viewport-p window @t{#!optional} viewport
 Returns true if @var{window} is completely outside the current
 viewport in any direction.  If @var{viewport} is specified check against
 that viewport rather than the current one.
@@ -4383,7 +4419,7 @@ the subset of the workspace continuum that is ``interesting'' to the
 user (typically, all those that have ever been explicitly created).
 @end defun
 
-@defun workspace-id-to-logical space-id &optional limits
+@defun workspace-id-to-logical space-id @t{#!optional} limits
 Takes an absolute workspace ID and returns its position in the
 interval of ``interesting'' workspaces.  If @var{limits} is provided,
 it must be a pair @code{(@var{first-index} . @var{last-index})} like
@@ -4391,7 +4427,7 @@ that returned by @code{workspace-limits}.  If it is not provided, the
 function uses the result of @code{workspace-limits} directly.
 @end defun
 
-@defun workspace-id-from-logical offset &optional limits
+@defun workspace-id-from-logical offset @t{#!optional} limits
 Takes an offset position into an interval of ``interesting''
 workspaces, and returns the workspace ID at that position.  If
 @var{limits} is provided, it must be a pair @code{(@var{first-index}
@@ -4443,7 +4479,7 @@ Select workspace @var{space} and then switch to viewport
 @code{(@var{col}, @var{row})} in that workspace.
 @end defun
 
-@defun insert-workspace &optional before
+@defun insert-workspace @t{#!optional} before
 Insert a new workspace, returning its index.  The new index appears
 before the workspace indicated by @var{before}, or the current
 workspace if @var{before} is @code{nil}.
@@ -4462,12 +4498,12 @@ Move the workspace @var{space} @var{count} positions forward, or
 @var{count} positions backwards if @var{count} is negative.
 @end defun
 
-@defun move-workspace-forwards &optional count
+@defun move-workspace-forwards @t{#!optional} count
 Move the current workspace one place to the right (or @var{count}
 places to the right if @var{count} is defined).
 @end defun
 
-@defun move-workspace-backwards &optional count
+@defun move-workspace-backwards @t{#!optional} count
 Move the current workspace one place to the left (or @var{count}
 places to the left if @var{count} is defined).
 @end defun
@@ -4482,7 +4518,7 @@ These functions do not have default values for their @var{count}
 arguments.
 @end defun
 
-@defun remove-workspace &optional index
+@defun remove-workspace @t{#!optional} index
 Remove workspace @var{index} (or the current workspace if @var{index}
 is @code{nil}).  All windows in that workspace are moved to the next
 workspace @var{index}+1.  This will change the set of ``interesting''
@@ -4567,7 +4603,7 @@ Returns the nearest workspace to @var{space} that contains
 @var{window}.
 @end defun
 
-@defun workspace-windows &optional space include-iconified
+@defun workspace-windows @t{#!optional} space include-iconified
 Returns a list of all windows that are members of the current
 workspace (or @var{space} if it is not @code{nil}).  The list normally
 does not contain iconified windows, but they can by included by
@@ -4578,7 +4614,7 @@ specifying a true @var{include-iconified} argument.
 Display the menu of all managed windows.
 @end defun
 
-@defun move-window-to-workspace window old new &optional was-focused
+@defun move-window-to-workspace window old new @t{#!optional} was-focused
 Move @var{window} from workspace @var{old} to workspace @var{new}.
 
 We need the old workspace as an explicit argument because a window can
@@ -4589,7 +4625,7 @@ If @var{was-focused} is true and the window is visible, it gets the
 input focus in the new workspace.
 @end defun
 
-@defun copy-window-to-workspace window old new &optional was-focused
+@defun copy-window-to-workspace window old new @t{#!optional} was-focused
 Arrange it so @var{window} appears in both @var{old} and @var{new}
 workspaces.
 
@@ -4597,7 +4633,7 @@ If @var{was-focused} is true and the window is visible, it gets the
 input focus in the new workspace.
 @end defun
 
-@defun send-to-next-workspace window count &optional copy select
+@defun send-to-next-workspace window count @t{#!optional} copy select
 Move the window @var{count} workspaces to the right.  @var{Count} does
 not default to one.
 
@@ -4610,7 +4646,7 @@ If the moved window had input focus before the move, it will have
 input focus after the move as well.
 @end defun
 
-@defun send-to-previous-workspace window count &optional copy select
+@defun send-to-previous-workspace window count @t{#!optional} copy select
 Move the window @var{count} workspaces to the left.  @var{Count} does
 not default to one.
 
@@ -4636,7 +4672,7 @@ input focus after the move as well.
 This is identical to @code{(send-to-next-workspace window count t select)}.
 @end defun
 
-@defun copy-to-previous-workspace window count &optional select
+@defun copy-to-previous-workspace window count @t{#!optional} select
 Copy the window @var{count} workspaces to the right.  @var{Count} does
 not default to one.
 
@@ -4647,7 +4683,7 @@ input focus after the move as well.
 This is identical to @code{(send-to-previous-workspace window count t select)}.
 @end defun
 
-@defun send-window-to-workspace-from-first window count &optional copy select
+@defun send-window-to-workspace-from-first window count @t{#!optional} copy select
 Move @var{window} to the workspace at position @var{count} in the
 ``interesting'' list.
 
@@ -4839,7 +4875,7 @@ zero and the function returns @code{(0 . 0)}.
 Return the ID of the head containing the mouse pointer.
 @end defun
 
-@defun current-head &optional window
+@defun current-head @t{#!optional} window
 Return the ID of the head containing the window with input focus.  If
 @var{window} is supplied and a window, return the head containing that
 window.  If @var{window} is supplied and @var{nil}, return
@@ -4853,14 +4889,14 @@ containing the specified window.  But unlike @code{current-head},
 be in if its viewport were the visible viewport.
 @end defun
 
-@defun current-head-dimensions &optional window
+@defun current-head-dimensions @t{#!optional} window
 Return a cons-cell defining the size in pixels of the current head
 (that containing the window @var{window}, or the pointer if
 @var{window} is false).  Returns the screen dimensions if no such head
 can be identified.
 @end defun
 
-@defun current-head-offset &optional window
+@defun current-head-offset @t{#!optional} window
 Return a cons-cell defining the origin of the current head (that
 containing the window @var{window}, or the pointer if @var{window} is
 false).  Returns @code{'(0 . 0)} if no such head can be identified.
@@ -5296,7 +5332,7 @@ The toggle type submenu of window operations, like ``sticky'' or
 on and off for a given window.
 @end defvar
 
-@defun add-window-menu-toggle label command &optional predicate
+@defun add-window-menu-toggle label command @t{#!optional} predicate
 Add an item to @code{window-ops-toggle-menu}.  The @var{command} is a
 function (or a symbol pointing to a function) that gets run when the
 menu item is selected.
@@ -5564,7 +5600,7 @@ otherwise.
 It is possible to create an event inside Sawfish that mimics a real
 keyboard or mouse event.
 
-@defun synthesize-event event window &optional propagate
+@defun synthesize-event event window @t{#!optional} propagate
 Generate a synthetic key press or button press and send it to the X
 window bound to the @var{window} object. Pass the symbol @code{root}
 for the root window. This press is automatically followed by the
@@ -5586,10 +5622,14 @@ ancestor chain until it is handled.
 @chapter Commands
 @cindex Commands
 
-A @dfn{command} is a lisp function which can be called from key or
-mouse input. This, however, requires a different way to specify how
-arguments are passed, so Sawfish distinguishes the notion of commands
-from functions.
+A @dfn{command} is roughly speaking a lisp function which can be
+called from key or mouse input. But it may be preferable for example
+to pass the currently focused window as the argument, and such
+mechanism is prepared.  So Sawfish distinguishes the notion of
+commands from functions.
+
+Formally stated, a command is an association of the name to a
+function, and a way to pass the arguments, and so on.
 
 The name space of commands are independent of that of bindings (which
 includes functions.)
@@ -5608,7 +5648,6 @@ The default value is @code{(default)}.
 * Interactive Calling Specification::
 * Operations on Commands::	Accessors and the like
 * Invoking Commands::           Invocation in lisp side
-* Default Commands::            Sawfish ships with a few commands
 @end menu
 
 @node Command Definition, Old-style Command Definition, , Commands
@@ -5780,14 +5819,14 @@ wants, i.e. those specified by @code{customize-command-class} are
 included. Else, all commands are returned.
 @end defun
 
-@node Invoking Commands, Default Commands, Operations on Commands, Commands
+@node Invoking Commands, , Operations on Commands, Commands
 @section Invoking Commands
 
 When a command is to be invoked, the @code{call-command} function is
 used. This builds a list of argument values to apply to the command
 (using its interactive declaration) then calls the command.
 
-@defun call-command command &optional prefix-arg
+@defun call-command command @t{#!optional} prefix-arg
 This function calls the command @var{command} interactively. See the
 documentation of @code{commandp} above for what constitutes a command.
 
@@ -5822,33 +5861,6 @@ command.
 @end defvar
 
 @xref{Command Hooks}, for hooks run before and after commands.
-
-@node Default Commands,  , Invoking Commands, Commands
-@section Default Commands
-
-Sawfish defines several commands by default.
-
-@deffn Command: run-shell-command
-Executes a shell command. This is a wrapper for @code{system}
-function, so in lisp code, use it instead. (@pxref{Shell Commands, ,
-,librep}.)
-@end deffn
-
-@deffn Command: quit
-@deffnx Command: restart
-Quits and restarts Sawfish. @xref{Sawfish Invocation Functions}.
-@end deffn
-
-@deffn Command: destroy-window
-@deffnx Command: kill-client
-Command @code{destroy-window} calls the function of the same name, and
-command @code{kill-client} calls the function @code{x-kill-client}.
-Both take @code{%W} as argument. @xref{Destroying Windows}.
-@end deffn
-
-@deffn Command: no-operation
-Does nothing.
-@end deffn
 
 @node Keymaps, Event Loop, Commands, Top
 @chapter Keymaps
@@ -6022,7 +6034,7 @@ Return the event which caused the current command to be invoked
 Returns the string which the current event would usually insert.
 @end defun
 
-@defun current-event-window &optional win
+@defun current-event-window @t{#!optional} win
 Extract the owning window of the current X event (this is a window
 object, or the symbol @code{root} for the root window, or @code{nil}
 if there is no window or no event).  This is stored internally as the
@@ -6036,7 +6048,7 @@ returned as the current event window.
 Return the previous event which occurred.
 @end defun
 
-@defun proxy-current-event window &optional mask propagate
+@defun proxy-current-event window @t{#!optional} mask propagate
 Send the current X event to @var{window}, either a window object, a
 numeric window id, or the symbol @code{root}. If a @code{ButtonPress}
 event the pointer grab will be released first.
@@ -6072,7 +6084,7 @@ Cause the next button press to be treated as a single click event, no
 matter how soon it occurs after the prevous button-press event.
 @end defun
 
-@defun accept-x-input &optional mask
+@defun accept-x-input @t{#!optional} mask
 Handle any X events received. If @var{mask} is non-nil then only events
 matching this numeric value are handled (see the X header files for
 details).
@@ -6102,7 +6114,7 @@ Returns the number of X events waiting to be handled.
 @cindex Pointer functions
 @cindex Functions, pointer
 
-@defun query-pointer &optional from-server
+@defun query-pointer @t{#!optional} from-server
 Returns a cons cell @code{(x . y)} representing the current
 mouse pointer position, relative to the origin of the root window.
 
@@ -6139,7 +6151,7 @@ Move the mouse pointer to position (@var{x}, @var{y}) relative to the
 origin of the root window.
 @end defun
 
-@defun warp-cursor-to-window window &optional x y
+@defun warp-cursor-to-window window @t{#!optional} x y
 Move the mouse pointer to position (@var{x}, @var{y}) relative to the
 client window associated with object @var{window}.
 
@@ -6247,7 +6259,7 @@ returns.
 Returns @code{t} if the X server is currently grabbed.
 @end defun
 
-@defun grab-pointer &optional window cursor ptr-sync kbd-sync confine-to
+@defun grab-pointer @t{#!optional} window cursor ptr-sync kbd-sync confine-to
 Grab the mouse pointer and direct all pointer events to window object
 @var{window}.  If @var{cursor} is defined and a cursor object, display
 this while the pointer is grabbed.
@@ -6282,7 +6294,7 @@ Returns non-nil if the grab succeeded.
 Release the grab on the mouse pointer.
 @end defun
 
-@defun grab-keyboard &optional window ptr-sync kbd-sync
+@defun grab-keyboard @t{#!optional} window ptr-sync kbd-sync
 Grab the keyboard and direct all keyboard events to window object
 @var{window}.
 
@@ -6353,7 +6365,7 @@ the root window.
 may only be @code{box} for a 3x3 grid.
 @end defun
 
-@defun display-message &optional text attributes
+@defun display-message @t{#!optional} text attributes
 Display the string @var{text} in a window on the screen. If @var{text}
 is @code{nil} then any string previously displayed is removed. Returns
 the numeric id of the window displaying the message, or @code{nil} if
@@ -6436,13 +6448,13 @@ rectangle @code{by}.  Returns one of the symbols @code{unobscured},
 @code{partially-obscured}, or @code{fully-obscured}.
 @end defun
 
-@defun rect-minus r s &optional tail
+@defun rect-minus r s @t{#!optional} tail
 Return a list of rectangles whose union is the part of rectangle
 @code{r} not contained in rectangle @code{s}.  If @code{tail} is given,
 the result is prepended to it.
 @end defun
 
-@defun rectangles-from-grid x-points y-poinst &optional pred
+@defun rectangles-from-grid x-points y-poinst @t{#!optional} pred
 The two lists of integers @code{x-points} and @code{y-points} define a
 rectangular grid. Return the complete list of rectangles formed by the
 intersections of the grid.
@@ -6454,7 +6466,7 @@ Assumes that @code{x-points} and @code{y-points} are both sorted
 smallest->largest.
 @end defun
 
-@defun rectangles-from-windows windows &optional weight-fun
+@defun rectangles-from-windows windows @t{#!optional} weight-fun
 Returns a list of rectangle objects representing the list of window
 objects @code{windows}.
 
@@ -6463,7 +6475,7 @@ to return the weight for that window. If not defined, the window's
 @code{weight} property is used instead.
 @end defun
 
-@defun grid-from-rectangles rects &optional with-root
+@defun grid-from-rectangles rects @t{#!optional} with-root
 Given a list of rectangles @code{rects} return a cons cell
 @code{(x-points . y-points)} defining the grid they represent.
 
@@ -6549,14 +6561,14 @@ appears on.
 
 These functions are found in sawfish.wm.viewport:
 
-@defun rect-within-viewport-p rect &optional viewport
+@defun rect-within-viewport-p rect @t{#!optional} viewport
 Return @code{t} if @code{rect} is entirely inside the screen boundaries
 for some viewport, regardless of whether it is the current viewport, or
 even if the viewport currently exists.  If @code{viewport} is specified
 check only against that viewport.
 @end defun
 
-@defun rect-within-head-p rect &optional head
+@defun rect-within-head-p rect @t{#!optional} head
 Return @code{t} if @code{rect} is entirely within some head on some
 viewport. If @code{head} is provided @code{rect} must be within that
 head on some viewport.
@@ -6649,6 +6661,8 @@ Quits and restart Sawfish.
 Restart does exec (3), replacing the current process. All command line
 arguments are used again, except that session management related ones
 are updated.
+
+There also exist same name commands.
 @end defun
 
 @defun exit-type
@@ -6799,6 +6813,16 @@ Remove all duplicates values from @var{lst}, using @code{eq}.  The
 order of elements is not preserved.
 @end defun
 
+@deffn Command run-shell-command
+Executes a shell command. This is a wrapper for @code{system}
+function, so in lisp code, use it instead. (@pxref{Shell Commands, ,
+,librep}.)
+@end deffn
+
+@deffn Command no-operation
+Does nothing.
+@end deffn
+
 @node External Applications, Standard Hooks, Miscellaneous Functions, Top
 @chapter External Applications
 @cindex External applications
@@ -6864,9 +6888,11 @@ The program launched by the @code{xterm} function. Interpreted by shell.
 
 @deffn Function xterm @t{#!optional} command
 @deffnx Command xterm
-Start a new terminal. Optional argument @var{COMMAND} is passed to the
-terminal with @code{-e} option, so for most, including xterm, it can contain
-arguments to be passed.
+Start a new terminal specified the option @code{xterm-program}.
+
+Optional argument @var{COMMAND} is passed to the terminal with
+@code{-e} option, so for most terminals, including xterm, it can
+contain arguments to be passed.
 @end deffn
 
 @defvr {Customizable} browser-program
@@ -6901,7 +6927,7 @@ hook''. If a window hook has a local value defined in the window's
 property list then this value is used, before the default value
 defined by the actual variable.
 
-@defun call-window-hook hook window &optional args hook-type
+@defun call-window-hook hook window @t{#!optional} args hook-type
 Call @var{hook} for @var{window} with further arguments @var{args}. See
 @code{call-hook} for a description of @var{hook-type}. Each function in
 the hook is called with arguments @code{(@var{window} . @var{args})}.
@@ -7457,7 +7483,7 @@ Defaults to false.
 @node X Server, X Windows, Low-level X Interface, Low-level X Interface
 @section X Server
 
-@defun x-server-timestamp &optional from-server store
+@defun x-server-timestamp @t{#!optional} from-server store
 Return a recent X server timestamp as an integer.
 
 If @var{from-server} is non-@var{nil}, the timestamp is read directly
@@ -7472,7 +7498,7 @@ the window manager.
 @node X Windows, X Selections, X Server, Low-level X Interface
 @section X Windows
 
-@defun x-create-window (x . y) (width . height) bw attrs &optional event-handler
+@defun x-create-window (x . y) (width . height) bw attrs @t{#!optional} event-handler
 Create a new X window at @code{(@var{x}, @var{y})} with dimensions
 @code{(@var{width}, @var{height})} and border width @var{bw}.
 @var{Attrs} is an alist mapping attribute names to values.  Allowed
@@ -7490,7 +7516,7 @@ are @code{x}, @code{y}, @code{width}, @code{height} and
 Destroy the X window @var{window}.
 @end defun
 
-@defun x-map-window window &optional unraised
+@defun x-map-window window @t{#!optional} unraised
 Map the window associated with @var{window} to the display.  If
 @var{unraised} is not specified, the window will be mapped at the top
 of the window stack.
@@ -7646,7 +7672,7 @@ positive angles are rotated counter-clockwise from zero, and negative
 angles are rotated clockwise from zero.
 @end defun
 
-@defun x-draw-image image window (x . y) &optional (width . height)
+@defun x-draw-image image window (x . y) @t{#!optional} (width . height)
 Render the image object @var{image} in @var{window} at position
 @code{(@var{x}, @var{y})}.  If @var{width} and @var{height} are
 defined the image is first scaled to these dimensions; otherwise it is
@@ -7674,7 +7700,7 @@ positive angles are rotated counter-clockwise from zero, and negative
 angles are rotated clockwise from zero.
 @end defun
 
-@defun x-fill-polygon window gc points &optional draw-mode
+@defun x-fill-polygon window gc points @t{#!optional} draw-mode
 Draw a single filled polygon in @var{window} using
 the graphics context @var{gc}.  @var{Points} is a list of
 @code{(@var{x}, @var{y})} pairs that defines the polygon vertices.
@@ -7694,7 +7720,7 @@ Draw a filled rectangle with its top-left corner at @code{(@var{x},
 Returns @code{t} if @var{obj} is an X GraphicsContext object.
 @end defun
 
-@defun x-gc-set-dashes gc pixels-list &optional offset
+@defun x-gc-set-dashes gc pixels-list @t{#!optional} offset
 Set the dash style of graphics context @var{gc} to the value of
 @var{pixels-list}.  @var{Pixels-list} is a list of cons cells
 @code{((pixels-on . pixels-off) ...)} indicating runs of on and off
@@ -7722,7 +7748,7 @@ Two functions to draw strings are there. If you need to write a
 message like @code{display-message} use @code{x-draw-string}. If you
 need to write on the root-window directly, use @code{x-draw-text}.
 
-@defun x-draw-string window gc (x . y) string &optional font
+@defun x-draw-string window gc (x . y) string @t{#!optional} font
 Draw the specified string at @code{(@var{x}, @var{y})} in @var{window}
 using the graphics context @var{gc}.  If @var{font} is specified use
 that font. See also @code{x-draw-text}.

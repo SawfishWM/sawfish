@@ -212,7 +212,11 @@ Note that the value of the `:group' key is not evaluated."
 	(define-command (intern (concat "customize:" (symbol-name group)))
           (lambda ()
             (require 'sawfish.wm.customize)
-            (customize group))))))
+            (customize group))
+	  #:doc (format nil
+			"Invoke configurator to customize group \"%s\"."
+			group
+			)))))
 
   (define (custom-quote-keys keys)
     (let ((out '()))
