@@ -27,6 +27,8 @@
 	    get-window-by-name-re
 	    maybe-raise-window
 	    maybe-lower-window
+	    popup-window-menu
+	    rename-window-func
 	    show-message
 	    ws-copy-window
 	    ws-insert-workspace
