@@ -311,7 +311,6 @@
           (rigth-m 38)
           (left-m-t 0)
           (right-m-t 0))
-      (require 'sawfish.wm.tabs.tab)
       (set-tab-adjustments #:theme-left-dec-width left-d-w #:theme-right-dec-width right-d-w #:theme-left-margin left-m #:theme-right-margin rigth-m
                            #:theme-left-margin-transient left-m-t #:theme-right-margin-transient right-m-t))))
 

@@ -87,7 +87,8 @@
 			 sawfish.wm.state.iconify
 			 sawfish.wm.state.ignored
 			 sawfish.wm.server
-			 sawfish.wm.state.wm-spec))
+			 sawfish.wm.state.wm-spec
+			 sawfish.wm.tabs.tab))
 
 ;; Create the exports from sawfish.wm; Bindings in these modules are
 ;; exported by sawfish.wm on behalf of them. User scripts have to
