@@ -87,63 +87,48 @@
 			 sawfish.wm.state.iconify
 			 sawfish.wm.state.ignored
 			 sawfish.wm.server
-			 sawfish.wm.state.wm-spec
-			 sawfish.wm.edge.actions))
+			 sawfish.wm.state.wm-spec))
 
-;; create the exports from sawfish.wm
-(open-structures '(sawfish.wm.colors
-		   sawfish.wm.commands
-		   sawfish.wm.cursors
-		   sawfish.wm.custom
-		   sawfish.wm.events
-		   sawfish.wm.focus
-		   sawfish.wm.fonts
-		   sawfish.wm.frames
-		   sawfish.wm.gaol
-		   sawfish.wm.images
-		   sawfish.wm.misc
-		   sawfish.wm.placement
-		   sawfish.wm.session.init
-		   sawfish.wm.server
-		   sawfish.wm.stacking
-		   sawfish.wm.viewport
-		   sawfish.wm.window-anim
-		   sawfish.wm.windows
-		   sawfish.wm.workspace
-		   sawfish.wm.state.iconify
-		   sawfish.wm.state.shading
-		   sawfish.wm.state.transient
-		   sawfish.wm.state.ignored
-		   sawfish.wm.edge.actions))
-
-;; Bindings in these modules are exported by sawfish.wm on behalf of
-;; them. User scripts have to import only sawfish.wm for core functions.
-(export-bindings (parse-interface
-		  '(compound-interface
-		    (structure-interface sawfish.wm.colors)
-		    (structure-interface sawfish.wm.commands)
-		    (structure-interface sawfish.wm.cursors)
-		    (structure-interface sawfish.wm.custom)
-		    (structure-interface sawfish.wm.events)
-		    (structure-interface sawfish.wm.focus)
-		    (structure-interface sawfish.wm.fonts)
-		    (structure-interface sawfish.wm.frames)
-		    (structure-interface sawfish.wm.gaol)
-		    (structure-interface sawfish.wm.images)
-		    (structure-interface sawfish.wm.misc)
-		    (structure-interface sawfish.wm.placement)
-		    (structure-interface sawfish.wm.session.init)
-		    (structure-interface sawfish.wm.server)
-		    (structure-interface sawfish.wm.stacking)
-		    (structure-interface sawfish.wm.viewport)
-		    (structure-interface sawfish.wm.window-anim)
-		    (structure-interface sawfish.wm.windows)
-		    (structure-interface sawfish.wm.workspace)
-		    (structure-interface sawfish.wm.state.iconify)
-		    (structure-interface sawfish.wm.state.shading)
-		    (structure-interface sawfish.wm.state.transient)
-		    (structure-interface sawfish.wm.state.ignored)
-		    (structure-interface sawfish.wm.edge.actions))))
+;; Create the exports from sawfish.wm; Bindings in these modules are
+;; exported by sawfish.wm on behalf of them. User scripts have to
+;; import only sawfish.wm for core functions.
+(let ((mods '(sawfish.wm.colors
+	      sawfish.wm.commands
+	      sawfish.wm.cursors
+	      sawfish.wm.custom
+	      sawfish.wm.events
+	      sawfish.wm.focus
+	      sawfish.wm.fonts
+	      sawfish.wm.frames
+	      sawfish.wm.gaol
+	      sawfish.wm.images
+	      sawfish.wm.misc
+	      sawfish.wm.placement
+	      sawfish.wm.session.init
+	      sawfish.wm.server
+	      sawfish.wm.stacking
+	      sawfish.wm.viewport
+	      sawfish.wm.window-anim
+	      sawfish.wm.windows
+	      sawfish.wm.workspace
+	      sawfish.wm.state.iconify
+	      sawfish.wm.state.shading
+	      sawfish.wm.state.transient
+	      sawfish.wm.state.ignored
+	      sawfish.wm.edge.actions)))
+  (open-structures mods)
+  #| I.e.
+  (export-bindings (parse-interface
+		    '(compound-interface
+		      (structure-interface sawfish.wm.colors)
+		      (structure-interface sawfish.wm.commands)
+		      ...)))
+  |#
+  (export-bindings (parse-interface
+		    (cons 'compound-interface
+			  (mapcar (lambda (i)
+				    (list 'structure-interface i))
+				  mods)))))
 
 (let ((sawfish-load-all (lambda (s)
 			  ;; ensure files are loaded in the correct structure
