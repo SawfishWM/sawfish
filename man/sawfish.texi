@@ -760,6 +760,10 @@ the symbol @code{configurator}, then the string of the form
 ``@var{instance}/@var{class}'' is returned.
 @end defun
 
+@defun window-role window
+Return the window role set by @code{NET_WM_ROLE}.
+@end defun
+
 @defun window-id window
 If window object @var{window} has a client window associated with,
 return an integer defining its xid, otherwise return @code{nil}.
@@ -859,23 +863,32 @@ Functions to get specific windows.
 Return a window object with ID @var{xid}, or @code{nil}.
 @end defun
 
-@defun get-window-by-name name
+@defun get-window-by-name name #!key regex icon
 Return a window object with name @var{name}, or @code{nil}.  Even if
 multiple windows are matched, one of them is returned.
+
+If @code{regex} is non-nil, @var{name} is treated as a regex, and
+matched against window names.
+
+If @code{icon} is non-nil, window's icon name (set by
+@code{NEW_WM_ICON_NAME}, @emph{not} EWMH @code{_NET_WM_ICON_NAME}) is
+searched, instead of the window's name.
 @end defun
 
-@defun get-window-by-name-re name
-Return a window object with name matching regular expression
-@var{name}, or @code{nil}. Even if multiple windows are matched,
-one of them is returned.
-@end defun
-
-@deffn Function: get-window-by-class class
-@deffnx Function: get-window-by-class-re class
+@defun get-window-by-class class #!regex
 Same as the above, but the match is done against the window class.
 Here, the class does not include the ``instance''. (See @code{window-class} in
 @xref{Window Attributes}.)
-@end deffn
+
+The option @code{regex} is boolean, not a regex, like @code{get-window-by-name}.
+@end defun
+
+@defun get-window-by-role role
+Same as the above, but the match is done against the window role.
+
+The option @code{regex} is boolean, not a regex, like @code{get-window-by-name}.
+
+@end defun
 
 @defun filter-windows pred
 Return the list of windows (mapped or unmapped) that match the

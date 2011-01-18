@@ -224,12 +224,12 @@ In order to support ``gnome2-globalmenu'', the reaction policy to
 @code{_NET_ACTIVE_WINDOW} if it's done by (un)grabbing the pointer.
 
 @item revised @code{get-window-by-*} functions [Christopher Bratusek]
+
+For the details, see @xref{Window Attributes}, and @xref{Getting Windows}.
 @itemize *
-@item added @code{window-role} function (return NET_WM_ROLE)
-@item added @code{get-window-by-role} function (takes #:regex switch)
-@item merged @code{get-window-by-name-re} as #:regex switch into @code{get-window-by-name} (the old name is still supported)
-@item merged @code{get-window-by-class-re} as #:regex switch into @code{get-window-by-class} (the old name is still supported)
-@item added #:icon switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
+@item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE) 
+@item Deleted @code{get-window-by-name-re} and @code{get-window-by-class-re}. Use instead @code{get-window-by-name} or @code{get-window-by-class} with the new option @code{#:regex}. (The old name is still supported.)
+@item added @code{#:icon} switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
 @end itemize
 
 @item Window-operation menu improvements [Christopher Bratusek]

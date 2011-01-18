@@ -66,8 +66,8 @@
   (define (jump-or-exec regex prog #!key match-class onfocused)
     "Jump to a window, or when absent, start program."
     (let ((wind (if match-class
-		    (get-window-by-class-re regex)
-		  (get-window-by-name-re regex)))
+		    (get-window-by-class regex #:regex t)
+		  (get-window-by-name regex #:regex t)))
 	  (curwin (input-focus)))
       (cond ((and onfocused
 		  curwin

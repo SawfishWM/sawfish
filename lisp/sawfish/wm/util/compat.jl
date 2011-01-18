@@ -20,16 +20,18 @@
 
 (define-structure sawfish.wm.util.compat
 
-    (export show-message
-	    ws-copy-window
-	    ws-move-window
-	    ws-insert-workspace
-	    ws-remove-workspace
-	    custom-set-color
+    (export custom-set-color
 	    custom-set-font
 	    custom-set-frame-style
+	    get-window-by-class-re
+	    get-window-by-name-re
 	    maybe-raise-window
-	    maybe-lower-window)
+	    maybe-lower-window
+	    show-message
+	    ws-copy-window
+	    ws-insert-workspace
+	    ws-move-window
+	    ws-remove-workspace)
 
     (open rep
 	  sawfish.wm.windows
@@ -65,6 +67,12 @@
 
   (define popup-window-menu popup-window-ops-menu)
   (define rename-window-func rename-window)
+
+  (define (get-window-by-class-re class)
+    (get-window-by-class class #:regex t))
+
+  (define (get-window-by-name-re name)
+    (get-window-by-name name #:regex t))
 
 ;;; obsolete commands
 

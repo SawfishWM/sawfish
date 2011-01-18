@@ -59,11 +59,7 @@
 	     avoided-windows
 	     call-after-property-changed
 	     call-after-state-changed
-	     rename-window
-	     
-	     ;; dummy
-	     get-window-by-class-re
-	     get-window-by-name-re))
+	     rename-window))
 
     (open rep
 	  rep.system
@@ -128,9 +124,10 @@
 ;;; finding windows, reading properties
 
   (define (get-window-by-name name #!key regex icon)
-    "Find a window object whose window-name is NAME. If REGEX is set then find
-a window object whose window-name matches NAME. If ICON is set then window-icon-name
-is being checked instead. Returns nil if no such window is found."
+    "Find a window object whose window-name is NAME. If REGEX is
+non-nil, then find a window object whose name matches NAME. If
+ICON is non-nil, then window-icon-name (NET_WM_ICON_NAME, _not_ EWMH
+_NET_WM_ICON_NAME) is checked instead. Returns nil if no such window is found."
     (if icon 
         (if regex
 	    (car (filter-windows (lambda (w)
@@ -143,25 +140,19 @@ is being checked instead. Returns nil if no such window is found."
         (car (filter-windows (lambda (w)
   			       (string= (window-name w) name)))))))
 
-  (define (get-window-by-name-re name)
-    (get-window-by-name name #:regex t))
-
   (define (get-window-by-class class #!key regex)
-    "Find a window object whose window-class is CLASS. If REGEX is set then find
-a window object whose window-class matches CLASS. Returns nil if no such window
-is found."
+    "Find a window object whose window-class is CLASS. If REGEX is
+non-nil then find a window object whose class matches
+CLASS. Returns nil if no such window is found."
     (if regex
         (car (filter-windows (lambda (w)
 			       (string-match class (window-class w)))))
       (car (filter-windows (lambda (w)
   			     (string= (window-class w) class))))))
 
-  (define (get-window-by-class-re class)
-    (get-window-by-class class #:regex t))
-
   (define (get-window-by-role role #!key regex)
-    "Find a window object whose window-role is ROLE. If REGEX is set then
-find a window object whose window-role matches ROLE. Returns nil if no such
+    "Find a window object whose window-role is ROLE. If REGEX is non-nil then
+find a window object whose role matches ROLE. Returns nil if no such
 window is found."
     (if regex
         (car (filter-windows (lambda (w)
