@@ -200,19 +200,22 @@ It returns the list of all commands. (@pxref{Operations on Commands}).
 @item Misc Changes
 @itemize @minus
 
-@item Tabs-NG [fuchur]
+@item Tabs and themes [fuchur]
 
-Sawfish's tabbed window system is revised. Most changes are internal, but a few user-visible
-ones have been done, too. When a lot of windows are open, it should now be more responsive.
+A new, tab-capable, highly configurable theme ``DarkTab'' is added. It
+allows the tab-bar to appear in top, left, right, and bottom. Use a
+new window rule @code{title-position} for it. ``DarkTab'' is now the
+default theme.
 
-You no longer need to change the tab-adjustments via SawfishConfig, when changing or customizing tab-enabled themes
-(this is now done internally).
+Many improvements in tab system are done. For example, stickiness change
+on a window applies to all other windows in the same tab group, though
+maybe not yet complete. (Please tell us things you noticed.)
 
-Also there are now vertical and horizontal tabbar-prototypes available (see @code{DarkTab} theme), with a keymap both.
-The window-matcher @code{title-position} ensures that the position of the title will be restored, when using the @code{DarkTab} theme.
+When you use a tab capable theme (Elberg-Tabbed or Get-S-Tabbed), you
+had to manually adjust positions by pixel, but it's not necessary any
+more.
 
-@item The themes @code{Elberg-Tabbed} and @code{Get-S-Tabbed} have been updated to work
-with Tabs-NG. The theme @code{DarkTab} made by fuchur is now the default theme.
+When a lot of windows are open, they should now be more responsive.
 
 @item Behavior modification at focus-in [Harald van Dijk]
 

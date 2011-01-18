@@ -1,4 +1,4 @@
-;; tab.jl - emulate fluxbox tab system
+;; tab.jl - frame handling of tab
 ;;
 ;; Copyright (C) Yann Hodique <Yann.Hodique@lifl.fr>
 ;;
@@ -20,8 +20,7 @@
 
 (define-structure sawfish.wm.tabs.tab
 
-    (export tab-add-to-group 
-            set-tab-adjustments)
+    (export set-tab-adjustments)
 
     (open rep
 	  rep.system
@@ -37,25 +36,25 @@
   (define-structure-alias tab sawfish.wm.tabs.tab)
 
   ;; TODO:
-  ;; - change other tab sizes when window resizes itself, should fixed
   ;; - make calculations work with tiny windows, should fixed
   ;; - hide some frame parts on leftmost and rightmost tabs, should fixed
   ;; - add a drag-n-drop way to group windows by tabs
 
+  (define tabbar-left-dec-width)
+  (define tabbar-right-dec-width)
+  (define tabbar-left-margin)
+  (define tabbar-right-margin)
+  (define tabbar-left-margin-transient)
+  (define tabbar-right-margin-transient)
+
   (define (set-tab-adjustments #!key theme-left-dec-width theme-right-dec-width theme-left-margin
                                theme-right-margin theme-left-margin-transient theme-right-margin-transient)
-    (if theme-left-dec-width
-        (defvar-setq tabbar-left-dec-width theme-left-dec-width))
-    (if theme-right-dec-width
-        (defvar-setq tabbar-right-dec-width theme-right-dec-width))
-    (if theme-left-margin
-        (defvar-setq tabbar-left-margin theme-left-margin))
-    (if theme-right-margin
-        (defvar-setq tabbar-right-margin theme-right-margin))
-    (if theme-left-margin-transient
-        (defvar-setq tabbar-left-margin-transient theme-left-margin-transient))
-    (if theme-right-margin-transient
-        (defvar-setq tabbar-right-margin-transient theme-right-margin-transient)))
+    (setq tabbar-left-dec-width theme-left-dec-width)
+    (setq tabbar-right-dec-width theme-right-dec-width)
+    (setq tabbar-left-margin theme-left-margin)
+    (setq tabbar-right-margin theme-right-margin)
+    (setq tabbar-left-margin-transient theme-left-margin-transient)
+    (setq tabbar-right-margin-transient theme-right-margin-transient))
 
   (gaol-add set-tab-adjustments)
 
@@ -167,14 +166,18 @@
   (define-frame-class 'tabbar-vertical-bottom-edge
     `((bottom-edge . ,tab-bottom-edge)) t)
   
-  (define (mygroup win)
+  ;; This function is for interactive use. Use tab-group-window for lisp.
+  (define (tab-add-to-group win)
+    "Add a window to a tabgroup. Apply this command on a window, then
+on another. The first window will be added to the tabgroup containig
+the second."
     (if (marked-windows)
         (progn
           (apply-on-marked-windows (lambda (w) (tab-group-window w win)))
           (unmark-all-windows))
       (mark-window win)))
 
-  (define-command 'tab-add-to-group mygroup #:spec "%W"))
+  (define-command 'tab-add-to-group tab-add-to-group #:spec "%W"))
 
 ;;(require 'x-cycle)
 ;;(define-cycle-command-pair
@@ -188,5 +191,3 @@
 ;;                   )
 ;;    )
 ;;  #:spec "%W")
-
-;;(require 'sawfish.wm.util.window-order)

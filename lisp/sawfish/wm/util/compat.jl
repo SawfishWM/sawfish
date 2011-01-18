@@ -129,7 +129,11 @@
           infinite-desktop.stop-at-workspace-borders
 	  edge-flip-enabled edge-flip-type edge-flip-only-when-moving
 	  infinite-desktop-p infinite-desktop.move-distance
-	  infinite-desktop.move-cursor-distance ))
+	  infinite-desktop.move-cursor-distance
+	  tab-left-dec-width tab-right-dec-width
+	  tab-left-margin tab-right-margin
+	  tab-left-margin-transient tab-right-margin-transient
+	  ))
 
 ;;; obsolete custom setters
 
