@@ -1,3 +1,57 @@
+2011-01-18  Teika Kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands/launcher.jl
+	* lisp/sawfish/wm/custom.jl
+	* man/news.texi
+	* man/sawfish.texi: Minor doc.
+	Texi: "&optional" is replaced by "#!optional".
+	In texi, "deffn Command" are improved:
+	- "Function" is added.
+	- Arguments of commands are either null or "window".
+	Minor news.
+
+	* lisp/sawfish/wm/state/wm-spec.jl: Suppress a byte compiler warning.
+
+	* lisp/sawfish/wm/tabs/tabgroup.jl: Tab: bugfix, by updating the
+	title when a window in a tabgroup is closed. [fuchur]
+
+	* lisp/sawfish/wm/tabs/tab.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* man/news.texi: Tab.
+	Replaced defvar-setq with plain setq.
+	Many minor, internal improvements.
+	News and comments.
+	Indent fix.
+
+	* lisp/sawfish/wm/commands/jump-or-exec.jl
+	* lisp/sawfish/wm/util/compat.jl
+	* lisp/sawfish/wm/windows.jl
+	* man/news.texi
+	* man/sawfish.texi: Revised recent changes in get-window-*.
+	Full doc is written.
+	Moved old functions to compat.jl.
+	Bugfix in compat.jl; exports recently added functions.
+
+	* lisp/sawfish/wm.jl:
+	Simplified a bit, in making modules exports. It used two
+	identical lists, but now combined to one, making maintenance
+	easier.
+
+	* lisp/sawfish/wm.jl
+	* lisp/sawfish/wm/gaol.jl
+	* themes/DarkTab/theme.jl
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: Simplified calls of
+	sawfish.wm.tabs.tab.
+
+	* po/Makefile.in
+	* scripts/Makefile.in
+	* scripts/sawfish-client.jl
+	* scripts/sawfish-menu.jl
+	* sounds/Makefile.in
+	* themes/Makefile.in: Replaced sawmill -> sawfish.
+	Any remaining "sawmill" shouldn't be changed, except po/*po.
+
 2011-01-08  Teika Kazura <teika@lavabit.com>
 	* src/sawfish_subrs.h: Exports symbols in src/flippers.c.
 
