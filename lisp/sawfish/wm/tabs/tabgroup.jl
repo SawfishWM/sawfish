@@ -115,6 +115,7 @@
                 (tab-build-group (tab-group-position old) (tab-group-dimensions old) l))
         ;; releas from sawfish "default" group adopt by tab-group-window
         (add-window-to-new-group win)
+	(adjustment-title win)
         (tab-refresh-group win 'frame)
         (window-put win 'fixed-position nil)
         (tab-refresh-group (car l) 'frame))))
