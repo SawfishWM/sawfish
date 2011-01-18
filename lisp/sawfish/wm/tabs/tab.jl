@@ -20,18 +20,18 @@
 
 (define-structure sawfish.wm.tabs.tab
 
-	(export tab-add-to-group 
+    (export tab-add-to-group 
             set-tab-adjustments)
 
-	(open rep
-	      rep.system
-	      sawfish.wm.misc
-	      sawfish.wm.custom
-	      sawfish.wm.commands
-	      sawfish.wm.frames
-	      sawfish.wm.tabs.tabgroup
-	      sawfish.wm.util.marks
-	      sawfish.wm.windows
+    (open rep
+	  rep.system
+	  sawfish.wm.misc
+	  sawfish.wm.custom
+	  sawfish.wm.commands
+	  sawfish.wm.frames
+	  sawfish.wm.tabs.tabgroup
+	  sawfish.wm.util.marks
+	  sawfish.wm.windows
           sawfish.wm.gaol)
 
   (define-structure-alias tab sawfish.wm.tabs.tab)
