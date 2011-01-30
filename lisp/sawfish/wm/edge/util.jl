@@ -47,8 +47,8 @@
       (remove-hook 'after-restacking-hook raise-flippers)
       (remove-hook 'randr-change-notify-hook recreate-flippers)))
 
-  (defcustom hot-spots-area 50
-    "Lenght in px (in both x and y direction) wich is used as hot-spots-area."
+  (defcustom hot-spots-corner-lenght 50
+    "Lenght in px (in both x and y direction) wich is used for the hot-spot corners."
     :type number
     :range (5 . 500)
     :group edge-actions)
@@ -56,28 +56,28 @@
   (define (get-active-corner)
     (let ((cursor-x (car (query-pointer)))
 	  (cursor-y (cdr (query-pointer))))
-      (cond ((or (and (< cursor-x hot-spots-area)
+      (cond ((or (and (< cursor-x hot-spots-corner-lenght)
 		      (<= cursor-y 1))
 		 (and (<= cursor-x 1)
-		      (< cursor-y hot-spots-area)))
+		      (< cursor-y hot-spots-corner-lenght)))
 	     'top-left)
 
-	    ((or (and (> cursor-x (- (screen-width) hot-spots-area))
+	    ((or (and (> cursor-x (- (screen-width) hot-spots-corner-lenght))
 		      (<= cursor-y 1))
 		 (and (>= cursor-x (- (screen-width) 1))
-		      (< cursor-y hot-spots-area)))
+		      (< cursor-y hot-spots-corner-lenght)))
 	     'top-right)
 
-	    ((or (and (> cursor-x (- (screen-width) hot-spots-area))
+	    ((or (and (> cursor-x (- (screen-width) hot-spots-corner-lenght))
 		      (>= cursor-y (- (screen-height) 1)))
 		 (and (>= cursor-x (- (screen-width) 1))
-		      (> cursor-y (- (screen-height) hot-spots-area))))
+		      (> cursor-y (- (screen-height) hot-spots-corner-lenght))))
 	     'bottom-right)
 
-	    ((or (and (< cursor-x hot-spots-area)
+	    ((or (and (< cursor-x hot-spots-corner-lenght)
 		      (>= cursor-y (- (screen-height) 1)))
 		 (and (<= cursor-x 1)
-		      (> cursor-y (- (screen-height) hot-spots-area))))
+		      (> cursor-y (- (screen-height) hot-spots-corner-lenght))))
 	     'bottom-left))))
 
   (define (get-active-edge)
