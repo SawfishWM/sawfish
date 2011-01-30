@@ -4407,7 +4407,7 @@ The word ``virtual desktop'' is sometimes used instead of
 * Workspace Intervals::			``Interesting'' workspaces
 * Workspace Manipulation::		Creating, rearranging, deleting
 * Workspaces and Windows::
-* Edge Flipping::			Switching workspaces with mouse
+* EdgeActions::			Switching workspaces with mouse
 @end menu
 
 @node Workspace Intervals, Workspace Manipulation, Workspaces, Workspaces
@@ -4563,7 +4563,7 @@ When true, preserve the outermost empty workspaces in the pager.
 Don't quietly remove them when they become empty.  Defaults to true.
 @end defvar
 
-@node Workspaces and Windows, Edge Flipping, Workspace Manipulation, Workspaces
+@node Workspaces and Windows, EdgeActions, Workspace Manipulation, Workspaces
 @section Workspaces and Windows
 
 Workspaces do not need to have windows assigned to them, but most
@@ -4758,68 +4758,110 @@ Return true if non-desktop and non-dock windows are hidden, false
 otherwise.
 @end defun
 
-@node Edge Flipping,  , Workspaces and Windows, Workspaces
-@section Edge Flipping
+@node EdgeActions,  , Workspaces and Windows, Workspaces
+@section EdgeActions
 
-Sawfish provides an intuitive way, like flipping pages, to switch the
-workspace (or the viewport) by moving the mouse to the edge of the
-screen. This is called ``edge flipping''. To use it, add
-@code{(require 'sawfish.wm.ext.edge-flip)} in your
-@file{~/.sawfish/rc} file, and use the configurator.
+EdgeActions is a centralized way to control the behaviour of the
+screen-borders and -corners, which offers high customizability.
 
-@defvr Customizable edge-flip-enabled nil
-When true, select the next desktop when the pointer hits screen edge.
-Defaults to false.
-@end defvr
+It consists of the following modules: @code{sawfish.wm.edge.subrs} -, which
+contains the C-subroutines, @code{sawfish.wm.edge.utils} - a set of utility
+functions, @code{sawfish.wm.edge.actions} - infrastucture module,
+@code{sawfish.wm.edge.flip} - edge-fliping functions,
+@code{sawfish.wm.edge.hot-spots} - hot-spot functions and
+@code{sawfish.wm.edge.viewport-drag} - functions for dragging the viewport.
 
-@defvr Customizable edge-flip-type
-Indicates what is selected when hitting the screen edge.  Must be one
-of @code{viewport} or @code{workspace}.  Defaults to @code{workspace}.
-@end defvr
+@section EdgeAction Internals
 
-@defvr Customizable edge-flip-only-when-moving
-When true, Sawfish only flips when the user is interactively moving a
-window.  Defaults to false.
-@end defvr
+C-Subroutines (@code{sawfish.wm.edge.subrs}):
 
-This variable is not customizable, but it can be edited.
-
-@defvar edge-flip-delay
-Milliseconds to delay before edge flipping.  Defaults to 250.
-@end defvar
-
-@defvr {Hook} before-edge-flip-hook
-@defvrx {Hook} after-edge-flip-hook
-These hooks are called immediately before / after edge-flipping.
-@end defvr
-
-Edge-flipping is implemented by invisible, pixel-wide windows on the
-edges of the display@footnote{Detecter narrow windows overlap at the
-screen corners.}. When the pointer moves over any of these windows,
-Sawfish calls @code{enter-flipper-hook} and @code{leave-flipper-hook}
-hooks.
-
-Programmers can add their own callbacks to perform other actions with
-the flippers. Note that you may have to manually remove the
-@code{edge-flip-enter} and @code{edge-flip-leave} callbacks from the
-hooks before adding your own callbacks.
-
-These low level functions are stored in the
-@code{sawfish.wm.util.flippers} structure.
-
-@defun enable-flippers
-@defunx disable-flippers
-Add / remove edge windows used by edge-flip. At sawfish startup,
-`enable-flippers' is called.
+@defun create-flippers
+Create the flipper-window, which is -to put it plainly- your screen-border.
+Actions are performed when the flipper-window is activated. Technically it's
+one window, but from users point of view it consists of 8 parts (4 borders
+plus 4 corners).
 @end defun
 
-@defvr {Hook} enter-flipper-hook
-@defvrx {Hook} leave-flipper-hook
-These hooks are called as the pointer enters and leaves the detecter
-windows on the edge of the screen. They're called with a single
-argument, one of the symbols @code{left}, @code{right}, @code{top},
-@code{bottom} indicating the edge in question.
+@defun destroy-flippers
+Destroy the flipper-window.
+@end defun
+
+@defun recreate-flippers
+Recreate the flipper-window, this is done automatically, when the resolution
+changes, to ensure EdgeActions stays working properly.
+@end defun
+
+@defvr {HOOK} enter-flipper-hook
+This hook is called when the flipper-window is entered.
 @end defvr
+
+@defvr {HOOK} leave-flipper-hook
+This hook is called when the flipper-window is left.
+@end defvr
+
+Utils (@code{sawfish.wm.edge.utils}):
+
+@defun activate-flippers t
+A wrapper-functions around @code{recreate-flippers} and @code{destroy-flippers},
+which additionally adds (respectively removes) the required hook-functions.
+@end defun
+
+@defvr Customizable hot-spots-corner-length 50
+Lenght in px (in both x and y direction) wich is used for the hot-spot corners.
+All remaining pixels represent the borders.
+@end defvr
+
+@defun get-active-corner
+This function returns the corner of the flipper-window which was entered, or nil.
+@end defun
+
+@defun get-active-border
+This function returns the border of the flipper-window which was entered, or nil.
+@end defun
+
+Infrastructure (@code{sawfish.wm.edge.actions}):
+
+@defvr Customizable left-right-edge-action 'none/hot-spot
+Action to perform for the left and right screen-edges when they are hit by the
+pointer, either flip-workspace, flip-viewport, viewport-drag or none/hot-spot.
+@end defvr
+
+@defvr Customizable left-right-edge-move-action 'none
+Action to perform for the left and right screen-edges when a window is dragged over
+them, either flip-workspace, flip-viewport, viewport-drag or none.
+@end defvr
+
+@defvr Customizable top-bottom-edge-action 'none/hot-spot
+Action to perform for the top and buttom screen-edges when they are hit by the
+pointer, either flip-workspace, flip-viewport, viewport-drag or none/hot-spot.
+@end defvr
+
+@defvr Customizable top-bottom-edge-move-action 'none
+Action to perform for the top and bottom screen-edges when a window is dragged
+over them, either flip-workspace, flip-viewport, viewport-drag or none.
+@end defvr
+
+@defun activate-edges t
+This function calls @code{activate-flippers} and adds the required
+hook-functions to be able to perform user-actions on the edges.
+@end defun
+
+@defun edge-action-call func edge
+This function calls the desired user-action @code{func} for the screen-edge
+@code{edge}.
+@end defun
+
+@defun edge-action-hook-func
+This hook-function is responsible to either call @code{hot-spot-invoke} (if a
+corner was activated) or to call @code{edge-action-call} to perform an action,
+when the edge was activated using the pointer.
+@end defun
+
+@defun edge-action-move-hook-func
+This hook-function is responsible to call @code{edge-action-call} to perfom an
+action, if the edge was activated while dragging a window over it. Hot-Spots is
+not supported when doing so.
+@end defun
 
 @node RandR and Xinerama, Window Placement, Workspaces, Top
 @chapter RandR and Xinerama
@@ -7262,7 +7304,7 @@ moved.
 
 @defvr {Hook} enter-flipper-hook
 @defvrx {Hook} leave-flipper-hook
-See @xref{Edge Flipping}.
+See @xref{EdgeActions}.
 @end defvr
 
 @node Startup and Shutdown Hooks, Other Hooks, Workspace and Viewport Hooks, Standard Hooks
