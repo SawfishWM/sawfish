@@ -39,15 +39,13 @@
     (if enable
         (progn
 	  (recreate-flippers)
-	  (unless (in-hook-p 'after-restacking-hook flippers-after-restacking)
-	    (add-hook 'after-restacking-hook flippers-after-restacking))
+	  (unless (in-hook-p 'after-restacking-hook raise-flippers)
+	    (add-hook 'after-restacking-hook raise-flippers))
 	  (unless (in-hook-p 'randr-change-notify-hook recreate-flippers)
 	    (add-hook 'randr-change-notify-hook recreate-flippers)))
-      (disable-flippers)
-      (if (in-hook-p 'after-restacking-hook flippers-after-restacking)
-	  (remove-hook 'after-restacking-hook flippers-after-restacking))
-      (if (in-hook-p 'randr-change-notify-hook recreate-flippers)
-	  (remove-hook 'randr-change-notify-hook recreate-flippers))))
+      (destroy-flippers)
+      (remove-hook 'after-restacking-hook raise-flippers)
+      (remove-hook 'randr-change-notify-hook recreate-flippers)))
 
   (defcustom hot-spots-area 50
     "Lenght in px (in both x and y direction) wich is used as hot-spots-area."
