@@ -90,13 +90,13 @@
   (define (edges-activate init)
     (if init
 	(progn
-	  (flippers-activate t)
+	  (activate-flippers t)
 	  (unless (in-hook-p 'enter-flipper-hook edge-action-hook-func)
 	    (add-hook 'enter-flipper-hook edge-action-hook-func))
 	  ;; While the pointer is grabbed, window enter/leave events
 	  ;; are not generated.
 	  (unless (in-hook-p 'while-moving-hook edge-action-move-hook-func)
 	    (add-hook 'while-moving-hook edge-action-move-hook-func)))
-      (flippers-activate nil)
+      (activate-flippers nil)
       (remove-hook 'enter-flipper-hook edge-action-hook-func)
       (remove-hook 'while-moving-hook edge-action-move-hook-func))))
