@@ -20,7 +20,7 @@
 
 (define-structure sawfish.wm.edge.actions
 
-    (export edges-activate)
+    (export activate-edges)
 
     (open rep
 	  rep.system
@@ -39,20 +39,20 @@
     :group edge-actions
     :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
-  (defcustom left-right-edge-move-action 'none/hot-spot
+  (defcustom left-right-edge-move-action 'none
     "Action for the left and right screen-edge while moving a window."
     :group edge-actions
-    :type  (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
+    :type  (choice none viewport-drag flip-workspace flip-viewport))
 
   (defcustom top-bottom-edge-action 'none/hot-spot
     "Action for the top and bottom screen-edge."
     :group edge-actions
     :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
-  (defcustom top-bottom-edge-move-action 'none/hot-spot
+  (defcustom top-bottom-edge-move-action 'none
     "Action for the top and bottom screen-edge while moving."
     :group edge-actions
-    :type  (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
+    :type  (choice none viewport-drag flip-workspace flip-viewport))
 
   (define (edge-action-call func edge)
     (case func
@@ -87,7 +87,7 @@
 		 (eq edge 'bottom))
 	     (edge-action-call top-bottom-edge-move-action edge)))))
 
-  (define (edges-activate init)
+  (define (activate-edges init)
     (if init
 	(progn
 	  (activate-flippers t)
