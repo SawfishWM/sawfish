@@ -30,7 +30,7 @@ DEFSYM(bottom, "bottom");
 DEFSYM(enter_flipper_hook, "enter-flipper-hook");
 DEFSYM(leave_flipper_hook, "leave-flipper-hook");
 
-DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
+DEFUN("raise-flippers", Fraise_flippers, Sraise_flippers, (void), rep_Subr0)
 {
     XMapRaised (dpy, edge_left);
     XMapRaised (dpy, edge_right);
@@ -40,7 +40,7 @@ DEFUN("enable-flippers", Fenable_flippers, Senable_flippers, (void), rep_Subr0)
     return Qt;
 }
 
-DEFUN("disable-flippers", Fdisable_flippers, Sdisable_flippers,
+DEFUN("destroy-flippers", Fdestroy_flippers, Sdestroy_flippers,
       (void), rep_Subr0)
 {
     XDestroyWindow (dpy, edge_left);
@@ -98,17 +98,6 @@ event_handler (XEvent *ev)
     }
 }
 
-DEFUN("flippers-after-restacking", Fflippers_after_restacking,
-      Sflippers_after_restacking, (void), rep_Subr0)
-{
-    /* Must keep edge windows raised so they always get the pointer */
-    XRaiseWindow (dpy, edge_left);
-    XRaiseWindow (dpy, edge_right);
-    XRaiseWindow (dpy, edge_top);
-    XRaiseWindow (dpy, edge_bottom);
-    return Qt;
-}
-
 /* DL hooks / initialisation */
 
 static Window
@@ -148,9 +137,9 @@ DEFUN("create-flippers", Fcreate_flippers,
 DEFUN("recreate-flippers", Frecreate_flippers,
       Srecreate_flippers, (void), rep_Subr0)
 {
-	Fdisable_flippers();
+	Fdestroy_flippers();
 	Fcreate_flippers();
-	Fenable_flippers();
+	Fraise_flippers();
 
 	return Qt;
 }
@@ -160,9 +149,8 @@ flippers_init (void)
 {
     repv tem = rep_push_structure ("sawfish.wm.edge.subrs");
 
-    rep_ADD_SUBR(Senable_flippers);
-    rep_ADD_SUBR(Sdisable_flippers);
-    rep_ADD_SUBR(Sflippers_after_restacking);
+    rep_ADD_SUBR(Sraise_flippers);
+    rep_ADD_SUBR(Sdestroy_flippers);
     rep_ADD_SUBR(Screate_flippers);
     rep_ADD_SUBR(Srecreate_flippers);
 
