@@ -308,7 +308,11 @@ fixed-position."
 		       (tab-refresh-group win 'depth)))))
   
     (add-hook 'before-move-hook (lambda (win) (adjustment-title win)))
-    (add-hook 'after-move-hook (lambda (win) (tab-refresh-group win 'move)))
+    (add-hook 'after-move-hook 
+              (lambda (win) 
+                (adjustment-title win)
+                (tab-refresh-group win 'move)))
+
     (add-hook 'after-resize-hook (lambda (win) (tab-refresh-group win 'resize)))
     ;; only update tabs by move if opaque move mode (opaque = slow)
     ;;
