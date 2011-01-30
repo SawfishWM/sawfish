@@ -153,7 +153,7 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
   ;; initialize the screen-edges
   (unless batch-mode
     (init-apps-menu)
-    (edges-activate t))
+    (activate-edges t))
 
   ;; apply customized font-colors
   (if use-custom-font-color
