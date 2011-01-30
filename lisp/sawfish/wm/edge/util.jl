@@ -22,7 +22,7 @@
 
     (compound-interface
      (structure-interface sawfish.wm.edge.subrs)
-     (export flippers-activate
+     (export activate-flippers
 	     get-active-corner
 	     get-active-edge))
 
@@ -35,7 +35,7 @@
 
   (define-structure-alias edge-util sawfish.wm.edge.util)
 
-  (define (flippers-activate enable)
+  (define (activate-flippers enable)
     (if enable
         (progn
 	  (recreate-flippers)
