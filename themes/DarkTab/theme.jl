@@ -2923,6 +2923,7 @@
            (right-frame-transient-buttons-right
             (make-button-list t darktab:right-top-buttons 'top-edge 0 (+ darktab:title-dimension darktab:button-width))))
 
+      (require 'sawfish.wm.tabs.tab)
       (when (eq current-title 'top)
         (let ((top-left-d-w 11)
               (top-right-d-w 3)
