@@ -1,3 +1,79 @@
+2011-02-01  Teika Kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/customize.jl
+	* lisp/sawfish/wm/ext/auto-raise.jl
+	* lisp/sawfish/wm/windows.jl
+	* man/sawfish.texi
+	* themes/mxflat/theme.jl: Minor docs.
+
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* lisp/sawfish/wm/custom.jl
+	* lisp/sawfish/wm/ext/apps-menu.jl
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/focus.jl
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/state/wm-spec.jl
+	* lisp/sawfish/wm/util/display-wininfo.jl
+	* lisp/sawfish/wm/windows.jl: Indent in lisp files.
+	Not thorough, only recently changed files are chosen.
+
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/state/iconify.jl
+	* lisp/sawfish/wm/windows.jl: Doc readability improvements in
+	keymap.jl. Anonymous functions are moved to appropirate modules.
+
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/flip.jl
+	* lisp/sawfish/wm/edge/hot-spots.jl
+	* lisp/sawfish/wm/edge/util.jl
+	* lisp/sawfish/wm/edge/viewport-drag.jl
+	* lisp/sawfish/wm/ext/shade-hover.jl
+	* lisp/sawfish/wm/ext/tooltips.jl
+	* lisp/sawfish/wm/focus.jl
+	* man/news.texi
+	* src/flippers.c: Doc in edge and news. Minor cleanups.
+	News items are also sorted.
+
+	* lisp/sawfish/wm/edge/util.jl
+	* man/sawfish.texi: Typo fix "lenght" -> "length" in edge.
+
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* man/news.texi
+	* man/sawfish.texi: Functions of "resize-window-to-preset-size"
+	family are defined, based on "resize-window-to-dimension".
+
+	* lisp/sawfish/wm.jl
+	* lisp/sawfish/wm/animation/main.jl
+	* lisp/sawfish/wm/animation/modes.jl
+	* lisp/sawfish/wm/animation/outline.jl
+	* lisp/sawfish/wm/animation/setup.jl
+	* lisp/sawfish/wm/autoload.jl
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* lisp/sawfish/wm/util/window-outline.jl
+	* lisp/sawfish/wm/window-anim.jl
+	* man/news.texi: Renamed animation related modules.
+	All are collected under wm/animation/. Imports are also updated.
+	window-anim.jl         -> animation/setup.jl
+	animation/outline.jl   -> animation/main.jl
+	util/window-outline.jl -> animation/modes.jl
+
+	* lisp/sawfish/wm/animation/setup.jl
+	* lisp/sawfish/wm/ext/match-window.jl
+	* man/news.texi
+	* man/sawfish.texi: Per-window animator from "Window Rules" in configurator.
+
+	* lisp/sawfish/wm/ext/error-handler.jl
+	* lisp/sawfish/wm/user.jl
+	* man/news.texi: Implemented `init' for error-destination.
+	An error during initialization is printed to both screen and stderr by default.
+
+	* lisp/sawfish/wm/ext/tooltips.jl: Minor tooltip improvement:
+	Don't show it for empty keymap.
+	Padding frame classes, which are used for tab, have empty
+	keymap. Don't show their tooltip.
+
 2011-01-18  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands/launcher.jl
 	* lisp/sawfish/wm/custom.jl
