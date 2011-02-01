@@ -34,6 +34,7 @@
 	    window-sticky-p/viewport
 	    make-window-sticky/viewport
 	    make-window-unsticky/viewport
+	    toggle-window-sticky/viewport
 	    window-sticky-p
 	    make-window-sticky
 	    make-window-unsticky
@@ -198,12 +199,20 @@
       (unless no-hooks
 	(emit-sticky-hook w))))
 
+   (define (toggle-window-sticky/viewport w #!key no-hooks)
+     "Toggle the stickiness of the window, i.e. make it appear in
+all viewports."
+     (if (window-get w 'sticky-viewport)
+	 (window-put w 'sticky-viewport nil)
+       (window-put w 'sticky-viewport t)))
+
   ;; combined code
 
   (define (window-sticky-p w)
     (or (window-sticky-p/workspace w) (window-sticky-p/viewport w)))
 
   (define (make-window-sticky w)
+    "Make the window appear in all workspaces and viewports."
     (unless (window-sticky-p w)
       (make-window-sticky/workspace w #:no-hooks t)
       (make-window-sticky/viewport w #:no-hooks t)
@@ -216,8 +225,8 @@
       (emit-sticky-hook w)))
 
   (define (toggle-window-sticky w)
-    "Toggle the `stickiness' of the window--whether or not it is a member of
-all workspaces."
+    "Toggle the `stickiness' of the window, i.e. make it appear in
+all workspaces and viewports."
     (if (window-sticky-p w)
 	(make-window-unsticky w)
       (make-window-sticky w)))
@@ -225,7 +234,10 @@ all workspaces."
   (define-command 'make-window-sticky make-window-sticky #:spec "%W")
   (define-command 'make-window-unsticky make-window-unsticky #:spec "%W")
   (define-command 'toggle-window-sticky toggle-window-sticky #:spec "%W")
-
+  (define-command 'toggle-window-sticky-viewport
+    toggle-window-sticky/viewport #:spec "%W")
+    
+  
 ;;; hooks
 
   (define (ws-client-msg-handler w prop data)

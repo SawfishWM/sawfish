@@ -59,7 +59,8 @@
 	     avoided-windows
 	     call-after-property-changed
 	     call-after-state-changed
-	     rename-window))
+	     rename-window
+	     toggle-fixed-postion))
 
     (open rep
 	  rep.system
@@ -572,7 +573,14 @@ STATES has been changed. STATES may also be a single symbol."
   (define-command 'rename-window rename-window
     #:spec "%W\nsEnter new window name:")
 
-  ;;; gaollable functions
+  (define (toggle-fixed-postion w)
+    "Toggle the window property `fixed-position'."
+     (if (window-get w 'fixed-position)
+	 (window-put w 'fixed-position nil)
+       (window-put w 'fixed-position t))
+     (call-window-hook 'window-state-change-hook w (list '(fixed-position))))
+  (define-command 'toggle-fixed-postion toggle-fixed-postion #:spec "%W")
+;;; gaollable functions
 
   (gaol-add window-really-wants-input-p window-class window-avoided-p
 	    call-after-property-changed call-after-state-changed
