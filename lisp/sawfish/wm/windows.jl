@@ -159,7 +159,7 @@ window is found."
 			       (when (window-role w)
 				 (string-match role (window-role w))))))
       (car (filter-windows (lambda (w)
-			    (string= (window-role w) role))))))
+			     (string= (window-role w) role))))))
 
   (define (window-really-wants-input-p w)
     "Return nil if window W should never be focused."

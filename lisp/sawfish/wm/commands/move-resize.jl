@@ -528,11 +528,11 @@ its edges with an edge of another window.")
       (resize-window-with-hints* win new-wid new-hgt)))
 
   (define (double-window-size w)
-    (if (not (window-get w 'fixed-size))
+    (unless (window-get w 'fixed-size)
       (resize-by-factor w 2)))
 
   (define (halve-window-size w)
-    (if (not (window-get w 'fixed-size))
+    (unless (window-get w 'fixed-size)
       (resize-by-factor w 0.5)))
 
 ;;; hook functions
@@ -552,7 +552,7 @@ its edges with an edge of another window.")
 
   (define (resize-window-interactively w)
     "Resize the window interactively, with mouse or keyboard."
-    (if (not (window-get w 'fixed-size))
+    (unless (window-get w 'fixed-size)
       (do-move-resize w 'resize)))
 
   (define (resize-window-to-dimensions x y #!key window)
@@ -592,10 +592,10 @@ that window."
   (define-command 'resize-window-interactively
     resize-window-interactively #:spec "%W")
   (define-command 'resize-window-to-dimensions
-     resize-window-to-dimensions
-     #:spec "NNew width:\nNNew height:"
-     #:type '(and (labelled "New width:" (number 100))
-                  (labelled "New height:" (number 100))))
+    resize-window-to-dimensions
+    #:spec "NNew width:\nNNew height:"
+    #:type '(and (labelled "New width:" (number 100))
+		 (labelled "New height:" (number 100))))
   (define-command 'move-selected-window
     move-selected-window)
   (define-command 'resize-selected-window

@@ -36,7 +36,7 @@
 	     apply-frame-style
 	     apply-frame-style-and-save
 	     window-type
-         adjustment-title
+	     adjustment-title
 	     set-window-type
 	     push-window-type
 	     pop-window-type
@@ -665,10 +665,10 @@ generate.")
 			       (cursor . ,(cursor-for-frame-part 'title))))
 
   (define-frame-class 'tabbar-horizontal `((keymap . tabbar-keymap)
-			       (cursor . ,(cursor-for-frame-part 'title))))
+					   (cursor . ,(cursor-for-frame-part 'title))))
 
   (define-frame-class 'tabbar-vertical `((keymap . tabbar-keymap)
-			       (cursor . ,(cursor-for-frame-part 'title))))
+					 (cursor . ,(cursor-for-frame-part 'title))))
 
   (mapc (lambda (x)
 	  (define-frame-class x `((cursor . ,(cursor-for-frame-part x))

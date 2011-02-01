@@ -301,22 +301,22 @@ of choices."
       (setq full-group (list full-group)))
     (let loop ((group full-group)
 	       (parent custom-groups))
-         (if (null group)
-             (unless (or (memq cell (cddr parent))
-                         (assq (car cell) (cddr parent)))
-               ;; reached the bottom most group
-               (rplacd (cdr parent) (nconc (cddr parent) (list cell))))
-           ;; keep on recursing
-           (loop (cdr group)
-                 (or (assq (car group) (cddr parent))
-                     (error
-		      "Unknown customization group: %s.\nIf not typo, its defgroup is not called yet." full-group)))
-           (unless (cdr group)
-             (rplacd (cdr custom-groups)
-                     (nconc (sort (filter consp (cddr custom-groups))
-                                  (lambda (x y)
-                                    (string-lessp (cadr x) (cadr y))))
-                            (filter atom (cddr custom-groups))))))))
+      (if (null group)
+	  (unless (or (memq cell (cddr parent))
+		      (assq (car cell) (cddr parent)))
+	    ;; reached the bottom most group
+	    (rplacd (cdr parent) (nconc (cddr parent) (list cell))))
+	;; keep on recursing
+	(loop (cdr group)
+	      (or (assq (car group) (cddr parent))
+		  (error
+		   "Unknown customization group: %s.\nIf not typo, its defgroup is not called yet." full-group)))
+	(unless (cdr group)
+	  (rplacd (cdr custom-groups)
+		  (nconc (sort (filter consp (cddr custom-groups))
+			       (lambda (x y)
+				 (string-lessp (cadr x) (cadr y))))
+			 (filter atom (cddr custom-groups))))))))
 
 ;;; setting values
 

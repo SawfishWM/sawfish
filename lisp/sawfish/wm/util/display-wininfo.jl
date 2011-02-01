@@ -83,7 +83,7 @@
 
   ;; Returns the list of *one* string which is made of
   ;; * name, in brackets when iconified
-  ;: * workspace num like <2>, when display-wininfo-show-workspace in non-nil
+  ;; * workspace num like <2>, when display-wininfo-show-workspace in non-nil
   (define (window-info w)
     (list (concat (and (window-get w 'iconified) ?[)
                        (window-name w)

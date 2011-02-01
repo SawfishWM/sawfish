@@ -335,46 +335,46 @@ exile it."
 
   (define (desk-file->fdo-list desk-file)
     (when (desktop-file-p desk-file)
-       (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
-	 (let ((a (assoc "NoDisplay" fdo-list))
-	       (b (assoc "OnlyShowIn" fdo-list))
-	       (c (assoc "NotShowIn" fdo-list))
-	       (d (assoc "Hidden" fdo-list)))
-	   ;; 't
-	   (setq fdo-list (append fdo-list (cons (cons "apps-menu-display?" "true"))))
-	   ;; 'maybe
-	   (when (eq apps-menu-show-all 'maybe)
-	     (when b
-	       (if (string-match (concat (quote-regexp desktop-environment) "*")
-				 (string-downcase (cdr b)))
-		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
-		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
-	     (when c
-	       (if (string-match (concat (quote-regexp desktop-environment) "*")
-				 (string-downcase (cdr c)))
-		   (rplacd (assoc "apps-menu-display?" fdo-list) "false")
-		 (rplacd (assoc "apps-menu-display?" fdo-list) "true"))))
-	   ;; 'nil
-	   (when (or (eq apps-menu-show-all 'nil) (not apps-menu-show-all))
-	     (when a
-	       (if (string-match "[Ff]" (cdr a))
-		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
-		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
-	     (when d
-	       (if (string-match "[Ff]" (cdr d))
-		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
-		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
-	     (when b
-	       (if (string-match (concat (quote-regexp desktop-environment) "*")
-				 (string-downcase (cdr b)))
-		   (rplacd (assoc "apps-menu-display?" fdo-list) "true")
-		 (rplacd (assoc "apps-menu-display?" fdo-list) "false")))
-	     (when c
-	       (if (string-match (concat (quote-regexp desktop-environment) "*")
-				 (string-downcase (cdr c)))
-		   (rplacd (assoc "apps-menu-display?" fdo-list) "false")
-		 (rplacd (assoc "apps-menu-display?" fdo-list) "true")))))
-	   fdo-list)))
+      (let ((fdo-list (fdo-check-exile (parse-desktop-file desk-file))))
+	(let ((a (assoc "NoDisplay" fdo-list))
+	      (b (assoc "OnlyShowIn" fdo-list))
+	      (c (assoc "NotShowIn" fdo-list))
+	      (d (assoc "Hidden" fdo-list)))
+	  ;; 't
+	  (setq fdo-list (append fdo-list (cons (cons "apps-menu-display?" "true"))))
+	  ;; 'maybe
+	  (when (eq apps-menu-show-all 'maybe)
+	    (when b
+	      (if (string-match (concat (quote-regexp desktop-environment) "*")
+				(string-downcase (cdr b)))
+		  (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		(rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	    (when c
+	      (if (string-match (concat (quote-regexp desktop-environment) "*")
+				(string-downcase (cdr c)))
+		  (rplacd (assoc "apps-menu-display?" fdo-list) "false")
+		(rplacd (assoc "apps-menu-display?" fdo-list) "true"))))
+	  ;; 'nil
+	  (when (or (eq apps-menu-show-all 'nil) (not apps-menu-show-all))
+	    (when a
+	      (if (string-match "[Ff]" (cdr a))
+		  (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		(rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	    (when d
+	      (if (string-match "[Ff]" (cdr d))
+		  (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		(rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	    (when b
+	      (if (string-match (concat (quote-regexp desktop-environment) "*")
+				(string-downcase (cdr b)))
+		  (rplacd (assoc "apps-menu-display?" fdo-list) "true")
+		(rplacd (assoc "apps-menu-display?" fdo-list) "false")))
+	    (when c
+	      (if (string-match (concat (quote-regexp desktop-environment) "*")
+				(string-downcase (cdr c)))
+		  (rplacd (assoc "apps-menu-display?" fdo-list) "false")
+		(rplacd (assoc "apps-menu-display?" fdo-list) "true")))))
+	fdo-list)))
 
   ;; generate a sawfish menu entry from a .desktop file
   (define (generate-menu-entry fdo-list)

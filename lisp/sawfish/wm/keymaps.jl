@@ -84,9 +84,9 @@
 ;;; Options
 
   (defcustom global-keymap (bind-keys (make-keymap)
-			     "W-Left" 'previous-workspace
-			     "W-Right" 'next-workspace
-			     "W-Tab" 'cycle-windows)
+				      "W-Left" 'previous-workspace
+				      "W-Right" 'next-workspace
+				      "W-Tab" 'cycle-windows)
     "Keymap containing bindings active anywhere."
     :group bindings
     :type keymap
@@ -94,14 +94,14 @@
     :after-set (lambda () (grab-keymap global-keymap)))
 
   (defcustom window-keymap (bind-keys (make-keymap)
-			     "W-Up" 'raise-window
-			     "W-Down" 'lower-window
-			     "W-Button3-Click1" 'raise-lower-window
-			     "W-Button2-Click1" 'popup-window-ops-menu
-			     "W-Button1-Move" 'move-window-interactively
-			     "Button1-Click1" 'raise-and-pass-through-click
-			     "W-ISO_Left_Tab" 'tab-raise-left-window
-			     "H-ISO_Left_Tab" 'tab-raise-right-window)
+				      "W-Up" 'raise-window
+				      "W-Down" 'lower-window
+				      "W-Button3-Click1" 'raise-lower-window
+				      "W-Button2-Click1" 'popup-window-ops-menu
+				      "W-Button1-Move" 'move-window-interactively
+				      "Button1-Click1" 'raise-and-pass-through-click
+				      "W-ISO_Left_Tab" 'tab-raise-left-window
+				      "H-ISO_Left_Tab" 'tab-raise-right-window)
     "Keymap containing bindings active when a client window is focused."
     :group bindings
     :type keymap
@@ -109,103 +109,103 @@
     :after-set (lambda () (grab-keymap window-keymap)))
 
   (defcustom root-window-keymap (bind-keys (make-keymap)
-				  "Button2-Click1" 'popup-root-menu)
+					   "Button2-Click1" 'popup-root-menu)
     "Keymap containing bindings active when the pointer is in the root window
 (or when no window is focused)."
     :group bindings
     :type keymap)
 
   (defcustom title-keymap (bind-keys (make-keymap)
-			    "Button3-Off" 'raise-lower-window
-			    "Button2-Move" 'resize-window-interactively
-			    "Button1-Off2" 'toggle-window-shaded
-			    "Button1-Move" 'move-window-interactively
-			    "Button2-Off" 'tab-add-to-group)
+				     "Button3-Off" 'raise-lower-window
+				     "Button2-Move" 'resize-window-interactively
+				     "Button1-Off2" 'toggle-window-shaded
+				     "Button1-Move" 'move-window-interactively
+				     "Button2-Off" 'tab-add-to-group)
     "Keymap containing bindings active when the pointer is in the title of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom tabbar-keymap (bind-keys (make-keymap)
-			    "Button1-Off2" 'toggle-window-shaded
-                "Button1-Move" 'move-window-interactively
-			    "C-Button1-Off" 'tab-add-to-group
-			    "C-Button1-Click" 'tab-release-window
-			    "C-Button1-Move" 'move-window-interactively)
+				      "Button1-Off2" 'toggle-window-shaded
+				      "Button1-Move" 'move-window-interactively
+				      "C-Button1-Off" 'tab-add-to-group
+				      "C-Button1-Click" 'tab-release-window
+				      "C-Button1-Move" 'move-window-interactively)
     "Keymap containing bindings active when the pointer is in the tabbar of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom border-keymap (bind-keys (make-keymap)
-			     "Button3-Off" 'raise-lower-window
-			     "Button2-Move" 'move-window-interactively
-			     "Button1-Move" 'resize-window-interactively)
+				      "Button3-Off" 'raise-lower-window
+				      "Button2-Move" 'move-window-interactively
+				      "Button1-Move" 'resize-window-interactively)
     "Keymap containing bindings active when the pointer is in the border of
 a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom close-button-keymap (bind-keys (make-keymap)
-				   "Button3-Click1" 'popup-window-ops-menu
-				   "S-Button1-Off" 'delete-group
-				   "Button1-Off" 'delete-window)
+					    "Button3-Click1" 'popup-window-ops-menu
+					    "S-Button1-Off" 'delete-group
+					    "Button1-Off" 'delete-window)
     "Keymap containing bindings active when the pointer is in the close button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom iconify-button-keymap (bind-keys (make-keymap)
-				     "Button3-Click1" 'popup-window-ops-menu
-				     "Button1-Off" 'iconify-window)
+					      "Button3-Click1" 'popup-window-ops-menu
+					      "Button1-Off" 'iconify-window)
     "Keymap containing bindings active when the pointer is in the iconify
 button of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom maximize-button-keymap (bind-keys (make-keymap)
-				      "Button3-Off" 'maximize-window-horizontally-toggle
-				      "Button2-Off" 'maximize-window-vertically-toggle
-				      "Button1-Off" 'maximize-window-toggle)
+					       "Button3-Off" 'maximize-window-horizontally-toggle
+					       "Button2-Off" 'maximize-window-vertically-toggle
+					       "Button1-Off" 'maximize-window-toggle)
     "Keymap containing bindings active when the pointer is in the maximize
 button of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom menu-button-keymap (bind-keys (make-keymap)
-				  "Button3-Off" 'delete-window
-				  "Button1-Click1" 'popup-window-ops-menu)
+					   "Button3-Off" 'delete-window
+					   "Button1-Click1" 'popup-window-ops-menu)
     "Keymap containing bindings active when the pointer is in the menu button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom shade-button-keymap (bind-keys (make-keymap)
-				   "Button1-Off" 'toggle-window-shaded)
+					    "Button1-Off" 'toggle-window-shaded)
     "Keymap containing bindings active when the pointer is in the shade button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom sticky-button-keymap (bind-keys (make-keymap)
-				   "Button1-Off" 'toggle-window-sticky
-				   "Button2-Off" '(call-command
-				                   (lambda ()
-						     (if (window-get (current-event-window) 'sticky-viewport)
-						           (window-put (current-event-window) 'sticky-viewport nil)
-							   (window-put (current-event-window) 'sticky-viewport t)))))
+					     "Button1-Off" 'toggle-window-sticky
+					     "Button2-Off" '(call-command
+							     (lambda ()
+							       (if (window-get (current-event-window) 'sticky-viewport)
+								   (window-put (current-event-window) 'sticky-viewport nil)
+								 (window-put (current-event-window) 'sticky-viewport t)))))
     "Keymap containing bindings active when the pointer is in the sticky button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom lock-button-keymap (bind-keys (make-keymap)
-    "Button1-Off" '(call-command
-			(lambda ()
-				(if (window-get (current-event-window) 'fixed-position)
-					(window-put (current-event-window) 'fixed-position nil)
-					(window-put (current-event-window) 'fixed-position t))
-                  (call-window-hook 'window-state-change-hook (current-event-window) (list '(fixed-position))))))
+					   "Button1-Off" '(call-command
+							   (lambda ()
+							     (if (window-get (current-event-window) 'fixed-position)
+								 (window-put (current-event-window) 'fixed-position nil)
+							       (window-put (current-event-window) 'fixed-position t))
+							     (call-window-hook 'window-state-change-hook (current-event-window) (list '(fixed-position))))))
 
 
     "Keymap containing bindings active when the pointer is in the lock button
@@ -215,32 +215,32 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 
 
   (defcustom rename-button-keymap (bind-keys (make-keymap)
-				   "Button1-Off" 'rename-window)
+					     "Button1-Off" 'rename-window)
     "Keymap containing bindings active when the pointer is in the rename button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom move-resize-button-keymap (bind-keys (make-keymap)
-                                        "Button1-Off" 'move-window-interactively
-					"Button2-Off" 'resize-window-interactively
-					"Button3-Off" 'move-window-center
-					"Button4-Off" 'double-window-size
-					"Button5-Off" 'halve-window-size)
+						  "Button1-Off" 'move-window-interactively
+						  "Button2-Off" 'resize-window-interactively
+						  "Button3-Off" 'move-window-center
+						  "Button4-Off" 'double-window-size
+						  "Button5-Off" 'halve-window-size)
     "Keymap containing bindings active when the pointer is in the move/resize button
 of a window. (Only mouse-bindings are evaluated in this map.)"
     :group bindings
     :type keymap)
 
   (defcustom raise-lower-button-keymap (bind-keys (make-keymap)
-                                         "Button1-Off" 'raise-window
-					 "Button2-Off" 'lower-window
-					 "Button4-Off" 'raise-window-depth
-					 "Button5-Off" 'lower-window-depth)
+						  "Button1-Off" 'raise-window
+						  "Button2-Off" 'lower-window
+						  "Button4-Off" 'raise-window-depth
+						  "Button5-Off" 'lower-window-depth)
     "Keymap containing bindings active when the pointer is in the raise/lower button
 of a window. (Only mouse-bindings are evaluated in this map.)"
-  :group bindings
-  :type keymap)
+    :group bindings
+    :type keymap)
 
   (defvar pointer-motion-threshold 2
     "Distance in pixels pointer must move before generating motion events.")
@@ -264,14 +264,14 @@ of a window. (Only mouse-bindings are evaluated in this map.)"
 
   (add-hook 'add-window-hook keymap-add-window)
 
-;; custom support for modifiers
+  ;; custom support for modifiers
 
   (define-custom-serializer 'modifier-list
-			    (lambda (value)
-			      (require 'sawfish.wm.util.decode-events)
-			      (decode-modifier value)))
+    (lambda (value)
+      (require 'sawfish.wm.util.decode-events)
+      (decode-modifier value)))
 
   (define-custom-deserializer 'modifier-list
-			      (lambda (value)
-				(require 'sawfish.wm.util.decode-events)
-				(encode-modifier value))))
+    (lambda (value)
+      (require 'sawfish.wm.util.decode-events)
+      (encode-modifier value))))

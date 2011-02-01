@@ -23,12 +23,12 @@
     (export define-focus-mode
 	    autoload-focus-mode
 	    focus-mode
-        raise-tabs-on-hover-setter
+	    raise-tabs-on-hover-setter
 	    set-focus-mode
 	    focus-push-map
 	    focus-pop-map
 	    warp-pointer-if-necessary
-        focus-revert
+	    focus-revert
 	    focus-within-click-event)
 
     (open rep
@@ -241,7 +241,7 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 	(let ((command (lookup-event-binding event)))
 	  (if command
 	      (let-fluids ((focus-within-click-event t))
-                 (call-command command))
+		(call-command command))
 	    (require 'sawfish.wm.util.decode-events)
 	    (when (and (or focus-click-through
 			   (window-get w 'focus-click-through)

@@ -306,7 +306,7 @@ before killing it.")
 				    (require 'sawfish.wm.util.keymap)
 				    (make-memoizing-where-is
 				     (list global-keymap window-keymap)))))
-       (inner cell)))
+      (inner cell)))
 
   (define (menu-dispatch result)
     (let ((orig-win menu-active))
@@ -379,7 +379,7 @@ before killing it.")
   (define (popup-window-ops-menu w)
     "Display the menu listing all window operations."
     (let-fluids ((menu-args (list w)))
-       (popup-menu window-ops-menu)))
+      (popup-menu window-ops-menu)))
 
   (define (popup-window-list-menu)
     "Display the window-list menu."
