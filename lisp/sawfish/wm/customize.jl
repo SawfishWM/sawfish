@@ -100,7 +100,8 @@ instance can read it only once."
 	  (unwind-protect
 	      (progn
 		(format file "\
-;; sawfish user customization -- do not edit by hand!
+;; Sawfish user customization -- do not edit by hand!
+;; Use the configurator instead.
 ;; sawfish version %s, written %s\n\n"
                         sawfish-version (current-time-string))
 		(mapc (lambda (f)

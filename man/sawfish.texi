@@ -1926,14 +1926,17 @@ Move the top-left corner of the window frame of @var{window} to
 
 @defun resize-window-with-hints window cols rows @t{#!optional} hints
 @defunx resize-window-with-hints* window width height @t{#!optional} hints
-Resize the window associated with object @var{window} so that it has
-certain X and Y dimensions.  For the first function, the dimensions
-are @var{cols} columns and @var{rows} rows.   For the second function,
-the dimensions are @var{width} pixels and @var{height} pixels.
+Resize the window @var{window} respecting the hints (see below).
+For the first function, the dimensions are @var{cols} columns and
+@var{rows} rows.  For the second function, the dimensions are
+@var{width} pixels and @var{height} pixels.
 
 The @var{hints} parameters is either the size hints alist to use, or
 @code{nil} in which case the @code{window-size-hints} function is used
 to retrieve the window's hints.
+
+Hints can specify minimum or maximum value of each dimension, and
+also increase step, as far as these two functions are concerned.
 @end defun
 
 @defun window-size-hints window
@@ -3092,13 +3095,11 @@ customization variables to configure, or all classes if @var{group} is
 undefined.
 @end deffn
 
-There also exists the command, for example, @code{customize:appearance},
-i.e. for each top-level customization group, the command to customize
-only it and its subgroups.
+There also exists commands like @code{customize:appearance}, i.e. for
+each top-level customization group, the command to customize only it
+and its subgroups.
 
-The @file{sawfish-config} program can be used to invoke the GUI manually;
-if GNOME is being used, then the GNOME Control Center can also be used
-to customize certain classes.
+The @file{sawfish-config} program can be used to invoke the GUI manually.
 
 In order to provide these customization options however, an extra
 requirement is placed on the Lisp programmer. Instead of just using the
@@ -5721,7 +5722,10 @@ If it's lacking, that of the function @var{fun} will be looked up.
 Other arguments are mostly for internal use.
 
 @var{type} specifies arguments, too. These arguments are statically
-set in ``Bindings'' section of the configurator. (The doc is lacking.)
+set in ``Bindings'' section of the configurator. If @var{type} is set,
+then a lisp expression like @code{(command-name arg1 arg2...)} is bound
+to the key, in contrast to the usual case where command name is bound.
+(The precise doc is lacking.)
 
 @var{class} is a symbol which annotates the command, for example
 @code{advanced}. Users can choose which commands are shown in the
@@ -6426,6 +6430,10 @@ is @code{nil} then any string previously displayed is removed. Returns
 the numeric id of the window displaying the message, or @code{nil} if
 no message is displayed.
 
+The window is placed on top of X client windows, and basically at the
+center of the screen. The window remains until another call of this
+function, or the user clicks on it.
+
 @var{attributes} is an alist specifying how the string should be
 displayed; each element of the list is a cons cell @code{(@var{attr} .
 @var{value})} associating an attribute @var{attr} (a symbol) with it's
@@ -6462,8 +6470,11 @@ The head on which to center the message when a position is not specified or
 given as nil.  If not provided defaults to the head containing the window that
 has the input focus.
 @end table
-@end defun
 
+Tip: Don't call this function during initialization. Instead, use
+@code{after-initialization-hook} to defer. Otherwise the message
+window is covered by X client windows.
+@end defun
 
 @node Rectangle Functions, Gradient Functions, Display Functions, Miscellaneous Functions
 @section Rectangle Functions

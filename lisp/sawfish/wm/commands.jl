@@ -140,6 +140,9 @@ command called NAME (optionally whose arguments have custom-type TYPE)."
   (define (call-command name #!optional pfx-arg)
     "Call the command NAME; optionally with the prefix argument PFX-ARG."
 
+    ;; `name' is a lisp expression for commands with `type',
+    ;; among others.
+    
     ;; prefix
     (let ((this-command name))
       (unless pfx-arg (setq pfx-arg prefix-arg))

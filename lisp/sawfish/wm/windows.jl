@@ -317,6 +317,9 @@ specified by the user."
 ;;; resizing windows in accordance with their size hints
 
   (define (constrain-dimension-to-hints x dimension hints)
+    ;; User asks the value DIMENSION as a window dimension.
+    ;; X is either 'x or 'y.
+    ;; Return value is the DIMENSION constrained by HINTS.
     (let ((base (cdr (assq (if (eq dimension 'x)
 			       'base-width 'base-height) hints)))
 	  (minimum (cdr (assq (if (eq dimension 'x)

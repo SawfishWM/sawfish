@@ -2732,45 +2732,11 @@ string color."
 ;;; REGISTER THEME
 ;;  --------------
 ;;
-;; that is from the manual
-;; (http://sawmill.sourceforge.net/prog-manual.html)
-;;
-;; Frame Types
-;;
-;; * default
-;; The normal frame type. Includes all decorations, both borders and
-;; the title bar.
-;;
-;; * transient
-;; The frame for a transient window. This usually does not include a
-;; title bar, but does have all four borders.
-;;
-;; * shaped
-;; Shaped windows are normally decorated with only a title-bar, since
-;; their boundary is not rectangular it makes no sense to surround
-;; them with a rectangular border.
-;;
-;; * shaped-transient
-;; A combination of the shaped and transient types, normally just a
-;; very small title border with no text.
-;;
-;; * shaded
-;; A shaded window (normally just the title bar).
-;;
-;; * shaded-transient
-;; A shaded transient window.
-;;
-;; * unframed
-;; No frame at all, just the client window itself. The predefined
-;; nil-frame variable contains a null frame that may be used for this
-;; frame type.
-;;
 ;; "Normal" 'default
 ;; "Title-only" 'shaped
 ;; "Border-only" 'transient
 ;; "Top-border" 'shaped-transient
 ;; "None" 'unframed
-;;
 
 ;; return the window frame and decorations
 (define (get-frame w frame-type)

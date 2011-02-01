@@ -45,6 +45,7 @@
     :depends raise-windows-on-focus
     :group (focus auto-raise))
 
+  ;; Used to suppress temporarily in some commands.
   (defvar disable-auto-raise nil)
 
   (define rw-timer nil)
