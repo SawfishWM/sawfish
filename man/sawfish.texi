@@ -2773,9 +2773,13 @@ Sawfish provides certain window animation capabilities.  They have
 been described as ``lame'', so they are off by default.
 
 @defvar default-window-animator
-The default window animation mode, used if a window has no explicit
-animation set.  Normally @code{none}.
+The animation mode when an window is iconified. The default is @code{none}.
+
+You can set the animation mode for each window from the configurator
+``Window Rules'', or via window property. (@pxref{Standard Properties})
 @end defvar
+
+Here are listed functions to define and invoke animator.
 
 @defun define-window-animator name fun
 Define a window animator called @var{name} (a symbol) that is managed
@@ -7460,6 +7464,9 @@ When set, the user is not allowed to change the position of this window.
 @item client-set-position
 When set, the program owning the window has manually moved the window
 after it was mapped.
+
+@item animator
+Animator when iconified. (@pxref{Animating Windows})
 
 @end vtable
 

@@ -39,8 +39,9 @@
   (defgroup animation "Animation" :group appearance)
 
   (defcustom default-window-animator 'none
-    "The default window animation mode"
+    "Animation when an window is iconified."
     :type (choice none solid wireframe cross elliptical draft)
+    :tooltip "Can be overriden from \"Window Rules\"."
     :group (appearance animation))
 
 ;;; animator registration

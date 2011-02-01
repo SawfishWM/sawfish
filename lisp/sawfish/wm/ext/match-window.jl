@@ -102,6 +102,7 @@
 		 (shade-hover boolean)
 		 (never-iconify boolean)
 		 (never-maximize boolean)
+		 (animator (choice none solid wireframe cross elliptical draft))
 		 )
      (other ,(_ "Other")
             (avoid boolean)
