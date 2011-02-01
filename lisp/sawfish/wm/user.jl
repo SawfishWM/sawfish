@@ -113,6 +113,7 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
 ;;; From here, executed at startup.
 
   ;; load ~/.sawfish/rc
+  (setq error-destination 'init)
   (unless (get-command-line-option "--no-rc")
     (condition-case error-data
 	(progn
@@ -190,7 +191,11 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
 	(do-load arg))
        ((member arg '("-q" "--quit"))
 	(throw 'quit 0))
-       (t (do-load arg))))))
+       (t (do-load arg)))))
+  
+  (when (eq error-destination 'init)
+    (setq error-destination 'standard-error))
+  )
 
 ;; prevent this file being loaded as a module
 nil

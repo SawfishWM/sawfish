@@ -186,6 +186,13 @@ This new window-matcher is a companion to @code{toggle-or-exec}. When
 a window matched loses the focus, it gets hidden. Use this together
 with @code{toggle-or-exec} for greater toggle-window experience.
 
+@item Error printing during initialization [Teika Kazura]
+
+When an error occurs during initialization, and if you don't customize
+the option @code{error-handler}, then the error is reported to both
+the screen and standard-error. After Sawfish starts, it's printed to
+the standard-error only.
+
 @item New function @code{report-commands} [Teika kazura]@*
 It returns the list of all commands. (@pxref{Operations on Commands}).
 @end itemize

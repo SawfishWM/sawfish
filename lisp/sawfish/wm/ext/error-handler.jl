@@ -68,6 +68,16 @@
 	 (write standard-error "Sawfish error:\n")
 	 (write standard-error text)
 	 (write standard-error #\newline))
+	((init)
+	 ;; If it's called now, then the message window is covered
+	 ;; by client windows.
+	 (add-hook 'after-initialization-hook
+		   (lambda ()
+		     (display-message
+		      (concat "Error:\n(Click to dismiss. Also printed to stderr)\n\n" text))))
+	 (write standard-error "Sawfish error:\n")
+	 (write standard-error text)
+	 (write standard-error #\newline))
 	((both)
 	 (display-message text)
 	 (write standard-error "Sawfish error:\n")
