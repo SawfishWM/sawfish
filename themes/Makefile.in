@@ -55,6 +55,7 @@ install : all installdirs
 	    fi \
 	  done \
 	done
+	cd $(DESTDIR)$(themedir) && tar xf StyleTab.tar.gz && rm StyleTab.tar.gz
 
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(themedir) $(DESTDIR)$(sitethemedir)
