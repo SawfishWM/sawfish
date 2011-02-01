@@ -69,6 +69,11 @@ more detailed examples.
 
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
+
+@item Animation related modules are renamed [Teika kazura]
+
+All are collected under @file{sawfish/wm/animation}. @code{window-anim.jl} -> @code{setup.jl}, @code{outline.jl} -> @code{main.jl}, @code{util/window-outline.jl} -> @code{modes.jl}.
+
 @end itemize
 @item Build and Installation
 @itemize @minus

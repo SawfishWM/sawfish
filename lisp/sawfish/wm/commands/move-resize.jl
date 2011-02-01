@@ -221,7 +221,7 @@ its edges with an edge of another window.")
 
       (update-edges)
       (unless (eq move-resize-mode 'opaque)
-	(require 'sawfish.wm.util.window-outline)
+	(require 'sawfish.wm.animation.modes)
 	;; prevent any other programs drawing on the display
 	(grab-server)
 	(setq server-grabbed t))

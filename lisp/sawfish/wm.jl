@@ -69,7 +69,7 @@
 (require 'sawfish.wm.custom)
 (require 'sawfish.wm.focus)
 (require 'sawfish.wm.placement)
-(require 'sawfish.wm.window-anim)
+(require 'sawfish.wm.animation.setup)
 
 ;; load standard libraries (but don't import them)
 (mapc intern-structure '(sawfish.wm.keymaps
@@ -108,7 +108,7 @@
 	      sawfish.wm.server
 	      sawfish.wm.stacking
 	      sawfish.wm.viewport
-	      sawfish.wm.window-anim
+	      sawfish.wm.animation.setup
 	      sawfish.wm.windows
 	      sawfish.wm.workspace
 	      sawfish.wm.state.iconify

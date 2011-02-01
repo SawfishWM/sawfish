@@ -1,4 +1,4 @@
-;; window-anim.jl -- visual feedback for window actions
+;; animation/setup.jl -- Set up animation feature.
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.ext.window-anim
+(define-structure sawfish.wm.animation.setup
 
     (export define-window-animator
 	    autoload-window-animator
@@ -30,8 +30,8 @@
 	  sawfish.wm.windows
 	  sawfish.wm.custom
 	  rep.util.autoloader)
-
-  (define-structure-alias window-anim sawfish.wm.ext.window-anim)
+  ;; For backward compatibility.
+  (define-structure-alias window-anim sawfish.wm.animation.setup)
 
   (define window-animators nil
     "List of all possible window animation types.")

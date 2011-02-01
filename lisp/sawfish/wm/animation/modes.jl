@@ -1,4 +1,4 @@
-;; window-outline.jl -- drawing window `rubber-band' outlines
+;; modes.jl -- Define animators.
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.util.window-outline
+(define-structure sawfish.wm.animation.modes
 
     (export draw-window-outline
 	    erase-window-outline
@@ -29,7 +29,8 @@
 	  rep.util.autoloader
 	  sawfish.wm.misc)
 
-  (define-structure-alias window-outline sawfish.wm.util.window-outline)
+  ;; For backward compatibility.
+  (define-structure-alias window-outline sawfish.wm.animation.modes)
 
 ;;; mechanics
 

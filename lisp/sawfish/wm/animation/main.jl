@@ -1,4 +1,4 @@
-;; anim-outline.jl -- simple window animations
+;; main.jl -- animation definition interface
 
 ;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
 
@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.animation.outline
+(define-structure sawfish.wm.animation.main
 
     (export make-outline-animator)
 
@@ -26,13 +26,14 @@
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.windows
-	  sawfish.wm.window-anim
+	  sawfish.wm.animation.setup
 	  sawfish.wm.custom
-	  sawfish.wm.util.window-outline
+	  sawfish.wm.animation.modes
 	  sawfish.wm.gaol
 	  rep.io.timers)
 
-  (define-structure-alias anim-outline sawfish.wm.animation.outline)
+  ;; For backward compatibility.
+  (define-structure-alias anim-outline sawfish.wm.animation.main)
 
   (defcustom anim-outline-icon-coords (cons (screen-width) (screen-height))
     "Animation Outline Coordinates"
