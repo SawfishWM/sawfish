@@ -199,7 +199,7 @@
       (unless no-hooks
 	(emit-sticky-hook w))))
 
-   (define (toggle-window-sticky/viewport w #!key no-hooks)
+   (define (toggle-window-sticky/viewport w)
      "Toggle the stickiness of the window, i.e. make it appear in
 all viewports."
      (if (window-get w 'sticky-viewport)
