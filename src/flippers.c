@@ -1,5 +1,4 @@
-/* flippers.c -- viewport edge flipping mechanism
-   $Id$
+/* flippers.c -- Screen edge sensors
 
    Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
 

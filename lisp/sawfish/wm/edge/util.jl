@@ -1,4 +1,4 @@
-;; edge-util.jl -- common utils for EdgeActions
+;; edge/util.jl -- common utils for EdgeActions
 
 ;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 
@@ -20,11 +20,9 @@
 
 (define-structure sawfish.wm.edge.util
 
-    (compound-interface
-     (structure-interface sawfish.wm.edge.subrs)
-     (export activate-flippers
-	     get-active-corner
-	     get-active-edge))
+    (export activate-flippers
+	    get-active-corner
+	    get-active-edge)
 
     (open rep
 	  rep.system
@@ -48,7 +46,8 @@
       (remove-hook 'randr-change-notify-hook recreate-flippers)))
 
   (defcustom hot-spots-corner-lenght 50
-    "Lenght in px (in both x and y direction) wich is used for the hot-spot corners."
+    "In hot-spot, this size portion is recognized as \"corners\".
+The unit is pixel, and applies to both x and y direction."
     :type number
     :range (5 . 500)
     :group edge-actions)

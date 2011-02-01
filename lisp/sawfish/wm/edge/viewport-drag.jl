@@ -35,7 +35,7 @@ screen edge."
     :range (1 . nil))
 
   (defcustom viewport-drag-cursor-distance 32
-    "Amount to pull back the cursor (in pixer) after dragging the viewport."
+    "Amount to pull back the cursor (in pixel) after dragging the viewport."
     :group edge-actions
     :type number
     :range (1 . nil))

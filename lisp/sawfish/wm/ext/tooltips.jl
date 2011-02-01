@@ -119,8 +119,7 @@
 	(add-hook 'pre-command-hook remove-tooltip))))
 
   (define (remove-tooltip)
-    (when (in-hook-p 'pre-command-hook remove-tooltip)
-      (remove-hook 'pre-command-hook remove-tooltip))
+    (remove-hook 'pre-command-hook remove-tooltip)
     (when tooltips-displayed
       (display-message nil)
       (setq tooltips-displayed nil))

@@ -64,8 +64,7 @@ over them.)"
       (delete-timer shade-hover-timer)
       (setq shade-hover-timer nil))
     (setq shade-hover-window nil)
-    (when (in-hook-p 'pre-command-hook shade-hover-before)
-      (remove-hook 'pre-command-hook shade-hover-before)))
+    (remove-hook 'pre-command-hook shade-hover-before))
 
   (define (shade-hover-leave w)
     (when (eq shade-hover-window w)

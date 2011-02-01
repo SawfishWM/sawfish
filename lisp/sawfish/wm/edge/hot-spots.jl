@@ -1,4 +1,4 @@
-;; hot-spots.jl 3.0.0 -- Invoke user functions when hitting the screen-edge
+;; hot-spots.jl -- Invoke lisp functions when hitting the screen-edge
 
 ;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 

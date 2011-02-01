@@ -43,6 +43,16 @@ access git repository.)
 
 @item Notes
 @itemize @minus
+@item Infinite-desktop and edge-flip needs updates.
+
+Open the configurator -> ``Edge Actions''. Changes must be easy.  (Set
+4 pull-downs, and you're done mostly. ``Infinite-desktop'' is renamed to
+``viewport-drag''.) For more options, see ``Edge Actions'' below.
+
+If your @file{~/.sawfish/rc} opens related modules, delete them. These
+modules are renamed, and you don't have to manually load them any
+more.
+
 @item Function renames [Teika kazura]
 @itemize
 @item Popup of operations-menu on a window, from @code{popup-window-menu} to @code{popup-window-ops-menu} (both the function and command). Old names are still available.
@@ -51,14 +61,14 @@ access git repository.)
 
 Even if the old names still remain, it is highly recommended to update.
 
-@item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
-In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
-
 @item Syntax-change in @code{jump-or-exec} [Christopher Bratusek]
 
 The @code{class} and @code{onfocused} parameters are now keys, so pass them as
 #:class ''value'' or #:onfocused ''value''. Check @file{jump-or-exec.jl} for
 more detailed examples.
+
+@item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
+In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
 @end itemize
 @item Build and Installation
 @itemize @minus
@@ -94,10 +104,6 @@ invoked, if run without any desktop environment. Fixed it.
 
 It is ensured that SawfishPager builds correctly, by improving @file{sawfish.pc} file.
 
-@item KDE *.desktop files location [Teika Kazura]
-
-Previously, user's change of the variable @code{kde-desktop-directories} was ignored, but this is fixed.
-
 @item At focus in/out, correctly reports the mode [Timo Korvola]
 
 When @code{focus-in-hook} / @code{focus-out-hook} are called,
@@ -112,66 +118,47 @@ Some windows were skipped in window cycles among groups. This is fixed.
 
 It used to print an error message when you cancel an interactive call of
 @code{call-command} with the escape key, but it doesn't any more.
+
+@item KDE *.desktop files location [Teika Kazura]
+
+Previously, user's change of the variable @code{kde-desktop-directories} was ignored, but this is fixed.
 @end itemize
 @item New Features
 @itemize @minus
 
-@item EdgeActions [Christopher Bratusek, Teika Kazura]
+@item Edge Actions [Christopher Bratusek]
 
-EdgeActions is a centralized way for performing actions with your screen-edges. Lots of internal and
-user-visible changes have been made.
+``Edge Actions'' is a centralized way to invoke an action when the
+mouse pointer hits a screen-edge. It includes former ``edge-flip'' and
+``infinite-desktop'' (now renamed to ``viewport-drag''), and a new
+feature ``hot-spot''.
+
+Edge-flip and viewport-drag can be configured from the
+configurator ``Edge Actions'' group. Options must be easy to
+understand.
+
+``Hot-spot'' lets you assign an action to each screen-edge and
+-corner. An action has to be a function, and can be set in
+@file{~/.sawfish/rc}, like this:
+
+@lisp
+(defvar-setq top-left-corner-function
+  (lambda () (display-message "hello world")))
+@end lisp
+
+Hot-spot variable names consist of position (e.g. top-left or bottom) + ``edge''/''corner'' + ``function''. A lisp expression will be evaluated in the @code{user} module.
+
+Other related changes are:
+@itemize *
+@item Viewport-drag and edge-flip (of course hot-spot, too) can be chosen per direction, top-bottom and left-right. It's also possible to enable / disable dragging of a window for each of them.
+@item It means a window can be dragged during viewport-drag, which was not possible.
+@item There're two delay timers now, for edge-flip and hot-spot.
+@end itemize
 
 Internal changes:
 @itemize *
-
-@item Some functions have been moved from Lisp to C-Part. Also EdgeFlip has been highly revised, so that
-other technics (namely ViewportDrag and HotSpots) do no longer depend on active EdgeFlip (no more conflicts)
-@item The module @code{sawfish.wm.edge.actions} contains the EdgeAction infrastructure and most options
-@item The module @code{sawfish.wm.edge.util} contains helper functions for EdgeActions
-@item The module @code{sawfish.wm.edge.subrs} contains the C-Part subroutines for EdgeActions
-@item InfiniteDesktop is renamed to ViewportDrag (more self-descriptive)
-@item General code-revision. Less but more powerful code is now in use
-@end itemize
-
-User-visible changes:
-@itemize *
-@item Centralized customization ("Edge Actions" group in SawfishConfig)
-@item EdgeFlip changes. Additionally to the above stated internal changes, EdgeFlip has been split into
-EdgeFlip/Viewport and EdgeFlip/Workspace, giving you more customizability.
-@item HotSpots have been added. HotSpots let you call functions when hitting either the corners or the edges.
-By default the corners extend by 50 px in both directions along the edge, this value is changable.
-
-HotSpot functions need to be set via @file{~/.sawfishrc}, like this:
-
-( defvar-setq top-left-corner-function
-  ( lambda () ( display-message "hello world" ) ) )
-
-the lambda is required - it won't work else. Function names are pretty self-descriptive:
-position (eg: top-left or bottom) + variant (edge or corner) + "function".
-
-@item ViewportDrag now also works while moving a window.
-@item Delay-timer changes. ViewportDrag doesn't have a delay anymore (doesn't quite make sense). 
-HotSpots and EdgeFlip have both their own, customizable timer.
-@item Actions are now split as follows:
-
-top-bottom (normal)
-top-bottom (while moving)
-
-left-right (normal)
-left-right (while moving)
-
-That means that you have better control what to do and when, as actions for when hitting the edge/corner with
-the pointer ("normal") and for when hitting the edge/corner while moving a window are split now.
-
-You can choose from the following actions:
-@itemize →
-@item flip-viewport (traditional EdgeFlip for Viewports)
-@item flip-workspace (traditional EdgeFlip for Workspaces)
-@item viewport-drag (drag Viewport to pseudo-increase it's size making it "infinite")
-@item none/hot-spots (either perform nothing or -if user-set- a HotSpot function)
-@end itemize
-
-By default nothing is done.
+@item Codes are found in @code{sawfish.wm.edge.*}. You don't have to import them for ordinary use.
+@item Low-level functions now have API in @code{sawfish.wm.edge.util} written in Lisp.
 @end itemize
 
 @item Replace running window manager with Sawfish [Timo Korvola]@*
@@ -223,12 +210,12 @@ In order to support ``gnome2-globalmenu'', the reaction policy to
 @code{XFocusInEvent} is slightly modified. Sawfish doesn't emit
 @code{_NET_ACTIVE_WINDOW} if it's done by (un)grabbing the pointer.
 
-@item revised @code{get-window-by-*} functions [Christopher Bratusek]
+@item Revised @code{get-window-by-*} functions [Christopher Bratusek]
 
 For the details, see @xref{Window Attributes}, and @xref{Getting Windows}.
 @itemize *
 @item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE) 
-@item Deleted @code{get-window-by-name-re} and @code{get-window-by-class-re}. Use instead @code{get-window-by-name} or @code{get-window-by-class} with the new option @code{#:regex}. (The old name is still supported.)
+@item Deleted @code{get-window-by-name-re} and @code{get-window-by-class-re}. Use instead @code{get-window-by-name} or @code{get-window-by-class} with the new boolean option @code{#:regex}. (The old name is still supported.)
 @item added @code{#:icon} switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
 @end itemize
 
@@ -255,11 +242,12 @@ team] French [gnome-fr team], and Slovenian [gnome-sl team].
 (Developer's personal extensions had sneaked in.)
 @end itemize
 
-@item Emacs sawfish-mode now indents @code{let-fluids} and let-loop correctly [Teika Kazura]
+@item Emacs sawfish-mode now indents @code{let-fluids} and let-loop correctly, provided by @file{sawfish.el} [Teika Kazura]
 @item Turn `focus-ignore-pointer-events' into an internal variable (has wrongly been a user-option before) [Teika Kazura]
 @item Documentations [Teika kazura]
 @itemize
 @item Section on popup menus is rewritten. (@pxref{Popup Menus})
+@item Functions which return window geometry are now clarified in the point of frames.
 @item Correction: The function @code{commandp} can only take symbols as its argument. (@pxref{Operations on Commands})
 @end itemize
 

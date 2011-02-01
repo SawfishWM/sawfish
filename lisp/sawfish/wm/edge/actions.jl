@@ -1,4 +1,4 @@
-;; edge-action.jl -- Edges taken to another dimension
+;; edge/actions.jl -- Sets up central user interface of edge-actions
 
 ;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
 
