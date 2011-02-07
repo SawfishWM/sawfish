@@ -53,7 +53,7 @@
 
 (defcustom styletab:style 'Dark "Frame and button style. (after you set this, you'll need to restart Sawfish)"
   :group (appearance StyleTab:group StyleTab:settings-group)
-  :options (Reduce Dark DarkColor Smoothly)
+  :options (Reduce Dark DarkColor Silver SilverColor Smoothly)
   :type symbol)
 
 (defcustom styletab:titlebar-place 'top "Titlebar default place."
@@ -381,6 +381,89 @@
                               send-to-next lock raise-lower move-resize rename frame-typ)
                       (boolean "Show in transients"))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; styles settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;(define styletab-style styletab:style)
+
+(define title-colors-images
+  (lambda ()
+    (if (eq styletab:custom-colors t)
+        (title-colors-custom)
+      (case styletab:style
+            ((Reduce) (title-colors-reduce))
+            ((Dark) (title-colors-dark))
+            ((DarkColor) (title-colors-dark))
+            ((Silver) (title-colors-silver))
+            ((SilverColor) (title-colors-silver))
+            ((Smoothly) (title-colors-smoothly))))))
+
+(define title-colors-custom
+  (lambda ()
+    `((focused . ,styletab:focused-color) (highlighted . ,styletab:highlighted-color) (clicked . ,styletab:highlighted-color) 
+      (inactive . ,styletab:inactive-color) (inactive-highlighted . ,styletab:inactive-highlighted-color) 
+      (inactive-clicked . ,styletab:inactive-highlighted-color))))
+
+(define title-colors-reduce
+  (lambda ()
+    `((focused . "#E5E5E5") (highlighted . "#FDFDFD") (clicked . "#FDFDFD") (inactive . "#B1B1B1") (inactive-highlighted . "#CBCBCB")
+      (inactive-clicked . "#CBCBCB"))))
+
+(define title-colors-dark
+  (lambda ()
+    `((focused . "#F2F2F2") (highlighted . "#FEFEFE") (clicked . "#FEFEFE") (inactive . "#CBCBCB") (inactive-highlighted . "#D8D8D8")
+      (inactive-clicked . "#D8D8D8"))))
+
+(define title-colors-smoothly
+  (lambda ()
+    `((focused . "#000000") (highlighted . "#333333") (clicked . "#333333") (inactive . "#666666") (inactive-highlighted . "#777777")
+      (inactive-clicked . "#777777"))))
+
+(define title-colors-silver
+  (lambda ()
+    `((focused . "#000000") (highlighted . "#333333") (clicked . "#333333") (inactive . "#4C4C4C") (inactive-highlighted . "#666666")
+      (inactive-clicked . "#666666"))))
+
+
+(define button-width-custom
+  (lambda ()
+    (if (eq styletab:custom-button-width t)
+        (button-width-set)
+      (case styletab:style
+            ((Reduce) (button-width-reduce))
+            ((Dark) (button-width-dark))
+            ((DarkColor) (button-width-dark))
+            ((Silver) (button-width-silver))
+            ((SilverColor) (button-width-silver))
+            ((Smoothly) (button-width-smoothly))))))
+
+(define button-width-add
+  (lambda ()
+    (if (eq styletab:custom-button-width nil)
+        (button-width-zero)
+      (case styletab:style
+            ((Reduce) (button-width-reduce))
+            ((Dark) (button-width-dark))
+            ((DarkColor) (button-width-dark))
+            ((Silver) (button-width-silver))
+            ((SilverColor) (button-width-silver))
+            ((Smoothly) (button-width-smoothly))))))
+
+(define button-width-set (lambda () (+ styletab:button-width (button-width-add))))
+(define button-width-zero (lambda () 0))
+(define button-width-reduce (lambda () 0))
+(define button-width-dark (lambda () 8))
+(define button-width-silver (lambda () -4))
+(define button-width-smoothly (lambda () 0))
+
+(define tabbar-right-edge-width
+  (lambda ()
+    (case styletab:style
+          ((Reduce) 6)
+          ((Dark) 3)
+          ((DarkColor) 3)
+          ((Silver) 3)
+          ((SilverColor) 3)
+          ((Smoothly) 3))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; frame-class, keys bindings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -770,989 +853,161 @@
        (set-window-type (current-event-window) typ)
        (move-resize-window-to (current-event-window) pos-x pos-y dim-x dim-y)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; top images ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define top-frame-top-border-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-border-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-border-i.png")))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; make images ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define top-frame-top-left-corner-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-left-corner-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-left-corner-i.png")))))
+;; button/icon table
+;;
+(define icon-cache (make-weak-table eq-hash eq))
 
-(define top-frame-top-left-corner-shaped-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-left-corner-shaped-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-left-corner-shaped-i.png")))))
+;; frames/title table
+;;
+(define frame-cache (make-weak-table eq-hash eq))
 
-(define top-frame-tab-left-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-left-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-left-i.png")))))
-
-(define top-frame-tab-left-icon-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-left-icon-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-left-icon-i.png")))))
-
-(define top-frame-tab-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-i.png")))))
-
-(define top-frame-tab-right-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-right-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-tab-right-i.png")))))
-
-(define top-frame-title-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-title-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-title-i.png")))))
+(define (window-icon w)
+  (or (table-ref icon-cache w)
+      (let ((icon (window-icon-image w)))
+        (if icon
+            (let ((scaled (scale-image icon (- styletab:title-dimension 7) (- styletab:title-dimension 7))))
+              (table-set icon-cache w scaled)
+              scaled)
+          (scale-image top-frame-icon-title-images (- styletab:title-dimension 7) (- styletab:title-dimension 7))))))
 
 (define top-frame-icon-title-images 
-  (make-image (concat (symbol-name styletab:style) "/" "top-frame-icon-title-images-f.png")))
-
-(define top-frame-top-right-corner-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-right-corner-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-right-corner-i.png")))))
-
-(define top-frame-top-right-corner-shaped-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-right-corner-shaped-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-top-right-corner-shaped-i.png")))))
-
-(define top-frame-menu-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-menu-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-menu-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-menu-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-menu-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-menu-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-menu-button-ic.png")))))
-
-(define top-frame-shade-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-shade-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-shade-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-shade-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-shade-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-shade-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-shade-button-ic.png")))))
-
-(define top-frame-unshade-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unshade-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unshade-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unshade-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unshade-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unshade-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unshade-button-ic.png")))))
-
-(define top-frame-sticky-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-sticky-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-sticky-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-sticky-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-sticky-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-sticky-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-sticky-button-ic.png")))))
-
-(define top-frame-unsticky-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unsticky-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unsticky-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unsticky-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unsticky-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unsticky-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unsticky-button-ic.png")))))
-
-(define top-frame-iconify-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-iconify-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-iconify-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-iconify-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-iconify-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-iconify-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-iconify-button-ic.png")))))
-
-(define top-frame-maximize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-maximize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-maximize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-maximize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-maximize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-maximize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-maximize-button-ic.png")))))
-
-(define top-frame-unmaximize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unmaximize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unmaximize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unmaximize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unmaximize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unmaximize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unmaximize-button-ic.png")))))
-
-(define top-frame-close-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-close-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-close-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-close-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-close-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-close-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-close-button-ic.png")))))
-
-(define top-frame-lock-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-lock-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-lock-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-lock-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-lock-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-lock-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-lock-button-ic.png")))))
-
-(define top-frame-unlock-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unlock-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unlock-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unlock-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unlock-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unlock-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unlock-button-ic.png")))))
-
-(define top-frame-prev-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-button-ic.png")))))
-
-(define top-frame-prev-last-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-last-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-last-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-last-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-last-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-last-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-prev-last-button-ic.png")))))
-
-(define top-frame-next-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-button-ic.png")))))
-
-(define top-frame-next-last-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-last-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-last-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-last-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-last-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-last-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-next-last-button-ic.png")))))
-
-(define top-frame-raise-lower-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-raise-lower-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-raise-lower-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-raise-lower-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-raise-lower-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-raise-lower-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-raise-lower-button-ic.png")))))
-
-(define top-frame-ontop-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-ontop-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-ontop-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-ontop-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-ontop-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-ontop-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-ontop-button-ic.png")))))
-
-(define top-frame-unontop-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unontop-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unontop-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unontop-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unontop-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unontop-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-unontop-button-ic.png")))))
-
-(define top-frame-move-resize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-move-resize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-move-resize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-move-resize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-move-resize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-move-resize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-move-resize-button-ic.png")))))
-
-(define top-frame-rename-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-rename-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-rename-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-rename-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-rename-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-rename-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-rename-button-ic.png")))))
-
-(define top-frame-frame-typ-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-frame-typ-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-frame-typ-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-frame-typ-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-frame-typ-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-frame-typ-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-frame-typ-button-ic.png")))))
-
-(define top-frame-left-border-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-left-border-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-left-border-i.png")))))
-
-(define top-frame-bottom-left-corner-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-bottom-left-corner-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-bottom-left-corner-i.png")))))
-
-(define top-frame-bottom-border-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-bottom-border-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-bottom-border-i.png")))))
-
-(define top-frame-right-border-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-right-border-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-right-border-i.png")))))
-
-(define top-frame-bottom-right-corner-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-bottom-right-corner-f.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "top-frame-bottom-right-corner-i.png")))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; bottom images ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define bottom-frame-top-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-top-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-top-border-i.png")))))
-
-(define bottom-frame-top-left-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-top-left-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-top-left-corner-i.png")))))
-
-(define bottom-frame-top-right-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-top-right-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-top-right-corner-i.png")))))
-
-(define bottom-frame-left-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-left-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-left-border-i.png")))))
-
-(define bottom-frame-right-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-right-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-right-border-i.png")))))
-
-(define bottom-frame-bottom-border-cursor-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-border-cursor-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-border-cursor-f.png")))))
-
-(define bottom-frame-bottom-left-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-left-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-left-corner-i.png")))))
-
-(define bottom-frame-bottom-right-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-right-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-right-corner-i.png")))))
-
-(define bottom-frame-title-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-title-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-title-i.png")))))
-
-(define bottom-frame-bottom-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-border-i.png")))))
-
-(define bottom-frame-tab-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-tab-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-tab-i.png")))))
-
-(define bottom-frame-tab-left-icon-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-tab-left-icon-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-tab-left-icon-i.png")))))
-
-(define bottom-frame-tab-right-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-tab-right-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-tab-right-i.png")))))
-
-(define bottom-frame-menu-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-menu-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-menu-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-menu-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-menu-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-menu-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-menu-button-ic.png")))))
-
-(define bottom-frame-shade-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-shade-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-shade-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-shade-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-shade-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-shade-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-shade-button-ic.png")))))
-
-(define bottom-frame-unshade-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unshade-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unshade-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unshade-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unshade-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unshade-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unshade-button-ic.png")))))
-
-(define bottom-frame-sticky-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-sticky-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-sticky-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-sticky-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-sticky-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-sticky-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-sticky-button-ic.png")))))
-
-(define bottom-frame-unsticky-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unsticky-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unsticky-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unsticky-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unsticky-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unsticky-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unsticky-button-ic.png")))))
-
-(define bottom-frame-iconify-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-iconify-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-iconify-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-iconify-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-iconify-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-iconify-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-iconify-button-ic.png")))))
-
-(define bottom-frame-maximize-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-maximize-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-maximize-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-maximize-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-maximize-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-maximize-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-maximize-button-ic.png")))))
-
-(define bottom-frame-unmaximize-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unmaximize-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unmaximize-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unmaximize-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unmaximize-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unmaximize-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unmaximize-button-ic.png")))))
-
-(define bottom-frame-close-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-close-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-close-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-close-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-close-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-close-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-close-button-ic.png")))))
-
-(define bottom-frame-lock-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-lock-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-lock-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-lock-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-lock-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-lock-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-lock-button-ic.png")))))
-
-(define bottom-frame-unlock-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unlock-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unlock-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unlock-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unlock-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unlock-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unlock-button-ic.png")))))
-
-(define bottom-frame-prev-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-button-ic.png")))))
-
-(define bottom-frame-prev-last-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-last-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-last-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-last-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-last-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-last-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-prev-last-button-ic.png")))))
-
-(define bottom-frame-next-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-button-ic.png")))))
-
-(define bottom-frame-next-last-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-last-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-last-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-last-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-last-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-last-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-next-last-button-ic.png")))))
-
-(define bottom-frame-raise-lower-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-raise-lower-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-raise-lower-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-raise-lower-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-raise-lower-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-raise-lower-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-raise-lower-button-ic.png")))))
-
-(define bottom-frame-ontop-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-ontop-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-ontop-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-ontop-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-ontop-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-ontop-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-ontop-button-ic.png")))))
-
-(define bottom-frame-unontop-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unontop-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unontop-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unontop-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unontop-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unontop-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-unontop-button-ic.png")))))
-
-(define bottom-frame-move-resize-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-move-resize-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-move-resize-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-move-resize-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-move-resize-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-move-resize-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-move-resize-button-ic.png")))))
-
-(define bottom-frame-rename-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-rename-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-rename-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-rename-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-rename-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-rename-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-rename-button-ic.png")))))
-
-(define bottom-frame-frame-typ-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-frame-typ-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-frame-typ-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-frame-typ-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-frame-typ-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-frame-typ-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-frame-typ-button-ic.png")))))
-
-(define bottom-frame-bottom-left-corner-shaped-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-left-corner-shaped-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-left-corner-shaped-i.png")))))
-
-(define bottom-frame-bottom-right-corner-shaped-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-right-corner-shaped-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "bottom-frame-bottom-right-corner-shaped-i.png")))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; left images ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define left-frame-left-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-left-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-left-border-i.png")))))
-
-(define left-frame-tab-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-tab-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-tab-i.png")))))
-
-(define left-frame-tab-bottom-icon-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-tab-bottom-icon-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-tab-bottom-icon-i.png")))))
-
-(define left-frame-tab-top-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-tab-top-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-tab-top-i.png")))))
-
-(define left-frame-bottom-left-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-left-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-left-corner-i.png")))))
-
-(define left-frame-top-left-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-left-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-left-corner-i.png")))))
-
-(define left-frame-title-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-title-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-title-i.png")))))
-
-(define left-frame-bottom-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-border-i.png")))))
-
-(define left-frame-bottom-right-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-right-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-right-corner-i.png")))))
-
-(define left-frame-right-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-right-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-right-border-i.png")))))
-
-(define left-frame-top-right-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-right-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-right-corner-i.png")))))
-
-(define left-frame-top-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-border-i.png")))))
-
-(define left-frame-menu-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-menu-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-menu-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-menu-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-menu-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-menu-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-menu-button-ic.png")))))
-
-(define left-frame-shade-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-shade-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-shade-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-shade-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-shade-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-shade-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-shade-button-ic.png")))))
-
-(define left-frame-unshade-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unshade-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unshade-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unshade-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unshade-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unshade-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unshade-button-ic.png")))))
-
-(define left-frame-sticky-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-sticky-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-sticky-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-sticky-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-sticky-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-sticky-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-sticky-button-ic.png")))))
-
-(define left-frame-unsticky-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unsticky-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unsticky-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unsticky-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unsticky-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unsticky-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unsticky-button-ic.png")))))
-
-(define left-frame-iconify-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-iconify-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-iconify-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-iconify-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-iconify-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-iconify-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-iconify-button-ic.png")))))
-
-(define left-frame-maximize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-maximize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-maximize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-maximize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-maximize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-maximize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-maximize-button-ic.png")))))
-
-(define left-frame-unmaximize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unmaximize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unmaximize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unmaximize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unmaximize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unmaximize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unmaximize-button-ic.png")))))
-
-(define left-frame-close-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-close-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-close-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-close-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-close-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-close-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-close-button-ic.png")))))
-
-(define left-frame-lock-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-lock-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-lock-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-lock-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-lock-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-lock-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-lock-button-ic.png")))))
-
-(define left-frame-unlock-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unlock-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unlock-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unlock-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unlock-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unlock-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unlock-button-ic.png")))))
-
-(define left-frame-prev-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-button-ic.png")))))
-
-(define left-frame-prev-last-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-last-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-last-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-last-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-last-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-last-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-prev-last-button-ic.png")))))
-
-(define left-frame-next-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-button-ic.png")))))
-
-(define left-frame-next-last-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-last-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-last-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-last-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-last-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-last-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-next-last-button-ic.png")))))
-
-(define left-frame-raise-lower-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-raise-lower-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-raise-lower-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-raise-lower-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-raise-lower-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-raise-lower-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-raise-lower-button-ic.png")))))
-
-(define left-frame-ontop-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-ontop-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-ontop-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-ontop-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-ontop-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-ontop-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-ontop-button-ic.png")))))
-
-(define left-frame-unontop-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unontop-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unontop-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unontop-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unontop-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unontop-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-unontop-button-ic.png")))))
-
-(define left-frame-move-resize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-move-resize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-move-resize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-move-resize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-move-resize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-move-resize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-move-resize-button-ic.png")))))
-
-(define left-frame-rename-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-rename-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-rename-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-rename-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-rename-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-rename-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-rename-button-ic.png")))))
-
-(define left-frame-frame-typ-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-frame-typ-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-frame-typ-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-frame-typ-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-frame-typ-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-frame-typ-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-frame-typ-button-ic.png")))))
-
-(define left-frame-bottom-left-corner-shaped-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-left-corner-shaped-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-bottom-left-corner-shaped-i.png")))))
-
-(define left-frame-top-left-corner-shaped-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-left-corner-shaped-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "left-frame-top-left-corner-shaped-i.png")))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; right images ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define right-frame-right-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-right-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-right-border-i.png")))))
-
-(define right-frame-tab-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-tab-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-tab-i.png")))))
-
-(define right-frame-tab-bottom-icon-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-tab-bottom-icon-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-tab-bottom-icon-i.png")))))
-
-(define right-frame-tab-top-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-tab-top-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-tab-top-i.png")))))
-
-(define right-frame-bottom-right-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-right-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-right-corner-i.png")))))
-
-(define right-frame-top-right-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-right-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-right-corner-i.png")))))
-
-(define right-frame-title-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-title-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-title-i.png")))))
-
-(define right-frame-top-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-border-i.png")))))
-
-(define right-frame-bottom-left-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-left-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-left-corner-i.png")))))
-
-(define right-frame-left-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-left-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-left-border-i.png")))))
-
-(define right-frame-top-left-corner-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-left-corner-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-left-corner-i.png")))))
-
-(define right-frame-bottom-border-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-border-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-border-i.png")))))
-
-(define right-frame-menu-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-menu-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-menu-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-menu-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-menu-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-menu-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-menu-button-ic.png")))))
-
-(define right-frame-shade-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-shade-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-shade-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-shade-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-shade-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-shade-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-shade-button-ic.png")))))
-
-(define right-frame-unshade-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unshade-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unshade-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unshade-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unshade-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unshade-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unshade-button-ic.png")))))
-
-(define right-frame-sticky-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-sticky-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-sticky-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-sticky-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-sticky-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-sticky-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-sticky-button-ic.png")))))
-
-(define right-frame-unsticky-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unsticky-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unsticky-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unsticky-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unsticky-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unsticky-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unsticky-button-ic.png")))))
-
-(define right-frame-iconify-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-iconify-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-iconify-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-iconify-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-iconify-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-iconify-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-iconify-button-ic.png")))))
-
-(define right-frame-maximize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-maximize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-maximize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-maximize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-maximize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-maximize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-maximize-button-ic.png")))))
-
-(define right-frame-unmaximize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unmaximize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unmaximize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unmaximize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unmaximize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unmaximize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unmaximize-button-ic.png")))))
-
-(define right-frame-close-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-close-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-close-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-close-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-close-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-close-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-close-button-ic.png")))))
-
-(define right-frame-lock-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-lock-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-lock-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-lock-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-lock-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-lock-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-lock-button-ic.png")))))
-
-(define right-frame-unlock-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unlock-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unlock-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unlock-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unlock-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unlock-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unlock-button-ic.png")))))
-
-(define right-frame-prev-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-button-ic.png")))))
-
-(define right-frame-prev-last-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-last-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-last-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-last-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-last-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-last-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-prev-last-button-ic.png")))))
-
-(define right-frame-next-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-button-ic.png")))))
-
-(define right-frame-next-last-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-last-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-last-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-last-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-last-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-last-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-next-last-button-ic.png")))))
-
-(define right-frame-raise-lower-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-raise-lower-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-raise-lower-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-raise-lower-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-raise-lower-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-raise-lower-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-raise-lower-button-ic.png")))))
-
-(define right-frame-ontop-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-ontop-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-ontop-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-ontop-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-ontop-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-ontop-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-ontop-button-ic.png")))))
-
-(define right-frame-unontop-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unontop-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unontop-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unontop-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unontop-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unontop-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-unontop-button-ic.png")))))
-
-(define right-frame-move-resize-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-move-resize-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-move-resize-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-move-resize-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-move-resize-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-move-resize-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-move-resize-button-ic.png")))))
-
-(define right-frame-rename-button-images 
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-rename-button-f.png")))
-	(highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-rename-button-h.png")))
-	(clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-rename-button-c.png")))
-	(inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-rename-button-i.png")))
-	(inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-rename-button-ih.png")))
-	(inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-rename-button-ic.png")))))
-
-(define right-frame-frame-typ-button-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-frame-typ-button-f.png")))
-    (highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-frame-typ-button-h.png")))
-    (clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-frame-typ-button-c.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-frame-typ-button-i.png")))
-    (inactive-highlighted . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-frame-typ-button-ih.png")))
-    (inactive-clicked . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-frame-typ-button-ic.png")))))
-
-(define right-frame-bottom-right-corner-shaped-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-right-corner-shaped-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-bottom-right-corner-shaped-i.png")))))
-
-(define right-frame-top-right-corner-shaped-images
-  `((focused . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-right-corner-shaped-f.png")))
-    (inactive . ,(make-image (concat (symbol-name styletab:style) "/" "right-frame-top-right-corner-shaped-i.png")))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; styles settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(define title-colors-images
-  (lambda ()
-    (if (eq styletab:custom-colors t)
-        (title-colors-custom)
-      (case styletab:style
-            ((Reduce) (title-colors-reduce))
-            ((Dark) (title-colors-dark))
-            ((DarkColor) (title-colors-dark))
-            ((Smoothly) (title-colors-smoothly))))))
-
-(define title-colors-custom
-  (lambda ()
-    `((focused . ,styletab:focused-color) (highlighted . ,styletab:highlighted-color) (clicked . ,styletab:highlighted-color) 
-      (inactive . ,styletab:inactive-color) (inactive-highlighted . ,styletab:inactive-highlighted-color) 
-      (inactive-clicked . ,styletab:inactive-highlighted-color))))
-
-(define title-colors-reduce
-  (lambda ()
-    `((focused . "#E5E5E5") (highlighted . "#FDFDFD") (clicked . "#FDFDFD") (inactive . "#B1B1B1") (inactive-highlighted . "#CBCBCB")
-      (inactive-clicked . "#CBCBCB"))))
-
-(define title-colors-dark
-  (lambda ()
-    `((focused . "#F2F2F2") (highlighted . "#FEFEFE") (clicked . "#FEFEFE") (inactive . "#CBCBCB") (inactive-highlighted . "#D8D8D8")
-      (inactive-clicked . "#D8D8D8"))))
-
-(define title-colors-smoothly
-  (lambda ()
-    `((focused . "#000000") (highlighted . "#333333") (clicked . "#333333") (inactive . "#666666") (inactive-highlighted . "#777777")
-      (inactive-clicked . "#777777"))))
-
-
-(define button-width-custom
-  (lambda ()
-    (if (eq styletab:custom-button-width t)
-        (button-width-set)
-      (case styletab:style
-            ((Reduce) (button-width-reduce))
-            ((Dark) (button-width-dark))
-            ((DarkColor) (button-width-dark))
-            ((Smoothly) (button-width-smoothly))))))
-
-(define button-width-add
-  (lambda ()
-    (if (eq styletab:custom-button-width nil)
-        (button-width-zero)
-      (case styletab:style
-            ((Reduce) (button-width-reduce))
-            ((Dark) (button-width-dark))
-            ((DarkColor) (button-width-dark))
-            ((Smoothly) (button-width-smoothly))))))
-
-(define button-width-set (lambda () (+ styletab:button-width (button-width-add))))
-(define button-width-zero (lambda () 0))
-(define button-width-reduce (lambda () 0))
-(define button-width-dark (lambda () 8))
-(define button-width-smoothly (lambda () 0))
-
-
-(define tabbar-right-edge-width
-  (lambda ()
-    (case styletab:style
-          ((Reduce) 6)
-          ((Dark) 3)
-          ((DarkColor) 3)
-          ((Smoothly) 3))))
+  (make-image (concat (symbol-name  styletab:style) "/" "top-frame-icon-title-images-f.png")))
+
+(define (get-frame-image img)
+  (or
+   (table-ref frame-cache img)
+   (let ((image
+          (make-image img)))
+     (table-set frame-cache img image)
+     image)))
+
+(define make-border-image
+  (lambda (w)
+    `((focused . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-f.png")))
+      (inactive . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-i.png"))))))
+
+(define top-border-images 
+  (lambda (w) (make-border-image (concat w "-frame-top-border"))))
+(define top-left-corner-images 
+  (lambda (w) (make-border-image (concat w "-frame-top-left-corner"))))
+(define top-left-corner-shaped-images 
+  (lambda (w) (make-border-image (concat w "-frame-top-left-corner-shaped"))))
+(define top-right-corner-images
+  (lambda (w) (make-border-image (concat w "-frame-top-right-corner"))))
+(define top-right-corner-shaped-images
+  (lambda (w) (make-border-image (concat w "-frame-top-right-corner-shaped"))))
+(define tab-left-icon-images 
+  (lambda (w) (make-border-image (concat w "-frame-tab-left-icon"))))
+(define tab-images 
+  (lambda (w) (make-border-image (concat w "-frame-tab"))))
+(define tab-right-images 
+  (lambda (w) (make-border-image (concat w "-frame-tab-right"))))
+(define tab-bottom-icon-images
+  (lambda (w) (make-border-image (concat w "-frame-tab-bottom-icon"))))
+(define tab-top-images
+  (lambda (w) (make-border-image (concat w "-frame-tab-top"))))
+(define title-images 
+  (lambda (w) (make-border-image (concat w "-frame-title"))))
+(define left-border-images
+  (lambda (w) (make-border-image (concat w "-frame-left-border"))))
+(define right-border-images
+  (lambda (w) (make-border-image (concat w "-frame-right-border"))))
+(define bottom-left-corner-images
+  (lambda (w) (make-border-image (concat w "-frame-bottom-left-corner"))))
+(define bottom-border-images
+  (lambda (w) (make-border-image (concat w "-frame-bottom-border"))))
+(define bottom-right-corner-images
+  (lambda (w) (make-border-image (concat w "-frame-bottom-right-corner"))))
+(define bottom-border-cursor-images
+  (lambda (w) (make-border-image (concat w "-frame-bottom-border-cursor"))))
+(define bottom-left-corner-shaped-images
+  (lambda (w) (make-border-image (concat w "-frame-bottom-left-corner-shaped"))))
+(define bottom-right-corner-shaped-images
+  (lambda (w) (make-border-image (concat w "-frame-bottom-right-corner-shaped"))))
+
+(define (get-button-image img)
+  (or
+   (table-ref icon-cache img)
+   (let ((image
+          (scale-image (make-image img) styletab:title-dimension (+ styletab:title-dimension (button-width-custom)))))
+     (table-set icon-cache img image)
+     image)))
+
+(define make-button-image
+  (lambda (w)
+    `((focused . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-f.png")))
+      (highlighted . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-h.png")))
+      (clicked . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-c.png")))
+      (inactive . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-i.png")))
+      (inactive-highlighted . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-ih.png")))
+      (inactive-clicked . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-ic.png"))))))
+
+(define button-images
+  (lambda (w x) (make-button-image (concat w "-frame-" x "-button"))))
+
+(define top-frame-shade-button-images (make-button-image "top-frame-shade-button"))
+(define bottom-frame-shade-button-images (make-button-image "bottom-frame-shade-button"))
+(define left-frame-shade-button-images (make-button-image "left-frame-shade-button"))
+(define right-frame-shade-button-images (make-button-image "right-frame-shade-button"))
+(define top-frame-unshade-button-images (make-button-image "top-frame-unshade-button"))
+(define bottom-frame-unshade-button-images (make-button-image "bottom-frame-unshade-button"))
+(define left-frame-unshade-button-images (make-button-image "left-frame-unshade-button"))
+(define right-frame-unshade-button-images (make-button-image "right-frame-unshade-button"))
+(define top-frame-sticky-button-images (make-button-image "top-frame-sticky-button"))
+(define bottom-frame-sticky-button-images (make-button-image "bottom-frame-sticky-button"))
+(define left-frame-sticky-button-images (make-button-image "left-frame-sticky-button"))
+(define right-frame-sticky-button-images (make-button-image "right-frame-sticky-button"))
+(define top-frame-unsticky-button-images (make-button-image "top-frame-unsticky-button"))
+(define bottom-frame-unsticky-button-images (make-button-image "bottom-frame-unsticky-button"))
+(define left-frame-unsticky-button-images (make-button-image "left-frame-unsticky-button"))
+(define right-frame-unsticky-button-images (make-button-image "right-frame-unsticky-button"))
+(define top-frame-maximize-button-images (make-button-image "top-frame-maximize-button"))
+(define bottom-frame-maximize-button-images (make-button-image "bottom-frame-maximize-button"))
+(define left-frame-maximize-button-images (make-button-image "left-frame-maximize-button"))
+(define right-frame-maximize-button-images (make-button-image "right-frame-maximize-button"))
+(define top-frame-unmaximize-button-images (make-button-image "top-frame-unmaximize-button"))
+(define bottom-frame-unmaximize-button-images (make-button-image "bottom-frame-unmaximize-button"))
+(define left-frame-unmaximize-button-images (make-button-image "left-frame-unmaximize-button"))
+(define right-frame-unmaximize-button-images (make-button-image "right-frame-unmaximize-button"))
+(define top-frame-lock-button-images (make-button-image "top-frame-lock-button"))
+(define bottom-frame-lock-button-images (make-button-image "bottom-frame-lock-button"))
+(define left-frame-lock-button-images (make-button-image "left-frame-lock-button"))
+(define right-frame-lock-button-images (make-button-image "right-frame-lock-button"))
+(define top-frame-unlock-button-images (make-button-image "top-frame-unlock-button"))
+(define bottom-frame-unlock-button-images (make-button-image "bottom-frame-unlock-button"))
+(define left-frame-unlock-button-images (make-button-image "left-frame-unlock-button"))
+(define right-frame-unlock-button-images (make-button-image "right-frame-unlock-button"))
+(define top-frame-prev-button-images (make-button-image "top-frame-prev-button"))
+(define bottom-frame-prev-button-images (make-button-image "bottom-frame-prev-button"))
+(define left-frame-prev-button-images (make-button-image "left-frame-prev-button"))
+(define right-frame-prev-button-images (make-button-image "right-frame-prev-button"))
+(define top-frame-prev-last-button-images (make-button-image "top-frame-prev-last-button"))
+(define bottom-frame-prev-last-button-images (make-button-image "bottom-frame-prev-last-button"))
+(define left-frame-prev-last-button-images (make-button-image "left-frame-prev-last-button"))
+(define right-frame-prev-last-button-images (make-button-image "right-frame-prev-last-button"))
+(define top-frame-next-button-images (make-button-image "top-frame-next-button"))
+(define bottom-frame-next-button-images (make-button-image "bottom-frame-next-button"))
+(define left-frame-next-button-images (make-button-image "left-frame-next-button"))
+(define right-frame-next-button-images (make-button-image "right-frame-next-button"))
+(define top-frame-next-last-button-images (make-button-image "top-frame-next-last-button"))
+(define bottom-frame-next-last-button-images (make-button-image "bottom-frame-next-last-button"))
+(define left-frame-next-last-button-images (make-button-image "left-frame-next-last-button"))
+(define right-frame-next-last-button-images (make-button-image "right-frame-next-last-button"))
+(define top-frame-raise-lower-button-images (make-button-image "top-frame-raise-lower-button"))
+(define bottom-frame-raise-lower-button-images (make-button-image "bottom-frame-raise-lower-button"))
+(define left-frame-raise-lower-button-images (make-button-image "left-frame-raise-lower-button"))
+(define right-frame-raise-lower-button-images (make-button-image "right-frame-raise-lower-button"))
+(define top-frame-ontop-button-images (make-button-image "top-frame-ontop-button"))
+(define bottom-frame-ontop-button-images (make-button-image "bottom-frame-ontop-button"))
+(define left-frame-ontop-button-images (make-button-image "left-frame-ontop-button"))
+(define right-frame-ontop-button-images (make-button-image "right-frame-ontop-button"))
+(define top-frame-unontop-button-images (make-button-image "top-frame-unontop-button"))
+(define bottom-frame-unontop-button-images (make-button-image "bottom-frame-unontop-button"))
+(define left-frame-unontop-button-images (make-button-image "left-frame-unontop-button"))
+(define right-frame-unontop-button-images (make-button-image "right-frame-unontop-button"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; buttons, colors settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1949,20 +1204,6 @@
           right-frame-ontop-button-images
         right-frame-unontop-button-images))))
 
-;; window icons
-;; ripped from Crux
-;;
-(define icon-table (make-weak-table eq-hash eq))
-
-(define (window-icon w)
-  (or (table-ref icon-table w)
-      (let ((icon (window-icon-image w)))
-        (if icon
-            (let ((scaled (scale-image icon (- styletab:title-dimension 7) (- styletab:title-dimension 7))))
-              (table-set icon-table w scaled)
-              scaled)
-          (scale-image top-frame-icon-title-images (- styletab:title-dimension 7) (- styletab:title-dimension 7))))))
-
 (define frame-width
   (lambda (w)
     (if (or (eq (window-type w) 'default)
@@ -1994,19 +1235,19 @@
 
 (define top-frame-default-border-corner-group 
   `(((class . top-left-corner)
-     (background . ,top-frame-top-left-corner-images)
+     (background . ,(top-left-corner-images "top"))
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
      (height . ,title-hight)
      (width . ,frame-width))
 	((class . top-right-corner)
-     (background . ,top-frame-top-right-corner-images)
+     (background . ,(top-right-corner-images "top"))
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-hight)
      (width . ,frame-width))
     ((class . title)
-     (background . ,top-frame-title-images)
+     (background . ,(title-images "top"))
      (right-edge . 0)
      (top-edge . ,title-edge-s)
      (height . ,title-hight-s)
@@ -2014,19 +1255,19 @@
 
 (define bottom-frame-default-border-corner-group
   `(((class . bottom-left-corner)
-     (background . ,bottom-frame-bottom-left-corner-images)
+     (background . ,(bottom-left-corner-images "bottom"))
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
      (height . ,title-hight)
      (width . ,frame-width))
     ((class . bottom-right-corner)
-     (background . ,bottom-frame-bottom-right-corner-images)
+     (background . ,(bottom-right-corner-images "bottom"))
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-hight)
      (width . ,frame-width))
     ((class . title)
-     (background . ,bottom-frame-title-images)
+     (background . ,(title-images "bottom"))
      (right-edge . 0)
      (bottom-edge . ,title-edge)
      (height . ,title-hight-s)
@@ -2034,13 +1275,13 @@
 
 (define left-frame-default-border-corner-group
   `(((class . bottom-left-corner)
-     (background . ,left-frame-bottom-left-corner-images)
+     (background . ,(bottom-left-corner-images "left"))
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-hight))
     ((class . top-left-corner)
-     (background . ,left-frame-top-left-corner-images)
+     (background . ,(top-left-corner-images "left"))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
@@ -2048,13 +1289,13 @@
 
 (define right-frame-default-border-corner-group
   `(((class . bottom-right-corner)
-     (background . ,right-frame-bottom-right-corner-images)
+     (background . ,(bottom-right-corner-images "right"))
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-hight))
     ((class . top-right-corner)
-     (background . ,right-frame-top-right-corner-images)
+     (background . ,(top-right-corner-images "right"))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
@@ -2062,33 +1303,33 @@
 
 (define top-frame-border-group
   `(((class . left-border)
-     (background . ,top-frame-left-border-images)
+     (background . ,(left-border-images "top"))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (top-edge . 0)
      (width . ,frame-width)
      (bottom-edge . 0))
 	((class . bottom-left-corner)
-     (background . ,top-frame-bottom-left-corner-images)
+     (background . ,(bottom-left-corner-images "top"))
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
 	((class . bottom-border)
-     (background . ,top-frame-bottom-border-images)
+     (background . ,(bottom-border-images "top"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (bottom-edge . ,frame-edge))
 	((class . bottom-right-corner)
-     (background . ,top-frame-bottom-right-corner-images)
+     (background . ,(bottom-right-corner-images "top"))
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
 	((class . right-border)
-     (background . ,top-frame-right-border-images)
+     (background . ,(right-border-images "top"))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (right-edge . ,frame-edge)
@@ -2097,33 +1338,33 @@
 
 (define bottom-frame-border-group
   `(((class . left-border)
-     (background . ,bottom-frame-left-border-images)
+     (background . ,(left-border-images "bottom"))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (bottom-edge . 0)
      (width . ,frame-width)
      (top-edge . 0))
     ((class . top-left-corner)
-     (background . ,bottom-frame-top-left-corner-images)
+     (background . ,(top-left-corner-images "bottom"))
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (top-edge . ,frame-edge))
     ((class . top-border)
-     (background . ,bottom-frame-top-border-images)
+     (background . ,(top-border-images "bottom"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (top-edge . ,frame-edge))
     ((class . top-right-corner)
-     (background . ,bottom-frame-top-right-corner-images)
+     (background . ,(top-right-corner-images "bottom"))
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (top-edge . ,frame-edge))
     ((class . right-border)
-     (background . ,bottom-frame-right-border-images)
+     (background . ,(right-border-images "bottom"))
      (cursor . sb_h_double_arrow)
      (bottom-edge . 0)
      (right-edge . ,frame-edge)
@@ -2132,33 +1373,33 @@
 
 (define left-frame-border-group
   `(((class . bottom-border)
-     (background . ,left-frame-bottom-border-images)
+     (background . ,(bottom-border-images "left"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . bottom-right-corner)
-     (background . ,left-frame-bottom-right-corner-images)
+     (background . ,(bottom-right-corner-images "left"))
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . right-border)
-     (background . ,left-frame-right-border-images)
+     (background . ,(right-border-images "left"))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (right-edge . ,frame-edge)
      (width . ,frame-width)
      (bottom-edge . 0))
     ((class . top-right-corner)
-     (background . ,left-frame-top-right-corner-images)
+     (background . ,(top-right-corner-images "left"))
      (top-edge . ,frame-edge)
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width))
     ((class . top-border)
-     (background . ,left-frame-top-border-images)
+     (background . ,(top-border-images "left"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
@@ -2167,33 +1408,33 @@
 
 (define right-frame-border-group
   `(((class . bottom-border)
-     (background . ,right-frame-bottom-border-images)
+     (background . ,(bottom-border-images "right"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . bottom-left-corner)
-     (background . ,right-frame-bottom-left-corner-images)
+     (background . ,(bottom-left-corner-images "right"))
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . left-border)
-     (background . ,right-frame-left-border-images)
+     (background . ,(left-border-images "right"))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (left-edge . ,frame-edge)
      (width . ,frame-width)
      (bottom-edge . 0))
     ((class . top-left-corner)
-     (background . ,right-frame-top-left-corner-images)
+     (background . ,(top-left-corner-images "right"))
      (top-edge . ,frame-edge)
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width))
     ((class . top-border)
-     (background . ,right-frame-top-border-images)
+     (background . ,(top-border-images "right"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
@@ -2202,7 +1443,7 @@
 
 (define top-frame-title-group
   `(((class . top-border)
-     (background . ,top-frame-top-border-images)
+     (background . ,(top-border-images "top"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (top-edge . ,title-edge)
@@ -2211,14 +1452,14 @@
     ((class . tabbar-horizontal)
      (x-justify . ,(lambda (w) (- styletab:title-dimension 12)))
      (y-justify . center)
-     (background . ,top-frame-tab-images)
+     (background . ,(tab-images "top"))
      (foreground . ,title-colors-images)
      (top-edge . ,title-edge-s)
      (height . ,title-hight-s)
      (text . ,window-name))
     ((class . tabbar-horizontal-left-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,top-frame-tab-left-icon-images)
+     (background . ,(tab-left-icon-images "top"))
      (cursor . hand2)
      (top-edge . ,title-edge-s)
      (height . ,title-hight-s)
@@ -2226,14 +1467,14 @@
      (y-justify . 2)
      (x-justify . 5))
     ((class . tabbar-horizontal-right-edge)
-     (background . ,top-frame-tab-right-images)
+     (background . ,(tab-right-images "top"))
      (width . ,tabbar-right-edge-width)
      (height . ,title-hight-s)
      (top-edge . ,title-edge-s))))
 
 (define bottom-frame-title-group
   `(((class . title)
-     (background . ,bottom-frame-bottom-border-images)
+     (background . ,(bottom-border-images "bottom"))
      (left-edge . 0)
      (bottom-edge . -2)
      (right-edge . 0)
@@ -2241,14 +1482,14 @@
     ((class . tabbar-horizontal)
      (x-justify . ,(lambda (w) (- styletab:title-dimension 12)))
      (y-justify . center)
-     (background . ,bottom-frame-tab-images)
+     (background . ,(tab-images "bottom"))
      (foreground . ,title-colors-images)
      (bottom-edge . ,title-edge)
      (height . ,title-hight-s)
      (text . ,window-name))
     ((class . tabbar-horizontal-left-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,bottom-frame-tab-left-icon-images)
+     (background . ,(tab-left-icon-images "bottom"))
      (cursor . hand2)
      (bottom-edge . ,title-edge)
      (height . ,title-hight-s)
@@ -2256,14 +1497,14 @@
      (y-justify . 2)
      (x-justify . 5))
     ((class . tabbar-horizontal-right-edge)
-     (background . ,bottom-frame-tab-right-images)
+     (background . ,(tab-right-images "bottom"))
      (width . ,tabbar-right-edge-width)
      (height . ,title-hight-s)
      (bottom-edge . ,title-edge))))
 
 (define left-frame-title-group
   `(((class . left-border)
-     (background . ,left-frame-left-border-images)
+     (background . ,(left-border-images "left"))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (left-edge . ,title-edge)
@@ -2271,7 +1512,7 @@
      (width . 2))
     ((class . tabbar-vertical-top-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,left-frame-tab-top-images)
+     (background . ,(tab-top-images "left"))
      (cursor . hand2)
      (height . ,title-hight-s)
      (width . ,title-hight-s)
@@ -2281,12 +1522,12 @@
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
-     (background . ,left-frame-tab-images)
+     (background . ,(tab-images "left"))
      (left-edge . ,title-edge-s)
      (width . ,title-hight-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,left-frame-tab-bottom-icon-images)
+     (background . ,(tab-bottom-icon-images "left"))
      (left-edge . ,title-edge-s)
      (height . ,title-hight-s)
      (width . ,title-hight-s)
@@ -2295,7 +1536,7 @@
 
 (define right-frame-title-group
   `(((class . right-border)
-     (background . ,right-frame-right-border-images)
+     (background . ,(right-border-images "right"))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (right-edge . ,title-edge)
@@ -2303,7 +1544,7 @@
      (width . 2))
     ((class . tabbar-vertical-top-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,right-frame-tab-top-images)
+     (background . ,(tab-top-images "right"))
      (cursor . hand2)
      (height . ,title-hight-s)
      (width . ,title-hight-s)
@@ -2313,12 +1554,12 @@
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
-     (background . ,right-frame-tab-images)
+     (background . ,(tab-images "right"))
      (right-edge . ,title-edge-s)
      (width . ,title-hight-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,right-frame-tab-bottom-icon-images)
+     (background . ,(tab-bottom-icon-images "right"))
      (right-edge . ,title-edge-s)
      (height . ,title-hight-s)
      (width . ,title-hight-s)
@@ -2327,7 +1568,7 @@
 
 (define bottom-frame-title-cursor-images
   `(((class . bottom-border)
-     (background . ,bottom-frame-bottom-border-cursor-images)
+     (background . ,(bottom-border-cursor-images "bottom"))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (bottom-edge . ,title-edge)
@@ -2336,7 +1577,7 @@
 
 (define top-frame-close-button
   `((class . close-button)
-    (background . ,top-frame-close-button-images)
+    (background . ,(button-images "top" "close"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
@@ -2344,7 +1585,7 @@
 
 (define bottom-frame-close-button
   `((class . close-button)
-    (background . ,bottom-frame-close-button-images)
+    (background . ,(button-images "bottom" "close"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
@@ -2352,7 +1593,7 @@
 
 (define left-frame-close-button
   `((class . close-button)
-    (background . ,left-frame-close-button-images)
+    (background . ,(button-images "left" "close"))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2360,7 +1601,7 @@
 
 (define right-frame-close-button
   `((class . close-button)
-    (background . ,right-frame-close-button-images)
+    (background . ,(button-images "right" "close"))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2368,7 +1609,7 @@
 
 (define top-frame-menu-button
   `((class . menu-button)
-    (background . ,top-frame-menu-button-images)
+    (background . ,(button-images "top" "menu"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
@@ -2376,7 +1617,7 @@
 
 (define bottom-frame-menu-button
   `((class . menu-button)
-    (background . ,bottom-frame-menu-button-images)
+    (background . ,(button-images "bottom" "menu"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
@@ -2384,7 +1625,7 @@
 
 (define left-frame-menu-button
   `((class . menu-button)
-    (background . ,left-frame-menu-button-images)
+    (background . ,(button-images "left" "menu"))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2392,7 +1633,7 @@
 
 (define right-frame-menu-button
   `((class . menu-button)
-    (background . ,right-frame-menu-button-images)
+    (background . ,(button-images "right" "menu"))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2400,7 +1641,7 @@
 
 (define top-frame-iconify-button
   `((class . iconify-button)
-    (background . ,top-frame-iconify-button-images)
+    (background . ,(button-images "top" "iconify"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
@@ -2408,7 +1649,7 @@
 
 (define bottom-frame-iconify-button
   `((class . iconify-button)
-    (background . ,bottom-frame-iconify-button-images)
+    (background . ,(button-images "bottom" "iconify"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
@@ -2416,7 +1657,7 @@
 
 (define left-frame-iconify-button
   `((class . iconify-button)
-    (background . ,left-frame-iconify-button-images)
+    (background . ,(button-images "left" "iconify"))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2424,7 +1665,7 @@
 
 (define right-frame-iconify-button
   `((class . iconify-button)
-    (background . ,right-frame-iconify-button-images)
+    (background . ,(button-images "right" "iconify"))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2528,28 +1769,28 @@
 
 (define top-frame-space-button
   `((class . title)
-    (background . ,top-frame-title-images)
+    (background . ,(title-images "top"))
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-space-button
   `((class . title)
-    (background . ,bottom-frame-title-images)
+    (background . ,(title-images "bottom"))
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-space-button
   `((class . title)
-    (background . ,left-frame-title-images)
+    (background . ,(title-images "left"))
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
     (width . ,title-hight-s)))
 
 (define right-frame-space-button
   `((class . title)
-    (background . ,right-frame-title-images)
+    (background . ,(title-images "right"))
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-hight-s)))
@@ -2684,7 +1925,7 @@
 
 (define  top-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,top-frame-move-resize-button-images)
+    (background . ,(button-images "top" "move-resize"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
@@ -2692,7 +1933,7 @@
 
 (define  bottom-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,bottom-frame-move-resize-button-images)
+    (background . ,(button-images "bottom" "move-resize"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
@@ -2700,7 +1941,7 @@
 
 (define  left-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,left-frame-move-resize-button-images)
+    (background . ,(button-images "left" "move-resize"))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2708,7 +1949,7 @@
 
 (define  right-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,right-frame-move-resize-button-images)
+    (background . ,(button-images "right" "move-resize"))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2716,7 +1957,7 @@
 
 (define top-frame-rename-button
   `((class . rename-button)
-    (background . ,top-frame-rename-button-images)
+    (background . ,(button-images "top" "rename"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
@@ -2724,7 +1965,7 @@
 
 (define bottom-frame-rename-button
   `((class . rename-button)
-    (background . ,bottom-frame-rename-button-images)
+    (background . ,(button-images "bottom" "rename"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
@@ -2732,7 +1973,7 @@
 
 (define left-frame-rename-button
   `((class . rename-button)
-    (background . ,left-frame-rename-button-images)
+    (background . ,(button-images "left" "rename"))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2740,7 +1981,7 @@
 
 (define right-frame-rename-button
   `((class . rename-button)
-    (background . ,right-frame-rename-button-images)
+    (background . ,(button-images "right" "rename"))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2748,7 +1989,7 @@
 
 (define top-frame-frame-typ-button
   `((class . frame-typ-button)
-    (background . ,top-frame-frame-typ-button-images)
+    (background . ,(button-images "top" "frame-typ"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-hight-s)
@@ -2756,7 +1997,7 @@
 
 (define bottom-frame-frame-typ-button
   `((class . frame-typ-button)
-    (background . ,bottom-frame-frame-typ-button-images)
+    (background . ,(button-images "bottom" "frame-typ"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
     (height . ,title-hight-s)
@@ -2764,7 +2005,7 @@
 
 (define left-frame-frame-typ-button
   `((class . frame-typ-button)
-    (background . ,left-frame-frame-typ-button-images)
+    (background . ,(button-images "left" "frame-typ"))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2772,7 +2013,7 @@
 
 (define right-frame-frame-typ-button
   `((class . frame-typ-button)
-    (background . ,right-frame-frame-typ-button-images)
+    (background . ,(button-images "right" "frame-typ"))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2780,21 +2021,21 @@
 
 (define top-frame-shaped-border-corner-group
   `(((class . top-left-corner)
-     (background . ,top-frame-top-left-corner-shaped-images)
+     (background . ,(top-left-corner-shaped-images "top"))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
      (height . ,title-hight)
      (width . ,frame-width))
 	((class . top-right-corner)
-     (background . ,top-frame-top-right-corner-shaped-images)
+     (background . ,(top-right-corner-shaped-images "top"))
      (cursor . sb_h_double_arrow)
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-hight)
      (width . ,frame-width))
     ((class . title)
-     (background . ,top-frame-title-images)
+     (background . ,(title-images "top"))
      (right-edge . 0)
      (top-edge . ,title-edge-s)
      (height . ,title-hight-s)
@@ -2802,21 +2043,21 @@
 
 (define bottom-frame-shaped-border-corner-group
   `(((class . bottom-left-corner)
-     (background . ,bottom-frame-bottom-left-corner-shaped-images)
+     (background . ,(bottom-left-corner-shaped-images "bottom"))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
      (height . ,title-hight)
      (width . ,frame-width))
     ((class . bottom-right-corner)
-     (background . ,bottom-frame-bottom-right-corner-shaped-images)
+     (background . ,(bottom-right-corner-shaped-images "bottom"))
      (cursor . sb_h_double_arrow)
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-hight)
      (width . ,frame-width))
     ((class . title)
-     (background . ,bottom-frame-title-images)
+     (background . ,(title-images "bottom"))
      (right-edge . 0)
      (bottom-edge . ,title-edge)
      (height . ,title-hight-s)
@@ -2824,13 +2065,13 @@
 
 (define left-frame-shaped-border-corner-group
   `(((class . bottom-left-corner)
-     (background . ,left-frame-bottom-left-corner-shaped-images)
+     (background . ,(bottom-left-corner-shaped-images "left"))
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-hight))
     ((class . top-left-corner)
-     (background . ,left-frame-top-left-corner-shaped-images)
+     (background . ,(top-left-corner-shaped-images "left"))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
@@ -2838,13 +2079,13 @@
 
 (define right-frame-shaped-border-corner-group
   `(((class . bottom-right-corner)
-     (background . ,right-frame-bottom-right-corner-shaped-images)
+     (background . ,(bottom-right-corner-shaped-images "right"))
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-hight))
     ((class . top-right-corner)
-     (background . ,right-frame-top-right-corner-shaped-images)
+     (background . ,(top-right-corner-shaped-images "right"))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
@@ -3168,24 +2409,33 @@
 
 ;; also reset icon cache
 ;;
-(define reframe-all-clean
+(define clear-cache-reframe
   (lambda ()
-    (setq icon-table (make-weak-table eq-hash eq))
+    (setq icon-cache (make-weak-table eq-hash eq))
     (reframe-all)))
+
+;; also reset all cache 
+;;
+(define (clear-cache-reframe-style)
+  (setq icon-cache (make-weak-table eq-hash eq))
+  (setq frame-cache (make-weak-table eq-hash eq))
+  (reframe-windows-with-style theme-name))
 
 ;; Create only frames, don't rebuild-frame/reframe-window.
 ;; Tabthemes will reframe/rebuild windows call from tabgroup.jl. 
 ;;
 (call-after-state-changed '(title-position) create-frames-only)
 
+
 (custom-set-property 'styletab:custom-colors ':after-set reframe-all)
 (custom-set-property 'styletab:focused-color ':after-set reframe-all)
 (custom-set-property 'styletab:highlighted-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-highlighted-color ':after-set reframe-all)
-(custom-set-property 'styletab:title-dimension ':after-set reframe-all-clean)
-(custom-set-property 'styletab:custom-button-width ':after-set reframe-all)
-(custom-set-property 'styletab:button-width ':after-set reframe-all)
+(custom-set-property 'styletab:style ':after-set clear-cache-reframe-style)
+(custom-set-property 'styletab:title-dimension ':after-set clear-cache-reframe)
+(custom-set-property 'styletab:custom-button-width ':after-set clear-cache-reframe)
+(custom-set-property 'styletab:button-width ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:borders-dimension ':after-set reframe-all)
 (custom-set-property 'styletab:titlebar-place ':after-set reframe-all)
 (custom-set-property 'styletab:top-left-buttons ':after-set reframe-all)
