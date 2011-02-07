@@ -36,7 +36,6 @@
 	     apply-frame-style
 	     apply-frame-style-and-save
 	     window-type
-	     adjustment-title
 	     set-window-type
 	     push-window-type
 	     pop-window-type
@@ -327,12 +326,10 @@ generate.")
 		  (reload-frame-style style))))
 	    frame-style-files)))
 
-  (define (adjustment-title w)
-    (call-window-hook 'window-state-change-hook w (list '(title-position))))
-
 ;;; applying frame styles to windows
 
   (define (reframe-window w)
+    (require 'sawfish.wm.tabs.tabgroup)
     (adjustment-title w)
     (if (window-get w 'ignored)
 	(progn

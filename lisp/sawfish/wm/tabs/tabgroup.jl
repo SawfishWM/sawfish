@@ -20,8 +20,9 @@
 
 (define-structure sawfish.wm.tabs.tabgroup
 
-    (export tab-release-window
-	    tab-raise-left-window
+    (export adjustment-title
+            tab-release-window
+            tab-raise-left-window
             tab-raise-right-window
             tab-find-window
             tab-rank
@@ -29,21 +30,21 @@
             tab-group-window)
     
     (open rep
-	  rep.system
-	  rep.data.records
-	  sawfish.wm.misc
-	  sawfish.wm.custom
-	  sawfish.wm.commands
-	  sawfish.wm.windows
+          rep.system
+          rep.data.records
+          sawfish.wm.misc
+          sawfish.wm.custom
+          sawfish.wm.commands
+          sawfish.wm.windows
           sawfish.wm.frames
-	  sawfish.wm.state.iconify
-	  sawfish.wm.state.shading
+          sawfish.wm.state.iconify
+          sawfish.wm.state.shading
           sawfish.wm.commands.move-resize
-	  sawfish.wm.stacking
+          sawfish.wm.stacking
           sawfish.wm.util.groups
           sawfish.wm.commands.groups
           sawfish.wm.workspace)
-
+  
   (define-structure-alias tabgroup sawfish.wm.tabs.tabgroup)
 
   (define tab-groups nil)
@@ -56,6 +57,10 @@
     (p tab-group-position)
     (d tab-group-dimensions)
     (wl tab-group-window-list))
+
+  (define (adjustment-title w)
+    (call-window-hook 'window-state-change-hook w (list '(title-position))))
+
 
   (define (tab-move-resize-frame-window-to win x y w h)
     "Move and resize according to *frame* dimensions."
@@ -112,7 +117,6 @@
                 (tab-build-group (tab-group-position old) (tab-group-dimensions old) l))
         ;; releas from sawfish "default" group adopt by tab-group-window
         (add-window-to-new-group win)
-	(adjustment-title win)
         (tab-refresh-group win 'frame)
         (window-put win 'fixed-position nil)
         (tab-refresh-group (car l) 'frame))))
@@ -144,6 +148,7 @@ fixed-position."
       (unwind-protect
           (let* ((index (tab-window-group-index win))
                  (wins (tab-group-window-list (nth index tab-groups))))
+            (adjustment-title win)
             (cond
              ((eq prop 'frame)
               (mapcar (lambda (w)
@@ -300,19 +305,13 @@ fixed-position."
 		      ((eq 'fixed-position args)
 		       (tab-refresh-group win 'fixed-position))
 		      ((eq 'frame-style args)
-		       (adjustment-title win)
 		       (tab-refresh-group win 'reframe-style))
 		      ((eq 'type args)
 		       (tab-refresh-group win 'type))
 		      ((eq 'stacking args)
 		       (tab-refresh-group win 'depth)))))
   
-    (add-hook 'before-move-hook (lambda (win) (adjustment-title win)))
-    (add-hook 'after-move-hook 
-              (lambda (win) 
-                (adjustment-title win)
-                (tab-refresh-group win 'move)))
-
+    (add-hook 'after-move-hook (lambda (win) (tab-refresh-group win 'move)))
     (add-hook 'after-resize-hook (lambda (win) (tab-refresh-group win 'resize)))
     ;; only update tabs by move if opaque move mode (opaque = slow)
     ;;
@@ -321,14 +320,8 @@ fixed-position."
       )
     (add-hook 'window-resized-hook (lambda (win) (tab-refresh-group win 'resize)))
     (add-hook 'shade-window-hook (lambda (win) (tab-refresh-group win 'shade)))
-    (add-hook 'unshade-window-hook 
-              (lambda (win) 
-                (adjustment-title win)
-                (tab-refresh-group win 'unshade)))
+    (add-hook 'unshade-window-hook (lambda (win) (tab-refresh-group win 'unshade)))
     (add-hook 'iconify-window-hook (lambda (win) (tab-refresh-group win 'iconify)))
-    (add-hook 'uniconify-window-hook 
-              (lambda (win) 
-                (adjustment-title win)
-                (tab-refresh-group win 'uniconify)))
+    (add-hook 'uniconify-window-hook (lambda (win) (tab-refresh-group win 'uniconify)))
     (add-hook 'add-to-workspace-hook (lambda (win) (tab-refresh-group win 'frame)))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups)))
