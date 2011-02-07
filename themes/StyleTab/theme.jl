@@ -928,22 +928,14 @@
 (define bottom-right-corner-shaped-images
   (lambda (w) (make-border-image (concat w "-frame-bottom-right-corner-shaped"))))
 
-(define (get-button-image img)
-  (or
-   (table-ref icon-cache img)
-   (let ((image
-          (scale-image (make-image img) styletab:title-dimension (+ styletab:title-dimension (button-width-custom)))))
-     (table-set icon-cache img image)
-     image)))
-
 (define make-button-image
   (lambda (w)
-    `((focused . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-f.png")))
-      (highlighted . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-h.png")))
-      (clicked . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-c.png")))
-      (inactive . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-i.png")))
-      (inactive-highlighted . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-ih.png")))
-      (inactive-clicked . ,(get-button-image (concat (symbol-name  styletab:style) "/" w "-ic.png"))))))
+    `((focused . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-f.png")))
+      (highlighted . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-h.png")))
+      (clicked . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-c.png")))
+      (inactive . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-i.png")))
+      (inactive-highlighted . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-ih.png")))
+      (inactive-clicked . ,(get-frame-image (concat (symbol-name  styletab:style) "/" w "-ic.png"))))))
 
 (define button-images
   (lambda (w x) (make-button-image (concat w "-frame-" x "-button"))))
