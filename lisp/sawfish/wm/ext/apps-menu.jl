@@ -107,7 +107,7 @@ filtering on the `apps-menu'.")
 		     "X-Internet" "P2P" "Email" "WebBrowser" "IRCClient"
 		     "Chat" "InstantMessaging" "Chat" "WebDevelopment"))
       ("Games" . ("Game" "ActionGame" "AdventureGame" "ArcadeGame"
-		  "BoardGame" "Emulator" "BlocksGame" "CardGame" "KidsGame"
+		  "BoardGame" "BlocksGame" "CardGame" "KidsGame"
 		  "LogicGame" "RolePlaying"))
       ("Graphics" . ("RasterGraphics" "VectorGraphics" "X-GraphicUtility"
 		     "2DGraphics" "3dGraphics" "3DGraphics" "Scanning"
@@ -128,7 +128,7 @@ filtering on the `apps-menu'.")
 		    "TelephonyTools" "Accessibility" "Clock" "ConsoleOnly"))
       ("Filesystem" . ("X-FileSystemFind" "X-FileSystemUtility" "Archiving"
 		       "FileManager" "X-FileSystemMount" "Compression"))
-      ("System" . ("X-SystemSchedule" "System" "X-SystemMemory"
+      ("System" . ("X-SystemSchedule" "System" "X-SystemMemory" "Emulator"
 		   "TerminalEmulator" "Printing" "Monitor" "Security"))
       ("Settings" . ("Settings" "HardwareSettings" "PackageManager" 
 		     "X-GNOME-PersonalSettings" "DesktopSettings"))
@@ -178,7 +178,7 @@ Returns (key . value)"
     (substring instring 1 (- (length instring) 2)))
   
   (define (parse-fdo-file-line infile)
-    "Parse a `*.desktop' file line.
+    "Parse a `*.desktop' file list.
 Returns (group1 (key1 . value1) ... group2 (keyA . valueA) ...)"
     (when (setq this-line (read-line infile))
       (if (not (fdo-skip-line-p this-line))
@@ -222,6 +222,8 @@ files in those direcories with their full pathnames.  Optionally
 	  ((atom input) (list input))
 	  (t (append (flatten (car input))
 		     (flatten (cdr input))))))
+
+  ;; language functions
 
   (defmacro simplify-mlang (mlang mlevel)
     `(and
@@ -361,7 +363,9 @@ with caution, file may be corrupt.\n"))
 exile it."
     (when fdo-list
       (if (or (and (not (assoc "Categories" fdo-list))
-		   (not (assoc "Category" fdo-list)))
+		   (not (stringp (cdr (assoc "Categories" fdo-list))))
+		   (not (assoc "Category" fdo-list))
+		   (not (stringp (cdr (assoc "Categories" fdo-list)))))
 	      (not (assoc "Exec" fdo-list))
 	      (and (not (assoc "Name" fdo-list))
 		   (not (assoc (concat name-string
@@ -375,7 +379,8 @@ exile it."
     (when fdo-list
       (if (assoc "Category" fdo-list)
 	  (if (or (not (stringp (cdr (assoc "Category" fdo-list))))
-		  (equal "" (cdr (assoc "Category" fdo-list))))
+		  (equal "" (cdr (assoc "Category" fdo-list)))
+		  (not (stringp (cdr (assoc "Category" fdo-list)))))
 	      (rplacd (assoc "Category" fdo-list) "Exile"))
 	(append fdo-list (cons (cons "Category" "Exile")))))
       fdo-list)
