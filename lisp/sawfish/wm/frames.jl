@@ -680,7 +680,8 @@ generate.")
 	    def-frame-class define-frame-class after-setting-frame-option
 	    frame-part-get frame-part-put frame-part-window frame-part-x-window
 	    frame-part-position frame-part-dimensions frame-part-state
-	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part)
+	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part
+	    reload-frame-style)
 
   (add-hook 'add-window-hook reframe-window t)
   (add-hook 'shape-notify-hook reframe-window t)
