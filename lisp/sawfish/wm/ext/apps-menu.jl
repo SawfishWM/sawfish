@@ -507,13 +507,15 @@ If `display-test' is not defined, will return the input desktop-file-list."
     "Split a desktop entry into several entries, each containing one
 of the categories of the original."
     (when fdol
-      (let ((new-fdol fdol))
-	(let loop ((categories
-		    (delete "" (string-split ";" (cdr (assoc "Categories" fdol))))))
-	     (when categories
-	       (append (list 
-			(append new-fdol (list (cons "Category" (car categories)))))
-		       (loop (cdr categories))))))))
+      (let ((new-fdol fdol)
+	    (category-string (cdr (assoc "Categories" fdol))))
+	(when (stringp category-string)
+	  (let loop ((categories
+		      (delete "" (string-split ";" category-string))))
+	       (when categories
+		 (append (list 
+			  (append new-fdol (list (cons "Category" (car categories)))))
+			 (loop (cdr categories)))))))))
 
   ;; Sawfish-menu generation
 
