@@ -2416,7 +2416,7 @@
 (define (clear-cache-reframe-style)
   (setq icon-cache (make-weak-table eq-hash eq))
   (setq frame-cache (make-weak-table eq-hash eq))
-  (reframe-windows-with-style theme-name))
+  (reload-frame-style theme-name))
 
 ;; Create only frames, don't rebuild-frame/reframe-window.
 ;; Tabthemes will reframe/rebuild windows call from tabgroup.jl. 
