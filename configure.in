@@ -247,12 +247,10 @@ AC_ARG_WITH(gdk-pixbuf,
 
 if test "$with_gdk_pixbuf" != "no"; then
 	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}
-			  ,GDK_PIXBUF_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
-			  GDK_PIXBUF_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
+			  ,IMAGE_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
+			  IMAGE_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
 			  AC_DEFINE(HAVE_GDK_PIXBUF, 1, [Have gdk-pixbuf])
 			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
-			  IMAGE_LIBS='${GDK_PIXBUF_LIBS}'
-			  IMAGE_CFLAGS='${GDK_PIXBUF_CFLAGS}'
 			  IMAGE_LOADER="GDK Pixbuf Xlib"
 			  imageloader="gdk-pixbuf-xlib"
 			  with_gdk_pixbuf=yes
@@ -262,11 +260,9 @@ fi
 
 if test "$with_gdk_pixbuf" = "no"; then
 	PKG_CHECK_MODULES(IMLIB1, imlib >= 1.9
-			  ,IMLIB_CFLAGS="`pkg-config --cflags imlib`"
-			  IMLIB_LIBS="`pkg-config --libs imlib`"
+			  ,IMAGE_CFLAGS="-I`pkg-config --variable includedir imlib`"
+			  IMAGE_LIBS="`pkg-config --libs imlib`"
 			  AC_DEFINE(HAVE_IMLIB, 1, [Have Imlib1])
-			  IMAGE_LIBS='${IMLIB1_LIBS}'
-			  IMAGE_CFLAGS='${IMLIB1_CFLAGS}'
 			  IMLIB_VERSION="`pkg-config --modversion imlib`"
 			  IMAGE_LOADER="IMLIB 1"
 			  imageloader="imlib1"
@@ -382,8 +378,6 @@ AC_SUBST(LIBS)
 AC_SUBST(X_CFLAGS)
 AC_SUBST(X_LIBS)
 AC_SUBST(X_EXTRA_LIBS)
-AC_SUBST(IMLIB_CFLAGS)
-AC_SUBST(IMLIB_LIBS)
 AC_SUBST(XINERAMA_LIBS)
 AC_SUBST(XRANDR_LIBS)
 AC_SUBST(XFT_LIBS)
@@ -396,8 +390,6 @@ AC_SUBST(REP_CFLAGS)
 AC_SUBST(REP_LIBS)
 AC_SUBST(REP_VERSION)
 AC_SUBST(REP_MSGFMT)
-AC_SUBST(GDK_PIXBUF_LIBS)
-AC_SUBST(GDK_PIXBUF_CFLAGS)
 AC_SUBST(IMAGE_LIBS)
 AC_SUBST(IMAGE_CFLAGS)
 AC_SUBST(GTK_MIN_VER)
