@@ -31,6 +31,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.commands
 	  sawfish.wm.frames
+	  sawfish.wm.gaol
 	  sawfish.wm.session.init
 	  sawfish.wm.workspace
 	  sawfish.wm.util.stacking
@@ -109,4 +110,7 @@ state."
   (sm-add-saved-properties 'shaded)
   (add-swapped-properties 'shaded)
 
-  (add-window-menu-toggle (_ "S_haded") 'toggle-window-shaded window-shaded-p))
+  (add-window-menu-toggle (_ "S_haded") 'toggle-window-shaded window-shaded-p)
+
+  (gaol-add unshade-window)
+  )

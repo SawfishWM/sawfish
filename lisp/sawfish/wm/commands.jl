@@ -48,6 +48,7 @@
 	    for more.
 	  |#
 	  sawfish.wm.misc
+	  sawfish.wm.gaol
 	  sawfish.wm.events
 	  sawfish.wm.windows.subrs
 	  sawfish.wm.util.with-output)
@@ -99,6 +100,15 @@ interactive specification and a custom-type specification respectively)."
     (setter name fun)
     (apply apply-command-keys name keys))
 
+  (define (define-command-gaol name fun . keys)
+    "Version of `define-commnad' which can be used in gaol.
+You can't overriee an existing command."
+    (when (and (not (boundp name))
+	       (functionp fun))
+      (make-variable-special name)
+      (apply define-command name fun keys)))
+  (gaol-add define-command-gaol)
+  
   (define (autoload-command name module . keys)
     "Record that loading the module called MODULE (a symbol) will provde a
 command called NAME (optionally whose arguments have custom-type TYPE)."
@@ -418,4 +428,6 @@ command for the `system' function."
 
   (define (define-command-to-screen name fun #!rest keys)
     (apply define-command name (lambda args (with-output-to-screen
-                                              (apply fun args))) keys)))
+                                              (apply fun args))) keys))
+
+  )

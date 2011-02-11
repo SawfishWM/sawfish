@@ -34,6 +34,7 @@
     (open rep
           rep.system
           rep.data.records
+	  sawfish.wm.gaol
           sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.commands
@@ -350,4 +351,7 @@ fixed-position."
     (add-hook 'iconify-window-hook (lambda (win) (tab-refresh-group win 'iconify)))
     (add-hook 'uniconify-window-hook (lambda (win) (tab-refresh-group win 'uniconify)))
     (add-hook 'add-to-workspace-hook (lambda (win) (tab-refresh-group win 'frame)))
-    (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups)))
+    (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
+
+  (gaol-add tab-refresh-group)
+  )
