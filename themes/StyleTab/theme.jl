@@ -61,7 +61,7 @@
   :options (top bottom left right)
   :type symbol)
 
-(defcustom styletab:title-dimension 24 "Hight of title border. Default 24"
+(defcustom styletab:title-dimension 24 "Height of title border. Default 24"
   :group (appearance StyleTab:group StyleTab:settings-group)
   :type number
   :range (16 . 32))
@@ -1215,8 +1215,8 @@
         (- styletab:borders-dimension)
       0)))
 
-(define title-hight (lambda (w) styletab:title-dimension)) 
-(define title-hight-s (lambda (w) (- styletab:title-dimension 2)))
+(define title-height (lambda (w) styletab:title-dimension)) 
+(define title-height-s (lambda (w) (- styletab:title-dimension 2)))
 (define title-edge (lambda (w) (- styletab:title-dimension)))
 (define title-edge-s (lambda (w) (- (- styletab:title-dimension 2))))
 (define top-frame-button-width (lambda (w) (+ styletab:title-dimension (button-width-custom))))
@@ -1235,19 +1235,19 @@
      (background . ,(top-left-corner-images "top"))
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
 	((class . top-right-corner)
      (background . ,(top-right-corner-images "top"))
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
      (background . ,(title-images "top"))
      (right-edge . 0)
      (top-edge . ,title-edge-s)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (width . 2))))
 
 (define bottom-frame-default-border-corner-group
@@ -1255,19 +1255,19 @@
      (background . ,(bottom-left-corner-images "bottom"))
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
     ((class . bottom-right-corner)
      (background . ,(bottom-right-corner-images "bottom"))
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
      (background . ,(title-images "bottom"))
      (right-edge . 0)
      (bottom-edge . ,title-edge)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (width . 2))))
 
 (define left-frame-default-border-corner-group
@@ -1276,13 +1276,13 @@
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
+     (width . ,title-height))
     ((class . top-left-corner)
      (background . ,(top-left-corner-images "left"))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))))
+     (width . ,title-height))))
 
 (define right-frame-default-border-corner-group
   `(((class . bottom-right-corner)
@@ -1290,13 +1290,13 @@
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
+     (width . ,title-height))
     ((class . top-right-corner)
      (background . ,(top-right-corner-images "right"))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))))
+     (width . ,title-height))))
 
 (define top-frame-border-group
   `(((class . left-border)
@@ -1452,21 +1452,21 @@
      (background . ,(tab-images "top"))
      (foreground . ,title-colors-images)
      (top-edge . ,title-edge-s)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (text . ,window-name))
     ((class . tabbar-horizontal-left-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,(tab-left-icon-images "top"))
      (cursor . hand2)
      (top-edge . ,title-edge-s)
-     (height . ,title-hight-s)
-     (width . ,title-hight-s)
+     (height . ,title-height-s)
+     (width . ,title-height-s)
      (y-justify . 2)
      (x-justify . 5))
     ((class . tabbar-horizontal-right-edge)
      (background . ,(tab-right-images "top"))
      (width . ,tabbar-right-edge-width)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (top-edge . ,title-edge-s))))
 
 (define bottom-frame-title-group
@@ -1482,21 +1482,21 @@
      (background . ,(tab-images "bottom"))
      (foreground . ,title-colors-images)
      (bottom-edge . ,title-edge)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (text . ,window-name))
     ((class . tabbar-horizontal-left-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,(tab-left-icon-images "bottom"))
      (cursor . hand2)
      (bottom-edge . ,title-edge)
-     (height . ,title-hight-s)
-     (width . ,title-hight-s)
+     (height . ,title-height-s)
+     (width . ,title-height-s)
      (y-justify . 2)
      (x-justify . 5))
     ((class . tabbar-horizontal-right-edge)
      (background . ,(tab-right-images "bottom"))
      (width . ,tabbar-right-edge-width)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (bottom-edge . ,title-edge))))
 
 (define left-frame-title-group
@@ -1511,8 +1511,8 @@
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,(tab-top-images "left"))
      (cursor . hand2)
-     (height . ,title-hight-s)
-     (width . ,title-hight-s)
+     (height . ,title-height-s)
+     (width . ,title-height-s)
      (left-edge . ,title-edge-s)
      (y-justify . 4)
      (x-justify . 2))
@@ -1521,13 +1521,13 @@
      (y-justify . center)
      (background . ,(tab-images "left"))
      (left-edge . ,title-edge-s)
-     (width . ,title-hight-s))
+     (width . ,title-height-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,(tab-bottom-icon-images "left"))
      (left-edge . ,title-edge-s)
-     (height . ,title-hight-s)
-     (width . ,title-hight-s)
+     (height . ,title-height-s)
+     (width . ,title-height-s)
      (y-justify . 1)
      (x-justify . 2))))
 
@@ -1543,8 +1543,8 @@
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,(tab-top-images "right"))
      (cursor . hand2)
-     (height . ,title-hight-s)
-     (width . ,title-hight-s)
+     (height . ,title-height-s)
+     (width . ,title-height-s)
      (right-edge . ,title-edge-s)
      (y-justify . 4)
      (x-justify . 4))
@@ -1553,13 +1553,13 @@
      (y-justify . center)
      (background . ,(tab-images "right"))
      (right-edge . ,title-edge-s)
-     (width . ,title-hight-s))
+     (width . ,title-height-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
      (background . ,(tab-bottom-icon-images "right"))
      (right-edge . ,title-edge-s)
-     (height . ,title-hight-s)
-     (width . ,title-hight-s)
+     (height . ,title-height-s)
+     (width . ,title-height-s)
      (y-justify . 1)
      (x-justify . 4))))
 
@@ -1577,7 +1577,7 @@
     (background . ,(button-images "top" "close"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-close-button
@@ -1585,7 +1585,7 @@
     (background . ,(button-images "bottom" "close"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-close-button
@@ -1594,7 +1594,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-close-button
   `((class . close-button)
@@ -1602,14 +1602,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-menu-button
   `((class . menu-button)
     (background . ,(button-images "top" "menu"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-menu-button
@@ -1617,7 +1617,7 @@
     (background . ,(button-images "bottom" "menu"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-menu-button
@@ -1626,7 +1626,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-menu-button
   `((class . menu-button)
@@ -1634,14 +1634,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-iconify-button
   `((class . iconify-button)
     (background . ,(button-images "top" "iconify"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-iconify-button
@@ -1649,7 +1649,7 @@
     (background . ,(button-images "bottom" "iconify"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-iconify-button
@@ -1658,7 +1658,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-iconify-button
   `((class . iconify-button)
@@ -1666,14 +1666,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-maximize-button
   `((class . maximize-button)
     (background . ,top-frame-maximize-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-maximize-button
@@ -1681,7 +1681,7 @@
     (background . ,bottom-frame-maximize-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-maximize-button
@@ -1690,7 +1690,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-maximize-button
   `((class . maximize-button)
@@ -1698,14 +1698,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-shade-button
   `((class . shade-button)
     (background . ,top-frame-shade-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-shade-button
@@ -1713,7 +1713,7 @@
     (background . ,bottom-frame-shade-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-shade-button
@@ -1722,7 +1722,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-shade-button
   `((class . shade-button)
@@ -1730,14 +1730,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-sticky-button
   `((class . sticky-button)
     (background . ,top-frame-sticky-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-sticky-button
@@ -1745,7 +1745,7 @@
     (background . ,bottom-frame-sticky-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-sticky-button
@@ -1754,7 +1754,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-sticky-button
   `((class . sticky-button)
@@ -1762,20 +1762,20 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-space-button
   `((class . title)
     (background . ,(title-images "top"))
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-space-button
   `((class . title)
     (background . ,(title-images "bottom"))
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-space-button
@@ -1783,21 +1783,21 @@
     (background . ,(title-images "left"))
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-space-button
   `((class . title)
     (background . ,(title-images "right"))
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-prev-button
   `((class . prev-button)
     (background . ,top-frame-prev-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-prev-button
@@ -1805,7 +1805,7 @@
     (background . ,bottom-frame-prev-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-prev-button
@@ -1814,7 +1814,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-prev-button
   `((class . prev-button)
@@ -1822,14 +1822,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-next-button
   `((class . next-button)
     (background . ,top-frame-next-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-next-button
@@ -1837,7 +1837,7 @@
     (background . ,bottom-frame-next-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-next-button
@@ -1846,7 +1846,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-next-button
   `((class . next-button)
@@ -1854,14 +1854,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-lock-button
   `((class . lock-button)
     (background . ,top-frame-lock-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-lock-button
@@ -1869,7 +1869,7 @@
     (background . ,bottom-frame-lock-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-lock-button
@@ -1878,7 +1878,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-lock-button
   `((class . lock-button)
@@ -1886,14 +1886,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-raise-lower-button
   `((class . raise-lower-button)
     (background . ,top-frame-raise-lower-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-raise-lower-button
@@ -1901,7 +1901,7 @@
     (background . ,bottom-frame-raise-lower-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-raise-lower-button
@@ -1910,7 +1910,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-raise-lower-button
   `((class . raise-lower-button)
@@ -1918,14 +1918,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define  top-frame-move-resize-button
   `((class . move-resize-button)
     (background . ,(button-images "top" "move-resize"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define  bottom-frame-move-resize-button
@@ -1933,7 +1933,7 @@
     (background . ,(button-images "bottom" "move-resize"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define  left-frame-move-resize-button
@@ -1942,7 +1942,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define  right-frame-move-resize-button
   `((class . move-resize-button)
@@ -1950,14 +1950,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-rename-button
   `((class . rename-button)
     (background . ,(button-images "top" "rename"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-rename-button
@@ -1965,7 +1965,7 @@
     (background . ,(button-images "bottom" "rename"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-rename-button
@@ -1974,7 +1974,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-rename-button
   `((class . rename-button)
@@ -1982,14 +1982,14 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-frame-typ-button
   `((class . frame-typ-button)
     (background . ,(button-images "top" "frame-typ"))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-frame-typ-button
@@ -1997,7 +1997,7 @@
     (background . ,(button-images "bottom" "frame-typ"))
     (cursor . hand2)
     (bottom-edge . ,title-edge)
-    (height . ,title-hight-s)
+    (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-frame-typ-button
@@ -2006,7 +2006,7 @@
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define right-frame-frame-typ-button
   `((class . frame-typ-button)
@@ -2014,7 +2014,7 @@
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
-    (width . ,title-hight-s)))
+    (width . ,title-height-s)))
 
 (define top-frame-shaped-border-corner-group
   `(((class . top-left-corner)
@@ -2022,20 +2022,20 @@
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
 	((class . top-right-corner)
      (background . ,(top-right-corner-shaped-images "top"))
      (cursor . sb_h_double_arrow)
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
      (background . ,(title-images "top"))
      (right-edge . 0)
      (top-edge . ,title-edge-s)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (width . 2))))
 
 (define bottom-frame-shaped-border-corner-group
@@ -2044,20 +2044,20 @@
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
     ((class . bottom-right-corner)
      (background . ,(bottom-right-corner-shaped-images "bottom"))
      (cursor . sb_h_double_arrow)
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
-     (height . ,title-hight)
+     (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
      (background . ,(title-images "bottom"))
      (right-edge . 0)
      (bottom-edge . ,title-edge)
-     (height . ,title-hight-s)
+     (height . ,title-height-s)
      (width . 2))))
 
 (define left-frame-shaped-border-corner-group
@@ -2066,13 +2066,13 @@
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
+     (width . ,title-height))
     ((class . top-left-corner)
      (background . ,(top-left-corner-shaped-images "left"))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))))
+     (width . ,title-height))))
 
 (define right-frame-shaped-border-corner-group
   `(((class . bottom-right-corner)
@@ -2080,13 +2080,13 @@
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))
+     (width . ,title-height))
     ((class . top-right-corner)
      (background . ,(top-right-corner-shaped-images "right"))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
-     (width . ,title-hight))))
+     (width . ,title-height))))
 
 (define top-button-alist
   `((close  . ,top-frame-close-button)
@@ -2246,7 +2246,7 @@
               (top-left-m
                (if (numberp (cdr (car (car top-frame-normal-buttons-left))))
                    (+ (cdr (car (car top-frame-normal-buttons-left))) (+ styletab:title-dimension (button-width-custom))) 0))
-              (top-rigth-m
+              (top-right-m
                (if (numberp (cdr (car (car top-frame-normal-buttons-right))))
                    (+ (cdr (car (car top-frame-normal-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0))
               (top-left-m-t
@@ -2256,7 +2256,7 @@
                (if (numberp (cdr (car (car top-frame-transient-buttons-right))))
                    (+ (cdr (car (car top-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
           (set-tab-adjustments #:theme-left-dec-width top-left-d-w #:theme-right-dec-width top-right-d-w #:theme-left-margin top-left-m
-                               #:theme-right-margin top-rigth-m #:theme-left-margin-transient top-left-m-t
+                               #:theme-right-margin top-right-m #:theme-left-margin-transient top-left-m-t
                                #:theme-right-margin-transient top-right-m-t))
         (setq normal-frame
               (append top-frame-default-border-corner-group top-frame-title-group top-frame-normal-buttons-left 
@@ -2277,7 +2277,7 @@
               (bottom-left-m
                (if (numberp (cdr (car (car bottom-frame-normal-buttons-left))))
                    (+ (cdr (car (car bottom-frame-normal-buttons-left))) (+ styletab:title-dimension (button-width-custom))) 0))
-              (bottom-rigth-m
+              (bottom-right-m
                (if (numberp (cdr (car (car bottom-frame-normal-buttons-right))))
                    (+ (cdr (car (car bottom-frame-normal-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0))
               (bottom-left-m-t
@@ -2287,7 +2287,7 @@
                (if (numberp (cdr (car (car bottom-frame-transient-buttons-right))))
                    (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
           (set-tab-adjustments #:theme-left-dec-width bottom-left-d-w #:theme-right-dec-width bottom-right-d-w #:theme-left-margin bottom-left-m
-                               #:theme-right-margin bottom-rigth-m #:theme-left-margin-transient bottom-left-m-t
+                               #:theme-right-margin bottom-right-m #:theme-left-margin-transient bottom-left-m-t
                                #:theme-right-margin-transient bottom-right-m-t))
         (setq normal-frame
               (append bottom-frame-default-border-corner-group bottom-frame-title-group bottom-frame-normal-buttons-left 
@@ -2308,7 +2308,7 @@
               (left-left-m
                (if (numberp (cdr (car (car left-frame-normal-buttons-left))))
                    (+ (cdr (car (car left-frame-normal-buttons-left))) (+ styletab:title-dimension (button-width-custom))) 0))
-              (left-rigth-m
+              (left-right-m
                (if (numberp (cdr (car (car left-frame-normal-buttons-right))))
                    (+ (cdr (car (car left-frame-normal-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0))
               (left-left-m-t
@@ -2318,7 +2318,7 @@
                (if (numberp (cdr (car (car left-frame-transient-buttons-right))))
                    (+ (cdr (car (car left-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
           (set-tab-adjustments #:theme-left-dec-width left-left-d-w #:theme-right-dec-width left-right-d-w #:theme-left-margin left-left-m
-                               #:theme-right-margin left-rigth-m #:theme-left-margin-transient left-left-m-t
+                               #:theme-right-margin left-right-m #:theme-left-margin-transient left-left-m-t
                                #:theme-right-margin-transient left-right-m-t))
         (setq normal-frame
               (append left-frame-title-group left-frame-normal-buttons-left left-frame-default-border-corner-group 
@@ -2339,7 +2339,7 @@
               (right-left-m
                (if (numberp (cdr (car (car right-frame-normal-buttons-left))))
                    (+ (cdr (car (car right-frame-normal-buttons-left))) (+ styletab:title-dimension (button-width-custom))) 0))
-              (right-rigth-m
+              (right-right-m
                (if (numberp (cdr (car (car right-frame-normal-buttons-right))))
                    (+ (cdr (car (car right-frame-normal-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0))
               (right-left-m-t
@@ -2349,7 +2349,7 @@
                (if (numberp (cdr (car (car right-frame-transient-buttons-right))))
                    (+ (cdr (car (car right-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
           (set-tab-adjustments #:theme-left-dec-width right-left-d-w #:theme-right-dec-width right-right-d-w #:theme-left-margin right-left-m
-                               #:theme-right-margin right-rigth-m #:theme-left-margin-transient right-left-m-t
+                               #:theme-right-margin right-right-m #:theme-left-margin-transient right-left-m-t
                                #:theme-right-margin-transient right-right-m-t))
         (setq normal-frame
               (append right-frame-title-group right-frame-normal-buttons-left right-frame-default-border-corner-group 
