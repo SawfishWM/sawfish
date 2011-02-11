@@ -1,3 +1,22 @@
+2011-02-11  Teika Kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands.jl
+	* lisp/sawfish/wm/state/shading.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl
+	* lisp/sawfish/wm/windows.jl: Added some funcs to gaol.
+
+	* themes/StyleTab/theme.jl: Major rework
+	- compressed long 'defcustom's using mapc.
+	- Improved tabbar-rotating commands definition.
+	You may have to delete styletab-related parts in ~/.sawfish/custom.
+
+	Definitions are now collected into one function.
+	For users, tooltip is shown for tab-rotating button.
+	Keybinding is changed a bit.
+
+	- typo fix 'frame-typ' -> 'frame-type'. It accompanies
+	many image filenames change.
+	Other minor typo fix:  rigth  -> right, hight -> height
+
 2011-02-01  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands.jl
 	* lisp/sawfish/wm/customize.jl
