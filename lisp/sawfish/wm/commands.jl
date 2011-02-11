@@ -102,7 +102,7 @@ interactive specification and a custom-type specification respectively)."
 
   (define (define-command-gaol name fun . keys)
     "Version of `define-commnad' which can be used in gaol.
-You can't overriee an existing command."
+You can't override an existing command."
     (when (and (not (boundp name))
 	       (functionp fun))
       (make-variable-special name)
