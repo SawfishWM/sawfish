@@ -319,7 +319,8 @@
     (call-window-hook 'window-state-change-hook w (list '(title-position)))
     (tab-refresh-group w 'reframe)
     (move-window-to w pos-x pos-y)
-    (resize-window-to w dim-x dim-y)))
+    (resize-window-to w dim-x dim-y)
+    (tab-refresh-group w 'move)))
 
 (define (horiz-button1)
   "To left, move tab-bar."
