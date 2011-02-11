@@ -52,7 +52,7 @@
 (defgroup StyleTab:right-bottom-buttons-group "Right Titlebar Bottom Buttons"
   :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group))
 
-(defcustom styletab:style 'Dark "Frame and button style. (after you set this, you'll need to restart Sawfish)"
+(defcustom styletab:style 'Dark "Frame and button style."
   :group (appearance StyleTab:group StyleTab:settings-group)
   :options (Reduce Dark DarkColor Silver SilverColor Smoothly)
   :type symbol)
