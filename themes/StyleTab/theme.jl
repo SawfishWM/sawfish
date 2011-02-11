@@ -1,4 +1,4 @@
-;; theme file
+;; StyleTab
 
 (define theme-name 'StyleTab)
 
@@ -6,6 +6,7 @@
 ;;
 (require 'rep.data.tables)
 
+;; Defcustom and defgroup
 (defgroup StyleTab:group "StyleTab"
   :group appearance)
 
@@ -109,277 +110,62 @@
   :depends styletab:custom-colors
   :type color)
 
-(defcustom styletab:top-left-buttons `((menu ,t) (frame-type ,t) (sticky ,nil) (shade ,nil) (space ,nil) (raise-lower ,nil) (lock ,nil) (move-resize ,nil))
-  "Top Titlebar Left Buttons (from left to right)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:top-buttons-group StyleTab:top-left-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:top-right-buttons `((close ,t) (maximize ,t) (minimize ,nil) (space ,nil) (send-to-next ,nil) (send-to-prev ,nil))
-  "Top Titlebar Right Buttons (from right to left)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:top-buttons-group StyleTab:top-right-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:bottom-left-buttons `((menu ,t) (frame-type ,t) (sticky ,nil) (shade ,nil) (space ,nil) (raise-lower ,nil) (lock ,t) (move-resize ,nil))
-  "Bottom Titlebar Left Buttons (from left to right)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:bottom-buttons-group StyleTab:bottom-left-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:bottom-right-buttons `((close ,t) (maximize ,nil) (minimize ,nil) (space ,nil) (send-to-next ,nil) (send-to-prev ,nil))
-  "Bottom Titlebar Right Buttons (from right to left)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:bottom-buttons-group StyleTab:bottom-right-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:left-top-buttons `((close ,t) (maximize ,t) (minimize ,t) (sticky ,nil) (lock ,nil))
-  "Left Titlebar Top Buttons (from top to bottom)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:left-buttons-group StyleTab:left-top-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:left-bottom-buttons `((menu ,t) (frame-type ,t))
-  "Left Titlebar Bottom Buttons (from bottom to top)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:left-buttons-group StyleTab:left-bottom-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:right-top-buttons `((close ,t) (maximize ,t) (minimize ,t) (sticky ,nil) (lock ,nil))
-  "Right Titlebar Top Buttons (from top to bottom)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group StyleTab:right-top-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
-
-(defcustom styletab:right-bottom-buttons `((menu ,t) (frame-type ,t))
-  "Right Titlebar Bottom Buttons (from bottom to top)"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group StyleTab:right-bottom-buttons-group)
-  :type (v-and (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))
-               (v-and (choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-                              send-to-next lock raise-lower move-resize rename frame-type)
-                      (boolean "Show in transients"))))
+(mapc
+ (lambda (arg)
+   (let ((type-list ;; ":type" in defcustom
+          (append '(v-and)
+                  (make-list 10
+                             (list 'v-and '(choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+						   send-to-next lock raise-lower move-resize rename frame-type)
+				   '(boolean "Also show in transients"))))))
+     (eval
+      (macroexpand
+       `(defcustom ,(car arg) ;; name
+          ,(cadr arg) ;; default value
+          ,(caddr arg) ;; doc
+          :group
+          ,`(appearance StyleTab:group StyleTab:buttons-group
+                        ,(cadddr arg) ,(car (cddddr arg)))
+          :type ,type-list
+          ))))) ;; end of lambda
+ '( ;; list to pass to mapc
+   (styletab:top-left-buttons
+    '((menu t) (frame-type t) (sticky nil) (shade nil) (space nil)
+      (raise-lower nil) (lock nil) (move-resize nil))
+    "Top Titlebar Left Buttons (from left to right)"
+    StyleTab:top-buttons-group StyleTab:top-left-buttons-group)
+   (styletab:top-right-buttons
+    '((close t) (maximize t) (minimize nil) (space nil)
+      (send-to-next nil) (send-to-prev nil))
+    "Top Titlebar Right Buttons (from right to left)"
+    StyleTab:top-buttons-group StyleTab:top-right-buttons-group)
+   (styletab:bottom-left-buttons
+    '((menu t) (frame-type t) (sticky nil) (shade nil) (space nil)
+      (raise-lower nil) (lock nil) (move-resize nil))
+    "Bottom Titlebar Left Buttons (from left to right)"
+    StyleTab:bottom-buttons-group StyleTab:bottom-left-buttons-group)
+   (styletab:bottom-right-buttons
+    '((close t) (maximize t) (minimize nil) (space nil)
+      (send-to-next nil) (send-to-prev nil))
+    "Bottom Titlebar Right Buttons (from right to left)"
+    StyleTab:bottom-buttons-group StyleTab:bottom-right-buttons-group)
+   (styletab:left-top-buttons
+    '((close t) (maximize t) (minimize t) (sticky nil) (lock nil))
+    "Left Titlebar Top Buttons (from top to bottom)"
+    StyleTab:left-buttons-group StyleTab:left-top-buttons-group)
+   (styletab:left-bottom-buttons
+    '((menu t) (frame-type t))
+    "Left Titlebar Bottom Buttons (from bottom to top)"
+    StyleTab:left-buttons-group StyleTab:left-bottom-buttons-group)
+   (styletab:right-top-buttons
+    '((close t) (maximize t) (minimize t) (sticky nil) (lock nil))
+    "Right Titlebar Top Buttons (from top to bottom)"
+    StyleTab:right-buttons-group StyleTab:right-top-buttons-group)
+   (styletab:right-bottom-buttons
+    '((menu t) (frame-type t))
+    "Right Titlebar Bottom Buttons (from bottom to top)"
+    StyleTab:right-buttons-group StyleTab:right-bottom-buttons-group)
+   ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; styles settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -464,9 +250,6 @@
           ((Silver) 3)
           ((SilverColor) 3)
           ((Smoothly) 3))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; frame-class, keys bindings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; frame-class, keys bindings
