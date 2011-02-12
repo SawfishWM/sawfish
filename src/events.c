@@ -1984,6 +1984,27 @@ events_init (void)
     rep_INTERN_SPECIAL(window_state_change_hook);
     rep_INTERN_SPECIAL(randr_change_notify_hook);
 
+    Fset(Qvisibility_notify_hook, Qnil);
+    Fset(Qdestroy_notify_hook, Qnil);
+    Fset(Qmap_notify_hook, Qnil);
+    Fset(Qunmap_notify_hook, Qnil);
+    Fset(Qreparent_notify_hook, Qnil);
+    Fset(Qproperty_notify_hook, Qnil);
+    Fset(Qenter_notify_hook, Qnil);
+    Fset(Qleave_notify_hook, Qnil);
+    Fset(Qfocus_in_hook, Qnil);
+    Fset(Qfocus_out_hook, Qnil);
+    Fset(Qclient_message_hook, Qnil);
+    Fset(Qwindow_moved_hook, Qnil);
+    Fset(Qwindow_resized_hook, Qnil);
+    Fset(Qshape_notify_hook, Qnil);
+    Fset(Qenter_frame_part_hook, Qnil);
+    Fset(Qleave_frame_part_hook, Qnil);
+    Fset(Qconfigure_notify_hook, Qnil);
+    Fset(Qconfigure_request_hook, Qnil);
+    Fset(Qwindow_state_change_hook, Qnil);
+    Fset(Qrandr_change_notify_hook, Qnil);
+
     rep_INTERN_SPECIAL(pointer_motion_threshold);
 
     rep_INTERN(iconify_window);

@@ -83,6 +83,9 @@
     :type (choice none transients group)
     :group min-max)
 
+  (defvar iconify-window-hook nil)
+  (defvar uniconify-window-hook nil)
+
   (define (window-iconified-p w) (window-get w 'iconified))
 
   (define (window-iconifiable-p w)

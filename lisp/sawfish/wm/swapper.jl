@@ -30,6 +30,8 @@
           sawfish.wm.viewport
           sawfish.wm.frames)
 
+  (defvar after-workspace-swap-in-hook nil)
+  
 ;;; default swappers
 
   (define (workspace-swap-out w space)

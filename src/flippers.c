@@ -161,6 +161,8 @@ flippers_init (void)
     rep_INTERN (bottom);
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
+    Fset(Qenter_flipper_hook, Qnil);
+    Fset(Qleave_flipper_hook, Qnil);
 
 }
 

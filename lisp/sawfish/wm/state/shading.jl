@@ -42,6 +42,9 @@
   (defvar raise-windows-when-unshaded nil
     "Raise windows when they are unshaded.")
 
+  (defvar shade-window-hook nil)
+  (defvar unshade-window-hook nil)
+
   (define (window-shaded-p w) (window-get w 'shaded))
 
   (define (shade-window w)

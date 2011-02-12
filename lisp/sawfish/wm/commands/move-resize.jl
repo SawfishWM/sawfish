@@ -150,6 +150,13 @@ its edges with an edge of another window.")
   (defvar move-resize-moving-edges nil)
   (defvar move-resize-directions nil)
 
+  (defvar while-moving-hook nil)
+  (defvar while-resizing-hook nil)
+  (defvar before-move-hook nil)
+  (defvar after-move-hook nil)
+  (defvar before-resize-hook nil)
+  (defvar after-resize-hook nil)
+
   (define (delete-unmovable-directions directions)
     (when move-lock-when-maximized
       (when (window-maximized-vertically-p move-resize-window)

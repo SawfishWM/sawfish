@@ -36,6 +36,8 @@
           sawfish.wm.viewport
 	  sawfish.wm.misc)
 
+  (defvar workarea-changed-hook nil)
+  
   (define (define-window-strut w left top right bottom)
     (let ((new (list left top right bottom))
 	  (old (window-get w 'workarea-strut)))

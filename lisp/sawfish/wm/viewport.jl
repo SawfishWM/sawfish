@@ -95,6 +95,9 @@ the change is instantaneous."
   (defvar workspace-viewport-data nil
     "Information about the viewport details of different workspaces.")
 
+  (defvar viewport-moved-hook nil)
+  (defvar viewport-resized-hook nil)
+  
 ;;; raw viewport handling
 
   ;; The unit is pixel, NOT (col, row).

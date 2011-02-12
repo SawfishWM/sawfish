@@ -1918,6 +1918,7 @@ keys_init(void)
     rep_INTERN_SPECIAL(root_window_keymap);
     rep_INTERN_SPECIAL(override_keymap);
     rep_INTERN_SPECIAL(unbound_key_hook);
+    Fset(Qunbound_key_hook, Qnil);
     rep_INTERN_SPECIAL(eval_key_release_events);
     rep_INTERN_SPECIAL(eval_modifier_events);
     Fset (Qeval_key_release_events, Qnil);

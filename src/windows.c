@@ -1721,6 +1721,14 @@ windows_init (void)
     rep_INTERN_SPECIAL(after_initialization_hook);
     rep_INTERN_SPECIAL(remove_window_hook);
 
+    Fset(Qbefore_add_window_hook, Qnil);
+    Fset(Qadd_window_hook, Qnil);
+    Fset(Qafter_add_window_hook, Qnil);
+    Fset(Qplace_window_hook, Qnil);
+    Fset(Qafter_framing_hook, Qnil);
+    Fset(Qafter_initialization_hook, Qnil);
+    Fset(Qremove_window_hook, Qnil);
+
     rep_INTERN(fully_obscured);
     rep_INTERN(partially_obscured);
     rep_INTERN(unobscured);

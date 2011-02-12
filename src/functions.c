@@ -1408,6 +1408,7 @@ functions_init (void)
 
     rep_INTERN(root);
     rep_INTERN_SPECIAL(after_restacking_hook);
+    Fset(Qafter_restacking_hook, Qnil);
     rep_INTERN(position);
     rep_INTERN(spacing);
     rep_INTERN(head);

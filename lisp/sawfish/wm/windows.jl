@@ -122,6 +122,8 @@
   (defvar dock-window-depth 0
     "The stacking depth of dock windows.")
 
+  (defvar activate-window-hook nil)
+
 ;;; finding windows, reading properties
 
   (define (get-window-by-name name #!key regex icon)
