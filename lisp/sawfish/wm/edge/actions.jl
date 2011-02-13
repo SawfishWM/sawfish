@@ -62,7 +62,9 @@
        (edge-flip-invoke edge 'workspace))
       ((flip-viewport)
        (edge-flip-invoke edge 'viewport))
-      (t (hot-spot-invoke edge))))
+      ((none/hot-spot)
+       (hot-spot-invoke edge))
+      (t nil)))
 
   ;; Entry point without dragging 
   (define (edge-action-hook-func)
