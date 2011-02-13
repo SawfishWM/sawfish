@@ -52,7 +52,7 @@
 (defgroup StyleTab:right-bottom-buttons-group "Right Titlebar Bottom Buttons"
   :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group))
 
-(defcustom styletab:style 'Dark "Frame and button style."
+(defcustom styletab:style 'Dark "Frame and button style. (requires restart)"
   :group (appearance StyleTab:group StyleTab:settings-group)
   :options (Reduce Dark DarkColor Silver SilverColor Smoothly)
   :type symbol)
@@ -82,7 +82,7 @@
   :depends styletab:custom-button-width
   :range (-4 . 4))
 
-(defcustom styletab:title-font (get-font "-*-helvetica-bold-r-normal-*-9-*-*-*-*-*-*")
+(defcustom styletab:title-font default-font
   "Tabbar font."
   :group (appearance StyleTab:group StyleTab:settings-group)
   :type font)
@@ -121,8 +121,8 @@
           (append '(v-and)
                   (make-list 10
                              (list 'v-and '(choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
-						   send-to-next lock raise-lower move-resize rename frame-type)
-				   '(boolean "Also show in transients"))))))
+                                                   send-to-next lock raise-lower move-resize rename frame-type)
+                                   '(boolean "Also show in transients"))))))
      (eval
       (macroexpand
        `(defcustom ,(car arg) ;; name
@@ -172,7 +172,8 @@
     StyleTab:right-buttons-group StyleTab:right-bottom-buttons-group)
    ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; styles settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;; styles settings 
 
 ;;(define styletab-style styletab:style)
 
@@ -256,20 +257,20 @@
           ((SilverColor) 3)
           ((Smoothly) 3))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ;;; frame-class, keys bindings
 
 (define (rotate-tab src dest)
   (let ((w (current-event-window))
-	pos-x pos-y fdim framew framehigh dim-x dim-y current-title)
+        pos-x pos-y fdim framew framehigh dim-x dim-y current-title type)
     (if (not (window-get w 'title-position))
-	(case styletab:titlebar-place
-	  ((top) (setq current-title 'top))
-	  ((bottom) (setq current-title 'bottom))
-	  ((left) (setq current-title 'left))
-	  ((right) (setq current-title 'right)))
+        (case styletab:titlebar-place
+              ((top) (setq current-title 'top))
+              ((bottom) (setq current-title 'bottom))
+              ((left) (setq current-title 'left))
+              ((right) (setq current-title 'right)))
       (setq current-title (window-get w 'title-position)))
-    (unshade-window w)
+    (setq type (window-get w 'type))
     (setq pos-x (car (window-position w)))
     (setq pos-y (cdr (window-position w)))
     (setq dim-x (car (window-dimensions w)))
@@ -277,55 +278,59 @@
     (setq fdim (window-frame-dimensions w))
     (setq framew (/ (- (+ (car fdim) (cdr fdim)) (+ dim-x dim-y styletab:title-dimension)) 3))
 
-    (if (eq src 'horiz)
-	(if (eq dest 'opposite)
-	    (progn
-	      (if (eq current-title 'top)
-		  (setq dest 'bottom)
-		(setq dest 'top))
-	      (when (>= (+ pos-y dim-y styletab:title-dimension framew) (screen-height))
-		(setq pos-y (- (screen-height) dim-y styletab:title-dimension framew)))
-	      (when (<= pos-y 0) (setq pos-y 0)))
-	  ;; Toleft or right
-	  (if (or (eq (window-get w 'type) 'default)
-		  (eq (window-get w 'type) 'transient))
-	      (setq framehigh (+ (- styletab:title-dimension (* styletab:borders-dimension 2)) framew))
-	    (setq framehigh (+ styletab:title-dimension framew)))
-	  (setq dim-x (- dim-x framehigh))
-	  (setq dim-y (+ dim-y framehigh))
-	  (when (and (eq dest 'left) (<= pos-x 0))
-	    (setq pos-x 0))
-	  (when (and (eq dest 'right)
-		     (>= (+ pos-x dim-x framehigh framew framew) (screen-width)))
-	    (setq pos-x (- (screen-width) dim-x styletab:title-dimension framew))))
-      ;; vert
-      (if (eq dest 'opposite)
-	  (progn
-	    (if (eq current-title 'left)
-		(progn
-		  (setq dest 'right)
-		  (when (>= (+ pos-x dim-x) (screen-width))
-		    (setq pos-x (- (screen-width) dim-x styletab:title-dimension framew))))
-	      (setq dest 'left)
-	      (when (<= pos-x 0) (setq pos-x 0))))
-	;; To top or bottom
-	(if (or (eq (window-get w 'type) 'default)
-		(eq (window-get w 'type) 'transient))
-	    (setq framehigh (- styletab:title-dimension (* styletab:borders-dimension 2)))
-	  (setq framehigh styletab:title-dimension))
-	(setq dim-x (+ dim-x framehigh framew))
-	(setq dim-y (- dim-y framehigh framew))
-	(when (>= (+ pos-y dim-y styletab:title-dimension framew) (screen-height))
-	  (setq pos-y (- (screen-height) dim-y styletab:title-dimension framew)))
-	(when (<= pos-y 0) (setq pos-y 0))))
-    
-    (window-put w 'title-position dest)
-    (tab-refresh-group w 'title-position)
-    (call-window-hook 'window-state-change-hook w (list '(title-position)))
-    (tab-refresh-group w 'reframe)
-    (move-window-to w pos-x pos-y)
-    (resize-window-to w dim-x dim-y)
-    (tab-refresh-group w 'move)))
+    (when (not (eq type 'unframed))
+      (if (window-get w 'shaded) (unshade-window w))
+      (if (eq src 'horiz)
+          (if (eq dest 'opposite)
+              (progn
+                (if (eq current-title 'top)
+                    (setq dest 'bottom)
+                  (setq dest 'top))
+                (when (>= (+ pos-y dim-y styletab:title-dimension framew) (screen-height))
+                  (setq pos-y (- (screen-height) dim-y styletab:title-dimension framew)))
+                (when (<= pos-y 0) (setq pos-y 0)))
+            ;; To left or right
+            (if (or (eq (window-get w 'type) 'default)
+                    (eq (window-get w 'type) 'transient))
+                (setq framehigh (+ (- styletab:title-dimension (* styletab:borders-dimension 2)) framew))
+              (setq framehigh (+ styletab:title-dimension framew)))
+            (setq dim-x (- dim-x framehigh))
+            (setq dim-y (+ dim-y framehigh))
+            (when (and (eq dest 'left) (<= pos-x 0))
+              (setq pos-x 0))
+            (when (and (eq dest 'right)
+                       (>= (+ pos-x dim-x framehigh framew framew) (screen-width)))
+              (setq pos-x (- (screen-width) dim-x styletab:title-dimension framew))))
+        ;; vert
+        (if (eq dest 'opposite)
+            (progn
+              (if (eq current-title 'left)
+                  (progn
+                    (setq dest 'right)
+                    (when (>= (+ pos-x dim-x) (screen-width))
+                      (setq pos-x (- (screen-width) dim-x styletab:title-dimension framew))))
+                (setq dest 'left)
+                (when (<= pos-x 0) (setq pos-x 0))))
+          ;; To top or bottom
+          (if (or (eq (window-get w 'type) 'default)
+                  (eq (window-get w 'type) 'transient))
+              (setq framehigh (- styletab:title-dimension (* styletab:borders-dimension 2)))
+            (setq framehigh styletab:title-dimension))
+          (setq dim-x (+ dim-x framehigh framew))
+          (setq dim-y (- dim-y framehigh framew))
+          (when (>= (+ pos-y dim-y styletab:title-dimension framew) (screen-height))
+            (setq pos-y (- (screen-height) dim-y styletab:title-dimension framew)))
+          (when (<= pos-y 0) (setq pos-y 0))))
+      
+      (window-put w 'title-position dest)
+      (call-window-hook 'window-state-change-hook w (list '(title-position)))
+      (reframe-window w)
+      (move-window-to w pos-x pos-y)
+      (resize-window-to w dim-x dim-y)
+      (when (window-get w 'tabbed)
+        (tab-refresh-group w 'title-position)
+        (tab-refresh-group w 'reframe)
+        (tab-refresh-group w 'move)))))
 
 (define (tabbar-to-top)
   "Move tab-bar to top."
@@ -374,12 +379,12 @@
 (define (tabbar-toggle)
   "To opposite, move tab-bar. (Swap top & bottom, or left & right)"
   (let ((w (current-event-window)))
-  (if (not (window-get w 'title-position))
-      (window-put w 'title-position styletab:titlebar-place))
-  (if (or (eq (window-get w 'title-position) 'top)
-          (eq (window-get w 'title-position) 'bottom))
-      (rotate-tab 'horiz 'opposite)
-    (rotate-tab 'vert 'opposite))))
+    (if (not (window-get w 'title-position))
+        (window-put w 'title-position styletab:titlebar-place))
+    (if (or (eq (window-get w 'title-position) 'top)
+            (eq (window-get w 'title-position) 'bottom))
+        (rotate-tab 'horiz 'opposite)
+      (rotate-tab 'vert 'opposite))))
 
 (define-command-gaol 'tabbar-toggle tabbar-toggle)
 (define-command-gaol 'tabbar-to-top tabbar-to-top)
@@ -389,150 +394,165 @@
 
 (def-frame-class tabbar-horizontal-left-edge ()
   (bind-keys tabbar-horizontal-left-edge-keymap
-	     "Button1-Off" 'tabbar-to-left
-	     "Button2-Off" 'tabbar-toggle
-	     "Button3-Off" 'tabbar-to-right))
+             "Button1-Off" 'tabbar-to-left
+             "Button2-Off" 'tabbar-toggle
+             "Button3-Off" 'tabbar-to-right))
 
 (def-frame-class tabbar-vertical-top-edge ()
   (bind-keys tabbar-vertical-top-edge-keymap
-	     "Button1-Off" 'tabbar-to-top
-	     "Button2-Off" 'tabbar-toggle
-	     "Button3-Off" 'tabbar-to-bottom))
+             "Button1-Off" 'tabbar-to-top
+             "Button2-Off" 'tabbar-toggle
+             "Button3-Off" 'tabbar-to-bottom))
+
+(define (f-type dest)
+  (let ((w (current-event-window))
+        pos-x pos-y dim-x dim-y cur new current-title)
+    (if (not (window-get w 'title-position))
+        (case styletab:titlebar-place
+              ((top) (setq current-title 'top))
+              ((bottom) (setq current-title 'bottom))
+              ((left) (setq current-title 'left))
+              ((right) (setq current-title 'right)))
+      (setq current-title (window-get w 'title-position)))
+    (setq pos-x (car (window-position w)))
+    (setq pos-y (cdr (window-position w)))
+    (setq dim-x (car (window-dimensions w)))
+    (setq dim-y (cdr (window-dimensions w)))
+    (setq cur (window-get w 'type))
+    (if (window-get w 'shaded) (unshade-window w))
+
+    (when (eq dest 'def-tra)
+      (if (eq cur 'default)
+          (setq new 'transient)
+        (setq new 'default))
+      (when (or (eq cur 'shaped)
+                (eq cur 'utility))
+        (setq new 'default)
+        (setq dim-x (- dim-x (* styletab:borders-dimension 2)))         
+        (setq dim-y (- dim-y styletab:borders-dimension))
+        (when (not (or (eq current-title 'top)
+                       (eq current-title 'bottom)))
+          (setq dim-x (+ dim-x styletab:borders-dimension))
+          (setq dim-y (- dim-y styletab:borders-dimension))))
+      (when (eq cur 'shaped-transient)
+        (setq new 'transient)
+        (setq dim-x (- dim-x (* styletab:borders-dimension 2)))
+        (setq dim-y (- dim-y styletab:borders-dimension))
+        (when (not (or (eq current-title 'top)
+                       (eq current-title 'bottom)))
+          (setq dim-x (+ dim-x styletab:borders-dimension))
+          (setq dim-y (- dim-y styletab:borders-dimension))))
+      (when (eq cur 'unframed)
+        (setq new 'default)
+        (when (or (eq current-title 'top)
+                  (eq current-title 'bottom))
+          (setq dim-x (- dim-x (* styletab:borders-dimension 2)))
+          (setq dim-y (- dim-y styletab:borders-dimension styletab:title-dimension)))
+        (when (not (or (eq current-title 'top)
+                       (eq current-title 'bottom)))
+          (setq dim-y (- dim-y (* styletab:borders-dimension 2)))
+          (setq dim-x (- dim-x styletab:borders-dimension styletab:title-dimension)))))
+    
+    (when (eq dest 'sha-tra)
+      (if (or (eq cur 'shaped)
+              (eq cur 'utility))
+          (setq new 'shaped-transient)
+        (setq new 'shaped))
+      (when (eq cur 'default)
+        (setq new 'shaped)
+        (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
+        (setq dim-y (+ dim-y styletab:borders-dimension))
+        (when (not (or (eq current-title 'top)
+                       (eq current-title 'bottom)))
+          (setq dim-x (- dim-x styletab:borders-dimension))
+          (setq dim-y (+ dim-y styletab:borders-dimension))))
+      (when (eq cur 'transient)
+        (setq new 'shaped-transient)
+        (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
+        (setq dim-y (+ dim-y styletab:borders-dimension))
+        (when (not (or (eq current-title 'top)
+                       (eq current-title 'bottom)))
+          (setq dim-x (- dim-x styletab:borders-dimension))
+          (setq dim-y (+ dim-y styletab:borders-dimension))))
+      (when (eq cur 'unframed)
+        (setq new 'shaped)
+        (if (or (eq current-title 'top)
+                (eq current-title 'bottom))
+            (setq dim-y (- dim-y styletab:title-dimension))
+          (setq dim-x (- dim-x styletab:title-dimension)))))
+
+    (when (eq dest 'unf-def)
+      (when (or (eq cur 'default)
+                (eq cur 'transient))
+        (setq new 'unframed)
+        (when (or (eq current-title 'top)
+                  (eq current-title 'bottom))
+          (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
+          (setq dim-y (+ dim-y styletab:borders-dimension styletab:title-dimension)))
+        (when (not (or (eq current-title 'top)
+                       (eq current-title 'bottom)))
+          (setq dim-y (+ dim-y (* styletab:borders-dimension 2)))
+          (setq dim-x (+ dim-x styletab:borders-dimension styletab:title-dimension))))
+      (when (or (eq cur 'shaped)
+                (eq cur 'shaped-transient)
+                (eq cur 'utility))
+        (setq new 'unframed)
+        (if (or (eq current-title 'top)
+                (eq current-title 'bottom))
+            (setq dim-y (+ dim-y styletab:title-dimension))
+          (setq dim-x (+ dim-x styletab:title-dimension))))
+      (when (eq cur 'unframed)
+        (setq new 'shaped-transient)
+        (if (or (eq current-title 'top)
+                (eq current-title 'bottom))
+            (setq dim-y (- dim-y styletab:title-dimension))
+          (setq dim-x (- dim-x styletab:title-dimension)))))
+    (when (not (eq cur new))
+      (window-put w 'type new)
+      (reframe-window w)
+      (move-window-to w pos-x pos-y)
+      (resize-window-to w dim-x dim-y)
+      (when (window-get w 'tabbed)
+        (tab-refresh-group w 'type)
+        (tab-refresh-group w 'move)))))
+
+(define (set-frame-default-and-default/transient-toggle)
+  "Set frametype default and toggle default/transient with resize"
+  (f-type 'def-tra))
+
+(define (set-frame-unframed-and-unframed/shaped-transient-toggle)
+  "Set frametype unframed and toggle unframed/shaped-transient with resize"
+  (f-type 'unf-def))
+
+(define (set-frame-shaped-and-shaped/shaped-transient-toggle)
+  "Set frametype shaped and toggle shaped/shaped-transient with resize"
+  (f-type 'sha-tra))
+
+(define-command-gaol 'set-frame-default-and-default/transient-toggle set-frame-default-and-default/transient-toggle)
+(define-command-gaol 'set-frame-unframed-and-unframed/shaped-transient-toggle set-frame-unframed-and-unframed/shaped-transient-toggle)
+(define-command-gaol 'set-frame-shaped-and-shaped/shaped-transient-toggle set-frame-shaped-and-shaped/shaped-transient-toggle)
+
+(def-frame-class frame-type-button ()
+  (bind-keys frame-type-button-keymap
+             "Button1-Off" 'set-frame-default-and-default/transient-toggle
+             "Button2-Off" 'set-frame-unframed-and-unframed/default-toggle
+             "Button3-Off" 'set-frame-shaped-and-shaped/shaped-transient-toggle))
 
 (defvar prev-button-keymap
   (bind-keys (make-keymap)
 			 "Button3-Off" 'send-group-to-next-workspace
              "Button2-Click" 'popup-workspace-list
              "Button1-Off" 'send-group-to-previous-workspace))
-
 (defvar next-button-keymap
   (bind-keys (make-keymap)
              "Button3-Off" 'send-group-to-previous-workspace
              "Button2-Click" 'popup-workspace-list
              "Button1-Off" 'send-group-to-next-workspace))
+(define-frame-class 'prev-button '((keymap . prev-button-keymap)))
+(define-frame-class 'next-button '((keymap . next-button-keymap)))
 
-(def-frame-class frame-type-button ()
-  (bind-keys
-   frame-type-button-keymap "Button1-Off"
-   '(call-command
-     (lambda ()
-       (setq w (current-event-window))
-       (if (not (window-get w 'title-position))
-           (case styletab:titlebar-place
-                 ((top) (setq current-title 'top))
-                 ((bottom) (setq current-title 'bottom))
-                 ((left) (setq current-title 'left))
-                 ((right) (setq current-title 'right)))
-         (setq current-title (window-get w 'title-position)))
-       (setq pos-x (car (window-position w)))
-       (setq pos-y (cdr (window-position w)))
-       (setq dim-x (car (window-dimensions w)))
-       (setq dim-y (cdr (window-dimensions w)))
-       (setq type (window-get w 'type))
-       (if (eq type 'default)
-           (setq typ 'transient)
-         (setq typ 'default))
-       (when (or (eq type 'shaped)
-                 (eq type 'utility))
-         (setq typ 'default)
-         (setq dim-x (- dim-x (* styletab:borders-dimension 2)))         
-         (setq dim-y (- dim-y styletab:borders-dimension))
-         (when (not (or (eq current-title 'top)
-                        (eq current-title 'bottom)))
-           (setq dim-x (+ dim-x styletab:borders-dimension))
-           (setq dim-y (- dim-y styletab:borders-dimension))))
-       (when (eq type 'shaped-transient)
-         (setq typ 'transient)
-         (setq dim-x (- dim-x (* styletab:borders-dimension 2)))
-         (setq dim-y (- dim-y styletab:borders-dimension))
-         (when (not (or (eq current-title 'top)
-                        (eq current-title 'bottom)))
-           (setq dim-x (+ dim-x styletab:borders-dimension))
-           (setq dim-y (- dim-y styletab:borders-dimension))))
-       (set-window-type w typ)
-       (move-resize-window-to w pos-x pos-y dim-x dim-y))))
-
-  (bind-keys
-   frame-type-button-keymap "Button2-Off"
-   '(call-command
-     (lambda ()
-       (setq w (current-event-window))
-       (if (eq (window-get w 'title-position) nil)
-           (case styletab:titlebar-place
-                 ((top) (setq current-title 'top))
-                 ((bottom) (setq current-title 'bottom))
-                 ((left) (setq current-title 'left))
-                 ((right) (setq current-title 'right)))
-         (setq current-title (window-get w 'title-position)))
-       (setq pos-x (car (window-position w)))
-       (setq pos-y (cdr (window-position w)))
-       (setq dim-x (car (window-dimensions w)))
-       (setq dim-y (cdr (window-dimensions w)))
-       (setq type (window-get w 'type))
-       (when (or (eq type 'default)
-                 (eq type 'transient))
-         (setq typ 'shaped)
-         (when (or (eq current-title 'top)
-                   (eq current-title 'bottom))
-           (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
-           (setq dim-y (+ dim-y styletab:borders-dimension styletab:title-dimension)))
-         (when (not (eq current-title 'top)
-                    (eq current-title 'bottom))
-           (setq dim-y (+ dim-y (* styletab:borders-dimension 2)))
-           (setq dim-x (+ dim-x styletab:borders-dimension styletab:title-dimension))))
-       (when (or (eq type 'shaped)
-                 (eq type 'shaped-transient)
-                 (eq type 'utility))
-         (setq typ 'shaped)
-         (if (or (eq current-title 'top)
-                 (eq current-title 'bottom))
-             (setq dim-y (+ dim-y styletab:title-dimension))
-           (setq dim-x (+ dim-x styletab:title-dimension))))
-       (set-window-type w 'unframed)
-       (move-resize-window-to w pos-x pos-y dim-x dim-y))))
-  
-  (bind-keys
-   frame-type-button-keymap "Button3-Off"
-   '(call-command
-     (lambda ()
-       (setq w (current-event-window))
-       (if (not (window-get w 'title-position))
-           (case styletab:titlebar-place
-                 ((top) (setq current-title 'top))
-                 ((bottom) (setq current-title 'bottom))
-                 ((left) (setq current-title 'left))
-                 ((right) (setq current-title 'right)))
-         (setq current-title (window-get w 'title-position)))
-       (setq pos-x (car (window-position w)))
-       (setq pos-y (cdr (window-position w)))
-       (setq dim-x (car (window-dimensions w)))
-       (setq dim-y (cdr (window-dimensions w)))
-       (setq type (window-get w 'type))
-       (if (or (eq type 'shaped)
-               (eq type 'utility))
-           (setq typ 'shaped-transient)
-         (setq typ 'shaped))
-       (when (eq type 'default)
-         (setq typ 'shaped)
-         (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
-         (setq dim-y (+ dim-y styletab:borders-dimension))
-         (when (not (or (eq current-title 'top)
-                        (eq current-title 'bottom)))
-           (setq dim-x (- dim-x styletab:borders-dimension))
-           (setq dim-y (+ dim-y styletab:borders-dimension))))
-       (when (eq type 'transient)
-         (setq typ 'shaped-transient)
-         (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
-         (setq dim-y (+ dim-y styletab:borders-dimension))
-         (when (not (or (eq current-title 'top)
-                        (eq current-title 'bottom)))
-           (setq dim-x (- dim-x styletab:borders-dimension))
-           (setq dim-y (+ dim-y styletab:borders-dimension))))
-       (set-window-type w typ)
-       (move-resize-window-to w pos-x pos-y dim-x dim-y)))))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; make images ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;; make images 
 
 ;; button/icon table
 ;;
@@ -679,7 +699,8 @@
 (define left-frame-unontop-button-images (make-button-image "left-frame-unontop-button"))
 (define right-frame-unontop-button-images (make-button-image "right-frame-unontop-button"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; buttons, colors settings ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;; buttons, colors settings 
 
 (define top-frame-sticky-image-set
   (lambda (w)
@@ -897,11 +918,9 @@
 (define left-frame-button-height (lambda (w) (+ styletab:title-dimension (button-width-custom))))
 (define right-frame-button-height (lambda (w) (+ styletab:title-dimension (button-width-custom))))
 
-(define-frame-class 'prev-button '((keymap . prev-button-keymap)))
-(define-frame-class 'next-button '((keymap . next-button-keymap)))
-(define-frame-class 'frame-type-button '((keymap . frame-type-button-keymap)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; frames ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;; frames 
 
 (define top-frame-default-border-corner-group 
   `(((class . top-left-corner)
@@ -1831,7 +1850,8 @@
     (frame-type . ,right-frame-frame-type-button)
     (\(none\)   . ,nil)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; build themes ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;; build themes
 
 (define normal-frame nil)
 (define shaped-frame nil)
@@ -2104,7 +2124,8 @@
 (custom-set-property 'styletab:highlighted-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-highlighted-color ':after-set reframe-all)
-(custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
+;; with reload sawfish crash after style switch disable until fix
+;;(custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
 (custom-set-property 'styletab:title-dimension ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:custom-button-width ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:button-width ':after-set clear-cache-reframe)
