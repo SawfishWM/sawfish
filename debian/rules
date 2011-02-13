@@ -75,7 +75,7 @@ install: build
 
 	cp debian/sawfish-data.install.in debian/sawfish-data.install
 	find debian/tmp/usr/share/sawfish/*/lisp -name \*.jlc | \
-	 cut -d/ -f3- | grep -v 'main' >> debian/sawfish-data.install
+	 cut -d/ -f3- | grep -v 'cfg/main' >> debian/sawfish-data.install
 
 	dh_install --fail-missing
 
