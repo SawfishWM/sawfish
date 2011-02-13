@@ -82,6 +82,11 @@
   :depends styletab:custom-button-width
   :range (-4 . 4))
 
+(defcustom styletab:title-font (get-font "-*-helvetica-bold-r-normal-*-9-*-*-*-*-*-*")
+  "Tabbar font."
+  :group (appearance StyleTab:group StyleTab:settings-group)
+  :type font)
+
 (defcustom styletab:custom-colors nil "Customize title text colors. (Don't use styles defaults.)"
   :group (appearance StyleTab:group StyleTab:settings-group)
   :type boolean)
@@ -322,44 +327,77 @@
     (resize-window-to w dim-x dim-y)
     (tab-refresh-group w 'move)))
 
-(define (horiz-button1)
-  "To left, move tab-bar."
-  (rotate-tab 'horiz 'left))
-(define (horiz-button2)
-  "To opposite, move tab-bar. (Swap top & bottom)"
-  (rotate-tab 'horiz 'opposite))
-(define (horiz-button3)
-  "To right, move tab-bar."
-  (rotate-tab 'horiz 'right))
+(define (tabbar-to-top)
+  "Move tab-bar to top."
+  (let ((w (current-event-window)))
+    (if (not (window-get w 'title-position))
+        (window-put w 'title-position styletab:titlebar-place))
+    (if (or (eq (window-get w 'title-position) 'left)
+            (eq (window-get w 'title-position) 'right))
+        (rotate-tab 'vert 'top))
+    (if (eq (window-get w 'title-position) 'bottom)
+        (rotate-tab 'horiz 'opposite))))
 
-(define (vert-button1)
-  "To top, move tab-bar."
-  (rotate-tab 'vert 'top))
-(define (vert-button2)
-  "To opposite, move tab-bar. (Swap left & right)"
-  (rotate-tab 'vert 'opposite))
-(define (vert-button3)
-  "To bottom, move tab-bar."
-  (rotate-tab 'vert 'bottom))
+(define (tabbar-to-bottom)
+  "Move tab-bar to bottom."
+  (let ((w (current-event-window)))
+    (if (not (window-get w 'title-position))
+        (window-put w 'title-position styletab:titlebar-place))
+    (if (or (eq (window-get w 'title-position) 'left)
+            (eq (window-get w 'title-position) 'right))
+        (rotate-tab 'vert 'bottom))
+    (if (eq (window-get w 'title-position) 'top)
+        (rotate-tab 'horiz 'opposite))))
 
-(define-command-gaol 'horiz-button1 horiz-button1)
-(define-command-gaol 'horiz-button2 horiz-button2)
-(define-command-gaol 'horiz-button3 horiz-button3)
-(define-command-gaol 'vert-button1 vert-button1)
-(define-command-gaol 'vert-button2 vert-button2)
-(define-command-gaol 'vert-button3 vert-button3)
+(define (tabbar-to-left)
+  "Move tab-bar to left."
+  (let ((w (current-event-window)))
+    (if (not (window-get w 'title-position))
+        (window-put w 'title-position styletab:titlebar-place))
+    (if (or (eq (window-get w 'title-position) 'top)
+            (eq (window-get w 'title-position) 'bottom))
+        (rotate-tab 'horiz 'left))
+    (if (eq (window-get w 'title-position) 'right)
+        (rotate-tab 'vert 'opposite))))
+
+(define (tabbar-to-right)
+  "Move tab-bar to right."
+  (let ((w (current-event-window)))
+    (if (not (window-get w 'title-position))
+        (window-put w 'title-position styletab:titlebar-place))
+    (if (or (eq (window-get w 'title-position) 'top)
+            (eq (window-get w 'title-position) 'bottom))
+        (rotate-tab 'horiz 'right))
+    (if (eq (window-get w 'title-position) 'left)
+        (rotate-tab 'vert 'opposite))))
+
+(define (tabbar-toggle)
+  "To opposite, move tab-bar. (Swap top & bottom, or left & right)"
+  (let ((w (current-event-window)))
+  (if (not (window-get w 'title-position))
+      (window-put w 'title-position styletab:titlebar-place))
+  (if (or (eq (window-get w 'title-position) 'top)
+          (eq (window-get w 'title-position) 'bottom))
+      (rotate-tab 'horiz 'opposite)
+    (rotate-tab 'vert 'opposite))))
+
+(define-command-gaol 'tabbar-toggle tabbar-toggle)
+(define-command-gaol 'tabbar-to-top tabbar-to-top)
+(define-command-gaol 'tabbar-to-bottom tabbar-to-bottom)
+(define-command-gaol 'tabbar-to-left tabbar-to-left)
+(define-command-gaol 'tabbar-to-right tabbar-to-right)
 
 (def-frame-class tabbar-horizontal-left-edge ()
   (bind-keys tabbar-horizontal-left-edge-keymap
-	     "Button1-Off" 'horiz-button1
-	     "Button2-Off" 'horiz-button2
-	     "Button3-Off" 'horiz-button3))
+	     "Button1-Off" 'tabbar-to-left
+	     "Button2-Off" 'tabbar-toggle
+	     "Button3-Off" 'tabbar-to-right))
 
 (def-frame-class tabbar-vertical-top-edge ()
   (bind-keys tabbar-vertical-top-edge-keymap
-	     "Button1-Off" 'vert-button1
-	     "Button2-Off" 'vert-button2
-	     "Button3-Off" 'vert-button3))
+	     "Button1-Off" 'tabbar-to-top
+	     "Button2-Off" 'tabbar-toggle
+	     "Button3-Off" 'tabbar-to-bottom))
 
 (defvar prev-button-keymap
   (bind-keys (make-keymap)
@@ -399,18 +437,16 @@
          (setq typ 'default)
          (setq dim-x (- dim-x (* styletab:borders-dimension 2)))         
          (setq dim-y (- dim-y styletab:borders-dimension))
-         (when
-             (not (or (eq current-title 'top)
-                      (eq current-title 'bottom)))
+         (when (not (or (eq current-title 'top)
+                        (eq current-title 'bottom)))
            (setq dim-x (+ dim-x styletab:borders-dimension))
            (setq dim-y (- dim-y styletab:borders-dimension))))
        (when (eq type 'shaped-transient)
          (setq typ 'transient)
          (setq dim-x (- dim-x (* styletab:borders-dimension 2)))
          (setq dim-y (- dim-y styletab:borders-dimension))
-         (when
-             (not (or (eq current-title 'top)
-                      (eq current-title 'bottom)))
+         (when (not (or (eq current-title 'top)
+                        (eq current-title 'bottom)))
            (setq dim-x (+ dim-x styletab:borders-dimension))
            (setq dim-y (- dim-y styletab:borders-dimension))))
        (set-window-type w typ)
@@ -480,18 +516,16 @@
          (setq typ 'shaped)
          (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
          (setq dim-y (+ dim-y styletab:borders-dimension))
-         (when
-             (not (or (eq current-title 'top)
-                      (eq current-title 'bottom)))
+         (when (not (or (eq current-title 'top)
+                        (eq current-title 'bottom)))
            (setq dim-x (- dim-x styletab:borders-dimension))
            (setq dim-y (+ dim-y styletab:borders-dimension))))
        (when (eq type 'transient)
          (setq typ 'shaped-transient)
          (setq dim-x (+ dim-x (* styletab:borders-dimension 2)))
          (setq dim-y (+ dim-y styletab:borders-dimension))
-         (when
-             (not (or (eq current-title 'top)
-                      (eq current-title 'bottom)))
+         (when (not (or (eq current-title 'top)
+                        (eq current-title 'bottom)))
            (setq dim-x (- dim-x styletab:borders-dimension))
            (setq dim-y (+ dim-y styletab:borders-dimension))))
        (set-window-type w typ)
@@ -1090,6 +1124,7 @@
      (y-justify . center)
      (background . ,(tab-images "top"))
      (foreground . ,title-colors-images)
+     (font . ,(lambda () (list styletab:title-font)))
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
      (text . ,window-name))
@@ -1120,6 +1155,7 @@
      (y-justify . center)
      (background . ,(tab-images "bottom"))
      (foreground . ,title-colors-images)
+     (font . ,(lambda () (list styletab:title-font)))
      (bottom-edge . ,title-edge)
      (height . ,title-height-s)
      (text . ,window-name))
@@ -2052,7 +2088,7 @@
 
 ;; also reset all cache 
 ;;
-(define (clear-cache-reframe-style)
+(define (clear-cache-reload-frame-style)
   (setq icon-cache (make-weak-table eq-hash eq))
   (setq frame-cache (make-weak-table eq-hash eq))
   (reload-frame-style theme-name))
@@ -2062,13 +2098,13 @@
 ;;
 (call-after-state-changed '(title-position) create-frames-only)
 
-
+(custom-set-property 'styletab:title-font ':after-set reframe-all)
 (custom-set-property 'styletab:custom-colors ':after-set reframe-all)
 (custom-set-property 'styletab:focused-color ':after-set reframe-all)
 (custom-set-property 'styletab:highlighted-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-highlighted-color ':after-set reframe-all)
-(custom-set-property 'styletab:style ':after-set clear-cache-reframe-style)
+(custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
 (custom-set-property 'styletab:title-dimension ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:custom-button-width ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:button-width ':after-set clear-cache-reframe)
