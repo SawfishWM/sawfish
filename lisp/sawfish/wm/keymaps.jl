@@ -132,9 +132,9 @@
 							(tab-refresh-group (current-event-window) 'raise)))
 				      "Button1-Off2" 'toggle-window-shaded
 				      "Button1-Move" 'move-window-interactively
-				      "C-Button1-Off" 'tab-add-to-group
-				      "C-Button1-Click" 'tab-release-window
-				      "C-Button1-Move" 'move-window-interactively)
+				      "Button2-Off" 'tab-add-to-group
+				      "Button3-Click" 'tab-release-window
+				      "Button3-Move" 'move-window-interactively)
     "Keymap of window tabbar. Mouse-bindings only."
     :group bindings
     :type keymap)
