@@ -34,7 +34,7 @@
     (open rep
           rep.system
           rep.data.records
-	  sawfish.wm.gaol
+          sawfish.wm.gaol
           sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.commands
@@ -135,7 +135,8 @@
 
   (define (tab-delete-window-from-tab-groups w)
     "Find window's group and remove it."
-    (tab-delete-window-from-group w (tab-window-group-index w)))
+    (when (window-tabbed-p w)
+      (tab-delete-window-from-group w (tab-window-group-index w))))
 
   (define (tab-put-window-in-group win index)
     "Put window in group at given index."
@@ -151,9 +152,9 @@
 
   (define (tab-refresh-group win prop)
     "Refresh the entire group containing WIN according to PROP.
-PROP can be one of the symbols : frame, reframe, reframe-style, move,
-resize, type, depth, shade, unshade, iconify, uniconify,
-fixed-position."
+PROP can be one of the symbols: raise, frame, reframe, style, move,
+resize, title-position, type, depth, shade, unshade, iconify, uniconify,
+sticky, unsticky, fixed-position."
     (when tab-refresh-lock
       (setq tab-refresh-lock nil)
       (unwind-protect
@@ -174,13 +175,13 @@ fixed-position."
              ((eq prop 'reframe)
               (mapcar (lambda (w)
                         (reframe-window w)) wins))
-             ((eq prop 'reframe-style)
+             ((eq prop 'style)
               (let ((group-frame-style (window-get win 'frame-style))
                     (dim (window-frame-dimensions win))
                     (pos (window-position win)))
                 (mapcar (lambda (w)
                           (set-frame-style w group-frame-style)
-                          (tab-move-resize-frame-window-to w (car pos) (cdr pos) (car dim) (cdr dim)) 
+                          (tab-move-resize-frame-window-to w (car pos) (cdr pos) (car dim) (cdr dim))
                           (reframe-window w)) wins)))
              ((or (eq prop 'move) (eq prop 'resize))
               (let ((dim (window-frame-dimensions win))
@@ -199,7 +200,7 @@ fixed-position."
               (let ((group-frame-type (window-get win 'type)))
                 (mapcar (lambda (w)
                           (window-put w 'type group-frame-type)
-                          (reframe-window w)) wins)))
+                          (rebuild-frame w)) wins)))
              ((eq prop 'depth)
               (let ((group-frame-depth (window-get win 'depth)))
                 (mapcar (lambda (w)
@@ -234,6 +235,13 @@ fixed-position."
   ;; Entry points
   (define (tab-group-window w win)
     "Add window W to tabgroup containing WIN."
+    ;; from tabgroup to tabgroup
+    (when (window-tabbed-p w)
+      (tab-delete-window-from-tab-groups w))
+    ;; sort windows/tabs (depth)
+    (tab-refresh-group win 'raise)
+    (raise-window w)
+    (set-input-focus w)
     (let* ((index (tab-window-group-index win))
            (index2 (tab-window-group-index w))
            ;; adopt window settings for the new tab
@@ -244,32 +252,25 @@ fixed-position."
            (group-frame-title-position (window-get win 'title-position))
            (group-frame-depth (window-get win 'depth)))
       (when (not (eq index index2))
-        ;; unshade windows if add/remove
-        (if (window-get w 'shaded)
-            (unshade-window w))
-        (if (window-get win 'shaded)
-            (unshade-window win))
-        (if (not (window-tabbed-p win))
-            (window-put win 'tabbed t))
-        (window-put w 'tabbed t)
+        (if (window-get w 'shaded) (unshade-window w))
+        (if (window-get win 'shaded) (unshade-window win))
         (window-put w 'frame-style group-frame-style)
         (window-put w 'type group-frame-type)
         (window-put w 'title-position group-frame-title-position)
-        ;; reframe w with new frame-style , type, title-position.
-        ;; tab-move-resize-frame-window-to, tab-refresh-group expectet
-        ;; the same frame for w and win
-        (reframe-window w)
         (window-put w 'sticky group-frame-sticky)
         (window-put w 'depth group-frame-depth)
         (window-put w 'fixed-position group-frame-fixed-position)
-        ;; ugly hack, don't know why it's needed, but new groups are
-        ;; listed with pos (0,0):
+        ;; reframe w here, tab-refresh-group expectet
+        ;; the same frame for w and win
+        (reframe-window w)
         (tab-refresh-group win 'move)
         (tab-put-window-in-group w index)
         (tab-delete-window-from-group w index2)
         (tab-refresh-group win 'frame)
-        (tab-refresh-group w 'raise))))
-
+        (tab-refresh-group w 'move)
+        (if (not (window-tabbed-p win)) (window-put win 'tabbed t))
+        (window-put w 'tabbed t))))
+  
   (define (tab-release-window w)
     "Release the window from its group."
     (tab-delete-window-from-tab-groups w)
@@ -323,34 +324,37 @@ fixed-position."
   (unless batch-mode
     (add-hook 'window-state-change-hook
               (lambda (win args)
-                (setq args (car args))
-                (cond ((eq 'sticky args)
-                       (tab-group-sticky win))
-                      ((eq 'fixed-position args)
-                       (tab-refresh-group win 'fixed-position))
-                      ((eq 'frame-style args)
-                       (tab-refresh-group win 'reframe-style))
-                      ((eq 'type args)
-                       (tab-refresh-group win 'type))
-                      ((eq 'stacking args)
-                       (tab-refresh-group win 'depth)))))
+                (when (window-tabbed-p win)
+                  (setq args (car args))
+                  (cond ((eq 'sticky args)
+                         (tab-group-sticky win))
+                        ((eq 'fixed-position args)
+                         (tab-refresh-group win 'fixed-position))
+                        ((eq 'frame-style args)
+                         (tab-refresh-group win 'style)
+                         (tab-refresh-group win 'move))
+                        ((eq 'type args)
+                         (tab-refresh-group win 'type))
+                        ((eq 'stacking args)
+                         (tab-refresh-group win 'depth))))))
     
-    (add-hook 'focus-in-hook (lambda (win) 
-                                     (if tab-raise-on-hover
-				         (tab-group-raise win))))
-    (add-hook 'after-move-hook (lambda (win) (tab-refresh-group win 'move)))
-    (add-hook 'after-resize-hook (lambda (win) (tab-refresh-group win 'resize)))
+    (add-hook 'focus-in-hook 
+              (lambda (win) 
+                (if tab-raise-on-hover
+                    (tab-group-raise win))))
+    (add-hook 'after-move-hook (lambda (win)  (if (window-tabbed-p win) (tab-refresh-group win 'move))))
+    (add-hook 'after-resize-hook (lambda (win)  (if (window-tabbed-p win) (tab-refresh-group win 'resize))))
     ;; only update tabs by move if opaque move mode (opaque = slow)
     ;;
     (when (eq move-outline-mode 'opaque)
-      (add-hook 'while-moving-hook (lambda (win) (tab-refresh-group win 'move)))
+      (add-hook 'while-moving-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'move))))
       )
-    (add-hook 'window-resized-hook (lambda (win) (tab-refresh-group win 'resize)))
-    (add-hook 'shade-window-hook (lambda (win) (tab-refresh-group win 'shade)))
-    (add-hook 'unshade-window-hook (lambda (win) (tab-refresh-group win 'unshade)))
-    (add-hook 'iconify-window-hook (lambda (win) (tab-refresh-group win 'iconify)))
-    (add-hook 'uniconify-window-hook (lambda (win) (tab-refresh-group win 'uniconify)))
-    (add-hook 'add-to-workspace-hook (lambda (win) (tab-refresh-group win 'frame)))
+    (add-hook 'window-resized-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'resize))))
+    (add-hook 'shade-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'shade))))
+    (add-hook 'unshade-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'unshade))))
+    (add-hook 'iconify-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'iconify))))
+    (add-hook 'uniconify-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'uniconify))))
+    (add-hook 'add-to-workspace-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'frame))))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
 
   (gaol-add tab-refresh-group)
