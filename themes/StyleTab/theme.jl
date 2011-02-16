@@ -428,7 +428,7 @@
       (when (or (eq cur 'shaped)
                 (eq cur 'utility))
         (setq new 'default)
-        (setq dim-x (- dim-x (* styletab:borders-dimension 2)))         
+        (setq dim-x (- dim-x (* styletab:borders-dimension 2)))
         (setq dim-y (- dim-y styletab:borders-dimension))
         (when (not (or (eq current-title 'top)
                        (eq current-title 'bottom)))
@@ -452,7 +452,7 @@
                        (eq current-title 'bottom)))
           (setq dim-y (- dim-y (* styletab:borders-dimension 2)))
           (setq dim-x (- dim-x styletab:borders-dimension styletab:title-dimension)))))
-    
+
     (when (eq dest 'sha-tra)
       (if (or (eq cur 'shaped)
               (eq cur 'utility))
@@ -535,7 +535,7 @@
 (def-frame-class frame-type-button ()
   (bind-keys frame-type-button-keymap
              "Button1-Off" 'set-frame-default-and-default/transient-toggle
-             "Button2-Off" 'set-frame-unframed-and-unframed/default-toggle
+             "Button2-Off" 'set-frame-unframed-and-unframed/shaped-transient-toggle
              "Button3-Off" 'set-frame-shaped-and-shaped/shaped-transient-toggle))
 
 (defvar prev-button-keymap
@@ -2089,7 +2089,7 @@
     (current-title-w w)))
 
 (define (reframe-windows style)
-  (map-windows 
+  (map-windows
    (lambda (w)
      (when (eq (window-get w 'current-frame-style) style)
        (current-title-w w)
@@ -2098,6 +2098,12 @@
 (define reframe-all
   (lambda ()
     (reframe-windows theme-name)))
+
+(define (reframe-one w)
+  (when (not (window-get w 'tabbed))
+    (when (eq (window-get w 'current-frame-style) theme-name)
+      (current-title-w w)
+      (rebuild-frame w))))
 
 ;; also reset icon cache
 ;;
@@ -2113,9 +2119,7 @@
   (setq frame-cache (make-weak-table eq-hash eq))
   (reload-frame-style theme-name))
 
-;; Create only frames, don't rebuild-frame/reframe-window.
-;; Tabthemes will reframe/rebuild windows call from tabgroup.jl. 
-;;
+(call-after-state-changed '(sticky fixed-position stacking) reframe-one)
 (call-after-state-changed '(title-position) create-frames-only)
 
 (custom-set-property 'styletab:title-font ':after-set reframe-all)

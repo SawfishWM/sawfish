@@ -491,6 +491,4 @@
     (when (eq (window-get w 'current-frame-style) 'Elberg-tabbed)
       (create-frames)))
 
-;; Create only frames, don't rebuild-frame/reframe-window.
-;; Tabthemes will reframe/rebuild windows call from tabgroup.jl.
 (call-after-state-changed '(title-position) create-frames-only)
