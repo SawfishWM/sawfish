@@ -262,6 +262,7 @@
 
 (define (rotate-tab src dest)
   (let ((w (current-event-window))
+        (wins (tab-group-windows-index (current-event-window)))
         pos-x pos-y fdim framew framehigh dim-x dim-y current-title type)
     (if (not (window-get w 'title-position))
         (case styletab:titlebar-place
@@ -321,16 +322,14 @@
           (when (>= (+ pos-y dim-y styletab:title-dimension framew) (screen-height))
             (setq pos-y (- (screen-height) dim-y styletab:title-dimension framew)))
           (when (<= pos-y 0) (setq pos-y 0))))
-      
-      (window-put w 'title-position dest)
+
+      (mapcar (lambda (w)
+                (window-put w 'title-position dest)) wins)
       (call-window-hook 'window-state-change-hook w (list '(title-position)))
-      (reframe-window w)
-      (move-window-to w pos-x pos-y)
-      (resize-window-to w dim-x dim-y)
-      (when (window-get w 'tabbed)
-        (tab-refresh-group w 'title-position)
-        (tab-refresh-group w 'reframe)
-        (tab-refresh-group w 'move)))))
+      (mapcar (lambda (w)
+                (reframe-window w)
+                (move-window-to w pos-x pos-y)
+                (resize-window-to w dim-x dim-y)) wins))))
 
 (define (tabbar-to-top)
   "Move tab-bar to top."
@@ -406,6 +405,7 @@
 
 (define (f-type dest)
   (let ((w (current-event-window))
+        (wins (tab-group-windows-index (current-event-window)))
         pos-x pos-y dim-x dim-y cur new current-title)
     (if (not (window-get w 'title-position))
         (case styletab:titlebar-place
@@ -508,13 +508,11 @@
             (setq dim-y (- dim-y styletab:title-dimension))
           (setq dim-x (- dim-x styletab:title-dimension)))))
     (when (not (eq cur new))
-      (window-put w 'type new)
-      (reframe-window w)
-      (move-window-to w pos-x pos-y)
-      (resize-window-to w dim-x dim-y)
-      (when (window-get w 'tabbed)
-        (tab-refresh-group w 'type)
-        (tab-refresh-group w 'move)))))
+      (mapcar (lambda (w)
+                (window-put w 'type new)
+                (reframe-window w)
+                (move-window-to w pos-x pos-y)
+                (resize-window-to w dim-x dim-y)) wins))))
 
 (define (set-frame-default-and-default/transient-toggle)
   "Set frametype default and toggle default/transient with resize"
