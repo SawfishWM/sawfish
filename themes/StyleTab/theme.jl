@@ -540,14 +540,14 @@
 
 (defvar prev-button-keymap
   (bind-keys (make-keymap)
-			 "Button3-Off" 'send-group-to-next-workspace
+			 "Button3-Off" 'send-to-next-workspace
              "Button2-Click" 'popup-workspace-list
-             "Button1-Off" 'send-group-to-previous-workspace))
+             "Button1-Off" 'send-to-previous-workspace))
 (defvar next-button-keymap
   (bind-keys (make-keymap)
-             "Button3-Off" 'send-group-to-previous-workspace
+             "Button3-Off" 'send-to-previous-workspace
              "Button2-Click" 'popup-workspace-list
-             "Button1-Off" 'send-group-to-next-workspace))
+             "Button1-Off" 'send-to-next-workspace))
 (define-frame-class 'prev-button '((keymap . prev-button-keymap)))
 (define-frame-class 'next-button '((keymap . next-button-keymap)))
 

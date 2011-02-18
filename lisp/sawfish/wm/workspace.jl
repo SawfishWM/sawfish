@@ -692,19 +692,25 @@ a window"
 
   (define (send-to-next-workspace w count #!optional copy select)
     "Move the window to the next workspace."
+    (require 'sawfish.wm.tabs.tabgroup)
     (ws-call-with-workspace
      (lambda (space)
        (let ((was-focused (eq w (input-focus)))
-	     (orig-space (if (window-in-workspace-p
-			      w current-workspace)
-			     current-workspace
-			   (car (window-workspaces w)))))
-	 (when orig-space
-	   (copy-window-to-workspace w orig-space space was-focused)
-	   (when select
-	     (select-workspace space was-focused))
-	   (unless copy
-	     (move-window-to-workspace w orig-space space was-focused)))))
+             (orig-space (if (window-in-workspace-p
+                              w current-workspace)
+                             current-workspace
+                           (car (window-workspaces w))))
+             (wins (tab-group-windows-index w)))
+         (when orig-space
+           (mapcar (lambda (w)
+                     (copy-window-to-workspace w orig-space space)) wins)
+           (when select
+             (select-workspace space was-focused))
+           (unless copy
+             (mapcar (lambda (w)  
+                       (move-window-to-workspace w orig-space space)) wins))
+           (when (and was-focused (window-visible-p w))
+             (set-input-focus w)))))
      count workspace-send-boundary-mode))
 
   (define (send-to-previous-workspace w count #!optional copy select)
