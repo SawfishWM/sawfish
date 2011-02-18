@@ -2119,6 +2119,7 @@
 
 (call-after-state-changed '(sticky fixed-position stacking) reframe-one)
 (call-after-state-changed '(title-position) create-frames-only)
+(add-hook 'remove-from-workspace-hook reframe-one)
 
 (custom-set-property 'styletab:title-font ':after-set reframe-all)
 (custom-set-property 'styletab:custom-colors ':after-set reframe-all)
