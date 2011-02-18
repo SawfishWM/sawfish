@@ -214,10 +214,11 @@
     :type keymap)
 
   (defcustom raise-lower-button-keymap (bind-keys (make-keymap)
-						  "Button1-Off" 'raise-window
-						  "Button2-Off" 'lower-window
-						  "Button4-Off" 'raise-window-depth
-						  "Button5-Off" 'lower-window-depth)
+						  "Button1-Off" 'raise-window-depth
+						  "Button2-Off" 'raise-window
+						  "Button3-Off" 'lower-window-depth
+						  "Button4-Off" 'raise-window
+						  "Button5-Off" 'lower-window)
     "Keymap of \"raise/lower\" button. Mouse-bindings only."
     :group bindings
     :type keymap)
