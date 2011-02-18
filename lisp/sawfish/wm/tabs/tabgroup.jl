@@ -242,8 +242,8 @@ sticky, unsticky, fixed-position."
   ;; Entry points
   (define (tab-group-window w win)
     "Add window W to tabgroup containing WIN."
-    ;; don't add a window as tab, if it exists
-    ;; on another workspace or viewport
+    ;; don't add a window as tab, if it already
+    ;; exists on another workspace
     (when (not (cdr (window-get win 'workspaces)))
       ;; from tabgroup to tabgroup
       (when (window-tabbed-p w)
