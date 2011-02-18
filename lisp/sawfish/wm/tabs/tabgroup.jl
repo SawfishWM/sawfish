@@ -29,7 +29,7 @@
             tab-find-window
             tab-rank
             tab-group-window-list
-            tab-group-windows-index
+            tab-group-window-index
             tab-group-window)
     
     (open rep
@@ -113,7 +113,7 @@
        (t
         (loop (+ index 1))))))
 
-  (define (tab-group-windows-index win)
+  (define (tab-group-window-index win)
     "Return the windows of the group containing win."
     (let* ((index (tab-window-group-index win))
            (wins (tab-group-window-list (nth index tab-groups))))
@@ -367,5 +367,5 @@ sticky, unsticky, fixed-position."
     (add-hook 'add-to-workspace-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'frame))))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
 
-  (gaol-add tab-refresh-group tab-group-windows-index)
+  (gaol-add tab-refresh-group tab-group-window-index)
   )
