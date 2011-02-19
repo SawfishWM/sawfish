@@ -46,8 +46,8 @@
       (remove-hook 'randr-change-notify-hook recreate-flippers)))
 
   (defcustom hot-spots-corner-length 50
-    "In hot-spot, this size portion is recognized as \"corners\".
-The unit is pixel, and applies to both x and y direction."
+    "The size portion of the screen-border recognized as \"corners\",
+in pixels. Applies to both x and y direction."
     :type number
     :range (5 . 500)
     :group edge-actions)

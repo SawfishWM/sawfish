@@ -50,7 +50,7 @@
     :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
 
   (defcustom top-bottom-edge-move-action 'none
-    "Action for the top and bottom screen-edge while moving."
+    "Action for the top and bottom screen-edge while moving a window."
     :group edge-actions
     :type  (choice none viewport-drag flip-workspace flip-viewport))
 
