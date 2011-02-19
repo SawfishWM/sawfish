@@ -1,3 +1,64 @@
+2011-02-19  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/utils.jl: improved two strings
+
+2011-02-18  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/workspace.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl: - support tabbed windows in
+	send-to/copy-to-next/previous-workspace
+	- add tab-group-window-index function
+	- don't add a window to tabgroup, if it already exists on another
+	workspace
+	-- [fuchur]
+
+	* lisp/sawfish/wm/keymaps.jl: more natural keymap for raise-lower-button
+	-- [fuchur]
+
+	* themes/StyleTab/theme.jl: - make use of tab-group-window-index
+	- update send-to-prev/next button after action performed
+	-- [fuchur]
+
+2011-02-16  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/tabs/tabgroup.jl: - make sure we only call the
+	tab-hooks if the window is actually tabbed
+	- in tab-refresh-group rename the reframe-style property to style
+	- use reframe-window rather than rebuild-frame in tab-refresh-group for type property
+	- make tab-group-window with non-click focus-modes work (regression)
+	- make sure already tabbed windows, can be added to a different tab-group
+	-- [fuchur]
+
+	* lisp/sawfish/wm/keymaps.jl: improved default bindings for tabbar [fuchur]
+
+	* themes/StyleTab/theme.jl: - make Button2-Off for menu-button work
+	- add call-after-state-changed for sticky, fixed-position and stacking
+	properties [fuchur]
+
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: removed old comment [fuchur]
+
+2011-02-13  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/edge/actions.jl: don't call edge-action for
+	non-dragging, while moving a window. Else both edge-actions would be
+	called, which would mess up things.
+
+	* themes/StyleTab/theme.jl: - option for choosing titlebar-font, (independent
+	of prompt/message font)
+	- make commands for moving tabbars accessible to the keyboard (tabbar-move-to-top/bottom/left/right)
+	- rewrote code for frametype-button
+	- add keybindings for changing frametype with resize
+	- change fallback font for tabbar to overall default (failsafe)
+	- temporarly disable reloading the style immediately (until crash is fixed)
+	-- [fuchur]
+
+	* debian/rules: interims update [Daniel M. German]
+
+2011-02-11  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/commands.jl: fixed a small typo
+
+	* themes/StyleTab/theme.jl: updated README
+	                            fixed a regression regarding the icon [fuchur]
+				    updated docstring for styletab:style option
+
 2011-02-11  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands.jl
 	* lisp/sawfish/wm/state/shading.jl
@@ -7,7 +68,7 @@
 	* themes/StyleTab/theme.jl: Major rework
 	- compressed long 'defcustom's using mapc.
 	- Improved tabbar-rotating commands definition.
-	You may have to delete styletab-related parts in ~/.sawfish/custom.
+	You will have to delete styletab-related parts in ~/.sawfish/custom.
 
 	Definitions are now collected into one function.
 	For users, tooltip is shown for tab-rotating button.
@@ -16,6 +77,69 @@
 	- typo fix 'frame-typ' -> 'frame-type'. It accompanies
 	many image filenames change.
 	Other minor typo fix:  rigth  -> right, hight -> height
+
+2011-02-10  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/ext/apps-menu.jl: more robust category loading [Matthew Love]
+
+	* lisp/sawfish/wm/frames.jl: removed tabs-raise-on-hover from here
+
+	* lisp/sawfish/wm/tabs/tabgroup.jl: moved tabs-raise-on-hover here. Let
+	tabgroup's focus-in-hook handle it (read: it's now working properly).
+	- add "tabbed" property to tabbed windows
+	- added window-tabbed-p function
+	- fixed the "overlapping glitch"
+	- fixed some focus issues
+	- don't use sawfish's default groups for tabs
+	- support for calling title-position from theme.jl
+	-- [fuchur]
+
+	* themes/StyleTab/theme.jl: updated for above changes [fuchur]
+	                            make switching styles work on-the-fly
+
+	* lisp/sawfish/wm/gaol.jl: added reload-frame-style to list of gaol'ed
+	functions
+
+2011-02-08  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/ext/apps-menu.jl: move "Emulators" category from
+	"Games" to "System" / check whether a .desktop file contains a valid
+	category string (more robustness). [Matthew Love]
+
+2011-02-07  Christopher Roy Bratusek <zanghar@freenet.de>
+	* themes/StyleTab/theme.jl: overall internal improvements [fuchur]
+	                            added Silver and SilverColor styles [fuchur]
+
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl: moved from adjustment-title from
+	frames.jl to tabgroup.jl / small fixups [fuchur]
+
+	* man/sawfish.1: fixed typo (s/replac/replace) [Matthew Love]
+
+	* lisp/sawfish/wm/ext/apps-menu.jl: a new version of our FDO
+	menu-implementation by Matthew Love. Features filtering-abilities and
+	improved categorizing of applications, aswell as overall polishment
+
+	* man/sawfish.texi: updated docs for apps-menu [Matthew Love]
+
+2011-02-02  Christopher Roy Bratusek <zanghar@freenet.de>
+	* themes/StyleTab/theme.jl: fixed a typo (default style is Dark not DarkTab)
+	                            updated README [fuchur]
+				    improved Reduce and Smoothly styles when
+				    there are about 30 buttons [fuchur]
+
+2011-02-01  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm/state/iconify.jl: removed an unused #!key argument
+	from toggle-window-sticky/viewport
+
+	* themes/DarkTab: removed DarkTab theme
+
+	* themes/StyleTab: added StyleTab (successor of DarkTab)
+	                   changes to original StyleTab:
+			   - default style changed to Dark
+			   - improved README
+
+	* man/news.texi
+	* themes/Makefile.in
+	* lisp/sawfish/wm/user.jl: updated for DarkTab > StyleTab switch
 
 2011-02-01  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands.jl
@@ -93,6 +217,47 @@
 	Padding frame classes, which are used for tab, have empty
 	keymap. Don't show their tooltip.
 
+2011-01-30  Christopher Roy Bratusek <zanghar@freenet.de>
+	* lisp/sawfish/wm.jl
+	* lisp/sawfish/wm/gaol.jl
+	* themes/StyleTab/theme.jl
+	* themes/Elberg-tabbed/theme.jl
+	* themes/get-S-tabbed/theme.jl: reverted commit "Simplified accesses to
+	the module sawfish.wm.tabs.tab." (452d34d5df577f9ffa832ba6e9997017a5332efc)
+
+	* src/flippers.c: give EdgeActions subroutines better names:
+	  - enable-flippers => raise-flippers
+	  - disable-flippers => destroy-flippers
+	
+	* src/flippers.c: updated recreate-flippers routine
+	                  removed flippers-after-restacking (dupplicate of
+			  raise-flippers)
+
+	* lisp/sawfish/wm/edge/util.jl: - updated for subroutine renaming
+	                                - renamed flippers-activate to
+					  activate-flippers (consistency)
+					- renamed hot-spots-area to
+					  hot-spots-corner-length
+
+	* lisp/sawfish/wm/edge/actions.jl: - updated for function renaming
+	                                   - renamed edges-activate to
+					     activate-edges (consistency)
+					   - changed default value for
+					     *-move-action to "none" rather than
+					     "none/hot-spot", as hot-spot is not
+					     called while moving a window
+
+	* lisp/sawfish/wm/user.jl: updated for function renaming
+
+	* man/sawfish.texi: began writing EA docs:
+	                    - Subroutines
+			    - Utils
+			    - Infrastructure
+
+	* lisp/sawfish/wm/tabs/tabgroup.jl: when moving a window using keyboard
+	it could sometimes happen, that there was a "gap" between the tabs
+	afterwards. This is fixed now. [fuchur]
+
 2011-01-18  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands/launcher.jl
 	* lisp/sawfish/wm/custom.jl
@@ -146,6 +311,11 @@
 	* sounds/Makefile.in
 	* themes/Makefile.in: Replaced sawmill -> sawfish.
 	Any remaining "sawmill" shouldn't be changed, except po/*po.
+
+2011-01-15  Christopher Roy Bratusek <zanghar@freenet.de>
+	* sawfish.pc.in: fixed includedir
+
+	* man/news.texi: NEWS refinement
 
 2011-01-08  Teika Kazura <teika@lavabit.com>
 	* src/sawfish_subrs.h: Exports symbols in src/flippers.c.
