@@ -21,7 +21,7 @@
 (define-structure sawfish.wm.tabs.tabgroup
 
     (export window-tabbed-p
-            adjustment-title
+            adjust-title
             tab-refresh-group
             tab-release-window
             tab-raise-left-window
@@ -70,7 +70,7 @@
     (d tab-group-dimensions)
     (wl tab-group-window-list))
 
-  (define (adjustment-title w)
+  (define (adjust-title w)
     (call-window-hook 'window-state-change-hook w (list '(title-position))))
 
   (define (tab-move-resize-frame-window-to win x y w h)
@@ -168,7 +168,7 @@ sticky, unsticky, fixed-position."
           (let* ((index (tab-window-group-index win))
                  (wins (tab-group-window-list (nth index tab-groups)))
                  (focus (tab-group-offset win 0)))
-            (adjustment-title win)
+            (adjust-title win)
             (cond
              ((eq prop 'raise)
               (raise-windows focus wins))
