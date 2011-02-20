@@ -34,7 +34,7 @@
   (define-structure-alias hot-spots sawfish.wm.edge.hot-spots)
 
   (defcustom hot-spot-delay 250
-    "Delay (in milliseconds) of hot-spot."
+    "Delay (in milliseconds) before activating a hot-spot."
     :group edge-actions
     :type number
     :range (0 . nil))
