@@ -126,10 +126,7 @@
     :type keymap)
 
   (defcustom tabbar-keymap (bind-keys (make-keymap)
-				      "Button1-Off" (lambda ()
-						      (require 'sawfish.wm.tabs.tabgroup)
-						      (unless tab-raise-on-hover
-							(tab-refresh-group (current-event-window) 'raise)))
+				      "Button1-Off" 'maybe-raise-tab
 				      "Button1-Off2" 'toggle-window-shaded
 				      "Button1-Move" 'move-window-interactively
 				      "Button2-Off" 'tab-add-to-group

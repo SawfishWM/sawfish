@@ -30,7 +30,8 @@
             tab-rank
             tab-group-window-list
             tab-group-window-index
-            tab-group-window)
+            tab-group-window
+	    maybe-raise-tab)
     
     (open rep
           rep.system
@@ -55,6 +56,14 @@
     "Raise tabs while hovering them."
     :group focus
     :type boolean)
+
+  (define (maybe-raise-tab w)
+    "Raise a window, when it's a tab and automatic raising of is disabled"
+    (when (and (not tab-raise-on-hover)
+	       (window-tabbed-p w))
+      (tab-refresh-group w 'raise)))
+
+  (define-command 'maybe-raise-tab maybe-raise-tab #:spec "%W")
 
   (define tab-groups nil)
   (define tab-refresh-lock t)
