@@ -7301,6 +7301,34 @@ argument. This can't be a string.
 
 @end defun
 
+@defun toggle-or-exec regex prog #!key match-class
+This function is a wrapper around @code{jump-or-exec}, which turns windows into
+quake-like "toggle-windows". That means, if the matching window is focussed, it
+will be iconified (without animation). Else it works in the same way.
+
+There is also a companion window-matcher, @code{iconify-on-leave}. That way the
+window will also be iconified, when the pointer leaves it.
+
+@lisp
+;; Examples:
+
+;; => application dolphin matched on it's WM_NAME 
+;; => will be iconified when key pressed while it's focused
+;;  ( bind-keys global-keymap "Home" 
+;;    `( toggle-or-exec "Dolphin" "dolphin ~" )
+
+;; => application konsole matched on it's WM_CLASS
+;; => will be iconified when key pressed while it's focused
+;; => will also be iconified when the cursor leaves it
+;;  ( bind-keys global-keymap "F12"
+;;    `( toggle-or-exec "Konsole" "konsole" #:match-class t ) 
+;;
+;;  ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
+;;    '( ( iconify-on-leave .t ) ) )
+@end lisp
+
+@end defun
+
 @node Common Applications,, Application Invocation, External Applications
 @section Common Applications
 There're some functions and variables for invocation of external
