@@ -4868,6 +4868,134 @@ action, if the edge was activated while dragging a window over it. Hot-Spots is
 not supported when doing so.
 @end defun
 
+EdgeFlip (@code{sawfish.wm.edge.flip}):
+
+This is the traditional EdgeFlip. When a window or the pointer hits the
+screen-edge, the screen is shifted by either one Viewport or one Workspace in
+that direction. The pointer is warped accordingly (to keep in logical position).
+
+@defvr Customizable edge-flip-delay 250
+"Delay (in milliseconds) of flipping of viewport / workspace."
+@end defvr
+
+@defun edge-flip-invoke edge type
+This function invokes edge-fliping. edge (a symbol) is the screen-edge that is active
+(left, right, top, bottom), type is either @code{workspace} or @code{viewport}.
+@end defun
+
+ViewportDrag (@code{sawfish.wm.edge.viewport-drag}):
+
+iViewportDrag (formerly Infinite-Desktop) is a mechanic, that shifts the
+Viewport accordingly to which screen edge was activated. This way the Viewport
+becomes virtually "infinite", regardless of the physical size (thus the old name).
+
+@defvr Customizable viewport-drag-distance 64
+Amount to drag the viewport (in pixel) each time the pointer hits the screen edge.
+@end defvr
+
+@defvr Customizable viewport-drag-cursor-distance 32
+"Amount to pull back the cursor (in pixel) after dragging the viewport."
+Recommended is half of @code{viewport-drag-distance}.
+@end defvr
+
+@defun viewport-drag edge
+This function invokes viewport-dragging. edge is the screen-edge that is active
+(left, right, top, bottom) (a symbol).
+@end defun
+
+HotSpots (@code{sawfish.wm.edge.hot-spots}):
+
+HotSpots is a mechanic, which allows for practically everything to be done when
+a screen edge or a corner is activated. the corners are defined via
+@code{hot-spots-corner-length}. Only HotSpots responds to the corners.
+
+That way your screen-edge is actually split into 12: 4 corners, two times 4
+edges (as explained above actions are split for when while moving a window and
+for when activating the edges using the pointer). Corners are not recognized for
+for while moving a window.
+
+@c this is going to be changed by Teika, he said
+HotSpots only allows functions to be used as actions, though practically
+everything can be done this way. If the arguement is not a function, an
+error is thrown, to in form the user.
+
+@defvr Customizable hot-spot-delay
+Delay (in milliseconds) before activating a hot-spot.
+@end defvr
+
+@defvr Customizable left-edge-function nil
+The function launched when hitting the left-edge.
+@end defvr
+
+@defvr Customizable top-left-corner-function nil
+The function launched when hitting the top-left-corner.
+@end defvr
+
+@defvr Customizable top-edge-function nil
+The function launched when hitting the top-edge.
+@end defvr
+
+@defvr Customizable top-right-corner-function nil
+The function launched when hitting the top-right-corner.
+@end defvr
+
+@defvr Customizable right-edge-function nil
+The function launched when hitting the bottom-edge.
+@end defvr
+
+@defvr Customizable bottom-right-corner-function nil
+The function launched when hitting the bottom-right-corner.
+@end defvr
+
+@defvr Customizable bottom-edge-function nil
+The function launched when hitting the bottom-edge.
+@end defvr
+
+@defvr Customizable top-left-corner-function nil
+The function launched when hitting the bottom-left-corner.
+@end defvr
+
+@defun hot-spot-invoke spot
+This function invokes the hot-spot. spot (a symbol) is either left,
+top-left, top, top-right, right, bottom-right, bottom or bottom-left.
+@end defun
+
+Example configuration (@file{~/.sawfishrc}):
+
+Note: this is just an example, not all functions in
+      it may be availabe on your system.
+
+@lisp
+( defvar-setq edge-flip-delay 250 )
+( defvar-setq hot-spot-delay 125 )
+
+( defvar-setq top-left-corner-function
+  ( lambda () ( tile-windows ) ) )
+
+( defvar-setq top-right-corner-function
+  ( lambda () ( pager-unhide ) ) )
+
+( defvar-setq  bottom-right-corner-function 
+  ( lambda () ( show-desktop ) ) )
+
+( defvar-setq bottom-left-corner-function
+  ( lambda () ( raise-window ( get-window-by-role "panel_" #:regex t ) ) ) )
+
+( defvar-setq top-edge-function
+  ( lambda () ( jump-or-exec "Konsole" "konsole" #:match-class t ) ) )
+
+( defvar-setq bottom-edge-function
+  ( lambda () ( jump-or-exec "Dolphin" "dolphin" #:match-class t ) ) )
+
+;; actions when pointer hits edge
+( defvar-setq left-right-edge-action 'flip-viewport )
+( defvar-setq top-bottom-edge-action 'none/hot-spot )
+
+;; actions while moving window hits edge
+( defvar-setq left-right-edge-move-action 'flip-workspace )
+( defvar-setq top-bottom-edge-move-action 'none )
+@end lisp
+
 @node RandR and Xinerama, Window Placement, Workspaces, Top
 @chapter RandR and Xinerama
 @cindex RandR
