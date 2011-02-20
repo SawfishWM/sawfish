@@ -1,6 +1,13 @@
 2011-02-20  Christopher Roy Bratusek <zanghar@freenet.de>
 	* lisp/sawfish/wm/edge/hot-spot.jl: small string-change
 
+	* lisp/sawfish/wm/autoload.jl
+	* lisp/sawfish/wm/keymaps.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl: add maybe-raise-tab-function,
+	rather than using a lambda in tabbar keymap (no tooltip then)
+
+	* KEYBINDINGS: updated
+
 	* man/sawfish.texi: EdgeActions docs
 	                    - EdgeFlip
 			    - ViewportDrag
