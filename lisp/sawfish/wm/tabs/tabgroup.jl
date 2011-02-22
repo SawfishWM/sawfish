@@ -30,9 +30,8 @@
             tab-rank
             tab-group-window-list
             tab-group-window-index
-            tab-group-window
-            maybe-raise-tab)
-    
+            tab-group-window)
+
     (open rep
           rep.system
           rep.data.records
@@ -52,19 +51,6 @@
   
   (define-structure-alias tabgroup sawfish.wm.tabs.tabgroup)
   
-    (defcustom tab-raise-on-hover nil
-    "Raise tabs while hovering them."
-    :group focus
-    :type boolean)
-
-    (define (maybe-raise-tab w)
-      "Raise a window, when it's a tab and automatic raising of is disabled"
-      (when (and (not tab-raise-on-hover)
-                 (window-tabbed-p w))
-        (tab-refresh-group w 'raise)))
-    
-    (define-command 'maybe-raise-tab maybe-raise-tab #:spec "%W")
-
   (define current-win nil)
   (define all-wins nil)
   (define oldgroup nil)
@@ -417,7 +403,7 @@ sticky, unsticky, fixed-position."
                          (tab-refresh-group win 'depth)
                          (tab-refresh-group win 'frame))))))
     
-    (add-hook 'focus-in-hook (lambda (win) (if tab-raise-on-hover (tab-group-raise win))))
+    (add-hook 'focus-in-hook (lambda (win) (tab-group-raise win)))
     (when (eq move-outline-mode 'opaque)
       (add-hook 'before-move-hook (lambda (win) (if (window-tabbed-p win) (before-move-resize win)))))
     (add-hook 'after-move-hook  (lambda (win) (after-move-resize win)))
