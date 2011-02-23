@@ -1,15 +1,14 @@
 # For Sawfish specific issues, read <top>/po/README.
-
 # Norwegian (bokmål) translation of sawfish.
 # Copyright © 2000,2001 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 2000-2010.
+# Kjartan Maraas <kmaraas@gnome.org>, 2000-2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish 0.37.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-29 08:51+0200\n"
-"PO-Revision-Date: 2010-10-29 08:54+0200\n"
+"POT-Creation-Date: 2011-02-23 14:37+0100\n"
+"PO-Revision-Date: 2011-02-23 14:42+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "Language: no\n"
@@ -35,7 +34,7 @@ msgid "Sawfish Configurator"
 msgstr "Sawfish konfigurator"
 
 #: ../lisp/sawfish/cfg/widgets/command.jl:52
-#: ../lisp/sawfish/cfg/widgets/keymap.jl:66 ../lisp/sawfish/wm/commands.jl:380
+#: ../lisp/sawfish/cfg/widgets/keymap.jl:66 ../lisp/sawfish/wm/commands.jl:410
 msgid "Command"
 msgstr "Kommando"
 
@@ -46,7 +45,7 @@ msgstr "Udokumentert"
 #: ../lisp/sawfish/cfg/widgets/event.jl:34
 #: ../lisp/sawfish/cfg/widgets/match-window.jl:53
 msgid "Grab..."
-msgstr "Hent..."
+msgstr "Hent …"
 
 #: ../lisp/sawfish/cfg/widgets/gtk/workspace-geometry.jl:32
 #: ../lisp/sawfish/cfg/widgets/workspace-geometry.jl:32
@@ -110,7 +109,7 @@ msgstr "Verdi"
 
 #: ../lisp/sawfish/gtk/widgets/file.jl:32
 msgid "Browse..."
-msgstr "Bla gjennom..."
+msgstr "Bla gjennom …"
 
 #: ../lisp/sawfish/gtk/widgets/file.jl:42
 msgid "Select file"
@@ -135,20 +134,20 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nei"
 
-#: ../lisp/sawfish/wm/autoload.jl:196 ../lisp/sawfish/wm/autoload.jl:197
+#: ../lisp/sawfish/wm/autoload.jl:195 ../lisp/sawfish/wm/autoload.jl:196
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:50
 #: ../lisp/sawfish/wm/commands/viewport-linear.jl:62
 msgid "Index:"
 msgstr "Indeks:"
 
-#: ../lisp/sawfish/wm/commands/launcher.jl:73
-#: ../lisp/sawfish/wm/commands.jl:372
+#: ../lisp/sawfish/wm/commands/launcher.jl:75
+#: ../lisp/sawfish/wm/commands.jl:402
 msgid "Command:"
 msgstr "Kommando:"
 
-#: ../lisp/sawfish/wm/commands/launcher.jl:78
+#: ../lisp/sawfish/wm/commands/launcher.jl:80
 msgid "url:"
-msgstr ""
+msgstr "url:"
 
 #: ../lisp/sawfish/wm/ext/audio-events.jl:75
 msgid "Event"
@@ -158,23 +157,23 @@ msgstr "Hendelse"
 msgid "Audio file"
 msgstr "Lydfil"
 
-#: ../lisp/sawfish/wm/ext/error-handler.jl:84
+#: ../lisp/sawfish/wm/ext/error-handler.jl:94
 msgid "No errors."
 msgstr "Ingen feil."
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:62
 msgid "Geometry"
-msgstr ""
+msgstr "Geometri"
 
 #: ../lisp/sawfish/wm/ext/match-window.jl:84
 msgid "Focus"
 msgstr "Fokus"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:90
+#: ../lisp/sawfish/wm/ext/match-window.jl:91
 msgid "Appearance"
 msgstr "Utseende"
 
-#: ../lisp/sawfish/wm/ext/match-window.jl:104
+#: ../lisp/sawfish/wm/ext/match-window.jl:107
 msgid "Other"
 msgstr "Andre"
 
@@ -203,42 +202,41 @@ msgid "_Save window-history"
 msgstr "_Lagre vinduhistorikk"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:90
-#, fuzzy
 msgid "_Reload window-history"
-msgstr "Glem all lagret vindushistorikk."
+msgstr "Last vindushistorikk _på nytt"
 
 #: ../lisp/sawfish/wm/ext/window-history.jl:380
 msgid "_History"
 msgstr "_Historikk"
 
-#: ../lisp/sawfish/wm/frames.jl:534
+#: ../lisp/sawfish/wm/frames.jl:536
 msgid "Default"
 msgstr "Forvalgt"
 
-#: ../lisp/sawfish/wm/frames.jl:541
+#: ../lisp/sawfish/wm/frames.jl:543
 msgid "Normal"
 msgstr "Normal"
 
-#: ../lisp/sawfish/wm/frames.jl:544
+#: ../lisp/sawfish/wm/frames.jl:546
 msgid "Title-only"
 msgstr "Kun tittel"
 
-#: ../lisp/sawfish/wm/frames.jl:547
+#: ../lisp/sawfish/wm/frames.jl:549
 msgid "Border-only"
 msgstr "Kun kant"
 
-#: ../lisp/sawfish/wm/frames.jl:550
+#: ../lisp/sawfish/wm/frames.jl:552
 msgid "Top-border"
 msgstr "Øverste kant"
 
-#: ../lisp/sawfish/wm/frames.jl:553
+#: ../lisp/sawfish/wm/frames.jl:555
 msgid "None"
 msgstr "Ingen"
 
 #. add some GNOME menu-entries
 #. add some KDE help menus
 #: ../lisp/sawfish/wm/integration/gnome.jl:49
-#: ../lisp/sawfish/wm/integration/kde.jl:57 ../lisp/sawfish/wm/menus.jl:168
+#: ../lisp/sawfish/wm/integration/kde.jl:56 ../lisp/sawfish/wm/menus.jl:178
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -252,13 +250,13 @@ msgstr "GNOME _nettsted"
 
 #: ../lisp/sawfish/wm/integration/gnome.jl:53
 msgid "_About GNOME"
-msgstr "_Om GNOME..."
+msgstr "_Om GNOME …"
 
 #. add gnome-logout and customize menu-entries
 #. add kde-logout menu item
 #: ../lisp/sawfish/wm/integration/gnome.jl:56
-#: ../lisp/sawfish/wm/integration/kde.jl:63 ../lisp/sawfish/wm/menus.jl:161
-#: ../lisp/sawfish/wm/menus.jl:183
+#: ../lisp/sawfish/wm/integration/kde.jl:62 ../lisp/sawfish/wm/menus.jl:171
+#: ../lisp/sawfish/wm/menus.jl:193
 msgid "Sessi_on"
 msgstr "Sesj_on"
 
@@ -274,296 +272,283 @@ msgstr "_Logg ut fra GNOME"
 msgid "_Shutdown from GNOME"
 msgstr "_Slå av datamaskinen fra GNOME"
 
-#: ../lisp/sawfish/wm/integration/kde.jl:59
+#: ../lisp/sawfish/wm/integration/kde.jl:58
 msgid "_KDE Help"
 msgstr "_KDE-hjelp"
 
-#: ../lisp/sawfish/wm/integration/kde.jl:60
+#: ../lisp/sawfish/wm/integration/kde.jl:59
 msgid "KDE _Website"
 msgstr "KDE _nettsted"
 
-#: ../lisp/sawfish/wm/integration/kde.jl:66
-#, fuzzy
+#: ../lisp/sawfish/wm/integration/kde.jl:65
 msgid "_Customize KDE"
-msgstr "_Egendefinert"
+msgstr "_Tilpass KDE"
 
-#: ../lisp/sawfish/wm/integration/kde.jl:68
-#, fuzzy
+#: ../lisp/sawfish/wm/integration/kde.jl:67
 msgid "_Logout from KDE"
-msgstr "Logg ut av aktiv GNOME-sesjon."
+msgstr "_Logg ut fra KDE"
 
-#: ../lisp/sawfish/wm/integration/kde.jl:70
-#, fuzzy
+#: ../lisp/sawfish/wm/integration/kde.jl:69
 msgid "_Reboot from KDE"
-msgstr "Logg ut av aktiv GNOME-sesjon."
+msgstr "Sta_rt på nytt fra KDE"
 
-#: ../lisp/sawfish/wm/integration/kde.jl:72
+#: ../lisp/sawfish/wm/integration/kde.jl:71
 msgid "_Shutdown from KDE"
-msgstr ""
+msgstr "_Slå av fra KDE"
 
-#: ../lisp/sawfish/wm/menus.jl:89
+#. Mysterious underscore "_" before a string offers (human
+#. langugage) translation. The one inside of a string is
+#. a shortcut key.
+#: ../lisp/sawfish/wm/menus.jl:92
 msgid "Mi_nimize"
 msgstr "Mi_nimer"
 
-#: ../lisp/sawfish/wm/menus.jl:95
+#: ../lisp/sawfish/wm/menus.jl:98
 msgid "Unma_ximize"
 msgstr "G_jenopprett"
 
-#: ../lisp/sawfish/wm/menus.jl:96
+#: ../lisp/sawfish/wm/menus.jl:99
 msgid "Ma_ximize"
 msgstr "Ma_ksimer"
 
-#: ../lisp/sawfish/wm/menus.jl:101
+#: ../lisp/sawfish/wm/menus.jl:104
 msgid "_Move"
 msgstr "_Flytt"
 
-#: ../lisp/sawfish/wm/menus.jl:104
+#: ../lisp/sawfish/wm/menus.jl:107
 msgid "_Resize"
 msgstr "End_re størrelse"
 
-#: ../lisp/sawfish/wm/menus.jl:107
+#: ../lisp/sawfish/wm/menus.jl:110
+msgid "_Resize to"
+msgstr "End_re størrelse til"
+
+#: ../lisp/sawfish/wm/menus.jl:113
 msgid "_Close"
 msgstr "_Lukk"
 
-#: ../lisp/sawfish/wm/menus.jl:111
+#: ../lisp/sawfish/wm/menus.jl:117
 msgid "_Toggle"
 msgstr "_Slå av/på"
 
-#: ../lisp/sawfish/wm/menus.jl:112
+#: ../lisp/sawfish/wm/menus.jl:118
 msgid "In _group"
 msgstr "I _gruppe"
 
-#: ../lisp/sawfish/wm/menus.jl:113
+#: ../lisp/sawfish/wm/menus.jl:119
 msgid "_Workspace"
 msgstr "_Arbeidsområde"
 
-#: ../lisp/sawfish/wm/menus.jl:114
+#: ../lisp/sawfish/wm/menus.jl:120
 msgid "Move to _Previous workspace"
 msgstr "Flytt til _forrige arbeidsområde"
 
-#: ../lisp/sawfish/wm/menus.jl:115
+#: ../lisp/sawfish/wm/menus.jl:121
 msgid "Move to _Next workspace"
 msgstr "Flytt til _neste arbeidsområde"
 
-#: ../lisp/sawfish/wm/menus.jl:117
-#, fuzzy
+#: ../lisp/sawfish/wm/menus.jl:123
 msgid "Copy to P_revious workspace"
-msgstr "Kopier til forrige arbeidsområde"
+msgstr "Kopier til fo_rrige arbeidsområde"
 
-#: ../lisp/sawfish/wm/menus.jl:118
-#, fuzzy
+#: ../lisp/sawfish/wm/menus.jl:124
 msgid "Copy to Ne_xt workspace"
-msgstr "Kopier til neste arbeidsområde"
+msgstr "Kopier til ne_ste arbeidsområde"
 
-#: ../lisp/sawfish/wm/menus.jl:119
+#: ../lisp/sawfish/wm/menus.jl:125
 msgid "_Grow & Pack"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:120
+#: ../lisp/sawfish/wm/menus.jl:126
 msgid "Grow left"
 msgstr "Øk til venstre"
 
-#: ../lisp/sawfish/wm/menus.jl:121
+#: ../lisp/sawfish/wm/menus.jl:127
 msgid "Grow right"
 msgstr "Øk til høyre"
 
-#: ../lisp/sawfish/wm/menus.jl:122
+#: ../lisp/sawfish/wm/menus.jl:128
 msgid "Grow up"
 msgstr "Øk oppover"
 
-#: ../lisp/sawfish/wm/menus.jl:123
+#: ../lisp/sawfish/wm/menus.jl:129
 msgid "Grow down"
 msgstr "Øk nedover"
 
-#: ../lisp/sawfish/wm/menus.jl:125
+#: ../lisp/sawfish/wm/menus.jl:131
 msgid "Pack left"
 msgstr "Pakk mot venstre"
 
-#: ../lisp/sawfish/wm/menus.jl:126
+#: ../lisp/sawfish/wm/menus.jl:132
 msgid "Pack right"
 msgstr "Pakk mot høyre"
 
-#: ../lisp/sawfish/wm/menus.jl:127
+#: ../lisp/sawfish/wm/menus.jl:133
 msgid "Pack up"
 msgstr "Pakk oppover"
 
-#: ../lisp/sawfish/wm/menus.jl:128
+#: ../lisp/sawfish/wm/menus.jl:134
 msgid "Pack down"
 msgstr "Pakk nedover"
 
-#: ../lisp/sawfish/wm/menus.jl:129
+#: ../lisp/sawfish/wm/menus.jl:135
 msgid "Shrink & _Yank"
 msgstr ""
 
-#: ../lisp/sawfish/wm/menus.jl:130
+#: ../lisp/sawfish/wm/menus.jl:136
 #, fuzzy
 msgid "Shrink left"
 msgstr "La vindu gli til venstre"
 
-#: ../lisp/sawfish/wm/menus.jl:131
+#: ../lisp/sawfish/wm/menus.jl:137
 #, fuzzy
 msgid "Shrink right"
 msgstr "La vindu gli til høyre"
 
-#: ../lisp/sawfish/wm/menus.jl:132
+#: ../lisp/sawfish/wm/menus.jl:138
 #, fuzzy
 msgid "Shrink up"
 msgstr "La vindu gli oppover"
 
-#: ../lisp/sawfish/wm/menus.jl:133
+#: ../lisp/sawfish/wm/menus.jl:139
 #, fuzzy
 msgid "Shrink down"
 msgstr "La vindu gli nedover"
 
-#: ../lisp/sawfish/wm/menus.jl:135
+#: ../lisp/sawfish/wm/menus.jl:141
 #, fuzzy
 msgid "Yank left"
 msgstr "Pakk mot venstre"
 
-#: ../lisp/sawfish/wm/menus.jl:136
+#: ../lisp/sawfish/wm/menus.jl:142
 #, fuzzy
 msgid "Yank right"
 msgstr "Pakk mot høyre"
 
-#: ../lisp/sawfish/wm/menus.jl:137
+#: ../lisp/sawfish/wm/menus.jl:143
 #, fuzzy
 msgid "Yank up"
 msgstr "Pakk oppover"
 
-#: ../lisp/sawfish/wm/menus.jl:138
+#: ../lisp/sawfish/wm/menus.jl:144
 #, fuzzy
 msgid "Yank down"
 msgstr "Pakk nedover"
 
-#: ../lisp/sawfish/wm/menus.jl:139
+#: ../lisp/sawfish/wm/menus.jl:145
 #, fuzzy
 msgid "Stac_king"
 msgstr "Stabling"
 
-#: ../lisp/sawfish/wm/menus.jl:140
-#, fuzzy
-msgid "_Raise"
-msgstr "Hev"
-
-#: ../lisp/sawfish/wm/menus.jl:141
-#, fuzzy
-msgid "_Lower"
-msgstr "Senk"
-
-#: ../lisp/sawfish/wm/menus.jl:143
-#, fuzzy
-msgid "_Upper layer"
-msgstr "Øvre lag"
-
-#: ../lisp/sawfish/wm/menus.jl:144
-#, fuzzy
-msgid "Lo_wer layer"
-msgstr "Nedre lag"
-
-#: ../lisp/sawfish/wm/menus.jl:145
-#, fuzzy
-msgid "Frame ty_pe"
-msgstr "Rammetype"
-
 #: ../lisp/sawfish/wm/menus.jl:146
-#, fuzzy
+msgid "_Raise"
+msgstr "_Hev"
+
+#: ../lisp/sawfish/wm/menus.jl:147
+msgid "_Lower"
+msgstr "_Senk"
+
+#: ../lisp/sawfish/wm/menus.jl:149
+msgid "_Upper layer"
+msgstr "_Øvre lag"
+
+#: ../lisp/sawfish/wm/menus.jl:150
+msgid "Lo_wer layer"
+msgstr "_Nedre lag"
+
+#: ../lisp/sawfish/wm/menus.jl:151
+msgid "Frame ty_pe"
+msgstr "Rammety_pe"
+
+#: ../lisp/sawfish/wm/menus.jl:152
 msgid "Frame sty_le"
-msgstr "Rammestil"
+msgstr "Rammesti_l"
 
-#: ../lisp/sawfish/wm/menus.jl:153
-#, fuzzy
+#. Mysterious underscore "_" before a stringoffers (human
+#. langugage) translation. The one inside of a string
+#. specifies shortcut key.
+#: ../lisp/sawfish/wm/menus.jl:163
 msgid "Sawfish Rootmenu"
-msgstr "Sawfish nettside"
+msgstr "Sawfish hovedmeny"
 
-#: ../lisp/sawfish/wm/menus.jl:155
+#: ../lisp/sawfish/wm/menus.jl:165
 msgid "_Windows"
 msgstr "_Vinduer"
 
-#: ../lisp/sawfish/wm/menus.jl:156
+#: ../lisp/sawfish/wm/menus.jl:166
 msgid "Work_spaces"
 msgstr "Arbeid_sområder"
 
-#: ../lisp/sawfish/wm/menus.jl:158
+#: ../lisp/sawfish/wm/menus.jl:168
 msgid "_Programs"
 msgstr "_Programmer"
 
-#: ../lisp/sawfish/wm/menus.jl:159
+#: ../lisp/sawfish/wm/menus.jl:169
 msgid "_Customize"
 msgstr "_Egendefinert"
 
-#: ../lisp/sawfish/wm/menus.jl:162
-#, fuzzy
+#: ../lisp/sawfish/wm/menus.jl:172
 msgid "Display _Errors"
-msgstr "Vis feil"
+msgstr "Vis f_eil"
 
-#: ../lisp/sawfish/wm/menus.jl:163
+#: ../lisp/sawfish/wm/menus.jl:173
 #, fuzzy
 msgid "_Reload Appsmenu"
 msgstr "Vis applikasjonsmeny"
 
-#: ../lisp/sawfish/wm/menus.jl:165
-#, fuzzy
+#: ../lisp/sawfish/wm/menus.jl:175
 msgid "Restart _Sawfish"
-msgstr "Start på nytt"
-
-#: ../lisp/sawfish/wm/menus.jl:166
-#, fuzzy
-msgid "_Quit Sawfish"
-msgstr "_Om sawfish..."
-
-#: ../lisp/sawfish/wm/menus.jl:169
-#, fuzzy
-msgid "Sawfish _FAQ"
-msgstr "Sawfish feil"
-
-#: ../lisp/sawfish/wm/menus.jl:170
-#, fuzzy
-msgid "Sawfish _News"
-msgstr "Sawfish nettside"
-
-#: ../lisp/sawfish/wm/menus.jl:171
-#, fuzzy
-msgid "Sawfish _Wiki"
-msgstr "Sawfish feil"
-
-#: ../lisp/sawfish/wm/menus.jl:172
-#, fuzzy
-msgid "Sawfish _Manual"
-msgstr "Sawfish nettside"
-
-#: ../lisp/sawfish/wm/menus.jl:174
-#, fuzzy
-msgid "_About Sawfish"
-msgstr "_Om sawfish..."
+msgstr "Start _Sawfish på nytt"
 
 #: ../lisp/sawfish/wm/menus.jl:176
-#, fuzzy
-msgid "_Kill Window"
-msgstr "_Vinduer"
+msgid "_Quit Sawfish"
+msgstr "_Avslutt sawfish"
+
+#: ../lisp/sawfish/wm/menus.jl:179
+msgid "Sawfish _FAQ"
+msgstr "Sawfish _FAQ"
+
+#: ../lisp/sawfish/wm/menus.jl:180
+msgid "Sawfish _News"
+msgstr "Sawfish _nyheter"
+
+#: ../lisp/sawfish/wm/menus.jl:181
+msgid "Sawfish _Wiki"
+msgstr "Sawfish _Wiki"
+
+#: ../lisp/sawfish/wm/menus.jl:182
+msgid "Sawfish _Manual"
+msgstr "Sawfish _brukerhåndbok"
+
+#: ../lisp/sawfish/wm/menus.jl:184
+msgid "_About Sawfish"
+msgstr "_Om sawfish"
 
 #: ../lisp/sawfish/wm/menus.jl:186
-#, fuzzy
+msgid "_Kill Window"
+msgstr "_Terminer vindu"
+
+#: ../lisp/sawfish/wm/menus.jl:196
 msgid "_Reboot System"
-msgstr "Logg ut av aktiv GNOME-sesjon."
+msgstr "Sta_rt systemet på nytt"
 
-#: ../lisp/sawfish/wm/menus.jl:188
+#: ../lisp/sawfish/wm/menus.jl:198
 msgid "_Shutdown System"
-msgstr ""
+msgstr "_Slå av systemet"
 
-#: ../lisp/sawfish/wm/menus.jl:190
+#: ../lisp/sawfish/wm/menus.jl:200
 msgid "S_uspend System"
-msgstr ""
+msgstr "Sett systemet i hvilemod_us"
 
-#: ../lisp/sawfish/wm/menus.jl:192
+#: ../lisp/sawfish/wm/menus.jl:202
 msgid "_Hibernate System"
-msgstr ""
+msgstr "Sett systemet i d_valemodus"
 
-#: ../lisp/sawfish/wm/menus.jl:411
-#, fuzzy
+#: ../lisp/sawfish/wm/menus.jl:423
 msgid "S_awfishConfig"
-msgstr "Sawfish konfigurator"
+msgstr "S_awfish-konfigurasjon"
 
-#: ../lisp/sawfish/wm/state/iconify.jl:257
+#: ../lisp/sawfish/wm/state/iconify.jl:269
 msgid "_Sticky"
 msgstr "_Klebrig"
 
@@ -584,11 +569,10 @@ msgid "In _window list"
 msgstr "I _vinduslisten"
 
 #: ../lisp/sawfish/wm/state/ignored.jl:113
-#, fuzzy
 msgid "In _task list"
-msgstr "I GNOME oppgavelis_ten"
+msgstr "I oppgavelis_ten"
 
-#: ../lisp/sawfish/wm/state/shading.jl:112
+#: ../lisp/sawfish/wm/state/shading.jl:113
 msgid "S_haded"
 msgstr "S_kyggelagt"
 
@@ -598,7 +582,7 @@ msgstr "Ny gruppe"
 
 #: ../lisp/sawfish/wm/util/keymap.jl:175
 msgid "Press key..."
-msgstr "Trykk en tast..."
+msgstr "Trykk en tast …"
 
 #: ../lisp/sawfish/wm/util/keymap.jl:199
 msgid "[Quote]"
@@ -613,8 +597,8 @@ msgstr "Vindu:"
 msgid "Workspace %d"
 msgstr "Arbeidsområde %d"
 
-#: ../lisp/sawfish/wm/util/prompt-wm.jl:77 ../lisp/sawfish/wm/workspace.jl:896
-#: ../lisp/sawfish/wm/workspace.jl:904 ../lisp/sawfish/wm/workspace.jl:912
+#: ../lisp/sawfish/wm/util/prompt-wm.jl:77 ../lisp/sawfish/wm/workspace.jl:905
+#: ../lisp/sawfish/wm/workspace.jl:913 ../lisp/sawfish/wm/workspace.jl:921
 msgid "Workspace:"
 msgstr "Arbeidsområde:"
 
@@ -634,31 +618,31 @@ msgstr "Navn på arbeidsområder"
 msgid "_Insert workspace"
 msgstr "Sett _inn arbeidsområde"
 
-#: ../lisp/sawfish/wm/workspace.jl:153
+#: ../lisp/sawfish/wm/workspace.jl:154
 msgid "Select _next workspace"
 msgstr "Velg _neste arbeidsområde"
 
-#: ../lisp/sawfish/wm/workspace.jl:154
+#: ../lisp/sawfish/wm/workspace.jl:155
 msgid "Select _previous workspace"
 msgstr "Velg _forrige arbeidsområde"
 
-#: ../lisp/sawfish/wm/workspace.jl:155
+#: ../lisp/sawfish/wm/workspace.jl:157
 msgid "Merge with next"
 msgstr "Flett sammen med neste"
 
-#: ../lisp/sawfish/wm/workspace.jl:156
+#: ../lisp/sawfish/wm/workspace.jl:158
 msgid "Merge with previous"
 msgstr "Flett sammen med forrige"
 
-#: ../lisp/sawfish/wm/workspace.jl:157
+#: ../lisp/sawfish/wm/workspace.jl:160
 msgid "Move workspace _right"
 msgstr "Flytt arbeidsområde til høy_re"
 
-#: ../lisp/sawfish/wm/workspace.jl:158
+#: ../lisp/sawfish/wm/workspace.jl:161
 msgid "Move workspace _left"
 msgstr "F_lytt arbeidsområde til venstre"
 
-#: ../lisp/sawfish/wm/workspace.jl:641
+#: ../lisp/sawfish/wm/workspace.jl:644
 #, librep-format
 msgid "space %d"
 msgstr "mellomrom %d"
