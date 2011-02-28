@@ -52,7 +52,7 @@
 (defgroup StyleTab:right-bottom-buttons-group "Right Titlebar Bottom Buttons"
   :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group))
 
-(defcustom styletab:style 'Dark "Frame and button style. (requires restart)"
+(defcustom styletab:style 'Dark "Frame and button style."
   :group (appearance StyleTab:group StyleTab:settings-group)
   :options (Reduce Dark DarkColor Silver SilverColor Smoothly)
   :type symbol)
@@ -129,10 +129,10 @@
           ,(cadr arg) ;; default value
           ,(caddr arg) ;; doc
           :group
-          ,`(appearance StyleTab:group StyleTab:buttons-group
-                        ,(cadddr arg) ,(car (cddddr arg)))
-          :type ,type-list
-          ))))) ;; end of lambda
+         ,`(appearance StyleTab:group StyleTab:buttons-group
+                       ,(cadddr arg) ,(car (cddddr arg)))
+         :type ,type-list
+         ))))) ;; end of lambda
  '( ;; list to pass to mapc
    (styletab:top-left-buttons
     '((menu t) (frame-type t) (sticky nil) (shade nil) (space nil)
@@ -331,7 +331,7 @@
                 (move-window-to w pos-x pos-y)
                 (resize-window-to w dim-x dim-y)) wins))))
 
-(define (tabbar-to-top)
+(define (tabbartotop)
   "Move tab-bar to top."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
@@ -342,7 +342,7 @@
     (if (eq (window-get w 'title-position) 'bottom)
         (rotate-tab 'horiz 'opposite))))
 
-(define (tabbar-to-bottom)
+(define (tabbartobottom)
   "Move tab-bar to bottom."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
@@ -353,7 +353,7 @@
     (if (eq (window-get w 'title-position) 'top)
         (rotate-tab 'horiz 'opposite))))
 
-(define (tabbar-to-left)
+(define (tabbartoleft)
   "Move tab-bar to left."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
@@ -364,7 +364,7 @@
     (if (eq (window-get w 'title-position) 'right)
         (rotate-tab 'vert 'opposite))))
 
-(define (tabbar-to-right)
+(define (tabbartoright)
   "Move tab-bar to right."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
@@ -375,7 +375,7 @@
     (if (eq (window-get w 'title-position) 'left)
         (rotate-tab 'vert 'opposite))))
 
-(define (tabbar-toggle)
+(define (tabbartoggle)
   "To opposite, move tab-bar. (Swap top & bottom, or left & right)"
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
@@ -385,11 +385,11 @@
         (rotate-tab 'horiz 'opposite)
       (rotate-tab 'vert 'opposite))))
 
-(define-command-gaol 'tabbar-toggle tabbar-toggle)
-(define-command-gaol 'tabbar-to-top tabbar-to-top)
-(define-command-gaol 'tabbar-to-bottom tabbar-to-bottom)
-(define-command-gaol 'tabbar-to-left tabbar-to-left)
-(define-command-gaol 'tabbar-to-right tabbar-to-right)
+(define-command-gaol 'tabbar-toggle tabbartoggle)
+(define-command-gaol 'tabbar-to-top tabbartotop)
+(define-command-gaol 'tabbar-to-bottom tabbartobottom)
+(define-command-gaol 'tabbar-to-left tabbartoleft)
+(define-command-gaol 'tabbar-to-right tabbartoright)
 
 (def-frame-class tabbar-horizontal-left-edge ()
   (bind-keys tabbar-horizontal-left-edge-keymap
@@ -402,6 +402,7 @@
              "Button1-Off" 'tabbar-to-top
              "Button2-Off" 'tabbar-toggle
              "Button3-Off" 'tabbar-to-bottom))
+
 
 (define (f-type dest)
   (let ((w (current-event-window))
@@ -514,21 +515,22 @@
                 (move-window-to w pos-x pos-y)
                 (resize-window-to w dim-x dim-y)) wins))))
 
-(define (set-frame-default-and-default/transient-toggle)
+
+(define (set-frame-default-and-default/transient)
   "Set frametype default and toggle default/transient with resize"
   (f-type 'def-tra))
 
-(define (set-frame-unframed-and-unframed/shaped-transient-toggle)
+(define (set-frame-unframed-and-unframed/shaped-transient)
   "Set frametype unframed and toggle unframed/shaped-transient with resize"
   (f-type 'unf-def))
 
-(define (set-frame-shaped-and-shaped/shaped-transient-toggle)
+(define (set-frame-shaped-and-shaped/shaped-transient)
   "Set frametype shaped and toggle shaped/shaped-transient with resize"
   (f-type 'sha-tra))
 
-(define-command-gaol 'set-frame-default-and-default/transient-toggle set-frame-default-and-default/transient-toggle)
-(define-command-gaol 'set-frame-unframed-and-unframed/shaped-transient-toggle set-frame-unframed-and-unframed/shaped-transient-toggle)
-(define-command-gaol 'set-frame-shaped-and-shaped/shaped-transient-toggle set-frame-shaped-and-shaped/shaped-transient-toggle)
+(define-command-gaol 'set-frame-default-and-default/transient-toggle set-frame-default-and-default/transient)
+(define-command-gaol 'set-frame-unframed-and-unframed/shaped-transient-toggle set-frame-unframed-and-unframed/shaped-transient)
+(define-command-gaol 'set-frame-shaped-and-shaped/shaped-transient-toggle set-frame-shaped-and-shaped/shaped-transient)
 
 (def-frame-class frame-type-button ()
   (bind-keys frame-type-button-keymap
@@ -554,18 +556,18 @@
 
 ;; button/icon table
 ;;
-(define icon-cache (make-weak-table eq-hash eq))
+(define styletab-icon-cache (make-weak-table eq-hash eq))
 
 ;; frames/title table
 ;;
-(define frame-cache (make-weak-table eq-hash eq))
+(define styletab-frame-cache (make-weak-table eq-hash eq))
 
 (define (window-icon w)
-  (or (table-ref icon-cache w)
+  (or (table-ref styletab-icon-cache w)
       (let ((icon (window-icon-image w)))
         (if icon
             (let ((scaled (scale-image icon (- styletab:title-dimension 7) (- styletab:title-dimension 7))))
-              (table-set icon-cache w scaled)
+              (table-set styletab-icon-cache w scaled)
               scaled)
           (scale-image top-frame-icon-title-images (- styletab:title-dimension 7) (- styletab:title-dimension 7))))))
 
@@ -574,10 +576,10 @@
 
 (define (get-frame-image img)
   (or
-   (table-ref frame-cache img)
+   (table-ref styletab-frame-cache img)
    (let ((image
           (make-image img)))
-     (table-set frame-cache img image)
+     (table-set styletab-frame-cache img image)
      image)))
 
 (define make-border-image
@@ -2107,14 +2109,14 @@
 ;;
 (define clear-cache-reframe
   (lambda ()
-    (setq icon-cache (make-weak-table eq-hash eq))
+    (setq styletab-icon-cache (make-weak-table eq-hash eq))
     (reframe-all)))
 
 ;; also reset all cache 
 ;;
 (define (clear-cache-reload-frame-style)
-  (setq icon-cache (make-weak-table eq-hash eq))
-  (setq frame-cache (make-weak-table eq-hash eq))
+  (setq styletab-icon-cache (make-weak-table eq-hash eq))
+  (setq styletab-frame-cache (make-weak-table eq-hash eq))
   (reload-frame-style theme-name))
 
 (call-after-state-changed '(sticky fixed-position stacking) reframe-one)
@@ -2127,8 +2129,7 @@
 (custom-set-property 'styletab:highlighted-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-color ':after-set reframe-all)
 (custom-set-property 'styletab:inactive-highlighted-color ':after-set reframe-all)
-;; with reload sawfish crash after style switch disable until fix
-;;(custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
+(custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
 (custom-set-property 'styletab:title-dimension ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:custom-button-width ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:button-width ':after-set clear-cache-reframe)
