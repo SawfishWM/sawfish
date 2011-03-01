@@ -1,3 +1,49 @@
+2011-03-01  Teika Kazura <teika@lavabit.com>
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* lisp/sawfish/wm/state/iconify.jl
+	* lisp/sawfish/wm/state/shading.jl
+	* lisp/sawfish/wm/swapper.jl
+	* lisp/sawfish/wm/util/workarea.jl
+	* lisp/sawfish/wm/viewport.jl
+	* lisp/sawfish/wm/windows.jl
+	* src/events.c
+	* src/flippers.c
+	* src/functions.c
+	* src/keys.c
+	* src/windows.c: All hooks are now initialized to nil.
+	`remove-hook' doesn't consider if it's bound or not, so this is
+	better to avoid error. (All means all defined in Sawfish.)
+
+	* lisp/sawfish/wm/commands/move-resize.jl
+	* man/news.texi
+	* man/sawfish.texi: New resize commands.
+	Deleted `resize-window-to-dimensions', and implemented
+	`resize-window-to-preset-size' and `resize-window-prompt'.
+
+	* lisp/sawfish/wm/commands/jump-or-exec.jl
+	* lisp/sawfish/wm/state/iconify.jl
+	* man/sawfish.texi: toggle-or-exec cleanup:
+	- jump-or-exec-leave is deleted, and toggle-or-exec instead uses iconify-window.
+	- Instead, iconify-on-leave-fun, a hook function, is re-implemented in wm/state/iconify.jl.
+	- Minor improvements in related doc.
+
+	* OPTIONS
+	* lisp/sawfish/wm/ext/apps-menu.jl
+	* man/news.texi
+	* man/sawfish.texi: Improvements in doc on apps-menu. One minor
+	fix in filtering.
+	- In apps-menu-filter, it was attempted to accept a lisp
+	expression.  It is deleted, since it didn't work, and it was
+	useless since the expression can't receive the desktop entry list
+	to process.
+	- Also news.texi and OPTIONS are updated.
+	- It includes whitespace fix.
+
+	* OPTIONS
+	* lisp/sawfish/wm/ext/error-handler.jl
+	* themes/Makefile.in
+	* themes/StyleTab/theme.jl: Minor doc.
+
 2011-02-28  Christopher Roy Bratusek <zanghar@freenet.de>
 	* themes/StyleTab/theme.jl: Fixed crash when changing style
 	on-the-fly (by improving keybindings (gaols and internal commands
@@ -227,11 +273,6 @@
 
 	* lisp/sawfish/wm/edge/util.jl
 	* man/sawfish.texi: Typo fix "lenght" -> "length" in edge.
-
-	* lisp/sawfish/wm/commands/move-resize.jl
-	* man/news.texi
-	* man/sawfish.texi: Functions of "resize-window-to-preset-size"
-	family are defined, based on "resize-window-to-dimension".
 
 	* lisp/sawfish/wm.jl
 	* lisp/sawfish/wm/animation/main.jl
