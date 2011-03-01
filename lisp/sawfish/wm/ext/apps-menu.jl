@@ -58,7 +58,7 @@
 	  sawfish.wm.menus
 	  sawfish.wm.commands
 	  sawfish.wm.commands.launcher)
-  
+
   (define-structure-alias apps-menu sawfish.wm.ext.apps-menu)
 
   ;; User Options
@@ -73,11 +73,11 @@ applications menu.")
 
   (defvar apps-menu-filter 'default
     "The filter to use while generating the `apps-menu'. The default filters
-include `fdo-toplevel-filter' `fdo-nodisplay-filter' `fdo-hidden-filter' 
-`fdo-onlyshowin-filter' and `fdo-notshowin-filter'.  Can also be set with 
-'default or 'some, both of which are combinations of the default filters, 
-'default uses them all and 'some only uses `fdo-notshowin-filter' and 
-`fdo-onlyshowin-filter'. This can be set to 'nil or '() to perform no 
+include `fdo-toplevel-filter' `fdo-nodisplay-filter' `fdo-hidden-filter'
+`fdo-onlyshowin-filter' and `fdo-notshowin-filter'.  Can also be set with
+'default or 'some, both of which are combinations of the default filters,
+'default uses them all and 'some only uses `fdo-notshowin-filter' and
+`fdo-onlyshowin-filter'. This can be set to 'nil or '() to perform no
 filtering on the `apps-menu'.")
 
   (defvar apps-menu-associate-categories t
@@ -90,7 +90,7 @@ filtering on the `apps-menu'.")
     "Sort the apps menu alphabetically.")
 
   (defvar apps-menu-lang nil
-    "Language for applications menu, in string. Default is set from locale.")
+    "Human language for applications menu, in string. Default is set from locale.")
 
   ;; The Master Category List
 
@@ -130,7 +130,7 @@ filtering on the `apps-menu'.")
 		       "FileManager" "X-FileSystemMount" "Compression"))
       ("System" . ("X-SystemSchedule" "System" "X-SystemMemory" "Emulator"
 		   "TerminalEmulator" "Printing" "Monitor" "Security"))
-      ("Settings" . ("Settings" "HardwareSettings" "PackageManager" 
+      ("Settings" . ("Settings" "HardwareSettings" "PackageManager"
 		     "X-GNOME-PersonalSettings" "DesktopSettings"))
       ("Exiles" . ("Exile"))))
 
@@ -144,7 +144,7 @@ filtering on the `apps-menu'.")
     "Return `t' if `instring' should be skipped."
     (or (eq (aref instring 0) ?#)
 	(eq (aref instring 0) ?\n)))
-  
+
   (define (check-if-desktop-stream instream)
     "Check for the `[Desktop Entry]' line in `instream'"
     (let ((line (read-line instream)))
@@ -153,7 +153,7 @@ filtering on the `apps-menu'.")
 	    't
 	  (when (fdo-skip-line-p line)
 	    (check-if-desktop-stream instream))))))
-  
+
   (define (desktop-file-p directory-file)
     "Quickly check if `directory-file' is a `*.desktop' file."
     (condition-case nil
@@ -161,9 +161,9 @@ filtering on the `apps-menu'.")
 	  (check-if-desktop-stream this-file))
       ;; unreadable -> return nil
       (file-error)))
-  
+
   (define (get-key-value-pair instring)
-    "Split a `*.desktop' file line into it's key-value pair.
+    "Split a `*.desktop' file line into its key-value pair.
 Returns (key . value)"
     ;; Sorry, \\s doesn't work. Why??
     (if (string-match "^([^ \t=]+)[ \t]*=[ \t]*([^\n]+)" instring)
@@ -172,11 +172,11 @@ Returns (key . value)"
       (cons "" "")))
 
   (define (fdo-group-p instring)
-    (eq (aref instring 0) ?\[))  
+    (eq (aref instring 0) ?\[))
 
   (define (get-fdo-group instring)
     (substring instring 1 (- (length instring) 2)))
-  
+
   (define (parse-fdo-file-line infile)
     "Parse a `*.desktop' file list.
 Returns (group1 (key1 . value1) ... group2 (keyA . valueA) ...)"
@@ -194,9 +194,9 @@ Returns (group1 (key1 . value1) ... group2 (keyA . valueA) ...)"
     (when (desktop-file-p infile)
       (let ((d-file (open-file infile 'read)))
 	(parse-fdo-file-line d-file))))
-  
+
   ;; desktop-file mapping
-  
+
   (define (map-desk-files in-desk-files in-directory #!optional (extension "."))
     "Given a list of filenames and a directory, will expand those
 filenames to include the full path."
@@ -205,7 +205,7 @@ filenames to include the full path."
 	  (cons (expand-file-name (car in-desk-files) in-directory)
 		(map-desk-files (cdr in-desk-files) in-directory extension))
 	(map-desk-files (cdr in-desk-files) in-directory extension))))
-  
+
   (define (map-dir-files directories #!optional (extension "."))
     "Given a list of directory paths, will return a list of
 files in those direcories with their full pathnames.  Optionally
@@ -227,7 +227,7 @@ files in those direcories with their full pathnames.  Optionally
 
   (defmacro simplify-mlang (mlang mlevel)
     `(and
-      ,(cond 
+      ,(cond
 	((or (= 0 mlevel) (not mlevel))
 	 `(or (string-looking-at "([a-z]*)(_?)([A-Z]*?)(@)([A-Z]*[a-z]*)?" ,mlang)
 	      (string-looking-at "([a-z]*)(_..)|([a-z]*)?" ,mlang)
@@ -242,10 +242,10 @@ files in those direcories with their full pathnames.  Optionally
 
   (define (find-lang-string)
     (let loop ((lang-vars '("LC_ALL" "LC_MESSAGES" "LANG")))
-	 (and lang-vars
-	      (let ((mlang (getenv (car lang-vars))))
-		(if mlang (simplify-mlang mlang 0)
-		  (loop (cdr lang-vars)))))))
+      (and lang-vars
+	   (let ((mlang (getenv (car lang-vars))))
+	     (if mlang (simplify-mlang mlang 0)
+	       (loop (cdr lang-vars)))))))
 
   ;; Functions for categories
 
@@ -258,55 +258,55 @@ files in those direcories with their full pathnames.  Optionally
   (define (merge-list input delimiter)
     "Merge a cons list `input' into a string separated by `delimiter'"
     (when input
-      (concat (car input) delimiter 
+      (concat (car input) delimiter
 	      (merge-list (cdr input) delimiter))))
 
   (define (associate-categories fdol)
-    "Associate the `Categories' value(s) with the category 
+    "Associate the `Categories' value(s) with the category
 master list, `desktop-cat-alist'.  Returns a modified desktop-file entry."
     (when fdol
-      (let* ((these-categories 
-	     (delete "" (string-split ";" (cdr (assoc "Categories" fdol)))))
-	    (category-list '()))
+      (let* ((these-categories
+	      (delete "" (string-split ";" (cdr (assoc "Categories" fdol)))))
+	     (category-list '()))
 	(let loop ((this-category these-categories))
-	     (if (null this-category)
-		 (let ((cat-string (merge-list (remove-duplicates category-list) ";")))
-		   (rplacd (assoc "Categories" fdol)
-			   cat-string)
-		   fdol)
-	       (progn (mapc (lambda (ent)
-			      (if (member (car this-category) ent)
-				  (setq category-list 
-					(append category-list (list (car ent))))))
-			    desktop-cat-alist)
-		      (loop (cdr this-category))))))))
+	  (if (null this-category)
+	      (let ((cat-string (merge-list (remove-duplicates category-list) ";")))
+		(rplacd (assoc "Categories" fdol)
+			cat-string)
+		fdol)
+	    (progn (mapc (lambda (ent)
+			   (if (member (car this-category) ent)
+			       (setq category-list
+				     (append category-list (list (car ent))))))
+			 desktop-cat-alist)
+		   (loop (cdr this-category))))))))
 
   (define (grab-category input cat)
-    "Remove duplicate categories from a generated apps-menu list by 
+    "Remove duplicate categories from a generated apps-menu list by
 category name."
     (when input
       (let ((cat-list '()))
 	(setq cat-list (append cat-list (list cat)))
 	(let loop ((this-line input))
-	     (if (not this-line) cat-list
-	       (progn (if (string= (caar this-line) cat)
-			  (setq cat-list (append cat-list (list (cdr (car this-line))))))
-		      (loop (cdr this-line))))))))
+	  (if (not this-line) cat-list
+	    (progn (if (string= (caar this-line) cat)
+		       (setq cat-list (append cat-list (list (cdr (car this-line))))))
+		   (loop (cdr this-line))))))))
 
   (define (make-category-list input)
     "Return a list of the categories to be used in the menu."
     (when input
       (cons (caar input)
 	    (make-category-list (cdr input)))))
-  
-  (define (consolodate-menu input)
-    "Reduce the menu down so that each menu entry is inside a 
+
+  (define (consolidate-menu input)
+    "Reduce the menu down so that each menu entry is inside a
 single category."
     (when input
       (let ((cat-list (remove-duplicates (make-category-list input)))
 	    (out-menu nil))
 	(mapc (lambda (x)
-		(setq out-menu 
+		(setq out-menu
 		      (append out-menu
 			      (list (remove-duplicates (grab-category input x))))))
 	      cat-list)
@@ -323,8 +323,8 @@ single category."
     "Alphabetize the entries in the category menus."
     (if saw-menu
 	(cons (cons (car (car saw-menu))
-		    (sort (cdr (car saw-menu)) 
-			  (lambda (a b) 
+		    (sort (cdr (car saw-menu))
+			  (lambda (a b)
 			    (string< (string-downcase (car a)) (string-downcase (car b))))))
 	      (alphabetize-entries (cdr saw-menu)))))
 
@@ -357,7 +357,7 @@ with caution, file may be corrupt.\n"))
 		 (not (assoc (concat name-string apps-menu-lang "]") fdo-list)))
 	(setq fdo-list (append fdo-list (cons (cons "Name" "Unknown")))))
       fdo-list))
-	    
+
   (define (fdo-check-exile fdo-list)
     "If `fdo-list' doesn't have a Categories, Exec, or Name field,
 exile it."
@@ -383,7 +383,7 @@ exile it."
 		  (not (stringp (cdr (assoc "Category" fdo-list)))))
 	      (rplacd (assoc "Category" fdo-list) "Exile"))
 	(append fdo-list (cons (cons "Category" "Exile")))))
-      fdo-list)
+    fdo-list)
 
   (define (determine-desktop-name fdo-list)
     "Get the correct Name[*] entry based on language settings."
@@ -420,7 +420,7 @@ not present in the desktop-file-list"
 	(if (string-match "[Ff]" (cdr (assoc "NoDisplay" fdol)))
 	    fdol)
       fdol))
-  
+
   (define (fdo-hidden-filter fdol)
     "Return the desktop-file-list if Hidden is False, or if Hidden is
 not present in the desktop-file-list"
@@ -430,7 +430,7 @@ not present in the desktop-file-list"
       fdol))
 
   (define (fdo-onlyshowin-filter fdol)
-    "Return the desktop-file-list if OnlyShowIn matches `desktop-environment', 
+    "Return the desktop-file-list if OnlyShowIn matches `desktop-environment',
 or if OnlyShowIn is not present in the desktop-file-list"
     (if (assoc "OnlyShowIn" fdol)
 	(if (string-match desktop-environment (string-downcase (cdr (assoc "OnlyShowIn" fdol))))
@@ -438,7 +438,7 @@ or if OnlyShowIn is not present in the desktop-file-list"
       fdol))
 
   (define (fdo-notshowin-filter fdol)
-    "Return the desktop-file-list if NotShowIn does not match `desktop-environment', 
+    "Return the desktop-file-list if NotShowIn does not match `desktop-environment',
 or if NotShowIn is not present in the desktop-file-list"
     (if (assoc "NotShowIn" fdol)
 	(if (not (string-match desktop-environment (string-downcase (cdr (assoc "NotShowIn" fdol)))))
@@ -454,7 +454,7 @@ desktop-entry through `fdo-associate-categories'."
 	fdol)))
 
   (define (fdo-toplevel-filter fdol)
-    "Return the desktop-file-list if the `Category' is of the 
+    "Return the desktop-file-list if the `Category' is of the
 Top-Level variety."
     (when fdol
       (if (not (equal "Top-Level" (cdr (assoc "Category" fdol))))
@@ -475,32 +475,30 @@ the NotShowIn and OnlyShowIn keys."
      (fdo-notshowin-filter
       (fdo-onlyshowin-filter fdol))))
 
-  (define (fdo-filter-record fdol display-test)
-    "Return the result of `display-test' which can be a pre-set filter,
-such as `default' or `some' or it can be a pre-defined function of
-your choosing, which should either return the desktop-file-list or '(). 
-If `display-test' is not defined, will return the input desktop-file-list."
-    (if (not display-test) fdol
+  (define (fdo-filter-record fdol filter)
+"Let `filter' process `fdol', a desktop file entry, and return the result.
+`filter' can be a function, or a symbol 'default or 'some. If it isn't set,
+return `fdol' as-is."
+    (if (not filter) fdol
       (condition-case nil
 	  (let loop ((fdo-entry fdol))
-	       (when (consp fdo-entry)
-		 (cons
-		  ;; Check if entry is valid
-		  (fdo-double-check-category
-		   (fdo-check-exile
-		    ((cond 
-		      ;; default filter is chosen
-		      ((equal display-test 'default)
-		       fdo-default-filter)
-		      ;; some flter is chosen
-		      ((equal display-test 'some)
-		       fdo-some-filter)
-		      ;; user filter is chosen
-		      ((closurep display-test)
-		       display-test)
-		      (t `progn))
-		     (car fdo-entry))))
-		  (loop (cdr fdo-entry)))))
+	    (when (consp fdo-entry)
+	      (cons
+	       ;; Check if entry is valid
+	       (fdo-double-check-category
+		(fdo-check-exile
+		 ((cond
+		   ;; default filter is chosen
+		   ((equal filter 'default)
+		    fdo-default-filter)
+		   ;; some flter is chosen
+		   ((equal filter 'some)
+		    fdo-some-filter)
+		   ;; user filter is chosen
+		   ((closurep filter)
+		    filter))
+		  (car fdo-entry))))
+	       (loop (cdr fdo-entry)))))
 	(error fdol))))
 
   (define (split-desktop-entry fdol)
@@ -512,10 +510,10 @@ of the categories of the original."
 	(when (stringp category-string)
 	  (let loop ((categories
 		      (delete "" (string-split ";" category-string))))
-	       (when categories
-		 (append (list 
-			  (append new-fdol (list (cons "Category" (car categories)))))
-			 (loop (cdr categories)))))))))
+	    (when categories
+	      (append (list
+		       (append new-fdol (list (cons "Category" (car categories)))))
+		      (loop (cdr categories)))))))))
 
   ;; Sawfish-menu generation
 
@@ -523,7 +521,7 @@ of the categories of the original."
     "Return menu-entry list from a fdo-list."
     ;; Generate the menu-entry list
     (generate-menu-entry
-      ;; Filter entry by pre-made or user function
+     ;; Filter entry by pre-made or user function
      (delete nil
 	     (fdo-filter-record
 	      ;; Split the desktop-entry by category
@@ -539,9 +537,9 @@ of the categories of the original."
 desktop file `desk-file'."
     (when (car fdo-list)
       (cons (list (cdr (assoc "Category" (car fdo-list)))
-		    (determine-desktop-name (car fdo-list))
-		    (determine-desktop-exec (car fdo-list)))
-	      (generate-menu-entry (cdr fdo-list)))))
+		  (determine-desktop-name (car fdo-list))
+		  (determine-desktop-exec (car fdo-list)))
+	    (generate-menu-entry (cdr fdo-list)))))
 
   (define (generate-apps-menu)
     "Returns the list of applications menu which can be used for `apps-menu'."
@@ -549,7 +547,7 @@ desktop file `desk-file'."
       (setq apps-menu-lang (find-lang-string)))
     (let ((desk-files (flatten (map-dir-files desktop-directory ".desktop")))
 	  (local-menu nil))
-      (mapc 
+      (mapc
        (lambda (x)
 	 (setq local-menu
 	       (append local-menu
@@ -557,8 +555,8 @@ desktop file `desk-file'."
 			(parse-fdo-file x)))))
        desk-files)
       (if apps-menu-alphabetize
-	  (alphabetize-entries (consolodate-menu (sort (delete nil local-menu) string<)))
-	(consolodate-menu (sort (delete nil local-menu) string<)))))
+	  (alphabetize-entries (consolidate-menu (sort (delete nil local-menu) string<)))
+	(consolidate-menu (sort (delete nil local-menu) string<)))))
 
   (define (init-apps-menu)
     "If `apps-menu' is nil, then call `update-apps-menu'. This function

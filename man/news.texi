@@ -67,6 +67,8 @@ The @code{class} and @code{onfocused} parameters are now keys, so pass them as
 #:class ''value'' or #:onfocused ''value''. Check @file{jump-or-exec.jl} for
 more detailed examples.
 
+@item Apps-menu options @code{apps-menu-show-all} is deleted. See below for more.
+
 @item User option @code{focus-ignore-pointer-events} is deleted. [Teika kazura]@*
 In fact, it's for internal use, and should not have been a user option. Use your favorite focus mode instead.
 
@@ -143,7 +145,7 @@ configurator ``Edge Actions'' group. Options must be easy to
 understand.
 
 ``Hot-spot'' lets you assign an action to each screen-edge and
--corner. An action has to be a function, and can be set in
+-corner. An action has to be a lisp function, and can be set in
 @file{~/.sawfish/rc}, like this:
 
 @lisp
@@ -215,6 +217,15 @@ had to manually adjust positions by pixel, but it's not necessary any
 more.
 
 When a lot of windows are open, they should now be more responsive.
+
+@item Application menu is fully customizable [Matthew Love]
+
+With the new option @code{apps-menu-filter}, you can fully customize
+the application menu. For the full description, see @xref{Applications
+Menu}.
+
+It replaces former options like @code{apps-menu-show-all} or
+@code{apps-menu-ignore-no-display}.
 
 @item Per-window animation mode [Teika kazura]
 
@@ -442,7 +453,8 @@ Applications menu now looks more like that of GNOME / KDE / XFCE if
 one is running. (further improvements are planned)
 
 The user option @code{apps-menu-ignore-no-display} is now gone
-and replaced by @code{apps-menu-show-all}.
+and replaced by @code{apps-menu-show-all}. [Note: After Sawfish-1.8.0, 
+this option is superseded by @code{apps-menu-filter}.]
 
 If @code{apps-menu-show-all} is @code{nil} (default), the menu
 looks much like that of GNOME / KDE / Xfce, by hiding some

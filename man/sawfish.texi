@@ -4998,7 +4998,7 @@ Note: this is just an example, not all functions in
 ( defvar-setq top-right-corner-function
   ( lambda () ( pager-unhide ) ) )
 
-( defvar-setq  bottom-right-corner-function 
+( defvar-setq  bottom-right-corner-function
   ( lambda () ( show-desktop ) ) )
 
 ( defvar-setq bottom-left-corner-function
@@ -5358,12 +5358,16 @@ You can modify menus. @xref{Popup Definitions}.
 @cindex Menus, applications
 
 The applications menu lets you invoke installed applications. Sawfish
-generates applications menu from @file{*.desktop} files at Sawfish startup.
+generates applications menu from @file{*.desktop} files (usually found
+in @file{/usr/share/applications/}) at Sawfish startup.
+
+Functions in this section are defined in the module
+@code{sawfish.wm.ext.apps-menu}.
 
 @menu
 * Applications Menu Variables::
 * Applications Menu Functions::
-* Applications Menu Filtering::
+* Desktop File Processing::
 @end menu
 
 @node Applications Menu Variables, Applications Menu Functions, Applications Menu, Applications Menu
@@ -5373,37 +5377,49 @@ generates applications menu from @file{*.desktop} files at Sawfish startup.
 
 @defvar apps-menu-autogen
 If non-nil, the applications menu is automatically generated from
-@code{user-apps-menu} and @file{*.desktop} files, and stored in the
-variable @code{apps-menu}. 
-Default is @code{t}.
+the variable @code{user-apps-menu} and @file{*.desktop} files, and
+stored in the variable @code{apps-menu}.  Default is @code{t}.
 
 If you set the applications menu manually to the variable
 @code{apps-menu}, then it won't happen anyway.
 @end defvar
 
+@defvar desktop-cat-alist
+Defines categorization of applications. For example, if a
+@file{*.desktop} file's category has an entry ``X-Desktop'', it'll be
+classified as ``Desktop'' by Sawfish default.
+
+If another option @code{apps-menu-associate-categories} is set to nil,
+then the original value defined in @file{*.desktop} is respected.
+
+If you want to customize this variable, see the file
+@file{lisp/sawfish/wm/ext/apps-menu.jl} for the default value.
+@end defvar
+
 @defvar apps-menu-associate-categories
-Associate desktop entry categories with the category-master-list.
-Default is @code{t}.
+See the above. Default is @code{t}.
 @end defvar
 
 @defvar apps-menu-filter
-The filter to use while generating the @code{apps-menu}. The default filters
-include @code{fdo-toplevel-filter} @code{fdo-nodisplay-filter} @code{fdo-hidden-filter} 
-@code{fdo-onlyshowin-filter} and @code{fdo-notshowin-filter}.  Can also be set with 
-@code{'default} or @code{'some}, both of which are combinations of the default filters, 
-@code{'default} uses them all and @code{'some} only uses @code{fdo-notshowin-filter} and 
-@code{fdo-onlyshowin-filter}. This can be set to @code{'nil} or @code{'()} to perform no 
-filtering on the @code{apps-menu}.
+The filter to use while generating the @code{apps-menu}. For the details,
+see @xref{Desktop File Processing}.
 
-Also, an arbitrary filter (or combination of filters) can be defined by the user.  Set this
-variable to the name of the filter, or a lambda expression, and it will be used as the
-@code{apps-menu} filter.
-Default is @code{'default}.
+It can be a symbol @code{default}, @code{some}, or a function.
+
+The @code{default} filters include @code{fdo-toplevel-filter}
+@code{fdo-nodisplay-filter} @code{fdo-hidden-filter}
+@code{fdo-onlyshowin-filter} and @code{fdo-notshowin-filter}. This is
+the default value.
+
+The @code{some} filter only uses @code{fdo-notshowin-filter} and
+@code{fdo-onlyshowin-filter}.
+
+Or if it is set to nil, no filtering is done.
 @end defvar
 
 @defvar desktop-directory
 List of directories to look for *.desktop files. Default is
-@code{'("/usr/share/applications")}.
+@code{("/usr/share/applications")}.
 @end defvar
 
 @defvar kde-desktop-directories
@@ -5411,13 +5427,13 @@ KDE specific directories where *.desktop files are stored.
 @end defvar
 
 @defvar apps-menu-alphabetize
-Sort the generated Applications menu alphabetically. 
+Sort the generated applications menu alphabetically.
 Defaults is @code{t}.
 @end defvar
 
 @defvar apps-menu-lang
 Human language for applications menu generation, in
-string, like ``en''. Default is set from the locale.
+string, like ``en'' for English. Default is set from the locale.
 @end defvar
 
 You can prepend anything to the applications menu, by setting the
@@ -5440,9 +5456,11 @@ If you set value to @code{apps-menu}, Sawfish doesn't generate
 applications menu from @file{*.desktop} files.
 
 @defvar apps-menu
-The variable containing the definition of the applications menu. If
-you set this, it is exclusively used, and Sawfish doesn't generate
-its applications menu.
+The variable containing the definition of the applications menu. By default,
+Sawfish automatically sets this.
+
+If you set this variable manually, it is exclusively used, and Sawfish
+doesn't generate its applications menu.
 @end defvar
 
 @defvar user-apps-menu
@@ -5450,7 +5468,7 @@ Your own applications menu entries. In the applications menu, this is
 followed by auto generated applications menu.
 @end defvar
 
-@node Applications Menu Functions, Applications Menu Filtering, Applications Menu Variables, Applications Menu
+@node Applications Menu Functions, Desktop File Processing, Applications Menu Variables, Applications Menu
 @subsection Applications Menu Functions
 @cindex Applications menu functions
 @cindex Functions, applications menu
@@ -5469,142 +5487,150 @@ Return the applications menu (a list), generated from @file{*.desktop}
 files which can be set to @code{apps-menu}.
 @end defun
 
-@defun parse-fdo-file
-Parse a `*.desktop' file list.
+Here're functions to process each desktop file. See also the next
+section. (@pxref{Desktop File Processing})
+
+@defun parse-fdo-file file
+Parse an *.desktop file @var{file} list.
 Returns @code{(group1 (key1 . value1) ... group2 (keyA . valueA) ...)}
 @end defun
 
 @defun fdo-filter-record fdo-list filter
-Return the result of @code{filter} which can be a pre-set filter,
-such as @code{default} or @code{some} or it can be a pre-defined function of
-your choosing, which should either return a @code{fdo-list} or @code{'()}. 
-If @code{filter} is not defined, will return the input @code{fdo-list}.
-This can be useful for testing filters.
+Let @var{filter} process a desktop file entry @var{fdo-list}, and
+return the result.
+
+If @var{filter} is a function, it's executed with the argument
+@var{fdo-list}. If it's a symbol @code{default} or @code{some}, then
+@code{fdo-default-filter} or @code{fdo-some-filter} is exectuted,
+respectively. If @var{filter} is not defined, will return the input
+@code{fdo-list}.
+
+This can be useful for testing filters, and is also used internally.
 @end defun
 
-@node Applications Menu Filtering, , Applications Menu Functions, Applications Menu
-@subsection Applications Menu Filtering
+@node Desktop File Processing, , Applications Menu Functions, Applications Menu
+@subsection Desktop File Processing
 @cindex Applications menu filtering
 @cindex Filtering, applications menu
 
-While building the applications menu, sawfish sends a desktop menu
-entry through a number of so-called filters.  These filters perform
-various funtions on the desktop file entry, which is defined as a
-list.
+In this section it is shown how Sawfish processes desktop file entries
+while building the applications menu. Each entry passes through many
+@dfn{filters}, and they're what you may want to customize.
 
-Here is an example of the desktop file entry using the 
+Desktop file entries are expressed as a list. Here is an example of
 @file{emacs.desktop} file before any filters are performed:
 
 @lisp
-(``Desktop Entry'' 
-           (``Name'' . ``Emacs Text Editor'') 
-           (``Name[de]'' . ``Emacs Texteditor'') 
-           (``GenericName'' . ``Text Editor'') 
-           (``Comment'' . ``Edit text'') 
-           (``Exec'' . ``emacs %f'') 
-           (``Icon'' . ``emacs-icon'') 
-           (``Type'' . ``Application'') 
-           (``Terminal'' . ``false'') 
-           (``Categories'' . ``Development;TextEditor;'') 
-           (``StartupWMClass'' . ``Emacs''))
+("Desktop Entry"
+	   ("Name" . "Emacs Text Editor")
+	   ("Name[de]" . "Emacs Texteditor")
+	   ("GenericName" . "Text Editor")
+	   ("Comment" . "Edit text")
+	   ("Exec" . "emacs %f")
+	   ("Icon" . "emacs-icon")
+	   ("Type" . "Application")
+	   ("Terminal" . "false")
+	   ("Categories" . "Development;TextEditor;")
+	   ("StartupWMClass" . "Emacs"))
 @end lisp
 
-And here is the same example after the initial filters are
-performed, one of the first filters performed on the desktop
-entry list is a 'split filter, which splits the entry into
-multiple entries based on the number of categories that are
-included:
+It then gets split into two lists. The original ``Categories'' key
+contains several values, and each of new entries has ``Category'' key
+which contains only one of the original categories.
 
 @lisp
-(``Desktop Entry'' 
-           (``Name'' . ``Emacs Text Editor'') 
-           (``Name[de]'' . ``Emacs Texteditor'') 
-           (``GenericName'' . ``Text Editor'') 
-           (``Comment'' . ``Edit text'') 
-           (``Exec'' . ``emacs %f'') 
-           (``Icon'' . ``emacs-icon'') 
-           (``Type'' . ``Application'') 
-           (``Terminal'' . ``false'') 
-           (``Categories'' . ``Development;TextEditor;'') 
-           (``Cateogry'' . ``Development'')
-           (``StartupWMClass'' . ``Emacs''))
+("Desktop Entry"
+	   ("Name" . "Emacs Text Editor")
+	   ("Name[de]" . "Emacs Texteditor")
+	   ("GenericName" . "Text Editor")
+	   ("Comment" . "Edit text")
+	   ("Exec" . "emacs %f")
+	   ("Icon" . "emacs-icon")
+	   ("Type" . "Application")
+	   ("Terminal" . "false")
+	   ("Categories" . "Development;TextEditor;")
+	   ("Cateogry" . "Development") ; Look here
+	   ("StartupWMClass" . "Emacs"))
 
-(``Desktop Entry'' 
-           (``Name'' . ``Emacs Text Editor'') 
-           (``Name[de]'' . ``Emacs Texteditor'') 
-           (``GenericName'' . ``Text Editor'') 
-           (``Comment'' . ``Edit text'') 
-           (``Exec'' . ``emacs %f'') 
-           (``Icon'' . ``emacs-icon'') 
-           (``Type'' . ``Application'') 
-           (``Terminal'' . ``false'') 
-           (``Categories'' . ``Development;TextEditor;'') 
-           (``Cateogry'' . ``TextEditor'')
-           (``StartupWMClass'' . ``Emacs''))
+("Desktop Entry"
+	   ("Name" . "Emacs Text Editor")
+	   ("Name[de]" . "Emacs Texteditor")
+	   ("GenericName" . "Text Editor")
+	   ("Comment" . "Edit text")
+	   ("Exec" . "emacs %f")
+	   ("Icon" . "emacs-icon")
+	   ("Type" . "Application")
+	   ("Terminal" . "false")
+	   ("Categories" . "Development;TextEditor;")
+	   ("Cateogry" . "TextEditor") ; Look here
+	   ("StartupWMClass" . "Emacs"))
 @end lisp
 
 @noindent
-This is the entry list format that is used in all of the later filters.  
-All filtering functions should accept such an entry list as it's argument, 
-and all filtering functions should either return @code{'()} or an entry list.
+This is the entry list format that is used in all of the later filters.
+All filtering functions should accept such an entry list as its argument,
+and all filtering functions should either return nil or an entry list.
 If @code{fdo-associate-categories} is @code{t} then the ``Category'' key will be
 changed to the main category that will eventually show up in the @code{apps-menu}.
-The keys that are used by the Applications Menu are currently,
+The keys that are used by the applications menu are currently,
 
 @itemize @bullet
 @item Name([])
 
-The @code{Name} key in the desktop entry list specifies the name to be used
-in the top-level of the Applications Menu.  If @code{apps-menu-lang} coincides
-with one of the Name[lang] keys in the entry list, then that will be the name used.
+The name to be displayed in the applications menu. If
+@code{apps-menu-lang} or the locale coincides with one of the
+Name[lang] keys in the entry list, then that will be the name used.
+
 @item Exec
 
-The @code{Exec} key in the desktop entry list specifies the command to be run
-when the entry is called.
+The command to be run when the entry is called.
+
 @item Terminal
 
-The @code{Terminal} key in the desktop entry list specifies whether or not to run
-the @code{Exec} value inside of a terminal or not, this will use the default terminal.
+Whether or not to run the @code{Exec} value inside of a terminal or
+not. If it's true, the terminal specified by @code{xterm-program} is
+used.
+
 @item Category
 
-The @code{Category} key in the desktop entry list specifies which top-level category
-to place the entry in.
+Which top-level category to place the entry in.
+
 @item Hidden
 
-The @code{Hidden} key in the desktop entry list specifies whether or not the entry
-should be hidden by default.
+Whether or not the entry should be hidden by default.
+
 @item NoDisplay
 
-The @code{NoDisplay} key in the desktop entry list specifies whether or not the entry
-should be displayed by default.
+Whether or not the entry should be displayed by default.
+
 @item NotShowIn
 
-The @code{NotShowIn} key in the desktop entry list, will determine if an item should
-not be shown by checking the current desktop enviroment against the value of this key.
+If an item should not be shown by checking the current desktop
+enviroment against the value of this key.
+
 @item OnlyShowIn
 
-The @code{OnlyShowIn} key in the desktop entry list, will determine if an item should
-be shown by checking the current desktop enviroment against the value of this key.
+If an item should be shown by checking the current desktop enviroment
+against the value of this key.
 @end itemize
 
-@noindent
-The filters can either be pre-defined filters, user-defined functions or a lambda 
-expression, a user-defined function would likely look like one of the default filters
-described below.
+@subsubheading Filters
+Filters are functions, either pre-defined or user-defined, which take
+one argument, a desktop file entry. You can set your filter to the
+@code{apps-menu-filter} variable.
 
-@noindent
-Filter examples
-
-@noindent
-A lambda expression, this example will move emacs to the 'util category:
+Here we show an example user-defined filter, and all pre-defined
+filters, which are also available to user codes.
 
 @lisp
-(setq apps-menu-filter 
+;; This will move emacs to the ``util'' category, in addition to the
+;; operations done by default filter.
+(setq apps-menu-filter
       (lambda (ent)
 	(let ((ent (fdo-default-filter ent)))
 	  (when ent
-	    (cond ((string-match ``[Ee]macs'' (cdr (assoc "Name" ent)) nil t)
-		   (rplacd (assoc ``Category'' ent) ``util'')))
+	    (cond ((string-match "[Ee]macs" (cdr (assoc "Name" ent)) nil t)
+		   (rplacd (assoc "Category" ent) "util")))
 	    ent))))
 @end lisp
 
@@ -5613,54 +5639,55 @@ The pre-defined filters:
 
 @lisp
 (define (fdo-nodisplay-filter fdol)
-  ``Return the desktop-file-list if NoDisplay is False, or if NoDisplay is
-not present in the desktop-file-list''
-  (if (assoc ``NoDisplay'' fdol)
-      (if (string-match ``[Ff]'' (cdr (assoc ``NoDisplay'' fdol)))
+  "Return the desktop-file-list if NoDisplay is False, or if NoDisplay is
+not present in the desktop-file-list"
+  (if (assoc "NoDisplay" fdol)
+      ;; [Ff] means match to "false"
+      (if (string-match "[Ff]" (cdr (assoc "NoDisplay" fdol)))
       	  fdol)
     fdol))
 
 (define (fdo-hidden-filter fdol)
-  ``Return the desktop-file-list if Hidden is False, or if Hidden is
-not present in the desktop-file-list''
+  "Return the desktop-file-list if Hidden is False, or if Hidden is
+not present in the desktop-file-list"
   (if (assoc "Hidden" fdol)
-      (if (string-match ``[Ff]'' (string-downcase (cdr (assoc ``OnlyShowIn'' fdol))))
+      (if (string-match "[Ff]" (string-downcase (cdr (assoc "OnlyShowIn" fdol))))
 	  fdol)
     fdol))
 
 (define (fdo-onlyshowin-filter fdol)
-  ``Return the desktop-file-list if OnlyShowIn matches `desktop-environment', 
-or if OnlyShowIn is not present in the desktop-file-list''
-  (if (assoc ``OnlyShowIn'' fdol)
-      (if (string-match desktop-environment (string-downcase (cdr (assoc ``OnlyShowIn'' fdol))))
+  "Return the desktop-file-list if OnlyShowIn matches `desktop-environment',
+or if OnlyShowIn is not present in the desktop-file-list"
+  (if (assoc "OnlyShowIn" fdol)
+      (if (string-match desktop-environment (string-downcase (cdr (assoc "OnlyShowIn" fdol))))
 	  fdol)
     fdol))
 
 (define (fdo-notshowin-filter fdol)
-  ``Return the desktop-file-list if NotShowIn does not match `desktop-environment', 
-or if NotShowIn is not present in the desktop-file-list''
-  (if (assoc ``NotShowIn'' fdol)
-      (if (not (string-match desktop-environment (string-downcase (cdr (assoc ``NotShowIn'' fdol)))))
+  "Return the desktop-file-list if NotShowIn does not match `desktop-environment',
+or if NotShowIn is not present in the desktop-file-list"
+  (if (assoc "NotShowIn" fdol)
+      (if (not (string-match desktop-environment (string-downcase (cdr (assoc "NotShowIn" fdol)))))
 	  fdol)
     fdol))
 
 (define (fdo-associate-categories-filter fdol)
-  ``If `apps-menu-associate-categories' is true, filter the
-desktop-entry through `fdo-associate-categories'.''
+  "If `apps-menu-associate-categories' is true, filter the
+desktop-entry through `fdo-associate-categories'."
   (when fdol
     (if apps-menu-associate-categories
 	(associate-categories fdol)
       fdol)))
 
 (define (fdo-toplevel-filter fdol)
-  ``Return the desktop-file-list if the `Category' is of the 
-Top-Level variety.''
+  "Return the desktop-file-list if the `Category' is of the
+Top-Level variety."
   (when fdol
-    (if (not (equal ``Top-Level'' (cdr (assoc ``Category'' fdol))))
+    (if (not (equal "Top-Level" (cdr (assoc "Category" fdol))))
 	fdol)))
 
 (define (fdo-default-filter fdol)
-  ``The default fdo-filter, combines the above.''
+  "The default fdo-filter, combines the above."
   (fdo-toplevel-filter
    (fdo-hidden-filter
     (fdo-notshowin-filter
@@ -5697,7 +5724,7 @@ The second element specifies the action to take. Possible choices are:
 
 @table @asis
 @item Command
-If it's a command name (a symbol), then that command is invoked. 
+If it's a command name (a symbol), then that command is invoked.
 In the window operation menu, if that command takes a window as the
 argument, it's passed.
 
@@ -7104,7 +7131,7 @@ the @code{PATH} environmental variable. Example:
 
 @defun quit
 @defunx restart
-Quits and restart Sawfish. 
+Quits and restart Sawfish.
 
 Restart does exec (3), replacing the current process. All command line
 arguments are used again, except that session management related ones
