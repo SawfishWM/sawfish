@@ -120,6 +120,9 @@
    (let ((type-list ;; ":type" in defcustom
           (append '(v-and)
                   (make-list 10
+			     ;; Here, `list' is necessary. If you
+			     ;; replace it with a quote, the configurator
+			     ;; crashes.
                              (list 'v-and '(choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                                                    send-to-next lock raise-lower move-resize rename frame-type)
                                    '(boolean "Also show in transients"))))))

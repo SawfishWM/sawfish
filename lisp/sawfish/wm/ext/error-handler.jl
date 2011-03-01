@@ -38,6 +38,8 @@
     :type boolean
     :group misc)
 
+  ;; By default, an error during ~/.sawfish/rc is printed to both,
+  ;; and after that, only to standard-error.
   (defcustom error-destination 'standard-error
     "Display error messages to: \\w"
     :type (choice nowhere screen standard-error both)
