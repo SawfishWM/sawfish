@@ -576,7 +576,6 @@ that window."
 	(resize-window-interactively w))))
 
   ;; Move Window To Center
-
   (define (move-window-center w)
     (move-window-to w
                     (quotient (- (screen-width)
@@ -584,6 +583,11 @@ that window."
                     (quotient (- (screen-height)
                                  (cdr (window-frame-dimensions w))) 2)))
 
+  ;; resize-prompt
+  (define-command 'resize-window-prompt resize-window-with-hints*
+    #:doc "Resize window. Prompted to enter new size."
+    #:spec "%W\nNNew width:\nNNew height:")
+     
   ;; resize-to-preset-size family
   (define (resize-window-to-preset-size x y)
     ;; The size is set beforehand in the configurator.
@@ -594,7 +598,6 @@ that window."
 
   (define-command 'resize-window-to-preset-size
     resize-window-to-preset-size
-    #:spec "NNew width:\nNNew height:"
     #:doc "Resize a window to the size you specify here."
     #:type '(and (labelled "New width:" (number 10))
 		 (labelled "New height:" (number 10)))
@@ -610,7 +613,6 @@ that window."
   (define-command 'resize-window-to-preset-width
     resize-window-to-preset-width
     #:doc "Resize a window to the width you specify here."
-    #:spec "NNew width:"
     #:type `(and (labelled "New width:" (number 10)))
     )
 
@@ -624,7 +626,6 @@ that window."
   (define-command 'resize-window-to-preset-height
     resize-window-to-preset-height
     #:doc "Resive a window to the height you specify here."
-    #:spec "NNew height:"
     #:type '(and (labelled "New height:" (number 10)))
     )
 
