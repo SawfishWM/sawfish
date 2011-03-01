@@ -1976,6 +1976,14 @@ the mouse pointer gives the direction to resize in. If the pointer is
 in the central rectangle the bottom and right edges are moved.
 @end deffn
 
+@deffn Command resize-window-to-preset-size
+@deffnx Command resize-window-to-preset-height
+@deffnx Command resize-window-to-preset-width
+For these commands, first you specify a window dimension(s) in the
+configurator. The focused window will be resized to that preset size
+on invocation.
+@end deffn
+
 @deffn Function move-selected-window
 @deffnx Command move-selected-window
 Wait for the user to select a window using the mouse, then

@@ -234,6 +234,13 @@ For the details, see @xref{Window Attributes}, and @xref{Getting Windows}.
 @item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE) 
 @item Deleted @code{get-window-by-name-re} and @code{get-window-by-class-re}. Use instead @code{get-window-by-name} or @code{get-window-by-class} with the new boolean option @code{#:regex}. (The old name is still supported.)
 @item added @code{#:icon} switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
+
+@item Commands to resize a window to preset dimensions [Christopher Bratusek]
+
+For the new command @code{resize-window-to-preset-size}, first you
+specify a size in the configurator. The focused window will be resized
+to that preset size on invocation. There're also commands to change
+only one of the height and width.
 @end itemize
 
 @item Window-operation menu improvements [Christopher Bratusek]

@@ -22,7 +22,6 @@
 
     (export move-window-interactively
 	    resize-window-interactively
-	    resize-window-to-dimensions
 	    move-selected-window
 	    resize-selected-window
 	    double-window-size
@@ -562,12 +561,6 @@ its edges with an edge of another window.")
     (unless (window-get w 'fixed-size)
       (do-move-resize w 'resize)))
 
-  (define (resize-window-to-dimensions x y #!key window)
-    "Resize the current window to the specified dimensions"
-    (if window
-        (resize-window-with-hints* window x y)
-      (resize-window-with-hints* (current-event-window) x y)))
-
   (define (move-selected-window)
     "Wait for the user to select a window, then interactively move
 that window."
@@ -591,6 +584,50 @@ that window."
                     (quotient (- (screen-height)
                                  (cdr (window-frame-dimensions w))) 2)))
 
+  ;; resize-to-preset-size family
+  (define (resize-window-to-preset-size x y)
+    ;; The size is set beforehand in the configurator.
+    (let ((w (current-event-window)))
+      (when (or (null w) (eq w 'root))
+	(setq w (input-focus)))
+      (resize-window-with-hints* w x y)))
+
+  (define-command 'resize-window-to-preset-size
+    resize-window-to-preset-size
+    #:spec "NNew width:\nNNew height:"
+    #:doc "Resize a window to the size you specify here."
+    #:type '(and (labelled "New width:" (number 10))
+		 (labelled "New height:" (number 10)))
+    )
+
+  (define (resize-window-to-preset-width x)
+    ;; The width is set beforehand in the configurator.
+    (let ((w (current-event-window)))
+      (when (or (null w) (eq w 'root))
+	(setq w (input-focus)))
+      (resize-window-with-hints* w x
+				 (cdr (window-dimensions w)))))
+  (define-command 'resize-window-to-preset-width
+    resize-window-to-preset-width
+    #:doc "Resize a window to the width you specify here."
+    #:spec "NNew width:"
+    #:type `(and (labelled "New width:" (number 10)))
+    )
+
+  (define (resize-window-to-preset-height y)
+    ;; The height is set beforehand in the configurator.
+    (let ((w (current-event-window)))
+      (when (or (null w) (eq w 'root))
+	(setq w (input-focus)))
+      (resize-window-with-hints* w
+				 (car (window-dimensions w)) y)))
+  (define-command 'resize-window-to-preset-height
+    resize-window-to-preset-height
+    #:doc "Resive a window to the height you specify here."
+    #:spec "NNew height:"
+    #:type '(and (labelled "New height:" (number 10)))
+    )
+
   ;;###autoload
   (define-command 'move-window-center
     move-window-center #:spec "%W")
@@ -598,11 +635,6 @@ that window."
     move-window-interactively #:spec "%W")
   (define-command 'resize-window-interactively
     resize-window-interactively #:spec "%W")
-  (define-command 'resize-window-to-dimensions
-    resize-window-to-dimensions
-    #:spec "NNew width:\nNNew height:"
-    #:type '(and (labelled "New width:" (number 100))
-		 (labelled "New height:" (number 100))))
   (define-command 'move-selected-window
     move-selected-window)
   (define-command 'resize-selected-window
