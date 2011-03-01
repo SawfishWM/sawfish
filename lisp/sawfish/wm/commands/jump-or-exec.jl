@@ -25,32 +25,10 @@
 ;; Provides key bindings to focus a given window, or starts the
 ;; application if absent.
 ;;
-;; toggle-or-exec was merged into jump-or-exec. It's basically
-;; the same, but it turns windows into drop-down-terminal like ones, that means
-;; then you press the key while on the corresponding window, it will be hidden.
-;; Optionally you may add a window-matcher, wich will also hide the window when
-;; you leave it (not done by default).
-;;
-;; Examples:
-;;
-;; => application dolphin matched on it's WM_NAME 
-;;  => will be iconified when key pressed while it's focused
-;;  ( bind-keys global-keymap "Home" 
-;;    `( toggle-or-exec "Dolphin" "dolphin ~" ) 
-;;
-;; => application konsole matched on it's WM_CLASS
-;;  => will be iconified when key pressed while it's focused
-;;  => will also be iconified when the cursor leaves it
-;;  ( bind-keys global-keymap "F12"
-;;    `( toggle-or-exec "Konsole" "konsole" #:match-class t ) 
-;;
-;;  ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
-;;    '( ( iconify-on-leave .t ) ) )
 
 (define-structure sawfish.wm.commands.jump-or-exec
 
     (export jump-or-exec
-	    jump-or-exec-leave
 	    toggle-or-exec)
 
     (open rep
@@ -58,7 +36,6 @@
 	  rep.regexp
           sawfish.wm.misc
           sawfish.wm.windows
-	  sawfish.wm.events
 	  sawfish.wm.state.iconify
 	  sawfish.wm.util.display-window
 	  sawfish.wm.commands)
@@ -90,19 +67,7 @@
 
   (define-command 'jump-or-exec jump-or-exec #:class 'default)
 
-  (define (jump-or-exec-leave)
-    (let ((default-window-animator 'none))
-      (iconify-window (input-focus))))
-
   (define (toggle-or-exec regex prog #!key match-class)
     (jump-or-exec regex prog
 		  #:match-class match-class
-		  #:onfocused jump-or-exec-leave))
-
-  (define (jump-or-exec-hook)
-    (if (and (not (eq (current-event-window) 'root)) ;; may error on startup else
-	     (window-get (current-event-window) 'iconify-on-leave))
-	(let ((default-window-animator 'none)) ;; no animator
-	  (iconify-window (current-event-window)))))
-
-  (add-hook 'leave-notify-hook jump-or-exec-hook))
+		  #:onfocused iconify-window)))

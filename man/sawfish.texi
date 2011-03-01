@@ -2917,6 +2917,16 @@ Return an image object representing the icon currently associated with
 Return the icon name associated with @var{window}.
 @end defun
 
+When a window has a property @code{iconify-on-leave} set to non-nil,
+it gets iconified when the mouse pointer leaves it. It can be set
+from the configurator.
+
+@lisp
+;; Example:
+;; ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
+;;   '( ( iconify-on-leave . t ) ) )
+@end lisp
+
 @node Window Stickiness, Ignored Windows, Iconifying Windows, Windows
 @section Window Stickiness
 @cindex Window stickiness
@@ -7276,8 +7286,8 @@ See also @xref{Applications Menu}, which is a popup to execute applications.
 @node Application Invocation, Common Applications,, External Applications
 @section Application Invocation
 
-See also the function @code{system} which invokes a command from a shell.
-(@pxref{Shell Commands,,, librep, The Librep Manual})
+See also the lisp function @code{system} which invokes a command from
+a shell.  (@pxref{Shell Commands,,, librep, The Librep Manual})
 
 @defun jump-or-exec regex prog #!key match-class onfocused
 Jump to a window, or if it doesn't exist, start a program. Main use of
@@ -7309,35 +7319,35 @@ argument. This can't be a string.
 
 ;; Jump to a window with the class "Gnome-run-dialog".
 (bind-keys global-keymap "W-F2"
-  '(jump-or-exec "Gnome-run-dialog" "gnome-run-dialog" #:match-class t ))
+  '(jump-or-exec "Gnome-run-dialog" "/usr/local/bin/gnome-run-dialog" #:match-class t ))
 @end lisp
 
 @end defun
 
 @defun toggle-or-exec regex prog #!key match-class
-This function is a wrapper around @code{jump-or-exec}, which turns windows into
-quake-like "toggle-windows". That means, if the matching window is focussed, it
-will be iconified (without animation). Else it works in the same way.
+This function adds to @code{jump-or-exec} by turning a window to
+``quake''-like "toggle-windows". That means, if this function is invoked
+on a matching window, that window will be iconified. Else it works in
+the same way as @code{jump-or-exec}.
 
-There is also a companion window-matcher, @code{iconify-on-leave}. That way the
-window will also be iconified, when the pointer leaves it.
+You may also want to use a window property
+@code{iconify-on-leave}. (@pxref{Iconifying Windows}.)
 
 @lisp
 ;; Examples:
 
-;; => application dolphin matched on it's WM_NAME 
-;; => will be iconified when key pressed while it's focused
+;; Application "dolphin", matched by its name (i.e. WM_NAME.)
+;; Press "Home" key, and
+;; * if no instance of dolphin is running, it's invoked.
+;; * if one is there, the focus jumps to it.
+;; * if it's already focused, it will be iconified.
+;;
 ;;  ( bind-keys global-keymap "Home" 
 ;;    `( toggle-or-exec "Dolphin" "dolphin ~" )
 
-;; => application konsole matched on it's WM_CLASS
-;; => will be iconified when key pressed while it's focused
-;; => will also be iconified when the cursor leaves it
+;; "konsole", matched by its window-class (= WM_CLASS).
 ;;  ( bind-keys global-keymap "F12"
 ;;    `( toggle-or-exec "Konsole" "konsole" #:match-class t ) 
-;;
-;;  ( add-window-matcher '( ( WM_CLASS . "^Konsole/konsole$" ) )
-;;    '( ( iconify-on-leave .t ) ) )
 @end lisp
 
 @end defun
@@ -7847,6 +7857,9 @@ Has the window been placed in a position yet? The
 
 @item iconified
 Is the window iconified? @xref{Iconifying Windows}.
+
+@item iconify-on-leave
+Iconify this window then the mouse pointer leaves. @xref{Iconifying Windows}.
 
 @item gravity
 When set, overrides the window gravity field of the window's size
