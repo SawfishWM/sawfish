@@ -1,3 +1,25 @@
+2011-03-02  Christopher Roy Bratusek <zanghar@freenet.de>
+	* debian/watch
+	* debian/sawfish-lisp-source.lintian
+	* debian/README*: removed
+
+	* debian/changelog.in
+	* debian/changelog: renamed file
+
+	* debian/control.in
+	* debian/control: renamed file
+
+	* configure.in: don't export gitdate
+	                don't generate debian/changelog
+			don't generate debian/control
+
+	* debian/rules: update
+
+	* Makefile.in: don't remove debian/changelog
+	               debian/contro.
+
+	* debian/sawfish-data.docs: added
+
 2011-03-01  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/commands/move-resize.jl
 	* lisp/sawfish/wm/state/iconify.jl

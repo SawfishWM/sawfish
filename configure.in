@@ -354,8 +354,6 @@ if test $REP_MSGFMT = true; then
 fi
 AC_MSG_RESULT($LINGUAS)
 
-gitdate=`date +%y%m%d`
-
 dnl Nonstandard exported symbols
 AC_SUBST(version)
 AC_SUBST(subversion)
@@ -365,7 +363,6 @@ AC_SUBST(lispdir)
 AC_SUBST(localedir)
 AC_SUBST(install_sh)
 AC_SUBST(datarootdir)
-AC_SUBST(gitdate)
 AC_SUBST(imageloader)
 AC_SUBST(MAKEDEP)
 AC_SUBST(GNOMEDIR)
@@ -422,8 +419,6 @@ scripts/Makefile
 sounds/Makefile
 src/Makefile
 themes/Makefile
-debian/changelog
-debian/control
 ])
 
 AC_OUTPUT
