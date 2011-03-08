@@ -59,7 +59,11 @@
   (define safe-specials
     '(default-foreground display-name canonical-display-name
       default-font default-frame nil-frame frame-part-classes
-      decorate-transients batch-mode default-directory))
+      decorate-transients batch-mode default-directory
+      ;; This should be in librep, but I added it here, too.
+      ;; Without this, wrong theme codes make Sawfish crash.
+      ;; It's ok for librep to fix it, too.
+      %in-condition-case))
 
   (define safe-features '(sawfish.wm.util.gtkrc
 			  sawfish.wm.util.x

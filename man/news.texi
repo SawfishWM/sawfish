@@ -125,6 +125,12 @@ Sawfish wrongly reported a focus change during a grab as
 
 Some windows were skipped in window cycles among groups. This is fixed.
 
+@item No more crash at loading wrong theme code [Teika Kazura]
+
+From Sawfish-1.7.0, Sawfish used to crash when a theme with wrong code
+is loaded, but it's fixed. It's not complete, and for example some
+mxflat options make Sawfish crash.
+
 @item Cancellation of @code{call-command} [Teika kazura]
 
 It used to print an error message when you cancel an interactive call of
