@@ -9,6 +9,8 @@ between. For more detailed information see the @file{ChangeLog} file
 in the Sawfish source tree, or git log.  (See the Wiki on how to
 access git repository.)
 
+Each release lists incompatible changes at its top.
+
 @c @heading x.y.z ``Code name''
 @c @itemize @bullet
 
@@ -41,7 +43,7 @@ access git repository.)
 
 @itemize @bullet
 
-@item Notes
+@item Incompatible changes
 @itemize @minus
 @item Infinite-desktop and edge-flip needs updates.
 
@@ -63,9 +65,11 @@ Even if the old names still remain, it is highly recommended to update.
 
 @item Syntax-change in @code{jump-or-exec} [Christopher Bratusek]
 
-The @code{class} and @code{onfocused} parameters are now keys, so pass them as
-#:class ''value'' or #:onfocused ''value''. Check @file{jump-or-exec.jl} for
-more detailed examples.
+The previous @code{class} and @code{onfocused} parameters are now
+keys, and pass them as ``#:match-class t/nil'' or ``#:onfocused
+value''. Note that @code{match-class} is @emph{boolean}; To pass a
+class, set @code{#:match-class t} and pass the class name to the
+argument @code{regex}. (@pxref{Application Invocation})
 
 @item Apps-menu options @code{apps-menu-show-all} is deleted. See below for more.
 

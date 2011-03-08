@@ -593,6 +593,7 @@ generate.")
         (setcdr item (delete-if (lambda (it) (eq (car it) key))
                                 (cdr item))))))
 
+  ;; Example:
   ;; (def-frame-class shade-button '((cursor . foo) ...)
   ;;   (bind-keys shade-button-keymap
   ;;     "Button1-Off" 'toggle-window-shaded))

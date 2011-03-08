@@ -7321,9 +7321,10 @@ Jump to a window, or if it doesn't exist, start a program. Main use of
 this function is as a binding to keys. Defined in the
 module @code{sawfish.wm.commands.jump-or-exec}.
 
-Window is searched by matching the name with a regex @var{regex}, or
-if @var{match-class} is non-nil, by window's WM_CLASS. When no window
-matches, action specified by @var{prog} is taken.
+Window is searched by matching the name with a regex @var{regex}.  If
+@emph{boolean}@var{match-class} is non-nil, the value of @var{regex}
+is matched with window's WM_CLASS. When no window matches, action
+specified by @var{prog} is taken.
 
 If @var{prog} is a string, then it should be a program name, and
 executed from a shell in the background. (I.e. Sawfish adds ''&''.)

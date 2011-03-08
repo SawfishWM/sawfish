@@ -379,7 +379,7 @@
         (rotate-tab 'vert 'opposite))))
 
 (define (tabbartoggle)
-  "To opposite, move tab-bar. (Swap top & bottom, or left & right)"
+  " Move tab-bar to the opposite side. (Swap top & bottom, or left & right)"
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
         (window-put w 'title-position styletab:titlebar-place))
@@ -520,15 +520,15 @@
 
 
 (define (set-frame-default-and-default/transient)
-  "Set frametype default and toggle default/transient with resize"
+  "Set frametype to `default' and toggle transient-ness with resize."
   (f-type 'def-tra))
 
 (define (set-frame-unframed-and-unframed/shaped-transient)
-  "Set frametype unframed and toggle unframed/shaped-transient with resize"
+  "Set frametype to 'unframed' and toggle transient-ness with resize"
   (f-type 'unf-def))
 
 (define (set-frame-shaped-and-shaped/shaped-transient)
-  "Set frametype shaped and toggle shaped/shaped-transient with resize"
+  "Set frametype to shaped and toggle transient-ness with resize"
   (f-type 'sha-tra))
 
 (define-command-gaol 'set-frame-default-and-default/transient-toggle set-frame-default-and-default/transient)
