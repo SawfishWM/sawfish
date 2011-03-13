@@ -39,7 +39,7 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
-@heading 1.8.0 "Unity Without Words"
+@heading 1.8.0 "思いやり (Omoiyari)"
 
 @itemize @bullet
 
@@ -47,18 +47,18 @@ Each release lists incompatible changes at its top.
 @itemize @minus
 @item Infinite-desktop and edge-flip needs updates.
 
-Open the configurator -> ``Edge Actions''. Changes must be easy.  (Set
+Open the configurator -> ``Edge Actions''. Changes will be easy. (Set
 4 pull-downs, and you're done mostly. ``Infinite-desktop'' is renamed to
 ``viewport-drag''.) For more options, see ``Edge Actions'' below.
 
-If your @file{~/.sawfish/rc} opens related modules, delete them. These
-modules are renamed, and you don't have to manually load them any
+If your @file{~/.sawfish/rc} opens related modules, delete those references.
+These modules are renamed, and you don't have to manually load them any
 more.
 
-@item Function renames [Teika kazura]
+@item Renamed functions [Teika kazura]
 @itemize
-@item Popup of operations-menu on a window, from @code{popup-window-menu} to @code{popup-window-ops-menu} (both the function and command). Old names are still available.
-@item Window rename, from @code{rename-window-func} to @code{rename-window}. (Old name is still avialable.) The function @code{rename-window-interactive} is deleted. Use @code{(call-command 'rename-window)} instead.
+@item Popup of operations-menu on a window, renamed from @code{popup-window-menu} to @code{popup-window-ops-menu} (both the function and command). Old names are still available.
+@item Renamed window rename, from @code{rename-window-func} to @code{rename-window}. (Old name is still avialable.) The function @code{rename-window-interactive} is deleted. Use @code{(call-command 'rename-window)} instead.
 @end itemize
 
 Even if the old names still remain, it is highly recommended to update.
@@ -87,7 +87,7 @@ All are collected under @file{sawfish/wm/animation}. @code{window-anim.jl} -> @c
 @item Fixed installation for non-root users [Stefano Sabatini]
 
 Previously when installing to a private directory as an ordinary user, the installation failed, because some files
-were forced to be installed in /usr. This is fixed now. 
+were forced to be installed in /usr. This is fixed now.
 
 @item Session files installation [Christopher Bratusek]
 
@@ -101,7 +101,7 @@ Now you can choose which session files (default: all) to install with these conf
 
 
 @item Spec-File compatibility for RHEL 6 beta [Kim B. Heino]
-@item Debian-Scripts compatibility for Debian/Experimental [Christopher Bratusek]
+@item Debian-Scripts (mostly) updated to the new specification [Christopher Bratusek]
 @end itemize
 @item Bug fixes
 @itemize @minus
@@ -151,7 +151,7 @@ mouse pointer hits a screen-edge. It includes former ``edge-flip'' and
 feature ``hot-spot''.
 
 Edge-flip and viewport-drag can be configured from the
-configurator ``Edge Actions'' group. Options must be easy to
+configurator ``Edge Actions'' group. Options are easy to
 understand.
 
 ``Hot-spot'' lets you assign an action to each screen-edge and
@@ -163,7 +163,7 @@ understand.
   (lambda () (display-message "hello world")))
 @end lisp
 
-Hot-spot variable names consist of position (e.g. top-left or bottom) + ``edge''/''corner'' + ``function''. A lisp expression will be evaluated in the @code{user} module.
+Hot-spot variable names consist of position (e.g. top-left or bottom) + ``edge''/''corner'' + ``function''.
 
 Other related changes are:
 @itemize *
@@ -222,7 +222,7 @@ Many improvements in tab system are done. For example, stickiness change
 on a window applies to all other windows in the same tab group, though
 maybe not yet complete. (Please tell us things you noticed.)
 
-When you use a tab capable theme (Elberg-Tabbed or Get-S-Tabbed), you
+When you used a tab capable theme (Elberg-Tabbed or Get-S-Tabbed), you
 had to manually adjust positions by pixel, but it's not necessary any
 more.
 
@@ -288,7 +288,7 @@ now have to do @code{make all} at the top directory. Previously it was
 possible to produce wrong @file{sawfish.pot}.
 @item Translation updates: Spanish [gnome-es team], German [gnome-de team],
 Simplified-Chinese [gnome-zh_CN team, Wang Lei], Norwegian/bokmål [gnome-no
-team] French [gnome-fr team], and Slovenian [gnome-sl team].
+team] French [gnome-fr team], Czech [gnome-cs team] and Slovenian [gnome-sl team].
 @item Updated @file{sawfish.pot} and subsequently all @file{*.po}. Banished some bogus items in @file{sawfish.pot}.
 (Developer's personal extensions had sneaked in.)
 @end itemize
