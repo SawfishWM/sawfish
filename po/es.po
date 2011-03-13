@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-21 21:23+0100\n"
-"PO-Revision-Date: 2011-03-13 12:37+0100\n"
+"PO-Revision-Date: 2011-03-13 18:42+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -188,17 +188,16 @@ msgstr "Color del texto del título con el foco."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Highlighted title text color."
-msgstr "Color del texto del título resaltado."
+msgstr "Texto del título resaltado."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Inactive title text color."
 msgstr "Color del texto del título inactivo."
 
 #. ../themes/StyleTab/theme.jl
-#, fuzzy
 #| msgid "unfocused highlighted title string color"
 msgid "Inactive Highlighted title text color."
-msgstr "color de la cadena de título resaltada sin el foco"
+msgstr "Color del texto del título resaltado inactivo."
 
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
@@ -451,9 +450,9 @@ msgid ""
 msgstr ""
 "alineación horizontal de la cadena de título\n"
 "\n"
-"«centro real» significa que se debe contar con la barra de título al "
-"completo al centrar la cadena, al seleccionar «centro» sólo se tiene en "
-"cuenta la distancia entre botones."
+"«centro real» significa que se debe contar con la barra de título entera al "
+"centrar la cadena. Al seleccionar «centro» sólo se tiene en cuenta la "
+"distancia entre botones."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -1901,7 +1900,7 @@ msgid ""
 "by\n"
 "window or pixels instead."
 msgstr ""
-"Amplíar la ventana hacia arriba hasta que «tropieza» con otra ventana.\n"
+"Amplía la ventana hacia arriba hasta que «tropieza» con otra ventana.\n"
 "Si el borde superior está más allá del borde de la pantalla, se devuelve a "
 "su posición.\n"
 "Con un argumento de prefijo universal, maximiza hacia arriba en su lugar.\n"
@@ -1997,12 +1996,9 @@ msgid "Jump or exec"
 msgstr "Saltar o ejecutar"
 
 #. ../lisp/sawfish/wm/commands/jump-or-exec.jl
-#, fuzzy
 #| msgid "jump to a window matched by re, or start program otherwise."
 msgid "Jump to a window, or when absent, start program."
-msgstr ""
-"saltar a una ventana coincidente con la exp. reg. o, de otra forma, iniciar "
-"un programa."
+msgstr "Saltar a una ventana, o si no hay, iniciar programa."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "External Applications"
@@ -2011,13 +2007,12 @@ msgstr "Aplicaciones externas"
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "The program launched by the `xterm' function. Interpreted by shell."
 msgstr ""
-"El programa lanzado por la función «xterm». Interpretado por la «shell»."
+"El programa lanzado por la función `xterm'. Interpretado por la terminal."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "The program launched by the `browser' function. Interpreted by shell."
 msgstr ""
-"El programa lanzado por la función del «browser». Interpretado por la "
-"«shell»."
+"El programa lanzado por la función `browser'. Interpretado por la terminal."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "Xterm"
@@ -2260,16 +2255,14 @@ msgstr ""
 "Redimensionar la ventana de forma interactiva usando el ratón o el teclado."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 #| msgid "Window history save dimensions"
 msgid "Resize window to dimensions"
-msgstr "Guardar dimensiones de historia de la ventana"
+msgstr "Redimensionar la ventana al tamaño"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 #| msgid "Move the current window to the specified viewport."
 msgid "Resize the current window to the specified dimensions"
-msgstr "Mover la ventana actual al espacio de trabajo especificado."
+msgstr "Redimensionar la ventana actual al tamaño especificado"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
@@ -2766,10 +2759,9 @@ msgid "Workspaces"
 msgstr "Áreas de trabajo"
 
 #. ../lisp/sawfish/wm/custom.jl
-#, fuzzy
 #| msgid "Actions"
 msgid "Edge Actions"
-msgstr "Operaciones"
+msgstr "Acciones del borde"
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
@@ -2781,7 +2773,7 @@ msgstr "Invocar el IGU de configuración."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "none/hot-spot"
-msgstr ""
+msgstr "ninguno/punto caliente"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 #, fuzzy
@@ -2790,60 +2782,62 @@ msgid "viewport-drag"
 msgstr "espacio de trabajo"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
-#, fuzzy
 #| msgid "workspace"
 msgid "flip-workspace"
-msgstr "escritorio"
+msgstr "girar espacio de trabajo"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
-#, fuzzy
 #| msgid "viewport"
 msgid "flip-viewport"
-msgstr "espacio de trabajo"
+msgstr "voltear vista"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the left and right screen-edge."
-msgstr ""
+msgstr "Acción para los bordes izquierdo y derecho de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the left and right screen-edge while moving a window."
 msgstr ""
+"Acción para los bordes izquierdo y derecho de la pantalla mientras se mueve "
+"una ventana."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the top and bottom screen-edge."
-msgstr ""
+msgstr "Acción para los bordes superior e inferior de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the top and bottom screen-edge while moving a window."
 msgstr ""
+"Acción para los bordes superior e inferior de la pantalla mientras se mueve "
+"una ventana."
 
 #. ../lisp/sawfish/wm/edge/flip.jl
-#, fuzzy
 #| msgid "Delay in milliseconds before unshading windows."
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
-msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
+msgstr "Retardo (en milisegundos) al voltear la vista / espacio de trabajo."
 
 #. ../lisp/sawfish/wm/edge/hot-spots.jl
-#, fuzzy
 #| msgid "Delay in milliseconds before unshading windows."
 msgid "Delay (in milliseconds) before activating a hot-spot."
-msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
+msgstr "Retardo (en milisegundos) antes de activar un punto caliente."
 
 #. ../lisp/sawfish/wm/edge/util.jl
 msgid ""
 "The size portion of the screen-border recognized as \"corners\",\n"
 "in pixels. Applies to both x and y direction."
 msgstr ""
+"El tamaño de la porción del borde de la pantalla reconocido como "
+"«esquinas»,\n"
+"en píxeles. Se aplica tanto a la dirección X como a la Y."
 
 #. ../lisp/sawfish/wm/edge/viewport-drag.jl
-#, fuzzy
 #| msgid "Amount to move the viewport when the pointer hits the screen edge."
 msgid ""
 "Amount to drag the viewport (in pixel) each time the pointer hits the\n"
 "screen edge."
 msgstr ""
-"Cantidad para mover el espacio de trabajo cuando el puntero llega al borde "
-"de la pantalla."
+"Cantidad para arrastrar la vista (en píxeles) cada vez que el puntero llega\n"
+"al borde de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/viewport-drag.jl
 #, fuzzy
@@ -2889,8 +2883,8 @@ msgstr "Elevar ventanas al enfocarlas."
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr ""
-"Retardo en milisegundos hasta que las ventanas enfocadas\n"
-"se envían a primer plano."
+"Retardo en milisegundos hasta que las ventanas enfocadas se envían a primer "
+"plano."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Beep when errors occur."
@@ -3026,10 +3020,9 @@ msgid "Focus mode"
 msgstr "Modo de foco"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 #| msgid "Iconify group"
 msgid "Iconify on leave"
-msgstr "Minimizar grupo"
+msgstr "Minimizar al salir"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame type"
@@ -3040,10 +3033,9 @@ msgid "Frame style"
 msgstr "Estilo de marco"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
 #| msgid "Fixed position"
 msgid "Title position"
-msgstr "Posición fija"
+msgstr "Posición del título"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Dimensions"
@@ -3155,7 +3147,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
-msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
+msgstr "Retardo en milisegundos antes de desenrollar ventanas."
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
@@ -3500,10 +3492,9 @@ msgid "global-keymap"
 msgstr "combinación-de-teclas-globales"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
 #| msgid "Keymap containing bindings active anywhere."
 msgid "Keymap active anywhere."
-msgstr "Mapa de teclado que contiene vínculos activos en cualquier sitio."
+msgstr "Mapa de teclado activo en cualquier sitio."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "window-keymap"
