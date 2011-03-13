@@ -6,16 +6,17 @@
 #
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004.
 # Jacinto Capote Robles <fastangel@gmail.com>, 2009.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
+# Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-21 21:23+0100\n"
-"PO-Revision-Date: 2011-02-27 13:31+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"PO-Revision-Date: 2011-03-13 12:37+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,6 @@ msgid "StyleTab"
 msgstr "Etilo de la pestaña"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Stacking"
 msgid "Settings"
 msgstr "Configuración"
 
@@ -65,11 +65,11 @@ msgstr "Botones de la barra de título inferior"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Left Titlebar Buttons"
-msgstr ""
+msgstr "Botones de la barra de título izquierda"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Right Titlebar Buttons"
-msgstr ""
+msgstr "Botones de la barra de título derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Top Titlebar Left Buttons"
@@ -89,19 +89,19 @@ msgstr "Botones a la derecha de la barra de título inferior"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Left Titlebar Top Buttons"
-msgstr ""
+msgstr "Botones superiores de la barra de título izquierda"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Left Titlebar Bottom Buttons"
-msgstr ""
+msgstr "Botones inferiores de la barra de título izquierda"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Right Titlebar Top Buttons"
-msgstr ""
+msgstr "Botones superiores de la barra de título derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Right Titlebar Bottom Buttons"
-msgstr ""
+msgstr "Botones inferiores de la barra de título derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Reduce"
@@ -129,7 +129,7 @@ msgstr "Suave"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Frame and button style. (requires restart)"
-msgstr ""
+msgstr "Estilo de marco y botón. (Requiere reiniciar.)"
 
 #. ../themes/mxflat/theme.jl
 #. ../themes/StyleTab/theme.jl
@@ -155,47 +155,44 @@ msgstr "derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Titlebar default place."
-msgstr ""
+msgstr "Posición predeterminada de la barra de título."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Height of title bar."
 msgid "Height of title border. Default 24"
 msgstr "Altura del borde del título. Predeterminado: 24."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Width of window border."
 msgid "Width of window border. Default 4"
 msgstr "Anchura del borde del título. Predeterminado: 4."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Customize buttons width. (Don't use styles defaults.)"
-msgstr ""
+msgstr "Personalizar anchura de los botones.(No usar estilos predeterminados.)"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Width of Buttons. Default 0"
-msgstr ""
+msgstr "Anchura de los botones. Valor predeterminado 0"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Tabbar font."
-msgstr ""
+msgstr "Tipografía de la barra de pestañas."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Customize title text colors. (Don't use styles defaults.)"
 msgstr ""
+"Personalizar colores del texto del título.(No usar estilos predeterminados.)"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "  focused clicked title string color"
 msgid "Focused title text color."
 msgstr "Color del texto del título con el foco."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "  focused highlighted title string color"
 msgid "Highlighted title text color."
 msgstr "Color del texto del título resaltado."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Inactive title text color."
-msgstr ""
+msgstr "Color del texto del título inactivo."
 
 #. ../themes/StyleTab/theme.jl
 #, fuzzy
@@ -1624,6 +1621,9 @@ msgid ""
 "\n"
 "Can be overriden from \"Window Rules\"."
 msgstr ""
+"Animación cuando una ventana está minimizada.\n"
+"\n"
+"Se puede anular desde las «Reglas de ventana»."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -2029,6 +2029,9 @@ msgid ""
 "specified by variable `xterm-program' in Config -> Misc -> External "
 "Applications."
 msgstr ""
+"Iniciar una terminal. Los comandos opcionales se pasan con «-e». La terminal "
+"se especifica con la variable `xterm-program' en Config -> Misc -> "
+"Aplicaciones externas."
 
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/wm/commands/launcher.jl
@@ -2044,6 +2047,8 @@ msgid ""
 "Start browser. Url is optional. Browser program is specified by variable "
 "`browser-program' in Config -> Misc -> External Applications."
 msgstr ""
+"Iniciar navegador. El URL es opcional. El navegador se especifica con la "
+"variable `browser-program' en Config -> Misc -> Aplicaciones externas."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "url:"
@@ -2618,7 +2623,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
-msgstr "Incluir las ventanas iconificadas al cambiar entre ventanas."
+msgstr "Incluir las ventanas minimizadas al cambiar entre ventanas."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include windows on all workspaces when cycling."
@@ -2719,7 +2724,7 @@ msgstr "Pedir un comando, ejecutarlo, y mostrar en pantalla su salida."
 #. ../lisp/sawfish/wm/custom.jl
 #, c-format
 msgid "Invoke configurator to customize group \"%s\"."
-msgstr ""
+msgstr "Invocar el configurador para personalizar grupo «%s»."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -4929,7 +4934,6 @@ msgid "Renames WINDOW to NEW-NAME."
 msgstr "Renombra la VENTANA al NOMBRE-NUEVO."
 
 #. ../lisp/sawfish/wm/windows.jl
-#| msgid "Fixed position"
 msgid "Toggle fixed postion"
 msgstr "Conmutar la posición fija"
 
