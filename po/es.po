@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-21 21:23+0100\n"
-"PO-Revision-Date: 2011-03-17 10:14+0100\n"
+"PO-Revision-Date: 2011-03-25 10:06+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2827,7 +2827,6 @@ msgstr ""
 "al borde de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/viewport-drag.jl
-#| msgid "Amount to pull back the cursor after moving the viewport."
 msgid "Amount to pull back the cursor (in pixel) after dragging the viewport."
 msgstr ""
 "Cantidad que echar atrás el cursor (en píxeles) después de arrastrar la "
@@ -3598,6 +3597,8 @@ msgstr "mapa-de-teclado-del-botón-mover-redimensionar"
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"move/resize\" button. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado del botón «mover/redimensionar». Sólo combinaciones con el "
+"ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "raise-lower-button-keymap"
@@ -3606,6 +3607,7 @@ msgstr "mapa-de-teclado-del-botón-subir-bajar"
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"raise/lower\" button. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado del botón «subir/bajar». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
@@ -3633,10 +3635,8 @@ msgid "_Resize"
 msgstr "_Redimensionar"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-#| msgid "_Resize"
 msgid "_Resize to"
-msgstr "_Redimensionar"
+msgstr "_Redimensionar a"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -3847,10 +3847,8 @@ msgid "_Hibernate System"
 msgstr "_Hibernar el sistema"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-#| msgid "Popup window menu"
 msgid "Popup window ops menu"
-msgstr "Abrir menú ventana"
+msgstr "Mostrar el menú de operaciones de ventana"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display the menu listing all window operations."
@@ -4009,10 +4007,8 @@ msgid "Make window sticky"
 msgstr "Definir ventana como permanente"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid "Move the window to the next viewport."
 msgid "Make the window appear in all workspaces and viewports."
-msgstr "Mover la ventana al siguiente espacio de trabajo."
+msgstr "Mostrar la ventana en todos los espacios de trabajo y vistas."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window unsticky"
@@ -4023,34 +4019,24 @@ msgid "Toggle window sticky"
 msgstr "Cambiar permanencia de la ventana"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid ""
-#| "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#| "all workspaces."
 msgid ""
 "Toggle the `stickiness' of the window, i.e. make it appear in\n"
 "all workspaces and viewports."
 msgstr ""
-"Cambiar la «permanencia» de la ventana; si es o no miembro de todos\n"
-"los escritorios."
+"Cambiar la «permanencia» de la ventana; p.e. si es o no miembro\n"
+"de todos los escritorios."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid "Toggle window sticky"
 msgid "Toggle window sticky viewport"
-msgstr "Cambiar permanencia de la ventana"
+msgstr "Cambiar permanencia de la vista de la ventana"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid ""
-#| "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#| "all workspaces."
 msgid ""
 "Toggle the stickiness of the window, i.e. make it appear in\n"
 "all viewports."
 msgstr ""
-"Cambiar la «permanencia» de la ventana; si es o no miembro de todos\n"
-"los escritorios."
+"Cambiar la «permanencia» de la ventana; p.e. definir si aparece\n"
+"en todas las vistas."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -4411,50 +4397,51 @@ msgid ""
 "on another. The first window will be added to the tabgroup containig\n"
 "the second."
 msgstr ""
+"Añadir una ventana a un grupo de pestañas. Aplicar este comando en una "
+"ventana,\n"
+"a continuación. La primera ventana se añadirá al grupo de pestañas que "
+"contiene\n"
+"la segunda."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-#| msgid "Raise Tabs on Hover"
 msgid "Raise tabs while hovering them."
 msgstr "Traer a primer plano las pestañas al posar el ratón encima"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Maybe raise tab"
-msgstr ""
+msgstr "Quizá traer a primer plano la pestaña."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Raise a window, when it's a tab and automatic raising of is disabled"
 msgstr ""
+"Traer al primer plano una ventana, si es una pestaña y la elevación "
+"automática está desactivada"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab release window"
 msgstr "El tabulador libera la ventana"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-#| msgid "Release active window from its group"
 msgid "Release the window from its group."
-msgstr "Librear la ventana activa de su grupo"
+msgstr "Liberar la ventana de su grupo"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab raise left window"
 msgstr "El tabulador trae la ventana izquierda"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 #| msgid "Raise left window in current group"
 msgid "Raise left window in current tab group."
-msgstr "Traer a primer plano ventana izquierda en el grupo actual"
+msgstr "Traer a primer plano ventana izquierda en el grupo de pestañas actual."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab raise right window"
 msgstr "El tabulador trae la ventana derecha"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 #| msgid "Raise right window in current group"
 msgid "Raise right window in current tab group."
-msgstr "Traer a primer plano ventana derecha en el grupo actual"
+msgstr "Traer a primer plano ventana derecha en el grupo de pestañas actual."
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -4462,7 +4449,7 @@ msgstr "Insertar escritorio"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Obsolete. Renamed to insert-workspace-after."
-msgstr ""
+msgstr "Obsoleto. Renombrado a insertar-espacio-de-trabajo-después."
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Popup window menu"
@@ -4470,7 +4457,7 @@ msgstr "Abrir menú ventana"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Obsolete. Renamed to popup-window-ops-menu."
-msgstr ""
+msgstr "Obsoleto. Renombrado a ventana-emergente-de-menú-de-operaciones."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade window when selected."
