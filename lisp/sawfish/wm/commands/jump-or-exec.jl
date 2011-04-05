@@ -49,7 +49,8 @@
       (cond ((and onfocused
 		  curwin
 		  (if match-class
-		      (string-match regex (window-class curwin))
+		      (and (window-class curwin)
+			   (string-match regex (window-class curwin)))
 		    (string-match regex (window-name curwin))))
 	     ;; Exec "onfocused"
 	     (cond ((commandp onfocused)
