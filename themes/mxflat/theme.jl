@@ -351,7 +351,7 @@ vertically."
   'center
   "title string horizontal alignment"
   :tooltip "'real-center' means to take the whole titlebar into \
-account while centering the string. when selecting 'center' only the \
+account while centering the string. When selecting 'center' only the \
 distance between the buttons is taken into account."
   :group (appearance mxflat:group mxflat:title-group mxflat:title-basic-group)
   :type symbol
@@ -728,7 +728,7 @@ button will be drawn on left/right side of the titlebar."
   'title-height
   "button position model"
   :tooltip "'title-height' means calculate position as multiple of \
-title height. when selecting 'pixel' you can adjust the button \
+title height. When selecting 'pixel' you can adjust the button \
 position pixelwise, but keep in mind that several buttons might \
 slide on top of each other. 'none' means no buttons at all."
   :group (appearance mxflat:group mxflat:buttons-group
