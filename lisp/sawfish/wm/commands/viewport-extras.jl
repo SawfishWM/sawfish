@@ -60,10 +60,10 @@
 
   ;;###autoload
   (define-command 'move-viewport-next
-    move-viewport-next #:class 'viewport)
+    move-viewport-next)
   (define-command 'move-viewport-previous
-    move-viewport-previous #:class 'viewport)
+    move-viewport-previous)
   (define-command 'move-window-previous
-    move-window-previous #:spec "%W" #:class 'viewport)
+    move-window-previous #:spec "%W")
   (define-command 'move-window-next
-    move-window-next #:spec "%W" #:class 'viewport))
+    move-window-next #:spec "%W"))

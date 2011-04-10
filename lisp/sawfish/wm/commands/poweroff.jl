@@ -69,4 +69,4 @@
       ((hibernate) (system (format nil "%s &" hibernate-command)))))
 
   ;;###autoload
-  (define-command 'poweroff poweroff #:class 'default))
+  (define-command 'poweroff poweroff))

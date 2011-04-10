@@ -1,3 +1,35 @@
+2011-04-10  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* man/sawfish.texi: fixed wrong logic of doc for insert-workspace
+
+	* lisp/sawfish/wm/workspace.jl: update insert-workspace accordingly
+	add insert-workspace-before to workspace-menu
+
+	* lisp/sawfish/wm/commands/describe.jl
+	* lisp/sawfish/wm/commands/groups.jl
+	* lisp/sawfish/wm/commands/jump-or-exec.jl
+	* lisp/sawfish/wm/commands/launcher.jl
+	* lisp/sawfish/wm/commands/poweroff.jl
+	* lisp/sawfish/wm/commands/raise-commands.jl
+	* lisp/sawfish/wm/commands/viewport-extras.jl
+	* lisp/sawfish/wm/stacking.jl
+	* lisp/sawfish/wm/state/transient.jl
+	* lisp/sawfish/wm/viewport.jl
+	* lisp/sawfish/wm/workspace.jl: removed unneeded 'default class from commands
+	removed unused 'default and 'advanced classes from commands
+
+
+2011-04-08  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* Makefile.in: fixed uninstall rule
+
+2011-04-07  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* themes/mxflat/theme.jl: fixed two strings in mxflat
+
+	* po/sawfish.pot: updated pot file
+
+2011-04-05  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/commands/jump-or-exec.jl: fixed failing jump-or-exec
+	when a window without WM_CLASS exists
+
 2011-03-08  Teika Kazura <teika@lavabit.com>
 	* lisp/sawfish/wm/frames.jl
 	* man/news.texi

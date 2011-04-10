@@ -70,12 +70,12 @@ passed."
                       browser-program url))))
 
   ;;###autoload
-  (define-command 'xterm xterm #:class 'default
+  (define-command 'xterm xterm
     #:spec "sCommand:"
     #:type `(and (labelled ,(_ "Command:") string))
     #:doc "Start a terminal. Optional command is passed with -e. The terminal is specified by variable `xterm-program' in Config -> Misc -> External Applications."
     )
-  (define-command 'browser browser #:class 'default
+  (define-command 'browser browser
     #:spec "sUrl:"
     #:type `(and (labelled ,(_ "url:") string))
     #:doc "Start browser. Url is optional. Browser program is specified by variable `browser-program' in Config -> Misc -> External Applications."

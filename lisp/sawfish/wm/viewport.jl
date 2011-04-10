@@ -619,7 +619,7 @@ is selected. The return value is the cons cell (x . y)."
     #:spec "NX:\nNY:"
     #:type `(and (labelled ,(_ "Column:") (number 1))
 		 (labelled ,(_ "Row:") (number 1)))
-    #:class 'default)
+   )
 
   (define (activate-viewport-column x)
     "Select the specified viewport column."
@@ -628,7 +628,7 @@ is selected. The return value is the cons cell (x . y)."
   (define-command 'activate-viewport-column activate-viewport-column
     #:spec "NX:"
     #:type `(and (labelled ,(_ "Column:") (number 1)))
-    #:class 'default)
+   )
 
   (define (activate-viewport-row y)
     "Select the specified viewport row."
@@ -637,7 +637,7 @@ is selected. The return value is the cons cell (x . y)."
   (define-command 'activate-viewport-row activate-viewport-row
     #:spec "NY:"
     #:type `(and (labelled ,(_ "Row:") (number 1)))
-    #:class 'default)
+   )
 
   (define (move-window-to-viewport x y)
     "Move the current window to the specified viewport."
@@ -646,7 +646,7 @@ is selected. The return value is the cons cell (x . y)."
   (define-command 'move-window-to-viewport move-window-to-viewport
     #:spec "NX:\nNY:"
     #:type '(and (labelled "X:" (number 1)) (labelled "Y:" (number 1)))
-    #:class 'default)
+   )
 
   (define (move-viewport-right)
     "Move the viewport one screen to the right."
@@ -698,21 +698,21 @@ viewport."
     (move-window-to-viewport-and-move-viewport w 0 -1))
 
   (define-command 'move-viewport-right move-viewport-right
-    #:class 'default)
+   )
   (define-command 'move-viewport-left move-viewport-left
-    #:class 'default)
+   )
   (define-command 'move-viewport-up move-viewport-up
-    #:class 'default)
+   )
   (define-command 'move-viewport-down move-viewport-down
-    #:class 'default)
+   )
   (define-command 'move-window-right move-window-right #:spec "%W"
-    #:class 'default)
+   )
   (define-command 'move-window-left move-window-left #:spec "%W"
-    #:class 'default)
+   )
   (define-command 'move-window-up move-window-up #:spec "%W"
-    #:class 'default)
+   )
   (define-command 'move-window-down move-window-down #:spec "%W"
-    #:class 'default)
+   )
 
 ;;; session management, config
 

@@ -66,7 +66,7 @@
 	    ((commandp prog) (call-command prog))
 	    (t (user-eval prog)))))
 
-  (define-command 'jump-or-exec jump-or-exec #:class 'default)
+  (define-command 'jump-or-exec jump-or-exec)
 
   (define (toggle-or-exec regex prog #!key match-class)
     (jump-or-exec regex prog

@@ -38,9 +38,9 @@
 
   ;;###autoload
   (define-command 'describe-symbol describe-symbol
-    #:spec "SSymbol:" #:class 'advanced)
+    #:spec "SSymbol:")
   (define-command-to-screen 'describe-symbol-to-screen describe-symbol
-    #:spec "SSymbol:" #:class 'advanced
+    #:spec "SSymbol:"
     #:doc "Enter a name of var/func, and prints its doc.")
 
   (define (apropos-output symbols)
@@ -61,9 +61,9 @@
 
   ;;###autoload
   (define-command 'apropos-function apropos-function
-    #:spec "sApropos functions:\nP" #:class 'advanced)
+    #:spec "sApropos functions:\nP")
   (define-command-to-screen 'apropos-function-to-screen apropos-function
-    #:spec "sApropos functions:\nP" #:class 'advanced)
+    #:spec "sApropos functions:\nP")
 
   (define (apropos-variable regexp)
     (format standard-output "Apropos variable `%s':\n" regexp)
@@ -71,6 +71,6 @@
 
   ;;###autoload
   (define-command 'apropos-variable apropos-variable
-    #:spec "sApropos variables:" #:class 'advanced)
+    #:spec "sApropos variables:")
   (define-command-to-screen 'apropos-variable-to-screen apropos-variable
-    #:spec "sApropos variables:" #:class 'advanced))
+    #:spec "sApropos variables:"))
