@@ -6,16 +6,17 @@
 #
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004.
 # Jacinto Capote Robles <fastangel@gmail.com>, 2009.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
+# Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-21 21:23+0100\n"
-"PO-Revision-Date: 2011-02-27 13:31+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"PO-Revision-Date: 2011-03-25 10:06+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,6 @@ msgid "StyleTab"
 msgstr "Etilo de la pestaña"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Stacking"
 msgid "Settings"
 msgstr "Configuración"
 
@@ -65,11 +65,11 @@ msgstr "Botones de la barra de título inferior"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Left Titlebar Buttons"
-msgstr ""
+msgstr "Botones de la barra de título izquierda"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Right Titlebar Buttons"
-msgstr ""
+msgstr "Botones de la barra de título derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Top Titlebar Left Buttons"
@@ -89,19 +89,19 @@ msgstr "Botones a la derecha de la barra de título inferior"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Left Titlebar Top Buttons"
-msgstr ""
+msgstr "Botones superiores de la barra de título izquierda"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Left Titlebar Bottom Buttons"
-msgstr ""
+msgstr "Botones inferiores de la barra de título izquierda"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Right Titlebar Top Buttons"
-msgstr ""
+msgstr "Botones superiores de la barra de título derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Right Titlebar Bottom Buttons"
-msgstr ""
+msgstr "Botones inferiores de la barra de título derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Reduce"
@@ -129,7 +129,7 @@ msgstr "Suave"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Frame and button style. (requires restart)"
-msgstr ""
+msgstr "Estilo de marco y botón. (Requiere reiniciar.)"
 
 #. ../themes/mxflat/theme.jl
 #. ../themes/StyleTab/theme.jl
@@ -155,53 +155,48 @@ msgstr "derecha"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Titlebar default place."
-msgstr ""
+msgstr "Posición predeterminada de la barra de título."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Height of title bar."
 msgid "Height of title border. Default 24"
 msgstr "Altura del borde del título. Predeterminado: 24."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Width of window border."
 msgid "Width of window border. Default 4"
 msgstr "Anchura del borde del título. Predeterminado: 4."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Customize buttons width. (Don't use styles defaults.)"
-msgstr ""
+msgstr "Personalizar anchura de los botones.(No usar estilos predeterminados.)"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Width of Buttons. Default 0"
-msgstr ""
+msgstr "Anchura de los botones. Valor predeterminado 0"
 
 #. ../themes/StyleTab/theme.jl
 msgid "Tabbar font."
-msgstr ""
+msgstr "Tipografía de la barra de pestañas."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Customize title text colors. (Don't use styles defaults.)"
 msgstr ""
+"Personalizar colores del texto del título.(No usar estilos predeterminados.)"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "  focused clicked title string color"
 msgid "Focused title text color."
 msgstr "Color del texto del título con el foco."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "  focused highlighted title string color"
 msgid "Highlighted title text color."
-msgstr "Color del texto del título resaltado."
+msgstr "Texto del título resaltado."
 
 #. ../themes/StyleTab/theme.jl
 msgid "Inactive title text color."
-msgstr ""
+msgstr "Color del texto del título inactivo."
 
 #. ../themes/StyleTab/theme.jl
-#, fuzzy
-#| msgid "unfocused highlighted title string color"
 msgid "Inactive Highlighted title text color."
-msgstr "color de la cadena de título resaltada sin el foco"
+msgstr "Color del texto del título resaltado inactivo."
 
 #. ../themes/gradient/theme.jl
 msgid "Gradient Theme"
@@ -454,9 +449,9 @@ msgid ""
 msgstr ""
 "alineación horizontal de la cadena de título\n"
 "\n"
-"«centro real» significa que se debe contar con la barra de título al "
-"completo al centrar la cadena, al seleccionar «centro» sólo se tiene en "
-"cuenta la distancia entre botones."
+"«centro real» significa que se debe contar con la barra de título entera al "
+"centrar la cadena. Al seleccionar «centro» sólo se tiene en cuenta la "
+"distancia entre botones."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -863,9 +858,9 @@ msgstr ""
 "modelo de la posición del botón\n"
 "\n"
 "«altura del título» significa calcular la posición como un múltiplo de la "
-"altura del título. Al seleccionar «píxel» puede ajustar la posición del "
-"botón por píxeles, pero recuerde que varios botones se pueden deslizar unos "
-"encima de otros. «ninguno» significa que no habrá botones."
+"altura del título. Al seleccionar «píxel» puede ajustar la posición del botón "
+"por píxeles, pero recuerde que varios botones se pueden deslizar unos encima "
+"de otros. «ninguno» significa que no habrá botones."
 
 #. ../themes/mxflat/theme.jl
 msgid "menu button position"
@@ -929,7 +924,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:sticky-button-keymap"
-msgstr "mxflat:mapa de teclado del botón pegajoso"
+msgstr "mxflat: mapa de teclado del botón pegajoso"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -947,7 +942,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:previous-button-keymap"
-msgstr "mxflat:mapa de teclado del botón anterior"
+msgstr "mxflat: mapa de teclado del botón anterior"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -966,7 +961,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:next-button-keymap"
-msgstr "mxflat:mapa de teclado del siguiente botón"
+msgstr "mxflat: mapa de teclado del siguiente botón"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -996,7 +991,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:configure-button-keymap"
-msgstr "mxflat:mapa de teclado del botón de configuración"
+msgstr "mxflat: mapa de teclado del botón de configuración"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -1024,7 +1019,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:info-button-keymap"
-msgstr "mxflat:mapa de teclado del botón de información"
+msgstr "mxflat: mapa de teclado del botón de información"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -1056,7 +1051,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:always-on-top-button-keymap"
-msgstr "mxflat:mapa de teclado del botón de siempre encima"
+msgstr "mxflat: mapa de teclado del botón de siempre encima"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -1072,7 +1067,7 @@ msgstr ""
 
 #. ../themes/mxflat/theme.jl
 msgid "mxflat:lock-button-keymap"
-msgstr "mxflat:mapa de teclado del botón de bloqueo"
+msgstr "mxflat: mapa de teclado del botón de bloqueo"
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -1624,6 +1619,9 @@ msgid ""
 "\n"
 "Can be overriden from \"Window Rules\"."
 msgstr ""
+"Animación cuando una ventana está minimizada.\n"
+"\n"
+"Se puede anular desde las «Reglas de ventana»."
 
 #. ../lisp/sawfish/wm/commands/grow-pack.jl
 #. ../lisp/sawfish/wm/autoload.jl
@@ -1901,7 +1899,7 @@ msgid ""
 "by\n"
 "window or pixels instead."
 msgstr ""
-"Amplíar la ventana hacia arriba hasta que «tropieza» con otra ventana.\n"
+"Amplía la ventana hacia arriba hasta que «tropieza» con otra ventana.\n"
 "Si el borde superior está más allá del borde de la pantalla, se devuelve a "
 "su posición.\n"
 "Con un argumento de prefijo universal, maximiza hacia arriba en su lugar.\n"
@@ -1997,12 +1995,8 @@ msgid "Jump or exec"
 msgstr "Saltar o ejecutar"
 
 #. ../lisp/sawfish/wm/commands/jump-or-exec.jl
-#, fuzzy
-#| msgid "jump to a window matched by re, or start program otherwise."
 msgid "Jump to a window, or when absent, start program."
-msgstr ""
-"saltar a una ventana coincidente con la exp. reg. o, de otra forma, iniciar "
-"un programa."
+msgstr "Saltar a una ventana, o si no hay, iniciar programa."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "External Applications"
@@ -2011,13 +2005,12 @@ msgstr "Aplicaciones externas"
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "The program launched by the `xterm' function. Interpreted by shell."
 msgstr ""
-"El programa lanzado por la función «xterm». Interpretado por la «shell»."
+"El programa lanzado por la función `xterm'. Interpretado por la terminal."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "The program launched by the `browser' function. Interpreted by shell."
 msgstr ""
-"El programa lanzado por la función del «browser». Interpretado por la "
-"«shell»."
+"El programa lanzado por la función `browser'. Interpretado por la terminal."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "Xterm"
@@ -2029,6 +2022,9 @@ msgid ""
 "specified by variable `xterm-program' in Config -> Misc -> External "
 "Applications."
 msgstr ""
+"Iniciar una terminal. Los comandos opcionales se pasan con «-e». La terminal "
+"se especifica con la variable `xterm-program' en Config -> Misc -> "
+"Aplicaciones externas."
 
 #. ../lisp/sawfish/wm/commands.jl
 #. ../lisp/sawfish/wm/commands/launcher.jl
@@ -2044,6 +2040,8 @@ msgid ""
 "Start browser. Url is optional. Browser program is specified by variable "
 "`browser-program' in Config -> Misc -> External Applications."
 msgstr ""
+"Iniciar navegador. El URL es opcional. El navegador se especifica con la "
+"variable `browser-program' en Config -> Misc -> Aplicaciones externas."
 
 #. ../lisp/sawfish/wm/commands/launcher.jl
 msgid "url:"
@@ -2255,16 +2253,12 @@ msgstr ""
 "Redimensionar la ventana de forma interactiva usando el ratón o el teclado."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Window history save dimensions"
 msgid "Resize window to dimensions"
-msgstr "Guardar dimensiones de historia de la ventana"
+msgstr "Redimensionar la ventana al tamaño"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Move the current window to the specified viewport."
 msgid "Resize the current window to the specified dimensions"
-msgstr "Mover la ventana actual al espacio de trabajo especificado."
+msgstr "Redimensionar la ventana actual al tamaño especificado"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
@@ -2618,7 +2612,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include iconified windows when cycling."
-msgstr "Incluir las ventanas iconificadas al cambiar entre ventanas."
+msgstr "Incluir las ventanas minimizadas al cambiar entre ventanas."
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "Include windows on all workspaces when cycling."
@@ -2638,7 +2632,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid "cycle-keymap"
-msgstr "combinación-de-teclas-de-rotación"
+msgstr "mapa-de-teclado-de-rotación"
 
 #. ../lisp/sawfish/wm/commands/x-cycle.jl
 msgid ""
@@ -2719,7 +2713,7 @@ msgstr "Pedir un comando, ejecutarlo, y mostrar en pantalla su salida."
 #. ../lisp/sawfish/wm/custom.jl
 #, c-format
 msgid "Invoke configurator to customize group \"%s\"."
-msgstr ""
+msgstr "Invocar el configurador para personalizar grupo «%s»."
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
@@ -2761,10 +2755,8 @@ msgid "Workspaces"
 msgstr "Áreas de trabajo"
 
 #. ../lisp/sawfish/wm/custom.jl
-#, fuzzy
-#| msgid "Actions"
 msgid "Edge Actions"
-msgstr "Operaciones"
+msgstr "Acciones del borde"
 
 #. ../lisp/sawfish/wm/customize.jl
 msgid "Customize"
@@ -2776,76 +2768,69 @@ msgstr "Invocar el IGU de configuración."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "none/hot-spot"
-msgstr ""
+msgstr "ninguno/punto caliente"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
-#, fuzzy
-#| msgid "viewport"
 msgid "viewport-drag"
-msgstr "espacio de trabajo"
+msgstr "arrastrar vista"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
-#, fuzzy
-#| msgid "workspace"
 msgid "flip-workspace"
-msgstr "escritorio"
+msgstr "girar espacio de trabajo"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
-#, fuzzy
-#| msgid "viewport"
 msgid "flip-viewport"
-msgstr "espacio de trabajo"
+msgstr "voltear vista"
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the left and right screen-edge."
-msgstr ""
+msgstr "Acción para los bordes izquierdo y derecho de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the left and right screen-edge while moving a window."
 msgstr ""
+"Acción para los bordes izquierdo y derecho de la pantalla mientras se mueve "
+"una ventana."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the top and bottom screen-edge."
-msgstr ""
+msgstr "Acción para los bordes superior e inferior de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/actions.jl
 msgid "Action for the top and bottom screen-edge while moving a window."
 msgstr ""
+"Acción para los bordes superior e inferior de la pantalla mientras se mueve "
+"una ventana."
 
 #. ../lisp/sawfish/wm/edge/flip.jl
-#, fuzzy
-#| msgid "Delay in milliseconds before unshading windows."
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
-msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
+msgstr "Retardo (en milisegundos) al voltear la vista / espacio de trabajo."
 
 #. ../lisp/sawfish/wm/edge/hot-spots.jl
-#, fuzzy
-#| msgid "Delay in milliseconds before unshading windows."
 msgid "Delay (in milliseconds) before activating a hot-spot."
-msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
+msgstr "Retardo (en milisegundos) antes de activar un punto caliente."
 
 #. ../lisp/sawfish/wm/edge/util.jl
 msgid ""
 "The size portion of the screen-border recognized as \"corners\",\n"
 "in pixels. Applies to both x and y direction."
 msgstr ""
+"El tamaño de la porción del borde de la pantalla reconocido como «esquinas»,\n"
+"en píxeles. Se aplica tanto a la dirección X como a la Y."
 
 #. ../lisp/sawfish/wm/edge/viewport-drag.jl
-#, fuzzy
-#| msgid "Amount to move the viewport when the pointer hits the screen edge."
 msgid ""
 "Amount to drag the viewport (in pixel) each time the pointer hits the\n"
 "screen edge."
 msgstr ""
-"Cantidad para mover el espacio de trabajo cuando el puntero llega al borde "
-"de la pantalla."
+"Cantidad para arrastrar la vista (en píxeles) cada vez que el puntero llega\n"
+"al borde de la pantalla."
 
 #. ../lisp/sawfish/wm/edge/viewport-drag.jl
-#, fuzzy
-#| msgid "Amount to pull back the cursor after moving the viewport."
 msgid "Amount to pull back the cursor (in pixel) after dragging the viewport."
 msgstr ""
-"Cantidad que echar atrás el cursor después de mover espacio de trabajo."
+"Cantidad que echar atrás el cursor (en píxeles) después de arrastrar la "
+"vista."
 
 #. ../lisp/sawfish/wm/ext/apps-menu.jl
 msgid "Update apps menu"
@@ -2884,8 +2869,8 @@ msgstr "Elevar ventanas al enfocarlas."
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Delay in milliseconds until focused windows are raised."
 msgstr ""
-"Retardo en milisegundos hasta que las ventanas enfocadas\n"
-"se envían a primer plano."
+"Retardo en milisegundos hasta que las ventanas enfocadas se envían a primer "
+"plano."
 
 #. ../lisp/sawfish/wm/ext/error-handler.jl
 msgid "Beep when errors occur."
@@ -3021,10 +3006,8 @@ msgid "Focus mode"
 msgstr "Modo de foco"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-#| msgid "Iconify group"
 msgid "Iconify on leave"
-msgstr "Minimizar grupo"
+msgstr "Minimizar al salir"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Frame type"
@@ -3035,10 +3018,8 @@ msgid "Frame style"
 msgstr "Estilo de marco"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-#| msgid "Fixed position"
 msgid "Title position"
-msgstr "Posición fija"
+msgstr "Posición del título"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Dimensions"
@@ -3069,10 +3050,8 @@ msgid "Never maximize"
 msgstr "No maximizar nunca"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#, fuzzy
-#| msgid "Animation"
 msgid "Animator"
-msgstr "Animación"
+msgstr "Animador"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
 msgid "Avoid"
@@ -3150,7 +3129,7 @@ msgstr ""
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Delay in milliseconds before unshading windows."
-msgstr "Retardo en milisegundos antes de desenrrollar ventanas."
+msgstr "Retardo en milisegundos antes de desenrollar ventanas."
 
 #. ../lisp/sawfish/wm/ext/shade-hover.jl
 msgid "Raise windows when they are unshaded."
@@ -3492,94 +3471,84 @@ msgstr "_Apagar desde XFCE"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "global-keymap"
-msgstr "combinación-de-teclas-globales"
+msgstr "mapa-de-teclado-global"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-#| msgid "Keymap containing bindings active anywhere."
 msgid "Keymap active anywhere."
-msgstr "Mapa de teclado que contiene vínculos activos en cualquier sitio."
+msgstr "Mapa de teclado activo en cualquier sitio."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "window-keymap"
-msgstr "combinación-de-teclas-de-ventana"
+msgstr "mapa-de-teclado-de-ventana"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-#| msgid "Keymap containing bindings active when a client window is focused."
 msgid "Keymap active when a client window is focused."
-msgstr ""
-"Mapa de teclado que contiene las combinaciones activas cuando una\n"
-"ventana cliente tiene el foco."
+msgstr "Mapa de teclado activo cuando una ventana cliente tiene el foco."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "root-window-keymap"
-msgstr "combinación-de-teclas-de-ventana-raíz"
+msgstr "mapa-de-teclado-de-ventana-raíz"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-#| msgid ""
-#| "Keymap containing bindings active when the pointer is in the root window\n"
-#| "(or when no window is focused)."
 msgid ""
 "Keymap active when the pointer is in the root window\n"
 "(or when no window is focused)."
 msgstr ""
-"Mapa de teclado que contiene las combinaciones activas cuando el puntero "
-"está\n"
+"Mapa de teclado activo cuando el puntero está\n"
 "en la ventana raíz (o cuando ninguna ventana tiene el foco)."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "title-keymap"
-msgstr "combinación-de-teclas-de-título"
+msgstr "mapa-de-teclado-de-título"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of window title bar. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado de la barra de título de la ventana. Sólo combinaciones con "
+"el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-#| msgid "global-keymap"
 msgid "tabbar-keymap"
-msgstr "combinación-de-teclas-globales"
+msgstr "mapa-de-teclado-global de la barra de pestañas"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of window tabbar. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado de la barra de pestañas de la ventana. Sólo combinaciones "
+"con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "border-keymap"
-msgstr "combinación-de-teclas-de-borde"
+msgstr "mapa-de-teclado-de-borde"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of window border. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado del borde de la ventana. Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "close-button-keymap"
-msgstr "combinación-de-teclas-de-botón-cerrar"
+msgstr "mapa-de-teclado-del-botón-cerrar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"close\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón «cerrar». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "iconify-button-keymap"
-msgstr "combinación-de-teclas-de-botón-minimizar"
+msgstr "mapa-de-teclado-del-botón-minimizar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"iconify\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón «minimizar». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "maximize-button-keymap"
-msgstr "combinación-de-teclas-de-botón-maximizar"
+msgstr "mapa-de-teclado-del-botón-maximizar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#, fuzzy
-#| msgid "maximize button position"
 msgid "Keymap of \"maximize\" button. Mouse-bindings only."
-msgstr "maximizar el botón de posición"
+msgstr "Mapa de teclado del botón «maximizar». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "menu-button-keymap"
@@ -3587,55 +3556,58 @@ msgstr "combinacion-de-teclas-de-botón-menú"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"menu\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón «menú». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "shade-button-keymap"
-msgstr "combinación-de-teclas-de-botón-enrollar"
+msgstr "mapa-de-teclado-del-botón-enrollar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"shade\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón  «sombra». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "sticky-button-keymap"
-msgstr "combinación-de-teclas-de-botón-permanente"
+msgstr "mapa-de-teclado-del-botón-permanente"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"sticky\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón «pegajoso». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "lock-button-keymap"
-msgstr "combinación-de-teclas-de-botón-bloquear"
+msgstr "mapa-de-teclado-del-botón-bloquear"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"lock\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón «bloquear». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "rename-button-keymap"
-msgstr "combinación-de-teclas-de-botón-renombrar"
+msgstr "mapa-de-teclado-del-botón-renombrar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"rename\" button. Mouse-bindings only."
-msgstr ""
+msgstr "Mapa de teclado del botón «renombrar». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "move-resize-button-keymap"
-msgstr "combinación-de-teclas-de-botón-mover-redimensionar"
+msgstr "mapa-de-teclado-del-botón-mover-redimensionar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"move/resize\" button. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado del botón «mover/redimensionar». Sólo combinaciones con el "
+"ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "raise-lower-button-keymap"
-msgstr "combinación-de-teclas-de-botón-subir-bajar"
+msgstr "mapa-de-teclado-del-botón-subir-bajar"
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Keymap of \"raise/lower\" button. Mouse-bindings only."
 msgstr ""
+"Mapa de teclado del botón «subir/bajar». Sólo combinaciones con el ratón."
 
 #. ../lisp/sawfish/wm/keymaps.jl
 msgid "Modifier key(s) used for default shortcuts."
@@ -3663,10 +3635,8 @@ msgid "_Resize"
 msgstr "_Redimensionar"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-#| msgid "_Resize"
 msgid "_Resize to"
-msgstr "_Redimensionar"
+msgstr "_Redimensionar a"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "_Close"
@@ -3877,10 +3847,8 @@ msgid "_Hibernate System"
 msgstr "_Hibernar el sistema"
 
 #. ../lisp/sawfish/wm/menus.jl
-#, fuzzy
-#| msgid "Popup window menu"
 msgid "Popup window ops menu"
-msgstr "Abrir menú ventana"
+msgstr "Mostrar el menú de operaciones de ventana"
 
 #. ../lisp/sawfish/wm/menus.jl
 msgid "Display the menu listing all window operations."
@@ -4039,10 +4007,8 @@ msgid "Make window sticky"
 msgstr "Definir ventana como permanente"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid "Move the window to the next viewport."
 msgid "Make the window appear in all workspaces and viewports."
-msgstr "Mover la ventana al siguiente espacio de trabajo."
+msgstr "Mostrar la ventana en todos los espacios de trabajo y vistas."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "Make window unsticky"
@@ -4053,34 +4019,24 @@ msgid "Toggle window sticky"
 msgstr "Cambiar permanencia de la ventana"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid ""
-#| "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#| "all workspaces."
 msgid ""
 "Toggle the `stickiness' of the window, i.e. make it appear in\n"
 "all workspaces and viewports."
 msgstr ""
-"Cambiar la «permanencia» de la ventana; si es o no miembro de todos\n"
-"los escritorios."
+"Cambiar la «permanencia» de la ventana; p.e. si es o no miembro\n"
+"de todos los escritorios."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid "Toggle window sticky"
 msgid "Toggle window sticky viewport"
-msgstr "Cambiar permanencia de la ventana"
+msgstr "Cambiar permanencia de la vista de la ventana"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#, fuzzy
-#| msgid ""
-#| "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#| "all workspaces."
 msgid ""
 "Toggle the stickiness of the window, i.e. make it appear in\n"
 "all viewports."
 msgstr ""
-"Cambiar la «permanencia» de la ventana; si es o no miembro de todos\n"
-"los escritorios."
+"Cambiar la «permanencia» de la ventana; p.e. definir si aparece\n"
+"en todas las vistas."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
 msgid "_Sticky"
@@ -4441,50 +4397,51 @@ msgid ""
 "on another. The first window will be added to the tabgroup containig\n"
 "the second."
 msgstr ""
+"Añadir una ventana a un grupo de pestañas. Aplicar este comando en una "
+"ventana,\n"
+"a continuación. La primera ventana se añadirá al grupo de pestañas que "
+"contiene\n"
+"la segunda."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-#| msgid "Raise Tabs on Hover"
 msgid "Raise tabs while hovering them."
 msgstr "Traer a primer plano las pestañas al posar el ratón encima"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Maybe raise tab"
-msgstr ""
+msgstr "Quizá traer a primer plano la pestaña."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Raise a window, when it's a tab and automatic raising of is disabled"
 msgstr ""
+"Traer al primer plano una ventana, si es una pestaña y la elevación "
+"automática está desactivada"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab release window"
 msgstr "El tabulador libera la ventana"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
-#| msgid "Release active window from its group"
 msgid "Release the window from its group."
-msgstr "Librear la ventana activa de su grupo"
+msgstr "Liberar la ventana de su grupo"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab raise left window"
 msgstr "El tabulador trae la ventana izquierda"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 #| msgid "Raise left window in current group"
 msgid "Raise left window in current tab group."
-msgstr "Traer a primer plano ventana izquierda en el grupo actual"
+msgstr "Traer a primer plano ventana izquierda en el grupo de pestañas actual."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab raise right window"
 msgstr "El tabulador trae la ventana derecha"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#, fuzzy
 #| msgid "Raise right window in current group"
 msgid "Raise right window in current tab group."
-msgstr "Traer a primer plano ventana derecha en el grupo actual"
+msgstr "Traer a primer plano ventana derecha en el grupo de pestañas actual."
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Insert workspace"
@@ -4492,7 +4449,7 @@ msgstr "Insertar escritorio"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Obsolete. Renamed to insert-workspace-after."
-msgstr ""
+msgstr "Obsoleto. Renombrado a insertar-espacio-de-trabajo-después."
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Popup window menu"
@@ -4500,7 +4457,7 @@ msgstr "Abrir menú ventana"
 
 #. ../lisp/sawfish/wm/util/compat.jl
 msgid "Obsolete. Renamed to popup-window-ops-menu."
-msgstr ""
+msgstr "Obsoleto. Renombrado a ventana-emergente-de-menú-de-operaciones."
 
 #. ../lisp/sawfish/wm/util/display-window.jl
 msgid "Unshade window when selected."
@@ -4571,7 +4528,7 @@ msgid ""
 "Sends the next key event directly to the focused client window, ignoring\n"
 "any window manager bindings that it may have."
 msgstr ""
-"Envia el evento de tecla siguiente directamente a la ventana cliente con "
+"Envía el evento de tecla siguiente directamente a la ventana cliente con "
 "foco,\n"
 "ignorando cualquier combinación de teclas que pueda tener el gestor de "
 "ventanas."
@@ -4929,7 +4886,6 @@ msgid "Renames WINDOW to NEW-NAME."
 msgstr "Renombra la VENTANA al NOMBRE-NUEVO."
 
 #. ../lisp/sawfish/wm/windows.jl
-#| msgid "Fixed position"
 msgid "Toggle fixed postion"
 msgstr "Conmutar la posición fija"
 
