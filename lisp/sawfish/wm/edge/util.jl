@@ -45,13 +45,6 @@
       (remove-hook 'after-restacking-hook raise-flippers)
       (remove-hook 'randr-change-notify-hook recreate-flippers)))
 
-  (defcustom hot-spots-corner-length 50
-    "The size portion of the screen-border recognized as \"corners\",
-in pixels. Applies to both x and y direction."
-    :type number
-    :range (5 . 500)
-    :group edge-actions)
-
   (define (get-active-corner)
     (let ((cursor-x (car (query-pointer)))
 	  (cursor-y (cdr (query-pointer))))

@@ -47,6 +47,8 @@
 	   sawfish.wm.util.compat
 	   sawfish.wm.ext.error-handler
 	   sawfish.wm.ext.apps-menu
+	   sawfish.wm.edge.conf
+	   sawfish.wm.edge.actions
 	   sawfish.wm.frames
 	   sawfish.wm.menus)
      (access sawfish.wm.integration.kde
@@ -151,10 +153,13 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
     (sawfish.wm.integration.kde#kde-late-init))
 
   ;; generate apps-menu from *.desktop files
-  ;; initialize the screen-edges
   (unless batch-mode
-    (init-apps-menu)
-    (activate-edges t))
+    (init-apps-menu))
+
+  ;; initialize edges, unless disabled
+  (if (and (not batch-mode)
+	   edge-actions-enabled)
+      (activate-edges t))
 
   ;; apply customized font-colors
   (if use-custom-font-color

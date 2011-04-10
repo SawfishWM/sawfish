@@ -27,19 +27,6 @@
 
   (define-structure-alias viewport-drag sawfish.wm.edge.viewport-drag)
 
-  (defcustom viewport-drag-distance 64
-    "Amount to drag the viewport (in pixel) each time the pointer hits the
-screen edge."
-    :group edge-actions
-    :type number
-    :range (1 . nil))
-
-  (defcustom viewport-drag-cursor-distance 32
-    "Amount to pull back the cursor (in pixel) after dragging the viewport."
-    :group edge-actions
-    :type number
-    :range (1 . nil))
-
   (define (drag-right)
     "Shifts the viewport `viewport-drag-distance' pixels to the right."
     (let ((dist viewport-drag-distance)

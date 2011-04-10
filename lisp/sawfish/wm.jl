@@ -114,8 +114,7 @@
 	      sawfish.wm.state.iconify
 	      sawfish.wm.state.shading
 	      sawfish.wm.state.transient
-	      sawfish.wm.state.ignored
-	      sawfish.wm.edge.actions)))
+	      sawfish.wm.state.ignored)))
   (open-structures mods)
   #| I.e.
   (export-bindings (parse-interface

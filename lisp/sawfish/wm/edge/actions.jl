@@ -20,39 +20,21 @@
 
 (define-structure sawfish.wm.edge.actions
 
-    (export activate-edges)
+    (export activate-edges
+	    activate-edges-after-set)
 
     (open rep
 	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom
+	  sawfish.wm.edge.conf
 	  sawfish.wm.edge.util
 	  sawfish.wm.edge.flip
 	  sawfish.wm.edge.hot-spots
 	  sawfish.wm.edge.viewport-drag)
 
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
-
-  (defcustom left-right-edge-action 'none/hot-spot
-    "Action for the left and right screen-edge."
-    :group edge-actions
-    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
-
-  (defcustom left-right-edge-move-action 'none
-    "Action for the left and right screen-edge while moving a window."
-    :group edge-actions
-    :type  (choice none viewport-drag flip-workspace flip-viewport))
-
-  (defcustom top-bottom-edge-action 'none/hot-spot
-    "Action for the top and bottom screen-edge."
-    :group edge-actions
-    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
-
-  (defcustom top-bottom-edge-move-action 'none
-    "Action for the top and bottom screen-edge while moving a window."
-    :group edge-actions
-    :type  (choice none viewport-drag flip-workspace flip-viewport))
 
   (define (edge-action-call func edge)
     (case func
@@ -101,4 +83,7 @@
 	    (add-hook 'while-moving-hook edge-action-move-hook-func)))
       (activate-flippers nil)
       (remove-hook 'enter-flipper-hook edge-action-hook-func)
-      (remove-hook 'while-moving-hook edge-action-move-hook-func))))
+      (remove-hook 'while-moving-hook edge-action-move-hook-func)))
+
+  (define (activate-edges-after-set)
+    (activate-edges edge-actions-enabled)))

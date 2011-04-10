@@ -37,12 +37,6 @@
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
-  (defcustom edge-flip-delay 250
-    "Delay (in milliseconds) of flipping of viewport / workspace."
-    :group edge-actions
-    :type number
-    :range (0 . nil))
-
   (define (edge-flip-invoke edge type)
     (make-timer (lambda ()
 		  (flip-core edge type))
