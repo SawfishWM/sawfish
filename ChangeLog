@@ -26,6 +26,22 @@
 	* po/sl.po: updated spanish and slovenian translation
 	-- [gnome-es and gnome-sl team]
 
+	* lisp/sawfish/wm/edge/actions.jl: make edge-actions deactivatible via
+	sawfishrc and add edge-actions-enabled defcustom
+
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/util.jl
+	* lisp/sawfish/wm/edge/flip.jl
+	* lisp/sawfish/wm/edge/hot-spot.jl
+	* lisp/sawfish/wm/edge/viewport-drag.jl
+	* lisp/sawfish/wm/edge/conf.jl: move all defcustoms into edge.conf
+	module, in order to make them appear in the right order in
+	SawfishConfig (options from flip/hots-pot/viewport-drag/util were
+	shown before those from actions.jl, as they were loaded first)
+
+	* lisp/sawfish/wm.jl
+	* lisp/sawfish/wm/user.jl: load edge-actions in user.jl, not wm.jl
+
 2011-04-08  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* Makefile.in: fixed uninstall rule
 
