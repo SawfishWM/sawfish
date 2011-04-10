@@ -26,7 +26,7 @@
 	  sawfish.wm.custom
 	  sawfish.wm.edge.actions)
 
-  (define-structure-alias edge-actions sawfish.wm.edge.conf)
+  (define-structure-alias edge-conf sawfish.wm.edge.conf)
 
   (defcustom edge-actions-enabled nil
     "Activate edges to perform various actions."
@@ -54,19 +54,19 @@
     :group edge-actions
     :type  (choice none viewport-drag flip-workspace flip-viewport))
 
-    (defcustom edge-flip-delay 250
+  (defcustom edge-flip-delay 250
     "Delay (in milliseconds) of flipping of viewport / workspace."
     :group edge-actions
     :type number
     :range (0 . nil))
 
-    (defcustom hot-spot-delay 250
+  (defcustom hot-spot-delay 250
     "Delay (in milliseconds) before activating a hot-spot."
     :group edge-actions
     :type number
     :range (0 . nil))
 
-    (defcustom hot-spots-corner-length 50
+  (defcustom hot-spots-corner-length 50
     "The size portion of the screen-border recognized as \"corners\",
 in pixels. Applies to both x and y direction."
     :type number
