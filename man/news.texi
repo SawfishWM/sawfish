@@ -58,6 +58,16 @@ existsted [Christopher Bratusek]
 @item Miscellaneous Changes
 @itemize @minus
 
+@item EdgeActions changes [Christopher Bratusek]:
+@itemize +
+
+@item Load from @code{user.jl}, rather than @code{wm.jl}
+@item Add @code{edge-actions-enabled} variable in order to be able
+to completely disable EdgeActions (also via .sawfishrc)
+@item Move all options into new @code{sawfish.wm.edge.conf} module (so
+they appear in the correct order now)
+@end itemize
+
 @item Fixed documentation for function @code{insert-workspace}
 [Christopher Bratusek]
 
