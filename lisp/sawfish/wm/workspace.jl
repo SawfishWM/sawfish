@@ -149,7 +149,8 @@ a window"
   (define last-interesting-workspace nil)
 
   (defvar static-workspace-menus
-    `((,(_ "_Insert workspace") insert-workspace-after)
+    `((,(_ "_Insert workspace (before current)") insert-workspace-before)
+      (,(_ "_Insert workspace (after current)") insert-workspace-after)
       ()
       (,(_ "Select _next workspace") next-workspace)
       (,(_ "Select _previous workspace") previous-workspace)
@@ -393,20 +394,20 @@ a window"
 	      (- last-interesting-workspace first-space)))))
 
   ;; insert a new workspace (returning its index) so that the workspace
-  ;; before it has index BEFORE
-  (define (insert-workspace #!optional before)
-    (unless before
-      (setq before current-workspace))
+  ;; before it has index AFTER
+  (define (insert-workspace #!optional after)
+    (unless after
+      (setq after current-workspace))
     (map-windows
      (lambda (w)
        (transform-window-workspaces (lambda (space)
-				      (if (> space before)
+				      (if (> space after)
 					  (1+ space)
 					space)) w)))
-    (when (> current-workspace before)
+    (when (> current-workspace after)
       (setq current-workspace (1+ current-workspace)))
     (call-hook 'workspace-state-change-hook)
-    (1+ before))
+    (1+ after))
 
   ;; merge workspace INDEX with workspace INDEX+1
   (define (remove-workspace #!optional index)

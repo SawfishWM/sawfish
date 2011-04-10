@@ -4520,10 +4520,10 @@ Select workspace @var{space} and then switch to viewport
 @code{(@var{col}, @var{row})} in that workspace.
 @end defun
 
-@defun insert-workspace @t{#!optional} before
+@defun insert-workspace @t{#!optional} after
 Insert a new workspace, returning its index.  The new index appears
-before the workspace indicated by @var{before}, or the current
-workspace if @var{before} is @code{nil}.
+after the workspace indicated by @var{after}, or the current
+workspace if @var{after} is @code{nil}.
 @end defun
 
 @defun insert-workspace-after
