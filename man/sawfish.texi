@@ -14,7 +14,7 @@
 
 This is @cite{The sawfish Programming Manual}, for sawfish.
 
-Copyright 1999 - 2003 John Harper, 2007 - 2010 Sawfish team.
+Copyright 1999 - 2003 John Harper, 2007 - 2011 Sawfish team.
 
 Permission is granted to make and distribute verbatim copies of
 this manual provided the copyright notice and this permission notice
@@ -40,7 +40,7 @@ notice identical to this one.
 @author John Harper, Sawfish team.
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 1999 - 2003 John Harper, 2007 - 2010 Sawfish team.
+Copyright @copyright{} 1999 - 2003 John Harper, 2007 - 2011 Sawfish team.
 
 Permission is granted to make and distribute verbatim copies of
 this manual provided the copyright notice and this permission notice
@@ -4794,7 +4794,8 @@ screen-borders and -corners, which offers high customizability.
 
 It consists of the following modules: @code{sawfish.wm.edge.subrs} -, which
 contains the C-subroutines, @code{sawfish.wm.edge.utils} - a set of utility
-functions, @code{sawfish.wm.edge.actions} - infrastucture module,
+functions, @code{sawfish.wm.edge.conf} - configuration infrastructure,
+@code{sawfish.wm.edge.actions} - functionality infrastucture module,
 @code{sawfish.wm.edge.flip} - edge-fliping functions,
 @code{sawfish.wm.edge.hot-spots} - hot-spot functions and
 @code{sawfish.wm.edge.viewport-drag} - functions for dragging the viewport.
@@ -4834,11 +4835,6 @@ A wrapper-functions around @code{recreate-flippers} and @code{destroy-flippers},
 which additionally adds (respectively removes) the required hook-functions.
 @end defun
 
-@defvr Customizable hot-spots-corner-length 50
-Length in px (in both x and y direction) wich is used for the hot-spot corners.
-All remaining pixels represent the borders.
-@end defvr
-
 @defun get-active-corner
 This function returns the corner of the flipper-window which was entered, or nil.
 @end defun
@@ -4847,7 +4843,11 @@ This function returns the corner of the flipper-window which was entered, or nil
 This function returns the border of the flipper-window which was entered, or nil.
 @end defun
 
-Infrastructure (@code{sawfish.wm.edge.actions}):
+Configuration infrastructure (@code{sawfish.wm.edge.conf}):
+
+@defvr Customizable edge-actions-enabled nil
+Global configuration, whether to enable or disable EdgeActions.
+@end defvr
 
 @defvr Customizable left-right-edge-action 'none/hot-spot
 Action to perform for the left and right screen-edges when they are hit by the
@@ -4869,9 +4869,38 @@ Action to perform for the top and bottom screen-edges when a window is dragged
 over them, either flip-workspace, flip-viewport, viewport-drag or none.
 @end defvr
 
+@defvr Customizable edge-flip-delay 250
+"Delay (in milliseconds) of flipping of viewport / workspace."
+@end defvr
+
+@defvr Customizable hot-spot-delay 150
+Delay (in milliseconds) before activating a hot-spot.
+@end defvr
+
+@defvr Customizable hot-spots-corner-length 50
+Length in px (in both x and y direction) wich is used for the hot-spot corners.
+All remaining pixels represent the borders.
+@end defvr
+
+@defvr Customizable viewport-drag-distance 64
+Amount to drag the viewport (in pixel) each time the pointer hits the screen edge.
+@end defvr
+
+@defvr Customizable viewport-drag-cursor-distance 32
+"Amount to pull back the cursor (in pixel) after dragging the viewport."
+Recommended is half of @code{viewport-drag-distance}.
+@end defvr
+
+Functionality infrastructure (@code{sawfish.wm.edge.actions}):
+
 @defun activate-edges t
 This function calls @code{activate-flippers} and adds the required
 hook-functions to be able to perform user-actions on the edges.
+@end defun
+
+@defun activate-edges-after-set
+This function is used by the @code{edge-actions-enabled} customizable to make
+(de-)activating EdgeActions from SawfishConfig and resource-file work.
 @end defun
 
 @defun edge-action-call func edge
@@ -4897,10 +4926,6 @@ This is the traditional EdgeFlip. When a window or the pointer hits the
 screen-edge, the screen is shifted by either one Viewport or one Workspace in
 that direction. The pointer is warped accordingly (to keep in logical position).
 
-@defvr Customizable edge-flip-delay 250
-"Delay (in milliseconds) of flipping of viewport / workspace."
-@end defvr
-
 @defun edge-flip-invoke edge type
 This function invokes edge-fliping. edge (a symbol) is the screen-edge that is active
 (left, right, top, bottom), type is either @code{workspace} or @code{viewport}.
@@ -4911,15 +4936,6 @@ ViewportDrag (@code{sawfish.wm.edge.viewport-drag}):
 iViewportDrag (formerly Infinite-Desktop) is a mechanic, that shifts the
 Viewport accordingly to which screen edge was activated. This way the Viewport
 becomes virtually "infinite", regardless of the physical size (thus the old name).
-
-@defvr Customizable viewport-drag-distance 64
-Amount to drag the viewport (in pixel) each time the pointer hits the screen edge.
-@end defvr
-
-@defvr Customizable viewport-drag-cursor-distance 32
-"Amount to pull back the cursor (in pixel) after dragging the viewport."
-Recommended is half of @code{viewport-drag-distance}.
-@end defvr
 
 @defun viewport-drag edge
 This function invokes viewport-dragging. edge is the screen-edge that is active
@@ -4941,10 +4957,6 @@ for while moving a window.
 HotSpots only allows functions to be used as actions, though practically
 everything can be done this way. If the arguement is not a function, an
 error is thrown, to in form the user.
-
-@defvr Customizable hot-spot-delay
-Delay (in milliseconds) before activating a hot-spot.
-@end defvr
 
 @defvr Customizable left-edge-function nil
 The function launched when hitting the left-edge.
