@@ -159,7 +159,6 @@
 ;;  (defvar-setq root-menu)
 
 ;;  Probably you want to set `user-apps-menu', instead of `apps-menu'.
-;;  See below.
 ;;  (defvar-setq apps-menu)
 
 ;;  (defvar-setq custom-menu-includes-all-settings t
@@ -174,10 +173,14 @@
 ;;    "Your own applications menu entries. It is followed by auto generated
 ;:  applications menu.")
 
-;; (defvar-setq apps-menu-filter 'default
-;;   "The filter to use while generating `apps-menu'. It can be
-;; a symbol `default', `some', a function, or nil. See the info manual
-;; \"Applications Menu\" section for the full description.")
+;;  (defvar apps-menu-filter 'default
+;;    "The filter to use while generating the `apps-menu'. The default filters
+;;  include `fdo-toplevel-filter' `fdo-nodisplay-filter' `fdo-hidden-filter'
+;;  `fdo-onlyshowin-filter' and `fdo-notshowin-filter'.  Can also be set with
+;;  'default or 'some, both of which are combinations of the default filters,
+;;  'default uses them all and 'some only uses `fdo-notshowin-filter' and
+;;  `fdo-onlyshowin-filter'. This can be set to 'nil or '() to perform no
+;;  filtering on the `apps-menu'.")
 
 ;; (defvar-setq desktop-directory '("/usr/share/applications")
 ;;   "List of directories to look for *.desktop files")
@@ -187,6 +190,12 @@
 
 ;; (defvar-setq apps-menu-alphabetize 't
 ;;   "Sort the apps menu alphabetically.")
+
+;; (defvar-setq apps-menu-associate-categories t
+;;   "Associate desktop entry categories with the category-master-list")
+
+;; (defvar-setq desktop-directory '("/usr/share/applications")
+;;   "List of directories to look for *.desktop files."
 
 ;; (defvar-setq want-poweroff-menu t
 ;;   "Add poweroff menu if you don't use GNOME / KDE / XFCE.")
@@ -210,7 +219,7 @@
 ;;    "The number of columns and rows of viewports of the virtual desktop.
 ;; If the dynamic viewport is enabled, this variable is meaningless.")
 
-;;  (defcustom viewport-minimum-dimensions '(1 . 1)
+;;  (defvar-setq viewport-minimum-dimensions '(1 . 1)
 ;;    "Minimum number of columns and rows in virtual desktop (if boundary-mode is dynamic).")
 
 ;;  (defvar-setq uniconify-to-current-viewport t
@@ -264,7 +273,7 @@
 ;;    "Whether to bump into fully obscured windows when growing or
 ;;packing windows.")
 
-;;  (defcustom grow-pack-bump-other-depth 'always
+;;  (defvar-setq grow-pack-bump-other-depth 'always
 ;;    "Whether to bump into windows on a different depth when growing
 ;;or packing windows. `maybe' means only avoided windows in other
 ;;depths.")
@@ -350,24 +359,6 @@
 ;; playing *.wav file.
 ;;   You can't set any arguments to pass from this variable. If you want
 ;; to give arguments or redirect output, write a wrapper program.")
-
-;; edge flip options
-
-;;  (require 'sawfish.wm.ext.edge-flip)
-
-;;  (defvar-setq edge-flip-enabled nil
-;;    "Select the next desktop when the pointer hits screen edge.")
-;;  ;; need to call this function to manually enable edge-flip:
-;;  (edge-flip-enable)
-
-;;  (defvar-setq edge-flip-type 'workspace
-;;    "Control what hitting the screen edge selects, workspace or viewport.")
-
-;;  (defvar-setq edge-flip-only-when-moving nil
-;;    "Only flip when interactively moving a window.")
-
-;;  (defvar-setq edge-flip-delay 250
-;;    "Milliseconds to delay before edge flipping.")
 
 ;; error handling options
 
@@ -455,7 +446,7 @@
 ;;  (defvar-setq shade-hover-delay 250
 ;;    "Delay in milliseconds before unshading windows.")
 
-;;  (defcustom shade-hover-raise nil
+;;  (defvar-setq shade-hover-raise nil
 ;;    "Raise windows when they are unshaded.")
 
 ;; smart placement modes
@@ -507,7 +498,7 @@
 ;;  (defvar-setq raise-windows-when-unshaded nil
 ;;    "Raise windows when they are unshaded.")
 
-;;  (defcustom unshade-selected-windows nil
+;;  (defvar-setq unshade-selected-windows nil
 ;;    "Unshade window when selected.")
 
 ;; maximize options
@@ -625,27 +616,6 @@
 ;;  (defvar-setq prompt-color (cons (get-color "black") (get-color "white"))
 ;;    "Prompt message's colors.")
 
-;; tab options
-
-;; (require 'sawfish.wm.tabs.tab)
-
-;; (defvar-setq tab-left-dec-width 11
-;;   "Width of tab's left-edge decoration")
-
-;; (defvar-setq tab-right-dec-width 11
-;;   "Width of tab's right-edge decoration")
-
-;; (defvar-setq tab-left-margin 16 
-;;   "Width of tab area's left-edge decoration")
-
-;; (defvar-setq tab-right-margin 16
-;;   "Width of tab area's right-edge decoration")
-
-;; (defvar-setq tab-raise-on-hover nil
-;;   "Raise Tabs on Hover")    
-;; ;; need to call this function to make tab-raise-on-hover work
-;; (raise-tabs-on-hover-setter)
-
 ;; shrink-yank options (in grow-pack.jl)
 
 ;; (defvar-setq shrink-window-minimum-size 10
@@ -653,19 +623,6 @@
 
 ;; (defvar-setq yank-window-minimum-visible 10
 ;;   "The minimum amount of window left visible, if yanked over the edge.")
-
-;; infinite-desktop options
-
-;; (require 'sawfish.wm.ext.infinite-desktop)
-
-;; (defvar-setq infinite-desktop-p t
-;;   "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts edge-flipping).")
-
-;; (defvar-setq infinite-desktop-move-distance 64
-;;   "Amount to move the viewport when the pointer hits the screen edge.")
-
-;; (defvar-setq infinite-desktop-move-cursor-distance 32
-;;   "Amount to pull back the cursor after moving the viewport.")
 
 ;; poweroff options
 
@@ -680,3 +637,37 @@
 
 ;; (defvar-setq hibernate-command "sudo hibernate"
 ;;   "The command used to hibernate the computer.")
+
+;; EdgeAction options
+
+;;  (defvar-setq edge-actions-enabled nil
+;;   "Activate edges to perform various actions.")
+
+;; (defvar-setq left-right-edge-action 'none/hot-spot
+;;   "Action for the left and right screen-edge.")
+
+;; (defvar-setq left-right-edge-move-action 'none
+;;   "Action for the left and right screen-edge while moving a window.")
+
+;; (defvar-setq top-bottom-edge-action 'none/hot-spot
+;;   "Action for the top and bottom screen-edge.")
+
+;; (defvar-setq top-bottom-edge-move-action 'none
+;;   "Action for the top and bottom screen-edge while moving a window.")
+
+;; (defvar-setq edge-flip-delay 250
+;;   "Delay (in milliseconds) of flipping of viewport / workspace.")
+
+;; (defvar-setq hot-spot-delay 250
+;;   "Delay (in milliseconds) before activating a hot-spot.")
+
+;; (defvar-setq hot-spots-corner-length 50
+;;   "The size portion of the screen-border recognized as \"corners\",
+;;   in pixels. Applies to both x and y direction."
+
+;; (defvar-setq viewport-drag-distance 64
+;;   "Amount to drag the viewport (in pixel) each time the pointer hits the
+;;   screen edge.")
+
+;; (defvar-setq viewport-drag-cursor-distance 32
+;;   "Amount to pull back the cursor (in pixel) after dragging the viewport.")
