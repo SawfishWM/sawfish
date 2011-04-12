@@ -92,14 +92,14 @@ clean :
 	-for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
-	rm -f *~ NEWS DOC* TAGS build.h
+	rm -f *~ DOC* TAGS build.h
 
 distclean :
 	-for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
-	rm -f *~ NEWS DOC* TAGS build.h sawfish.pc
+	rm -f *~ DOC* TAGS build.h sawfish.pc
 
 gitclean : distclean
 	rm -f aclocal.m4 configure
