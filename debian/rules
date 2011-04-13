@@ -42,7 +42,6 @@ override_dh_auto_configure:
 
 override_dh_auto_install:
 	dh_auto_install
-	$(CURDIR)/debian/edit-la-files debian/tmp
 	find $(lisp_source_extras) | $(dh_install_auto) -psawfish-lisp-source
 	find $(data_extras) | $(dh_install_auto) -psawfish-data
 	dh_install -psawfish-data sawfish.el usr/share/emacs/site-lisp/sawfish
