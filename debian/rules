@@ -34,6 +34,9 @@ dh_install_data = dh_install -psawfish-data --autodest
 %:
 	dh $@ --with autotools-dev --with autoreconf
 
+override_dh_auto_clean:
+	-$(MAKE) debclean
+
 override_dh_auto_configure:
 	env CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" dh_auto_configure -- $(DEB_CONFIGURE_USER_FLAGS)
 
