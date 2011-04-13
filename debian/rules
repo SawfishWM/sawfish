@@ -1,17 +1,6 @@
 #!/usr/bin/make -f
 
-export DH_VERBOSE=1
-
-version = $(shell sed -n 's/version="\(.*\)"/\1/p' configure.in | head -n 1)
-
-DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-
-ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-  confflags += --build $(DEB_HOST_GNU_TYPE)
-else
-  confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
-endif
+version := $(shell sed -n 's/version="\(.*\)"/\1/p' configure.in | head -n 1)
 
 CFLAGS += -Wall -g -fno-strict-aliasing
 
@@ -21,27 +10,67 @@ else
 	CFLAGS += -O2
 endif
 
+LC_ALL=
+LINGUAS=
+LANG=
+export LC_ALL LINGUAS LANG
+
+DEB_CONFIGURE_USER_FLAGS = --with-readline
+
+lisp_source_extras = debian/tmp/usr/share/sawfish/*/lisp -name "*.jl" \
+	\! -name "*autoload*" \! -name "*custom-defaults*"
+
+data_extras = debian/tmp/usr/share/sawfish/*/lisp -name "*.jlc" \! -name "*main*"
+
+data_extradirs = debian/tmp/usr/share/sawfish/$(version)/sounds \
+	debian/tmp/usr/share/sawfish/$(version)/themes \
+	debian/tmp/usr/share/xsessions \
+	debian/tmp/usr/include
+
+dh_install_auto = xargs dh_install --autodest
+
+dh_install_data = dh_install -psawfish-data --autodest
+
 %:
-	dh $@
+	dh $@ --with autotools-dev --with autoreconf
 
-override_dh_install:
-	dh_testdir
-	dh_testroot
-	dh_installdirs
+override_dh_auto_configure:
+	env CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" dh_auto_configure -- $(DEB_CONFIGURE_USER_FLAGS)
 
-	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+override_dh_auto_install:
+	dh_auto_install
+	$(CURDIR)/debian/edit-la-files debian/tmp
+	find $(lisp_source_extras) | $(dh_install_auto) -psawfish-lisp-source
+	find $(data_extras) | $(dh_install_auto) -psawfish-data
+	dh_install -psawfish-data sawfish.el usr/share/emacs/site-lisp/sawfish
+	for d in $(data_extradirs) ; do dh_install -psawfish-data --autodest $$d ; done
 
-	find debian -type d -name info | xargs rm -rf
+override_dh_installdocs:
+	dh_installdocs --link-doc=sawfish-data
+	dh_installdocs -psawfish-data  FAQ NEWS README TODO OPTIONS KEYBINDINGS USERDOC debian/README.*
 
-	[ ! -f debian/sawfish-lisp-source.install ] || rm debian/sawfish-lisp-source.install
-	find debian/tmp/usr/share/sawfish/*/lisp -name \*.jl | \
-	 cut -d/ -f3- | grep -v 'autoload\|custom-defaults' > debian/sawfish-lisp-source.install
+override_dh_installchangelogs:
+	dh_installchangelogs -psawfish-data
 
-	cp debian/sawfish-data.install.in debian/sawfish-data.install
-	find debian/tmp/usr/share/sawfish/*/lisp -name \*.jlc | \
-	 cut -d/ -f3- | grep -v 'cfg/main' >> debian/sawfish-data.install
+override_dh_installman:
+	dh_installman -psawfish man/*.1
 
-	dh_install --fail-missing
+override_dh_strip:
+	dh_strip -a --dbg-package=sawfish-dbg
 
-	chmod a+x debian/sawfish/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jlc
-	chmod a+x debian/sawfish-lisp-source/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jl
+override_dh_shlibdeps:
+	dh_shlibdeps -- --warnings=2
+
+# Get rid of rpath
+	# SET -E; \
+	#  TMPFILE=`MKTEMP`; \
+	#  SED "S/^REP_LIBS=\(.*\)-WL,--RPATH -WL,[^ ]* \(.*\)$$/REP_LIBS=\1 \2/" MAKEDEFS >$$TMPFILE ;\
+	#  MV $$TMPFILE MAKEDEFS
+
+# Remove info files installed by Makefile. dh_installinfo will do it again without creating info.dir
+	# find debian -type d -name info | xargs rm -rf
+
+# These are scripts. (Actually, they are /usr/bin/sawfish-config before and after compiling)
+# Should that be a symlink?
+	# chmod a+x debian/sawfish/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jlc
+	# chmod a+x debian/sawfish-lisp-source/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jl
