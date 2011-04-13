@@ -49,7 +49,7 @@ override_dh_auto_install:
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=sawfish-data
-	dh_installdocs -psawfish-data  FAQ NEWS README TODO OPTIONS KEYBINDINGS USERDOC debian/README.*
+	dh_installdocs -psawfish-data  FAQ NEWS README TODO OPTIONS KEYBINDINGS USERDOC
 
 override_dh_installchangelogs:
 	dh_installchangelogs -psawfish-data
