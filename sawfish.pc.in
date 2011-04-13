@@ -8,7 +8,7 @@ imageloader=@imageloader@
 Name: sawfish
 Description: The Sawfish X11 Window Manager
 Version: @version@
-Requires: librep >= @REP_MIN_VER@ rep-gtk >= @REP_GTK_MIN_VER@ gtk+-2.0.pc >= @GTK_MIN_VER@ @IMAGE_PC@
+Requires: librep >= @REP_MIN_VER@ rep-gtk >= @REP_GTK_MIN_VER@ gtk+-2.0 >= @GTK_MIN_VER@ @IMAGE_PC@
 
 Cflags: -I${includedir}
 Libs: -L${libdir} -lX11
