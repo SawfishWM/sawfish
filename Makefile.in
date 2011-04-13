@@ -11,7 +11,7 @@
 #
 # sawfish is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
@@ -101,9 +101,13 @@ distclean :
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
 	rm -f *~ DOC* TAGS build.h sawfish.pc
 
+debclean : distclean
+	rm -f sawfish*.ebuild sawfish.spec.in libtool ltmain.sh config.h.in
+
 gitclean : distclean
 	rm -f aclocal.m4 configure
-	rm -rf autom4te.cache
+	rm -rf autom4te.cache m4/
+	rm -f libtool ltmain.sh
 	rm -f sawfish.spec sawfish*.ebuild
 	-fakeroot debian/rules clean
 
