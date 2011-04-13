@@ -107,7 +107,6 @@ gitclean : distclean
 	rm -f sawfish.spec sawfish*.ebuild
 	-fakeroot debian/rules clean
 
-
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
 	      --language=lisp `find $(srcdir) -name '*.jl' -print`

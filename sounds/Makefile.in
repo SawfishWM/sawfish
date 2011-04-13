@@ -47,7 +47,7 @@ clean :
 
 distclean : gitclean
 
-gitlean : clean
+gitclean : clean
 	rm -f Makefile
 
 .PHONY : all install uninstall clean gitclean

@@ -247,6 +247,7 @@ if test "$with_gdk_pixbuf" != "no"; then
 	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}
 			  ,IMAGE_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
 			  IMAGE_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
+			  IMAGE_PC="gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}"
 			  AC_DEFINE(HAVE_GDK_PIXBUF, 1, [Have gdk-pixbuf])
 			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
 			  IMAGE_LOADER="GDK Pixbuf Xlib"
@@ -260,6 +261,7 @@ if test "$with_gdk_pixbuf" = "no"; then
 	PKG_CHECK_MODULES(IMLIB1, imlib >= 1.9
 			  ,IMAGE_CFLAGS="-I`pkg-config --variable includedir imlib`"
 			  IMAGE_LIBS="`pkg-config --libs imlib`"
+			  IMAGE_PC="imlib >= 1.9"
 			  AC_DEFINE(HAVE_IMLIB, 1, [Have Imlib1])
 			  IMLIB_VERSION="`pkg-config --modversion imlib`"
 			  IMAGE_LOADER="IMLIB 1"
@@ -387,6 +389,7 @@ AC_SUBST(REP_VERSION)
 AC_SUBST(REP_MSGFMT)
 AC_SUBST(IMAGE_LIBS)
 AC_SUBST(IMAGE_CFLAGS)
+AC_SUBST(IMAGE_PC)
 AC_SUBST(GTK_MIN_VER)
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
