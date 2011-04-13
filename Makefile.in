@@ -34,8 +34,8 @@ all : build.h DOC
 
 # this depends on config.status so it's rebuilt if configure is re-run
 build.h : build-info config.status
-	$(SHELL) $< $(host_type) $(version)$(subversion) \
-	  '$(sawfishdir)' '$(lispdir)' '$(sawfishexecdir)' '$(localedir)'
+	$(SHELL) $< $(version)$(subversion) '$(sawfishdir)' \
+		'$(lispdir)' '$(sawfishexecdir)' '$(localedir)'
 
 install : all installdirs
 	for dir in $(SUBDIRS); do \

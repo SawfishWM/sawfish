@@ -2,12 +2,11 @@
 # build-info -- Generate header file containing build details
 # $Id: build-info,v 1.5 2000/11/16 21:58:27 jsh Exp $
 
-host_type="$1"
-version="$2"
-sawfishdir="$3"
-lispdir="$4"
-sawfishexecdir="$5"
-localedir="$6"
+version="$1"
+sawfishdir="$2"
+lispdir="$3"
+sawfishexecdir="$4"
+localedir="$5"
 
 [ -n "$HOSTNAME" ] \
     || HOSTNAME=`hostname` \
@@ -36,8 +35,6 @@ cat >src/build.h <<EOF
 #define SAWFISH_LISPDIR "$lispdir"
 #define SAWFISH_EXECDIR "$sawfishexecdir"
 #define SAWFISH_LOCALEDIR "$localedir"
-
-#define HOST_TYPE "$host_type"
 
 #define BUILD_HOST "$sys_name"
 #define BUILD_USER "$user_name"
