@@ -26,8 +26,7 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
-sitesoundsdir := ${sawfishdir}/sounds
-soundsdir := ${sawfishdir}/${version}/sounds
+soundsdir := ${sawfishdir}/sounds
 
 all :
 
@@ -37,7 +36,7 @@ install : all installdirs
 	done
 
 installdirs : mkinstalldirs
-	$(SHELL) $< $(DESTDIR)$(soundsdir) $(DESTDIR)$(sitesoundsdir)
+	$(SHELL) $< $(DESTDIR)$(soundsdir)
 
 uninstall :
 	rm -rf $(DESTDIR)$(soundsdir)

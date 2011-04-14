@@ -58,7 +58,7 @@ install : all installdirs
 	fi
 
 installdirs : mkinstalldirs
-	$(SHELL) $< $(DESTDIR)$(sawfishdir)/$(version) \
+	$(SHELL) $< $(DESTDIR)$(sawfishdir) \
 	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
 	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties \
 	  $(DESTDIR)$(datadir)/applications/ \
@@ -70,7 +70,7 @@ uninstall :
 	for dir in $(SUBDIRS); do \
 	  ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
-	rm -rf $(DESTDIR)$(sawfishdir)/$(version)
+	rm -rf $(DESTDIR)$(sawfishdir)
 	rm -f $(DESTDIR)$(libdir)/pkgconfig/sawfish.pc
 	if test $(XDM_SESSION) = "yes"; then \
 		rm -f $(DESTDIR)$(datadir)/xsessions/sawfish.desktop; \

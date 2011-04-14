@@ -26,8 +26,7 @@ top_srcdir=@top_srcdir@
 srcdir=@srcdir@
 VPATH=@srcdir@:@top_srcdir@
 
-sitethemedir := ${sawfishdir}/themes
-themedir := ${sawfishdir}/${version}/themes
+themedir := ${sawfishdir}/themes
 
 # also in lisp/Makefile.in
 sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
@@ -60,7 +59,7 @@ install : all installdirs
 	cd $(DESTDIR)$(themedir) && tar xf StyleTab.tar.gz && rm StyleTab.tar.gz
 
 installdirs : mkinstalldirs
-	$(SHELL) $< $(DESTDIR)$(themedir) $(DESTDIR)$(sitethemedir)
+	$(SHELL) $< $(DESTDIR)$(themedir)
 
 uninstall :
 	for d in $(THEMES); do \
