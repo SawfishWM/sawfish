@@ -46,6 +46,8 @@
        (edge-flip-invoke edge 'viewport))
       ((none/hot-spot)
        (hot-spot-invoke edge))
+      ((none/hot-move)
+       (hot-move-invoke edge))
       (t nil)))
 
   ;; Entry point without dragging 
