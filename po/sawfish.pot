@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-07 22:58+0200\n"
+"POT-Creation-Date: 2011-04-16 07:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -309,7 +309,6 @@ msgstr ""
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
 #. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/edge/actions.jl
 #. ../lisp/sawfish/wm/animation/setup.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
@@ -2401,59 +2400,67 @@ msgstr ""
 msgid "Invoke the configurator GUI."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Activate edges to perform various actions."
+msgstr ""
+
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "none/hot-spot"
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "viewport-drag"
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "flip-workspace"
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "flip-viewport"
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "none/hot-move"
+msgstr ""
+
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge while moving a window."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the top and bottom screen-edge."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the top and bottom screen-edge while moving a window."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/flip.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/hot-spots.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) before activating a hot-spot."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/util.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid ""
 "The size portion of the screen-border recognized as \"corners\",\n"
 "in pixels. Applies to both x and y direction."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/viewport-drag.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid ""
 "Amount to drag the viewport (in pixel) each time the pointer hits the\n"
 "screen edge."
 msgstr ""
 
-#. ../lisp/sawfish/wm/edge/viewport-drag.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Amount to pull back the cursor (in pixel) after dragging the viewport."
 msgstr ""
 
@@ -4404,7 +4411,11 @@ msgid "Preserve outermost empty workspaces in the pager."
 msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "_Insert workspace"
+msgid "_Insert workspace (before current)"
+msgstr ""
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "_Insert workspace (after current)"
 msgstr ""
 
 #. ../lisp/sawfish/wm/workspace.jl
