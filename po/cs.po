@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-21 21:23+0100\n"
-"PO-Revision-Date: 2011-02-24 18:09+0100\n"
+"POT-Creation-Date: 2011-04-16 07:25+0200\n"
+"PO-Revision-Date: 2011-04-17 12:20+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,6 @@ msgid "StyleTab"
 msgstr "Stylová karta"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Stacking"
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -127,8 +126,9 @@ msgid "Smoothly"
 msgstr "Hladce"
 
 #. ../themes/StyleTab/theme.jl
-msgid "Frame and button style. (requires restart)"
-msgstr "Styl rámečku a tlačítka. (vyžaduje restart)"
+#| msgid "Frame and button style. (requires restart)"
+msgid "Frame and button style."
+msgstr "Styl rámečku a tlačítka."
 
 #. ../themes/mxflat/theme.jl
 #. ../themes/StyleTab/theme.jl
@@ -157,12 +157,10 @@ msgid "Titlebar default place."
 msgstr "Výchozí umístění záhlaví."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Height of title bar."
 msgid "Height of title border. Default 24"
 msgstr "Výška okraje záhlaví. Výchozí je 24"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Width of window border."
 msgid "Width of window border. Default 4"
 msgstr "Šířka okraje okna. Výchozí je 4"
 
@@ -183,12 +181,10 @@ msgid "Customize title text colors. (Don't use styles defaults.)"
 msgstr "Přizpůsobit barvy textu záhlaví. (Nepoužívat výchozí styly.)"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "  focused clicked title string color"
 msgid "Focused title text color."
 msgstr "Barva textu zaměřeného záhlaví."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "  focused highlighted title string color"
 msgid "Highlighted title text color."
 msgstr "Barva textu zvýrazněného záhlaví."
 
@@ -197,7 +193,6 @@ msgid "Inactive title text color."
 msgstr "Barva textu neaktivního záhlaví."
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "unfocused highlighted title string color"
 msgid "Inactive Highlighted title text color."
 msgstr "Barva textu zvýrazněného záhlaví."
 
@@ -325,7 +320,6 @@ msgstr "vše"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
 #. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/edge/actions.jl
 #. ../lisp/sawfish/wm/animation/setup.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
@@ -441,17 +435,23 @@ msgid "real-center"
 msgstr "skutečný střed"
 
 #. ../themes/mxflat/theme.jl
+#| msgid ""
+#| "title string horizontal alignment\n"
+#| "\n"
+#| "'real-center' means to take the whole titlebar into account while "
+#| "centering the string. when selecting 'center' only the distance between "
+#| "the buttons is taken into account."
 msgid ""
 "title string horizontal alignment\n"
 "\n"
 "'real-center' means to take the whole titlebar into account while centering "
-"the string. when selecting 'center' only the distance between the buttons is "
+"the string. When selecting 'center' only the distance between the buttons is "
 "taken into account."
 msgstr ""
 "vodorovné zarovnání textu záhlaví\n"
 "\n"
 "„skutečný střed“ znamená, že se při výpočtu středu bere v úvahu celé záhlaví "
-"okna. zatímco při výběru „na střed“ se počítá jen se vzdáleností mezi "
+"okna. Zatímco při výběru „na střed“ se počítá jen se vzdáleností mezi "
 "tlačítky."
 
 #. ../themes/mxflat/theme.jl
@@ -842,10 +842,17 @@ msgid "pixel"
 msgstr "pixel"
 
 #. ../themes/mxflat/theme.jl
+#| msgid ""
+#| "button position model\n"
+#| "\n"
+#| "'title-height' means calculate position as multiple of title height. when "
+#| "selecting 'pixel' you can adjust the button position pixelwise, but keep "
+#| "in mind that several buttons might slide on top of each other. 'none' "
+#| "means no buttons at all."
 msgid ""
 "button position model\n"
 "\n"
-"'title-height' means calculate position as multiple of title height. when "
+"'title-height' means calculate position as multiple of title height. When "
 "selecting 'pixel' you can adjust the button position pixelwise, but keep in "
 "mind that several buttons might slide on top of each other. 'none' means no "
 "buttons at all."
@@ -855,7 +862,7 @@ msgstr ""
 "„výška záhlaví“ znamená výpočet umístění jako násobku výšky záhlaví. Při "
 "volbě „pixel“ můžete přizpůsobovat umístění tlačítka po pixelech, ale "
 "vezměte na vědomí, že několik tlačítek se může snadno navzájem překrýt. "
-"„nic“ znamená vůbec žádná tlačítka."
+"„none“ znamená vůbec žádná tlačítka."
 
 #. ../themes/mxflat/theme.jl
 msgid "menu button position"
@@ -1974,7 +1981,6 @@ msgid "Jump or exec"
 msgstr "Skočit nebo spustit"
 
 #. ../lisp/sawfish/wm/commands/jump-or-exec.jl
-#| msgid "jump to a window matched by re, or start program otherwise."
 msgid "Jump to a window, or when absent, start program."
 msgstr "Skočit na okno nebo, pokud neexistuje, spustit program."
 
@@ -2209,6 +2215,46 @@ msgstr ""
 "jiného okna."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Raise window depth"
+msgid "Resize window prompt"
+msgstr "Dotaz na velikost okna"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Display the window. You're prompted to type in the name."
+msgid "Resize window. Prompted to enter new size."
+msgstr "Změnit velikost okna. Budete vyzváni k zadání velikosti."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Resize window to dimensions"
+msgid "Resize window to preset size"
+msgstr "Změnit velikost okna na předvolené rozměry"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Resize the current window to the specified dimensions"
+msgid "Resize a window to the size you specify here."
+msgstr "Změnit velikost aktuálního okna na rozměry, které zde zadáte."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Resize window to dimensions"
+msgid "Resize window to preset width"
+msgstr "Změnit velikost okna na předvolenou šířku"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Resize the window interactively, with mouse or keyboard."
+msgid "Resize a window to the width you specify here."
+msgstr "Změnit velikost aktuálního okna na šířku, kterou zde zadáte."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Resize window to dimensions"
+msgid "Resize window to preset height"
+msgstr "Změnit velikost okna na předvolenou výšku"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#| msgid "Move the window to the next workspace."
+msgid "Resive a window to the height you specify here."
+msgstr "Změnit velikost aktuálního okna na výšku, kterou zde zadáte."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window center"
 msgstr "Přesunout okno na střed"
 
@@ -2227,16 +2273,6 @@ msgstr "Změnit velikost okna interaktivně"
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize the window interactively, with mouse or keyboard."
 msgstr "Změnit velikost okna interaktivně, myší nebo klávesnicí."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-#| msgid "Window history save dimensions"
-msgid "Resize window to dimensions"
-msgstr "Změnit velikost okna na rozměry"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-#| msgid "Move the current window to the specified viewport."
-msgid "Resize the current window to the specified dimensions"
-msgstr "Změnit velikost aktuálního okna na zadané rozměry."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
@@ -2721,7 +2757,6 @@ msgid "Workspaces"
 msgstr "Pracovní plochy"
 
 #. ../lisp/sawfish/wm/custom.jl
-#| msgid "Actions"
 msgid "Edge Actions"
 msgstr "Akce na okrajích"
 
@@ -2733,52 +2768,56 @@ msgstr "Přizpůsobit"
 msgid "Invoke the configurator GUI."
 msgstr "Vyvolat grafické uživatelské rozhraní pro nastavení."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Activate edges to perform various actions."
+msgstr "Aktivovat hrany kvůli provedení různých akcí."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "none/hot-spot"
 msgstr "nic/aktivní bod"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
-#| msgid "viewport"
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "viewport-drag"
 msgstr "táhnout průhled"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
-#| msgid "workspace"
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "flip-workspace"
 msgstr "překlopit plochu"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
-#| msgid "viewport"
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "flip-viewport"
 msgstr "překlopit průhled"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge."
 msgstr "Akce pro levý a pravý kraj obrazovky."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
+#| msgid "none/hot-spot"
+msgid "none/hot-move"
+msgstr "nic/horký přesun"
+
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge while moving a window."
 msgstr "Akce pro levý a pravý kraj obrazovky při přesunu okna."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the top and bottom screen-edge."
 msgstr "Akce pro horní a dolní kraj obrazovky."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the top and bottom screen-edge while moving a window."
 msgstr "Akce pro horní a dolní kraj obrazovky při přesunu okna."
 
-#. ../lisp/sawfish/wm/edge/flip.jl
-#| msgid "Delay in milliseconds before unshading windows."
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
 msgstr "Prodleva (v milisekundách) překlopení průhledu / pracovní plochy."
 
-#. ../lisp/sawfish/wm/edge/hot-spots.jl
-#| msgid "Delay in milliseconds before unshading windows."
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) before activating a hot-spot."
 msgstr "Prodleva v milisekundách před aktivací aktivního bodu."
 
-#. ../lisp/sawfish/wm/edge/util.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid ""
 "The size portion of the screen-border recognized as \"corners\",\n"
 "in pixels. Applies to both x and y direction."
@@ -2786,8 +2825,7 @@ msgstr ""
 "Velikost části okraje obrazovky vyhodnocované jako „rohy“,\n"
 "v pixelech. Použije se ve směru x i ve směru y."
 
-#. ../lisp/sawfish/wm/edge/viewport-drag.jl
-#| msgid "Amount to move the viewport when the pointer hits the screen edge."
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid ""
 "Amount to drag the viewport (in pixel) each time the pointer hits the\n"
 "screen edge."
@@ -2795,8 +2833,7 @@ msgstr ""
 "Kus (v pixelech), o který se má posunout průhled pokaždé, když se\n"
 "ukazatel dotkne kraje obrazovky."
 
-#. ../lisp/sawfish/wm/edge/viewport-drag.jl
-#| msgid "Amount to pull back the cursor after moving the viewport."
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Amount to pull back the cursor (in pixel) after dragging the viewport."
 msgstr ""
 "Kus (v pixelech), o který se má kurzor stáhnout zpět po posunu průhledu."
@@ -2971,7 +3008,6 @@ msgid "Focus mode"
 msgstr "Režim zaměřování"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#| msgid "Iconify group"
 msgid "Iconify on leave"
 msgstr "Ikonizovat při opuštění"
 
@@ -2984,7 +3020,6 @@ msgid "Frame style"
 msgstr "Styl rámečku"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#| msgid "Fixed position"
 msgid "Title position"
 msgstr "Poloha záhlaví"
 
@@ -3017,7 +3052,6 @@ msgid "Never maximize"
 msgstr "Nikdy nemaximalizovat"
 
 #. ../lisp/sawfish/wm/ext/match-window.jl
-#| msgid "Animation"
 msgid "Animator"
 msgstr "Animace"
 
@@ -3438,7 +3472,6 @@ msgid "global-keymap"
 msgstr "globální zkratky"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#| msgid "Keymap containing bindings active anywhere."
 msgid "Keymap active anywhere."
 msgstr "Klávesové mapa se zkratkami aktivními kdekoliv."
 
@@ -3447,7 +3480,6 @@ msgid "window-keymap"
 msgstr "zkratky okna"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#| msgid "Keymap containing bindings active when a client window is focused."
 msgid "Keymap active when a client window is focused."
 msgstr ""
 "Klávesová mapa se zkratkami aktivními, když je zaměřeno klientské okno."
@@ -3457,9 +3489,6 @@ msgid "root-window-keymap"
 msgstr "zkratky plochy"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#| msgid ""
-#| "Keymap containing bindings active when the pointer is in the root window\n"
-#| "(or when no window is focused)."
 msgid ""
 "Keymap active when the pointer is in the root window\n"
 "(or when no window is focused)."
@@ -3476,7 +3505,6 @@ msgid "Keymap of window title bar. Mouse-bindings only."
 msgstr "Klávesová mapa se zkratkami záhlaví okna. Pouze pro zkratky myší."
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#| msgid "global-keymap"
 msgid "tabbar-keymap"
 msgstr "zkratky lišty karet"
 
@@ -3514,7 +3542,6 @@ msgid "maximize-button-keymap"
 msgstr "zkratky maximalizačního tlačítka"
 
 #. ../lisp/sawfish/wm/keymaps.jl
-#| msgid "maximize button position"
 msgid "Keymap of \"maximize\" button. Mouse-bindings only."
 msgstr ""
 "Klávesová mapa se zkratkami tlačítka „maximalizovat“. Pouze pro zkratky myši."
@@ -3610,7 +3637,6 @@ msgid "_Resize"
 msgstr "Změnit _velikost"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "_Resize"
 msgid "_Resize to"
 msgstr "Změnit _velikost na"
 
@@ -3823,7 +3849,6 @@ msgid "_Hibernate System"
 msgstr "Uspat systém na _disk"
 
 #. ../lisp/sawfish/wm/menus.jl
-#| msgid "Popup window menu"
 msgid "Popup window ops menu"
 msgstr "Rozbalit nabídku operací s oknem"
 
@@ -3985,7 +4010,6 @@ msgid "Make window sticky"
 msgstr "Zapnout přichytávání okna"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#| msgid "Move the window to the next viewport."
 msgid "Make the window appear in all workspaces and viewports."
 msgstr "Zviditelnit okno na všech pracovních plochách a průhledech."
 
@@ -3998,9 +4022,6 @@ msgid "Toggle window sticky"
 msgstr "Přepnout přichytávání okna"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#| msgid ""
-#| "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#| "all workspaces."
 msgid ""
 "Toggle the `stickiness' of the window, i.e. make it appear in\n"
 "all workspaces and viewports."
@@ -4009,14 +4030,10 @@ msgstr ""
 "pracovních plochách a průhledech."
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#| msgid "Toggle window sticky"
 msgid "Toggle window sticky viewport"
 msgstr "Přepnout přichytávání okna k průhledu"
 
 #. ../lisp/sawfish/wm/state/iconify.jl
-#| msgid ""
-#| "Toggle the `stickiness' of the window--whether or not it is a member of\n"
-#| "all workspaces."
 msgid ""
 "Toggle the stickiness of the window, i.e. make it appear in\n"
 "all viewports."
@@ -4388,26 +4405,10 @@ msgstr ""
 "druhé okno."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#| msgid "Raise Tabs on Hover"
-msgid "Raise tabs while hovering them."
-msgstr "Karty do popředí po najetí na ně."
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-msgid "Maybe raise tab"
-msgstr "Možná kartu do popředí"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-msgid "Raise a window, when it's a tab and automatic raising of is disabled"
-msgstr ""
-"Přenést okno do popředí, když jde o kartu a automatický přesun do popředí je "
-"zakázaný"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab release window"
 msgstr "Uvolnit okno karty"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#| msgid "Release active window from its group"
 msgid "Release the window from its group."
 msgstr "Uvolnit okno z jeho skupiny."
 
@@ -4416,7 +4417,6 @@ msgid "Tab raise left window"
 msgstr "Do popředí kartu s oknem vlevo"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#| msgid "Raise left window in current group"
 msgid "Raise left window in current tab group."
 msgstr "Levé okno v aktuální skupině přenést do popředí."
 
@@ -4425,7 +4425,6 @@ msgid "Tab raise right window"
 msgstr "Do popředí kartu s oknem vpravo"
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-#| msgid "Raise right window in current group"
 msgid "Raise right window in current tab group."
 msgstr "Pravé okno v aktuální skupině přenést do popředí."
 
@@ -4843,7 +4842,6 @@ msgid "Renames WINDOW to NEW-NAME."
 msgstr "Přejmenovat OKNO na NOVÝ-NÁZEV."
 
 #. ../lisp/sawfish/wm/windows.jl
-#| msgid "Fixed position"
 msgid "Toggle fixed postion"
 msgstr "Přepnout pevné umístění"
 
@@ -4878,8 +4876,14 @@ msgid "Preserve outermost empty workspaces in the pager."
 msgstr "Zachovat nejvzdálenější prázdné pracovní plochy ve stránkovači."
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "_Insert workspace"
-msgstr "_Vložit pracovní plochu"
+#| msgid "Insert workspace before"
+msgid "_Insert workspace (before current)"
+msgstr "Vlož_it plochu (před aktuální)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+#| msgid "Insert workspace after"
+msgid "_Insert workspace (after current)"
+msgstr "Vlož_it plochu (za aktuální)"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Select _next workspace"
@@ -5119,6 +5123,21 @@ msgstr "Vybrat plochu interaktivně"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Dotázat se na pracovní plochu a přepnout se na ni."
+
+#~| msgid "Raise Tabs on Hover"
+#~ msgid "Raise tabs while hovering them."
+#~ msgstr "Karty do popředí po najetí na ně."
+
+#~ msgid "Maybe raise tab"
+#~ msgstr "Možná kartu do popředí"
+
+#~ msgid "Raise a window, when it's a tab and automatic raising of is disabled"
+#~ msgstr ""
+#~ "Přenést okno do popředí, když jde o kartu a automatický přesun do popředí "
+#~ "je zakázaný"
+
+#~ msgid "_Insert workspace"
+#~ msgstr "_Vložit pracovní plochu"
 
 #~ msgid "Tabs"
 #~ msgstr "Karty"
