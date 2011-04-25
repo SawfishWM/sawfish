@@ -60,7 +60,6 @@
 	     call-after-property-changed
 	     call-after-state-changed
 	     rename-window
-	     release-windows
 	     toggle-fixed-postion))
 
     (open rep
@@ -575,16 +574,6 @@ STATES has been changed. STATES may also be a single symbol."
 
   (define-command 'rename-window rename-window
     #:spec "%W\nsEnter new window name:")
-
-  (define (release-windows #!key warp center)
-    "Release all windows (commonly used for hot-spot while moving)."
-    (synthesize-event (lookup-event "ESC") 'root)
-    (if warp
-        (warp-cursor-to-window warp))
-    (if center
-        (progn
-	  (require 'sawfish.wm.commands.move-cursor)
-          (move-cursor-center))))
 
   (define (toggle-fixed-postion w)
     "Toggle the window property `fixed-position'."

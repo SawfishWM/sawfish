@@ -20,8 +20,7 @@
 
 (define-structure sawfish.wm.edge.hot-spots
 
-    (export hot-spot-invoke
-            hot-move-invoke)
+    (export hot-spot-invoke)
 
     (open rep
 	  rep.system
@@ -83,38 +82,5 @@
 		      (mod hot-spot-delay 1000))
 	(when func
 	  ;; non-nil, but not a function?
-	  (error "In hot-spot, you configuration of spot `%s' is wrong; it should be a function." spot))
-	)))
-
-  (defvar left-edge-move-function nil
-    "The function launched when hitting the left-edge.")
-
-  (defvar top-edge-move-function nil
-    "The function launched when hitting the top-edge.")
-
-  (defvar right-edge-move-function nil
-    "The function launched when hitting the right-edge.")
-
-  (defvar bottom-edge-move-function nil
-    "The function launched when hitting the bottom-edge.")
-
-  (define (hot-move-invoke spot)
-    (let ((func (case spot
-		  ((left)
-		   left-edge-move-function)
-		  ((top)
-		   top-edge-move-function)
-		  ((right)
-		   right-edge-move-function)
-		  ((bottom)
-		   bottom-edge-move-function))))
-      (if (functionp func)
-	  (make-timer (lambda ()
-			(allow-events 'async-both)
-			(funcall func))
-		      (quotient hot-spot-delay 1000)
-		      (mod hot-spot-delay 1000))
-	(when func
-	  ;; non-nil, but not a function?
-	  (error "In hot-spot, you configuration of spot `%s' is wrong; it should be a function." spot))
+	  (error "In hot-spot, you configuration of `%s' is wrong; it should be a function." spot))
 	))))
