@@ -623,9 +623,10 @@ that window."
 	(setq w (input-focus)))
       (resize-window-with-hints* w
 				 (car (window-dimensions w)) y)))
+
   (define-command 'resize-window-to-preset-height
     resize-window-to-preset-height
-    #:doc "Resive a window to the height you specify here."
+    #:doc "Resize a window to the height you specify here."
     #:type '(and (labelled "New height:" (number 10)))
     )
 
