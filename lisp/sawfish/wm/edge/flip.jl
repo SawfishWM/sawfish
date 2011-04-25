@@ -26,7 +26,6 @@
     (open rep
 	  rep.system
 	  rep.io.timers
-	  sawfish.wm.custom
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events

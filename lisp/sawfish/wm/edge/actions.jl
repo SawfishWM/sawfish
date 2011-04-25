@@ -32,6 +32,7 @@
 	  sawfish.wm.edge.util
 	  sawfish.wm.edge.flip
 	  sawfish.wm.edge.hot-spots
+	  sawfish.wm.edge.tile
 	  sawfish.wm.edge.viewport-drag)
 
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
@@ -44,8 +45,12 @@
        (edge-flip-invoke edge 'workspace))
       ((flip-viewport)
        (edge-flip-invoke edge 'viewport))
+      ((tile-windows)
+       (tile-windows))
       ((none/hot-spot)
        (hot-spot-invoke edge))
+      ((none/hot-move)
+       (hot-move-invoke edge))
       (t nil)))
 
   ;; Entry point without dragging 

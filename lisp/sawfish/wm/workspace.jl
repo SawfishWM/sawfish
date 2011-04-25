@@ -101,6 +101,7 @@
 	    show-desktop
 	    hide-desktop
 	    showing-desktop-p
+	    window-on-current-workspace-p
 
 	    ;; XXX rename these..?
 	    ws-remove-window
@@ -894,6 +895,9 @@ last instance remaining, then delete the actual window."
 
   (define-command 'show-desktop show-desktop)
   (define-command 'hide-desktop hide-desktop)
+
+  (define (window-on-current-workspace-p w)
+    (= (window-workspaces w) current-workspace))
 
 ;;; some commands for moving directly to a workspace
 

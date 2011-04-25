@@ -37,22 +37,22 @@
   (defcustom left-right-edge-action 'none/hot-spot
     "Action for the left and right screen-edge."
     :group edge-actions
-    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
+    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport tile-windows))
 
-  (defcustom left-right-edge-move-action 'none
+  (defcustom left-right-edge-move-action 'none/hot-move
     "Action for the left and right screen-edge while moving a window."
     :group edge-actions
-    :type  (choice none viewport-drag flip-workspace flip-viewport))
+    :type  (choice none/hot-move viewport-drag flip-workspace flip-viewport tile-windows))
 
   (defcustom top-bottom-edge-action 'none/hot-spot
     "Action for the top and bottom screen-edge."
     :group edge-actions
-    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport))
+    :type (choice none/hot-spot viewport-drag flip-workspace flip-viewport tile-windows))
 
-  (defcustom top-bottom-edge-move-action 'none
+  (defcustom top-bottom-edge-move-action 'none/hot-move
     "Action for the top and bottom screen-edge while moving a window."
     :group edge-actions
-    :type  (choice none viewport-drag flip-workspace flip-viewport))
+    :type  (choice none/hot-move viewport-drag flip-workspace flip-viewport tile-windows))
 
   (defcustom edge-flip-delay 250
     "Delay (in milliseconds) of flipping of viewport / workspace."
