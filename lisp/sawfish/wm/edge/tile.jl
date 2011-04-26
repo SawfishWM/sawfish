@@ -34,7 +34,7 @@ an extra column should be used.")
   (define (tile-windows)
     (interactive)
     (let ((windows (remove-if window-iconified-p
-			      (filter-windows window-on-current-workspace-p))))
+			      (filter-windows window-on-current-workspace-viewport-p))))
       (when (> (length windows) 1)
 	(let* ((columns (do ((c 1 (1+ c)))
 			    ((> (/ (screen-height) (/ (length windows) c))
