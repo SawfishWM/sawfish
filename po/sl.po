@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-21 21:23+0100\n"
-"PO-Revision-Date: 2011-04-12 12:08+0100\n"
+"POT-Creation-Date: 2011-04-25 18:43+0200\n"
+"PO-Revision-Date: 2011-04-27 22:05+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-Country: SLOVENIA\n"
 "X-Poedit-Language: Slovenian\n"
@@ -125,8 +125,8 @@ msgid "Smoothly"
 msgstr "Gladko"
 
 #. ../themes/StyleTab/theme.jl
-msgid "Frame and button style. (requires restart)"
-msgstr "Slog okvirjev in gumbom (zahteva ponovni zagon)."
+msgid "Frame and button style."
+msgstr "Slog okvirjev in gumbov."
 
 #. ../themes/mxflat/theme.jl
 #. ../themes/StyleTab/theme.jl
@@ -314,7 +314,7 @@ msgstr "vse"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
 #. ../lisp/sawfish/wm/stacking.jl
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 #. ../lisp/sawfish/wm/animation/setup.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
@@ -399,10 +399,11 @@ msgid "real-center"
 msgstr "prava sredina"
 
 #. ../themes/mxflat/theme.jl
+#, fuzzy
 msgid ""
 "title string horizontal alignment\n"
 "\n"
-"'real-center' means to take the whole titlebar into account while centering the string. when selecting 'center' only the distance between the buttons is taken into account."
+"'real-center' means to take the whole titlebar into account while centering the string. When selecting 'center' only the distance between the buttons is taken into account."
 msgstr ""
 "vodoravna poravnava nazivnega niza\n"
 "\n"
@@ -727,10 +728,11 @@ msgid "pixel"
 msgstr "točka"
 
 #. ../themes/mxflat/theme.jl
+#, fuzzy
 msgid ""
 "button position model\n"
 "\n"
-"'title-height' means calculate position as multiple of title height. when selecting 'pixel' you can adjust the button position pixelwise, but keep in mind that several buttons might slide on top of each other. 'none' means no buttons at all."
+"'title-height' means calculate position as multiple of title height. When selecting 'pixel' you can adjust the button position pixelwise, but keep in mind that several buttons might slide on top of each other. 'none' means no buttons at all."
 msgstr ""
 "model položaja gumbov\n"
 "\n"
@@ -1994,6 +1996,46 @@ msgstr ""
 "Ob premikanju okna ta možnost omogoči poravnavo enega njegovih robov z robom drugega okna."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window prompt"
+msgstr "Enovrstično vprašanje"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window. Prompted to enter new size."
+msgstr "Prikaz okna z vpisom njegovega imena v pojavno okno."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window to preset size"
+msgstr "Spremeni velikost na osnovno vrednost"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize a window to the size you specify here."
+msgstr "Spremeni velikost trenutnega okna na določeno razsežnost."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window to preset width"
+msgstr "Širina okna za prikaz"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize a window to the width you specify here."
+msgstr "Z uporabo miške ali tipkovnice spremeni velikost okna."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize window to preset height"
+msgstr "Višina okna za prikaz"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+#, fuzzy
+msgid "Resize a window to the height you specify here."
+msgstr "Premakni okno na naslednjo delovno površino."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window center"
 msgstr "Premakni okno na sredino"
 
@@ -2012,14 +2054,6 @@ msgstr "Interaktivno spremeni velikost okna"
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize the window interactively, with mouse or keyboard."
 msgstr "Z uporabo miške ali tipkovnice spremeni velikost okna."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Resize window to dimensions"
-msgstr "Spremeni razsežnost"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Resize the current window to the specified dimensions"
-msgstr "Spremeni velikost trenutnega okna na določeno razsežnost."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move selected window"
@@ -2513,47 +2547,51 @@ msgstr "Prilagodi"
 msgid "Invoke the configurator GUI."
 msgstr "Prikliči namestilnik grafičnega vmesnika"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Activate edges to perform various actions."
+msgstr "Omogoči uporabo robov za izvajanje različnih dejanj."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "none/hot-spot"
 msgstr "brez/vroča točka"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "viewport-drag"
 msgstr "poteg vidnega polja"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "flip-workspace"
 msgstr "zrcaljenje delovnih površin"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "flip-viewport"
 msgstr "zrcaljenje vidnega polja"
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge."
 msgstr "Dejanje izvedeno ob stiku z levim in desnim robom zaslona."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge while moving a window."
 msgstr "Dejanje izvedeno ob stiku z levim in desnim robom zaslona med premikanjem okna."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the top and bottom screen-edge."
 msgstr "Dejanje izvedeno ob stiku z zgornjim in spodnjim robom zaslona."
 
-#. ../lisp/sawfish/wm/edge/actions.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the top and bottom screen-edge while moving a window."
 msgstr "Dejanje izvedeno ob stiku z zgornjim in spodnjim robom zaslona med premikanjem okna."
 
-#. ../lisp/sawfish/wm/edge/flip.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
 msgstr "Premor v milisekundah preden se vidno polje ali delovna površina prezrcali."
 
-#. ../lisp/sawfish/wm/edge/hot-spots.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) before activating a hot-spot."
 msgstr "Časovni zamik (v milisekundah) pred udejanjenjem vroče točke"
 
-#. ../lisp/sawfish/wm/edge/util.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid ""
 "The size portion of the screen-border recognized as \"corners\",\n"
 "in pixels. Applies to both x and y direction."
@@ -2561,7 +2599,7 @@ msgstr ""
 "Velikost predela robnega dela zaslona, ki ga poimenujemo \"koti zaslona\",\n"
 "v točkah. Vrednost je uveljavljena za os x in y."
 
-#. ../lisp/sawfish/wm/edge/viewport-drag.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid ""
 "Amount to drag the viewport (in pixel) each time the pointer hits the\n"
 "screen edge."
@@ -2569,7 +2607,7 @@ msgstr ""
 "Velikost premika vidnega polja (v točkah), ko se kazalnik dotakne\n"
 "roba zaslona."
 
-#. ../lisp/sawfish/wm/edge/viewport-drag.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Amount to pull back the cursor (in pixel) after dragging the viewport."
 msgstr "Premik kazalnika vidnega polja (v točkah), po končanem premiku vidnega polja."
 
@@ -4111,18 +4149,6 @@ msgstr ""
 "drugo okno."
 
 #. ../lisp/sawfish/wm/tabs/tabgroup.jl
-msgid "Raise tabs while hovering them."
-msgstr "Dvigni zavihek ob prehodu miške."
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-msgid "Maybe raise tab"
-msgstr "Morda dvigni zavihek"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
-msgid "Raise a window, when it's a tab and automatic raising of is disabled"
-msgstr "Dvigni okno, ko je z enim zavihkom in je samodejno dvigovanje onemogočeno"
-
-#. ../lisp/sawfish/wm/tabs/tabgroup.jl
 msgid "Tab release window"
 msgstr "Zavihek sprostitve okna"
 
@@ -4595,8 +4621,12 @@ msgid "Preserve outermost empty workspaces in the pager."
 msgstr "Ohrani najbolj zunanje prazne delovne površine v preklopniku delovnih površin"
 
 #. ../lisp/sawfish/wm/workspace.jl
-msgid "_Insert workspace"
-msgstr "_Vstavi delovno površino"
+msgid "_Insert workspace (before current)"
+msgstr "_Vstavi delovno površino (pred trenutno)"
+
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "_Insert workspace (after current)"
+msgstr "_Vstavi delovno površino (za trenutno)"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Select _next workspace"
@@ -4835,44 +4865,45 @@ msgstr "Interaktivni izbor delovne površine"
 msgid "Prompt for a workspace and switch to it."
 msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 
+#, fuzzy
+#~ msgid "none/hot-move"
+#~ msgstr "Premakni na zavihek"
+#~ msgid "Raise tabs while hovering them."
+#~ msgstr "Dvigni zavihek ob prehodu miške."
+#~ msgid "Maybe raise tab"
+#~ msgstr "Morda dvigni zavihek"
+#~ msgid "Raise a window, when it's a tab and automatic raising of is disabled"
+#~ msgstr ""
+#~ "Dvigni okno, ko je z enim zavihkom in je samodejno dvigovanje onemogočeno"
+#~ msgid "_Insert workspace"
+#~ msgstr "_Vstavi delovno površino"
 #~ msgid "Tabs"
 #~ msgstr "Zavihki"
-
 #~ msgid "Start xterm. Optional command is passed with -e."
 #~ msgstr "Zaženi xterm. Poljubni ukaz je mogoče prikrojiti z -e."
-
 #~ msgid "Start browser. Url is optional."
 #~ msgstr "Zaženi brskalnik z izbranim naslovom URL."
-
 #~ msgid "Edge Flipping"
 #~ msgstr "Preskok preko roba"
-
 #~ msgid "Select the next desktop when the pointer hits screen edge."
 #~ msgstr "Preskoči na naslednje namizje, ko kazalec zadane ob rob zaslona."
-
 #~ msgid "Hitting the screen edge selects the next: \\w"
 #~ msgstr "Dotik roba zaslona izbere naslednje: \\w"
-
 #~ msgid "Only flip when interactively moving a window."
 #~ msgstr "Preskoči le kadar se okno interaktivno premika."
-
 #~ msgid "Milliseconds to delay before edge flipping."
 #~ msgstr "Čas zamika pred preskakovanjem robov v milisekundah"
-
 #~ msgid "Infinite Desktop"
 #~ msgstr "Neskončno namizje"
-
 #~ msgid ""
 #~ "\"Infinite desktop\", or smooth viewport motion with mouse (Conflicts "
 #~ "edge-flipping)."
 #~ msgstr ""
 #~ "\"Neskončno namizje\", ali gladki prehod gibanja vidnega polja z miško "
 #~ "(ni v skladu s preskakovanjem robov)."
-
 #~ msgid "When true, pointer in/out events don't cause focus changes."
 #~ msgstr ""
 #~ "Izbrana možnost omogoči, da vhodni/izhodni dogodki ne spremenijo žarišča."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the title of\n"
 #~ "a window. (Only mouse-bindings are evaluated in this map.)"
@@ -4880,14 +4911,12 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik v nazivni vrstici "
 #~ "okna.\n"
 #~ "(delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the border of\n"
 #~ "a window. (Only mouse-bindings are evaluated in this map.)"
 #~ msgstr ""
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik na robu okna\n"
 #~ "(delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the close "
 #~ "button\n"
@@ -4896,7 +4925,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "zapiranje\n"
 #~ "okna (delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the iconify\n"
 #~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
@@ -4904,7 +4932,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "pomanjšanje\n"
 #~ "okna (delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the maximize\n"
 #~ "button of a window. (Only mouse-bindings are evaluated in this map.)"
@@ -4912,14 +4939,12 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "razpenjanje\n"
 #~ "okna (delujejo le miškine povezave.)"
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the menu button\n"
 #~ "of a window. (Only mouse-bindings are evaluated in this map.)"
 #~ msgstr ""
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za meni\n"
 #~ "(delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the shade "
 #~ "button\n"
@@ -4928,7 +4953,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "senčenje\n"
 #~ "(delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the sticky "
 #~ "button\n"
@@ -4937,7 +4961,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad lepljivim "
 #~ "gumbom\n"
 #~ "(delujejo le miškine povezave.)"
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the lock button\n"
 #~ "of a window. (Only mouse-bindings are evaluated in this map.)"
@@ -4945,7 +4968,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "zaklepanje\n"
 #~ "(delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the rename "
 #~ "button\n"
@@ -4954,7 +4976,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "preimenovanje\n"
 #~ "(delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the move/resize "
 #~ "button\n"
@@ -4963,7 +4984,6 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "premikanje in spreminjanje\n"
 #~ "velikosti okna (delujejo le miškine povezave)."
-
 #~ msgid ""
 #~ "Keymap containing bindings active when the pointer is in the raise/lower "
 #~ "button\n"
@@ -4972,140 +4992,97 @@ msgstr "Vprašaj za delovno površino in nato nanjo preklopi."
 #~ "Tipkovne bližnjice, ki so dejavne le, ko je kazalnik nad gumbom za "
 #~ "dviganje in spuščanje\n"
 #~ "okna (delujejo le miškine povezave)."
-
 #~ msgid "Width of tab's left-edge decoration"
 #~ msgstr "Okrašenost širine levega roba zavihka"
-
 #~ msgid "Width of tab's right-edge decoration"
 #~ msgstr "Okrašenost širine desnega roba zavihka"
-
 #~ msgid "Width of tab area's left-edge decoration"
 #~ msgstr "Okrašenost širine območja levega roba zavihka"
-
 #~ msgid "Width of tab area's right-edge decoration"
 #~ msgstr "Okrašenost širine območja desnega roba zavihka"
-
 #~ msgid "Width of tab area's left-edge-transient decoration"
 #~ msgstr "Okrašenost širine območja levega roba zavihka"
-
 #~ msgid "Width of tab area's right-edge-transient decoration"
 #~ msgstr "Okrašenost širine območja desnega roba zavihka"
-
 #~ msgid "The default window animation mode"
 #~ msgstr "Privzeti način animacij oken"
-
 #~ msgid "Toggle or exec"
 #~ msgstr "Preklop ali izvajanje"
-
 #~ msgid ""
 #~ "Jump to a window matched by regular expression RE, or start\n"
 #~ "program otherwise. Turn the window into an drop-down-window"
 #~ msgstr ""
 #~ "Skoči na okno, ki je skladno z logičnim izrazom RE ali pa začni\n"
 #~ "ustrezen program. Okno naj se spremeni v spustno okno."
-
 #~ msgid "Hot Spots"
 #~ msgstr "Vroče točke"
-
 #~ msgid "The program launched when hitting the left-edge."
 #~ msgstr "Program se zažene z dotikom levega robu."
-
 #~ msgid "The program launched when hitting the top-left-corner."
 #~ msgstr "Program se zažene z dotikom zgornjega levega robu."
-
 #~ msgid "The program launched when hitting the top-edge."
 #~ msgstr "Program se zažene z dotikom zgornjega robu."
-
 #~ msgid "The program launched when hitting the top-right-corner."
 #~ msgstr "Program se zažene z dotikom zgornjega desnega robu."
-
 #~ msgid "The program launched when hitting the right-edge."
 #~ msgstr "Program se zažene z dotikom desnega robu."
-
 #~ msgid "The program launched when hitting the bottom-right-corner."
 #~ msgstr "Program se zažene z dotikom spodnjega desnega robu."
-
 #~ msgid "The program launched when hitting the bottom-edge."
 #~ msgstr "Program se zažene z dotikom spodnjega robu."
-
 #~ msgid "The program launched when hitting the bottom-left-corner."
 #~ msgstr "Program se zažene z dotikom spodnjega levega robu."
-
 #~ msgid "_Send window to"
 #~ msgstr "P_ošlji okno na"
-
 #~ msgid "_Previous workspace"
 #~ msgstr "_Predhodna delovna površina"
-
 #~ msgid "_Next workspace"
 #~ msgstr "_Naslednja delovna površina"
-
 #~ msgid "C_opy window to"
 #~ msgstr "_Kopiraj na"
-
 #~ msgid "P_revious workspace"
 #~ msgstr "_Predhodna delovna površina"
-
 #~ msgid "Ne_xt workspace"
 #~ msgstr "_Naslednja delovna površina"
-
 #~ msgid "Dockapps"
 #~ msgstr "Sidrni programi"
-
 #~ msgid "Dockapp placement origin: \\w"
 #~ msgstr "Izvor postavitve sidrnih programov: \\w"
-
 #~ msgid "Dockapp placement direction: \\w"
 #~ msgstr "Smer postavitve sidrnih programov: \\w"
-
 #~ msgid "Add..."
 #~ msgstr "Dodaj ..."
-
 #~ msgid "Delete"
 #~ msgstr "Izbriši"
-
 #~ msgid "Edit..."
 #~ msgstr "Uredi ..."
-
 #~ msgid "Delete the window."
 #~ msgstr "Izbriši okno."
-
 #~ msgid "3d hack"
 #~ msgstr "3d hack"
-
 #~ msgid "Default frame style:"
 #~ msgstr "Privzet slog okvirjev:"
-
 #~ msgid "Edit frame style"
 #~ msgstr "Uredi slog okvirja"
-
 #~ msgid "_FAQ..."
 #~ msgstr "_FAQ..."
-
 #~ msgid "_News..."
 #~ msgstr "_Novice ..."
-
 #~ msgid "_WWW page..."
 #~ msgstr "_Spletišče ..."
-
 #~ msgid "_Manual..."
 #~ msgstr "P_riročnik ..."
-
 #~ msgid "Edit theme..."
 #~ msgstr "Uredi temo..."
-
 #~ msgid "Lock position and size while windows are maximized."
 #~ msgstr "Zakleni položaj in velikost med razpenjanjem okna."
-
 #~ msgid "Unshade selected windows."
 #~ msgstr "Odstrani senčenje izbranih oken."
-
 #~ msgid "Display the workspace/viewport containing the window W."
 #~ msgstr "Pokaži delovno površino ali vidno polje, ki vsebuje okno W."
-
 #~ msgid "Display the workspace containing the window W, then focus on W."
 #~ msgstr ""
 #~ "Pokaži delovno površino, ki vsebuje okno W in ga nato postavi v žarišče."
-
 #~ msgid "Give focus to windows even when they haven't asked for it."
 #~ msgstr "Postavi okno v žarišče, tudi če okno tega ne zahteva."
+
