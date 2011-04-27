@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sawfish master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-16 07:25+0200\n"
-"PO-Revision-Date: 2011-04-17 11:46+0100\n"
+"POT-Creation-Date: 2011-04-25 18:43+0200\n"
+"PO-Revision-Date: 2011-04-27 09:17+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -341,6 +341,7 @@ msgstr "alle"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
 #. ../lisp/sawfish/wm/stacking.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 #. ../lisp/sawfish/wm/animation/setup.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
@@ -506,6 +507,10 @@ msgid ""
 "With gradient mode vertical or diagonal only the first or last (reversed) 2 "
 "colors in the list are used."
 msgstr ""
+"Farbverlaufsmodus\n"
+"\n"
+"Im vertikalen oder diagonalen Farbverlaufsmodus werden nur die ersten oder "
+"letzten zwei (umgekehrten) Farben in der Liste verwendet."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -706,6 +711,10 @@ msgid ""
 "If a button is smaller than the titlebar you might want to set its vertical "
 "alignment."
 msgstr ""
+"Vertikale Knopflage\n"
+"\n"
+"Falls ein Knopf schmaler ist als die Titelleiste, können Sie hier die "
+"vertikale Ausrichtung festlegen."
 
 #. ../themes/mxflat/theme.jl
 msgid ""
@@ -2025,9 +2034,8 @@ msgid "border-grab"
 msgstr "border-grab"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
 msgid "How to choose window edges when resizing."
-msgstr "Aktuelle Maße beim Ändern der Größe von Fenstern anzeigen."
+msgstr "Auswahl der Kanten beim Ändern der Größe von Fenstern."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid ""
@@ -2072,7 +2080,7 @@ msgid "Resize window to preset height"
 msgstr "Fensterhöhe auf Vorgabe zurücksetzen"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-msgid "Resive a window to the height you specify here."
+msgid "Resize a window to the height you specify here."
 msgstr "Die Größe eines Fensters auf die angegebene Höhe ändern."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
@@ -2616,10 +2624,6 @@ msgstr "flip-viewport"
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge."
 msgstr "Aktion für den linken und rechten Bildschirmrand."
-
-#. ../lisp/sawfish/wm/edge/conf.jl
-msgid "none/hot-move"
-msgstr "kein/Hot-Move"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge while moving a window."
@@ -4451,9 +4455,8 @@ msgstr ""
 "Begrenzungsmodus aktiviert ist): \\w"
 
 #. ../lisp/sawfish/wm/viewport.jl
-#, fuzzy
 msgid "Windows uniconify to the current viewport."
-msgstr "Gruppe in das aktuelle Sichtfeld verschieben"
+msgstr "Fenster in das aktuelle Sichtfeld wiederherstellen."
 
 #. ../lisp/sawfish/wm/viewport.jl
 msgid ""
@@ -4616,18 +4619,12 @@ msgid "Whether to enable warping the cursor to windows."
 msgstr "Ob der Cursor auf Fenster bewegt werden soll."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to not avoid ignored windows by default."
-msgstr ""
-"Ob es sich beim Wachsen oder Packen mit einem ignorierten Fenster\n"
-"überschneiden soll."
+msgstr "Ob ignorierte Fenster standardmäßig vermieden werden sollen."
 
 #. ../lisp/sawfish/wm/windows.jl
-#, fuzzy
 msgid "Whether to avoid any unspecified window by default."
 msgstr ""
-"Ob es sich beim Wachsen oder Packen mit einem ignorierten Fenster\n"
-"überschneiden soll."
 
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Format to create unique window names."
@@ -4958,6 +4955,9 @@ msgstr "Arbeitsfläche interaktiv auswählen"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Nach einer Arbeitsfläche fragen und darauf umschalten."
+
+#~ msgid "none/hot-move"
+#~ msgstr "kein/Hot-Move"
 
 #~ msgid "Raise tabs while hovering them."
 #~ msgstr "Reiter bei Mauskontakt anheben."
