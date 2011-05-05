@@ -192,8 +192,6 @@
 (autoload-command 'send-to-workspace-up 'sawfish.wm.ext.workspace-grid)
 (autoload-command 'send-to-workspace-left 'sawfish.wm.ext.workspace-grid)
 (autoload-command 'send-to-workspace-right 'sawfish.wm.ext.workspace-grid)
-(autoload-command (quote set-viewport-linear) (quote "viewport-linear") #:type (backquote (and (labelled (backquote-unquote (_ "Index:")) (number 0)))))
-(autoload-command (quote set-window-viewport-linear) (quote "viewport-linear") #:type (backquote (and (labelled (backquote-unquote (_ "Index:")) (number 0)))))
 (autoload-command 'jump-or-exec 'sawfish.wm.commands.jump-or-exec)
 (autoload-command 'edge-flip-invoke 'sawfish.wm.edge.flip)
 (autoload-command 'viewport-drag-invoke 'sawfish.wm.edge.viewport-drag)

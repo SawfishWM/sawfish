@@ -7,16 +7,16 @@
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004.
 # Jacinto Capote Robles <fastangel@gmail.com>, 2009.
 # Javier Mazorra Rodríguez <mazi.debian@gmail.com>, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 # Jorge González <jorgegonz@svn.gnome.org>, 2009, 2010, 2011.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sawfish.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-16 07:25+0200\n"
-"PO-Revision-Date: 2011-04-24 11:17+0200\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2011-04-25 18:43+0200\n"
+"PO-Revision-Date: 2011-04-25 22:52+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,7 +128,6 @@ msgid "Smoothly"
 msgstr "Suave"
 
 #. ../themes/StyleTab/theme.jl
-#| msgid "Frame and button style. (requires restart)"
 msgid "Frame and button style."
 msgstr "Estilo de marco y botón."
 
@@ -322,6 +321,7 @@ msgstr "todos"
 #. ../lisp/sawfish/wm/util/stacking.jl
 #. ../lisp/sawfish/wm/state/iconify.jl
 #. ../lisp/sawfish/wm/stacking.jl
+#. ../lisp/sawfish/wm/edge/conf.jl
 #. ../lisp/sawfish/wm/animation/setup.jl
 #. ../themes/mxflat/theme.jl
 msgid "none"
@@ -440,13 +440,6 @@ msgid "real-center"
 msgstr "centro real"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-#| msgid ""
-#| "title string horizontal alignment\n"
-#| "\n"
-#| "'real-center' means to take the whole titlebar into account while "
-#| "centering the string. when selecting 'center' only the distance between "
-#| "the buttons is taken into account."
 msgid ""
 "title string horizontal alignment\n"
 "\n"
@@ -854,14 +847,6 @@ msgid "pixel"
 msgstr "píxel"
 
 #. ../themes/mxflat/theme.jl
-#, fuzzy
-#| msgid ""
-#| "button position model\n"
-#| "\n"
-#| "'title-height' means calculate position as multiple of title height. when "
-#| "selecting 'pixel' you can adjust the button position pixelwise, but keep "
-#| "in mind that several buttons might slide on top of each other. 'none' "
-#| "means no buttons at all."
 msgid ""
 "button position model\n"
 "\n"
@@ -2247,53 +2232,38 @@ msgstr ""
 "un borde de otra ventana."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Raise window depth"
 msgid "Resize window prompt"
-msgstr "Disminuir profundidad de la ventana"
+msgstr "Redimensionar la ventana de pregunta"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Display the window. You're prompted to type in the name."
 msgid "Resize window. Prompted to enter new size."
-msgstr "Mostrar la ventana. Se le preguntará para que escriba el nombre."
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Resize window to dimensions"
-msgid "Resize window to preset size"
-msgstr "Redimensionar la ventana al tamaño"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Resize the current window to the specified dimensions"
-msgid "Resize a window to the size you specify here."
-msgstr "Redimensionar la ventana actual al tamaño especificado"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Resize window to dimensions"
-msgid "Resize window to preset width"
-msgstr "Redimensionar la ventana al tamaño"
-
-#. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Resize the window interactively, with mouse or keyboard."
-msgid "Resize a window to the width you specify here."
 msgstr ""
-"Redimensionar la ventana de forma interactiva usando el ratón o el teclado."
+"Redimensionar la ventana. Se le preguntará para que escriba el tamaño nuevo."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Resize window to dimensions"
+msgid "Resize window to preset size"
+msgstr "Redimensionar la ventana al tamaño predefinido"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize a window to the size you specify here."
+msgstr "Redimensionar una ventana al tamaño que especifique aquí."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize window to preset width"
+msgstr "Redimensionar la ventana a la anchura predefinida"
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
+msgid "Resize a window to the width you specify here."
+msgstr "Redimensionar una ventana a la anchura que especifique aquí."
+
+#. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Resize window to preset height"
-msgstr "Redimensionar la ventana al tamaño"
+msgstr "Redimensionar la ventana a la altura predefinida"
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
-#, fuzzy
-#| msgid "Move the window to the next workspace."
-msgid "Resive a window to the height you specify here."
-msgstr "Mover la ventana al escritorio siguiente."
+#| msgid "Resive a window to the height you specify here."
+msgid "Resize a window to the height you specify here."
+msgstr "Redimensionar una ventana a la altura que especifique aquí."
 
 #. ../lisp/sawfish/wm/commands/move-resize.jl
 msgid "Move window center"
@@ -2845,11 +2815,6 @@ msgstr "voltear vista"
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge."
 msgstr "Acción para los bordes izquierdo y derecho de la pantalla."
-
-#. ../lisp/sawfish/wm/edge/conf.jl
-#| msgid "none/hot-spot"
-msgid "none/hot-move"
-msgstr "ninguno/punto caliente"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Action for the left and right screen-edge while moving a window."
@@ -4971,12 +4936,10 @@ msgid "Preserve outermost empty workspaces in the pager."
 msgstr "Preservar las últimas áreas de trabajo vacías en el paginador."
 
 #. ../lisp/sawfish/wm/workspace.jl
-#| msgid "Insert workspace before"
 msgid "_Insert workspace (before current)"
 msgstr "_Insertar escritorio (antes del actual)"
 
 #. ../lisp/sawfish/wm/workspace.jl
-#| msgid "Insert workspace after"
 msgid "_Insert workspace (after current)"
 msgstr "_Insertar escritorio (después del actual)"
 
@@ -5221,6 +5184,9 @@ msgstr "Elegir escritorio de forma interactiva"
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "Prompt for a workspace and switch to it."
 msgstr "Preguntar por un escritorio y cambiar a él."
+
+#~ msgid "none/hot-move"
+#~ msgstr "ninguno/punto caliente"
 
 #~ msgid "Raise tabs while hovering them."
 #~ msgstr "Traer a primer plano las pestañas al posar el ratón encima"
