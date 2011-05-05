@@ -4,6 +4,17 @@
 	* lisp/sawfish/wm/windows.jl: more robustness for get-window-by
 	-name, -class, -role
 
+	* configure.in: check for XTest
+	
+	* lisp/sawfish/wm/windows.jl: remove release-window function
+
+	* src/windows.c: add fake-release-window subroutine
+
+	* lisp/sawfish/wm/edge/hot-spot.jl: improve HotMove for easier user-setup
+
+	* lisp/sawfish/wm/edge/action.jl: block HotSpot for 1 second after
+	HotMove was called
+
 2011-04-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/autoload.jl: removed maybe-raise-tab from
 	autoload, aswell as viewport-linear stuff. Add edge-flip-invoke,
