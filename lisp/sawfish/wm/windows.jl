@@ -134,14 +134,18 @@ _NET_WM_ICON_NAME) is checked instead. Returns nil if no such window is found."
     (if icon 
         (if regex
 	    (car (filter-windows (lambda (w)
-				   (string-match name (window-icon-name w)))))
+				   (when (window-icon-name w)
+				     (string-match name (window-icon-name w))))))
 	  (car (filter-windows (lambda (w)
-				 (string= (window-icon-name w) name)))))
+				 (when (window-icon-name w)
+				   (string= (window-icon-name w) name))))))
       (if regex
           (car (filter-windows (lambda (w)
-			         (string-match name (window-name w)))))
+				 (when (window-name w)
+			           (string-match name (window-name w))))))
         (car (filter-windows (lambda (w)
-  			       (string= (window-name w) name)))))))
+			       (when (window-name w)
+  			         (string= (window-name w) name))))))))
 
   (define (get-window-by-class class #!key regex)
     "Find a window object whose window-class is CLASS. If REGEX is
@@ -149,9 +153,11 @@ non-nil then find a window object whose class matches
 CLASS. Returns nil if no such window is found."
     (if regex
         (car (filter-windows (lambda (w)
-			       (string-match class (window-class w)))))
+			       (when (window-class w)
+			         (string-match class (window-class w))))))
       (car (filter-windows (lambda (w)
-  			     (string= (window-class w) class))))))
+			     (when (window-class w)
+  			       (string= (window-class w) class)))))))
 
   (define (get-window-by-role role #!key regex)
     "Find a window object whose window-role is ROLE. If REGEX is non-nil then
@@ -162,7 +168,8 @@ window is found."
 			       (when (window-role w)
 				 (string-match role (window-role w))))))
       (car (filter-windows (lambda (w)
-			     (string= (window-role w) role))))))
+			     (when (window-role w)
+			       (string= (window-role w) role)))))))
 
   (define (window-really-wants-input-p w)
     "Return nil if window W should never be focused."
