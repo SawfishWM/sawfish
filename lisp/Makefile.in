@@ -23,7 +23,6 @@ include ../Makedefs
 
 top_builddir=..
 top_srcdir=@top_srcdir@
-VPATH=@srcdir@:@top_srcdir@
 
 REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lisp
 
@@ -73,7 +72,7 @@ install : all installdirs
 	done
 	$(rep_INSTALL_ALIASES) -l . $(DESTDIR)$(lispdir)
 
-installdirs : mkinstalldirs
+installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(foreach x,$(INSTALL_DIRS),$(DESTDIR)$(lispdir)/$(x))
 
 uninstall :

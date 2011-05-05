@@ -24,7 +24,6 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@srcdir@:@top_srcdir@
 
 LISP_SRCS := sawfish-menu.jl sawfish-client.jl sawfish-about.jl
 LISP_OBJS := $(LISP_SRCS:.jl=.jlc)
@@ -56,7 +55,7 @@ uninstall :
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-about
 	rm -f $(DESTDIR)$(sawfishdir)/sawfish.png
 
-installdirs : mkinstalldirs
+installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir)
 
 clean :

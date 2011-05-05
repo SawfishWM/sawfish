@@ -23,7 +23,6 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@srcdir@:@top_srcdir@
 
 SRCS = sawfish.texi news.texi faq.texi
 
@@ -61,7 +60,7 @@ install : sawfish.info installdirs
 		$(INSTALL_DATA) $$f.gz $(DESTDIR)$(prefix)/share/man/man1/; \
 	done
 
-installdirs : mkinstalldirs
+installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(infodir)
 	$(SHELL) $< $(DESTDIR)$(prefix)/share/man/man1/
 

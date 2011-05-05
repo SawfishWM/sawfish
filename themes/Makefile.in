@@ -24,7 +24,6 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@srcdir@:@top_srcdir@
 
 themedir := ${sawfishdir}/themes
 
@@ -58,7 +57,7 @@ install : all installdirs
 	@# itself slows in librep.
 	cd $(DESTDIR)$(themedir) && tar xf StyleTab.tar.gz && rm StyleTab.tar.gz
 
-installdirs : mkinstalldirs
+installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(themedir)
 
 uninstall :
