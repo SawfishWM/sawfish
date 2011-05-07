@@ -41,7 +41,8 @@
             window-head-any-viewport
 	    viewport-minimum-size-changed
             viewport-honor-workspace-edges
-	    viewport-windows)
+	    viewport-windows
+	    window-on-current-head-viewport-p)
 
     (open rep
 	  rep.system
@@ -608,6 +609,9 @@ is selected. The return value is the cons cell (x . y)."
                                         (<= (+ (cdr pos) (cdr dims)) top)
                                         (>= (car pos) right)
                                         (>= (cdr pos) bottom)))))))))
+
+  (define (window-on-current-head-viewport-p w)
+    (eq (current-head w) (window-head-any-viewport w)))
 
 ;;; commands
 

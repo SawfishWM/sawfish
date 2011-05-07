@@ -17,6 +17,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
+	  sawfish.wm.viewport
 	  sawfish.wm.state.iconify
 	  sawfish.wm.state.maximize
 	  sawfish.wm.commands.move-resize)
@@ -34,7 +35,8 @@ an extra column should be used.")
   (define (tile-windows)
     (interactive)
     (let ((windows (remove-if window-iconified-p
-			      (filter-windows window-on-current-workspace-viewport-p))))
+			      (or (filter-windows window-on-current-workspace-viewport-p)
+			          (filter-windows window-on-current-head-viewport-p)))))
       (when (> (length windows) 1)
 	(let* ((columns (do ((c 1 (1+ c)))
 			    ((> (/ (screen-height) (/ (length windows) c))
