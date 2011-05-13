@@ -176,9 +176,9 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 					    frame-font-highlight-color
 					    frame-font-clicked-color)
                                       t))
-              '(title tab))
+              '(title tabbar-horizontal))
       (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
-            '(title tab)))
+            '(title tabbar-horizontal)))
     (mapc rebuild-frame (managed-windows)))
 
   (defvar theme-update-interval 60
