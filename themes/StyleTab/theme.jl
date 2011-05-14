@@ -82,11 +82,6 @@
   :depends styletab:custom-button-width
   :range (-4 . 4))
 
-(defcustom styletab:title-font default-font
-  "Tabbar font."
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :type font)
-
 (mapc
  (lambda (arg)
    (let ((type-list ;; ":type" in defcustom
@@ -1110,7 +1105,6 @@
      (y-justify . center)
      (background . ,(tab-images "top"))
      (foreground . ,title-colors-images)
-     (font . ,(lambda () (list styletab:title-font)))
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
      (text . ,window-name))
@@ -1141,7 +1135,6 @@
      (y-justify . center)
      (background . ,(tab-images "bottom"))
      (foreground . ,title-colors-images)
-     (font . ,(lambda () (list styletab:title-font)))
      (bottom-edge . ,title-edge)
      (height . ,title-height-s)
      (text . ,window-name))
@@ -2090,7 +2083,6 @@
 (call-after-state-changed '(title-position) create-frames-only)
 (add-hook 'remove-from-workspace-hook reframe-one)
 
-(custom-set-property 'styletab:title-font ':after-set reframe-all)
 (custom-set-property 'styletab:custom-colors ':after-set reframe-all)
 (custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
 (custom-set-property 'styletab:title-dimension ':after-set clear-cache-reframe)
