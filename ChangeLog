@@ -1,3 +1,25 @@
+2011-05-14  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* src/frames.c
+	* src/sawfish_subrs.h
+	* lisp/sawfish/wm/gaol.jl
+	* lisp/sawfish/wm/frames.jl: use frame-font for titlebars, rather than
+	default-font (now changing titlebar-font leaves message-font intact)
+
+	* themes/mxflat/theme.jl
+	* themes/get-S-tabbed/theme.jl
+	* themes/Crux/theme.jl
+	* themes/StyleTab/theme.jl: updated to use frame-font instead of
+	default-font. Remove custom-font-setting option from StyleTab
+
+2011-05-13  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/frames.jl: add possibility to also change the
+	font-color for highlighted and clicked frames regardless of theme
+
+	* lisp/sawfish/wm/frames.jl: fixed changing font-color for horizontal
+	tabbars (vertical don't show text (yet))
+
+	* themes/StyleTab/theme.jl: remove custom color-changing option
+
 2011-05-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/commands/jump-or-exec.jl: reverted 2 commits
 

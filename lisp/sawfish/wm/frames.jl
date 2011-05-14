@@ -172,11 +172,13 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 	(mapc (lambda (fc)
 		(set-frame-part-value fc 'foreground
                                       (list frame-font-inactive-color
-                                            frame-font-active-color)
+                                            frame-font-active-color
+					    frame-font-highlight-color
+					    frame-font-clicked-color)
                                       t))
-              '(title tab))
+              '(title tabbar-horizontal))
       (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
-            '(title tab)))
+            '(title tabbar-horizontal)))
     (mapc rebuild-frame (managed-windows)))
 
   (defvar theme-update-interval 60
@@ -227,7 +229,12 @@ generate.")
     "Default font: \\w"
     :group appearance
     :type font
-    :widget-flags (expand-horizontally)
+    :after-set (lambda () (after-setting-frame-option)))
+
+  (defcustom frame-font default-font
+    "Titlebar font: \\w"
+    :group appearance
+    :type font
     :after-set (lambda () (after-setting-frame-option)))
 
   (defvar default-bevel-percent nil
@@ -240,7 +247,7 @@ generate.")
     :group appearance
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-active-color "black"
+  (defcustom frame-font-active-color "grey"
     "Font color for active frames"
     :type color
     :group appearance
@@ -249,6 +256,20 @@ generate.")
 
   (defcustom frame-font-inactive-color "black"
     "Font color for inactive frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-highlight-color "white"
+    "Font color for highlighted frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-clicked-color "grey85"
+    "Font color for clicked frames"
     :type color
     :group appearance
     :depends use-custom-font-color

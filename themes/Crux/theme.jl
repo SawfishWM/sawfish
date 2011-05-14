@@ -219,7 +219,7 @@
 
 (define (vertical-justification)
   ;; `center' justification adjusted for the 3-pixel top-border
-  (max 0 (- (/ (- 22 (font-height default-font)) 2) 3)))
+  (max 0 (- (/ (- 22 (font-height frame-font)) 2) 3)))
 
 (define (horizontal-justification w)
   (+ (* (length (car (table-ref button-table w))) 18) 2))

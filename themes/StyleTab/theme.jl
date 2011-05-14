@@ -82,39 +82,6 @@
   :depends styletab:custom-button-width
   :range (-4 . 4))
 
-(defcustom styletab:title-font default-font
-  "Tabbar font."
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :type font)
-
-(defcustom styletab:custom-colors nil "Customize title text colors. (Don't use styles defaults.)"
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :type boolean)
-
-(defcustom styletab:focused-color "#E5E5E5"
-  "Focused title text color."
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :depends styletab:custom-colors
-  :type color)
-
-(defcustom styletab:highlighted-color "#FDFDFD"
-  "Highlighted title text color."
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :depends styletab:custom-colors
-  :type color)
-
-(defcustom styletab:inactive-color "#B1B1B1"
-  "Inactive title text color."
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :depends styletab:custom-colors
-  :type color)
-
-(defcustom styletab:inactive-highlighted-color "#CBCBCB"
-  "Inactive Highlighted title text color."
-  :group (appearance StyleTab:group StyleTab:settings-group)
-  :depends styletab:custom-colors
-  :type color)
-
 (mapc
  (lambda (arg)
    (let ((type-list ;; ":type" in defcustom
@@ -182,21 +149,13 @@
 
 (define title-colors-images
   (lambda ()
-    (if (eq styletab:custom-colors t)
-        (title-colors-custom)
       (case styletab:style
             ((Reduce) (title-colors-reduce))
             ((Dark) (title-colors-dark))
             ((DarkColor) (title-colors-dark))
             ((Silver) (title-colors-silver))
             ((SilverColor) (title-colors-silver))
-            ((Smoothly) (title-colors-smoothly))))))
-
-(define title-colors-custom
-  (lambda ()
-    `((focused . ,styletab:focused-color) (highlighted . ,styletab:highlighted-color) (clicked . ,styletab:highlighted-color) 
-      (inactive . ,styletab:inactive-color) (inactive-highlighted . ,styletab:inactive-highlighted-color) 
-      (inactive-clicked . ,styletab:inactive-highlighted-color))))
+            ((Smoothly) (title-colors-smoothly)))))
 
 (define title-colors-reduce
   (lambda ()
@@ -1146,7 +1105,6 @@
      (y-justify . center)
      (background . ,(tab-images "top"))
      (foreground . ,title-colors-images)
-     (font . ,(lambda () (list styletab:title-font)))
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
      (text . ,window-name))
@@ -1177,7 +1135,6 @@
      (y-justify . center)
      (background . ,(tab-images "bottom"))
      (foreground . ,title-colors-images)
-     (font . ,(lambda () (list styletab:title-font)))
      (bottom-edge . ,title-edge)
      (height . ,title-height-s)
      (text . ,window-name))
@@ -2126,12 +2083,7 @@
 (call-after-state-changed '(title-position) create-frames-only)
 (add-hook 'remove-from-workspace-hook reframe-one)
 
-(custom-set-property 'styletab:title-font ':after-set reframe-all)
 (custom-set-property 'styletab:custom-colors ':after-set reframe-all)
-(custom-set-property 'styletab:focused-color ':after-set reframe-all)
-(custom-set-property 'styletab:highlighted-color ':after-set reframe-all)
-(custom-set-property 'styletab:inactive-color ':after-set reframe-all)
-(custom-set-property 'styletab:inactive-highlighted-color ':after-set reframe-all)
 (custom-set-property 'styletab:style ':after-set clear-cache-reload-frame-style)
 (custom-set-property 'styletab:title-dimension ':after-set clear-cache-reframe)
 (custom-set-property 'styletab:custom-button-width ':after-set clear-cache-reframe)
