@@ -26,7 +26,6 @@
     (open rep
 	  rep.system
 	  rep.io.timers
-	  sawfish.wm.custom
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events
@@ -37,31 +36,36 @@
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
-  (define (edge-flip-invoke edge type)
+  (define (edge-flip-invoke edge type #!key while-moving)
     (make-timer (lambda ()
-		  (flip-core edge type))
+		  (flip-core edge type #:while-moving while-moving))
 		(quotient edge-flip-delay 1000)
 		(mod edge-flip-delay 1000)))
 
-  (define (flip-core edge type)
+  (define steps nil)
+
+  (define (flip-core edge type #!key while-moving)
     (let ((ptr (query-pointer t)))
       (before-flip)
       (if (eq type 'viewport)
 	  (progn
-	    (cond ((eq edge 'left)
-		   (when (move-viewport -1 0)
-		     (rplaca ptr (- (screen-width) 2))))
-		  ((eq edge 'right)
-		   (when (move-viewport 1 0)
-		     (rplaca ptr 1)))
-		  ((eq edge 'top)
-		   (when (move-viewport 0 -1)
-		     (rplacd ptr (- (screen-height) 2))))
-		  ((eq edge 'bottom)
-		   (when (move-viewport 0 1)
-		     (rplacd ptr 1))))
-	    ;; always warp the pointer to keep it logically static
-	    (warp-cursor (car ptr) (cdr ptr)))
+	    (if while-moving
+	        (setq steps 1)
+	      (setq steps scroll-viewport-steps))
+	    (let ((scroll-viewport-steps steps))
+	      (cond ((eq edge 'left)
+		    (when (move-viewport -1 0)
+		      (rplaca ptr (- (screen-width) 2))))
+		    ((eq edge 'right)
+		    (when (move-viewport 1 0)
+		      (rplaca ptr 1)))
+		    ((eq edge 'top)
+		    (when (move-viewport 0 -1)
+		      (rplacd ptr (- (screen-height) 2))))
+		    ((eq edge 'bottom)
+		    (when (move-viewport 0 1)
+		      (rplacd ptr 1))))
+	      (warp-cursor (car ptr) (cdr ptr))))
 	(let ((orig current-workspace))
 	  (cond ((eq edge 'left)
 		 (workspace-left)
@@ -76,25 +80,18 @@
 		 (workspace-down)
 		 (rplacd ptr 1)))
 	  (unless (= current-workspace orig)
-	    (warp-cursor (car ptr) (cdr ptr)))))
-      (after-flip type)))
+	    (warp-cursor (car ptr) (cdr ptr)))
+	  (after-flip)))))
 
-;;; ugly hacks to make flipping work while dragging windows
-
-;;; XXX xrefresh() to fix rubberband-traces? maybe a user-option
-;;; XXX whether to do so? We'll see...
-
-  ;; current-workspace before flipping
   (define original-space)
 
   (define (before-flip)
     (when move-resize-window
       (setq original-space current-workspace)))
 
-  (define (after-flip type)
+  (define (after-flip)
     (let ((w move-resize-window))
       (when w
-	(when (and (eq type 'workspace)
-		   (/= original-space current-workspace)
+	(when (and (/= original-space current-workspace)
 		   (not (window-get w 'sticky)))
 	  (move-window-to-workspace w original-space current-workspace t))))))

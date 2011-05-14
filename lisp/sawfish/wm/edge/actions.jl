@@ -25,6 +25,7 @@
 
     (open rep
 	  rep.system
+	  rep.io.timers
 	  sawfish.wm.misc
 	  sawfish.wm.events
 	  sawfish.wm.custom
@@ -32,44 +33,55 @@
 	  sawfish.wm.edge.util
 	  sawfish.wm.edge.flip
 	  sawfish.wm.edge.hot-spots
+	  sawfish.wm.edge.tile
 	  sawfish.wm.edge.viewport-drag)
 
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
 
-  (define (edge-action-call func edge)
+  (defvar while-hot-move nil)
+
+  (define (edge-action-call func edge #!key while-moving)
     (case func
       ((viewport-drag)
        (viewport-drag-invoke edge))
       ((flip-workspace)
        (edge-flip-invoke edge 'workspace))
       ((flip-viewport)
-       (edge-flip-invoke edge 'viewport))
+       (edge-flip-invoke edge 'viewport #:while-moving while-moving))
+      ((tile-windows)
+       (tile-windows #:while-moving while-moving))
       ((none/hot-spot)
        (hot-spot-invoke edge))
+      ((none/hot-move)
+       (hot-move-invoke edge))
       (t nil)))
 
   ;; Entry point without dragging 
   (define (edge-action-hook-func)
-    (let ((corner (get-active-corner))
-	  (edge (get-active-edge)))
-      (if corner
-	  (hot-spot-invoke corner)
-	(cond ((or (eq edge 'left)
-		   (eq edge 'right))
-	       (edge-action-call left-right-edge-action edge))
-	      ((or (eq edge 'top)
-		   (eq edge 'bottom))
-	       (edge-action-call top-bottom-edge-action edge))))))
+    (unless while-hot-move
+      (let ((corner (get-active-corner))
+   	    (edge (get-active-edge)))
+        (if corner
+	    (hot-spot-invoke corner)
+	  (cond ((or (eq edge 'left)
+	  	     (eq edge 'right))
+	         (edge-action-call left-right-edge-action edge))
+	        ((or (eq edge 'top)
+		     (eq edge 'bottom))
+	         (edge-action-call top-bottom-edge-action edge)))))))
 
   ;; Entry point for window dragging
   (define (edge-action-move-hook-func)
+    (setq while-hot-move t)
     (let ((edge (get-active-edge)))
       (cond ((or (eq edge 'left)
 		 (eq edge 'right))
-	     (edge-action-call left-right-edge-move-action edge))
+	     (edge-action-call left-right-edge-move-action edge #:while-moving t))
 	    ((or (eq edge 'top)
 		 (eq edge 'bottom))
-	     (edge-action-call top-bottom-edge-move-action edge)))))
+	     (edge-action-call top-bottom-edge-move-action edge #:while-moving t))))
+    ;; for one second after HotMove prevent HotSpot
+    (make-timer (lambda () (setq while-hot-move nil)) 1))
 
   (define (activate-edges init)
     (if init

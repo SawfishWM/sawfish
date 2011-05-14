@@ -20,6 +20,21 @@
 
 	* themes/StyleTab/theme.jl: remove custom color-changing option
 
+	* lisp/sawfish/wm/edge/flip.jl: only call after-flip for
+	flip-workspace. set scroll-viewport-steps to 1 for flip-viewport
+	while-moving (no hang when viewport-boundary-mode 'dynamic)
+
+	* lisp/sawfish/wm/edge/actions.jl: add while-moving key-value
+
+	* lisp/sawfish/wm/edge/tile.jl: call fake-release-window when tiling
+	while moving a winodw (so that it properly works)
+
+2011-05-07  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/viewport.jl: add window-on-current-head-viewport
+
+	* lisp/sawfish/wm/edge/tile.jl: one-shot-try to make tile
+	xinerama-aware
+
 2011-05-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/commands/jump-or-exec.jl: reverted 2 commits
 
@@ -28,9 +43,42 @@
 
 	* **/Makefile.in: remove VPATH to appease makepp [Daniel Pfeiffer]
 
+	* configure.in: check for XTest
+	
+	* lisp/sawfish/wm/windows.jl: remove release-window function
+
+	* src/windows.c: add fake-release-window subroutine
+
+	* lisp/sawfish/wm/edge/hot-spot.jl: improve HotMove for easier user-setup
+
+	* lisp/sawfish/wm/edge/action.jl: block HotSpot for 1 second after
+	HotMove was called
+
 2011-04-26  Christopher Roy Bratusek <nano@tuxfamily.org>
-	* lisp/sawfish/wm/autoload.jl: removed maybe-raise-tab
-	from autoload, aswell as viewport-linear stuff
+	* lisp/sawfish/wm/autoload.jl: removed maybe-raise-tab from
+	autoload, aswell as viewport-linear stuff. Add edge-flip-invoke,
+	viewport-drag-invoke and tile-windows to autoload
+
+2011-04-25  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/tile.jl: only include windows on
+	current-workspace AND current-viewport
+
+	* lisp/sawfish/wm/workspace.jl: fixed window-on-current-workspace-p
+	added window-on-current-workspace-viewport-p
+
+2011-04-24  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/tile.jl: tiling for EdgeActions
+	original code by Mark Triggs, updated by me [not yet working!]
+
+	* lisp/sawfish/wm/edge/hot-spot.jl: added HotMove for EdgeActions
+
+	* lisp/sawfish/wm/windows.jl
+	* lisp/sawfish/wm/workspace.jl
+	* lisp/sawfish/wm/commands/move-resize.jl: various support functions
+	for HotMove and Tiling
+
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl: updated
 
 2011-04-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* configure.in: bump minimum rep to 0.92.0

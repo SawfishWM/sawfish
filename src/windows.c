@@ -23,6 +23,8 @@
 #include <assert.h>
 #include <string.h>
 #include <X11/extensions/shape.h>
+#include <X11/extensions/XTest.h>
+#include <X11/keysym.h>
 #include <glib.h>
 
 Lisp_Window *window_list;
@@ -1528,6 +1530,26 @@ Return the list of windows that match the predicate function PRED.
     return output;
 }
 
+DEFUN ("fake-release-window", Frelese_windows,
+      Sfake_release_window, (void), rep_Subr0) /*
+::doc:sawfish.wm.windows.subrs#release-windows::
+release-windows
+
+Release the grab from windows
+::end:: */
+{
+
+	/* release windows */
+
+	unsigned int escape = XKeysymToKeycode(dpy, XK_Escape);
+
+	XTestFakeKeyEvent (dpy, escape, True, CurrentTime);
+	XTestFakeKeyEvent (dpy, escape, False, CurrentTime);
+	XFlush (dpy);
+
+}
+
+
 /* type hooks */
 
 static int
@@ -1710,6 +1732,7 @@ windows_init (void)
     rep_ADD_SUBR(Swindow_icon_image);
     rep_ADD_SUBR(Smap_windows);
     rep_ADD_SUBR(Sfilter_windows);
+    rep_ADD_SUBR(Sfake_release_window);
     rep_pop_structure (tem);
 
     rep_INTERN_SPECIAL(before_add_window_hook);
