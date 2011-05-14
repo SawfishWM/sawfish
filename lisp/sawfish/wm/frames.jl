@@ -229,7 +229,12 @@ generate.")
     "Default font: \\w"
     :group appearance
     :type font
-    :widget-flags (expand-horizontally)
+    :after-set (lambda () (after-setting-frame-option)))
+
+  (defcustom frame-font default-font
+    "Titlebar font: \\w"
+    :group appearance
+    :type font
     :after-set (lambda () (after-setting-frame-option)))
 
   (defvar default-bevel-percent nil
