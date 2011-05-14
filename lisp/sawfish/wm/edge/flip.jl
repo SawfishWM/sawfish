@@ -59,7 +59,6 @@
 		  ((eq edge 'bottom)
 		   (when (move-viewport 0 1)
 		     (rplacd ptr 1))))
-	    ;; always warp the pointer to keep it logically static
 	    (warp-cursor (car ptr) (cdr ptr)))
 	(let ((orig current-workspace))
 	  (cond ((eq edge 'left)
@@ -75,25 +74,18 @@
 		 (workspace-down)
 		 (rplacd ptr 1)))
 	  (unless (= current-workspace orig)
-	    (warp-cursor (car ptr) (cdr ptr)))))
-      (after-flip type)))
+	    (warp-cursor (car ptr) (cdr ptr)))
+	  (after-flip)))))
 
-;;; ugly hacks to make flipping work while dragging windows
-
-;;; XXX xrefresh() to fix rubberband-traces? maybe a user-option
-;;; XXX whether to do so? We'll see...
-
-  ;; current-workspace before flipping
   (define original-space)
 
   (define (before-flip)
     (when move-resize-window
       (setq original-space current-workspace)))
 
-  (define (after-flip type)
+  (define (after-flip)
     (let ((w move-resize-window))
       (when w
-	(when (and (eq type 'workspace)
-		   (/= original-space current-workspace)
+	(when (and (/= original-space current-workspace)
 		   (not (window-get w 'sticky)))
 	  (move-window-to-workspace w original-space current-workspace t))))))
