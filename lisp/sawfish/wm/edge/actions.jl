@@ -40,16 +40,16 @@
 
   (defvar while-hot-move nil)
 
-  (define (edge-action-call func edge)
+  (define (edge-action-call func edge #!key while-moving)
     (case func
       ((viewport-drag)
        (viewport-drag-invoke edge))
       ((flip-workspace)
        (edge-flip-invoke edge 'workspace))
       ((flip-viewport)
-       (edge-flip-invoke edge 'viewport))
+       (edge-flip-invoke edge 'viewport #:while-moving while-moving))
       ((tile-windows)
-       (tile-windows))
+       (tile-windows #:while-moving while-moving))
       ((none/hot-spot)
        (hot-spot-invoke edge))
       ((none/hot-move)
@@ -76,10 +76,10 @@
     (let ((edge (get-active-edge)))
       (cond ((or (eq edge 'left)
 		 (eq edge 'right))
-	     (edge-action-call left-right-edge-move-action edge))
+	     (edge-action-call left-right-edge-move-action edge #:while-moving t))
 	    ((or (eq edge 'top)
 		 (eq edge 'bottom))
-	     (edge-action-call top-bottom-edge-move-action edge))))
+	     (edge-action-call top-bottom-edge-move-action edge #:while-moving t))))
     ;; for one second after HotMove prevent HotSpot
     (make-timer (lambda () (setq while-hot-move nil)) 1))
 

@@ -1,3 +1,12 @@
+2011-05-14  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/flip.jl: only call after-flip for
+	flip-workspace
+
+	* lisp/sawfish/wm/edge/actions.jl: add while-moving key-value
+
+	* lisp/sawfish/wm/edge/tile.jl: call fake-release-window when tiling
+	while moving a winodw (so that it properly works)
+
 2011-05-07  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/viewport.jl: add window-on-current-head-viewport
 

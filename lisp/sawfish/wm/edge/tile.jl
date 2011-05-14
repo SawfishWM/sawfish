@@ -32,8 +32,10 @@ an extra column should be used.")
   ;; macro for tile-windows
   (defmacro pop (l) `(setq ,l (cdr ,l)))
 
-  (define (tile-windows)
+  (define (tile-windows #!key while-moving)
     (interactive)
+    (if while-moving
+        (fake-release-window))
     (let ((windows (remove-if window-iconified-p
 			      (or (filter-windows window-on-current-workspace-viewport-p)
 			          (filter-windows window-on-current-head-viewport-p)))))
