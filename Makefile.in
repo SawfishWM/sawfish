@@ -102,6 +102,7 @@ distclean :
 
 debclean : distclean
 	rm -f sawfish*.ebuild sawfish.spec libtool ltmain.sh config.h.in NEWS
+	rm -f configure m4/*
 
 gitclean : distclean
 	rm -f aclocal.m4 configure
