@@ -21,8 +21,8 @@ lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
 	\! -name "*autoload*" \! -name "*custom-defaults*"
 
 data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload.jl" \
-	      debian/tmp/usr/share/sawfish/lisp -name "*custom-defaults.jl" \
-	      debian/tmp/usr/share/sawfish/lisp -name "*.jlc" \
+	      -o -name "*custom-defaults.jl" \
+	      -o -name "*.jlc" \
 	      debian/tmp/usr/share/sawfish/sawfish.png
 
 data_extradirs = debian/tmp/usr/share/sawfish/sounds \
