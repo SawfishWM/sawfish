@@ -22,8 +22,7 @@ lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
 
 data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload.jl" \
 	      -o -name "*custom-defaults.jl" \
-	      -o -name "*.jlc" \
-	      -name "sawfish.png"
+	      -o -name "*.jlc"
 
 data_extradirs = debian/tmp/usr/share/sawfish/sounds \
 	debian/tmp/usr/share/sawfish/themes \
@@ -54,6 +53,7 @@ override_dh_auto_install:
 	find $(data_extras) | $(dh_install_auto) -psawfish-data
 	dh_install -psawfish-data sawfish.el usr/share/emacs/site-lisp/sawfish
 	for d in $(data_extradirs) ; do dh_install -psawfish-data --autodest $$d ; done
+	dh_install -psawfish-data debian/tmp/usr/share/sawfish/sawfish.png
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=sawfish-data
@@ -70,17 +70,3 @@ override_dh_strip:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -- --warnings=2
-
-# Get rid of rpath
-	# SET -E; \
-	#  TMPFILE=`MKTEMP`; \
-	#  SED "S/^REP_LIBS=\(.*\)-WL,--RPATH -WL,[^ ]* \(.*\)$$/REP_LIBS=\1 \2/" MAKEDEFS >$$TMPFILE ;\
-	#  MV $$TMPFILE MAKEDEFS
-
-# Remove info files installed by Makefile. dh_installinfo will do it again without creating info.dir
-	# find debian -type d -name info | xargs rm -rf
-
-# These are scripts. (Actually, they are /usr/bin/sawfish-config before and after compiling)
-# Should that be a symlink?
-	# chmod a+x debian/sawfish/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jlc
-	# chmod a+x debian/sawfish-lisp-source/usr/share/sawfish/$(version)/lisp/sawfish/cfg/main.jl
