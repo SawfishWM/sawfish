@@ -39,6 +39,25 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
+@heading 1.8.2 "Tunebeat"
+@itemize @bullet
+
+@item Bug Fixes
+@itemize @minus
+
+@item More robustness for @code{get-window-by-*} functions. Fixes problems with
+functions like @code{jump-or-exec} failing, when a window without WM_CLASS existed.
+[Christopher Bratusek]
+@end itemize
+@item Build and Installation
+@itemize @minus
+
+@item Make building Sawfish with @code{makepp} work [Daniel Pfeiffer]
+
+@item Fix debian packaging scripts [Christopher Bratusek]
+@end itemize
+@end itemize
+
 @heading 1.8.1 "Sharp As A Knife"
 @itemize @bullet
 
