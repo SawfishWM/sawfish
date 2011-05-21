@@ -174,7 +174,9 @@ by the current theme, then FALLBACK-TYPE is used instead.")
                                       (list frame-font-inactive-color
                                             frame-font-active-color
 					    frame-font-highlight-color
-					    frame-font-clicked-color)
+					    frame-font-clicked-color
+					    frame-font-inactive-highlight-color
+					    frame-font-inactive-clicked-color)
                                       t))
               '(title tabbar-horizontal))
       (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
@@ -268,8 +270,22 @@ generate.")
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
+  (defcustom frame-font-inactive-highlight-color "white"
+    "Font color for inactive highligted frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
   (defcustom frame-font-clicked-color "grey85"
     "Font color for clicked frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-inactive-clicked-color "grey85"
+    "Font color for inactive clicked frames"
     :type color
     :group appearance
     :depends use-custom-font-color
