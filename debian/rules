@@ -17,15 +17,22 @@ export LC_ALL LINGUAS LANG
 
 DEB_CONFIGURE_USER_FLAGS = --with-readline
 
-lisp_source_extras = debian/tmp/usr/share/sawfish/*/lisp -name "*.jl" \
+lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
 	\! -name "*autoload*" \! -name "*custom-defaults*"
 
-data_extras = debian/tmp/usr/share/sawfish/*/lisp -name "*.jlc" \! -name "*main*"
+data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload*" \
+	      -name "*.jlc" -name "*custom-defaults.jl" \
+	      debian/tmp/usr/share/sawfish/sawfish.png
 
-data_extradirs = debian/tmp/usr/share/sawfish/$(version)/sounds \
-	debian/tmp/usr/share/sawfish/$(version)/themes \
+data_extradirs = debian/tmp/usr/share/sawfish/sounds \
+	debian/tmp/usr/share/sawfish/themes \
 	debian/tmp/usr/share/xsessions \
-	debian/tmp/usr/include
+	debian/tmp/usr/include \
+	debian/tmp/usr/share/applications \
+	debian/tmp/usr/share/kde4 \
+	debian/tmp/usr/share/gnome \
+	debian/tmp/usr/share/locale \
+	debian/tmp/usr/share/icons
 
 dh_install_auto = xargs dh_install --autodest
 
