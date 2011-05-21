@@ -24,7 +24,6 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@srcdir@:@top_srcdir@
 
 soundsdir := ${sawfishdir}/sounds
 
@@ -35,7 +34,7 @@ install : all installdirs
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(soundsdir); \
 	done
 
-installdirs : mkinstalldirs
+installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(soundsdir)
 
 uninstall :

@@ -20,12 +20,12 @@
 # along with sawfish; see the file COPYING.  If not, write to
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+makepp_percent_subdirs=1
 include ../../../Makedefs
 
 top_builddir=../../..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
-VPATH=@srcdir@:@top_srcdir@
 
 REP_ENVIRON:=$(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/lisp
 

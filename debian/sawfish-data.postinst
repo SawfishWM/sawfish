@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+
+	find /usr/share/sawfish/lisp -name *.jlc | xargs touch
+
+fi
+
+exit 0
