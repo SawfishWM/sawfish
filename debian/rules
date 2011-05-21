@@ -20,8 +20,9 @@ DEB_CONFIGURE_USER_FLAGS = --with-readline
 lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
 	\! -name "*autoload*" \! -name "*custom-defaults*"
 
-data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload*" \
-	      -name "*.jlc" -name "*custom-defaults.jl" \
+data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload.jl" \
+	      debian/tmp/usr/share/sawfish/lisp -name "*custom-defaults.jl" \
+	      debian/tmp/usr/share/sawfish/lisp -name "*.jlc" \
 	      debian/tmp/usr/share/sawfish/sawfish.png
 
 data_extradirs = debian/tmp/usr/share/sawfish/sounds \
