@@ -306,42 +306,42 @@ generate.")
     :group appearance
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-active-color "grey"
+  (defcustom frame-font-active-color "#F2F2F2"
     "Font color for active frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-inactive-color "black"
+  (defcustom frame-font-inactive-color "#CBCBCB"
     "Font color for inactive frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-highlight-color "white"
+  (defcustom frame-font-highlight-color "#FEFEFE"
     "Font color for highlighted frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-inactive-highlight-color "white"
+  (defcustom frame-font-inactive-highlight-color "#D8D8D8"
     "Font color for inactive highligted frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-clicked-color "grey85"
+  (defcustom frame-font-clicked-color "#FFFFFF"
     "Font color for clicked frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-inactive-clicked-color "grey85"
+  (defcustom frame-font-inactive-clicked-color "#EEEEEE"
     "Font color for inactive clicked frames"
     :type color
     :group appearance
