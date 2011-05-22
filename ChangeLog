@@ -2,6 +2,15 @@
 	* lisp/sawfish/wm/frames.jl: fixed setting frame-font colors for
 	states inactive-highlighted and inactive-clicked
 
+	* themes/get-S-tabbed/theme.jl
+	* themes/Crux/theme.jl
+	* themes/mxflat/theme.jl
+	* src/frames.c
+	* src/sawfish_subrs.h
+	* lisp/sawfish/wm/frames.jl: remove frame-font, fallback to
+	default-font again. Instead offer options for changing frame-font
+	according to the window state.
+
 2011-05-14  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/frames.c
 	* src/sawfish_subrs.h

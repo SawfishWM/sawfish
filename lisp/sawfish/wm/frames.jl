@@ -54,6 +54,7 @@
 	     def-frame-class
 	     define-frame-class
 	     update-frame-font-color
+	     update-frame-font
 	     update-border-color-width))
 
     (open rep
@@ -184,6 +185,21 @@ by the current theme, then FALLBACK-TYPE is used instead.")
             '(title tabbar-horizontal)))
     (mapc rebuild-frame (managed-windows)))
 
+  (define (update-frame-font)
+    (if use-custom-font
+        (mapc (lambda (fc)
+		(set-frame-part-value fc 'font
+				      `((inactive . ,frame-font-inactive)
+					(focused . ,frame-font-active)
+					(highlighted . ,frame-font-highlight)
+					(clicked . ,frame-font-clicked)
+					(inactive-highlighted . ,frame-font-highlight)
+					(inactive-clicked . ,frame-font-clicked)) t))
+	      '(title tabbar-horizontal))
+      (mapc (lambda (fc) (remove-frame-part-value fc 'font t))
+	    '(title tabbar-horizontal)))
+    (mapc rebuild-frame (managed-windows)))
+
   (define (update-border-color-width)
     (if use-custom-border
         (mapc (lambda (border)
@@ -246,16 +262,44 @@ generate.")
     :type font
     :after-set (lambda () (after-setting-frame-option)))
 
-  (defcustom frame-font default-font
-    "Titlebar font: \\w"
-    :group appearance
-    :type font
-    :after-set (lambda () (after-setting-frame-option)))
-
   (defvar default-bevel-percent nil
     "Bevel intensity as a percentage.")
 
   ;; frame fonts & colors
+  (defcustom use-custom-font nil
+    "Use custom font for different states"
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-inactive default-font
+    "Font for inactive titlebars: \\w"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-active default-font
+    "Font for focused titlebars: \\w"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-highlight default-font
+    "Font for highlighted titlebars: \\w"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-clicked default-font
+    "Font for clicked titlebars: \\w"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
   (defcustom use-custom-font-color '()
     "Use custom font colors for frames"
     :type boolean

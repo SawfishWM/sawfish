@@ -127,7 +127,6 @@ extern void flippers_init(void);
 extern void flippers_kill(void);
 
 /* from frames.c */
-extern repv Qframe_font;
 extern int frame_part_type;
 extern repv Qdefault_frame, Qnil_frame;
 extern repv Qfocused, Qhighlighted, Qclicked;
