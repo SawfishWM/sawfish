@@ -183,6 +183,18 @@ by the current theme, then FALLBACK-TYPE is used instead.")
             '(title tabbar-horizontal)))
     (mapc rebuild-frame (managed-windows)))
 
+  (define (update-border-color-width)
+    (if use-custom-border
+        (mapc (lambda (border)
+		(set-frame-part-value border 'border-width custom-border-width t)
+		(set-frame-part-value border 'border-color custom-border-color t))
+	      '(title tabbar-horizontal tabbar-vertical))
+      (mapc (lambda (border)
+	      (remove-frame-part-value border 'border-width t)
+	      (remove-frame-part-value border 'border-color t))
+	    '(title tabbar-horizontal tabbar-vertical)))
+    (mapc rebuild-frame (managed-windows)))
+
   (defvar theme-update-interval 60
     "Number of seconds between checking if theme files have been modified.")
 
@@ -290,6 +302,26 @@ generate.")
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom use-custom-border '()
+    "Draw an extra window border"
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-border-color-width)))
+
+  (defcustom custom-border-color "black"
+    "Color for the window border"
+    :type color
+    :group appearance
+    :depends use-custom-border
+    :after-set (lambda () (update-border-color-width)))
+
+  (defcustom custom-border-width 0
+    "Width for the window border"
+    :type number
+    :group appearance
+    :depends use-custom-border
+    :after-set (lambda () (update-border-color-width)))
 
 ;;; managing frame types
 
