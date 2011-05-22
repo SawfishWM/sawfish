@@ -161,6 +161,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
 	   edge-actions-enabled)
       (activate-edges t))
 
+  ;; apply customized frame-fonts
+  (if use-custom-font
+      (update-frame-font))
+
   ;; apply customized font-colors
   (if use-custom-font-color
       (update-frame-font-color))
