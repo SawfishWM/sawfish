@@ -66,6 +66,7 @@
       (gtk-text-view-set-editable readme-text-view nil)
       (gtk-editable-set-editable (gtk-combo-entry combo) nil)
       (gtk-scrolled-window-set-policy readme-scroller 'automatic 'automatic)
+      (gtk-widget-set-size-request readme-text-view -1 250)
 
       (gtk-combo-set-popdown-strings combo (mapcar symbol-name options))
       (when value
