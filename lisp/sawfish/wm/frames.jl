@@ -171,12 +171,12 @@ by the current theme, then FALLBACK-TYPE is used instead.")
     (if use-custom-font-color
 	(mapc (lambda (fc)
 		(set-frame-part-value fc 'foreground
-                                      (list frame-font-inactive-color
-                                            frame-font-active-color
-					    frame-font-highlight-color
-					    frame-font-clicked-color
-					    frame-font-inactive-highlight-color
-					    frame-font-inactive-clicked-color)
+                                      `((inactive . ,frame-font-inactive-color)
+                                        (focused . ,frame-font-active-color)
+					(highlighted . ,frame-font-highlight-color)
+					(clicked . ,frame-font-clicked-color)
+					(inactive-highlighted . ,frame-font-inactive-highlight-color)
+					(inactive-clicked . ,frame-font-inactive-clicked-color))
                                       t))
               '(title tabbar-horizontal))
       (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
