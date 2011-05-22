@@ -165,6 +165,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
   (if use-custom-font-color
       (update-frame-font-color))
 
+  ;; apply customized border-width/color
+  (if use-custom-border
+      (update-border-color-width))
+
   (if want-poweroff-menu
       (add-poweroff-menu))
 

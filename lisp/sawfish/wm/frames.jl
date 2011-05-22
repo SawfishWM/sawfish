@@ -53,7 +53,8 @@
 	     remove-frame-part-value
 	     def-frame-class
 	     define-frame-class
-	     update-frame-font-color))
+	     update-frame-font-color
+	     update-border-color-width))
 
     (open rep
 	  rep.system
