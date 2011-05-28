@@ -14,18 +14,25 @@
           sawfish.gtk.widget)
 
   (define (make-image-item changed-callback)
-    (let* ((box (gtk-table-new 1 3 nil))
+    (let* ((box (gtk-table-new 2 3 nil))
+	   (vbox (gtk-vbox-new nil box-spacing))
 	   (entry (gtk-entry-new))
 	   (selector (gtk-file-chooser-button-new '() 'open))
 	   (selector-preview (gtk-image-new))
 	   (image-preview (gtk-image-new)))
+
       (gtk-container-set-border-width box box-border)
+
       (gtk-table-attach box image-preview 0 1 0 1 'shrink 'shrink 3 0)
-      (gtk-table-attach box selector 1 2 0 1 'shrink 'shrink 0 0)
-      (gtk-table-attach box entry  1 3 0 1 'shrink 'shrink 0 0)
+      (gtk-table-attach box vbox 1 2 0 1 'shrink 'shrink 0 0)
+
+      (gtk-box-pack-start vbox selector)
+      (gtk-box-pack-start vbox entry)
+
       (gtk-widget-set-size-request image-preview 150 150)
-      (gtk-widget-set-size-request entry 0 0)
-      (gtk-widget-set-size-request selector 150 26)
+      (gtk-widget-set-size-request entry 150 -1)
+      (gtk-widget-set-size-request selector 150 -1)
+
       (when changed-callback
   	(g-signal-connect
 	entry "changed" (make-signal-callback changed-callback)))
@@ -51,7 +58,7 @@
 	(case op
 	  ((set) (lambda (x)
 		   (gtk-entry-set-text entry (or (and (stringp x) x) ""))
-		   (when (stringp x)
+		   (when (and (stringp x) x)
 		     (gtk-image-set-from-pixbuf image-preview
 		       (gdk-pixbuf-new-from-file-at-scale x 150 -1 t)))))
 	  ((clear) (lambda ()
