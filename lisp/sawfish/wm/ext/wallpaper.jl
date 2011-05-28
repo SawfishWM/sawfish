@@ -46,8 +46,7 @@
     :after-set (lambda () (set-wallpaper)))
 
   (defcustom wallpaper-setter ""
-    "Application to set desktop wallpaper. If you use a desktop,
-set this to either `gnome2' or `xfce4' accordingly."
+    "Application to set desktop wallpaper (if not GNOME2/XFCE4)."
     :type file-name
     :group (appearance wallpaper)
     :after-set (lambda () (set-wallpaper)))
@@ -65,7 +64,7 @@ set this to either `gnome2' or `xfce4' accordingly."
     :after-set (lambda () (set-wallpaper-xfce)))
 
   (defcustom wallpaper-display-type 'centered
-    "How to display the image (currently only for `gnome2' and `xfce4')."
+    "How to display the image (only for GNOME2 and XFCE4)."
     :type (choice auto/none centered tiled scaled streched zoom spanned)
     :group (appearance wallpaper)
     :after-set (lambda () (set-wallpaper)))
