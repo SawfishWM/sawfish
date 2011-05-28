@@ -89,8 +89,6 @@ DEFSYM(hidden, "hidden");
 DEFSYM(border_width, "border-width");
 DEFSYM(border_color, "border-color");
 
-DEFSYM(frame_font, "frame-font");
-
 static repv state_syms[fps_MAX];
 
 static bool frame_draw_mutex;
@@ -693,7 +691,7 @@ set_frame_part_fg (struct frame_part *fp)
 	    fg = global_symbol_value (Qdefault_foreground);
 	if (!FONTP(font))
 	{
-	    font = global_symbol_value (Qframe_font);
+	    font = global_symbol_value (Qdefault_font);
 	    if (!FONTP(font))
 		goto out;
 	}
@@ -2006,7 +2004,6 @@ frames_init (void)
 
     rep_INTERN_SPECIAL(frame_part_classes);
     rep_INTERN_SPECIAL(override_frame_part_classes);
-    rep_INTERN_SPECIAL(frame_font);
 
     state_syms[fps_inactive] = Qnil;
     state_syms[fps_focused] = Qfocused;

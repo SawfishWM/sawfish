@@ -2,7 +2,7 @@
 
 ;; Based off of my arctic Enlightenment theme....
 
-(define font frame-font)
+(define font default-font)
 (define font-colors (list "grey50" "white"))
 
 (define title-images
