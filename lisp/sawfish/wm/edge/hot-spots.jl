@@ -57,30 +57,35 @@
   (defvar bottom-left-corner-function nil
     "The function launched when hitting the bottom-left-corner.")
 
+  (define hot-spot-timer nil)
+
   (define (hot-spot-invoke spot)
-    (let ((func (case spot
-		  ((top-left)
-		   top-left-corner-function)
-		  ((top-right)
-		   top-right-corner-function)
-		  ((bottom-right)
-		   bottom-right-corner-function)
-		  ((bottom-left)
-		   bottom-left-corner-function)
-		  ((left)
-		   left-edge-function)
-		  ((top)
-		   top-edge-function)
-		  ((right)
-		   right-edge-function)
-		  ((bottom)
-		   bottom-edge-function))))
-      (if (functionp func)
-	  (make-timer (lambda ()
-			(funcall func))
-		      (quotient hot-spot-delay 1000)
-		      (mod hot-spot-delay 1000))
-	(when func
-	  ;; non-nil, but not a function?
-	  (error "In hot-spot, you configuration of `%s' is wrong; it should be a function." spot))
-	))))
+    (unless hot-spot-timer
+      (let ((func (case spot
+                    ((top-left)
+                     top-left-corner-function)
+                    ((top-right)
+                     top-right-corner-function)
+                    ((bottom-right)
+                     bottom-right-corner-function)
+                    ((bottom-left)
+                     bottom-left-corner-function)
+                    ((left)
+                     left-edge-function)
+                    ((top)
+                     top-edge-function)
+                    ((right)
+                     right-edge-function)
+                    ((bottom)
+                     bottom-edge-function))))
+        (if (functionp func)
+            (setq hot-spot-timer
+                  (make-timer (lambda ()
+                                (setq hot-spot-timer nil)
+                                (funcall func))
+                              (quotient hot-spot-delay 1000)
+                              (mod hot-spot-delay 1000)))
+          (when func
+            ;; non-nil, but not a function?
+            (error "In hot-spot, your configuration of spot `%s' is wrong; it should be a function." spot))
+	)))))
