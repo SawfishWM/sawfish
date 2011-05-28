@@ -29,36 +29,24 @@
   (define (make-file-item changed-callback)
     (let* ((box (gtk-hbox-new nil box-spacing))
 	   (entry (gtk-entry-new))
-	   (button (gtk-button-new-with-label (_ "Browse..."))))
+	   (button (gtk-file-chooser-button-new '() 'open)))
       (gtk-container-set-border-width box box-border)
       (gtk-box-pack-start box entry)
       (gtk-box-pack-start box button)
+
       (when changed-callback
 	(g-signal-connect
 	 entry "changed" (make-signal-callback changed-callback)))
-      (g-signal-connect
-       button "clicked"
-       (lambda ()
-	 (let ((filesel (gtk-file-selection-new (_ "Select file"))))
-	   (gtk-file-selection-set-filename filesel (gtk-entry-get-text entry))
-	   (g-signal-connect
-	    (gtk-file-selection-ok-button filesel) "clicked"
-	    (lambda ()
-	      (gtk-entry-set-text
-	       entry (gtk-file-selection-get-filename filesel))
-	      (gtk-widget-destroy filesel)))
-	   (g-signal-connect
-	    (gtk-file-selection-cancel-button filesel) "clicked"
-	    (lambda () (gtk-widget-destroy filesel)))
-	   (g-signal-connect filesel "delete_event"
-                             (lambda () (gtk-widget-destroy filesel)))
-	   (gtk-widget-show filesel)
-	   (gtk-grab-add filesel))))
+
       (gtk-widget-show box)
+
+      (g-signal-connect button "file-set" (lambda ()
+					    (gtk-entry-set-text entry (gtk-file-chooser-get-filename button))))
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text entry (and (stringp x) x))))
+		   (gtk-entry-set-text entry (or (and (stringp x) x) ""))))
 	  ((clear) (lambda ()
 		     (gtk-entry-set-text entry "")))
 	  ((ref) (lambda () (gtk-entry-get-text entry)))
