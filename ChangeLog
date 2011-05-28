@@ -1,3 +1,20 @@
+2011-05-25  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets/image.jl: added image-widget for
+	sawfish-config (contains preview and selector), original widget by
+	Lucas Pandolfo and heavily modified by me
+
+	* lisp/sawfish/gtk/Makefile.in: updated
+
+	* configure.in: bump minimum rep-gtk to 0.90.7 (new funcs required by
+	image widget)
+
+2011-05-21  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* debian/changelog
+	* debian/rules
+	* debian/postinst
+	* debian/sawfish-data.postinst
+	* Makefile.in: make packaging scripts work
+
 2011-05-22  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/frames.jl: fixed setting frame-font colors for
 	states inactive-highlighted and inactive-clicked
@@ -41,13 +58,6 @@
 
 	* lisp/sawfish/wm/edge/tile.jl: one-shot-try to make tile
 	xinerama-aware
-
-2011-05-21  Christopher Roy Bratusek <nano@tuxfamily.org>
-	* debian/changelog
-	* debian/rules
-	* debian/postinst
-	* debian/sawfish-data.postinst
-	* Makefile.in: make packaging scripts work
 
 2011-05-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/commands/jump-or-exec.jl: reverted 2 commits
