@@ -4,6 +4,13 @@
 
 	* lisp/sawfish/gtk/widgets/image.jl: improved 'image widget
 
+	* lisp/Makefile.in: don't install wallpaper.jlc (breaks 'image and
+	'file widgets (...))
+
+	* lisp/sawfish/wm/ext/wallpaper.jl: added integration of wallpaper
+	settings (also gnome2 and xfce4 if desired), original module by Lucas
+	Pandolfo and heavily modified by me
+
 2011-05-25  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/gtk/widgets/image.jl: added image-widget for
 	sawfish-config (contains preview and selector), original widget by
