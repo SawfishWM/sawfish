@@ -14,22 +14,19 @@
           sawfish.gtk.widget)
 
   (define (make-image-item changed-callback)
-    (let* ((box (gtk-table-new 2 2 nil))
-	   (vbox (gtk-vbox-new nil box-spacing))
+    (let* ((box (gtk-table-new 1 2 nil))
 	   (entry (gtk-entry-new))
 	   (selector (gtk-file-chooser-button-new '() 'open))
 	   (selector-preview (gtk-image-new))
 	   (image-preview (gtk-image-new)))
 
-      (gtk-container-set-border-width box box-border)
+      (gtk-container-set-border-width box 0)
 
-      (gtk-table-attach box image-preview 0 1 0 1 'shrink 'shrink 2 0)
-      (gtk-table-attach box vbox 1 2 0 1 'shrink 'shrink 0 0)
-
-      (gtk-box-pack-start vbox selector)
-      (gtk-box-pack-start vbox entry)
+      (gtk-table-attach box selector 0 1 0 1 'shrink 'shrink 0 0)
+      (gtk-table-attach box image-preview 0 1 1 2  'shrink 'shrink 0 -12)
 
       (gtk-widget-set-size-request image-preview 150 150)
+      (gtk-widget-set-size-request selector 150 -1)
 
       (when changed-callback
   	(g-signal-connect
