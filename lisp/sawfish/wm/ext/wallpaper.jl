@@ -53,6 +53,9 @@
 
   (defcustom wallpaper-setter-args ""
     "Additional arguements to pass to the application."
+    :type string
+    :group (appearance wallpaper)
+    :after-set (lambda () (set-wallpaper)))
 
   (defcustom set-wallpaper-gnome2 nil
     "Whether to apply wallpaper to GNOME2"
