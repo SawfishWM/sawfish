@@ -46,10 +46,13 @@
     :after-set (lambda () (set-wallpaper)))
 
   (defcustom wallpaper-setter ""
-    "Application to set desktop wallpaper (if not GNOME2/XFCE4)."
+    "Application to set desktop wallpaper."
     :type file-name
     :group (appearance wallpaper)
     :after-set (lambda () (set-wallpaper)))
+
+  (defcustom wallpaper-setter-args ""
+    "Additional arguements to pass to the application."
 
   (defcustom set-wallpaper-gnome2 nil
     "Whether to apply wallpaper to GNOME2"
@@ -73,7 +76,7 @@
     (when (file-exists-p root-wallpaper)
       (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
       (when wallpaper-setter
-	(system (concat wallpaper-setter wallpaper-filename " &")))))
+	(system (concat wallpaper-setter wallpaper-filename " " wallpaper-setter-args " &")))))
 
   (defvar gnome-type nil)
   (defvar xfce-type nil)
