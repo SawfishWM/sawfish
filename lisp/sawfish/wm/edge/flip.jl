@@ -36,11 +36,16 @@
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
+  (define edge-flip-timer nil)
+
   (define (edge-flip-invoke edge type #!key while-moving)
-    (make-timer (lambda ()
-		  (flip-core edge type #:while-moving while-moving))
-		(quotient edge-flip-delay 1000)
-		(mod edge-flip-delay 1000)))
+    (unless edge-flip-timer
+      (setq edge-flip-timer
+            (make-timer (lambda ()
+                          (setq edge-flip-timer nil)
+                          (flip-core edge type #:while-moving while-moving))
+                        (quotient edge-flip-delay 1000)
+                        (mod edge-flip-delay 1000)))))
 
   (define steps nil)
 
