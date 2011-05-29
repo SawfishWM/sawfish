@@ -18,11 +18,13 @@ export LC_ALL LINGUAS LANG
 DEB_CONFIGURE_USER_FLAGS = --with-readline
 
 lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
-	\! -name "*autoload*" \! -name "*custom-defaults*"
+	\! -name "*autoload*" \! -name "*custom-defaults*" \
+	\! -name "*wallpaper.jl"
 
 data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload.jl" \
 	      -o -name "*custom-defaults.jl" \
-	      -o -name "*.jlc"
+	      -o -name "*.jlc" \
+	      -o -name "*wallpaper.jl"
 
 data_extradirs = debian/tmp/usr/share/sawfish/sounds \
 	debian/tmp/usr/share/sawfish/themes \
