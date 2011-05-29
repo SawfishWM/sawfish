@@ -27,12 +27,13 @@
           sawfish.gtk.widget)
 
   (define (make-file-item changed-callback)
-    (let* ((box (gtk-hbox-new nil box-spacing))
+    (let* ((box (gtk-vbox-new nil box-spacing))
 	   (entry (gtk-entry-new))
 	   (button (gtk-file-chooser-button-new '() 'open)))
       (gtk-container-set-border-width box box-border)
-      (gtk-box-pack-start box entry)
+
       (gtk-box-pack-start box button)
+      (gtk-box-pack-start box entry)
 
       (when changed-callback
 	(g-signal-connect
