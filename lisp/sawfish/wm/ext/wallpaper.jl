@@ -79,7 +79,7 @@
     (when (file-exists-p root-wallpaper)
       (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
       (when wallpaper-setter
-	(system (concat wallpaper-setter wallpaper-filename " " wallpaper-setter-args " &")))))
+	(system (concat wallpaper-setter " " wallpaper-setter-args wallpaper-filename " &")))))
 
   (defvar gnome-type nil)
   (defvar xfce-type nil)
