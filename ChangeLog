@@ -1,8 +1,28 @@
+2011-05-29  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/wallpaper.jl: added option to pass extra
+	arguements to wallpaper-setter
+
+	* lisp/sawfish/wm/widgets/image.jl
+	* lisp/sawfish/wm/widgets/file.jl: better widget-layouts
+
 2011-05-28  Jeremy Hankins <nowan@nowan.org>
 	* lisp/sawfish/wm/edge/flip.jl
 	* lisp/sawfish/wm/edge/hot-spots.jl: EF/HS/HM timers are no
 	longer started if a timer is already running; fixes bug where
 	flip-viewport would jump multiple viewports.
+
+2011-05-28  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets/file.jl: ported 'file widget to
+	gtk-file-chooser-button
+
+	* lisp/sawfish/gtk/widgets/image.jl: improved 'image widget
+
+	* lisp/Makefile.in: don't install wallpaper.jlc (breaks 'image and
+	'file widgets (...))
+
+	* lisp/sawfish/wm/ext/wallpaper.jl: added integration of wallpaper
+	settings (also gnome2 and xfce4 if desired), original module by Lucas
+	Pandolfo and heavily modified by me
 
 2011-05-25  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/gtk/widgets/image.jl: added image-widget for
@@ -13,13 +33,6 @@
 
 	* configure.in: bump minimum rep-gtk to 0.90.7 (new funcs required by
 	image widget)
-
-2011-05-21  Christopher Roy Bratusek <nano@tuxfamily.org>
-	* debian/changelog
-	* debian/rules
-	* debian/postinst
-	* debian/sawfish-data.postinst
-	* Makefile.in: make packaging scripts work
 
 2011-05-22  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/frames.jl: fixed setting frame-font colors for
@@ -39,6 +52,13 @@
 
 	* lisp/sawfish/wm/user.jl: load frame-font and border-width/color
 	options on startup
+
+2011-05-21  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* debian/changelog
+	* debian/rules
+	* debian/postinst
+	* debian/sawfish-data.postinst
+	* Makefile.in: make packaging scripts work
 
 2011-05-14  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/frames.c

@@ -61,7 +61,10 @@ lisp : $(SAWFISH_LISP_FILES)
 sawfish/wm.jlc : sawfish/wm.jl
 	$(COMPILE_ENV) $(sawfish_prog) compiler -f compile-batch $^
 
-install : all installdirs
+non-jlc: all
+	rm sawfish/wm/ext/wallpaper.jlc
+
+install : all non-jlc installdirs
 	set -e; for d in $(SUBDIRS); do \
 	  ( cd $$d && $(MAKE) $@ ); \
 	done
