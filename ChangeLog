@@ -1,9 +1,13 @@
 2011-05-29  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/ext/wallpaper.jl: added option to pass extra
-	arguements to wallpaper-setter
+	arguements to wallpaper-setter. Place widget-text to the left
 
-	* lisp/sawfish/wm/widgets/image.jl
-	* lisp/sawfish/wm/widgets/file.jl: better widget-layouts
+	* lisp/sawfish/gtk/widgets/image.jl
+	* lisp/sawfish/gtk/widgets/file.jl: better widget-layout
+
+	* lisp/sawfish/gtk/widgets/font.jl.in: ported 'font widget to
+	gtk-font-button (rather than ancient gtk-font-selection-dialog) and
+	removed the entry and hbox widgets.
 
 	* debian/rules: updated
 

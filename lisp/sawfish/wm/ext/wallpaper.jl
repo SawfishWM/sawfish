@@ -40,7 +40,7 @@
   (defgroup wallpaper "Wallpaper" :group appearance)
 
   (defcustom root-wallpaper nil
-    "Root wallpaper to use."
+    "Wallpaper to use: \\w"
     :type image
     :group (appearance wallpaper)
     :after-set (lambda () (set-wallpaper)))
