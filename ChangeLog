@@ -2,8 +2,12 @@
 	* lisp/sawfish/wm/ext/wallpaper.jl: added option to pass extra
 	arguements to wallpaper-setter
 
-	* lisp/sawfish/wm/widgets/image.jl
-	* lisp/sawfish/wm/widgets/file.jl: better widget-layout
+	* lisp/sawfish/gtk/widgets/image.jl
+	* lisp/sawfish/gtk/widgets/file.jl: better widget-layout
+
+	* lisp/sawfish/gtk/widgets/font.jl.in: ported 'font widget to
+	gtk-font-button (rather than ancient gtk-font-selection-dialog) and
+	improve the widget layout
 
 2011-05-28  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/gtk/widgets/file.jl: ported 'file widget to
