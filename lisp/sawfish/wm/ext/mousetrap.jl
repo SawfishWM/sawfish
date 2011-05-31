@@ -65,8 +65,10 @@
     :type (choice crosshair none)
     :group misc)
 
-  (defvar mousetrap-cursor-shape 'dotbox
-    "Mouse cursor shape to use for mousetrap.")
+  (defcustom mousetrap-cursor-shape 'fleur
+    "Mouse cursor shape to use for mousetrap."
+    :type (choice fleur cross crosshair iron_cross target)
+    :group misc)
 
   (define (draw-crosshair-outline x y width height)
     "Crosshair outline drawing."
