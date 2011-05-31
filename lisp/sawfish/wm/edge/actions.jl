@@ -39,6 +39,7 @@
   (define-structure-alias edge-actions sawfish.wm.edge.actions)
 
   (defvar while-hot-move nil)
+  (defvar while-mousetrap nil)
 
   (define (edge-action-call func edge #!key while-moving)
     (case func
@@ -58,7 +59,8 @@
 
   ;; Entry point without dragging 
   (define (edge-action-hook-func)
-    (unless while-hot-move
+    (unless (and while-hot-move
+		 while-mousetrap)
       (let ((corner (get-active-corner))
    	    (edge (get-active-edge)))
         (if corner
@@ -72,16 +74,18 @@
 
   ;; Entry point for window dragging
   (define (edge-action-move-hook-func)
-    (setq while-hot-move t)
-    (let ((edge (get-active-edge)))
-      (cond ((or (eq edge 'left)
-		 (eq edge 'right))
-	     (edge-action-call left-right-edge-move-action edge #:while-moving t))
-	    ((or (eq edge 'top)
-		 (eq edge 'bottom))
-	     (edge-action-call top-bottom-edge-move-action edge #:while-moving t))))
-    ;; for one second after HotMove prevent HotSpot
-    (make-timer (lambda () (setq while-hot-move nil)) 1))
+    (unless (and while-hot-move
+		 while-mousetrap)
+      (setq while-hot-move t)
+      (let ((edge (get-active-edge)))
+        (cond ((or (eq edge 'left)
+		   (eq edge 'right))
+	       (edge-action-call left-right-edge-move-action edge #:while-moving t))
+	     ((or (eq edge 'top)
+		   (eq edge 'bottom))
+	       (edge-action-call top-bottom-edge-move-action edge #:while-moving t))))
+      ;; for one second after HotMove prevent HotSpot
+      (make-timer (lambda () (setq while-hot-move nil)) 1)))
 
   (define (activate-edges init)
     (if init
