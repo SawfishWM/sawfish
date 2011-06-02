@@ -245,7 +245,7 @@ AC_ARG_WITH(gdk-pixbuf,
   --without-gdk-pixbuf	  Use Imlib1 instead], [], [with_gdk_pixbuf=yes])
 
 if test "$with_gdk_pixbuf" != "no"; then
-	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}
+	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GDK_MIN_VER}
 			  ,IMAGE_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
 			  IMAGE_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
 			  IMAGE_PC="gdk-pixbuf-xlib-2.0 >= ${GDK_MIN_VER}"
