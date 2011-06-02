@@ -15,7 +15,6 @@
 
   (define (make-image-item changed-callback)
     (let* ((box (gtk-table-new 1 2 nil))
-	   (entry (gtk-entry-new))
 	   (selector (gtk-file-chooser-button-new '() 'open))
 	   (selector-preview (gtk-image-new))
 	   (image-preview (gtk-image-new)))
@@ -30,7 +29,7 @@
 
       (when changed-callback
   	(g-signal-connect
-	entry "changed" (make-signal-callback changed-callback)))
+	  selector "file-set" (make-signal-callback changed-callback)))
 
       (g-signal-connect selector "update-preview" 
 			(lambda (w) 
@@ -44,7 +43,6 @@
       (gtk-file-chooser-set-preview-widget selector selector-preview)
 
       (g-signal-connect selector "file-set" (lambda () 
-					    (gtk-entry-set-text entry (gtk-file-chooser-get-filename selector))
 					    (gtk-image-set-from-pixbuf image-preview (gdk-pixbuf-new-from-file-at-scale
 										       (gtk-file-chooser-get-filename selector) 150 -1 t))))
       (gtk-widget-show box)
@@ -52,15 +50,15 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text entry (or (and (stringp x) x) ""))
+		   (gtk-file-chooser-select-filename selector (or (and (file-exists-p x) x) ""))
 		   (when (and (stringp x) x)
 		     (gtk-image-set-from-pixbuf image-preview
 		       (gdk-pixbuf-new-from-file-at-scale x 150 -1 t)))))
 	  ((clear) (lambda ()
 		     (gtk-image-clear image-preview)
-		     (gtk-entry-set-text entry "")))
+		     (gtk-file-chooser-select-filename selector "")))
 	  ((ref) (lambda ()
-		   (gtk-entry-get-text entry)))
+		   (gtk-file-chooser-get-filename selector)))
 	  ((gtk-widget) box)
 	  ((validp) (lambda (x) (stringp x)))))))
 

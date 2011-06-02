@@ -12,6 +12,14 @@
 
 	* lisp/sawfish/wm/edge/tile.jl: added command definition
 
+	* lisp/sawfish/gtk/widgets/image.jl: due two fixes in rep-gtk it's possible
+	now to set the filename in GtkFileChooserButton, so the GtkEntry is
+	removed
+
+	* configure.in: bump minimum GTK+ to 2.24
+
+	* lisp/sawfish/gtk/widget.jl: port 'choice and 'symbol widgets to GtkComboBoxText
+
 2011-05-31  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/edge/actions.jl: don't exec any edge-action, while
 	mousetrapping is active (new feature in misc-1.9 branch)

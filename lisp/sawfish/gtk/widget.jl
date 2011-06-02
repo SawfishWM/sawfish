@@ -187,65 +187,56 @@
 ;;; Predefined widget constructors
 
   (define (make-choice-item changed-callback . options)
-    (let ((omenu (gtk-option-menu-new))
-	  (menu (gtk-menu-new))
-	  (value (or (caar options) (car options))))
-      (let loop ((rest options)
-		 (last nil))
-	(when rest
-	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
-			 last (_ (or (cadar rest)
-				     (symbol-name (car rest)))))))
-	    (gtk-menu-shell-append menu button)
-	    (gtk-widget-show button)
-	    (g-signal-connect button "toggled"
-			      (lambda (w)
-				(when (gtk-check-menu-item-active w)
-				  (setq value (or (caar rest) (car rest)))
-				  (call-callback changed-callback))))
-	    (loop (cdr rest) button))))
-      (gtk-option-menu-set-menu omenu menu)
-      (gtk-widget-show-all omenu)
+    (let ((combo (gtk-combo-box-text-new)))
+
+      (let loop ((rest options))
+        (when rest
+          (let ((append (gtk-combo-box-text-append-text combo
+                          (_ (or (cadar rest)
+                                 (symbol-name (car rest)))))))
+            (loop (cdr rest)))))
+
+      (when changed-callback
+	(g-signal-connect combo "changed"
+			  (make-signal-callback changed-callback)))
+
+      (gtk-widget-show combo)
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (setq value x)
-		   (let ((idx (option-index options x)))
-		     (gtk-option-menu-set-history omenu (or idx 0))
-		     (do ((i 0 (1+ i))
-			  (rest (gtk-container-get-children menu) (cdr rest)))
-			 ((null rest))
-		       (gtk-check-menu-item-set-active (car rest) (= i idx))))))
+		   (gtk-combo-box-set-active combo (position x options))))
 	  ((clear) nop)
-	  ((ref) (lambda () value))
-	  ((gtk-widget) omenu)
+	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
+	  ((gtk-widget) combo)
 	  ((validp) (lambda (x) (option-index options x)))))))
 
   (define-widget-type 'choice make-choice-item)
 
   (define (make-symbol-item changed-callback #!rest options)
-    (let ((widget (gtk-combo-new)))
-      (when options
-	(gtk-combo-set-popdown-strings
-	 widget (cons "" (mapcar symbol-name options))))
+    (let ((combo (gtk-combo-box-text-new)))
+
+      (let loop ((rest options))
+        (when rest
+          (let ((append (gtk-combo-box-text-append-text combo
+                          (_ (or (cadar rest)
+                                 (symbol-name (car rest)))))))
+            (loop (cdr rest)))))
+
       (when changed-callback
-	(g-signal-connect
-	 (gtk-combo-entry widget)
-	 "changed" (make-signal-callback changed-callback)))
-      (gtk-widget-show widget)
+	(g-signal-connect combo "changed"
+			  (make-signal-callback changed-callback)))
+
+      (gtk-widget-show combo)
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   ;; Can't i18n'ize these strings..
-		   (gtk-entry-set-text (gtk-combo-entry widget)
-				       (if x (symbol-name x) ""))))
-	  ((clear) (lambda ()
-		     (gtk-entry-set-text (gtk-combo-entry widget) "")))
-	  ((ref) (lambda ()
-		   (string->symbol
-		    (gtk-entry-get-text (gtk-combo-entry widget)))))
-	  ((gtk-widget) widget)
-	  ((validp) symbolp)))))
+		   (gtk-combo-box-set-active combo (position x options))))
+	  ((clear) nop)
+	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
+	  ((gtk-widget) combo)
+	  ((validp) (lambda (x) (symbolp x)))))))
 
   (define-widget-type 'symbol make-symbol-item)
 
@@ -520,6 +511,14 @@
 ;;; utility functions
 
   (define string->symbol intern)
+
+  (define (position item l)
+    (let loop ((rest l)
+               (i 0))
+         (if (equal item (car rest))
+             i
+           (if rest
+               (loop (cdr rest) (1+ i))))))
 
   (define (option-index lst x)
     (let loop ((i 0) (rest lst))
