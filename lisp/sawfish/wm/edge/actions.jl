@@ -40,8 +40,11 @@
 
   (defvar while-hot-move nil)
   (defvar while-mousetrap nil)
+  (defvar before-edge-action-hook nil)
+  (defvar after-edge-action-hook nil)
 
   (define (edge-action-call func edge #!key while-moving)
+    (call-hook 'before-edge-action-hook)
     (case func
       ((viewport-drag)
        (viewport-drag-invoke edge))
@@ -55,7 +58,8 @@
        (hot-spot-invoke edge))
       ((none/hot-move)
        (hot-move-invoke edge))
-      (t nil)))
+      (t nil))
+    (call-hook 'after-edge-action-hook))
 
   ;; Entry point without dragging 
   (define (edge-action-hook-func)
