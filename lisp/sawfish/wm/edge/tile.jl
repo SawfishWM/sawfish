@@ -66,4 +66,6 @@ an extra column should be used.")
 		    (when (window-touching-p w)
 		      ;; oops. Roll back to the original size
 		      (resize-window-frame-to w old-width old-height))))
-		windows))))))
+		windows)))))
+
+  (define-command 'tile-windows tile-windows))
