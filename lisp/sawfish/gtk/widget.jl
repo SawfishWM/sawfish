@@ -46,6 +46,7 @@
 	   gui.gtk-2.gtk
 	   rep.system
 	   rep.util.utf8
+	   rep.util.misc
 	   rep.regexp)
      (access rep.structures))
 
@@ -509,16 +510,6 @@
   (define-widget-type 'unknown make-unknown-item)
 
 ;;; utility functions
-
-  (define string->symbol intern)
-
-  (define (position item l)
-    (let loop ((rest l)
-               (i 0))
-         (if (equal item (car rest))
-             i
-           (if rest
-               (loop (cdr rest) (1+ i))))))
 
   (define (option-index lst x)
     (let loop ((i 0) (rest lst))
