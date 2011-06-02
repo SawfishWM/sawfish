@@ -20,6 +20,7 @@
 
     (open rep
           rep.system
+	  sawfish.wm.commands
           sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.commands.move-cursor
@@ -80,4 +81,8 @@
       ((left) (drag-left))
       ((top) (drag-up))
       ((right) (drag-right))
-      ((bottom) (drag-down)))))
+      ((bottom) (drag-down))))
+
+  (define-command 'viewport-drag-invoke viewport-drag-invoke
+    #:spec "ViewportDrag:"
+    #:type `(and (labelled ,(_ "Edge:" ) (choice left top right bottom)))))
