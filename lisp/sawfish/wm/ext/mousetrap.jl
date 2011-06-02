@@ -70,6 +70,18 @@
     :type (choice fleur cross crosshair iron_cross target)
     :group misc)
 
+  (defvar mousetrap-escape-key nil)
+
+  (defvar mousetrap-move-right-key nil)
+  (defvar mousetrap-move-left-key nil)
+  (defvar mousetrap-move-up-key nil)
+  (defvar mousetrap-move-down-key nil)
+
+  (defvar mousetrap-move-quarter-top-right-key nil)
+  (defvar mousetrap-move-quarter-top-left-key nil)
+  (defvar mousetrap-move-quarter-bottom-right-key nil)
+  (defvar mousetrap-move-quarter-bottom-left-key nil)
+
   (define (draw-crosshair-outline x y width height)
     "Crosshair outline drawing."
     (let ((gc (x-create-root-xor-gc))
@@ -156,52 +168,50 @@ Returns the event-name of the key pressed to finish, nil if cancelled."
 		      (unless (eq mousetrap-outline 'none)
 			(erase-window-outline mousetrap-outline pos-x pos-y dim-x dim-y))
 		      ;; Act according to the key read
-		      (cond ((or (equal key "C-g") ; exit
-				(equal key "M-g")
-				(equal key "ESC"))
+		      (cond ((or (equal key mousetrap-escape-key)
+				 (equal key "ESC"))
 			    (throw 'exit-mousetrap nil))
 			    ((or (equal key "RET")
-				(equal key "Menu")
-				(equal key "SPC"))
+				 (equal key "SPC"))
 			    (throw 'exit-mousetrap key))
-			    ((or ; Left half
-			      (equal key "Left")
-			      (equal key "h"))
+			    ((or (equal key mousetrap-move-left-key); Left half
+			         (equal key "Left")
+			         (equal key "h"))
 			    (setq dim-x (floor (/ dim-x 2))))
-			    ((or ; Upper half
-			      (equal key "Up") 
-			      (equal key "u"))
+			    ((or (equal key mousetrap-move-up-key); Upper half
+			         (equal key "Up")
+			         (equal key "u"))
 			    (setq dim-y (floor (/ dim-y 2))))
-			    ((or ; Lower half
-			      (equal key "Down") 
-			      (equal key "n"))
+			    ((or (equal key mousetrap-move-down-key); Lower half
+			         (equal key "Down")
+			         (equal key "n"))
 			    (setq pos-y (floor (+ pos-y (/ dim-y 2))))
 			    (setq dim-y (floor (/ dim-y 2))))
-			    ((or ; Right half
-			      (equal key "Right")
-			      (equal key "j"))
+			    ((or (equal key mousetrap-move-right-key); Right half
+			         (equal key "Right")
+			         (equal key "j"))
 			    (setq pos-x (floor (+ pos-x (/ dim-x 2))))
 			    (setq dim-x (floor (/ dim-x 2))))
-			    ((or ; top-left quarter
-			      (equal key "M-Left")
-			      (equal key "r"))
+			    ((or (equal key mousetrap-move-quarter-top-left-key) ; top-left quarter
+			         (equal key "M-Left")
+			         (equal key "r"))
 			    (setq dim-y (floor (/ dim-y 2)))
 			    (setq dim-x (floor (/ dim-x 2))))
-			    ((or ; top-right quarter
-			      (equal key "M-Right")
-			      (equal key "t"))
+			    ((or (equal key mousetrap-move-quarter-top-right-key) ; top-right quarter
+			         (equal key "M-Right")
+			         (equal key "t"))
 			    (setq dim-y (floor (/ dim-y 2)))
 			    (setq pos-x (floor (+ pos-x (/ dim-x 2))))
 			    (setq dim-x (floor (/ dim-x 2))))
-			    ((or ; bottom-left quarter
-			      (equal key "C-Left")
-			      (equal key "v"))
+			    ((or (equal key mousetrap-move-quarter-bottom-left-key) ; bottom-left quarter
+			         (equal key "C-Left")
+			         (equal key "v"))
 			    (setq pos-y (floor (+ pos-y (/ dim-y 2))))
 			    (setq dim-y (floor (/ dim-y 2)))
 			    (setq dim-x (floor (/ dim-x 2))))
-			    ((or ; bottom-right quarter
-			      (equal key "C-Right")
-			      (equal key "b"))
+			    ((or (equal key mousetrap-move-quarter-bottom-right-key) ; bottom-right quarter
+			         (equal key "C-Right")
+			         (equal key "b"))
 			    (setq pos-y (floor (+ pos-y (/ dim-y 2))))
 			    (setq dim-y (floor (/ dim-y 2)))
 			    (setq pos-x (floor (+ pos-x (/ dim-x 2))))
