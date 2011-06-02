@@ -52,6 +52,7 @@
 
     (open rep
 	  rep.system
+	  rep.io.timers
           sawfish.wm
 	  sawfish.wm.misc
 	  sawfish.wm.custom
@@ -221,7 +222,7 @@ Returns the event-name of the key pressed to finish, nil if cancelled."
 	    (ungrab-pointer)
 	    (remove-hook 'unbound-key-hook mousetrap-read-event)
 	    (ungrab-keyboard)))
-            (setq while-mousetrap nil))
+            (make-timer (lambda () (setq while-mousetrap nil)) 1))
 
   (define (synthetic-click event-name)
     (let* ((w (query-pointer-window))
