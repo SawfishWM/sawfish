@@ -63,8 +63,8 @@
 
   ;; Entry point without dragging 
   (define (edge-action-hook-func)
-    (unless (and while-hot-move
-		 while-mousetrap)
+    (unless (or while-hot-move
+	        while-mousetrap)
       (let ((corner (get-active-corner))
    	    (edge (get-active-edge)))
         (if corner
@@ -78,8 +78,7 @@
 
   ;; Entry point for window dragging
   (define (edge-action-move-hook-func)
-    (unless (and while-hot-move
-		 while-mousetrap)
+    (unless while-mousetrap
       (setq while-hot-move t)
       (let ((edge (get-active-edge)))
         (cond ((or (eq edge 'left)
