@@ -14,6 +14,7 @@
     (open rep
 	  rep.data
 	  rep.system
+	  sawfish.wm.commands
 	  sawfish.wm.misc
 	  sawfish.wm.windows
 	  sawfish.wm.workspace
