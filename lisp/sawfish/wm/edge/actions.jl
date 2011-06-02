@@ -40,8 +40,11 @@
 
   (defvar while-hot-move nil)
   (defvar while-mousetrap nil)
+  (defvar before-edge-action-hook nil)
+  (defvar after-edge-action-hook nil)
 
   (define (edge-action-call func edge #!key while-moving)
+    (call-hook 'before-edge-action-hook (list func edge while-moving))
     (case func
       ((viewport-drag)
        (viewport-drag-invoke edge))
@@ -55,12 +58,13 @@
        (hot-spot-invoke edge))
       ((none/hot-move)
        (hot-move-invoke edge))
-      (t nil)))
+      (t nil))
+    (call-hook 'after-edge-action-hook (list func edge while-moving)))
 
   ;; Entry point without dragging 
   (define (edge-action-hook-func)
-    (unless (and while-hot-move
-		 while-mousetrap)
+    (unless (or while-hot-move
+	        while-mousetrap)
       (let ((corner (get-active-corner))
    	    (edge (get-active-edge)))
         (if corner
@@ -74,8 +78,7 @@
 
   ;; Entry point for window dragging
   (define (edge-action-move-hook-func)
-    (unless (and while-hot-move
-		 while-mousetrap)
+    (unless while-mousetrap
       (setq while-hot-move t)
       (let ((edge (get-active-edge)))
         (cond ((or (eq edge 'left)

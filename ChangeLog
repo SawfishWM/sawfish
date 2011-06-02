@@ -3,6 +3,10 @@
 	adjust the mousetrap keybindings. Set a timer of one second to
 	properly block edge-actions after mousetrapping
 
+	* lisp/sawfish/wm/edge/actions.jl: added before-edge-action-hook and
+	after-edge-action-hook. Fixed logic of blocking actions while
+	mousetrapping
+
 2011-05-31  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/edge/actions.jl: don't exec any edge-action, while
 	mousetrapping is active (new feature in misc-1.9 branch)
