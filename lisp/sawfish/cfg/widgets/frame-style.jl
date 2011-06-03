@@ -27,6 +27,7 @@
           rep.regexp
           rep.io.files
           rep.io.timers
+          rep.util.misc
           sawfish.gtk.widget
           sawfish.cfg.i18n)
 
@@ -34,61 +35,55 @@
 
     (let ((vbox (gtk-vbox-new nil 0))
 	  (hbox (gtk-hbox-new nil 0))
-	  (combo (gtk-combo-new))
+	  (combo (gtk-combo-box-text-new))
 	  (doc-label (gtk-label-new (_ doc)))
 	  (readme-text-view (gtk-text-view-new))
 	  (readme-scroller (gtk-scrolled-window-new))
-	  (value (car options))
-	  (last-value nil)
-	  (timer nil))
+          (timer nil)
+          (value nil))
 
       (define (timer-callback)
 	(setq timer nil)
-	(setq value (intern (gtk-entry-get-text (gtk-combo-entry combo))))
-	;; ugh. the gtk2 combo seems pretty fucked; this
-	;; didn't used to be necessary
-	(when (and (not (eq value last-value)) (memq value options))
-	  (setq last-value value)
-	  (update-readme value readme-text-view path)
-	  (call-callback changed-callback)))
+	(setq value (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options))))
+        (update-readme value readme-text-view path)
+	(call-callback changed-callback))
 
-      (gtk-widget-relate-label combo doc-label)
+      (let loop ((rest options))
+        (when rest
+          (let ((append (gtk-combo-box-text-append-text combo
+                          (_ (or (cadar rest)
+                                 (symbol-name (car rest)))))))
+            (loop (cdr rest)))))
+
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
       (gtk-container-add readme-scroller readme-text-view)
       (gtk-box-pack-start hbox doc-label)
-      (gtk-box-pack-start hbox combo t t)
+      (gtk-box-pack-start hbox combo nil nil)
       (gtk-box-pack-start vbox readme-scroller t t)
       (gtk-box-pack-start vbox hbox nil nil)
       (gtk-label-set-justify doc-label 'left)
       (gtk-text-view-set-cursor-visible readme-text-view nil)
       (gtk-text-view-set-wrap-mode readme-text-view 'word-char)
       (gtk-text-view-set-editable readme-text-view nil)
-      (gtk-editable-set-editable (gtk-combo-entry combo) nil)
       (gtk-scrolled-window-set-policy readme-scroller 'automatic 'automatic)
       (gtk-widget-set-size-request readme-text-view -1 250)
 
-      (gtk-combo-set-popdown-strings combo (mapcar symbol-name options))
-      (when value
-	(gtk-entry-set-text (gtk-combo-entry combo) (symbol-name value)))
+      (g-signal-connect combo "changed"
+                      (lambda ()
+			(if timer
+			    (set-timer timer)
+			  (setq timer (make-timer timer-callback nil 200)))))
 
-      (g-signal-connect (gtk-combo-entry combo) "changed"
-			(lambda ()
-			  (if timer
-			      (set-timer timer)
-			    (setq timer (make-timer timer-callback nil 200)))))
-
-      (update-readme value readme-text-view path)
       (gtk-widget-show-all vbox)
 
       (lambda (op)
 	(case op
 	  ((gtk-widget) vbox)
-	  ((clear) (lambda ()))
+	  ((clear) nop)
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text
-		    (gtk-combo-entry combo) (symbol-name x))))
-	  ((ref) (lambda () value))
+		   (gtk-combo-box-set-active combo (position x options))))
+	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
 	  ((validp) (lambda (x) (memq x options)))))))
 
   (define-widget-type 'frame-style make-frame-style-item)
