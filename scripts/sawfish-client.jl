@@ -94,8 +94,7 @@ where OPTIONS are any of:
 	     (require 'rep.io.readline)
 	     (require 'rep.util.repl)
 	     (format standard-output "\
-sawfish %s, Copyright (C) 1999-2000 John Harper
-sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
+sawfish-client %s.\n"
 		     (sawfish-client-eval 'sawfish-version))
 	     (let ((r (sawfish-client-eval
 		       `(progn
@@ -107,7 +106,7 @@ sawfish comes with ABSOLUTELY NO WARRANTY; for details see the file COPYING\n"
 		 (write standard-output "\nEnter `,help' to list commands.\n")
 		 (let loop ()
 		   (let ((input (readline
-				 (format nil (if (repl-pending r) "" "%s> ")
+				 (format nil (if (repl-pending r) "" "client > ")
 					 (repl-struct r)))))
 		     (when input
 		       (let ((out (sawfish-client-eval
