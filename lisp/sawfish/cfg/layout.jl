@@ -28,9 +28,9 @@
     ((open rep
 	   gui.gtk-2.gtk
 	   rep.regexp
+           rep.util.misc
 	   sawfish.cfg.slot
-	   sawfish.gtk.widget
-	   sawfish.cfg.utils)
+	   sawfish.gtk.widget)
      (access rep.structures))
 
   (define widget-ptr nil)

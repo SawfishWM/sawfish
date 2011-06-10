@@ -25,9 +25,9 @@
     (open rep
           gui.gtk-2.gtk
           rep.regexp
+          rep.util.misc
           sawfish.gtk.widget
-          sawfish.cfg.wm
-	  sawfish.cfg.utils)
+          sawfish.cfg.wm)
 
   (define all-commands)
 
