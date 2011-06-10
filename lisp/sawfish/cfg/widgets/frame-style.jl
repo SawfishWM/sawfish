@@ -82,7 +82,7 @@
 	  ((gtk-widget) vbox)
 	  ((clear) nop)
 	  ((set) (lambda (x)
-		   (gtk-combo-box-set-active combo (position x options))))
+		   (gtk-combo-box-set-active combo (option-index options x))))
 	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
 	  ((validp) (lambda (x) (memq x options)))))))
 
