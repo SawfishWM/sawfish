@@ -24,6 +24,11 @@
 	* lisp/sawfish/gtk/widget.jl: removed option-index (now in
 	rep.util.misc) and command-index (exactly the same as option-index)
 
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/cfg/widgets/frame-style.jl
+	* lisp/sawfish/gtk/widget.jl: use option-index instead of position and
+	protect against wrong values
+
 2011-06-04  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* configure.in: bump minimum librep to 0.92.1, new funcs required by
 	SawfishConfig
