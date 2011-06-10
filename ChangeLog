@@ -1,3 +1,34 @@
+2011-06-10  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/utils.jl: removed (funcs now in rep.util.misc)
+
+	* lisp/sawfish/cfg/layout.jl
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/cfg/widgets/keymaps.jl
+	* lisp/sawfish/cfg/widgets/match-windows.jl: updated for above change
+
+	* lisp/sawfish/cfg/Makefile.in
+	* lisp/sawfish/cfg/widgets/icon.jl: removed unused, dummy 'icon widget
+
+	* lisp/sawfish/cfg/widgets/gtk/*: removed unused
+	sawfish.cfg.widgets.gtk*
+
+	* lisp/sawfish/gtk/widgets/program.jl: removed 'program widget (just
+	an alias to 'file)
+
+	* lisp/sawfish/gtk/Makefile.in
+	* lisp/sawfish/wm/ext/play-audio.jl: updated
+
+	* lisp/sawfish/gtk/widgets/simple-dialog.jl: better wmclass
+
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/gtk/widget.jl: removed option-index (now in
+	rep.util.misc) and command-index (exactly the same as option-index)
+
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/cfg/widgets/frame-style.jl
+	* lisp/sawfish/gtk/widget.jl: use option-index instead of position and
+	protect against wrong values
+
 2011-06-04  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* configure.in: bump minimum librep to 0.92.1, new funcs required by
 	SawfishConfig

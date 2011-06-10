@@ -25,10 +25,10 @@
     (open rep
           gui.gtk-2.gtk
           rep.regexp
+          rep.util.misc
           sawfish.gtk.widget
           sawfish.gtk.widgets.simple-dialog
-          sawfish.cfg.wm
-	  sawfish.cfg.utils)
+          sawfish.cfg.wm)
 
   (defconst matcher-count 3)
 

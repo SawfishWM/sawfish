@@ -206,7 +206,7 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-combo-box-set-active combo (position x options))))
+		   (gtk-combo-box-set-active combo (or (option-index options x) 0))))
 	  ((clear) nop)
 	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
 	  ((gtk-widget) combo)
@@ -233,7 +233,7 @@
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-combo-box-set-active combo (position x options))))
+		   (gtk-combo-box-set-active combo (or (option-index options x) 0))))
 	  ((clear) nop)
 	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
 	  ((gtk-widget) combo)
@@ -507,12 +507,4 @@
 	  ((gtk-widget) label)
 	  ((validp) (lambda (x) (declare (unused x)) t))))))
 
-  (define-widget-type 'unknown make-unknown-item)
-
-;;; utility functions
-
-  (define (option-index lst x)
-    (let loop ((i 0) (rest lst))
-      (cond ((null rest) nil)
-	    ((eq (or (caar rest) (car rest)) x) i)
-	    (t (loop (1+ i) (cdr rest)))))))
+  (define-widget-type 'unknown make-unknown-item))

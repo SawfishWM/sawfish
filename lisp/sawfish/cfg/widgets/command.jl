@@ -25,9 +25,10 @@
     (open rep
           gui.gtk-2.gtk
           rep.regexp
+          rep.util.misc
+          rep.util.misc
           sawfish.gtk.widget
-          sawfish.cfg.wm
-	  sawfish.cfg.utils)
+          sawfish.cfg.wm)
 
   (define all-commands)
 
@@ -126,10 +127,10 @@
 		     (gtk-clist-select-row 0 0)
 		     (gtk-clist-moveto clist 0 0)))
 	  ((set) (lambda (x)
-		   (let ((index (command-index commands (command-name x))))
+		   (let ((index (option-index commands (command-name x))))
 		     (unless index
 		       ;; scan in all-commands
-		       (setq index (command-index
+		       (setq index (option-index
 				    all-commands (command-name x)))
 		       (if index
 			   ;; yes, add it to the list
@@ -153,12 +154,4 @@
 		      ;; XXX check params
 		      (memq (command-name (car x)) commands)))))))
 
-  (define-widget-type 'command make-command-item)
-
-;;; utils
-
-  (define (command-index lst x)
-    (let loop ((i 0) (rest lst))
-      (cond ((null rest) nil)
-	    ((eq (or (caar rest) (car rest)) x) i)
-	    (t (loop (1+ i) (cdr rest)))))))
+  (define-widget-type 'command make-command-item))
