@@ -43,7 +43,7 @@
 playing *.wav file.
   You can't set any arguments to pass from this variable. If you want
 to give arguments or redirect output, write a wrapper program."
-    :type program
+    :type file
     :group audio)
 
   ;; currently running audio process
