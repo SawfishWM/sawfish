@@ -1,6 +1,12 @@
 2011-06-11  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/widgets/workspace-geometry.jl: removed, unused
 
+	* lisp/sawfish/wm/misc.jl: add call-with-pointer-grabbed
+
+	* lisp/sawfish/wm/keymap.jl: read-event does now grab the pointer
+	instead of keyboard, fixes setting mouse or mixed mouse-keyboard
+	bindings from SawfishConfig (keyboard-only bindings still work)
+
 2011-06-10  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/utils.jl: removed (funcs now in rep.util.misc)
 
