@@ -23,35 +23,27 @@
     (export )
 
     (open rep
+	  rep.io.files
           gui.gtk-2.gtk
           sawfish.gtk.widget)
 
   (define (make-file-item changed-callback)
-    (let* ((box (gtk-vbox-new nil box-spacing))
-	   (entry (gtk-entry-new))
-	   (button (gtk-file-chooser-button-new '() 'open)))
-      (gtk-container-set-border-width box box-border)
-
-      (gtk-box-pack-start box button)
-      (gtk-box-pack-start box entry)
+    (let* ((button (gtk-file-chooser-button-new '() 'open)))
 
       (when changed-callback
 	(g-signal-connect
-	 entry "changed" (make-signal-callback changed-callback)))
+	 button "file-set" (make-signal-callback changed-callback)))
 
-      (gtk-widget-show box)
-
-      (g-signal-connect button "file-set" (lambda ()
-					    (gtk-entry-set-text entry (gtk-file-chooser-get-filename button))))
+      (gtk-widget-show button)
 
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-entry-set-text entry (or (and (stringp x) x) ""))))
+		   (gtk-file-chooser-select-filename button (or (and (file-exists-p x) x) ""))))
 	  ((clear) (lambda ()
-		     (gtk-entry-set-text entry "")))
-	  ((ref) (lambda () (gtk-entry-get-text entry)))
-	  ((gtk-widget) box)
+		     (gtk-file-chooser-select-filename button "")))
+	  ((ref) (lambda () (gtk-file-chooser-get-filename button)))
+	  ((gtk-widget) button)
 	  ((validp) (lambda (x) (stringp x)))))))
 
   (define-widget-type 'file make-file-item))
