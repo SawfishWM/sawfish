@@ -25,6 +25,7 @@
     (open rep
           gui.gtk-2.gtk
           rep.regexp
+	  rep.util.misc
           sawfish.cfg.slot
           sawfish.cfg.wm
           sawfish.cfg.layout
@@ -61,7 +62,7 @@
 	  (when rest
 	    (let* ((slot (car rest))
 		   (button (gtk-radio-menu-item-new-with-label-from-widget
-			    last (beautify-keymap-name (slot-name slot)))))
+			    last (beautify-symbol-name (slot-name slot) #:cut "-keymap"))))
 	      (gtk-menu-shell-append menu button)
 	      (gtk-widget-show button)
 	      (g-signal-connect button "toggled"
@@ -89,20 +90,4 @@
       (gtk-widget-show-all vbox)
       vbox))
 
-  (define-layout-type 'keymaps layout-keymaps)
-
-;;; utils
-
-  ;; also in sawfish-xgettext
-  (define (beautify-keymap-name symbol)
-    (cond ((stringp symbol) symbol)
-	  ((not (symbolp symbol)) (format "%s" symbol))
-	  (t
-	   (let ((name (copy-sequence (symbol-name symbol))))
-	     (when (string-match "-keymap" name)
-	       (setq name (substring name 0 (match-start))))
-	     (while (string-match "[-:]" name)
-	       (setq name (concat (substring name 0 (match-start))
-				  ?  (substring name (match-end)))))
-	     (aset name 0 (char-upcase (aref name 0)))
-	     (_ name))))))
+  (define-layout-type 'keymaps layout-keymaps))
