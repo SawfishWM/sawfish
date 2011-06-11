@@ -71,6 +71,16 @@ to grab the keyboard then THUNK won't be called."
       (when (zerop (setq grab-counter (1- grab-counter)))
 	(ungrab-keyboard)))))
 
+(define (call-with-pointer-grabbed thunk)
+  (when (grab-pointer)
+    (unwind-protect
+        (progn
+	  (setq grab-counter (1+ grab-counter))
+	  (thunk))
+      (when (zerop (setq grab-counter (1- grab-counter)))
+	(ungrab-pointer)))))
+
+
 (define (call-with-error-handler thunk)
   (condition-case data
       (thunk)
@@ -200,7 +210,7 @@ by concatenating the sequence of strings SEQ."
 ;; exports
 
 (export-bindings
- '(with-server-grabbed call-with-server-ungrabbed
+ '(with-server-grabbed call-with-server-ungrabbed call-with-pointer-grabbed
                        call-with-keyboard-grabbed call-with-error-handler
                        make-directory-recursively locate-file
                        clamp clamp* uniquify-list screen-dimensions
