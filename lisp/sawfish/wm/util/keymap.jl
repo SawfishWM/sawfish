@@ -167,11 +167,11 @@ the command is found in the list of keymaps KEYMAPS."
     (call-with-pointer-grabbed
       (lambda ()
 	(unwind-protect
-	    (let
-		((override-keymap '(keymap))
+	    (let ((override-keymap '(keymap))
+		  (pointer-motion-threshold 20)
 		  (unbound-key-hook
-		  (list (lambda ()
-		          (throw 'read-event (current-event))))))
+		    (list (lambda ()
+		            (throw 'read-event (current-event))))))
 	      (display-message (or prompt (_ "Press key...")))
 	      (catch 'read-event
 	        (recursive-edit)))
