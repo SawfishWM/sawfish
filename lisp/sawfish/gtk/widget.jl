@@ -192,10 +192,9 @@
 
       (let loop ((rest options))
         (when rest
-          (let ((append (gtk-combo-box-text-append-text combo
-                          (_ (or (cadar rest)
-                                 (symbol-name (car rest)))))))
-            (loop (cdr rest)))))
+          (gtk-combo-box-text-append-text combo
+            (_ (or (cadar rest) (symbol-name (car rest)))))
+            (loop (cdr rest))))
 
       (when changed-callback
 	(g-signal-connect combo "changed"
@@ -219,10 +218,9 @@
 
       (let loop ((rest options))
         (when rest
-          (let ((append (gtk-combo-box-text-append-text combo
-                          (_ (or (cadar rest)
-                                 (symbol-name (car rest)))))))
-            (loop (cdr rest)))))
+          (gtk-combo-box-text-append-text combo
+            (_ (or (cadar rest) (symbol-name (car rest)))))
+            (loop (cdr rest))))
 
       (when changed-callback
 	(g-signal-connect combo "changed"

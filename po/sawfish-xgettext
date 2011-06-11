@@ -23,38 +23,11 @@ exec rep "$0" "$@"
 
 (require 'rep.i18n.xgettext)
 (require 'rep.lang.doc)
+(require 'rep.utils.misc)
 
 (defvar *write-c-file* nil)
 
 (define (exit n) (throw 'quit n))
-
-;; random hackery
-
-;; from sawfish.ui.widgets.match-window
-(define (beautify-symbol-name symbol)
-  (cond ((stringp symbol) symbol)
-	((not (symbolp symbol)) (format "%s" symbol))
-	(t
-	 (let ((name (copy-sequence (symbol-name symbol))))
-	   (while (string-match "[-:]" name)
-	     (setq name (concat (substring name 0 (match-start))
-				?  (substring name (match-end)))))
-	   (aset name 0 (char-upcase (aref name 0)))
-	   name))))
-
-;; from sawfish.ui.layouts.keymaps
-(define (beautify-keymap-name symbol)
-  (cond ((stringp symbol) symbol)
-	((not (symbolp symbol)) (format "%s" symbol))
-	(t
-	 (let ((name (copy-sequence (symbol-name symbol))))
-	   (when (string-match "-keymap" name)
-	     (setq name (substring name 0 (match-start))))
-	   (while (string-match "[-:]" name)
-	     (setq name (concat (substring name 0 (match-start))
-				?  (substring name (match-end)))))
-	   (aset name 0 (char-upcase (aref name 0)))
-	   name))))
 
 ;; helper function that groks sawfish specific forms
 
@@ -86,7 +59,7 @@ exec rep "$0" "$@"
 		     (register (symbol-name s)))) (cdr type)))
 	 ;; extract keymap names
 	 (when (eq type 'keymap)
-	   (register (beautify-keymap-name (symbol-name variable)))))
+	   (register (beautify-symbol-name (symbol-name variable) #:cut "-keymap"))))
        (when (stringp doc)
 	 (register doc))))
 

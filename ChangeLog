@@ -7,6 +7,18 @@
 	instead of keyboard, fixes setting mouse or mixed mouse-keyboard
 	bindings from SawfishConfig (keyboard-only bindings still work)
 
+	* lisp/sawfish/cfg/layouts/keymap.jl: removed beautify-keymap-name,
+	use beautify-symbol-name instead
+
+	* po/sawfish-xgettext: use beautify-symbol-name from rep.util.misc,
+	removed own beautify-symbol-name/beautify-keymap-name
+
+	* lisp/sawfish/cfg/widgets/frame-style.jl: shut-up a compiler-warning
+
+	* lisp/sawfish/cfg/widgets/frame-style.jl
+	* lisp/sawfish/gtk/widget.jl: properly loop through the list of
+	options when filling GtkComboBoxText widgets
+
 2011-06-10  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/utils.jl: removed (funcs now in rep.util.misc)
 
