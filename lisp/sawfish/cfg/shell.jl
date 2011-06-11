@@ -49,6 +49,13 @@
   (define ok-widget)
   (define revert-widget)
 
+  (define (apply-gtk-style-properties)
+    ;; GtkComboBoxText Widget
+    ;; 'choice 'symbol 'modifier-list 'frame-style
+    ;; make them appear like lists
+    (gtk-rc-parse-string "style \"combo_text\" { GtkComboBox::appears-as-list = 1 } ")
+    (gtk-rc-parse-string "class \"GtkComboBoxText\" style \"combo_text\""))
+
   (define (initialize-shell)
     (let ((vbox (gtk-vbox-new nil box-spacing))
 	  (hbox (gtk-hbutton-box-new))
@@ -56,6 +63,8 @@
 	  root-container)
 
       (setq main-window (gtk-window-new 'toplevel))
+
+      (apply-gtk-style-properties)
 
 	(gtk-window-set-resizable main-window t)
 	(gtk-window-set-icon-name main-window "sawfish-config")

@@ -19,6 +19,17 @@
 	* lisp/sawfish/gtk/widget.jl: properly loop through the list of
 	options when filling GtkComboBoxText widgets
 
+	* lisp/sawfish/cfg/widgets/match-window.jl: don't make scheme-boolean
+	an optional widget
+
+	* lisp/sawfish/gtk/widgets/scheme-boolean.jl: use GtkCheckButton
+	instead of GtkToggleButton. Set intial and clear states to
+	`inconsistent' and only return #t or #f it not `inconsistent'.
+	Properly implements scheme-boolean in Window-Rules
+
+	* lisp/sawfish/cfg/shell.jl: added apply-gtk-style-properties.
+	Currently only `appear-as-list' to GtkComboBoxText is passed
+
 2011-06-10  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/utils.jl: removed (funcs now in rep.util.misc)
 
