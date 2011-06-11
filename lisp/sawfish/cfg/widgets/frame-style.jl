@@ -31,6 +31,9 @@
           sawfish.gtk.widget
           sawfish.cfg.i18n)
 
+  (eval-when-compile
+    (defvar fallback-frame-style nil))
+
   (define (make-frame-style-item changed-callback doc options path)
 
     (let ((vbox (gtk-vbox-new nil 0))
@@ -50,10 +53,9 @@
 
       (let loop ((rest options))
         (when rest
-          (let ((append (gtk-combo-box-text-append-text combo
-                          (_ (or (cadar rest)
-                                 (symbol-name (car rest)))))))
-            (loop (cdr rest)))))
+           (gtk-combo-box-text-append-text combo
+             (_ (or (cadar rest) (symbol-name (car rest)))))
+            (loop (cdr rest))))
 
       (gtk-box-set-spacing hbox box-spacing)
       (gtk-box-set-spacing vbox box-spacing)
