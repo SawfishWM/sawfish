@@ -132,7 +132,7 @@
 	     (let* ((prop (car props))
 		    (widget (make-widget
 			     (if (eq (cadr prop) 'boolean)
-				 `(optional scheme-boolean)
+				 `(scheme-boolean)
 			       `(optional ,(cadr prop))))))
 	       (gtk-table-attach-defaults
 		table (make-left-label (beautify-symbol-name (car prop)))
