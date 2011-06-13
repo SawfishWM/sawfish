@@ -65,6 +65,9 @@
   ;;	(number [MIN [MAX [INITIAL-VALUE]]]) ;; integer only
   ;;	  The default of minimum is 0, max 65536,
   ;;	  and initial value is the same as the min.
+  ;;	(range MIN MAX [INITIAL-VALUE]) ;; integer only
+  ;;	  same as number, but using GtkScale rather than GtkSpin
+  ;;	  and MIN / MAX need to be passed
   ;;	(boolean [LABEL])
   ;;	(color)
   ;;	(font)
@@ -285,6 +288,39 @@
 	  ((validp) numberp)))))
 
   (define-widget-type 'number make-number-item)
+
+  (define (make-range-item changed-callback range #!optional initial-value)
+    (let ((widget (gtk-hscale-new-with-range (or (car range) 0)
+				             (or (cdr range) 65535) 1)))
+      (when initial-value
+        (gtk-range-set-value widget initial-value)
+	(gtk-scale-add-mark widget initial-value 'top (number->string initial-value)))
+
+      (when changed-callback
+	(g-signal-connect
+	 widget "value-changed" (make-signal-callback changed-callback)))
+
+      (gtk-widget-show widget)
+      (gtk-scale-set-value-pos widget 'left)
+      (gtk-widget-set-size-request widget 100 -1)
+
+      (lambda (op)
+	(case op
+	  ((set) (lambda (x)
+		   (when (numberp x)
+		     (gtk-range-set-value widget x)
+		     (gtk-scale-clear-marks widget)
+		     (gtk-scale-add-mark widget x 'top "°"))))
+	  ((clear) (lambda () (gtk-scale-clear-marks widget)))
+	  ((ref) (lambda ()
+		   (let ((value (gtk-range-get-value widget)))
+		     (if (integerp value)
+			 (inexact->exact value)
+		       value))))
+	  ((gtk-widget) widget)
+	  ((validp) numberp)))))
+
+  (define-widget-type 'range make-range-item)
 
   (define (make-boolean-item changed-callback #!optional label)
     (let ((widget (if label

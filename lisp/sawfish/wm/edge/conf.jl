@@ -69,8 +69,7 @@
   (defcustom hot-spots-corner-length 50
     "The size portion of the screen-border recognized as \"corners\",
 in pixels. Applies to both x and y direction."
-    :type number
-    :range (5 . 500)
+    :type (range (5 . 500))
     :group edge-actions)
 
   (defcustom viewport-drag-distance 64
