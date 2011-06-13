@@ -290,8 +290,7 @@
   (define-widget-type 'number make-number-item)
 
   (define (make-range-item changed-callback range #!optional initial-value)
-    (let ((widget (gtk-hscale-new-with-range (or (car range) 0)
-				             (or (cdr range) 65535) 1)))
+    (let ((widget (gtk-hscale-new-with-range (car range) (cdr range) 1)))
       (when initial-value
         (gtk-range-set-value widget initial-value)
 	(gtk-scale-add-mark widget initial-value 'top (number->string initial-value)))
