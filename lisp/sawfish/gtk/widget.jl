@@ -301,6 +301,7 @@
 	 widget "value-changed" (make-signal-callback changed-callback)))
 
       (gtk-widget-show widget)
+      (gtk-scale-set-value-pos widget 'left)
       (gtk-widget-set-size-request widget 100 -1)
 
       (lambda (op)
