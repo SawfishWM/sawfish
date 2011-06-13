@@ -34,9 +34,9 @@
       (g-signal-connect selector "update-preview" 
 			(lambda (w) 
 			  (let* ((filename (gtk-file-chooser-get-preview-filename w))
-				 (pixbuf (gdk-pixbuf-new-from-file filename)))
+				 (pixbuf (gdk-pixbuf-new-from-file-at-scale filename 150 -1 t)))
 			    (if pixbuf
-				(progn (gtk-image-set-from-pixbuf selector-preview (gdk-pixbuf-scale-simple pixbuf 150 150 'bilinear))
+				(progn (gtk-image-set-from-pixbuf selector-preview pixbuf)
 				       (gtk-file-chooser-set-preview-widget-active selector t))
 				(gtk-file-chooser-set-preview-widget-active selector nil)))))
 
