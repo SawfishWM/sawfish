@@ -26,7 +26,6 @@
           gui.gtk-2.gtk
           rep.regexp
           rep.io.files
-          rep.io.timers
           rep.util.misc
           sawfish.gtk.widget
           sawfish.cfg.i18n)
@@ -41,15 +40,7 @@
 	  (combo (gtk-combo-box-text-new))
 	  (doc-label (gtk-label-new (_ doc)))
 	  (readme-text-view (gtk-text-view-new))
-	  (readme-scroller (gtk-scrolled-window-new))
-          (timer nil)
-          (value nil))
-
-      (define (timer-callback)
-	(setq timer nil)
-	(setq value (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options))))
-        (update-readme value readme-text-view path)
-	(call-callback changed-callback))
+	  (readme-scroller (gtk-scrolled-window-new)))
 
       (let loop ((rest options))
         (when rest
@@ -71,11 +62,7 @@
       (gtk-scrolled-window-set-policy readme-scroller 'automatic 'automatic)
       (gtk-widget-set-size-request readme-text-view -1 250)
 
-      (g-signal-connect combo "changed"
-                      (lambda ()
-			(if timer
-			    (set-timer timer)
-			  (setq timer (make-timer timer-callback nil 200)))))
+      (g-signal-connect combo "changed" changed-callback)
 
       (gtk-widget-show-all vbox)
 
@@ -84,7 +71,8 @@
 	  ((gtk-widget) vbox)
 	  ((clear) nop)
 	  ((set) (lambda (x)
-		   (gtk-combo-box-set-active combo (or (option-index options x) (option-index options fallback-frame-style)))))
+		   (gtk-combo-box-set-active combo (or (option-index options x) (option-index options fallback-frame-style)))
+		   (update-readme (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options))) readme-text-view path)))
 	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
 	  ((validp) (lambda (x) (memq x options)))))))
 
