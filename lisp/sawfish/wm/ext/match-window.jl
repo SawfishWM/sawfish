@@ -74,7 +74,7 @@
 	       (new-workspace boolean)
 	       (new-viewport boolean)
 	       (viewport (pair (number 1) (number 1)))
-	       (depth (number -16 16 0))
+	       (depth (range (-16 . 16) 0))
 	       (placement-weight (number 0))
 	       (fixed-position boolean)
 	       (fixed-size boolean)
