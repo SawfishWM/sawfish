@@ -56,7 +56,8 @@
 	     update-frame-font-color
 	     update-frame-font
 	     update-border-color-width
-	     update-title-offsets
+	     update-title-x-offsets
+	     update-title-y-offsets
 	     update-text-position))
 
     (open rep
@@ -140,7 +141,6 @@ that overrides settings set elsewhere.")
   (defcustom default-frame-style nil
     "Theme"
     :type frame-style
-    :widget-flags (expand-vertically)
     :group appearance
     :after-set (lambda () (after-setting-default-frame)))
 
@@ -216,34 +216,50 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 
   (define title-x-left-offset)
   (define title-x-right-offset)
+  (define title-y-top-offset)
+  (define title-y-bottom-offset)
 
-  (define (update-title-offsets value)
+  (define (update-title-x-offsets value)
     (setq title-x-left-offset (car value))
     (setq title-x-right-offset (cdr value)))
+
+  (define (update-title-y-offsets value)
+    (setq title-y-top-offset (car value))
+    (setq title-y-bottom-offset (cdr value)))
 
   (define (get-text-position requested-position)
     ;; this function sets the real position. 'left 'center 'right are user-choosen,
     ;; we check here whether applicable. eg. left (= 0) is not appropriate for
     ;; StyleTab, as it shows an icon on the left
     (case requested-position
-      ((left)
-       (if title-x-left-offset
-	   (+ 1 title-x-left-offset)
-	 1))
-      ((right)
-       (if title-x-right-offset
-	   (+ -1 title-x-right-offset)
-	 -1))
-      ((center)
-       'center)))
+      ((left) (+ 1 (or title-x-left-offset 0)))
+      ((right) (+ -1 (or title-x-right-offset 0)))
+      ((top) (+ 1 (or title-y-top-offset 0)))
+      ((bottom) (+ -1 (or title-y-bottom-offset 0)))
+      ((center) 'center)))
 
   (define (update-text-position)
-    (if (not (eq use-custom-text-position 'none))
-        (mapc (lambda (pos)
-		(set-frame-part-value pos 'x-justify (get-text-position use-custom-text-position) t))
-	      '(title tabbar-horizontal))
+    (if use-custom-text-position
+      (progn
+        (unless (eq custom-text-x-position 'default)
+	  (mapc (lambda (pos)
+		  (set-frame-part-value pos 'x-justify (get-text-position custom-text-x-position) t))
+	        '(title tabbar-horizontal)))
+	(unless (eq custom-text-y-position 'default)
+	  (mapc (lambda (pos)
+		  (set-frame-part-value pos 'y-justify (get-text-position custom-text-y-position) t))
+	        '(title tabbar-horizontal))))
+      (update-title-x-offsets '(0 . 0))
+      (update-title-y-offsets '(0 . 0)))
+    (when (or (not use-custom-text-position)
+	      (eq custom-text-x-position 'default))
       (mapc (lambda (pos)
 	      (remove-frame-part-value pos 'x-justify t))
+	    '(title tabbar-horizontal)))
+    (when (or (not use-custom-text-position)
+	      (eq custom-text-y-position 'default))
+      (mapc (lambda (pos)
+	      (remove-frame-part-value pos 'y-justify t))
 	    '(title tabbar-horizontal)))
     (mapc rebuild-frame (managed-windows)))
 
@@ -383,11 +399,24 @@ generate.")
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom use-custom-text-position 'none
-    "Whether to change the position of the title-bar text and
-where to place it. none to leave as-is."
-    :type (choice left center right none)
+  (defcustom use-custom-text-position nil
+    "Whether to change the position of the titlebar text."
+    :type boolean
     :group appearance
+    :after-set (lambda () (update-text-position)))
+
+  (defcustom custom-text-x-position 'default
+    "Horizontal orientation of the text."
+    :type (choice default left center right)
+    :group appearance
+    :depends use-custom-text-position
+    :after-set (lambda () (update-text-position)))
+
+  (defcustom custom-text-y-position 'default
+    "Vertical orientation of the text."
+    :type (choice default top center bottom)
+    :group appearance
+    :depends use-custom-text-position
     :after-set (lambda () (update-text-position)))
 
   (defcustom use-custom-border '()
@@ -506,7 +535,22 @@ where to place it. none to leave as-is."
 
   (define (after-setting-default-frame)
     (check-frame-availability default-frame-style)
-    (after-setting-frame-option))
+    (after-setting-frame-option)
+    ;; XXX Fucking evil!
+    ;; XXX offsets would be wrong else...
+    (if use-custom-text-position
+      (setq use-custom-text-position nil)
+      (update-text-position)
+      (setq use-custom-text-position t)
+      (update-text-position))
+    ;; XXX even more Fucking evil!
+    ;; XXX tab-adjustments would be wrong else
+    ;; XXX even though each theme sets them...
+    (if (or (eq default-frame-style (intern "StyleTab"))
+	    (eq default-frame-style (intern "Elberg-tabbbed"))
+	    (eq default-frame-style (intern "get-S-tabbed"))
+	    (eq default-frame-style (intern "gradient-tabbed")))
+      (reframe-windows-with-style default-frame-style)))
 
   (define (rebuild-frames-with-style style)
     (map-windows (lambda (w)
@@ -838,7 +882,7 @@ where to place it. none to leave as-is."
 	    frame-part-get frame-part-put frame-part-window frame-part-x-window
 	    frame-part-position frame-part-dimensions frame-part-state
 	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part
-	    reload-frame-style update-title-offsets)
+	    reload-frame-style update-title-x-offsets update-title-y-offsets)
 
   (add-hook 'add-window-hook reframe-window t)
   (add-hook 'shape-notify-hook reframe-window t)

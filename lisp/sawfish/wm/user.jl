@@ -173,6 +173,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
   (if use-custom-border
       (update-border-color-width))
 
+  ;; apply customized text-position
+  (if use-custom-text-position
+      (update-text-position))
+
   (if want-poweroff-menu
       (add-poweroff-menu))
 

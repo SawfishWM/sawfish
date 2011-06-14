@@ -1910,7 +1910,7 @@
           (set-tab-adjustments #:theme-left-dec-width top-left-d-w #:theme-right-dec-width top-right-d-w #:theme-left-margin top-left-m
                                #:theme-right-margin top-right-m #:theme-left-margin-transient top-left-m-t
                                #:theme-right-margin-transient top-right-m-t)
-	  (update-title-offsets '(11 . 0)))
+	  (update-title-x-offsets '(11 . 0)))
         (setq normal-frame
               (append top-frame-default-border-corner-group top-frame-title-group top-frame-normal-buttons-left 
                       top-frame-border-group top-frame-normal-buttons-right))
@@ -1942,7 +1942,7 @@
           (set-tab-adjustments #:theme-left-dec-width bottom-left-d-w #:theme-right-dec-width bottom-right-d-w #:theme-left-margin bottom-left-m
                                #:theme-right-margin bottom-right-m #:theme-left-margin-transient bottom-left-m-t
                                #:theme-right-margin-transient bottom-right-m-t)
-	  (update-title-offsets '(11 . 0)))
+	  (update-title-x-offsets '(11 . 0)))
         (setq normal-frame
               (append bottom-frame-default-border-corner-group bottom-frame-title-group bottom-frame-normal-buttons-left 
                       bottom-frame-border-group bottom-frame-normal-buttons-right bottom-frame-title-cursor-images))
@@ -1974,7 +1974,7 @@
           (set-tab-adjustments #:theme-left-dec-width left-left-d-w #:theme-right-dec-width left-right-d-w #:theme-left-margin left-left-m
                                #:theme-right-margin left-right-m #:theme-left-margin-transient left-left-m-t
                                #:theme-right-margin-transient left-right-m-t)
-	  (update-title-offsets '(11 . -11)))
+	  (update-title-x-offsets '(11 . -11)))
         (setq normal-frame
               (append left-frame-title-group left-frame-normal-buttons-left left-frame-default-border-corner-group 
                       left-frame-border-group left-frame-normal-buttons-right))
@@ -2006,7 +2006,7 @@
           (set-tab-adjustments #:theme-left-dec-width right-left-d-w #:theme-right-dec-width right-right-d-w #:theme-left-margin right-left-m
                                #:theme-right-margin right-right-m #:theme-left-margin-transient right-left-m-t
                                #:theme-right-margin-transient right-right-m-t)
-	  (update-title-offsets '(11 . -11)))
+	  (update-title-x-offsets '(11 . -11)))
         (setq normal-frame
               (append right-frame-title-group right-frame-normal-buttons-left right-frame-default-border-corner-group 
                       right-frame-border-group right-frame-normal-buttons-right))
