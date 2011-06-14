@@ -232,14 +232,14 @@ by the current theme, then FALLBACK-TYPE is used instead.")
     ;; we check here whether applicable. eg. left (= 0) is not appropriate for
     ;; StyleTab, as it shows an icon on the left
     (case requested-position
-      ((left) (+ 0 (or title-x-left-offset 0)))
+      ((left) (+ 1 (or title-x-left-offset 0)))
       ((right) (+ -1 (or title-x-right-offset 0)))
-      ((top) (+ 0 (or title-y-top-offset 0)))
+      ((top) (+ 1 (or title-y-top-offset 0)))
       ((bottom) (+ -1 (or title-y-bottom-offset 0)))
       ((center) 'center)))
 
   (define (update-text-position)
-    (when use-custom-text-position
+    (if use-custom-text-position
       (progn
         (unless (eq custom-text-x-position 'default)
 	  (mapc (lambda (pos)
@@ -248,7 +248,9 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 	(unless (eq custom-text-y-position 'default)
 	  (mapc (lambda (pos)
 		  (set-frame-part-value pos 'y-justify (get-text-position custom-text-y-position) t))
-	        '(title tabbar-horizontal)))))
+	        '(title tabbar-horizontal))))
+      (update-title-x-offsets '(0 . 0))
+      (update-title-y-offsets '(0 . 0)))
     (when (or (not use-custom-text-position)
 	      (eq custom-text-x-position 'default))
       (mapc (lambda (pos)
@@ -533,7 +535,13 @@ generate.")
 
   (define (after-setting-default-frame)
     (check-frame-availability default-frame-style)
-    (after-setting-frame-option))
+    (after-setting-frame-option)
+    ;; XXX Fucking evil!
+    (if use-custom-text-position
+      (setq use-custom-text-position nil)
+      (update-text-position)
+      (setq use-custom-text-position t)
+      (update-text-position)))
 
   (define (rebuild-frames-with-style style)
     (map-windows (lambda (w)
