@@ -537,11 +537,20 @@ generate.")
     (check-frame-availability default-frame-style)
     (after-setting-frame-option)
     ;; XXX Fucking evil!
+    ;; XXX offsets would be wrong else...
     (if use-custom-text-position
       (setq use-custom-text-position nil)
       (update-text-position)
       (setq use-custom-text-position t)
-      (update-text-position)))
+      (update-text-position))
+    ;; XXX even more Fucking evil!
+    ;; XXX tab-adjustments would be wrong else
+    ;; XXX even though each theme sets them...
+    (if (or (eq default-frame-style (intern "StyleTab"))
+	    (eq default-frame-style (intern "Elberg-tabbbed"))
+	    (eq default-frame-style (intern "get-S-tabbed"))
+	    (eq default-frame-style (intern "gradient-tabbed")))
+      (reframe-windows-with-style default-frame-style)))
 
   (define (rebuild-frames-with-style style)
     (map-windows (lambda (w)
