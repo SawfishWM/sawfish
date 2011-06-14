@@ -84,8 +84,7 @@ the more smoothly the screen is scrolled.
 It is the number of steps for scrolling. The value 1 means no scroll, and
 the change is instantaneous."
     :group (workspace viewport)
-    :type number
-    :range (1 . 50))
+    :type (range (1 . 50)))
 
   (defcustom viewport-boundary-mode 'stop
     "Stop, wrap-around, or grow the virtual desktop when you go beyond virtual desktop edge."

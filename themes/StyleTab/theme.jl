@@ -64,13 +64,11 @@
 
 (defcustom styletab:title-dimension 24 "Height of title border. Default 24"
   :group (appearance StyleTab:group StyleTab:settings-group)
-  :type number
-  :range (16 . 32))
+  :type (range (16 . 32)))
 
 (defcustom styletab:borders-dimension 4 "Width of window border. Default 4"
   :group (appearance StyleTab:group StyleTab:settings-group)
-  :type number
-  :range (0 . 10))
+  :type (range (0 . 10)))
 
 (defcustom styletab:custom-button-width nil "Customize buttons width. (Don't use styles defaults.)"
   :group (appearance StyleTab:group StyleTab:settings-group)
@@ -78,9 +76,8 @@
 
 (defcustom styletab:button-width 0 "Width of Buttons. Default 0"
   :group (appearance StyleTab:group StyleTab:settings-group)
-  :type number
-  :depends styletab:custom-button-width
-  :range (-4 . 4))
+  :type (range (-4 . 4))
+  :depends styletab:custom-button-width)
 
 (defcustom styletab:title-font default-font
   "Tabbar font."

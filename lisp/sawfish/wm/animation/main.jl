@@ -42,15 +42,13 @@
 
   (defcustom anim-outline-steps 16
     "Animation Steps"
-    :type number
-    :group (appearance animation)
-    :range ( 1 . 1000 ))
+    :type (range (1 . 1000))
+    :group (appearance animation))
 
   (defcustom anim-outline-delay 20
     "Animation Delay"
-    :type number
-    :group (appearance animation)
-    :range ( 1 . 1000 ))
+    :type (range (1 . 1000))
+    :group (appearance animation))
 
   (define (anim-outline-run w mode initial-coords initial-dims
 			    final-coords final-dims)
