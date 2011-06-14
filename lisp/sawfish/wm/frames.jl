@@ -55,7 +55,9 @@
 	     define-frame-class
 	     update-frame-font-color
 	     update-frame-font
-	     update-border-color-width))
+	     update-border-color-width
+	     update-title-offsets
+	     update-text-position))
 
     (open rep
 	  rep.system
@@ -212,6 +214,39 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 	    '(title tabbar-horizontal tabbar-vertical)))
     (mapc rebuild-frame (managed-windows)))
 
+  (define title-x-left-offset)
+  (define title-x-right-offset)
+
+  (define (update-title-offsets value)
+    (setq title-x-left-offset (car value))
+    (setq title-x-right-offset (cdr value)))
+
+  (define (get-text-position requested-position)
+    ;; this function sets the real position. 'left 'center 'right are user-choosen,
+    ;; we check here whether applicable. eg. left (= 0) is not appropriate for
+    ;; StyleTab, as it shows an icon on the left
+    (case requested-position
+      ((left)
+       (if title-x-left-offset
+	   (+ 1 title-x-left-offset)
+	 1))
+      ((right)
+       (if title-x-right-offset
+	   (+ -1 title-x-right-offset)
+	 -1))
+      ((center)
+       'center)))
+
+  (define (update-text-position)
+    (if (not (eq use-custom-text-position 'none))
+        (mapc (lambda (pos)
+		(set-frame-part-value pos 'x-justify (get-text-position use-custom-text-position) t))
+	      '(title tabbar-horizontal))
+      (mapc (lambda (pos)
+	      (remove-frame-part-value pos 'x-justify t))
+	    '(title tabbar-horizontal)))
+    (mapc rebuild-frame (managed-windows)))
+
   (defvar theme-update-interval 60
     "Number of seconds between checking if theme files have been modified.")
 
@@ -347,6 +382,13 @@ generate.")
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom use-custom-text-position 'none
+    "Whether to change the position of the title-bar text and
+where to place it. none to leave as-is."
+    :type (choice left center right none)
+    :group appearance
+    :after-set (lambda () (update-text-position)))
 
   (defcustom use-custom-border '()
     "Draw an extra window border"
@@ -796,7 +838,7 @@ generate.")
 	    frame-part-get frame-part-put frame-part-window frame-part-x-window
 	    frame-part-position frame-part-dimensions frame-part-state
 	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part
-	    reload-frame-style)
+	    reload-frame-style update-title-offsets)
 
   (add-hook 'add-window-hook reframe-window t)
   (add-hook 'shape-notify-hook reframe-window t)
