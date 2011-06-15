@@ -541,6 +541,7 @@ generate.")
     (when use-custom-text-position
       (setq use-custom-text-position nil)
       (update-text-position)
+      (reframe-windows-with-style default-frame-style)
       (setq use-custom-text-position t)
       (update-text-position))
     ;; XXX even more Fucking evil!
