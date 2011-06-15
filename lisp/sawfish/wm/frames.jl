@@ -538,7 +538,7 @@ generate.")
     (after-setting-frame-option)
     ;; XXX Fucking evil!
     ;; XXX offsets would be wrong else...
-    (if use-custom-text-position
+    (when use-custom-text-position
       (setq use-custom-text-position nil)
       (update-text-position)
       (setq use-custom-text-position t)
