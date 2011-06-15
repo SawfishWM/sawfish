@@ -538,9 +538,10 @@ generate.")
     (after-setting-frame-option)
     ;; XXX Fucking evil!
     ;; XXX offsets would be wrong else...
-    (if use-custom-text-position
+    (when use-custom-text-position
       (setq use-custom-text-position nil)
       (update-text-position)
+      (reframe-windows-with-style default-frame-style)
       (setq use-custom-text-position t)
       (update-text-position))
     ;; XXX even more Fucking evil!
