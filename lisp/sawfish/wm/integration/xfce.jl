@@ -1,6 +1,6 @@
 ;; xfce.jl -- XFCE integration
 
-;; Copyright (C) 2010 Christopher Bratusek <zanghar@freenet.de>
+;; Copyright (C) 2010 Christopher Bratusek <nano@tuxfamily.org>
 
 ;; This file is part of sawfish.
 
@@ -62,7 +62,11 @@
 		      (,(_ "_Reboot from XFCE")
 		       (system "xfce4-session-logout --reboot &"))
 		      (,(_ "_Shutdown from XFCE")
-		       (system "xfce4-session-logout --halt &")))))))
+		       (system "xfce4-session-logout --halt &"))
+		      (,(_ "_Hibernate from XFCE")
+			(system "xfce4-session-logout --hibernate &"))
+		      (,(_ "S_uspend from XFCE")
+			(system "xfce4-session-logout --suspend &")))))))
 
   ;; Returns nil if xfce is not found.
   ;; If detected, returns t, and do also xfce support init.
