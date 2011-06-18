@@ -51,6 +51,7 @@
   (define wiki-button)
   (define doc-button)
   (define about-button)
+  (define edit-button)
 
   (define (apply-gtk-style-properties)
     ;; GtkComboBoxText Widget
@@ -105,6 +106,9 @@
 	(setq ok-widget (gtk-button-new-from-stock "gtk-close"))
 	(setq revert-widget (gtk-button-new-from-stock "gtk-undo"))
 	(setq wiki-button (gtk-link-button-new-with-label "http://sawfish.wikia.com/" "Sawfish Wiki"))
+	(gtk-button-set-relief wiki-button 'normal)
+	(setq edit-button (gtk-button-new-from-stock "gtk-edit"))
+	(gtk-button-set-label edit-button "Edit sawfishrc")
 	(setq about-button (gtk-button-new-from-stock "gtk-about"))
 	(setq doc-button (gtk-button-new-from-stock "gtk-help"))
 	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
@@ -119,12 +123,20 @@
 	(gtk-box-pack-end vbox hbox)
 	(g-signal-connect ok-widget "clicked" on-ok)
 	(g-signal-connect revert-widget "clicked" on-revert)
+	(g-signal-connect edit-button "clicked"
+	  (lambda () (if (file-exists-p "~/.sawfishrc")
+		         (system "xdg-open ~/.sawfishrc &")
+		       (if (file-exists-p "~/.sawfish/rc")
+			   (system "xdg-open ~/.sawfish/rc &")
+			 (system "echo \";;; Sawfish Resource File\" > ~/.sawfishrc &")
+			 (system "xdg-open ~/.sawfishrc &")))))
 	(g-signal-connect about-button "clicked"
 	  (lambda () (system "sawfish-about >/dev/null 2>&1 </dev/null &")))
 	(g-signal-connect doc-button "clicked"
 	  (lambda () (system "x-terminal-emulator -e \"info sawfish Top\" &")))
 	(gtk-container-add hbox wiki-button)
 	(gtk-container-add hbox doc-button)
+	(gtk-container-add hbox edit-button)
 	(gtk-container-add hbox about-button)
 	(gtk-container-add hbox revert-widget)
 	(gtk-container-add hbox ok-widget)
