@@ -49,9 +49,7 @@
   (define (show-homepage) (browser "http://sawfish.wikia.com/"))
 
   (define (show-about)
-    (system (format nil "%s >/dev/null 2>&1 </dev/null &"
-		    (expand-file-name "sawfish-about"
-				      sawfish-exec-directory))))
+    (system "sawfish-about >/dev/null 2>&1 </dev/null &"))
 
   ;;###autoload
   (define-command 'help:show-faq show-faq)
