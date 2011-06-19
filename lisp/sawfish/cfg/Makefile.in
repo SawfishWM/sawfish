@@ -39,21 +39,13 @@ SRCS :=	apply.jl		\
 	slot.jl			\
 	wm.jl
 
-W_SRCS := widgets/command.jl	\
-	widgets/event.jl	\
-	widgets/frame-style.jl	\
-	widgets/keymap.jl	\
-	widgets/match-window.jl \
-	widgets/modifier-list.jl 
-
 L_SRCS := layouts/keymaps.jl
 
 OBJS := $(SRCS:.jl=.jlc)
-W_OBJS := $(W_SRCS:.jl=.jlc)
 L_OBJS := $(L_SRCS:.jl=.jlc)
 
-ALL_SRCS := $(SRCS) $(W_SRCS) $(L_SRCS)
-ALL_OBJS := $(OBJS) $(W_OBJS) $(L_OBJS)
+ALL_SRCS := $(SRCS) $(L_SRCS)
+ALL_OBJS := $(OBJS) $(L_OBJS)
 
 SUBSTS := -e "s|__nokogiridir__|$(lispdir)|" 
 
@@ -69,9 +61,6 @@ install : all installdirs
 	set -e; for p in $(SRCS) $(OBJS); do \
 	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg; \
 	done
-	set -e; for p in $(W_SRCS) $(W_OBJS); do \
-	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg/widgets; \
-	done
 	set -e; for p in $(L_SRCS) $(L_OBJS); do \
 	  $(INSTALL_DATA) $$p $(DESTDIR)${lispdir}/sawfish/cfg/layouts; \
 	done
@@ -85,13 +74,11 @@ uninstall :
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)/sawfish/cfg \
-	  $(DESTDIR)$(lispdir)/sawfish/cfg/widgets \
 	  $(DESTDIR)$(lispdir)/sawfish/cfg/layouts $(DESTDIR)$(bindir) \
 	  $(DESTDIR)${datadir}/icons/hicolor/32x32/apps/
 
 clean : 
 	rm -f *.jlc *~ core
-	rm -f widgets/*~ widgets/*.jlc
 	rm -f layouts/*~ layouts/*.jlc
 
 distclean : gitclean

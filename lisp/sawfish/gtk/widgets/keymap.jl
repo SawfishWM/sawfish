@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.cfg.widgets.keymap
+(define-structure sawfish.gtk.widgets.keymap
 
     (export )
 
