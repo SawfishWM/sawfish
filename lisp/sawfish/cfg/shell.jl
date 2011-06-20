@@ -321,7 +321,6 @@ where OPTIONS are any of:\n
 
     (setq interrupt-mode 'exit)
     (i18n-init)
-    (add-widget-prefix 'sawfish.cfg.widgets)
 
     (initialize-configs)
     (initialize-shell)
