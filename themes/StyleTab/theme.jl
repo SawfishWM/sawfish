@@ -3,81 +3,51 @@
 (define theme-name 'StyleTab)
 
 ;;need hash tables for icon cache 
-;;
+
 (require 'rep.data.tables)
 
 ;; Defcustom and defgroup
 (defgroup StyleTab:group "StyleTab"
   :group appearance)
 
-(defgroup StyleTab:settings-group "Settings"
-  :group (appearance StyleTab:group))
-
-(defgroup StyleTab:buttons-group "buttons"
-  :group (appearance StyleTab:group))
-
 (defgroup StyleTab:top-buttons-group "Top Titlebar Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group))
+  :group (appearance StyleTab:group))
 
 (defgroup StyleTab:bottom-buttons-group "Bottom Titlebar Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group))
+  :group (appearance StyleTab:group))
 
 (defgroup StyleTab:left-buttons-group "Left Titlebar Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group))
+  :group (appearance StyleTab:group))
 
 (defgroup StyleTab:right-buttons-group "Right Titlebar Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group))
-
-(defgroup StyleTab:top-left-buttons-group "Top Titlebar Left Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:top-buttons-group))
-
-(defgroup StyleTab:top-right-buttons-group "Top Titlebar Right Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:top-buttons-group))
-
-(defgroup StyleTab:bottom-left-buttons-group "Bottom Titlebar Left Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:bottom-buttons-group))
-
-(defgroup StyleTab:bottom-right-buttons-group "Bottom Titlebar Right Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:bottom-buttons-group))
-
-(defgroup StyleTab:left-top-buttons-group "Left Titlebar Top Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:left-buttons-group))
-
-(defgroup StyleTab:left-bottom-buttons-group "Left Titlebar Bottom Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:left-buttons-group))
-
-(defgroup StyleTab:right-top-buttons-group "Right Titlebar Top Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group))
-
-(defgroup StyleTab:right-bottom-buttons-group "Right Titlebar Bottom Buttons"
-  :group (appearance StyleTab:group StyleTab:buttons-group StyleTab:right-buttons-group))
+  :group (appearance StyleTab:group))
 
 (defcustom styletab:style 'Dark "Frame and button style."
-  :group (appearance StyleTab:group StyleTab:settings-group)
+  :group (appearance StyleTab:group)
   :options (Reduce Dark DarkColor Silver SilverColor Smoothly)
   :type symbol)
 
 (defcustom styletab:titlebar-place 'top "Titlebar default place."
-  :group (appearance StyleTab:group StyleTab:settings-group)
+  :group (appearance StyleTab:group)
   :options (top bottom left right)
   :type symbol)
 
-(defcustom styletab:title-dimension 24 "Height of title border. Default 24"
-  :group (appearance StyleTab:group StyleTab:settings-group)
+(defcustom styletab:title-dimension 24 "Height of title border. "
+  :group (appearance StyleTab:group)
   :type number
   :range (16 . 32))
 
-(defcustom styletab:borders-dimension 4 "Width of window border. Default 4"
-  :group (appearance StyleTab:group StyleTab:settings-group)
+(defcustom styletab:borders-dimension 4 "Width of window border."
+  :group (appearance StyleTab:group)
   :type number
   :range (0 . 10))
 
-(defcustom styletab:custom-button-width nil "Customize buttons width. (Don't use styles defaults.)"
-  :group (appearance StyleTab:group StyleTab:settings-group)
+(defcustom styletab:custom-button-width nil "Customize buttons width."
+  :group (appearance StyleTab:group)
   :type boolean)
 
-(defcustom styletab:button-width 0 "Width of Buttons. Default 0"
-  :group (appearance StyleTab:group StyleTab:settings-group)
+(defcustom styletab:button-width 0 "Width of Buttons."
+  :group (appearance StyleTab:group)
   :type number
   :depends styletab:custom-button-width
   :range (-4 . 4))
@@ -90,7 +60,7 @@
 			     ;; Here, `list' is necessary. If you
 			     ;; replace it with a quote, the configurator
 			     ;; crashes.
-                             (list 'v-and '(choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
+                             (list 'h-and '(choice \(none\) close menu maximize minimize shade sticky space send-to-prev 
                                                    send-to-next lock raise-lower move-resize rename frame-type)
                                    '(boolean "Also show in transients"))))))
      (eval
@@ -99,47 +69,43 @@
           ,(cadr arg) ;; default value
           ,(caddr arg) ;; doc
           :group
-         ,`(appearance StyleTab:group StyleTab:buttons-group
-                       ,(cadddr arg) ,(car (cddddr arg)))
+         ,`(appearance StyleTab:group
+                       ,(cadddr arg))
          :type ,type-list
          ))))) ;; end of lambda
  '( ;; list to pass to mapc
    (styletab:top-left-buttons
-    '((menu t) (frame-type t) (sticky nil) (shade nil) (space nil)
-      (raise-lower nil) (lock nil) (move-resize nil))
-    "Top Titlebar Left Buttons (from left to right)"
-    StyleTab:top-buttons-group StyleTab:top-left-buttons-group)
+    '((menu t) (sticky nil) (shade nil))
+    "Top Titlebar Left Buttons (from left to right) \\top"
+    StyleTab:top-buttons-group)
    (styletab:top-right-buttons
-    '((close t) (maximize t) (minimize nil) (space nil)
-      (send-to-next nil) (send-to-prev nil))
-    "Top Titlebar Right Buttons (from right to left)"
-    StyleTab:top-buttons-group StyleTab:top-right-buttons-group)
+    '((close t) (maximize t) (minimize nil))
+    "Top Titlebar Right Buttons (from right to left) \\top"
+    StyleTab:top-buttons-group)
    (styletab:bottom-left-buttons
-    '((menu t) (frame-type t) (sticky nil) (shade nil) (space nil)
-      (raise-lower nil) (lock nil) (move-resize nil))
-    "Bottom Titlebar Left Buttons (from left to right)"
-    StyleTab:bottom-buttons-group StyleTab:bottom-left-buttons-group)
+    '((menu t) (sticky nil) (shade nil))
+    "Bottom Titlebar Left Buttons (from left to right) \\top"
+    StyleTab:bottom-buttons-group)
    (styletab:bottom-right-buttons
-    '((close t) (maximize t) (minimize nil) (space nil)
-      (send-to-next nil) (send-to-prev nil))
-    "Bottom Titlebar Right Buttons (from right to left)"
-    StyleTab:bottom-buttons-group StyleTab:bottom-right-buttons-group)
+    '((close t) (maximize t) (minimize nil))
+    "Bottom Titlebar Right Buttons (from right to left) \\top"
+    StyleTab:bottom-buttons-group)
    (styletab:left-top-buttons
-    '((close t) (maximize t) (minimize t) (sticky nil) (lock nil))
-    "Left Titlebar Top Buttons (from top to bottom)"
-    StyleTab:left-buttons-group StyleTab:left-top-buttons-group)
+    '((close t) (maximize t) (minimize nil))
+    "Left Titlebar Top Buttons (from top to bottom) \\top"
+    StyleTab:left-buttons-group)
    (styletab:left-bottom-buttons
-    '((menu t) (frame-type t))
-    "Left Titlebar Bottom Buttons (from bottom to top)"
-    StyleTab:left-buttons-group StyleTab:left-bottom-buttons-group)
+    '((menu t) (sticky nil) (shade nil))
+    "Left Titlebar Bottom Buttons (from bottom to top) \\top"
+    StyleTab:left-buttons-group)
    (styletab:right-top-buttons
-    '((close t) (maximize t) (minimize t) (sticky nil) (lock nil))
-    "Right Titlebar Top Buttons (from top to bottom)"
-    StyleTab:right-buttons-group StyleTab:right-top-buttons-group)
+    '((close t) (maximize t) (minimize nil))
+    "Right Titlebar Top Buttons (from top to bottom) \\top"
+    StyleTab:right-buttons-group)
    (styletab:right-bottom-buttons
-    '((menu t) (frame-type t))
-    "Right Titlebar Bottom Buttons (from bottom to top)"
-    StyleTab:right-buttons-group StyleTab:right-bottom-buttons-group)
+    '((menu t) (sticky nil) (shade nil))
+    "Right Titlebar Bottom Buttons (from bottom to top) \\top"
+    StyleTab:right-buttons-group)
    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
