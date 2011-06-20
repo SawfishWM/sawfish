@@ -1,3 +1,13 @@
+2011-06-20  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/layout.jl: add \\top \\bottom and \\left "flags" to
+	defcustoms doc-string (\\w as compat-variant for \\left is kept). They
+	let be choosen where to display the label, if it's a widget on it's
+	own. (eg works with: number (= GtkSpinButton + GtkLabel), but not with
+	choice (= GtkComboBoxText)).
+
+	* themes/StyleTab/theme.jl: improved grouping and layout of options in
+	SawfishConfig
+
 2011-06-19  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/widgets/*.jl
 	* lisp/sawfish/gtk/widgets/: moved all widgets into sawfish.gtk. tree
