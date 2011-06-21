@@ -50,6 +50,7 @@
 /* one of the ec_ values */
 int exit_code = ec_no_exit;
 
+DEFSYM(before_restart_hook, "before-restart-hook");
 DEFSYM(sawfish_directory, "sawfish-directory");
 DEFSYM(sawfish_lisp_lib_directory, "sawfish-lisp-lib-directory");
 DEFSYM(sawfish_site_lisp_directory, "sawfish-site-lisp-directory");
@@ -133,6 +134,7 @@ Restart the sawfish process.
 ::end:: */
 {
     exit_code = ec_restart;
+    Fcall_hook (Qbefore_restart_hook, Qnil, Qnil);
     return Fquit ();
 }
 
@@ -325,7 +327,9 @@ sawfish_symbols (void)
     Fset (Qinterrupt_mode, Qtop_level);
 
     rep_INTERN_SPECIAL(fonts_are_fontsets);
+    rep_INTERN_SPECIAL(before_restart_hook);
     Fset (Qfonts_are_fontsets, Qt);
+    Fset (Qbefore_restart_hook, Qnil);
 
     tem = rep_push_structure ("sawfish.wm.misc");
     rep_ADD_SUBR_INT(Squit);
