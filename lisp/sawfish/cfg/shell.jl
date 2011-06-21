@@ -52,6 +52,8 @@
   (define doc-button)
   (define about-button)
   (define edit-button)
+  (define install-theme-label)
+  (define install-theme-button)
 
   (define (initialize-shell)
     (let ((vbox (gtk-vbox-new nil box-spacing))
@@ -61,12 +63,13 @@
 
       (setq main-window (gtk-window-new 'toplevel))
 
-	(gtk-window-set-resizable main-window t)
-	(gtk-window-set-icon-name main-window "sawfish-config")
-	(gtk-window-set-default-size main-window 550 400)
-	(setq root-container (gtk-frame-new))
-	(gtk-frame-set-shadow-type root-container 'etched-in)
-	(gtk-container-add main-window root-container)
+      (gtk-box-set-homogeneous hbox nil)
+      (gtk-window-set-resizable main-window t)
+      (gtk-window-set-icon-name main-window "sawfish-config")
+      (gtk-window-set-default-size main-window 550 400)
+      (setq root-container (gtk-frame-new))
+      (gtk-frame-set-shadow-type root-container 'etched-in)
+      (gtk-container-add main-window root-container)
 
       (setq slot-box-widget (gtk-vbox-new nil box-spacing))
 
@@ -96,12 +99,20 @@
 
 	(setq ok-widget (gtk-button-new-from-stock "gtk-close"))
 	(setq revert-widget (gtk-button-new-from-stock "gtk-undo"))
-	(setq wiki-button (gtk-link-button-new-with-label "http://sawfish.wikia.com/" "Sawfish Wiki"))
+	
+	(setq wiki-button (gtk-link-button-new-with-label "http://sawfish.wikia.com/" "Browse Wiki"))
 	(gtk-button-set-relief wiki-button 'normal)
+	
 	(setq edit-button (gtk-button-new-from-stock "gtk-edit"))
-	(gtk-button-set-label edit-button "Edit sawfishrc")
+	(gtk-button-set-label edit-button "Edit RC")
+	
 	(setq about-button (gtk-button-new-from-stock "gtk-about"))
 	(setq doc-button (gtk-button-new-from-stock "gtk-help"))
+	
+	(setq install-theme-label (gtk-label-new "Install theme:"))
+	(setq install-theme-button (gtk-file-chooser-button-new '() 'open))
+	(gtk-file-chooser-set-filename install-theme-button "~")
+
 	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish Configurator"))
 	(gtk-window-set-wmclass main-window "sawfish-configurator"
@@ -110,10 +121,12 @@
       (g-signal-connect main-window "delete_event" on-quit)
 
 	(gtk-box-set-spacing hbox button-box-spacing)
-	(gtk-button-box-set-layout hbox 'end)
+	(gtk-button-box-set-layout hbox 'center)
 	(gtk-box-pack-end vbox hbox)
+	
 	(g-signal-connect ok-widget "clicked" on-ok)
 	(g-signal-connect revert-widget "clicked" on-revert)
+	
 	(g-signal-connect edit-button "clicked"
 	  (lambda () (if (file-exists-p "~/.sawfishrc")
 		         (system "xdg-open ~/.sawfishrc &")
@@ -121,11 +134,29 @@
 			   (system "xdg-open ~/.sawfish/rc &")
 			 (system "echo \";;; Sawfish Resource File\" > ~/.sawfishrc &")
 			 (system "xdg-open ~/.sawfishrc &")))))
+	
 	(g-signal-connect about-button "clicked"
 	  (lambda () (system "sawfish-about >/dev/null 2>&1 </dev/null &")))
+	
 	(g-signal-connect doc-button "clicked"
 	  (lambda () (system "x-terminal-emulator -e \"info sawfish Top\" &")))
+	
+	(g-signal-connect install-theme-button "file-set"
+	  (lambda () (let ((file (gtk-file-chooser-get-filename install-theme-button))
+			   (filex))
+		       (unless (file-exists-p "~/.sawfish/themes/")
+			 (unless (file-exists-p "~/.sawfish/")
+			   (make-directory "~/.sawfish/"))
+			 (make-directory "~/.sawfish/themes/"))
+		       (setq filex (last (string-split "/" file)))
+		       (gtk-file-chooser-set-filename install-theme-button "~")
+		       (if (string-match "\\.tar" filex)
+			   (copy-file file (concat "~/.sawfish/themes/" filex))
+			 (sawfish-config-display-info "Only tar-archives can be installed at the moment." nil)))))
+
 	(gtk-container-add hbox wiki-button)
+	(gtk-container-add hbox install-theme-label)
+	(gtk-container-add hbox install-theme-button)
 	(gtk-container-add hbox doc-button)
 	(gtk-container-add hbox edit-button)
 	(gtk-container-add hbox about-button)
@@ -266,21 +297,31 @@
 	    (gtk-container-remove slot-box-widget w))
 	  (gtk-container-get-children slot-box-widget)))
 
-  (define (sawfish-absent)
-    ;; Prints error and never returns.
+  (define (sawfish-config-display-info text kill)
     (let ((window (gtk-window-new 'toplevel))
 	  (vbox (gtk-vbox-new nil box-spacing))
-	  (label (gtk-label-new "Sawfish's configurator needs a running Sawfish. Aborting."))
-	  (button (gtk-button-new-from-stock "gtk-ok"))
-	  (func (lambda () (throw 'quit 1))))
-      (gtk-window-set-title window "SawfishConfig error")
+	  (label (gtk-label-new text))
+	  (button (gtk-button-new-from-stock "gtk-ok")))
+
+      (gtk-window-set-title window "SawfishConfig Info")
       (gtk-window-set-icon-name window "gtk-info")
+
       (gtk-container-set-border-width window 10)
+      
       (gtk-label-set-line-wrap label t)
+      
       (gtk-widget-set-size-request label 225 45)
-      (g-signal-connect window "delete_event" func)
+      
+      (if kill
+	  (progn
+	    (g-signal-connect window "delete_event" (lambda () throw 'quit 1))
+	    (g-signal-connect button "clicked" (lambda () (throw 'quit 1))))
+	(g-signal-connect window "delete_event"
+			  (lambda () (gtk-widget-destroy window)))
+	(g-signal-connect button "clicked"
+			  (lambda () (gtk-widget-destroy window))))
+	    
       (gtk-container-add window vbox)
-      (g-signal-connect button "clicked" func)
       (gtk-container-add vbox label)
       (gtk-container-add vbox button)
 
@@ -293,7 +334,7 @@
   (define (run-shell)
     (condition-case nil
 	(wm-locale-dir)
-      (error (sawfish-absent)))
+      (error (sawfish-config-display-info "Sawfish's configurator needs a running Sawfish. Aborting." t)))
     (when (get-command-line-option "--help")
       (write standard-output "\
 usage: sawfish-config [OPTIONS...]\n
