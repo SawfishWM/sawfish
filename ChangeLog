@@ -3,6 +3,12 @@
 	tar-xz). Transform `sawfish-absent' into
 	`sawfish-config-display-info', allowing to display any notice.
 
+	* lisp/sawfish/wm/user.jl: close sawfish-config before restarting
+	Sawfish and restart it after initialization. If not restarting, just
+	close sawfish-config
+
+	* src/main.c: add before-restart-hook
+
 2011-06-20  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/shell.jl: don't load old sawfish.cfg.widgets
 	widgets, even if they are installed
