@@ -3,6 +3,12 @@
 	tar-xz). Transform `sawfish-absent' into
 	`sawfish-config-display-info', allowing to display any notice.
 
+	* lisp/sawfish/wm/user.jl: close sawfish-config before restarting
+	Sawfish and restart it after initialization. If not restarting, just
+	close sawfish-config
+
+	* src/main.c: add before-restart-hook
+
 2011-06-20  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/cfg/layout.jl: add \\top \\bottom and \\left "flags" to
 	defcustoms doc-string (\\w as compat-variant for \\left is kept). They
