@@ -57,7 +57,7 @@
       (close-button)))))
 
 (defcustom Crux:button-theme 'default
-  "Display title buttons to mimic: \\w"
+  "Display title buttons to mimic: \\left"
   ;; XXX it would be better if the choices were extracted from
   ;; XXX the above alist somehow
   :type (choice (default "Default")

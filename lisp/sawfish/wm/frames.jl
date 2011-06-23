@@ -308,7 +308,7 @@ generate.")
 ;;; defcustom's for some built-in variables
 
   (defcustom default-font nil
-    "Default font: \\w"
+    "Default font: \\left"
     :group appearance
     :type font
     :after-set (lambda () (after-setting-frame-option)))
@@ -324,28 +324,28 @@ generate.")
     :after-set (lambda () (update-frame-font)))
 
   (defcustom frame-font-inactive default-font
-    "Font for inactive titlebars: \\w"
+    "Font for inactive titlebars: \\left"
     :group appearance
     :type font
     :depends use-custom-font
     :after-set (lambda () (update-frame-font)))
 
   (defcustom frame-font-active default-font
-    "Font for focused titlebars: \\w"
+    "Font for focused titlebars: \\left"
     :group appearance
     :type font
     :depends use-custom-font
     :after-set (lambda () (update-frame-font)))
 
   (defcustom frame-font-highlight default-font
-    "Font for highlighted titlebars: \\w"
+    "Font for highlighted titlebars: \\left"
     :group appearance
     :type font
     :depends use-custom-font
     :after-set (lambda () (update-frame-font)))
 
   (defcustom frame-font-clicked default-font
-    "Font for clicked titlebars: \\w"
+    "Font for clicked titlebars: \\left"
     :group appearance
     :type font
     :depends use-custom-font
