@@ -80,7 +80,7 @@
     uniconify-group #:spec "%W")
   (define-command 'iconify-transient-group
     iconify-transient-group #:spec "%W")
-  (define-command 'uniconify-transientgroup
+  (define-command 'uniconify-transient-group
     uniconify-transient-group #:spec "%W")
 
   ;; sticky
