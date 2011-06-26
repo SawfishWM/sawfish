@@ -64,6 +64,8 @@
 	(nconc menu `(()
 		      (,(_ "_Customize KDE") (system "systemsettings &"))
 		      ()
+		      (,(_ "L_ock screen from KDE")
+			(system "qdbus org.kde.krunner /ScreenSaver Lock &"))
 		      (,(_ "_Logout from KDE")
 		       (system ,(concat kde-logout-cmd " 1 0 -1 &")))
 		      (,(_ "_Reboot from KDE")
