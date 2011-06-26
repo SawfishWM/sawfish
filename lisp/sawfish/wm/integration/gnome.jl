@@ -57,6 +57,8 @@
 	(nconc menu `(()
 		      (,(_ "_Customize GNOME") (system "gnome-control-center &"))
 		      ()
+		      (,(_ "L_ock screen from GNOME")
+			(system "gnome-screensaver-command -l &"))
 		      (,(_ "_Logout from GNOME")
 		       (system "gnome-session-save --logout-dialog &"))
 		      (,(_ "_Shutdown from GNOME")
