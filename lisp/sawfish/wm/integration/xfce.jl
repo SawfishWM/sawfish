@@ -57,6 +57,8 @@
 	(nconc menu `(()
 		      (,(_ "_Customize XFCE") (system "xfce4-settings-manager &"))
 		      ()
+		      (,(_ "L_ock from XFCE")
+			(system "xflock4 &"))
 		      (,(_ "_Logout from XFCE")
 		       (system "xfce4-session-logout --logout &"))
 		      (,(_ "_Reboot from XFCE")
