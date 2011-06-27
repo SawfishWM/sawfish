@@ -33,9 +33,10 @@ an extra column should be used.")
   ;; macro for tile-windows
   (defmacro pop (l) `(setq ,l (cdr ,l)))
 
-  (define (tile-windows #!key while-moving)
+  (define (tile-windows edge while-moving)
     (interactive)
-    (if while-moving
+    (call-hook 'before-edge-action-hook (list 'tile-windows edge while-moving))
+    (when while-moving
         (fake-release-window))
     (let ((windows (remove-if window-iconified-p
 			      (or (filter-windows window-on-current-workspace-viewport-p)
@@ -67,6 +68,7 @@ an extra column should be used.")
 		    (when (window-touching-p w)
 		      ;; oops. Roll back to the original size
 		      (resize-window-frame-to w old-width old-height))))
-		windows)))))
+		windows)))
+      (call-hook 'after-edge-action-hook (list 'tile-windows edge while-moving))))
 
   (define-command 'tile-windows tile-windows))
