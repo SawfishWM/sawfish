@@ -1,3 +1,19 @@
+2011-06-27  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/conf.jl: define before/after-edge-action-hook
+	here
+
+	* lisp/sawfish/wm/edge/actions.jl: improved passing of while-moving
+	flag to edge-actions
+
+	* lisp/sawfish/wm/edge/flip.jl: split up code for flip-viewport and
+	flip-workspace
+
+	* lisp/sawfish/wm/edge/flip.jl
+	* lisp/sawfish/wm/edge/hot-spot.jl
+	* lisp/sawfish/wm/edge/tile.jl
+	* lisp/sawfish/wm/edge/viewport-drag.jl: call
+	before/after-edge-action-hook from the proper places
+
 2011-06-02  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/edge/actions.jl: added before-edge-action-hook and
 	after-edge-action-hook. Fixed logic of blocking actions while
