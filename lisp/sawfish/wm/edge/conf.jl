@@ -28,6 +28,9 @@
 
   (define-structure-alias edge-conf sawfish.wm.edge.conf)
 
+  (defvar before-edge-action-hook nil)
+  (defvar after-edge-action-hook nil)
+
   (defcustom edge-actions-enabled nil
     "Activate edges to perform various actions."
     :group edge-actions
