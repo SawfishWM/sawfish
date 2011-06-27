@@ -80,16 +80,18 @@
                     ((bottom)
                      bottom-edge-function))))
         (if (functionp func)
-            (setq hot-spot-timer
-                  (make-timer (lambda ()
-                                (setq hot-spot-timer nil)
-                                (funcall func))
-                              (quotient hot-spot-delay 1000)
-                              (mod hot-spot-delay 1000)))
+            (progn
+              (call-hook 'before-edge-action-hook (list 'hot-spot spot nil))
+	      (setq hot-spot-timer
+		    (make-timer (lambda ()
+				  (setq hot-spot-timer nil)
+				  (funcall func)
+				  (call-hook 'after-edge-action-hook (list 'hot-spot spot nil)))
+				(quotient hot-spot-delay 1000)
+				(mod hot-spot-delay 1000))))
           (when func
             ;; non-nil, but not a function?
-            (error "In hot-spot, your configuration of spot `%s' is wrong; it should be a function." spot))
-	))))
+            (error "In hot-spot, your configuration of spot `%s' is wrong; it should be a function." spot))))))
 
   (defvar left-edge-move-function nil
     "The function launched when hitting the left-edge.")
@@ -118,15 +120,17 @@
                      bottom-edge-move-function)))
             (win (input-focus)))
         (if (functionp func)
-            (setq hot-move-timer
-                  (make-timer (lambda ()
-                                (setq hot-move-timer nil)
-                                (allow-events 'async-both)
-                                (fake-release-window)
-                                (funcall func win))
-                              (quotient hot-spot-delay 1000)
-                              (mod hot-spot-delay 1000)))
+            (progn
+	      (call-hook 'before-edge-action-hook (list 'hot-move spot t))
+	      (setq hot-move-timer
+		    (make-timer (lambda ()
+				  (setq hot-move-timer nil)
+				  (allow-events 'async-both)
+				  (fake-release-window)
+				  (funcall func win)
+				  (call-hook 'after-edge-action-hook (list 'hot-move spot t)))
+				(quotient hot-spot-delay 1000)
+				(mod hot-spot-delay 1000))))
           (when func
             ;; non-nil, but not a function?
-            (error "In hot-move, your configuration of spot `%s' is wrong; it should be a function." spot))
-          )))))
+            (error "In hot-move, your configuration of spot `%s' is wrong; it should be a function." spot)))))))
