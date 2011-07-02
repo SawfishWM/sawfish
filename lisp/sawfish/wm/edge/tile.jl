@@ -9,7 +9,8 @@
 
 (define-structure sawfish.wm.edge.tile
 
-    (export tile-windows)
+    (export tile-windows
+	    tile-windows-core)
 
     (open rep
 	  rep.data
@@ -33,7 +34,7 @@ an extra column should be used.")
   ;; macro for tile-windows
   (defmacro pop (l) `(setq ,l (cdr ,l)))
 
-  (define (tile-windows edge while-moving)
+  (define (tile-windows-core edge while-moving)
     (interactive)
     (call-hook 'before-edge-action-hook (list 'tile-windows edge while-moving))
     (when while-moving
@@ -70,5 +71,8 @@ an extra column should be used.")
 		      (resize-window-frame-to w old-width old-height))))
 		windows)))
       (call-hook 'after-edge-action-hook (list 'tile-windows edge while-moving))))
+
+  (define (tile-windows)
+    (tile-windows-core nil nil))
 
   (define-command 'tile-windows tile-windows))

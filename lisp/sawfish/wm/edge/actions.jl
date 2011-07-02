@@ -49,7 +49,7 @@
        (edge-flip-invoke edge func while-moving))
       ((flip-viewport)
        (edge-flip-invoke edge func while-moving))
-      ((tile-windows)
+      ((tile-windows-core)
        (tile-windows edge while-moving))
       ((none/hot-spot)
        (hot-spot-invoke edge))
