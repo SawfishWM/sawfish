@@ -72,7 +72,9 @@
       (let ((value (slot-value slot)))
 	(mapc (lambda (dep)
 		(when (slot-layout dep)
-		  (gtk-widget-set-sensitive (slot-layout dep) value)))
+		  (if value
+		      (gtk-widget-show (slot-layout dep))
+		    (gtk-widget-hide (slot-layout dep)))))
 	      (slot-dependences slot)))))
 
   (define (update-all-dependences)
