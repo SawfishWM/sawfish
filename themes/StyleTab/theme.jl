@@ -1876,7 +1876,7 @@
               (top-right-m-t
                (if (numberp (cdr (car (car top-frame-transient-buttons-right))))
                    (+ (cdr (car (car top-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
-	  (update-title-x-offsets '(11 . 0)))
+	  (update-title-x-offsets '(11 . 0))
           (set-tab-adjustments top-left-d-w top-right-d-w top-left-m top-right-m top-left-m-t top-right-m-t))
         (setq normal-frame
               (append top-frame-default-border-corner-group top-frame-title-group top-frame-normal-buttons-left 
@@ -1906,7 +1906,7 @@
               (bottom-right-m-t
                (if (numberp (cdr (car (car bottom-frame-transient-buttons-right))))
                    (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
-	  (update-title-x-offsets '(11 . 0)))
+	  (update-title-x-offsets '(11 . 0))
           (set-tab-adjustments bottom-left-d-w bottom-right-d-w bottom-left-m bottom-right-m bottom-left-m-t bottom-right-m-t))
         (setq normal-frame
               (append bottom-frame-default-border-corner-group bottom-frame-title-group bottom-frame-normal-buttons-left 
@@ -1936,7 +1936,7 @@
               (left-right-m-t
                (if (numberp (cdr (car (car left-frame-transient-buttons-right))))
                    (+ (cdr (car (car left-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
-	  (update-title-x-offsets '(11 . -11)))
+	  (update-title-x-offsets '(11 . -11))
           (set-tab-adjustments left-left-d-w left-right-d-w left-left-m left-right-m left-left-m-t left-right-m-t))
         (setq normal-frame
               (append left-frame-title-group left-frame-normal-buttons-left left-frame-default-border-corner-group 
@@ -1966,7 +1966,7 @@
               (right-right-m-t
                (if (numberp (cdr (car (car right-frame-transient-buttons-right))))
                    (+ (cdr (car (car right-frame-transient-buttons-right))) (+ styletab:title-dimension (button-width-custom))) 0)))
-	  (update-title-x-offsets '(11 . -11)))
+	  (update-title-x-offsets '(11 . -11))
           (set-tab-adjustments right-left-d-w right-right-d-w right-left-m right-right-m right-left-m-t right-right-m-t))
         (setq normal-frame
               (append right-frame-title-group right-frame-normal-buttons-left right-frame-default-border-corner-group 
