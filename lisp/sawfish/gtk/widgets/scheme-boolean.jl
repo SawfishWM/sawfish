@@ -28,18 +28,25 @@
 
   (define (make-item changed-callback)
     (let ((widget (gtk-check-button-new-with-label (_ "Enable"))))
+
       (gtk-label-set-justify (car (gtk-container-get-children widget)) 'left)
       (gtk-toggle-button-set-inconsistent widget t)
-      (g-signal-connect
-       widget "toggled"
-       (lambda ()
-	 (when changed-callback
-	   (call-callback changed-callback))))
+
+      (g-signal-connect widget "toggled" (lambda (widget)
+					   (gtk-toggle-button-set-inconsistent widget nil)))
+
+      (when changed-callback
+	(g-signal-connect widget "toggled" (make-signal-callback changed-callback)))
+
       (gtk-widget-show widget)
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (gtk-toggle-button-set-active widget x)))
+		   (if (not (memq x '(() #f)))
+		       (gtk-toggle-button-set-active widget t)
+		     (gtk-toggle-button-set-inconsistent widget nil)
+		     (gtk-toggle-button-set-active widget nil))))
 	  ((clear) (lambda ()
 		     (gtk-toggle-button-set-inconsistent widget t)))
 	  ((ref) (lambda ()
