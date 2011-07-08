@@ -10,7 +10,8 @@
 (define-structure sawfish.wm.edge.tile
 
     (export tile-windows
-	    tile-windows-core)
+	    tile-windows-core
+	    window-never-tile-p)
 
     (open rep
 	  rep.data
@@ -34,6 +35,10 @@ an extra column should be used.")
   ;; macro for tile-windows
   (defmacro pop (l) `(setq ,l (cdr ,l)))
 
+
+  (define (window-never-tile-p w)
+    (window-get w 'never-tile))
+
   (define (tile-windows-core edge while-moving)
     (interactive)
     (call-hook 'before-edge-action-hook (list 'tile-windows edge while-moving))
@@ -41,6 +46,7 @@ an extra column should be used.")
         (fake-release-window))
     (let ((windows (remove-if window-iconified-p
 			      window-ignored-p
+			      window-never-tile-p
 			      (or (filter-windows window-on-current-workspace-viewport-p)
 			          (filter-windows window-on-current-head-viewport-p)))))
       (when (> (length windows) 1)
