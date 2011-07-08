@@ -40,6 +40,7 @@ an extra column should be used.")
     (when while-moving
         (fake-release-window))
     (let ((windows (remove-if window-iconified-p
+			      window-ignored-p
 			      (or (filter-windows window-on-current-workspace-viewport-p)
 			          (filter-windows window-on-current-head-viewport-p)))))
       (when (> (length windows) 1)
