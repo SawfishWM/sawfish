@@ -4796,8 +4796,9 @@ It consists of the following modules: @code{sawfish.wm.edge.subrs} -, which
 contains the C-subroutines, @code{sawfish.wm.edge.utils} - a set of utility
 functions, @code{sawfish.wm.edge.conf} - configuration infrastructure,
 @code{sawfish.wm.edge.actions} - functionality infrastucture module,
-@code{sawfish.wm.edge.flip} - edge-fliping functions,
-@code{sawfish.wm.edge.hot-spots} - hot-spot functions and
+@code{sawfish.wm.edge.flip} - viewport/workspace fliping functions,
+@code{sawfish.wm.edge.hot-spots} - hot-spot/hot-move functions,
+@code{sawfish.wm.edge.tile} - simple, but functional tiling funtion and
 @code{sawfish.wm.edge.viewport-drag} - functions for dragging the viewport.
 
 @section EdgeAction Internals
@@ -4845,6 +4846,16 @@ This function returns the border of the flipper-window which was entered, or nil
 
 Configuration infrastructure (@code{sawfish.wm.edge.conf}):
 
+@defvr {HOOK} before-edge-action-hook
+This hook is called before an edge-action is performed.
+Passes @code{func}, @code{edge} and @code{while-moving} to the functions invoked.
+@end defvr
+
+@defvr {HOOK} after-edge-action-hook
+This hook is called after an edge-action is performed.
+Passes @code{func}, @code{edge} and @code{while-moving} to the functions invoked.
+@end defvr
+
 @defvr Customizable edge-actions-enabled nil
 Global configuration, whether to enable or disable EdgeActions.
 @end defvr
@@ -4854,9 +4865,9 @@ Action to perform for the left and right screen-edges when they are hit by the
 pointer, either flip-workspace, flip-viewport, viewport-drag or none/hot-spot.
 @end defvr
 
-@defvr Customizable left-right-edge-move-action 'none
+@defvr Customizable left-right-edge-move-action 'none/hot-move
 Action to perform for the left and right screen-edges when a window is dragged over
-them, either flip-workspace, flip-viewport, viewport-drag or none.
+them, either flip-workspace, flip-viewport, viewport-drag or none/hot-move.
 @end defvr
 
 @defvr Customizable top-bottom-edge-action 'none/hot-spot
@@ -4864,9 +4875,9 @@ Action to perform for the top and buttom screen-edges when they are hit by the
 pointer, either flip-workspace, flip-viewport, viewport-drag or none/hot-spot.
 @end defvr
 
-@defvr Customizable top-bottom-edge-move-action 'none
+@defvr Customizable top-bottom-edge-move-action 'none/hot-move
 Action to perform for the top and bottom screen-edges when a window is dragged
-over them, either flip-workspace, flip-viewport, viewport-drag or none.
+over them, either flip-workspace, flip-viewport, viewport-drag or none/hot-move.
 @end defvr
 
 @defvr Customizable edge-flip-delay 250
@@ -4903,9 +4914,9 @@ This function is used by the @code{edge-actions-enabled} customizable to make
 (de-)activating EdgeActions from SawfishConfig and resource-file work.
 @end defun
 
-@defun edge-action-call func edge
+@defun edge-action-call func edge while-moving
 This function calls the desired user-action @code{func} for the screen-edge
-@code{edge}.
+@code{edge}. @code{while-moving} to distinguish whether a window is dragged or not.
 @end defun
 
 @defun edge-action-hook-func
@@ -4915,9 +4926,9 @@ when the edge was activated using the pointer.
 @end defun
 
 @defun edge-action-move-hook-func
-This hook-function is responsible to call @code{edge-action-call} to perfom an
-action, if the edge was activated while dragging a window over it. Hot-Spots is
-not supported when doing so.
+This hook-function is responsible to either call @code{hot-move-invoke} or to 
+call @code{edge-action-call} to perfom an action, if the edge was activated
+while dragging a window over it.
 @end defun
 
 EdgeFlip (@code{sawfish.wm.edge.flip}):
@@ -4926,9 +4937,10 @@ This is the traditional EdgeFlip. When a window or the pointer hits the
 screen-edge, the screen is shifted by either one Viewport or one Workspace in
 that direction. The pointer is warped accordingly (to keep in logical position).
 
-@defun edge-flip-invoke edge type
+@defun edge-flip-invoke edge type while-moving
 This function invokes edge-fliping. edge (a symbol) is the screen-edge that is active
-(left, right, top, bottom), type is either @code{workspace} or @code{viewport}.
+(left, right, top, bottom), type is either @code{flip-workspace} or @code{flip-viewport}.
+@code{while-moving} is used to distinguish whether a window is dragged or not.
 @end defun
 
 ViewportDrag (@code{sawfish.wm.edge.viewport-drag}):
@@ -4937,9 +4949,36 @@ iViewportDrag (formerly Infinite-Desktop) is a mechanic, that shifts the
 Viewport accordingly to which screen edge was activated. This way the Viewport
 becomes virtually "infinite", regardless of the physical size (thus the old name).
 
-@defun viewport-drag edge
+@defun viewport-drag edge while-moving
 This function invokes viewport-dragging. edge is the screen-edge that is active
-(left, right, top, bottom) (a symbol).
+(left, right, top, bottom) (a symbol).  @code{while-moving} is used to distinguish
+whether a window is dragged or not.
+@end defun
+
+Tile (@code{sawfish.wm.edge.tile}):
+
+Tiling is a mechanic to re-arrange windows in a non-overlapping way. Tiling as such
+means to "organization of the screen into mutually non-overlapping frames, as opposed
+to the more popular approach of coordinate-based stacking of overlapping objects".
+
+@c maybe merge DMG quadrants stuff?
+@c need untile-windows, respectively toggle-tiling for full expose experience
+This simple approach Sawfish provides may also be known as "Expose" or "Mosaic".
+
+Sawfish does not tile all windows visible. It filters by given rules:
+
+- only current head (xinerama)
+- only current workspace
+- only current visible viewport
+- exclude iconified windows
+- exclude ignored windows
+
+@defun tile-windows
+Interactive command to manually tile windows.
+@end defun
+
+@defun tile-windows-core edge while-moving
+Internal function to tile windows when activating an edge.
 @end defun
 
 HotSpots (@code{sawfish.wm.edge.hot-spots}):
@@ -4948,12 +4987,17 @@ HotSpots is a mechanic, which allows for practically everything to be done when
 a screen edge or a corner is activated. the corners are defined via
 @code{hot-spots-corner-length}. Only HotSpots responds to the corners.
 
+HotMove is HotSpots' companion, which allows for practically everything to be done
+when a screen edge is actived by dragging a window over it. HotMove doesn't know about
+corners, it only sees for edges.
+
 That way your screen-edge is actually split into 12: 4 corners, two times 4
 edges (as explained above actions are split for when while moving a window and
 for when activating the edges using the pointer). Corners are not recognized for
 for while moving a window.
 
 @c this is going to be changed by Teika, he said
+@c I'll check into this before merging into master 11-07-08
 HotSpots only allows functions to be used as actions, though practically
 everything can be done this way. If the arguement is not a function, an
 error is thrown, to in form the user.
@@ -4990,9 +5034,30 @@ The function launched when hitting the bottom-edge.
 The function launched when hitting the bottom-left-corner.
 @end defvr
 
+@defvar Customizable left-edge-move-function nil
+The function launched when dragging a window over the left-edge.
+@end defvar
+
+@defvar Customizable top-edge-move-function nil
+The function launched when dragging a window over the top-edge.
+@end defvar
+
+@defvar Customizable right-edge-move-function nil
+The function launched when dragging a window over the right-edge.
+@end defvar
+
+@defvar Customizable bottom-edge-move-function nil
+The function launched when dragging a window over the bottom-edge.
+@end defvar
+
 @defun hot-spot-invoke spot
 This function invokes the hot-spot. spot (a symbol) is either left,
 top-left, top, top-right, right, bottom-right, bottom or bottom-left.
+@end defun
+
+@defun hot-move-invoke spot
+This function invokes the hot-spot while moving. spot (a symbol) is
+either left, top, right, or bottom.
 @end defun
 
 Example configuration (@file{~/.sawfishrc}):
@@ -5001,9 +5066,14 @@ Note: this is just an example, not all functions in
       it may be availabe on your system.
 
 @lisp
+;; Timers
 ( defvar-setq edge-flip-delay 250 )
 ( defvar-setq hot-spot-delay 125 )
 
+;; Activate screen edges
+( activate-edges t )
+
+;; HotSpots
 ( defvar-setq top-left-corner-function
   ( lambda () ( tile-windows ) ) )
 
@@ -5021,6 +5091,13 @@ Note: this is just an example, not all functions in
 
 ( defvar-setq bottom-edge-function
   ( lambda () ( jump-or-exec "Dolphin" "dolphin" #:match-class t ) ) )
+
+;; HotMove
+( defvar-setq top-edge-move-function
+  ( lambda ( win ) ( maximize-window win ) ) )
+
+( defvar-setq bottom-edge-move-function
+  ( lambda ( win ) ( delete-window win ) ) )
 
 ;; actions when pointer hits edge
 ( defvar-setq left-right-edge-action 'flip-viewport )
