@@ -55,7 +55,7 @@
   ;; this level, and positive for windows above the normal level
 
   (defcustom transients-above 'parents
-    "Keep transient windows stacked above: \\w"
+    "Keep transient windows stacked above: \\left"
     :group (misc stacking)
     :type (choice all parents none))
 
