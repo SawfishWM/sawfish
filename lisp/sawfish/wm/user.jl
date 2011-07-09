@@ -157,28 +157,32 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
     (init-apps-menu))
 
   ;; initialize edges, unless disabled
-  (if (and (not batch-mode)
+  (when (and (not batch-mode)
 	   edge-actions-enabled)
       (activate-edges t))
 
   ;; apply customized frame-fonts
-  (if use-custom-font
-      (update-frame-font))
+  (when use-custom-font
+    (update-frame-font))
 
   ;; apply customized font-colors
-  (if use-custom-font-color
-      (update-frame-font-color))
+  (when use-custom-font-color
+    (update-frame-font-color))
+
+  ;; apply customized cursor-shapes
+  (when use-custom-button-cursor-shape
+    (update-button-cursor-shape))
 
   ;; apply customized border-width/color
-  (if use-custom-border
-      (update-border-color-width))
+  (when use-custom-border
+    (update-border-color-width))
 
   ;; apply customized text-position
-  (if use-custom-text-position
-      (update-text-position))
+  (when use-custom-text-position
+    (update-text-position))
 
-  (if want-poweroff-menu
-      (add-poweroff-menu))
+  (when want-poweroff-menu
+    (add-poweroff-menu))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)

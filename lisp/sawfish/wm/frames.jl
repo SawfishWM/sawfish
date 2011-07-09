@@ -55,6 +55,7 @@
 	     define-frame-class
 	     update-frame-font-color
 	     update-frame-font
+             update-button-cursor-shape
 	     update-border-color-width
 	     update-title-x-offsets
 	     update-title-y-offsets
@@ -200,6 +201,31 @@ by the current theme, then FALLBACK-TYPE is used instead.")
 	      '(title tabbar-horizontal))
       (mapc (lambda (fc) (remove-frame-part-value fc 'font t))
 	    '(title tabbar-horizontal)))
+    (mapc rebuild-frame (managed-windows)))
+
+  (define (get-cursor-shape-for-button button)
+    (case button
+      ((menu-button) menu-button-cursor-shape)
+      ((close-button) close-button-cursor-shape)
+      ((iconify-button) iconify-button-cursor-shape)
+      ((maximize-button) maximize-button-cursor-shape)
+      ((shade-button) shade-button-cursor-shape)
+      ((sticky-button) sticky-button-cursor-shape)
+      ((lock-button) lock-button-cursor-shape)
+      ((rename-button) rename-button-cursor-shape)
+      ((move-resize-button) move-resize-button-cursor-shape)
+      ((raise-lower-button) raise-lower-button-cursor-shape)))
+
+  (define (update-button-cursor-shape)
+    (if use-custom-button-cursor-shape
+        (mapc (lambda (btn)
+		(set-frame-part-value btn 'cursor (get-cursor-shape-for-button btn) t))
+	      '(menu-button close-button iconify-button maximize-button shade-button
+		sticky-button lock-button rename-button move-resize-button raise-lower-button))
+      (mapc (lambda (btn)
+	      (remove-frame-part-value btn 'cursor t))
+	    '(menu-button close-button iconify-button maximize-button shade-button
+	      sticky-button lock-button rename-button move-resize-button raise-lower-button)))
     (mapc rebuild-frame (managed-windows)))
 
   (define (update-border-color-width)
@@ -398,6 +424,112 @@ generate.")
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom use-custom-button-cursor-shape nil
+    "Whether to change the cursor shape for frame buttons."
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom menu-button-cursor-shape 'left_ptr
+    "Cursor shape for menu button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom close-button-cursor-shape 'left_ptr
+    "Cursor shape for close button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom iconify-button-cursor-shape 'left_ptr
+    "Cursor shape for iconify button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom maximize-button-cursor-shape 'left_ptr
+    "Cursor shape for maximize button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom shade-button-cursor-shape 'left_ptr
+    "Cursor shape for shade button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom sticky-button-cursor-shape 'left_ptr
+    "Cursor shape for sticky button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom lock-button-cursor-shape 'left_ptr
+    "Cursor shape for lock button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom rename-button-cursor-shape 'left_ptr
+    "Cursor shape for rename button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom move-resize-button-cursor-shape 'left_ptr
+    "Cursor shape for move-resize button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom raise-lower-button-cursor-shape 'left_ptr
+    "Cursor shape for raise-lower button: \\w"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom use-custom-text-position nil
     "Whether to change the position of the titlebar text."
