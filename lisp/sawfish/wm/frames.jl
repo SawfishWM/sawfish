@@ -432,7 +432,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom menu-button-cursor-shape 'left_ptr
-    "Cursor shape for menu button: \\w"
+    "Cursor shape for menu button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -442,7 +442,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom close-button-cursor-shape 'left_ptr
-    "Cursor shape for close button: \\w"
+    "Cursor shape for close button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -452,7 +452,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom iconify-button-cursor-shape 'left_ptr
-    "Cursor shape for iconify button: \\w"
+    "Cursor shape for iconify button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -462,7 +462,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom maximize-button-cursor-shape 'left_ptr
-    "Cursor shape for maximize button: \\w"
+    "Cursor shape for maximize button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -472,7 +472,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom shade-button-cursor-shape 'left_ptr
-    "Cursor shape for shade button: \\w"
+    "Cursor shape for shade button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -482,7 +482,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom sticky-button-cursor-shape 'left_ptr
-    "Cursor shape for sticky button: \\w"
+    "Cursor shape for sticky button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -492,7 +492,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom lock-button-cursor-shape 'left_ptr
-    "Cursor shape for lock button: \\w"
+    "Cursor shape for lock button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -502,7 +502,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom rename-button-cursor-shape 'left_ptr
-    "Cursor shape for rename button: \\w"
+    "Cursor shape for rename button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -512,7 +512,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom move-resize-button-cursor-shape 'left_ptr
-    "Cursor shape for move-resize button: \\w"
+    "Cursor shape for move-resize button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -522,7 +522,7 @@ generate.")
     :after-set (lambda () (update-button-cursor-shape)))
 
   (defcustom raise-lower-button-cursor-shape 'left_ptr
-    "Cursor shape for raise-lower button: \\w"
+    "Cursor shape for raise-lower button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
