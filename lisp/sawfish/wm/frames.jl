@@ -435,42 +435,50 @@ generate.")
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom menu-button-cursor-shape 'left_ptr
+  (defcustom menu-button-cursor-shape 'X_cursor
     "Cursor shape for menu button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom close-button-cursor-shape 'left_ptr
+  (defcustom close-button-cursor-shape 'pirate
     "Cursor shape for close button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom iconify-button-cursor-shape 'left_ptr
+  (defcustom iconify-button-cursor-shape 'll_angle
     "Cursor shape for iconify button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom maximize-button-cursor-shape 'left_ptr
+  (defcustom maximize-button-cursor-shape 'draped_box
     "Cursor shape for maximize button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
@@ -478,79 +486,95 @@ generate.")
   (defcustom shade-button-cursor-shape 'left_ptr
     "Cursor shape for shade button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom sticky-button-cursor-shape 'left_ptr
+  (defcustom sticky-button-cursor-shape 'plus
     "Cursor shape for sticky button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom lock-button-cursor-shape 'left_ptr
+  (defcustom lock-button-cursor-shape 'dotbox
     "Cursor shape for lock button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom next-workspace-button-cursor-shape 'left_ptr
+  (defcustom next-workspace-button-cursor-shape 'sb_right_arrow
     "Cursor shape for next-workspace button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom previous-workspace-button-cursor-shape 'left_ptr
+  (defcustom previous-workspace-button-cursor-shape 'sb_left_arrow
     "Cursor shape for previous-workspace button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom rename-button-cursor-shape 'left_ptr
+  (defcustom rename-button-cursor-shape 'xterm
     "Cursor shape for rename button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom move-resize-button-cursor-shape 'left_ptr
+  (defcustom move-resize-button-cursor-shape 'fleur
     "Cursor shape for move-resize button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
 
-  (defcustom raise-lower-button-cursor-shape 'left_ptr
+  (defcustom raise-lower-button-cursor-shape 'double_arrow
     "Cursor shape for raise-lower button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
-                  crosshair diamond_cross dotbox double_arrow fleur
-                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
-                  plus question_arrow right_ptr spider star target tcross xterm)
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
     :after-set (lambda () (update-button-cursor-shape)))
