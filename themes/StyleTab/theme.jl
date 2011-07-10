@@ -466,19 +466,6 @@
              "Button2-Off" 'set-frame-unframed-and-unframed/shaped-transient-toggle
              "Button3-Off" 'set-frame-shaped-and-shaped/shaped-transient-toggle))
 
-(defvar prev-button-keymap
-  (bind-keys (make-keymap)
-			 "Button3-Off" 'send-to-next-workspace
-             "Button2-Click" 'popup-workspace-list
-             "Button1-Off" 'send-to-previous-workspace))
-(defvar next-button-keymap
-  (bind-keys (make-keymap)
-             "Button3-Off" 'send-to-previous-workspace
-             "Button2-Click" 'popup-workspace-list
-             "Button1-Off" 'send-to-next-workspace))
-(define-frame-class 'prev-button '((keymap . prev-button-keymap)))
-(define-frame-class 'next-button '((keymap . next-button-keymap)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ;;; make images 
 
@@ -1413,7 +1400,7 @@
     (width . ,title-height-s)))
 
 (define top-frame-prev-button
-  `((class . prev-button)
+  `((class . previous-workspace-button)
     (background . ,top-frame-prev-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
@@ -1421,7 +1408,7 @@
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-prev-button
-  `((class . prev-button)
+  `((class . previous-workspace-button)
     (background . ,bottom-frame-prev-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
@@ -1429,7 +1416,7 @@
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-prev-button
-  `((class . prev-button)
+  `((class . previous-workspace-button)
     (background . ,left-frame-prev-image-set)
     (cursor . hand2)
     (left-edge . ,title-edge-s)
@@ -1437,7 +1424,7 @@
     (width . ,title-height-s)))
 
 (define right-frame-prev-button
-  `((class . prev-button)
+  `((class . previous-workspace-button)
     (background . ,right-frame-prev-image-set)
     (cursor . hand2)
     (right-edge . ,title-edge-s)
@@ -1445,7 +1432,7 @@
     (width . ,title-height-s)))
 
 (define top-frame-next-button
-  `((class . next-button)
+  `((class . next-workspace-button)
     (background . ,top-frame-next-image-set)
     (cursor . hand2)
     (top-edge . ,title-edge-s)
@@ -1453,7 +1440,7 @@
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-next-button
-  `((class . next-button)
+  `((class . next-workspace-button)
     (background . ,bottom-frame-next-image-set)
     (cursor . hand2)
     (bottom-edge . ,title-edge)
@@ -1461,7 +1448,7 @@
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-next-button
-  `((class . next-button)
+  `((class . next-workspace-button)
     (background . ,left-frame-next-image-set)
     (cursor . hand2)
     (left-edge . ,title-edge-s)
@@ -1469,7 +1456,7 @@
     (width . ,title-height-s)))
 
 (define right-frame-next-button
-  `((class . next-button)
+  `((class . next-workspace-button)
     (background . ,right-frame-next-image-set)
     (cursor . hand2)
     (right-edge . ,title-edge-s)

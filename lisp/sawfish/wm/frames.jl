@@ -214,18 +214,22 @@ by the current theme, then FALLBACK-TYPE is used instead.")
       ((lock-button) lock-button-cursor-shape)
       ((rename-button) rename-button-cursor-shape)
       ((move-resize-button) move-resize-button-cursor-shape)
-      ((raise-lower-button) raise-lower-button-cursor-shape)))
+      ((raise-lower-button) raise-lower-button-cursor-shape)
+      ((next-workspace-button) next-workspace-button-cursor-shape)
+      ((previous-workspace-button) previous-workspace-button-cursor-shape)))
 
   (define (update-button-cursor-shape)
     (if use-custom-button-cursor-shape
         (mapc (lambda (btn)
 		(set-frame-part-value btn 'cursor (get-cursor-shape-for-button btn) t))
 	      '(menu-button close-button iconify-button maximize-button shade-button
-		sticky-button lock-button rename-button move-resize-button raise-lower-button))
+		sticky-button lock-button rename-button move-resize-button raise-lower-button
+		next-workspace-button previous-workspace-button))
       (mapc (lambda (btn)
 	      (remove-frame-part-value btn 'cursor t))
 	    '(menu-button close-button iconify-button maximize-button shade-button
-	      sticky-button lock-button rename-button move-resize-button raise-lower-button)))
+	      sticky-button lock-button rename-button move-resize-button raise-lower-button
+		next-workspace-button previous-workspace-button)))
     (mapc rebuild-frame (managed-windows)))
 
   (define (update-border-color-width)
@@ -493,6 +497,26 @@ generate.")
 
   (defcustom lock-button-cursor-shape 'left_ptr
     "Cursor shape for lock button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom next-workspace-button-cursor-shape 'left_ptr
+    "Cursor shape for next-workspace button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow fleur
+                  hand1 hand2 iron_cross left_ptr mouse pencil pirate
+                  plus question_arrow right_ptr spider star target tcross xterm)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom previous-workspace-button-cursor-shape 'left_ptr
+    "Cursor shape for previous-workspace button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow fleur
                   hand1 hand2 iron_cross left_ptr mouse pencil pirate
@@ -991,6 +1015,8 @@ generate.")
   (define-frame-class 'rename-button '((keymap . rename-button-keymap)))
   (define-frame-class 'move-resize-button '((keymap . move-resize-button-keymap)))
   (define-frame-class 'raise-lower-button '((keymap . raise-lower-button-keymap)))
+  (define-frame-class 'next-workspace-button '((keymap . next-workspace-button-keymap)))
+  (define-frame-class 'previous-workspace-button '((keymap . previous-workspace-button-keymap)))
 
   (define-frame-class 'title `((keymap . title-keymap)
 			       (cursor . ,(cursor-for-frame-part 'title))))
