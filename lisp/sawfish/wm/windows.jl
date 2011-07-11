@@ -296,6 +296,10 @@ specified by the user."
       (let ((coords (window-position w))
 	    (foff (window-frame-offset w))
 	    (dims (window-dimensions w)))
+	(require 'sawfish.wm.state.shading)
+	(when (window-shaded-p w)
+	  (setq foff (cons 0 0))
+	  (setq dims (window-frame-dimensions w)))
 	(unless x
 	  (setq x
 		(if (< (car warp-to-window-offset) 0)
