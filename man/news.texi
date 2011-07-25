@@ -78,12 +78,12 @@ possible to trigger the same event multiple times at a time. This is fixed now.
 
 @item @code{HotMove}. Calls an EdgeAction when dragging a window over the edge.
 
-@item @code{Tiling}. Simple tiling EdgeActions (can also be used stand-alone).
+@item @code{Tile}. Simple tiling EdgeAction (can also be used stand-alone).
 Original code by Mark Triggs.
 @end itemize
 
 @item @code{before-edge-action-hook} and @code{after-edge-action-hook}. While
-@code{enter-flipper-hook} and @code{leave-flipper-hook} simply respond to the move
+@code{enter-flipper-hook} and @code{leave-flipper-hook} simply respond to the mouse
 entering or leaving the flipper-window, the new hooks respond only when an EdgeAction
 was invoked. The two hooks pass the invoked EdgeAction, activated edge and a boolean
 @code{while-moving} value to the child-function (in that order).
@@ -137,7 +137,7 @@ Lucas Pandolfo.
 @item @code{program}. Just an alias to @code{file}.
 
 @item All @code{gtk-only} widgets. Since Sawfish 1.5.0 those have been dummies,
-we don't use @code{libgnome}, @code{libgnomeui} or @code{libgnomecanvas} anymore.
+we don't use @code{libgnome}, @code{libgnomeui} or @code{libgnomecanvas} anymore anyway.
 @end itemize
 
 @item New buttons. SawfishConfig now offers buttons to access Wiki, Help,
@@ -204,7 +204,8 @@ refer to the functions @code{update-title-x-offsets}, @code{update-title-y-offse
 
 @item Majorly improved the grouping of options in StyleTab.
 
-@item Moved definitons for @code{previous-workspace-button} and @code{next-workspace-button}.
+@item Moved definitons for @code{previous-workspace-button} and @code{next-workspace-button}
+from StyleTab into Sawfish.
 @end itemize
 @item New Features
 @itemize @minus
