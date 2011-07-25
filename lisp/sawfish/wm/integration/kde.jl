@@ -66,12 +66,19 @@
 		      ()
 		      (,(_ "L_ock screen from KDE")
 			(system "qdbus org.kde.krunner /ScreenSaver Lock &"))
+		      (,(_ "S_witch User from KDE")
+			(system "qdbus org.kde.krunner /App switchUser &"))
+		      ()
 		      (,(_ "_Logout from KDE")
 		       (system ,(concat kde-logout-cmd " 1 0 -1 &")))
 		      (,(_ "_Reboot from KDE")
 		       (system ,(concat kde-logout-cmd " 1 1 -1 &")))
 		      (,(_ "_Shutdown from KDE")
-		       (system ,(concat kde-logout-cmd " 1 2 -1 &"))))))))
+		       (system ,(concat kde-logout-cmd " 1 2 -1 &")))
+		      (,(_ "S_uspend from KDE")
+			(system "qdbus org.kde.kded /org/freedesktop/PowerManagement Suspend &"))
+		      (,(_ "_Hibernate from KDE")
+			(system "qdbus org.kde.kded /org/freedesktop/PowerManagement Hibernate &")))))))
   
   ;; Returns nil if kde is not found.
   ;; If detected, returns t, and do also kde support init.
