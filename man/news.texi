@@ -39,6 +39,191 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
+@heading 1.8.90 "Beats Of Life"
+@itemize @bullet
+
+@item Updated or New dependencies
+@itemize @minus
+
+@item librep 0.92.0 -> 0.92.1
+@item rep-gtk 0.90.4 -> 0.90.7
+@end itemize
+@item Bug Fixes
+@itemize @minus
+
+@item When cursor-warping was enabled and user switched to a shaded window,
+the cursor warped to the position of the unshaded window. This is fixed now.
+[Christopher Bratusek]
+
+@item When switching between tabbed themes from SawfishConfig, it could happens
+that there were @code{gaps} in the frame. This is fixed now. [Christopher Bratusek]
+
+@item In SawfishConfig one could only grab key-bindings, but not mouse- or mixed
+mouse-key-bindings. This is fixed now. (Move mouse 20 pixels to grab a @code{Move} event).
+[Christopher Bratusek]
+
+@item SawfishConfig became useless when Sawfish restarted. This is now worked-around
+by simply restarting SawfishConfig when Sawfish does. A new @code{before-restart-hook}
+has been added for this purpose. [Christopher Bratusek]
+
+@item In EdgeActions @code{HotSpot}, @code{HotMove} and @code{EdgeFlip}, it was
+possible to trigger the same event multiple times at a time. This is fixed now.
+[Jeremy Hankins]
+@end itemize
+@item EdgeAction changes [Christopher Bratusek]
+@itemize @minus
+
+@item New EdgeActions:
+@itemize x
+
+@item @code{HotMove}. Calls an EdgeAction when dragging a window over the edge.
+
+@item @code{Tiling}. Simple tiling EdgeActions (can also be used stand-alone).
+Original code by Mark Triggs.
+@end itemize
+
+@item @code{before-edge-action-hook} and @code{after-edge-action-hook}. While
+@code{enter-flipper-hook} and @code{leave-flipper-hook} simply respond to the move
+entering or leaving the flipper-window, the new hooks respond only when an EdgeAction
+was invoked. The two hooks pass the invoked EdgeAction, activated edge and a boolean
+@code{while-moving} value to the child-function (in that order).
+
+@item Simplified, more robust EdgeFlip (flip-viewport and flip-workspace are now split).
+
+@item Improved logic of blocking an action while another is already running. On one hand,
+see `Bug Fixes' above, on the other hand it's now ensured that we dont' activate an edge
+twice when dragging a window over it or when the pointer hits the edge via mouse-trapping.
+
+@item Updated EdgeAction documentation
+@end itemize
+@item SawfishConfig changes [Christopher Bratusek]
+@itemize @minus
+
+@item Updated and Improved widgets in SawfishConfig:
+@itemize x
+
+@item @code{file}. The file(-chooser) widget now uses GtkFileChooserButton in
+favour of the ancient GtkFileSelectionDialog. The GtkEntry and GtkVBox used as
+helpers became useless and are removed.
+
+@item @code{font}. The font(-chooser) widget now uses GtkFontChooserButton in
+favour of the ancient GtkFontSelectionDialog. The GtkEntry used as helper became
+useless and is removed.
+
+@item @code{choice}, @code{symbol}, @code{keymap}, @code{frame-style}. Those widgets
+now use GtkComboBoxText in favour of ancient GtkCombo/GtkComboEntry.
+
+@item @code{scheme-boolean}. This widget is now properly implemented.
+
+Old: two checkboxes. First for activating setting, second for choosing yes or no.
+New: only one checkbox, yes or no as usual, shows minus when unset.
+@end itemize
+
+@item New widgets in SawfishConfig:
+@itemize x
+
+@item @code{range}. The range widget represents an integer with a given range.
+Basically it uses a GtkScale instead of a GtkSpinButton, which results in a
+better user-experience for those values.
+
+@item @code{image}. The image widget contains a preview and image-selector.
+The file-browser openend is setup to display previews, too. Original code by
+Lucas Pandolfo.
+@end itemize
+
+@item Removed widgets in SawfishConfig:
+@itemize x
+
+@item @code{program}. Just an alias to @code{file}.
+
+@item All @code{gtk-only} widgets. Since Sawfish 1.5.0 those have been dummies,
+we don't use @code{libgnome}, @code{libgnomeui} or @code{libgnomecanvas} anymore.
+@end itemize
+
+@item New buttons. SawfishConfig now offers buttons to access Wiki, Help,
+ResourceFile and About. Additionally there's now a file-chooser for installing
+themes from @code{*.tar.*} files.
+
+@item Widgets that depend on an disabled setting are now hidden instead of greyed-out.
+
+@item Merged sawfish.cfg.widgets into sawfish.gtk.widgets. Old widgets aren't loaded
+anymore, even if present from an old installation.
+
+@item All defcustoms do now have a property to change the position of the label.
+To change it, append on of the following to the doc-string: \\left \\right \\top \\bottom.
+
+Example:
+
+@lisp
+(defcustom test-var 'eclipse
+  "This is just a test with label on top. \\top"
+  :type (choice eclipse crosshair none)
+  :group appearance)
+@end lisp
+
+Of course that only works, if the label is a GtkLabel widget on it's own.
+@end itemize
+@item Theme/Theming changes [Christopher Bratusek]
+@itemize @minus
+
+@item New themes:
+@itemize x
+
+@item Candido
+@item Zami-like
+@end itemize
+
+@item Improved themes:
+@itemize x
+
+@item Gradient has been replaced by Gradient-tabbed.
+@end itemize
+
+@item Removed themes [still available from Wiki]:
+@itemize x
+
+@item get-S-tabbed
+@item brushed-metal
+@item simple
+@item smaker
+@item mono
+@item gtk
+@end itemize
+
+@item New theme-related configuration-options [theme independent]:
+@itemize x
+
+@item Added an option to control the titlebar text position. If a theme
+draws something additional in the titlebar (eg. StyleTab draws an icon),
+refer to the functions @code{update-title-x-offsets}, @code{update-title-y-offsets}.
+
+@item Added an option to control the cursor-shape when hovering frame-buttons.
+
+@item Added an option to change the font, depending on the window state.
+@end itemize
+
+@item Majorly improved the grouping of options in StyleTab.
+
+@item Moved definitons for @code{previous-workspace-button} and @code{next-workspace-button}.
+@end itemize
+@item New Features
+@itemize @minus
+
+@item Added @code{mouse-trap} feature. See the file @file{lisp/sawfish/wm/ext/mousetrap.jl},
+for detailed information. [Fernando Carmano Varo] [Christopher Bratusek]
+
+@item Improved desktop-integration modules [Christopher Bratusek]
+@itemize x
+
+@item KDE integration: added entries for user-switch, hibernate, suspend, lock-screen.
+
+@item XFCE integration: added entries for hibernate, suspend, lock-screen.
+
+@item GNOME integration: added entry for lock-screen.
+@end itemize
+@end itemize
+@end itemize
+
 @heading 1.8.1 "Sharp As A Knife"
 @itemize @bullet
 
