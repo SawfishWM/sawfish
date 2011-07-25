@@ -210,6 +210,18 @@ from StyleTab into Sawfish.
 @item New Features
 @itemize @minus
 
+@item Added @code{single-window-mode}. Basically this feature is known from OS-X, though it's
+implemented in a more strict way. The @code{single-window-mode} window should get all of the users
+attention.
+
+This is ensured by auto-iconifying any up-popping window, which is not in the same
+group. To additionally not annoy the user this is done without animation. Avoided or ignored
+windows are lowered. When @code{single-window-mode} is quit, the opposite happens.
+
+Also @code{single-window-mode} hooks into unmap-notify-hook to check whether the user wants to
+stop @code{single-window-mode} (by either closing or iconifying the window). Besides each
+workspace can hold it's own @code{single-window-mode}.
+
 @item Added @code{mouse-trap} feature. See the file @file{lisp/sawfish/wm/ext/mousetrap.jl},
 for detailed information. [Fernando Carmano Varo] [Christopher Bratusek]
 
