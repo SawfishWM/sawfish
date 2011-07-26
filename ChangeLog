@@ -4,6 +4,11 @@
 	* lisp/sawfish/wm/int/xfce.jl: added entries for launching the
 	desktop's menu-editor
 
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/commands/poweroff.jl: use SSD as fallback for
+	poweroff commands (if none onf the integration modules are loaded).
+	Add lockdown and logout stuff to poweroff.
+
 2011-07-25  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/ext/single-window-mode.jl: added (my vision of)
 	single-window-mode
