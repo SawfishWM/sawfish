@@ -56,6 +56,7 @@
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_Customize GNOME") (system "gnome-control-center &"))
+		      (,(_ "_Edit GNOME menu") (system "alacarte &"))
 		      ()
 		      (,(_ "L_ock screen from GNOME")
 			(system "gnome-screensaver-command -l &"))

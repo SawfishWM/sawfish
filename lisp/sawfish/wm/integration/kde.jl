@@ -63,6 +63,7 @@
 	(setq kde-logout-cmd "qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout")
 	(nconc menu `(()
 		      (,(_ "_Customize KDE") (system "systemsettings &"))
+		      (,(_ "_Edit KDE menu") (system "kmenuedit &"))
 		      ()
 		      (,(_ "L_ock screen from KDE")
 			(system "qdbus org.kde.krunner /ScreenSaver Lock &"))

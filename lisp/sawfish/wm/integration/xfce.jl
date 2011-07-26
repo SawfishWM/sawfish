@@ -56,6 +56,10 @@
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_Customize XFCE") (system "xfce4-settings-manager &"))
+		      ;; Since XFCE 4.6 there's no stand-alone editor anymore.
+		      ;; So what to choose? Alacarte (GNOME) or LXMed (LXDE)?
+		      ;; I'd say alacarte here...
+		      (,(_ "_Edit XFCE Menu") (system "alacarte &"))
 		      ()
 		      (,(_ "L_ock from XFCE")
 			(system "xflock4 &"))
