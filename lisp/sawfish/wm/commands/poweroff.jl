@@ -35,23 +35,33 @@
 
   (define-structure-alias poweroff sawfish.wm.commands.poweroff)
 
-  (defcustom reboot-command "sudo shutdown -r now"
+  (defcustom reboot-command "ssd --reboot"
     "The command used to reboot the computer."
     :type string
     :group (misc apps))
 
-  (defcustom halt-command "sudo shutdown -h now"
+  (defcustom halt-command "ssd --shutdown"
     "The command used to halt the computer."
     :type string
     :group (misc apps))
 
-  (defcustom suspend-command "sudo suspend"
+  (defcustom suspend-command "ssd --suspend"
     "The command used to suspend the computer."
     :type string
     :group (misc apps))
 
-  (defcustom hibernate-command "sudo hibernate"
+  (defcustom hibernate-command "ssd --hibernate"
     "The command used to hibernate the computer."
+    :type string
+    :group (misc apps))
+
+  (defcustom logout-command "ssd --logout"
+    "The command used to logout the user."
+    :type string
+    :group (misc apps))
+
+  (defcustom lockdown-command "ssd --lockdown"
+    "The command used to lockdown the display."
     :type string
     :group (misc apps))
 
@@ -66,7 +76,9 @@
        (map-windows delete-window)
        (system (format nil "%s &" halt-command)))
       ((suspend)   (system (format nil "%s &" suspend-command)))
-      ((hibernate) (system (format nil "%s &" hibernate-command)))))
+      ((hibernate) (system (format nil "%s &" hibernate-command)))
+      ((logout) (system (format nil "%s &" logout-command)))
+      ((lockdown) (system (format nil "%s &" lockdown-command)))))
 
   ;;###autoload
   (define-command 'poweroff poweroff))
