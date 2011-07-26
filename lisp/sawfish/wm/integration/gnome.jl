@@ -1,6 +1,6 @@
 ;; gnome.jl -- GNOME integration
 
-;; Copyright (C) 2000 John Harper <john@dcs.warwick.ac.uk>
+;; Copyright (C) 2010 Christopher Roy Bratusek <nano@tuxfamily.org>
 
 ;; This file is part of sawfish.
 
