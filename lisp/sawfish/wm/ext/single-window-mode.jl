@@ -88,15 +88,6 @@
     "Return workspace for single-window `win' or nil, if none."
     (car (rassoc class single-window-mode-list)))
 
-  (define (single-workspace-window-removed)
-    (let loop ((rest single-window-mode-list))
-      (when rest
-	(let ((single-window-class (cdr rest))
-	      (single-window-workspace (car rest)))
-	  (unless (get-window-by-class single-window-class)
-	    (single-window-mode-list-remove single-window-workspace
-					    single-window-class))))))
-
   (define (toggle-single-window-mode #!optional w)
     "Toggle single-window-mode for window `w'."
     (let ((win (if w w (input-focus)))
