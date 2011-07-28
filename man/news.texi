@@ -222,8 +222,10 @@ Also @code{single-window-mode} hooks into unmap-notify-hook to check whether the
 stop @code{single-window-mode} (by either closing or iconifying the window). Besides each
 workspace can hold it's own @code{single-window-mode}.
 
-@item Added @code{mouse-trap} feature. See the file @file{lisp/sawfish/wm/ext/mousetrap.jl},
-for detailed information. [Fernando Carmano Varo] [Christopher Bratusek]
+@item Added @code{mouse-trap} feature. It provides a method for moving the mouse to any place of
+the screen by zooming with just a few keystrokes. The mouse is warped to the center of the screen
+screen and a outline is drawn dividing the screen in 4 squares (like trapping the mouse on it).
+[Fernando Carmano Varo] [Christopher Bratusek]
 
 @item Integrated settings for selecting wallpaper using an external command (eg: hsetroot).
 Applying settings to GNOME2 or XFCE4 is also supported. Original code by Lucas Pandolfo.
