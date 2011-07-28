@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure single-window-mode
+(define-structure sawfish.wm.ext.single-window-mode
 
   (export toggle-single-window-mode
 	  single-window-on-workspace-p
@@ -59,7 +59,6 @@
 
   (define (single-window-mode-list-remove ws class)
     "Remove a single-window from the list."
-    ;; not working for classes with "-"?
     (setq single-window-mode-list
       (remove `(,ws . ,class) single-window-mode-list)))
 
@@ -96,10 +95,8 @@
 			  current-workspace
 			;; XXX 'sticky winodws?
 			(car (window-workspaces win))))
-      ;; not yet working
       (message (format nil "win: %s > ws: %s\n class: %s > win-class-ws: %s" win window-ws (window-class win)
 			   (single-window-mode-get-window-class-for-workspace window-ws)))
-      (unless (string-match "-" (window-class win))
 	(if (equal (window-class win)
 		   (single-window-mode-get-window-class-for-workspace window-ws))
 	    (single-window-mode-stop win)
@@ -107,7 +104,7 @@
 	      (progn
 		(single-window-mode-stop (single-window-mode-get-window-for-workspace window-ws))
 		(single-window-mode-start win))
-	  (single-window-mode-start win)))))
+	  (single-window-mode-start win))))
     (message (format nil "%s" single-window-mode-list)))
 
   (define-command 'toggle-single-window-mode toggle-single-window-mode)
@@ -161,9 +158,7 @@
     (single-window-mode-core nil w))
 
   (define (single-window-mode-after-add-window w)
-    (when (and (window-get w 'single-window)
-	       ;; not yet working
-	       (not (string-match "-" (window-class w))))
+    (when (window-get w 'single-window)
       (toggle-single-window-mode w)))
 
   (define (single-window-mode-unmap-notify w)
