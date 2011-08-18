@@ -30,7 +30,7 @@
 	  rep.system
 	  sawfish.wm.misc
 	  sawfish.wm.events
-	  sawfish.wm.custom
+	  sawfish.wm.windows
 	  sawfish.wm.edge.subrs)
 
   (define-structure-alias edge-util sawfish.wm.edge.util)
