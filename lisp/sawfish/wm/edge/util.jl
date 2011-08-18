@@ -22,7 +22,9 @@
 
     (export activate-flippers
 	    get-active-corner
-	    get-active-edge)
+	    get-active-edge
+	    move-window-to-corner
+	    move-window-to-edge)
 
     (open rep
 	  rep.system
@@ -81,4 +83,21 @@
 	    ((zerop (cdr cursor))
 	     'top)
 	    ((= (cdr cursor) (1- (screen-height)))
-	     'bottom)))))
+	     'bottom))))
+
+  (define (move-window-to-corner w corner)
+    (let ((win-size (window-frame-dimensions w)))
+      (case corner
+	((top-left) (move-window-to w 0 0))
+	((top-right) (move-window-to w (- (screen-width) (car win-size)) 0))
+	((bottom-right) (move-window-to w (- (screen-width) (car win-size))
+					  (- (screen-height) (cdr win-size))))
+	((bottom-left) (move-window-to w 0 (- (screen-height) (cdr win-size)))))))
+
+  (define (move-window-to-edge w edge)
+    (let ((win-size (window-frame-dimensions w)))
+      (case edge
+	((left) (move-window-to w 0 (- (/ (screen-height) 2) (/ (cdr win-size) 2))))
+	((top) (move-window-to w (- (/ (screen-width) 2) (/ (car win-size) 2)) 0))
+	((right) (move-window-to w (screen-width) (- (/ (screen-height) 2) (/ (cdr win-size) 2))))
+	((bottom) (move-window-to w (- (/ (screen-width) 2) (/ (car win-size) 2)) (screen-height)))))))
