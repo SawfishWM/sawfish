@@ -27,7 +27,6 @@
     (open rep
 	  rep
 	  rep.system
-	  rep.io.timers
 	  sawfish.wm.windows
 	  sawfish.wm.commands.move-resize
 	  sawfish.wm.state.maxmize

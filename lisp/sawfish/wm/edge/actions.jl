@@ -34,6 +34,7 @@
 	  sawfish.wm.edge.expand
 	  sawfish.wm.edge.flip
 	  sawfish.wm.edge.hot-spots
+	  sawfish.wm.edge.maximize
 	  sawfish.wm.edge.tile
 	  sawfish.wm.edge.viewport-drag)
 
@@ -54,6 +55,8 @@
        (tile-windows-core edge while-moving))
       ((expand-window)
        (expand-action edge))
+      ((maximize-window)
+       (maximize-action))
       ((none/hot-spot)
        (hot-spot-invoke edge))
       ((none/hot-move)
