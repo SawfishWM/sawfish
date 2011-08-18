@@ -28,8 +28,10 @@
 	  rep
 	  rep.system
 	  sawfish.wm.windows
+	  sawfish.wm.misc
+	  sawfish.wm.events
 	  sawfish.wm.commands.move-resize
-	  sawfish.wm.state.maxmize
+	  sawfish.wm.state.maximize
 	  sawfish.wm.edge.util)
 
   (define-structure-alias edge-expand sawfish.wm.edge.expand)
@@ -40,8 +42,8 @@
     (if (eq side 'left)
         (move-window-to-corner w 'top-left)
       (move-window-to-corner w 'top-right))
-    (resize-window-frame-to (/ (screen-width) 2) (window-height w))
-    (maximize-fill-window-vertical w))
+    (resize-window-frame-to w (/ (screen-width) 2) (window-height w))
+    (maximize-fill-window-vertically w))
 
   (define (expand-window-half-screen-horizontal side #!optional w)
     (unless w
@@ -49,16 +51,16 @@
     (if (eq side 'top)
         (move-window-to-corner w 'top-left)
       (move-window-to-corner w 'bottom-left))
-    (resize-window-frame-to (window-width w) (/ (screen-height) 2))
-    (maximize-fill-window-horizontal w))
+    (resize-window-frame-to w (window-width w) (/ (screen-height) 2))
+    (maximize-fill-window-horizontally w))
 
   (define (expand-action edge)
     (let ((w (input-focus))
           (func (case edge
-                   ((left) (expand-window-half-screen-vertical))
-                   ((right) (expand-window-half-screen-vertical))
-                   ((top) (expand-window-half-screen-horizontal))
-                   ((bottom) (expand-window-half-screen-horizontal)))))
+                   ((left) expand-window-half-screen-vertical)
+                   ((right) expand-window-half-screen-vertical)
+                   ((top) expand-window-half-screen-horizontal)
+                   ((bottom) expand-window-half-screen-horizontal))))
       (allow-events 'async-both)
       (fake-release-window)
       (funcall func edge w))))
