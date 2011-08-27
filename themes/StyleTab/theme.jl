@@ -24,7 +24,7 @@
 
 (defcustom styletab:style 'Dark "Frame and button style."
   :group (appearance StyleTab:group)
-  :options (Reduce Dark DarkColor Silver SilverColor Smoothly)
+  :options (BlueGlass BlueDarker Reduce Dark DarkColor Silver SilverColor Smoothly)
   :type symbol)
 
 (defcustom styletab:titlebar-place 'top "Titlebar default place."
@@ -116,12 +116,24 @@
 (define title-colors-images
   (lambda ()
       (case styletab:style
+	    ((BlueGlass) (title-colors-blueglass))
+	    ((BlueDarker) (title-colors-bluedarker))
             ((Reduce) (title-colors-reduce))
             ((Dark) (title-colors-dark))
             ((DarkColor) (title-colors-dark))
             ((Silver) (title-colors-silver))
             ((SilverColor) (title-colors-silver))
             ((Smoothly) (title-colors-smoothly)))))
+
+(define title-colors-blueglass
+  (lambda ()
+    `((focused . "#E5E5E5") (highlighted . "#FDFDFD") (clicked . "#FDFDFD") (inactive . "#2B2B2B") (inactive-highlighted . "#000000")
+      (inactive-clicked . "#000000"))))
+
+(define title-colors-bluedarker
+  (lambda ()
+    `((focused . "#E5E5E5") (highlighted . "#FDFDFD") (clicked . "#FDFDFD") (inactive . "#B8B8B8") (inactive-highlighted . "#CFCFCF")
+      (inactive-clicked . "#CFCFCF"))))
 
 (define title-colors-reduce
   (lambda ()
@@ -149,6 +161,8 @@
     (if (eq styletab:custom-button-width t)
         (button-width-set)
       (case styletab:style
+	    ((BlueGlass) (button-width-blueglass))
+            ((BlueDarker) (button-width-blueglass))
             ((Reduce) (button-width-reduce))
             ((Dark) (button-width-dark))
             ((DarkColor) (button-width-dark))
@@ -161,6 +175,8 @@
     (if (eq styletab:custom-button-width nil)
         (button-width-zero)
       (case styletab:style
+	    ((BlueGlass) (button-width-blueglass))
+            ((BlueDarker) (button-width-blueglass))
             ((Reduce) (button-width-reduce))
             ((Dark) (button-width-dark))
             ((DarkColor) (button-width-dark))
@@ -171,6 +187,7 @@
 (define button-width-set (lambda () (+ styletab:button-width (button-width-add))))
 (define button-width-zero (lambda () 0))
 (define button-width-reduce (lambda () 0))
+(define button-width-blueglass (lambda () 0))
 (define button-width-dark (lambda () 8))
 (define button-width-silver (lambda () -4))
 (define button-width-smoothly (lambda () 0))
@@ -178,6 +195,8 @@
 (define tabbar-right-edge-width
   (lambda ()
     (case styletab:style
+	  ((BlueGlass) 3)
+          ((BlueDarker) 3)
           ((Reduce) 6)
           ((Dark) 3)
           ((DarkColor) 3)
