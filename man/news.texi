@@ -48,6 +48,21 @@ Each release lists incompatible changes at its top.
 @item More robustness for @code{get-window-by-*} functions. Fixes problems with
 functions like @code{jump-or-exec} failing, when a window without WM_CLASS existed.
 [Christopher Bratusek]
+
+@item When cursor-warping was enabled and user switched to a shaded
+window, the cursor warped to the position of the unshaded
+window. This is fixed now. [Christopher Bratusek]
+
+@item Fix a bug in manager selection handling.
+Set all required fields of the client message event.
+Call XSync before changing the error handler. [Timo Korvola]
+
+@item Fix failing to generate apps-menu, if a desktop-entry had
+the Category property (instead of Categories or both). [Matthew Love]
+
+@item In EdgeActions `HotSpot', `HotMove' and `EdgeFlip', it was
+possible to trigger the same event multiple times at a time.
+This is fixed now.[Jeremy Hankins] 
 @end itemize
 @item Build and Installation
 @itemize @minus
