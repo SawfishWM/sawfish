@@ -3,6 +3,11 @@
 	required fields of the client message event. Call XSync before
 	changing the error handler. [Timo Korvola]
 
+	* lisp/sawfish/wm/ext/match-window.jl: fixed a bug in apps-menu,
+	failing to generate the list, if a .desktop file contains the
+	errorneous Category property instead of Categories (or both).
+	-- [Matthew Love]
+
 2011-07-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/int/kde.jl
 	* lisp/sawfish/wm/int/gnome.jl

@@ -346,9 +346,9 @@ with caution, file may be corrupt.\n"))
       (if (assoc "Categories" fdo-list)
 	  (rplacd (assoc "Categories" fdo-list) "Exile")
 	(setq fdo-list (append fdo-list (cons (cons "Categories" "Exile")))))
-      (if (assoc "Saw-Category" fdo-list)
-	  (rplacd (assoc "Saw-Category" fdo-list) "Exile")
-	(setq fdo-list (append fdo-list (cons (cons "Saw-Category" "Exile")))))
+      (if (assoc "Category" fdo-list)
+	  (rplacd (assoc "Category" fdo-list) "Exile")
+	(setq fdo-list (append fdo-list (cons (cons "Category" "Exile")))))
       ;; Set the Exec key if it does not exist
       (when (not (assoc "Exec" fdo-list))
 	(setq fdo-list (append fdo-list (list exile-cmd))))
@@ -375,12 +375,12 @@ exile it."
   (define (fdo-double-check-category fdo-list)
     "Make sure the Category key is present and correctly asigned."
     (when fdo-list
-      (if (assoc "Saw-Category" fdo-list)
-	  (if (or (not (stringp (cdr (assoc "Saw-Category" fdo-list))))
-		  (equal "" (cdr (assoc "Saw-Category" fdo-list)))
-		  (not (stringp (cdr (assoc "Saw-Category" fdo-list)))))
-	      (rplacd (assoc "Saw-Category" fdo-list) "Exile"))
-	(append fdo-list (cons (cons "Saw-Category" "Exile")))))
+      (if (assoc "Category" fdo-list)
+	  (if (or (not (stringp (cdr (assoc "Category" fdo-list))))
+		  (equal "" (cdr (assoc "Category" fdo-list)))
+		  (not (stringp (cdr (assoc "Category" fdo-list)))))
+	      (rplacd (assoc "Category" fdo-list) "Exile"))
+	(append fdo-list (cons (cons "Category" "Exile")))))
     fdo-list)
 
   (define (determine-desktop-name fdo-list)
@@ -455,7 +455,7 @@ desktop-entry through `fdo-associate-categories'."
     "Return the desktop-file-list if the `Category' is of the
 Top-Level variety."
     (when fdol
-      (if (not (equal "Top-Level" (cdr (assoc "Saw-Category" fdol))))
+      (if (not (equal "Top-Level" (cdr (assoc "Category" fdol))))
 	  fdol)))
 
   (define (fdo-default-filter fdol)
@@ -510,7 +510,7 @@ of the categories of the original."
 		      (delete "" (string-split ";" category-string))))
 	    (when categories
 	      (append (list
-		       (append new-fdol (list (cons "Saw-Category" (car categories)))))
+		       (append new-fdol (list (cons "Category" (car categories)))))
 		      (loop (cdr categories)))))))))
 
   ;; Sawfish-menu generation
@@ -534,7 +534,7 @@ of the categories of the original."
     "Generate a menu entry to run the program specified in the the
 desktop file `desk-file'."
     (when (car fdo-list)
-      (cons (list (cdr (assoc "Saw-Category" (car fdo-list)))
+      (cons (list (cdr (assoc "Category" (car fdo-list)))
 		  (determine-desktop-name (car fdo-list))
 		  (determine-desktop-exec (car fdo-list)))
 	    (generate-menu-entry (cdr fdo-list)))))
