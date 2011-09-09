@@ -1,3 +1,13 @@
+2011-09-08  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* src/display.c: Fix a bug in manager selection handling. Set all
+	required fields of the client message event. Call XSync before
+	changing the error handler. [Timo Korvola]
+
+	* lisp/sawfish/wm/ext/match-window.jl: fixed a bug in apps-menu,
+	failing to generate the list, if a .desktop file contains the
+	errorneous Category property instead of Categories (or both).
+	-- [Matthew Love]
+
 2011-05-28  Jeremy Hankins <nowan@nowan.org>
 	* lisp/sawfish/wm/edge/flip.jl
 	* lisp/sawfish/wm/edge/hot-spots.jl: EF/HS/HM timers are no
