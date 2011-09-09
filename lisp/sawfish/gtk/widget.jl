@@ -261,7 +261,7 @@
   (define-widget-type 'string make-string-item)
 
   (define (make-number-item changed-callback
-                            #!optional minimum maximum initial-value)
+                            #!optional minimum maximum initial-value stepping)
     ;; XXX backwards compat..
     (when (eq minimum 'nil) (setq minimum nil))
     (when (eq maximum 'nil) (setq maximum nil))
@@ -269,6 +269,8 @@
 						  (or maximum 65535) 1)))
       (when initial-value
         (gtk-spin-button-set-value widget initial-value))
+      (when stepping
+	(gtk-spin-button-set-increments widget stepping stepping))
       (when changed-callback
 	(g-signal-connect
 	 widget "value-changed" (make-signal-callback changed-callback)))
