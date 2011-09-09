@@ -4,6 +4,21 @@
 	Categories property (Category isn't even expected to exist).
 	-- [Matthew Love]
 
+2011-08-18  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/util.jl: added move-window-to-corner and
+	move-window-to-edge helpers
+
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/expand.jl: added expand-window functionality to
+	EdgeActions. expand-window-half-screen-vertical and
+	expand-window-half-screen-horizontal are the public functions.
+
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/maxmize.jl: added an maximize-window
+	edge-action
+
 2011-07-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/int/kde.jl
 	* lisp/sawfish/wm/int/gnome.jl
@@ -31,7 +46,7 @@
 	* themes/StyleTab/theme.jl: moved previous-workspace-button and
 	next-workspace-button out of StyleTab into frames.jl
 
-	* lisp/sawfish/wm/frames.jl: changed defaults for button-cursor-shapes
+	* lisp/sawfish/wm/frames.jl: changed defaults for button-cursor-shape
 
 2011-07-09  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/frames.jl: added an option to control the
