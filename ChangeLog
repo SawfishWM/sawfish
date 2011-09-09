@@ -1,3 +1,8 @@
+2011-09-08  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* src/display.c: Fix a bug in manager selection handling. Set all
+	required fields of the client message event. Call XSync before
+	changing the error handler. [Timo Korvola]
+
 2011-09-04  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/ext/apps-menu.jl: Fixed failing to generate
 	apps-menu when .desktop-files have a Category property, but no
