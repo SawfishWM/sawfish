@@ -336,6 +336,8 @@ acquire_manager_selection(Window sel_owner)
                 break;
         }
     }
+    cm.type = ClientMessage;
+    cm.window = root_window;
     cm.message_type = xa_manager;
     cm.format = 32;
     cm.data.l[0] = startup_time;
@@ -448,6 +450,7 @@ sys_init(char *program_name)
 
             acquire_manager_selection (sel_owner);
 
+	    XSync (dpy, False);
 	    XSetErrorHandler (error_other_wm);
 	    XSelectInput (dpy, root_window, ROOT_EVENTS);
 	    XSync (dpy, False);
