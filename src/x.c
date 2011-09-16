@@ -100,7 +100,9 @@ DEFSYM (x, "x");
 DEFSYM (y, "y");
 DEFSYM (border_width, "border-width");
 DEFSYM (border_color, "border-color");
+DEFSYM (save_under, "save-under");
 DEFSYM (expose, "expose");
+DEFSYM (button_press, "button-press");
 DEFSYM (convex, "convex");
 DEFSYM (non_convex, "non-convex");
 DEFSYM (line_width, "line-width");
@@ -592,6 +594,11 @@ x_window_parse_attributes (XSetWindowAttributes *attributes, repv attrs)
 		attributes->border_pixel = VCOLOR (rep_CDR (tem))->pixel;
 		attributesMask |= CWBorderPixel;
 	    }
+            else if ((car == Qsave_under))
+            {
+                attributes->save_under = (rep_CDR(tem) != Qnil)?True:False;
+		attributesMask |= CWSaveUnder;
+            }
 	}
 
 	attrs = rep_CDR (attrs);
@@ -617,8 +624,10 @@ x_window_event_handler (XEvent *ev)
 	    if (ev->xexpose.count == 0)
 		type = Qexpose;
 	    break;
-
-	    /* XXX other event types..? */
+        case ButtonPress:
+           type = Qbutton_press;
+           break;
+        /* XXX other event types..? */
 	}
 	if (type != Qnil)
 	{
@@ -700,6 +709,22 @@ window is created unmapped.
 
     return rep_VAL (w);
 }
+
+DEFUN("x-window-select-input", Fx_window_select_input, Sx_window_select_input,
+      (repv win, repv mask), rep_Subr2)
+/*
+  ::doc:sawfish.wm.windows.subrs#x-window-select-input::
+  x-window-select-input WINDOW MASK
+
+  ask the X server for future events on the WINDOW, which are matched by the MASK.
+  ::end:: */
+{
+   rep_DECLARE1 (win, X_WINDOWP);
+   rep_DECLARE2(mask, rep_INTEGERP);
+   XSelectInput (dpy, VX_DRAWABLE (win)->id,  rep_INT(mask));
+   return Qnil;
+}
+
 
 DEFUN ("x-create-pixmap", Fx_create_pixmap,
        Sx_create_pixmap, (repv wh), rep_Subr1)
@@ -1543,6 +1568,7 @@ rep_dl_init (void)
 					   x_window_sweep, x_window_mark,
 					   0, 0, 0, 0, 0, 0, 0);
     rep_ADD_SUBR (Sx_create_window);
+    rep_ADD_SUBR (Sx_window_select_input);
     rep_ADD_SUBR (Sx_create_pixmap);
     rep_ADD_SUBR (Sx_create_bitmap);
     rep_ADD_SUBR (Sx_map_window);
@@ -1583,6 +1609,8 @@ rep_dl_init (void)
     rep_INTERN (border_width);
     rep_INTERN (border_color);
     rep_INTERN (expose);
+    rep_INTERN (save_under);
+    rep_INTERN (button_press);
     rep_INTERN (convex);
     rep_INTERN (non_convex);
     rep_INTERN (line_width);
