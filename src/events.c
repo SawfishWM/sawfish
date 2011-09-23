@@ -669,8 +669,6 @@ property_notify (XEvent *ev)
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
             repv tem;
-            if  (debug)
-                DB (("%s: need_refresh property_change",  __FUNCTION__));
             tem = Fwindow_get (w_, Qrefresh); /* fixme:  w -> w_ */
             if (!(tem && tem != Qnil))
             {
