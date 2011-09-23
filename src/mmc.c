@@ -196,7 +196,8 @@ describe_focus_out(XEvent *ev, Lisp_Window *w)
          color_reset));
 };
 
-extern int restack_fast;
+/* extern int restack_fast; */
+
 int
 set_int_variable(int* var, repv value)
 {
@@ -209,17 +210,16 @@ set_int_variable(int* var, repv value)
 
 
 /* mmc: i should add  incrementing/decrementing &  commit-on-zero? */
-DEFUN("set-restack-fast", Fset_restack_fast, Sset_restack_fast, (repv debug), rep_Subr1) /*
-::doc:sawfish.wm.events::set-restack-fast
+/* DEFUN("set-restack-fast", Fset_restack_fast, Sset_restack_fast, (repv debug), rep_Subr1) */ /*
+   ::doc:sawfish.wm.events::set-restack-fast
 make the following restacking operations immediate if 0, and posponed if 1
 ::end:: */
-{
+/* {
    rep_DECLARE1 (debug, rep_INTP);
    return set_int_variable(&restack_fast, debug);
-}
+} */
 
 extern bool be_proactive_in_move;
-
 
 #if 0
 DEFUN("set-proactive-move", Fset_proactive_move, Sset_proactive_move, (repv debug), rep_Subr1) /*
@@ -567,7 +567,7 @@ set_init (void)
     rep_ADD_SUBR(Sreopen_stdout);
 
     rep_ADD_SUBR(Sget_priority);
-    rep_ADD_SUBR(Sset_restack_fast);
+    /* rep_ADD_SUBR(Sset_restack_fast); /*
 
     rep_ADD_SUBR(Sset_debug_functions);
     rep_ADD_SUBR(Sset_debug_display);
