@@ -112,6 +112,7 @@ DEFSYM(new_value, "new-value");
 DEFSYM(deleted, "deleted");
 
 DEFSYM(urgency, "urgency");
+DEFSYM(refresh, "refresh");
 
 DEFSYM(stack, "stack");
 DEFSYM(above, "above");
@@ -602,7 +603,9 @@ property_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     repv w_ = rep_VAL (w);		/* type alias for gc-pro'ing */
-    if (w != 0 && ev->xproperty.window == w->id)
+
+    if (w != 0 && !WINDOW_IS_GONE_P(w)
+        && ev->xproperty.window == w->id) /* not frame */
     {
 	bool need_refresh = FALSE, changed = TRUE;
 	repv changed_states = Qnil, prop;
@@ -665,7 +668,15 @@ property_notify (XEvent *ev)
 	if (need_refresh && w->reparented
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
-	    w->property_change (w);
+            repv tem;
+            if  (debug)
+                DB (("%s: need_refresh property_change",  __FUNCTION__));
+            tem = Fwindow_get (w_, Qrefresh); /* fixme:  w -> w_ */
+            if (!(tem && tem != Qnil))
+            {
+                /* mmc: i think i raised this on ML year(s) ago... */
+                w->property_change (w);
+            }
 	}
 
 	if (changed)
@@ -781,8 +792,10 @@ map_request (XEvent *ev)
 					     Quniconify_window), rep_VAL(w));
     }
 
-    if (!w->client_unmapped)
+    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w))
+    {
 	XMapWindow (dpy, w->id);
+    }
 
     if (w->visible)
 	XMapWindow (dpy, w->frame);
@@ -950,7 +963,7 @@ enter_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && !WINDOW_IS_GONE_P (w))
+        if (tem && rep_CONSP(tem) && (w) && !WINDOW_IS_GONE_P (w))
 	{
 	    Fcall_window_hook (Qenter_frame_part_hook, rep_VAL(w),
 			       rep_list_2 (rep_VAL(fp), mode), Qnil);
@@ -996,7 +1009,7 @@ leave_notify (XEvent *ev)
 	    refresh_frame_part (fp);
 
 	tem = Fassq (Qclass, fp->alist);
-	if (tem && rep_CONSP(tem) && !WINDOW_IS_GONE_P (w))
+        if (tem && rep_CONSP(tem) && (w) && !WINDOW_IS_GONE_P (w))
 	{
 	    Fcall_window_hook (Qleave_frame_part_hook, rep_VAL(w),
 			       rep_LIST_2 (rep_VAL(fp), mode), Qnil);
@@ -2013,6 +2026,7 @@ events_init (void)
     rep_INTERN(new_value);
     rep_INTERN(deleted);
     rep_INTERN(urgency);
+    rep_INTERN(refresh);
 
     rep_INTERN(stack);
     rep_INTERN(above);
