@@ -675,7 +675,7 @@ property_notify (XEvent *ev)
             repv tem;
             if  (debug)
                 DB (("%s: need_refresh property_change",  __FUNCTION__));
-            tem = Fwindow_get (w_, Qrefresh); /* fixme:  w -> w_ */
+            tem = Fwindow_get (w_, Qrefresh, Qnil); /* fixme:  w -> w_ */
             if (!(tem && tem != Qnil))
             {
                 /* mmc: i think i raised this on ML year(s) ago... */
