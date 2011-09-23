@@ -408,8 +408,6 @@ Note that calls to `grab-server' and `ungrab-server' _nest_.
 {
     if (--server_grabs == 0)
     {
-        if (debug_functions & DB_FUNCTIONS_GRAB)
-            DB (("F: XUngrabServer\n"));
 	XUngrabServer (dpy);
 	XFlush (dpy);
     }
@@ -508,8 +506,7 @@ again:
     if (ret == GrabSuccess)
 	mark_pointer_grabbed ();
 
-   if (debug_functions & DB_FUNCTIONS_GRAB)
-      DB (("F: grab-pointer: time=%lu %lu ret=%d\n", last_event_time, last_event_time, ret));
+    DB(("grab-pointer: time=%lu ret=%d\n", last_event_time, ret));
     return (ret == GrabSuccess) ? Qt : Qnil;
 }
 
@@ -522,8 +519,7 @@ Release the grab on the mouse pointer.
 {
     ungrab_pointer ();
     synthesize_button_release ();
-    if (debug_functions & DB_FUNCTIONS_GRAB)
-        DB (("F: ungrab-pointer: time=%lu\n", last_event_time));
+    DB(("ungrab-pointer: time=%lu\n", last_event_time));
     return Qt;
 }
 
@@ -547,48 +543,28 @@ Returns non-nil if the grab succeeded.
 ::end:: */
 {
     Window g_win;
-    char* name;
     int ret;
 
-    /* Determine the X window */
     if (WINDOWP(win) && VWIN(win)->visible)
-    {
-        name = rep_STR(VWIN(win)->name);
 	g_win = VWIN(win)->frame;
-    }
     else if (rep_INTP(win))
-    {
-        name = "number...";
 	g_win = rep_INT(win);
-    }
     else
-    {
 	g_win = root_window;
-        name = "root";
-    }
 
 again:
-    if ((debug_functions & DB_FUNCTIONS_GRAB) | debug_keys)
-        DB (("%s: %sXGrabKeyboard%s: window: %s pointer: %s  keyboard: %s time=%lu...",
-             __FUNCTION__,
-             xgrab_color, name, color_reset,
-             rep_NILP( ptr_sync) ? "GrabModeAsync" : "GrabModeSync",
-             rep_NILP( kbd_sync) ? "GrabModeAsync" : "GrabModeSync",
-             last_event_time));
     ret = XGrabKeyboard (dpy, g_win, False,
 			 rep_NILP( ptr_sync) ? GrabModeAsync : GrabModeSync,
 			 rep_NILP( kbd_sync) ? GrabModeAsync : GrabModeSync,
 			 last_event_time);
-    if ((debug_functions & DB_FUNCTIONS_GRAB) | debug_keys)
-        DB (("ret=%s\n", (ret == GrabSuccess)?"ok":"bad"));
     if (ret == GrabNotViewable && g_win != root_window)
     {
 	/* fall back to the root window. */
-        if (debug_functions & DB_FUNCTIONS_GRAB)
-            DB (("F: GrabNotViewable, retry\n"));
 	g_win = root_window;
 	goto again;
     }
+
+    DB(("grab-keyboard: time=%lu ret=%d\n", last_event_time, ret));
     return (ret == GrabSuccess) ? Qt : Qnil;
 }
     
@@ -600,28 +576,9 @@ ungrab-keyboard
 Release the grab on the keyboard.
 ::end:: */
 {
-   if ((debug_functions & DB_FUNCTIONS_GRAB) | debug_keys){
-      /* key_color */
-      DB(("%s: %sXUngrabKeyboard%s: time=%lu\n", __FUNCTION__,
-          xgrab_color, color_reset, last_event_time));
-      Fbacktrace(Fstderr_file()); //Fbacktrace(Qnil);
-   };
-   status = XUngrabKeyboard (dpy, last_event_time);
-   if (status != Success) /* AlreadyGrabbed Success */
-   {
-       char* names[] =
-           {
-               "GrabSuccess",
-               "AlreadyGrabbed",
-               "GrabInvalidTime",
-               "GrabNotViewable",
-               "GrabFrozen"
-           };
-       DB(("%s: XUngrabKeyboard returned: %s\n", __FUNCTION__,
-           (status > sizeof(names)/sizeof(names[0]))? "unexpected/out-of-range value":
-           names[status]));
-   }
-   return (status == Success)? Qt : Qnil; /* fixme: should be an exception! */
+    DB(("ungrab-keyboard: time=%lu\n", last_event_time));
+    XUngrabKeyboard (dpy, last_event_time);
+    return Qt;
 }
 
 DEFUN("screen-width", Fscreen_width, Sscreen_width, (void), rep_Subr0) /*
