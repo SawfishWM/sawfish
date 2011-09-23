@@ -47,7 +47,7 @@
   (define tabbar-left-margin-transient)
   (define tabbar-right-margin-transient)
 
-  (define (set-tab-adjustments theme-left-dec-width theme-right-dec-width theme-left-margin
+  (define (set-tab-adjustments #!key theme-left-dec-width theme-right-dec-width theme-left-margin
                                theme-right-margin theme-left-margin-transient theme-right-margin-transient)
     (setq tabbar-left-dec-width theme-left-dec-width)
     (setq tabbar-right-dec-width theme-right-dec-width)
