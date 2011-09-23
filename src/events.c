@@ -606,7 +606,7 @@ property_notify (XEvent *ev)
     int debug = (debug_events & DB_EVENTS_PROPERTY) &&
        (!( (ignore_atoms[0] == ev->xproperty.atom) || (ignore_atoms[1] == ev->xproperty.atom)));
 
-    if (w != 0 && !WINDOw_IS_GONE_P(w)
+    if (w != 0 && !WINDOW_IS_GONE_P(w)
 	&& ev->xproperty.window == w->id)
     {
 	bool need_refresh = FALSE, changed = TRUE;
