@@ -669,7 +669,7 @@ property_notify (XEvent *ev)
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
             repv tem;
-            tem = Fwindow_get (w_, Qrefresh); /* fixme:  w -> w_ */
+            tem = Fwindow_get (w_, Qrefresh, Qnil); /* fixme:  w -> w_ */
             if (!(tem && tem != Qnil))
             {
                 /* mmc: i think i raised this on ML year(s) ago... */
