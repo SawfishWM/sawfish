@@ -43,10 +43,6 @@
 #include <X11/Xresource.h>
 #include <X11/extensions/shape.h>
 #include <assert.h>
-#include "debug.h"
-#include "debug-colors.h"
-int debug_frames;
-
 
 static XID window_fp_context;
 

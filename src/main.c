@@ -501,7 +501,6 @@ where OPTIONS are any of:\n\
 	    Fset (Qfonts_are_fontsets, Qnil);
 	}
 
-        set_init ();
 	/* call all init funcs... */
 	session_init ();
 	events_init ();

@@ -45,10 +45,6 @@
 #include <X11/Xatom.h>
 #include <stdint.h>
 
-#include "debug.h"
-#include "debug-colors.h"
-int debug_functions=0;
-
 /* Number of outstanding server grabs made; only when this is zero is
    the server ungrabbed. */
 static int server_grabs;
@@ -89,14 +85,12 @@ windows isn't affected.
     repv ptr;
     Lisp_Window *pred;
 
-    /* check that it's a list of _windows_ */
     rep_DECLARE1(list, rep_LISTP);
     for (ptr = list; rep_CONSP (ptr); ptr = rep_CDR (ptr))
     {
 	if (!WINDOWP (rep_CAR (ptr)))
 	    return rep_signal_arg_error (list, 1);
     }
-    /* end of the check*/
 
     if (list == Qnil)
 	return Qt;
@@ -104,8 +98,6 @@ windows isn't affected.
     ptr = list;
     pred = 0;
 
-    if (debug_stacking)
-        DB (("%s%s%s\n", functions_color, __FUNCTION__, color_reset));
     while (rep_CONSP (ptr))
     {
 	Lisp_Window *this = VWIN (rep_CAR (ptr));
@@ -249,8 +241,6 @@ root window.
     {
 	XWarpPointer (dpy, None, root_window,
 		      0, 0, 0, 0, rep_INT(x), rep_INT(y));
-        if (debug_functions & DB_FUNCTIONS_MOUSE)
-            DB (("warp-cursor: XWarpPointer: %d, %d\n", rep_INT(x), rep_INT(y)));
 	invalidate_cached_mouse_position ();
 	return Qt;
     }
@@ -273,15 +263,6 @@ Move the top-left corner of window object WINDOW to (X, Y).
     {
 	VWIN(win)->attr.x = rep_INT(x);
 	VWIN(win)->attr.y = rep_INT(y);
-        if (debug_functions & DB_FUNCTIONS_MOVE)
-        {
-            DB (("%s: %s -> @ %d,%d\n",
-                 __FUNCTION__,
-                 rep_STR(VWIN(win)->name),
-                 rep_INT(x),
-                 rep_INT(y)));
-            Fbacktrace(Fstderr_file());
-        }
 	XMoveWindow (dpy,
 		     VWIN(win)->reparented ? VWIN(win)->frame : VWIN(win)->id,
 		     VWIN(win)->attr.x, VWIN(win)->attr.y);
@@ -304,19 +285,6 @@ Set the dimensions of window object WINDOW to (WIDTH, HEIGHT).
     rep_DECLARE3(height, rep_INTP);
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
-    if (debug_functions & DB_FUNCTIONS_MOVE)
-    {
-        DB (("%s: %s  resize: %d,%d -> %d,%d:  --- %d,%d\n",
-             __FUNCTION__,
-             rep_STR(VWIN(win)->name),
-             VWIN(win)->attr.width,
-             VWIN(win)->attr.height,
-             rep_INT(width),
-             rep_INT(height),
-             rep_INT(width) - VWIN(win)->attr.width,
-             rep_INT(height) - VWIN(win)->attr.height
-             ));
-    };
     fix_window_size (VWIN(win));
     VWIN (win)->pending_configure = 0;
     Fcall_window_hook (Qwindow_resized_hook, win, Qnil, Qnil);
@@ -345,23 +313,6 @@ Reconfigure the geometry of window object WINDOW as specified.
     VWIN(win)->attr.y = rep_INT(y);
     VWIN(win)->attr.width = rep_INT(width);
     VWIN(win)->attr.height = rep_INT(height);
-    if (debug_functions & DB_FUNCTIONS_MOVE)
-    {
-        DB (("%s: %s @ %d,%d ->%d,%d  --- %s%d, %d%s\nsize: %d,%d ->%d,%d  --- %s%d, %d%s\n",
-             __FUNCTION__,
-             rep_STR(VWIN(win)->name),
-             VWIN(win)->attr.x, VWIN(win)->attr.y,
-             rep_INT(x), rep_INT(y),
-             functions_color,
-             rep_INT(x) - VWIN(win)->attr.x, rep_INT(y) - VWIN(win)->attr.y,
-             color_reset,
-             VWIN(win)->attr.width, VWIN(win)->attr.height,
-             rep_INT(width), rep_INT(height),
-             functions_color,
-             rep_INT(width) - VWIN(win)->attr.width,
-             rep_INT(height) - VWIN(win)->attr.height,
-             color_reset));
-    }
     if (resized)
     {
 	fix_window_size (VWIN(win));
@@ -609,8 +560,6 @@ Flush all pending X requests, don't wait for them to finish, unless WAIT
 is true.
 ::end:: */
 {
-   if (debug_functions)
-      DB(("%s\n", __FUNCTION__));
     if (wait == Qnil)
 	XFlush (dpy);
     else
@@ -632,8 +581,6 @@ WINDOW may be the symbol `root', a window object or a numeric window id.
     rep_DECLARE2(atom, rep_SYMBOLP);
     if (w == 0)
 	return WINDOWP(win) ? atom : rep_signal_arg_error (win, 1);
-   if (debug_functions)
-       DB (("F: %sXDeleteProperty%s: atom=\n", property_color, color_reset));
     XDeleteProperty (dpy, w,
 		     XInternAtom (dpy, rep_STR(rep_SYM(atom)->name), False));
     if (WINDOWP (win))
@@ -818,16 +765,6 @@ converted to their numeric X atoms.
     rep_DECLARE4(type, rep_SYMBOLP);
     a_type = XInternAtom (dpy, rep_STR(rep_SYM(type)->name), False);
     rep_DECLARE5(format, rep_INTP);
-
-    if (debug_functions & DB_FUNCTIONS_PROP)
-       DB (("F: %s%s%s: %s: %s =  %s(type: %s, format %d)\n",
-            property_color, __FUNCTION__, color_reset,
-            WINDOWP (win)? rep_STR(VWIN(win)->name):"?window?",
-            rep_STR(rep_SYM(prop)->name),
-            rep_STRINGP(data)?rep_STR(data):"vectorp",
-            rep_STR(rep_SYM(type)->name),
-            rep_INT(format)));
-
     if (w == 0)
 	return WINDOWP(win) ? prop : rep_signal_arg_error (win, 1);
 
@@ -902,8 +839,6 @@ FORMAT sized quantities (8, 16 or 32).
     XClientMessageEvent ev;
     Window w = x_win_from_arg (win);
 
-    if (debug_functions)
-       DB (("F: %s%s%s:\n", message_color, __FUNCTION__, color_reset));
     rep_DECLARE2(type, rep_SYMBOLP);
     rep_DECLARE(3, data, rep_STRINGP(data) || rep_VECTORP(data));
     rep_DECLARE4(format, rep_INTP);
@@ -1191,28 +1126,15 @@ refresh_message_window ()
 		ptr++;
 	}
     }
-    else
-    {
-        if (debug_functions)
-            DB (("F: %s%s%s: the message_window is NULL!\n", message_color, __FUNCTION__, color_reset));
-    }
 }
 
 static void
 message_event_handler (XEvent *ev)
 {
     if (ev->type == Expose && ev->xexpose.count == 0)
-      {
-          if (debug_functions & DB_FUNCTIONS_MESSAGE)
-              DB (("F: %s%s%s: Expose!\n", message_color,__FUNCTION__, color_reset));
-          refresh_message_window ();
-      }
+	refresh_message_window ();
     else if (ev->type == ButtonPress)
-      {
-          if (debug_functions & DB_FUNCTIONS_MESSAGE)
-              DB (("F: %s%s%s:  ButtonPress\n", message_color,__FUNCTION__, color_reset));
-          Fdisplay_message (Qnil, Qnil);
-      };
+	Fdisplay_message (Qnil, Qnil);
 }
 
 DEFSTRING(white, "white");
@@ -1223,9 +1145,6 @@ DEFUN("display-message", Fdisplay_message, Sdisplay_message,
 {
     if (text == Qnil)
     {
-        if (debug_functions & DB_FUNCTIONS_MESSAGE){
-            DB (("F: %s%s%s: removing!\n", message_color, __FUNCTION__, color_reset));
-        };
 	if (message_win != 0)
 	{
 	    deregister_event_handler (message_win);
