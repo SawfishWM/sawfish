@@ -473,7 +473,9 @@
           (Elberg-left-m-t 0)
           (Elberg-right-m-t 0))
       (require 'sawfish.wm.tabs.tab)
-      (set-tab-adjustments Elberg-left-d-w Elberg-right-d-w Elberg-left-m Elberg-rigth-m Elberg-left-m-t Elberg-right-m-t))))
+      (set-tab-adjustments #:theme-left-dec-width Elberg-left-d-w #:theme-right-dec-width Elberg-right-d-w #:theme-left-margin 
+                           Elberg-left-m #:theme-right-margin Elberg-rigth-m #:theme-left-margin-transient Elberg-left-m-t 
+                           #:theme-right-margin-transient Elberg-right-m-t))))
 
 (create-frames)
   
