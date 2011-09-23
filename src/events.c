@@ -32,10 +32,6 @@
 #include <glib.h>
 #include <stdio.h>
 
-#include "debug.h"
-#include "debug-colors.h"
-int debug_events;
-
 /* Lookup table of event handlers */
 void (*event_handlers[LASTEvent])(XEvent *ev);
 
@@ -55,9 +51,7 @@ static int button_press_mouse_x = -1, button_press_mouse_y = -1;
 static Window button_press_window;
 static bool pointer_in_motion;
 
-/* Most recently seen server timestamp.
- * todo: should be per-input-device. This is only for Focus/Grab handling.
- * And we don't guarantee they all arrive with the same timeout.*/
+/* Most recently seen server timestamp. */
 Time last_event_time;
 
 /* Current XEvent or a null pointer */
@@ -160,8 +154,24 @@ subtract_timestamps (Time t2, Time t1)
 void
 save_timestamp (Time t)
 {
-    last_event_time = t;
-    return;
+    if (subtract_timestamps (t, last_event_time) >= 0)
+	last_event_time = t;
+    else
+    {
+	Time real = get_server_timestamp ();
+
+	/* If the difference between T and the real server time is
+	   less than that between LAST-EVENT-TIME and the server time,
+	   then set LAST-EVENT-TIME to T. */
+
+	if (labs (subtract_timestamps (real, t))
+	    < labs (subtract_timestamps (real, last_event_time)))
+	{
+	    last_event_time = t;
+	}
+    }
+
+    DB(("  last_event_time=%lu\n", last_event_time));
 }
 
 /* Where possible record the timestamp from event EV */
@@ -177,7 +187,6 @@ record_event_time (XEvent *ev)
 
     case ButtonPress:
     case ButtonRelease:
-        // these times are per device!
 	save_timestamp (ev->xbutton.time);
 	break;
 
@@ -187,11 +196,11 @@ record_event_time (XEvent *ev)
 
     case EnterNotify:
     case LeaveNotify:
-	// save_timestamp (ev->xcrossing.time);
+	save_timestamp (ev->xcrossing.time);
 	break;
 
     case PropertyNotify:
-	// save_timestamp (ev->xproperty.time);
+	save_timestamp (ev->xproperty.time);
 	break;
     }
 }
@@ -303,16 +312,10 @@ colormap_notify (XEvent *ev)
 static void
 key_press (XEvent *ev)
 {
-    Lisp_Window *w = find_window_by_id (ev->xkey.window);
-    if (debug_keys & DB_KEYS_FLOW)
-        DB (("E: %s [%s %u @ %lu]-> eval_input_event (%s)\n", __FUNCTION__,
-             ev->type == KeyPress? "keyPress": "keyRelease",
-             ev->xkey.keycode, ev->xkey.time, 
-             window_name (w)));
     record_mouse_position (ev->xkey.x_root, ev->xkey.y_root, ev->type, 0);
 
     /* Don't look for a context map, frame parts are never focused */
-    eval_input_event (Qnil); /* the event is handed over in the current_x_event var */
+    eval_input_event (Qnil);
 
     XAllowEvents (dpy, SyncKeyboard, last_event_time);
 }
@@ -370,7 +373,7 @@ current_context_map (void)
 	repv map = Qnil;
 
 	/* Only use the context map if the frame part is currently clicked,
-	   and its window is visible (i.e. not iconified) */
+	   and it's window is visible (i.e. not iconified) */
 	if (clicked_frame_part
 	    && clicked_frame_part->clicked
 	    && clicked_frame_part->win != 0
@@ -489,8 +492,7 @@ motion_notify (XEvent *ev)
 
 
 static bool
-update_window_name(Lisp_Window * w, XPropertyEvent xproperty)
-{
+update_window_name(Lisp_Window * w, XPropertyEvent xproperty) {
     unsigned char *prop;
     Atom actual;
     int format;
@@ -602,12 +604,8 @@ property_notify (XEvent *ev)
     Lisp_Window *w = find_window_by_id (ev->xproperty.window);
     repv w_ = rep_VAL (w);		/* type alias for gc-pro'ing */
 
-    /* the condition is complex, so eval once:*/
-    int debug = (debug_events & DB_EVENTS_PROPERTY) &&
-       (!( (ignore_atoms[0] == ev->xproperty.atom) || (ignore_atoms[1] == ev->xproperty.atom)));
-
     if (w != 0 && !WINDOW_IS_GONE_P(w)
-	&& ev->xproperty.window == w->id)
+        && ev->xproperty.window == w->id) /* not frame */
     {
 	bool need_refresh = FALSE, changed = TRUE;
 	repv changed_states = Qnil, prop;
@@ -671,8 +669,6 @@ property_notify (XEvent *ev)
 	    && w->property_change != 0 && !WINDOW_IS_GONE_P (w))
 	{
             repv tem;
-            if  (debug)
-                DB (("%s: need_refresh property_change",  __FUNCTION__));
             tem = Fwindow_get (w_, Qrefresh, Qnil); /* fixme:  w -> w_ */
             if (!(tem && tem != Qnil))
             {
@@ -778,9 +774,7 @@ map_request (XEvent *ev)
 	{
 	    fprintf (stderr, "warning: failed to allocate a window\n");
 	    return;
-        };
-        if (debug_events & DB_EVENTS_MAP)
-            DB (("window pointer is %x\n", id));
+	}
     }
     else
     {
@@ -794,44 +788,28 @@ map_request (XEvent *ev)
 	w->mapped = TRUE;
 	rep_call_lisp1 (module_symbol_value (rep_VAL (&iconify_mod),
 					     Quniconify_window), rep_VAL(w));
-    };
-    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w)) {
-        if (debug_windows){
-            DB(("%s %s-> %s XMapWindow %x%s\n", map_request_color, __FUNCTION__, color_reset,
-                w->id, window_name (w)));
-        }
-       XMapWindow (dpy, w->id);
     }
 
-    if (w->visible) {
-        if (debug_windows){
-            DB(("%s %s-> %s XMapWindow %x %s(frame)\n",map_request_color, __FUNCTION__,
-                color_reset, w->frame, window_name (w)));
-        }
-        XMapWindow (dpy, w->frame);
+    if (!w->client_unmapped && !WINDOW_IS_GONE_P(w))
+    {
+	XMapWindow (dpy, w->id);
     }
+
+    if (w->visible)
+	XMapWindow (dpy, w->frame);
 
     if (w->client_unmapped)
-       /* wouldn't happen otherwise */
-       Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
+	/* wouldn't happen otherwise */
+	Fcall_window_hook (Qmap_notify_hook, rep_VAL(w), Qnil, Qnil);
 
-    if ((debug_windows & DB_WINDOWS_ADD)
-        || (debug_events & DB_EVENTS_MAP))
-    {
-        DB(("end processing %s.\n", __FUNCTION__));
-    }
 }
 
 static void
 reparent_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xreparent.window);
-
-    if (debug_events & DB_EVENTS_MISC)
-        DB(("%s%s: %x %x%s\n", reparent_color, __FUNCTION__, ev->xreparent.window,
-            ev->xreparent.parent, color_reset));
-    if (w != 0 && !WINDOW_IS_GONE_P(w)
-	&& (ev->xreparent.event == ev->xreparent.window))
+    if (w != 0 && ev->xreparent.window == w->id
+	&& ev->xreparent.event == w->id)
     {
 	if (ev->xreparent.parent != root_window
 	    && ev->xreparent.parent != w->frame)
@@ -840,7 +818,6 @@ reparent_notify (XEvent *ev)
 	       reparent it to the root. -- thk */
 	    w->reparented = FALSE;
 	    XRemoveFromSaveSet (dpy, w->id);
-            /* mmc: IOW this will instruct remove_window->remove_window_frame to skip ...*/
 
             Fcall_window_hook (Qreparent_notify_hook,
                                rep_VAL(w), Qnil, Qnil);
@@ -892,7 +869,7 @@ static void
 unmap_notify (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xunmap.window);
-    if (w != 0 && ! WINDOW_IS_GONE_P(w)
+    if (w != 0 && ev->xunmap.window == w->id
 	&& (ev->xunmap.event == w->id || ev->xunmap.send_event))
     {
 	int being_reparented = FALSE;
@@ -970,9 +947,6 @@ enter_notify (XEvent *ev)
 	repv tem;
 	bool refresh = FALSE;
 	Lisp_Window *w = fp->win;
-        if (!w)
-            DB(("%s%s: fp->win = 0 -> %s This would be a SEGFAULT!\n", __FUNCTION__, error_color,
-                color_reset));
 	if (!fp->highlighted && !frame_state_mutex)
 	{
 	    fp->highlighted = 1;
@@ -1019,9 +993,6 @@ leave_notify (XEvent *ev)
 	repv tem;
 	bool refresh = FALSE;
 	Lisp_Window *w = fp->win;
-         if (!w)
-             DB(("%s%s: fp->win = 0 -> %s This would be a SEGFAULT!\n", __FUNCTION__, error_color,
-                 color_reset));
 	if (fp->highlighted && !frame_state_mutex)
 	{
 	    fp->highlighted = 0;
@@ -1138,25 +1109,12 @@ static void
 configure_request (XEvent *ev)
 {
     Lisp_Window *w = find_window_by_id (ev->xconfigurerequest.window);
-    if (debug_events & DB_EVENTS_FLOW)
-       DB (("%s%s%s   %x/%s\n",
-            configure_color, __FUNCTION__, color_reset,
-            ev->xconfigurerequest.window, /* ?? */
-            window_name (w)));
     if (w == 0)
     {
 	XWindowChanges xwc;
 	unsigned int xwcm = (ev->xconfigurerequest.value_mask & 
 		      (CWX | CWY | CWWidth | CWHeight
 		       | CWStackMode | CWSibling));
-          if (debug_events & DB_EVENTS_CONFIGURE)
-             DB(("%s %s the request: %s%s%s\n",
-                 __FUNCTION__,
-                 (xwcm == ev->xconfigurerequest.value_mask)?"passing along":"filtering",
-                 (ev->xconfigurerequest.value_mask & CWStackMode)?"stack-mode ":"",
-                 (ev->xconfigurerequest.value_mask & CWWidth)?"width ":"",
-                 (ev->xconfigurerequest.value_mask & CWSibling)?"sibling ":""
-                 ));
 	xwc.x = ev->xconfigurerequest.x;
 	xwc.y = ev->xconfigurerequest.y;
 	xwc.width = ev->xconfigurerequest.width;
@@ -1226,11 +1184,6 @@ configure_request (XEvent *ev)
 				  Fcons ((mask & CWX) ? rep_MAKE_INT (x) : Qnil,
 					 (mask & CWY) ? rep_MAKE_INT (y) : Qnil)),
 			   alist);
-            if (debug_events & DB_EVENTS_CONFIGURE)
-                DB(("%s %s\tposition: %d/%d %s\n", __FUNCTION__, window_name (w),
-                    (mask & CWX)?x:-1,
-                    (mask & CWY)?y:-1,
-                    ev->xconfigurerequest.send_event?"synthetic! ":""));
 	}
 	if ((mask & CWWidth) || (mask & CWHeight))
 	{
@@ -1320,12 +1273,6 @@ randr_screen_change_notify (XEvent *ev)
 static void
 create_notify (XEvent *ev)
 {
-    Window id = ev->xcreatewindow.window;
-    if (debug_windows & DB_WINDOWS_ADD)
-        DB (("%s on %s new window %x  %s\n", __FUNCTION__,
-             (ev->xcreatewindow.parent == root_window)?"root":"???",
-             id,
-             ev->xcreatewindow.override_redirect?"override!":""));
 }
 
 static void
@@ -1464,8 +1411,6 @@ shape_notify (XEvent *ev)
     {
 	if (sev->kind == ShapeBounding)
 	    w->shaped = sev->shaped ? 1 : 0;
-        DB(("%s: %s%s%s\n",  __FUNCTION__, warning_color, w->shaped?"shaped":"NO MORE shaped",
-            color_reset));
 	queue_reshape_frame (w);
 	Fcall_window_hook (Qshape_notify_hook, rep_VAL(w), Qnil, Qnil);
     }
@@ -1607,11 +1552,9 @@ inner_handle_input (repv arg)
 {
     XEvent *ev = (XEvent *) rep_PTR (arg);
 
-    /* try to get a Special handler of the window */
     void (*handler)(XEvent *) = window_event_handler (ev->xany.window);
     if (handler != 0)
 	(*handler) (ev);
-    /* The global one: */
     else if (ev->type < LASTEvent && event_handlers[ev->type] != 0)
 	event_handlers[ev->type] (ev);
     else if (ev->type == shape_event_base + ShapeNotify)
@@ -1631,6 +1574,17 @@ inner_handle_input (repv arg)
 void
 handle_input_mask(long mask)
 {
+    static time_t last_time;
+
+    time_t current_time = time (0);
+    if (current_time < last_time)
+    {
+	/* Hmm. Looks like the clock's been turned backwards. Refetch the
+	   server timestamp so we don't ignore any following timestamps */
+	last_event_time = get_server_timestamp ();
+    }
+    last_time = current_time;
+
     /* Read all events in the input queue. */
     while(rep_throw_value == rep_NULL)
     {
@@ -1640,7 +1594,7 @@ handle_input_mask(long mask)
 
 	if (mask == 0)
 	{
-	    if (XEventsQueued(dpy, QueuedAfterReading) <= 0)
+	    if(XEventsQueued(dpy, QueuedAfterReading) <= 0)
 		break;
 	    XNextEvent(dpy, &xev);
 	}
@@ -1655,13 +1609,7 @@ handle_input_mask(long mask)
 	rep_POPGC;
 
 	if (xev.type == NoExpose || xev.type == GraphicsExpose)
-        {
-            if (debug_events & DB_EVENTS_FLOW)  /*  & DB_EVENTS_TIME */
-                DB (("** Event: serial:%s%d%s %s .... ignoring\n",
-                     serial_color,xev.xany.serial, color_reset,
-                     xev.type < LASTEvent ?event_names[xev.type]:"unknown event"));
-            continue;
-        }
+	    continue;
 
 #ifdef DEBUG
 	do {
@@ -1699,18 +1647,7 @@ handle_input_mask(long mask)
 void
 handle_sync_input (int fd)
 {
-    while ((rep_throw_value == rep_NULL)
-           && (XEventsQueued(dpy, QueuedAfterFlush)))
-        handle_input_mask (0);
-    /* This might exit due to Exception.
-     * But some event might still be alread read, yet to be processed. */
-    if (rep_throw_value != rep_NULL)
-    {
-        if (XEventsQueued(dpy, QueuedAlready))
-        {
-            rep_mark_input_pending (ConnectionNumber(dpy));
-        };
-    }
+    handle_input_mask (0);
 }
 
 /* Lisp functions */
@@ -1735,8 +1672,6 @@ the server, otherwise it's taken from the current event (if possible).
 	if(XQueryPointer(dpy, root_window, &tmpw, &tmpw,
 			 &x, &y, &tmp, &tmp, &tmpu))
 	{
-            if (debug_events & DB_EVENTS_MISC)
-                DB (("query-pointer: XQueryPointer: %d, %d\n", x, y));
 	    record_mouse_position (x, y, -1, 0);
 	}
     }
