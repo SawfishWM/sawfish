@@ -60,6 +60,7 @@ extern Atom xa_wm_state, xa_wm_change_state, xa_wm_protocols,
     xa_compound_text, xa_wm_net_name, xa_wm_net_icon_name, xa_utf8_string,
     xa_manager, xa_wm_sn;
 extern Time startup_time;
+extern Atom ignore_atoms[2];    /* _WIN_AREA  _WIN_WORKSPACE */
 extern int shape_event_base, shape_error_base;
 extern repv Qdisplay_name, Qcanonical_display_name;
 extern bool sys_init (char *program_name);
@@ -372,5 +373,15 @@ extern void insert_in_stacking_list_above (Lisp_Window *w, Lisp_Window *x);
 extern void insert_in_stacking_list_below (Lisp_Window *w, Lisp_Window *x);
 extern void restack_window (Lisp_Window *w);
 extern repv make_stacking_list (void);
+
+/* from mmc.c */
+extern const char* window_name (Lisp_Window *w);
+extern const char* window_name_or (Lisp_Window *w, const char* fallback);
+extern char* my_timestamp(Time t);
+extern void describe_focus_out(XEvent *ev, Lisp_Window *w);
+extern void describe_focus_in(XEvent *ev,Lisp_Window *w);
+
+extern void set_init (void);
+
 
 #endif /* SAWFISH_SUBRS_H */
