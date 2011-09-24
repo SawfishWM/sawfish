@@ -832,7 +832,8 @@ Fix/hack for foreground button, but makes botton ugly."
       (inactive-highlighted . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
                                                                                "/" w "-frame-" x "-button-ih.png")) scale-w scale-h))
       (inactive-clicked . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                           "/" w "-frame-" x "-button-ic.png")) scale-w scale-h)))))
+                                                                           "/" w "-frame-" x "-button-ic.png")) scale-w scale-h))))
+  (reframe-all))
 ;;(define make-hight-button-image
 ;;  (lambda (w x)
 ;;    `((focused . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-f.png")))
