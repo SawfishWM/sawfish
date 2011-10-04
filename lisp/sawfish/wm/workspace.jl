@@ -101,6 +101,7 @@
 	    show-desktop
 	    hide-desktop
 	    showing-desktop-p
+	    toggle-desktop
 	    window-on-current-workspace-p
 	    window-on-current-workspace-viewport-p
 
@@ -894,8 +895,15 @@ last instance remaining, then delete the actual window."
     "Returns true when in `showing desktop' mode."
     showing-desktop)
 
+  (define (toggle-desktop)
+    "Hide or unhide all windows except the desktop window."
+    (if showing-desktop
+        (hide-desktop)
+      (show-desktop)))
+
   (define-command 'show-desktop show-desktop)
   (define-command 'hide-desktop hide-desktop)
+  (define-command 'toggle-desktop toggle-desktop)
 
   (define (window-on-current-workspace-p w)
     (= (car (window-get w 'workspaces)) current-workspace))

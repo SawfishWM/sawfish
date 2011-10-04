@@ -6,6 +6,15 @@
 	* lisp/sawfish/wm/ext/match-window.jl: renamed tile EdgeAction to
 	expose
 
+	* lisp/sawfish/wm/edge/maximize.jl
+	* lisp/sawfish/wm/edge/misc.jl: renamed module
+
+	* lisp/sawfish/wm/workspace.jl: added toggle-desktop function
+
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl: added show-desktop as EdgeAction
+	(using toggle-desktop)
+
 2011-08-18  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/edge/util.jl: added move-window-to-corner and
 	move-window-to-edge helpers

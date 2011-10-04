@@ -41,7 +41,7 @@
     "Action for the left and right screen-edge."
     :group edge-actions
     :type (choice none/hot-spot viewport-drag flip-workspace
-		  flip-viewport expose-windows))
+		  flip-viewport expose-windows show-desktop))
 
   (defcustom left-right-edge-move-action 'none/hot-move
     "Action for the left and right screen-edge while moving a window."
@@ -53,7 +53,7 @@
     "Action for the top and bottom screen-edge."
     :group edge-actions
     :type (choice none/hot-spot viewport-drag flip-workspace
-		  flip-viewport expose-windows))
+		  flip-viewport expose-windows show-desktop))
 
   (defcustom top-bottom-edge-move-action 'none/hot-move
     "Action for the top and bottom screen-edge while moving a window."
