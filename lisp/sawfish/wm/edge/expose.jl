@@ -1,4 +1,4 @@
-;; tile.jl --- Tile Sawfish windows in an intelligent (hah!) fashion
+;; expose.jl --- Tile Sawfish windows in an intelligent (hah!) fashion
 ;;
 ;; Description: Handles tiling of all windows on the current workspace.
 ;; Windows are automatically sized and arranged to make best use of the
@@ -7,11 +7,11 @@
 ;; Author: Mark Triggs <mst@dishevelled.net>
 ;; Maintainer: Christopher Roy Bratusek <nano@tuxfamily.org>
 
-(define-structure sawfish.wm.edge.tile
+(define-structure sawfish.wm.edge.expose
 
-    (export tile-windows
-	    tile-windows-core
-	    window-never-tile-p)
+    (export expose-windows
+	    expose-windows-core
+	    window-never-expose-p)
 
     (open rep
 	  rep.data
@@ -26,26 +26,26 @@
 	  sawfish.wm.state.ignored
 	  sawfish.wm.commands.move-resize)
 
-  (define-structure-alias tile sawfish.wm.edge.tile)
+  (define-structure-alias expose sawfish.wm.edge.expose)
 
   (defvar min-height (/ (screen-height) 4)
     "For windows at least, wideness is preferable to tallness. So, the minimum
 height specifies how short you are willing to tolerate your windows before
 an extra column should be used.")
 
-  ;; macro for tile-windows
+  ;; macro for expose-windows
   (defmacro pop (l) `(setq ,l (cdr ,l)))
 
-  (define (window-never-tile-p w) (window-get w 'never-tile))
+  (define (window-never-expose-p w) (window-get w 'never-expose))
 
-  (define (tile-windows-core edge while-moving)
+  (define (expose-windows-core edge while-moving)
     (interactive)
-    (call-hook 'before-edge-action-hook (list 'tile-windows edge while-moving))
+    (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
     (when while-moving
         (fake-release-window))
     (let ((windows (remove-if (or window-iconified-p
 			          window-ignored-p
-			          window-never-tile-p)
+			          window-never-expose-p)
 			      (or (filter-windows window-on-current-workspace-viewport-p)
 			          (filter-windows window-on-current-head-viewport-p)))))
       (when (> (length windows) 1)
@@ -76,9 +76,9 @@ an extra column should be used.")
 		      ;; oops. Roll back to the original size
 		      (resize-window-frame-to w old-width old-height))))
 		windows)))
-      (call-hook 'after-edge-action-hook (list 'tile-windows edge while-moving))))
+      (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving))))
 
-  (define (tile-windows)
-    (tile-windows-core nil nil))
+  (define (expose-windows)
+    (expose-windows-core nil nil))
 
-  (define-command 'tile-windows tile-windows))
+  (define-command 'expose-windows expose-windows))

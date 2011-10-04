@@ -119,7 +119,7 @@
             (ignore-stacking-requests boolean)
 	    (auto-gravity boolean)
 	    (never-delete boolean)
-	    (never-tile boolean)
+	    (never-expose boolean)
 	    )))
 
   ;; alist of (PROPERTY . FEATURE) mapping properties to the lisp
