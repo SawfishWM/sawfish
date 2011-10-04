@@ -27,12 +27,6 @@
 (defgroup StyleTab:right-buttons-group "Right Titlebar Buttons"
   :group (appearance StyleTab:group))
 
-(defcustom styletab-c:do-reload nil "Do reload. Will reload the theme if switch on/off.
-Essential if you change the title hight or botton size.
-Fix/hack for foreground button, but makes botton ugly."
-  :group (appearance StyleTab:group)
-  :type boolean)
-
 (defcustom styletab-c:styles 'Default "Frame and button style."
   :group (appearance StyleTab:group)
   :type symbol
@@ -725,17 +719,17 @@ Fix/hack for foreground button, but makes botton ugly."
 ;;; make images/recolor 
 
 ;; button/icon table
-(define styletab-c-icon-cache (make-weak-table eq-hash eq))
+(define styletab-icon-cache (make-weak-table eq-hash eq))
 
 ;; frames/title table
-(define styletab-c-frame-cache (make-weak-table eq-hash eq))
+(define styletab-frame-cache (make-table equal-hash equal))
 
 (define (window-icon w)
-  (or (table-ref styletab-c-icon-cache w)
+  (or (table-ref styletab-icon-cache w)
       (let ((icon (window-icon-image w)))
         (if icon
             (let ((scaled (scale-image icon (- styletab-c:title-dimension 7) (- styletab-c:title-dimension 7))))
-              (table-set styletab-c-icon-cache w scaled)
+              (table-set styletab-icon-cache w scaled)
               scaled)
           (scale-image top-frame-icon-title-images (- styletab-c:title-dimension 7) (- styletab-c:title-dimension 7))))))
 
@@ -761,330 +755,311 @@ Fix/hack for foreground button, but makes botton ugly."
                    (max (- green green-delta) 0)
                    (max (- blue blue-delta) 0))))
 
-(defun do-recolor (img color)
-  (let* ((recolorer
-          (make-image-recolorer color
-                                #:zero-channel blue-channel
-                                #:index-channel green-channel)))
-    (recolorer img)))
-
 (define (get-recolor-dark dimout color)
   (darken-color color dimout))
 
 (define (get-recolor-bright bright color)
   (brighten-color color bright))
 
-(define (do-make-image img)
+(define (do-recolor img color)
+  (let ((recolorer
+         (make-image-recolorer color
+                               #:zero-channel blue-channel
+                               #:index-channel green-channel)))
+    (recolorer img)
+    img))
+
+(define recolor-lock t)
+(define recolor-cache t)
+
+(define (do-make-image-cache img)
   (or
-   (table-ref styletab-c-frame-cache img)
+   (table-ref styletab-frame-cache img)
    (let ((image
           (make-image img)))
-     (table-set styletab-c-frame-cache img image)
-     image)))
+     (table-set styletab-frame-cache img image))))
 
-(define make-border-image
-  (lambda (w)
-    `((focused . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-f.png")))
-      (inactive . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-f.png")))))) 
+(define (get-cached-image img)
+  (table-ref styletab-frame-cache img))
 
-(define make-tab-image
-  (lambda (w)
-    `((focused . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-f.png")))
-      (highlighted . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-f.png")))
-      (inactive . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-i.png")))
-      (inactive-highlighted . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-i.png"))))))
+(define (base-tables-images w)
+  (or
+   (table-ref styletab-frame-cache w)
+   (progn  
+     (when (not recolor-cache)
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-f.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-i.png")))
+     (when recolor-cache
+       (let ((focus (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-f.png"))
+                                (if (eq styletab-c:custom-frame-colors t)
+                                    (get-recolor-dark 0 styletab-c:focus-frame-color)
+                                  (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+             (inact (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-i.png"))
+                                (if (eq styletab-c:custom-frame-colors t)
+                                    (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                                  (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
+         (table-set styletab-frame-cache w `((focused . ,focus) (inactive . ,inact))))))))
 
-(define make-base-button-image
-  (lambda (w)
-    `((focused . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-button-f.png")))
-      (highlighted . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-button-f.png")))
-      (clicked . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-button-c.png")))
-      (inactive . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-button-f.png")))
-      (inactive-highlighted . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-button-f.png")))
-      (inactive-clicked . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-button-c.png"))))))
+(define (tab-tables-images w)
+  (or
+   (table-ref styletab-frame-cache w)
+   (progn  
+     (when (not recolor-cache)
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-f.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-h.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-i.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-ih.png")))
+     (when recolor-cache
+       (let ((focus (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-f.png"))
+                                (if (eq styletab-c:custom-frame-colors t)
+                                    (get-recolor-dark 0 styletab-c:focus-frame-color)
+                                  (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+             (highl (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-h.png"))
+                                (if (eq styletab-c:custom-frame-colors t)
+                                    (get-recolor-bright 
+                                     (if (eq styletab-c:hightlight-tabbar t) 
+                                         (/ (* styletab-c:active-hightlight-brighten 20) 2) 0)
+                                     styletab-c:focus-frame-color) (get-recolor-bright 
+                                                                    (if (eq styletab-c:hightlight-tabbar t) 
+                                                                        (/ (nth 2 (proposals-colors)) 2) 0)
+                                                                    (get-color (nth 0 (proposals-colors)))))))
+             (inact (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-i.png"))
+                                (if (eq styletab-c:custom-frame-colors t)
+                                    (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                                  (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors)))))))
+             (in-hi (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-ih.png"))
+                                (if (eq styletab-c:custom-frame-colors t)
+                                    (get-recolor-bright 
+                                     (if (eq styletab-c:hightlight-tabbar t) 
+                                         (- (/ (* styletab-c:inactive-hightlight-brighten 20) 2) (* styletab-c:inactive-dimout 20))
+                                       (- (* styletab-c:inactive-dimout 20)))
+                                     styletab-c:unfocus-frame-color)
+                                  (get-recolor-bright (if (eq styletab-c:hightlight-tabbar t) 
+                                                          (- (/ (nth 3 (proposals-colors)) 2) (nth 1 (proposals-colors)))
+                                                        (- (nth 1 (proposals-colors))))
+                                                      (get-color (nth 0 (proposals-colors))))))))
+         (table-set styletab-frame-cache w `((focused . ,focus) (highlighted . ,highl) (inactive . ,inact) (inactive-highlighted . ,in-hi))))))))
 
-;; Scale foreground botton here.
-;; I have no idea how to scale
-;; a botton after the botton was 
-;; create with make-image, (scale-image
-;; then not work like recolor-image)
-;; so theme or sawfish must restart/reload 
-;; if titel or botton sitz change but it
-;; makes the forground ugly
 (define scale-w nil)
 (define scale-h nil)
-(define make-hight-button-image
-  (lambda (w x)
-    (if (or (= w '"top")
-            (= w '"bottom"))
-        (progn (setq scale-w (+ styletab-c:title-dimension (button-width-custom)))
-               (setq scale-h (- styletab-c:title-dimension 4)))
-      (progn (setq scale-w (- styletab-c:title-dimension 4))
-             (setq scale-h (+ styletab-c:title-dimension (button-width-custom)))))
-    `((focused . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                  "/" w "-frame-" x "-button-f.png")) scale-w scale-h))
-      (highlighted . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                      "/" w "-frame-" x "-button-f.png")) scale-w scale-h))
-      (clicked . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                  "/" w "-frame-" x "-button-c.png")) scale-w scale-h))
-      (inactive . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                   "/" w "-frame-" x "-button-i.png")) scale-w scale-h))
-      (inactive-highlighted . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                               "/" w "-frame-" x "-button-ih.png")) scale-w scale-h))
-      (inactive-clicked . ,(scale-image (do-make-image (concat (symbol-name styletab-c:styles) 
-                                                                           "/" w "-frame-" x "-button-ic.png")) scale-w scale-h))))
-  (reframe-all))
-;;(define make-hight-button-image
-;;  (lambda (w x)
-;;    `((focused . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-f.png")))
-;;      (highlighted . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-f.png")))
-;;      (clicked . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-c.png")))
-;;      (inactive . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-i.png")))
-;;      (inactive-highlighted . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ih.png")))
-;;      (inactive-clicked . ,(do-make-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ic.png"))))))
+(define (button-tables-images w x color always)
+  (if (or (equal w '"top")
+          (equal w '"bottom"))
+      (progn (setq scale-w (+ styletab-c:title-dimension (button-width-custom)))
+             (setq scale-h (- styletab-c:title-dimension 4)))
+    (progn (setq scale-w (- styletab-c:title-dimension 4))
+           (setq scale-h (+ styletab-c:title-dimension (button-width-custom)))))
+  (or
+   (table-ref styletab-frame-cache (concat w "-frame-" x "-button"))
+   (progn  
+     (when (not recolor-cache)
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-f.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-h.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-c.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-i.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ih.png"))
+       (do-make-image-cache (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ic.png")))
+     (when recolor-cache
+
+       (let ((focus (scale-image (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-f.png"))
+                                             (if (eq styletab-c:custom-frame-colors t)
+                                                 (get-recolor-dark 0 (if (and always color) color styletab-c:focus-frame-color))
+                                               (get-recolor-dark 0 (if (and always color) color (get-color (nth 0 (proposals-colors))))))) 
+                                 scale-w scale-h))
+             (highl (scale-image (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-h.png"))
+                                             (if (eq styletab-c:custom-frame-colors t)
+                                                 (get-recolor-bright (* styletab-c:active-hightlight-brighten 20)
+                                                                     (if color color styletab-c:focus-frame-color))
+                                               (get-recolor-bright (nth 2 (proposals-colors))
+                                                                   (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+             (click (scale-image (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-c.png"))
+                                             (if (eq styletab-c:custom-frame-colors t)
+                                                 (get-recolor-bright (* styletab-c:active-hightlight-brighten 20)
+                                                                     (if color color styletab-c:focus-frame-color))
+                                               (get-recolor-bright (nth 2 (proposals-colors))
+                                                                   (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+             (inact (scale-image (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-i.png"))
+                                             (if (eq styletab-c:custom-frame-colors t)
+                                                 (get-recolor-dark (* styletab-c:inactive-dimout 20)
+                                                                   (if (and always color) color styletab-c:unfocus-frame-color))
+                                               (get-recolor-dark (nth 1 (proposals-colors))
+                                                                 (if (and always color) color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+             (in-hi (scale-image (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ih.png"))
+                                             (if (eq styletab-c:custom-frame-colors t)
+                                                 (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
+                                                                     (if color color styletab-c:unfocus-frame-color))
+                                               (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
+                                                                   (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+             (in-cl (scale-image (do-recolor (get-cached-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ic.png"))
+                                             (if (eq styletab-c:custom-frame-colors t)
+                                                 (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
+                                                                     (if color color styletab-c:unfocus-frame-color))
+                                               (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
+                                                                   (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h)))
+         (table-set styletab-frame-cache (concat w "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click) 
+                                                                              (inactive . ,inact) (inactive-highlighted . ,in-hi) 
+                                                                              (inactive-clicked . ,in-cl))))))))
 
 ;; frames/tabbar
-(define top-frame-icon-title-images 
-  (do-make-image (concat (symbol-name styletab-c:styles) "/" "top-frame-icon-title-images-f.png")))
-
-(define tabbar-horizontal-images
-  (mapcar (lambda (w)  (mapcar (lambda (x) (make-tab-image 
-                                            (concat x "-" w))) (list "top" "bottom"))) (list "frame-tab-left-icon" "frame-tab" "frame-tab-right")))
-(define tabbar-vertical-images
-  (mapcar (lambda (w)  (mapcar (lambda (x) (make-tab-image 
-                                            (concat x "-" w))) (list "left" "right"))) (list "frame-tab-top" "frame-tab" "frame-tab-bottom-icon")))
-(define title-cursor-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-title-cursor"))) (list "top" "bottom" "left" "right")))
-(define title-nocursor-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-title-nocursor"))) (list "top" "bottom" "left" "right")))
-(define top-border-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-top-border"))) (list "bottom" "left" "right")))
-(define top-left-corner-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-top-left-corner"))) (list "top" "bottom" "left" "right")))
-(define top-right-corner-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-top-right-corner"))) (list "top" "bottom" "left" "right")))
-(define top-left-corner-shaped-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-top-left-corner-shaped"))) (list "top" "left")))
-(define top-right-corner-shaped-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-top-right-corner-shaped"))) (list "top" "right")))
-(define title-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-title"))) (list "top" "bottom" "left" "right")))
-(define left-border-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-left-border"))) (list "top" "bottom" "right")))
-(define right-border-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-right-border"))) (list "top" "bottom" "left")))
-(define bottom-left-corner-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-bottom-left-corner"))) (list "top" "bottom" "left" "right")))
-(define bottom-border-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-bottom-border"))) (list "top" "left" "right")))
-(define bottom-right-corner-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-bottom-right-corner"))) (list "top" "bottom" "left" "right")))
-(define bottom-left-corner-shaped-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-bottom-left-corner-shaped"))) (list "bottom" "left")))
-(define bottom-right-corner-shaped-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-bottom-right-corner-shaped"))) (list "bottom" "right")))
+(define top-frame-icon-title-images
+  (make-image (concat (symbol-name styletab-c:styles) "/" "top-frame-icon-title-images-f.png")))
+(define (tabbar-horizontal-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-" w)))
+                                (tab-tables-images (concat x "-" w))) (list "top" "bottom"))) (list "frame-tab-left-icon" "frame-tab" "frame-tab-right")))
+(define (tabbar-vertical-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-" w)))
+                                (tab-tables-images (concat x "-" w))) (list "left" "right"))) (list "frame-tab-top" "frame-tab" "frame-tab-bottom-icon")))
+(define (title-cursor-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-title-cursor")))
+            (base-tables-images (concat w "-frame-title-cursor"))) (list "top" "bottom" "left" "right")))
+(define (title-nocursor-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-title-nocursor"))) 
+            (base-tables-images (concat w "-frame-title-nocursor"))) (list "top" "bottom" "left" "right")))
+(define (top-border-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-top-border")))
+            (base-tables-images (concat w "-frame-top-border"))) (list "bottom" "left" "right")))
+(define (top-left-corner-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-top-left-corner"))) 
+            (base-tables-images (concat w "-frame-top-left-corner"))) (list "top" "bottom" "left" "right")))
+(define (top-right-corner-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-top-right-corner"))) 
+            (base-tables-images (concat w "-frame-top-right-corner"))) (list "top" "bottom" "left" "right")))
+(define (top-left-corner-shaped-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-top-left-corner-shaped"))) 
+            (base-tables-images (concat w "-frame-top-left-corner-shaped"))) (list "top" "left")))
+(define (top-right-corner-shaped-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-top-right-corner-shaped")))
+            (base-tables-images (concat w "-frame-top-right-corner-shaped"))) (list "top" "right")))
+(define (title-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-title")))
+            (base-tables-images (concat w "-frame-title"))) (list "top" "bottom" "left" "right")))
+(define (left-border-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-left-border"))) 
+            (base-tables-images (concat w "-frame-left-border"))) (list "top" "bottom" "right")))
+(define (right-border-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-right-border")))
+            (base-tables-images (concat w "-frame-right-border"))) (list "top" "bottom" "left")))
+(define (bottom-left-corner-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-bottom-left-corner")))
+            (base-tables-images (concat w "-frame-bottom-left-corner"))) (list "top" "bottom" "left" "right")))
+(define (bottom-border-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-bottom-border")))
+            (base-tables-images (concat w "-frame-bottom-border"))) (list "top" "left" "right")))
+(define (bottom-right-corner-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-bottom-right-corner")))
+            (base-tables-images (concat w "-frame-bottom-right-corner"))) (list "top" "bottom" "left" "right")))
+(define (bottom-left-corner-shaped-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-bottom-left-corner-shaped"))) 
+            (base-tables-images (concat w "-frame-bottom-left-corner-shaped"))) (list "bottom" "left")))
+(define (bottom-right-corner-shaped-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-bottom-right-corner-shaped"))) 
+            (base-tables-images (concat w "-frame-bottom-right-corner-shaped"))) (list "bottom" "right")))
 
 ;; buttons
-(define base-button-images
-  (mapcar (lambda (w) (make-base-button-image w)) (list "top" "bottom" "left" "right")))
-(define space-button-images
-  (mapcar (lambda (w) (make-border-image (concat w "-frame-title"))) (list "top" "bottom" "left" "right")))
-(define close-button-images
-  (mapcar (lambda (w) (make-hight-button-image w "close")) (list "top" "bottom" "left" "right")))
-(define menu-button-images
-  (mapcar (lambda (w) (make-hight-button-image w "menu")) (list "top" "bottom" "left" "right")))
-(define iconify-button-images
-  (mapcar (lambda (w) (make-hight-button-image w "iconify")) (list "top" "bottom" "left" "right")))
-(define move-resize-button-images
-  (mapcar (lambda (w) (make-hight-button-image w "move-resize")) (list "top" "bottom" "left" "right")))
-(define rename-button-images
-  (mapcar (lambda (w) (make-hight-button-image w "rename")) (list "top" "bottom" "left" "right")))
-(define frame-type-button-images
-  (mapcar (lambda (w) (make-hight-button-image w "frame-type")) (list "top" "bottom" "left" "right")))
-(define maximize-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "maximize" "unmaximize")))
-(define shade-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "shade" "unshade")))
-(define sticky-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "sticky" "unsticky")))
-(define lock-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "lock" "unlock")))
-(define prev-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "prev" "prev-last")))
-(define next-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "next" "next-last")))
-(define raise-lower-button-images 
-  (mapcar (lambda (w) (mapcar (lambda (x) (make-hight-button-image x w)) (list "top" "bottom" "left" "right"))) (list "raise-lower" "ontop" "unontop")))
-
+(define (base-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-button")))
+            (base-tables-images (concat w "-frame-button"))) (list "top" "bottom" "left" "right")))
+(define (space-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-title")))
+            (base-tables-images (concat w "-frame-title"))) (list "top" "bottom" "left" "right")))
+(define (close-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-close-button")))
+            (button-tables-images w "close" styletab-c:hightlight-close
+                                  (if (eq styletab-c:hightlight-close-all t) t))) (list "top" "bottom" "left" "right")))
+(define (menu-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-menu-button")))
+            (button-tables-images w "menu" styletab-c:hightlight-menu
+                                  (if (eq styletab-c:hightlight-menu-all t) t))) (list "top" "bottom" "left" "right")))
+(define (iconify-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-iconify-button"))) 
+            (button-tables-images w "iconify" styletab-c:hightlight-iconify
+                                  (if (eq styletab-c:hightlight-iconify-all t) t))) (list "top" "bottom" "left" "right")))
+(define (move-resize-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-move-resize-button"))) 
+            (button-tables-images w "move-resize" styletab-c:hightlight-move-resize
+                                  (if (eq styletab-c:hightlight-move-resize-all t) t))) (list "top" "bottom" "left" "right")))
+(define (rename-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-rename-button")))
+            (button-tables-images w "rename" styletab-c:hightlight-rename
+                                  (if (eq styletab-c:hightlight-rename-all t) t))) (list "top" "bottom" "left" "right")))
+(define (frame-type-button-images)
+  (mapcar (lambda (w) (when recolor-cache (table-unset styletab-frame-cache (concat w "-frame-frame-type-button"))) 
+            (button-tables-images w "frame-type" styletab-c:hightlight-frame-type
+                                  (if (eq styletab-c:hightlight-frame-type-all t) t))) (list "top" "bottom" "left" "right")))
+(define (maximize-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-maximize
+                                                      (if (eq styletab-c:hightlight-maximize-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "maximize" "unmaximize")))
+(define (shade-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-shade
+                                                      (if (eq styletab-c:hightlight-shade-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "shade" "unshade")))
+(define (sticky-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-sticky
+                                                      (if (eq styletab-c:hightlight-sticky-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "sticky" "unsticky")))
+(define (lock-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-lock
+                                                      (if (eq styletab-c:hightlight-lock-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "lock" "unlock")))
+(define (prev-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-prev
+                                                      (if (eq styletab-c:hightlight-prev-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "prev" "prev-last")))
+(define (next-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-next
+                                                      (if (eq styletab-c:hightlight-next-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "next" "next-last")))
+(define (raise-lower-button-images)
+  (mapcar (lambda (w) (mapcar (lambda (x) (when recolor-cache (table-unset styletab-frame-cache (concat x "-frame-" w "-button")))
+                                (button-tables-images x w styletab-c:hightlight-raise-lower
+                                                      (if (eq styletab-c:hightlight-raise-lower-all t) t)))
+                              (list "top" "bottom" "left" "right"))) (list "raise-lower" "ontop" "unontop")))
 (define (recolor-base)
-  (mapcar (lambda (w)
-            (mapcar (lambda (x)
-                      (do-recolor (cdr (nth 0 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-dark 0 styletab-c:focus-frame-color)
-                                    (get-recolor-dark 0 (get-color (nth 0 (proposals-colors))))))
-                      (do-recolor (cdr (nth 1 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
-                                    (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))) w))
-          (list title-cursor-images title-nocursor-images top-border-images top-left-corner-images top-right-corner-images
-                top-left-corner-shaped-images top-right-corner-shaped-images title-images left-border-images right-border-images
-                bottom-left-corner-images bottom-border-images bottom-right-corner-images bottom-left-corner-shaped-images
-                bottom-right-corner-shaped-images space-button-images))
-
-  (mapcar (lambda (w)
-            (mapcar (lambda (x)
-                      (mapcar (lambda (y)
-                                (do-recolor (cdr (nth y x))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-dark 0 styletab-c:focus-frame-color)
-                                              (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
-                              (list '0 '1 '2))
-                      (mapcar (lambda (y)
-                                (do-recolor (cdr (nth y x))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
-                                              (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors)))))))
-                              (list '3 '4 '5))) w))
-          (list base-button-images)))
+  (title-cursor-images) (title-nocursor-images) (top-border-images) (top-left-corner-images) (top-right-corner-images) (top-left-corner-shaped-images)
+  (top-right-corner-shaped-images) (title-images) (left-border-images) (right-border-images) (bottom-left-corner-images) (bottom-border-images)
+  (bottom-right-corner-images) (bottom-left-corner-shaped-images) (bottom-right-corner-shaped-images) (base-button-images) (space-button-images))
 
 (define (recolor-tab)
-  (mapcar (lambda (w)
-            (mapcar (lambda (x)
-                      (mapcar (lambda (y)
-                                (do-recolor (cdr (nth 0 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-dark 0 styletab-c:focus-frame-color)
-                                              (get-recolor-dark 0 (get-color (nth 0 (proposals-colors))))))
-                                (do-recolor (cdr (nth 1 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-bright (if (eq styletab-c:hightlight-tabbar t) 
-                                                                        (/ (* styletab-c:active-hightlight-brighten 20) 2)
-                                                                      0)
-                                                                    styletab-c:focus-frame-color)
-                                              (get-recolor-bright (if (eq styletab-c:hightlight-tabbar t) 
-                                                                      (/ (nth 2 (proposals-colors)) 2)
-                                                                    0)
-                                                                  (get-color (nth 0 (proposals-colors))))))
-                                (do-recolor (cdr (nth 2 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
-                                              (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))
-                                (do-recolor (cdr (nth 3 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-bright 
-                                                 (if (eq styletab-c:hightlight-tabbar t) 
-                                                     (- (/ (* styletab-c:inactive-hightlight-brighten 20) 2) (* styletab-c:inactive-dimout 20))
-                                                   (- (* styletab-c:inactive-dimout 20)))
-                                                 styletab-c:unfocus-frame-color)
-                                              (get-recolor-bright (if (eq styletab-c:hightlight-tabbar t) 
-                                                                      (- (/ (nth 3 (proposals-colors)) 2) (nth 1 (proposals-colors)))
-                                                                    (- (nth 1 (proposals-colors))))
-                                                                  (get-color (nth 0 (proposals-colors))))))) x)) w)) 
-          (list tabbar-horizontal-images tabbar-vertical-images)))
-
-(define (recolor-botton-static-sing button color always)
-  (mapcar (lambda (w)
-            (mapcar (lambda (x)
-                      (do-recolor (cdr (nth 0 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-dark 0 (if (and always color) color styletab-c:focus-frame-color))
-                                    (get-recolor-dark 0 (if (and always color) color (get-color (nth 0 (proposals-colors)))))))
-                      (do-recolor (cdr (nth 1 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-bright (* styletab-c:active-hightlight-brighten 20) (if color color styletab-c:focus-frame-color))
-                                    (get-recolor-bright (nth 2 (proposals-colors)) (if color color (get-color (nth 0 (proposals-colors)))))))
-                      (do-recolor (cdr (nth 2 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-bright (* styletab-c:active-hightlight-brighten 20) (if color color styletab-c:focus-frame-color))
-                                    (get-recolor-bright (nth 2 (proposals-colors)) (if color color (get-color (nth 0 (proposals-colors)))))))
-                      (do-recolor (cdr (nth 3 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-dark (* styletab-c:inactive-dimout 20) (if (and always color) color styletab-c:unfocus-frame-color))
-                                    (get-recolor-dark (nth 1 (proposals-colors)) (if (and always color) color (get-color (nth 0 (proposals-colors)))))))
-                      (do-recolor (cdr (nth 4 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
-                                                          (if color color styletab-c:unfocus-frame-color))
-                                    (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
-                                                        (if color color (get-color (nth 0 (proposals-colors)))))))
-                      (do-recolor (cdr (nth 5 x))
-                                  (if (eq styletab-c:custom-frame-colors t)
-                                      (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
-                                                          (if color color styletab-c:unfocus-frame-color))
-                                    (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
-                                                        (if color color (get-color (nth 0 (proposals-colors)))))))) w))
-          (list button)))
-
-(define (recolor-botton-dynamic-sing button color always)
-  (mapcar (lambda (w)
-            (mapcar (lambda (x)
-                      (mapcar (lambda (y)
-                                (do-recolor (cdr (nth 0 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-dark 0 (if (and always color) color styletab-c:focus-frame-color))
-                                              (get-recolor-dark 0 (if (and always color) color (get-color (nth 0 (proposals-colors)))))))
-                                (do-recolor (cdr (nth 1 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-bright (* styletab-c:active-hightlight-brighten 20) 
-                                                                    (if color color styletab-c:focus-frame-color))
-                                              (get-recolor-bright (nth 2 (proposals-colors)) (if color color (get-color (nth 0 (proposals-colors)))))))
-                                (do-recolor (cdr (nth 2 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-bright (* styletab-c:active-hightlight-brighten 20) 
-                                                                    (if color color styletab-c:focus-frame-color))
-                                              (get-recolor-bright (nth 2 (proposals-colors)) (if color color (get-color (nth 0 (proposals-colors)))))))
-                                (do-recolor (cdr (nth 3 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-dark (* styletab-c:inactive-dimout 20) 
-                                                                  (if (and always color) color styletab-c:unfocus-frame-color))
-                                              (get-recolor-dark (nth 1 (proposals-colors)) 
-                                                                (if (and always color) color (get-color (nth 0 (proposals-colors)))))))
-                                (do-recolor (cdr (nth 4 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
-                                                                    (if color color styletab-c:unfocus-frame-color))
-                                              (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
-                                                                  (if color color (get-color (nth 0 (proposals-colors)))))))
-                                (do-recolor (cdr (nth 5 y))
-                                            (if (eq styletab-c:custom-frame-colors t)
-                                                (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
-                                                                    (if color color styletab-c:unfocus-frame-color))
-                                              (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
-                                                                  (if color color (get-color (nth 0 (proposals-colors)))))))) x)) w))
-          (list button)))
+  (tabbar-horizontal-images) (tabbar-vertical-images))
 
 (define (recolor-close-button)
-  (recolor-botton-static-sing close-button-images styletab-c:hightlight-close (if (eq styletab-c:hightlight-close-all t) t)))
+  (close-button-images))
 (define (recolor-menu-button)
-  (recolor-botton-static-sing menu-button-images styletab-c:hightlight-menu (if (eq styletab-c:hightlight-menu-all t) t)))
+  (menu-button-images))
 (define (recolor-iconify-button)
-  (recolor-botton-static-sing iconify-button-images styletab-c:hightlight-iconify (if (eq styletab-c:hightlight-iconify-all t) t)))
+  (iconify-button-images))
 (define (recolor-move-resize-button)
-  (recolor-botton-static-sing move-resize-button-images styletab-c:hightlight-move-resize (if (eq styletab-c:hightlight-move-resize-all t) t)))
+  (move-resize-button-images))
 (define (recolor-rename-button)
-  (recolor-botton-static-sing rename-button-images styletab-c:hightlight-rename (if (eq styletab-c:hightlight-rename-all t) t)))
+  (rename-button-images))
 (define (recolor-frame-type-button)
-  (recolor-botton-static-sing frame-type-button-images styletab-c:hightlight-frame-type (if (eq styletab-c:hightlight-frame-type-all t) t)))
+  (frame-type-button-images))
 (define (recolor-maximize-button)
-  (recolor-botton-dynamic-sing maximize-button-images styletab-c:hightlight-maximize (if (eq styletab-c:hightlight-maximize-all t) t)))
+  (maximize-button-images))
 (define (recolor-shade-button)
-  (recolor-botton-dynamic-sing shade-button-images styletab-c:hightlight-shade (if (eq styletab-c:hightlight-shade-all t) t)))
+  (shade-button-images))
 (define (recolor-sticky-button)
-  (recolor-botton-dynamic-sing sticky-button-images styletab-c:hightlight-sticky (if (eq styletab-c:hightlight-sticky-all t) t)))
+  (sticky-button-images))
 (define (recolor-lock-button)
-  (recolor-botton-dynamic-sing lock-button-images styletab-c:hightlight-lock (if (eq styletab-c:hightlight-lock-all t) t)))
+  (lock-button-images))
 (define (recolor-prev-button)
-  (recolor-botton-dynamic-sing prev-button-images styletab-c:hightlight-prev (if (eq styletab-c:hightlight-prev-all t) t)))
+  (prev-button-images))
 (define (recolor-next-button)
-  (recolor-botton-dynamic-sing next-button-images styletab-c:hightlight-next (if (eq styletab-c:hightlight-next-all t) t)))
+  (next-button-images))
 (define (recolor-raise-lower-button)
-  (recolor-botton-dynamic-sing raise-lower-button-images styletab-c:hightlight-raise-lower (if (eq styletab-c:hightlight-raise-lower-all t) t)))
+  (raise-lower-button-images))
 
 (define (recolor-all-buttons)
-  (recolor-close-button) (recolor-menu-button) (recolor-iconify-button) (recolor-move-resize-button) (recolor-rename-button) 
-  (recolor-frame-type-button) (recolor-maximize-button) (recolor-shade-button) (recolor-sticky-button) (recolor-lock-button)
-  (recolor-prev-button) (recolor-next-button) (recolor-raise-lower-button))
+  (recolor-close-button) (recolor-menu-button) (recolor-iconify-button) (recolor-move-resize-button) 
+  (recolor-rename-button) (recolor-frame-type-button) (recolor-maximize-button) (recolor-shade-button) 
+  (recolor-sticky-button) (recolor-lock-button) (recolor-prev-button) (recolor-next-button) (recolor-raise-lower-button))
 
 (define (recolor-all)
   (recolor-base) (recolor-tab) (recolor-all-buttons))
@@ -1125,25 +1100,25 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-default-border-corner-group
   `(((class . title)
-     (background . ,(nth 0 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title")))
      (left-edge . 0)
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
      (width . ,button-left-edge))
     ((class . top-left-corner)
-     (background . ,(nth 0 top-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-top-left-corner")))
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . top-right-corner)
-     (background . ,(nth 0 top-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-top-right-corner")))
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
-     (background . ,(nth 0 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title")))
      (right-edge . 0)
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
@@ -1151,25 +1126,25 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-default-border-corner-group
   `(((class . title)
-     (background . ,(nth 1 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title")))
      (left-edge . 0)
      (bottom-edge . ,title-edge-s)
      (height . ,title-height-s)
      (width . ,button-left-edge))
     ((class . bottom-left-corner)
-     (background . ,(nth 1 bottom-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-bottom-left-corner")))
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . bottom-right-corner)
-     (background . ,(nth 1 bottom-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-bottom-right-corner")))
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
-     (background . ,(nth 1 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title")))
      (right-edge . 0)
      (bottom-edge . ,title-edge-s)
      (height . ,title-height-s)
@@ -1177,25 +1152,25 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-default-border-corner-group
   `(((class . title)
-     (background . ,(nth 2 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title")))
      (top-edge . 0)
      (left-edge . ,title-edge-s)
      (height . ,button-right-edge)
      (width . ,title-height-s))
     ((class . bottom-left-corner)
-     (background . ,(nth 2 bottom-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-bottom-left-corner")))
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . top-left-corner)
-     (background . ,(nth 2 top-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-top-left-corner")))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . title)
-     (background . ,(nth 2 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title")))
      (bottom-edge . 0)
      (left-edge . ,title-edge-s)
      (height . ,button-left-edge)
@@ -1203,25 +1178,25 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-default-border-corner-group
   `(((class . title)
-     (background . ,(nth 3 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title")))
      (top-edge . 0)
      (right-edge . ,title-edge-s)
      (height . ,button-left-edge)
      (width . ,title-height-s))
     ((class . bottom-right-corner)
-     (background . ,(nth 3 bottom-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-bottom-right-corner")))
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . top-right-corner)
-     (background . ,(nth 3 top-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-top-right-corner")))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . title)
-     (background . ,(nth 3 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title")))
      (bottom-edge . 0)
      (right-edge . ,title-edge-s)
      (height . ,button-right-edge)
@@ -1229,33 +1204,33 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-border-group
   `(((class . left-border)
-     (background . ,(nth 0 left-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-left-border")))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (top-edge . 0)
      (width . ,frame-width)
      (bottom-edge . 0))
 	((class . bottom-left-corner)
-     (background . ,(nth 0 bottom-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-bottom-left-corner")))
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
 	((class . bottom-border)
-     (background . ,(nth 0 bottom-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-bottom-border")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (bottom-edge . ,frame-edge))
 	((class . bottom-right-corner)
-     (background . ,(nth 0 bottom-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-bottom-right-corner")))
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
 	((class . right-border)
-     (background . ,(nth 0 right-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-right-border")))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (right-edge . ,frame-edge)
@@ -1264,33 +1239,33 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-border-group
   `(((class . left-border)
-     (background . ,(nth 1 left-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-left-border")))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (bottom-edge . 0)
      (width . ,frame-width)
      (top-edge . 0))
     ((class . top-left-corner)
-     (background . ,(nth 1 top-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-top-left-corner")))
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (top-edge . ,frame-edge))
     ((class . top-border)
-     (background . ,(nth 0 top-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-top-border")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (top-edge . ,frame-edge))
     ((class . top-right-corner)
-     (background . ,(nth 1 top-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-top-right-corner")))
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (top-edge . ,frame-edge))
     ((class . right-border)
-     (background . ,(nth 1 right-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-right-border")))
      (cursor . sb_h_double_arrow)
      (bottom-edge . 0)
      (right-edge . ,frame-edge)
@@ -1299,33 +1274,33 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-border-group
   `(((class . bottom-border)
-     (background . ,(nth 1 bottom-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-bottom-border")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . bottom-right-corner)
-     (background . ,(nth 2 bottom-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-bottom-right-corner")))
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . right-border)
-     (background . ,(nth 2 right-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-right-border")))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (right-edge . ,frame-edge)
      (width . ,frame-width)
      (bottom-edge . 0))
     ((class . top-right-corner)
-     (background . ,(nth 2 top-right-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-top-right-corner")))
      (top-edge . ,frame-edge)
      (right-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width))
     ((class . top-border)
-     (background . ,(nth 1 top-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-top-border")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
@@ -1334,33 +1309,33 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-border-group
   `(((class . bottom-border)
-     (background . ,(nth 2 bottom-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-bottom-border")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
      (height . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . bottom-left-corner)
-     (background . ,(nth 3 bottom-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-bottom-left-corner")))
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width)
      (bottom-edge . ,frame-edge))
     ((class . left-border)
-     (background . ,(nth 2 left-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-left-border")))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (left-edge . ,frame-edge)
      (width . ,frame-width)
      (bottom-edge . 0))
     ((class . top-left-corner)
-     (background . ,(nth 3 top-left-corner-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-top-left-corner")))
      (top-edge . ,frame-edge)
      (left-edge . ,frame-edge)
      (height . ,frame-width)
      (width . ,frame-width))
     ((class . top-border)
-     (background . ,(nth 2 top-border-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-top-border")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (right-edge . 0)
@@ -1369,7 +1344,7 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-title-group
   `(((class . top-border)
-     (background . ,(nth 0 title-cursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title-cursor")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (top-edge . ,title-edge)
@@ -1378,14 +1353,14 @@ Fix/hack for foreground button, but makes botton ugly."
     ((class . tabbar-horizontal)
      (x-justify . ,(lambda (w) (- styletab-c:title-dimension 12)))
      (y-justify . center)
-     (background . ,(nth 0 (nth 1 tabbar-horizontal-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-tab")))
      (foreground . ,title-colors-images)
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
      (text . ,window-name))
     ((class . tabbar-horizontal-left-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,(nth 0 (nth 0 tabbar-horizontal-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-tab-left-icon")))
      (cursor . hand2)
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
@@ -1393,12 +1368,12 @@ Fix/hack for foreground button, but makes botton ugly."
      (y-justify . 2)
      (x-justify . ,(lambda (w) (+ 3 (icon-edge w)))))
     ((class . tabbar-horizontal-right-edge)
-     (background . ,(nth 0 (nth 2 tabbar-horizontal-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-tab-right")))
      (width . ,tabbar-right-edge-width)
      (height . ,title-height-s)
      (top-edge . ,title-edge-s))
     ((class . title)
-     (background . ,(nth 0 title-nocursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title-nocursor")))
      (left-edge . 0)
      (top-edge . -2)
      (right-edge . 0)
@@ -1406,7 +1381,7 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-title-group
   `(((class . title)
-     (background . ,(nth 1 title-nocursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title-nocursor")))
      (left-edge . 0)
      (bottom-edge . -2)
      (right-edge . 0)
@@ -1414,14 +1389,14 @@ Fix/hack for foreground button, but makes botton ugly."
     ((class . tabbar-horizontal)
      (x-justify . ,(lambda (w) (- styletab-c:title-dimension 12)))
      (y-justify . center)
-     (background . ,(nth 0 (nth 1 tabbar-horizontal-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-tab")))
      (foreground . ,title-colors-images)
      (bottom-edge . ,title-edge-s)
      (height . ,title-height-s)
      (text . ,window-name))
     ((class . tabbar-horizontal-left-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,(nth 0 (nth 0 tabbar-horizontal-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-tab-left-icon")))
      (cursor . hand2)
      (bottom-edge . ,title-edge-s)
      (height . ,title-height-s)
@@ -1429,12 +1404,12 @@ Fix/hack for foreground button, but makes botton ugly."
      (y-justify . 2)
      (x-justify . ,(lambda (w) (+ 3 (icon-edge w)))))
     ((class . tabbar-horizontal-right-edge)
-     (background . ,(nth 0 (nth 2 tabbar-horizontal-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-tab-right")))
      (width . ,tabbar-right-edge-width)
      (height . ,title-height-s)
      (bottom-edge . ,title-edge-s))
     ((class . bottom-border)
-     (background . ,(nth 1 title-cursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title-cursor")))
      (cursor . sb_v_double_arrow)
      (left-edge . 0)
      (bottom-edge . ,title-edge)
@@ -1443,7 +1418,7 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-title-group
   `(((class . left-border)
-     (background . ,(nth 2 title-cursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title-cursor")))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (left-edge . ,title-edge)
@@ -1451,7 +1426,7 @@ Fix/hack for foreground button, but makes botton ugly."
      (width . 2))
     ((class . tabbar-vertical-top-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,(nth 0 (nth 0 tabbar-vertical-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-tab-top")))
      (cursor . hand2)
      (height . ,(lambda (w) (+ 2 (title-height-s w))))
      (width . ,title-height-s)
@@ -1461,19 +1436,19 @@ Fix/hack for foreground button, but makes botton ugly."
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
-     (background . ,(nth 0 (nth 1 tabbar-vertical-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-tab")))
      (left-edge . ,title-edge-s)
      (width . ,title-height-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,(nth 0 (nth 2 tabbar-vertical-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-tab-bottom-icon")))
      (left-edge . ,title-edge-s)
      (height . ,title-height-s)
      (width . ,title-height-s)
      (y-justify . ,(lambda (w) (- (+ 0 (icon-edge w)))))
      (x-justify . 2))
     ((class . title)
-     (background . ,(nth 2 title-nocursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title-nocursor")))
      (top-edge . 0)
      (left-edge . -2)
      (bottom-edge . 0)
@@ -1481,7 +1456,7 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-title-group
   `(((class . right-border)
-     (background . ,(nth 3 title-cursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title-cursor")))
      (cursor . sb_h_double_arrow)
      (top-edge . 0)
      (right-edge . ,title-edge)
@@ -1489,7 +1464,7 @@ Fix/hack for foreground button, but makes botton ugly."
      (width . 2))
     ((class . tabbar-vertical-top-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,(nth 1 (nth 0 tabbar-vertical-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-tab-top")))
      (cursor . hand2)
      (height . ,(lambda (w) (+ 2 (title-height-s w))))
      (width . ,title-height-s)
@@ -1499,19 +1474,19 @@ Fix/hack for foreground button, but makes botton ugly."
     ((class . tabbar-vertical)
      (x-justify . 12)
      (y-justify . center)
-     (background . ,(nth 1 (nth 1 tabbar-vertical-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-tab")))
      (right-edge . ,title-edge-s)
      (width . ,title-height-s))
     ((class . tabbar-vertical-bottom-edge)
      (foreground . ,(lambda (w) (window-icon w)))
-     (background . ,(nth 1 (nth 2 tabbar-vertical-images)))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-tab-bottom-icon")))
      (right-edge . ,title-edge-s)
      (height . ,title-height-s)
      (width . ,title-height-s)
      (y-justify . ,(lambda (w) (- (+ 0 (icon-edge w)))))
      (x-justify . 2))
     ((class . title)
-     (background . ,(nth 3 title-nocursor-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title-nocursor")))
      (top-edge . 0)
      (right-edge . -2)
      (bottom-edge . 0)
@@ -1519,8 +1494,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-close-button
   `((class . close-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(nth 0 close-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-close-button")))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1528,8 +1503,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-close-button
   `((class . close-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(nth 1 close-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-close-button")))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1537,8 +1512,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-close-button
   `((class . close-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(nth 2 close-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-close-button")))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1546,8 +1521,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-close-button
   `((class . close-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(nth 3 close-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-close-button")))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1555,8 +1530,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-menu-button
   `((class . menu-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(nth 0 menu-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-menu-button")))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1564,8 +1539,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-menu-button
   `((class . menu-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(nth 1 menu-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-menu-button")))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1573,8 +1548,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-menu-button
   `((class . menu-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(nth 2 menu-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-menu-button")))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1582,8 +1557,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-menu-button
   `((class . menu-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(nth 3 menu-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-menu-button")))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1591,8 +1566,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-iconify-button
   `((class . iconify-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(nth 0 iconify-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-iconify-button")))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1600,8 +1575,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-iconify-button
   `((class . iconify-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(nth 1 iconify-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-iconify-button")))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1609,8 +1584,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-iconify-button
   `((class . iconify-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(nth 2 iconify-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-iconify-button")))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1618,8 +1593,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-iconify-button
   `((class . iconify-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(nth 3 iconify-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-iconify-button")))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1627,9 +1602,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-maximize-button
   `((class . maximize-button)
-    (background . ,(nth 0 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
     (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (nth 0 (nth 1 maximize-button-images)) (nth 0 (nth 0 maximize-button-images)))))
+                                   (table-ref styletab-frame-cache '"top-frame-unmaximize-button") 
+                                 (table-ref styletab-frame-cache '"top-frame-maximize-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1637,9 +1613,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-maximize-button
   `((class . maximize-button)
-    (background . ,(nth 1 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
     (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (nth 1 (nth 1 maximize-button-images)) (nth 1 (nth 0 maximize-button-images)))))
+                                   (table-ref styletab-frame-cache '"bottom-frame-unmaximize-button") 
+                                 (table-ref styletab-frame-cache '"bottom-frame-maximize-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1647,9 +1624,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-maximize-button
   `((class . maximize-button)
-    (background . ,(nth 2 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
     (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (nth 2 (nth 1 maximize-button-images)) (nth 2 (nth 0 maximize-button-images)))))
+                                   (table-ref styletab-frame-cache '"left-frame-unmaximize-button") 
+                                 (table-ref styletab-frame-cache '"left-frame-maximize-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1657,9 +1635,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-maximize-button
   `((class . maximize-button)
-    (background . ,(nth 3 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
     (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (nth 3 (nth 1 maximize-button-images)) (nth 3 (nth 0 maximize-button-images)))))
+                                   (table-ref styletab-frame-cache '"right-frame-unmaximize-button") 
+                                 (table-ref styletab-frame-cache '"right-frame-maximize-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1667,8 +1646,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-shade-button
   `((class . shade-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) (nth 0 (nth 1 shade-button-images)) (nth 0 (nth 0 shade-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
+                                   (table-ref styletab-frame-cache '"top-frame-unshade-button") 
+                                 (table-ref styletab-frame-cache '"top-frame-shade-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1676,8 +1657,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-shade-button
   `((class . shade-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) (nth 1 (nth 1 shade-button-images)) (nth 1 (nth 0 shade-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
+                                   (table-ref styletab-frame-cache '"bottom-frame-unshade-button") 
+                                 (table-ref styletab-frame-cache '"bottom-frame-shade-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1685,8 +1668,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-shade-button
   `((class . shade-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) (nth 2 (nth 1 shade-button-images)) (nth 2 (nth 0 shade-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
+                                   (table-ref styletab-frame-cache '"left-frame-unshade-button") 
+                                 (table-ref styletab-frame-cache '"left-frame-shade-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1694,8 +1679,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-shade-button
   `((class . shade-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) (nth 3 (nth 1 shade-button-images)) (nth 3 (nth 0 shade-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
+                                   (table-ref styletab-frame-cache '"right-frame-unshade-button") 
+                                 (table-ref styletab-frame-cache '"right-frame-shade-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1703,8 +1690,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-sticky-button
   `((class . sticky-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'sticky) (nth 0 (nth 1 sticky-button-images)) (nth 0 (nth 0 sticky-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'sticky) 
+                                   (table-ref styletab-frame-cache '"top-frame-unsticky-button") 
+                                 (table-ref styletab-frame-cache '"top-frame-sticky-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1712,8 +1701,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-sticky-button
   `((class . sticky-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'sticky) (nth 1 (nth 1 sticky-button-images)) (nth 1 (nth 0 sticky-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'sticky) 
+                                   (table-ref styletab-frame-cache '"bottom-frame-unsticky-button") 
+                                 (table-ref styletab-frame-cache '"bottom-frame-sticky-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1721,8 +1712,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-sticky-button
   `((class . sticky-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'sticky) (nth 2 (nth 1 sticky-button-images)) (nth 2 (nth 0 sticky-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'sticky) 
+                                   (table-ref styletab-frame-cache '"left-frame-unsticky-button") 
+                                 (table-ref styletab-frame-cache '"left-frame-sticky-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1730,8 +1723,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-sticky-button
   `((class . sticky-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'sticky) (nth 3 (nth 1 sticky-button-images)) (nth 3 (nth 0 sticky-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'sticky) 
+                                   (table-ref styletab-frame-cache '"right-frame-unsticky-button") 
+                                 (table-ref styletab-frame-cache '"right-frame-sticky-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1739,37 +1734,38 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-space-button
   `((class . title)
-    (background . ,(nth 0 space-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title")))
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
     (width . ,top-frame-button-width)))
 
 (define bottom-frame-space-button
   `((class . title)
-    (background . ,(nth 1 space-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title")))
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
     (width . ,bottom-frame-button-width)))
 
 (define left-frame-space-button
   `((class . title)
-    (background . ,(nth 2 space-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title")))
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
     (width . ,title-height-s)))
 
 (define right-frame-space-button
   `((class . title)
-    (background . ,(nth 3 space-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title")))
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
     (width . ,title-height-s)))
 
 (define top-frame-prev-button
   `((class . previous-workspace-button)
-    (background . ,(nth 0 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky))
-                                   (nth 0 (nth 1 prev-button-images)) (nth 0 (nth 0 prev-button-images)))))    
+                                   (table-ref styletab-frame-cache '"top-frame-prev-last-button")   
+                                 (table-ref styletab-frame-cache '"top-frame-prev-button"))))    
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1777,9 +1773,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-prev-button
   `((class . previous-workspace-button)
-    (background . ,(nth 1 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky))
-                                   (nth 1 (nth 1 prev-button-images)) (nth 1 (nth 0 prev-button-images)))))    
+                                   (table-ref styletab-frame-cache '"bottom-frame-prev-last-button")   
+                                 (table-ref styletab-frame-cache '"bottom-frame-prev-button"))))    
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1787,9 +1784,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-prev-button
   `((class . previous-workspace-button)
-    (background . ,(nth 2 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky))
-                                   (nth 2 (nth 1 prev-button-images)) (nth 2 (nth 0 prev-button-images)))))    
+                                   (table-ref styletab-frame-cache '"left-frame-prev-last-button")   
+                                 (table-ref styletab-frame-cache '"left-frame-prev-button"))))    
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1797,9 +1795,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-prev-button
   `((class . previous-workspace-button)
-    (background . ,(nth 3 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky))
-                                   (nth 3 (nth 1 prev-button-images)) (nth 3 (nth 0 prev-button-images)))))    
+                                   (table-ref styletab-frame-cache '"right-frame-prev-last-button")   
+                                 (table-ref styletab-frame-cache '"right-frame-prev-button"))))    
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1807,9 +1806,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-next-button
   `((class . next-workspace-button)
-    (background . ,(nth 0 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky))
-                                   (nth 0 (nth 1 next-button-images)) (nth 0 (nth 0 next-button-images)))))
+                                   (table-ref styletab-frame-cache '"top-frame-next-last-button")   
+                                 (table-ref styletab-frame-cache '"top-frame-next-button"))))    
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1817,9 +1817,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-next-button
   `((class . next-workspace-button)
-    (background . ,(nth 1 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky))
-                                   (nth 1 (nth 1 next-button-images)) (nth 1 (nth 0 next-button-images)))))
+                                   (table-ref styletab-frame-cache '"bottom-frame-next-last-button")   
+                                 (table-ref styletab-frame-cache '"bottom-frame-next-button"))))    
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1827,9 +1828,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-next-button
   `((class . next-workspace-button)
-    (background . ,(nth 2 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky))
-                                   (nth 2 (nth 1 next-button-images)) (nth 2 (nth 0 next-button-images)))))
+                                   (table-ref styletab-frame-cache '"left-frame-next-last-button")   
+                                 (table-ref styletab-frame-cache '"left-frame-next-button"))))    
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1837,9 +1839,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-next-button
   `((class . next-workspace-button)
-    (background . ,(nth 3 base-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky))
-                                   (nth 3 (nth 1 next-button-images)) (nth 3 (nth 0 next-button-images)))))
+                                   (table-ref styletab-frame-cache '"right-frame-next-last-button")   
+                                 (table-ref styletab-frame-cache '"right-frame-next-button"))))    
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1847,8 +1850,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-lock-button
   `((class . lock-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) (nth 0 (nth 1 lock-button-images)) (nth 0 (nth 0 lock-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
+                                   (table-ref styletab-frame-cache '"top-frame-unlock-button") 
+                                 (table-ref styletab-frame-cache '"top-frame-lock-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1856,8 +1861,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-lock-button
   `((class . lock-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) (nth 1 (nth 1 lock-button-images)) (nth 1 (nth 0 lock-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
+                                   (table-ref styletab-frame-cache '"bottom-frame-unlock-button") 
+                                 (table-ref styletab-frame-cache '"bottom-frame-lock-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1865,8 +1872,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-lock-button
   `((class . lock-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) (nth 2 (nth 1 lock-button-images)) (nth 2 (nth 0 lock-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
+                                   (table-ref styletab-frame-cache '"left-frame-unlock-button") 
+                                 (table-ref styletab-frame-cache '"left-frame-lock-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1874,8 +1883,10 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-lock-button
   `((class . lock-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) (nth 3 (nth 1 lock-button-images)) (nth 3 (nth 0 lock-button-images)))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
+                                   (table-ref styletab-frame-cache '"right-frame-unlock-button") 
+                                 (table-ref styletab-frame-cache '"right-frame-lock-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1883,9 +1894,11 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-raise-lower-button
   `((class . raise-lower-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (nth 0 (nth 0 raise-lower-button-images)) 
-                                 (if (> (window-get w 'depth) 0) (nth 0 (nth 1 raise-lower-button-images)) (nth 0 (nth 2 raise-lower-button-images))))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-frame-cache '"top-frame-raise-lower-button") 
+                                 (if (> (window-get w 'depth) 0) 
+                                     (table-ref styletab-frame-cache '"top-frame-ontop-button")
+                                   (table-ref styletab-frame-cache '"top-frame-unontop-button")))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1893,9 +1906,11 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-raise-lower-button
   `((class . raise-lower-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (nth 1 (nth 0 raise-lower-button-images)) 
-                                 (if (> (window-get w 'depth) 0) (nth 1 (nth 1 raise-lower-button-images)) (nth 1 (nth 2 raise-lower-button-images))))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-frame-cache '"bottom-frame-raise-lower-button") 
+                                 (if (> (window-get w 'depth) 0) 
+                                     (table-ref styletab-frame-cache '"bottom-frame-ontop-button")
+                                   (table-ref styletab-frame-cache '"bottom-frame-unontop-button")))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1903,9 +1918,11 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-raise-lower-button
   `((class . raise-lower-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (nth 2 (nth 0 raise-lower-button-images)) 
-                                 (if (> (window-get w 'depth) 0) (nth 2 (nth 1 raise-lower-button-images)) (nth 2 (nth 2 raise-lower-button-images))))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-frame-cache '"left-frame-raise-lower-button") 
+                                 (if (> (window-get w 'depth) 0) 
+                                     (table-ref styletab-frame-cache '"left-frame-ontop-button")
+                                   (table-ref styletab-frame-cache '"left-frame-unontop-button")))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1913,9 +1930,11 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-raise-lower-button
   `((class . raise-lower-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (nth 3 (nth 0 raise-lower-button-images)) 
-                                 (if (> (window-get w 'depth) 0) (nth 3 (nth 1 raise-lower-button-images)) (nth 3 (nth 2 raise-lower-button-images))))))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-frame-cache '"right-frame-raise-lower-button") 
+                                 (if (> (window-get w 'depth) 0) 
+                                     (table-ref styletab-frame-cache '"right-frame-ontop-button")
+                                   (table-ref styletab-frame-cache '"right-frame-unontop-button")))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1923,8 +1942,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define  top-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(nth 0 move-resize-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-move-resize-button")))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1932,8 +1951,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define  bottom-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(nth 1 move-resize-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-move-resize-button")))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1941,8 +1960,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define  left-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(nth 2 move-resize-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-move-resize-button")))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1950,8 +1969,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define  right-frame-move-resize-button
   `((class . move-resize-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(nth 3 move-resize-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-move-resize-button")))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1959,8 +1978,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-rename-button
   `((class . rename-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(nth 0 rename-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-rename-button")))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1968,8 +1987,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-rename-button
   `((class . rename-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(nth 1 rename-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-rename-button")))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1977,8 +1996,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-rename-button
   `((class . rename-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(nth 2 rename-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-rename-button")))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1986,8 +2005,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-rename-button
   `((class . rename-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(nth 3 rename-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-rename-button")))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1995,8 +2014,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-frame-type-button
   `((class . frame-type-button)
-    (background . ,(nth 0 base-button-images))
-    (foreground . ,(nth 0 frame-type-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-frame-type-button")))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -2004,8 +2023,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-frame-type-button
   `((class . frame-type-button)
-    (background . ,(nth 1 base-button-images))
-    (foreground . ,(nth 1 frame-type-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-frame-type-button")))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -2013,8 +2032,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-frame-type-button
   `((class . frame-type-button)
-    (background . ,(nth 2 base-button-images))
-    (foreground . ,(nth 2 frame-type-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-frame-type-button")))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -2022,8 +2041,8 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-frame-type-button
   `((class . frame-type-button)
-    (background . ,(nth 3 base-button-images))
-    (foreground . ,(nth 3 frame-type-button-images))
+    (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-button")))
+    (foreground . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-frame-type-button")))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -2031,27 +2050,27 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define top-frame-shaped-border-corner-group
   `(((class . title)
-     (background . ,(nth 0 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title")))
      (left-edge . 0)
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
      (width . ,button-left-edge))
     ((class . top-left-corner)
-     (background . ,(nth 0 top-left-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-top-left-corner-shaped")))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . top-right-corner)
-     (background . ,(nth 0 top-right-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-top-right-corner-shaped")))
      (cursor . sb_h_double_arrow)
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
-     (background . ,(nth 0 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"top-frame-title")))
      (right-edge . 0)
      (top-edge . ,title-edge-s)
      (height . ,title-height-s)
@@ -2059,27 +2078,27 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define bottom-frame-shaped-border-corner-group
   `(((class . title)
-     (background . ,(nth 1 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title")))
      (left-edge . 0)
      (bottom-edge . ,title-edge-s)
      (height . ,title-height-s)
      (width . ,button-left-edge))
     ((class . bottom-left-corner)
-     (background . ,(nth 0 bottom-left-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-bottom-left-corner-shaped")))
      (cursor . sb_h_double_arrow)
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . bottom-right-corner)
-     (background . ,(nth 0 bottom-right-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-bottom-right-corner-shaped")))
      (cursor . sb_h_double_arrow)
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
      (width . ,frame-width))
     ((class . title)
-     (background . ,(nth 1 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"bottom-frame-title")))
      (right-edge . 0)
      (bottom-edge . ,title-edge-s)
      (height . ,title-height-s)
@@ -2087,25 +2106,25 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define left-frame-shaped-border-corner-group
   `(((class . title)
-     (background . ,(nth 2 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title")))
      (top-edge . 0)
      (left-edge . ,title-edge-s)
      (height . ,button-right-edge)
      (width . ,title-height-s))
     ((class . bottom-left-corner)
-     (background . ,(nth 1 bottom-left-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-bottom-left-corner-shaped")))
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . top-left-corner)
-     (background . ,(nth 1 top-left-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-top-left-corner-shaped")))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . title)
-     (background . ,(nth 2 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"left-frame-title")))
      (bottom-edge . 0)
      (left-edge . ,title-edge-s)
      (height . ,button-left-edge)
@@ -2113,25 +2132,25 @@ Fix/hack for foreground button, but makes botton ugly."
 
 (define right-frame-shaped-border-corner-group
   `(((class . title)
-     (background . ,(nth 3 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title")))
      (top-edge . 0)
      (right-edge . ,title-edge-s)
      (height . ,button-left-edge)
      (width . ,title-height-s))
     ((class . bottom-right-corner)
-     (background . ,(nth 1 bottom-right-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-bottom-right-corner-shaped")))
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . top-right-corner)
-     (background . ,(nth 1 top-right-corner-shaped-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-top-right-corner-shaped")))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
      (height . ,frame-width)
      (width . ,title-height))
     ((class . title)
-     (background . ,(nth 3 title-images))
+     (background . ,(lambda (w) (table-ref styletab-frame-cache '"right-frame-title")))
      (bottom-edge . 0)
      (right-edge . ,title-edge-s)
      (height . ,button-right-edge)
@@ -2214,249 +2233,209 @@ Fix/hack for foreground button, but makes botton ugly."
 (define shaped-transient-frame nil)
 (define button-alist nil)
 (define current-title styletab-c:titlebar-place)
-(define top-normal-buttons-left nil)
-(define top-transient-buttons-left nil)
-(define top-normal-buttons-right nil)
-(define top-transient-buttons-right nil)
-(define bottom-normal-buttons-left nil)
-(define bottom-transient-buttons-left nil)
-(define bottom-normal-buttons-right nil)
-(define bottom-transient-buttons-right nil)
-(define left-normal-buttons-top nil)
-(define left-transient-buttons-top nil)
-(define left-normal-buttons-bottom nil)
-(define left-transient-buttons-bottom nil)
-(define right-normal-buttons-top nil)
-(define right-transient-buttons-top nil)
-(define right-normal-buttons-bottom nil)
-(define right-transient-buttons-bottom nil)
 (define top-tab-adjustments nil)
 (define bottom-tab-adjustments nil)
 (define left-tab-adjustments nil)
 (define right-tab-adjustments nil)
 
-(define make-buttons
+;; botton list table
+(define styletab-botton-cache (make-table equal-hash equal))
+(define (make-buttons)
+  (setq styletab-botton-cache (make-weak-table equal-hash equal))
   ;; ripped from Anonymous
-  (lambda ()
-    (let* (
-           ;; turns one cons cell (btn-name . show-in-transients) into a button
-           ;; definition, adding the button position
-           (make-button
-            (lambda (is-trans btn edge pos)
-              (let ((btn-def  (cdr (assq (car btn) button-alist)))
-                    (btn-in-trans (last btn)))
-                (if (or (null btn-def) (and is-trans (not btn-in-trans)))
-                    nil
-                  (cons (cons edge pos) btn-def)))))
+  (let* (;; turns one cons cell (btn-name . show-in-transients) into a button
+         ;; definition, adding the button position
+         (make-button
+          (lambda (is-trans btn edge pos)
+            (let ((btn-def  (cdr (assq (car btn) button-alist)))
+                  (btn-in-trans (last btn)))
+              (if (or (null btn-def) (and is-trans (not btn-in-trans)))
+                  nil
+                (cons (cons edge pos) btn-def)))))
+         
+         ;; turns the list of cons cells (btn-name . show-in-transients) into
+         ;; a list of button definitions, adding the button positions
+         (make-button-list
+          (lambda (is-trans btn-list edge pos-start pos-inc)
+            (let loop ((rest btn-list) (pos pos-start) (result ()))
+              (if (null rest)
+                  result
+                (let ((new-btn (make-button is-trans (car rest) edge pos)))
+                  (if (null new-btn)
+                      (loop (cdr rest) pos result)
+                    (loop (cdr rest) (+ pos pos-inc) (append (list new-btn) result))))))))
+         (adjus
+          (lambda (b-list) 
+            (if (numberp (cdr (car (car b-list))))
+                (+ (cdr (car (car b-list))) (+ styletab-c:title-dimension (button-width-custom))) 0)))
 
-           ;; turns the list of cons cells (btn-name . show-in-transients) into
-           ;; a list of button definitions, adding the button positions
-           (make-button-list
-            (lambda (is-trans btn-list edge pos-start pos-inc)
-              (let loop ((rest btn-list) (pos pos-start) (result ()))
-                (if (null rest)
-                    result
-                  (let ((new-btn (make-button is-trans (car rest) edge pos)))
-                    (if (null new-btn)
-                        (loop (cdr rest) pos result)
-                      (loop (cdr rest) (+ pos pos-inc) (append (list new-btn) result))))))))
+         (setalist (setq button-alist top-button-alist))
+         (top-normal-buttons-left
+          (make-button-list nil styletab-c:top-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (top-normal-buttons-right
+          (make-button-list nil styletab-c:top-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (top-transient-buttons-left
+          (make-button-list t styletab-c:top-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (top-transient-buttons-right
+          (make-button-list t styletab-c:top-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         
+         (setalist (setq button-alist bottom-button-alist))
+         (bottom-normal-buttons-left 
+          (make-button-list nil styletab-c:bottom-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (bottom-normal-buttons-right
+          (make-button-list nil styletab-c:bottom-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (bottom-transient-buttons-left
+          (make-button-list t styletab-c:bottom-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (bottom-transient-buttons-right
+          (make-button-list t styletab-c:bottom-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         
+         (setalist (setq button-alist left-button-alist))
+         (left-normal-buttons-bottom 
+          (make-button-list nil styletab-c:left-bottom-buttons 'bottom-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (left-normal-buttons-top
+          (make-button-list nil styletab-c:left-top-buttons 'top-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (left-transient-buttons-bottom
+          (make-button-list t styletab-c:left-bottom-buttons 'bottom-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (left-transient-buttons-top
+          (make-button-list t styletab-c:left-top-buttons 'top-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         
+         (setalist (setq button-alist right-button-alist))
+         (right-normal-buttons-bottom 
+          (make-button-list nil styletab-c:right-bottom-buttons 'bottom-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (right-normal-buttons-top
+          (make-button-list nil styletab-c:right-top-buttons 'top-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (right-transient-buttons-bottom
+          (make-button-list t styletab-c:right-bottom-buttons 'bottom-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
+         (right-transient-buttons-top
+          (make-button-list t styletab-c:right-top-buttons 'top-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom)))))
+    
+    (let ((top-left-d-w 11)
+          (top-right-d-w (tabbar-right-edge-width))
+          (top-left-m (adjus top-normal-buttons-left))
+          (top-right-m (adjus top-normal-buttons-right))
+          (top-left-m-t (adjus top-transient-buttons-left))
+          (top-right-m-t (adjus top-transient-buttons-right))
+          (bottom-left-d-w 11)
+          (bottom-right-d-w (tabbar-right-edge-width))
+          (bottom-left-m (adjus bottom-normal-buttons-left))
+          (bottom-right-m (adjus bottom-normal-buttons-right))
+          (bottom-left-m-t (adjus bottom-transient-buttons-left))
+          (bottom-right-m-t (adjus bottom-transient-buttons-right))
+          (left-left-d-w 11)
+          (left-right-d-w (- styletab-c:title-dimension 2))
+          (left-left-m (adjus left-normal-buttons-bottom))
+          (left-right-m (adjus left-normal-buttons-top))
+          (left-left-m-t (adjus left-transient-buttons-bottom))
+          (left-right-m-t (adjus left-transient-buttons-top))
+          (right-left-d-w 11)
+          (right-right-d-w (- styletab-c:title-dimension 2))
+          (right-left-m (adjus right-normal-buttons-bottom))
+          (right-right-m (adjus right-normal-buttons-top))
+          (right-left-m-t (adjus right-transient-buttons-bottom))
+          (right-right-m-t (adjus right-transient-buttons-top)))
 
+      (table-set styletab-botton-cache "top-normal-buttons-left" top-normal-buttons-left)
+      (table-set styletab-botton-cache "top-transient-buttons-left" top-transient-buttons-left)
+      (table-set styletab-botton-cache "top-normal-buttons-right" top-normal-buttons-right)
+      (table-set styletab-botton-cache "top-transient-buttons-right" top-transient-buttons-right)
+      (table-set styletab-botton-cache "top-tab-adjustments" 
+                 (list top-left-d-w top-right-d-w top-left-m top-right-m top-left-m-t top-right-m-t))
+      (table-set styletab-botton-cache "bottom-normal-buttons-left" bottom-normal-buttons-left)
+      (table-set styletab-botton-cache "bottom-transient-buttons-left" bottom-transient-buttons-left)
+      (table-set styletab-botton-cache "bottom-normal-buttons-right" bottom-normal-buttons-right)
+      (table-set styletab-botton-cache "bottom-transient-buttons-right" bottom-transient-buttons-right)
+      (table-set styletab-botton-cache "bottom-tab-adjustments"
+                 (list bottom-left-d-w bottom-right-d-w bottom-left-m bottom-right-m bottom-left-m-t bottom-right-m-t))
+      (table-set styletab-botton-cache "left-normal-buttons-top" left-normal-buttons-top)
+      (table-set styletab-botton-cache "left-transient-buttons-top" left-transient-buttons-top)
+      (table-set styletab-botton-cache "left-normal-buttons-bottom" left-normal-buttons-bottom)
+      (table-set styletab-botton-cache "left-transient-buttons-bottom" left-transient-buttons-bottom)
+      (table-set styletab-botton-cache "left-tab-adjustments" 
+                 (list left-left-d-w left-right-d-w left-left-m left-right-m left-left-m-t left-right-m-t))
+      (table-set styletab-botton-cache "right-normal-buttons-top" right-normal-buttons-top)
+      (table-set styletab-botton-cache "right-transient-buttons-top" right-transient-buttons-top)
+      (table-set styletab-botton-cache "right-normal-buttons-bottom" right-normal-buttons-bottom)
+      (table-set styletab-botton-cache "right-transient-buttons-bottom" right-transient-buttons-bottom)
+      (table-set styletab-botton-cache "right-tab-adjustments" 
+                 (list right-left-d-w right-right-d-w right-left-m right-right-m right-left-m-t right-right-m-t)))))
 
-           (top-frame-normal-buttons-left
-            (setq button-alist top-button-alist)
-            (make-button-list nil styletab-c:top-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (top-frame-normal-buttons-right
-            (make-button-list nil styletab-c:top-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (top-frame-transient-buttons-left
-            (make-button-list t styletab-c:top-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (top-frame-transient-buttons-right
-            (make-button-list t styletab-c:top-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-
-           (bottom-frame-normal-buttons-left 
-            (setq button-alist bottom-button-alist)
-            (make-button-list nil styletab-c:bottom-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (bottom-frame-normal-buttons-right
-            (make-button-list nil styletab-c:bottom-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (bottom-frame-transient-buttons-left
-            (make-button-list t styletab-c:bottom-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (bottom-frame-transient-buttons-right
-            (make-button-list t styletab-c:bottom-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-
-           (left-frame-normal-buttons-bottom 
-            (setq button-alist left-button-alist)
-            (make-button-list nil styletab-c:left-bottom-buttons 'bottom-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (left-frame-normal-buttons-top
-            (make-button-list nil styletab-c:left-top-buttons 'top-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (left-frame-transient-buttons-bottom
-            (make-button-list t styletab-c:left-bottom-buttons 'bottom-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (left-frame-transient-buttons-top
-            (make-button-list t styletab-c:left-top-buttons 'top-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-
-           (right-frame-normal-buttons-bottom 
-            (setq button-alist right-button-alist)
-            (make-button-list nil styletab-c:right-bottom-buttons 'bottom-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (right-frame-normal-buttons-top
-            (make-button-list nil styletab-c:right-top-buttons 'top-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (right-frame-transient-buttons-bottom
-            (make-button-list t styletab-c:right-bottom-buttons 'bottom-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-           (right-frame-transient-buttons-top
-            (make-button-list t styletab-c:right-top-buttons 'top-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom)))))
-
-      (require 'sawfish.wm.tabs.tab)
-      (let ((top-left-d-w 11)
-            (top-right-d-w (tabbar-right-edge-width))
-            (top-left-m
-             (if (numberp (cdr (car (car top-frame-normal-buttons-left))))
-                 (+ (cdr (car (car top-frame-normal-buttons-left))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (top-right-m
-             (if (numberp (cdr (car (car top-frame-normal-buttons-right))))
-                 (+ (cdr (car (car top-frame-normal-buttons-right))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (top-left-m-t
-             (if (numberp (cdr (car (car top-frame-transient-buttons-left))))
-                 (+ (cdr (car (car top-frame-transient-buttons-left))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (top-right-m-t
-             (if (numberp (cdr (car (car top-frame-transient-buttons-right))))
-                 (+ (cdr (car (car top-frame-transient-buttons-right))) (+ styletab-c:title-dimension (button-width-custom))) 0)))
-        (setq top-normal-buttons-left top-frame-normal-buttons-left)
-        (setq top-transient-buttons-left top-frame-transient-buttons-left)
-        (setq top-normal-buttons-right top-frame-normal-buttons-right)
-        (setq top-transient-buttons-right top-frame-transient-buttons-right)
-        (setq top-tab-adjustments (list top-left-d-w top-right-d-w top-left-m top-right-m top-left-m-t top-right-m-t)))
-
-      (let ((bottom-left-d-w 11)
-            (bottom-right-d-w (tabbar-right-edge-width))
-            (bottom-left-m
-             (if (numberp (cdr (car (car bottom-frame-normal-buttons-left))))
-                 (+ (cdr (car (car bottom-frame-normal-buttons-left))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (bottom-right-m
-             (if (numberp (cdr (car (car bottom-frame-normal-buttons-right))))
-                 (+ (cdr (car (car bottom-frame-normal-buttons-right))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (bottom-left-m-t
-             (if (numberp (cdr (car (car bottom-frame-transient-buttons-left))))
-                 (+ (cdr (car (car bottom-frame-transient-buttons-left))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (bottom-right-m-t
-             (if (numberp (cdr (car (car bottom-frame-transient-buttons-right))))
-                 (+ (cdr (car (car bottom-frame-transient-buttons-right))) (+ styletab-c:title-dimension (button-width-custom))) 0)))
-        (setq bottom-normal-buttons-left bottom-frame-normal-buttons-left)
-        (setq bottom-transient-buttons-left bottom-frame-transient-buttons-left)
-        (setq bottom-normal-buttons-right bottom-frame-normal-buttons-right)
-        (setq bottom-transient-buttons-right bottom-frame-transient-buttons-right)
-        (setq bottom-tab-adjustments (list bottom-left-d-w bottom-right-d-w bottom-left-m bottom-right-m bottom-left-m-t bottom-right-m-t)))
-      
-      (let ((left-left-d-w 11)
-            (left-right-d-w (- styletab-c:title-dimension 2))
-            (left-left-m
-             (if (numberp (cdr (car (car left-frame-normal-buttons-bottom))))
-                 (+ (cdr (car (car left-frame-normal-buttons-bottom))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (left-right-m
-             (if (numberp (cdr (car (car left-frame-normal-buttons-top))))
-                 (+ (cdr (car (car left-frame-normal-buttons-top))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (left-left-m-t
-             (if (numberp (cdr (car (car left-frame-transient-buttons-bottom))))
-                 (+ (cdr (car (car left-frame-transient-buttons-bottom))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (left-right-m-t
-             (if (numberp (cdr (car (car left-frame-transient-buttons-top))))
-                 (+ (cdr (car (car left-frame-transient-buttons-top))) (+ styletab-c:title-dimension (button-width-custom))) 0)))
-        (setq left-normal-buttons-top left-frame-normal-buttons-top)
-        (setq left-transient-buttons-top left-frame-transient-buttons-top)
-        (setq left-normal-buttons-bottom left-frame-normal-buttons-bottom)
-        (setq left-transient-buttons-bottom left-frame-transient-buttons-bottom)
-        (setq left-tab-adjustments (list left-left-d-w left-right-d-w left-left-m left-right-m left-left-m-t left-right-m-t)))
-
-      (let ((right-left-d-w 11)
-            (right-right-d-w (- styletab-c:title-dimension 2))
-            (right-left-m
-             (if (numberp (cdr (car (car right-frame-normal-buttons-bottom))))
-                 (+ (cdr (car (car right-frame-normal-buttons-bottom))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (right-right-m
-             (if (numberp (cdr (car (car right-frame-normal-buttons-top))))
-                 (+ (cdr (car (car right-frame-normal-buttons-top))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (right-left-m-t
-             (if (numberp (cdr (car (car right-frame-transient-buttons-bottom))))
-                 (+ (cdr (car (car right-frame-transient-buttons-bottom))) (+ styletab-c:title-dimension (button-width-custom))) 0))
-            (right-right-m-t
-             (if (numberp (cdr (car (car right-frame-transient-buttons-top))))
-                 (+ (cdr (car (car right-frame-transient-buttons-top))) (+ styletab-c:title-dimension (button-width-custom))) 0)))
-        (setq right-normal-buttons-top right-frame-normal-buttons-top)
-        (setq right-transient-buttons-top right-frame-transient-buttons-top)
-        (setq right-normal-buttons-bottom right-frame-normal-buttons-bottom)
-        (setq right-transient-buttons-bottom right-frame-transient-buttons-bottom)
-        (setq right-tab-adjustments (list right-left-d-w right-right-d-w right-left-m right-right-m right-left-m-t right-right-m-t))))))
-
-(define make-frame
-  (lambda ()
-    (require 'sawfish.wm.tabs.tab)
-    (when (eq current-title 'top)
-      (update-title-x-offsets `(,(- styletab-c:title-dimension 12) . 0))
-      (set-tab-adjustments #:theme-left-dec-width (nth 0 top-tab-adjustments) #:theme-right-dec-width (nth 1 top-tab-adjustments)
-                           #:theme-left-margin (nth 2 top-tab-adjustments) #:theme-right-margin (nth 3 top-tab-adjustments)
-                           #:theme-left-margin-transient (nth 4 top-tab-adjustments) #:theme-right-margin-transient (nth 5 top-tab-adjustments))
-      (setq normal-frame
-            (append top-frame-title-group top-frame-default-border-corner-group top-normal-buttons-left
-                    top-frame-border-group top-normal-buttons-right))
-      (setq shaped-frame
-            (append top-frame-title-group top-frame-shaped-border-corner-group top-normal-buttons-left
-                    top-normal-buttons-right))
-      (setq transient-frame
-            (append top-frame-title-group top-frame-default-border-corner-group top-transient-buttons-left
-                    top-frame-border-group top-transient-buttons-right))
-      (setq shaped-transient-frame
-            (append top-frame-title-group top-frame-shaped-border-corner-group top-transient-buttons-left
-                    top-transient-buttons-right)))
-
-    (when (eq current-title 'bottom)
-      (update-title-x-offsets `(,(- styletab-c:title-dimension 12) . 0))
-      (set-tab-adjustments #:theme-left-dec-width (nth 0 bottom-tab-adjustments) #:theme-right-dec-width (nth 1 bottom-tab-adjustments)
-                           #:theme-left-margin (nth 2 bottom-tab-adjustments) #:theme-right-margin (nth 3 bottom-tab-adjustments)
-                           #:theme-left-margin-transient (nth 4 bottom-tab-adjustments) #:theme-right-margin-transient (nth 5 bottom-tab-adjustments))
-      (setq normal-frame
-            (append bottom-frame-title-group bottom-frame-default-border-corner-group bottom-normal-buttons-left
-                    bottom-frame-border-group bottom-normal-buttons-right))
-      (setq shaped-frame
-            (append bottom-frame-title-group bottom-frame-shaped-border-corner-group bottom-normal-buttons-left
-                    bottom-normal-buttons-right))
-      (setq transient-frame
-            (append bottom-frame-title-group bottom-frame-default-border-corner-group bottom-transient-buttons-left
-                    bottom-frame-border-group bottom-transient-buttons-right))
-      (setq shaped-transient-frame
-            (append bottom-frame-title-group bottom-frame-shaped-border-corner-group bottom-transient-buttons-left
-                    bottom-transient-buttons-right)))
-
-    (when (eq current-title 'left)
-      (update-title-x-offsets '(11 . -11))
-      (set-tab-adjustments #:theme-left-dec-width (nth 0 left-tab-adjustments) #:theme-right-dec-width (nth 1 left-tab-adjustments)
-                           #:theme-left-margin (nth 2 left-tab-adjustments) #:theme-right-margin (nth 3 left-tab-adjustments)
-                           #:theme-left-margin-transient (nth 4 left-tab-adjustments) #:theme-right-margin-transient (nth 5 left-tab-adjustments))
-      (setq normal-frame
-            (append left-frame-title-group left-normal-buttons-bottom left-frame-default-border-corner-group
-                    left-frame-border-group left-normal-buttons-top))
-      (setq shaped-frame
-            (append left-frame-title-group left-normal-buttons-bottom left-frame-shaped-border-corner-group
-                    left-normal-buttons-top))
-      (setq transient-frame
-            (append left-frame-title-group left-transient-buttons-bottom left-frame-default-border-corner-group
-                    left-frame-border-group left-transient-buttons-top))
-      (setq shaped-transient-frame
-            (append left-frame-title-group left-transient-buttons-bottom left-frame-shaped-border-corner-group
-                    left-transient-buttons-top)))
-
-    (when (eq current-title 'right)
-      (update-title-x-offsets '(11 . -11))
-      (set-tab-adjustments #:theme-left-dec-width (nth 0 right-tab-adjustments) #:theme-right-dec-width (nth 1 right-tab-adjustments)
-                           #:theme-left-margin (nth 2 right-tab-adjustments) #:theme-right-margin (nth 3 right-tab-adjustments)
-                           #:theme-left-margin-transient (nth 4 right-tab-adjustments) #:theme-right-margin-transient (nth 5 right-tab-adjustments))
-      (setq normal-frame
-            (append right-frame-title-group right-normal-buttons-bottom right-frame-default-border-corner-group
-                    right-frame-border-group right-normal-buttons-top))
-      (setq shaped-frame
-            (append right-frame-title-group right-normal-buttons-bottom right-frame-shaped-border-corner-group
-                    right-normal-buttons-top))
-      (setq transient-frame
-            (append right-frame-title-group right-transient-buttons-bottom right-frame-default-border-corner-group
-                    right-frame-border-group right-transient-buttons-top))
-      (setq shaped-transient-frame
-            (append right-frame-title-group right-transient-buttons-bottom right-frame-shaped-border-corner-group
-                    right-transient-buttons-top)))))
+(define (make-frame)
+  (require 'sawfish.wm.tabs.tab)
+  (when (eq current-title 'top)
+    (update-title-x-offsets `(,(- styletab-c:title-dimension 12) . 0))
+    (setq top-tab-adjustments (table-ref styletab-botton-cache '"top-tab-adjustments"))
+    (set-tab-adjustments #:theme-left-dec-width (nth 0 top-tab-adjustments) #:theme-right-dec-width (nth 1 top-tab-adjustments)
+                         #:theme-left-margin (nth 2 top-tab-adjustments) #:theme-right-margin (nth 3 top-tab-adjustments)
+                         #:theme-left-margin-transient (nth 4 top-tab-adjustments) #:theme-right-margin-transient (nth 5 top-tab-adjustments))
+    (setq normal-frame
+          (append top-frame-title-group top-frame-default-border-corner-group (table-ref styletab-botton-cache '"top-normal-buttons-left")
+                  top-frame-border-group (table-ref styletab-botton-cache '"top-normal-buttons-right")))
+    (setq shaped-frame
+          (append top-frame-title-group top-frame-shaped-border-corner-group (table-ref styletab-botton-cache '"top-normal-buttons-left")
+                  (table-ref styletab-botton-cache '"top-normal-buttons-right")))
+    (setq transient-frame
+          (append top-frame-title-group top-frame-default-border-corner-group (table-ref styletab-botton-cache '"top-transient-buttons-left")
+                  top-frame-border-group (table-ref styletab-botton-cache '"top-transient-buttons-right")))
+    (setq shaped-transient-frame
+          (append top-frame-title-group top-frame-shaped-border-corner-group (table-ref styletab-botton-cache '"top-transient-buttons-left")
+                  (table-ref styletab-botton-cache '"top-transient-buttons-right"))))
+  
+  (when (eq current-title 'bottom)
+    (update-title-x-offsets `(,(- styletab-c:title-dimension 12) . 0))
+    (setq bottom-tab-adjustments (table-ref styletab-botton-cache '"bottom-tab-adjustments"))
+    (set-tab-adjustments #:theme-left-dec-width (nth 0 bottom-tab-adjustments) #:theme-right-dec-width (nth 1 bottom-tab-adjustments)
+                         #:theme-left-margin (nth 2 bottom-tab-adjustments) #:theme-right-margin (nth 3 bottom-tab-adjustments)
+                         #:theme-left-margin-transient (nth 4 bottom-tab-adjustments) #:theme-right-margin-transient (nth 5 bottom-tab-adjustments))
+    (setq normal-frame
+          (append bottom-frame-title-group bottom-frame-default-border-corner-group (table-ref styletab-botton-cache '"bottom-normal-buttons-left")
+                  bottom-frame-border-group (table-ref styletab-botton-cache '"bottom-normal-buttons-right")))
+    (setq shaped-frame
+          (append bottom-frame-title-group bottom-frame-shaped-border-corner-group (table-ref styletab-botton-cache '"bottom-normal-buttons-left")
+                  (table-ref styletab-botton-cache '"bottom-normal-buttons-right")))
+    (setq transient-frame
+          (append bottom-frame-title-group bottom-frame-default-border-corner-group (table-ref styletab-botton-cache '"bottom-transient-buttons-left")
+                  bottom-frame-border-group (table-ref styletab-botton-cache '"bottom-transient-buttons-right")))
+    (setq shaped-transient-frame
+          (append bottom-frame-title-group bottom-frame-shaped-border-corner-group (table-ref styletab-botton-cache '"bottom-transient-buttons-left")
+                  (table-ref styletab-botton-cache '"bottom-transient-buttons-right"))))
+  
+  (when (eq current-title 'left)
+    (update-title-x-offsets '(11 . -11))
+    (setq left-tab-adjustments (table-ref styletab-botton-cache '"left-tab-adjustments"))
+    (set-tab-adjustments #:theme-left-dec-width (nth 0 left-tab-adjustments) #:theme-right-dec-width (nth 1 left-tab-adjustments)
+                         #:theme-left-margin (nth 2 left-tab-adjustments) #:theme-right-margin (nth 3 left-tab-adjustments)
+                         #:theme-left-margin-transient (nth 4 left-tab-adjustments) #:theme-right-margin-transient (nth 5 left-tab-adjustments))
+    (setq normal-frame
+          (append left-frame-title-group (table-ref styletab-botton-cache '"left-normal-buttons-bottom") left-frame-default-border-corner-group
+                  left-frame-border-group (table-ref styletab-botton-cache '"left-normal-buttons-top")))
+    (setq shaped-frame
+          (append left-frame-title-group (table-ref styletab-botton-cache '"left-normal-buttons-bottom") left-frame-shaped-border-corner-group
+                  (table-ref styletab-botton-cache '"left-normal-buttons-top")))
+    (setq transient-frame
+          (append left-frame-title-group (table-ref styletab-botton-cache '"left-transient-buttons-bottom") left-frame-default-border-corner-group
+                  left-frame-border-group (table-ref styletab-botton-cache '"left-transient-buttons-top")))
+    (setq shaped-transient-frame
+          (append left-frame-title-group (table-ref styletab-botton-cache '"left-transient-buttons-bottom") left-frame-shaped-border-corner-group
+                  (table-ref styletab-botton-cache '"left-transient-buttons-top"))))
+  
+  (when (eq current-title 'right)
+    (update-title-x-offsets '(11 . -11))
+    (setq right-tab-adjustments (table-ref styletab-botton-cache '"right-tab-adjustments"))
+    (set-tab-adjustments #:theme-left-dec-width (nth 0 right-tab-adjustments) #:theme-right-dec-width (nth 1 right-tab-adjustments)
+                         #:theme-left-margin (nth 2 right-tab-adjustments) #:theme-right-margin (nth 3 right-tab-adjustments)
+                         #:theme-left-margin-transient (nth 4 right-tab-adjustments) #:theme-right-margin-transient (nth 5 right-tab-adjustments))
+    (setq normal-frame
+          (append right-frame-title-group (table-ref styletab-botton-cache '"right-normal-buttons-bottom") right-frame-default-border-corner-group
+                  right-frame-border-group (table-ref styletab-botton-cache '"right-normal-buttons-top")))
+    (setq shaped-frame
+          (append right-frame-title-group (table-ref styletab-botton-cache '"right-normal-buttons-bottom") right-frame-shaped-border-corner-group
+                  (table-ref styletab-botton-cache '"right-normal-buttons-top")))
+    (setq transient-frame
+          (append right-frame-title-group (table-ref styletab-botton-cache '"right-transient-buttons-bottom") right-frame-default-border-corner-group
+                  right-frame-border-group (table-ref styletab-botton-cache '"right-transient-buttons-top")))
+    (setq shaped-transient-frame
+          (append right-frame-title-group (table-ref styletab-botton-cache '"right-transient-buttons-bottom") right-frame-shaped-border-corner-group
+                  (table-ref styletab-botton-cache '"right-transient-buttons-top")))))
 
 (define (current-title-w w)
   (if (not (window-get w 'title-position))
@@ -2466,7 +2445,6 @@ Fix/hack for foreground button, but makes botton ugly."
             ((left) (setq current-title 'left))
             ((right) (setq current-title 'right)))
     (setq current-title (window-get w 'title-position)))
-  (make-buttons)
   (make-frame))
 
 (define (create-frames-only w)
@@ -2480,15 +2458,13 @@ Fix/hack for foreground button, but makes botton ugly."
        (current-title-w w)
        (reframe-window w)))))
 
-(define reframe-buttons
-  (lambda ()
-    (make-buttons)
-    (reframe-windows theme-name)))
+(define (reframe-buttons)
+  (make-buttons)
+  (reframe-windows theme-name))
 
-(define reframe-all
-  (lambda ()
-    (make-frame)
-    (reframe-windows theme-name)))
+(define (reframe-all)
+  (make-frame)
+  (reframe-windows theme-name))
 
 (define (reframe-one w)
   (when (not (window-get w 'tabbed))
@@ -2497,37 +2473,36 @@ Fix/hack for foreground button, but makes botton ugly."
       (rebuild-frame w))))
 
 ;; reframe-all and reset icon cache
-(define clear-icon-cache-reframe
-  (lambda ()
-    (setq styletab-c-icon-cache (make-weak-table eq-hash eq))
-    (reframe-all)))
-
-;; reload-frame-style and reset icon and frame cache 
-(define (clear-cache-reload-frame-style)
-  (setq styletab-c-icon-cache (make-weak-table eq-hash eq))
-  (setq styletab-c-frame-cache (make-weak-table eq-hash eq))
-  (reload-frame-style theme-name))
+(define (clear-icon-cache-reframe)
+  (when recolor-lock
+    (setq recolor-lock nil)
+    (make-buttons)
+    (recolor-all-buttons)
+    (setq styletab-icon-cache (make-weak-table eq-hash eq))
+    (reframe-all)
+    (setq recolor-lock t)))
 
 (define (bright-changed)
-  (recolor-tab)
-  (recolor-all-buttons)
-  (reframe-windows-with-style theme-name))
+  (when recolor-lock
+    (setq recolor-lock nil)
+    (recolor-tab)
+    (recolor-all-buttons)
+    (reframe-windows-with-style theme-name)
+    (setq recolor-lock t)))
 
 (define (color-changed)
-  (recolor-all)
-  (reframe-windows-with-style theme-name))
+  (when recolor-lock
+    (setq recolor-lock nil)
+    (recolor-all)
+    (reframe-windows-with-style theme-name)
+    (setq recolor-lock t)))
 
 (define (botton-color-changed botton)
-  (botton)
-  (reframe-windows theme-name))
-
-(define (initialize-theme)
-  (recolor-all)
-  (make-buttons)
-  (make-frame)
-  (reframe-windows-with-style theme-name))
-
-(initialize-theme)
+  (when recolor-lock
+    (setq recolor-lock nil)
+    (botton)
+    (reframe-windows theme-name)
+    (setq recolor-lock t)))
 
 ;; At last! We create the actual theme
 (add-frame-style theme-name
@@ -2541,12 +2516,21 @@ Fix/hack for foreground button, but makes botton ugly."
                          ((shaded-utility)      normal-frame)
                          ((unframed)            nil-frame))))
 
+(define (initialize-theme)
+  (when recolor-cache
+    (setq recolor-cache nil)
+    (recolor-all)
+    (setq recolor-cache t)
+    (make-buttons)
+    (make-frame)
+    (color-changed)))
+
+(initialize-theme)
 
 (call-after-state-changed '(sticky fixed-position stacking maximized) reframe-one)
 (call-after-state-changed '(title-position) create-frames-only)
 (add-hook 'remove-from-workspace-hook reframe-one)
 
-;;(custom-set-property 'styletab-c:styles ':after-set clear-cache-reload-frame-style)
 (custom-set-property 'styletab-c:title-dimension ':after-set clear-icon-cache-reframe)
 (custom-set-property 'styletab-c:custom-button-width ':after-set clear-icon-cache-reframe)
 (custom-set-property 'styletab-c:button-width ':after-set clear-icon-cache-reframe)
@@ -2560,5 +2544,3 @@ Fix/hack for foreground button, but makes botton ugly."
 (custom-set-property 'styletab-c:left-bottom-buttons ':after-set reframe-buttons)
 (custom-set-property 'styletab-c:right-top-buttons ':after-set reframe-buttons)
 (custom-set-property 'styletab-c:right-bottom-buttons ':after-set reframe-buttons)
-
-(custom-set-property 'styletab-c:do-reload ':after-set clear-cache-reload-frame-style)
