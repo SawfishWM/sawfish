@@ -1,3 +1,11 @@
+2011-10-04  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/shade-stack.jl: added shade-stack feature.
+	Original code by: Luke Gorrie. Changes compared to original:
+		- module format // defun -> define
+		- renamed already-stacked to window-shade-stacked-p
+		- fixed bug were stacking couldn't be done,
+		  caused by inexact instead of exact integers
+
 2011-09-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: when making X request, we might receive, and select
 	will stuck. This is prevented now. [Michal Maruska]
