@@ -1,4 +1,4 @@
-;; edge/maximize.jl -- window-maximization for EdgeActions
+;; edge/misc.jl -- misc actions for EdgeActions
 
 ;; Copyright (C) 2011 Christopher Roy Bratusek <zanghar@freenet.de>
 
@@ -18,7 +18,7 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.edge.maximize
+(define-structure sawfish.wm.edge.misc
 
     (export maximize-action)
 
@@ -29,7 +29,7 @@
 	  sawfish.wm.events
 	  sawfish.wm.state.maximize)
 
-  (define-structure-alias edge-maximize sawfish.wm.edge.maximize)
+  (define-structure-alias edge-misc sawfish.wm.edge.misc)
 
   (define (maximize-action)
     (let ((w (input-focus)))

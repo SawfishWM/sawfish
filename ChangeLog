@@ -1,4 +1,20 @@
 2011-10-04  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/expose.jl
+	* lisp/sawfish/wm/edge/tile.jl
+	* lisp/sawfish/wm/ext/match-window.jl: renamed tile EdgeAction to
+	expose
+
+	* lisp/sawfish/wm/edge/maximize.jl
+	* lisp/sawfish/wm/edge/misc.jl: renamed module
+
+	* lisp/sawfish/wm/workspace.jl: added toggle-desktop function
+
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl: added show-desktop as EdgeAction
+	(using toggle-desktop)
+	
 	* lisp/sawfish/wm/ext/shade-stack.jl: added shade-stack feature.
 	Original code by: Luke Gorrie. Changes compared to original:
 		- module format // defun -> define
