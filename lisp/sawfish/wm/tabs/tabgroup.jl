@@ -21,7 +21,6 @@
 (define-structure sawfish.wm.tabs.tabgroup
 
     (export window-tabbed-p
-            adjust-title
             tab-refresh-group
             tab-release-window
             tab-raise-left-window
@@ -66,9 +65,6 @@
     (p tab-group-position)
     (d tab-group-dimensions)
     (wl tab-group-window-list))
-
-  (define (adjust-title w)
-    (call-window-hook 'window-state-change-hook w (list '(title-position))))
 
   (define (tab-move-resize-frame-window-to win x y w h)
     "Move and resize according to *frame* dimensions."
@@ -140,7 +136,7 @@
       (tab-delete-window-from-group w (tab-window-group-index w))
       (window-put w 'fixed-position nil)
       (tab-refresh-group oldgroup 'frame)
-      (rebuild-frame w 'frame)))
+      (reframe-window w 'frame)))
 
   (define (tab-put-window-in-group win index)
     "Put window in group at given index."
@@ -162,7 +158,6 @@ sticky, unsticky, fixed-position."
                  (wins (tab-group-window-list (nth index tab-groups)))
                  (focus (tab-group-offset win 0))
                  (unfocus (remove focus wins)))
-            (adjust-title win)
             (cond
              ((eq prop 'raise)
               (raise-windows focus wins))
@@ -173,8 +168,8 @@ sticky, unsticky, fixed-position."
                (window-put focus 'title-position group-title-position)))
              ((eq prop 'frame)
               (mapcar (lambda (w)
-                        (rebuild-frame w)) unfocus)
-              (rebuild-frame focus))
+                        (reframe-window w)) unfocus)
+              (reframe-window focus))
              ((eq prop 'reframe)
               (mapcar (lambda (w)
                         (reframe-window w)) unfocus))
@@ -365,7 +360,7 @@ sticky, unsticky, fixed-position."
                (tabs (remove win (tab-group-window-list (nth index tab-groups))))
                (default-window-animator 'none))
           (tab-delete-window-from-group win index)
-          (rebuild-frame win)
+          (reframe-window win)
           (setq tab-refresh-lock nil)
           (mapcar (lambda (w)
                     (when (window-get w 'never-iconify)

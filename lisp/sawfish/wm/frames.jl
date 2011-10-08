@@ -694,8 +694,6 @@ generate.")
 ;;; applying frame styles to windows
 
   (define (reframe-window w)
-    (require 'sawfish.wm.tabs.tabgroup)
-    (adjust-title w)
     (if (window-get w 'ignored)
 	(progn
 	  (window-put w 'current-frame-style nil)
