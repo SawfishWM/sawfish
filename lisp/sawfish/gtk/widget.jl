@@ -212,7 +212,9 @@
 	  ((set) (lambda (x)
 		   (gtk-combo-box-set-active combo (or (option-index options x) 0))))
 	  ((clear) nop)
-	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
+	  ((ref) (lambda () (if (numberp (nth (gtk-combo-box-get-active combo) options))
+			        (nth (gtk-combo-box-get-active combo) options)
+			      (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options))))))
 	  ((gtk-widget) combo)
 	  ((validp) (lambda (x) (option-index options x)))))))
 
