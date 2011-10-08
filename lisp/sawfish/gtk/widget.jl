@@ -196,7 +196,9 @@
       (let loop ((rest options))
         (when rest
           (gtk-combo-box-text-append-text combo
-            (_ (or (cadar rest) (symbol-name (car rest)))))
+            (_ (or (cadar rest) (if (numberp (car rest))
+				    (number->string (car rest))
+				  (symbol-name (car rest))))))
             (loop (cdr rest))))
 
       (when changed-callback
