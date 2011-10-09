@@ -7,10 +7,9 @@
 ;; Author: Mark Triggs <mst@dishevelled.net>
 ;; Maintainer: Christopher Roy Bratusek <nano@tuxfamily.org>
 
-(define-structure sawfish.wm.edge.expose
+(define-structure sawfish.wm.ext.expose
 
     (export expose-windows
-	    expose-windows-core
 	    window-never-expose-p)
 
     (open rep
@@ -26,7 +25,7 @@
 	  sawfish.wm.state.ignored
 	  sawfish.wm.commands.move-resize)
 
-  (define-structure-alias expose sawfish.wm.edge.expose)
+  (define-structure-alias expose sawfish.wm.ext.expose)
 
   (defvar min-height (/ (screen-height) 4)
     "For windows at least, wideness is preferable to tallness. So, the minimum
@@ -38,7 +37,7 @@ an extra column should be used.")
 
   (define (window-never-expose-p w) (window-get w 'never-expose))
 
-  (define (expose-windows-core edge while-moving)
+  (define (expose-windows edge while-moving)
     (interactive)
     (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
     (when while-moving
@@ -77,8 +76,5 @@ an extra column should be used.")
 		      (resize-window-frame-to w old-width old-height))))
 		windows)))
       (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving))))
-
-  (define (expose-windows)
-    (expose-windows-core nil nil))
 
   (define-command 'expose-windows expose-windows))

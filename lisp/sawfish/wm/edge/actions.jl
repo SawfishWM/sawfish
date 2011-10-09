@@ -35,7 +35,6 @@
 	  sawfish.wm.edge.flip
 	  sawfish.wm.edge.hot-spots
 	  sawfish.wm.edge.misc
-	  sawfish.wm.edge.expose
 	  sawfish.wm.edge.viewport-drag
 	  sawfish.wm.workspace)
 
@@ -53,7 +52,7 @@
       ((flip-viewport)
        (edge-flip-invoke edge func while-moving))
       ((expose-windows)
-       (expose-windows-core edge while-moving))
+       (expose-action edge while-moving))
       ((expand-window)
        (expand-action edge))
       ((maximize-window)
