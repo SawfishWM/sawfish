@@ -1054,8 +1054,8 @@
 
 (define sharped-edge
   (lambda (w)
-    (if (or (eq current-type 'shaped) 
-            (eq current-type 'shaped-transient))
+    (if (or (eq (window-get w 'type) 'shaped) 
+            (eq (window-get w 'type) 'shaped-transient))
         styletab-c:borders-dimension
       0)))
 
@@ -2032,8 +2032,8 @@
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                   (eq current-type 'shaped-transient))
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                   (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
     ((class . top-right-corner)
@@ -2043,8 +2043,8 @@
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                   (eq current-type 'shaped-transient))
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                   (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
     ((class . top-right-corner)
@@ -2068,8 +2068,8 @@
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                   (eq current-type 'shaped-transient))
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                   (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
     ((class . bottom-right-corner)
@@ -2079,8 +2079,8 @@
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                   (eq current-type 'shaped-transient))
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                   (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
     ((class . bottom-right-corner)
@@ -2103,10 +2103,11 @@
                                   (table-ref styletab-c-frame-cache '"left-frame-top-left-corner"))))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                    (eq current-type 'shaped-transient))
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                    (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
+     
      (width . ,title-height))
     ((class . bottom-left-corner)
      (background . ,(lambda (w) (if (window-get w 'shaded) 
@@ -2114,8 +2115,8 @@
                                   (table-ref styletab-c-frame-cache '"left-frame-bottom-left-corner"))))
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                    (eq current-type 'shaped-transient))
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                    (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
      (width . ,title-height))
@@ -2139,8 +2140,8 @@
                                   (table-ref styletab-c-frame-cache '"right-frame-top-right-corner"))))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                    (eq current-type 'shaped-transient))
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                    (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
      (width . ,title-height))
@@ -2150,8 +2151,8 @@
                                   (table-ref styletab-c-frame-cache '"right-frame-bottom-right-corner"))))
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq current-type 'shaped)
-                                    (eq current-type 'shaped-transient))
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+                                    (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
      (width . ,title-height))
@@ -2236,8 +2237,8 @@
 (define frame nil)
 (define button-alist nil)
 (define current-title styletab-c:titlebar-place)
-(define current-type nil)
 (define recolor-lock t)
+(define current-type nil)
 
 ;; botton list table
 (define styletab-c-botton-cache (make-table equal-hash equal))
@@ -2399,6 +2400,7 @@
       w (concat w "-s")))
 
 (define (make-frame w type current-title)
+  (setq current-type (window-get w 'type))
   (require 'sawfish.wm.tabs.tab)
   (when (eq current-title 'top)
     (update-title-x-offsets `(,(- styletab-c:title-dimension 12) . 0))
@@ -2550,7 +2552,6 @@
   (reframe-with-style))
 
 (define (get-frame w type)
-  (setq current-type (window-get w 'type))
   (let ((current-title 
          (if (not (window-get w 'title-position))
              (case styletab-c:titlebar-place
@@ -2573,11 +2574,11 @@
           ((shaped-transient)
            (make-frame w 'shaped-transient-frame current-title)))))
 
-(add-frame-style theme-name get-frame)
-
 ;; initialize theme
-(make-buttons) 
 (color-changed)
+(make-buttons)
+
+(add-frame-style theme-name get-frame)
 
 (call-after-state-changed '(sticky fixed-position stacking) rebuild-one)
 (call-after-state-changed '(maximized) reframe-one)
