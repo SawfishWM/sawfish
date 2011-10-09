@@ -8,6 +8,19 @@
 	* lisp/sawfish/gtk/widgets.jl: support 'choice widgets with numeric
 	arguements.
 
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl: don't call adjust-title [fuchur]
+
+	* themes/StyleTab/theme.jl: - added all styles back.
+					- Dark => Default
+					- Silver => WixDa
+					- Reduce
+					- Smoothly
+					- Blue => Glass
+				    - added corners to frames (for resize with
+				    mouse)
+				    -- [fuchur]
+
 2011-10-04  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/edge/conf.jl
 	* lisp/sawfish/wm/edge/actions.jl
@@ -32,6 +45,15 @@
 		- fixed bug were stacking couldn't be done,
 		  caused by inexact instead of exact integers
 
+	* themes/StyleTab/theme.jl: - add hash tables for images
+				    - fix resize bug for buttons
+				    - fix recolor bug by resize
+				    - split create-frames into make-buttons
+				    and make-frames
+				    - add maximized to
+				    call-after-state-changed
+				    -- [fuchur]
+
 2011-09-24  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: use XKB [Michal Maruska]
 
@@ -47,6 +69,9 @@
 			- avoid Xmap for gone windows
 			- possible segfault fix in leave_notify
 			-- [Michal Maruska]
+
+2011-09-23  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* themes/StyleTab/theme.jl: support recoloring theme [fuchur]
 
 2011-09-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: when making X request, we might receive, and select
