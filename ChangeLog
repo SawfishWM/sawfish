@@ -22,6 +22,22 @@
 		- fixed bug were stacking couldn't be done,
 		  caused by inexact instead of exact integers
 
+2011-09-24  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* src/display.c: use XKB [Michal Maruska]
+
+	* src/pixmap-cache.c: - append_to_age_list rather than prepend
+			      - extend pixmap-cache-control to return more info
+			      - pixmap-cache-images: return the list of all
+			      images in cache
+			      -- [Michal Maruska]
+
+	* src/events.c: - simplify property_notify
+			- apply property change only if window has 'refresh
+			property
+			- avoid Xmap for gone windows
+			- possible segfault fix in leave_notify
+			-- [Michal Maruska]
+
 2011-09-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: when making X request, we might receive, and select
 	will stuck. This is prevented now. [Michal Maruska]
