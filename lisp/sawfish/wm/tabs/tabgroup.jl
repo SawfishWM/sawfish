@@ -136,7 +136,7 @@
       (tab-delete-window-from-group w (tab-window-group-index w))
       (window-put w 'fixed-position nil)
       (tab-refresh-group oldgroup 'frame)
-      (reframe-window w 'frame)))
+      (reframe-window w)))
 
   (define (tab-put-window-in-group win index)
     "Put window in group at given index."
