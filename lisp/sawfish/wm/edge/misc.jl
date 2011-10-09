@@ -40,4 +40,4 @@
       (maximize-window w)))
 
   (define (expose-action)
-    (expose-windows nil nil))
+    (expose-windows nil nil)))
