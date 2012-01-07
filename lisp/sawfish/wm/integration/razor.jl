@@ -27,6 +27,7 @@
           sawfish.wm.menus
 	  sawfish.wm.misc
           sawfish.wm.custom
+	  sawfish.wm.windows
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
