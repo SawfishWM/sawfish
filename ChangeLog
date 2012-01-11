@@ -1,3 +1,17 @@
+2012-01-04  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/integration/razor.jl: add integration-module for
+	Razor-Qt
+
+	* lisp/sawfish/wm/user.jl: same
+
+2011-12-27  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/integration/mate.jl: add integration-module for MATE
+
+	* lisp/sawfish/wm/user.jl: same
+
+	* lisp/sawfish/wm/ext/single-window-mode.jl: properly call
+	maximize-window-fullscreen
+
 2011-10-09  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/edge/expose.jl
 	* lisp/sawfish/wm/ext/expose.jl: moved file
@@ -37,7 +51,7 @@
 	* lisp/sawfish/wm/edge/conf.jl
 	* lisp/sawfish/wm/edge/actions.jl: added show-desktop as EdgeAction
 	(using toggle-desktop)
-	
+
 	* lisp/sawfish/wm/ext/shade-stack.jl: added shade-stack feature.
 	Original code by: Luke Gorrie. Changes compared to original:
 		- module format // defun -> define
@@ -231,7 +245,7 @@
 	* lisp/sawfish/wm/commands/help.jl: updated
 
 	* lisp/sawfish/cfg/shell.jl: add buttons for accessing Wiki, Info,
-	resource file and about-dialog to SawfishConfig. 
+	resource file and about-dialog to SawfishConfig.
 
 	* scripts/sawfish-about.jl: small update in about-dialog
 
@@ -506,7 +520,7 @@
 	* **/Makefile.in: remove VPATH to appease makepp [Daniel Pfeiffer]
 
 	* configure.in: check for XTest
-	
+
 	* lisp/sawfish/wm/windows.jl: remove release-window function
 
 	* src/windows.c: add fake-release-window subroutine
@@ -581,7 +595,7 @@
 	* sounds/Makefile.in
 	* src/Makefile.in: minor clean-ups -- Ian Zimmermann
 
-	* debian/**: merged scripts from Ian Zimmermann 
+	* debian/**: merged scripts from Ian Zimmermann
 
 2011-04-12  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* Makefile.in: don't remove NEWS upon clean or distclean
@@ -1017,7 +1031,7 @@
 	* src/flippers.c: give EdgeActions subroutines better names:
 	  - enable-flippers => raise-flippers
 	  - disable-flippers => destroy-flippers
-	
+
 	* src/flippers.c: updated recreate-flippers routine
 	                  removed flippers-after-restacking (dupplicate of
 			  raise-flippers)
@@ -1207,7 +1221,7 @@
 	- options none and hot-spot merged together (none/hot-spot)
 	- code-cleanup in hot-spots
 	- corrected copyright header of viewport-drag
-	- some doc / indention fixes 
+	- some doc / indention fixes
 	-- Teika Kazura
 
 2010-11-27  Teika kazura <teika@lavabit.com>

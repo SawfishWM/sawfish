@@ -53,7 +53,9 @@
 	   sawfish.wm.menus)
      (access sawfish.wm.integration.kde
 	     sawfish.wm.integration.gnome
-	     sawfish.wm.integration.xfce)
+	     sawfish.wm.integration.xfce
+	     sawfish.wm.integration.mate
+	     sawfish.wm.integration.razor)
 
      (set-binds))
 
@@ -61,7 +63,7 @@
   ;; apps-menu, too, or it will break. 
   (defvar desktop-environment "none"
     "Running desktop environment, detected by Sawfish.
-Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
+Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\" or \"none\".")
 
   (defvar want-poweroff-menu t
     "Add poweroff menu if you don't use GNOME / KDE / XFCE.")
@@ -103,8 +105,10 @@ Possible values are \"kde\", \"gnome\", \"xfce\", or \"none\".")
   ;; and probably `want-poweroff-menu', too.
   (define (detect-desktop-environment)
     (or (sawfish.wm.integration.gnome#detect-gnome)
+	(sawfish.wm.integration.mate#detect-mate)
 	(sawfish.wm.integration.kde#detect-kde)
-	(sawfish.wm.integration.xfce#detect-xfce))
+	(sawfish.wm.integration.xfce#detect-xfce)
+	(sawfish.wm.integration.razor#detect-razor))
     )
 
   ;; Don't signal an error even if user "require" them. These modules

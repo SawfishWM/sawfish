@@ -135,7 +135,7 @@
     "Start single-window-mode for window `w'."
     
     (when single-window-mode-window-fullscreen
-      (maximize-window-fullscreen w))
+      (maximize-window-fullscreen w t))
 
     (single-window-mode-list-append (if (window-on-current-workspace-p w)
 					current-workspace
