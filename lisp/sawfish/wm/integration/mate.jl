@@ -52,7 +52,7 @@
 		      (,(_ "MATE _Website") (browser "http://www.matsusoft.com.ar/projects/mate/"))
 		      (,(_ "_About MATE") (system "mate-about &")))))
 
-    i  ;; add mate-logout and customize menu-entries
+      ;; add mate-logout and customize menu-entries
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_Customize MATE") (system "mate-control-center &"))
