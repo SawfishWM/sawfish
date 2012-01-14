@@ -1,32 +1,33 @@
-# This file in not an offical spec of any distributions.
-# Please read the changelog at the bottom, and send us a fix if it doesn't work.
-# The latest is available from:
-# http://git.gnome.org/browse/sawfish/tree/sawfish.spec.in
 Summary: An extensible window manager for the X Window System
 Name: sawfish
 Version: @version@
 Release: 1%{?dist}
-Requires: librep >= @REP_MIN_VER@, rep-gtk >= @REP_GTK_MIN_VER@
-License: GPLv2+
+License: GPLv2+ and Artistic 2.0
+# GPLv2+ is for Sawfish
+# Artistic 2.0 is for sounds
 Group: User Interface/Desktops
-Source0: http://download.tuxfamily.org/sawfish/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://download.tuxfamily.org/%{name}/%{name}-%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: gmp-devel, pango-devel, libXft-devel, texinfo, gettext
-BuildRequires: libICE-devel, libSM-devel
-%if 0%{?el6}
+BuildRequires: gmp-devel
 BuildRequires: gtk2-devel
-%else
-BuildRequires: gdk-pixbuf2-devel
-%endif
-BuildRequires: librep-devel, rep-gtk-devel
+BuildRequires: libXft-devel
+BuildRequires: libXtst-devel
+BuildRequires: libICE-devel
+BuildRequires: libSM-devel
+BuildRequires: texinfo
+BuildRequires: gettext
+BuildRequires: kde-filesystem
+BuildRequires: desktop-file-utils
+BuildRequires: librep-devel >= @REP_MIN_VER@
+BuildRequires: rep-gtk-devel >= @REP_GTK_MIN_VER@
+Requires: control-center-filesystem
+Requires: hicolor-icon-theme
+Requires: kde-filesystem
+Requires: librep >= @REP_MIN_VER@
+Requires: rep-gtk >= @REP_GTK_MIN_VER@
 
 %define rep_execdir %(pkg-config librep --variable=repcommonexecdir)
-%if %{?_kde4_appsdir:1}%{!?_kde4_appsdir:0}
-%define kde_apps %{_kde4_appsdir}
-%else
-%define kde_apps %{_datadir}/kde4/apps
-%endif
 
 %description
 Sawfish is an extensible window manager which uses a Lisp-based
@@ -37,12 +38,12 @@ accomplished by writing Lisp code in a personal .sawfishrc file, or
 using a GTK+ interface.  Sawfish is mostly GNOME compliant
 
 %package devel
-Summary: Development files for sawfish
+Summary: Development files for Sawfish
 Group: Development/Languages
-Requires: %{name} = %{version}, pkgconfig
+Requires: %{name} = %{version}-%{release}, pkgconfig
 
 %description devel
-Include files for sawfish development.
+Include files for Sawfish development.
 
 %prep
 %setup -q
@@ -52,18 +53,21 @@ Include files for sawfish development.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties/
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-
-make install DESTDIR=$RPM_BUILD_ROOT
+make install DESTDIR=%{buildroot}
 %find_lang %{name}
+gzip -9nf %{buildroot}%{_infodir}/sawfish*
+rm -f %{buildroot}%{_infodir}/dir
+find %{buildroot}%{_libdir} -name \*.a -exec rm '{}' \;
+find %{buildroot}%{_libdir} -name \*.la -exec rm '{}' \;
+# Fix main.jl (sawfish-config) for rpmlint
+sed -i -e '/^\#!/,/^!\#/d' %{buildroot}%{_datadir}/sawfish/lisp/sawfish/cfg/main.jl
 
-gzip -9nf $RPM_BUILD_ROOT%{_infodir}/sawfish*
-rm -f $RPM_BUILD_ROOT%{_infodir}/dir
-find $RPM_BUILD_ROOT%{_libdir} -name \*.a -exec rm '{}' \;
+desktop-file-validate %{buildroot}%{_datadir}/applications/sawfish.desktop
+desktop-file-validate %{buildroot}%{_datadir}/gnome/wm-properties/sawfish-wm.desktop
+desktop-file-validate %{buildroot}%{_kde4_appsdir}/ksmserver/windowmanagers/sawfish.desktop
+desktop-file-validate %{buildroot}%{_datadir}/xsessions/sawfish.desktop
 
 %post
 /sbin/install-info %{_infodir}/sawfish.info.gz %{_infodir}/dir
@@ -74,32 +78,52 @@ if [ "$1" = 0 ]; then
 fi
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %doc COPYING COPYING.SOUNDS FAQ KEYBINDINGS NEWS OPTIONS
 %doc README README.IMPORTANT TODO USERDOC
-%dir %{_datadir}/sawfish
+%dir %{_kde4_appsdir}/ksmserver
+%dir %{_kde4_appsdir}/ksmserver/windowmanagers
 %{_bindir}/*
-%{_datadir}/sawfish/%{version}
-%{_datadir}/sawfish/sawfish.png
-%{_libdir}/sawfish/
 %{rep_execdir}/sawfish
+%{_libdir}/sawfish
+%{_datadir}/sawfish
 %{_datadir}/applications/sawfish.desktop
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
-%{kde_apps}/ksmserver/windowmanagers/sawfish.desktop
+%{_kde4_appsdir}/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
 %{_datadir}/icons/hicolor/32x32/apps/sawfish-config.png
 %{_mandir}/man1/sawfish*.gz
 %{_infodir}/sawfish*
 
 %files devel
-%defattr (-,root,root,-)
-%{_includedir}/sawfish/
+%{_includedir}/sawfish
 %{_libdir}/pkgconfig/sawfish.pc
 
+# Note about rpmlint warning:
+# W: devel-file-in-non-devel-package /usr/bin/sawfish-config
+# This is sawfish GUI configurator, not devel config script.
+
 %changelog
+* Sun Oct  9 2011 Kim B. Heino <b@bbbs.net> - 1.8.91-1
+- Update to 1.8.91
+
+* Mon Aug 22 2011 Kim B. Heino <b@bbbs.net> - 1.8.90-1
+- Update to 1.8.90
+
+* Sat Jul 30 2011 Kim B. Heino <b@bbbs.net> - 1.8.1-2
+- Rebuild for new librep
+
+* Mon May  2 2011 Kim B. Heino <b@bbbs.net> - 1.8.1-1
+- Update to 1.8.1
+
+* Fri Apr 15 2011 Kim B. Heino <b@bbbs.net> - 1.8.0-2
+- Updated spec file
+
+* Thu Mar 31 2011 Kim B. Heino <b@bbbs.net> - 1.8.0-1
+- Update to 1.8.0
+
 * Sat Sep 25 2010 Kim B. Heino <b@bbbs.net> - 1.7.0-1
 - fix url, icons, misc fixes
 
