@@ -14,7 +14,7 @@
 	  sawfish.wm.misc
 	  sawfish.wm.windows)
 
-  (define-structure-alias "events-util" sawfish.wm.util.events)
+  (define-structure-alias events-util sawfish.wm.util.events)
 
 (define (event-wait-for #!key
                       (keymap '(keymap))
