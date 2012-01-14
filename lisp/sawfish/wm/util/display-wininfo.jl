@@ -20,8 +20,7 @@
 
 (define-structure sawfish.wm.util.display-wininfo
 
-    (export display-wininfo
-            display-window-position)
+    (export display-wininfo)
 
     (open rep
 	  rep.system
@@ -173,7 +172,7 @@ If W is nil previous window is removed."
       (setq str (format nil "%sSize: %s x %s\n" str
 			(car size) (cdr size)))
       (display-message (concat str "\nClick to dismiss."))))
-
+  
   (define-command 'display-window-position display-window-position
     #:doc "Choose a window, and prints its position and size in a popup.")
   )
