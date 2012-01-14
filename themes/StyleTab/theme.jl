@@ -37,15 +37,15 @@
   :type symbol
   :options (top bottom left right))
 
-(defcustom styletab-c:title-dimension 24 "Height of title border. "
+(defcustom styletab-c:title-dimension 24 "Height of title border."
   :group (appearance StyleTab:group)
-  :type number
-  :range (16 . 32))
+  :type symbol
+  :options (16 18 20 22 24 26 28 30 32))
 
 (defcustom styletab-c:borders-dimension 4 "Width of window border."
   :group (appearance StyleTab:group)
-  :type number
-  :range (0 . 10))
+  :type symbol
+  :options (0 2 4 6 8))
 
 (defcustom styletab-c:custom-button-width nil "Customize buttons width."
   :group (appearance StyleTab:group)
@@ -53,9 +53,9 @@
 
 (defcustom styletab-c:button-width 0 "Width of Buttons."
   :group (appearance StyleTab:group)
-  :type number
+  :type symbol
   :depends styletab-c:custom-button-width
-  :range (-4 . 4))
+  :options (1 2 3 4 0 -1 -2 -3 -4))
 
 (defcustom styletab-c:proposals 'Pink "Proposals."
   :group (appearance StyleTab:group StyleTab:color-group)
@@ -90,22 +90,22 @@
 (defcustom styletab-c:inactive-dimout 2 "Dimout inactive frame."
   :group (appearance StyleTab:group StyleTab:color-group)
   :depends styletab-c:custom-frame-colors
-  :type number
-  :range (0 . 5)
+  :type symbol
+  :options (0 1 2 3 4 5)
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:active-hightlight-brighten 2 "Focus window brightness mouse over buttons."
   :group (appearance StyleTab:group StyleTab:color-group)
   :depends styletab-c:custom-frame-colors
-  :type number
-  :range (-5 . 5)
+  :type symbol
+  :options (1 2 3 4 5 0 -1 -2 -3 -4 -5)
   :after-set (lambda () (bright-changed)))
 
 (defcustom styletab-c:inactive-hightlight-brighten 2 "Inactive windows brightness mouse over buttons."
   :group (appearance StyleTab:group StyleTab:color-group)
-  :type number
+  :type symbol
   :depends styletab-c:custom-frame-colors
-  :range (-5 . 5)
+  :options (1 2 3 4 5 0 -1 -2 -3 -4 -5)
   :after-set (lambda () (bright-changed)))
 
 (defcustom styletab-c:hightlight-close nil
@@ -2107,7 +2107,6 @@
                                     (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
-     
      (width . ,title-height))
     ((class . bottom-left-corner)
      (background . ,(lambda (w) (if (window-get w 'shaded) 
@@ -2504,11 +2503,6 @@
 (define (reframe-with-style)
   (reframe-windows-with-style theme-name))
 
-(define (rebuild-one w)
-  (when (not (window-get w 'tabbed))
-    (when (eq (window-get w 'current-frame-style) theme-name)
-      (rebuild-frame w))))
-
 (define (reframe-one w)
   (when (not (window-get w 'tabbed))
     (when (eq (window-get w 'current-frame-style) theme-name)
@@ -2580,9 +2574,8 @@
 
 (add-frame-style theme-name get-frame)
 
-(call-after-state-changed '(sticky fixed-position stacking) rebuild-one)
-(call-after-state-changed '(maximized) reframe-one)
-(add-hook 'remove-from-workspace-hook rebuild-one)
+(call-after-state-changed '(maximized sticky fixed-position stacking) reframe-one)
+(add-hook 'remove-from-workspace-hook reframe-one)
 
 (custom-set-property 'styletab-c:styles ':after-set reload-frame-style-reframe)
 (custom-set-property 'styletab-c:title-dimension ':after-set clear-icon-cache-reframe)
