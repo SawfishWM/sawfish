@@ -39,7 +39,7 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
-@heading 1.8.91 "3 The Hard Way"
+@heading 1.8.92 "Coldwater Canyon"
 @itemize @bullet
 
 @item Updated or New dependencies
@@ -47,6 +47,7 @@ Each release lists incompatible changes at its top.
 
 @item librep 0.92.0 -> 0.92.1
 @item rep-gtk 0.90.4 -> 0.90.7
+@item ssd 0.20 [optional, for built-in poweroff-menu]
 @end itemize
 @item Bug Fixes
 @itemize @minus
@@ -319,6 +320,10 @@ Applying settings to GNOME2 or XFCE4 is also supported. Original code by Lucas P
 @item XFCE integration: added entries for hibernate, suspend, lock-screen, menu-editor.
 
 @item GNOME integration: added entry for lock-screen, menu-editor.
+
+@item MATE integration: full integration module for MATE Desktop has been added.
+
+@item Razor-Qt integration: integration module for Razor-Qt has been added.
 
 @item The fallback poweroff-menu now uses SSD @code{Sawfish-Session-Dialog}, a companion to Sawfish,
 by default. Support for logout and lockdown has been added. [Christopher Bratusek]
