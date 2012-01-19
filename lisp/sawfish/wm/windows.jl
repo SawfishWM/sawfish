@@ -26,6 +26,7 @@
      (structure-interface sawfish.wm.windows.subrs)
      (export get-window-by-name
 	     get-window-by-class
+	     window-class-name
 	     get-window-by-role
 	     window-really-wants-input-p
 	     window-transient-p
@@ -158,6 +159,10 @@ CLASS. Returns nil if no such window is found."
       (car (filter-windows (lambda (w)
 			     (when (window-class w)
   			       (string= (window-class w) class)))))))
+
+  (define (window-class-name w #!optional (ref 1))
+    "Quick way to get window class name."
+    (aref (get-x-text-property w 'WM_CLASS) ref))
 
   (define (get-window-by-role role #!key regex)
     "Find a window object whose window-role is ROLE. If REGEX is non-nil then
