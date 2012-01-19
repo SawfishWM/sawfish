@@ -67,15 +67,15 @@
 		      ;; (,(_ "_Edit Razor-Qt menu") (system " &"))
 		      ()
 		      (,(_ "_Logout from Razor-Qt")
-		       (system "razor-power --logout &"))
+		       (system "razor-power logout &"))
 		      (,(_ "_Reboot from Razor-Qt")
-		       (system "razor-power --reboot &"))
+		       (system "razor-power reboot &"))
 		      (,(_ "_Shutdown from Razor-Qt")
-		       (system "razor-power --shutdown &"))
+		       (system "razor-power shutdown &"))
 		      (,(_ "S_uspend from Razor-Qt")
-		       (system "razor-power --suspend &"))
+		       (system "razor-power suspend &"))
 		      (,(_ "_Hibernate from Razor-Qt")
-		       (system "razor-power --hibernate &")))))))
+		       (system "razor-power hibernate &")))))))
 
   ;; Returns nil if razor is not found.
   ;; If detected, returns t, and do also razor support init.
