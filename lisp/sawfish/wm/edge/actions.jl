@@ -51,7 +51,7 @@
        (edge-flip-invoke edge func while-moving))
       ((flip-viewport)
        (edge-flip-invoke edge func while-moving))
-      ((expose-windows)
+      ((expose-windows-action)
        (expose-action edge while-moving))
       ((expand-window)
        (expand-action edge))

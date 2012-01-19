@@ -10,7 +10,8 @@
 (define-structure sawfish.wm.ext.expose
 
     (export expose-windows
-	    window-never-expose-p)
+			expose-windows-action
+			window-never-expose-p)
 
     (open rep
 	  rep.data
@@ -37,44 +38,74 @@ an extra column should be used.")
 
   (define (window-never-expose-p w) (window-get w 'never-expose))
 
-  (define (expose-windows edge while-moving)
-    (interactive)
+  (define (expose-windows-actions edge while-moving)
     (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
     (when while-moving
         (fake-release-window))
-    (let ((windows (remove-if (or window-iconified-p
-			          window-ignored-p
-			          window-never-expose-p)
-			      (or (filter-windows window-on-current-workspace-viewport-p)
-			          (filter-windows window-on-current-head-viewport-p)))))
-      (when (> (length windows) 1)
-	(let* ((columns (do ((c 1 (1+ c)))
-			    ((> (/ (screen-height) (/ (length windows) c))
-				min-height)
-			    c)))
-	      (rows (ceiling (/ (length windows) columns)))
-	      (width (floor (/ (screen-width) columns)))
-	      (height (floor (/ (screen-height) rows))))
-	  (let ((w windows))
-	    (do ((x 0 (1+ x)))
-		((or (>= x columns) (null w)) nil)
-	      (do ((y 0 (1+ y)))
-		  ((or (>= y rows) (null w) nil))
-		(if (window-maximized-p (car w))
-		    (unmaximize-window (car w)))
-		(resize-window-frame-to (car w) width height)
-		(move-window-to (car w) (+ (* x width) 2) (* y height))
-		(pop w))))
-	  ;; Resize the windows horizontally to use any remaining space.
-	  (mapc (lambda (w)
-		  (let ((old-width (window-width w))
-			(old-height (window-height w))
-			(new-width (- (screen-width) (window-x w))))
-		    (resize-window-frame-to w new-width old-height)
-		    (when (window-touching-p w)
-		      ;; oops. Roll back to the original size
-		      (resize-window-frame-to w old-width old-height))))
-		windows)))
-      (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving))))
+    
+      (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving)))
 
-  (define-command 'expose-windows expose-windows))
+  (defvar top-panel-height 0
+   "This var will be considered when using tile commands offered by hqw-util")
+
+  (defvar bottom-panel-height 0
+    "This var will be considered when using tile commands offered by hqw-util")
+
+  (define-command 'expose-windows-vertically
+    (lambda ()
+      (let (
+            (wins (workspace-windows current-workspace)))
+         (expose-windows wins t
+                    #:top-left-corner `(0 . ,top-panel-height)
+                    #:height-for-tile (- (screen-height) (+ top-panel-height bottom-panel-height))))))
+
+  (define-command 'expose-windows-horizontally
+    (lambda ()
+      (let (
+            (wins (workspace-windows current-workspace)))
+         (expose-windows wins nil
+                    #:top-left-corner `(0 . ,top-panel-height)
+                    #:height-for-tile (- (screen-height)
+                                         (+ top-panel-height bottom-panel-height))))))
+
+  (define (expose-windows wins #!optional
+                      vertically
+                      #!key
+                      (width-for-tile (screen-width))
+                      (height-for-tile (screen-height))
+                      (top-left-corner '(0 . 0)))
+   "To tile windows."
+   (let* (
+         (windows (remove-if (or window-iconified-p
+                                 window-never-expose-p
+                                 window-ignored-p)
+                               (or (filter-windows window-on-current-workspace-viewport-p)
+                                   (filter-windows window-on-current-head-viewport-p))))
+         (len (length windows))
+         (border-width (- (car (window-frame-dimensions (car windows))) 
+                          (car (window-dimensions (car windows)))))
+         (border-height (- (cdr (window-frame-dimensions (car windows))) 
+                           (cdr (window-dimensions (car windows)))))
+         (width-step (ceiling (/  width-for-tile
+                                  len)))
+         (height-step (ceiling (/ height-for-tile
+                                  len))))
+      (do (
+           (w (car windows) (progn (setq windows (cdr windows)) (car windows)))
+           (x (car top-left-corner) (if vertically
+                                          x
+                                       (setq x (+ x width-step))))
+           (y (cdr top-left-corner) (if vertically
+                                          (setq y (+ y height-step))
+                                       y))
+           (win-width (if vertically
+                            (- width-for-tile border-width)
+                         (- width-step border-width)))
+           (win-height (if vertically
+                             (- height-step border-height)
+                           (- height-for-tile border-height)))
+           )
+            ((null wins) )
+         (move-resize-window-to w x y win-width win-height))))
+
+  (define-command 'expose-windows expose-windows)) 
