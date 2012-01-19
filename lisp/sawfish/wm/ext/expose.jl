@@ -33,17 +33,7 @@
 height specifies how short you are willing to tolerate your windows before
 an extra column should be used.")
 
-  ;; macro for expose-windows
-  (defmacro pop (l) `(setq ,l (cdr ,l)))
-
   (define (window-never-expose-p w) (window-get w 'never-expose))
-
-  (define (expose-windows-actions edge while-moving)
-    (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
-    (when while-moving
-        (fake-release-window))
-    
-      (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving)))
 
   (defvar top-panel-height 0
    "This var will be considered when using tile commands offered by hqw-util")

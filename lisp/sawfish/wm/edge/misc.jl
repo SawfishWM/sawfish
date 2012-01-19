@@ -21,7 +21,7 @@
 (define-structure sawfish.wm.edge.misc
 
     (export maximize-action
-            expose-action)
+			expose-action)
 
     (open rep
 	  rep
@@ -39,5 +39,9 @@
       (fake-release-window)
       (maximize-window w)))
 
-  (define (expose-action)
-    (expose-windows nil nil)))
+  (define (expose-windows-actions edge while-moving)
+    (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
+    (when while-moving
+        (fake-release-window))
+      (expose-windows-horizontally)
+      (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving))))
