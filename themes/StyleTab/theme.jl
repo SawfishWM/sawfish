@@ -12,9 +12,6 @@
 (defgroup StyleTab:group "StyleTab"
   :group appearance)
 
-(defgroup StyleTab:color-group "colors"
-  :group (appearance StyleTab:group))
-
 (defgroup StyleTab:top-buttons-group "Top Titlebar Buttons"
   :group (appearance StyleTab:group))
 
@@ -26,11 +23,6 @@
 
 (defgroup StyleTab:right-buttons-group "Right Titlebar Buttons"
   :group (appearance StyleTab:group))
-
-(defcustom styletab-c:styles 'Default "Frame and button style."
-  :group (appearance StyleTab:group)
-  :type symbol
-  :options (Default Reduce Glass WixDa Smoothly))
 
 (defcustom styletab-c:titlebar-place 'top "Titlebar default place."
   :group (appearance StyleTab:group)
@@ -57,52 +49,57 @@
   :depends styletab-c:custom-button-width
   :options (1 2 3 4 0 -1 -2 -3 -4))
 
-(defcustom styletab-c:proposals 'Pink "Proposals."
-  :group (appearance StyleTab:group StyleTab:color-group)
+(defcustom styletab-c:styles 'Default "Frame and button style."
+  :group (appearance StyleTab:group)
+  :type symbol
+  :options (Default Reduce Glass WixDa Smoothly))
+
+(defcustom styletab-c:proposals 'Pink "Color proposals."
+  :group (appearance StyleTab:group)
   :type symbol
   :options (Default Reduce Glass WixDa Smoothly Brown Darkblue Blue Pink Green)
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:hightlight-tabbar nil "Also hightlighted tabbars."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :after-set (lambda () (botton-color-changed recolor-tab)))
 
-(defcustom styletab-c:custom-frame-colors nil "Customize frame color/brightness."
-  :group (appearance StyleTab:group StyleTab:color-group)
+(defcustom styletab-c:custom-frame-colors nil "Customize frame color/brightness (Don't use color proposals)."
+  :group (appearance StyleTab:group)
   :type boolean
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:focus-frame-color (get-color "#780000")
   "Focus frame color."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type color
   :depends styletab-c:custom-frame-colors
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:unfocus-frame-color (get-color "#780000")
   "Inactive frame color"
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type color
   :depends styletab-c:custom-frame-colors
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:inactive-dimout 2 "Dimout inactive frame."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :depends styletab-c:custom-frame-colors
   :type symbol
   :options (0 1 2 3 4 5)
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:active-hightlight-brighten 2 "Focus window brightness mouse over buttons."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :depends styletab-c:custom-frame-colors
   :type symbol
   :options (1 2 3 4 5 0 -1 -2 -3 -4 -5)
   :after-set (lambda () (bright-changed)))
 
 (defcustom styletab-c:inactive-hightlight-brighten 2 "Inactive windows brightness mouse over buttons."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type symbol
   :depends styletab-c:custom-frame-colors
   :options (1 2 3 4 5 0 -1 -2 -3 -4 -5)
@@ -110,156 +107,156 @@
 
 (defcustom styletab-c:hightlight-close nil
   "Hightlighted close button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-close-button)))
 
 (defcustom styletab-c:hightlight-close-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-close
   :after-set (lambda () (botton-color-changed recolor-close-button)))
 
 (defcustom styletab-c:hightlight-maximize nil
   "Hightlighted maximize button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-maximize-button)))
 
 (defcustom styletab-c:hightlight-maximize-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-maximize
   :after-set (lambda () (botton-color-changed recolor-maximize-button)))
 
 (defcustom styletab-c:hightlight-iconify nil
   "Hightlighted minimize button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-iconify-button)))
 
 (defcustom styletab-c:hightlight-iconify-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-iconify
   :after-set (lambda () (botton-color-changed recolor-iconify-button)))
 
 (defcustom styletab-c:hightlight-shade nil
   "Hightlighted shade button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-shade-button)))
 
 (defcustom styletab-c:hightlight-shade-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-shade
   :after-set (lambda () (botton-color-changed recolor-shade-button)))
 
 (defcustom styletab-c:hightlight-sticky nil
   "Hightlighted sticky button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-sticky-button)))
 
 (defcustom styletab-c:hightlight-sticky-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-sticky
   :after-set (lambda () (botton-color-changed recolor-sticky-button)))
 
 (defcustom styletab-c:hightlight-menu nil
   "Hightlighted menu button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-menu-button)))
 
 (defcustom styletab-c:hightlight-menu-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-menu
   :after-set (lambda () (botton-color-changed recolor-menu-button)))
 
 (defcustom styletab-c:hightlight-frame-type nil
   "Hightlighted frame type button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-frame-type-button)))
 
 (defcustom styletab-c:hightlight-frame-type-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-frame-type
   :after-set (lambda () (botton-color-changed recolor-frame-type-button)))
 
 (defcustom styletab-c:hightlight-lock nil
   "Hightlighted lock button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-lock-button)))
 
 (defcustom styletab-c:hightlight-lock-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-lock
   :after-set (lambda () (botton-color-changed recolor-lock-button)))
 
 (defcustom styletab-c:hightlight-move-resize nil
   "Hightlighted move/resize button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-move-resize-button)))
 
 (defcustom styletab-c:hightlight-move-resize-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-move-resize
   :after-set (lambda () (botton-color-changed recolor-move-resize-button)))
 
 (defcustom styletab-c:hightlight-raise-lower nil
   "Hightlighted raise/lower button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-raise-lower-button)))
 
 (defcustom styletab-c:hightlight-raise-lower-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-raise-lower
   :after-set (lambda () (botton-color-changed recolor-raise-lower-button)))
 
 (defcustom styletab-c:hightlight-next nil
   "Hightlighted next workspace button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-next-button)))
 
 (defcustom styletab-c:hightlight-next-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-next
   :after-set (lambda () (botton-color-changed recolor-next-button)))
 
 (defcustom styletab-c:hightlight-prev nil
   "Hightlighted previous workspace button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-prev-button)))
 
 (defcustom styletab-c:hightlight-prev-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-prev
   :after-set (lambda () (botton-color-changed recolor-prev-button)))
 
 (defcustom styletab-c:hightlight-rename nil
   "Hightlighted rename button."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-rename-button)))
 
 (defcustom styletab-c:hightlight-rename-all nil "Always use."
-  :group (appearance StyleTab:group StyleTab:color-group)
+  :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-rename
   :after-set (lambda () (botton-color-changed recolor-rename-button)))
