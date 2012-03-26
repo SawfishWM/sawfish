@@ -73,7 +73,7 @@
 
   ;; list of states in window-state-change-hook that should be tracked
   (defvar window-history-states '(sticky ignored never-focus type maximized
-                                         frame-style cycle-skip
+                                         frame-style cycle-skip tab-group
                                          window-list-skip title-position))
 
   ;; property matched on

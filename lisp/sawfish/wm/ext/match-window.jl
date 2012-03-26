@@ -109,6 +109,7 @@
             (ignored boolean)
             (group ,(lambda ()
                       `(symbol ,@(delete-if-not symbolp (window-group-ids)))))
+            (tab-group string)
             (ungrouped boolean)
             (cycle-skip boolean)
             (window-list-skip boolean)
@@ -275,7 +276,7 @@
       (remove-window-matcher-core (list (cons rules (car props)))
 				  (cdr props)))
     )
-  
+
   (define (remove-window-matcher-core rules props)
     (let
 	((remove-from (lambda (slot)
@@ -516,6 +517,11 @@
             (set-screen-viewport col row)
             (set-window-viewport w col row))))))
 
+  (define-match-window-setter 'tab-group
+    (lambda (w prop value)
+      (declare (unused prop))
+      (when value
+        (window-put w 'tab-group (intern value)))))
 
   (define-match-window-setter 'window-name
     (lambda (w prop value)
@@ -536,7 +542,7 @@
 	    ((eq value 'fullscreen)
 	     (window-put w 'queued-fullscreen-maximize t))
 	    ((eq value 'full-xinerama)
-	     (window-put w 'queued-fullxinerama-maximize))
+	     (window-put w 'queued-fullxinerama-maximize t))
 	    )))
 
   (define-match-window-setter 'keymap-trans
