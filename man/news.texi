@@ -47,7 +47,7 @@ Each release lists incompatible changes at its top.
 
 @item librep 0.92.0 -> 0.92.1
 @item rep-gtk 0.90.4 -> 0.90.7
-@item ssd 0.20 [optional, for built-in poweroff-menu]
+@item ssd 0.30 [optional, for built-in poweroff-menu]
 @end itemize
 @item Bug Fixes
 @itemize @minus
@@ -278,6 +278,9 @@ from StyleTab into Sawfish.
 @end itemize
 @item New Features
 @itemize @minus
+
+@item Added @code{tab-group} window-matcher. It allows window to be auto-tabbed together, if
+they got the same @code{tab-group} property [fuchur]
 
 @item Added @code{single-window-mode}. Basically this feature is known from OS-X, though it's
 implemented in a more strict way. The @code{single-window-mode} window should get all of the users
@@ -532,7 +535,7 @@ Internal changes:
 
 @item Replace running window manager with Sawfish [Timo Korvola]@*
 New command line option @code{--replace} is added. With it, Sawfish
-will replace the currently running window manager. It's 
+will replace the currently running window manager. It's
 done by ``manager selection'' defined in ICCCM secs 2.8 and 4.3.
 
 @item Toggle-Or-Exec wrapper added to Jump-Or-Exec [Christopher Bratusek]
@@ -540,7 +543,7 @@ done by ``manager selection'' defined in ICCCM secs 2.8 and 4.3.
 @code{toggle-or-exec} is similar to jump-or-exec, but turns windows
 into quake-like drop-down/pop-up-windows. That means, when you have
 the toggle-window focused and press its keybinding again, it will be
-hidden. 
+hidden.
 
 See the file @file{jump-or-exec.jl} for more detailed examples.
 
@@ -604,7 +607,7 @@ In order to support ``gnome2-globalmenu'', the reaction policy to
 
 For the details, see @xref{Window Attributes}, and @xref{Getting Windows}.
 @itemize *
-@item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE) 
+@item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE)
 @item Deleted @code{get-window-by-name-re} and @code{get-window-by-class-re}. Use instead @code{get-window-by-name} or @code{get-window-by-class} with the new boolean option @code{#:regex}. (The old name is still supported.)
 @item added @code{#:icon} switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
 
@@ -739,7 +742,7 @@ and mouse-bindings got messed-up.
 
 Now, this can be prevented by invoking Sawfish with the new
 commandline-option @code{--5-buttons}. It is assumed that modifiers
-are common among keyboard groups. 
+are common among keyboard groups.
 
 More precisely, what's supported is switching by @code{ISO_Next_Group}
 or similar, bound to a key (for example ctrl + alt). It appears as
@@ -815,7 +818,7 @@ Applications menu now looks more like that of GNOME / KDE / XFCE if
 one is running. (further improvements are planned)
 
 The user option @code{apps-menu-ignore-no-display} is now gone
-and replaced by @code{apps-menu-show-all}. [Note: After Sawfish-1.8.0, 
+and replaced by @code{apps-menu-show-all}. [Note: After Sawfish-1.8.0,
 this option is superseded by @code{apps-menu-filter}.]
 
 If @code{apps-menu-show-all} is @code{nil} (default), the menu
@@ -878,7 +881,7 @@ If you want to draw on the screen directly use @code{x-draw-text}
 (@pxref{X Drawing}.)
 @end itemize
 
-@item Translation updates 
+@item Translation updates
 
 Updated translations since 1.6.0 are Danish (da), British English
 (en_GB), German (de), Spanish (es), Slovenian (sl), and Swedish (sv).
