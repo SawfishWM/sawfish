@@ -55,9 +55,6 @@
   (define oldgroup nil)
   (define tab-groups nil)
   (define tab-refresh-lock t)
-  (define release-window nil)
-  (define last-unmap-id nil)
-  (define in-tab-group-name nil)
 
   (define (window-tabbed-p w)
     (window-get w 'tabbed))
@@ -135,8 +132,6 @@
 
   (define (tab-delete-window-from-tab-groups w)
     "Find window's group and remove it."
-    (if (not release-window)
-        (remove-from-tab-group w))
     (when (window-tabbed-p w)
       (tab-delete-window-from-group w (tab-window-group-index w))
       (window-put w 'fixed-position nil)
@@ -273,9 +268,7 @@ sticky, unsticky, fixed-position."
         (when (not (eq index index2))
           ;; tabgroup to tabgroup
           (when (window-tabbed-p w)
-            (setq release-window t)
-            (tab-delete-window-from-tab-groups w)
-            (setq release-window nil))
+            (tab-delete-window-from-tab-groups w))
           (setq tab-refresh-lock nil)
           (if (window-get w 'shaded) (unshade-window w))
           (if (window-get win 'shaded) (unshade-window win))
@@ -310,9 +303,7 @@ sticky, unsticky, fixed-position."
   
   (define (tab-release-window w)
     "Release the window from its group."
-    (setq release-window t)
     (tab-delete-window-from-tab-groups w)
-    (setq release-window nil)
     (tab-make-new-group w))
   
   (define-command 'tab-release-window tab-release-window #:spec "%f")
@@ -411,27 +402,7 @@ sticky, unsticky, fixed-position."
         (tab-refresh-group win 'move)
         (tab-refresh-group win 'frame))))
 
-  (define (unmap-id win)
-    (setq last-unmap-id (window-id win)))
-
-  (define (in-tab-group win)
-    "Add a new window as tab if have one (the first created if more as one) 
-of the windows the same 'tab-group property"
-    (when (window-get win 'tab-group)
-      (setq in-tab-group-name (append in-tab-group-name (cons (cons (window-id win) (window-get win 'tab-group)))))
-      (let ((open-win-tabgroup (get-window-by-id (car (rassoc (window-get win 'tab-group) in-tab-group-name)))))
-        (if (and open-win-tabgroup
-                 (not (eq win open-win-tabgroup)))
-            (tab-group-window win open-win-tabgroup)))))
-
-  (define (remove-from-tab-group win)
-    "Remove window from in-tab-group-name alist if it have a 'tab-group property"
-    (when (window-get win 'tab-group)
-      (setq in-tab-group-name (remove (assoc last-unmap-id in-tab-group-name) in-tab-group-name))))
-
   (unless batch-mode
-    (add-hook 'after-add-window-hook in-tab-group)
-    (add-hook 'unmap-notify-hook unmap-id)
     (add-hook 'window-state-change-hook
               (lambda (win args)
                 (when (window-tabbed-p win)
