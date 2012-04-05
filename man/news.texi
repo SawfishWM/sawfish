@@ -220,7 +220,7 @@ Of course that only works, if the label is a GtkLabel widget on it's own.
 So if you experience a long startup-time of Sawfish, it's a feature, not a bug. :
 == /spoiler ===
 
-@item StyleTab changes:
+@item StyleTab changes [fuchur]:
 @itemize x
 
 @item The theme is now fully re-colorable. You can choose different colors for
@@ -330,11 +330,17 @@ Applying settings to GNOME2 or XFCE4 is also supported. Original code by Lucas P
 
 @item MATE integration: full integration module for MATE Desktop has been added.
 
-@item Razor-Qt integration: integration module for Razor-Qt has been added.
+@item Razor-Qt integration: full integration module for Razor-Qt has been added.
+
+@item LXDE integration: basic integration module for LXDE has been added.
+@end itemize
 
 @item The fallback poweroff-menu now uses SSD @code{Sawfish-Session-Dialog}, a companion to Sawfish,
 by default. Support for logout and lockdown has been added. [Christopher Bratusek]
-@end itemize
+
+@item Added a @code{filemanager} launcher. If set the Sawfish root-menu will show an @code{Open Home}
+entry. The KDE, GNOME, MATE, XFCE and LXDE integration modules will set the program accordingly, unless
+it's already user-defined.
 @end itemize
 @end itemize
 
