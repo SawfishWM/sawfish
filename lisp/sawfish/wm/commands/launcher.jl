@@ -22,7 +22,8 @@
 (define-structure sawfish.wm.commands.launcher
 
     (export xterm
-	    browser)
+	    browser
+	    filemanager)
 
     (open rep
 	  rep.system
@@ -44,6 +45,12 @@
 
   (defcustom browser-program "www-browser"
     "The program launched by the `browser' function. Interpreted by shell."
+    :type string
+    :group (misc apps))
+
+
+  (defcustom filemanager-program ""
+    "The program launched by the 'filemanager' function. Interpreted by shell."
     :type string
     :group (misc apps))
 
@@ -69,15 +76,24 @@ passed."
       (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
                       browser-program url))))
 
+  (define (filemanager #!optional url)
+    "Start a new filemanager instance."
+    (if (not url)
+        (system (format nil "%s >/dev/null 2>&1 </dev/null &"
+			filemanager-program))
+      (system (format nil "%s %s >/dev/null 2>&1 </dev/null &"
+                      filemanager-program url))))
+
   ;;###autoload
   (define-command 'xterm xterm
     #:spec "sCommand:"
     #:type `(and (labelled ,(_ "Command:") string))
-    #:doc "Start a terminal. Optional command is passed with -e. The terminal is specified by variable `xterm-program' in Config -> Misc -> External Applications."
-    )
+    #:doc "Start a terminal. Optional command is passed with -e. The terminal is specified by variable `xterm-program' in Config -> Misc -> External Applications.")
   (define-command 'browser browser
     #:spec "sUrl:"
     #:type `(and (labelled ,(_ "url:") string))
-    #:doc "Start browser. Url is optional. Browser program is specified by variable `browser-program' in Config -> Misc -> External Applications."
-    )
-  )
+    #:doc "Start browser. Url is optional. Browser program is specified by variable `browser-program' in Config -> Misc -> External Applications.")
+  (define-command 'filemanager filemanager
+    #:spec "sUrl:"
+    #:type `(and (labelled ,(_ "url:") string))
+    #:doc "Start filemanager. Url is optional. filemanager program is specified by variable `filemanager-program' in Config -> Misc -> External Applications."))
