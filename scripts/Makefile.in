@@ -33,6 +33,7 @@ REP_ENVIRON := $(REP_ENVIRON) REP_LOAD_PATH=$(top_srcdir)/lisp:$(top_builddir)/l
 SUBSTS := -e "s|__lispdir__|$(lispdir)|" \
 	  -e "s|__localedir__|$(localedir)|" \
 	  -e "s|__version__|$(version)|" \
+	  -e "s|__codename__|$(codename)|" \
 	  -e "s|__sawfishdir__|$(sawfishdir)|"
 
 %.jlc : %.jl
