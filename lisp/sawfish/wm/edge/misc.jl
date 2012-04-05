@@ -21,12 +21,12 @@
 (define-structure sawfish.wm.edge.misc
 
     (export maximize-action
-			expose-action)
+   	    expose-action)
 
     (open rep
-	  rep
 	  rep.system
 	  sawfish.wm.windows
+	  sawfish.wm.commands
 	  sawfish.wm.events
 	  sawfish.wm.state.maximize
 	  sawfish.wm.ext.expose)

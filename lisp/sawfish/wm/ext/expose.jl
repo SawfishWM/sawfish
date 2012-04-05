@@ -10,8 +10,9 @@
 (define-structure sawfish.wm.ext.expose
 
     (export expose-windows
-			expose-windows-action
-			window-never-expose-p)
+            expose-windows-vertically
+            expose-windows-horizontally
+  	    window-never-expose-p)
 
     (open rep
 	  rep.data
@@ -41,7 +42,7 @@ an extra column should be used.")
   (defvar bottom-panel-height 0
     "This var will be considered when using tile commands offered by hqw-util")
 
-  (define-command 'expose-windows-vertically
+  (define (expose-windows-vertically)
     (lambda ()
       (let (
             (wins (workspace-windows current-workspace)))
@@ -49,7 +50,7 @@ an extra column should be used.")
                     #:top-left-corner `(0 . ,top-panel-height)
                     #:height-for-tile (- (screen-height) (+ top-panel-height bottom-panel-height))))))
 
-  (define-command 'expose-windows-horizontally
+  (define (expose-windows-horizontally)
     (lambda ()
       (let (
             (wins (workspace-windows current-workspace)))
@@ -72,9 +73,9 @@ an extra column should be used.")
                                (or (filter-windows window-on-current-workspace-viewport-p)
                                    (filter-windows window-on-current-head-viewport-p))))
          (len (length windows))
-         (border-width (- (car (window-frame-dimensions (car windows))) 
+         (border-width (- (car (window-frame-dimensions (car windows)))
                           (car (window-dimensions (car windows)))))
-         (border-height (- (cdr (window-frame-dimensions (car windows))) 
+         (border-height (- (cdr (window-frame-dimensions (car windows)))
                            (cdr (window-dimensions (car windows)))))
          (width-step (ceiling (/  width-for-tile
                                   len)))
@@ -98,4 +99,4 @@ an extra column should be used.")
             ((null wins) )
          (move-resize-window-to w x y win-width win-height))))
 
-  (define-command 'expose-windows expose-windows)) 
+  (define-command 'expose-windows expose-windows))
