@@ -39,7 +39,7 @@
       (fake-release-window)
       (maximize-window w)))
 
-  (define (expose-windows-actions edge while-moving)
+  (define (expose-windows-action edge while-moving)
     (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
     (when while-moving
         (fake-release-window))
