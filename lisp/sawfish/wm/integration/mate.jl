@@ -68,6 +68,7 @@
   ;; Returns nil if mate is not found.
   ;; If detected, returns t, and do also mate support init.
   (define (detect-mate)
-    (when (getenv "MATE_DESKTOP_SESSION_ID")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "MATE")
+              (getenv "MATE_DESKTOP_SESSION_ID"))
       (init)
       t)))

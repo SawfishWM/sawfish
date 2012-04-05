@@ -80,7 +80,8 @@
   ;; Returns nil if razor is not found.
   ;; If detected, returns t, and do also razor support init.
   (define (detect-razor)
-    (when (or (equal (getenv "DESKTOP_SESSION") "razor")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTKOP") "Razor")
+	      (equal (getenv "DESKTOP_SESSION") "razor")
 	      (get-window-by-class "Razor-desktop" #:regex t))
       (init)
       t)))

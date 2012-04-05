@@ -68,6 +68,7 @@
   ;; Returns nil if gnome is not found.
   ;; If detected, returns t, and do also gnome support init.
   (define (detect-gnome)
-    (when (getenv "GNOME_DESKTOP_SESSION_ID")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
+              (getenv "GNOME_DESKTOP_SESSION_ID"))
       (init)
       t)))
