@@ -31,7 +31,7 @@
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
-  (define-structure-alias razor-int sawfish.wm.integration.mate)
+  (define-structure-alias razor-int sawfish.wm.integration.razor)
 
   (define (init)
     (let (menu)
@@ -53,6 +53,14 @@
       ;;
       ;; (unless (variable-customized-p 'browser-program)
       ;; 	(setq browser-program "razor-www-browser"))
+
+      ;; use the Razor-Qt filemanager
+      ;;
+      ;; XXX Razor-Qt does not come with a default filemanager
+      ;; XXX candidate: ??
+      ;;
+      ;; (unless (variable-customized-p 'filemanager-program)
+      ;;   (setq filemanager-program "razor-fm"))
 
       ;; add some Razor-Qt menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
@@ -80,7 +88,8 @@
   ;; Returns nil if razor is not found.
   ;; If detected, returns t, and do also razor support init.
   (define (detect-razor)
-    (when (or (equal (getenv "DESKTOP_SESSION") "razor")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTKOP") "Razor")
+	      (equal (getenv "DESKTOP_SESSION") "razor")
 	      (get-window-by-class "Razor-desktop" #:regex t))
       (init)
       t)))

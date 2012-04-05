@@ -45,6 +45,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "mate-www-browser"))
 
+      ;; use the MATE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "caja"))
+
       ;; add some MATE menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
@@ -68,6 +72,7 @@
   ;; Returns nil if mate is not found.
   ;; If detected, returns t, and do also mate support init.
   (define (detect-mate)
-    (when (getenv "MATE_DESKTOP_SESSION_ID")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "MATE")
+              (getenv "MATE_DESKTOP_SESSION_ID"))
       (init)
       t)))

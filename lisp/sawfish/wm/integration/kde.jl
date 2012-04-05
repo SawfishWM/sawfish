@@ -52,6 +52,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "konqueror"))
 
+      ;; use the KDE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "dolphin"))
+
       ;; add some KDE help menus
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
@@ -80,11 +84,12 @@
 			(system "qdbus org.kde.kded /org/freedesktop/PowerManagement Suspend &"))
 		      (,(_ "_Hibernate from KDE")
 			(system "qdbus org.kde.kded /org/freedesktop/PowerManagement Hibernate &")))))))
-  
+
   ;; Returns nil if kde is not found.
   ;; If detected, returns t, and do also kde support init.
   (define (detect-kde)
-    (when (getenv "KDE_FULL_SESSION")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") KDE)
+              (getenv "KDE_FULL_SESSION"))
       (init)
       t))
 

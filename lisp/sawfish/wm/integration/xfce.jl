@@ -45,6 +45,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "midori"))
 
+      ;; use the XFCE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "thunar"))
+
       ;; add some XFCE help menus
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
@@ -77,6 +81,7 @@
   ;; Returns nil if xfce is not found.
   ;; If detected, returns t, and do also xfce support init.
   (define (detect-xfce)
-    (when (get-x-property 'root '_DT_SAVE_MODE)
+    (when (or (get-x-property 'root '_DT_SAVE_MODE)
+              (equal (getenv "XDG_CURRENT_DESKTOP") "XFCE"))
       (init)
       t)))

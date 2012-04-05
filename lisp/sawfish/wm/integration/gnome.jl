@@ -45,6 +45,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "gnome-www-browser"))
 
+      ;; use the GNOME filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "nautilus"))
+
       ;; add some GNOME menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
@@ -68,6 +72,7 @@
   ;; Returns nil if gnome is not found.
   ;; If detected, returns t, and do also gnome support init.
   (define (detect-gnome)
-    (when (getenv "GNOME_DESKTOP_SESSION_ID")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
+              (getenv "GNOME_DESKTOP_SESSION_ID"))
       (init)
       t)))
