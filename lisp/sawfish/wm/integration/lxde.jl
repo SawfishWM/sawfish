@@ -31,7 +31,7 @@
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
-  (define-structure-alias razor-int sawfish.wm.integration.lxde)
+  (define-structure-alias lxde-int sawfish.wm.integration.lxde)
 
   (define (init)
     (let (menu)
@@ -48,7 +48,7 @@
       ;; XXX candidate for int: ??
       ;;
       ;; (unless (variable-customized-p 'browser-program)
-      ;; 	(setq browser-program "razor-www-browser"))
+      ;; 	(setq browser-program "lxde-www-browser"))
 
       ;; use the LXDE filemanager
       (unless (variable-customized-p 'filemanager-program)
@@ -59,14 +59,14 @@
 	(nconc menu `(()
 		      (,(_ "LXDE _Website") (browser "http://www.lxde.org")))))
 
-      ;; add razor-logout and customize menu-entries
+      ;; add lxde-logout and customize menu-entries
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_LXSession Logout") (system "lxsession-logout &")))))
 
-  ;; Returns nil if razor is not found.
-  ;; If detected, returns t, and do also razor support init.
-  (define (detect-razor)
+  ;; Returns nil if lxde is not found.
+  ;; If detected, returns t, and do also lxde support init.
+  (define (detect-lxde)
     (when (or (equal (getenv "XDG_CURRENT_DESKTKOP") "LXDE")
 	      (equal (getenv "DESKTOP_SESSION") "LXDE"))
       (init)
