@@ -1,4 +1,4 @@
-;; razor.jl -- Razor-Qt integration
+;; lxde.jl -- LXDE integration
 
 ;; Copyright (C) 2012 Christopher Roy Bratusek <nano@tuxfamily.org>
 
@@ -18,9 +18,9 @@
 ;; along with sawfish; see the file COPYING.  If not, write to
 ;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
-(define-structure sawfish.wm.integration.razor
+(define-structure sawfish.wm.integration.lxde
 
-    (export detect-razor)
+    (export detect-lxde)
 
     (open rep
 	  rep.system
@@ -31,11 +31,11 @@
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
-  (define-structure-alias razor-int sawfish.wm.integration.razor)
+  (define-structure-alias razor-int sawfish.wm.integration.lxde)
 
   (define (init)
     (let (menu)
-      (setq desktop-environment "razor")
+      (setq desktop-environment "lxde")
       (setq want-poweroff-menu nil)
 
       ;; invoke the Razor-Qt terminal instead of xterm
@@ -43,8 +43,8 @@
       ;; XXX Razor-Qt does not come with a default terminal-emulator
       ;; XXX candidate for int: konsole
       ;;
-      ;; (unless (variable-customized-p 'xterm-program)
-      ;; 	(setq xterm-program "razor-terminal"))
+        (unless (variable-customized-p 'xterm-program)
+		(setq xterm-program "lxterm"))
 
       ;; use the Razor-Qt help browser and url launcher
       ;;
@@ -54,34 +54,20 @@
       ;; (unless (variable-customized-p 'browser-program)
       ;; 	(setq browser-program "razor-www-browser"))
 
-      ;; add some Razor-Qt menu-entries
+      ;; add some LXDE menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
-		      (,(_ "Razor-Qt _Website") (browser "http://www.razor-qt.org")))))
+		      (,(_ "LXDE _Website") (browser "http://www.lxde.org")))))
 
       ;; add razor-logout and customize menu-entries
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
-		      (,(_ "_Customize Razor-Qt") (system "razor-config &"))
-		      ;; XXX candidate: kmenuedit
-		      ;; (,(_ "_Edit Razor-Qt menu") (system " &"))
-		      ()
-		      (,(_ "_Logout from Razor-Qt")
-		       (system "razor-power logout &"))
-		      (,(_ "_Reboot from Razor-Qt")
-		       (system "razor-power reboot &"))
-		      (,(_ "_Shutdown from Razor-Qt")
-		       (system "razor-power shutdown &"))
-		      (,(_ "S_uspend from Razor-Qt")
-		       (system "razor-power suspend &"))
-		      (,(_ "_Hibernate from Razor-Qt")
-		       (system "razor-power hibernate &")))))))
+		      (,(_ "_LXSession Logout") (system "lxsession-logout &")))))
 
   ;; Returns nil if razor is not found.
   ;; If detected, returns t, and do also razor support init.
   (define (detect-razor)
-    (when (or (equal (getenv "XDG_CURRENT_DESKTKOP") "Razor")
-	      (equal (getenv "DESKTOP_SESSION") "razor")
-	      (get-window-by-class "Razor-desktop" #:regex t))
+    (when (or (equal (getenv "XDG_CURRENT_DESKTKOP") "LXDE")
+	      (equal (getenv "DESKTOP_SESSION") "LXDE"))
       (init)
       t)))
