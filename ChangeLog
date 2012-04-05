@@ -2,6 +2,24 @@
 	* lisp/sawfish/wm/ext/expose.jl
 	* lisp/sawfish/wm/edge/misc.jl: fixup expose action
 
+	* lisp/sawfish/wm/commands/launcher.jl: add filemanager launcher
+
+	* lisp/sawfish/wm/menus.jl
+	* lisp/sawfish/wm/user.jl: if filemanager is set, provide 'Open Home'
+	entry in Sawfish's root-menu
+
+	* lisp/sawfish/wm/integration/mate.jl
+	* lisp/sawfish/wm/integration/razor-qt.jl
+	* lisp/sawfish/wm/integration/kde.jl
+	* lisp/sawfish/wm/integration/gnome.jl
+	* lisp/sawfish/wm/integration/xfce.jl: try to match against
+	XDG_CURRENT_DESKTOP to detect desktop -- add desktop specific entries
+	for filemanager launcher
+
+	* lisp/sawfish/wm/integration/lxde.jl: LXDE integration module
+
+	* configure.in: bump version to 1.8.99 "Housenation"
+
 2012-03-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/ext/match-window.jl
 	* lisp/sawfish/wm/ext/window-history.jl

@@ -88,7 +88,7 @@
   ;; Returns nil if kde is not found.
   ;; If detected, returns t, and do also kde support init.
   (define (detect-kde)
-    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") KDE)
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "KDE")
               (getenv "KDE_FULL_SESSION"))
       (init)
       t))

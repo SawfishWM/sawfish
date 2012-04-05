@@ -181,9 +181,7 @@ before killing it.")
        (,(_ "Sawfish _Wiki") help:show-homepage)
        (,(_ "Sawfish _Manual") help:show-programmer-manual)
        ()
-       (,(_ "_About Sawfish") help:about))
-      ()
-      (,(_ "_Kill Window") (system "xkill &"))))
+       (,(_ "_About Sawfish") help:about))))
 
   (defvar apps-menu)
 
