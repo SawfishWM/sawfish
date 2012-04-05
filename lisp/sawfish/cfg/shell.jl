@@ -64,8 +64,8 @@
 
       (setq main-window (gtk-window-new 'toplevel))
 
-      (gtk-box-set-homogeneous hbox-a nil)
-      (gtk-box-set-homogeneous hbox-b nil)
+      (gtk-box-set-homogeneous hbox-a t)
+      (gtk-box-set-homogeneous hbox-b t)
       (gtk-window-set-resizable main-window t)
       (gtk-window-set-icon-name main-window "sawfish-config")
       (gtk-window-set-default-size main-window 550 400)
@@ -100,16 +100,21 @@
 
 
 	(setq ok-widget (gtk-button-new-from-stock "gtk-close"))
+	(gtk-button-set-relief ok-widget 'none)
 	(setq revert-widget (gtk-button-new-from-stock "gtk-undo"))
+	(gtk-button-set-relief revert-widget 'none)
 	
 	(setq wiki-button (gtk-link-button-new-with-label "http://sawfish.wikia.com/" "Browse Wiki"))
-	(gtk-button-set-relief wiki-button 'normal)
+	(gtk-button-set-relief wiki-button 'none)
 	
 	(setq edit-button (gtk-button-new-from-stock "gtk-edit"))
 	(gtk-button-set-label edit-button "Edit RC")
+	(gtk-button-set-relief edit-button 'none)
 	
 	(setq about-button (gtk-button-new-from-stock "gtk-about"))
+	(gtk-button-set-relief about-button 'none)
 	(setq doc-button (gtk-button-new-from-stock "gtk-help"))
+	(gtk-button-set-relief doc-button 'none)
 	
 	(setq install-theme-label (gtk-label-new "Install theme:"))
 	(setq install-theme-button (gtk-file-chooser-button-new '() 'open))
@@ -123,13 +128,14 @@
       (g-signal-connect main-window "delete_event" on-quit)
 
 	(gtk-box-set-spacing hbox-a button-box-spacing)
-	(gtk-button-box-set-layout hbox-a 'center)
-	(gtk-box-pack-end vbox hbox-a)
+	(gtk-button-box-set-layout hbox-a 'spread)
 
 	(gtk-box-set-spacing hbox-b button-box-spacing)
-	(gtk-button-box-set-layout hbox-b 'center)
-	(gtk-box-pack-end vbox hbox-b)
+	(gtk-button-box-set-layout hbox-b 'spread)
 	
+	(gtk-box-pack-end vbox hbox-b)
+	(gtk-box-pack-end vbox hbox-a)
+
 	(g-signal-connect ok-widget "clicked" on-ok)
 	(g-signal-connect revert-widget "clicked" on-revert)
 	
