@@ -21,7 +21,7 @@
 (define-structure sawfish.wm.edge.misc
 
     (export maximize-action
-   	    expose-action)
+   	    expose-windows-action)
 
     (open rep
 	  rep.system
