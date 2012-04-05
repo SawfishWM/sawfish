@@ -50,7 +50,8 @@
 	   sawfish.wm.edge.conf
 	   sawfish.wm.edge.actions
 	   sawfish.wm.frames
-	   sawfish.wm.menus)
+	   sawfish.wm.menus
+	   sawfish.wm.commands.launcher)
      (access sawfish.wm.integration.kde
 	     sawfish.wm.integration.gnome
 	     sawfish.wm.integration.xfce
@@ -61,7 +62,7 @@
      (set-binds))
 
   ;; "none" looks ugly, but if you are to change it to "", fix
-  ;; apps-menu, too, or it will break. 
+  ;; apps-menu, too, or it will break.
   (defvar desktop-environment "none"
     "Running desktop environment, detected by Sawfish.
 Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" or \"none\".")
@@ -157,6 +158,15 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
 
   (when (equal desktop-environment "kde")
     (sawfish.wm.integration.kde#kde-late-init))
+
+  (if (equal filemanager "")
+      (let ((menu root-menu))
+        (nconc menu `(()
+                      (,(_ "_Kill Window") (system "xkill &")))))
+    (let ((menu root-menu))
+      (nconc menu `(()
+                    (,(_ "_Open Home") (filemanager "~"))
+                    (,(_ "_Kill Window") (system "xkill &"))))))
 
   ;; generate apps-menu from *.desktop files
   (unless batch-mode

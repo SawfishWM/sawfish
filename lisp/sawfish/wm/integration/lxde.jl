@@ -62,7 +62,7 @@
       ;; add lxde-logout and customize menu-entries
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
-		      (,(_ "_LXSession Logout") (system "lxsession-logout &")))))
+		      (,(_ "_LXSession Logout") (system "lxsession-logout &")))))))
 
   ;; Returns nil if lxde is not found.
   ;; If detected, returns t, and do also lxde support init.
