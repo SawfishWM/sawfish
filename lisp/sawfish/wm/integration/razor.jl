@@ -54,6 +54,14 @@
       ;; (unless (variable-customized-p 'browser-program)
       ;; 	(setq browser-program "razor-www-browser"))
 
+      ;; use the Razor-Qt filemanager
+      ;;
+      ;; XXX Razor-Qt does not come with a default filemanager
+      ;; XXX candidate: ??
+      ;;
+      ;; (unless (variable-customized-p 'filemanager-program)
+      ;;   (setq filemanager-program "razor-fm"))
+
       ;; add some Razor-Qt menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()

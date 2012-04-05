@@ -45,6 +45,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "mate-www-browser"))
 
+      ;; use the MATE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "caja"))
+
       ;; add some MATE menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()

@@ -38,21 +38,21 @@
       (setq desktop-environment "lxde")
       (setq want-poweroff-menu nil)
 
-      ;; invoke the Razor-Qt terminal instead of xterm
-      ;;
-      ;; XXX Razor-Qt does not come with a default terminal-emulator
-      ;; XXX candidate for int: konsole
-      ;;
+      ;; invoke the LXDE terminal instead of xterm
         (unless (variable-customized-p 'xterm-program)
 		(setq xterm-program "lxterm"))
 
-      ;; use the Razor-Qt help browser and url launcher
+      ;; use the LXDE help browser and url launcher
       ;;
-      ;; XXX Razor-Qt does not come with a default browser
-      ;; XXX candidate for int: QupZilla
+      ;; XXX LXDE does not come with a default browser
+      ;; XXX candidate for int: ??
       ;;
       ;; (unless (variable-customized-p 'browser-program)
       ;; 	(setq browser-program "razor-www-browser"))
+
+      ;; use the LXDE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "pcmanfm"))
 
       ;; add some LXDE menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))

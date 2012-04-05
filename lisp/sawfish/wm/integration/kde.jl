@@ -52,6 +52,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "konqueror"))
 
+      ;; use the KDE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "dolphin"))
+
       ;; add some KDE help menus
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()

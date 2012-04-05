@@ -45,6 +45,10 @@
       (unless (variable-customized-p 'browser-program)
 	(setq browser-program "midori"))
 
+      ;; use the XFCE filemanager
+      (unless (variable-customized-p 'filemanager-program)
+	(setq filemanager-program "thunar"))
+
       ;; add some XFCE help menus
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
