@@ -31,11 +31,11 @@ exec rep --batch "$0" "$@"
 
   (define dialog (gtk-about-dialog-new))
   (gtk-about-dialog-set-program-name dialog "Sawfish")
-  (gtk-about-dialog-set-version dialog "__version__")
+  (gtk-about-dialog-set-version dialog "__version__ \"__codename__\"")
   (gtk-about-dialog-set-copyright dialog "© 1999-2000 John Harper\
   \n© 2000 Eazel, Inc\
   \n© 2007-2008 Janek Kozicki\
-  \n© 2008-2010 Christopher Bratusek")
+  \n© 2008-2012 Christopher Bratusek et all")
   (gtk-about-dialog-set-license dialog "Sawfish is released under the terms of the\
   \n\n\tGNU General Public License version 2, or (at your option) any later version.\
   \n\nSee the `COPYING' file in the source tree for the full license.\
@@ -46,10 +46,10 @@ exec rep --batch "$0" "$@"
   (gtk-about-dialog-set-website dialog "http://sawfish.wikia.com")
   (gtk-about-dialog-set-website-label dialog "Sawfish Wiki")
   (gtk-about-dialog-set-authors dialog '("1999-2007: John Harper\
-  \n2007-2011: Janek 'Re-Animator' Kozicki, Timo Korvola, Andrea Vetorello, Guillermo S. Romero\
-  \n2008-2011: Christopher 'Flashrider' Bratusek, Teika 'Mister X' Kazura\
-  \n2009-2011: Jeremy Hankins, Matthew Love, Fuchur 'Mister Y'\
-  \n1999-2011: All the brave contributors (see `THANKS' in `CONTRIBUTING')"))
+  \n2007-2012: Janek 'Re-Animator' Kozicki, Timo Korvola, Andrea Vetorello, Guillermo S. Romero\
+  \n2008-2012: Christopher 'Flashrider' Bratusek, Teika 'Mister X' Kazura\
+  \n2009-2012: Jeremy Hankins, Matthew Love\
+  \n1999-2012: All the brave contributors (see `THANKS' in `CONTRIBUTING')"))
   (gtk-about-dialog-set-translator-credits dialog "de: Christian Kirbach, Mario Blättermann\
   \nes: Jorge Gonzalez Gonzalez, Jacinto Capote Robles\
   \neu: Inaki Larranaga Murgoitio\
@@ -58,14 +58,14 @@ exec rep --batch "$0" "$@"
   (gtk-about-dialog-set-logo dialog (gdk-pixbuf-new-from-file "__sawfishdir__/sawfish.png"))
   (g-signal-connect dialog "delete_event" (lambda () (throw 'quit 0)))
   (gtk-widget-show-all dialog)
-  
+
   (g-signal-connect dialog "response"
     (lambda () (throw 'out)))
 
   (catch 'out
     (setq interrupt-mode 'exit)
     (recursive-edit))
-  
+
   )
 
 ;; Emacs support
