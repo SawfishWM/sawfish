@@ -57,13 +57,15 @@
 
   (define (initialize-shell)
     (let ((vbox (gtk-vbox-new nil box-spacing))
-	  (hbox (gtk-hbutton-box-new))
+	  (hbox-a (gtk-hbutton-box-new))
+	  (hbox-b (gtk-hbutton-box-new))
 	  (s-scroller (gtk-scrolled-window-new))
 	  root-container)
 
       (setq main-window (gtk-window-new 'toplevel))
 
-      (gtk-box-set-homogeneous hbox nil)
+      (gtk-box-set-homogeneous hbox-a nil)
+      (gtk-box-set-homogeneous hbox-b nil)
       (gtk-window-set-resizable main-window t)
       (gtk-window-set-icon-name main-window "sawfish-config")
       (gtk-window-set-default-size main-window 550 400)
@@ -120,9 +122,13 @@
 
       (g-signal-connect main-window "delete_event" on-quit)
 
-	(gtk-box-set-spacing hbox button-box-spacing)
-	(gtk-button-box-set-layout hbox 'center)
-	(gtk-box-pack-end vbox hbox)
+	(gtk-box-set-spacing hbox-a button-box-spacing)
+	(gtk-button-box-set-layout hbox-a 'center)
+	(gtk-box-pack-end vbox hbox-a)
+
+	(gtk-box-set-spacing hbox-b button-box-spacing)
+	(gtk-button-box-set-layout hbox-b 'center)
+	(gtk-box-pack-end vbox hbox-b)
 	
 	(g-signal-connect ok-widget "clicked" on-ok)
 	(g-signal-connect revert-widget "clicked" on-revert)
@@ -154,14 +160,14 @@
 			   (copy-file file (concat "~/.sawfish/themes/" filex))
 			 (sawfish-config-display-info "Only tar-archives can be installed at the moment." nil)))))
 
-	(gtk-container-add hbox wiki-button)
-	(gtk-container-add hbox install-theme-label)
-	(gtk-container-add hbox install-theme-button)
-	(gtk-container-add hbox doc-button)
-	(gtk-container-add hbox edit-button)
-	(gtk-container-add hbox about-button)
-	(gtk-container-add hbox revert-widget)
-	(gtk-container-add hbox ok-widget)
+	(gtk-container-add hbox-a wiki-button)
+	(gtk-container-add hbox-b install-theme-label)
+	(gtk-container-add hbox-b install-theme-button)
+	(gtk-container-add hbox-b doc-button)
+	(gtk-container-add hbox-b edit-button)
+	(gtk-container-add hbox-a about-button)
+	(gtk-container-add hbox-a revert-widget)
+	(gtk-container-add hbox-a ok-widget)
 
       (gtk-container-add root-container vbox)
       (gtk-widget-show-all main-window)
