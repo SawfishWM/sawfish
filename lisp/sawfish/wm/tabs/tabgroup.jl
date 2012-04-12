@@ -253,8 +253,11 @@ sticky, unsticky, fixed-position."
   (define (tab-group-window w win)
     "Add window W to tabgroup containing WIN."
     ;; don't add a window as tab, if it already
-    ;; exists on another workspace
-    (when (not (cdr (window-get win 'workspaces)))
+    ;; exists on another workspace or window type 
+    ;; is not a "normal" window (e.g. dock panel ...)
+    (when (and (not (cdr (window-get win 'workspaces)))
+               (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL)
+               (equal (aref (nth 2 (get-x-property win '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))
       (let* ((index (tab-window-group-index win))
              (index2 (tab-window-group-index w))
              (pos (window-position win))
