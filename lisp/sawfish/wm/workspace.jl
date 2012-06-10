@@ -101,6 +101,9 @@
 	    show-desktop
 	    hide-desktop
 	    showing-desktop-p
+	    toggle-desktop
+	    window-on-current-workspace-p
+	    window-on-current-workspace-viewport-p
 
 	    ;; XXX rename these..?
 	    ws-remove-window
@@ -892,8 +895,23 @@ last instance remaining, then delete the actual window."
     "Returns true when in `showing desktop' mode."
     showing-desktop)
 
+  (define (toggle-desktop)
+    "Hide or unhide all windows except the desktop window."
+    (if showing-desktop
+        (hide-desktop)
+      (show-desktop)))
+
   (define-command 'show-desktop show-desktop)
   (define-command 'hide-desktop hide-desktop)
+  (define-command 'toggle-desktop toggle-desktop)
+
+  (define (window-on-current-workspace-p w)
+    (= (car (window-get w 'workspaces)) current-workspace))
+
+  (define (window-on-current-workspace-viewport-p w)
+    (require 'sawfish.wm.viewport)
+    (and (= (car (window-get w 'workspaces)) current-workspace)
+	 (not (window-outside-viewport-p w))))
 
 ;;; some commands for moving directly to a workspace
 

@@ -173,16 +173,32 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
     (init-apps-menu))
 
   ;; initialize edges, unless disabled
-  (if (and (not batch-mode)
+  (when (and (not batch-mode)
 	   edge-actions-enabled)
       (activate-edges t))
 
-  ;; apply customized font-colors
-  (if use-custom-font-color
-      (update-frame-font-color))
+  ;; apply customized frame-fonts
+  (when use-custom-font
+    (update-frame-font))
 
-  (if want-poweroff-menu
-      (add-poweroff-menu))
+  ;; apply customized font-colors
+  (when use-custom-font-color
+    (update-frame-font-color))
+
+  ;; apply customized cursor-shapes
+  (when use-custom-button-cursor-shape
+    (update-button-cursor-shape))
+
+  ;; apply customized border-width/color
+  (when use-custom-border
+    (update-border-color-width))
+
+  ;; apply customized text-position
+  (when use-custom-text-position
+    (update-text-position))
+
+  (when want-poweroff-menu
+    (add-poweroff-menu))
 
   ;; use a default theme if none given
   (unless (or batch-mode default-frame-style)
@@ -213,10 +229,28 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
        ((member arg '("-q" "--quit"))
 	(throw 'quit 0))
        (t (do-load arg)))))
-  
+
+  (unless batch-mode
+    (add-hook 'before-restart-hook
+      (lambda () (let ((sc (get-window-by-class
+			     "Sawfish-Configurator" #:regex t)))
+		   (when sc
+		     (delete-window-safely sc)
+		     (system "touch ~/.restart_sc &")))))
+
+    (add-hook 'before-exit-hook
+      (lambda () (let ((sc (get-window-by-class
+			     "Sawfish-Configurator" #:regex t)))
+		   (when sc
+		     (delete-window-safely sc)))))
+
+    (when (file-exists-p "~/.restart_sc")
+      (system "sawfish-config &")
+      (delete-file "~/.restart_sc")))
+
+
   (when (eq error-destination 'init)
-    (setq error-destination 'standard-error))
-  )
+    (setq error-destination 'standard-error)))
 
 ;; prevent this file being loaded as a module
 nil

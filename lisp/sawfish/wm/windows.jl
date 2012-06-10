@@ -26,6 +26,7 @@
      (structure-interface sawfish.wm.windows.subrs)
      (export get-window-by-name
 	     get-window-by-class
+	     window-class-name
 	     get-window-by-role
 	     window-really-wants-input-p
 	     window-transient-p
@@ -60,6 +61,11 @@
 	     call-after-property-changed
 	     call-after-state-changed
 	     rename-window
+	     window-touching-p
+	     window-x
+	     window-y
+	     window-width
+	     window-height
 	     toggle-fixed-postion))
 
     (open rep
@@ -158,6 +164,10 @@ CLASS. Returns nil if no such window is found."
       (car (filter-windows (lambda (w)
 			     (when (window-class w)
   			       (string= (window-class w) class)))))))
+
+  (define (window-class-name w #!optional (ref 1))
+    "Quick way to get window class name."
+    (aref (get-x-text-property w 'WM_CLASS) ref))
 
   (define (get-window-by-role role #!key regex)
     "Find a window object whose window-role is ROLE. If REGEX is non-nil then
@@ -585,6 +595,42 @@ STATES has been changed. STATES may also be a single symbol."
 
   (define-command 'rename-window rename-window
     #:spec "%W\nsEnter new window name:")
+
+    ;; helpers for window-touching-p
+  (define (find-if fn l)
+    (cond ((null l) nil)
+	  ((fn (car l)) (car l))
+	  (t (find-if fn (cdr l)))))
+
+  (define (overlapping w1 w2)
+    "Do window W1 and window W2 overlap?"
+    (and (< (abs (- (window-x w1) (window-x w2)))
+	    (window-width (if (< (window-x w1) (window-x w2))
+			      w1 w2)))
+	(< (abs (- (window-y w1) (window-y w2)))
+	    (window-height (if (< (window-y w1) (window-y w2))
+			      w1 w2)))))
+
+  (define (window-touching-p w)
+    "Is window W touching another window?"
+    (require 'sawfish.wm.state.ignored)
+    (require 'sawfish.wm.workspace)
+    (find-if (lambda (other) (overlapping w other))
+	    (remove w (remove-if window-ignored-p
+				  (filter-windows
+				  window-on-current-workspace-p)))))
+
+  (define (window-x w)
+    (car (window-position w)))
+
+  (define (window-y w)
+    (cdr (window-position w)))
+
+  (define (window-width w)
+    (car (window-frame-dimensions w)))
+
+  (define (window-height w)
+    (cdr (window-frame-dimensions w)))
 
   (define (toggle-fixed-postion w)
     "Toggle the window property `fixed-position'."

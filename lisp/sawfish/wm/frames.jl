@@ -53,7 +53,13 @@
 	     remove-frame-part-value
 	     def-frame-class
 	     define-frame-class
-	     update-frame-font-color))
+	     update-frame-font-color
+	     update-frame-font
+             update-button-cursor-shape
+	     update-border-color-width
+	     update-title-x-offsets
+	     update-title-y-offsets
+	     update-text-position))
 
     (open rep
 	  rep.system
@@ -136,7 +142,6 @@ that overrides settings set elsewhere.")
   (defcustom default-frame-style nil
     "Theme"
     :type frame-style
-    :widget-flags (expand-vertically)
     :group appearance
     :after-set (lambda () (after-setting-default-frame)))
 
@@ -171,12 +176,121 @@ by the current theme, then FALLBACK-TYPE is used instead.")
     (if use-custom-font-color
 	(mapc (lambda (fc)
 		(set-frame-part-value fc 'foreground
-                                      (list frame-font-inactive-color
-                                            frame-font-active-color)
+                                      `((inactive . ,frame-font-inactive-color)
+                                        (focused . ,frame-font-active-color)
+					(highlighted . ,frame-font-highlight-color)
+					(clicked . ,frame-font-clicked-color)
+					(inactive-highlighted . ,frame-font-inactive-highlight-color)
+					(inactive-clicked . ,frame-font-inactive-clicked-color))
                                       t))
-              '(title tab))
+              '(title tabbar-horizontal))
       (mapc (lambda (fc) (remove-frame-part-value fc 'foreground t))
-            '(title tab)))
+            '(title tabbar-horizontal)))
+    (mapc rebuild-frame (managed-windows)))
+
+  (define (update-frame-font)
+    (if use-custom-font
+        (mapc (lambda (fc)
+		(set-frame-part-value fc 'font
+				      `((inactive . ,frame-font-inactive)
+					(focused . ,frame-font-active)
+					(highlighted . ,frame-font-highlight)
+					(clicked . ,frame-font-clicked)
+					(inactive-highlighted . ,frame-font-highlight)
+					(inactive-clicked . ,frame-font-clicked)) t))
+	      '(title tabbar-horizontal))
+      (mapc (lambda (fc) (remove-frame-part-value fc 'font t))
+	    '(title tabbar-horizontal)))
+    (mapc rebuild-frame (managed-windows)))
+
+  (define (get-cursor-shape-for-button button)
+    (case button
+      ((menu-button) menu-button-cursor-shape)
+      ((close-button) close-button-cursor-shape)
+      ((iconify-button) iconify-button-cursor-shape)
+      ((maximize-button) maximize-button-cursor-shape)
+      ((shade-button) shade-button-cursor-shape)
+      ((sticky-button) sticky-button-cursor-shape)
+      ((lock-button) lock-button-cursor-shape)
+      ((rename-button) rename-button-cursor-shape)
+      ((move-resize-button) move-resize-button-cursor-shape)
+      ((raise-lower-button) raise-lower-button-cursor-shape)
+      ((next-workspace-button) next-workspace-button-cursor-shape)
+      ((previous-workspace-button) previous-workspace-button-cursor-shape)))
+
+  (define (update-button-cursor-shape)
+    (if use-custom-button-cursor-shape
+        (mapc (lambda (btn)
+		(set-frame-part-value btn 'cursor (get-cursor-shape-for-button btn) t))
+	      '(menu-button close-button iconify-button maximize-button shade-button
+		sticky-button lock-button rename-button move-resize-button raise-lower-button
+		next-workspace-button previous-workspace-button))
+      (mapc (lambda (btn)
+	      (remove-frame-part-value btn 'cursor t))
+	    '(menu-button close-button iconify-button maximize-button shade-button
+	      sticky-button lock-button rename-button move-resize-button raise-lower-button
+		next-workspace-button previous-workspace-button)))
+    (mapc rebuild-frame (managed-windows)))
+
+  (define (update-border-color-width)
+    (if use-custom-border
+        (mapc (lambda (border)
+		(set-frame-part-value border 'border-width custom-border-width t)
+		(set-frame-part-value border 'border-color custom-border-color t))
+	      '(title tabbar-horizontal tabbar-vertical))
+      (mapc (lambda (border)
+	      (remove-frame-part-value border 'border-width t)
+	      (remove-frame-part-value border 'border-color t))
+	    '(title tabbar-horizontal tabbar-vertical)))
+    (mapc rebuild-frame (managed-windows)))
+
+  (define title-x-left-offset)
+  (define title-x-right-offset)
+  (define title-y-top-offset)
+  (define title-y-bottom-offset)
+
+  (define (update-title-x-offsets value)
+    (setq title-x-left-offset (car value))
+    (setq title-x-right-offset (cdr value)))
+
+  (define (update-title-y-offsets value)
+    (setq title-y-top-offset (car value))
+    (setq title-y-bottom-offset (cdr value)))
+
+  (define (get-text-position requested-position)
+    ;; this function sets the real position. 'left 'center 'right are user-choosen,
+    ;; we check here whether applicable. eg. left (= 0) is not appropriate for
+    ;; StyleTab, as it shows an icon on the left
+    (case requested-position
+      ((left) (+ 1 (or title-x-left-offset 0)))
+      ((right) (+ -1 (or title-x-right-offset 0)))
+      ((top) (+ 1 (or title-y-top-offset 0)))
+      ((bottom) (+ -1 (or title-y-bottom-offset 0)))
+      ((center) 'center)))
+
+  (define (update-text-position)
+    (if use-custom-text-position
+      (progn
+        (unless (eq custom-text-x-position 'default)
+	  (mapc (lambda (pos)
+		  (set-frame-part-value pos 'x-justify (get-text-position custom-text-x-position) t))
+	        '(title tabbar-horizontal)))
+	(unless (eq custom-text-y-position 'default)
+	  (mapc (lambda (pos)
+		  (set-frame-part-value pos 'y-justify (get-text-position custom-text-y-position) t))
+	        '(title tabbar-horizontal))))
+      (update-title-x-offsets '(0 . 0))
+      (update-title-y-offsets '(0 . 0)))
+    (when (or (not use-custom-text-position)
+	      (eq custom-text-x-position 'default))
+      (mapc (lambda (pos)
+	      (remove-frame-part-value pos 'x-justify t))
+	    '(title tabbar-horizontal)))
+    (when (or (not use-custom-text-position)
+	      (eq custom-text-y-position 'default))
+      (mapc (lambda (pos)
+	      (remove-frame-part-value pos 'y-justify t))
+	    '(title tabbar-horizontal)))
     (mapc rebuild-frame (managed-windows)))
 
   (defvar theme-update-interval 60
@@ -224,35 +338,286 @@ generate.")
 ;;; defcustom's for some built-in variables
 
   (defcustom default-font nil
-    "Default font: \\w"
+    "Default font: \\left"
     :group appearance
     :type font
-    :widget-flags (expand-horizontally)
     :after-set (lambda () (after-setting-frame-option)))
 
   (defvar default-bevel-percent nil
     "Bevel intensity as a percentage.")
 
   ;; frame fonts & colors
+  (defcustom use-custom-font nil
+    "Use custom font for different states"
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-inactive default-font
+    "Font for inactive titlebars: \\left"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-active default-font
+    "Font for focused titlebars: \\left"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-highlight default-font
+    "Font for highlighted titlebars: \\left"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
+  (defcustom frame-font-clicked default-font
+    "Font for clicked titlebars: \\left"
+    :group appearance
+    :type font
+    :depends use-custom-font
+    :after-set (lambda () (update-frame-font)))
+
   (defcustom use-custom-font-color '()
     "Use custom font colors for frames"
     :type boolean
     :group appearance
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-active-color "black"
+  (defcustom frame-font-active-color "#F2F2F2"
     "Font color for active frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
 
-  (defcustom frame-font-inactive-color "black"
+  (defcustom frame-font-inactive-color "#CBCBCB"
     "Font color for inactive frames"
     :type color
     :group appearance
     :depends use-custom-font-color
     :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-highlight-color "#FEFEFE"
+    "Font color for highlighted frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-inactive-highlight-color "#D8D8D8"
+    "Font color for inactive highligted frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-clicked-color "#FFFFFF"
+    "Font color for clicked frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom frame-font-inactive-clicked-color "#EEEEEE"
+    "Font color for inactive clicked frames"
+    :type color
+    :group appearance
+    :depends use-custom-font-color
+    :after-set (lambda () (update-frame-font-color)))
+
+  (defcustom use-custom-button-cursor-shape nil
+    "Whether to change the cursor shape for frame buttons."
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom menu-button-cursor-shape 'X_cursor
+    "Cursor shape for menu button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom close-button-cursor-shape 'pirate
+    "Cursor shape for close button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom iconify-button-cursor-shape 'll_angle
+    "Cursor shape for iconify button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom maximize-button-cursor-shape 'draped_box
+    "Cursor shape for maximize button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom shade-button-cursor-shape 'left_ptr
+    "Cursor shape for shade button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom sticky-button-cursor-shape 'plus
+    "Cursor shape for sticky button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom lock-button-cursor-shape 'dotbox
+    "Cursor shape for lock button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom next-workspace-button-cursor-shape 'sb_right_arrow
+    "Cursor shape for next-workspace button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom previous-workspace-button-cursor-shape 'sb_left_arrow
+    "Cursor shape for previous-workspace button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom rename-button-cursor-shape 'xterm
+    "Cursor shape for rename button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom move-resize-button-cursor-shape 'fleur
+    "Cursor shape for move-resize button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom raise-lower-button-cursor-shape 'double_arrow
+    "Cursor shape for raise-lower button: \\left"
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox double_arrow draped_box
+		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  pencil pirate plus question_arrow right_ptr sb_left_arrow
+		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  target tcross xterm X_cursor)
+    :depends use-custom-button-cursor-shape
+    :group appearance
+    :after-set (lambda () (update-button-cursor-shape)))
+
+  (defcustom use-custom-text-position nil
+    "Whether to change the position of the titlebar text."
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-text-position)))
+
+  (defcustom custom-text-x-position 'default
+    "Horizontal orientation of the text."
+    :type (choice default left center right)
+    :group appearance
+    :depends use-custom-text-position
+    :after-set (lambda () (update-text-position)))
+
+  (defcustom custom-text-y-position 'default
+    "Vertical orientation of the text."
+    :type (choice default top center bottom)
+    :group appearance
+    :depends use-custom-text-position
+    :after-set (lambda () (update-text-position)))
+
+  (defcustom use-custom-border '()
+    "Draw an extra window border"
+    :type boolean
+    :group appearance
+    :after-set (lambda () (update-border-color-width)))
+
+  (defcustom custom-border-color "black"
+    "Color for the window border"
+    :type color
+    :group appearance
+    :depends use-custom-border
+    :after-set (lambda () (update-border-color-width)))
+
+  (defcustom custom-border-width 0
+    "Width for the window border"
+    :type number
+    :group appearance
+    :depends use-custom-border
+    :after-set (lambda () (update-border-color-width)))
 
 ;;; managing frame types
 
@@ -329,8 +694,6 @@ generate.")
 ;;; applying frame styles to windows
 
   (define (reframe-window w)
-    (require 'sawfish.wm.tabs.tabgroup)
-    (adjust-title w)
     (if (window-get w 'ignored)
 	(progn
 	  (window-put w 'current-frame-style nil)
@@ -350,7 +713,23 @@ generate.")
 
   (define (after-setting-default-frame)
     (check-frame-availability default-frame-style)
-    (after-setting-frame-option))
+    (after-setting-frame-option)
+    ;; XXX Fucking evil!
+    ;; XXX offsets would be wrong else...
+    (when use-custom-text-position
+      (setq use-custom-text-position nil)
+      (update-text-position)
+      (reframe-windows-with-style default-frame-style)
+      (setq use-custom-text-position t)
+      (update-text-position))
+    ;; XXX even more Fucking evil!
+    ;; XXX tab-adjustments would be wrong else
+    ;; XXX even though each theme sets them...
+    (if (or (eq default-frame-style (intern "StyleTab"))
+	    (eq default-frame-style (intern "Elberg-tabbbed"))
+	    (eq default-frame-style (intern "get-S-tabbed"))
+	    (eq default-frame-style (intern "gradient-tabbed")))
+      (reframe-windows-with-style default-frame-style)))
 
   (define (rebuild-frames-with-style style)
     (map-windows (lambda (w)
@@ -658,6 +1037,8 @@ generate.")
   (define-frame-class 'rename-button '((keymap . rename-button-keymap)))
   (define-frame-class 'move-resize-button '((keymap . move-resize-button-keymap)))
   (define-frame-class 'raise-lower-button '((keymap . raise-lower-button-keymap)))
+  (define-frame-class 'next-workspace-button '((keymap . next-workspace-button-keymap)))
+  (define-frame-class 'previous-workspace-button '((keymap . previous-workspace-button-keymap)))
 
   (define-frame-class 'title `((keymap . title-keymap)
 			       (cursor . ,(cursor-for-frame-part 'title))))
@@ -682,7 +1063,7 @@ generate.")
 	    frame-part-get frame-part-put frame-part-window frame-part-x-window
 	    frame-part-position frame-part-dimensions frame-part-state
 	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part
-	    reload-frame-style)
+	    reload-frame-style update-title-x-offsets update-title-y-offsets)
 
   (add-hook 'add-window-hook reframe-window t)
   (add-hook 'shape-notify-hook reframe-window t)

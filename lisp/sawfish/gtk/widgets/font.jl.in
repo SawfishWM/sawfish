@@ -39,40 +39,22 @@
   (define default-font (if use-xft "Sans" "fixed"))
 
   (define (make-font-item changed-callback)
-    (let* ((box (gtk-hbox-new nil box-spacing))
-	   (entry (gtk-entry-new))
-	   (button (gtk-button-new-with-label (_ "Browse..."))))
-      (gtk-editable-set-editable entry nil)
-      (gtk-box-pack-start box entry t t)
-      (gtk-box-pack-start box button)
+    (let* ((button (gtk-font-button-new)))
+
+      (gtk-font-button-set-use-font button t)
+      (gtk-widget-set-size-request button 150 -1)
+
       (when changed-callback
 	(g-signal-connect
-	 entry "changed" (make-signal-callback changed-callback)))
-      (g-signal-connect
-       button "clicked"
-       (lambda ()
-	 (let ((fontsel (gtk-font-selection-dialog-new (_ "Select font"))))
-	   (gtk-font-selection-dialog-set-font-name
-	    fontsel (gtk-entry-get-text entry))
-	   (g-signal-connect
-	    (gtk-font-selection-dialog-ok-button fontsel) "clicked"
-	    (lambda ()
-	      (gtk-entry-set-text
-	       entry (gtk-font-selection-dialog-get-font-name fontsel))
-	      (gtk-widget-destroy fontsel)))
-	   (g-signal-connect
-	    (gtk-font-selection-dialog-cancel-button fontsel) "clicked"
-	    (lambda () (gtk-widget-destroy fontsel)))
-	   (g-signal-connect fontsel "delete_event"
-                             (lambda () (gtk-widget-destroy fontsel)))
-	   (gtk-widget-show fontsel)
-	   (gtk-grab-add fontsel))))
-      (gtk-widget-show box)
+	 button "font-set" (make-signal-callback changed-callback)))
+
+      (gtk-widget-show button)
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
 		   (cond ((stringp x)
-			  (gtk-entry-set-text entry x))
+			  (gtk-font-button-set-font-name button x))
 			 ((consp x)
 			  (let ((face (cond
                                        ((string-equal (car x) "Xft")
@@ -82,13 +64,13 @@
                                        ((string-equal (car x) "pango")
                                         (pango-description->face (cdr x))))))
 			    (when face
-			      (gtk-entry-set-text
-			       entry (face->pango-description face)))))
-			 (t (gtk-entry-set-text entry default-font)))))
+			      (gtk-font-button-set-font-name
+			       button (face->pango-description face)))))
+			 (t (gtk-font-button-set-font-name button default-font)))))
 	  ((clear) (lambda ()
-		     (gtk-entry-set-text entry default-font)))
+		     (gtk-font-button-set-font-name button default-font)))
 	  ((ref) (lambda ()
-		   (let* ((pango-name (gtk-entry-get-text entry))
+		   (let* ((pango-name (gtk-font-button-get-font-name button))
 			  (face (pango-description->face pango-name)))
 		     (cond ((not face) nil)
 			   (use-xft
@@ -96,7 +78,7 @@
 				(cons "Pango" (face->pango-description face))
 			      (cons "Xft" (face->xft-description face))))
 			   (t (cons "xlfd" (face->xlfd-description face)))))))
-	  ((gtk-widget) box)
+	  ((gtk-widget) button)
 	  ((validp) (lambda (x) (stringp x)))))))
 
   (define-widget-type 'font make-font-item))

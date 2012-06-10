@@ -1,4 +1,7 @@
 2012-04-05  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/expose.jl
+	* lisp/sawfish/wm/edge/misc.jl: fixup expose action
+
 	* lisp/sawfish/wm/commands/launcher.jl: add filemanager launcher
 
 	* lisp/sawfish/wm/menus.jl
@@ -23,13 +26,29 @@
 	* scripts/sawfish-about.jl.in: update copyright notice // show
 	codename in the about-dialog
 
+	* lisp/sawfish/cfg/shell.jl: re-align buttons
+
+2012-03-26  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/match-window.jl
+	* lisp/sawfish/wm/ext/window-history.jl
+	* lisp/sawfish/wm/tabs/tab.jl: add tab-group feature [fuchur]
+
 2012-01-19  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/windows.jl: add window-class-name [Wang HongQin]
+
+	* lisp/sawfish/wm/util/events.jl
+	* lisp/sawfish/wm/ext/cabinet.jl: added cabinet [Wang HonqQin]
+
+	* lisp/sawfish/wm/ext/expose.jl: new expose func [Wang HonqQin]
+
 	* lisp/sawfish/wm/integration/razor.jl: fix razor-power calls
 
 2012-01-14  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* sawfish.spec: sync spec-file with Fedora [Kim B. Heino]
 
-2012-01-04  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* themes/StyleTab/theme.jl: replace spinbuttons with comboboxes for
+	configuration user-interface [fuchur]
+
 	* lisp/sawfish/wm/integration/razor.jl: add integration-module for
 	Razor-Qt
 
@@ -43,13 +62,61 @@
 	* lisp/sawfish/wm/ext/single-window-mode.jl: properly call
 	maximize-window-fullscreen
 
+2011-10-09  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/expose.jl
+	* lisp/sawfish/wm/ext/expose.jl: moved file
+
+	* lisp/sawfish/wm/edge/misc.jl: define expose-action here
+
+2011-10-08  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets.jl: support 'choice widgets with numeric
+	arguements.
+
+	* lisp/sawfish/wm/frames.jl
+	* lisp/sawfish/wm/tabs/tabgroup.jl: don't call adjust-title [fuchur]
+
+	* themes/StyleTab/theme.jl: - added all styles back.
+					- Dark => Default
+					- Silver => WixDa
+					- Reduce
+					- Smoothly
+					- Blue => Glass
+				    - added corners to frames (for resize with
+				    mouse)
+				    -- [fuchur]
+
 2011-10-04  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/expose.jl
+	* lisp/sawfish/wm/edge/tile.jl
+	* lisp/sawfish/wm/ext/match-window.jl: renamed tile EdgeAction to
+	expose
+
+	* lisp/sawfish/wm/edge/maximize.jl
+	* lisp/sawfish/wm/edge/misc.jl: renamed module
+
+	* lisp/sawfish/wm/workspace.jl: added toggle-desktop function
+
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl: added show-desktop as EdgeAction
+	(using toggle-desktop)
+
 	* lisp/sawfish/wm/ext/shade-stack.jl: added shade-stack feature.
 	Original code by: Luke Gorrie. Changes compared to original:
 		- module format // defun -> define
 		- renamed already-stacked to window-shade-stacked-p
 		- fixed bug were stacking couldn't be done,
 		  caused by inexact instead of exact integers
+
+	* themes/StyleTab/theme.jl: - add hash tables for images
+				    - fix resize bug for buttons
+				    - fix recolor bug by resize
+				    - split create-frames into make-buttons
+				    and make-frames
+				    - add maximized to
+				    call-after-state-changed
+				    -- [fuchur]
 
 2011-09-24  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: use XKB [Michal Maruska]
@@ -67,6 +134,9 @@
 			- possible segfault fix in leave_notify
 			-- [Michal Maruska]
 
+2011-09-23  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* themes/StyleTab/theme.jl: support recoloring theme [fuchur]
+
 2011-09-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: when making X request, we might receive, and select
 	will stuck. This is prevented now. [Michal Maruska]
@@ -77,6 +147,10 @@
 
 	* src/windows.c: better place for XAddToSaveSet [Michal Maruska]
 
+2011-09-10  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets.jl: added stepping property to 'number
+	widgets.
+
 2011-09-08  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/display.c: Fix a bug in manager selection handling. Set all
 	required fields of the client message event. Call XSync before
@@ -86,6 +160,25 @@
 	failing to generate the list, if a .desktop file contains the
 	errorneous Category property instead of Categories (or both).
 	-- [Matthew Love]
+
+2011-08-27  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* themes/StyleTab/theme.jl: added BlueGlass and BlueDarker styles
+	[fuchur]
+
+2011-08-18  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/util.jl: added move-window-to-corner and
+	move-window-to-edge helpers
+
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/expand.jl: added expand-window functionality to
+	EdgeActions. expand-window-half-screen-vertical and
+	expand-window-half-screen-horizontal are the public functions.
+
+	* lisp/sawfish/wm/edge/actions.jl
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/maxmize.jl: added an maximize-window
+	edge-action
 
 2011-07-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/int/kde.jl
@@ -107,7 +200,60 @@
 	hibernate entries for KDE4
 
 2011-07-11  Christopher Roy Bratusek <nano@tuxfamily.org>
-	* lisp/sawfish/wm/windows.jl: fixed warping to a shaded window
+	* lisp/sawfish/wm/windows.jl: fixed warping to a shaded windows
+
+2011-07-10  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/frames.jl
+	* themes/StyleTab/theme.jl: moved previous-workspace-button and
+	next-workspace-button out of StyleTab into frames.jl
+
+	* lisp/sawfish/wm/frames.jl: changed defaults for button-cursor-shape
+
+2011-07-09  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/frames.jl: added an option to control the
+	cursor-shape of all built-in titlebar buttons. A set of reasonable
+	values to choose from is provided. left_ptr is default for all
+	-- left_ptr is the general default shape.
+
+	* lisp/sawfish/wm/user.jl: load customized cursor-shapes on startup.
+	changed some if to when
+
+	* lisp/sawfish/wm/edge/actions.jl: fixed calling tile-windows
+
+2011-07-08  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets/scheme-boolean.jl: scheme-boolean widget
+	now really working as suppposed
+
+	* lisp/sawfish/wm/edge/tile.jl: also exclude ignored windows from
+	tiling. added window-never-tile-p
+
+	* lisp/sawfish/wm/ext/match-window.jl: added never-tile window-matcher
+
+	* man/sawfish.texi: updated EA docs
+
+2011-07-05  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/slot.jl: hide widgets which depend on an disabled
+	value (rather than showing insensitive widgets)
+
+2011-07-02  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/tile.jl: make interactive call tile-windows
+	work again
+
+2011-06-27  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/conf.jl: define before/after-edge-action-hook
+	here
+
+	* lisp/sawfish/wm/edge/actions.jl: improved passing of while-moving
+	flag to edge-actions
+
+	* lisp/sawfish/wm/edge/flip.jl: split up code for flip-viewport and
+	flip-workspace
+
+	* lisp/sawfish/wm/edge/flip.jl
+	* lisp/sawfish/wm/edge/hot-spot.jl
+	* lisp/sawfish/wm/edge/tile.jl
+	* lisp/sawfish/wm/edge/viewport-drag.jl: call
+	before/after-edge-action-hook from the proper places
 
 2011-06-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/integration/gnome.jl
@@ -115,9 +261,258 @@
 	* lisp/sawfish/wm/integration/xfce.jl: added menu-entries for locking
 	the screen
 
+2011-06-21  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/shell.jl: added button to install a theme (from
+	tar-xz). Transform `sawfish-absent' into
+	`sawfish-config-display-info', allowing to display any notice.
+
+	* lisp/sawfish/wm/user.jl: close sawfish-config before restarting
+	Sawfish and restart it after initialization. If not restarting, just
+	close sawfish-config
+
+	* src/main.c: add before-restart-hook
+
+2011-06-20  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/layout.jl: add \\top \\bottom and \\left "flags" to
+	defcustoms doc-string (\\w as compat-variant for \\left is kept). They
+	let be choosen where to display the label, if it's a widget on it's
+	own. (eg works with: number (= GtkSpinButton + GtkLabel), but not with
+	choice (= GtkComboBoxText)).
+
+	* themes/StyleTab/theme.jl: improved grouping and layout of options in
+	SawfishConfig
+
+	* lisp/sawfish/cfg/shell.jl: don't load old sawfish.cfg.widgets
+	widgets, even if they are installed
+
+2011-06-19  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/widgets/*.jl
+	* lisp/sawfish/gtk/widgets/: moved all widgets into sawfish.gtk. tree
+
+2011-06-18  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* scripts/Makefile.in: install sawfish-about in $BINDIR
+
+	* lisp/sawfish/wm/commands/help.jl: updated
+
+	* lisp/sawfish/cfg/shell.jl: add buttons for accessing Wiki, Info,
+	resource file and about-dialog to SawfishConfig.
+
+	* scripts/sawfish-about.jl: small update in about-dialog
+
+	* lisp/sawfish/wm/ext/wallpaper.jl: fixed calling wallpaper-setter
+
+	* lisp/sawfish/gtk/widgets/image.jl: fixed initializing the widget
+
 2011-06-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/integration/xfce.jl: added hibernate and suspend
 	entries to xfce-integration module
+
+2011-06-15  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/frames.jl: ensure that title-offsets really are
+	correct when switching styles from SawfishConfig
+
+2011-06-14  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfih/wm/ext/match-window.jl
+	* themes/StyleTab/theme.jl
+	* lisp/sawfish/wm/animation/main.jl
+	* lisp/sawfish/wm/viewport.jl: use 'range widget where appropriate
+
+	* lisp/sawfish/wm/frames.jl: add an option to control the titlebar
+	text position, both in vertical and horizontal direction. Added an
+	ugly hack to ensure tab-adjustments are correct when switching between
+	tabbed themes from SawfishConfig.
+
+	* lisp/sawfish/wm/user.jl: load customized text-position on startup
+
+	* themes/StyleTab/theme.jl: set title-x offsets so that
+	update-text-position works properly with StyleTab
+
+	* themes/gradient-tabbed/: added
+
+	* themes/Makefile.in: updated
+
+	* lisp/sawfish/wm/cfg/widgets/frame-style.jl: simplified 'frame-style
+	widget a bit
+
+2011-06-13  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets/image.jl: improved loading of preview-image
+	-- Lucas Pandolfo
+
+	* lisp/sawfish/cfg/layout/keymaps.jl: ported selector for choosing
+	keymap in SawfishConig to GtkComboBoxText
+
+	* lisp/sawfish/gtk/widget.jl: added range widget. number-widget using
+	GtkScale instead of GtkSpinButton
+
+	* lisp/sawfish/wm/edge/conf.jl: use 'range widget
+
+	* themes/get-S-tabbed/
+	* themes/brushed-metal/
+	* themes/simple/
+	* themes/smaker/
+	* themes/mono/
+	* themes/gtk/
+	* themes/gradient/: removed
+
+	* themes/candido/
+	* themes/Zami-like/: added
+
+	* themes/Makefile.in: updated
+
+2011-06-11  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/widgets/workspace-geometry.jl: removed, unused
+
+	* lisp/sawfish/wm/misc.jl: add call-with-pointer-grabbed
+
+	* lisp/sawfish/wm/util/keymap.jl: read-event does now grab the pointer
+	instead of keyboard, fixes setting mouse or mixed mouse-keyboard
+	bindings from SawfishConfig (keyboard-only bindings still work)
+
+	* lisp/sawfish/cfg/layouts/keymap.jl: removed beautify-keymap-name,
+	use beautify-symbol-name instead
+
+	* po/sawfish-xgettext: use beautify-symbol-name from rep.util.misc,
+	removed own beautify-symbol-name/beautify-keymap-name
+
+	* lisp/sawfish/cfg/widgets/frame-style.jl: shut-up a compiler-warning
+
+	* lisp/sawfish/cfg/widgets/frame-style.jl
+	* lisp/sawfish/gtk/widget.jl: properly loop through the list of
+	options when filling GtkComboBoxText widgets
+
+	* lisp/sawfish/cfg/widgets/match-window.jl: don't make scheme-boolean
+	an optional widget
+
+	* lisp/sawfish/gtk/widgets/scheme-boolean.jl: use GtkCheckButton
+	instead of GtkToggleButton. Set intial and clear states to
+	`inconsistent' and only return #t or #f it not `inconsistent'.
+	Properly implements scheme-boolean in Window-Rules
+
+	* lisp/sawfish/gtk/widgets/file.jl: removed the GtkEntry and GtkVBox
+
+2011-06-10  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/cfg/utils.jl: removed (funcs now in rep.util.misc)
+
+	* lisp/sawfish/cfg/layout.jl
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/cfg/widgets/keymaps.jl
+	* lisp/sawfish/cfg/widgets/match-windows.jl: updated for above change
+
+	* lisp/sawfish/cfg/Makefile.in
+	* lisp/sawfish/cfg/widgets/icon.jl: removed unused, dummy 'icon widget
+
+	* lisp/sawfish/cfg/widgets/gtk/*: removed unused
+	sawfish.cfg.widgets.gtk*
+
+	* lisp/sawfish/gtk/widgets/program.jl: removed 'program widget (just
+	an alias to 'file)
+
+	* lisp/sawfish/gtk/Makefile.in
+	* lisp/sawfish/wm/ext/play-audio.jl: updated
+
+	* lisp/sawfish/gtk/widgets/simple-dialog.jl: better wmclass
+
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/gtk/widget.jl: removed option-index (now in
+	rep.util.misc) and command-index (exactly the same as option-index)
+
+	* lisp/sawfish/cfg/widgets/command.jl
+	* lisp/sawfish/cfg/widgets/frame-style.jl
+	* lisp/sawfish/gtk/widget.jl: use option-index instead of position and
+	protect against wrong values
+
+2011-06-04  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* configure.in: bump minimum librep to 0.92.1, new funcs required by
+	SawfishConfig
+
+2011-06-02  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/mousetrap.jl: added defvars to be able to
+	adjust the mousetrap keybindings. Set a timer of one second to
+	properly block edge-actions after mousetrapping
+
+	* lisp/sawfish/wm/edge/actions.jl: added before-edge-action-hook and
+	after-edge-action-hook. Fixed logic of blocking actions while
+	mousetrapping
+
+	* lisp/sawfish/wm/autoload.jl: drop edge-flip-invoke and
+	viewport-drag-invoke from list
+
+	* lisp/sawfish/wm/edge/tile.jl: added command definition
+
+	* lisp/sawfish/gtk/widgets/image.jl: due two fixes in rep-gtk it's possible
+	now to set the filename in GtkFileChooserButton, so the GtkEntry is
+	removed
+
+	* configure.in: bump minimum GTK+ to 2.24, GDK to 2.23
+
+	* lisp/sawfish/gtk/widget.jl: port 'choice, 'symbol and 'frame-style widgets
+	to GtkComboBoxText
+
+2011-05-31  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/actions.jl: don't exec any edge-action, while
+	mousetrapping is active (new feature in misc-1.9 branch)
+
+	* lisp/sawfish/wm/ext/mousetrap.jl: added mousetrapping feature,
+	original module by Fernando Carmona Varo, modified by me
+
+2011-05-29  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/wallpaper.jl: added option to pass extra
+	arguements to wallpaper-setter. Place widget-text to the left
+
+	* lisp/sawfish/gtk/widgets/image.jl
+	* lisp/sawfish/gtk/widgets/file.jl: better widget-layout
+
+	* lisp/sawfish/gtk/widgets/font.jl.in: ported 'font widget to
+	gtk-font-button (rather than ancient gtk-font-selection-dialog) and
+	removed the entry and hbox widgets.
+
+2011-05-28  Jeremy Hankins <nowan@nowan.org>
+	* lisp/sawfish/wm/edge/flip.jl
+	* lisp/sawfish/wm/edge/hot-spots.jl: EF/HS/HM timers are no
+	longer started if a timer is already running; fixes bug where
+	flip-viewport would jump multiple viewports.
+
+2011-05-28  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets/file.jl: ported 'file widget to
+	gtk-file-chooser-button
+
+	* lisp/sawfish/gtk/widgets/image.jl: improved 'image widget
+
+	* lisp/Makefile.in: don't install wallpaper.jlc (breaks 'image and
+	'file widgets (...))
+
+	* lisp/sawfish/wm/ext/wallpaper.jl: added integration of wallpaper
+	settings (also gnome2 and xfce4 if desired), original module by Lucas
+	Pandolfo and heavily modified by me
+
+2011-05-25  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/gtk/widgets/image.jl: added image-widget for
+	sawfish-config (contains preview and selector), original widget by
+	Lucas Pandolfo and heavily modified by me
+
+	* lisp/sawfish/gtk/Makefile.in: updated
+
+	* configure.in: bump minimum rep-gtk to 0.90.7 (new funcs required by
+	image widget)
+
+2011-05-22  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/frames.jl: fixed setting frame-font colors for
+	states inactive-highlighted and inactive-clicked
+
+	* themes/get-S-tabbed/theme.jl
+	* themes/Crux/theme.jl
+	* themes/mxflat/theme.jl
+	* src/frames.c
+	* src/sawfish_subrs.h
+	* lisp/sawfish/wm/frames.jl: remove frame-font, fallback to
+	default-font again. Instead offer options for changing frame-font
+	according to the window state.
+
+	* lisp/sawfish/wm/frames.jl: added option to adjust border-width and
+	border-color options.
+
+	* lisp/sawfish/wm/user.jl: load frame-font and border-width/color
+	options on startup
 
 2011-05-21  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* debian/changelog
@@ -125,6 +520,46 @@
 	* debian/postinst
 	* debian/sawfish-data.postinst
 	* Makefile.in: make packaging scripts work
+
+2011-05-14  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* src/frames.c
+	* src/sawfish_subrs.h
+	* lisp/sawfish/wm/gaol.jl
+	* lisp/sawfish/wm/frames.jl: use frame-font for titlebars, rather than
+	default-font (now changing titlebar-font leaves message-font intact)
+
+	* themes/mxflat/theme.jl
+	* themes/get-S-tabbed/theme.jl
+	* themes/Crux/theme.jl
+	* themes/StyleTab/theme.jl: updated to use frame-font instead of
+	default-font. Remove custom-font-setting option from StyleTab
+
+	* lisp/sawfish/wm/frames.jl: added options for chaning highlight and
+	clicked font-colors for inactive tabs and titlebars
+
+2011-05-13  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/frames.jl: add possibility to also change the
+	font-color for highlighted and clicked frames regardless of theme
+
+	* lisp/sawfish/wm/frames.jl: fixed changing font-color for horizontal
+	tabbars (vertical don't show text (yet))
+
+	* themes/StyleTab/theme.jl: remove custom color-changing option
+
+	* lisp/sawfish/wm/edge/flip.jl: only call after-flip for
+	flip-workspace. set scroll-viewport-steps to 1 for flip-viewport
+	while-moving (no hang when viewport-boundary-mode 'dynamic)
+
+	* lisp/sawfish/wm/edge/actions.jl: add while-moving key-value
+
+	* lisp/sawfish/wm/edge/tile.jl: call fake-release-window when tiling
+	while moving a winodw (so that it properly works)
+
+2011-05-07  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/viewport.jl: add window-on-current-head-viewport
+
+	* lisp/sawfish/wm/edge/tile.jl: one-shot-try to make tile
+	xinerama-aware
 
 2011-05-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/commands/jump-or-exec.jl: reverted 2 commits
@@ -134,9 +569,44 @@
 
 	* **/Makefile.in: remove VPATH to appease makepp [Daniel Pfeiffer]
 
+	* configure.in: check for XTest
+
+	* lisp/sawfish/wm/windows.jl: remove release-window function
+
+	* src/windows.c: add fake-release-window subroutine
+
+	* lisp/sawfish/wm/edge/hot-spot.jl: improve HotMove for easier user-setup
+
+	* lisp/sawfish/wm/edge/action.jl: block HotSpot for 1 second after
+	HotMove was called
+
 2011-04-26  Christopher Roy Bratusek <nano@tuxfamily.org>
-	* lisp/sawfish/wm/autoload.jl: removed maybe-raise-tab
-	from autoload, aswell as viewport-linear stuff
+	* lisp/sawfish/wm/autoload.jl: removed maybe-raise-tab from
+	autoload, aswell as viewport-linear stuff. Add edge-flip-invoke,
+	viewport-drag-invoke and tile-windows to autoload
+
+	* lisp/sawfish/wm/tile.jl: make tiling actually work
+
+2011-04-25  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/tile.jl: only include windows on
+	current-workspace AND current-viewport
+
+	* lisp/sawfish/wm/workspace.jl: fixed window-on-current-workspace-p
+	added window-on-current-workspace-viewport-p
+
+2011-04-24  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/edge/tile.jl: tiling for EdgeActions
+	original code by Mark Triggs, updated by me [not yet working!]
+
+	* lisp/sawfish/wm/edge/hot-spot.jl: added HotMove for EdgeActions
+
+	* lisp/sawfish/wm/windows.jl
+	* lisp/sawfish/wm/workspace.jl
+	* lisp/sawfish/wm/commands/move-resize.jl: various support functions
+	for HotMove and Tiling
+
+	* lisp/sawfish/wm/edge/conf.jl
+	* lisp/sawfish/wm/edge/actions.jl: updated
 
 2011-04-16  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* configure.in: bump minimum rep to 0.92.0
@@ -175,7 +645,7 @@
 	* sounds/Makefile.in
 	* src/Makefile.in: minor clean-ups -- Ian Zimmermann
 
-	* debian/**: merged scripts from Ian Zimmermann 
+	* debian/**: merged scripts from Ian Zimmermann
 
 2011-04-12  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* Makefile.in: don't remove NEWS upon clean or distclean
@@ -611,7 +1081,7 @@
 	* src/flippers.c: give EdgeActions subroutines better names:
 	  - enable-flippers => raise-flippers
 	  - disable-flippers => destroy-flippers
-	
+
 	* src/flippers.c: updated recreate-flippers routine
 	                  removed flippers-after-restacking (dupplicate of
 			  raise-flippers)
@@ -801,7 +1271,7 @@
 	- options none and hot-spot merged together (none/hot-spot)
 	- code-cleanup in hot-spots
 	- corrected copyright header of viewport-drag
-	- some doc / indention fixes 
+	- some doc / indention fixes
 	-- Teika Kazura
 
 2010-11-27  Teika kazura <teika@lavabit.com>

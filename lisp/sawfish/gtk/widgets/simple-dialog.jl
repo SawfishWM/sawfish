@@ -49,7 +49,7 @@
 	(gtk-widget-destroy window))
 
       (gtk-window-set-title window title)
-      (gtk-window-set-wmclass window "ok_cancel_dialog" "Nokogiri")
+      (gtk-window-set-wmclass window "SimpleDialog" "SawfishConfig")
       (gtk-container-set-border-width window box-border)
       (when main-window
 	(gtk-window-set-transient-for window main-window))

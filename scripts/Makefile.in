@@ -47,7 +47,7 @@ sawfish-about.jl : sawfish-about.jl.in ./Makefile
 install : all installdirs
 	$(INSTALL_SCRIPT) sawfish-menu.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-menu
 	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
-	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(sawfishexecdir)/sawfish-about
+	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(bindir)/sawfish-about
 	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(sawfishdir)/sawfish.png
 
 uninstall :

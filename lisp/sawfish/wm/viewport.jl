@@ -41,7 +41,8 @@
             window-head-any-viewport
 	    viewport-minimum-size-changed
             viewport-honor-workspace-edges
-	    viewport-windows)
+	    viewport-windows
+	    window-on-current-head-viewport-p)
 
     (open rep
 	  rep.system
@@ -61,14 +62,14 @@
   (defgroup viewport "Viewport" :group workspace)
 
   (defcustom viewport-dimensions '(1 . 1)
-    "The number of columns and rows of the virtual desktop: \\w"
+    "The number of columns and rows of the virtual desktop: \\left"
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
     :tooltip "This is meaningless if dynamic viewport is enabled."
     :after-set (lambda () (viewport-size-changed t)))
 
   (defcustom viewport-minimum-dimensions '(1 . 1)
-    "Minimum number of columns and rows of virtual desktop (if boundary mode is dynamic): \\w"
+    "Minimum number of columns and rows of virtual desktop (if boundary mode is dynamic): \\left"
     :group (workspace viewport)
     :type (pair (number 1) (number 1))
     :after-set (lambda () (viewport-minimum-size-changed)))
@@ -84,8 +85,7 @@ the more smoothly the screen is scrolled.
 It is the number of steps for scrolling. The value 1 means no scroll, and
 the change is instantaneous."
     :group (workspace viewport)
-    :type number
-    :range (1 . 50))
+    :type (range (1 . 50)))
 
   (defcustom viewport-boundary-mode 'stop
     "Stop, wrap-around, or grow the virtual desktop when you go beyond virtual desktop edge."
@@ -608,6 +608,9 @@ is selected. The return value is the cons cell (x . y)."
                                         (<= (+ (cdr pos) (cdr dims)) top)
                                         (>= (car pos) right)
                                         (>= (cdr pos) bottom)))))))))
+
+  (define (window-on-current-head-viewport-p w)
+    (eq (current-head w) (window-head-any-viewport w)))
 
 ;;; commands
 

@@ -219,6 +219,22 @@
     :group bindings
     :type keymap)
 
+  (defcustom next-workspace-button-keymap (bind-keys (make-keymap)
+					    "Button3-Off" 'send-to-previous-workspace
+					    "Button2-Click" 'popup-workspace-list
+					    "Button1-Off" 'send-to-next-workspace)
+    "Keymap of \"next-workspace\" button. Mouse-bindings only."
+    :group bindings
+    :type keymap)
+
+  (defcustom previous-workspace-button-keymap (bind-keys (make-keymap)
+					    "Button3-Off" 'send-to-next-workspace
+					    "Button2-Click" 'popup-workspace-list
+					    "Button1-Off" 'send-to-previous-workspace)
+    "Keymap of \"previous-workspace\" button. Mouse-bindings only."
+    :group bindings
+    :type keymap)
+
   (defvar pointer-motion-threshold 2
     "Distance pointer must move before generating motion events, in pixels.")
 

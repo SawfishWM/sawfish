@@ -21,7 +21,6 @@
 (define-structure sawfish.wm.tabs.tabgroup
 
     (export window-tabbed-p
-            adjust-title
             tab-refresh-group
             tab-release-window
             tab-raise-left-window
@@ -48,14 +47,17 @@
           sawfish.wm.util.groups
           sawfish.wm.commands.groups
           sawfish.wm.workspace)
-  
+
   (define-structure-alias tabgroup sawfish.wm.tabs.tabgroup)
-  
+
   (define current-win nil)
   (define all-wins nil)
   (define oldgroup nil)
   (define tab-groups nil)
   (define tab-refresh-lock t)
+  (define release-window t)
+  (define last-unmap-id nil)
+  (define in-tab-group-name nil)
 
   (define (window-tabbed-p w)
     (window-get w 'tabbed))
@@ -66,9 +68,6 @@
     (p tab-group-position)
     (d tab-group-dimensions)
     (wl tab-group-window-list))
-
-  (define (adjust-title w)
-    (call-window-hook 'window-state-change-hook w (list '(title-position))))
 
   (define (tab-move-resize-frame-window-to win x y w h)
     "Move and resize according to *frame* dimensions."
@@ -120,7 +119,7 @@
     (if (eq elem (car list))
         0
       (+ 1 (tab-rank elem (cdr list)))))
-  
+
   (define (tab-delete-window-from-group win index)
     "Remove WIN from the group at given index."
     (let* ((old (nth index tab-groups))
@@ -136,11 +135,14 @@
 
   (define (tab-delete-window-from-tab-groups w)
     "Find window's group and remove it."
+    (if release-window
+        (remove-from-tab-group w))
+    (setq release-window t)
     (when (window-tabbed-p w)
       (tab-delete-window-from-group w (tab-window-group-index w))
       (window-put w 'fixed-position nil)
       (tab-refresh-group oldgroup 'frame)
-      (rebuild-frame w 'frame)))
+      (reframe-window w)))
 
   (define (tab-put-window-in-group win index)
     "Put window in group at given index."
@@ -162,7 +164,6 @@ sticky, unsticky, fixed-position."
                  (wins (tab-group-window-list (nth index tab-groups)))
                  (focus (tab-group-offset win 0))
                  (unfocus (remove focus wins)))
-            (adjust-title win)
             (cond
              ((eq prop 'raise)
               (raise-windows focus wins))
@@ -173,8 +174,8 @@ sticky, unsticky, fixed-position."
                (window-put focus 'title-position group-title-position)))
              ((eq prop 'frame)
               (mapcar (lambda (w)
-                        (rebuild-frame w)) unfocus)
-              (rebuild-frame focus))
+                        (reframe-window w)) unfocus)
+              (reframe-window focus))
              ((eq prop 'reframe)
               (mapcar (lambda (w)
                         (reframe-window w)) unfocus))
@@ -237,7 +238,7 @@ sticky, unsticky, fixed-position."
                         (make-window-unsticky w)) unfocus))
              ((eq prop 'shade)
               (mapcar (lambda (w)
-                        (shade-window w)) unfocus)) 
+                        (shade-window w)) unfocus))
              ((eq prop 'unshade)
               (mapcar (lambda (w)
                         (unshade-window w)) unfocus))))
@@ -247,8 +248,11 @@ sticky, unsticky, fixed-position."
   (define (tab-group-window w win)
     "Add window W to tabgroup containing WIN."
     ;; don't add a window as tab, if it already
-    ;; exists on another workspace
-    (when (not (cdr (window-get win 'workspaces)))
+    ;; exists on another workspace or window type
+    ;; is not a "normal" window (e.g. dock panel ...)
+    (when (and (not (cdr (window-get win 'workspaces)))
+               (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL)
+               (equal (aref (nth 2 (get-x-property win '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))
       (let* ((index (tab-window-group-index win))
              (index2 (tab-window-group-index w))
              (pos (window-position win))
@@ -273,53 +277,62 @@ sticky, unsticky, fixed-position."
         (when (not (eq index index2))
           ;; tabgroup to tabgroup
           (when (window-tabbed-p w)
+            (setq release-window nil)
             (tab-delete-window-from-tab-groups w))
-          (setq tab-refresh-lock nil)
-          (if (window-get w 'shaded) (unshade-window w))
-          (if (window-get win 'shaded) (unshade-window win))
-          (window-put w 'frame-style group-frame-style)
-          (window-put w 'type group-frame-type)
-          (window-put w 'focus-mode group-frame-focus-mode)
-          (window-put w 'gravity group-frame-gravity)
-          (window-put w 'title-position group-frame-title-position)
-          (window-put w 'sticky group-frame-sticky)
-          (window-put w 'sticky-viewport group-frame-sticky-viewport)
-          (window-put w 'never-iconify group-frame-never-iconify)
-          (window-put w 'depth group-frame-depth)
-          (window-put w 'fixed-position group-frame-fixed-position)
-          (window-put w 'never-maximize group-frame-never-maximize)
-          (window-put w 'maximized-vertically group-frame-maximized-vertically)
-          (window-put w 'maximized-horizontally group-frame-maximized-horizontally)
-          (window-put w 'maximized-fullscreen group-frame-maximized-fullscreen)
-          (window-put w 'unmaximized-type group-frame-unmaximized-type)
-          (window-put w 'unmaximized-geometry group-frame-unmaximized-geometry)
-          ;; reframe w here, tab-refresh-group expectet
-          ;; the same frame for w and win
-          (reframe-window w)
-          (tab-put-window-in-group w index)
-          (tab-delete-window-from-group w index2)
-          (resize-window-to w (car dim) (cdr dim))
-          (move-window-to w (car pos) (cdr pos))
-          (setq tab-refresh-lock t)
-          (tab-refresh-group w 'frame)
-          (set-input-focus w)
-          (if (not (window-tabbed-p win)) (window-put win 'tabbed t))
-          (window-put w 'tabbed t)))))
-  
+          (if (window-get win 'iconified) (uniconify-window win))
+          (let ((group-frame-to-workspaces (car (window-workspaces win))))
+            (if (window-get win 'shaded) (unshade-window win))
+            (setq tab-refresh-lock nil)
+            (if (window-get w 'iconified) (uniconify-window w))
+            (let ((group-frame-from-workspaces (car (window-workspaces w))))
+              (if (window-get w 'shaded) (unshade-window w))
+              (window-put w 'frame-style group-frame-style)
+              (window-put w 'type group-frame-type)
+              (window-put w 'focus-mode group-frame-focus-mode)
+              (window-put w 'gravity group-frame-gravity)
+              (window-put w 'title-position group-frame-title-position)
+              (window-put w 'sticky group-frame-sticky)
+              (window-put w 'sticky-viewport group-frame-sticky-viewport)
+              (window-put w 'never-iconify group-frame-never-iconify)
+              (window-put w 'depth group-frame-depth)
+              (window-put w 'fixed-position group-frame-fixed-position)
+              (window-put w 'never-maximize group-frame-never-maximize)
+              (window-put w 'maximized-vertically group-frame-maximized-vertically)
+              (window-put w 'maximized-horizontally group-frame-maximized-horizontally)
+              (window-put w 'maximized-fullscreen group-frame-maximized-fullscreen)
+              (window-put w 'unmaximized-type group-frame-unmaximized-type)
+              (window-put w 'unmaximized-geometry group-frame-unmaximized-geometry)
+              ;; reframe w here, tab-refresh-group expectet
+              ;; the same frame for w and win
+              (reframe-window w)
+              (tab-put-window-in-group w index)
+              (tab-delete-window-from-group w index2)
+              (resize-window-to w (car dim) (cdr dim))
+              (move-window-to w (car pos) (cdr pos))
+              (when (and group-frame-to-workspaces group-frame-from-workspaces
+                         (not (eq group-frame-to-workspaces group-frame-from-workspaces)))
+                (move-window-to-workspace w group-frame-from-workspaces group-frame-to-workspaces))
+              (setq tab-refresh-lock t)
+              (tab-refresh-group w 'frame)
+              (set-input-focus w)
+              (if (not (window-tabbed-p win)) (window-put win 'tabbed t))
+              (window-put w 'tabbed t)))))))
+
   (define (tab-release-window w)
     "Release the window from its group."
+    (setq release-window nil)
     (tab-delete-window-from-tab-groups w)
     (tab-make-new-group w))
-  
+
   (define-command 'tab-release-window tab-release-window #:spec "%f")
-  
+
   (define (tab-group-offset win n)
     "Return the window at position (pos+n) in window's group."
     (let* ((gr (tab-group-window-list (tab-find-window win)))
            (size (length gr))
            (r (tab-rank win gr)))
       (nth (modulo (+ r n) size) gr)))
-  
+
   (define (tab-same-group-p w1 w2)
     "Predicate : true <=> w1 and w2 are grouped together."
     (member w1 (tab-group-window-list (tab-find-window w2))))
@@ -365,7 +378,7 @@ sticky, unsticky, fixed-position."
                (tabs (remove win (tab-group-window-list (nth index tab-groups))))
                (default-window-animator 'none))
           (tab-delete-window-from-group win index)
-          (rebuild-frame win)
+          (reframe-window win)
           (setq tab-refresh-lock nil)
           (mapcar (lambda (w)
                     (when (window-get w 'never-iconify)
@@ -403,11 +416,37 @@ sticky, unsticky, fixed-position."
         (setq all-wins nil)
         (setq current-win nil))
       (setq tab-refresh-lock t)
-      (when (window-tabbed-p win) 
+      (when (window-tabbed-p win)
         (tab-refresh-group win 'move)
         (tab-refresh-group win 'frame))))
 
+  (define (unmap-id win)
+    (setq last-unmap-id (window-id win)))
+
+  (define (in-tab-group win)
+    "Add a new window as tab if have one (the first created if more as one)
+of the windows the same 'tab-group property"
+     (when (window-get win 'tab-group)
+       (setq in-tab-group-name (append in-tab-group-name (cons (cons (window-id win) (window-get win 'tab-group)))))
+       (let ((open-win-tabgroup (get-window-by-id (car (rassoc (window-get win 'tab-group) in-tab-group-name)))))
+        ;; unmap-notify-hook gets not always a window-id for all
+        ;; windows e.g. gimp (it will close more as one window and
+        ;; also not all call the unmap-notify-hook and/or we get the window-id).
+        ;; This next "if" will clean the list and remove the "ghosts".
+        (if (not (eq open-win-tabgroup nil))
+            (if (not (eq win open-win-tabgroup))
+                (tab-group-window win open-win-tabgroup))
+          (setq in-tab-group-name (remove (rassoc (window-get win 'tab-group) in-tab-group-name) in-tab-group-name))
+          (in-tab-group win)))))
+
+  (define (remove-from-tab-group win)
+    "Remove window from in-tab-group-name alist if it have a 'tab-group property"
+    (when (window-get win 'tab-group)
+      (setq in-tab-group-name (remove (assoc last-unmap-id in-tab-group-name) in-tab-group-name))))
+
   (unless batch-mode
+    (add-hook 'after-add-window-hook in-tab-group)
+    (add-hook 'unmap-notify-hook unmap-id)
     (add-hook 'window-state-change-hook
               (lambda (win args)
                 (when (window-tabbed-p win)
@@ -428,7 +467,7 @@ sticky, unsticky, fixed-position."
                         ((eq 'stacking args)
                          (tab-refresh-group win 'depth)
                          (tab-refresh-group win 'frame))))))
-    
+
     (add-hook 'focus-in-hook (lambda (win) (tab-group-raise win)))
     (when (eq move-outline-mode 'opaque)
       (add-hook 'before-move-hook (lambda (win) (if (window-tabbed-p win) (before-move-resize win)))))

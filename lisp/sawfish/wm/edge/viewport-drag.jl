@@ -27,7 +27,7 @@
 
   (define-structure-alias viewport-drag sawfish.wm.edge.viewport-drag)
 
-  (define (drag-right)
+  (define (drag-right while-moving)
     "Shifts the viewport `viewport-drag-distance' pixels to the right."
     (let ((dist viewport-drag-distance)
           (cdist viewport-drag-cursor-distance)
@@ -37,9 +37,11 @@
                (> (+ dist viewport-x-offset) maxx))
           (setq dist (- maxx viewport-x-offset)))
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
-      (move-cursor (- (min dist cdist)) 0)))
+      (move-cursor (- (min dist cdist)) 0)
 
-  (define (drag-left)
+      (call-hook 'after-edge-action-hook (list 'viewport-drag 'right while-moving))))
+
+  (define (drag-left while-moving)
     "Shifts the viewport `viewport-drag-distance' pixels to the left."
     (let ((dist (- viewport-drag-distance))
           (cdist (- viewport-drag-cursor-distance))
@@ -49,9 +51,11 @@
                (< (+ viewport-x-offset dist) minx))
           (setq dist (- minx viewport-x-offset)))
       (set-viewport (+ viewport-x-offset dist) viewport-y-offset)
-      (move-cursor (- (max dist cdist)) 0)))
+      (move-cursor (- (max dist cdist)) 0)
 
-  (define (drag-up)
+      (call-hook 'after-edge-action-hook (list 'viewport-drag 'left while-moving))))
+
+  (define (drag-up while-moving)
     "Shifts the viewport `viewport-drag-distance' pixels up."
     (let ((dist (- viewport-drag-distance))
           (cdist (- viewport-drag-cursor-distance))
@@ -61,9 +65,11 @@
                (< (+ viewport-y-offset dist) miny))
           (setq dist (- miny viewport-y-offset)))
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
-      (move-cursor 0 (- (max dist cdist)))))
+      (move-cursor 0 (- (max dist cdist)))
 
-  (define (drag-down)
+      (call-hook 'after-edge-action-hook (list 'viewport-drag 'up while-moving))))
+
+  (define (drag-down while-moving)
     "Shifts the viewport `viewport-drag-distance' pixels down."
     (let ((dist viewport-drag-distance)
           (cdist viewport-drag-cursor-distance)
@@ -73,11 +79,14 @@
                (> (+ dist viewport-y-offset) maxy))
           (setq dist (- maxy viewport-y-offset)))
       (set-viewport viewport-x-offset (+ viewport-y-offset dist))
-      (move-cursor 0 (- (min dist cdist)))))
+      (move-cursor 0 (- (min dist cdist)))
 
-  (define (viewport-drag-invoke edge)
+      (call-hook 'after-edge-action-hook (list 'viewport-drag 'down while-moving))))
+
+  (define (viewport-drag-invoke edge while-moving)
+    (call-hook 'before-edge-action-hook (list 'viewport-drag edge while-moving))
     (case edge
-      ((left) (drag-left))
-      ((top) (drag-up))
-      ((right) (drag-right))
-      ((bottom) (drag-down)))))
+      ((left) (drag-left while-moving))
+      ((top) (drag-up while-moving))
+      ((right) (drag-right while-moving))
+      ((bottom) (drag-down while-moving)))))

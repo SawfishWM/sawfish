@@ -24,6 +24,7 @@
 	    resize-window-interactively
 	    move-selected-window
 	    resize-selected-window
+	    resize-window-frame-to
 	    double-window-size
 	    halve-window-size
 	    move-window-center)
@@ -574,6 +575,13 @@ that window."
     (let ((w (select-window)))
       (when w
 	(resize-window-interactively w))))
+
+  (define (resize-window-frame-to w width height)
+    (let ((width-offset (- (car (window-frame-dimensions w))
+			  (car (window-dimensions w))))
+	  (height-offset (- (cdr (window-frame-dimensions w))
+			    (cdr (window-dimensions w)))))
+      (resize-window-to w (- width width-offset) (- height height-offset))))
 
   ;; Move Window To Center
   (define (move-window-center w)

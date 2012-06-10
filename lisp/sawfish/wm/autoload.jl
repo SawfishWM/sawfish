@@ -193,4 +193,5 @@
 (autoload-command 'send-to-workspace-left 'sawfish.wm.ext.workspace-grid)
 (autoload-command 'send-to-workspace-right 'sawfish.wm.ext.workspace-grid)
 (autoload-command 'jump-or-exec 'sawfish.wm.commands.jump-or-exec)
+(autoload-command 'tile-windows 'sawfish.wm.edge.tile)
 ;;; ::autoload-end::

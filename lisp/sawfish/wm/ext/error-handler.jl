@@ -41,7 +41,7 @@
   ;; By default, an error during ~/.sawfish/rc is printed to both,
   ;; and after that, only to standard-error.
   (defcustom error-destination 'standard-error
-    "Display error messages to: \\w"
+    "Display error messages to: \\left"
     :type (choice nowhere screen standard-error both)
     :group misc)
 

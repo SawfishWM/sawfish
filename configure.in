@@ -125,13 +125,18 @@ PKG_CHECK_MODULES(libSM, sm >= 1.0
 		  AC_DEFINE(HAVE_X11_SM_SMLIB_H, 1, [Have smlib])
 		  ,AC_MSG_ERROR([cannot locate libSM]))
 
+PKG_CHECK_MODULES(XTest, xtst >= 1.0
+		  ,X_EXTRA_LIBS="${X_EXTRA_LIBS} -lXtst"
+		  AC_DEFINE(HAVE_X11_EXTENSIONS_XTST_H, 1, [Have Xtest])
+		  ,AC_MSG_ERROR([cannot locate Xtest]))
+
 X_SERVER="X.Org X11R7"
 
 CPPFLAGS="${_cppflags}"
 
 else
 
-AC_CHECK_HEADERS(X11/ICE/ICE.h X11/SM/SMlib.h X11/extensions/Xdbe.h, [], [], [#include <X11/Xlib.h> ])
+AC_CHECK_HEADERS(X11/ICE/ICE.h X11/SM/SMlib.h X11/extensions/Xdbe.h X11/extensions/XTest.h, [], [], [#include <X11/Xlib.h> ])
 
 dnl Checks for X extensions/libraries
 XINERAMA_LIBS=""
@@ -169,8 +174,8 @@ PKG_CHECK_MODULES(XFT, xft >= 1.0,
 dnl is X available?
 if test "${no_x}" != "yes"; then
   AC_DEFINE(HAVE_X11, 1, [Have X11])
-  X_LIBS="${X_LIBS} -lXext -lXrender -lSM -lICE"
-  X_EXTRA_LIBS=""
+  X_LIBS="${X_LIBS} -lXext -lXrender"
+  X_EXTRA_LIBS="-lSM -lICE -lXtst"
 else
   AC_MSG_ERROR([You need X11 for sawfish])
 fi
@@ -212,7 +217,7 @@ else FONT_LOADER="X.Org"
 fi
 
 dnl Check for librep
-REP_MIN_VER="0.92.0"
+REP_MIN_VER="0.92.1"
 
 PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  ,REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
@@ -223,14 +228,15 @@ PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  ,AC_MSG_ERROR([cannot locate librep >= $REP_MIN_VER]))
 
 dnl Check for rep-gtk
-REP_GTK_MIN_VER="0.90.4"
+REP_GTK_MIN_VER="0.90.7"
 
 PKG_CHECK_MODULES(REP_GTK, rep-gtk >= ${REP_GTK_MIN_VER}
 		  ,
 		  ,AC_MSG_ERROR([cannot locate rep-gtk >= $REP_GTK_MIN_VER]))
 
 dnl Check for GTK+2
-GTK_MIN_VER="2.12.0"
+GTK_MIN_VER="2.24.0"
+GDK_MIN_VER="2.23.0"
 
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
 		  ,GTK_LIBS="`pkg-config --libs gtk+-2.0`"
@@ -244,16 +250,16 @@ AC_ARG_WITH(gdk-pixbuf,
   --without-gdk-pixbuf	  Use Imlib1 instead], [], [with_gdk_pixbuf=yes])
 
 if test "$with_gdk_pixbuf" != "no"; then
-	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}
+	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GDK_MIN_VER}
 			  ,IMAGE_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
 			  IMAGE_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
-			  IMAGE_PC="gdk-pixbuf-xlib-2.0 >= ${GTK_MIN_VER}"
+			  IMAGE_PC="gdk-pixbuf-xlib-2.0 >= ${GDK_MIN_VER}"
 			  AC_DEFINE(HAVE_GDK_PIXBUF, 1, [Have gdk-pixbuf])
 			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
 			  IMAGE_LOADER="GDK Pixbuf Xlib"
 			  imageloader="gdk-pixbuf-xlib"
 			  with_gdk_pixbuf=yes
-			  ,AC_MSG_ERROR([cannot locate gdk-pixbuf-xlib >= $GTK_MIN_VER])
+			  ,AC_MSG_ERROR([cannot locate gdk-pixbuf-xlib-2.0 >= $GTK_MIN_VER])
 			  with_gdk_pixbuf=no)
 fi
 
@@ -490,7 +496,7 @@ echo "
 
   == == == == == == == == == == == == ==
 
-     Be sure to read README.IMPORTANT!
+  Be sure to read README.IMPORTANT!
 
   == == == == == == == == == == == == ==
   "

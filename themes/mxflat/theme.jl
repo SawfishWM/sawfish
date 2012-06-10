@@ -329,8 +329,7 @@ like that)."
   :depends mxflat:custom-title
   :after-set after-set-title-update-interval)
 
-(defcustom mxflat:title-font
-  default-font
+(defcustom mxflat:title-font default-font
   "title string font"
   :tooltip "You should really choose a better font.  Verdana bold 8 \
 pt looks nice."

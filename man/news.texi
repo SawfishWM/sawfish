@@ -39,6 +39,311 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
+@heading 1.8.92 "Coldwater Canyon"
+@itemize @bullet
+
+@item Updated or New dependencies
+@itemize @minus
+
+@item librep 0.92.0 -> 0.92.1
+@item rep-gtk 0.90.4 -> 0.90.7
+@item ssd 0.30 [optional, for built-in poweroff-menu]
+@end itemize
+@item Bug Fixes
+@itemize @minus
+
+@item When cursor-warping was enabled and user switched to a shaded window,
+the cursor warped to the position of the unshaded window. This is fixed now.
+[Christopher Bratusek]
+
+@item When switching between tabbed themes from SawfishConfig, it could happens
+that there were @code{gaps} in the frame. This is fixed now. [Christopher Bratusek]
+
+@item In SawfishConfig one could only grab key-bindings, but not mouse- or mixed
+mouse-key-bindings. This is fixed now. (Move mouse 20 pixels to grab a @code{Move} event).
+[Christopher Bratusek]
+
+@item SawfishConfig became useless when Sawfish restarted. This is now worked-around
+by simply restarting SawfishConfig when Sawfish does. A new @code{before-restart-hook}
+has been added for this purpose. [Christopher Bratusek]
+
+@item In EdgeActions @code{HotSpot}, @code{HotMove} and @code{EdgeFlip}, it was
+possible to trigger the same event multiple times at a time. This is fixed now.
+[Jeremy Hankins]
+
+@item Fixed a bug in apps-menu, failing to generate the menu, if a desktop-file contains
+both Categories and the (errorneous) Category key, or only the later. [Matthew Love]
+
+@item Fixed a bug in window-manager selection handling. Set all fields of the client
+message event. This prevents bugs, where Sawfish sometimes isn't able to replace another
+window-manager or aquiring the screen if no other WM is running. [Timo Korvola]
+
+@item When making X request, we might receive and @code{select} will stuck. This is fixed now
+[Michal Maruska]
+
+@item Avoid calling Xmap for gone windows. [Michal Maruska]
+
+@item Fixed a possible segmentation fault in @code{leave_notify} [Michal Maruska]
+
+@item In SawfishConfig the @code{choice} widget didn't work when the choices were
+numerical values. This is fixed now. [Christopher Bratusek]
+@end itemize
+@item Sawfish-MMC [Michal Maruska]
+
+Sawfish-MMC was a fork of Sawfish active, while the original Sawfish was inactive
+(2004-2007). Next follows a list of changes merged from Sawfish-MMC.
+@itemize @minus
+
+@item Only apply property changes if window as @code{refresh} property.
+
+@item In the pixmap-cache append pixmaps to the age list, rather than prepending.
+
+@item Extend @code{pixmap-cache-control} to reset and return more informations.
+
+@item @code{pixmap-cache-images} returns all images in cache.
+
+@item When initializing Sawfish, try to initialize XKB, too.
+
+@item Misc: Drop unused @code{prog_name} from @file{display.c}. Call @code{XAddToSaveSet}
+from a better position in the code. Mar @code{mapped_not_override_p} static. Simplified
+@code{property_notify}.
+@end itemize
+@item EdgeAction changes [Christopher Bratusek]
+@itemize @minus
+
+@item New EdgeActions:
+@itemize x
+
+@item @code{HotMove}. Calls an EdgeAction when dragging a window over the edge.
+
+@item @code{Expose}. Simple expose (one-shot tiling) EdgeAction (can also be used stand-alone).
+Original code by Mark Triggs.
+
+@item @code{Expand}. Drag a window over the edge and it expand to the half-screen size.
+
+@item @code{Show-Desktop}. Toggles between @code{show-desktop} and @code{hide-desktop}.
+
+@item @code{Maximize}. Just for competitive reasons choosable from configurator.
+@end itemize
+
+@item @code{before-edge-action-hook} and @code{after-edge-action-hook}. While
+@code{enter-flipper-hook} and @code{leave-flipper-hook} simply respond to the mouse
+entering or leaving the flipper-window, the new hooks respond only when an EdgeAction
+was invoked. The two hooks pass the invoked EdgeAction, activated edge and a boolean
+@code{while-moving} value to the child-function (in that order).
+
+@item Simplified, more robust EdgeFlip (flip-viewport and flip-workspace are now split).
+
+@item Improved logic of blocking an action while another is already running. On one hand,
+see `Bug Fixes' above, on the other hand it's now ensured that we dont' activate an edge
+twice when dragging a window over it or when the pointer hits the edge via mouse-trapping.
+
+@item New @code{move-window-to-corner} and @code{move-window-to-edge} helpers.
+
+@item Updated EdgeAction documentation
+@end itemize
+@item SawfishConfig changes [Christopher Bratusek]
+@itemize @minus
+
+@item Updated and Improved widgets in SawfishConfig:
+@itemize x
+
+@item @code{file}. The file(-chooser) widget now uses GtkFileChooserButton in
+favour of the ancient GtkFileSelectionDialog. The GtkEntry and GtkVBox used as
+helpers became useless and are removed.
+
+@item @code{font}. The font(-chooser) widget now uses GtkFontChooserButton in
+favour of the ancient GtkFontSelectionDialog. The GtkEntry used as helper became
+useless and is removed.
+
+@item @code{choice}, @code{symbol}, @code{keymap}, @code{frame-style}. Those widgets
+now use GtkComboBoxText in favour of ancient GtkCombo/GtkComboEntry.
+
+@item @code{scheme-boolean}. This widget is now properly implemented.
+
+Old: two checkboxes. First for activating setting, second for choosing yes or no.
+New: only one checkbox, yes or no as usual, shows minus when unset.
+
+@item @code{number}. The number-widget now has a @code{stepping} property, allowing
+to change the increment of a button-press on the spin-button.
+@end itemize
+
+@item New widgets in SawfishConfig:
+@itemize x
+
+@item @code{range}. The range widget represents an integer with a given range.
+Basically it uses a GtkScale instead of a GtkSpinButton, which results in a
+better user-experience for those values.
+
+@item @code{image}. The image widget contains a preview and image-selector.
+The file-browser openend is setup to display previews, too. Original code by
+Lucas Pandolfo.
+@end itemize
+
+@item Removed widgets in SawfishConfig:
+@itemize x
+
+@item @code{program}. Just an alias to @code{file}.
+
+@item All @code{gtk-only} widgets. Since Sawfish 1.5.0 those have been dummies,
+we don't use @code{libgnome}, @code{libgnomeui} or @code{libgnomecanvas} anymore anyway.
+@end itemize
+
+@item New buttons. SawfishConfig now offers buttons to access Wiki, Help,
+ResourceFile and About. Additionally there's now a file-chooser for installing
+themes from @code{*.tar.*} files.
+
+@item Widgets that depend on an disabled setting are now hidden instead of greyed-out.
+
+@item Merged sawfish.cfg.widgets into sawfish.gtk.widgets. Old widgets aren't loaded
+anymore, even if present from an old installation.
+
+@item All defcustoms do now have a property to change the position of the label.
+To change it, append on of the following to the doc-string: \\left \\right \\top \\bottom.
+
+Example:
+
+@lisp
+(defcustom test-var 'eclipse
+  "This is just a test with label on top. \\top"
+  :type (choice eclipse crosshair none)
+  :group appearance)
+@end lisp
+
+Of course that only works, if the label is a GtkLabel widget on it's own.
+@end itemize
+@item Theme/Theming changes [Christopher Bratusek]
+@itemize @minus
+
+=== spoiler ===
+: StyleTab in Sawfish 1.9 add lots of new fancyness for the price of beeing slow.
+So if you experience a long startup-time of Sawfish, it's a feature, not a bug. :
+== /spoiler ===
+
+@item StyleTab changes [fuchur]:
+@itemize x
+
+@item The theme is now fully re-colorable. You can choose different colors for
+each button and the frame. Furthermore you can choose how much to dimm inactive
+frames (compared to active).
+
+@item Majorly improved the grouping of options in StyleTab.
+
+@item Added corners to frames (allowing resize with mouse at window-corners).
+
+@item Available styles: Default (former Dark), WixDa (former Silver), Reduce,
+Smoothly and Glass (New).
+
+@item Added hash-tables for images.
+@end itemize
+
+@item New themes:
+@itemize x
+
+@item Candido
+@item Zami-like
+@end itemize
+
+@item Improved themes:
+@itemize x
+
+@item Gradient has been replaced by Gradient-tabbed.
+@end itemize
+
+@item Removed themes [still available from Wiki]:
+@itemize x
+
+@item get-S-tabbed
+@item brushed-metal
+@item simple
+@item smaker
+@item mono
+@item gtk
+@end itemize
+
+@item New theme-related configuration-options [theme independent]:
+@itemize x
+
+@item Added an option to control the titlebar text position. If a theme
+draws something additional in the titlebar (eg. StyleTab draws an icon),
+refer to the functions @code{update-title-x-offsets}, @code{update-title-y-offsets}.
+
+@item Added an option to control the cursor-shape when hovering frame-buttons.
+
+@item Added an option to change the font, depending on the window state.
+@end itemize
+
+@item Moved definitons for @code{previous-workspace-button} and @code{next-workspace-button}
+from StyleTab into Sawfish.
+@end itemize
+@item New Features
+@itemize @minus
+
+@item Added @code{cabinet} application-switcher. @code{cabinet} is an advanced application
+switcher for Sawfish. For more information please visit: http://sawfish.wikia.com/wiki/Cabinet
+[Wang HongQin]
+
+@item Added @code{tab-group} window-matcher. It allows window to be auto-tabbed together, if
+they got the same @code{tab-group} property [fuchur]
+
+@item Added @code{single-window-mode}. Basically this feature is known from OS-X, though it's
+implemented in a more strict way. The @code{single-window-mode} window should get all of the users
+attention.
+
+This is ensured by auto-iconifying any up-popping window, which is not in the same
+group. To additionally not annoy the user this is done without animation. Avoided or ignored
+windows are lowered. When @code{single-window-mode} is quit, the opposite happens.
+
+Also @code{single-window-mode} hooks into unmap-notify-hook to check whether the user wants to
+stop @code{single-window-mode} (by either closing or iconifying the window). Besides each
+workspace can hold it's own @code{single-window-mode}.
+
+@item Added @code{mouse-trap} feature. It provides a method for moving the mouse to any place of
+the screen by zooming with just a few keystrokes. The mouse is warped to the center of the screen
+screen and a outline is drawn dividing the screen in 4 squares (like trapping the mouse on it).
+[Fernando Carmano Varo] [Christopher Bratusek]
+
+@item Added @code{shade-stack} feature. It provides an alternative to @code{iconify-window}.
+Instead of iconifying a window or minizing it to a tray, the windows get shaded and sorted in
+a stack starting from the top-left corner (the number of columns can be changed). Combined with
+auto-unshade this offers - possibly - a better way of interacting with windows which aren't
+required at the moment. Original code by Luke Gorrie. [Christopher Bratusek]
+
+@item Integrated settings for selecting wallpaper using an external command (eg: hsetroot).
+Applying settings to GNOME2 or XFCE4 is also supported. Original code by Lucas Pandolfo.
+[Christopher Bratusek]
+
+@item Added @code{toggle-desktop} function. Toggles between @code{show-desktop} and
+@code{hide-desktop} - always logically correct. [Christopher Bratusek]
+@end itemize
+@item Miscellaneous Changes
+@itemize @minus
+
+@item Improved desktop-integration modules [Christopher Bratusek]
+@itemize x
+
+@item KDE integration: added entries for user-switch, hibernate, suspend, lock-screen, menu-editor.
+
+@item XFCE integration: added entries for hibernate, suspend, lock-screen, menu-editor.
+
+@item GNOME integration: added entry for lock-screen, menu-editor.
+
+@item MATE integration: full integration module for MATE Desktop has been added.
+
+@item Razor-Qt integration: full integration module for Razor-Qt has been added.
+
+@item LXDE integration: basic integration module for LXDE has been added.
+@end itemize
+
+@item The fallback poweroff-menu now uses SSD @code{Sawfish-Session-Dialog}, a companion to Sawfish,
+by default. Support for logout and lockdown has been added. [Christopher Bratusek]
+
+@item Added a @code{filemanager} launcher. If set the Sawfish root-menu will show an @code{Open Home}
+entry. The KDE, GNOME, MATE, XFCE and LXDE integration modules will set the program accordingly, unless
+it's already user-defined.
+@end itemize
+@end itemize
+
 @heading 1.8.1 "Sharp As A Knife"
 @itemize @bullet
 
@@ -240,7 +545,7 @@ Internal changes:
 
 @item Replace running window manager with Sawfish [Timo Korvola]@*
 New command line option @code{--replace} is added. With it, Sawfish
-will replace the currently running window manager. It's 
+will replace the currently running window manager. It's
 done by ``manager selection'' defined in ICCCM secs 2.8 and 4.3.
 
 @item Toggle-Or-Exec wrapper added to Jump-Or-Exec [Christopher Bratusek]
@@ -248,7 +553,7 @@ done by ``manager selection'' defined in ICCCM secs 2.8 and 4.3.
 @code{toggle-or-exec} is similar to jump-or-exec, but turns windows
 into quake-like drop-down/pop-up-windows. That means, when you have
 the toggle-window focused and press its keybinding again, it will be
-hidden. 
+hidden.
 
 See the file @file{jump-or-exec.jl} for more detailed examples.
 
@@ -312,7 +617,7 @@ In order to support ``gnome2-globalmenu'', the reaction policy to
 
 For the details, see @xref{Window Attributes}, and @xref{Getting Windows}.
 @itemize *
-@item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE) 
+@item Added functions @code{window-role} and @code{get-window-by-role} (return NET_WM_ROLE)
 @item Deleted @code{get-window-by-name-re} and @code{get-window-by-class-re}. Use instead @code{get-window-by-name} or @code{get-window-by-class} with the new boolean option @code{#:regex}. (The old name is still supported.)
 @item added @code{#:icon} switch to @code{get-window-by-name} to get a window via NET_WM_ICON_NAME (can be used with #:regex switch, too)
 
@@ -447,7 +752,7 @@ and mouse-bindings got messed-up.
 
 Now, this can be prevented by invoking Sawfish with the new
 commandline-option @code{--5-buttons}. It is assumed that modifiers
-are common among keyboard groups. 
+are common among keyboard groups.
 
 More precisely, what's supported is switching by @code{ISO_Next_Group}
 or similar, bound to a key (for example ctrl + alt). It appears as
@@ -523,7 +828,7 @@ Applications menu now looks more like that of GNOME / KDE / XFCE if
 one is running. (further improvements are planned)
 
 The user option @code{apps-menu-ignore-no-display} is now gone
-and replaced by @code{apps-menu-show-all}. [Note: After Sawfish-1.8.0, 
+and replaced by @code{apps-menu-show-all}. [Note: After Sawfish-1.8.0,
 this option is superseded by @code{apps-menu-filter}.]
 
 If @code{apps-menu-show-all} is @code{nil} (default), the menu
@@ -586,7 +891,7 @@ If you want to draw on the screen directly use @code{x-draw-text}
 (@pxref{X Drawing}.)
 @end itemize
 
-@item Translation updates 
+@item Translation updates
 
 Updated translations since 1.6.0 are Danish (da), British English
 (en_GB), German (de), Spanish (es), Slovenian (sl), and Swedish (sv).

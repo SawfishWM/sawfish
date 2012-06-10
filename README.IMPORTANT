@@ -1,6 +1,22 @@
 For full changes, read the news section in info. This file
 lists only important changes.
 
+In Sawfish 1.9.0 there are the following major changes:
+
+StyleTab incompatibility
+************************
+
+If you set-up StyleTab previously, you will need to re-set it up.
+Maybe - though unlikely - the old settings will interfere with the
+new ones. In that rare case remove the StyleTab related settings from
+~/.sawfish/custom
+
+GTK+ requirement bumped
+***********************
+
+With the use of new features and rep-gtk 0.90.7, the minimum GTK+
+requirement is now 2.24.0 (respectively 2.23.0 for GDK).
+
 In Sawfish 1.6.0 there are the following major changes:
 
 sawfish-ui is now sawfish-config

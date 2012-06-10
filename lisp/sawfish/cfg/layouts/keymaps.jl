@@ -25,6 +25,7 @@
     (open rep
           gui.gtk-2.gtk
           rep.regexp
+	  rep.util.misc
           sawfish.cfg.slot
           sawfish.cfg.wm
           sawfish.cfg.layout
@@ -39,47 +40,39 @@
   (define (layout-keymaps style slots)
     (declare (unused style))
 
-    (let* ((menu (gtk-menu-new))
-	   (omenu (gtk-option-menu-new))
-	   (hbox (gtk-hbox-new nil box-spacing))
+    (let* ((hbox (gtk-hbox-new nil box-spacing))
 	   (vbox (gtk-vbox-new nil box-spacing))
 	   (km-vbox (gtk-vbox-new nil box-spacing))
 	   (keymap-slots (filter keymap-slot-p slots))
 	   (other-slots (filter (lambda (x) (not (keymap-slot-p x))) slots))
-	   (active (car keymap-slots)))
+	   (active (car keymap-slots))
+           (combo (gtk-combo-box-text-new)))
 
       (when keymap-slots
 	(setq label-ptr (gtk-label-new (_ "Context:")))
 	(gtk-box-pack-start hbox label-ptr)
-	(gtk-box-pack-start hbox omenu)
-	(gtk-widget-relate-label omenu label-ptr)
+        (gtk-box-pack-start hbox combo)
 	(gtk-box-pack-start vbox hbox)
 
 	(let loop
-	    ((rest keymap-slots)
-	     (last nil))
+	    ((rest keymap-slots))
 	  (when rest
-	    (let* ((slot (car rest))
-		   (button (gtk-radio-menu-item-new-with-label-from-widget
-			    last (beautify-keymap-name (slot-name slot)))))
-	      (gtk-menu-shell-append menu button)
-	      (gtk-widget-show button)
-	      (g-signal-connect button "toggled"
-				(lambda (w)
-				  (when (gtk-check-menu-item-active w)
-				    (when active
-				      (gtk-container-remove
-				       km-vbox (slot-gtk-widget active)))
-				    (setq active slot)
-				    (gtk-box-pack-start
-				     km-vbox (slot-gtk-widget active) t t))))
-	      (set-slot-layout slot (slot-gtk-widget slot))
-	      (loop (cdr rest) button))))
+            (gtk-combo-box-text-append-text combo
+              (or (_ (beautify-symbol-name (slot-name (car rest) #:cut "-keymap")))
+                  (_ (cadar rest))))
+	      (loop (cdr rest)))
 
-	(gtk-option-menu-set-menu omenu menu)
+        (gtk-combo-box-set-active combo 0)
+
+        (g-signal-connect combo "changed"
+            (lambda ()
+              (let ((slot (nth (gtk-combo-box-get-active combo) keymap-slots)))
+                (when active
+                  (gtk-container-remove km-vbox (slot-gtk-widget active)))
+                (setq active slot)
+                (gtk-box-pack-start km-vbox (slot-gtk-widget active) t t)))))
 
 	(when active
-	  (gtk-option-menu-set-history omenu 0)
 	  (gtk-box-pack-start km-vbox (slot-gtk-widget active) t t))
 
 	(gtk-box-pack-start vbox km-vbox t t))
@@ -89,20 +82,4 @@
       (gtk-widget-show-all vbox)
       vbox))
 
-  (define-layout-type 'keymaps layout-keymaps)
-
-;;; utils
-
-  ;; also in sawfish-xgettext
-  (define (beautify-keymap-name symbol)
-    (cond ((stringp symbol) symbol)
-	  ((not (symbolp symbol)) (format "%s" symbol))
-	  (t
-	   (let ((name (copy-sequence (symbol-name symbol))))
-	     (when (string-match "-keymap" name)
-	       (setq name (substring name 0 (match-start))))
-	     (while (string-match "[-:]" name)
-	       (setq name (concat (substring name 0 (match-start))
-				  ?  (substring name (match-end)))))
-	     (aset name 0 (char-upcase (aref name 0)))
-	     (_ name))))))
+  (define-layout-type 'keymaps layout-keymaps))

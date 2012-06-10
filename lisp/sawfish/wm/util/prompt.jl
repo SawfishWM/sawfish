@@ -63,7 +63,7 @@
   (defgroup messages "Messages" :group misc)
 
   (defcustom prompt-font default-font
-    "Font for prompt: \\w"
+    "Font for prompt: \\left"
     :type font
     :group (misc messages))
 

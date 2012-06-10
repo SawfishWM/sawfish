@@ -46,6 +46,7 @@
 	   gui.gtk-2.gtk
 	   rep.system
 	   rep.util.utf8
+	   rep.util.misc
 	   rep.regexp)
      (access rep.structures))
 
@@ -64,6 +65,9 @@
   ;;	(number [MIN [MAX [INITIAL-VALUE]]]) ;; integer only
   ;;	  The default of minimum is 0, max 65536,
   ;;	  and initial value is the same as the min.
+  ;;	(range MIN MAX [INITIAL-VALUE]) ;; integer only
+  ;;	  same as number, but using GtkScale rather than GtkSpin
+  ;;	  and MIN / MAX need to be passed
   ;;	(boolean [LABEL])
   ;;	(color)
   ;;	(font)
@@ -187,65 +191,58 @@
 ;;; Predefined widget constructors
 
   (define (make-choice-item changed-callback . options)
-    (let ((omenu (gtk-option-menu-new))
-	  (menu (gtk-menu-new))
-	  (value (or (caar options) (car options))))
-      (let loop ((rest options)
-		 (last nil))
-	(when rest
-	  (let ((button (gtk-radio-menu-item-new-with-label-from-widget
-			 last (_ (or (cadar rest)
-				     (symbol-name (car rest)))))))
-	    (gtk-menu-shell-append menu button)
-	    (gtk-widget-show button)
-	    (g-signal-connect button "toggled"
-			      (lambda (w)
-				(when (gtk-check-menu-item-active w)
-				  (setq value (or (caar rest) (car rest)))
-				  (call-callback changed-callback))))
-	    (loop (cdr rest) button))))
-      (gtk-option-menu-set-menu omenu menu)
-      (gtk-widget-show-all omenu)
+    (let ((combo (gtk-combo-box-text-new)))
+
+      (let loop ((rest options))
+        (when rest
+          (gtk-combo-box-text-append-text combo
+            (_ (or (cadar rest) (if (numberp (car rest))
+				    (number->string (car rest))
+				  (symbol-name (car rest))))))
+            (loop (cdr rest))))
+
+      (when changed-callback
+	(g-signal-connect combo "changed"
+			  (make-signal-callback changed-callback)))
+
+      (gtk-widget-show combo)
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   (setq value x)
-		   (let ((idx (option-index options x)))
-		     (gtk-option-menu-set-history omenu (or idx 0))
-		     (do ((i 0 (1+ i))
-			  (rest (gtk-container-get-children menu) (cdr rest)))
-			 ((null rest))
-		       (gtk-check-menu-item-set-active (car rest) (= i idx))))))
+		   (gtk-combo-box-set-active combo (or (option-index options x) 0))))
 	  ((clear) nop)
-	  ((ref) (lambda () value))
-	  ((gtk-widget) omenu)
+	  ((ref) (lambda () (if (numberp (nth (gtk-combo-box-get-active combo) options))
+			        (nth (gtk-combo-box-get-active combo) options)
+			      (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options))))))
+	  ((gtk-widget) combo)
 	  ((validp) (lambda (x) (option-index options x)))))))
 
   (define-widget-type 'choice make-choice-item)
 
   (define (make-symbol-item changed-callback #!rest options)
-    (let ((widget (gtk-combo-new)))
-      (when options
-	(gtk-combo-set-popdown-strings
-	 widget (cons "" (mapcar symbol-name options))))
+    (let ((combo (gtk-combo-box-text-new)))
+
+      (let loop ((rest options))
+        (when rest
+          (gtk-combo-box-text-append-text combo
+            (_ (or (cadar rest) (symbol-name (car rest)))))
+            (loop (cdr rest))))
+
       (when changed-callback
-	(g-signal-connect
-	 (gtk-combo-entry widget)
-	 "changed" (make-signal-callback changed-callback)))
-      (gtk-widget-show widget)
+	(g-signal-connect combo "changed"
+			  (make-signal-callback changed-callback)))
+
+      (gtk-widget-show combo)
+
       (lambda (op)
 	(case op
 	  ((set) (lambda (x)
-		   ;; Can't i18n'ize these strings..
-		   (gtk-entry-set-text (gtk-combo-entry widget)
-				       (if x (symbol-name x) ""))))
-	  ((clear) (lambda ()
-		     (gtk-entry-set-text (gtk-combo-entry widget) "")))
-	  ((ref) (lambda ()
-		   (string->symbol
-		    (gtk-entry-get-text (gtk-combo-entry widget)))))
-	  ((gtk-widget) widget)
-	  ((validp) symbolp)))))
+		   (gtk-combo-box-set-active combo (or (option-index options x) 0))))
+	  ((clear) nop)
+	  ((ref) (lambda () (string->symbol (symbol-name (nth (gtk-combo-box-get-active combo) options)))))
+	  ((gtk-widget) combo)
+	  ((validp) (lambda (x) (symbolp x)))))))
 
   (define-widget-type 'symbol make-symbol-item)
 
@@ -268,7 +265,7 @@
   (define-widget-type 'string make-string-item)
 
   (define (make-number-item changed-callback
-                            #!optional minimum maximum initial-value)
+                            #!optional minimum maximum initial-value stepping)
     ;; XXX backwards compat..
     (when (eq minimum 'nil) (setq minimum nil))
     (when (eq maximum 'nil) (setq maximum nil))
@@ -276,6 +273,8 @@
 						  (or maximum 65535) 1)))
       (when initial-value
         (gtk-spin-button-set-value widget initial-value))
+      (when stepping
+	(gtk-spin-button-set-increments widget stepping stepping))
       (when changed-callback
 	(g-signal-connect
 	 widget "value-changed" (make-signal-callback changed-callback)))
@@ -295,6 +294,38 @@
 	  ((validp) numberp)))))
 
   (define-widget-type 'number make-number-item)
+
+  (define (make-range-item changed-callback range #!optional initial-value)
+    (let ((widget (gtk-hscale-new-with-range (car range) (cdr range) 1)))
+      (when initial-value
+        (gtk-range-set-value widget initial-value)
+	(gtk-scale-add-mark widget initial-value 'top (number->string initial-value)))
+
+      (when changed-callback
+	(g-signal-connect
+	 widget "value-changed" (make-signal-callback changed-callback)))
+
+      (gtk-widget-show widget)
+      (gtk-scale-set-value-pos widget 'left)
+      (gtk-widget-set-size-request widget 100 -1)
+
+      (lambda (op)
+	(case op
+	  ((set) (lambda (x)
+		   (when (numberp x)
+		     (gtk-range-set-value widget x)
+		     (gtk-scale-clear-marks widget)
+		     (gtk-scale-add-mark widget x 'top "°"))))
+	  ((clear) (lambda () (gtk-scale-clear-marks widget)))
+	  ((ref) (lambda ()
+		   (let ((value (gtk-range-get-value widget)))
+		     (if (integerp value)
+			 (inexact->exact value)
+		       value))))
+	  ((gtk-widget) widget)
+	  ((validp) numberp)))))
+
+  (define-widget-type 'range make-range-item)
 
   (define (make-boolean-item changed-callback #!optional label)
     (let ((widget (if label
@@ -515,14 +546,4 @@
 	  ((gtk-widget) label)
 	  ((validp) (lambda (x) (declare (unused x)) t))))))
 
-  (define-widget-type 'unknown make-unknown-item)
-
-;;; utility functions
-
-  (define string->symbol intern)
-
-  (define (option-index lst x)
-    (let loop ((i 0) (rest lst))
-      (cond ((null rest) nil)
-	    ((eq (or (caar rest) (car rest)) x) i)
-	    (t (loop (1+ i) (cdr rest)))))))
+  (define-widget-type 'unknown make-unknown-item))
