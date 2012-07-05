@@ -1547,6 +1547,8 @@ Release the grab from windows
 	XTestFakeKeyEvent (dpy, escape, False, CurrentTime);
 	XFlush (dpy);
 
+	return Qt;
+
 }
 
 
