@@ -448,7 +448,7 @@
   (define-match-window-setter 'dimensions
     (lambda (w prop value)
       (declare (unused prop))
-      (resize-window-with-hints w (car value) (cdr value))))
+      (resize-window-with-hints* w (car value) (cdr value))))
 
   (define-match-window-setter 'viewport
     (lambda (w prop value)

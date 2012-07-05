@@ -1,4 +1,8 @@
 2012-07-05  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/ext/match-window.jl: call resize-window-with-hints*
+	rather than resize-window-with-hints (fixes 'dimensions matcher)
+	[Robert Zenz]
+	
 	* src/images.c: replace gdk_pixbuf_unref with g_object_unref [Togan Muftouglu]
 
 	* src/windows.c: proper return in fake-release-window [Togan Muftouglu]
