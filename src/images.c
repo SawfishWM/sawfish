@@ -340,7 +340,7 @@ make-image-from-x-drawable ID [MASK-ID]
        if (tem != 0)
        {
 	   XImage *xim = XGetImage (dpy, mask, 0, 0, w, h, AllPlanes, ZPixmap);
-	   gdk_pixbuf_unref (im);
+	   g_object_unref (im);
 	   im = tem;
 	   if (xim != 0)
 	   {
@@ -498,7 +498,7 @@ the bottom right of the image.
 	    }
 	}
 	image_changed (VIMAGE (image));
-	gdk_pixbuf_unref (VIMAGE (image)->image);
+	g_object_unref (VIMAGE (image)->image);
 	VIMAGE (image)->image = out;
     }
 #endif
@@ -1421,7 +1421,7 @@ image_render (Lisp_Image *image, int width, int height,
 
 	gdk_pixbuf_xlib_render_pixmap_and_mask (scaled, pixmap, mask, 128);
 	if (need_to_unref)
-	    gdk_pixbuf_unref (scaled);
+	    g_object_unref (scaled);
 
 	pixmap_cache_set (image, width, height, *pixmap, *mask);
     }
@@ -1520,7 +1520,7 @@ set_pixel (Lisp_Image *im, int x, int y, repv pixel)
 	    GdkPixbuf *new = gdk_pixbuf_add_alpha (im->image, FALSE, 0, 0, 0);
 	    if (new != 0)
 	    {
-		gdk_pixbuf_unref (im->image);
+		g_object_unref (im->image);
 		im->image = new;
 		nchannels = image_channels (im);
 	    }
@@ -1729,7 +1729,7 @@ image_sweep (void)
 #if defined HAVE_IMLIB
 	    Imlib_kill_image (imlib_id, w->image);
 #elif defined HAVE_GDK_PIXBUF
-	    gdk_pixbuf_unref (w->image);
+	    g_object_unref (w->image);
 #endif
 	    rep_FREE_CELL(w);
 	}
