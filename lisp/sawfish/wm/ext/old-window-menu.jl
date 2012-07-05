@@ -16,7 +16,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
-;; the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+;; the Free Software Foundation, 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301 USA.
 
 ;; This is the "old" window menu. By default, beos-window-menu is used
 ;; instead. But **DON'T** remove. There sure exist those who use it,
