@@ -66,7 +66,8 @@
       ;; add some Razor-Qt menu-entries
       (when (setq menu (assoc (_ "_Help") root-menu))
 	(nconc menu `(()
-		      (,(_ "Razor-Qt _Website") (browser "http://www.razor-qt.org")))))
+		      (,(_ "Razor-Qt _Website") (browser "http://www.razor-qt.org"))
+		      (,(_ "About Razor-Qt") (system "razor-about &")))))
 
       ;; add razor-logout and customize menu-entries
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
