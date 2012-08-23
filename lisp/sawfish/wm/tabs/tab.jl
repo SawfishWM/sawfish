@@ -30,9 +30,9 @@
 	  sawfish.wm.commands
 	  sawfish.wm.frames
 	  sawfish.wm.tabs.tabgroup
-	  sawfish.wm.util.marks
+      sawfish.wm.cursors
 	  sawfish.wm.windows
-          sawfish.wm.gaol)
+      sawfish.wm.gaol)
 
   (define-structure-alias tab sawfish.wm.tabs.tab)
 
@@ -40,6 +40,8 @@
   ;; - make calculations work with tiny windows, should fixed
   ;; - hide some frame parts on leftmost and rightmost tabs, should fixed
   ;; - add a drag-n-drop way to group windows by tabs
+
+  (define marked-window nil)
 
   (define tabbar-left-dec-width)
   (define tabbar-right-dec-width)
@@ -172,13 +174,24 @@
     "Add a window to a tabgroup. Apply this command on a window, then
 on another. The first window will be added to the tabgroup containig
 the second."
-    (if (marked-windows)
+    (if marked-window
         (progn
-          (apply-on-marked-windows (lambda (w) (tab-group-window w win)))
-          (unmark-all-windows))
-      (mark-window win)))
+          (tab-group-window marked-window win)
+          (default-cursor (get-cursor 'left_ptr))
+          (setq marked-window nil))
+      (default-cursor (get-cursor 'clock))
+      (setq marked-window win)))
 
-  (define-command 'tab-add-to-group tab-add-to-group #:spec "%W"))
+  (define-command 'tab-add-to-group tab-add-to-group #:spec "%W")
+
+  (define (check-win)
+    (if (and marked-window
+             (not (window-id marked-window)))
+        (progn
+          (default-cursor (get-cursor 'left_ptr))
+          (setq marked-window nil))))
+        
+  (add-hook 'destroy-notify-hook check-win))
 
 ;;(require 'x-cycle)
 ;;(define-cycle-command-pair

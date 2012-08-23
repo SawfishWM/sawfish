@@ -45,6 +45,9 @@ Each release lists incompatible changes at its top.
 @item Bug Fixes
 @itemize @minus
 @item @code{dimension} window-matcher does now properly restore the window's size [Robert Zenz]
+
+@item When destroying a window marked for tabbing, before tabbing was done, tabbing didn't
+work anymore until Sawfish restarted. This is fixed now. [fuchur]
 @end itemize
 
 @item Miscellaneous Changes
@@ -54,6 +57,10 @@ Each release lists incompatible changes at its top.
 @item Replace @code{gdk_pixbuf_unref} by @code{g_object_unref} [Togan Muftuoglu]
 
 @item Fix the address if FSF in all relevant files [Togan Muftuoglu]
+
+@item Change cursor shape when working with tabs [fuchur]
+
+@item Removed @code{sawfish.wm.util.marks}, implemented in @code{sawfish.wm.tabs.tab}. [fuchur]
 
 @item Fix debian packaging scripts for Debian/Unstable [Christopher Bratusek]
 @end itemize
