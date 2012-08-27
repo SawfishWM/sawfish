@@ -48,6 +48,9 @@ Each release lists incompatible changes at its top.
 
 @item When destroying a window marked for tabbing, before tabbing was done, tabbing didn't
 work anymore until Sawfish restarted. This is fixed now. [fuchur]
+
+@item In @file{Makedefs.in} source @code{$(repexecdir)/rules.mk} as first, so that @code{--prefix}
+and co. from @code{configure} won't get overwritten. [Allin Cottrell]
 @end itemize
 
 @item Miscellaneous Changes

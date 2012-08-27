@@ -19,6 +19,9 @@
 # along with sawfish; see the file COPYING.  If not, write to
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 
+repexecdir=@REP_EXECDIR@
+include $(repexecdir)/rules.mk
+
 version=@version@
 codename=@codename@
 subversion=@subversion@
@@ -76,9 +79,6 @@ INSTALL_PROGRAM=@INSTALL_PROGRAM@
 INSTALL_SCRIPT=@INSTALL_SCRIPT@
 
 .PHONY: clean realclean install
-
-repexecdir=@REP_EXECDIR@
-include $(repexecdir)/rules.mk
 
 %.o : %.c
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
