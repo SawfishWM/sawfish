@@ -16,7 +16,7 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
-;; the Free Software Foundation, 51 Franklin Street, Fifth Floor, 
+;; the Free Software Foundation, 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301 USA.
 
 (define-structure sawfish.wm.tabs.tab
@@ -157,8 +157,8 @@
   (define-frame-class 'tabbar-horizontal-right-edge
     `((left-edge . ,tab-right-dec-pos)) t)
 
-  ;; new classes tabs on side : tabbar-vertical-top-edge tabbar-vertical tabbar-vertical-bottom-edge 
-  ;; 
+  ;; new classes tabs on side : tabbar-vertical-top-edge tabbar-vertical tabbar-vertical-bottom-edge
+  ;;
   (define-frame-class 'tabbar-vertical-top-edge
     `((bottom-edge . ,tab-top-dec-pos)) t)
 
@@ -168,7 +168,7 @@
 
   (define-frame-class 'tabbar-vertical-bottom-edge
     `((bottom-edge . ,tab-bottom-edge)) t)
-  
+
   ;; This function is for interactive use. Use tab-group-window for lisp.
   (define (tab-add-to-group win)
     "Add a window to a tabgroup. Apply this command on a window, then
@@ -176,13 +176,26 @@ on another. The first window will be added to the tabgroup containig
 the second."
     (if marked-window
         (progn
-          (tab-group-window marked-window win)
+          (mapcar (lambda (w) (tab-group-window w win)) marked-window)
           (default-cursor (get-cursor 'left_ptr))
           (setq marked-window nil))
       (default-cursor (get-cursor 'clock))
-      (setq marked-window win)))
+      (setq marked-window (cons win))))
 
   (define-command 'tab-add-to-group tab-add-to-group #:spec "%W")
+
+  (define (tabgroup-add-to-group win)
+    "Add a tabgroup to a tabgroup. Apply this command on a window
+from the tabgroup, then on another. The tabgroup will be added to
+the tabgroup containig the second."
+    (if marked-window
+        (progn
+          (setq marked-window (tab-group-window-index (car marked-window)))
+          (tab-add-to-group win))
+      (default-cursor (get-cursor 'clock))
+      (setq marked-window (tab-group-window-index win))))
+
+  (define-command 'tabgroup-add-to-group tabgroup-add-to-group #:spec "%W")
 
   (define (check-win)
     (if (and marked-window
@@ -190,7 +203,7 @@ the second."
         (progn
           (default-cursor (get-cursor 'left_ptr))
           (setq marked-window nil))))
-        
+
   (add-hook 'destroy-notify-hook check-win))
 
 ;;(require 'x-cycle)

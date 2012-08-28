@@ -16,7 +16,7 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
-;; the Free Software Foundation, 51 Franklin Street, Fifth Floor, 
+;; the Free Software Foundation, 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301 USA.
 
 (define-structure sawfish.wm.keymaps
@@ -121,7 +121,8 @@
 				     "Button2-Move" 'resize-window-interactively
 				     "Button1-Off2" 'toggle-window-shaded
 				     "Button1-Move" 'move-window-interactively
-				     "Button2-Off" 'tab-add-to-group)
+				     "Button2-Off" 'tab-add-to-group
+                                     "C-Button2-Off" 'tabgroup-add-to-group)
     "Keymap of window title bar. Mouse-bindings only."
     :group bindings
     :type keymap)
@@ -130,6 +131,7 @@
 				      "Button1-Off2" 'toggle-window-shaded
 				      "Button1-Move" 'move-window-interactively
 				      "Button2-Off" 'tab-add-to-group
+                                      "C-Button2-Off" 'tabgroup-add-to-group
 				      "Button3-Click" 'tab-release-window
 				      "Button3-Move" 'move-window-interactively)
     "Keymap of window tabbar. Mouse-bindings only."
