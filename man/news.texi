@@ -51,6 +51,9 @@ work anymore until Sawfish restarted. This is fixed now. [fuchur]
 
 @item In @file{Makedefs.in} source @code{$(repexecdir)/rules.mk} as first, so that @code{--prefix}
 and co. from @code{configure} won't get overwritten. [Allin Cottrell]
+
+@item In @code{tabs} some minor issues have been fixed, like correct @code{raise} or @code{sticky}
+tabs, and some issue with @code{move-resize} tabs. [fuchur]
 @end itemize
 @item New Features
 @itemize @minus
