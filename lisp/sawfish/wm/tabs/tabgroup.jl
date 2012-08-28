@@ -16,12 +16,13 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
-;; the Free Software Foundation, 51 Franklin Street, Fifth Floor, 
+;; the Free Software Foundation, 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301 USA.
 
 (define-structure sawfish.wm.tabs.tabgroup
 
     (export window-tabbed-p
+            net-wm-window-type-normal-p
             tab-refresh-group
             tab-release-window
             tab-raise-left-window
@@ -61,6 +62,9 @@
 
   (define (window-tabbed-p w)
     (window-get w 'tabbed))
+
+  (define (net-wm-window-type-normal-p w)
+    (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))
 
   (define-record-type :tab-group
     (tab-build-group p d wl)
@@ -251,8 +255,8 @@ sticky, unsticky, fixed-position."
     ;; exists on another workspace or window type
     ;; is not a "normal" window (e.g. dock panel ...)
     (when (and (not (cdr (window-get win 'workspaces)))
-               (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL)
-               (equal (aref (nth 2 (get-x-property win '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))
+               (net-wm-window-type-normal-p w)
+               (net-wm-window-type-normal-p win))
       (let* ((index (tab-window-group-index win))
              (index2 (tab-window-group-index w))
              (pos (window-position win))

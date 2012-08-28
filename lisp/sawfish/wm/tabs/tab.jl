@@ -174,13 +174,14 @@
     "Add a window to a tabgroup. Apply this command on a window, then
 on another. The first window will be added to the tabgroup containig
 the second."
-    (if marked-window
-        (progn
-          (mapcar (lambda (w) (tab-group-window w win)) marked-window)
-          (default-cursor (get-cursor 'left_ptr))
-          (setq marked-window nil))
-      (default-cursor (get-cursor 'clock))
-      (setq marked-window (cons win))))
+    (when (net-wm-window-type-normal-p win)
+      (if marked-window
+          (progn
+            (mapcar (lambda (w) (tab-group-window w win)) marked-window)
+            (default-cursor (get-cursor 'left_ptr))
+            (setq marked-window nil))
+        (default-cursor (get-cursor 'clock))
+        (setq marked-window (cons win)))))
 
   (define-command 'tab-add-to-group tab-add-to-group #:spec "%W")
 
@@ -188,18 +189,19 @@ the second."
     "Add a tabgroup to a tabgroup. Apply this command on a window
 from the tabgroup, then on another. The tabgroup will be added to
 the tabgroup containig the second."
-    (if marked-window
-        (progn
-          (setq marked-window (tab-group-window-index (car marked-window)))
-          (tab-add-to-group win))
-      (default-cursor (get-cursor 'clock))
-      (setq marked-window (tab-group-window-index win))))
+    (when (net-wm-window-type-normal-p win)
+      (if marked-window
+          (progn
+            (setq marked-window (tab-group-window-index (car marked-window)))
+            (tab-add-to-group win))
+        (default-cursor (get-cursor 'clock))
+        (setq marked-window (tab-group-window-index win)))))
 
   (define-command 'tabgroup-add-to-group tabgroup-add-to-group #:spec "%W")
 
   (define (check-win)
-    (if (and marked-window
-             (not (window-id marked-window)))
+    (if (and (car marked-window)
+             (not (window-id (car marked-window))))
         (progn
           (default-cursor (get-cursor 'left_ptr))
           (setq marked-window nil))))
