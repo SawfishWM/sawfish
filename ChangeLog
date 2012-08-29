@@ -1,6 +1,10 @@
 2012-08-29  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/tabs/tab.jl: remember default cursor [fuchur]
 
+	* lisp/sawfish/wm/tabs/tabgroup.jl: when one of the tabbed windows is
+	sticky and moved by selecting the first tab, it causes a crash. This
+	is fixed now. [fuchur]
+
 2012-08-28  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/tabs/tab.jl: allow a whole tabgroup to be added to
 	another tabgroup (or a single) window. [fuchur]
