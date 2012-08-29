@@ -41,6 +41,7 @@
   ;; - hide some frame parts on leftmost and rightmost tabs, should fixed
   ;; - add a drag-n-drop way to group windows by tabs
 
+  (define select-cursor (default-cursor))
   (define marked-window nil)
 
   (define tabbar-left-dec-width)
@@ -178,7 +179,7 @@ the second."
       (if marked-window
           (progn
             (mapcar (lambda (w) (tab-group-window w win)) marked-window)
-            (default-cursor (get-cursor 'left_ptr))
+            (default-cursor select-cursor)
             (setq marked-window nil))
         (default-cursor (get-cursor 'clock))
         (setq marked-window (cons win)))))
@@ -203,7 +204,7 @@ the tabgroup containig the second."
     (if (and (car marked-window)
              (not (window-id (car marked-window))))
         (progn
-          (default-cursor (get-cursor 'left_ptr))
+          (default-cursor select-cursor)
           (setq marked-window nil))))
 
   (add-hook 'destroy-notify-hook check-win))
