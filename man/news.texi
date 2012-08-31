@@ -63,6 +63,9 @@ tabs, and some issue with @code{move-resize} tabs. [fuchur]
 single window. By default the keybinding is @code{C-Button2-Off}. [fuchur]
 
 @item Tabs now support @code{viewport-sticky} and @code{workspace-sticky}. [fuchur]
+
+@item Tabs now support coloring the window-title in a different color, for windows, which are
+marked for tabbing. Currently only @code{StyleTab} uses this feature. [fuchur]
 @end itemize
 @item Miscellaneous Changes
 @itemize @minus
@@ -74,9 +77,10 @@ single window. By default the keybinding is @code{C-Button2-Off}. [fuchur]
 
 @item Change cursor shape when working with tabs [fuchur]
 
-@item Removed @code{sawfish.wm.util.marks}, implemented in @code{sawfish.wm.tabs.tab}. [fuchur]
+@item Removed @code{sawfish.wm.util.marks}, now implemented in @code{sawfish.wm.tabs.tab}. [fuchur]
 
-@item Fix debian packaging scripts for Debian/Unstable [Christopher Bratusek]
+@item Fix debian packaging scripts for Debian/Unstable, update install-sh to 2011-01-19.21,
+also remove NEWS and config.h.in upon @code{make gitclean}.[Christopher Bratusek]
 @end itemize
 @end itemize
 @heading 1.9.0 "Next Dimensional World"
