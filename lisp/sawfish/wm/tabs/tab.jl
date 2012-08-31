@@ -170,6 +170,9 @@
   (define-frame-class 'tabbar-vertical-bottom-edge
     `((bottom-edge . ,tab-bottom-edge)) t)
 
+  (define (emit-marked-hook w)
+    (call-window-hook 'window-state-change-hook w (list '(marked))))
+
   ;; This function is for interactive use. Use tab-group-window for lisp.
   (define (tab-add-to-group win)
     "Add a window to a tabgroup. Apply this command on a window, then
@@ -178,11 +181,17 @@ the second."
     (when (net-wm-window-type-normal-p win)
       (if marked-window
           (progn
-            (mapcar (lambda (w) (tab-group-window w win)) marked-window)
+            (mapcar (lambda (w) 
+                      (window-put w 'marked nil)
+                      (emit-marked-hook w)
+                      (tab-group-window w win)) marked-window)
             (default-cursor select-cursor)
+            (window-put win 'marked nil)
             (setq marked-window nil))
+        (window-put win 'marked t)
         (default-cursor (get-cursor 'clock))
-        (setq marked-window (cons win)))))
+        (setq marked-window (cons win)))
+      (emit-marked-hook win)))
 
   (define-command 'tab-add-to-group tab-add-to-group #:spec "%W")
 
@@ -196,7 +205,10 @@ the tabgroup containig the second."
             (setq marked-window (tab-group-window-index (car marked-window)))
             (tab-add-to-group win))
         (default-cursor (get-cursor 'clock))
-        (setq marked-window (tab-group-window-index win)))))
+        (setq marked-window (tab-group-window-index win))
+        (mapcar (lambda (w) 
+                  (window-put w 'marked t)
+                  (emit-marked-hook w)) marked-window))))
 
   (define-command 'tabgroup-add-to-group tabgroup-add-to-group #:spec "%W")
 
