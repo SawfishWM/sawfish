@@ -107,7 +107,7 @@ debclean : distclean
 gitclean : distclean
 	rm -f aclocal.m4 configure
 	rm -rf autom4te.cache m4/
-	rm -f libtool ltmain.sh
+	rm -f libtool ltmain.sh config.h.in
 	rm -f sawfish.spec sawfish*.ebuild
 	-fakeroot debian/rules clean
 
