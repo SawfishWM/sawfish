@@ -5,6 +5,11 @@
 	* lisp/sawfish/wm/tabs/tab.jl: improve check-win. Always rebuild list
 	of marked windows when a marked window is closed. [fuchur]
 
+	* lisp/sawfish/wm/tabs/tabgroup.jl: add frame-style-tabs-support-p.
+	Only allow tabbing a window, if the frame-style of the parent window
+	has support for tabs [note that in Sawfish different windows can have
+	different frame-styles!] [fuchur]
+
 2012-08-31  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/tabs/tab.jl: add support for coloring a window-title
 	in a different color, when a window is marked for tabbing [fuchur]

@@ -22,6 +22,7 @@
 (define-structure sawfish.wm.tabs.tabgroup
 
     (export window-tabbed-p
+            frame-style-tabs-support-p
             net-wm-window-type-normal-p
             tab-refresh-group
             tab-release-window
@@ -59,12 +60,22 @@
   (define release-window t)
   (define last-unmap-id nil)
   (define in-tab-group-name nil)
+  (define tab-theme-name)
+
+  (define (set-tab-theme-name #!key frame-style-supported-tabs)
+    (setq tab-theme-name frame-style-supported-tabs))
 
   (define (window-tabbed-p w)
     (window-get w 'tabbed))
 
+  (define (frame-style-tabs-support-p w)
+    (setq tab-theme-name nil)
+    (call-window-hook 'window-state-change-hook w (list '(tab-theme-name)))
+    (eq (window-get w 'current-frame-style) tab-theme-name))
+  
   (define (net-wm-window-type-normal-p w)
-    (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))
+    (if (get-x-property w '_NET_WM_WINDOW_TYPE)
+        (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL)))
 
   (define-record-type :tab-group
     (tab-build-group p d wl)
@@ -265,7 +276,8 @@ sticky, unsticky, fixed-position."
     ;; is not a "normal" window (e.g. dock panel ...)
     (when (and (not (cdr (window-get win 'workspaces)))
                (net-wm-window-type-normal-p w)
-               (net-wm-window-type-normal-p win))
+               (net-wm-window-type-normal-p win)
+               (frame-style-tabs-support-p win))
       (let* ((index (tab-window-group-index win))
              (index2 (tab-window-group-index w))
              (pos (window-position win))
@@ -499,4 +511,4 @@ of the windows the same 'tab-group property"
     (add-hook 'add-to-workspace-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'frame))))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
 
-  (gaol-add tab-refresh-group tab-group-window-index))
+  (gaol-add set-tab-theme-name tab-refresh-group tab-group-window-index))
