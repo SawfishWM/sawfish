@@ -50,8 +50,10 @@
     :type boolean
     :group focus)
 
-  (defvar decorate-transients nil
-    "Decorate dialog windows similarly to application windows.")
+  (defcustom decorate-transients nil
+    "Decorate dialog windows similarly to application windows."
+    :type boolean
+    :group appearance)
 
 ;;; functions
 
