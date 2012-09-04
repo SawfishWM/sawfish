@@ -4,6 +4,8 @@
 
 ;; Copyright (C) 2009-2011 Sergey Kozhemyakin <serg.kozhemyakin@gmail.com>
 
+(define theme-name 'gradient-tabbed)
+
 (require 'gradient)
 
 ;; customize variables
@@ -117,8 +119,7 @@
        gradient-tabbed:inactive-menu-color))
     (when (> (cdr (image-dimensions img)) 4)
       (bevel-image img 1 (not (eq state 'clicked))))
-    (set-image-border img 1 1 1 1)
-    ))
+    (set-image-border img 1 1 1 1)))
 
 (define render-close-button
   (lambda (img state)
@@ -129,8 +130,7 @@
        gradient-tabbed:inactive-close-color))
     (when (> (cdr (image-dimensions img)) 4)
       (bevel-image img 1 (not (eq state 'clicked))))
-    (set-image-border img 1 1 1 1)
-    ))
+    (set-image-border img 1 1 1 1)))
 
 (define menu-button
   (list
@@ -155,8 +155,7 @@
        gradient-tabbed:normal-from-color))
     (when (> (cdr (image-dimensions img)) 4)
       (bevel-image img 1 (not (eq state 'clicked))))
-    (set-image-border img 1 1 1 1)
-    ))
+    (set-image-border img 1 1 1 1)))
 
 (define render-resizebar-handle
   (lambda (img state)
@@ -167,8 +166,7 @@
        gradient-tabbed:inactive-handle-color))
     (when (> (cdr (image-dimensions img)) 4)
       (bevel-image img 1 (not (eq state 'clicked))))
-    (set-image-border img 1 1 1 1)
-    ))
+    (set-image-border img 1 1 1 1)))
 
 (define menu
   `((renderer . ,render-menu-button)
@@ -253,8 +251,7 @@
     (class . bottom-left-corner)))
 
 (define left-border
-  `(
-    (background . ,border-color)
+  `((background . ,border-color)
     (left-edge . -1)
     (width . 1)
     (top-edge . -21)
@@ -262,8 +259,7 @@
     (class . left-border)))
 
 (define right-border
-  `(
-    (background . ,border-color)
+  `((background . ,border-color)
     (right-edge . -1)
     (width . 1)
     (top-edge . -21)
@@ -271,8 +267,7 @@
     (class . right-border)))
 
 (define left-transient-border
-  `(
-    (background . ,border-color)
+  `((background . ,border-color)
     (left-edge . -1)
     (width . 1)
     (top-edge . -21)
@@ -280,8 +275,7 @@
     (class . left-border)))
 
 (define right-transient-border
-  `(
-    (background . ,border-color)
+  `((background . ,border-color)
     (right-edge . -1)
     (width . 1)
     (top-edge . -21)
@@ -289,8 +283,7 @@
     (class . right-border)))
 
 (define bottom-border
-  `(
-    (background . ,border-color)
+  `((background . ,border-color)
     (left-edge . -1)
     (right-edge . -1)
     (bottom-edge . -1)
@@ -298,8 +291,7 @@
     (class . bottom-border)))
 
 (define top-border
-  `(
-    (background . ,border-color)
+  `((background . ,border-color)
     (left-edge . -1)
     (right-edge . -1)
     (top-edge . -22)
@@ -309,8 +301,7 @@
 ;; frames definitions
 
 (define frame
-  `(
-    ,menu
+  `(,menu
     ,close
     ,tab
     ,resizebar
@@ -318,33 +309,26 @@
     ,resizebar-right
     ,left-border
     ,right-border
-    ,top-border
-    ))
+    ,top-border))
 
 (define shaped-frame
-  `(
-    ,menu
+  `(,menu
     ,close
     ,tab
     ,left-transient-border
     ,right-transient-border
     ,bottom-border
-    ,top-border
-    ))
+    ,top-border))
 
 (define transient-frame
-  `(
-    ,transient-titlebar
+  `(,tab
     ,left-transient-border
     ,right-transient-border
     ,bottom-border
-    ,top-border
-    ))
+    ,top-border))
 
 (define shaped-transient-frame
-  `(
-    ,transient-titlebar
-    ))
+  `(,tab))
 
 ;; build frames
 
@@ -364,18 +348,19 @@
                            #:theme-left-margin-transient gradient-tabbed-left-m-t
                            #:theme-right-margin-transient gradient-tabbed-right-m-t))))
 
+(define (frame-style-name w)
+  (when (eq (window-get w 'current-frame-style) theme-name)
+    (set-tab-theme-name #:frame-style-supported-tabs theme-name)))
+
+(define (get-frame w type)
+  (create-frames)
+  (case type
+        ((default) frame)
+        ((transient) transient-frame)
+        ((shaped) shaped-frame)
+        ((shaped-transient) shaped-transient-frame)))
+
 (create-frames)
 
-(add-frame-style 'gradient-tabbed
-                 (lambda (w type)
-                   (case type
-                     ((default) frame)
-                     ((transient) transient-frame)
-                     ((shaped) shaped-frame)
-                     ((shaped-transient) shaped-transient-frame))))
-
-(define (create-frames-only w)
-  (when (eq (window-get w 'current-frame-style) 'gradient-tabbed)
-    (create-frames)))
-
-(call-after-state-changed '(title-position) create-frames-only)
+(add-frame-style theme-name get-frame)
+(call-after-state-changed '(tab-theme-name) frame-style-name)

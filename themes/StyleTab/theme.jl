@@ -2626,6 +2626,10 @@
   (reload-frame-style theme-name)
   (reframe-with-style))
 
+(define (frame-style-name w)
+  (when (eq (window-get w 'current-frame-style) theme-name)
+    (set-tab-theme-name #:frame-style-supported-tabs theme-name)))
+
 (define (get-frame w type)
   (let ((current-title 
          (if (not (window-get w 'title-position))
@@ -2655,6 +2659,7 @@
 
 (add-frame-style theme-name get-frame)
 
+(call-after-state-changed '(tab-theme-name) frame-style-name)
 (call-after-state-changed '(marked) reframe-marked)
 (call-after-state-changed '(maximized sticky fixed-position stacking) reframe-one)
 (add-hook 'remove-from-workspace-hook reframe-one)

@@ -15,6 +15,8 @@
 ;;        ((w-width (car (window-dimensions w))))
 ;;      (max 0 (min (- w-width 100) (text-width (window-name w)))))))
 
+(define theme-name 'Elberg-tabbed)
+
 ;; 6x19 - upper left corner
 (define upper-left-images (list (make-image "i-ul.png")
                                 (make-image "a-ul.png")))
@@ -160,9 +162,7 @@
 
 (define text-colors (list "grey50" "white"))
 
-
 ;; frame layout
-
 (define frame
   `(((background . ,upper-left-images)
      (left-edge . -6)
@@ -292,7 +292,7 @@
 
 (define shaped-frame 
   `(((background . ,upper-left-shaped-images)
-     (left-edge . -6)
+     (left-edge . 6)
      (top-edge . -19)
      (height . 19)
      (class . top-left-corner))
@@ -335,7 +335,7 @@
     
     ;; top-right corner
     ((background . ,upper-right-shaped-images)
-     (right-edge . -6)
+     (right-edge . 6)
      (top-edge . -19)
      (height . 19)
      (class . top-right-corner))
@@ -378,7 +378,6 @@
     ((background . ,top-righthollow-images)
      (top-edge . -19)
      (class . tabbar-horizontal-right-edge))))
-
 
 (define transient-frame 
   `(((background . ,t-upper-left-images)
@@ -477,18 +476,19 @@
                            Elberg-left-m #:theme-right-margin Elberg-rigth-m #:theme-left-margin-transient Elberg-left-m-t 
                            #:theme-right-margin-transient Elberg-right-m-t))))
 
+(define (frame-style-name w)
+  (when (eq (window-get w 'current-frame-style) theme-name)
+    (set-tab-theme-name #:frame-style-supported-tabs theme-name)))
+
+(define (get-frame w type)
+  (create-frames)
+  (case type
+        ((default) frame)
+        ((transient) transient-frame)
+        ((shaped) shaped-frame)
+        ((shaped-transient) shaped-transient-frame)))
+
 (create-frames)
-  
-(add-frame-style 'Elberg-tabbed
-                 (lambda (w type)
-                   (case type
-                         ((default) frame)
-                         ((transient) transient-frame)
-                         ((shaped) shaped-frame)
-                         ((shaped-transient) shaped-transient-frame))))
 
-(define (create-frames-only w)
-    (when (eq (window-get w 'current-frame-style) 'Elberg-tabbed)
-      (create-frames)))
-
-(call-after-state-changed '(title-position) create-frames-only)
+(add-frame-style theme-name get-frame)
+(call-after-state-changed '(tab-theme-name) frame-style-name)
