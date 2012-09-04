@@ -213,11 +213,15 @@ the tabgroup containig the second."
   (define-command 'tabgroup-add-to-group tabgroup-add-to-group #:spec "%W")
 
   (define (check-win)
-    (if (and (car marked-window)
-             (not (window-id (car marked-window))))
-        (progn
-          (default-cursor select-cursor)
-          (setq marked-window nil))))
+    (if (car marked-window)
+        (let ((m-list marked-window))
+          (setq marked-window nil)
+          (mapcar (lambda (w)
+                    (if (window-id w)
+                        (setq marked-window (append marked-window (cons w nil))))) m-list)
+          (when (not (car marked-window))
+            (default-cursor select-cursor)
+            (setq marked-window nil)))))
 
   (add-hook 'destroy-notify-hook check-win))
 
