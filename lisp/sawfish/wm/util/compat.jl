@@ -119,8 +119,7 @@
           iconify-whole-group uniconify-whole-group
           always-update-frames edge-flip-warp-pointer
           frame-type-fallbacks warp-to-window-x-offset
-          warp-to-window-y-offset uniquify-name-format
-          transients-get-focus decorate-transients
+          warp-to-window-y-offset uniquify-name-format transients-get-focus 
           raise-windows-on-uniconify uniconify-to-current-workspace
           iconify-ignored focus-ignore-pointer-events
           focus-windows-on-uniconify transients-are-group-members
