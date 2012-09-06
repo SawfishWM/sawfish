@@ -12,6 +12,10 @@
 	window-ops-menu, as resize-window-to-dimensions has been removed more
 	than a year ago -.-
 
+	* lisp/sawfish/wm/commands/move-resize.jl: completely new
+	resize-window-prompt func. now displays old width and old height
+	before prompting and checks whether given values actually are numbers.
+
 2012-09-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/util/compat.jl: remove decorate-transients from compat
 	list (defcustom works now)

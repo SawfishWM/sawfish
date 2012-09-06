@@ -26,6 +26,7 @@
 	    move-selected-window
 	    resize-selected-window
 	    resize-window-frame-to
+	    resize-window-prompt
 	    double-window-size
 	    halve-window-size
 	    move-window-center)
@@ -593,10 +594,22 @@ that window."
                                  (cdr (window-frame-dimensions w))) 2)))
 
   ;; resize-prompt
-  (define-command 'resize-window-prompt resize-window-with-hints*
-    #:doc "Resize window. Prompted to enter new size."
-    #:spec "%W\nNNew width:\nNNew height:")
-     
+  (define (resize-window-prompt)
+    (require 'sawfish.wm.util.prompt)
+    "Resize window. Prompted to enter new size."
+    (let* ((win (current-event-window))
+           (w-name (window-name win))
+           (old-w (car (window-dimensions win)))
+           (old-h (cdr (window-dimensions win)))
+	   (new-w (prompt #:title (format nil "Old width of window %s: %s\nEnter new width: " w-name old-w)))
+	   (new-h (prompt #:title (format nil "Old height of window %s: %s\nEnter new height: " w-name old-h))))
+      (if (and (numberp (string->number new-w))
+	       (numberp (string->number new-h)))
+	  (resize-window-with-hints* win (string->number new-w) (string->number new-h))
+	(display-message (format nil "One of the given values is not a number.")))))
+
+  (define-command 'resize-window-prompt resize-window-prompt)
+
   ;; resize-to-preset-size family
   (define (resize-window-to-preset-size x y)
     ;; The size is set beforehand in the configurator.
