@@ -55,8 +55,10 @@
   ;; Suppress annoying compiler warnings
   (eval-when-compile (require 'rep.io.timers))
 
-  (defvar menus-include-shortcuts nil
-    "Display key-binding information in menu items.")
+  (defcustom menus-include-shortcuts nil
+    "Display key-binding information in menu items."
+    :group misc
+    :type boolean)
 
   (defvar menu-program (expand-file-name "sawfish-menu" sawfish-exec-directory)
     "Location of the program implementing sawfish's menu interface.")

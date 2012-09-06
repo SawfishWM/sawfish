@@ -123,8 +123,7 @@
           raise-windows-on-uniconify uniconify-to-current-workspace
           iconify-ignored focus-ignore-pointer-events
           focus-windows-on-uniconify transients-are-group-members
-          raise-selected-windows warp-to-selected-windows
-          menus-include-shortcuts configure-auto-gravity
+          raise-selected-windows warp-to-selected-windows configure-auto-gravity
           configure-ignore-stacking-requests
           beos-window-menu-simplifies customize-show-symbols
           move-snap-mode move-snap-ignored-windows

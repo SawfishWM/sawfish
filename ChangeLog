@@ -2,6 +2,12 @@
 	* lisp/sawfish/wm/state/transient.jl: :after-set for
 	decorate-transients
 
+	* lisp/sawfish/wm/menus.jl: make menus-include-shortcuts a defcustom
+	again.
+
+	* lisp/sawfish/wm/util/compat.jl: remove menus-include-shortcuts from
+	compat list to make defcustom work.
+
 2012-09-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/util/compat.jl: remove decorate-transients from compat
 	list (defcustom works now)
