@@ -53,7 +53,8 @@
   (defcustom decorate-transients nil
     "Decorate dialog windows similarly to application windows."
     :type boolean
-    :group appearance)
+    :group appearance
+    :after-set after-setting-frame-option)
 
 ;;; functions
 
