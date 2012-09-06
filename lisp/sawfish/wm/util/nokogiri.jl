@@ -37,8 +37,10 @@
 	  sawfish.wm.util.keymap
 	  sawfish.wm.ext.match-window)
 
-  (defvar customize-show-symbols nil
-    "Show variable names of each customization option.")
+  (defcustom customize-show-symbols nil
+    "Show variable names of each customization option."
+    :type boolean
+    :group misc)
 
 ;;; interfaces
 

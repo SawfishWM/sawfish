@@ -124,8 +124,7 @@
           iconify-ignored focus-ignore-pointer-events
           focus-windows-on-uniconify transients-are-group-members
           raise-selected-windows warp-to-selected-windows configure-auto-gravity
-          configure-ignore-stacking-requests
-          beos-window-menu-simplifies customize-show-symbols
+          configure-ignore-stacking-requests beos-window-menu-simplifies
           move-snap-mode move-snap-ignored-windows
           move-resize-inhibit-configure move-snap-edges
           raise-windows-when-unshaded persistent-group-ids
