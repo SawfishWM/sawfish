@@ -8,6 +8,10 @@
 	* lisp/sawfish/wm/util/compat.jl: remove menus-include-shortcuts from
 	compat list to make defcustom work.
 
+	* lisp/sawfish/wm/menus.jl: use resize-window-prompt in
+	window-ops-menu, as resize-window-to-dimensions has been removed more
+	than a year ago -.-
+
 2012-09-05  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/util/compat.jl: remove decorate-transients from compat
 	list (defcustom works now)
