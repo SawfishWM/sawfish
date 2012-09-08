@@ -31,15 +31,19 @@
         rep.io.timers
         rep.io.files
 	rep.util.misc
-        sawfish.wm.misc)
+        sawfish.wm.misc
+	sawfish.wm.custom)
 
   (define-structure-alias xmodmap sawfish.wm.prg.xmodmap)
 
   ;; SAWFISHRC
   ;; (require 'sawfish.wm.prg.xmodmap)
-  ;; (load-xmodmap)
-  ;; ;; alternatively
-  ;; (load-xmodmap #:config "pathtofile")
+  ;; (defvar-setq init-xmodmap t)
+
+  (defcustom init-xmodmap nil
+    "Whether to start xmodmap with Sawfish."
+    :type boolean
+    :group (misc apps))
 
   (define (save-keymap #!key (file "~/.Xmodmap.orig"))
     "Save current keymap to ~/.Xmodmap.orig - or a path passed."
@@ -59,4 +63,9 @@
 	  (if (file-exists-p config)
 	      (system (format nil "xmodmap %s &" config))
 	    (display-message (format nil "given configuration file does not exist."))))
-      (display-message (format nil "xmodmap executable not found in PATH.")))))
+      (display-message (format nil "xmodmap executable not found in PATH."))))
+
+  (unless batch-mode
+    (when init-xmodmap
+      (add-hook 'after-initialization-hook load-xmodmap t)
+      (add-hook 'before-restart-hook restore-keymap t))))
