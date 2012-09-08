@@ -1,0 +1,69 @@
+Additional Notes on sawfish.wm.prg.*
+====================================
+
+All modules in sawfish.wm.prg. are 'required by default.
+
+=== Trayer ===
+
+This modules allows you to control a trayer instance per-session.
+
+Due to high amount of options trayer has, we don't provide an option
+to 'just start' trayer with Sawfish.
+
+To enable autostarting trayer with vendor defaults, use this in sawfishrc:
+
+(start-trayer)
+
+(start-trayer) supports all commandline-settings of trayer, so you could use:
+
+(start-trayer #:expand "true" #:edge "bottom" #:align "center" #:width 500)
+
+As you can see, booleans need to passed as strings ("true"/"false").
+
+see sawfish.wm.prg.trayer for all #: keys and default values.
+
+=== xgamma ===
+
+This module allows you to control your monitor's gamma settings. Configuration
+can be done via SawfishConfig => Misc => External Applications. You can modify
+the RGB channels separately. Changes will take effect immediately and on next
+start if you choose to do so.
+
+=== xmobar ===
+
+This module allows you to control a xmobar instance per-session.
+
+In SawfishConfig => Misc => External Applications you can choose whether to
+auto-start xmobar with Sawfish and what configuration file to load. By default
+that is $HOME/.xmobarrc.
+
+=== xmodmap ===
+
+This module allows you to load a keymap using xmodmap. By default $HOME/.Xmodmap
+is used. In SawfishConfig => Misc => External Applications you can choose whether
+to start xmodmap on Sawfish start and what configuration file to load.
+
+Before the file is loaded, sawfish saves the default keymap. Before restarting
+Sawfish the restored keymap is loaded (and after restart the modifed re-loaded.
+
+This ensures you can always use (restore-keymap) in order to (pseudo)undo the
+changes to your keymap done by xmodmap. Useful when playing around with xmodmap.
+
+=== xsettingsd ===
+
+xsettingsd is a daemon that implements the XSettings protocoll and as such it allows
+GTK+ (or any other compliant toolkit) to get it's settings like theme, icon-theme,
+cursor-theme or font from it.
+
+To get your current configuration you can do this:
+
+run `gnome-settings-daemon' and then `sawfish-client -f dump-xsettings'
+
+this will convert GSD settings to XSD settings. Be aware: if you use GSD from GNOME3,
+the Net/Theme property will contain a GTK+3 theme.
+
+So check this value in $HOME/.xsettingsd first and change it to a valid GTK+2 theme.
+Alternatively you can grab and modify the file XSettings shipped in our source-directory.
+
+In SawfishConfig => Misc => External Applications you can choose whether to auto-start
+xsettingsd and what configuration file to use, by default $HOME/.xsettingsd
