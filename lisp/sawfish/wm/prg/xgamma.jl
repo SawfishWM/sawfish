@@ -93,4 +93,4 @@
 
   (unless batch-mode
     (when init-xgamma
-      (xgamma-set-from-cfg t t t))))
+      (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t))))
