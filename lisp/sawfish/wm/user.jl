@@ -16,7 +16,7 @@
 ;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
-;; the Free Software Foundation, 51 Franklin Street, Fifth Floor, 
+;; the Free Software Foundation, 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301 USA.
 
 ;; Commentary:
@@ -52,7 +52,12 @@
 	   sawfish.wm.edge.actions
 	   sawfish.wm.frames
 	   sawfish.wm.menus
-	   sawfish.wm.commands.launcher)
+	   sawfish.wm.commands.launcher
+	   sawfish.wm.prg.trayer
+	   sawfish.wm.prg.xgamma
+	   sawfish.wm.prg.xmobar
+	   sawfish.wm.prg.xmodmap
+	   sawfish.wm.prg.xsettingsd)
      (access sawfish.wm.integration.kde
 	     sawfish.wm.integration.gnome
 	     sawfish.wm.integration.xfce
@@ -249,6 +254,26 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
       (system "sawfish-config &")
       (delete-file "~/.restart_sc")))
 
+  ;; adjust xgamma settings if requested
+  (unless batch-mode
+    (when init-xgamma
+      (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t)))
+
+  ;; auto-start xmobar if requested
+  (unless batch-mode
+    (when init-xmobar
+      (add-hook 'after-initialization-hook (lambda () (start-xmobar #:config xmobar-config)) t)))
+
+  ;; load xmodmap if requested
+  (unless batch-mode
+    (when init-xmodmap
+      (add-hook 'after-initialization-hook (lambda () (load-xmodmap #:config xmodmap-config)) t)
+      (add-hook 'before-restart-hook restore-keymap t)))
+
+  ;; auto-start xsettingsd if requested
+  (unless batch-mode
+    (when init-xsettingsd
+      (add-hook 'after-initialization-hook (lambda () (start-xsettingsd #:config xsettingsd-config)) t)))
 
   (when (eq error-destination 'init)
     (setq error-destination 'standard-error)))

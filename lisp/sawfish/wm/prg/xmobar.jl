@@ -65,8 +65,4 @@
 
   (define (stop-xmobar)
     "Stop xmobar, if running."
-    (when %xmobar-proc (kill-process %xmobar-proc)))
-
-  (unless batch-mode
-    (when init-xmobar
-      (add-hook 'after-initialization-hook (lambda () (start-xmobar #:config xmobar-config)) t))))
+    (when %xmobar-proc (kill-process %xmobar-proc))))

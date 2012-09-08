@@ -22,6 +22,8 @@
 (define-structure sawfish.wm.prg.xgamma
 
   (export xgamma-set
+	  ;; for user.jl/sawfish-config
+	  xgamma-set-from-cfg
           xgamma-get)
 
   (open rep
@@ -89,8 +91,4 @@
             (system (format nil "xgamma -ggamma %s &" (/ xgamma-green 100.))))
           (when blue
             (system (format nil "xgamma -bgamma %s &" (/ xgamma-blue 100.)))))
-      (display-message (format nil "xgamma executable not found in PATH."))))
-
-  (unless batch-mode
-    (when init-xgamma
-      (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t))))
+      (display-message (format nil "xgamma executable not found in PATH.")))))

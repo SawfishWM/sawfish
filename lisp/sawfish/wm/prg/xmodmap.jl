@@ -68,9 +68,4 @@
 	  (if (file-exists-p config)
 	      (system (format nil "xmodmap %s &" config))
 	    (display-message (format nil "given configuration file does not exist."))))
-      (display-message (format nil "xmodmap executable not found in PATH."))))
-
-  (unless batch-mode
-    (when init-xmodmap
-      (add-hook 'after-initialization-hook (lambda () (load-xmodmap #:config xmodmap-config)) t)
-      (add-hook 'before-restart-hook restore-keymap t))))
+      (display-message (format nil "xmodmap executable not found in PATH.")))))

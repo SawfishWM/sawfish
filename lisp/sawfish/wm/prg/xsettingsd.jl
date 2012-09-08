@@ -72,8 +72,4 @@
 
   (define (stop-xsettingsd)
     "Stop xsettingsd, if running."
-    (when %xsettingsd-proc (kill-process %xsettingsd-proc)))
-
-  (unless batch-mode
-    (when init-xsettingsd
-      (add-hook 'after-initialization-hook (lambda () (start-xsettingsd #:config xsettingsd-config)) t))))
+    (when %xsettingsd-proc (kill-process %xsettingsd-proc))))
