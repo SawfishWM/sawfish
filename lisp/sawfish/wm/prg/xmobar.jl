@@ -30,7 +30,8 @@
         rep.io.timers
 	rep.io.files
         rep.util.misc
-        sawfish.wm.misc)
+        sawfish.wm.misc
+	sawfish.wm.custom)
 
   (define-structure-alias xmobar sawfish.wm.prg.xmobar)
 
@@ -39,6 +40,16 @@
   ;; SAWFISHRC
   ;; (require 'sawfish.wm.prg.xmobar)
   ;; (add-hook 'after-initialization-hook start-xmobar t)
+
+  (defcustom init-xmobar nil
+    "Whether to start xmobar with Sawfish."
+    :type boolean
+    :group (misc apps))
+
+  (defcustom xmobar-config (concat (getenv "HOME") "/.xmobarrc")
+    "xmobar configuration file to use."
+    :type file
+    :group (misc apps))
 
   (define (start-xmobar #!key (config (concat (getenv "HOME") "/.xmobarrc")))
     "Start xmobar. If a xmobar process already exists, it's beeing killed.
@@ -54,4 +65,8 @@
 
   (define (stop-xmobar)
     "Stop xmobar, if running."
-    (when %xmobar-proc (kill-process %xmobar-proc))))
+    (when %xmobar-proc (kill-process %xmobar-proc)))
+
+  (unless batch-mode
+    (when init-xmobar
+      (add-hook 'after-initialization-hook (lambda () (start-xmobar #:config xmobar-config)) t))))
