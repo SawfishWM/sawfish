@@ -31,11 +31,22 @@
         rep.io.timers
 	rep.io.files
         rep.util.misc
-        sawfish.wm.misc)
+        sawfish.wm.misc
+	sawfish.wm.custom)
 
   (define-structure-alias xsettingsd sawfish.wm.prg.xsettingsd)
 
   (define %xsettingsd-proc nil)
+
+  (defcustom init-xsettingsd nil
+    "Whether to start xsettingsd with Sawfish."
+    :type boolean
+    :group (misc apps))
+
+  (defcustom xsettingsd-config (concat (getenv "HOME") "/.xsettingsd")
+    "xsettingsd configuration file to use."
+    :type file
+    :group (misc apps))
 
   ;; SAWFISHRC
   ;; (require 'sawfish.wm.prg.xsettingsd)
@@ -56,9 +67,13 @@
           (if (file-exists-p config)
 	      (start-process %xsettingsd-proc "xsettingsd" config)
 	    (display-message (format nil "given configuration filie does not exist.
-\n use (dump-xsettings) to generate default configuration."))))
+\n use (dump-xsettings) while gnome-settings-daemon is running  to generate default configuration."))))
       (display-message (format nil "xsettingsd executable not found in PATH."))))
 
   (define (stop-xsettingsd)
     "Stop xsettingsd, if running."
-    (when %xsettingsd-proc (kill-process %xsettingsd-proc))))
+    (when %xsettingsd-proc (kill-process %xsettingsd-proc)))
+
+  (unless batch-mode
+    (when init-xsettingsd
+      (add-hook 'after-initialization-hook (lambda () (start-xsettingsd #:config xsettingsd-config)) t))))
