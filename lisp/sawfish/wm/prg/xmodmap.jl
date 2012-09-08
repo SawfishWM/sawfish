@@ -56,5 +56,7 @@
     (if (program-exists-p "xmodmap")
         (progn
 	  (save-keymap)
-	  (system (format nil "xmodmap %s &" config)))
+	  (if (file-exists-p config)
+	      (system (format nil "xmodmap %s &" config))
+	    (display-message (format nil "given configuration file does not exist."))))
       (display-message (format nil "xmodmap executable not found in PATH.")))))

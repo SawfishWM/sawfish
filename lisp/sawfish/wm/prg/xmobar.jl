@@ -28,6 +28,7 @@
         rep.system
         rep.io.processes
         rep.io.timers
+	rep.io.files
         rep.util.misc
         sawfish.wm.misc)
 
@@ -46,7 +47,9 @@
         (progn
 	  (when %xmobar-proc (kill-process %xmobar-proc))
           (setq %xmobar-proc (make-process))
-          (start-process %xmobar-proc "xmobar" config))
+          (if (file-exists-p config)
+	      (start-process %xmobar-proc "xmobar" config)
+	    (display-message (format nil "given configuration filie does not exist."))))
       (display-message (format nil "xmobar executable not found in PATH."))))
 
   (define (stop-xmobar)
