@@ -1,4 +1,4 @@
-;; trayer.jl -- Razor-Qt integration
+;; trayer.jl -- trayer integration
 
 ;; Copyright (C) 2012 Christopher Roy Bratusek <nano@tuxfamily.org>
 

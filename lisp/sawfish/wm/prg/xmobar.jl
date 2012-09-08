@@ -1,4 +1,4 @@
-;; xmobar.jl -- Razor-Qt integration
+;; xmobar.jl -- xmobar integration
 
 ;; Copyright (C) 2012 Christopher Roy Bratusek <nano@tuxfamily.org>
 
