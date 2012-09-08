@@ -29,7 +29,8 @@
         rep.io.processes
         rep.io.timers
         rep.util.misc
-        sawfish.wm.misc)
+        sawfish.wm.misc
+	sawfish.wm.custom)
 
   (define-structure-alias xgamma sawfish.wm.prg.xgamma)
 
@@ -39,6 +40,29 @@
   ;; (xgamma-set t #:gamma 0.5)
   ;; ;; set single channels
   ;; (xgamma-set nil #:red 0.4 #:green 0.5 #:blue 0.6)
+
+  (defcustom init-xgamma nil
+    "Set gamma values when Sawfish starts."
+    :type boolean
+    :group (misc apps))
+
+  (defcustom xgamma-red 100
+    "Gamma value for red channel in per cent."
+    :type (range (0 . 200))
+    :group (misc apps)
+    :after-set (lambda () (xgamma-set-from-cfg t nil nil)))
+
+  (defcustom xgamma-green 100
+    "Gamma value for green channel in per cent."
+    :type (range (0 . 200))
+    :group (misc apps)
+    :after-set (lambda () (xgamma-set-from-cfg nil t nil)))
+
+  (defcustom xgamma-blue 100
+    "Gamma value for blue channel in per cent."
+    :type (range (0 . 200))
+    :group (misc apps)
+    :after-set (lambda () (xgamma-set-from-cfg nil nil t)))
 
   (define (xgamma-get)
     (if (program-exists-p "xgamma")
@@ -51,7 +75,22 @@
                           (green 1.0)
                           (blue 1.0))
     (if (program-exists-p "xgamma")
-      (if all
-          (system (format nil "xgamma -gamma %s &" gamma))
-        (system (format nil "xgamma -rgamma %s -ggamma %s -bgamma %s &" red green blue)))
-      (display-message (format nil "xgamma executable not found in PATH.")))))
+        (if all
+	    (system (format nil "xgamma -gamma %s &" gamma))
+          (system (format nil "xgamma -rgamma %s -ggamma %s -bgamma %s &" red green blue)))
+      (display-message (format nil "xgamma executable not found in PATH."))))
+
+  (define (xgamma-set-from-cfg red green blue)
+    (if (program-exists-p "xgamma")
+        (progn
+          (when red
+            (system (format nil "xgamma -rgamma %s &" (/ xgamma-red 100.))))
+          (when green
+            (system (format nil "xgamma -ggamma %s &" (/ xgamma-green 100.))))
+          (when blue
+            (system (format nil "xgamma -bgamma %s &" (/ xgamma-blue 100.)))))
+      (display-message (format nil "xgamma executable not found in PATH."))))
+
+  (unless batch-mode
+    (when init-xgamma
+      (xgamma-set-from-cfg t t t))))
