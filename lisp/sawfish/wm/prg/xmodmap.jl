@@ -45,6 +45,11 @@
     :type boolean
     :group (misc apps))
 
+  (defcustom xmodmap-config (concat (getenv "HOME") "/.Xmodmap")
+    "xmodmap configuration file to use."
+    :type file
+    :group (misc apps))
+
   (define (save-keymap #!key (file "~/.Xmodmap.orig"))
     "Save current keymap to ~/.Xmodmap.orig - or a path passed."
     (system (format nil "xmodmap -pke >  %s &" file)))
@@ -67,5 +72,5 @@
 
   (unless batch-mode
     (when init-xmodmap
-      (add-hook 'after-initialization-hook load-xmodmap t)
+      (add-hook 'after-initialization-hook (lambda () (load-xmodmap #:config xmodmap-config)) t)
       (add-hook 'before-restart-hook restore-keymap t))))
