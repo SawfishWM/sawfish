@@ -7,20 +7,8 @@ All modules in sawfish.wm.prg. are 'required by default.
 
 This modules allows you to control a trayer instance per-session.
 
-Due to high amount of options trayer has, we don't provide an option
-to 'just start' trayer with Sawfish.
-
-To enable autostarting trayer with vendor defaults, use this in sawfishrc:
-
-(start-trayer)
-
-(start-trayer) supports all commandline-settings of trayer, so you could use:
-
-(start-trayer #:expand "true" #:edge "bottom" #:align "center" #:width 500)
-
-As you can see, booleans need to passed as strings ("true"/"false").
-
-see sawfish.wm.prg.trayer for all #: keys and default values.
+In SawfishConfig => Misc => External Applications you can adjust
+any setting trayer provides and whether to auto-start it.
 
 === xgamma ===
 
