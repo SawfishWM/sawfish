@@ -46,13 +46,14 @@
   (defcustom xsettingsd-config (concat (getenv "HOME") "/.xsettingsd")
     "xsettingsd configuration file to use."
     :type file
+    :depends init-xsettingsd
     :group (misc apps))
 
   ;; SAWFISHRC
   ;; (require 'sawfish.wm.prg.xsettingsd)
   ;; (add-hook 'after-initialization-hook start-xsettingsd t)
 
-  (define (dump-xsettings #!key (config (concat (getenv "HOME") "/.xsettingsd")))
+  (define (dump-xsettings #!key (config xsettingsd-config))
     (if (program-exists-p "dump_xsettings")
 	(system (format nil "dump_xsettings > %s &" config))
       (message (format nil "dump_xsettings executable not found in PATH."))))

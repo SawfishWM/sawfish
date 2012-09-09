@@ -36,10 +36,6 @@
 
   (define-structure-alias xmodmap sawfish.wm.prg.xmodmap)
 
-  ;; SAWFISHRC
-  ;; (require 'sawfish.wm.prg.xmodmap)
-  ;; (defvar-setq init-xmodmap t)
-
   (defcustom init-xmodmap nil
     "Whether to start xmodmap with Sawfish."
     :type boolean
@@ -48,6 +44,7 @@
   (defcustom xmodmap-config (concat (getenv "HOME") "/.Xmodmap")
     "xmodmap configuration file to use."
     :type file
+    :depends init-xmodmap
     :group (misc apps))
 
   (define (save-keymap #!key (file "~/.Xmodmap.orig"))
@@ -60,7 +57,7 @@
         (system "xmodmap ~/.Xmodmap.orig &")
       (display-message (format nil "~/.xmodmap.orig does not exist."))))
 
-  (define (load-xmodmap #!key (config (concat (getenv "HOME") "/.Xmodmap")))
+  (define (load-xmodmap #!key (config xmodmap-config))
     "Start xmodmap. configuration-file may be passed, else $HOME/.Xmodmap is used."
     (if (program-exists-p "xmodmap")
         (progn

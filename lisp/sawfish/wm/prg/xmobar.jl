@@ -37,10 +37,6 @@
 
   (define %xmobar-proc nil)
 
-  ;; SAWFISHRC
-  ;; (require 'sawfish.wm.prg.xmobar)
-  ;; (add-hook 'after-initialization-hook start-xmobar t)
-
   (defcustom init-xmobar nil
     "Whether to start xmobar with Sawfish."
     :type boolean
@@ -49,9 +45,10 @@
   (defcustom xmobar-config (concat (getenv "HOME") "/.xmobarrc")
     "xmobar configuration file to use."
     :type file
+    :depends init-xmobar
     :group (misc apps))
 
-  (define (start-xmobar #!key (config (concat (getenv "HOME") "/.xmobarrc")))
+  (define (start-xmobar #!key (config xmobar-config))
     "Start xmobar. If a xmobar process already exists, it's beeing killed.
      Configuration-file may be passed, if not, $HOME/.xmobarrc is used."
     (if (program-exists-p "xmobar")

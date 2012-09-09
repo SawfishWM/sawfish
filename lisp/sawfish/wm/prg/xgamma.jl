@@ -36,13 +36,6 @@
 
   (define-structure-alias xgamma sawfish.wm.prg.xgamma)
 
-  ;; SAWFISHRC
-  ;; (require 'sawfish.wm.prg.xgamma)
-  ;; ;; set all three channels at once
-  ;; (xgamma-set t #:gamma 0.5)
-  ;; ;; set single channels
-  ;; (xgamma-set nil #:red 0.4 #:green 0.5 #:blue 0.6)
-
   (defcustom init-xgamma nil
     "Set gamma values when Sawfish starts."
     :type boolean
@@ -51,18 +44,21 @@
   (defcustom xgamma-red 100
     "Gamma value for red channel in per cent."
     :type (range (0 . 200))
+    :depends init-xgamma
     :group (misc apps)
     :after-set (lambda () (xgamma-set-from-cfg t nil nil)))
 
   (defcustom xgamma-green 100
     "Gamma value for green channel in per cent."
     :type (range (0 . 200))
+    :depends init-xgamma
     :group (misc apps)
     :after-set (lambda () (xgamma-set-from-cfg nil t nil)))
 
   (defcustom xgamma-blue 100
     "Gamma value for blue channel in per cent."
     :type (range (0 . 200))
+    :depends init-xgamma
     :group (misc apps)
     :after-set (lambda () (xgamma-set-from-cfg nil nil t)))
 
