@@ -259,21 +259,26 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
     (when init-xgamma
       (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t)))
 
+  ;; auto-start trayer if requested
+  (unless batch-mode
+    (when init-trayer
+      (add-hook 'after-initialization-hook start-trayer t)))
+
   ;; auto-start xmobar if requested
   (unless batch-mode
     (when init-xmobar
-      (add-hook 'after-initialization-hook (lambda () (start-xmobar #:config xmobar-config)) t)))
+      (add-hook 'after-initialization-hook start-xmobar t)))
 
   ;; load xmodmap if requested
   (unless batch-mode
     (when init-xmodmap
-      (add-hook 'after-initialization-hook (lambda () (load-xmodmap #:config xmodmap-config)) t)
+      (add-hook 'after-initialization-hook load-xmodmap t)
       (add-hook 'before-restart-hook restore-keymap t)))
 
   ;; auto-start xsettingsd if requested
   (unless batch-mode
     (when init-xsettingsd
-      (add-hook 'after-initialization-hook (lambda () (start-xsettingsd #:config xsettingsd-config)) t)))
+      (add-hook 'after-initialization-hook start-xsettingsd t)))
 
   (when (eq error-destination 'init)
     (setq error-destination 'standard-error)))
