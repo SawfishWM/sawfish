@@ -56,7 +56,7 @@
 	  (when %pancake-proc (kill-process %pancake-proc))
           (setq %pancake-proc (make-process))
           (if (file-exists-p config)
-	      (start-process %pancake-proc "pancake" config)
+	      (start-process %pancake-proc "pancake" "-c" config)
 	    (display-message (format nil "given configuration filie does not exist."))))
       (display-message (format nil "pancake executable not found in PATH."))))
 
