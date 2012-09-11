@@ -58,18 +58,28 @@ anymore since Sawfish 1.7. Use @code{resize-window-prompt} instead. [Christopher
 (respectively old height) when prompt for new values. Shows an information, if one of the given
 values is not actually a number. [Christopher Bratusek]
 
-@item @code{trayer} module. Handles a @code{trayer} instance during a sawfish session. [Christopher Bratusek]
+@item External Application modules. Those modules allow handling, setting-up external application
+during a sawfish session. See @file{AUTOSTART} for additional notes on them.
+@itemize ++
+@item @code{trayer} module. Handles a @code{trayer} (a system-tray) instance during a sawfish session.
+[Christopher Bratusek]
 
-@item @code{xmobar} module. Handles a @code{xmobar} instance during a sawfish session. [Christopher Bratusek]
+@item @code{xmobar} module. Handles a @code{xmobar} (an on-screen, very flexible bar, monitoring
+whatever you like) instance during a sawfish session. [Christopher Bratusek]
 
 @item @code{xmodmap} module. Allows reading @file{~/.Xmodmap} on startup of Sawfish. [Christopher Bratusek]
 
-@item @code{xsettingsd} module. Handles a @code{xsettingsd} instance during a sawfish session. [Christopher Bratusek]
+@item @code{xsettingsd} module. Handles a @code{xsettingsd} (a daemon implementing XSettings to provide GTK+
+application with information like what theme to use))instance during a sawfish session. [Christopher Bratusek]
 
-@item @code{xgamma} module. Allows changing gamma settings on startup of Sawfish. [Christopher Bratusek]
+@item @code{xgamma} module. Allows changing display's gamma settings on startup of Sawfish. [Christopher Bratusek]
 
-@item For additional Notes on @code{trayer}, @code{xmobar}, @code{xsettingsd}, @code{xmodamap}, and @code{xgamma}
-modules refer to the file @code{AUTOSTART} in the source-directory.
+@item @code{fehlstart} module. Handles a @code{fehlstart} (a simple, but yet flexible application launcher)
+instance during a sawfish session. [Christopher Bratusek]
+
+@item @code{pancake} module. Hanles a @code{pancake} (a simple desktop panel with pager, window-list,
+taskbar, tray) instance during a sawfish session [Christopher Bratusek]
+@end itemize
 @end itemize
 @item Miscellaneous Changes
 @itemize @minus
