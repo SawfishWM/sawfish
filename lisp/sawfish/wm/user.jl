@@ -53,6 +53,7 @@
 	   sawfish.wm.frames
 	   sawfish.wm.menus
 	   sawfish.wm.commands.launcher
+	   sawfish.wm.ext.wallpaper
 	   sawfish.wm.prg.fehlstart
 	   sawfish.wm.prg.pancake
 	   sawfish.wm.prg.trayer
@@ -260,6 +261,11 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
   (unless batch-mode
     (when init-xgamma
       (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t)))
+
+  ;; set wallpaper if requested
+  (unless batch-mode
+    (when init-wallpaper
+      (add-hook 'after-initialization-hook set-wallpaper t)))
 
   ;; auto-start fehlstart if requested
   (unless batch-mode
