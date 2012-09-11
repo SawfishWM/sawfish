@@ -51,6 +51,9 @@ Each release lists incompatible changes at its top.
 
 @item @code{window-ops-menu} was still calling @code{resize-window-to-dimension} that didn't exist
 anymore since Sawfish 1.7. Use @code{resize-window-prompt} instead. [Christopher Bratusek]
+
+@item Make "Sawfish Rootmenu" label an insensitive menu-item, so that clicking it while the root-menu
+pops-up doesn't make the menu dissapear immediately. [Christopher Bratusek]
 @end itemize
 @item New Features
 @itemize @minus

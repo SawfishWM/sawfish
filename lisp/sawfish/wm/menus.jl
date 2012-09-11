@@ -163,7 +163,7 @@ before killing it.")
     ;; Mysterious underscore "_" before a stringoffers (human
     ;; langugage) translation. The one inside of a string
     ;; specifies shortcut key.
-    `((,(_ "Sawfish Rootmenu"))
+    `((,(_ "Sawfish Rootmenu") nil (insensitive . t))
       ()
       (,(_ "_Windows") . window-menu)
       (,(_ "Work_spaces") . workspace-menu)
