@@ -43,7 +43,7 @@
     :group (misc apps))
 
   (define (start-fehlstart )
-    "Start fehlstart. If a fehlstart process already exists, it's beeing killed.
+    "Start fehlstart. If a fehlstart process already exists, it's beeing killed."
     (if (program-exists-p "fehlstart")
         (progn
 	  (when %fehlstart-proc (kill-process %fehlstart-proc))
