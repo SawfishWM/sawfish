@@ -53,6 +53,8 @@
 	   sawfish.wm.frames
 	   sawfish.wm.menus
 	   sawfish.wm.commands.launcher
+	   sawfish.wm.prg.fehlstart
+	   sawfish.wm.prg.pancake
 	   sawfish.wm.prg.trayer
 	   sawfish.wm.prg.xgamma
 	   sawfish.wm.prg.xmobar
@@ -258,6 +260,16 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
   (unless batch-mode
     (when init-xgamma
       (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t)))
+
+  ;; auto-start fehlstart if requested
+  (unless batch-mode
+    (when init-fehlstart
+      (add-hook 'after-initialization-hook start-fehlstart t)))
+
+  ;; auto-start pancake if requested
+  (unless batch-mode
+    (when init-pancake
+      (add-hook 'after-initialization-hook start-pancake t)))
 
   ;; auto-start trayer if requested
   (unless batch-mode
