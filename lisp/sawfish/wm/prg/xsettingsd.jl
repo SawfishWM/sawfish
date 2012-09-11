@@ -49,16 +49,12 @@
     :depends init-xsettingsd
     :group (misc apps))
 
-  ;; SAWFISHRC
-  ;; (require 'sawfish.wm.prg.xsettingsd)
-  ;; (add-hook 'after-initialization-hook start-xsettingsd t)
-
   (define (dump-xsettings #!key (config xsettingsd-config))
     (if (program-exists-p "dump_xsettings")
 	(system (format nil "dump_xsettings > %s &" config))
       (message (format nil "dump_xsettings executable not found in PATH."))))
 
-  (define (start-xsettingsd #!key (config (concat (getenv "HOME") "/.xsettingsd")))
+  (define (start-xsettingsd #!key (config xsettingsd-config))
     "Start xsettingsd. If a xsettingsd process already exists, it's beeing killed.
      Configuration-file may be passed, if not, $HOME/.xsettingsd is used."
     (if (program-exists-p "xsettingsd")
