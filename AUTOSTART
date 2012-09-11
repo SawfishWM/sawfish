@@ -3,9 +3,33 @@ Additional Notes on sawfish.wm.prg.*
 
 All modules in sawfish.wm.prg. are 'required by default.
 
+=== Fehlstart ===
+
+This module allows you to initiate fehlstart with Sawfish.
+
+Fehlstart is a simple, yet powerful application launcher.
+By default the keybinding is "Super-TAB". Type "settings" in Fehlstart,
+to open the configuration file.
+
+In SawfishConfig => Misc => External Application you can choose
+whether to auto-start Fehlstart or not.
+
+=== Pancake ===
+
+This module allows you to control a pancake instance per-session.
+
+Pancake is a simple desktop panel with plugins like tray, pager, tasklist
+and clock. A sample pancakerc is supplied with the pancake source.
+
+In SawfishConfig => Misc => External Applications you can choose whether
+to auto-start pancake or not and what configuration file to use. By default
+that is $HOME/.pancakerc
+
 === Trayer ===
 
 This modules allows you to control a trayer instance per-session.
+
+Trayer is a system-tray implementation.
 
 In SawfishConfig => Misc => External Applications you can adjust
 any setting trayer provides and whether to auto-start it.
@@ -20,6 +44,11 @@ start if you choose to do so.
 === xmobar ===
 
 This module allows you to control a xmobar instance per-session.
+
+xmobar is a on-screen panel displaying output of any command you want it to.
+
+NOTE: In your xmobar configuration file set "lowerOnStart" to "False" if you
+experience that xmobar is invisible on startup.
 
 In SawfishConfig => Misc => External Applications you can choose whether to
 auto-start xmobar with Sawfish and what configuration file to load. By default
