@@ -40,46 +40,64 @@
 
   (defgroup wallpaper "Wallpaper" :group appearance)
 
+  (defcustom init-wallpaper nil
+    "Whether to change wallpaper on startup."
+    :type boolean
+    :group (appearance wallpaper)
+    :after-set (lambda () (set-wallpaper)))
+
   (defcustom root-wallpaper nil
     "Wallpaper to use: \\w"
     :type image
     :group (appearance wallpaper)
-    :after-set (lambda () (set-wallpaper)))
+    :after-set (lambda () (set-wallpaper))
+    :depends init-wallpaper)
 
   (defcustom wallpaper-setter ""
     "Application to set desktop wallpaper."
     :type file-name
     :group (appearance wallpaper)
-    :after-set (lambda () (set-wallpaper)))
+    :after-set (lambda () (set-wallpaper))
+    :depends init-wallpaper)
 
   (defcustom wallpaper-setter-args ""
     "Additional arguements to pass to the application."
     :type string
     :group (appearance wallpaper)
-    :after-set (lambda () (set-wallpaper)))
+    :after-set (lambda () (set-wallpaper))
+    :depends init-wallpaper)
 
   (defcustom set-wallpaper-gnome2 nil
     "Whether to apply wallpaper to GNOME2"
     :type boolean
     :group (appearance wallpaper)
-    :after-set (lambda () (set-wallpaper-gnome)))
+    :after-set (lambda () (set-wallpaper))
+    :depends init-wallpaper)
 
   (defcustom set-wallpaper-xfce4 nil
     "Whether to apply wallpaper to XFCE4"
     :type boolean
     :group (appearance wallpaper)
-    :after-set (lambda () (set-wallpaper-xfce)))
+    :after-set (lambda () (set-wallpaper))
+    :depends init-wallpaper)
 
   (defcustom wallpaper-display-type 'centered
     "How to display the image (only for GNOME2 and XFCE4)."
     :type (choice auto/none centered tiled scaled streched zoom spanned)
     :group (appearance wallpaper)
+    :depends init-wallpaper
     :after-set (lambda () (set-wallpaper)))
 
   (define (set-wallpaper)
-    (when (file-exists-p root-wallpaper)
-      (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
-      (when wallpaper-setter
+    (when root-wallpaper
+      (when set-wallpaper-xfce4
+        (set-wallpaper-xfce))
+      (when set-wallpaper-gnome2
+        (set-wallpaper-gnome))
+      (when (and wallpaper-setter
+		 (not (eq desktop-environment "gnome"))
+		 (not (eq desktop-environment "xfce")))
+        (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
 	(system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &")))))
 
   (defvar gnome-type nil)
@@ -87,9 +105,7 @@
   (defvar wallpaper-filename nil)
 
   (define (set-wallpaper-gnome)
-    (when (and (eq desktop-environment "gnome")
-	       set-wallpaper-gnome2
-	       (file-exists-p root-wallpaper))
+    (when (eq desktop-environment "gnome")
       (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
 	(case wallpaper-display-type
 	  ((auto/none) (setq gnome-type "none"))
@@ -102,9 +118,7 @@
 			/desktop/gnome/background/picture_options " gnome-type " &"))))
 
   (define (set-wallpaper-xfce)
-    (when (and (eq desktop-environment "xfce")
-	       set-wallpaper-xfce4
-	       (file-exists-p root-wallpaper))
+    (when (eq desktop-environment "xfce")
       (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
       (case wallpaper-display-type
 	((auto/none) (setq xfce-type 0))
@@ -119,6 +133,3 @@
 		      -s " wallpaper-filename " &"))
       (system (concat "xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/image-style
 		      -s " xfce-type " &")))))
-
-  
-
