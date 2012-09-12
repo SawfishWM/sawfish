@@ -54,7 +54,6 @@
 	   sawfish.wm.menus
 	   sawfish.wm.commands.launcher
 	   sawfish.wm.ext.wallpaper
-	   sawfish.wm.prg.clipit
 	   sawfish.wm.prg.fehlstart
 	   sawfish.wm.prg.pancake
 	   sawfish.wm.prg.trayer
