@@ -54,6 +54,7 @@
 	   sawfish.wm.menus
 	   sawfish.wm.commands.launcher
 	   sawfish.wm.ext.wallpaper
+	   sawfish.wm.prg.clipit
 	   sawfish.wm.prg.fehlstart
 	   sawfish.wm.prg.pancake
 	   sawfish.wm.prg.trayer
@@ -257,44 +258,23 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
       (system "sawfish-config &")
       (delete-file "~/.restart_sc")))
 
-  ;; adjust xgamma settings if requested
+  ;; auto-start handling
   (unless batch-mode
     (when init-xgamma
-      (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t)))
-
-  ;; set wallpaper if requested
-  (unless batch-mode
+      (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t))
     (when init-wallpaper
-      (add-hook 'after-initialization-hook set-wallpaper t)))
-
-  ;; auto-start fehlstart if requested
-  (unless batch-mode
+      (add-hook 'after-initialization-hook set-wallpaper t))
     (when init-fehlstart
-      (add-hook 'after-initialization-hook start-fehlstart t)))
-
-  ;; auto-start pancake if requested
-  (unless batch-mode
+      (add-hook 'after-initialization-hook start-fehlstart t))
     (when init-pancake
-      (add-hook 'after-initialization-hook start-pancake t)))
-
-  ;; auto-start trayer if requested
-  (unless batch-mode
+      (add-hook 'after-initialization-hook start-pancake t))
     (when init-trayer
-      (add-hook 'after-initialization-hook start-trayer t)))
-
-  ;; auto-start xmobar if requested
-  (unless batch-mode
+      (add-hook 'after-initialization-hook start-trayer t))
     (when init-xmobar
-      (add-hook 'after-initialization-hook start-xmobar t)))
-
-  ;; load xmodmap if requested
-  (unless batch-mode
+      (add-hook 'after-initialization-hook start-xmobar t))
     (when init-xmodmap
       (add-hook 'after-initialization-hook load-xmodmap t)
-      (add-hook 'before-restart-hook restore-keymap t)))
-
-  ;; auto-start xsettingsd if requested
-  (unless batch-mode
+      (add-hook 'before-restart-hook restore-keymap t))
     (when init-xsettingsd
       (add-hook 'after-initialization-hook start-xsettingsd t)))
 
