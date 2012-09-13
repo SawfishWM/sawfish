@@ -84,6 +84,10 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
   ;; frame-style loaded if user hasn't set their own
   (define fallback-frame-style 'StyleTab)
 
+  ;; give root-window 'WINDOW_MANAGER property with value sawfish
+  (unless batch-mode
+    (set-x-text-property 'root 'WINDOW_MANAGER (vector "sawfish")))
+
   (define rc-files '("~/.sawfishrc" "~/.sawfish/rc"))
 
   ;; initialize the special variable pointing at this structure
