@@ -440,9 +440,9 @@ generate.")
     "Cursor shape for menu button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -452,9 +452,9 @@ generate.")
     "Cursor shape for close button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -464,9 +464,9 @@ generate.")
     "Cursor shape for iconify button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -476,9 +476,9 @@ generate.")
     "Cursor shape for maximize button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -488,9 +488,9 @@ generate.")
     "Cursor shape for shade button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -500,9 +500,9 @@ generate.")
     "Cursor shape for sticky button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -512,9 +512,9 @@ generate.")
     "Cursor shape for lock button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -524,9 +524,9 @@ generate.")
     "Cursor shape for next-workspace button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -536,9 +536,9 @@ generate.")
     "Cursor shape for previous-workspace button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -548,9 +548,9 @@ generate.")
     "Cursor shape for rename button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -560,9 +560,9 @@ generate.")
     "Cursor shape for move-resize button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -572,9 +572,9 @@ generate.")
     "Cursor shape for raise-lower button: \\left"
     :type (choice arrow box_spiral center_ptr circle cross cross_reverse
                   crosshair diamond_cross dotbox double_arrow draped_box
-		  fleur hand1 hand2 iron_cross left_ptr ll_angel mouse
+		  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
 		  pencil pirate plus question_arrow right_ptr sb_left_arrow
-		  sb_right_arrow sb_bottom_arrow sb_top_arrow spider star
+		  sb_right_arrow sb_down_arrow sb_up_arrow spider star
 		  target tcross xterm X_cursor)
     :depends use-custom-button-cursor-shape
     :group appearance
@@ -616,6 +616,7 @@ generate.")
   (defcustom custom-border-width 0
     "Width for the window border"
     :type number
+    :range (0 . 10)
     :group appearance
     :depends use-custom-border
     :after-set (lambda () (update-border-color-width)))
