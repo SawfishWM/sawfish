@@ -39,7 +39,7 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
-@heading 1.XX "XXX"
+@heading 1.9.90 "Strike A Pose"
 @itemize @bullet
 
 @item Bug Fixes
@@ -54,6 +54,9 @@ anymore since Sawfish 1.7. Use @code{resize-window-prompt} instead. [Christopher
 
 @item Make "Sawfish Rootmenu" label an insensitive menu-item, so that clicking it while the root-menu
 pops-up doesn't make the menu dissapear immediately. [Christopher Bratusek]
+
+@item In SawfishConfig you can select different cursor shapes for different buttons. Some of the
+definitions have been wrong and could crash Sawfish when choosing them. This is fixed now. [fuchur]
 @end itemize
 @item New Features
 @itemize @minus
