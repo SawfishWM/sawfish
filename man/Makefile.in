@@ -30,20 +30,20 @@ MAKEINFO = makeinfo
 MAKEINFOFLAGS =
 
 
-all : sawfish.info ../NEWS ../USERDOC ../FAQ
+all : sawfish.info NEWS USERDOC FAQ
 
-../USERDOC : user-doc.texi
-	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../USERDOC
+USERDOC : user-doc.texi
+	$(MAKEINFO) $(MAKEINFOFLAGS) --no-headers $< -o ../doc/USERDOC
 
 # Usually this suffices:
 # makeinfo --no-validate  --no-headers news.texi > ../NEWS
-../NEWS : news.texi
+NEWS : news.texi
 	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../NEWS
 
 # Usually this suffices:
 # makeinfo --no-validate  --no-headers news.texi > ../FAQ
-../FAQ : faq.texi
-	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../FAQ
+FAQ : faq.texi
+	$(MAKEINFO) $(MAKEINFOFLAGS) --no-validate --no-headers $< -o ../doc/FAQ
 
 # Usually this suffices:
 # makeinfo  -I . sawfish.texi -o sawfish.info
@@ -73,6 +73,7 @@ clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.??? *1.gz
 
 distclean : gitclean
+	rm -f Makefile
 
 gitclean : clean
-	rm -f Makefile
+	rm -f ../doc/FAQ ../doc/USERDOC ../NEWS

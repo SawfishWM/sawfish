@@ -98,21 +98,17 @@ distclean :
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
-	rm -f *~ DOC* TAGS build.h sawfish.pc
-
-debclean : distclean
-	rm -f sawfish*.ebuild sawfish.spec libtool ltmain.sh config.h.in NEWS
-	rm -f configure m4/*
+	rm -f *~ DOC* TAGS build.h data/sawfish.pc
 
 gitclean : distclean
 	-fakeroot debian/rules clean
 	rm -f aclocal.m4 configure
 	rm -rf autom4te.cache m4/
 	rm -f libtool ltmain.sh config.h.in
-	rm -f sawfish.spec sawfish*.ebuild NEWS
+	rm -f sawfish.spec sawfish*.ebuild
 
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
 	      --language=lisp `find $(srcdir) -name '*.jl' -print`
 
-.PHONY: install uninstall tar clean gitclean distclean TAGS
+.PHONY: install uninstall tar clean debclean gitclean distclean TAGS
