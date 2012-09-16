@@ -414,9 +414,9 @@ dnl Build all files
 AC_CONFIG_FILES([
 Makedefs
 Makefile
-sawfish.ebuild
-sawfish.pc
-sawfish.spec
+data/sawfish.ebuild
+data/sawfish.pc
+data/sawfish.spec
 lisp/Makefile
 lisp/sawfish/cfg/Makefile
 lisp/sawfish/gtk/Makefile
@@ -431,7 +431,8 @@ themes/Makefile
 
 AC_OUTPUT
 
-mv sawfish.ebuild sawfish-$version.ebuild
+mv data/sawfish.ebuild sawfish-$version.ebuild
+mv data/sawfish.spec sawfish.spec
 
 REP_VERSION="`pkg-config --modversion librep`"
 REP_GTK_VERSION="`pkg-config --modversion rep-gtk`"

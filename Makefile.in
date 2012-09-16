@@ -43,17 +43,17 @@ install : all installdirs
 	for f in ./DOC*; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawfishexecdir); \
 	done
-	$(INSTALL_DATA) $(srcdir)/sawfish.desktop \
+	$(INSTALL_DATA) $(srcdir)/data/sawfish.desktop \
 		$(DESTDIR)$(datadir)/applications/
 	if test $(GNOME2_SESSION) = "yes"; then \
-		$(INSTALL_DATA) $(srcdir)/sawfish-wm.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties; \
+		$(INSTALL_DATA) $(srcdir)/data/sawfish-wm.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties; \
 	fi
-	$(INSTALL_DATA) $(top_srcdir)/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
+	$(INSTALL_DATA) $(top_srcdir)/data/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 	if test $(XDM_SESSION) = "yes"; then \
-		$(INSTALL_DATA) $(top_srcdir)/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop; \
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop; \
 	fi
 	if test $(KDE4_SESSION) = "yes"; then \
-		$(INSTALL_DATA) $(top_srcdir)/sawfish-ksm.desktop $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop; \
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-ksm.desktop $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop; \
 	fi
 
 installdirs : mkinstalldirs
@@ -105,11 +105,11 @@ debclean : distclean
 	rm -f configure m4/*
 
 gitclean : distclean
+	-fakeroot debian/rules clean
 	rm -f aclocal.m4 configure
 	rm -rf autom4te.cache m4/
 	rm -f libtool ltmain.sh config.h.in
 	rm -f sawfish.spec sawfish*.ebuild NEWS
-	-fakeroot debian/rules clean
 
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
