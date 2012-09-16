@@ -1,0 +1,87 @@
+* Sawflibs
+
+  A collection of libraries for Sawfish.
+
+** sawflibs.tile
+
+   Tilings for your workspaces. These are the exported interactive
+   commands:
+
+   - =tile-workspace= Tiles the current workspace with the active,
+     registered tiling, if any.
+   - =next-tiling= Cycles through available tilings for this workspace.
+   - =increase-max-windows=, =decrease-max-windows= For tall tiling,
+     increases/decreases the number of visible windows.
+   - =tall-rotate-left=, =tall-rotate-left= For tall tiling, rotate the
+     tile left or right.
+
+   Currently there are 2 tilings available:
+
+   - *tall tile* Use =tall-tiling= to add to a given workspace. It works
+     as xmonad's tall layout: one master window on the left, and the
+     rest stacked on its right. The function takes a workspace number
+     as its first argument plus the following keyword arguments:
+     - =width= The master window will take (screen-width)/width pixels
+       (default: 2).
+     - =top=, =bottom= Top and bottom margins, in pixels (default: 0).
+     - =gap= Spacing between adjacent windows, in pixels (default: 0).
+     - =max= Maximum number of visible windows (default: 3).
+     - =auto= A boolean indicating whether tiling should happen
+       automatically whenever a new window is created (default: t).
+
+   - *column tile* Divide the screen in the given number of columns and
+     distributed windows among them. All columns have the same width
+     and the window width is resized to fit in (its height is left
+     untouched). The function to register a column tiling is
+     =col-tiling=, which again takes the workspace number as its first
+     argument and the following keyword args:
+     - =cols= number of columns (default: 3)
+     - =top=, =bottom=, =gap= as above.
+     - =auto= as above, but defaults to false.
+
+   Sample usage:
+
+   #+BEGIN_SRC
+     (require 'sawflibs.tile)
+     (tall-tiling 3 #:width 2 #:top 0 #:bottom 1 #:gap 1 #:max 3)
+     (tall-tiling 1 #:width 3 #:top 20 #:bottom 3 #:gap 1 #:max 2 #:auto #f)
+     ;; we can have more than one tiling per workspace, and
+     ;; switch among them with 'next-tiling':
+     (tall-tiling 0 #:width 3 #:top 20 #:bottom 20 #:gap 1 #:max 2 #:auto #f)
+     (col-tiling 0 #:cols 3 #:gap 2 #:top 40 #:bottom 20)
+
+     (bind-keys global-keymap
+                "F12" 'tile-workspace
+                "Super-=" 'increase-max-windows
+                "Super--" 'decrease-max-windows
+                "Super-Space" 'next-tiling)
+   #+END_SRC
+
+** sawfilbs.xmobar
+   This module exports two procedures:
+
+     =- activate-xmobar=, which takes the name of an Xmobar
+       configuration file and starts an xmobar instance, piping to its
+       standard input a list of currently active namespaces and the
+       title of the currently focused window. If an xmobar is already
+       running, =activate-xmobar= will kill it before starting the new
+       one.
+
+     - =activate-xmobar-prop=, which takes a symbol representing an X
+       atom name, and sets the corresponding X property to the value
+       described above. This one is useful is you use =XMonadProp=
+       (instead of =StdinReader=) in your xmobar configuration (in which
+       case you will pass '_XMONAD_LOG as the property to be set.
+
+   Both procedures accept the following keyword arguments:
+
+     - =width= Maximum width of the displayed window title
+     - =foreground= Foreground color for workspace names
+     - =highlight= Highlight color for current workspace name
+
+** sawflibs.util
+
+    Utility functions for rep programming.
+
+    - take N LST
+    - group-by LST N
