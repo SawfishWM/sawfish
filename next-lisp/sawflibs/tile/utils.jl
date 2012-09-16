@@ -25,15 +25,13 @@
 	  sawfish.wm.frames
 	  sawfish.wm.placement
 	  sawfish.wm.workspace
-	  sawfish.wm.ext.expose
           sawfish.wm.util.window-order
           sawfish.wm.misc)
 
   (define (window-workspace w) (car (window-get w 'workspaces)))
 
   (define (workspace-windows #!optional ignore)
-    (remove-if (lambda (w) (or (equal w ignore) (window-ignored-p w)
-			       (window-avoided-p w) (window-never-expose-p w)))
+    (remove-if (lambda (w) (or (equal w ignore) (window-ignored-p w)))
                (window-order current-workspace)))
 
   (define (window-x w) (car (window-position w)))

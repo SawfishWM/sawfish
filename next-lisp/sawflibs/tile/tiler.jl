@@ -1,13 +1,17 @@
 (define-structure sawflibs.tile.tiler
     (export tile-workspace
+            untile-window
             register-workspace-tiler
             current-tiler-name
+            tileable-windows
             next-tiling
             setting
             set-setting)
+
     (open rep
           rep.system
           rep.data.tables
+          sawfish.wm.windows
           sawflibs.tile.utils)
 
   (define %tilers '())
@@ -20,11 +24,14 @@
 
   (define (forget w) (table-unset %sizes w))
 
+  (define (restore-window w)
+    (let ((s (table-ref %sizes w)))
+      (when s
+        (apply push-window (cons w s))
+        t)))
+
   (define (restore-windows ws)
-    (mapc (lambda (w)
-            (let ((s (table-ref %sizes w)))
-              (when s (apply push-window (cons w s)))))
-          (workspace-windows ws)))
+    (mapc restore-window (workspace-windows ws)))
 
   (define (restore-sizes ws)
     (mapc (lambda (w)
@@ -63,8 +70,17 @@
 
   (define (tiling-tiler ti) (nth 0 ti))
   (define (tiling-settings ti) (nth 1 ti))
-  (define (tiling-auto-p ti) (nth 2 ti))
+
+  (define (tiling-auto-p ti w)
+    (let ((p (nth 2 ti)))
+      (if (functionp p) (p w) p)))
+
   (define (tiling-name ti) (nth 3 ti))
+
+  (define (tileable-windows #!optional ignore)
+    (let ((ws (workspace-windows ignore))
+          (tp (nth 2 (tiling))))
+      (if (functionp tp) (filter tp ws) ws)))
 
   (define (current-tiler-name) (tiling-name (tiling)))
 
@@ -73,8 +89,12 @@
     (let ((ti (tiling)))
       (when ti ((tiling-tiler ti) new-window destroyed-window))))
 
+  (define (untile-window w)
+    (interactive "%f")
+    (when (restore-window w) (tile-workspace nil w)))
+
   (define (tileable-window-p w)
-    (and (tiling-auto-p (tiling (window-workspace w)))
+    (and (tiling-auto-p (tiling (window-workspace w)) w)
          (eq (window-type w) 'default)))
 
   (define (add-autotile w)
@@ -103,4 +123,7 @@
   (add-hook 'after-move-hook maybe-save t)
   (add-hook 'after-resize-hook maybe-save t)
   (add-hook 'after-add-window-hook add-autotile t)
-  (add-hook 'destroy-notify-hook destroy-autotile t))
+  (add-hook 'uniconify-window-hook add-autotile t)
+  (add-hook 'iconify-window-hook destroy-autotile t)
+  (add-hook 'destroy-notify-hook destroy-autotile t)
+  (add-hook 'unmap-notify-hook destroy-autotile t))

@@ -2,6 +2,7 @@
 (define-structure sawflibs.tile
     (export align-workspace-windows
             tile-workspace
+            untile-window
             next-tiling
             col-tiling
             tall-tiling
@@ -15,4 +16,3 @@
           sawflibs.tile.tiler
           sawflibs.tile.tall
           sawflibs.tile.col))
-
