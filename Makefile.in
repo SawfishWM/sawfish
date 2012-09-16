@@ -99,12 +99,11 @@ distclean :
 	done
 	rm -f config.cache config.h config.log config.status Makedefs Makefile
 	rm -f *~ DOC* TAGS build.h data/sawfish.pc
+	rm -rf autom4te.cache m4/ aclocal.m4
 
 gitclean : distclean
 	-fakeroot debian/rules clean
-	rm -f aclocal.m4 configure
-	rm -rf autom4te.cache m4/
-	rm -f libtool ltmain.sh config.h.in
+	rm -f configure libtool ltmain.sh config.h.in
 	rm -f sawfish.spec sawfish*.ebuild
 
 TAGS :
