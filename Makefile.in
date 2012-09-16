@@ -106,6 +106,9 @@ gitclean : distclean
 	rm -f configure libtool ltmain.sh config.h.in
 	rm -f sawfish.spec sawfish*.ebuild
 
+export :
+	git checkout-index --prefix="$$HOME/sawfish-$(version)/" -a
+
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
 	      --language=lisp `find $(srcdir) -name '*.jl' -print`
