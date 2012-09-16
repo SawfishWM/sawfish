@@ -44,7 +44,7 @@ dh_install_data = dh_install -psawfish-data --autodest
 	dh $@ --with autotools-dev --with autoreconf
 
 override_dh_auto_clean:
-	-$(MAKE) debclean
+	-$(MAKE) distclean
 
 override_dh_auto_configure:
 	env CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" dh_auto_configure -- $(DEB_CONFIGURE_USER_FLAGS)
@@ -59,7 +59,7 @@ override_dh_auto_install:
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=sawfish-data
-	dh_installdocs -psawfish-data  FAQ NEWS README TODO OPTIONS KEYBINDINGS USERDOC AUTOSTART XSettings
+	dh_installdocs -psawfish-data  doc/FAQ NEWS README TODO doc/OPTIONS doc/KEYBINDINGS doc/USERDOC doc/AUTOSTART doc/XSettings
 
 override_dh_installchangelogs:
 	dh_installchangelogs -psawfish-data

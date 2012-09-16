@@ -81,8 +81,8 @@ fi
 rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%doc COPYING COPYING.SOUNDS FAQ KEYBINDINGS NEWS OPTIONS
-%doc README README.IMPORTANT TODO USERDOC AUTOSTART XSettings
+%doc COPYING COPYING.SOUNDS doc/FAQ doc/KEYBINDINGS NEWS doc/OPTIONS
+%doc README README.IMPORTANT TODO doc/USERDOC doc/AUTOSTART doc/XSettings
 %dir %{_kde4_appsdir}/ksmserver
 %dir %{_kde4_appsdir}/ksmserver/windowmanagers
 %{_bindir}/*
