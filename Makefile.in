@@ -106,11 +106,11 @@ gitclean : distclean
 	rm -f configure libtool ltmain.sh config.h.in
 	rm -f sawfish.spec sawfish*.ebuild
 
-export :
+tarball :
 	git checkout-index --prefix="$$HOME/sawfish-$(version)/" -a
 
 TAGS :
 	etags --language=c `find $(srcdir) -name '*.[ch]' -print` \
 	      --language=lisp `find $(srcdir) -name '*.jl' -print`
 
-.PHONY: install uninstall tar clean debclean gitclean distclean TAGS
+.PHONY: install uninstall tar clean debclean gitclean distclean tarball TAGS
