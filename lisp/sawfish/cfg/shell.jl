@@ -49,24 +49,17 @@
 
   (define ok-widget)
   (define revert-widget)
-  (define wiki-button)
-  (define doc-button)
   (define about-button)
-  (define edit-button)
-  (define install-theme-label)
-  (define install-theme-button)
 
   (define (initialize-shell)
     (let ((vbox (gtk-vbox-new nil box-spacing))
-	  (hbox-a (gtk-hbutton-box-new))
-	  (hbox-b (gtk-hbutton-box-new))
+	  (hbox (gtk-hbutton-box-new))
 	  (s-scroller (gtk-scrolled-window-new))
 	  root-container)
 
       (setq main-window (gtk-window-new 'toplevel))
 
-      (gtk-box-set-homogeneous hbox-a t)
-      (gtk-box-set-homogeneous hbox-b t)
+      (gtk-box-set-homogeneous hbox t)
       (gtk-window-set-resizable main-window t)
       (gtk-window-set-icon-name main-window "sawfish-config")
       (gtk-window-set-default-size main-window 550 400)
@@ -102,24 +95,12 @@
 
 	(setq ok-widget (gtk-button-new-from-stock "gtk-close"))
 	(gtk-button-set-relief ok-widget 'none)
+
 	(setq revert-widget (gtk-button-new-from-stock "gtk-undo"))
 	(gtk-button-set-relief revert-widget 'none)
-	
-	(setq wiki-button (gtk-link-button-new-with-label "http://sawfish.wikia.com/" "Browse Wiki"))
-	(gtk-button-set-relief wiki-button 'none)
-	
-	(setq edit-button (gtk-button-new-from-stock "gtk-edit"))
-	(gtk-button-set-label edit-button "Edit RC")
-	(gtk-button-set-relief edit-button 'none)
-	
+
 	(setq about-button (gtk-button-new-from-stock "gtk-about"))
 	(gtk-button-set-relief about-button 'none)
-	(setq doc-button (gtk-button-new-from-stock "gtk-help"))
-	(gtk-button-set-relief doc-button 'none)
-	
-	(setq install-theme-label (gtk-label-new "Install theme:"))
-	(setq install-theme-button (gtk-file-chooser-button-new '() 'open))
-	(gtk-file-chooser-set-filename install-theme-button "~")
 
 	(gtk-window-set-title main-window (_ "Sawfish Configurator"))
 	(gtk-widget-set-name main-window (_ "Sawfish Configurator"))
@@ -128,53 +109,20 @@
 
       (g-signal-connect main-window "delete_event" on-quit)
 
-	(gtk-box-set-spacing hbox-a button-box-spacing)
-	(gtk-button-box-set-layout hbox-a 'spread)
+	(gtk-box-set-spacing hbox button-box-spacing)
+	(gtk-button-box-set-layout hbox 'spread)
 
-	(gtk-box-set-spacing hbox-b button-box-spacing)
-	(gtk-button-box-set-layout hbox-b 'spread)
-	
-	(gtk-box-pack-end vbox hbox-b)
-	(gtk-box-pack-end vbox hbox-a)
+	(gtk-box-pack-end vbox hbox)
 
 	(g-signal-connect ok-widget "clicked" on-ok)
 	(g-signal-connect revert-widget "clicked" on-revert)
-	
-	(g-signal-connect edit-button "clicked"
-	  (lambda () (if (file-exists-p "~/.sawfishrc")
-		         (system "xdg-open ~/.sawfishrc &")
-		       (if (file-exists-p "~/.sawfish/rc")
-			   (system "xdg-open ~/.sawfish/rc &")
-			 (system "echo \";;; Sawfish Resource File\" > ~/.sawfishrc &")
-			 (system "xdg-open ~/.sawfishrc &")))))
-	
+
 	(g-signal-connect about-button "clicked"
 	  (lambda () (system "sawfish-about >/dev/null 2>&1 </dev/null &")))
-	
-	(g-signal-connect doc-button "clicked"
-	  (lambda () (system "x-terminal-emulator -e \"info sawfish Top\" &")))
-	
-	(g-signal-connect install-theme-button "file-set"
-	  (lambda () (let ((file (gtk-file-chooser-get-filename install-theme-button))
-			   (filex))
-		       (unless (file-exists-p "~/.sawfish/themes/")
-			 (unless (file-exists-p "~/.sawfish/")
-			   (make-directory "~/.sawfish/"))
-			 (make-directory "~/.sawfish/themes/"))
-		       (setq filex (last (string-split "/" file)))
-		       (gtk-file-chooser-set-filename install-theme-button "~")
-		       (if (string-match "\\.tar" filex)
-			   (copy-file file (concat "~/.sawfish/themes/" filex))
-			 (sawfish-config-display-info "Only tar-archives can be installed at the moment." nil)))))
 
-	(gtk-container-add hbox-a wiki-button)
-	(gtk-container-add hbox-b install-theme-label)
-	(gtk-container-add hbox-b install-theme-button)
-	(gtk-container-add hbox-b doc-button)
-	(gtk-container-add hbox-b edit-button)
-	(gtk-container-add hbox-a about-button)
-	(gtk-container-add hbox-a revert-widget)
-	(gtk-container-add hbox-a ok-widget)
+	(gtk-container-add hbox about-button)
+	(gtk-container-add hbox revert-widget)
+	(gtk-container-add hbox ok-widget)
 
       (gtk-container-add root-container vbox)
       (gtk-widget-show-all main-window)
@@ -320,11 +268,11 @@
       (gtk-window-set-icon-name window "gtk-info")
 
       (gtk-container-set-border-width window 10)
-      
+
       (gtk-label-set-line-wrap label t)
-      
+
       (gtk-widget-set-size-request label 225 45)
-      
+
       (if kill
 	  (progn
 	    (g-signal-connect window "delete_event" (lambda () throw 'quit 1))
@@ -333,7 +281,7 @@
 			  (lambda () (gtk-widget-destroy window)))
 	(g-signal-connect button "clicked"
 			  (lambda () (gtk-widget-destroy window))))
-	    
+
       (gtk-container-add window vbox)
       (gtk-container-add vbox label)
       (gtk-container-add vbox button)
