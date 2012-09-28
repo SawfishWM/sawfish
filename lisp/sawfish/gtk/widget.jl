@@ -48,7 +48,8 @@
 	   rep.system
 	   rep.util.utf8
 	   rep.util.misc
-	   rep.regexp)
+	   rep.regexp
+	   rep.io.files)
      (access rep.structures))
 
   (defconst box-spacing 4)
@@ -482,6 +483,72 @@
 	  (item op)))))
 
   (define-widget-type 'labelled make-labelled-item)
+
+  (define (make-label-item changed-callback label)
+    (declare (unused changed-callback))
+    (let ((box (gtk-hbox-new nil box-spacing))
+	  (label (gtk-label-new (_ label))))
+      (gtk-label-set-line-wrap label t)
+      (gtk-box-pack-start box label)
+      (gtk-widget-show-all box)
+      (lambda (op)
+	(if (eq op 'gtk-widget)
+	    box
+	  (lambda () t)))))
+
+  (define-widget-type 'label make-label-item)
+
+  (define (make-link-item changed-callback link label)
+    (declare (unused changed-callback))
+    (let ((box (gtk-hbox-new nil box-spacing))
+	  (link (gtk-link-button-new-with-label link (_ label))))
+      (gtk-button-set-relief link 'none)
+      (gtk-box-pack-start box link)
+      (gtk-widget-show-all box)
+      (lambda (op)
+	(if (eq op 'gtk-widget)
+	    box
+	  (lambda () t)))))
+
+  (define-widget-type 'link make-link-item)
+
+  (define (make-xdg-item changed-callback file label create)
+    (declare (unused changed-callback))
+    (let ((box (gtk-hbox-new nil box-spacing))
+	  (button (gtk-button-new-with-label (_ label))))
+      (gtk-box-pack-start box button)
+      (gtk-button-set-relief button 'none)
+      (g-signal-connect button "clicked"
+	(lambda ()
+	  (if (and (not (file-exists-p file))
+		   create)
+	      (system (format nil "touch %s && xdg-open %s &" file file))
+	    (when (file-exists-p file)
+	      (system (format nil "xdg-open %s &" file))))))
+      (gtk-widget-show-all box)
+      (lambda (op)
+	(if (eq op 'gtk-widget)
+	    box
+	  (lambda () t)))))
+
+  (define-widget-type 'xdg make-xdg-item)
+
+  (define (make-shell-item changed-callback command label)
+    (declare (unused changed-callback))
+    (let ((box (gtk-hbox-new nil box-spacing))
+	  (button (gtk-button-new-with-label (_ label))))
+      (gtk-box-pack-start box button)
+      (gtk-button-set-relief button 'none)
+      (g-signal-connect button "clicked"
+	(lambda ()
+	      (system (format nil "x-terminal-emulator -e \"%s\" &" command))))
+      (gtk-widget-show-all box)
+      (lambda (op)
+	(if (eq op 'gtk-widget)
+	    box
+	  (lambda () t)))))
+
+  (define-widget-type 'shell make-shell-item)
 
   (define (make-optional-item changed-callback item)
     (let ((box (gtk-hbox-new nil box-spacing))
