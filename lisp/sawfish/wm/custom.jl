@@ -525,7 +525,7 @@ the user."
 	   (custom-load custom-default-file))))
 
   (defcustom introduction nil
-    "Intro text."
+    ""
     :type (label "\tSawfish Configuration utility.\n
 \nSawfishConfig allows you to adjust vartious aspects of sawfish easily. \
 Choose a group from the tree on the left and adjust Sawfish to your liking.
@@ -534,19 +534,19 @@ defcustoms in the script\). Additional information about Sawfish can be found at
     :group ())
 
   (defcustom introduction-link nil
-    "Intro link."
+    ""
     :type (link "http://sawfish.wikia.com" "http://sawfish.wikia.com" nil)
     :group ())
 
   (defcustom introduction-edit nil
-    "Intro edit."
+    ""
     :type (v-and (label "\nSawfish additionaly supports a user resource file \
 in which you can add custom function, load additional scripts on startup \
-and much more.") (xdg "~/.sawfishrc" "=> open (or create) $HOME/.sawfishrc" t))
+and much more.") (xdg "~/.sawfishrc" "=> open (or create) resource file"))
     :group ())
 
   (defcustom introduction-info nil
-    "Intro info."
+    ""
     :type (v-and (label "\nSawfish features an info file, containing lots of \
 useful information about Sawfish itself and how to use it.")
 (shell "info sawfish Top" "=> view info file"))
