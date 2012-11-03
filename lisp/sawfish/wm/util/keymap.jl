@@ -165,18 +165,18 @@ the command is found in the list of keymaps KEYMAPS."
 ;;; grab the next key event
 
   (define (read-event #!optional prompt)
-    (call-with-pointer-grabbed
-      (lambda ()
-	(unwind-protect
-	    (let ((override-keymap '(keymap))
-		  (pointer-motion-threshold 20)
-		  (unbound-key-hook
-		    (list (lambda ()
-		            (throw 'read-event (current-event))))))
-	      (display-message (or prompt (_ "Press key...")))
-	      (catch 'read-event
-	        (recursive-edit)))
-	  (display-message nil)))))
+    (call-with-keyboard-grabbed
+     (lambda ()
+       (unwind-protect
+	   (let
+	       ((override-keymap '(keymap))
+		(unbound-key-hook
+		 (list (lambda ()
+			 (throw 'read-event (current-event))))))
+	     (display-message (or prompt (_ "Press key...")))
+	     (catch 'read-event
+	       (recursive-edit)))
+	 (display-message nil)))))
 
   (define (quote-event)
     "Sends the next key event directly to the focused client window, ignoring
