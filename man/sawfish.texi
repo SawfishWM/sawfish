@@ -4972,7 +4972,7 @@ Sawfish does not tile all windows visible. It filters by given rules:
 - only current visible viewport
 - exclude iconified windows
 - exclude ignored windows
-- exclude windows with @code{never-tile} matcher
+- exclude windows with @code{never-expose} matcher
 
 @defun tile-windows
 Interactive command to manually tile windows.
@@ -4982,7 +4982,7 @@ Interactive command to manually tile windows.
 Internal function to tile windows when activating an edge.
 @end defun
 
-@defun window-never-tile-p w
+@defun window-never-expose-p w
 Returns whether window should be tiled or not.
 @end defun
 
