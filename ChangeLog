@@ -3,6 +3,15 @@
 	32767 (X11 maximum) -- fixes odd window-behaviour with Firefox 17
 	(original patch by Michael Panteleit)
 
+	* lisp/sawfish/wm/tile/tile.jl
+	* lisp/sawfish/wm/tile/col.jl
+	* lisp/sawfish/wm/tile/tiler.jl
+	* lisp/sawfish/wm/tile/utils.jl
+	* lisp/sawfish/wm/tile/tall.jl: moved tiling from next-lisp/ into
+	main-tree. Some minor fixups. Don't tile windows that are marked,
+	ignored, dock, never-expose or are invisible. Original code: Jose A.
+	Ortega Ruiz, modifications: Christopher Roy Bratusek
+
 2012-11-03  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/wm/util/keymap.jl: Revert "read-event now grabs pointer
 	instead of keyboard." -- fixes grabbing keys doesn't always work
