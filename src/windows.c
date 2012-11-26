@@ -1297,6 +1297,13 @@ associated with WINDOW. Possible keys in the alist are `min-height',
     hints = &VWIN(win)->hints;
     flags = hints->flags;
 
+    /* workaround stuff like Firefox 17 that
+     * has enormous max-width/maxh-height */
+    if (hints->max_width >= 32767)
+	    hints->max_width = 32767;
+    if (hints->max_height >= 32767)
+	    hints->max_height = 32767;
+
     /* Some sanity checking */
     if ((flags & PMinSize) 
 	&& (hints->min_width < 0 || hints->min_height < 0))
