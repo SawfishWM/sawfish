@@ -42,6 +42,11 @@ Each release lists incompatible changes at its top.
 @heading 1.9.90 "Strike A Pose"
 @itemize @bullet
 
+@item Updated or New dependencies
+@itemize @minus
+@item PangoX: no longer required
+@end itemize
+
 @item Bug Fixes
 @itemize @minus
 @item Always rebuild the list of marked winows in tabs when closing a marked window. [fuchur]
@@ -57,6 +62,12 @@ pops-up doesn't make the menu dissapear immediately. [Christopher Bratusek]
 
 @item In SawfishConfig you can select different cursor shapes for different buttons. Some of the
 definitions have been wrong and could crash Sawfish when choosing them. This is fixed now. [fuchur]
+
+@item When a windows @code{max-width} or @code{max-height} would exceed 32767 (X11's maximum) it would
+result in odd window-behaviour (for example: no maximization button), this is fixed by capping the value
+at 32767. Originally reported with Firefox and Thunderbird 17.0 [Michael Panteleit]
+
+@item Fixed grabbing key-bindings in SawfishConfig. [Christopher Bratusek]
 @end itemize
 @item New Features
 @itemize @minus
