@@ -1,3 +1,17 @@
+2012-11-26  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* src/windows.c: cap max-width / max-height of a window, if it exceeds
+	32767 (X11 maximum) -- fixes odd window-behaviour with Firefox 17
+	(original patch by Michael Panteleit)
+
+2012-11-03  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/util/keymap.jl: Revert "read-event now grabs pointer
+	instead of keyboard." -- fixes grabbing keys doesn't always work
+
+	* configure.in
+	* src/fonts.c: no longer depend on pangoX -- not shipped in recent
+	versions anymore (reported in Fedora, Arch). Either use PangoXFT or
+	plain XFT (patch from Fedora)
+
 2012-09-29  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* lisp/sawfish/gtk/widget.jl: modified xdg widget to check for
 	~/.sawfish/rc, too, if ~/.sawfishrc was requested (or vice versa)
