@@ -1,5 +1,5 @@
 
-(define-structure sawflibs.tile
+(define-structure sawfish.wm.tile
     (export align-workspace-windows
             tile-workspace
             untile-window
@@ -12,7 +12,7 @@
             decrease-max-windows)
     (open rep
           rep.system
-          sawflibs.tile.utils
-          sawflibs.tile.tiler
-          sawflibs.tile.tall
-          sawflibs.tile.col))
+          sawfish.wm.tile.utils
+          sawfish.wm.tile.tiler
+          sawfish.wm.tile.tall
+          sawfish.wm.tile.col))

@@ -1,4 +1,4 @@
-(define-structure sawflibs.tile.tiler
+(define-structure sawfish.wm.tile.tiler
     (export tile-workspace
             untile-window
             register-workspace-tiler
@@ -6,13 +6,16 @@
             tileable-windows
             next-tiling
             setting
-            set-setting)
+            set-setting
+	    tileable-window-p)
 
     (open rep
           rep.system
           rep.data.tables
           sawfish.wm.windows
-          sawflibs.tile.utils)
+          sawfish.wm.tile.utils
+          sawfish.wm.state.ignored
+	  sawfish.wm.ext.expose)
 
   (define %tilers '())
   (define %sizes (make-table eq-hash eq))
@@ -31,17 +34,17 @@
         t)))
 
   (define (restore-windows ws)
-    (mapc restore-window (workspace-windows ws)))
+    (mapc restore-window (tileable-workspace-windows ws)))
 
   (define (restore-sizes ws)
     (mapc (lambda (w)
             (let ((s (table-ref %sizes w)))
               (when s
                 (resize-frame-to w (nth 2 s) (nth 3 s)))))
-          (workspace-windows ws)))
+          (tileable-workspace-windows ws)))
 
   (define null-tiler
-    (list (lambda (a b)
+    (list (lambda ()
             (restore-windows current-workspace))))
 
   (define (register-workspace-tiler ws tiler args auto #!optional name)
@@ -78,7 +81,7 @@
   (define (tiling-name ti) (nth 3 ti))
 
   (define (tileable-windows #!optional ignore)
-    (let ((ws (workspace-windows ignore))
+    (let ((ws (tileable-workspace-windows ignore))
           (tp (nth 2 (tiling))))
       (if (functionp tp) (filter tp ws) ws)))
 
@@ -87,7 +90,8 @@
   (define (tile-workspace #!optional new-window destroyed-window)
     (interactive)
     (let ((ti (tiling)))
-      (when ti ((tiling-tiler ti) new-window destroyed-window))))
+      (when ti
+	((tiling-tiler ti) new-window destroyed-window))))
 
   (define (untile-window w)
     (interactive "%f")
@@ -95,6 +99,9 @@
 
   (define (tileable-window-p w)
     (and (tiling-auto-p (tiling (window-workspace w)) w)
+         (not (window-never-expose-p w))
+	 (not (window-ignored-p w))
+	 (not (dock-window-p w))
          (eq (window-type w) 'default)))
 
   (define (add-autotile w)
@@ -107,7 +114,7 @@
     (when (tileable-window-p w)
       (tile-workspace nil w)))
 
-  (define (maybe-save w #!optional ignored)
+  (define (maybe-save w)
     (let ((ct (tiling)))
       (when (or (not ct) (eq ct null-tiler))
         (save-size w))))

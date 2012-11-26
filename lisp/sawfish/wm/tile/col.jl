@@ -1,14 +1,13 @@
 
-(define-structure sawflibs.tile.col
+(define-structure sawfish.wm.tile.col
     (export col-tiling)
             ;; increase-cols
             ;; decrease-cols)
     (open rep
           rep.system
-          sawflibs.utils
           sawfish.wm
-          sawflibs.tile.tiler
-          sawflibs.tile.utils)
+          sawfish.wm.tile.tiler
+          sawfish.wm.tile.utils)
 
   (define (col-tiling ws #!key (top 0) (bottom 0) (cols 3) (gap 1) (auto #f) (resize #t))
     (register-workspace-tiler ws

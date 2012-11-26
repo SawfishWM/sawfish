@@ -6,14 +6,14 @@
 ;; Inspiraton: smart-tile by Mark Triggs <mst@dishevelled.net>
 ;;
 ;; Usage:
-;;   (require 'sawflibs.tile.tall)
+;;   (require 'sawfish.wm.tile.tall)
 ;;   (tall-tiling 3 #:width 2 #:top 0 #:bottom 1 #:gap 1 #:max 3)
 ;;   (tall-tiling 1 #:width 3 #:top 20 #:bottom 3 #:gap 1 #:auto #f)
 ;;   (bind-keys global-keymap "M-=" 'increase-max-windows)
 ;;   (bind-keys global-keymap "M--" 'decrease-max-windows)
 ;;
 
-(define-structure sawflibs.tile.tall
+(define-structure sawfish.wm.tile.tall
     (export tall-tiling
             tall-rotate-left
             tall-rotate-right
@@ -21,9 +21,9 @@
             decrease-max-windows)
     (open rep
 	  rep.system
-          sawflibs.utils
-          sawflibs.tile.tiler
-          sawflibs.tile.utils)
+          sawfish.wm.tile.tiler
+          sawfish.wm.tile.utils
+	  sawfish.wm.windows)
 
   (define (tall-tiling n #!key
                        (width 2) (top 0) (bottom 0) (gap 0) (max 2) (auto t))

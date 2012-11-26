@@ -1,9 +1,9 @@
 ;; Utilities for window placement and tiling
 
-(define-structure sawflibs.tile.utils
+(define-structure sawfish.wm.tile.utils
     (export current-workspace
             window-workspace
-            workspace-windows
+            tileable-workspace-windows
             window-type
             window-x
             window-y
@@ -16,11 +16,15 @@
             input-focus
             focus-window
             align-workspace-windows
-            notify)
+            notify
+            take
+            group-by)
     (open rep
           rep.io.timers
           sawfish.wm.stacking
           sawfish.wm.state.ignored
+	  sawfish.wm.state.iconify
+	  sawfish.wm.ext.expose
 	  sawfish.wm.windows
 	  sawfish.wm.frames
 	  sawfish.wm.placement
@@ -30,8 +34,16 @@
 
   (define (window-workspace w) (car (window-get w 'workspaces)))
 
-  (define (workspace-windows #!optional ignore)
-    (remove-if (lambda (w) (or (equal w ignore) (window-ignored-p w)))
+  (define (tileable-workspace-windows #!optional ignore)
+    (remove-if (lambda (w)
+		 (or (equal w ignore)
+		     (dock-window-p w)
+		     (window-iconified-p w)
+		     ;; window-matcher
+		     (window-never-expose-p w)
+		     ;; for pager and stuff
+		     (not (window-visible-p w))
+		     (window-ignored-p w)))
                (window-order current-workspace)))
 
   (define (window-x w) (car (window-position w)))
@@ -58,16 +70,28 @@
   (define (align-workspace-windows)
     (interactive)
     (let* ((fw (input-focus))
-           (windows (workspace-windows fw))
+           (windows (tileable-workspace-windows fw))
            (x (window-x fw))
            (y (window-y fw)))
       (mapc (lambda (w)
               (push-window w x y (window-width w) (window-height w)))
             windows)))
 
-  (define %hide-timer (make-timer (lambda (tm) (display-message nil))))
+  (define %hide-timer (make-timer (lambda () (display-message nil))))
 
   (define (notify fmt #!rest args)
     (display-message (apply format (cons nil (cons fmt args))))
-    (set-timer %hide-timer 1)))
+    (set-timer %hide-timer 1))
+
+  (define (take n l)
+    (cond ((null l) '())
+          ((<= n 0) '())
+          ((= 1 n) (list (car l)))
+          (t (cons (car l) (take (- n 1) (cdr l))))))
+
+  (define (group-by ws n)
+    (cond ((null ws) ws)
+          ((< n 1) (list ws))
+          ((<= (length ws) n) (list ws))
+          (t (cons (take n ws) (group-by (nthcdr n ws) n))))))
 
