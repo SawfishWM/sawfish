@@ -62,7 +62,7 @@
 
   (define (push-window w x y width height)
     (resize-frame-to w (inexact->exact width) (inexact->exact height))
-    (move-window-to w x y)
+    (move-window-to w (inexact->exact x) (inexact->exact y))
     (window-order-push w))
 
   (define (focus-window w) (window-order-push w))
