@@ -61,7 +61,7 @@
       (resize-window-to w (- width width-offset) (- height height-offset))))
 
   (define (push-window w x y width height)
-    (resize-frame-to w width height)
+    (resize-frame-to w (inexact->exact width) (inexact->exact height))
     (move-window-to w x y)
     (window-order-push w))
 

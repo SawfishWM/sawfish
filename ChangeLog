@@ -1,3 +1,7 @@
+2012-11-27  Christopher Roy Bratusek <nano@tuxfamily.org>
+	* lisp/sawfish/wm/tile/utils.jl: make tall-tiler support inexact
+	values for master-window-width by making push-window failsafe
+
 2012-11-26  Christopher Roy Bratusek <nano@tuxfamily.org>
 	* src/windows.c: cap max-width / max-height of a window, if it exceeds
 	32767 (X11 maximum) -- fixes odd window-behaviour with Firefox 17
