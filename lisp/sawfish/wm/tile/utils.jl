@@ -43,6 +43,8 @@
 		     (window-never-expose-p w)
 		     ;; for pager and stuff
 		     (not (window-visible-p w))
+		     ;; no dialogs
+		     (not (eq (window-type w) 'default))
 		     (window-ignored-p w)))
                (window-order current-workspace)))
 
