@@ -1835,14 +1835,14 @@ string color."
                       (window-name w))
         (update-title "(.*)(\\$fullname)(.*)"
                       (window-full-name w))
-        (update-title "(.*)(\\$width)(.*)"
-                      (car (window-frame-dimensions w)))
-        (update-title "(.*)(\\$height)(.*)"
-                      (cdr (window-frame-dimensions w)))
         (update-title "(.*)(\\$width-content)(.*)"
                       (car (window-dimensions w)))
         (update-title "(.*)(\\$height-content)(.*)"
                       (cdr (window-dimensions w)))
+        (update-title "(.*)(\\$width)(.*)"
+                      (car (window-frame-dimensions w)))
+        (update-title "(.*)(\\$height)(.*)"
+                      (cdr (window-frame-dimensions w)))
         (update-title "(.*)(\\$x-pos)(.*)"
                       (car (window-position w)))
         (update-title "(.*)(\\$y-pos)(.*)"
