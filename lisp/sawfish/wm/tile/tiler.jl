@@ -14,8 +14,7 @@
           rep.data.tables
           sawfish.wm.windows
           sawfish.wm.tile.utils
-          sawfish.wm.state.ignored
-	  sawfish.wm.ext.expose)
+          sawfish.wm.state.ignored)
 
   (define %tilers '())
   (define %sizes (make-table eq-hash eq))
