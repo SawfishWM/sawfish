@@ -100,6 +100,7 @@
   (define (tileable-window-p w)
     (and (tiling-auto-p (tiling (window-workspace w)) w)
          (not (window-never-tile-p w))
+	 (not (window-visible-p w))
 	 (not (window-ignored-p w))
 	 (not (dock-window-p w))
          (eq (window-type w) 'default)))
