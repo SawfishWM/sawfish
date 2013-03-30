@@ -9,7 +9,9 @@
             tall-rotate-left
             tall-rotate-right
             increase-max-windows
-            decrease-max-windows)
+            decrease-max-windows
+	    increase-max-cols
+	    decrease-max-cols)
     (open rep
           rep.system
           sawfish.wm.tile.utils

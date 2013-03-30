@@ -1,24 +1,25 @@
 
 (define-structure sawfish.wm.tile.col
-    (export col-tiling)
-            ;; increase-cols
-            ;; decrease-cols)
+    (export col-tiling
+            increase-max-cols
+            decrease-max-cols)
     (open rep
           rep.system
           sawfish.wm
           sawfish.wm.tile.tiler
           sawfish.wm.tile.utils)
 
-  (define (col-tiling ws #!key (top 0) (bottom 0) (cols 3) (gap 1) (auto #f) (resize #t))
+  (define (col-tiling ws #!key (top 0) (bottom 0) (cols 3) (gap 1) (auto t))
     (register-workspace-tiler ws
                               col-tiler
-                              (list cols top bottom gap resize) auto))
+                              (list cols top bottom gap)
+			      auto
+			      'col-tiler))
 
   (define (cols) (setting 0))
   (define (top-m) (setting 1))
   (define (bottom-m) (setting 2))
   (define (gap) (setting 3))
-  (define (resize) (setting 4))
 
   (define (col-tiler focused deleted)
     (let ((windows (tileable-windows deleted)))
@@ -39,20 +40,31 @@
 
   (define (push-column ws x y dx dy g max-h)
     (when (not (null ws))
-      (let* ((w (car ws))
-             (wdx (if (resize) dx (window-width w)))
-             (wdy (if (resize)
-                      (min (window-height (car ws)) max-h)
-                    (window-height w)))
+      (let* ((wdx dx)
+             (wdy (min (window-height (car ws)) max-h))
              (sh (screen-width))
              (wx (if (> (+ x wdx) sh) (- sh wdx g) x)))
         (push-window (car ws) wx y wdx wdy)
         (push-column (cdr ws) (+ x dx g) (+ y dy) dx dy g max-h))))
 
-  (define (increase-cols)
-    (interactive)
-    #t)
+  (define (ws-col-max ws delta)
+    (let ((old (setting 0 #f ws)))
+      (when old
+        (let ((no (+ old delta)))
+          (when (> no 1)
+            (set-setting 0 no ws)
+            no)))))
 
-  (define (decrease-cols)
+  (define (change-cols delta)
+    (let ((n (ws-col-max current-workspace delta)))
+      (when n
+        (col-tiler nil nil)
+        (notify "Maximum columns set to %s" n))))
+
+  (define (increase-max-cols)
     (interactive)
-    #t))
+    (change-cols 1))
+
+  (define (decrease-max-cols)
+    (interactive)
+    (change-cols -1)))
