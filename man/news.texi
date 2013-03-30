@@ -74,18 +74,22 @@ at 32767. Originally reported with Firefox and Thunderbird 17.0 [Michael Pantele
 @item New Features
 @itemize @minus
 @item Tiling. [Jose A. Ortega Ruiz] [Christopher Bratusek]
-Currently this module is under heavy testing (so you have been warned!). @code{tall-tile} has been
-tested to properly work (with some minor hickups), while @code{col-tile} is untested. Example on how
-to test the new @code{tall-tile} module (for more infos read @file{lisp/sawfish/wm/tile/readme.org}:
+Currently this module is under testing. There are still minor hickups, but both @code{tall-tile}
+and @code{col-tile} are working (see also @file{lisp/sawfish/wm/tile/readme.org}):
+
+@code{tall-tile}: one big window on the left, small windows on the right
+@code{col-tile}: tile windows as columns (recommended for multi-head configurations)
 
 @lisp
 ;; Tiling
 (require 'sawfish.wm.tile.tile)
-(tall-tiling 0 #:width 2 #:top 0 #:bottom 1 #:gap 1 #:max 3)
+(tall-tiling 0 #:width 1.75 #:top 0 #:bottom 0 #:gap 3 #:max 3)
+(col-tiling 0 #:top 0 #:bottom 0 #:gap 3 #:cols 3)
 (bind-keys global-keymap
-           "F11" 'tile-workspace
 	   "C-S-KP_Add" 'increase-max-windows
 	   "C-S-KP_Subtract" 'decrease-max-windows
+	   "C-M-KP_Add" 'increase-cols
+	   "C-M-KP_Subtract" 'decrease-cols
 	   "C-F11" 'next-tiling)
 @end lisp
 
@@ -115,6 +119,10 @@ instance during a sawfish session. [Christopher Bratusek]
 @item @code{pancake} module. Handles a @code{pancake} (a simple desktop panel with pager, window-list,
 taskbar, tray) instance during a sawfish session [Christopher Bratusek]
 @end itemize
+@end itemize
+@item Removed Features
+@itemize @minus
+@item Removed @code{sawfish.wm.ext.expose} in favour of much more advanced tiling-functions. [Christopher Bratusek]
 @end itemize
 @item Miscellaneous Changes
 @itemize @minus
