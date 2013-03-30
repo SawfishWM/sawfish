@@ -83,10 +83,10 @@ AC_ARG_WITH([xinerama], [AS_HELP_STRING([--with-xinerama], [Include Xinerama sup
 
 if test "$with_xinerama" != "no"; then
 
-PKG_CHECK_MODULES(libXineRama, xinerama >= 1.0
+PKG_CHECK_MODULES(libXinerama, xinerama >= 1.0
 		  ,XINERAMA_LIBS="-lXinerama"
 		  AC_DEFINE(HAVE_X11_EXTENSIONS_XINERAMA_H, 1, [Have xinerama])
-		  ,AC_MSG_ERROR([cannot locate libXineRama]))
+		  ,AC_MSG_ERROR([cannot locate libXinerama]))
 
 fi
 
