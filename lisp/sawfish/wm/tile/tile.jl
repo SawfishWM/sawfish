@@ -11,7 +11,8 @@
             increase-max-windows
             decrease-max-windows
 	    increase-max-cols
-	    decrease-max-cols)
+	    decrease-max-cols
+	    window-never-tile-p)
     (open rep
           rep.system
           sawfish.wm.tile.utils

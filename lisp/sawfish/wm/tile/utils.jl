@@ -25,7 +25,6 @@
           sawfish.wm.stacking
           sawfish.wm.state.ignored
 	  sawfish.wm.state.iconify
-	  sawfish.wm.ext.expose
 	  sawfish.wm.windows
 	  sawfish.wm.frames
 	  sawfish.wm.placement

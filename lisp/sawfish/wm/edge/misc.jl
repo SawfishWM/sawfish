@@ -21,16 +21,14 @@
 
 (define-structure sawfish.wm.edge.misc
 
-    (export maximize-action
-   	    expose-windows-action)
+    (export maximize-action)
 
     (open rep
 	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.commands
 	  sawfish.wm.events
-	  sawfish.wm.state.maximize
-	  sawfish.wm.ext.expose)
+	  sawfish.wm.state.maximize)
 
   (define-structure-alias edge-misc sawfish.wm.edge.misc)
 
@@ -38,11 +36,4 @@
     (let ((w (input-focus)))
       (allow-events 'async-both)
       (fake-release-window)
-      (maximize-window w)))
-
-  (define (expose-windows-action edge while-moving)
-    (call-hook 'before-edge-action-hook (list 'expose-windows edge while-moving))
-    (when while-moving
-        (fake-release-window))
-      (expose-windows-horizontally)
-      (call-hook 'after-edge-action-hook (list 'expose-windows edge while-moving))))
+      (maximize-window w))))

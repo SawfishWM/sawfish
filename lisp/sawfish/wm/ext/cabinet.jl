@@ -169,8 +169,7 @@
             sawfish.wm.util.x
             sawfish.wm.windows
             sawfish.wm.workspace
-	    sawfish.wm.util.events
-	    sawfish.wm.ext.expose)
+	    sawfish.wm.util.events)
 
    ;; (mapc require '( rep
    ;;       rep.system
@@ -636,13 +635,6 @@ this is a procedure with no argument."
                                               'cabinet-marked
                                               (not
 						(window-get w 'cabinet-marked))))))
-                 "Super-t" (with-marked-wl
-                            (lambda (wl)
-                               (expose-windows wl)))
-                 "Super-T" (with-marked-wl
-                            (lambda (wl)
-                               (expose-windows wl t)))
-
                  "Super-S" (cycle-workspace 1)
                  "Super-R" (cycle-workspace -1)
                  "Super-v" (with-draw
