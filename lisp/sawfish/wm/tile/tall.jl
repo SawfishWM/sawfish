@@ -103,8 +103,9 @@
              (rest (cdr windows))
              (master (car rest))
              (children (append (cdr rest) (list first))))
-        (do-tile master children)
-        (focus-window master))))
+        (when rest
+	  (do-tile master children)
+	  (focus-window master)))))
 
   (define (tall-rotate-right)
     (interactive)
@@ -114,5 +115,6 @@
              (rest (cdr windows))
              (master (last rest))
              (children (cons first (remove master rest))))
-        (do-tile master children)
-        (focus-window master)))))
+	(when rest
+          (do-tile master children)
+	  (focus-window master))))))
