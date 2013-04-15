@@ -28,6 +28,9 @@
        automatically whenever a new window is created (default: #t).
      - =right= A boolean indicating whether the main window should be
        placed to the right rather than to the left side (default: #f).
+     - =master= A function taking a window and returning a boolean
+       indicating whether the given window can occupy the main pane
+       (default: =(lambda () #t)=).
 
    - *column tile* Divide the screen in the given number of columns and
      distributed windows among them. All columns have the same width

@@ -27,12 +27,13 @@
 
   (define (tall-tiling n #!key
                        (width 2) (top 0) (bottom 0) (gap 0)
-                       (max 2) (auto t) (right #f))
+                       (max 2) (auto t) (right #f) (master #f))
     (register-workspace-tiler n
                               tall-tiler
                               (list width top bottom gap max right)
                               auto
-                              'tall-tiler))
+                              'tall-tiler
+                              master))
 
   (define (tall-tiler master ignore)
     (let ((windows (tileable-windows ignore)))

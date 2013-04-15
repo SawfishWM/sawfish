@@ -46,9 +46,9 @@
     (list (lambda ()
             (restore-windows current-workspace))))
 
-  (define (register-workspace-tiler ws tiler args auto #!optional name)
+  (define (register-workspace-tiler ws tiler args auto #!optional name picker)
     (let ((curr (assoc ws %tilers))
-          (new (list tiler args auto name)))
+          (new (list tiler args auto name (or picker (lambda (w) #t)))))
       (if (null curr)
           (setq %tilers (cons (list ws new null-tiler) %tilers))
         (setcdr curr (cons new (cdr curr))))))
@@ -79,6 +79,8 @@
 
   (define (tiling-name ti) (nth 3 ti))
 
+  (define (tiling-master-picker ti) (nth 4 ti))
+
   (define (tileable-windows #!optional ignore)
     (let ((ws (tileable-workspace-windows ignore))
           (tp (nth 2 (tiling))))
@@ -86,11 +88,18 @@
 
   (define (current-tiler-name) (tiling-name (tiling)))
 
+  (define (pick ti master ignore)
+    (let ((test (tiling-master-picker ti)))
+      (or (and master (not (eq master ignore)) (test master) master)
+          (let ((wl (tileable-workspace-windows ignore)))
+            (or (car (filter test wl)) master (car wl))))))
+
   (define (tile-workspace #!optional new-window destroyed-window)
     (interactive)
     (let ((ti (tiling)))
       (when ti
-	((tiling-tiler ti) new-window destroyed-window))))
+	((tiling-tiler ti) (pick ti new-window destroyed-window)
+                           destroyed-window))))
 
   (define (untile-window w)
     (interactive "%f")
