@@ -7,7 +7,7 @@
 ;;
 ;; Usage:
 ;;   (require 'sawfish.wm.tile.tall)
-;;   (tall-tiling 3 #:width 2 #:top 0 #:bottom 1 #:gap 1 #:max 3)
+;;   (tall-tiling 3 #:width 2 #:top 0 #:bottom 1 #:gap 1 #:max 3 #:right #t)
 ;;   (tall-tiling 1 #:width 3 #:top 20 #:bottom 3 #:gap 1 #:auto #f)
 ;;   (bind-keys global-keymap "M-=" 'increase-max-windows)
 ;;   (bind-keys global-keymap "M--" 'decrease-max-windows)
@@ -26,12 +26,14 @@
 	  sawfish.wm.windows)
 
   (define (tall-tiling n #!key
-                       (width 2) (top 0) (bottom 0) (gap 0) (max 2) (auto t))
+                       (width 2) (top 0) (bottom 0) (gap 0)
+                       (max 2) (auto t) (right #f) (master #f))
     (register-workspace-tiler n
                               tall-tiler
-                              (list width top bottom gap max)
+                              (list width top bottom gap max right)
                               auto
-                              'tall-tiler))
+                              'tall-tiler
+                              master))
 
   (define (tall-tiler master ignore)
     (let ((windows (tileable-windows ignore)))
@@ -48,18 +50,20 @@
            (tm (setting 1))
            (bm (setting 2))
            (gap (setting 3))
+           (rs (setting 5))
            (m-width (master-width (setting 0)))
            (c-height (child-height cno tm bm))
-           (c-width (scr-width m-width (* 3 gap) 1)))
+           (c-width (scr-width m-width (* 3 gap) 1))
+           (h-offset (+ (if rs c-width m-width) (* 2 gap))))
       (mapc (lambda (g)
               (push-children (reverse g)
-                             (+ m-width (* 2 gap))
+                             (if rs gap h-offset)
                              (scr-height c-height bm)
                              (if (= (length g) cno) tm -1)
                              c-width
                              c-height))
             groups)
-      (push-window master gap tm m-width (scr-height tm bm))))
+      (push-window master (if rs h-offset gap) tm m-width (scr-height tm bm))))
 
   (define (master-width f) (floor (1- (/ (scr-width) f))))
 
