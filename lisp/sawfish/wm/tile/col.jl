@@ -9,10 +9,11 @@
           sawfish.wm.tile.tiler
           sawfish.wm.tile.utils)
 
-  (define (col-tiling ws #!key (top 0) (bottom 0) (cols 3) (gap 1) (auto t))
+  (define (col-tiling ws #!key
+                      (top 0) (bottom 0) (cols 3) (gap 1) (auto t) (resize t))
     (register-workspace-tiler ws
                               col-tiler
-                              (list cols top bottom gap)
+                              (list cols top bottom gap resize)
 			      auto
 			      'col-tiler))
 
@@ -20,6 +21,7 @@
   (define (top-m) (setting 1))
   (define (bottom-m) (setting 2))
   (define (gap) (setting 3))
+  (define (resize) (setting 4))
 
   (define (col-tiler focused deleted)
     (let ((windows (tileable-windows deleted)))
@@ -40,8 +42,11 @@
 
   (define (push-column ws x y dx dy g max-h)
     (when (not (null ws))
-      (let* ((wdx dx)
-             (wdy (min (window-height (car ws)) max-h))
+      (let* ((w (car ws))
+             (wdx (if (resize) dx (window-width w)))
+             (wdy (if (resize)
+                      (min (window-height (car ws)) max-h)
+                    (window-height w)))
              (sh (screen-width))
              (wx (if (> (+ x wdx) sh) (- sh wdx g) x)))
         (push-window (car ws) wx y wdx wdy)
