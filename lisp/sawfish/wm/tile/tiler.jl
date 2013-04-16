@@ -82,7 +82,8 @@
     (or (nth 4 ti) (lambda (w) #t)))
 
   (define (tileable-window-p w)
-    (and (tiling-auto-p (tiling (window-workspace w)) w)
+    (and w
+	 (tiling-auto-p (tiling (window-workspace w)) w)
          (not (window-never-tile-p w))
 	 (not (window-ignored-p w))
 	 (not (dock-window-p w))
