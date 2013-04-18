@@ -52,13 +52,7 @@
           (setq %tilers (cons (list ws new null-tiler) %tilers))
         (setcdr curr (cons new (cdr curr))))))
 
-  (define (next-tiling)
-    (interactive)
-    (when (rotate-tiling)
-      (restore-sizes current-workspace)
-      (tile-workspace)))
-
-  (define (rotate-tiling #!optional ws)
+    (define (rotate-tiling #!optional ws)
     (let ((ts (assoc (or ws current-workspace) %tilers)))
       (when (> (length ts) 2)
         (setcdr ts `(,@(cddr ts) ,(cadr ts))))))
@@ -108,6 +102,14 @@
       (when ti
 	((tiling-tiler ti) (pick ti new-window destroyed-window)
                            destroyed-window))))
+
+  (define (next-tiling)
+    (interactive)
+    (when (rotate-tiling)
+      (restore-sizes current-workspace)
+      (tile-workspace))
+    (let ((cn (current-tiler-name)))
+      (if cn (notify "Current tiler: %s" cn) (notify "No active tiler"))))
 
   (define (untile-window w)
     (interactive "%f")
