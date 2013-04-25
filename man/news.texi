@@ -39,7 +39,7 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
-@heading 1.9.90 "Strike A Pose"
+@heading 1.9.91 "Steam Train"
 @itemize @bullet
 
 @item Updated or New dependencies
@@ -83,8 +83,8 @@ and @code{col-tile} are working (see also @file{lisp/sawfish/wm/tile/readme.org}
 @lisp
 ;; Tiling
 (require 'sawfish.wm.tile.tile)
-(tall-tiling 0 #:width 1.75 #:top 0 #:bottom 0 #:gap 3 #:max 3)
-(col-tiling 0 #:top 0 #:bottom 0 #:gap 3 #:cols 3)
+(tall-tiling 0 #:width 1.75 #:top 0 #:bottom 0 #:gap 3 #:max 3 #:right nil #:resize t)
+(col-tiling 0 #:top 0 #:bottom 0 #:gap 3 #:cols 3 #:resize t)
 (bind-keys global-keymap
 	   "C-S-KP_Add" 'increase-max-windows
 	   "C-S-KP_Subtract" 'decrease-max-windows
