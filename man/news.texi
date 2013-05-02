@@ -51,6 +51,9 @@ Each release lists incompatible changes at its top.
 @itemize @minus
 @item Always rebuild the list of marked winows in tabs when closing a marked window. [fuchur]
 
+@item In @code{sawfish-config} fix the @code{make-choice-item} to properly support settings for
+the @code{Crux} theme. [Vedat Hallac]
+
 @item Only allow a window to be tabbed, if the parent window's framestyle has support for tabs.
 (Note that in Sawfish different windows can have diffrent framestyles) [fuchur]
 
@@ -71,6 +74,7 @@ at 32767. Originally reported with Firefox and Thunderbird 17.0 [Michael Pantele
 
 @item Fixed non-working @code{$height-content} and @code{$width-content} in the mxflat theme [Robert Zenz]
 @end itemize
+
 @item New Features
 @itemize @minus
 @item Tiling. [Jose A. Ortega Ruiz] [Christopher Bratusek]
@@ -121,11 +125,13 @@ instance during a sawfish session. [Christopher Bratusek]
 @item @code{pancake} module. Handles a @code{pancake} (a simple desktop panel with pager, window-list,
 taskbar, tray) instance during a sawfish session [Christopher Bratusek]
 @end itemize
+
 @end itemize
 @item Removed Features
 @itemize @minus
 @item Removed @code{sawfish.wm.ext.expose} in favour of much more advanced tiling-functions. [Christopher Bratusek]
 @end itemize
+
 @item Miscellaneous Changes
 @itemize @minus
 @item Updated @code{Elberg-tabbed} and @code{gradient-tabbed} for tab-system as of Sawfish 1.9.1 [fuchur]
