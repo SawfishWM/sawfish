@@ -79,6 +79,9 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
   (defvar want-poweroff-menu t
     "Add poweroff menu if you don't use GNOME / KDE / XFCE / Razor-Qt / LXDE.")
 
+  (defvar want-extra-menu-entries t
+    "Provide additional entries in root menu.")
+
   (setq *user-structure* 'user)
 
   ;; frame-style loaded if user hasn't set their own
@@ -172,14 +175,12 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
   (when (equal desktop-environment "kde")
     (sawfish.wm.integration.kde#kde-late-init))
 
-  (if (equal filemanager "")
-      (let ((menu root-menu))
-        (nconc menu `(()
-                      (,(_ "_Kill Window") (system "xkill &")))))
+  (when want-extra-menu-entries
     (let ((menu root-menu))
-      (nconc menu `(()
-                    (,(_ "_Open Home") (filemanager "~"))
-                    (,(_ "_Kill Window") (system "xkill &"))))))
+      (nconc menu `(()))
+      (unless (equal filemanager "")
+        (nconc menu `((,(_ "_Open Home") (filemanager "~")))))
+      (nconc menu `((,(_ "_Kill Window") (system "xkill &"))))))
 
   ;; generate apps-menu from *.desktop files
   (unless batch-mode
