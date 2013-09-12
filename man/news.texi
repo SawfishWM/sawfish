@@ -144,6 +144,10 @@ taskbar, tray) instance during a sawfish session [Christopher Bratusek]
 
 @item Added @code{force-tab} window-matcher, forcing a window to be tabbed. [fuchur]
 
+@item Added @code{window-type} window-matcher. This allows you to change the @code{_NET_WM_TYPE} of a window.
+Specifications explicitly state that the client (Sawfish in this case) is not allowed to do so. Still, we provide
+this ability in case of bogus applications and testing purposes, it is neither desired nor required for normal work. [fuchur]
+
 @end itemize
 @item Removed Features
 @itemize @minus

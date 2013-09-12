@@ -94,6 +94,7 @@
                                 `(choice ,@(mapcar car match-window-types))))
                  (frame-style ,(lambda ()
                                  `(symbol ,@(find-all-frame-styles t))))
+		 (window-type (choice normal dialog dock desktop menu toolbar utility splashscreen))
 		 (title-position (choice top bottom right left))
 		 (dimensions (pair (number 1) (number 1)))
 		 (maximized (choice all vertical horizontal
@@ -398,6 +399,35 @@
       (unless (or (window-get w 'placed) (window-workspaces w))
         ;; translate from 1.. to 0..
         (set-window-workspaces w (list (1- value))))))
+
+  (define-match-window-setter 'window-type
+    (lambda (w prop value)
+      (declare (unused prop))
+      (cond ((eq value 'normal)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_NORMAL) 'ATOM 32)
+         (set-window-type w 'default))
+	    ((eq value 'dialog)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_DIALOG) 'ATOM 32)
+         (mark-window-as-transient w))
+        ((eq value 'dock)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_DOCK) 'ATOM 32)
+         (mark-window-as-dock w))
+        ((eq value 'desktop)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_DESKTOP) 'ATOM 32)
+         (mark-window-as-desktop w))
+        ((eq value 'menu)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_MENU) 'ATOM 32)
+         (set-window-type w 'menu))
+        ((eq value 'toolbar)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_TOOLBAR) 'ATOM 32)
+         (set-window-type w 'toolbar))
+        ((eq value 'utility)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_UTILITY) 'ATOM 32)
+         (set-window-type w 'utility))
+        ((eq value 'splashscreen)
+	     (set-x-property w '_NET_WM_WINDOW_TYPE (vector '_NET_WM_WINDOW_TYPE_SPLASHSCREEN) 'ATOM 32)
+         (set-window-type w 'splash)
+         (window-put w 'place-mode 'centered)))))
 
   (define-match-window-setter 'position
     (lambda (w prop value)

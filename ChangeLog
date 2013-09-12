@@ -20,6 +20,12 @@
 	* lisp/sawfish/wm/workspace.jl: remember window properties after
 	switching workspaces (especially unmaximize-geometry and such) [fuchur]
 
+	* lisp/sawfish/wm/ext/match-window.jl: add window-type window-matcher.
+	This allows you to change the _NET_WM_TYPE of a window. Specification
+	explicitly state that the client is not allowed to do so. Still, we
+	provide this ability in case of bogus applications or testing purposes,
+	it is neither desired nor required for normal work. [fuchur]
+
 2013-05-02  Vedat Hallac <vedat@hallac.net>
 	* lisp/sawfish/gtk/widget.jl: fix make-choice-item to properly support
 	crux theme settings
