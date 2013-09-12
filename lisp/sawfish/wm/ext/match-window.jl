@@ -84,7 +84,7 @@
 	       )
      (focus ,(_ "Focus")
             (raise-on-focus boolean)
-            (focus-when-mapped boolean)
+            (focus-when-mapped (choice always never))
             (never-focus boolean)
             (focus-click-through boolean)
             (focus-mode ,(lambda () `(choice ,@focus-modes)))

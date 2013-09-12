@@ -180,9 +180,10 @@ the level of any transient windows it has."
                                 (and x-for (window-get x-for 'desktop))))
                           (or (and
                                focus-windows-when-mapped
+                               (not (eq (window-get w 'focus-when-mapped) 'never))
                                (not (window-get w 'never-focus))
                                (not (window-get w 'inhibit-focus-when-mapped)))
-                              (window-get w 'focus-when-mapped))))))
+                              (eq (window-get w 'focus-when-mapped) 'always))))))
       (unless (window-get w 'sticky)
         (when (not (eq (car (window-in-workspace-p w current-workspace))
                        (car (window-workspaces w))))
