@@ -74,8 +74,9 @@
     (eq (window-get w 'current-frame-style) tab-theme-name))
   
   (define (net-wm-window-type-normal-p w)
-    (if (get-x-property w '_NET_WM_WINDOW_TYPE)
-        (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL)))
+    (or (window-get w 'force-tab)
+        (if (get-x-property w '_NET_WM_WINDOW_TYPE)
+            (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))))
 
   (define-record-type :tab-group
     (tab-build-group p d wl)

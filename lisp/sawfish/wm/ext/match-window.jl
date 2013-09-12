@@ -111,6 +111,7 @@
             (group ,(lambda ()
                       `(symbol ,@(delete-if-not symbolp (window-group-ids)))))
             (tab-group string)
+            (force-tab boolean)
             (ungrouped boolean)
             (cycle-skip boolean)
             (window-list-skip boolean)
