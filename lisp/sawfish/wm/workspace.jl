@@ -549,13 +549,14 @@ a window"
 
 	 ;; first map new windows top-to-bottom
 	 (mapc (lambda (w)
-		 (when (window-appears-in-workspace-p w current-workspace)
-		   (swap-in w current-workspace))
-		 (when (and (window-appears-in-workspace-p w current-workspace)
-			    (window-get w 'placed))
-		   (if (window-viewable-p w)
-		       (show-window w)
-		     (hide-window w))))
+             (when (and (window-appears-in-workspace-p w current-workspace)
+                        (cdr (window-get w 'workspaces)))
+               (swap-in w current-workspace))
+             (when (and (window-appears-in-workspace-p w current-workspace)
+                        (window-get w 'placed))
+               (if (window-viewable-p w)
+                   (show-window w)
+                 (hide-window w))))
 	       order)
 
 	 ;; then unmap old-windows bottom-to-top
