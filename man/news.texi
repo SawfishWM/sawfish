@@ -39,7 +39,7 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
-@heading 1.9.91 "Steam Train"
+@heading 1.10 "Soundtropolis"
 @itemize @bullet
 
 @item Updated or New dependencies
@@ -98,6 +98,11 @@ and @code{col-tile} are working (see also @file{lisp/sawfish/wm/tile/readme.org}
 	   "C-M-Left" 'tall-rotate-left
 	   "C-F11" 'next-tiling)
 @end lisp
+
+@item Added full compton integration (including autostarting compton with Sawfish).
+Compton is a fork of xcompmgr with many bug fixes and many improvements compared to
+the original. Using @code{sawfish-config} it is also possible to change most compton
+options directly from within Sawfish. [fuchur]
 
 @item Completeley revised @code{resize-window-prompt}. Now display window's name and old width
 (respectively old height) when prompt for new values. Shows an information, if one of the given
