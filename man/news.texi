@@ -86,7 +86,7 @@ and @code{col-tile} are working (see also @file{lisp/sawfish/wm/tile/readme.org}
 @code{col-tile}: tile windows as columns (recommended for multi-head configurations)
 
 @lisp
-;; Example Tiling configuration in ${HOME}/.sawfish/rc or ${HOME}/.sawfishrc
+;; Example Tiling configuration in Sawfish's resource file
 (require 'sawfish.wm.tile.tile)
 (tall-tiling 0 #:width 1.75 #:top 0 #:bottom 0 #:gap 3 #:max 3 #:right nil #:resize t)
 (col-tiling 0 #:top 0 #:bottom 0 #:gap 3 #:cols 3 #:resize t)
