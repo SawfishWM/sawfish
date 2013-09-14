@@ -58,6 +58,42 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
+    (defcustom shadows-main-win nil "Only draw shadows on normal windows and dialogs."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
+    (defcustom shadows-disable-shaped nil "Don't draw shadows on shaped windows."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
+    (defcustom shadows-disable-dad nil "Don't draw shadows on drag-and-drop windows."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
+    (defcustom shadows-disable-menu nil "Don't draw shadows on menus."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
+    (defcustom force-tabbed nil "Force shadows by tabbed windows."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
+    (defcustom shadows-crop-xinerama nil "Crop shadows in xinerama setups (not supported by all compton versions)."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
     (defcustom top-offset -15 "The top offset for shadows. (Default -15)"
       :depends opacity-enable
       :group (appearance window-effects)
@@ -140,17 +176,17 @@
       :options (0 2 4 6 8 10 12 14 16 18 20 25 30 35 40 45 50)
       :after-set (lambda () (switch-opacity)))
 
+    (defcustom zero-mask nil "Zero the part of the shadow's mask behind the window (experimental)."
+      :depends opacity-enable
+      :group (appearance window-effects)
+      :type boolean
+      :after-set (lambda () (switch-opacity)))
+
     (defcustom menu-opacity 10 "The opacity for menus. (Default 10)"
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (5 6 7 8 9 10)
-      :after-set (lambda () (switch-opacity)))
-
-    (defcustom zero-mask nil "Zero the part of the shadow's mask behind the window (experimental)."
-      :depends opacity-enable
-      :group (appearance window-effects)
-      :type boolean
       :after-set (lambda () (switch-opacity)))
 
     (defcustom opacity-by-move 75 "Opacity by move. (Default 75)"
@@ -207,11 +243,17 @@
 
     ;; windows custom-settings entry
     (define-match-window-property 'opacity 'appearance '(number 0 100 100))
+    (define-match-window-property 'no-shadows 'appearance 'boolean)
 
+    ;; info: compton crash with empty values 
     (define (shadows) (if shadows-enable '-c '-e1))
     (define (fade) (if fade-enable '-f '-e1))
     (define (avoid) (if avoid-shadows '-C '-e1))
     (define (zero) (if zero-mask '-z '-e1))
+    (define (dad) (if shadows-disable-dad '-G '-e1))
+    (define (smenu) (if shadows-disable-menu (concat "window_type *= 'menu'") (concat "window_type *= 'nil'")))
+    (define (sxinerama) (if shadows-crop-xinerama "--xinerama-shadow-crop" '-e1 ))
+
     (define (trans) (/ (+ 0.00 translucency) 100))
     (define (fade-i) (/ (+ 0.00 fade-in) 1000))
     (define (fade-o) (/ (+ 0.00 fade-out) 1000))
@@ -225,22 +267,26 @@
                            (c-fade (fade))
                            (c-avoid (avoid))
                            (c-zero (zero))
+                           (c-smenu (smenu))
+                           (c-dad (dad))
                            (c-trans (trans))
                            (c-fade-i (fade-i))
                            (c-fade-o (fade-o))
                            (c-menu-o (menu-o))
                            (c-red (red))
                            (c-green (green))
-                           (c-blue (blue)))
+                           (c-blue (blue))
+			   (c-sxinerama (sxinerama)))
       "Start compton. If a compton process already exists, it's beeing killed."
       (when (program-exists-p "compton")
         (stop-compton)
         (setq %compton-proc (make-process))
         (start-process %compton-proc "compton" (format nil "%s" c-shadows) (format nil "%s" c-fade) (format nil "%s" c-avoid) (format nil "%s" c-zero)
-                        "-r" (number->string blur-radius) "-o" (format nil "%s" c-trans) "-l" (number->string left-offset)
-                        "-t" (number->string top-offset) "-I" (format nil "%s" c-fade-i) "-O" (format nil "%s" c-fade-o) "-D" (number->string fade-time)
-                        "-m" (format nil "%s" c-menu-o) "--shadow-red" (format nil "%s" c-red) "--shadow-green" (format nil "%s" c-green)
-                        "--shadow-blue" (format nil "%s" c-blue))))
+                       "-r" (number->string blur-radius) "-o" (format nil "%s" c-trans) "-l" (number->string left-offset)
+                       "-t" (number->string top-offset) "-I" (format nil "%s" c-fade-i) "-O" (format nil "%s" c-fade-o) "-D" (number->string fade-time)
+                       "-m" (format nil "%s" c-menu-o) "--shadow-red" (format nil "%s" c-red) "--shadow-green" (format nil "%s" c-green)
+                       "--shadow-blue" (format nil "%s" c-blue) (format nil "%s" c-dad) (format nil "%s" c-sxinerama) "--detect-rounded-corners"
+                       "--shadow-exclude" (concat c-smenu) "--shadow-exclude" "_COMPTON_SHADOW:32c = 0")))
 
     (define (stop-compton)
       "Stop compton, if running."
@@ -250,9 +296,6 @@
     ;;0xffffffff opacity 0%
     ;;4294967294.00 opacity 0%
     ;;0x00000000 opacity 100%
-    (define (get-id w)
-      (window-frame-id w))
-
     (define (get-opacity w)
       (* (/ 4294967294.00 100) w))
 
@@ -260,22 +303,38 @@
       (if (get-x-property w '_NET_WM_WINDOW_TYPE)
           (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0)))
 
-    (define (dim-window id opacity)
-      "Set _NET_WM_WINDOW_OPACITY to opacity for window id"
+    (define (window-shadow w)
+      "Set _COMPTON_SHADOW to exclude shadow for window w"
+      (if (or (and (window-get w 'tabbed)
+                   (not force-tabbed))
+              (and (window-get w 'shaded)
+                   shadows-disable-shaped)
+              (and (not shadows-enable))
+              (window-get w 'no-shadows)
+              (and (if shadows-main-win
+                       (and (not (eq (get-type w) '_NET_WM_WINDOW_TYPE_DIALOG))
+                            (not (eq (get-type w) '_NET_WM_WINDOW_TYPE_NORMAL))))))
+          (set-x-property (window-frame-id w) '_COMPTON_SHADOW (make-vector 1 0) 'CARDINAL 32)
+        (delete-x-property (window-frame-id w) '_COMPTON_SHADOW))
+      (sync-server))
+
+    (define (dim-window w opacity)
+      "Set _NET_WM_WINDOW_OPACITY to opacity for window w"
+      (window-shadow w)
       (if (eq opacity '0)
-          (delete-x-property id '_NET_WM_WINDOW_OPACITY)
-        (set-x-property id '_NET_WM_WINDOW_OPACITY (make-vector 1 opacity) 'CARDINAL 32))
+          (delete-x-property (window-frame-id w) '_NET_WM_WINDOW_OPACITY)
+        (set-x-property (window-frame-id w) '_NET_WM_WINDOW_OPACITY (make-vector 1 opacity) 'CARDINAL 32))
       (sync-server))
 
     (define (window-opacity w)
       (if (window-get w 'opacity)
           (if (eq (input-focus) w)
-              (dim-window (get-id w) (get-opacity '100))
-            (dim-window (get-id w) (get-opacity (window-get w 'opacity))))
+              (dim-window w (get-opacity '100))
+            (dim-window w (get-opacity (window-get w 'opacity))))
         (if (window-get w 'tabbed)
             (if (eq (input-focus) w)
-                (dim-window (get-id w) (get-opacity '100))
-              (dim-window (get-id w) (get-opacity opacity-tabbed-i)))
+                (dim-window w (get-opacity '100))
+              (dim-window w (get-opacity opacity-tabbed-i)))
           (let ((type-is (get-type w)))
             (if (or (eq type-is '_NET_WM_WINDOW_TYPE_DIALOG)
                     (eq type-is '_NET_WM_WINDOW_TYPE_NOTIFY)
@@ -284,23 +343,23 @@
                 (progn
                   (if (eq type-is '_NET_WM_WINDOW_TYPE_DIALOG)
                       (if (eq (input-focus) w)
-                          (dim-window (get-id w) (get-opacity '100))
-                        (dim-window (get-id w) (get-opacity opacity-dialog-i))))
+                          (dim-window w (get-opacity '100))
+                        (dim-window w (get-opacity opacity-dialog-i))))
                   (if (eq type-is '_NET_WM_WINDOW_TYPE_NOTIFY)
                       (if (eq (input-focus) w)
-                          (dim-window (get-id w) (get-opacity opacity-notify-i))
-                        (dim-window (get-id w) (get-opacity opacity-notify-i))))
+                          (dim-window w (get-opacity opacity-notify-i))
+                        (dim-window w (get-opacity opacity-notify-i))))
                   (if (eq type-is '_NET_WM_WINDOW_TYPE_DOCK)
                       (if (eq (input-focus) w)
-                          (dim-window (get-id w) (get-opacity opacity-dock-a))
-                        (dim-window (get-id w) (get-opacity opacity-dock-i))))
+                          (dim-window w (get-opacity opacity-dock-a))
+                        (dim-window w (get-opacity opacity-dock-i))))
                   (if (eq type-is '_NET_WM_WINDOW_TYPE_DESKTOP)
                       (if (eq (input-focus) w)
-                          (dim-window (get-id w) (get-opacity '100))
-                        (dim-window (get-id w) (get-opacity opacity-desktop-i)))))
+                          (dim-window w (get-opacity '100))
+                        (dim-window w (get-opacity opacity-desktop-i)))))
               (if (eq (input-focus) w)
-                  (dim-window (get-id w) (get-opacity '100))
-                (dim-window (get-id w) (get-opacity opacity-normal-i))))))))
+                  (dim-window w (get-opacity '100))
+                (dim-window w (get-opacity opacity-normal-i))))))))
 
     (define (update-opacity type)
       (map-windows (lambda (w)
@@ -330,14 +389,24 @@
       (map-windows (lambda (w)
                      (if opacity-enable
                          (window-opacity w)
-                       (dim-window (get-id w) (get-opacity '100))))))
+                       (dim-window w (get-opacity '100))))))
 
     (define (before-move w)
-      (dim-window (get-id w) (get-opacity opacity-by-move)))
+      (dim-window w (get-opacity opacity-by-move)))
 
     (define (before-resize w)
-      (dim-window (get-id w) (get-opacity opacity-by-resize)))
+      (dim-window w (get-opacity opacity-by-resize)))
 
+    (define (tab-release w)
+      (if (eq w 'tab-release-window)
+          (map-windows (lambda (win)
+                         (if opacity-enable
+                             (window-opacity win)
+                           (dim-window win (get-opacity '100)))))))
+
+    (add-hook 'post-command-hook (lambda (w) (if opacity-enable (tab-release w))))
+    (add-hook 'after-add-window-hook (lambda (w) (if opacity-enable (window-opacity w))))
+    (add-hook 'shade-window-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'focus-in-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'focus-out-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'before-move-hook (lambda (w) (if opacity-enable (before-move w))))
