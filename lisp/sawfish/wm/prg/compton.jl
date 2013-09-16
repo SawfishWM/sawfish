@@ -38,6 +38,7 @@
   (define switch-opacity nil)
   (define update-opacity nil)
   (define stop-compton nil)
+
   (defgroup window-effects "Window Effects"
     :group appearance)
 
@@ -252,7 +253,9 @@
     (define (zero) (if zero-mask '-z '-e1))
     (define (dad) (if shadows-disable-dad '-G '-e1))
     (define (smenu) (if shadows-disable-menu (concat "window_type *= 'menu'") (concat "window_type *= 'nil'")))
-    (define (sxinerama) (if shadows-crop-xinerama "--xinerama-shadow-crop" '-e1 ))
+    (define (sxinerama)
+      (if (and (eq (system  "compton --help |grep xinerama-shadow-crop") '0)
+               shadows-crop-xinerama) '--xinerama-shadow-crop '-e1 ))
 
     (define (trans) (/ (+ 0.00 translucency) 100))
     (define (fade-i) (/ (+ 0.00 fade-in) 1000))
@@ -276,7 +279,7 @@
                            (c-red (red))
                            (c-green (green))
                            (c-blue (blue))
-			   (c-sxinerama (sxinerama)))
+                           (c-sxinerama (sxinerama)))
       "Start compton. If a compton process already exists, it's beeing killed."
       (when (program-exists-p "compton")
         (stop-compton)
@@ -398,13 +401,13 @@
       (dim-window w (get-opacity opacity-by-resize)))
 
     (define (tab-release w)
-      (if (eq w 'tab-release-window)
-          (map-windows (lambda (win)
-                         (if opacity-enable
-                             (window-opacity win)
-                           (dim-window win (get-opacity '100)))))))
+      (if (and (car w)
+               (not (cdr w)))
+           (if opacity-enable
+               (window-opacity (car w))
+             (dim-window (car w) (get-opacity '100)))))
 
-    (add-hook 'post-command-hook (lambda (w) (if opacity-enable (tab-release w))))
+    (add-hook 'tab-group-windows-hook (lambda (w) (if opacity-enable (tab-release w))))
     (add-hook 'after-add-window-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'shade-window-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'focus-in-hook (lambda (w) (if opacity-enable (window-opacity w))))
