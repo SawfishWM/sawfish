@@ -62,6 +62,10 @@
   (define in-tab-group-name nil)
   (define tab-theme-name)
 
+  (defvar tab-group-windows-hook '()
+    "Tab-group-windows-hook called when changing or creating a tabgroup.
+Returning all windows in the current tabgroup")
+
   (define (set-tab-theme-name #!key frame-style-supported-tabs)
     (setq tab-theme-name frame-style-supported-tabs))
 
@@ -155,10 +159,12 @@
         (remove-from-tab-group w))
     (setq release-window t)
     (when (window-tabbed-p w)
-      (tab-delete-window-from-group w (tab-window-group-index w))
-      (window-put w 'fixed-position nil)
-      (tab-refresh-group oldgroup 'frame)
-      (reframe-window w)))
+      (let ((wins (list (remove w (tab-group-window-index w)))))
+        (tab-delete-window-from-group w (tab-window-group-index w))
+        (window-put w 'fixed-position nil)
+        (tab-refresh-group oldgroup 'frame)
+        (call-hook 'tab-group-windows-hook wins)
+        (reframe-window w))))
 
   (define (tab-put-window-in-group win index)
     "Put window in group at given index."
@@ -353,6 +359,7 @@ sticky, unsticky, fixed-position."
           (setq tab-refresh-lock t)
           (tab-refresh-group w 'frame)
           (set-input-focus w)
+          (call-hook 'tab-group-windows-hook (list (tab-group-window-index w)))
           (if (not (window-tabbed-p win)) (window-put win 'tabbed t))
           (window-put w 'tabbed t)))))
   
@@ -441,6 +448,7 @@ sticky, unsticky, fixed-position."
                     (window-put w 'never-iconify-opaque nil)
                     (window-put w 'never-iconify t))
                   (window-put w 'tabbed t)) wins)
+        (call-hook 'tab-group-windows-hook (list (tab-group-window-index win)))
         (raise-window win)
         (setq all-wins nil))
       (setq tab-refresh-lock t)

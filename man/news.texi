@@ -148,6 +148,9 @@ taskbar, tray) instance during a sawfish session [Christopher Bratusek]
 Specifications explicitly state that the client (Sawfish in this case) is not allowed to do so. Still, we provide
 this ability in case of bogus applications and testing purposes, it is neither desired nor required for normal work. [fuchur]
 
+@item Added @code{tab-group-windows-hook}, triggered when changing or creating a tabgroup, returning all windows
+contained in the current tabgroup. [fuchur]
+
 @end itemize
 @item Removed Features
 @itemize @minus
