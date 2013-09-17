@@ -30,6 +30,7 @@
           sawfish.wm.misc
           sawfish.wm.custom
           sawfish.wm.windows
+          sawfish.wm.state.maximize
           sawfish.wm.ext.match-window)
 
   (define-structure-alias compton sawfish.wm.prg.compton)
@@ -89,7 +90,7 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadows-crop-xinerama nil "Crop shadows in xinerama setups (not supported by all compton versions)."
+    (defcustom shadows-crop-maximized nil "Crop shadows by maximized Windows (xinerama support):"
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
@@ -253,9 +254,6 @@
     (define (zero) (if zero-mask '-z '-e1))
     (define (dad) (if shadows-disable-dad '-G '-e1))
     (define (smenu) (if shadows-disable-menu (concat "window_type *= 'menu'") (concat "window_type *= 'nil'")))
-    (define (sxinerama)
-      (if (and (eq (system  "compton --help |grep xinerama-shadow-crop") '0)
-               shadows-crop-xinerama) '--xinerama-shadow-crop '-e1 ))
 
     (define (trans) (/ (+ 0.00 translucency) 100))
     (define (fade-i) (/ (+ 0.00 fade-in) 1000))
@@ -278,8 +276,7 @@
                            (c-menu-o (menu-o))
                            (c-red (red))
                            (c-green (green))
-                           (c-blue (blue))
-                           (c-sxinerama (sxinerama)))
+                           (c-blue (blue)))
       "Start compton. If a compton process already exists, it's beeing killed."
       (when (program-exists-p "compton")
         (stop-compton)
@@ -288,8 +285,8 @@
                        "-r" (number->string blur-radius) "-o" (format nil "%s" c-trans) "-l" (number->string left-offset)
                        "-t" (number->string top-offset) "-I" (format nil "%s" c-fade-i) "-O" (format nil "%s" c-fade-o) "-D" (number->string fade-time)
                        "-m" (format nil "%s" c-menu-o) "--shadow-red" (format nil "%s" c-red) "--shadow-green" (format nil "%s" c-green)
-                       "--shadow-blue" (format nil "%s" c-blue) (format nil "%s" c-dad) (format nil "%s" c-sxinerama) "--detect-rounded-corners"
-                       "--shadow-exclude" (concat c-smenu) "--shadow-exclude" "_COMPTON_SHADOW:32c = 0")))
+                       "--shadow-blue" (format nil "%s" c-blue) (format nil "%s" c-dad) "--detect-rounded-corners" "--shadow-exclude" (concat c-smenu)
+		       "--shadow-exclude" "_COMPTON_SHADOW:32c = 0")))
 
     (define (stop-compton)
       "Stop compton, if running."
@@ -314,6 +311,9 @@
                    shadows-disable-shaped)
               (and (not shadows-enable))
               (window-get w 'no-shadows)
+              (and shadows-crop-maximized
+                   (window-maximized-vertically-p w)
+                   (window-maximized-horizontally-p w))
               (and (if shadows-main-win
                        (and (not (eq (get-type w) '_NET_WM_WINDOW_TYPE_DIALOG))
                             (not (eq (get-type w) '_NET_WM_WINDOW_TYPE_NORMAL))))))
@@ -394,6 +394,10 @@
                          (window-opacity w)
                        (dim-window w (get-opacity '100))))))
 
+    (define (max-window w)
+      (if shadows-crop-maximized
+          (window-shadow w)))
+
     (define (before-move w)
       (dim-window w (get-opacity opacity-by-move)))
 
@@ -407,6 +411,8 @@
                (window-opacity (car w))
              (dim-window (car w) (get-opacity '100)))))
 
+    (add-hook 'window-maximized-hook (lambda (w) (if opacity-enable (max-window w))))
+    (add-hook 'window-unmaximized-hook (lambda (w) (if opacity-enable (max-window w))))
     (add-hook 'tab-group-windows-hook (lambda (w) (if opacity-enable (tab-release w))))
     (add-hook 'after-add-window-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'shade-window-hook (lambda (w) (if opacity-enable (window-opacity w))))
