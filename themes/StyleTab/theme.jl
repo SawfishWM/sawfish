@@ -516,11 +516,11 @@
 
       (mapcar (lambda (w)
                 (window-put w 'title-position dest)) wins)
-      (call-window-hook 'window-state-change-hook w (list '(title-position)))
-      (mapcar (lambda (w)
-                (reframe-window w)
-                (move-window-to w pos-x pos-y)
-                (resize-window-to w dim-x dim-y)) wins))))
+
+      (reframe-window w)
+      (move-window-to w pos-x pos-y)
+      (resize-window-to w dim-x dim-y)
+      (tab-refresh-group w 'move))))
 
 (define (tabbartotop)
   "Move tab-bar to top."
@@ -703,7 +703,8 @@
                 (window-put w 'type new)
                 (reframe-window w)
                 (move-window-to w pos-x pos-y)
-                (resize-window-to w dim-x dim-y)) wins))))
+                (resize-window-to w dim-x dim-y)) wins)
+      (tab-refresh-group w 'move))))
 
 (define (set-frame-default-and-default/transient)
   "Set frametype to `default' and toggle transient-ness with resize."
