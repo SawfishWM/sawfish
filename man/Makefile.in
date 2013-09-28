@@ -50,6 +50,9 @@ FAQ : faq.texi
 sawfish.info : $(SRCS)
 	$(MAKEINFO) $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.info
 
+html:
+	$(MAKEINFO) --html $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.html
+
 install : sawfish.info installdirs
 	for f in sawfish.info*; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(infodir); \
