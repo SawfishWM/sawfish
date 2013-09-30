@@ -49,7 +49,7 @@ exec rep "$0" "$@"
 	 ;; extract `:options (foo bar..)' strings
 	 (when (listp options)
 	   (mapc (lambda (s)
-		   (when s
+	           (when (symbolp s)
 		     (register (symbol-name s)))) options)))
        (let ((type (cadr (get-key ':type keys))))
 	 ;; extract `:type (choice foo bar..)' strings
