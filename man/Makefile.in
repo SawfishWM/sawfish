@@ -23,6 +23,7 @@ include ../Makedefs
 top_builddir=..
 top_srcdir=@top_srcdir@
 srcdir=@srcdir@
+mandir=@mandir@
 
 SRCS = sawfish.texi news.texi faq.texi
 
@@ -60,16 +61,16 @@ install : sawfish.info installdirs
 	-install-info --info-dir=$(DESTDIR)$(infodir) sawfish.info
 	for f in sawfish*.1; do \
 		gzip $$f -c > $$f.gz; \
-		$(INSTALL_DATA) $$f.gz $(DESTDIR)$(prefix)/share/man/man1/; \
+		$(INSTALL_DATA) $$f.gz $(DESTDIR)$(mandir)/man1/; \
 	done
 
 installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(infodir)
-	$(SHELL) $< $(DESTDIR)$(prefix)/share/man/man1/
+	$(SHELL) $< $(DESTDIR)$(mandir)/man1/
 
 uninstall :
 	rm -f $(DESTDIR)$(infodir)/sawfish.info*
-	rm -f $(DESTDIR)$(prefix)/share/man/man1/sawfish*
+	rm -f $(DESTDIR)$(mandir)/man1/sawfish*
 	-install-info --remove --info-dir=$(DESTDIR)$(infodir) sawfish.info
 
 clean :
