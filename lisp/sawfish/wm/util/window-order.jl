@@ -90,29 +90,35 @@ function will restrict its search to the elements of this list."
     (let loop ((rest (window-order current-workspace nil)))
       (cond ((null rest) nil)
 	    ((or (window-get (car rest) 'never-focus)
+             (dock-window-p (car rest));; panel/pager workspace switcher
 		 (and (listp windows) (not (memq (car rest) windows))))
 	     (loop (cdr rest)))
 	    (t (car rest)))))
 
   (define (window-order-focus-most-recent)
     (set-input-focus (window-order-most-recent)))
-
-  (define (on-viewport-change)
-    ;; The problem is that any sticky windows that have been focused once
-    ;; will _always_ rise to the top of the order when switching viewports
-    ;; (since the topmost window is _always_ focused when entering a new
-    ;; workspace). The hacky solution is to remove the order of any sticky
-    ;; windows
-    (let ((order (window-order current-workspace)))
-      (mapc (lambda (w)
-	      (when (window-get w 'sticky-viewport)
-		(window-put w 'order nil))) order))
+  
+  ;; The problem is that any sticky windows that have been focused once
+  ;; will _always_ rise to the top of the order when switching viewports
+  ;; (since the topmost window is _always_ focused when entering a new
+  ;; workspace). The hacky solution is to record the "input-focus" window
+  ;; if leave a workspace and restore if reenter the workspace. 
+  (define focus-most-recent-at-workspace nil)
+  (define (record-focus-most-recent-at-workspace)
+    (setq focus-most-recent-at-workspace 
+          (remove (assoc (car (list current-workspace)) focus-most-recent-at-workspace) 
+                  focus-most-recent-at-workspace))
+    (setq focus-most-recent-at-workspace 
+          (append focus-most-recent-at-workspace 
+                  (cons (cons (car (list current-workspace)) (window-order-most-recent))))))
+  (define (restore-focus-most-recent-at-workspace)
     (unless (eq focus-mode 'enter-exit)
-      (window-order-focus-most-recent)))
+      (set-input-focus (cdr (assoc (car (list current-workspace)) focus-most-recent-at-workspace)))))
 
   (sm-add-saved-properties 'order)
   (add-swapped-properties 'order)
 
   (add-hook 'sm-after-restore-hook window-order-compress)
   (add-hook 'iconify-window-hook window-order-pop)
-  (add-hook 'viewport-moved-hook on-viewport-change))
+  (add-hook 'leave-workspace-hook record-focus-most-recent-at-workspace)
+  (add-hook 'enter-workspace-hook restore-focus-most-recent-at-workspace))
