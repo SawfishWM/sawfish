@@ -60,19 +60,19 @@
   :options (Default Reduce Glass WixDa Smoothly Brown Darkblue Blue Pink Green)
   :after-set (lambda () (color-changed)))
 
-(defcustom styletab-c:tabbar-marked t "Customize tabbar color if window marked to add as tab."
+(defcustom styletab-c:tabbar-marked t "Colorize tab/titelbar if it is to be added as a tab."
   :group (appearance StyleTab:group)
   :type boolean
   :after-set (lambda () (botton-color-changed recolor-tab)))
 
 (defcustom styletab-c:tabbar-marked-color (get-color "#DF0000")
-  "Color of tabbar if window marked to add as tab."
+  "Color of tab/titelbar when it was marked."
   :group (appearance StyleTab:group)
   :type color
   :depends styletab-c:tabbar-marked
   :after-set (lambda () (botton-color-changed recolor-tab)))
 
-(defcustom styletab-c:hightlight-tabbar nil "Also hightlighted tabbars."
+(defcustom styletab-c:hightlight-tabbar nil "Also hightlighted tab/titelbar."
   :group (appearance StyleTab:group)
   :type boolean
   :after-set (lambda () (botton-color-changed recolor-tab)))
@@ -118,156 +118,156 @@
   :after-set (lambda () (bright-changed)))
 
 (defcustom styletab-c:hightlight-close nil
-  "Hightlighted close button."
+  "Colorize the close button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-close-button)))
 
-(defcustom styletab-c:hightlight-close-all nil "Always use."
+(defcustom styletab-c:hightlight-close-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-close
   :after-set (lambda () (botton-color-changed recolor-close-button)))
 
 (defcustom styletab-c:hightlight-maximize nil
-  "Hightlighted maximize button."
+  "Colorize the maximize button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-maximize-button)))
 
-(defcustom styletab-c:hightlight-maximize-all nil "Always use."
+(defcustom styletab-c:hightlight-maximize-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-maximize
   :after-set (lambda () (botton-color-changed recolor-maximize-button)))
 
 (defcustom styletab-c:hightlight-iconify nil
-  "Hightlighted minimize button."
+  "Colorize the minimize button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-iconify-button)))
 
-(defcustom styletab-c:hightlight-iconify-all nil "Always use."
+(defcustom styletab-c:hightlight-iconify-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-iconify
   :after-set (lambda () (botton-color-changed recolor-iconify-button)))
 
 (defcustom styletab-c:hightlight-shade nil
-  "Hightlighted shade button."
+  "Colorize the shade button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-shade-button)))
 
-(defcustom styletab-c:hightlight-shade-all nil "Always use."
+(defcustom styletab-c:hightlight-shade-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-shade
   :after-set (lambda () (botton-color-changed recolor-shade-button)))
 
 (defcustom styletab-c:hightlight-sticky nil
-  "Hightlighted sticky button."
+  "Colorize the sticky button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-sticky-button)))
 
-(defcustom styletab-c:hightlight-sticky-all nil "Always use."
+(defcustom styletab-c:hightlight-sticky-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-sticky
   :after-set (lambda () (botton-color-changed recolor-sticky-button)))
 
 (defcustom styletab-c:hightlight-menu nil
-  "Hightlighted menu button."
+  "Colorize the menu button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-menu-button)))
 
-(defcustom styletab-c:hightlight-menu-all nil "Always use."
+(defcustom styletab-c:hightlight-menu-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-menu
   :after-set (lambda () (botton-color-changed recolor-menu-button)))
 
 (defcustom styletab-c:hightlight-frame-type nil
-  "Hightlighted frame type button."
+  "Colorize the frame type button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-frame-type-button)))
 
-(defcustom styletab-c:hightlight-frame-type-all nil "Always use."
+(defcustom styletab-c:hightlight-frame-type-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-frame-type
   :after-set (lambda () (botton-color-changed recolor-frame-type-button)))
 
 (defcustom styletab-c:hightlight-lock nil
-  "Hightlighted lock button."
+  "Colorize the lock button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-lock-button)))
 
-(defcustom styletab-c:hightlight-lock-all nil "Always use."
+(defcustom styletab-c:hightlight-lock-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-lock
   :after-set (lambda () (botton-color-changed recolor-lock-button)))
 
 (defcustom styletab-c:hightlight-move-resize nil
-  "Hightlighted move/resize button."
+  "Colorize the move/resize button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-move-resize-button)))
 
-(defcustom styletab-c:hightlight-move-resize-all nil "Always use."
+(defcustom styletab-c:hightlight-move-resize-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-move-resize
   :after-set (lambda () (botton-color-changed recolor-move-resize-button)))
 
 (defcustom styletab-c:hightlight-raise-lower nil
-  "Hightlighted raise/lower button."
+  "Colorize the raise/lower button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-raise-lower-button)))
 
-(defcustom styletab-c:hightlight-raise-lower-all nil "Always use."
+(defcustom styletab-c:hightlight-raise-lower-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-raise-lower
   :after-set (lambda () (botton-color-changed recolor-raise-lower-button)))
 
 (defcustom styletab-c:hightlight-next nil
-  "Hightlighted next workspace button."
+  "Colorize the next workspace button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-next-button)))
 
-(defcustom styletab-c:hightlight-next-all nil "Always use."
+(defcustom styletab-c:hightlight-next-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-next
   :after-set (lambda () (botton-color-changed recolor-next-button)))
 
 (defcustom styletab-c:hightlight-prev nil
-  "Hightlighted previous workspace button."
+  "Colorize the previous workspace button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-prev-button)))
 
-(defcustom styletab-c:hightlight-prev-all nil "Always use."
+(defcustom styletab-c:hightlight-prev-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-prev
   :after-set (lambda () (botton-color-changed recolor-prev-button)))
 
 (defcustom styletab-c:hightlight-rename nil
-  "Hightlighted rename button."
+  "Colorize the rename button."
   :group (appearance StyleTab:group)
   :type (optional color)
   :after-set (lambda () (botton-color-changed recolor-rename-button)))
 
-(defcustom styletab-c:hightlight-rename-all nil "Always use."
+(defcustom styletab-c:hightlight-rename-all nil "Always colorize."
   :group (appearance StyleTab:group)
   :type boolean
   :depends styletab-c:hightlight-rename
@@ -283,7 +283,7 @@
                              ;; crashes.
                              (list 'h-and '(choice \(none\) close menu maximize minimize shade sticky space send-to-prev
                                                    send-to-next lock raise-lower move-resize rename frame-type)
-                                   '(boolean "Also show in transients"))))))
+                                   '(boolean "Also show in transients."))))))
      (eval
       (macroexpand
        `(defcustom ,(car arg) ;; name
@@ -297,35 +297,35 @@
  '( ;; list to pass to mapc
    (styletab-c:top-left-buttons
     '((menu t) (sticky nil) (shade nil))
-    "Top Titlebar Left Buttons (from left to right) \\top"
+    "Top Titlebar Left Buttons (from left to right). \\top"
     StyleTab:top-buttons-group)
    (styletab-c:top-right-buttons
     '((close t) (maximize t) (minimize nil))
-    "Top Titlebar Right Buttons (from right to left) \\top"
+    "Top Titlebar Right Buttons (from right to left). \\top"
     StyleTab:top-buttons-group)
    (styletab-c:bottom-left-buttons
     '((menu t) (sticky nil) (shade nil))
-    "Bottom Titlebar Left Buttons (from left to right) \\top"
+    "Bottom Titlebar Left Buttons (from left to right). \\top"
     StyleTab:bottom-buttons-group)
    (styletab-c:bottom-right-buttons
     '((close t) (maximize t) (minimize nil))
-    "Bottom Titlebar Right Buttons (from right to left) \\top"
+    "Bottom Titlebar Right Buttons (from right to left). \\top"
     StyleTab:bottom-buttons-group)
    (styletab-c:left-top-buttons
     '((close t) (maximize t) (minimize nil))
-    "Left Titlebar Top Buttons (from top to bottom) \\top"
+    "Left Titlebar Top Buttons (from top to bottom). \\top"
     StyleTab:left-buttons-group)
    (styletab-c:left-bottom-buttons
     '((menu t) (sticky nil) (shade nil))
-    "Left Titlebar Bottom Buttons (from bottom to top) \\top"
+    "Left Titlebar Bottom Buttons (from bottom to top). \\top"
     StyleTab:left-buttons-group)
    (styletab-c:right-top-buttons
     '((close t) (maximize t) (minimize nil))
-    "Right Titlebar Top Buttons (from top to bottom) \\top"
+    "Right Titlebar Top Buttons (from top to bottom). \\top"
     StyleTab:right-buttons-group)
    (styletab-c:right-bottom-buttons
     '((menu t) (sticky nil) (shade nil))
-    "Right Titlebar Bottom Buttons (from bottom to top) \\top"
+    "Right Titlebar Bottom Buttons (from bottom to top). \\top"
     StyleTab:right-buttons-group)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
@@ -522,8 +522,8 @@
       (resize-window-to w dim-x dim-y)
       (tab-refresh-group w 'move))))
 
-(define (tabbartotop)
-  "Move tab-bar to top."
+(define (tab/titelbartotop)
+  "Move tab/titelbar to top, with resize (StyleTab Option)."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
         (window-put w 'title-position styletab-c:titlebar-place))
@@ -533,8 +533,8 @@
     (if (eq (window-get w 'title-position) 'bottom)
         (rotate-tab 'horiz 'opposite))))
 
-(define (tabbartobottom)
-  "Move tab-bar to bottom."
+(define (tab/titelbartobottom)
+  "Move tab/titelbar to bottom, with resize (StyleTab Option)."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
         (window-put w 'title-position styletab-c:titlebar-place))
@@ -544,8 +544,8 @@
     (if (eq (window-get w 'title-position) 'top)
         (rotate-tab 'horiz 'opposite))))
 
-(define (tabbartoleft)
-  "Move tab-bar to left."
+(define (tab/titelbartoleft)
+  "Move tab/titelbar to left, with resize (StyleTab Option)."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
         (window-put w 'title-position styletab-c:titlebar-place))
@@ -555,8 +555,8 @@
     (if (eq (window-get w 'title-position) 'right)
         (rotate-tab 'vert 'opposite))))
 
-(define (tabbartoright)
-  "Move tab-bar to right."
+(define (tab/titelbartoright)
+  "Move tab/titelbar to right, with resize (StyleTab Option)."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
         (window-put w 'title-position styletab-c:titlebar-place))
@@ -566,8 +566,8 @@
     (if (eq (window-get w 'title-position) 'left)
         (rotate-tab 'vert 'opposite))))
 
-(define (tabbartoggle)
-  "Move tab-bar to the opposite side. (Swap top & bottom, or left & right)"
+(define (tab/titelbartoggle)
+  "Move tab/titelbar to the opposite side, with resize (StyleTab Option)."
   (let ((w (current-event-window)))
     (if (not (window-get w 'title-position))
         (window-put w 'title-position styletab-c:titlebar-place))
@@ -576,23 +576,23 @@
         (rotate-tab 'horiz 'opposite)
       (rotate-tab 'vert 'opposite))))
 
-(define-command-gaol 'tabbar-toggle tabbartoggle)
-(define-command-gaol 'tabbar-to-top tabbartotop)
-(define-command-gaol 'tabbar-to-bottom tabbartobottom)
-(define-command-gaol 'tabbar-to-left tabbartoleft)
-(define-command-gaol 'tabbar-to-right tabbartoright)
+(define-command-gaol 'tab/titelbar-toggle tab/titelbartoggle)
+(define-command-gaol 'tab/titelbar-to-top tab/titelbartotop)
+(define-command-gaol 'tab/titelbar-to-bottom tab/titelbartobottom)
+(define-command-gaol 'tab/titelbar-to-left tab/titelbartoleft)
+(define-command-gaol 'tab/titelbar-to-right tab/titelbartoright)
 
 (def-frame-class tabbar-horizontal-left-edge ()
   (bind-keys tabbar-horizontal-left-edge-keymap
-             "Button1-Off" 'tabbar-to-left
-             "Button2-Off" 'tabbar-toggle
-             "Button3-Off" 'tabbar-to-right))
+             "Button1-Off" 'tab/titelbar-to-left
+             "Button2-Off" 'tab/titelbar-toggle
+             "Button3-Off" 'tab/titelbar-to-right))
 
 (def-frame-class tabbar-vertical-top-edge ()
   (bind-keys tabbar-vertical-top-edge-keymap
-             "Button1-Off" 'tabbar-to-top
-             "Button2-Off" 'tabbar-toggle
-             "Button3-Off" 'tabbar-to-bottom))
+             "Button1-Off" 'tab/titelbar-to-top
+             "Button2-Off" 'tab/titelbar-toggle
+             "Button3-Off" 'tab/titelbar-to-bottom))
 
 (define (f-type dest)
   (let ((w (current-event-window))
@@ -707,15 +707,15 @@
       (tab-refresh-group w 'move))))
 
 (define (set-frame-default-and-default/transient)
-  "Set frametype to `default' and toggle transient-ness with resize."
+  "Set frametype to `default' and toggle transient-ness, with resize (StyleTab Option)."
   (f-type 'def-tra))
 
 (define (set-frame-unframed-and-unframed/shaped-transient)
-  "Set frametype to 'unframed' and toggle transient-ness with resize"
+  "Set frametype to 'unframed' and toggle transient-ness, with resize (StyleTab Option)."
   (f-type 'unf-def))
 
 (define (set-frame-shaped-and-shaped/shaped-transient)
-  "Set frametype to shaped and toggle transient-ness with resize"
+  "Set frametype to shaped and toggle transient-ness, with resize (StyleTab Option)."
   (f-type 'sha-tra))
 
 (define-command-gaol 'set-frame-default-and-default/transient-toggle set-frame-default-and-default/transient)
