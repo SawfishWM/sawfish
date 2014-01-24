@@ -40,16 +40,24 @@
 
   ;; Commands
 
-  (define (show-faq) (help-display-info-function "sawfish" "FAQ"))
+  (define (show-faq) 
+    "Display the sawfish FAQ."
+    (help-display-info-function "sawfish" "FAQ"))
 
-  (define (show-news) (help-display-info-function "sawfish" "News"))
+  (define (show-news) 
+    "Display sawfish news."
+    (help-display-info-function "sawfish" "News"))
 
   (define (show-programmer-manual)
+    "Open the programmer manual."
     (help-display-info-function "sawfish" "Top"))
 
-  (define (show-homepage) (browser "http://sawfish.wikia.com/"))
+  (define (show-homepage) 
+    "Open the webside http://sawfish.wikia.com."
+    (browser "http://sawfish.wikia.com/"))
 
   (define (show-about)
+    "Open about sawfish."
     (system "sawfish-about >/dev/null 2>&1 </dev/null &"))
 
   ;;###autoload

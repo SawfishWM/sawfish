@@ -67,6 +67,8 @@
     :group (misc apps))
 
   (define (poweroff action)
+    "Run one of the following system programs: 
+halt, reboot, suspend, hibernate, logout or lockdown."
     (case action
       ((reboot)
        (call-hook 'before-exit-hook)

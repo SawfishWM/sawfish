@@ -215,7 +215,7 @@ Note that the value of the `:group' key is not evaluated."
             (require 'sawfish.wm.customize)
             (customize group))
 	  #:doc (format nil
-			"Invoke configurator to customize group \"%s\"."
+			"Invoke configurator to customize group %s."
 			group
 			)))))
 

@@ -68,7 +68,7 @@
       (tab-pos group tabnum win)))
 
   (define (tab-pos group tabnum win)
-    "find the left and right pixel offsets of a tab"
+    "Find the left and right pixel offsets of a tab"
     (let* ((dim-x (car (window-dimensions win)))
            (dim-y (cdr (window-dimensions win)))
            (margin-l
@@ -174,7 +174,7 @@
     (call-window-hook 'window-state-change-hook w (list '(marked))))
 
   ;; This function is for interactive use. Use tab-group-window for lisp.
-  (define (tab-add-to-group win)
+  (define (tab-window-add-to-tabgroup win)
     "Add a window to a tabgroup. Apply this command on a window, then
 on another. The first window will be added to the tabgroup containig
 the second."
@@ -189,13 +189,13 @@ the second."
             (window-put win 'marked nil)
             (setq marked-window nil))
         (window-put win 'marked t)
-        (default-cursor (get-cursor 'clock))
+        (default-cursor (get-cursor marked-cursor-shape))
         (setq marked-window (cons win)))
       (emit-marked-hook win)))
 
-  (define-command 'tab-add-to-group tab-add-to-group #:spec "%W")
+  (define-command 'tab-window-add-to-tabgroup tab-window-add-to-tabgroup #:spec "%W")
 
-  (define (tabgroup-add-to-group win)
+  (define (tab-tabgroup-add-to-tabgroup win)
     "Add a tabgroup to a tabgroup. Apply this command on a window
 from the tabgroup, then on another. The tabgroup will be added to
 the tabgroup containig the second."
@@ -203,16 +203,17 @@ the tabgroup containig the second."
       (if marked-window
           (progn
             (setq marked-window (tab-group-window-index (car marked-window)))
-            (tab-add-to-group win))
-        (default-cursor (get-cursor 'clock))
+            (tab-window-add-to-tabgroup win))
+        (default-cursor (get-cursor marked-cursor-shape))
         (setq marked-window (tab-group-window-index win))
         (mapcar (lambda (w) 
                   (window-put w 'marked t)
                   (emit-marked-hook w)) marked-window))))
 
-  (define-command 'tabgroup-add-to-group tabgroup-add-to-group #:spec "%W")
+  (define-command 'tab-tabgroup-add-to-tabgroup tab-tabgroup-add-to-tabgroup #:spec "%W")
 
   (define (check-win)
+    "Check if a window that was marked as tab is destroy"
     (if (car marked-window)
         (let ((m-list marked-window))
           (setq marked-window nil)

@@ -223,6 +223,7 @@ all viewports."
       (emit-sticky-hook w)))
 
   (define (make-window-unsticky w)
+    "Make the window only appear on the current workspaces or viewports."
     (when (window-sticky-p w)
       (make-window-unsticky/workspace w #:no-hooks t)
       (make-window-unsticky/viewport w #:no-hooks t)

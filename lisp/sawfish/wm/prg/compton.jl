@@ -90,55 +90,55 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadows-crop-maximized nil "Crop shadows by maximized Windows (xinerama support):"
+    (defcustom shadows-crop-maximized nil "Crop shadows by maximized Windows (xinerama support)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom top-offset -15 "The top offset for shadows. (Default -15)"
+    (defcustom top-offset -15 "The top offset for shadows (Default -15)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (25 20 15 10 5 0 -05 -10 -15 -20 -25 -30 -35 -40 -45 -50)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom left-offset -15 "The left offset for shadows. (Default -15)"
+    (defcustom left-offset -15 "The left offset for shadows (Default -15)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (25 20 15 10 5 0 -05 -10 -15 -20 -25 -30 -35 -40 -45 -50)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom translucency 80 "The translucency for shadows. (Default 80)"
+    (defcustom translucency 80 "The translucency for shadows (Default 80)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (10 20 30 40 50 60 70 80 90 100)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom blur-radius 12 "The blur radius for shadows. (Default 12)"
+    (defcustom blur-radius 12 "The blur radius for shadows (Default 12)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadow-red 0 "Red color value of shadow. (Default 0)"
+    (defcustom shadow-red 0 "Red color value of shadow (Default 0)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (0 1 2 3 4 5 6 7 8 9 10)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadow-green 0 "Green color value of shadow. (Default 0)"
+    (defcustom shadow-green 0 "Green color value of shadow (Default 0)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (0 1 2 3 4 5 6 7 8 9 10)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadow-blue 0 "Blue color value of shadow. (Default 0)"
+    (defcustom shadow-blue 0 "Blue color value of shadow (Default 0)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
@@ -157,21 +157,21 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom fade-in 28 "Opacity change between steps while fading in. (Default 28)"
+    (defcustom fade-in 28 "Opacity change between steps while fading in (Default 28)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (1 7 14 21 28 35 42 49 56)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom fade-out 28 "Opacity change between steps while fading out. (Default 28)"
+    (defcustom fade-out 28 "Opacity change between steps while fading out (Default 28)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (1 7 14 21 28 35 42 49 56)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom fade-time 10 "The time between steps in a fade in milliseconds. (Default 10)"
+    (defcustom fade-time 10 "The time between steps in a fade in milliseconds (Default 10)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
@@ -184,60 +184,60 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom menu-opacity 10 "The opacity for menus. (Default 10)"
+    (defcustom menu-opacity 10 "The opacity for menus (Default 10)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
       :options (5 6 7 8 9 10)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom opacity-by-move 75 "Opacity by move. (Default 75)"
+    (defcustom opacity-by-move 75 "Opacity by move (Default 75)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 75 1))
 
-    (defcustom opacity-by-resize 75 "Opacity by resize. (Default 75)"
+    (defcustom opacity-by-resize 75 "Opacity by resize (Default 75)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 75 1))
 
-    (defcustom opacity-normal-i 90 "Opacity normal windows inactive. (Default 90)"
+    (defcustom opacity-normal-i 90 "Opacity normal windows inactive (Default 90)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 90 1)
       :after-set (lambda () (update-opacity 'normal)))
 
-    (defcustom opacity-dialog-i 85 "Opacity dialog windows inactive. (Default 85)"
+    (defcustom opacity-dialog-i 85 "Opacity dialog windows inactive (Default 85)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 85 1)
       :after-set (lambda () (update-opacity 'dialog)))
 
-    (defcustom opacity-tabbed-i 95 "Opacity tabbed windows inactive. (Default 95)"
+    (defcustom opacity-tabbed-i 95 "Opacity tabbed windows inactive (Default 95)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 95 1)
       :after-set (lambda () (update-opacity 'tabbed)))
 
-    (defcustom opacity-desktop-i 75 "Opacity desktop windows inactive. (Default 75)"
+    (defcustom opacity-desktop-i 75 "Opacity desktop windows inactive (Default 75)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 75 1)
       :after-set (lambda () (update-opacity 'desktop)))
 
-    (defcustom opacity-dock-a 100 "Opacity dock windows active. (Default 100)"
+    (defcustom opacity-dock-a 100 "Opacity dock windows active (Default 100)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 50 100 100 1)
       :after-set (lambda () (update-opacity 'dock)))
 
-    (defcustom opacity-dock-i 80 "Opacity dock windows inactive. (Default 80)"
+    (defcustom opacity-dock-i 80 "Opacity dock windows inactive (Default 80)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 80 1)
       :after-set (lambda () (update-opacity 'dock)))
 
-    (defcustom opacity-notify-i 85 "Opacity notify. (Default 85)"
+    (defcustom opacity-notify-i 85 "Opacity notify (Default 85)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type (number 0 100 85 1)

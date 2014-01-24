@@ -59,6 +59,8 @@ replay any pointer events that invoked the command."
     (replay-pointer w))
 
   (define (or-pass-through-click w)
+    "Raise the window if it is not on top, or if the window is on top, then replay
+any pointer events that invoked the command."
     (if (and (windowp w) (not (window-on-top-p w)))
 	(raise-window* w)
       (replay-pointer w)))

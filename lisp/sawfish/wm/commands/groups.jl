@@ -66,13 +66,17 @@
       (fun w)))
 
   (define (iconify-group w)
+    "Minimize the window and all windows from the same group."
     (call-with-iconify-mode 'group iconify-window w))
   (define (uniconify-group w)
+    "Restore the window and all windows from the same group from its minimized state."
     (call-with-iconify-mode 'group uniconify-window w))
 
   (define (iconify-transient-group w)
+    "Minimize the transient window and all transient windows from the same group."
     (call-with-iconify-mode 'transients iconify-window w))
   (define (uniconify-transient-group w)
+    "Restore the transient window and all transient windows from the same group from its minimized state."
     (call-with-iconify-mode 'transients uniconify-window w))
 
   (define-command 'iconify-group
@@ -87,13 +91,18 @@
   ;; sticky
 
   (define (make-group-sticky w)
+    "Make the window and all windows from the same group appears in all workspaces and viewports."
     (map-window-group make-window-sticky w))
   (define (make-group-unsticky w)
+    "Make the window and all windows from the same group appears only in the
+current workspaces or viewports."
     (map-window-group make-window-unsticky w))
-
+  
   (defun toggle-group-sticky (w)
+    "Toggle the `stickiness' from the window and all windows from the same group,
+i.e. make it appear in all workspaces and viewports."
     (if (window-get w 'sticky)
-	(make-group-unsticky w)
+        (make-group-unsticky w)
       (make-group-sticky w)))
 
   ;;###autoload
@@ -112,15 +121,18 @@
 	  send-group-dest-space (eq x (input-focus))))) w))
 
   (define (send-group-to-current-workspace w)
+    "Send the window and all windows from the same group to the current workspace."
     (send-group-to-workspace w current-workspace))
 
   (define (send-group-to-next-workspace send-group-window count)
+    "Send the window and all windows from the same group to the next workspace."
     (ws-call-with-workspace (lambda (space)
 			      (send-group-to-workspace send-group-window space)
 			      (select-workspace space))
 			    count workspace-send-boundary-mode))
 
   (define (send-group-to-previous-workspace w count)
+    "Send the window and all windows from the same group to the previous workspace."
     (send-group-to-next-workspace w (- count)))
 
   ;;###autoload
@@ -134,6 +146,8 @@
   ;; viewports
 
   (define (move-group-to-current-viewport w)
+    "Move the window and all windows from the same group
+to the current viewport."
     (map-window-group move-window-to-current-viewport w))
 
   (define (move-group-viewport w col row)
@@ -141,10 +155,25 @@
 			(move-window-viewport x col row)) w)
     (move-viewport-to-window w))
 
-  (define (move-group-left w) (move-group-viewport w -1 0))
-  (define (move-group-right w) (move-group-viewport w 1 0))
-  (define (move-group-up w) (move-group-viewport w 0 -1))
-  (define (move-group-down w) (move-group-viewport w 0 1))
+  (define (move-group-left w) 
+    "Move the window and all windows from the same group
+to the viewport on the left, and switch to that viewport."
+    (move-group-viewport w -1 0))
+
+  (define (move-group-right w) 
+    "Move the window and all windows from the same group
+to the viewport on the right, and switch to that viewport."
+    (move-group-viewport w 1 0))
+
+  (define (move-group-up w) 
+    "Move the window and all windows from the same group
+to the viewport above, and switch to that viewport."
+    (move-group-viewport w 0 -1))
+
+  (define (move-group-down w) 
+    "Move the window and all windows from the same group
+to the viewport below, and switch to that viewport."
+    (move-group-viewport w 0 1))
 
   ;;###autoload
   (define-command 'move-group-to-current-viewport
@@ -162,11 +191,29 @@
 
   ;; stacking
 
-  (define (raise-group w) (raise-windows w (windows-in-group w t)))
-  (define (lower-group w) (lower-windows w (windows-in-group w t)))
-  (define (raise-lower-group w) (raise-lower-windows w (windows-in-group w t)))
-  (define (raise-group-depth w) (map-window-group raise-window-depth w))
-  (define (lower-group-depth w) (map-window-group lower-window-depth w))
+  (define (raise-group w) 
+    "Raise the window and all windows from the same group to its highest
+allowed position in the stacking order."
+    (raise-windows w (windows-in-group w t)))
+
+  (define (lower-group w) 
+    "Lower the window and all windows from the same group to its lowest
+allowed position in the stacking order."
+    (lower-windows w (windows-in-group w t)))
+
+  (define (raise-lower-group w) 
+    "If the window is at its highest possible position, then lower the window and all
+windows from the same group to its lowest possible position. Otherwise raise the window
+and all windows from the group as far as allowed."
+    (raise-lower-windows w (windows-in-group w t)))
+
+  (define (raise-group-depth w) 
+    "Put the window and all windows from the same group in the stacking level above its current level."
+    (map-window-group raise-window-depth w))
+
+  (define (lower-group-depth w) 
+    "Put the window and all windows from the same group in the stacking level beneath its current level."
+    (map-window-group lower-window-depth w))
 
   ;;###autoload
   (define-command 'raise-group raise-group

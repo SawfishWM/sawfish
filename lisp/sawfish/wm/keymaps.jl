@@ -121,8 +121,8 @@
 				     "Button3-Move" 'move-window-interactively
 				     "Button3-Click" 'tab-release-window
 				     "Button2-Move" 'resize-window-interactively
-				     "Button2-Off" 'tab-add-to-group
-				     "C-Button2-Off" 'tabgroup-add-to-group
+				     "Button2-Off" 'tab-window-add-to-tabgroup
+				     "C-Button2-Off" 'tab-tabgroup-add-to-tabgroup
 				     "Button1-Off2" 'toggle-window-shaded
 				     "Button1-Move" 'move-window-interactively)
     "Keymap of window title bar. Mouse-bindings only."
@@ -132,8 +132,8 @@
   (defcustom tabbar-keymap (bind-keys (make-keymap)
 				      "Button3-Move" 'move-window-interactively
 				      "Button3-Click" 'tab-release-window
-				      "Button2-Off" 'tab-add-to-group
-				      "C-Button2-Off" 'tabgroup-add-to-group
+				      "Button2-Off" 'tab-window-add-to-tabgroup
+				      "C-Button2-Off" 'tab-tabgroup-add-to-tabgroup
 				      "Button1-Off2" 'toggle-window-shaded
 				      "Button1-Move" 'move-window-interactively)
     "Keymap of window tabbar. Mouse-bindings only."

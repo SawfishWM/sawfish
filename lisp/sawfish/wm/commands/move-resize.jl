@@ -91,6 +91,16 @@
     :tooltip "When moving a window, this option lets you align one of \
 its edges with an edge of another window.")
 
+  (defcustom marked-cursor-shape 'clock
+    "Cursor shape if a window is marked to added as tab."
+    :type (choice arrow box_spiral center_ptr circle cross cross_reverse
+                  crosshair diamond_cross dotbox clock double_arrow draped_box
+                  fleur hand1 hand2 iron_cross left_ptr ll_angle mouse
+                  pencil pirate plus question_arrow right_ptr sb_left_arrow
+                  sb_right_arrow sb_down_arrow sb_up_arrow spider star
+                  target tcross watch xterm X_cursor)
+    :group move)
+
   (defvar move-snap-mode 'resistance
     "How to snap together window edges, one of `magnetism', `resistance', or
 `attraction'.")
@@ -537,10 +547,12 @@ its edges with an edge of another window.")
       (resize-window-with-hints* win new-wid new-hgt)))
 
   (define (double-window-size w)
+    "Resize the window to the double size."
     (unless (window-get w 'fixed-size)
       (resize-by-factor w 2)))
 
   (define (halve-window-size w)
+    "Resize the window to the halve size."
     (unless (window-get w 'fixed-size)
       (resize-by-factor w 0.5)))
 
@@ -587,6 +599,7 @@ that window."
 
   ;; Move Window To Center
   (define (move-window-center w)
+    "Move the window to the center from the current screen."
     (move-window-to w
                     (quotient (- (screen-width)
                                  (car (window-frame-dimensions w))) 2)
@@ -595,8 +608,8 @@ that window."
 
   ;; resize-prompt
   (define (resize-window-prompt)
-    (require 'sawfish.wm.util.prompt)
     "Resize window. Prompted to enter new size."
+    (require 'sawfish.wm.util.prompt)
     (let* ((win (current-event-window))
            (w-name (window-name win))
            (old-w (car (window-dimensions win)))
