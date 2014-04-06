@@ -135,7 +135,12 @@
 				      "Button2-Off" 'tab-window-add-to-tabgroup
 				      "C-Button2-Off" 'tab-tabgroup-add-to-tabgroup
 				      "Button1-Off2" 'toggle-window-shaded
-				      "Button1-Move" 'move-window-interactively)
+				      "Button1-Move" 'move-window-interactively
+                      "Button1-C-Off" 'tab-move-to-left
+                      "Button3-C-Off" 'tab-move-to-right
+                      "Button1-Super-Off" 'tab-move-to-beginning
+                      "Button3-Super-Off" 'tab-move-to-end)
+
     "Keymap of window tabbar. Mouse-bindings only."
     :group bindings
     :type keymap)

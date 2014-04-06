@@ -139,6 +139,7 @@ Also need the currect settings in the theme.jl from the theme."
       wins))
 
   (define (tab-rank elem list)
+    "Returns the nth position from elem (tab) in a list (tabbar)"
     (if (eq elem (car list))
         0
       (+ 1 (tab-rank elem (cdr list)))))
@@ -408,6 +409,85 @@ sticky, unsticky, fixed-position."
       (set-input-focus win)))
 
   (define-command 'tab-raise-right-window tab-raise-right-window)
+
+  (define (move-tab w pos)
+    "Move tab W to pos"
+    (when (window-tabbed-p w)
+      (let* ((wins (tab-group-window-index w))
+            (rank (tab-rank w wins))
+            (list-end (nthcdr rank wins))
+            (list-start wins)
+            right left current new-list)
+        (mapcar (lambda (w)
+                  (setq list-start (remove w list-start))) list-end)
+        (when (eq pos 'next)
+          (if (not (nth (+ rank 1) wins))
+              (tab-move-to-beginning w)
+            (setq list-end (remove w list-end))
+            (setq right (nth (+ rank 1) wins))
+            (setq list-end (remove (nth (+ rank 1) wins) list-end))         
+            (setq current (list w))
+            (if (consp list-start)
+                (setq new-list (append new-list list-start)))
+            (if right
+                (setq new-list (append new-list (list right))))
+            (if (consp current)
+                (setq new-list (append new-list current)))
+            (if (consp list-end)
+                (setq new-list (append new-list list-end)))
+            (setq all-wins (nthcdr 0 new-list))
+            (after-move-resize w)))
+        (when (eq pos 'prev)
+          (setq left (last list-start))  
+          (if (not left)
+              (tab-move-to-end w)
+          (setq list-start (remove left list-start))
+            (setq list-end (nthcdr (+ rank 1) wins))
+            (setq current (list w))
+            (if (consp list-start)
+                (setq new-list (append new-list list-start)))
+            (if (consp current)
+                (setq new-list (append new-list current)))
+            (if left
+                (setq new-list (append new-list (list left))))
+            (if (consp list-end)
+                (setq new-list (append new-list list-end)))
+            (setq all-wins (nthcdr 0 new-list))
+            (after-move-resize w))))))
+
+  (define (tab-move-to-right w)
+    "Move tab to right in the tabbar."
+    (move-tab w 'next))
+
+  (define-command 'tab-move-to-right tab-move-to-right #:spec "%f")
+
+  (define (tab-move-to-left w)
+    "Move tab to left in the tabbar."
+    (move-tab w 'prev))
+  
+  (define-command 'tab-move-to-left tab-move-to-left #:spec "%f")
+
+  (define (move-tab-edge w pos)
+    "Move tab W to pos"
+    (when (window-tabbed-p w)
+      (let ((tabs (remove w (tab-group-window-index w))))
+        (if (eq pos 'end)
+            (setq all-wins (append tabs (cons w nil))))
+        (if (eq pos 'beg)
+            (setq all-wins (append (cons w nil) tabs)))
+        (after-move-resize w))))
+
+  (define (tab-move-to-end w)
+    "Move tab to the end in the tabbar."
+    (move-tab-edge w 'end))
+
+  (define-command 'tab-move-to-end tab-move-to-end #:spec "%f")
+
+  (define (tab-move-to-beginning w)
+    "Move tab to the beginning in the tabbar."
+    (move-tab-edge w 'beg))
+
+  (define-command 'tab-move-to-beginning tab-move-to-beginning #:spec "%f")
 
   (define (map-other-grouped-windows win func)
     ""
