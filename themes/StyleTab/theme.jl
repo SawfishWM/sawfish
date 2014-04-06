@@ -741,10 +741,10 @@
   (or (table-ref styletab-c-icon-cache w)
       (let ((icon (window-icon-image w)))
         (if icon
-            (let ((scaled (scale-image icon (- styletab-c:title-dimension 7) (- styletab-c:title-dimension 7))))
+            (let ((scaled (scale-image icon (- styletab-c:title-dimension 7) (- styletab-c:title-dimension 8))))
               (table-set styletab-c-icon-cache w scaled)
               scaled)
-          (scale-image top-frame-icon-title-images (- styletab-c:title-dimension 7) (- styletab-c:title-dimension 7))))))
+          (scale-image top-frame-icon-title-images (- styletab-c:title-dimension 7) (- styletab-c:title-dimension 8))))))
 
 (defun brighten-color (color percentage)
   (let* ((red (car (color-rgb color)))
