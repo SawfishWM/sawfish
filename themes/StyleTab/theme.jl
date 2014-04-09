@@ -2,7 +2,7 @@
 
 (define theme-name 'StyleTab)
 
-;;need hash tables for icon cache 
+;;need hash tables for icon cache
 (require 'rep.data.tables)
 
 ;; recolor imanges
@@ -52,12 +52,12 @@
 (defcustom styletab-c:styles 'Default "Frame and button style."
   :group (appearance StyleTab:group)
   :type symbol
-  :options (Default Reduce Glass WixDa Smoothly))
+  :options (Default Reduce Glass WixDa Smoothly Flat))
 
 (defcustom styletab-c:proposals 'Pink "Color proposals."
   :group (appearance StyleTab:group)
   :type symbol
-  :options (Default Reduce Glass WixDa Smoothly Brown Darkblue Blue Pink Green)
+  :options (Default Reduce Glass WixDa Smoothly Flat Brown Darkblue Blue Pink Green)
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:tabbar-marked t "Colorize tab/titelbar if it is to be added as a tab."
@@ -328,8 +328,8 @@
     "Right Titlebar Bottom Buttons (from bottom to top). \\top"
     StyleTab:right-buttons-group)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-;;; styles settings 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; styles settings
 
 (define proposals-colors
   (lambda ()
@@ -340,6 +340,7 @@
           ((Glass) (list "#5E5E70" '60 '40 '60))
           ((WixDa) (list "#6E6D8F" '20 '40 '60))
           ((Smoothly) (list "#75759E" '20 '40 '40))
+          ((Flat) (list "#6E6D8F" '20 '40 '60))
           ((Darkblue) (list "#00006E" '30 '70 '70))
           ((Brown) (list "#780000" '40 '40 '50))
           ((Blue) (list "#0000B4" '30 '40 '50))
@@ -353,7 +354,8 @@
           ((Reduce) (title-colors-reduce))
           ((Glass) (title-colors-glass))
           ((WixDa) (title-colors-wixda))
-          ((Smoothly) (title-colors-smoothly)))))
+          ((Smoothly) (title-colors-smoothly))
+          ((Flat) (title-colors-flat)))))
 
 (define title-colors-default
   (lambda ()
@@ -380,6 +382,11 @@
     `((focused . "#333333") (highlighted . "#000000") (clicked . "#000000") (inactive . "#666666") (inactive-highlighted . "#444444")
       (inactive-clicked . "#444444"))))
 
+(define title-colors-flat
+  (lambda ()
+    `((focused . "#F2F2F2") (highlighted . "#FFFFFF") (clicked . "#FFFFFF") (inactive . "#D9D9D9") (inactive-highlighted . "#E6E6E6")
+      (inactive-clicked . "#E6E6E6"))))
+
 (define button-width-custom
   (lambda ()
     (if (eq styletab-c:custom-button-width t)
@@ -389,7 +396,8 @@
             ((Reduce) (button-width-reduce))
             ((Glass) (button-width-glass))
             ((WixDa) (button-width-wixda))
-            ((Smoothly) (button-width-smoothly))))))
+            ((Smoothly) (button-width-smoothly))
+            ((Flat) (button-width-flat))))))
 
 (define button-width-add
   (lambda ()
@@ -400,7 +408,8 @@
             ((Reduce) (button-width-reduce))
             ((Glass) (button-width-glass))
             ((WixDa) (button-width-wixda))
-            ((Smoothly) (button-width-smoothly))))))
+            ((Smoothly) (button-width-smoothly))
+            ((Flat) (button-width-flat))))))
 
 (define button-width-set (lambda () (+ styletab-c:button-width (button-width-add))))
 (define button-width-zero (lambda () 0))
@@ -409,6 +418,7 @@
 (define button-width-glass (lambda () 0))
 (define button-width-wixda (lambda () -4))
 (define button-width-smoothly (lambda () 0))
+(define button-width-flat (lambda () 0))
 
 ;; end of tabtext
 (define tabbar-right-edge-width
@@ -418,7 +428,8 @@
           ((Reduce) 6)
           ((Glass) 3)
           ((WixDa) 3)
-          ((Smoothly) 3))))
+          ((Smoothly) 3)
+          ((Flat) 3))))
 
 ;; edge of first buttons left/right
 (define button-left-edge
@@ -428,7 +439,8 @@
           ((Reduce) 0)
           ((Glass) 0)
           ((WixDa) 0)
-          ((Smoothly) 0))))
+          ((Smoothly) 0)
+          ((Flat) 0))))
 
 (define button-right-edge
   (lambda ()
@@ -437,7 +449,8 @@
           ((Reduce) 1)
           ((Glass) 0)
           ((WixDa) 0)
-          ((Smoothly) 2))))
+          ((Smoothly) 2)
+          ((Flat) 0))))
 
 (define icon-edge
   (lambda ()
@@ -446,9 +459,10 @@
           ((Reduce) 2)
           ((Glass) 1)
           ((WixDa) 1)
-          ((Smoothly) 2))))
+          ((Smoothly) 2)
+          ((Flat) 1))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; frame-class, keys bindings
 
 (define (rotate-tab src dest)
@@ -728,8 +742,8 @@
              "Button2-Off" 'set-frame-unframed-and-unframed/shaped-transient-toggle
              "Button3-Off" 'set-frame-shaped-and-shaped/shaped-transient-toggle))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-;;; make images/recolor 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; make images/recolor
 
 ;; button/icon table
 (define styletab-c-icon-cache (make-weak-table eq-hash eq))
@@ -775,20 +789,28 @@
   (brighten-color color bright))
 
 (define (do-recolor img color)
-  (let ((recolorer
-         (make-image-recolorer color
-                               #:zero-channel blue-channel
-                               #:index-channel green-channel)))
-    (recolorer img)
-    img))
+  (if (and (eq styletab-c:styles 'Flat)
+           (not flat-buttons))
+      (make-sized-image 1 1 color)
+    (if (not (eq styletab-c:styles 'Flat))
+        (let ((recolorer
+               (make-image-recolorer color
+                                     #:zero-channel blue-channel
+                                     #:index-channel green-channel)))
+          (recolorer img)
+          img)
+      img)))
 
 (define (do-make-get-image img)
+  (if (and (eq styletab-c:styles 'Flat)
+           (not flat-buttons))
+      nil
     (or
      (table-ref styletab-c-frame-cache img)
      (let ((image
             (make-image img)))
        (table-set styletab-c-frame-cache img image)
-       image)))
+       image))))
 
 (define (base-tables-images w)
   (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-f.png"))
@@ -801,6 +823,142 @@
                              (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
     (table-unset styletab-c-frame-cache w)
     (table-set styletab-c-frame-cache w `((focused . ,focus) (inactive . ,inact)))))
+
+(define (build-title-corner-images w)
+  (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-frame-top-left-" w "-f.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark 0 styletab-c:focus-frame-color)
+                             (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+        (inact (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-frame-top-left-" w "-i.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                             (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
+      (table-unset styletab-c-frame-cache (concat "top-frame-top-left-" w))
+      (table-set styletab-c-frame-cache (concat "top-frame-top-left-" w) `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache (concat "top-frame-top-right-" w))
+      (table-set styletab-c-frame-cache (concat "top-frame-top-right-" w)
+                 `((focused . ,(flip-image-horizontally (copy-image focus))) (inactive . ,(flip-image-horizontally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache (concat "left-frame-top-left-" w))
+      (table-set styletab-c-frame-cache (concat "left-frame-top-left-" w)
+                 `((focused . ,(flip-image-diagonally (copy-image focus))) (inactive . ,(flip-image-diagonally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache (concat "left-frame-bottom-left-" w))
+      (table-set styletab-c-frame-cache (concat "left-frame-bottom-left-" w)
+                 `((focused . ,(flip-image-vertically (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-vertically (flip-image-diagonally (copy-image inact))))))
+      (table-unset styletab-c-frame-cache (concat "right-frame-top-right-" w))
+      (table-set styletab-c-frame-cache (concat "right-frame-top-right-" w)
+                 `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact))))))
+      (table-unset styletab-c-frame-cache (concat "right-frame-bottom-right-" w))
+      (table-set styletab-c-frame-cache (concat "right-frame-bottom-right-" w)
+                 `((focused . ,(flip-image-vertically (flip-image-horizontally (flip-image-diagonally (copy-image focus)))))
+                   (inactive . ,(flip-image-vertically (flip-image-horizontally (flip-image-diagonally (copy-image inact)))))))))
+
+(define (build-cursor-images w)
+  (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-frame-title-" w "-f.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark 0 styletab-c:focus-frame-color)
+                             (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+        (inact (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-frame-title-" w "-i.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                             (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
+      (table-unset styletab-c-frame-cache (concat "top-frame-title-" w))
+      (table-set styletab-c-frame-cache (concat "top-frame-title-" w) `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache (concat "left-frame-title-" w))
+      (table-set styletab-c-frame-cache (concat "left-frame-title-" w)
+                 `((focused . ,(flip-image-diagonally (copy-image focus))) (inactive . ,(flip-image-diagonally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache (concat "right-frame-title-" w))
+      (table-set styletab-c-frame-cache (concat "right-frame-title-" w)
+                 `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact))))))))
+
+(define (build-title-images w)
+  (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-" w "-f.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark 0 styletab-c:focus-frame-color)
+                             (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+        (inact (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-" w "-i.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                             (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
+      (table-unset styletab-c-frame-cache (concat "top-" w))
+      (table-set styletab-c-frame-cache (concat "top-" w) `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache (concat "bottom-" w))
+      (table-set styletab-c-frame-cache (concat "bottom-" w) `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache (concat "left-" w))
+      (table-set styletab-c-frame-cache (concat "left-" w)
+                 `((focused . ,(flip-image-diagonally (copy-image focus))) (inactive . ,(flip-image-diagonally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache (concat "right-" w))
+      (table-set styletab-c-frame-cache (concat "right-" w)
+                 `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact))))))))
+
+(define (build-border-images w)
+  (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-" w "-f.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark 0 styletab-c:focus-frame-color)
+                             (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+        (inact (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-" w "-i.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                             (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
+      (table-unset styletab-c-frame-cache (concat "top-" w))
+      (table-set styletab-c-frame-cache (concat "top-" w) `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache "right-frame-left-border")
+      (table-set styletab-c-frame-cache "right-frame-left-border" `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache '"top-frame-right-border")
+      (table-set styletab-c-frame-cache '"top-frame-right-border"
+                 `((focused . ,(flip-image-horizontally (copy-image focus))) (inactive . ,(flip-image-horizontally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache '"left-frame-right-border")
+      (table-set styletab-c-frame-cache '"left-frame-right-border"
+                 `((focused . ,(flip-image-horizontally (copy-image focus))) (inactive . ,(flip-image-horizontally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache '"top-frame-bottom-border")
+      (table-set styletab-c-frame-cache '"top-frame-bottom-border"
+                 `((focused . ,(flip-image-vertically (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-vertically (flip-image-diagonally (copy-image inact))))))
+      (table-unset styletab-c-frame-cache '"right-frame-bottom-border")
+      (table-set styletab-c-frame-cache '"right-frame-bottom-border"
+                 `((focused . ,(flip-image-vertically (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-vertically (flip-image-diagonally (copy-image inact))))))
+      (table-unset styletab-c-frame-cache '"left-frame-bottom-border")
+      (table-set styletab-c-frame-cache '"left-frame-bottom-border"
+                 `((focused . ,(flip-image-vertically (flip-image-diagonally (copy-image focus))))
+                   (inactive . ,(flip-image-vertically (flip-image-diagonally (copy-image inact))))))
+      (table-unset styletab-c-frame-cache '"right-frame-top-border")
+      (table-set styletab-c-frame-cache '"right-frame-top-border"
+                 `((focused . ,(flip-image-diagonally (copy-image focus)))
+                   (inactive . ,(flip-image-diagonally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache '"left-frame-top-border")
+      (table-set styletab-c-frame-cache '"left-frame-top-border"
+                 `((focused . ,(flip-image-diagonally (copy-image focus)))
+                   (inactive . ,(flip-image-diagonally (copy-image inact)))))))
+
+(define (build-corner-images w)
+  (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-" w "-f.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark 0 styletab-c:focus-frame-color)
+                             (get-recolor-dark 0 (get-color (nth 0 (proposals-colors)))))))
+        (inact (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" "top-" w "-i.png"))
+                           (if (eq styletab-c:custom-frame-colors t)
+                               (get-recolor-dark (* styletab-c:inactive-dimout 20) styletab-c:unfocus-frame-color)
+                             (get-recolor-dark (nth 1 (proposals-colors)) (get-color (nth 0 (proposals-colors))))))))
+      (table-unset styletab-c-frame-cache (concat "top-" w))
+      (table-set styletab-c-frame-cache (concat "top-" w) `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache "right-frame-bottom-left-corner")
+      (table-set styletab-c-frame-cache "right-frame-bottom-left-corner" `((focused . ,focus) (inactive . ,inact)))
+      (table-unset styletab-c-frame-cache '"top-frame-bottom-right-corner")
+      (table-set styletab-c-frame-cache '"top-frame-bottom-right-corner"
+                 `((focused . ,(flip-image-horizontally (copy-image focus))) (inactive . ,(flip-image-horizontally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache '"left-frame-bottom-right-corner")
+      (table-set styletab-c-frame-cache '"left-frame-bottom-right-corner"
+                 `((focused . ,(flip-image-horizontally (copy-image focus))) (inactive . ,(flip-image-horizontally (copy-image inact)))))
+      (table-unset styletab-c-frame-cache '"right-frame-top-left-corner")
+      (table-set styletab-c-frame-cache '"right-frame-top-left-corner"
+                 `((focused . ,(flip-image-vertically (copy-image focus))) (inactive . ,(flip-image-vertically (copy-image inact)))))
+      (table-unset styletab-c-frame-cache '"left-frame-top-right-corner")
+      (table-set styletab-c-frame-cache '"left-frame-top-right-corner"
+                 `((focused . ,(flip-image-diagonally (copy-image focus))) (inactive . ,(flip-image-diagonally (copy-image inact)))))))
 
 (define (tab-tables-images x w)
   (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" x "-" w "-f.png"))
@@ -815,11 +973,11 @@
                                  (get-recolor-bright 20 (get-color (nth 0 (proposals-colors))))))))
         (highl (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" x "-" w "-h.png"))
                            (if (eq styletab-c:custom-frame-colors t)
-                               (get-recolor-bright 
-                                (if (eq styletab-c:hightlight-tabbar t) 
+                               (get-recolor-bright
+                                (if (eq styletab-c:hightlight-tabbar t)
                                     (/ (* styletab-c:active-hightlight-brighten 20) 2) 0)
-                                styletab-c:focus-frame-color) (get-recolor-bright 
-                                                               (if (eq styletab-c:hightlight-tabbar t) 
+                                styletab-c:focus-frame-color) (get-recolor-bright
+                                                               (if (eq styletab-c:hightlight-tabbar t)
                                                                    (/ (nth 2 (proposals-colors)) 2) 0)
                                                                (get-color (nth 0 (proposals-colors)))))))
         (highl-m (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" x "-" w "-marked-h.png"))
@@ -828,11 +986,11 @@
                                      (get-recolor-bright 20 styletab-c:tabbar-marked-color)
                                    styletab-c:tabbar-marked-color)
                                (if (eq styletab-c:custom-frame-colors t)
-                                   (get-recolor-bright 
-                                    (if (eq styletab-c:hightlight-tabbar t) 
+                                   (get-recolor-bright
+                                    (if (eq styletab-c:hightlight-tabbar t)
                                         (/ (* styletab-c:active-hightlight-brighten 40) 2) 20)
-                                    styletab-c:focus-frame-color) (get-recolor-bright 
-                                                                   (if (eq styletab-c:hightlight-tabbar t) 
+                                    styletab-c:focus-frame-color) (get-recolor-bright
+                                                                   (if (eq styletab-c:hightlight-tabbar t)
                                                                        (/ (nth 2 (proposals-colors)) 2) 0)
                                                                    (get-recolor-bright 20 (get-color (nth 0 (proposals-colors)))))))))
         (inact (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" x "-" w "-i.png"))
@@ -847,12 +1005,12 @@
                                  (get-recolor-bright 20 (get-color (nth 0 (proposals-colors))))))))
         (in-hi (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" x "-" w "-ih.png"))
                            (if (eq styletab-c:custom-frame-colors t)
-                               (get-recolor-bright 
-                                (if (eq styletab-c:hightlight-tabbar t) 
+                               (get-recolor-bright
+                                (if (eq styletab-c:hightlight-tabbar t)
                                     (- (/ (* styletab-c:inactive-hightlight-brighten 20) 2) (* styletab-c:inactive-dimout 20))
                                   (- (* styletab-c:inactive-dimout 20)))
                                 styletab-c:unfocus-frame-color)
-                             (get-recolor-bright (if (eq styletab-c:hightlight-tabbar t) 
+                             (get-recolor-bright (if (eq styletab-c:hightlight-tabbar t)
                                                      (- (/ (nth 3 (proposals-colors)) 2) (nth 1 (proposals-colors)))
                                                    (- (nth 1 (proposals-colors))))
                                                  (get-color (nth 0 (proposals-colors)))))))
@@ -862,43 +1020,104 @@
                                      (get-recolor-bright 20 styletab-c:tabbar-marked-color)
                                    styletab-c:tabbar-marked-color)
                                (if (eq styletab-c:custom-frame-colors t)
-                                   (get-recolor-bright 
-                                    (if (eq styletab-c:hightlight-tabbar t) 
+                                   (get-recolor-bright
+                                    (if (eq styletab-c:hightlight-tabbar t)
                                         (/ (* styletab-c:active-hightlight-brighten 40) 2) 20)
-                                    styletab-c:focus-frame-color) (get-recolor-bright 
-                                                                   (if (eq styletab-c:hightlight-tabbar t) 
+                                    styletab-c:focus-frame-color) (get-recolor-bright
+                                                                   (if (eq styletab-c:hightlight-tabbar t)
                                                                        (/ (nth 2 (proposals-colors)) 2) 0)
                                                                    (get-recolor-bright 20 (get-color (nth 0 (proposals-colors))))))))))
-    (when (equal x '"top")
-      (table-unset styletab-c-frame-cache (concat x "-" w))
-      (table-set styletab-c-frame-cache (concat x "-" w) `((focused . ,focus) (highlighted . ,highl) (inactive . ,inact) 
-                                                           (inactive-highlighted . ,in-hi)))
-      (table-unset styletab-c-frame-cache (concat "bottom" "-" w))
-      (table-set styletab-c-frame-cache (concat "bottom" "-" w) `((focused . ,focus) (highlighted . ,highl) (inactive . ,inact) 
-                                                           (inactive-highlighted . ,in-hi)))
-      (table-unset styletab-c-frame-cache (concat x "-" w "-m"))
-      (table-set styletab-c-frame-cache (concat x "-" w "-m") `((focused . ,focus-m) (highlighted . ,highl-m) (inactive . ,inact-m) 
-                                                           (inactive-highlighted . ,in-hi-m)))
-      (table-unset styletab-c-frame-cache (concat "bottom" "-" w "-m"))
-      (table-set styletab-c-frame-cache (concat "bottom" "-" w "-m") `((focused . ,focus-m) (highlighted . ,highl-m) (inactive . ,inact-m) 
-                                                           (inactive-highlighted . ,in-hi-m))))
-    (when (equal x '"left")
-      (table-unset styletab-c-frame-cache (concat x "-" w))
-      (table-set styletab-c-frame-cache (concat x "-" w) `((focused . ,focus) (highlighted . ,highl) (inactive . ,inact) 
-                                                           (inactive-highlighted . ,in-hi)))
-      (table-unset styletab-c-frame-cache (concat "right" "-" w))
-      (table-set styletab-c-frame-cache (concat "right" "-" w) `((focused . ,(flip-image-horizontally (copy-image focus))) 
-                                                                 (highlighted . ,(flip-image-horizontally (copy-image highl)))
-                                                                 (inactive . ,(flip-image-horizontally (copy-image inact)))
-                                                                 (inactive-highlighted . ,(flip-image-horizontally (copy-image in-hi)))))
-      (table-unset styletab-c-frame-cache (concat x "-" w "-m"))
-      (table-set styletab-c-frame-cache (concat x "-" w "-m") `((focused . ,focus-m) (highlighted . ,highl-m) (inactive . ,inact-m) 
-                                                           (inactive-highlighted . ,in-hi-m)))
-      (table-unset styletab-c-frame-cache (concat "right" "-" w "-m"))
-      (table-set styletab-c-frame-cache (concat "right" "-" w "-m") `((focused . ,(flip-image-horizontally (copy-image focus-m))) 
-                                                                 (highlighted . ,(flip-image-horizontally (copy-image highl-m)))
-                                                                 (inactive . ,(flip-image-horizontally (copy-image inact-m)))
-                                                                 (inactive-highlighted . ,(flip-image-horizontally (copy-image in-hi-m))))))))
+    (table-unset styletab-c-frame-cache (concat x "-" w))
+    (table-set styletab-c-frame-cache (concat x "-" w) `((focused . ,focus) (highlighted . ,highl) (inactive . ,inact)
+                                                         (inactive-highlighted . ,in-hi)))
+    (table-unset styletab-c-frame-cache (concat "bottom" "-" w))
+    (table-set styletab-c-frame-cache (concat "bottom" "-" w) `((focused . ,focus) (highlighted . ,highl) (inactive . ,inact)
+                                                                (inactive-highlighted . ,in-hi)))
+    (table-unset styletab-c-frame-cache (concat x "-" w "-m"))
+    (table-set styletab-c-frame-cache (concat x "-" w "-m") `((focused . ,focus-m) (highlighted . ,highl-m) (inactive . ,inact-m)
+                                                              (inactive-highlighted . ,in-hi-m)))
+    (table-unset styletab-c-frame-cache (concat "bottom" "-" w "-m"))
+    (table-set styletab-c-frame-cache (concat "bottom" "-" w "-m") `((focused . ,focus-m) (highlighted . ,highl-m) (inactive . ,inact-m)
+                                                                     (inactive-highlighted . ,in-hi-m)))
+    (when (equal w '"frame-tab-left-icon")
+      (table-unset styletab-c-frame-cache "left-frame-tab-top")
+      (table-set styletab-c-frame-cache "left-frame-tab-top" `((focused . ,(flip-image-diagonally (copy-image focus)))
+                                                               (highlighted . ,(flip-image-diagonally (copy-image highl)))
+                                                               (inactive . ,(flip-image-diagonally (copy-image inact)))
+                                                               (inactive-highlighted . ,(flip-image-diagonally (copy-image in-hi)))))
+      (table-unset styletab-c-frame-cache "left-frame-tab-top-m")
+      (table-set styletab-c-frame-cache "left-frame-tab-top-m" `((focused . ,(flip-image-diagonally (copy-image focus-m)))
+                                                               (highlighted . ,(flip-image-diagonally (copy-image highl-m)))
+                                                               (inactive . ,(flip-image-diagonally (copy-image inact-m)))
+                                                               (inactive-highlighted . ,(flip-image-diagonally (copy-image in-hi-m)))))
+      (table-unset styletab-c-frame-cache "left-frame-tab-bottom-icon")
+      (table-set styletab-c-frame-cache
+                 "left-frame-tab-bottom-icon" `((focused . ,(flip-image-vertically (flip-image-diagonally (copy-image focus))))
+                                                (highlighted . ,(flip-image-vertically (flip-image-diagonally (copy-image highl))))
+                                                (inactive . ,(flip-image-vertically (flip-image-diagonally (copy-image inact))))
+                                                (inactive-highlighted . ,(flip-image-vertically (flip-image-diagonally (copy-image in-hi))))))
+      (table-unset styletab-c-frame-cache "left-frame-tab-bottom-icon-m")
+      (table-set styletab-c-frame-cache
+                 "left-frame-tab-bottom-icon-m" `((focused . ,(flip-image-vertically (flip-image-diagonally (copy-image focus-m))))
+                                                (highlighted . ,(flip-image-vertically (flip-image-diagonally (copy-image highl-m))))
+                                                (inactive . ,(flip-image-vertically (flip-image-diagonally (copy-image inact-m))))
+                                                (inactive-highlighted . ,(flip-image-vertically (flip-image-diagonally (copy-image in-hi-m))))))
+      (table-unset styletab-c-frame-cache "right-frame-tab-top")
+      (table-set styletab-c-frame-cache
+                 "right-frame-tab-top" `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus))))
+                                         (highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image highl))))
+                                         (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact))))
+                                         (inactive-highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image in-hi))))))
+      (table-unset styletab-c-frame-cache "right-frame-tab-top-m")
+      (table-set styletab-c-frame-cache
+                 "right-frame-tab-top-m" `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus-m))))
+                                         (highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image highl-m))))
+                                         (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact-m))))
+                                         (inactive-highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image in-hi-m))))))
+      (table-unset styletab-c-frame-cache "right-frame-tab-bottom-icon")
+      (table-set styletab-c-frame-cache
+                 "right-frame-tab-bottom-icon" `((focused . ,(flip-image-horizontally (flip-image-vertically
+                                                                                       (flip-image-diagonally (copy-image focus)))))
+                                                 (highlighted . ,(flip-image-horizontally (flip-image-vertically
+                                                                                           (flip-image-diagonally (copy-image highl)))))
+                                                 (inactive . ,(flip-image-horizontally (flip-image-vertically
+                                                                                        (flip-image-diagonally (copy-image inact)))))
+                                                 (inactive-highlighted . ,(flip-image-horizontally (flip-image-vertically
+                                                                                                    (flip-image-diagonally (copy-image in-hi)))))))
+      (table-unset styletab-c-frame-cache "right-frame-tab-bottom-icon-m")
+      (table-set styletab-c-frame-cache
+                 "right-frame-tab-bottom-icon-m" `((focused . ,(flip-image-horizontally (flip-image-vertically
+                                                                                       (flip-image-diagonally (copy-image focus-m)))))
+                                                 (highlighted . ,(flip-image-horizontally (flip-image-vertically
+                                                                                           (flip-image-diagonally (copy-image highl-m)))))
+                                                 (inactive . ,(flip-image-horizontally (flip-image-vertically
+                                                                                        (flip-image-diagonally (copy-image inact-m)))))
+                                                 (inactive-highlighted . ,(flip-image-horizontally (flip-image-vertically
+                                                                                                    (flip-image-diagonally (copy-image in-hi-m))))))))
+    (when (equal w '"frame-tab")
+      (table-unset styletab-c-frame-cache "left-frame-tab")
+      (table-set styletab-c-frame-cache "left-frame-tab" `((focused . ,(flip-image-diagonally (copy-image focus)))
+                                                           (highlighted . ,(flip-image-diagonally (copy-image highl)))
+                                                           (inactive . ,(flip-image-diagonally (copy-image inact)))
+                                                           (inactive-highlighted . ,(flip-image-diagonally (copy-image in-hi)))))
+      (table-unset styletab-c-frame-cache "left-frame-tab-m")
+      (table-set styletab-c-frame-cache "left-frame-tab-m" `((focused . ,(flip-image-diagonally (copy-image focus-m)))
+                                                             (highlighted . ,(flip-image-diagonally (copy-image highl-m)))
+                                                             (inactive . ,(flip-image-diagonally (copy-image inact-m)))
+                                                             (inactive-highlighted . ,(flip-image-diagonally (copy-image in-hi-m)))))
+      (table-unset styletab-c-frame-cache "right-frame-tab")
+      (table-set styletab-c-frame-cache
+                 "right-frame-tab" `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus))))
+                                     (highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image highl))))
+                                     (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact))))
+                                     (inactive-highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image in-hi))))))
+      (table-unset styletab-c-frame-cache "right-frame-tab-m")
+      (table-set styletab-c-frame-cache
+                 "right-frame-tab-m" `((focused . ,(flip-image-horizontally (flip-image-diagonally (copy-image focus-m))))
+                                       (highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image highl-m))))
+                                       (inactive . ,(flip-image-horizontally (flip-image-diagonally (copy-image inact-m))))
+                                       (inactive-highlighted . ,(flip-image-horizontally (flip-image-diagonally (copy-image in-hi-m)))))))))
+
 (define (base-button-tables-images w x)
   (let ((focus (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w x "-f.png"))
                            (if (eq styletab-c:custom-frame-colors t)
@@ -926,10 +1145,11 @@
       (table-unset styletab-c-frame-cache (concat w x))
       (table-set styletab-c-frame-cache (concat w x)  `((focused . ,focus) (clicked . ,click) (inactive . ,inact) (inactive-clicked . ,in-cl)))
       (table-unset styletab-c-frame-cache (concat "right" x))
-      (table-set styletab-c-frame-cache (concat "right" x) `((focused . ,(flip-image-horizontally (copy-image focus))) 
-                                                             (clicked . ,(flip-image-horizontally (copy-image click))) 
-                                                             (inactive . ,(flip-image-horizontally (copy-image inact))) 
+      (table-set styletab-c-frame-cache (concat "right" x) `((focused . ,(flip-image-horizontally (copy-image focus)))
+                                                             (clicked . ,(flip-image-horizontally (copy-image click)))
+                                                             (inactive . ,(flip-image-horizontally (copy-image inact)))
                                                              (inactive-clicked . ,(flip-image-horizontally (copy-image in-cl))))))))
+(define flat-buttons nil)
 (define scale-w nil)
 (define scale-h nil)
 (define (button-tables-images w x color always)
@@ -939,170 +1159,169 @@
              (setq scale-h (- styletab-c:title-dimension 4)))
     (progn (setq scale-w (- styletab-c:title-dimension 4))
            (setq scale-h (+ styletab-c:title-dimension (button-width-custom)))))
+  (if (eq styletab-c:styles 'Flat)
+      (setq flat-buttons t))
   (let ((focus (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-f.png"))
                                         (if (eq styletab-c:custom-frame-colors t)
                                             (get-recolor-dark 0 (if (and always color) color styletab-c:focus-frame-color))
                                           (get-recolor-dark 0 (if (and always color) color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
-        (highl (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-h.png"))
-                                        (if (eq styletab-c:custom-frame-colors t)
-                                            (get-recolor-bright (* styletab-c:active-hightlight-brighten 20)
-                                                                (if color color styletab-c:focus-frame-color))
-                                          (get-recolor-bright (nth 2 (proposals-colors))
-                                                              (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
-        (click (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-c.png"))
-                                        (if (eq styletab-c:custom-frame-colors t)
-                                            (get-recolor-bright (* styletab-c:active-hightlight-brighten 20)
-                                                                (if color color styletab-c:focus-frame-color))
-                                          (get-recolor-bright (nth 2 (proposals-colors))
-                                                              (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
-        (inact (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-i.png"))
-                                        (if (eq styletab-c:custom-frame-colors t)
-                                            (get-recolor-dark (* styletab-c:inactive-dimout 20)
-                                                              (if (and always color) color styletab-c:unfocus-frame-color))
-                                          (get-recolor-dark (nth 1 (proposals-colors))
-                                                            (if (and always color) color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
-        (in-hi (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ih.png"))
-                                        (if (eq styletab-c:custom-frame-colors t)
-                                            (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
-                                                                (if color color styletab-c:unfocus-frame-color))
-                                          (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
-                                                              (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
-        (in-cl (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ic.png"))
-                                        (if (eq styletab-c:custom-frame-colors t)
-                                            (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
-                                                                (if color color styletab-c:unfocus-frame-color))
-                                          (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
-                                                              (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h)))
-    (when (equal w '"top")
-      (table-unset styletab-c-frame-cache (concat "top" "-frame-" x "-button"))
-      (table-set styletab-c-frame-cache (concat "top" "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click) 
-                                                                               (inactive . ,inact) (inactive-highlighted . ,in-hi) 
-                                                                               (inactive-clicked . ,in-cl))))
-    (when (equal w '"top")
-      (table-unset styletab-c-frame-cache (concat "bottom" "-frame-" x "-button"))
-      (table-set styletab-c-frame-cache (concat "bottom" "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click)
-                                                                                  (inactive . ,inact) (inactive-highlighted . ,in-hi) 
+        highl click inact in-hi in-cl)
+    (when (not (eq styletab-c:styles 'Flat))
+      (setq highl (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-h.png"))
+                                           (if (eq styletab-c:custom-frame-colors t)
+                                               (get-recolor-bright (* styletab-c:active-hightlight-brighten 20)
+                                                                   (if color color styletab-c:focus-frame-color))
+                                             (get-recolor-bright (nth 2 (proposals-colors))
+                                                                 (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+      (setq click (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-c.png"))
+                                           (if (eq styletab-c:custom-frame-colors t)
+                                               (get-recolor-bright (* styletab-c:active-hightlight-brighten 20)
+                                                                   (if color color styletab-c:focus-frame-color))
+                                             (get-recolor-bright (nth 2 (proposals-colors))
+                                                                 (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+      (setq inact (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-i.png"))
+                                           (if (eq styletab-c:custom-frame-colors t)
+                                               (get-recolor-dark (* styletab-c:inactive-dimout 20)
+                                                                 (if (and always color) color styletab-c:unfocus-frame-color))
+                                             (get-recolor-dark (nth 1 (proposals-colors))
+                                                               (if (and always color) color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+      (setq in-hi (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ih.png"))
+                                           (if (eq styletab-c:custom-frame-colors t)
+                                               (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
+                                                                   (if color color styletab-c:unfocus-frame-color))
+                                             (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
+                                                                 (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h))
+      (setq in-cl (scale-image (do-recolor (do-make-get-image (concat (symbol-name styletab-c:styles) "/" w "-frame-" x "-button-ic.png"))
+                                           (if (eq styletab-c:custom-frame-colors t)
+                                               (get-recolor-bright (- (* styletab-c:inactive-hightlight-brighten 20) (* styletab-c:inactive-dimout 20))
+                                                                   (if color color styletab-c:unfocus-frame-color))
+                                             (get-recolor-bright (- (nth 3 (proposals-colors)) (nth 1 (proposals-colors)))
+                                                                 (if color color (get-color (nth 0 (proposals-colors))))))) scale-w scale-h)))
+    (setq flat-buttons nil)
+    (if (eq styletab-c:styles 'Flat)
+        (mapcar (lambda (z)
+                  (table-unset styletab-c-frame-cache (concat z "-frame-" x "-button"))
+                  (table-set styletab-c-frame-cache (concat z "-frame-" x "-button") `(,(copy-image focus))))
+                (list "top" "bottom" "left" "right"))
+
+      (when (equal w '"top")
+        (table-unset styletab-c-frame-cache (concat "top" "-frame-" x "-button"))
+        (table-set styletab-c-frame-cache (concat "top" "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click)
+                                                                                 (inactive . ,inact) (inactive-highlighted . ,in-hi)
+                                                                                 (inactive-clicked . ,in-cl))))
+      (when (equal w '"top")
+        (table-unset styletab-c-frame-cache (concat "bottom" "-frame-" x "-button"))
+        (table-set styletab-c-frame-cache (concat "bottom" "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click)
+                                                                                    (inactive . ,inact) (inactive-highlighted . ,in-hi)
+                                                                                    (inactive-clicked . ,in-cl))))
+      (when (equal w '"left")
+        (table-unset styletab-c-frame-cache (concat "left" "-frame-" x "-button"))
+        (table-set styletab-c-frame-cache (concat "left" "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click)
+                                                                                  (inactive . ,inact) (inactive-highlighted . ,in-hi)
                                                                                   (inactive-clicked . ,in-cl))))
-    (when (equal w '"left")
-      (table-unset styletab-c-frame-cache (concat "left" "-frame-" x "-button"))
-      (table-set styletab-c-frame-cache (concat "left" "-frame-" x "-button") `((focused . ,focus) (highlighted . ,highl) (clicked . ,click) 
-                                                                               (inactive . ,inact) (inactive-highlighted . ,in-hi) 
-                                                                               (inactive-clicked . ,in-cl))))
-    (when (equal w '"left")
-      (table-unset styletab-c-frame-cache (concat "right" "-frame-" x "-button"))
-      (table-set styletab-c-frame-cache (concat "right" "-frame-" x "-button") `((focused . ,(flip-image-horizontally (copy-image focus))) 
-                                                                                 (highlighted . ,(flip-image-horizontally (copy-image highl))) 
-                                                                                 (clicked . ,(flip-image-horizontally (copy-image click))) 
-                                                                                 (inactive . ,(flip-image-horizontally (copy-image inact))) 
-                                                                                 (inactive-highlighted . ,(flip-image-horizontally (copy-image in-hi))) 
-                                                                                 (inactive-clicked . ,(flip-image-horizontally (copy-image in-cl))))))))
+      (when (equal w '"left")
+        (table-unset styletab-c-frame-cache (concat "right" "-frame-" x "-button"))
+        (table-set styletab-c-frame-cache (concat "right" "-frame-" x "-button") `((focused . ,(flip-image-horizontally (copy-image focus)))
+                                                                                   (highlighted . ,(flip-image-horizontally (copy-image highl)))
+                                                                                   (clicked . ,(flip-image-horizontally (copy-image click)))
+                                                                                   (inactive . ,(flip-image-horizontally (copy-image inact)))
+                                                                                   (inactive-highlighted . ,(flip-image-horizontally (copy-image in-hi)))
+                                                                                  (inactive-clicked . ,(flip-image-horizontally (copy-image in-cl)))))))))
 ;; frames/tabbar
 (define top-frame-icon-title-images
   (make-image (concat (symbol-name styletab-c:styles) "/" "top-frame-icon-title-images-f.png")))
-(define (tabbar-horizontal-images)
-  (mapcar (lambda (w) (mapcar (lambda (x)
-                               (tab-tables-images x w)) (list "top"))) (list "frame-tab-left-icon" "frame-tab" "frame-tab-right")))
-(define (tabbar-vertical-images)
-  (mapcar (lambda (w) (mapcar (lambda (x)
-                               (tab-tables-images x w)) (list "left"))) (list "frame-tab-top" "frame-tab" "frame-tab-bottom-icon")))
-(define (title-cursor-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-title-cursor"))) (list "top" "bottom" "left" "right")))
-(define (title-nocursor-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-title-nocursor"))) (list "top" "bottom" "left" "right")))
-(define (top-border-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-top-border"))) (list "bottom" "left" "right")))
-(define (top-left-corner-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-top-left-corner"))) (list "top" "bottom" "left" "right")))
-(define (top-right-corner-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-top-right-corner"))) (list "top" "bottom" "left" "right")))
-(define (top-left-corner-shaped-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-top-left-corner-shaped"))) (list "top" "left")))
-(define (top-right-corner-shaped-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-top-right-corner-shaped"))) (list "top" "right")))
-(define (title-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-title"))) (list "top" "bottom" "left" "right")))
-(define (left-border-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-left-border"))) (list "top" "bottom" "right")))
-(define (right-border-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-right-border"))) (list "top" "bottom" "left")))
-(define (bottom-left-corner-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-bottom-left-corner"))) (list "top" "bottom" "left" "right")))
-(define (bottom-border-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-bottom-border"))) (list "top" "left" "right")))
-(define (bottom-right-corner-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-bottom-right-corner"))) (list "top" "bottom" "left" "right")))
-(define (bottom-left-corner-shaped-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-bottom-left-corner-shaped"))) (list "bottom" "left")))
-(define (bottom-right-corner-shaped-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-bottom-right-corner-shaped"))) (list "bottom" "right")))
+(define (bottom-all-images)
+  (mapcar (lambda (w) (base-tables-images (concat "bottom" w))) (list "-frame-title-cursor" "-frame-title-nocursor" "-frame-top-border"
+                                                                      "-frame-top-left-corner" "-frame-top-right-corner" "-frame-left-border"
+                                                                      "-frame-right-border" "-frame-bottom-left-corner-shaped"
+                                                                      "-frame-bottom-right-corner-shaped" "-frame-bottom-left-corner"
+                                                                      "-frame-bottom-right-corner")))
+(define (base-title-corner-images)
+  (mapcar (lambda (w) (build-title-corner-images w)) (list "corner" "corner-shaped")))
+(define (base-cursor-images)
+  (mapcar (lambda (w) (build-cursor-images w)) (list "cursor" "nocursor")))
+(define (base-title-images)
+  (mapcar (lambda (w) (build-title-images w)) (list "frame-title")))
+(define (base-border-images)
+  (mapcar (lambda (w) (build-border-images w)) (list "frame-left-border")))
+(define (base-corner-images)
+  (mapcar (lambda (w) (build-corner-images w)) (list "frame-bottom-left-corner")))
 
 ;; buttons
 (define (base-button-images)
   (mapcar (lambda (w) (base-button-tables-images  w "-frame-button")) (list "top" "left")))
-(define (space-button-images)
-  (mapcar (lambda (w) (base-tables-images (concat w "-frame-title"))) (list "top" "bottom" "left" "right")))
 (define (close-button-images)
   (button-tables-images "top" "close" styletab-c:hightlight-close (if (eq styletab-c:hightlight-close-all t) t))
-  (button-tables-images "left" "close" styletab-c:hightlight-close (if (eq styletab-c:hightlight-close-all t) t)))
+  (unless (eq styletab-c:styles 'Flat)
+       (button-tables-images "left" "close" styletab-c:hightlight-close (if (eq styletab-c:hightlight-close-all t) t))))
 (define (menu-button-images)
   (button-tables-images "top" "menu" styletab-c:hightlight-menu (if (eq styletab-c:hightlight-menu-all t) t))
-  (button-tables-images "left" "menu" styletab-c:hightlight-menu (if (eq styletab-c:hightlight-menu-all t) t)))
+  (unless (eq styletab-c:styles 'Flat)
+       (button-tables-images "left" "menu" styletab-c:hightlight-menu (if (eq styletab-c:hightlight-menu-all t) t))))
 (define (iconify-button-images)
   (button-tables-images "top" "iconify" styletab-c:hightlight-iconify (if (eq styletab-c:hightlight-iconify-all t) t))
-  (button-tables-images "left" "iconify" styletab-c:hightlight-iconify (if (eq styletab-c:hightlight-iconify-all t) t)))
+  (unless (eq styletab-c:styles 'Flat)
+       (button-tables-images "left" "iconify" styletab-c:hightlight-iconify (if (eq styletab-c:hightlight-iconify-all t) t))))
 (define (move-resize-button-images)
   (button-tables-images "top" "move-resize" styletab-c:hightlight-move-resize (if (eq styletab-c:hightlight-move-resize-all t) t))
-  (button-tables-images "left" "move-resize" styletab-c:hightlight-move-resize (if (eq styletab-c:hightlight-move-resize-all t) t)))
+  (unless (eq styletab-c:styles 'Flat)
+       (button-tables-images "left" "move-resize" styletab-c:hightlight-move-resize (if (eq styletab-c:hightlight-move-resize-all t) t))))
 (define (rename-button-images)
   (button-tables-images "top" "rename" styletab-c:hightlight-rename (if (eq styletab-c:hightlight-rename-all t) t))
-  (button-tables-images "left" "rename" styletab-c:hightlight-rename (if (eq styletab-c:hightlight-rename-all t) t)))
+  (unless (eq styletab-c:styles 'Flat)
+       (button-tables-images "left" "rename" styletab-c:hightlight-rename (if (eq styletab-c:hightlight-rename-all t) t))))
 (define (frame-type-button-images)
   (button-tables-images "top" "frame-type" styletab-c:hightlight-frame-type (if (eq styletab-c:hightlight-frame-type-all t) t))
-  (button-tables-images "left" "frame-type" styletab-c:hightlight-frame-type (if (eq styletab-c:hightlight-frame-type-all t) t)))
+  (unless (eq styletab-c:styles 'Flat)
+       (button-tables-images "left" "frame-type" styletab-c:hightlight-frame-type (if (eq styletab-c:hightlight-frame-type-all t) t))))
 (define (maximize-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-maximize
                                             (if (eq styletab-c:hightlight-maximize-all t) t))) (list "maximize" "unmaximize"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-maximize
-                                            (if (eq styletab-c:hightlight-maximize-all t) t))) (list "maximize" "unmaximize")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-maximize
+                                                 (if (eq styletab-c:hightlight-maximize-all t) t))) (list "maximize" "unmaximize"))))
 (define (shade-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-shade
                                             (if (eq styletab-c:hightlight-shade-all t) t))) (list "shade" "unshade"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-shade
-                                            (if (eq styletab-c:hightlight-shade-all t) t))) (list "shade" "unshade")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-shade
+                                                 (if (eq styletab-c:hightlight-shade-all t) t))) (list "shade" "unshade"))))
 (define (sticky-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-sticky
                                             (if (eq styletab-c:hightlight-sticky-all t) t))) (list "sticky" "unsticky"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-sticky
-                                            (if (eq styletab-c:hightlight-sticky-all t) t))) (list "sticky" "unsticky")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-sticky
+                                                 (if (eq styletab-c:hightlight-sticky-all t) t))) (list "sticky" "unsticky"))))
 (define (lock-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-lock
                                             (if (eq styletab-c:hightlight-lock-all t) t))) (list "lock" "unlock"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-lock
-                                            (if (eq styletab-c:hightlight-lock-all t) t))) (list "lock" "unlock")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-lock
+                                                 (if (eq styletab-c:hightlight-lock-all t) t))) (list "lock" "unlock"))))
 (define (prev-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-prev
                                             (if (eq styletab-c:hightlight-prev-all t) t))) (list "prev" "prev-last"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-prev
-                                            (if (eq styletab-c:hightlight-prev-all t) t))) (list "prev" "prev-last")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-prev
+                                                 (if (eq styletab-c:hightlight-prev-all t) t))) (list "prev" "prev-last"))))
 (define (next-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-next
                                             (if (eq styletab-c:hightlight-next-all t) t))) (list "next" "next-last"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-next
-                                            (if (eq styletab-c:hightlight-next-all t) t))) (list "next" "next-last")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-next
+                                                 (if (eq styletab-c:hightlight-next-all t) t))) (list "next" "next-last"))))
 (define (raise-lower-button-images)
   (mapcar (lambda (w) (button-tables-images "top" w styletab-c:hightlight-raise-lower
                                             (if (eq styletab-c:hightlight-raise-lower-all t) t))) (list "raise-lower" "ontop" "unontop"))
-  (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-raise-lower
-                                            (if (eq styletab-c:hightlight-raise-lower-all t) t))) (list "raise-lower" "ontop" "unontop")))
+  (unless (eq styletab-c:styles 'Flat)
+       (mapcar (lambda (w) (button-tables-images "left" w styletab-c:hightlight-raise-lower
+                                                 (if (eq styletab-c:hightlight-raise-lower-all t) t))) (list "raise-lower" "ontop" "unontop"))))
 
-(define (recolor-base)
-  (title-cursor-images) (title-nocursor-images) (top-border-images) (top-left-corner-images) (top-right-corner-images) (top-left-corner-shaped-images)
-  (top-right-corner-shaped-images) (title-images) (left-border-images) (right-border-images) (bottom-left-corner-images) (bottom-border-images)
-  (bottom-right-corner-images) (bottom-left-corner-shaped-images) (bottom-right-corner-shaped-images) (base-button-images) (space-button-images))
-
+(define (recolor-base) (base-title-corner-images) (base-cursor-images) (base-title-images) (base-button-images) (base-border-images) (base-corner-images)
+        (bottom-all-images))
 (define (recolor-tab)
-  (tabbar-horizontal-images) (tabbar-vertical-images))
-
+  (mapcar (lambda (w) (mapcar (lambda (x)
+                                (tab-tables-images x w)) (list "top"))) (list "frame-tab-left-icon" "frame-tab" "frame-tab-right")))
 (define (recolor-close-button)
   (close-button-images))
 (define (recolor-menu-button)
@@ -1131,14 +1350,14 @@
   (raise-lower-button-images))
 
 (define (recolor-all-buttons)
-  (recolor-close-button) (recolor-menu-button) (recolor-iconify-button) (recolor-move-resize-button) 
-  (recolor-rename-button) (recolor-frame-type-button) (recolor-maximize-button) (recolor-shade-button) 
+  (recolor-close-button) (recolor-menu-button) (recolor-iconify-button) (recolor-move-resize-button)
+  (recolor-rename-button) (recolor-frame-type-button) (recolor-maximize-button) (recolor-shade-button)
   (recolor-sticky-button) (recolor-lock-button) (recolor-prev-button) (recolor-next-button) (recolor-raise-lower-button))
 
 (define (recolor-all)
   (recolor-base) (recolor-tab) (recolor-all-buttons))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; frames classes
 (defmacro window-in-workspace-p (w space)
   `(memq ,space (window-get ,w 'workspaces)))
@@ -1165,12 +1384,12 @@
 
 (define sharped-edge
   (lambda (w)
-    (if (or (eq (window-get w 'type) 'shaped) 
+    (if (or (eq (window-get w 'type) 'shaped)
             (eq (window-get w 'type) 'shaped-transient))
         styletab-c:borders-dimension
       0)))
 
-(define title-height (lambda (w) styletab-c:title-dimension)) 
+(define title-height (lambda (w) styletab-c:title-dimension))
 (define title-height-s (lambda (w) (- styletab-c:title-dimension 4)))
 (define title-edge (lambda (w) (- styletab-c:title-dimension)))
 (define title-edge-s (lambda (w) (- (- styletab-c:title-dimension 2))))
@@ -1708,8 +1927,8 @@
 (define top-frame-maximize-button
   `((class . maximize-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (table-ref styletab-c-frame-cache '"top-frame-unmaximize-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry)
+                                   (table-ref styletab-c-frame-cache '"top-frame-unmaximize-button")
                                  (table-ref styletab-c-frame-cache '"top-frame-maximize-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
@@ -1719,8 +1938,8 @@
 (define bottom-frame-maximize-button
   `((class . maximize-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (table-ref styletab-c-frame-cache '"bottom-frame-unmaximize-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry)
+                                   (table-ref styletab-c-frame-cache '"bottom-frame-unmaximize-button")
                                  (table-ref styletab-c-frame-cache '"bottom-frame-maximize-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
@@ -1730,8 +1949,8 @@
 (define left-frame-maximize-button
   `((class . maximize-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (table-ref styletab-c-frame-cache '"left-frame-unmaximize-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry)
+                                   (table-ref styletab-c-frame-cache '"left-frame-unmaximize-button")
                                  (table-ref styletab-c-frame-cache '"left-frame-maximize-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
@@ -1741,8 +1960,8 @@
 (define right-frame-maximize-button
   `((class . maximize-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry) 
-                                   (table-ref styletab-c-frame-cache '"right-frame-unmaximize-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'unmaximized-geometry)
+                                   (table-ref styletab-c-frame-cache '"right-frame-unmaximize-button")
                                  (table-ref styletab-c-frame-cache '"right-frame-maximize-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
@@ -1752,8 +1971,8 @@
 (define top-frame-shade-button
   `((class . shade-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
-                                   (table-ref styletab-c-frame-cache '"top-frame-unshade-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'shaded)
+                                   (table-ref styletab-c-frame-cache '"top-frame-unshade-button")
                                  (table-ref styletab-c-frame-cache '"top-frame-shade-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
@@ -1763,8 +1982,8 @@
 (define bottom-frame-shade-button
   `((class . shade-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
-                                   (table-ref styletab-c-frame-cache '"bottom-frame-unshade-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'shaded)
+                                   (table-ref styletab-c-frame-cache '"bottom-frame-unshade-button")
                                  (table-ref styletab-c-frame-cache '"bottom-frame-shade-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
@@ -1774,8 +1993,8 @@
 (define left-frame-shade-button
   `((class . shade-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
-                                   (table-ref styletab-c-frame-cache '"left-frame-unshade-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'shaded)
+                                   (table-ref styletab-c-frame-cache '"left-frame-unshade-button")
                                  (table-ref styletab-c-frame-cache '"left-frame-shade-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
@@ -1785,8 +2004,8 @@
 (define right-frame-shade-button
   `((class . shade-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'shaded) 
-                                   (table-ref styletab-c-frame-cache '"right-frame-unshade-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'shaded)
+                                   (table-ref styletab-c-frame-cache '"right-frame-unshade-button")
                                  (table-ref styletab-c-frame-cache '"right-frame-shade-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
@@ -1798,7 +2017,7 @@
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-get w 'sticky)
                                        (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"top-frame-unsticky-button") 
+                                   (table-ref styletab-c-frame-cache '"top-frame-unsticky-button")
                                  (table-ref styletab-c-frame-cache '"top-frame-sticky-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
@@ -1808,9 +2027,9 @@
 (define bottom-frame-sticky-button
   `((class . sticky-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
-    (foreground . ,(lambda (w) (if (or (window-get w 'sticky) 
+    (foreground . ,(lambda (w) (if (or (window-get w 'sticky)
                                        (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"bottom-frame-unsticky-button") 
+                                   (table-ref styletab-c-frame-cache '"bottom-frame-unsticky-button")
                                  (table-ref styletab-c-frame-cache '"bottom-frame-sticky-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
@@ -1820,9 +2039,9 @@
 (define left-frame-sticky-button
   `((class . sticky-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
-    (foreground . ,(lambda (w) (if (or (window-get w 'sticky) 
+    (foreground . ,(lambda (w) (if (or (window-get w 'sticky)
                                        (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"left-frame-unsticky-button") 
+                                   (table-ref styletab-c-frame-cache '"left-frame-unsticky-button")
                                  (table-ref styletab-c-frame-cache '"left-frame-sticky-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
@@ -1832,9 +2051,9 @@
 (define right-frame-sticky-button
   `((class . sticky-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
-    (foreground . ,(lambda (w) (if (or (window-get w 'sticky) 
+    (foreground . ,(lambda (w) (if (or (window-get w 'sticky)
                                        (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"right-frame-unsticky-button") 
+                                   (table-ref styletab-c-frame-cache '"right-frame-unsticky-button")
                                  (table-ref styletab-c-frame-cache '"right-frame-sticky-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
@@ -1873,8 +2092,8 @@
   `((class . previous-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"top-frame-prev-last-button")   
-                                 (table-ref styletab-c-frame-cache '"top-frame-prev-button"))))    
+                                   (table-ref styletab-c-frame-cache '"top-frame-prev-last-button")
+                                 (table-ref styletab-c-frame-cache '"top-frame-prev-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1884,8 +2103,8 @@
   `((class . previous-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"bottom-frame-prev-last-button")   
-                                 (table-ref styletab-c-frame-cache '"bottom-frame-prev-button"))))    
+                                   (table-ref styletab-c-frame-cache '"bottom-frame-prev-last-button")
+                                 (table-ref styletab-c-frame-cache '"bottom-frame-prev-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1895,8 +2114,8 @@
   `((class . previous-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"left-frame-prev-last-button")   
-                                 (table-ref styletab-c-frame-cache '"left-frame-prev-button"))))    
+                                   (table-ref styletab-c-frame-cache '"left-frame-prev-last-button")
+                                 (table-ref styletab-c-frame-cache '"left-frame-prev-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1906,8 +2125,8 @@
   `((class . previous-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-first-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"right-frame-prev-last-button")   
-                                 (table-ref styletab-c-frame-cache '"right-frame-prev-button"))))    
+                                   (table-ref styletab-c-frame-cache '"right-frame-prev-last-button")
+                                 (table-ref styletab-c-frame-cache '"right-frame-prev-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1917,8 +2136,8 @@
   `((class . next-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"top-frame-next-last-button")   
-                                 (table-ref styletab-c-frame-cache '"top-frame-next-button"))))    
+                                   (table-ref styletab-c-frame-cache '"top-frame-next-last-button")
+                                 (table-ref styletab-c-frame-cache '"top-frame-next-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1928,8 +2147,8 @@
   `((class . next-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"bottom-frame-next-last-button")   
-                                 (table-ref styletab-c-frame-cache '"bottom-frame-next-button"))))    
+                                   (table-ref styletab-c-frame-cache '"bottom-frame-next-last-button")
+                                 (table-ref styletab-c-frame-cache '"bottom-frame-next-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
     (height . ,title-height-s)
@@ -1939,8 +2158,8 @@
   `((class . next-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"left-frame-next-last-button")   
-                                 (table-ref styletab-c-frame-cache '"left-frame-next-button"))))    
+                                   (table-ref styletab-c-frame-cache '"left-frame-next-last-button")
+                                 (table-ref styletab-c-frame-cache '"left-frame-next-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
     (height . ,left-frame-button-height)
@@ -1950,8 +2169,8 @@
   `((class . next-workspace-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
     (foreground . ,(lambda (w) (if (or (window-in-workspace-p w (- (get-last-workspace) 1)) (window-get w 'sticky) (window-get w 'sticky-viewport))
-                                   (table-ref styletab-c-frame-cache '"right-frame-next-last-button")   
-                                 (table-ref styletab-c-frame-cache '"right-frame-next-button"))))    
+                                   (table-ref styletab-c-frame-cache '"right-frame-next-last-button")
+                                 (table-ref styletab-c-frame-cache '"right-frame-next-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
     (height . ,right-frame-button-height)
@@ -1960,8 +2179,8 @@
 (define top-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
-                                   (table-ref styletab-c-frame-cache '"top-frame-unlock-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+                                   (table-ref styletab-c-frame-cache '"top-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"top-frame-lock-button"))))
     (cursor . hand2)
     (top-edge . ,title-edge-s)
@@ -1971,8 +2190,8 @@
 (define bottom-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
-                                   (table-ref styletab-c-frame-cache '"bottom-frame-unlock-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+                                   (table-ref styletab-c-frame-cache '"bottom-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"bottom-frame-lock-button"))))
     (cursor . hand2)
     (bottom-edge . ,title-edge-s)
@@ -1982,8 +2201,8 @@
 (define left-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
-                                   (table-ref styletab-c-frame-cache '"left-frame-unlock-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+                                   (table-ref styletab-c-frame-cache '"left-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"left-frame-lock-button"))))
     (cursor . hand2)
     (left-edge . ,title-edge-s)
@@ -1993,8 +2212,8 @@
 (define right-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position) 
-                                   (table-ref styletab-c-frame-cache '"right-frame-unlock-button") 
+    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+                                   (table-ref styletab-c-frame-cache '"right-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"right-frame-lock-button"))))
     (cursor . hand2)
     (right-edge . ,title-edge-s)
@@ -2004,8 +2223,8 @@
 (define top-frame-raise-lower-button
   `((class . raise-lower-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"top-frame-raise-lower-button") 
-                                 (if (> (window-get w 'depth) 0) 
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"top-frame-raise-lower-button")
+                                 (if (> (window-get w 'depth) 0)
                                      (table-ref styletab-c-frame-cache '"top-frame-ontop-button")
                                    (table-ref styletab-c-frame-cache '"top-frame-unontop-button")))))
     (cursor . hand2)
@@ -2016,8 +2235,8 @@
 (define bottom-frame-raise-lower-button
   `((class . raise-lower-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"bottom-frame-raise-lower-button") 
-                                 (if (> (window-get w 'depth) 0) 
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"bottom-frame-raise-lower-button")
+                                 (if (> (window-get w 'depth) 0)
                                      (table-ref styletab-c-frame-cache '"bottom-frame-ontop-button")
                                    (table-ref styletab-c-frame-cache '"bottom-frame-unontop-button")))))
     (cursor . hand2)
@@ -2028,8 +2247,8 @@
 (define left-frame-raise-lower-button
   `((class . raise-lower-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"left-frame-raise-lower-button") 
-                                 (if (> (window-get w 'depth) 0) 
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"left-frame-raise-lower-button")
+                                 (if (> (window-get w 'depth) 0)
                                      (table-ref styletab-c-frame-cache '"left-frame-ontop-button")
                                    (table-ref styletab-c-frame-cache '"left-frame-unontop-button")))))
     (cursor . hand2)
@@ -2040,8 +2259,8 @@
 (define right-frame-raise-lower-button
   `((class . raise-lower-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
-    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"right-frame-raise-lower-button") 
-                                 (if (> (window-get w 'depth) 0) 
+    (foreground . ,(lambda (w) (if (= (window-get w 'depth) 0) (table-ref styletab-c-frame-cache '"right-frame-raise-lower-button")
+                                 (if (> (window-get w 'depth) 0)
                                      (table-ref styletab-c-frame-cache '"right-frame-ontop-button")
                                    (table-ref styletab-c-frame-cache '"right-frame-unontop-button")))))
     (cursor . hand2)
@@ -2165,24 +2384,24 @@
      (height . ,title-height-s)
      (width . ,button-left-edge))
     ((class . top-left-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"top-frame-top-left-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"top-frame-top-left-corner"))))
      (left-edge . ,frame-edge)
      (top-edge . ,title-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                    (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
     ((class . top-right-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"top-frame-top-right-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"top-frame-top-right-corner"))))
      (top-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                    (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
@@ -2201,24 +2420,24 @@
      (height . ,title-height-s)
      (width . ,button-left-edge))
     ((class . bottom-left-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"bottom-frame-bottom-left-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"bottom-frame-bottom-left-corner"))))
      (left-edge . ,frame-edge)
      (bottom-edge . ,title-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                    (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
     ((class . bottom-right-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"bottom-frame-bottom-right-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"bottom-frame-bottom-right-corner"))))
      (bottom-edge . ,title-edge)
      (right-edge . ,frame-edge)
      (height . ,title-height)
-     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (width . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                    (eq (window-get w 'type) 'shaped-transient))
                                styletab-c:borders-dimension
                              (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge)))))
@@ -2237,23 +2456,23 @@
      (height . ,button-right-edge)
      (width . ,title-height-s))
     ((class . top-left-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"left-frame-top-left-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"left-frame-top-left-corner"))))
      (top-edge . ,frame-edge)
      (left-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                     (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
      (width . ,title-height))
     ((class . bottom-left-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"left-frame-bottom-left-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"left-frame-bottom-left-corner"))))
      (bottom-edge . ,frame-edge)
      (left-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                     (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
@@ -2273,23 +2492,23 @@
      (height . ,button-left-edge)
      (width . ,title-height-s))
     ((class . top-right-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"right-frame-top-right-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"right-frame-top-right-corner"))))
      (top-edge . ,frame-edge)
      (right-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                     (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
      (width . ,title-height))
     ((class . bottom-right-corner)
-     (background . ,(lambda (w) (if (window-get w 'shaded) 
+     (background . ,(lambda (w) (if (window-get w 'shaded)
                                     (table-ref styletab-c-frame-cache '"right-frame-bottom-right-corner-shaped")
                                   (table-ref styletab-c-frame-cache '"right-frame-bottom-right-corner"))))
      (bottom-edge . ,frame-edge)
      (right-edge . ,title-edge)
-     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped) 
+     (height . ,(lambda (w) (if (or (eq (window-get w 'type) 'shaped)
                                     (eq (window-get w 'type) 'shaped-transient))
                                 styletab-c:borders-dimension
                               (if (window-get w 'shaded) styletab-c:borders-dimension sharped-edge))))
@@ -2369,7 +2588,7 @@
     (frame-type . ,right-frame-frame-type-button)
     (\(none\)   . ,nil)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; build themes
 
 (define frame nil)
@@ -2393,7 +2612,7 @@
               (if (or (null btn-def) (and is-trans (not btn-in-trans)))
                   nil
                 (cons (cons edge pos) btn-def)))))
-         
+
          ;; turns the list of cons cells (btn-name . show-in-transients) into
          ;; a list of button definitions, adding the button positions
          (make-button-list
@@ -2408,12 +2627,12 @@
 
          (setalist (setq button-alist top-button-alist))
          (top-normal-buttons-left
-          (make-button-list nil styletab-c:top-left-buttons 'left-edge (+ (button-left-edge) styletab-c:borders-dimension) 
+          (make-button-list nil styletab-c:top-left-buttons 'left-edge (+ (button-left-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (top-normal-buttons-left-s
           (make-button-list nil styletab-c:top-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
          (top-normal-buttons-right
-          (make-button-list nil styletab-c:top-right-buttons 'right-edge (+ (button-right-edge) styletab-c:borders-dimension) 
+          (make-button-list nil styletab-c:top-right-buttons 'right-edge (+ (button-right-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (top-normal-buttons-right-s
           (make-button-list nil styletab-c:top-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
@@ -2430,12 +2649,12 @@
 
          (setalist (setq button-alist bottom-button-alist))
          (bottom-normal-buttons-left
-          (make-button-list nil styletab-c:bottom-left-buttons 'left-edge (+ (button-left-edge) styletab-c:borders-dimension) 
+          (make-button-list nil styletab-c:bottom-left-buttons 'left-edge (+ (button-left-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (bottom-normal-buttons-left-s
           (make-button-list nil styletab-c:bottom-left-buttons 'left-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
          (bottom-normal-buttons-right
-          (make-button-list nil styletab-c:bottom-right-buttons 'right-edge (+ (button-right-edge) styletab-c:borders-dimension) 
+          (make-button-list nil styletab-c:bottom-right-buttons 'right-edge (+ (button-right-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (bottom-normal-buttons-right-s
           (make-button-list nil styletab-c:bottom-right-buttons 'right-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
@@ -2452,34 +2671,34 @@
 
          (setalist (setq button-alist left-button-alist))
          (left-normal-buttons-top
-          (make-button-list nil styletab-c:left-top-buttons 'top-edge (+ (button-right-edge) styletab-c:borders-dimension) 
+          (make-button-list nil styletab-c:left-top-buttons 'top-edge (+ (button-right-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (left-normal-buttons-top-s
           (make-button-list nil styletab-c:left-top-buttons 'top-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
-         (left-normal-buttons-bottom 
-          (make-button-list nil styletab-c:left-bottom-buttons 'bottom-edge (+ (button-left-edge) styletab-c:borders-dimension) 
+         (left-normal-buttons-bottom
+          (make-button-list nil styletab-c:left-bottom-buttons 'bottom-edge (+ (button-left-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (left-normal-buttons-bottom-s
           (make-button-list nil styletab-c:left-bottom-buttons 'bottom-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
          (left-transient-buttons-top
-          (make-button-list t styletab-c:left-top-buttons 'top-edge (+ (button-right-edge) styletab-c:borders-dimension) 
+          (make-button-list t styletab-c:left-top-buttons 'top-edge (+ (button-right-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (left-transient-buttons-top-s
           (make-button-list t styletab-c:left-top-buttons 'top-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
          (left-transient-buttons-bottom
-          (make-button-list t styletab-c:left-bottom-buttons 'bottom-edge (+ (button-left-edge) styletab-c:borders-dimension) 
+          (make-button-list t styletab-c:left-bottom-buttons 'bottom-edge (+ (button-left-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (left-transient-buttons-bottom-s
           (make-button-list t styletab-c:left-bottom-buttons 'bottom-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-         
+
          (setalist (setq button-alist right-button-alist))
          (right-normal-buttons-top
-          (make-button-list nil styletab-c:right-top-buttons 'top-edge (+ (button-left-edge) styletab-c:borders-dimension) 
+          (make-button-list nil styletab-c:right-top-buttons 'top-edge (+ (button-left-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (right-normal-buttons-top-s
           (make-button-list nil styletab-c:right-top-buttons 'top-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
-         (right-normal-buttons-bottom 
-          (make-button-list nil styletab-c:right-bottom-buttons 'bottom-edge (+ (button-right-edge) styletab-c:borders-dimension) 
+         (right-normal-buttons-bottom
+          (make-button-list nil styletab-c:right-bottom-buttons 'bottom-edge (+ (button-right-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (right-normal-buttons-bottom-s
           (make-button-list nil styletab-c:right-bottom-buttons 'bottom-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom))))
@@ -2489,11 +2708,11 @@
          (right-transient-buttons-top-s
           (make-button-list t styletab-c:right-top-buttons 'top-edge (button-left-edge) (+ styletab-c:title-dimension (button-width-custom))))
          (right-transient-buttons-bottom
-          (make-button-list t styletab-c:right-bottom-buttons 'bottom-edge (+ (button-right-edge) styletab-c:borders-dimension) 
+          (make-button-list t styletab-c:right-bottom-buttons 'bottom-edge (+ (button-right-edge) styletab-c:borders-dimension)
                             (+ styletab-c:title-dimension (button-width-custom))))
          (right-transient-buttons-bottom-s
           (make-button-list t styletab-c:right-bottom-buttons 'bottom-edge (button-right-edge) (+ styletab-c:title-dimension (button-width-custom)))))
-    
+
     (table-set styletab-c-botton-cache "top-normal-buttons-left" top-normal-buttons-left)
     (table-set styletab-c-botton-cache "top-normal-buttons-left-s" top-normal-buttons-left-s)
     (table-set styletab-c-botton-cache "top-normal-buttons-right" top-normal-buttons-right)
@@ -2552,18 +2771,18 @@
                           (table-ref styletab-c-botton-cache (check-sharped '"top-normal-buttons-left"))
                           top-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"top-normal-buttons-right")))))
     (when (eq type 'transient-frame)
-      (setq frame (append top-frame-title-group top-frame-default-border-corner-group 
+      (setq frame (append top-frame-title-group top-frame-default-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"top-transient-buttons-left"))
                           top-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"top-transient-buttons-right")))))
     (when (eq type 'shaped-frame)
-      (setq frame (append top-frame-title-group top-frame-shaped-border-corner-group 
+      (setq frame (append top-frame-title-group top-frame-shaped-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"top-normal-buttons-left"))
                           (table-ref styletab-c-botton-cache (check-sharped '"top-normal-buttons-right")))))
     (when (eq type 'shaped-transient-frame)
-      (setq frame (append top-frame-title-group top-frame-shaped-border-corner-group 
+      (setq frame (append top-frame-title-group top-frame-shaped-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"top-transient-buttons-left"))
                           (table-ref styletab-c-botton-cache (check-sharped '"top-transient-buttons-right"))))))
-  
+
   (when (eq current-title 'bottom)
     (update-title-x-offsets `(,(- styletab-c:title-dimension 12) . 0))
     (set-tab-adjustments #:theme-left-dec-width 11 #:theme-right-dec-width (tabbar-right-edge-width)
@@ -2572,22 +2791,22 @@
                          #:theme-left-margin-transient (adjustments-tabbar (check-sharped '"bottom-transient-buttons-left"))
                          #:theme-right-margin-transient (adjustments-tabbar (check-sharped '"bottom-transient-buttons-right")))
     (when (eq type 'normal-frame)
-      (setq frame (append bottom-frame-title-group bottom-frame-default-border-corner-group 
+      (setq frame (append bottom-frame-title-group bottom-frame-default-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"bottom-normal-buttons-left"))
                           bottom-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"bottom-normal-buttons-right")))))
     (when (eq type 'transient-frame)
-      (setq frame (append bottom-frame-title-group bottom-frame-default-border-corner-group 
+      (setq frame (append bottom-frame-title-group bottom-frame-default-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"bottom-transient-buttons-left"))
                           bottom-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"bottom-transient-buttons-right")))))
     (when (eq type 'shaped-frame)
-      (setq frame (append bottom-frame-title-group bottom-frame-shaped-border-corner-group 
+      (setq frame (append bottom-frame-title-group bottom-frame-shaped-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"bottom-normal-buttons-left"))
                           (table-ref styletab-c-botton-cache (check-sharped '"bottom-normal-buttons-right")))))
     (when (eq type 'shaped-transient-frame)
-      (setq frame (append bottom-frame-title-group bottom-frame-shaped-border-corner-group 
+      (setq frame (append bottom-frame-title-group bottom-frame-shaped-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"bottom-transient-buttons-left"))
                           (table-ref styletab-c-botton-cache (check-sharped '"bottom-transient-buttons-right"))))))
-  
+
   (when (eq current-title 'left)
     (update-title-x-offsets '(11 . -11))
     (set-tab-adjustments #:theme-left-dec-width 11 #:theme-right-dec-width (- styletab-c:title-dimension 2)
@@ -2597,11 +2816,11 @@
                          #:theme-right-margin-transient (adjustments-tabbar (check-sharped '"left-transient-buttons-top")))
     (when (eq type 'normal-frame)
       (setq frame (append left-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"left-normal-buttons-bottom"))
-                          left-frame-default-border-corner-group left-frame-border-group 
+                          left-frame-default-border-corner-group left-frame-border-group
                           (table-ref styletab-c-botton-cache (check-sharped '"left-normal-buttons-top")))))
     (when (eq type 'transient-frame)
-      (setq frame (append left-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"left-transient-buttons-bottom")) 
-                          left-frame-default-border-corner-group 
+      (setq frame (append left-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"left-transient-buttons-bottom"))
+                          left-frame-default-border-corner-group
                           left-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"left-transient-buttons-top")))))
     (when (eq type 'shaped-frame)
       (setq frame (append left-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"left-normal-buttons-bottom"))
@@ -2609,7 +2828,7 @@
     (when (eq type 'shaped-transient-frame)
       (setq frame (append left-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"left-transient-buttons-bottom"))
                           left-frame-shaped-border-corner-group (table-ref styletab-c-botton-cache (check-sharped '"left-transient-buttons-top"))))))
-  
+
   (when (eq current-title 'right)
     (update-title-x-offsets '(11 . -11))
     (set-tab-adjustments #:theme-left-dec-width 11 #:theme-right-dec-width (- styletab-c:title-dimension 2)
@@ -2618,11 +2837,11 @@
                          #:theme-left-margin-transient (adjustments-tabbar (check-sharped '"right-transient-buttons-bottom"))
                          #:theme-right-margin-transient (adjustments-tabbar (check-sharped '"right-transient-buttons-top")))
     (when (eq type 'normal-frame)
-      (setq frame (append right-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"right-normal-buttons-bottom")) 
+      (setq frame (append right-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"right-normal-buttons-bottom"))
                           right-frame-default-border-corner-group
                           right-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"right-normal-buttons-top")))))
     (when (eq type 'transient-frame)
-      (setq frame (append right-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"right-transient-buttons-bottom")) 
+      (setq frame (append right-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"right-transient-buttons-bottom"))
                           right-frame-default-border-corner-group
                           right-frame-border-group (table-ref styletab-c-botton-cache (check-sharped '"right-transient-buttons-top")))))
     (when (eq type 'shaped-frame)
@@ -2630,13 +2849,13 @@
                           right-frame-shaped-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"right-normal-buttons-top")))))
     (when (eq type 'shaped-transient-frame)
-      (setq frame (append right-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"right-transient-buttons-bottom")) 
+      (setq frame (append right-frame-title-group (table-ref styletab-c-botton-cache (check-sharped '"right-transient-buttons-bottom"))
                           right-frame-shaped-border-corner-group
                           (table-ref styletab-c-botton-cache (check-sharped '"right-transient-buttons-top"))))))
   frame)
 
 (define (make-buttons-reframe-with-style)
-  (make-buttons) 
+  (make-buttons)
   (reframe-windows-with-style theme-name))
 
 (define (reframe-with-style)
@@ -2658,7 +2877,7 @@
     (setq recolor-lock nil)
     (recolor-all-buttons)
     (setq styletab-c-icon-cache (make-weak-table eq-hash eq))
-    (make-buttons) 
+    (make-buttons)
     (reframe-with-style)
     (setq recolor-lock t)))
 
@@ -2693,7 +2912,7 @@
     (set-tab-theme-name #:frame-style-supported-tabs theme-name)))
 
 (define (get-frame w type)
-  (let ((current-title 
+  (let ((current-title
          (if (not (window-get w 'title-position))
              (case styletab-c:titlebar-place
                    ((top)    'top)
