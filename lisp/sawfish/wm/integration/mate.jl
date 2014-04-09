@@ -61,7 +61,7 @@
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_Customize MATE") (system "mate-control-center &"))
-		      (,(_ "_Edit MATE menu") (system "alacarte &"))
+		      (,(_ "_Edit MATE menu") (system "menulibre &"))
 		      ()
 		      (,(_ "L_ock screen from MATE")
 			(system "mate-screensaver-command -l &"))
