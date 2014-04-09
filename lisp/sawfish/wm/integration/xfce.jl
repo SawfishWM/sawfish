@@ -66,15 +66,15 @@
 		      (,(_ "L_ock from XFCE")
 			(system "xflock4 &"))
 		      (,(_ "_Logout from XFCE")
-		       (system "xfce4-session-logout --logout &"))
+		       (system "xfce4-session-logout --logout -f &"))
 		      (,(_ "_Reboot from XFCE")
-		       (system "xfce4-session-logout --reboot &"))
+		       (system "xfce4-session-logout --reboot -f &"))
 		      (,(_ "_Shutdown from XFCE")
-		       (system "xfce4-session-logout --halt &"))
+		       (system "xfce4-session-logout --halt -f &"))
 		      (,(_ "_Hibernate from XFCE")
-			(system "xfce4-session-logout --hibernate &"))
+			(system "xfce4-session-logout --hibernate -f &"))
 		      (,(_ "S_uspend from XFCE")
-			(system "xfce4-session-logout --suspend &")))))))
+			(system "xfce4-session-logout --suspend -f &")))))))
 
   ;; Returns nil if xfce is not found.
   ;; If detected, returns t, and do also xfce support init.
