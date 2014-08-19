@@ -502,9 +502,11 @@
                                      (- (quotient (car (head-dimensions head)) 2)
                                         (quotient wx 2)))
                                  .
-                                 ,(+ (cdr (head-offset head))
-                                     (- (quotient (cdr (head-dimensions head)) 2)
-                                        (quotient wy 2))))
+                                 ,(if (> (cdr win-size) (cdr (head-dimensions head)))
+                                      '0
+                                    (+ (cdr (head-offset head))
+                                       (- (quotient (cdr (head-dimensions head)) 2)
+                                          (quotient wy 2)))))
                                win-size
                                1
                                `((background . ,cabinet:background))
