@@ -49,15 +49,17 @@ install : all installdirs
 	$(INSTALL_SCRIPT) sawfish-client.jlc $(DESTDIR)$(bindir)/sawfish-client
 	$(INSTALL_SCRIPT) sawfish-about.jlc $(DESTDIR)$(bindir)/sawfish-about
 	$(INSTALL_DATA) sawfish.png $(DESTDIR)$(sawfishdir)/sawfish.png
+	$(INSTALL_DATA) cabinet-missing.png $(DESTDIR)$(sawfishimagedir)/cabinet-missing.png
 
 uninstall :
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-menu
 	rm -f $(DESTDIR)${bindir}/sawfish-client
 	rm -f $(DESTDIR)${sawfishexecdir}/sawfish-about
 	rm -f $(DESTDIR)$(sawfishdir)/sawfish.png
+	rm -f $(DESTDIR)$(sawfishimagedir)/*.png
 
 installdirs : $(top_srcdir)/mkinstalldirs
-	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir)
+	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) $(DESTDIR)$(sawfishimagedir)
 
 clean :
 	rm -f *~ *.jlc core
