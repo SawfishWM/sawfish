@@ -352,6 +352,10 @@
   (when (eq (window-get w 'current-frame-style) theme-name)
     (set-tab-theme-name #:frame-style-supported-tabs theme-name)))
 
+(define (frame-style-tabbars w)
+  (when (eq (window-get w 'current-frame-style) theme-name)
+    (set-tab-theme-tabbars #:frame-style-supported-tabbars (list theme-name styletab-c:titlebar-place))))
+
 (define (get-frame w type)
   (create-frames)
   (case type
@@ -364,3 +368,4 @@
 
 (add-frame-style theme-name get-frame)
 (call-after-state-changed '(tab-theme-name) frame-style-name)
+(call-after-state-changed '(tab-theme-tabbars) frame-style-tabbars)
