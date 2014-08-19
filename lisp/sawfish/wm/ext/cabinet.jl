@@ -308,7 +308,7 @@
     "The text part shown on cabinet item"
     ;; if we remove a window we temporary need this if
     (if (not (numberp (window-id w)))
-        "Window is gone" 
+        "Window is gone"
       (concat (when (window-get w 'marked)
                 " »»")
               (when (window-tabbed-p w)
@@ -360,9 +360,15 @@
   (define command-timer nil)
   (define bad-key nil)
   (define focus-by-tab nil)
+  (define split-line-length nil)
 
   ;; item-format package
   (define (cabinet-item-text-format w)
+    (let ((split-length (quotient (length (cabinet-item-text w)) 2)))
+      (if (> split-length split-line-length)
+          (if (> split-length 40)
+              (setq split-line-length (- split-length 5))
+            (setq split-line-length split-length))))
     (cons (cabinet-item-text w)
           (cond
            ((window-iconified-p w) cabinet:iconified-item-forground)
@@ -410,16 +416,21 @@
                             0 nil))
           nil)
          (t (loop (cdr fow-nrl)))))))
-  
+
   (define (cabinet-split-line)
-    (make-item nil
-               (format nil "===================%s========================="
-                       (if workspace-mode
-                           (format nil " %s/%s "
-                                   current-workspace
-                                   (cdr (workspace-limits)))
-                         "ALL"))
-               cabinet:split-line-forground))
+    (let ((lenght '0)
+          line enil mode)
+      (while (< lenght split-line-length) 
+        (setq line (concat line "»")) 
+        (setq enil (concat enil "«")) 
+        (setq lenght (1+ lenght)))
+      (setq mode (if workspace-mode
+                     (format nil "%s/%s"
+                             current-workspace
+                             (cdr (workspace-limits)))
+                   "ALL"))
+      (make-item nil (format nil (concat line mode enil))
+                 cabinet:split-line-forground)))
 
   (define (draw-items wl input-line)
     (when (x-window-p cabinet-window)
@@ -712,15 +723,23 @@ this is a procedure with no argument."
     "Call marked hook if window marked"
     (call-window-hook 'window-state-change-hook cmd (list '(marked))))
 
+  (define (get-last-workspace)
+    (aref (nth 2 (get-x-property 'root '_NET_NUMBER_OF_DESKTOPS)) 0))
+  
   (defvar move-window-to-next-workspace
     (lambda (w)
-      (let ((nw (+ (car (window-get w 'workspaces)) 1)))
-        (send-to-next-workspace w nw))))
-
+      (unless (window-sticky-p w)
+        (let ((nw (+ (car (window-get w 'workspaces)) 1)))
+          (if (< nw (get-last-workspace))
+              (send-window-to-workspace-from-first w nw))))))
+  
   (defvar move-window-to-previous-workspace
     (lambda (w)
-      (let ((nw (- (car (window-get w 'workspaces)) 1)))
-        (send-to-next-workspace w nw))))
+      (unless (window-sticky-p w)
+        (let ((nw (- (car (window-get w 'workspaces)) 1)))
+          (if (> nw '-1)
+              (send-window-to-workspace-from-first w nw))))))
+
 
   (defvar move-window-to-top-left
     (lambda (w)
@@ -891,6 +910,7 @@ this is a procedure with no argument."
                             (quotient cabinet:raise-window-timeout 1000) (mod cabinet:raise-window-timeout 1000))))
         (when (eq cabinet:manipulation-on-selected 'None) 
           (set-input-focus nil)))
+      (setq split-line-length nil)
       (draw-items (append (mapcar cabinet-item-format wlist-for-manipulation)
                           (list (cabinet-split-line))
                           (mapcar cabinet-item-format wlist-for-display))
