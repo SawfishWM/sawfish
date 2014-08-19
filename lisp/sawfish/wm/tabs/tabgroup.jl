@@ -607,11 +607,11 @@ sticky, unsticky, fixed-position."
                  (nth 1 (frame-style-tabbars-support win)))))
           (case current-pos
                 ((top) (warp-cursor (+ (car (window-position win)) start-right (nth 4 tab-pos-list) (quotient (nth 6 tab-pos-list) 2))
-                                    (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win)) 2) 2) (cdr (window-position win)))))
+                                    (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win)) 4) 2) (cdr (window-position win)))))
                 ((bottom) (warp-cursor (+ (car (window-position win)) start-right (nth 4 tab-pos-list) (quotient (nth 6 tab-pos-list) 2))
                                        (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win))) 2) 
-                                          (cdr (window-position win)) (cdr (window-dimensions win)) 2)))
-                ((left) (warp-cursor (+ (quotient (- (car (window-frame-dimensions win)) (car (window-dimensions win)) 2) 2) (car (window-position win)))
+                                          (cdr (window-position win)) (cdr (window-dimensions win)))))
+                ((left) (warp-cursor (+ (quotient (- (car (window-frame-dimensions win)) (car (window-dimensions win)) 4) 2) (car (window-position win)))
                                      (- (+ (cdr (window-position win)) (cdr (window-dimensions win))) start-right (nth 7 tab-pos-list) 
                                         (quotient (nth 9 tab-pos-list) 2))))
                 ((right) (warp-cursor (+ (quotient (- (car (window-frame-dimensions win)) (car (window-dimensions win))) 2) 
@@ -645,7 +645,7 @@ of the windows the same 'tab-group property"
 
   (define timer-raise nil)
   (define (focus-in-tab win)
-    (let ((timer-wait (if raise-windows-on-focus raise-window-timeout '500)))
+    (let ((timer-wait (if raise-windows-on-focus raise-window-timeout '1)))
       (if (or (eq focus-mode 'click)
               (eq (window-get win 'focus-mode) 'click))
           (setq timer-wait '1))
