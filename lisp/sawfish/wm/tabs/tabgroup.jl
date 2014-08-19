@@ -46,6 +46,8 @@
           sawfish.wm.commands
           sawfish.wm.windows
           sawfish.wm.frames
+          sawfish.wm.tabs.tab
+          sawfish.wm.events
           sawfish.wm.state.iconify
           sawfish.wm.state.shading
           sawfish.wm.commands.move-resize
@@ -67,6 +69,7 @@
   (define last-unmap-id nil)
   (define in-tab-group-name nil)
   (define tab-theme-name)
+  (define tab-theme-tabbars)
 
   (defvar tab-group-windows-hook '()
     "Tab-group-windows-hook called when changing or creating a tabgroup.
@@ -75,21 +78,31 @@ Returning all windows in the current tabgroup")
   (define (set-tab-theme-name #!key frame-style-supported-tabs)
     (setq tab-theme-name frame-style-supported-tabs))
 
-  (define (window-tabbed-p w)
-    (window-get w 'tabbed))
-
   (define (frame-style-tabs-support-p w)
     "Returns t if the framestyle from W supports tabs.
 Also need the currect settings in the theme.jl from the theme."
     (setq tab-theme-name nil)
     (call-window-hook 'window-state-change-hook w (list '(tab-theme-name)))
     (eq (window-get w 'current-frame-style) tab-theme-name))
+
+  (define (set-tab-theme-tabbars #!key frame-style-supported-tabbars)
+    (setq tab-theme-tabbars frame-style-supported-tabbars))
+
+  (define (frame-style-tabbars-support w)
+    "Returns a list with theme name and tabbars position if the framestyle from W 
+has multiple tabbars. Also need the currect settings in the theme.jl from the theme."
+    (setq tab-theme-tabbars nil)
+    (call-window-hook 'window-state-change-hook w (list '(tab-theme-tabbars)))
+    tab-theme-tabbars)
   
   (define (net-wm-window-type-normal-p w)
     "Returns t if _NET_WM_WINDOW_TYPE by W is true or W has window-property 'force-tab"
     (or (window-get w 'force-tab)
         (if (get-x-property w '_NET_WM_WINDOW_TYPE)
             (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))))
+
+  (define (window-tabbed-p w)
+    (window-get w 'tabbed))
 
   (define-record-type :tab-group
     (tab-build-group p d wl)
@@ -473,14 +486,17 @@ sticky, unsticky, fixed-position."
             (setq all-wins (nthcdr 0 new-list))
             (after-move-resize w))))))
 
+  (define clicked-frame nil)
   (define (tab-move-to-right w)
     "Move tab to right in the tabbar."
+    (setq clicked-frame (clicked-frame-part))
     (move-tab w 'next))
 
   (define-command 'tab-move-to-right tab-move-to-right #:spec "%f")
 
   (define (tab-move-to-left w)
     "Move tab to left in the tabbar."
+    (setq clicked-frame (clicked-frame-part))
     (move-tab w 'prev))
   
   (define-command 'tab-move-to-left tab-move-to-left #:spec "%f")
@@ -497,12 +513,14 @@ sticky, unsticky, fixed-position."
 
   (define (tab-move-to-end w)
     "Move tab to the end in the tabbar."
+    (setq clicked-frame (clicked-frame-part))
     (move-tab-edge w 'end))
 
   (define-command 'tab-move-to-end tab-move-to-end #:spec "%f")
 
   (define (tab-move-to-beginning w)
     "Move tab to the beginning in the tabbar."
+    (setq clicked-frame (clicked-frame-part))
     (move-tab-edge w 'beg))
 
   (define-command 'tab-move-to-beginning tab-move-to-beginning #:spec "%f")
@@ -565,8 +583,41 @@ sticky, unsticky, fixed-position."
       (when (window-tabbed-p win)
         (tab-refresh-group win 'move)
         (tab-refresh-group win 'frame)
-        (set-input-focus (nth 0 (tab-group-windows-stacking-order win))))
+        (set-input-focus (nth 0 (tab-group-windows-stacking-order win)))
+        (when clicked-frame
+          (move-cursor-in-tabbar (input-focus))
+          (setq clicked-frame nil)))
       (setq tab-move-resize-lock nil)))
+
+  (define (move-cursor-in-tabbar win)
+    (let* ((group (tab-find-window win))
+           (tabnum (tab-rank win (tab-group-window-list group)))
+           (tab-pos-list (tab-pos group tabnum win))
+           (start-right
+            (if (or (eq (window-get win 'type) 'transient)
+                    (eq (window-get win 'type) 'shaped-transient))
+                tabbar-left-margin-transient
+              tabbar-left-margin)))
+      (if (not (eq (window-get win 'current-frame-style) (nth 0 (frame-style-tabbars-support win))))
+          (warp-cursor (+ (car (window-position win)) start-right (nth 4 tab-pos-list) (quotient (nth 6 tab-pos-list) 2))
+                       (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win)) 2) 2) (cdr (window-position win))))
+        (let ((current-pos 
+               (if (window-get win 'title-position)
+                   (window-get win 'title-position)
+                 (nth 1 (frame-style-tabbars-support win)))))
+          (case current-pos
+                ((top) (warp-cursor (+ (car (window-position win)) start-right (nth 4 tab-pos-list) (quotient (nth 6 tab-pos-list) 2))
+                                    (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win)) 2) 2) (cdr (window-position win)))))
+                ((bottom) (warp-cursor (+ (car (window-position win)) start-right (nth 4 tab-pos-list) (quotient (nth 6 tab-pos-list) 2))
+                                       (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win))) 2) 
+                                          (cdr (window-position win)) (cdr (window-dimensions win)) 2)))
+                ((left) (warp-cursor (+ (quotient (- (car (window-frame-dimensions win)) (car (window-dimensions win)) 2) 2) (car (window-position win)))
+                                     (- (+ (cdr (window-position win)) (cdr (window-dimensions win))) start-right (nth 7 tab-pos-list) 
+                                        (quotient (nth 9 tab-pos-list) 2))))
+                ((right) (warp-cursor (+ (quotient (- (car (window-frame-dimensions win)) (car (window-dimensions win))) 2) 
+                                         (car (window-position win)) (car (window-dimensions win)) 2) 
+                                      (- (+ (cdr (window-position win)) (cdr (window-dimensions win))) start-right (nth 7 tab-pos-list) 
+                                         (quotient (nth 9 tab-pos-list) 2)))))))))
 
   (define (unmap-id win)
     (setq last-unmap-id (window-id win)))
@@ -594,16 +645,16 @@ of the windows the same 'tab-group property"
 
   (define timer-raise nil)
   (define (focus-in-tab win)
-    (if (or shade-hover-mode (window-get win 'shade-hover))
-        (let ((timer-wait (if raise-windows-on-focus raise-window-timeout '500)))
-          (if (or (eq focus-mode 'click)
-                  (window-get win 'focus-mode 'click))
-              (setq timer-wait '1))
-          (setq timer-raise
-                (make-timer (lambda ()
-                              (raise-windows win (tab-group-windows-stacking-order win)))
-                            (quotient timer-wait 1000) (mod timer-wait 1000))))
-      (tab-refresh-group win 'raise)))
+    (let ((timer-wait (if raise-windows-on-focus raise-window-timeout '500)))
+      (if (or (eq focus-mode 'click)
+              (eq (window-get win 'focus-mode) 'click))
+          (setq timer-wait '1))
+      (setq timer-raise
+            (make-timer (lambda ()
+                          (if (or shade-hover-mode (window-get win 'shade-hover))
+                              (raise-windows win (tab-group-windows-stacking-order win))
+                            (tab-refresh-group win 'raise)))
+                        (quotient timer-wait 1000) (mod timer-wait 1000)))))
 
   (define (focus-out-tab)
     (when timer-raise
@@ -622,6 +673,7 @@ of the windows the same 'tab-group property"
           (mapcar (lambda (w)
                     (shade-window w)) (remove win (tab-group-windows win))))
         (set-input-focus win))))
+
 
   (unless batch-mode
     (add-hook 'after-add-window-hook in-tab-group)
@@ -662,4 +714,4 @@ of the windows the same 'tab-group property"
     (add-hook 'window-unmaximized-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'maximized))))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
 
-  (gaol-add set-tab-theme-name tab-refresh-group tab-group-windows))
+  (gaol-add set-tab-theme-name set-tab-theme-tabbars tab-refresh-group tab-group-windows))

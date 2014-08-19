@@ -21,7 +21,12 @@
 
 (define-structure sawfish.wm.tabs.tab
 
-    (export set-tab-adjustments)
+    (export tab-pos 
+            tabbar-left-margin
+            tabbar-left-margin-transient
+            tabbar-right-margin
+            tabbar-right-margin-transient
+            set-tab-adjustments)
 
     (open rep
 	  rep.system
