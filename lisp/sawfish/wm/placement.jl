@@ -150,6 +150,7 @@ this mode. The single argument is the window to be placed."
   (define (place-window-interactively w)
     (require 'sawfish.wm.commands.move-resize)
     (let ((move-outline-mode 'box)
+	  (move-from-interactive-placement t)
 	  (ptr (query-pointer))
 	  (dims (window-frame-dimensions w)))
       ;; XXX hacktastic! I don't know why the next thing is needed,
