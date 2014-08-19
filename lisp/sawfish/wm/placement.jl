@@ -156,7 +156,8 @@ this mode. The single argument is the window to be placed."
       ;; XXX but it is -- if the window was popped by a button click
       ;; XXX the ButtonRelease can get caught by move-window-int..
       ;; XXX (try double clicking on a gmc icon)
-      (accept-x-input)
+      ;; XXX 8 = ButtonReleaseMask
+      (accept-x-input 8)
       (when (window-id w)
 	(move-window-to w (- (car ptr) (quotient (car dims) 2))
 			(- (cdr ptr) (quotient (cdr dims) 2)))
