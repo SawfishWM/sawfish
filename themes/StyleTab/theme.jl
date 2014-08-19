@@ -52,12 +52,12 @@
 (defcustom styletab-c:styles 'Default "Frame and button style."
   :group (appearance StyleTab:group)
   :type symbol
-  :options (Default Reduce Glass WixDa Smoothly Flat))
+  :options (Default Glass Reduce WixDa Smoothly Flat))
 
-(defcustom styletab-c:proposals 'Pink "Color proposals."
+(defcustom styletab-c:proposals 'Default "Color proposals."
   :group (appearance StyleTab:group)
   :type symbol
-  :options (Default Reduce Glass WixDa Smoothly Flat Brown Darkblue Blue Pink Green)
+  :options (Default Glass Reduce WixDa Smoothly Flat Brown Darkblue Blue Pink Green)
   :after-set (lambda () (color-changed)))
 
 (defcustom styletab-c:tabbar-marked t "Colorize tab/titelbar if it is to be added as a tab."
@@ -65,7 +65,7 @@
   :type boolean
   :after-set (lambda () (botton-color-changed recolor-tab)))
 
-(defcustom styletab-c:tabbar-marked-color (get-color "#DF0000")
+(defcustom styletab-c:tabbar-marked-color (get-color "#010095")
   "Color of tab/titelbar when it was marked."
   :group (appearance StyleTab:group)
   :type color
@@ -2911,6 +2911,10 @@
   (when (eq (window-get w 'current-frame-style) theme-name)
     (set-tab-theme-name #:frame-style-supported-tabs theme-name)))
 
+(define (frame-style-tabbars w)
+  (when (eq (window-get w 'current-frame-style) theme-name)
+    (set-tab-theme-tabbars #:frame-style-supported-tabbars (list theme-name styletab-c:titlebar-place))))
+
 (define (get-frame w type)
   (let ((current-title
          (if (not (window-get w 'title-position))
@@ -2941,6 +2945,7 @@
 (add-frame-style theme-name get-frame)
 
 (call-after-state-changed '(tab-theme-name) frame-style-name)
+(call-after-state-changed '(tab-theme-tabbars) frame-style-tabbars)
 (call-after-state-changed '(marked) reframe-marked)
 (call-after-state-changed '(maximized sticky fixed-position stacking) reframe-one)
 (add-hook 'remove-from-workspace-hook reframe-one)
