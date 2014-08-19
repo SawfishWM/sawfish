@@ -467,7 +467,7 @@
 
 (define (rotate-tab src dest)
   (let ((w (current-event-window))
-        (wins (tab-group-window-index (current-event-window)))
+        (wins (tab-group-windows (current-event-window)))
         pos-x pos-y fdim framew framehigh dim-x dim-y current-title type)
     (if (not (window-get w 'title-position))
         (case styletab-c:titlebar-place
@@ -610,7 +610,7 @@
 
 (define (f-type dest)
   (let ((w (current-event-window))
-        (wins (tab-group-window-index (current-event-window)))
+        (wins (tab-group-windows (current-event-window)))
         pos-x pos-y dim-x dim-y cur new current-title)
     (if (not (window-get w 'title-position))
         (case styletab-c:titlebar-place
