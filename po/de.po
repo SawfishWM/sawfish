@@ -14,13 +14,13 @@
 # Christopher Roy Bratusek <nano@tuxfamily.org>, 2011.
 # Christian Kirbach <Christian.Kirbach@googlemail.com>, 2009, 2010, 2011.
 # Hendrik Richter <hendrikr@gnome.org>, 2005.
-# fuchur <flohtransporter@gmail.com>, 2013.
+# fuchur <flohtransporter@gmail.com>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish WM\n"
 "Report-Msgid-Bugs-To: http://sawfish.tuxfamily.org/flyspray/\n"
 "POT-Creation-Date: 2011-06-23 11:00+0200\n"
-"PO-Revision-Date: 2013-10-09 18:01+0200\n"
+"PO-Revision-Date: 2014-05-02 19:21+0200\n"
 "Last-Translator: fuchur <flohtransporter@gmail.com>\n"
 "Language-Team: German <me@home>\n"
 "MIME-Version: 1.0\n"
@@ -6055,42 +6055,585 @@ msgid "Cabinet"
 msgstr "Cabinet"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "The horizontal margin of cabinet"
-msgstr "Abstand des Menüs zum seitlichen Rand von Cabinet"
+msgid "Keybindings"
+msgstr "Tastenkombinationen"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "The vertically margin of cabinet"
-msgstr "Abstand des Menüs zum oberen Rand von Cabinet"
+msgid "Margin to the border of cabinet."
+msgstr "Abstand des Menüs zum Rand von Cabinet."
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid " The margin between item and item."
-msgstr "Abstand zwischen den Menüeinträgen von Cabinet"
+msgid "Margin between items."
+msgstr "Abstand zwischen den Menüeinträgen von Cabinet."
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid ""
-"whether cycle overhead,when start cabinet-switch.\n"
-"Just like x-cycle"
-msgstr "Das verhalten von Cabinet wird dem von x-cycle nachempfunden."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid ""
-"whether to show windows in current workspace.\n"
-"nil, means to show windows of all workspaces."
-msgstr "Cabinet nur auf Fenster der aktuellen Arbeitsfläche anzeigen."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "The margin between input line and the first item"
+msgid "Margin between input line and the first item."
 msgstr ""
 "Abstand zwischen der Eingabeaufforderung und dem ersten Menüeintrag von "
-"Cabinet"
+"Cabinet."
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Cabinet switch"
-msgstr "Cabinet Fensterleiste"
+msgid "Icon size."
+msgstr "Icon Größe."
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "The Main function."
-msgstr "Die Hauptfunktion von Cabinet."
+msgid "Display only windows from current workspace."
+msgstr "Nur Fenster der aktuellen Arbeitsfläche anzeigen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Display cabinet on active monitor."
+msgstr "Cabinet auf dem aktiven Monitor anzeigen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cycle overhead when start cabinet-switch, like x-cycle."
+msgstr ""
+"Beim aufrufen von Cabinet zum nächsten Menüeintrag springen, wie beim x-cycle."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Action if browse across cabinet."
+msgstr "Verhalten der Fenstern beim blättern in Cabinet."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid ""
+"Delay in milliseconds until a window gets raised if browse across cabinet. "
+"\\bottom"
+msgstr "Verzögerung bis ein Fenster beim blättern angehoben wird. \\bottom"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Delay in milliseconds until a window keybinding gets repeats. \\bottom"
+msgstr ""
+"Verzögerung der Tastatureingabe bis ein Fensterereignisse wiederholt wird. \\bottom"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Font color."
+msgstr "Farbe der Schrift."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Background color."
+msgstr "Farbe des Hintergrunds."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Input text color."
+msgstr "Farbe der Eingabeaufforderung."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Split line color."
+msgstr "Farbe der Trennlinie."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Maximized windows color."
+msgstr "Farbe bei maximierten Fenstern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Iconified windows color."
+msgstr "Farbe bei minimierten Fenstern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Shaded windows color."
+msgstr "Farbe bei eingerollten Fenstern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Windows displayed below the split line."
+msgstr "Fenster die unterhalb der Trennlinie angezeigt werden."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Windows removed from cabinet."
+msgstr "Fenster die nicht in Cabinet angezeigt werden."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cycle through windows."
+msgstr "Durch die Fenster blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Reversely cycle through windows."
+msgstr "Rückwärts durch die Fenster blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Exit with restore stack order."
+msgstr "Beenden und Reihenfolge der Fenster wiederherstellen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Toggle windows from current or all workspaces."
+msgstr ""
+"Umschalten zwischen Fenstern von der aktuellen und allen Arbeitsflächen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Toggle windows for display and for manipulation."
+msgstr ""
+"Umschalten zwischen Fenstern die ausgewählt werden können und jenen die nur "
+"angezeigt werden."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cycle through workspaces."
+msgstr "Durch die Arbeitsflächen blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Reversely cycle through workspaces."
+msgstr "Rückwärts durch die Arbeitsflächen blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Advance user keymap."
+msgstr "Tastenkombinationen für Fortgeschrittene Benutzer."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Marked window as selected."
+msgstr "Fenster als ausgewählt markieren."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "After executed cabinet:"
+msgstr "Nachdem ausgeführt Cabinet:"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cabinet:"
+msgstr "Cabinet:"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "\nIs duplicate."
+msgstr "\nIst doppelt."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "\nDisable cabinet."
+msgstr "\nCabinet ausgeschaltet."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "\nIs not a valid x-keysym-name."
+msgstr "\nIst kein zulässiger »x-keysym-name«."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Raise"
+msgstr "Anheben"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "go-to-next"
+msgstr "Zu nächste gehen"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "delete-window"
+msgstr "Fenster »Löschen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-iconified"
+msgstr "Fenster »Minimieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-toggle"
+msgstr "Fenster »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-shaded"
+msgstr "Fenster »Einrollen« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-sticky"
+msgstr "Fenster »Anheften« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-full-toggle"
+msgstr "Fenster auf Xinerama Vollbild »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-full-vertical-left-toggle"
+msgstr "Fenster auf der Linken halben Bildschirmgröße »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-full-vertical-right-toggle"
+msgstr "Fenster auf der Rechten halben Bildschirmgröße »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-fill-window-toggle"
+msgstr "Fenster füllend »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-fill-window-horizontally-toggle"
+msgstr "Fenster horizontal »Füllend Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-fill-window-vertically-toggle"
+msgstr "Fenster vertikal »Füllend Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-fullscreen-toggle"
+msgstr "Fenster auf Vollbild »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-horizontally-toggle"
+msgstr "Fenster Horizontal »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-vertically-toggle"
+msgstr "Fenster Vertikal »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-fullxinerama-toggle"
+msgstr "Fenster auf Xinerama Vollbild »Maximieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-fixed-postion"
+msgstr "Fenster »Feste Position« an/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-never-focus"
+msgstr "Fenster »Nie fokussieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-ignored"
+msgstr "Fenster »Ignorieren« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-task-list-skip"
+msgstr "Fenster »In Taskliste überspringen« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-cycle-skip"
+msgstr "Fenster »Beim durchlaufen überspringen« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-list-skip"
+msgstr "Fenster »In der Fensterliste überspringen« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-window-sticky-viewport"
+msgstr "Fenster auf Sichtfeld »Anheften« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "toggle-desktop"
+msgstr "Desktop »Anzeigen« ein/aus"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "send-to-next-head"
+msgstr "Fenster zum nächsten Monitor »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "send-to-previous-head"
+msgstr "Fenster zum vorherigen Monitor »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-to-center"
+msgstr "Fenster in die Mitte des Bildschirms »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-to-top-left"
+msgstr "Fenster nach oben links auf der Arbeitsfläche »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-down"
+msgstr "Fenster aufs Sichtfeld nach unten »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-right"
+msgstr "Fenster aufs rechte Sichtfeld »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-left"
+msgstr "Fenster aufs linke Sichtfeld »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-next"
+msgstr "Fenster ins nächstes Sichtfeld »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-previous"
+msgstr "Fenster ins vorherige Sichtfeld »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab-add-maked-windows"
+msgstr "Markierte Fenster als Reiter »Hinzufügen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab-release-window"
+msgstr "Reiter aus Reiterleiste »Lösen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab-move-to-end"
+msgstr "Reiter ans Ende der Reiterleiste »Schieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab-move-to-beginning"
+msgstr "Reiter an den Anfang der Reiterleiste »Schieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab-move-to-right"
+msgstr "Reiter nach Rechts in der Reiterleiste »Schieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab-move-to-left"
+msgstr "Reiter nach Links in der Reiterleiste »Schieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab/titelbar-toggle"
+msgstr "Titelleiste zum gegenüber liegendem Fensterrand »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab/titelbar-to-top"
+msgstr "Titelleiste zum Oberen Fensterrand »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab/titelbar-to-bottom"
+msgstr "Titelleiste zum Unterem Fensterrand »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab/titelbar-to-right"
+msgstr "Titelleiste zum Rechten Fensterrand »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "tab/titelbar-to-left"
+msgstr "Titelleiste zum Linken Fensterrand »Verschieben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-window"
+msgstr "Fenster »Anheben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "lower-window"
+msgstr "Fenster »Absenken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-single-window"
+msgstr "Einzelnes Fenster »Anheben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-lower-single-window"
+msgstr "Einzelnes Fenster »Absenken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-window-depth"
+msgstr "Fenster Tiefe »Anheben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-lower-window"
+msgstr "Fenster »Anheben/Absenken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "lower-window-depth"
+msgstr "Fenster Tiefe »Absenken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-window-and-transients"
+msgstr "Fenster und Dialoge »Anheben«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "raise-lower-window-and-transients"
+msgstr "Fenster und Dialoge »Anheben/Absenken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "shrink-window-up"
+msgstr "Fenster nach oben »Schrumpfen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "shrink-window-down"
+msgstr "Fenster nach unten »Schrumpfen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "shrink-window-left"
+msgstr "Fenster nach links »Schrumpfen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "shrink-window-right"
+msgstr "Fenster nach rechts »Schrumpfen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "yank-window-up"
+msgstr "Fenster nach oben »Zerren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "yank-window-down"
+msgstr "Fenster nach unten »Zerren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "yank-window-left"
+msgstr "Fenster nach links »Zerren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "yank-window-right"
+msgstr "Fenster nach rechts »Zerren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "size-window-add-column"
+msgstr "Fenster um eine Spalte »Vergrößern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "size-window-subtract-column"
+msgstr "Fenster um eine Spalte »Verkleinern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "size-window-add-row"
+msgstr "Fenster um eine Zeile »Vergrößern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "size-window-subtract-row"
+msgstr "Fenster um eine Zeile »Verkleinern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "grow-window-up"
+msgstr "Fenster nach oben »Ausweiten«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "grow-window-down"
+msgstr "Fenster nach unten »Ausweiten«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "grow-window-left"
+msgstr "Fenster nach links »Ausweiten«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "grow-window-right"
+msgstr "Fenster nach rechts »Ausweiten«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "pack-window-up"
+msgstr "Fenster nach oben »Packen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "pack-window-down"
+msgstr "Fenster nach unten »Packen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "pack-window-right"
+msgstr "Fenster nach rechts »Packen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "pack-window-left"
+msgstr "Fenster nach links »Packen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "double-window-size"
+msgstr "Fenstergröße »Verdoppeln«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "halve-window-size"
+msgstr "Fenstergröße »Halbieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "delete-window-safely"
+msgstr "Fenster »Sicher löschen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "destroy-window"
+msgstr "Fenster »Zerstören«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "window-history-save-position"
+msgstr "Fensterchronik Position »Speichern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "window-history-save-dimensions"
+msgstr "Fensterchronik Maße »Speichern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "window-history-save-attributes"
+msgstr "Fensterchronik Attribute »Speichern«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "window-history-forget"
+msgstr "Fensterchronik »Vergessen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "iconify-window"
+msgstr "Fenster »Minimieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "uniconify-window"
+msgstr "Fenster »Wiederherstellen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "shade-window"
+msgstr "Fenster »Einrollen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "unshade-window"
+msgstr "Fenster »Ausrollen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "make-window-ignored"
+msgstr "Fenster »Ignorieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "make-window-not-ignored"
+msgstr "Fenster »Nicht ignorieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "make-window-sticky"
+msgstr "Fenster »Anheften«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "make-window-unsticky"
+msgstr "Fenster »Anheften« ausschalten"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-to-next-workspace"
+msgstr "Fenster auf nächste Arbeitsfläche »Schicken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "move-window-to-previous-workspace"
+msgstr "Fenster auf vorherige Arbeitsfläche »Schicken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "send-to-workspace-left"
+msgstr "Fenster auf linke Arbeitsfläche »Schicken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "send-to-workspace-right"
+msgstr "Fenster auf rechte Arbeitsfläche »Schicken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "send-to-workspace-up"
+msgstr "Fenster auf obere Arbeitsfläche »Schicken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "send-to-workspace-down"
+msgstr "Fenster auf untere Arbeitsfläche »Schicken«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-discard"
+msgstr "Fenster »Maximiert« verwerfen"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-fill-window"
+msgstr "Fenster »Füllend Maximieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-fill-window-horizontally"
+msgstr "Fenster horizontal »Füllend Maximiere«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-fill-window-vertically"
+msgstr "Fenster vertikal »Füllend Maximiere«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "unmaximize-window"
+msgstr "Fenster »Unmaximieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-fullscreen"
+msgstr "Fenster auf Vollbild »Maximieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-fullxinerama"
+msgstr "Fenster auf Xinerama Vollbild »Maximieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-horizontally"
+msgstr "Fenster horizontal »Maximieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "maximize-window-vertically"
+msgstr "Fenster vertikal »Maximieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "copy-to-next-workspace"
+msgstr "Fenster auf nächste Arbeitsfläche »Kopieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "copy-to-previous-workspace"
+msgstr "Fenster auf vorherige Arbeitsfläche »Kopieren«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "focus-desktop"
+msgstr "Arbeitsfläche »Anzeigen«"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "hide-desktop"
+msgstr "Arbeitsfläche »Verbergen«"
 
 #. ../lisp/sawfish/wm/ext/auto-raise.jl
 msgid "Auto-Raise"
