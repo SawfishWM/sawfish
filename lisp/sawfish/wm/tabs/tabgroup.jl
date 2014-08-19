@@ -31,8 +31,10 @@
             tab-find-window
             tab-rank
             tab-group-window-list
-            tab-group-window-index
-            tab-group-window)
+            tab-group-windows
+            tab-group-windows-stacking-order
+            tab-group-window
+            tab-move-resize-lock)
 
     (open rep
           rep.system
@@ -57,6 +59,7 @@
   (define oldgroup nil)
   (define tab-groups nil)
   (define tab-refresh-lock t)
+  (define tab-move-resize-lock nil)
   (define release-window t)
   (define last-unmap-id nil)
   (define in-tab-group-name nil)
@@ -132,11 +135,21 @@ Also need the currect settings in the theme.jl from the theme."
        (t
         (loop (+ index 1))))))
 
-  (define (tab-group-window-index win)
+  (define (tab-group-windows win)
     "Return the windows of the group containing WIN."
     (let* ((index (tab-window-group-index win))
            (wins (tab-group-window-list (nth index tab-groups))))
       wins))
+
+  (define (tab-group-windows-stacking-order win)
+    "Return the windows of the group containing WIN sort by stacking order."
+    (let* ((tabs (tab-group-windows win))
+           (all-wins (stacking-order))
+           order)
+      (mapcar (lambda (w)
+                (if (member w tabs)
+                    (setq order (append order (list w))))) all-wins)
+      order))
 
   (define (tab-rank elem list)
     "Returns the nth position from elem (tab) in a list (tabbar)"
@@ -163,10 +176,10 @@ Also need the currect settings in the theme.jl from the theme."
         (remove-from-tab-group w))
     (setq release-window t)
     (when (window-tabbed-p w)
-      (let ((wins (list (remove w (tab-group-window-index w)))))
+      (let ((wins (list (remove w (tab-group-windows w)))))
         (if (not (window-get w 'shaded))
             (mapcar (lambda (w)
-                      (unshade-window w)) (tab-group-window-index w)))
+                      (unshade-window w)) (tab-group-windows w)))
         (tab-delete-window-from-group w (tab-window-group-index w))
         (window-put w 'fixed-position nil)
         (tab-refresh-group oldgroup 'frame)
@@ -280,10 +293,10 @@ sticky, unsticky, fixed-position."
                               (if viewport-sticky
                                   (make-window-sticky/viewport w)
                                 (make-window-unsticky/viewport w)))) unfocus))))
-            (when (cdr (tab-group-window-index win))
+            (when (cdr (tab-group-windows win))
               (if not-shaded (unshade-window win))
               (mapcar (lambda (w)
-                        (shade-window w)) (remove win (tab-group-window-index win)))))
+                        (shade-window w)) (remove win (tab-group-windows win)))))
         (setq tab-refresh-lock t))))
 
   ;; Entry points
@@ -371,7 +384,7 @@ sticky, unsticky, fixed-position."
           (setq tab-refresh-lock t)
           (tab-refresh-group w 'frame)
           (set-input-focus w)
-          (call-hook 'tab-group-windows-hook (list (tab-group-window-index w)))
+          (call-hook 'tab-group-windows-hook (list (tab-group-windows w)))
           (if (not (window-tabbed-p win)) (window-put win 'tabbed t))
           (window-put w 'tabbed t)))))
   
@@ -413,7 +426,7 @@ sticky, unsticky, fixed-position."
   (define (move-tab w pos)
     "Move tab W to pos"
     (when (window-tabbed-p w)
-      (let* ((wins (tab-group-window-index w))
+      (let* ((wins (tab-group-windows w))
             (rank (tab-rank w wins))
             (list-end (nthcdr rank wins))
             (list-start wins)
@@ -470,7 +483,7 @@ sticky, unsticky, fixed-position."
   (define (move-tab-edge w pos)
     "Move tab W to pos"
     (when (window-tabbed-p w)
-      (let ((tabs (remove w (tab-group-window-index w))))
+      (let ((tabs (remove w (tab-group-windows w))))
         (if (eq pos 'end)
             (setq all-wins (append tabs (cons w nil))))
         (if (eq pos 'beg)
@@ -504,8 +517,9 @@ sticky, unsticky, fixed-position."
     "Releas WIN from the tabgroup and iconify the rest from the group."
     (let* ((default-window-animator 'none)
            (index (tab-window-group-index win))
-           (wins (tab-group-window-index win))
-           (tabs (remove win (tab-group-window-index win))))
+           (wins (tab-group-windows win))
+           (tabs (remove win (tab-group-windows win))))
+      (setq tab-move-resize-lock 't)
       (tab-delete-window-from-group win index)
       (reframe-window win)
       (setq tab-refresh-lock nil)
@@ -539,13 +553,14 @@ sticky, unsticky, fixed-position."
                     (window-put w 'never-iconify-opaque nil)
                     (window-put w 'never-iconify t))
                   (window-put w 'tabbed t)) wins)
-        (call-hook 'tab-group-windows-hook (list (tab-group-window-index win)))
+        (call-hook 'tab-group-windows-hook (list (tab-group-windows win)))
         (raise-window win)
         (setq all-wins nil))
       (setq tab-refresh-lock t)
       (when (window-tabbed-p win)
         (tab-refresh-group win 'move)
-        (tab-refresh-group win 'frame))))
+        (tab-refresh-group win 'frame))
+      (setq tab-move-resize-lock nil)))
 
   (define (unmap-id win)
     (setq last-unmap-id (window-id win)))
@@ -608,4 +623,4 @@ of the windows the same 'tab-group property"
     (add-hook 'window-unmaximized-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'maximized))))
     (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
 
-  (gaol-add set-tab-theme-name tab-refresh-group tab-group-window-index))
+  (gaol-add set-tab-theme-name tab-refresh-group tab-group-windows))

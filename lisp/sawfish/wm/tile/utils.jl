@@ -19,6 +19,7 @@
             notify
             take
             group-by
+            tab-background-p
 	    window-never-tile-p)
     (open rep
           rep.io.timers
@@ -36,18 +37,26 @@
 
   (define (window-never-tile-p w) (window-get w 'never-tile))
 
+  (define (tab-background-p w)
+    "Returns t if a tabbed window is a background tab"
+    (require 'sawfish.wm.tabs.tabgroup)
+    (if tab-move-resize-lock 't
+      (if (window-tabbed-p w)
+          (if (member w (nthcdr 1 (tab-group-windows-stacking-order w))) 't))))
+
   (define (tileable-workspace-windows #!optional ignore)
     (remove-if (lambda (w)
-		 (or (equal w ignore)
-		     (dock-window-p w)
-		     (window-iconified-p w)
-		     ;; window-matcher
-		     (window-never-tile-p w)
-		     ;; for pager and stuff
-		     (not (window-visible-p w))
-		     ;; no dialogs
-		     (not (eq (window-type w) 'default))
-		     (window-ignored-p w)))
+                 (or (equal w ignore)
+                     (dock-window-p w)
+                     (window-iconified-p w)
+                     ;; window-matcher
+                     (window-never-tile-p w)
+                     ;; for pager and stuff
+                     (not (window-visible-p w))
+                     ;; no dialogs
+                     (not (eq (window-type w) 'default))
+                     (tab-background-p w)
+                     (window-ignored-p w)))
                (window-order current-workspace)))
 
   (define (window-x w) (car (window-position w)))
@@ -67,6 +76,9 @@
   (define (push-window w x y width height)
     (resize-frame-to w (inexact->exact width) (inexact->exact height))
     (move-window-to w (inexact->exact x) (inexact->exact y))
+    (require 'sawfish.wm.tabs.tabgroup)
+    (when (window-tabbed-p w)
+      (tab-refresh-group (nth 0 (tab-group-windows-stacking-order w)) 'move))
     (window-order-push w))
 
   (define (focus-window w) (window-order-push w))

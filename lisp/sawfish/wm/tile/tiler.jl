@@ -77,10 +77,11 @@
 
   (define (tileable-window-p w)
     (and w
-	 (tiling-auto-p (tiling (window-workspace w)) w)
+         (tiling-auto-p (tiling (window-workspace w)) w)
          (not (window-never-tile-p w))
-	 (not (window-ignored-p w))
-	 (not (dock-window-p w))
+         (not (window-ignored-p w))
+         (not (dock-window-p w))
+         (not (tab-background-p w))
          (eq (window-type w) 'default)))
 
   (define (tileable-windows #!optional ignore)

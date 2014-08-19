@@ -706,7 +706,7 @@ a window"
                               w current-workspace)
                              current-workspace
                            (car (window-workspaces w))))
-             (wins (tab-group-window-index w)))
+             (wins (tab-group-windows w)))
          (when orig-space
            (mapcar (lambda (w)
                      (copy-window-to-workspace w orig-space space)) wins)

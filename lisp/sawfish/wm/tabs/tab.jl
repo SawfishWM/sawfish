@@ -202,10 +202,10 @@ the tabgroup containig the second."
     (when (net-wm-window-type-normal-p win)
       (if marked-window
           (progn
-            (setq marked-window (tab-group-window-index (car marked-window)))
+            (setq marked-window (tab-group-windows (car marked-window)))
             (tab-window-add-to-tabgroup win))
         (default-cursor (get-cursor marked-cursor-shape))
-        (setq marked-window (tab-group-window-index win))
+        (setq marked-window (tab-group-windows win))
         (mapcar (lambda (w) 
                   (window-put w 'marked t)
                   (emit-marked-hook w)) marked-window))))
