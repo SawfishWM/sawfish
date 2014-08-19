@@ -34,7 +34,7 @@
 
   (defgroup auto-raise "Auto-Raise" :group focus)
 
-  (defcustom raise-windows-on-focus nil
+  (defcustom raise-windows-on-focus t
     "Raise windows when they are focused."
     :type boolean
     :require sawfish.wm.ext.auto-raise

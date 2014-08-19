@@ -20,7 +20,7 @@
 
 (define-structure sawfish.wm.ext.shade-hover
 
-    (export )
+    (export clean-up)
 
     (open rep
           rep.system

@@ -38,6 +38,7 @@
 
     (open rep
           rep.system
+          rep.io.timers
           rep.data.records
           sawfish.wm.gaol
           sawfish.wm.misc
@@ -51,6 +52,8 @@
           sawfish.wm.stacking
           sawfish.wm.util.groups
           sawfish.wm.commands.groups
+          sawfish.wm.ext.auto-raise
+          sawfish.wm.ext.shade-hover
           sawfish.wm.workspace)
 
   (define-structure-alias tabgroup sawfish.wm.tabs.tabgroup)
@@ -317,6 +320,7 @@ sticky, unsticky, fixed-position."
              ;; adopt window settings for the new tab
              (group-frame-style (window-get win 'frame-style))
              (group-frame-type (window-get win 'type))
+             (group-frame-shade-hover (window-get win 'shade-hover))
              (group-frame-focus-mode (window-get win 'focus-mode))
              (group-frame-gravity (window-get win 'gravity))
              (group-frame-never-iconify (window-get win 'never-iconify))
@@ -349,6 +353,7 @@ sticky, unsticky, fixed-position."
           (if (window-get w 'shaded) (unshade-window w))
           (window-put w 'frame-style group-frame-style)
           (window-put w 'type group-frame-type)
+          (window-put w 'shade-hover group-frame-shade-hover)
           (window-put w 'focus-mode group-frame-focus-mode)
           (window-put w 'gravity group-frame-gravity)
           (window-put w 'title-position group-frame-title-position)
@@ -559,7 +564,8 @@ sticky, unsticky, fixed-position."
       (setq tab-refresh-lock t)
       (when (window-tabbed-p win)
         (tab-refresh-group win 'move)
-        (tab-refresh-group win 'frame))
+        (tab-refresh-group win 'frame)
+        (set-input-focus (nth 0 (tab-group-windows-stacking-order win))))
       (setq tab-move-resize-lock nil)))
 
   (define (unmap-id win)
@@ -585,6 +591,37 @@ of the windows the same 'tab-group property"
     "Remove WIN from in-tab-group-name alist if it have a 'tab-group property"
     (when (window-get win 'tab-group)
       (setq in-tab-group-name (remove (assoc last-unmap-id in-tab-group-name) in-tab-group-name))))
+
+  (define timer-raise nil)
+  (define (focus-in-tab win)
+    (if (or shade-hover-mode (window-get win 'shade-hover))
+        (let ((timer-wait (if raise-windows-on-focus raise-window-timeout '500)))
+          (if (or (eq focus-mode 'click)
+                  (window-get win 'focus-mode 'click))
+              (setq timer-wait '1))
+          (setq timer-raise
+                (make-timer (lambda ()
+                              (raise-windows win (tab-group-windows-stacking-order win)))
+                            (quotient timer-wait 1000) (mod timer-wait 1000))))
+      (tab-refresh-group win 'raise)))
+
+  (define (focus-out-tab)
+    (when timer-raise
+      (delete-timer timer-raise)
+      (setq timer-raise nil)))
+
+  (define (unshade-tab win)
+    (let ((unshade-nil))
+      (when (window-get win 'shade-hover-unshaded)
+        (mapcar (lambda (w)
+                  (if (not (window-get w 'shaded)) (setq unshade-nil 't))) (remove win (tab-group-windows win)))
+        (when unshade-nil
+          (window-put win 'shade-hover-unshaded nil)
+          (clean-up)
+          (setq unshade-nil nil)
+          (mapcar (lambda (w)
+                    (shade-window w)) (remove win (tab-group-windows win))))
+        (set-input-focus win))))
 
   (unless batch-mode
     (add-hook 'after-add-window-hook in-tab-group)
@@ -616,7 +653,9 @@ of the windows the same 'tab-group property"
     (when (eq resize-outline-mode 'opaque)
       (add-hook 'before-resize-hook (lambda (win) (if (window-tabbed-p win) (before-move-resize win)))))
     (add-hook 'after-resize-hook  (lambda (win) (after-move-resize win)))
-    (add-hook 'focus-in-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'raise))))
+    (add-hook 'focus-in-hook (lambda (win) (if (window-tabbed-p win) (focus-in-tab win))))
+    (add-hook 'focus-out-hook (lambda (win) (if (window-tabbed-p win) (focus-out-tab))))
+    (add-hook 'unshade-window-hook (lambda (win) (if (window-tabbed-p win) (unshade-tab win))))
     (add-hook 'iconify-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'iconify))))
     (add-hook 'uniconify-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'uniconify))))
     (add-hook 'window-maximized-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'maximized))))
