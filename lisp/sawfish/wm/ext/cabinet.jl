@@ -167,7 +167,8 @@
     :type* `(list string ,(_ "Windows displayed below the split line.")))
   
   (defcustom cabinet:filter-out-from-display (list "^Gdesklets-daemon$" "^Xfce4-panel$" "^Mate-panel$"
-                                                   "^Xfdesktop$" "^x-caja-desktop$" "^plasma-desktop$")
+                                                   "^Xfdesktop$" "^x-caja-desktop$" "^plasma-desktop$"
+						   "^Pancake$" "^lxpanel" "Sawfishpager")
     nil
     :group (focus cabinet filter)
     :widget-flags (expand-horizontally expand-vertically)
