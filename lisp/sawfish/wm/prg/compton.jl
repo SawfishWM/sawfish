@@ -54,7 +54,7 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadows-enable nil "Enabled client-side shadows on windows."
+    (defcustom shadows-enable t "Enabled client-side shadows on windows."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
@@ -66,7 +66,7 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom shadows-disable-shaped nil "Don't draw shadows on shaped windows."
+    (defcustom shadows-disable-shaped t "Don't draw shadows on shaped windows."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
@@ -84,7 +84,7 @@
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom force-tabbed nil "Force shadows by tabbed windows."
+    (defcustom force-tabbed t "Force shadows by tabbed windows."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
@@ -110,7 +110,7 @@
       :options (25 20 15 10 5 0 -05 -10 -15 -20 -25 -30 -35 -40 -45 -50)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom translucency 80 "The translucency for shadows (Default 80)."
+    (defcustom translucency 60 "The translucency for shadows (Default 80)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type symbol
@@ -145,13 +145,13 @@
       :options (0 1 2 3 4 5 6 7 8 9 10)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom avoid-shadows nil "Avoid drawing shadows on dock/panel windows."
+    (defcustom avoid-shadows t "Avoid drawing shadows on dock/panel windows."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom fade-enable nil "Fade windows in/out when opening/closing and when opacity changes."
+    (defcustom fade-enable t "Fade windows in/out when opening/closing and when opacity changes."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
@@ -178,7 +178,7 @@
       :options (0 2 4 6 8 10 12 14 16 18 20 25 30 35 40 45 50)
       :after-set (lambda () (switch-opacity)))
 
-    (defcustom zero-mask nil "Zero the part of the shadow's mask behind the window (experimental)."
+    (defcustom zero-mask t "Zero the part of the shadow's mask behind the window (experimental)."
       :depends opacity-enable
       :group (appearance window-effects)
       :type boolean
