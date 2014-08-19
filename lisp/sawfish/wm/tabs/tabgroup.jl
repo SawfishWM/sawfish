@@ -28,6 +28,11 @@
             tab-release-window
             tab-raise-left-window
             tab-raise-right-window
+            tab-move-to-beginning
+            tab-move-to-end
+            tab-move-to-right
+            tab-move-to-left
+            tab-window-group-index
             tab-find-window
             tab-rank
             tab-group-window-list
@@ -102,7 +107,7 @@ has multiple tabbars. Also need the currect settings in the theme.jl from the th
             (equal (aref (nth 2 (get-x-property w '_NET_WM_WINDOW_TYPE)) 0) '_NET_WM_WINDOW_TYPE_NORMAL))))
 
   (define (window-tabbed-p w)
-    (window-get w 'tabbed))
+        (window-get w 'tabbed))
 
   (define-record-type :tab-group
     (tab-build-group p d wl)
@@ -577,13 +582,13 @@ sticky, unsticky, fixed-position."
                     (window-put w 'never-iconify t))
                   (window-put w 'tabbed t)) wins)
         (call-hook 'tab-group-windows-hook (list (tab-group-windows win)))
-        (raise-window win)
+        ;;(raise-window win)
         (setq all-wins nil))
       (setq tab-refresh-lock t)
       (when (window-tabbed-p win)
         (tab-refresh-group win 'move)
         (tab-refresh-group win 'frame)
-        (set-input-focus (nth 0 (tab-group-windows-stacking-order win)))
+        ;;(set-input-focus (nth 0 (tab-group-windows-stacking-order win)))
         (when clicked-frame
           (move-cursor-in-tabbar (input-focus))
           (setq clicked-frame nil)))
@@ -600,7 +605,7 @@ sticky, unsticky, fixed-position."
               tabbar-left-margin)))
       (if (not (eq (window-get win 'current-frame-style) (nth 0 (frame-style-tabbars-support win))))
           (warp-cursor (+ (car (window-position win)) start-right (nth 4 tab-pos-list) (quotient (nth 6 tab-pos-list) 2))
-                       (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win)) 2) 2) (cdr (window-position win))))
+                       (+ (quotient (- (cdr (window-frame-dimensions win)) (cdr (window-dimensions win)) 4) 2) (cdr (window-position win))))
         (let ((current-pos 
                (if (window-get win 'title-position)
                    (window-get win 'title-position)

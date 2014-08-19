@@ -126,6 +126,8 @@
 (autoload-command 'slide-group-right 'sawfish.wm.commands.slide-window)
 (autoload-command 'slide-group-up 'sawfish.wm.commands.slide-window)
 (autoload-command 'slide-group-down 'sawfish.wm.commands.slide-window)
+(defgroup cabinet "Cabinet" :group focus :require sawfish.wm.ext.cabinet)
+(autoload-command 'cabinet-switch 'sawfish.wm.ext.cabinet)
 (defgroup gpsy "Grow, Pack, Shrink & Yank" :group move :require sawfish.wm.commands.grow-pack)
 (defgroup cycle "Window Cycling" :group focus :require sawfish.wm.commands.x-cycle)
 (defgroup shade-hover "Shade Hover" :group focus :require sawfish.wm.ext.shade-hover)

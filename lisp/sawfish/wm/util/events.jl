@@ -1,87 +1,89 @@
-;; hqw-util.jl 1.0 -- A bunch of util functions for sawfish
+;; events.jl
 
-;; Time-stamp: <2011-12-15 10:23:36 hqwrong>
 ;; Copyright (C) 2011, hqwrong <hq.wrong@gmail.com>
 
-;; Permission is granted to copy, distribute and/or modify this
-;; document under the terms of the GNU Free Documentation License,
-;; Version 1.3 or any later version published by the Free Software
-;; Foundation.
+;; This file is part of sawfish.
 
-;;
-;;; Commentary:
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or (at
+;; your option) any later version.
+
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License                                                                                      
+;; along with this program.  If not, see `http://www.gnu.org/licenses/'. 
+
+
 (define-structure sawfish.wm.util.events
 
-      (export event-wait-for
-              event-exit-wait)
+    (export event-wait-for
+            event-exit-wait)
 
-      (open rep
-            rep.data
-            rep.system
-            rep.regexp
-            rep.lang.math
-            sawfish.wm.state.shading
-            sawfish.wm.state.iconify
-            sawfish.wm.stacking
-            sawfish.wm.viewport
-            sawfish.wm.state.maximize
-            sawfish.wm.custom
-            sawfish.wm.commands
-            sawfish.wm.colors
-            sawfish.wm.events
-            sawfish.wm.fonts
-            sawfish.wm.images
-            sawfish.wm.misc
-            sawfish.wm.util.x
-            sawfish.wm.windows
-            sawfish.wm.workspace)
+    (open rep
+          rep.data
+          rep.system
+          rep.regexp
+          sawfish.wm.misc
+          sawfish.wm.events
+          sawfish.wm.commands)
 
-(define (event-wait-for #!key
-                      (keymap '(keymap))
-                      loop-on-unbound
-                      handler
-                      exit-hook)
-   "wait-for an event.
-	`keymap' is used as the override keymap during `recursive-edit'
+  (define (event-wait-for #!key
+                          (keymap '(keymap))
+                          loop-on-unbound
+                          handler
+                          exit-hook)
+    "wait-for an event.
+`keymap' is used as the override keymap during `recursive-edit'
         
-        `handler' is a list of cons cell,as (predict
+`handler' is a list of cons cell,as (predict
 . procedure), when the key event has no bound in keymap, then the
 key name is passed to each predict by order.Once eval to t ,then
 the associated procedure is called with key as argument,then
 re-enter in `recursive-edit'.Otherwise,if loop-on-unbound is nil,
 exit loop.
 
-        `exit-hook' ,if setted,will be called with key's name as argument,
+`exit-hook' ,if setted,will be called with key's name as argument,
 after exit from loop."
    
-   (call-with-keyboard-grabbed
-    (lambda ()
+    (call-with-keyboard-grabbed
+     (lambda ()
        (let ((override-keymap keymap)
              (re-exit (lambda ()
-                         (throw 're-exit
-                                (event-name (current-event)))))
+                        (throw 're-exit
+                               (event-name (current-event)))))
              (key nil))
-          (add-hook 'unbound-key-hook re-exit)
-          (while (catch 'event-exit
-                    (setq key
-                          (catch 're-exit
-                             (recursive-edit)))
-                    (when handler
-                       (do ((l handler (cdr handler)))
-                             ((null l) t)
-                          (let* ((cell (car l))
-                                 (pred (car cell))
-                                 (proc (cdr cell)))
-                             (when (pred key)
-                                (proc key)
-                                (throw 'event-exit t)))))
-                    (when (not loop-on-unbound)
-                       (throw 'event-exit nil))
-                    t)
-             t)
-          (when exit-hook
-             (exit-hook key))))))
+         ;; XXX No idea what this hook do, here i only got
+         ;; XXX a error messages if i click on an frame part:
+         ;; XXX
+         ;; XXX Sawfish error: 
+         ;; XXX No catcher for throw: re-exit
+         ;; XXX
+         ;; XXX Disable this hook untill someone fix this.
+         ;;(add-hook 'unbound-key-hook re-exit)
+         (while (catch 'event-exit
+                  (setq key
+                        (catch 're-exit
+                          (recursive-edit)))
+                  (when handler
+                     (do ((l handler (cdr handler)))
+                        ((null l) t)
+                        (let* ((cell (car l))
+                               (pred (car cell))
+                               (proc (cdr cell)))
+                          (when (pred key)
+                            (proc key)
+                            (throw 'event-exit t)))))
+                  (when (not loop-on-unbound)
+                    (throw 'event-exit nil))
+                  t)
+           t)
+         (when exit-hook
+           (exit-hook key))))))
 
-(define (event-exit-wait)
-   "You'll find it useful,when you're using `event-wait-for'"
-   (throw 'event-exit)))
+  (define (event-exit-wait)
+    "You'll find it useful,when you're using `event-wait-for'"
+    (throw 'event-exit)))

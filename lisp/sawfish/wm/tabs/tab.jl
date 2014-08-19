@@ -26,6 +26,7 @@
             tabbar-left-margin-transient
             tabbar-right-margin
             tabbar-right-margin-transient
+            tab-window-add-to-tabgroup
             set-tab-adjustments)
 
     (open rep

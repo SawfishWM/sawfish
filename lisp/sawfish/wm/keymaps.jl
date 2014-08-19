@@ -87,7 +87,9 @@
   (defcustom global-keymap (bind-keys (make-keymap)
 				      "W-Left" 'previous-workspace
 				      "W-Right" 'next-workspace
-				      "W-Tab" 'cycle-windows)
+                      "W-Tab" 'cycle-windows
+                      "Super-Tab" 'cabinet-switch
+                      "C-Tab" 'cabinet-switch)
     "Keymap active anywhere."
     :group bindings
     :type keymap
