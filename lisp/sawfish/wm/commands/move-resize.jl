@@ -111,10 +111,19 @@ its edges with an edge of another window.")
   (defvar move-resize-inhibit-configure nil
     "Only update window contents after it has stopped moving.")
 
+  ;; Locally set by place-window-interactively in placement.jl & reset
+  ;; in move-switch-to-resize
+  (defvar move-from-interactive-placement nil)
+
   (defvar move-resize-map (bind-keys (make-keymap)
                                      "Any-Off1" (lambda () (finished))
                                      "Any-Off2" (lambda () (finished))
                                      "Any-Off3" (lambda () (finished))
+                                     "Button2-Click"
+                                     (lambda () (move-switch-to-resize))
+                                     "Button3-Click"
+                                     (lambda ()
+                                       (move-vmaximize-then-finished))
                                      "Any-Move" (lambda () (motion))
                                      "Any-ESC" (lambda () (cancel))
                                      "Any-RET" (lambda () (finished))
@@ -430,6 +439,40 @@ its edges with an edge of another window.")
       (apply erase-window-outline move-resize-last-outline))
     (apply-changes)
     (throw 'move-resize-done t))
+
+  ;; called when B2-Click during interactive placement (see
+  ;; place-window-interactively in placement.jl)
+  ;; => switch to resizing the window
+  (define (move-switch-to-resize)
+    (when move-from-interactive-placement
+      (grab-pointer nil resize-cursor-shape)
+      (warp-cursor (1- (min (+ move-resize-x move-resize-width
+			       (car move-resize-frame))
+			    (screen-width)))
+		   (1- (min (+ move-resize-y move-resize-height
+			       (cdr move-resize-frame))
+			    (screen-height))))
+      (setq move-from-interactive-placement nil
+	    move-resize-function 'resize)
+      ))
+
+  ;; called when B3-Click during interactive placement (see
+  ;; place-window-interactively in placement.jl)
+  ;; => vertical maximize the window then map it
+  (define (move-vmaximize-then-finished)
+    (if move-from-interactive-placement
+      (let ((bottom-y (+ move-resize-y
+			 move-resize-height
+			 (cdr move-resize-frame))))
+	(apply erase-window-outline move-resize-last-outline)
+	(setq move-resize-height
+	      (if (> bottom-y (screen-height))
+		  (- move-resize-height
+		     (- bottom-y (screen-height)))
+		(+ move-resize-height
+		   (- (screen-height) bottom-y))))
+	(apply-changes)
+	(throw 'move-resize-done t))))
 
   (define (cancel)
     (if (eq move-resize-mode 'opaque)
