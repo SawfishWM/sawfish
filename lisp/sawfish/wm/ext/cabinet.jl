@@ -704,7 +704,7 @@ your cmd's execution."
            (setq workspace-mode (not workspace-mode))
          (setq workspace-mode t)
          (update-on-workspace)))))
-  
+
   (define (with-update-on-workspace cmd)
     "It filters items for current workspace windows.
 add it, when your command changed workspace"
@@ -721,7 +721,18 @@ this is a procedure with no argument."
                       (or (memq current-workspace ww)
                           (eq ww nil)))) 
                   wlist-for-manipulation)))
-  
+
+  (define (update-on-bs cmd)
+    "Update cabinets interface after backspce"
+    (lambda ()
+      (cmd)
+      (if workspace-mode
+          (update-on-workspace)
+        (setq wlist-for-manipulation
+              (filter cabinet-filter-for-manipulation-func
+                      (filter cabinet-filter-for-display-func
+                              (stacking-order)))))))
+
   (define (call-marked cmd)
     "Call marked hook if window marked"
     (call-window-hook 'window-state-change-hook cmd (list '(marked))))
@@ -860,7 +871,7 @@ this is a procedure with no argument."
                                (concat cabinet-input " ")))))
                "BS" (with-draw
                      (with-update-on-input
-                      (with-update-on-workspace
+                      (update-on-bs
                        (with-new-wlist
                         (lambda ()
                           (when (> (length cabinet-input) 0)

@@ -22,7 +22,7 @@
 
     (export event-wait-for
             event-exit-wait)
-
+    
     (open rep
           rep.data
           rep.system
@@ -56,18 +56,11 @@ after exit from loop."
                         (throw 're-exit
                                (event-name (current-event)))))
              (key nil))
-         ;; XXX No idea what this hook do, here i only got
-         ;; XXX a error messages if i click on an frame part:
-         ;; XXX
-         ;; XXX Sawfish error: 
-         ;; XXX No catcher for throw: re-exit
-         ;; XXX
-         ;; XXX Disable this hook untill someone fix this.
-         ;;(add-hook 'unbound-key-hook re-exit)
+         (add-hook 'unbound-key-hook re-exit)
          (while (catch 'event-exit
                   (setq key
                         (catch 're-exit
-                          (recursive-edit)))
+                              (recursive-edit)))
                   (when handler
                      (do ((l handler (cdr handler)))
                         ((null l) t)
@@ -82,7 +75,8 @@ after exit from loop."
                   t)
            t)
          (when exit-hook
-           (exit-hook key))))))
+           (exit-hook key))
+         (remove-hook 'unbound-key-hook re-exit)))))
 
   (define (event-exit-wait)
     "You'll find it useful,when you're using `event-wait-for'"
