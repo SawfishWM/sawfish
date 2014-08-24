@@ -51,7 +51,7 @@ FAQ : faq.texi
 sawfish.info : $(SRCS)
 	$(MAKEINFO) $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.info
 
-html:
+html: sawfish.texi
 	$(MAKEINFO) --html $(MAKEINFOFLAGS) -I $(srcdir) $< -o sawfish.html
 
 install : sawfish.info installdirs
