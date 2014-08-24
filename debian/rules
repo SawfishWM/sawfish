@@ -48,6 +48,9 @@ dh_install_data = dh_install -psawfish-data --autodest
 %:
 	dh $@ --with autotools-dev --with autoreconf
 
+override_dh_auto_configure:
+	dh_auto_configure -- $(shell dpkg-buildflags --export=configure) $(DEB_CONFIGURE_USER_FLAGS)
+
 override_dh_auto_clean:
 	-$(MAKE) gitclean
 
