@@ -87,6 +87,9 @@ uninstall :
 DOC :
 	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
 
+changelog :
+	$(srcdir)/scripts/make-changelog
+
 clean :
 	-for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
