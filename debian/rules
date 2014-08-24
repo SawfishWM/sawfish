@@ -20,7 +20,7 @@ LINGUAS=
 LANG=
 export LC_ALL LINGUAS LANG
 
-DEB_CONFIGURE_USER_FLAGS = --with-readline
+DEB_CONFIGURE_USER_FLAGS =
 
 lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
 	\! -name "*autoload*" \! -name "*custom-defaults*" \
