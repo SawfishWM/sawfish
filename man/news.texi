@@ -45,21 +45,31 @@ Each release lists incompatible changes at its top.
 @item Bug Fixes
 @itemize @minus
 
-@item When installing manpages the @code{mandir} from configure is now honoured [Christopher Bratusek]
+@item Fix possibly wrong @code{input-focus} from @code{enter-*} focus-modes in tabbed-windowing. [fuchur]
 
-@item Fix handling symbol-type defcustoms in sawfish-xgettext, preventing generation of new sawfish.pot [Christopher Bratusek]
+@item Properly support tabbed-windowing when tiling is active aswell. [fuchur]
+
+@item When installing manpages the @code{mandir} from configure is now honoured. [Christopher Bratusek]
+
+@item Fix handling symbol-type defcustoms in sawfish-xgettext, preventing generation of new sawfish.pot. [Christopher Bratusek]
 @end itemize
 
 @item New Features
 @itemize @minus
 
-@item Add ability to move tabs around in the titlebar [fuchur]
+@item @code{CTWM} like interactive window placement. Previously pressing any button while interactively placing a window would place it. @code{Sawfish} now mimics @code{CTWM}s behaviour: pressing button 1 will just place the window, button 2 will allow dragging to resize the window and place it when the button releases, button 3 will place the window and attempt to fill it to the screen bottom. [Maxime Soulé]
 
-@item Add @code{marked-cursor-shape} defcustom (used when marking windows for tabbing) [fuchur]
+@item Add ability to move tabs around in the titlebar.
+
+@item Add @code{marked-cursor-shape} defcustom (used when marking windows for tabbing).
 @end itemize
 
 @item Miscellaneous Changes
 @itemize @minus
+
+@item Improve @code{cabinet} window-switcher. Code-cleanup, bug fixes, blacklisting applications (mostly panels, pagers) and icon for missing window-icons. [fuchur]
+
+@item Enable @code{shade-hover} and @code{auto-raise} in SawfishConfig, utilize them in tabbed-windowing.
 
 @item Improve icon size in StyleTab, add @code{Flat} style. Also improve speed and decrease memory usage by mirroring images [fuchur]
 
@@ -67,11 +77,19 @@ Each release lists incompatible changes at its top.
 
 @item Do not let @code{xfce-session} save the session (by adding @code{-f} flag in XFCE integration) [fuchur]
 
-@item Add update german translation [fuchur]
+@item Tweak default compton settings. [fuchur]
 
 @item Improve doc strings in many modules [fuchur]
 
 @item Add @code{html} target to man/Makefile, creating html-documentation [Christopher Bratusek]
+
+@item Add @code{make-changelog} script by Marcus D. Hanwell (generates ChangeLog from git log) [Christopher Bratusek]
+
+@item Updated german translation. [fuchur]
+
+@item Updated RPM spec file. [Kim B. Heino]
+
+@item Updated Debian packaging scripts. [Christopher Bratusek]
 @end itemize
 @end itemize
 
