@@ -55,6 +55,7 @@
 	   sawfish.wm.commands.launcher
 	   sawfish.wm.ext.wallpaper
 	   sawfish.wm.prg.compton
+	   sawfish.wm.prg.diodon
 	   sawfish.wm.prg.fehlstart
 	   sawfish.wm.prg.nm-applet
 	   sawfish.wm.prg.pancake
@@ -284,7 +285,9 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
     (when init-xsettingsd
       (add-hook 'after-initialization-hook start-xsettingsd t))
     (when init-nm-applet
-      (add-hook 'after-initialization-hook start-nm-applet t)))
+      (add-hook 'after-initialization-hook start-nm-applet t))
+    (when init-diodon
+      (add-hook 'after-initialization-hook start-diodon t)))
 
   (when (eq error-destination 'init)
     (setq error-destination 'standard-error)))
