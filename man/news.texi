@@ -49,6 +49,8 @@ Each release lists incompatible changes at its top.
 
 @item Properly support tabbed-windowing when tiling is active aswell. [fuchur]
 
+@item Several fixes for the @code{wallpaper} module regarding wrong values or non-existent files. [Christopher Bratusek]
+
 @item When installing manpages the @code{mandir} from configure is now honoured. [Christopher Bratusek]
 
 @item Fix handling symbol-type defcustoms in sawfish-xgettext, preventing generation of new sawfish.pot. [Christopher Bratusek]
@@ -59,9 +61,9 @@ Each release lists incompatible changes at its top.
 
 @item @code{CTWM} like interactive window placement. Previously pressing any button while interactively placing a window would place it. @code{Sawfish} now mimics @code{CTWM}s behaviour: pressing button 1 will just place the window, button 2 will allow dragging to resize the window and place it when the button releases, button 3 will place the window and attempt to fill it to the screen bottom. [Maxime Soulé]
 
-@item Add ability to move tabs around in the titlebar.
+@item Add ability to move tabs around in the titlebar. [fuchur]
 
-@item Add @code{marked-cursor-shape} defcustom (used when marking windows for tabbing).
+@item Add @code{marked-cursor-shape} defcustom (used when marking windows for tabbing). [fuchur]
 @end itemize
 
 @item Miscellaneous Changes
@@ -69,7 +71,7 @@ Each release lists incompatible changes at its top.
 
 @item Improve @code{cabinet} window-switcher. Code-cleanup, bug fixes, blacklisting applications (mostly panels, pagers) and icon for missing window-icons. [fuchur]
 
-@item Enable @code{shade-hover} and @code{auto-raise} in SawfishConfig, utilize them in tabbed-windowing.
+@item Enable @code{shade-hover} and @code{auto-raise} in SawfishConfig, utilize them in tabbed-windowing. [fuchur]
 
 @item Improve icon size in StyleTab, add @code{Flat} style. Also improve speed and decrease memory usage by mirroring images [fuchur]
 
