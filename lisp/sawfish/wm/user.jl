@@ -56,6 +56,7 @@
 	   sawfish.wm.ext.wallpaper
 	   sawfish.wm.prg.compton
 	   sawfish.wm.prg.fehlstart
+	   sawfish.wm.prg.nm-applet
 	   sawfish.wm.prg.pancake
 	   sawfish.wm.prg.trayer
 	   sawfish.wm.prg.xgamma
@@ -281,7 +282,9 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
       (add-hook 'after-initialization-hook load-xmodmap t)
       (add-hook 'before-restart-hook restore-keymap t))
     (when init-xsettingsd
-      (add-hook 'after-initialization-hook start-xsettingsd t)))
+      (add-hook 'after-initialization-hook start-xsettingsd t))
+    (when init-nm-applet
+      (add-hook 'after-initialization-hook start-nm-applet t)))
 
   (when (eq error-destination 'init)
     (setq error-destination 'standard-error)))
