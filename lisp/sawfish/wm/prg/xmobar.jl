@@ -62,4 +62,6 @@
 
   (define (stop-xmobar)
     "Stop xmobar, if running."
-    (when %xmobar-proc (kill-process %xmobar-proc))))
+    (when %xmobar-proc
+      (kill-process %xmobar-proc)
+      (setq %xmobar-proc nil))))

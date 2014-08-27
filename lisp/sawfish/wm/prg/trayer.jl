@@ -185,4 +185,6 @@ All options of trayer are supported."
 
   (define (stop-trayer)
     "Stop trayer, if running."
-    (when %trayer-proc (kill-process %trayer-proc))))
+    (when %trayer-proc
+      (kill-process %trayer-proc)
+      (setq %trayer-proc nil))))

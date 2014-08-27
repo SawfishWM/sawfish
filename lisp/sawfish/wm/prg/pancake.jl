@@ -62,4 +62,6 @@
 
   (define (stop-pancake)
     "Stop pancake, if running."
-    (when %pancake-proc (kill-process %pancake-proc))))
+    (when %pancake-proc
+      (kill-process %pancake-proc)
+      (setq %pancake-proc nil))))

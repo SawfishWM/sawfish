@@ -51,6 +51,8 @@ Each release lists incompatible changes at its top.
 
 @item Several fixes for the @code{wallpaper} module regarding wrong values or non-existent files. [Christopher Bratusek]
 
+@item When calling the @code{stop} function from @code{sawfish.wm.prg} fehlstart, trayer, pancake, xmobar and xsettingsd modules calling @code{start} afterwards in the same session failed. This is fixed now. [Christopher Bratusek]
+
 @item When installing manpages the @code{mandir} from configure is now honoured. [Christopher Bratusek]
 
 @item Fix handling symbol-type defcustoms in sawfish-xgettext, preventing generation of new sawfish.pot. [Christopher Bratusek]

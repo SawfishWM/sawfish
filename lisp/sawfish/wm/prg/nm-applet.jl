@@ -53,4 +53,6 @@
 
   (define (stop-nm-applet)
     "Stop nm-applet, if running."
-    (when %nm-applet-proc (kill-process %nm-applet-proc))))
+    (when %nm-applet-proc
+      (kill-process %nm-applet-proc)
+      (setq %nm-applet-proc nil))))

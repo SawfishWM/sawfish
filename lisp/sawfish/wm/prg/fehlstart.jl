@@ -53,4 +53,6 @@
 
   (define (stop-fehlstart)
     "Stop fehlstart, if running."
-    (when %fehlstart-proc (kill-process %fehlstart-proc))))
+    (when %fehlstart-proc
+      (kill-process %fehlstart-proc)
+      (setq %fehlstart-proc nil))))

@@ -69,4 +69,6 @@
 
   (define (stop-xsettingsd)
     "Stop xsettingsd, if running."
-    (when %xsettingsd-proc (kill-process %xsettingsd-proc))))
+    (when %xsettingsd-proc
+      (kill-process %xsettingsd-proc)
+      (setq %xsettingsd-proc nil))))
