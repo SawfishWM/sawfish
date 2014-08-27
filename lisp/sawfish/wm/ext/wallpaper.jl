@@ -89,7 +89,7 @@
     :after-set (lambda () (set-wallpaper)))
 
   (define (set-wallpaper)
-    (when root-wallpaper
+    (when (file-exists-p root-wallpaper)
       (when set-wallpaper-xfce4
         (set-wallpaper-xfce))
       (when set-wallpaper-gnome2
@@ -98,7 +98,8 @@
 		 (not (eq desktop-environment "gnome"))
 		 (not (eq desktop-environment "xfce")))
         (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
-	(system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &")))))
+	(when (program-exists-p wallpaper-setter)
+	  (system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &"))))))
 
   (defvar gnome-type nil)
   (defvar xfce-type nil)
