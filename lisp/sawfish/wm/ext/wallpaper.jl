@@ -26,7 +26,6 @@
 	  set-wallpaper-xfce)
 
   (open rep
-	rep.regexp
 	rep.system
 	rep.io.files
 	rep.util.misc
@@ -101,7 +100,7 @@
 		 (not (eq desktop-environment "gnome"))
 		 (not (eq desktop-environment "xfce")))
         (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
-	(when (or (program-exists-p (cdr (string-split "/" wallpaper-setter)))
+	(when (or (program-exists-p wallpaper-setter)
 		  (file-exists-p wallpaper-setter))
 	  (system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &"))))))
 
