@@ -26,8 +26,10 @@
 	  set-wallpaper-xfce)
 
   (open rep
+	rep.regexp
 	rep.system
 	rep.io.files
+	rep.util.misc
 	sawfish.wm
 	sawfish.wm.custom)
 
@@ -89,7 +91,8 @@
     :after-set (lambda () (set-wallpaper)))
 
   (define (set-wallpaper)
-    (when (file-exists-p root-wallpaper)
+    (when (and init-wallpaper
+	       (file-exists-p root-wallpaper))
       (when set-wallpaper-xfce4
         (set-wallpaper-xfce))
       (when set-wallpaper-gnome2
@@ -98,7 +101,8 @@
 		 (not (eq desktop-environment "gnome"))
 		 (not (eq desktop-environment "xfce")))
         (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
-	(when (program-exists-p wallpaper-setter)
+	(when (or (program-exists-p (cdr (string-split "/" wallpaper-setter)))
+		  (file-exists-p wallpaper-setter))
 	  (system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &"))))))
 
   (defvar gnome-type nil)

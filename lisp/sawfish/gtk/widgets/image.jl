@@ -53,7 +53,7 @@
 		   (when (not (eq x ()))
 		     (when (and (file-exists-p x) x)
 		       (gtk-file-chooser-select-filename selector x))
-		     (when (and (stringp x) x)
+		     (when (and (file-exists-p x) (stringp x) x)
 		       (gtk-image-set-from-pixbuf image-preview
 		         (gdk-pixbuf-new-from-file-at-scale x 150 -1 t))))))
 	  ((clear) (lambda ()
