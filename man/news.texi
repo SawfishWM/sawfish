@@ -65,6 +65,20 @@ Each release lists incompatible changes at its top.
 
 @item @code{CTWM} like interactive window placement. Previously pressing any button while interactively placing a window would place it. @code{Sawfish} now mimics @code{CTWM}s behaviour: pressing button 1 will just place the window, button 2 will allow dragging to resize the window and place it when the button releases, button 3 will place the window and attempt to fill it to the screen bottom. [Maxime Soulé]
 
+@item New EdgeActions for when moving windows. [Christopher Bratusek]
+@itemize x
+
+@item @code{kill} Kill a window when moved to the given edge
+
+@item @code{iconify} Iconify a window when moved to the given edge
+
+@item @code{move-window-viewport} Move window to the next viewport in the direction of moving against the edge
+
+@item @code{move-window-workspace} Move window to the previous workspace when hitting left or top edge and to the next workspace when hitting right or bottom edge.
+@end itemize
+
+@item Separate left/right and top/bottom edges in SawfishConfig, allowing for individual actions on each edge. [Christopher Bratusek]
+
 @item Add ability to move tabs around in the titlebar. [fuchur]
 
 @item Add @code{run-application} by Sergey I. Sharybin, with several improvements and better integration into Sawfish. Also add 'Run Application' entry at the bottom of the root menu. [Christopher Bratusek]

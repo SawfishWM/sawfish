@@ -43,7 +43,11 @@
 	    viewport-minimum-size-changed
             viewport-honor-workspace-edges
 	    viewport-windows
-	    window-on-current-head-viewport-p)
+	    window-on-current-head-viewport-p
+	    move-window-left
+	    move-window-right
+	    move-window-up
+	    move-window-down)
 
     (open rep
 	  rep.system

@@ -21,14 +21,22 @@
 
 (define-structure sawfish.wm.edge.misc
 
-    (export maximize-action)
+    (export maximize-action
+            kill-action
+	    iconify-action
+	    move-window-viewport-action
+	    move-window-workspace-action)
 
     (open rep
 	  rep.system
 	  sawfish.wm.windows
 	  sawfish.wm.commands
 	  sawfish.wm.events
-	  sawfish.wm.state.maximize)
+	  sawfish.wm.state.maximize
+	  sawfish.wm.state.iconify
+	  sawfish.wm.viewport
+	  sawfish.wm.workspace
+	  sawfish.wm.ext.workspace-grid)
 
   (define-structure-alias edge-misc sawfish.wm.edge.misc)
 
@@ -36,4 +44,38 @@
     (let ((w (input-focus)))
       (allow-events 'async-both)
       (fake-release-window)
-      (maximize-window w))))
+      (maximize-window w)))
+
+  (define (kill-action)
+    (let ((w (input-focus)))
+      (allow-events 'async-both)
+      (fake-release-window)
+      (delete-window-safely w)))
+
+  (define (iconify-action)
+    (let ((w (input-focus)))
+      (allow-events 'async-both)
+      (fake-release-window)
+      (iconify-window w)))
+
+  (define (move-window-viewport-action edge)
+    (let ((w (input-focus))
+          (func (case edge
+                   ((left) move-window-left)
+                   ((right) move-window-right)
+                   ((top) move-window-up)
+                   ((bottom) move-window-down))))
+      (allow-events 'async-both)
+      (fake-release-window)
+      (funcall func w)))
+
+  (define (move-window-workspace-action edge)
+    (let ((w (input-focus))
+          (func (case edge
+                   ((left) send-to-workspace-left)
+                   ((right) send-to-workspace-right)
+                   ((top) send-to-workspace-up)
+                   ((bottom) send-to-workspace-down))))
+      (allow-events 'async-both)
+      (fake-release-window)
+      (funcall func w 1))))

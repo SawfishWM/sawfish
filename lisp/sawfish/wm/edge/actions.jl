@@ -56,6 +56,14 @@
        (expand-action edge))
       ((maximize-window)
        (maximize-action))
+      ((kill-window)
+       (kill-action))
+      ((iconify-window)
+       (iconify-action))
+      ((move-window-viewport)
+       (move-window-viewport-action edge))
+      ((move-window-workspace)
+       (move-window-workspace-action edge))
       ((show-desktop)
        (toggle-desktop))
       ((none/hot-spot)
@@ -64,7 +72,7 @@
        (hot-move-invoke edge))
       (t nil)))
 
-  ;; Entry point without dragging a windw
+  ;; Entry point without dragging a window
   (define (edge-action-hook-func)
     (unless (or while-hot-move
 	        while-mousetrap)
@@ -72,26 +80,26 @@
    	    (edge (get-active-edge)))
         (if corner
 	    (hot-spot-invoke corner)
-	  (cond ((or (eq edge 'left)
-	  	     (eq edge 'right))
-	         (edge-action-call left-right-edge-action edge nil))
-	        ((or (eq edge 'top)
-		     (eq edge 'bottom))
-	         (edge-action-call top-bottom-edge-action edge nil)))))))
+	  (let ((func (case edge
+	              ((left) left-edge-action)
+	              ((right) right-edge-action)
+	              ((top) top-edge-action)
+	              ((bottom) bottom-edge-action))))
+	  (funcall edge-action-call func edge nil))))))
 
   ;; Entry point while dragging a window
   (define (edge-action-move-hook-func)
     (unless while-mousetrap
       (setq while-hot-move t)
       (let ((edge (get-active-edge)))
-        (cond ((or (eq edge 'left)
-		   (eq edge 'right))
-	       (edge-action-call left-right-edge-move-action edge t))
-	     ((or (eq edge 'top)
-		   (eq edge 'bottom))
-	       (edge-action-call top-bottom-edge-move-action edge t))))
+	 (let ((func (case edge
+	             ((left) left-edge-move-action)
+	             ((right) right-edge-move-action)
+	             ((top) top-edge-move-action)
+	             ((bottom) bottom-edge-move-action))))
+	   (funcall edge-action-call func edge t))
       ;; for one second after HotMove prevent HotSpot
-      (make-timer (lambda () (setq while-hot-move nil)) 1)))
+      (make-timer (lambda () (setq while-hot-move nil)) 1))))
 
   (define (activate-edges init)
     (if init

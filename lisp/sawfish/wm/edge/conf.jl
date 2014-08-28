@@ -38,29 +38,57 @@
     :type boolean
     :after-set (lambda () (activate-edges-after-set)))
 
-  (defcustom left-right-edge-action 'none/hot-spot
-    "Action for the left and right screen-edge."
+  (defcustom left-edge-action 'none/hot-spot
+    "Action for the left screen-edge."
     :group edge-actions
     :type (choice none/hot-spot viewport-drag flip-workspace
 		  flip-viewport show-desktop))
 
-  (defcustom left-right-edge-move-action 'none/hot-move
-    "Action for the left and right screen-edge while moving a window."
+  (defcustom left-edge-move-action 'none/hot-move
+    "Action for the left screen-edge while moving a window."
     :group edge-actions
     :type  (choice none/hot-move viewport-drag flip-workspace
-		   flip-viewport expand-window maximize-window))
+		   flip-viewport expand-window maximize-window kill-window
+		   iconify-window move-window-viewport move-window-workspace))
 
-  (defcustom top-bottom-edge-action 'none/hot-spot
-    "Action for the top and bottom screen-edge."
+  (defcustom top-edge-action 'none/hot-spot
+    "Action for the top screen-edge."
     :group edge-actions
     :type (choice none/hot-spot viewport-drag flip-workspace
 		  flip-viewport show-desktop))
 
-  (defcustom top-bottom-edge-move-action 'none/hot-move
-    "Action for the top and bottom screen-edge while moving a window."
+  (defcustom top-edge-move-action 'none/hot-move
+    "Action for the top screen-edge while moving a window."
     :group edge-actions
     :type  (choice none/hot-move viewport-drag flip-workspace
-		   flip-viewport expand-window maximize-window))
+		   flip-viewport expand-window maximize-window kill-window
+		   iconify-window move-window-viewport move-window-workspace))
+
+  (defcustom right-edge-action 'none/hot-spot
+    "Action for the right screen-edge."
+    :group edge-actions
+    :type (choice none/hot-spot viewport-drag flip-workspace
+		  flip-viewport show-desktop))
+
+  (defcustom right-edge-move-action 'none/hot-move
+    "Action for the right screen-edge while moving a window."
+    :group edge-actions
+    :type  (choice none/hot-move viewport-drag flip-workspace
+		   flip-viewport expand-window maximize-window kill-window
+		   iconify-window move-window-viewport move-window-workspace))
+
+  (defcustom bottom-edge-action 'none/hot-spot
+    "Action for the bottom screen-edge."
+    :group edge-actions
+    :type (choice none/hot-spot viewport-drag flip-workspace
+		  flip-viewport show-desktop))
+
+  (defcustom bottom-edge-move-action 'none/hot-move
+    "Action for the bottom screen-edge while moving a window."
+    :group edge-actions
+    :type  (choice none/hot-move viewport-drag flip-workspace
+		   flip-viewport expand-window maximize-window kill-window
+		   iconify-window move-window-viewport move-window-workspace))
 
   (defcustom edge-flip-delay 250
     "Delay (in milliseconds) of flipping of viewport / workspace."
