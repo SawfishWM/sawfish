@@ -1,7 +1,7 @@
 ;;; jump-or-exec.jl -- flexible application shortcut keys
 
 ;; Copyright (C) 2002 Damien Elmes <resolve@repose.cx>
-;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
+;; Copyright (C) 2010 Christopher Roy Bratusek <nano@jpberlin.de>
 ;; Copyright (C) 2010 Teika Kazura <teika@lavabit.com>
 
 ;; This file is part of sawfish.

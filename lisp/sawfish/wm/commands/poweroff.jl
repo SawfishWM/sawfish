@@ -1,6 +1,6 @@
 ;; poweroff.jl -- reboot, halt, suspend or hibernate your machine
 ;;
-;; Copyright (C) 2009 Christopher Roy Bratusek <zanghar@freenet.de>
+;; Copyright (C) 2009 Christopher Roy Bratusek <nano@jpberlin.de>
 ;;
 ;; This file is part of sawfish.
 ;;

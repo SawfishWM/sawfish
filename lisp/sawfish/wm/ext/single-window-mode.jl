@@ -1,6 +1,6 @@
 ;; single-window-mode.jl - pedantic implementation of single-window-mode
 
-;; (c) 2011 Christopher Roy Bratusek <nano@tuxfamily.org>
+;; (c) 2011 Christopher Roy Bratusek <nano@jpberlin.de>
 
 ;; This file is part of sawfish.
 

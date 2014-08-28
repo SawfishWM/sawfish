@@ -1,7 +1,7 @@
 ;; preview-image-selector.jl
 ;; Based on file.jl
 ;; Author: Lucas Pandolfo
-;; Modified by: Christopher Roy Bratusek <nano@tuxfamily.org>
+;; Modified by: Christopher Roy Bratusek <nano@jpberlin.de>
 
 (define-structure sawfish.gtk.widgets.image
 

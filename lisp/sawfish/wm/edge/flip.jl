@@ -1,7 +1,7 @@
 ;; flip.jl -- move viewport / workspace like flipping pages
 
 ;; Copyright (C) 1999 John Harper <john@dcs.warwick.ac.uk>
-;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
+;; Copyright (C) 2010 Christopher Roy Bratusek <nano@jpberlin.de>
 
 ;; This file is part of sawfish.
 

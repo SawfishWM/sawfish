@@ -1,6 +1,6 @@
 ;; edge/actions.jl -- Sets up central user interface of edge-actions
 
-;; Copyright (C) 2010 Christopher Roy Bratusek <zanghar@freenet.de>
+;; Copyright (C) 2010 Christopher Roy Bratusek <nano@jpberlin.de>
 
 ;; This file is part of sawfish.
 

@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 1999 Luke Gorrie <luke@vegetable.org>
 ;; Modifications by: 	The Glyph <glyph@twistedmatrix.com>
-;;			Christopher Roy Bratusek <nano@tuxfamily.org>
+;;			Christopher Roy Bratusek <nano@jpberlin.de>
 
 ;; This file is part of sawfish.
 

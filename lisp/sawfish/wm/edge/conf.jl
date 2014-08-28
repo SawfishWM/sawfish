@@ -1,6 +1,6 @@
 ;; edge/conf.jl -- configuration for EdgeActions
 
-;; Copyright (C) 2011 Christopher Roy Bratusek <zanghar@freenet.de>
+;; Copyright (C) 2011 Christopher Roy Bratusek <nano@jpberlin.de>
 
 ;; This file is part of sawfish.
 

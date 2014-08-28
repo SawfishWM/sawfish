@@ -1,6 +1,6 @@
 ;; xfce.jl -- XFCE integration
 
-;; Copyright (C) 2010 Christopher Bratusek <nano@tuxfamily.org>
+;; Copyright (C) 2010 Christopher Bratusek <nano@jpberlin.de>
 
 ;; This file is part of sawfish.
 

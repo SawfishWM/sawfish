@@ -1,7 +1,7 @@
 ;;; mousetrap.jl -- Zoom the mouse to any place with few keystrokes.
 
 ;; Author: Fernando Carmona Varo  <ferkiwi@gmail.com>
-;; Maintainer: Christopher Roy Bratusek <nano@tuxfamily.org>
+;; Maintainer: Christopher Roy Bratusek <nano@jpberlin.de>
 ;; Version: 0.7
 
 ;; This file is free software; you can redistribute it and/or modify
