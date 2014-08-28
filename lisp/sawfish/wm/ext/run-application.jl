@@ -32,7 +32,7 @@
 
 (declare (in-module sawfish.wm.util.prompt))
 
-(require 'sawfish.wm.util.prompt-extras)
+(require 'sawfish.wm.util.prompt)
 (require 'sawfish.wm.commands)
 (require 'sawfish.wm.colors)
 (require 'rep.io.files)
