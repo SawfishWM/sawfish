@@ -67,8 +67,6 @@ Each release lists incompatible changes at its top.
 
 @item Add @code{run-application} by Sergey I. Sharybin, with several improvements and better integration into Sawfish. Also add 'Run Application' entry at the bottom of the root menu. [Christopher Bratusek]
 
-@item Add @code{marked-cursor-shape} defcustom (used when marking windows for tabbing). [fuchur]
-
 @item Add @code{sawfish.wm.prg.nm-applet}, simple auto-starter for the @code{Network Manager Applet}. [Christopher Bratusek]
 
 @item Add @code{sawfish.wm.prg.diodon}, simple auto-starter for the @code{Diodon Clipboard Manager}. [Christopher Bratusek]
@@ -83,11 +81,15 @@ Each release lists incompatible changes at its top.
 
 @item Enable @code{shade-hover} and @code{auto-raise} in SawfishConfig, utilize them in tabbed-windowing. [fuchur]
 
+@item Add @code{marked-cursor-shape} defcustom (used when marking windows for tabbing). [fuchur]
+
 @item Improve icon size in StyleTab, add @code{Flat} style. Also improve speed and decrease memory usage by mirroring images [fuchur]
 
 @item Use @code{menulibre} instead of @code{alacarte} in XFCE and MATE integration by default [fuchur]
 
 @item Do not let @code{xfce-session} save the session (by adding @code{-f} flag in XFCE integration) [fuchur]
+
+@item Add @code{Open Terminal} and @code{Open Browser} to the root menu (if @code{xterm-program} or @code{browser-program} are set) [Christopher Bratusek]
 
 @item Tweak default compton settings. [fuchur]
 

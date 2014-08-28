@@ -184,9 +184,13 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
       (let ((menu root-menu))
         (user-require 'sawfish.wm.ext.run-application)
         (nconc menu `(()))
-        (unless (equal filemanager "")
+	(unless (equal xterm-program "")
+	  (nconc menu `((,(_ "Open _Terminal") (xterm)))))
+        (unless (equal filemanager-program "")
           (nconc menu `((,(_ "_Open Home") (filemanager "~")))))
-        (nconc menu `((,(_ "_Run Application") (run-application))))
+	(unless (equal browser-program "")
+	  (nconc menu `((,(_ "Open _Browser") (browser)))))
+	(nconc menu `((,(_ "_Run Application") (run-application))))
         (nconc menu `((,(_ "_Kill Window") (system "xkill &")))))))
 
   ;; generate apps-menu from *.desktop files
