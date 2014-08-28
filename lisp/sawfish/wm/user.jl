@@ -179,12 +179,15 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
   (when (equal desktop-environment "kde")
     (sawfish.wm.integration.kde#kde-late-init))
 
-  (when want-extra-menu-entries
-    (let ((menu root-menu))
-      (nconc menu `(()))
-      (unless (equal filemanager "")
-        (nconc menu `((,(_ "_Open Home") (filemanager "~")))))
-      (nconc menu `((,(_ "_Kill Window") (system "xkill &"))))))
+  (unless batch-mode
+    (when want-extra-menu-entries
+      (let ((menu root-menu))
+        (user-require 'sawfish.wm.ext.run-application)
+        (nconc menu `(()))
+        (unless (equal filemanager "")
+          (nconc menu `((,(_ "_Open Home") (filemanager "~")))))
+        (nconc menu `((,(_ "_Run Application") (run-application))))
+        (nconc menu `((,(_ "_Kill Window") (system "xkill &")))))))
 
   ;; generate apps-menu from *.desktop files
   (unless batch-mode

@@ -72,6 +72,43 @@
     :type (pair (labelled "Foreground:" color) (labelled "Background:" color))
     :group (misc messages))
 
+  (defcustom run-application:use-application-exclude t
+    "Exclude applications from `run-application': "
+    :type boolean
+    :group (misc messages))
+
+  (defcustom run-application:application-exclude "^\\."
+    "a regular expression matching applications to exclude"
+    :type string
+    :group (misc messages)
+    :depends run-application:use-application-exclude)
+
+  (defcustom run-application:x-position nil
+    "'run-application' x position: \\w"
+    :type (choice (nil "Center")
+		  (left "Left")
+		  (right "Right"))
+    :group (misc messages))
+
+  (defcustom run-application:x-offset 0
+    "'run-application' x offset: \\w"
+    :type (number 0)
+    :group (misc messages)
+    :depends run-application:x-position)
+
+  (defcustom run-application:y-position nil
+    "'run-application' y position: \\w"
+    :type (choice (nil "Center")
+		  (top "Top")
+		  (bottom "Bottom"))
+    :group (misc messages))
+
+  (defcustom run-application:y-offset 0
+    "'run-application' y offset: \\w"
+    :type (number 0)
+    :group (misc messages)
+    :depends run-application:y-position)
+ 
   (define-structure-alias prompt sawfish.wm.util.prompt)
 
   (defcustom prompt-keymap (make-keymap)

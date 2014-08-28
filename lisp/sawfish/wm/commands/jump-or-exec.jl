@@ -71,4 +71,6 @@
   (define (toggle-or-exec regex prog #!key match-class)
     (jump-or-exec regex prog
 		  #:match-class match-class
-		  #:onfocused iconify-window)))
+		  #:onfocused iconify-window))
+  
+  (define-command 'toggle-or-exec toggle-or-exec))
