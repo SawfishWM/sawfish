@@ -25,6 +25,7 @@
 #include <X11/extensions/shape.h>
 #include <X11/extensions/XTest.h>
 #include <X11/keysym.h>
+#include <X11/Xatom.h>
 #include <glib.h>
 
 Lisp_Window *window_list;
@@ -1537,12 +1538,19 @@ Return the list of windows that match the predicate function PRED.
     return output;
 }
 
-DEFUN ("fake-release-window", Frelese_windows,
+DEFUN ("fake-release-window", Ffakerelease_window,
       Sfake_release_window, (void), rep_Subr0) /*
-::doc:sawfish.wm.windows.subrs#release-windows::
-release-windows
+::doc:sawfish.wm.windows.subrs#fake-release-window::
+fake-release-window
 
-Release the grab from windows
+Release the grab from windows using a simulated press
+of the Escape key using the Xtest extension.
+
+This is a hacky solution, but in fact XSendKey is
+ignored by most application and thus not an alternative.
+
+fake-release-window is used by the EdgeActions. It use
+outside of them should be as low as possible.
 ::end:: */
 {
 
@@ -1552,7 +1560,7 @@ Release the grab from windows
 
 	XTestFakeKeyEvent (dpy, escape, True, CurrentTime);
 	XTestFakeKeyEvent (dpy, escape, False, CurrentTime);
-	XFlush (dpy);
+	XSync (dpy, False);
 
 	return Qt;
 
