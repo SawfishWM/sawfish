@@ -1538,7 +1538,7 @@ Return the list of windows that match the predicate function PRED.
     return output;
 }
 
-DEFUN ("fake-release-window", Ffakerelease_window,
+DEFUN ("fake-release-window", Ffake_release_window,
       Sfake_release_window, (void), rep_Subr0) /*
 ::doc:sawfish.wm.windows.subrs#fake-release-window::
 fake-release-window
