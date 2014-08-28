@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sawfish WM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 16:14+0200\n"
-"PO-Revision-Date: 2014-08-28 16:29+0100\n"
+"POT-Creation-Date: 2014-08-28 20:35+0200\n"
+"PO-Revision-Date: 2014-08-28 20:37+0100\n"
 "Last-Translator: Christopher Roy Bratusek <nano@jpberlin.de>\n"
 "Language-Team: German <me@home>\n"
 "Language: de\n"
@@ -3172,8 +3172,8 @@ msgstr "Erscheinungsbild"
 msgid "Bindings"
 msgstr "Tastenkombinationen"
 
-#. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/ext/cabinet.jl
+#. ../lisp/sawfish/wm/ext/match-window.jl
 #. ../lisp/sawfish/wm/custom.jl
 msgid "Focus"
 msgstr "Fokus"
@@ -3243,8 +3243,8 @@ msgid "show-desktop"
 msgstr "Zeige Arbeitsfläche"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the left and right screen-edge."
-msgstr "Aktion für den linken und rechten Bildschirmrand."
+msgid "Action for the left screen-edge."
+msgstr "Aktion für den linken Bildschirmrand."
 
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "none/hot-move"
@@ -3259,20 +3259,48 @@ msgid "maximize-window"
 msgstr "Fenster maximieren"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the left and right screen-edge while moving a window."
-msgstr ""
-"Aktion für den linken und rechten Bildschirmrand beim Verschieben eines "
-"Fensters."
+msgid "kill-window"
+msgstr "Fenster schließen"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the top and bottom screen-edge."
-msgstr "Aktion für den oberen und unteren Bildschirmrand."
+msgid "iconify-window"
+msgstr "Fenster »Minimieren«"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the top and bottom screen-edge while moving a window."
-msgstr ""
-"Aktion für den oberen und unteren Bildschirmrand beim Verschieben eines "
-"Fensters."
+msgid "move-window-viewport"
+msgstr "Fenster auf »Sichtfeld« verschieben"
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "move-window-workspace"
+msgstr "Fenster auf »Arbeitsfläche« verschieben"
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the left screen-edge while moving a window."
+msgstr "Aktion für den linken Bildschirmrand beim Verschieben eines Fensters."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the top screen-edge."
+msgstr "Aktion für den oberen Bildschirmrand."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the top screen-edge while moving a window."
+msgstr "Aktion für den oberen Bildschirmrand beim Verschieben eines Fensters."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the right screen-edge."
+msgstr "Aktion für den rechten Bildschirmrand."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the right screen-edge while moving a window."
+msgstr "Aktion für den rechten Bildschirmrand beim Verschieben eines Fensters."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the bottom screen-edge."
+msgstr "Aktion für den unteren Bildschirmrand."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the bottom screen-edge while moving a window."
+msgstr "Aktion für den unteren Bildschirmrand beim Verschieben eines Fensters."
 
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
@@ -3661,159 +3689,6 @@ msgstr "Verzögerung in Millisekunden, bevor Fenster ausgerollt werden."
 msgid "Raise windows when they are unshaded."
 msgstr "Fenster in den Vordergrund bringen, wenn sie ausgerollt werden."
 
-#. ../lisp/sawfish/wm/autoload.jl
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Cabinet"
-msgstr "Cabinet"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Filter"
-msgstr "Filter"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Keybindings"
-msgstr "Tastenkombinationen"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Margin to the border of cabinet."
-msgstr "Abstand des Menüs zum Rand von Cabinet."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Margin between items."
-msgstr "Abstand zwischen den Menüeinträgen von Cabinet."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Margin between input line and the first item."
-msgstr ""
-"Abstand zwischen der Eingabeaufforderung und dem ersten Menüeintrag von "
-"Cabinet."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Icon size."
-msgstr "Icon Größe."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Display only windows from current workspace."
-msgstr "Nur Fenster der aktuellen Arbeitsfläche anzeigen."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Display cabinet on active monitor."
-msgstr "Cabinet auf dem aktiven Monitor anzeigen."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Cycle overhead when start cabinet-switch, like x-cycle."
-msgstr ""
-"Beim aufrufen von Cabinet zum nächsten Menüeintrag springen, wie beim x-"
-"cycle."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Raise"
-msgstr "Anheben"
-
-#. ../lisp/sawfish/wm/frames.jl
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "None"
-msgstr "Nichts"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Action if browse across cabinet."
-msgstr "Verhalten der Fenstern beim blättern in Cabinet."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid ""
-"Delay in milliseconds until a window gets raised if browse across cabinet. "
-"\\bottom"
-msgstr "Verzögerung bis ein Fenster beim blättern angehoben wird. \\bottom"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Delay in milliseconds until a window keybinding gets repeats. \\bottom"
-msgstr ""
-"Verzögerung der Tastatureingabe bis ein Fensterereignisse wiederholt wird. "
-"\\bottom"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Font color."
-msgstr "Farbe der Schrift."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Background color."
-msgstr "Farbe des Hintergrunds."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Input text color."
-msgstr "Farbe der Eingabeaufforderung."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Split line color."
-msgstr "Farbe der Trennlinie."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Maximized windows color."
-msgstr "Farbe bei maximierten Fenstern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Iconified windows color."
-msgstr "Farbe bei minimierten Fenstern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Shaded windows color."
-msgstr "Farbe bei eingerollten Fenstern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Windows displayed below the split line."
-msgstr "Fenster die unterhalb der Trennlinie angezeigt werden."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Windows removed from cabinet."
-msgstr "Fenster die nicht in Cabinet angezeigt werden."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Cycle through windows."
-msgstr "Durch die Fenster blättern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Reversely cycle through windows."
-msgstr "Rückwärts durch die Fenster blättern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Exit with restore stack order."
-msgstr "Beenden und Reihenfolge der Fenster wiederherstellen."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Toggle windows from current or all workspaces."
-msgstr ""
-"Umschalten zwischen Fenstern von der aktuellen und allen Arbeitsflächen."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Toggle windows for display and for manipulation."
-msgstr ""
-"Umschalten zwischen Fenstern die ausgewählt werden können und jenen die nur "
-"angezeigt werden."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Cycle through workspaces."
-msgstr "Durch die Arbeitsflächen blättern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Reversely cycle through workspaces."
-msgstr "Rückwärts durch die Arbeitsflächen blättern."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Advance user keymap."
-msgstr "Tastenkombinationen für Fortgeschrittene Benutzer."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Marked window as selected."
-msgstr "Fenster als ausgewählt markieren."
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Cabinet switch"
-msgstr "Cabinet Fensterwechsler"
-
-#. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "Start cabinet switch."
-msgstr "Cabinet Fensterwechsler starten."
-
 #. ../lisp/sawfish/wm/ext/wallpaper.jl
 msgid "Wallpaper"
 msgstr "Hintergrundbild"
@@ -4103,6 +3978,159 @@ msgstr "Fensterregeln"
 #. ../lisp/sawfish/wm/ext/run-application.jl
 msgid "Run application"
 msgstr "Anwendungen ausführen"
+
+#. ../lisp/sawfish/wm/autoload.jl
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cabinet"
+msgstr "Cabinet"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Filter"
+msgstr "Filter"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Keybindings"
+msgstr "Tastenkombinationen"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Margin to the border of cabinet."
+msgstr "Abstand des Menüs zum Rand von Cabinet."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Margin between items."
+msgstr "Abstand zwischen den Menüeinträgen von Cabinet."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Margin between input line and the first item."
+msgstr ""
+"Abstand zwischen der Eingabeaufforderung und dem ersten Menüeintrag von "
+"Cabinet."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Icon size."
+msgstr "Icon Größe."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Display only windows from current workspace."
+msgstr "Nur Fenster der aktuellen Arbeitsfläche anzeigen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Display cabinet on active monitor."
+msgstr "Cabinet auf dem aktiven Monitor anzeigen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cycle overhead when start cabinet-switch, like x-cycle."
+msgstr ""
+"Beim aufrufen von Cabinet zum nächsten Menüeintrag springen, wie beim x-"
+"cycle."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Raise"
+msgstr "Anheben"
+
+#. ../lisp/sawfish/wm/frames.jl
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "None"
+msgstr "Nichts"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Action if browse across cabinet."
+msgstr "Verhalten der Fenstern beim blättern in Cabinet."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid ""
+"Delay in milliseconds until a window gets raised if browse across cabinet. "
+"\\bottom"
+msgstr "Verzögerung bis ein Fenster beim blättern angehoben wird. \\bottom"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Delay in milliseconds until a window keybinding gets repeats. \\bottom"
+msgstr ""
+"Verzögerung der Tastatureingabe bis ein Fensterereignisse wiederholt wird. "
+"\\bottom"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Font color."
+msgstr "Farbe der Schrift."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Background color."
+msgstr "Farbe des Hintergrunds."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Input text color."
+msgstr "Farbe der Eingabeaufforderung."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Split line color."
+msgstr "Farbe der Trennlinie."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Maximized windows color."
+msgstr "Farbe bei maximierten Fenstern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Iconified windows color."
+msgstr "Farbe bei minimierten Fenstern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Shaded windows color."
+msgstr "Farbe bei eingerollten Fenstern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Windows displayed below the split line."
+msgstr "Fenster die unterhalb der Trennlinie angezeigt werden."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Windows removed from cabinet."
+msgstr "Fenster die nicht in Cabinet angezeigt werden."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cycle through windows."
+msgstr "Durch die Fenster blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Reversely cycle through windows."
+msgstr "Rückwärts durch die Fenster blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Exit with restore stack order."
+msgstr "Beenden und Reihenfolge der Fenster wiederherstellen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Toggle windows from current or all workspaces."
+msgstr ""
+"Umschalten zwischen Fenstern von der aktuellen und allen Arbeitsflächen."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Toggle windows for display and for manipulation."
+msgstr ""
+"Umschalten zwischen Fenstern die ausgewählt werden können und jenen die nur "
+"angezeigt werden."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cycle through workspaces."
+msgstr "Durch die Arbeitsflächen blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Reversely cycle through workspaces."
+msgstr "Rückwärts durch die Arbeitsflächen blättern."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Advance user keymap."
+msgstr "Tastenkombinationen für Fortgeschrittene Benutzer."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Marked window as selected."
+msgstr "Fenster als ausgewählt markieren."
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Cabinet switch"
+msgstr "Cabinet Fensterwechsler"
+
+#. ../lisp/sawfish/wm/ext/cabinet.jl
+msgid "Start cabinet switch."
+msgstr "Cabinet Fensterwechsler starten."
 
 #. ../lisp/sawfish/wm/focus.jl
 msgid "When does the mouse pointer affect the input focus."
@@ -5851,183 +5879,6 @@ msgstr ""
 "Tastenbelegung mit Tastenkombinationen die aktiv sind, wenn eine "
 "Zeichenkette vom Benutzer eingelesen wird."
 
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"The number of columns and rows of the virtual desktop: \\left\n"
-"\n"
-"This is meaningless if dynamic viewport is enabled."
-msgstr ""
-"Die Anzahl der Spalten und Reihen bei virtuellen Arbeitsflächen: \\left\n"
-"\n"
-"Nur notwendig wenn virtuellen Arbeitsflächen sich nicht dynamisch vergrößern."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Minimum number of columns and rows of virtual desktop (if boundary mode is "
-"dynamic): \\left"
-msgstr ""
-"Die minimale Anzahl der Spalten und Reihen bei virtuellen Arbeitsflächen "
-"wenn diese sich dynamisch vergrößern: \\left "
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Windows uniconify to the current viewport."
-msgstr "Fenster in das aktuelle Sichtfeld wiederherstellen."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"When you go to another viewport, the bigger this value,\n"
-"the more smoothly the screen is scrolled.\n"
-"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
-"the change is instantaneous."
-msgstr ""
-"Je größer dieser Wert hier ist desto sanfter und ruckelfreier wird das "
-"wechseln bei\n"
-" virtuellen Arbeitsflächen von statten gehen. Der Wert 1 bedeutet das die "
-"vituellen\n"
-"Arbeitsflächen nicht herein geschoben werden sonder sie erscheint ohne "
-"Animationen."
-
-#. ../lisp/sawfish/wm/workspace.jl
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "wrap-around"
-msgstr "Umbrechen"
-
-#. ../lisp/sawfish/wm/workspace.jl
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "stop"
-msgstr "Stoppen"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "dynamic"
-msgstr "Dynamisch"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
-"desktop edge."
-msgstr ""
-"Das verhalten der virtuellen Arbeitsflächen wenn deren Rand erreicht wird."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport"
-msgstr "Sichtfeld »Aktivieren«"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport."
-msgstr "Das angegebene Sichtfeld auswählen."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Column:"
-msgstr "Spalte:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Row:"
-msgstr "Zeile:"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport column"
-msgstr "Sichtfeld »Spalte aktivieren«"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport column."
-msgstr "Die angegebene Spalte im Sichtfeld auswählen."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Activate viewport row"
-msgstr "Sichtfeld »Zeile aktivieren«"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Select the specified viewport row."
-msgstr "Die angegebene Zeile im Sichtfeld auswählen."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window to viewport"
-msgstr "Fenster aufs »Sichtfeld« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the current window to the specified viewport."
-msgstr "Das aktuelle Fenster zu dem angegebenen Sichtfeld verschieben."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport right"
-msgstr "Sichtfeld nach »Rechts« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the right."
-msgstr "Das Sichtfeld eine Bildschirmbreite nach rechts schieben."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport left"
-msgstr "Sichtfeld nach »Links« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen to the left."
-msgstr "Das Sichtfeld eine Bildschirmbreite nach links schieben."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport up"
-msgstr "Sichtfeld nach »Oben« schieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen up."
-msgstr "Das Sichtfeld eine Bildschirmhöhe nach oben schieben."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move viewport down"
-msgstr "Sichtfeld nach »Unten« schieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move the viewport one screen down."
-msgstr "Das Sichtfeld eine Bildschirmhöhe nach unten schieben."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window right"
-msgstr "Fenster aufs »Rechte Sichtfeld« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the right, and switch to that\n"
-"viewport."
-msgstr ""
-"Das Fenster in das Sichtfeld zur rechten verschieben\n"
-"und auf das Sichtfeld wechseln."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window left"
-msgstr "Fenster aufs »Linke Sichtfeld« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport on the left, and switch to that\n"
-"viewport."
-msgstr ""
-"Das Fenster in das Sichtfeld zur linken verschieben\n"
-"und auf das Sichtfeld wechseln."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window up"
-msgstr "Fenster aufs »Sichtfeld nach oben« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport above, and switch to that\n"
-"viewport."
-msgstr ""
-"Das Fenster in das Sichtfeld nach oben verschieben\n"
-"und auf das Sichtfeld wechseln."
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid "Move window down"
-msgstr "Fenster aufs »Sichtfeld nach unten« verschieben"
-
-#. ../lisp/sawfish/wm/viewport.jl
-msgid ""
-"Move the window to the viewport below, and switch to that\n"
-"viewport."
-msgstr ""
-"Das Fenster in das Sichtfeld  nach unten verschieben\n"
-"und auf das Sichtfeld wechseln."
-
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Warping"
 msgstr "Mauszeiger einfangen"
@@ -6107,6 +5958,16 @@ msgstr "Fenster »Feste Position« an/aus"
 #. ../lisp/sawfish/wm/windows.jl
 msgid "Toggle the window property `fixed-position'."
 msgstr "Fenstereigenschaft feste Position ein-/ausschalten."
+
+#. ../lisp/sawfish/wm/viewport.jl
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "stop"
+msgstr "Stoppen"
+
+#. ../lisp/sawfish/wm/viewport.jl
+#. ../lisp/sawfish/wm/workspace.jl
+msgid "wrap-around"
+msgstr "Umbrechen"
 
 #. ../lisp/sawfish/wm/workspace.jl
 msgid "keep-going"
@@ -6575,6 +6436,173 @@ msgstr "Anwendungen ausfüh_ren"
 msgid "_Kill Window"
 msgstr "Fenster ab_würgen"
 
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"The number of columns and rows of the virtual desktop: \\left\n"
+"\n"
+"This is meaningless if dynamic viewport is enabled."
+msgstr ""
+"Die Anzahl der Spalten und Reihen bei virtuellen Arbeitsflächen: \\left\n"
+"\n"
+"Nur notwendig wenn virtuellen Arbeitsflächen sich nicht dynamisch vergrößern."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Minimum number of columns and rows of virtual desktop (if boundary mode is "
+"dynamic): \\left"
+msgstr ""
+"Die minimale Anzahl der Spalten und Reihen bei virtuellen Arbeitsflächen "
+"wenn diese sich dynamisch vergrößern: \\left "
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Windows uniconify to the current viewport."
+msgstr "Fenster in das aktuelle Sichtfeld wiederherstellen."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"When you go to another viewport, the bigger this value,\n"
+"the more smoothly the screen is scrolled.\n"
+"It is the number of steps for scrolling. The value 1 means no scroll, and\n"
+"the change is instantaneous."
+msgstr ""
+"Je größer dieser Wert hier ist desto sanfter und ruckelfreier wird das "
+"wechseln bei\n"
+" virtuellen Arbeitsflächen von statten gehen. Der Wert 1 bedeutet das die "
+"vituellen\n"
+"Arbeitsflächen nicht herein geschoben werden sonder sie erscheint ohne "
+"Animationen."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "dynamic"
+msgstr "Dynamisch"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Stop, wrap-around, or grow the virtual desktop when you go beyond virtual "
+"desktop edge."
+msgstr ""
+"Das verhalten der virtuellen Arbeitsflächen wenn deren Rand erreicht wird."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport"
+msgstr "Sichtfeld »Aktivieren«"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport."
+msgstr "Das angegebene Sichtfeld auswählen."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Column:"
+msgstr "Spalte:"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Row:"
+msgstr "Zeile:"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport column"
+msgstr "Sichtfeld »Spalte aktivieren«"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport column."
+msgstr "Die angegebene Spalte im Sichtfeld auswählen."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Activate viewport row"
+msgstr "Sichtfeld »Zeile aktivieren«"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Select the specified viewport row."
+msgstr "Die angegebene Zeile im Sichtfeld auswählen."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window to viewport"
+msgstr "Fenster aufs »Sichtfeld« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the current window to the specified viewport."
+msgstr "Das aktuelle Fenster zu dem angegebenen Sichtfeld verschieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport right"
+msgstr "Sichtfeld nach »Rechts« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the right."
+msgstr "Das Sichtfeld eine Bildschirmbreite nach rechts schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport left"
+msgstr "Sichtfeld nach »Links« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen to the left."
+msgstr "Das Sichtfeld eine Bildschirmbreite nach links schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport up"
+msgstr "Sichtfeld nach »Oben« schieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen up."
+msgstr "Das Sichtfeld eine Bildschirmhöhe nach oben schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move viewport down"
+msgstr "Sichtfeld nach »Unten« schieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move the viewport one screen down."
+msgstr "Das Sichtfeld eine Bildschirmhöhe nach unten schieben."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window right"
+msgstr "Fenster aufs »Rechte Sichtfeld« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the right, and switch to that\n"
+"viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld zur rechten verschieben\n"
+"und auf das Sichtfeld wechseln."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window left"
+msgstr "Fenster aufs »Linke Sichtfeld« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport on the left, and switch to that\n"
+"viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld zur linken verschieben\n"
+"und auf das Sichtfeld wechseln."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window up"
+msgstr "Fenster aufs »Sichtfeld nach oben« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport above, and switch to that\n"
+"viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld nach oben verschieben\n"
+"und auf das Sichtfeld wechseln."
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid "Move window down"
+msgstr "Fenster aufs »Sichtfeld nach unten« verschieben"
+
+#. ../lisp/sawfish/wm/viewport.jl
+msgid ""
+"Move the window to the viewport below, and switch to that\n"
+"viewport."
+msgstr ""
+"Das Fenster in das Sichtfeld  nach unten verschieben\n"
+"und auf das Sichtfeld wechseln."
+
 #~ msgid ""
 #~ "\tSawfish Configuration utility.\n"
 #~ "\n"
@@ -6817,9 +6845,6 @@ msgstr "Fenster ab_würgen"
 #~ msgid "tab/titelbar-to-left"
 #~ msgstr "Titelleiste zum Linken Fensterrand »Verschieben«"
 
-#~ msgid "raise-window"
-#~ msgstr "Fenster »Anheben«"
-
 #~ msgid "lower-window"
 #~ msgstr "Fenster »Absenken«"
 
@@ -6928,9 +6953,6 @@ msgstr "Fenster ab_würgen"
 #~ msgid "window-history-forget"
 #~ msgstr "Fensterchronik »Vergessen«"
 
-#~ msgid "iconify-window"
-#~ msgstr "Fenster »Minimieren«"
-
 #~ msgid "uniconify-window"
 #~ msgstr "Fenster »Wiederherstellen«"
 
@@ -6951,9 +6973,6 @@ msgstr "Fenster ab_würgen"
 
 #~ msgid "make-window-unsticky"
 #~ msgstr "Fenster »Anheften« ausschalten"
-
-#~ msgid "move-window-to-next-workspace"
-#~ msgstr "Fenster auf nächste Arbeitsfläche »Schicken«"
 
 #~ msgid "move-window-to-previous-workspace"
 #~ msgstr "Fenster auf vorherige Arbeitsfläche »Schicken«"
