@@ -87,6 +87,6 @@
           (move-win-to-head w (- (current-head w) 1))
         (move-win-to-head w (- (head-count) 1)))))
   
-  (define-command 'send-window-to-next-head send-to-next-head #:spec "%W")
-  (define-command 'send-window-to-previous-head send-to-previous-head #:spec "%W")
+  (define-command 'send-window-to-next-head send-window-to-next-head #:spec "%W")
+  (define-command 'send-window-to-previous-head send-window-to-previous-head #:spec "%W")
   )
