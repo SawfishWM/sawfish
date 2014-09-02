@@ -176,6 +176,8 @@
 (autoload-placement-mode 'top-left 'sawfish.wm.placement.top-left #:for-normal t)
 (autoload-placement-mode 'stagger 'sawfish.wm.placement.stagger #:for-normal t)
 (autoload-placement-mode 'off-center 'sawfish.wm.placement.off-center #:for-normal t)
+(autoload-command 'send-window-to-next-head 'sawfish.wm.heads)
+(autoload-command 'send-window-to-previous-head 'sawfish.wm.heads)
 (autoload-command 'move-viewport-right 'sawfish.wm.viewport)
 (autoload-command 'move-viewport-up 'sawfish.wm.viewport)
 (autoload-command 'move-viewport-down 'sawfish.wm.viewport)
