@@ -269,7 +269,7 @@
                             maximize-window-fullscreen-toggle maximize-window-horizontally-toggle maximize-window-vertically-toggle maximize-window-fullxinerama-toggle
                             tab-add-maked-windows tab-release-window tab-move-to-end tab-move-to-beginning tab-move-to-right tab-move-to-left
                             move-window-to-center move-window-to-top-left move-window-to-next-workspace move-window-to-previous-workspace
-                            toggle-fixed-postion toggle-window-never-focus toggle-window-ignored toggle-task-list-skip toggle-window-cycle-skip
+                            toggle-window-fixed-position toggle-window-fixed-size  toggle-window-never-focus toggle-window-ignored toggle-task-list-skip toggle-window-cycle-skip
                             toggle-window-list-skip toggle-desktop send-window-to-next-head send-window-to-previous-head
                             raise-window lower-window raise-window-depth lower-window-depth raise-lower-window
                             raise-window-and-transients raise-lower-window-and-transients delete-window-safely destroy-window

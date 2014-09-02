@@ -199,7 +199,8 @@
     :type keymap)
 
   (defcustom lock-button-keymap (bind-keys (make-keymap)
-					   "Button1-Off" 'toggle-fixed-postion)
+					   "Button1-Off" 'toggle-window-fixed-position
+					   "Button3-Off" 'toggle-window-fixed-size)
     "Keymap of \"lock\" button. Mouse-bindings only."
     :group bindings
     :type keymap)

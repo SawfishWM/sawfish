@@ -219,7 +219,7 @@ has multiple tabbars. Also need the currect settings in the theme.jl from the th
     "Refresh the entire group containing WIN according to PROP.
 PROP can be one of the symbols: raise, frame, reframe, reframe-all, style, move,
 resize, title-position, type, depth, shade, unshade, iconify, uniconify, maximized,
-sticky, unsticky, fixed-position."
+sticky, unsticky, fixed-position fixed-size."
     (when tab-refresh-lock
       (setq tab-refresh-lock nil)
       (unwind-protect
@@ -268,6 +268,10 @@ sticky, unsticky, fixed-position."
               (let ((group-frame-fixed-position (window-get win 'fixed-position)))
                 (mapcar (lambda (w)
                           (window-put w 'fixed-position group-frame-fixed-position)) unfocus)))
+             ((eq prop 'fixed-size)
+              (let ((group-frame-fixed-size (window-get win 'fixed-size)))
+                (mapcar (lambda (w)
+                          (window-put w 'fixed-size group-frame-fixed-size)) unfocus)))
              ((eq prop 'type)
               (let ((group-frame-type (window-get win 'type)))
                 (mapcar (lambda (w)
@@ -343,6 +347,7 @@ sticky, unsticky, fixed-position."
              (group-frame-gravity (window-get win 'gravity))
              (group-frame-never-iconify (window-get win 'never-iconify))
              (group-frame-fixed-position (window-get win 'fixed-position))
+             (group-frame-fixed-size (window-get win 'fixed-size))
              (group-frame-title-position (window-get win 'title-position))
              (group-frame-depth (window-get win 'depth))
              (group-frame-never-maximize (window-get win 'never-maximize))
@@ -378,6 +383,7 @@ sticky, unsticky, fixed-position."
           (window-put w 'never-iconify group-frame-never-iconify)
           (window-put w 'depth group-frame-depth)
           (window-put w 'fixed-position group-frame-fixed-position)
+          (window-put w 'fixed-size group-frame-fixed-size)
           (window-put w 'never-maximize group-frame-never-maximize)
           (window-put w 'maximized-vertically group-frame-maximized-vertically)
           (window-put w 'maximized-horizontally group-frame-maximized-horizontally)
@@ -582,13 +588,13 @@ sticky, unsticky, fixed-position."
                     (window-put w 'never-iconify t))
                   (window-put w 'tabbed t)) wins)
         (call-hook 'tab-group-windows-hook (list (tab-group-windows win)))
-        ;;(raise-window win)
+        (raise-window win)
         (setq all-wins nil))
       (setq tab-refresh-lock t)
       (when (window-tabbed-p win)
         (tab-refresh-group win 'move)
         (tab-refresh-group win 'frame)
-        ;;(set-input-focus (nth 0 (tab-group-windows-stacking-order win)))
+        (set-input-focus (nth 0 (tab-group-windows-stacking-order win)))
         (when clicked-frame
           (move-cursor-in-tabbar (input-focus))
           (setq clicked-frame nil)))
@@ -692,6 +698,9 @@ of the windows the same 'tab-group property"
                          (tab-refresh-group win 'frame))
                         ((eq 'fixed-position args)
                          (tab-refresh-group win 'fixed-position)
+                         (tab-refresh-group win 'frame))
+                        ((eq 'fixed-size args)
+                         (tab-refresh-group win 'fixed-size)
                          (tab-refresh-group win 'frame))
                         ((eq 'frame-style args)
                          (tab-refresh-group win 'style)

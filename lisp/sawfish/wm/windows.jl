@@ -67,7 +67,8 @@
 	     window-y
 	     window-width
 	     window-height
-	     toggle-fixed-postion))
+	     toggle-window-fixed-position
+	     toggle-window-fixed-size))
 
     (open rep
 	  rep.system
@@ -633,13 +634,22 @@ STATES has been changed. STATES may also be a single symbol."
   (define (window-height w)
     (cdr (window-frame-dimensions w)))
 
-  (define (toggle-fixed-postion w)
+  (define (toggle-window-fixed-position w)
     "Toggle the window property `fixed-position'."
      (if (window-get w 'fixed-position)
 	 (window-put w 'fixed-position nil)
        (window-put w 'fixed-position t))
      (call-window-hook 'window-state-change-hook w (list '(fixed-position))))
-  (define-command 'toggle-fixed-postion toggle-fixed-postion #:spec "%W")
+  (define-command 'toggle-window-fixed-postion toggle-window-fixed-postion #:spec "%W")
+
+  (define (toggle-window-fixed-size w)
+    "Toggle the window property `fixed-size'."
+     (if (window-get w 'fixed-size)
+	 (window-put w 'fixed-size nil)
+       (window-put w 'fixed-size t))
+     (call-window-hook 'window-state-change-hook w (list '(fixed-size))))
+  (define-command 'toggle-window-fixed-size toggle-window-fixed-size #:spec "%W")
+
 ;;; gaollable functions
 
   (gaol-add window-really-wants-input-p window-class window-avoided-p
