@@ -640,7 +640,7 @@ STATES has been changed. STATES may also be a single symbol."
 	 (window-put w 'fixed-position nil)
        (window-put w 'fixed-position t))
      (call-window-hook 'window-state-change-hook w (list '(fixed-position))))
-  (define-command 'toggle-window-fixed-postion toggle-window-fixed-postion #:spec "%W")
+  (define-command 'toggle-window-fixed-position toggle-window-fixed-position #:spec "%W")
 
   (define (toggle-window-fixed-size w)
     "Toggle the window property `fixed-size'."
