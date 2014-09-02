@@ -2179,7 +2179,8 @@
 (define top-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"top-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+    (foreground . ,(lambda (w) (if (or (window-get w 'fixed-position)
+                                       (window-get w 'fixed-size))
                                    (table-ref styletab-c-frame-cache '"top-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"top-frame-lock-button"))))
     (cursor . hand2)
@@ -2190,7 +2191,8 @@
 (define bottom-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"bottom-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+    (foreground . ,(lambda (w) (if (or (window-get w 'fixed-position)
+                                       (window-get w 'fixed-size))
                                    (table-ref styletab-c-frame-cache '"bottom-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"bottom-frame-lock-button"))))
     (cursor . hand2)
@@ -2201,7 +2203,8 @@
 (define left-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"left-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+    (foreground . ,(lambda (w) (if (or (window-get w 'fixed-position)
+                                       (window-get w 'fixed-size))
                                    (table-ref styletab-c-frame-cache '"left-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"left-frame-lock-button"))))
     (cursor . hand2)
@@ -2212,7 +2215,8 @@
 (define right-frame-lock-button
   `((class . lock-button)
     (background . ,(lambda (w) (table-ref styletab-c-frame-cache '"right-frame-button")))
-    (foreground . ,(lambda (w) (if (window-get w 'fixed-position)
+    (foreground . ,(lambda (w) (if (or (window-get w 'fixed-position)
+                                       (window-get w 'fixed-size))
                                    (table-ref styletab-c-frame-cache '"right-frame-unlock-button")
                                  (table-ref styletab-c-frame-cache '"right-frame-lock-button"))))
     (cursor . hand2)
@@ -2947,7 +2951,7 @@
 (call-after-state-changed '(tab-theme-name) frame-style-name)
 (call-after-state-changed '(tab-theme-tabbars) frame-style-tabbars)
 (call-after-state-changed '(marked) reframe-marked)
-(call-after-state-changed '(maximized sticky fixed-position stacking) reframe-one)
+(call-after-state-changed '(maximized sticky fixed-position fixed-size stacking) reframe-one)
 (add-hook 'remove-from-workspace-hook reframe-one)
 
 (custom-set-property 'styletab-c:styles ':after-set reload-frame-style-reframe)
