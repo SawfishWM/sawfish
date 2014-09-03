@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Sawfish WM\n"
 "Report-Msgid-Bugs-To: http://sawfish.tuxfamily.org/flyspray/\n"
 "POT-Creation-Date: 2011-06-23 11:00+0200\n"
-"PO-Revision-Date: 2014-05-02 19:21+0200\n"
+"PO-Revision-Date: 2014-09-03 01:53+0200\n"
 "Last-Translator: fuchur <flohtransporter@gmail.com>\n"
 "Language-Team: German <me@home>\n"
 "MIME-Version: 1.0\n"
@@ -1733,8 +1733,12 @@ msgid "show-desktop"
 msgstr "Zeigt Arbeitsfläche"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the left and right screen-edge."
-msgstr "Aktion für den linken und rechten Bildschirmrand."
+msgid "Action for the left screen-edge."
+msgstr "Aktion für den linken Bildschirmrand."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the right screen-edge."
+msgstr "Aktion für den rechten Bildschirmrand."
 
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "none/hot-move"
@@ -1745,24 +1749,44 @@ msgid "expand-window"
 msgstr "Fenster ausdehnen"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
+msgid "kill-window"
+msgstr "Fenster sicher löschen"
+
+#. ../lisp/sawfish/wm/edge/conf.jl
 msgid "maximize-window"
 msgstr "Fenster maximieren"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the left and right screen-edge while moving a window."
-msgstr ""
-"Aktion für den linken und rechten Bildschirmrand beim Verschieben eines "
-"Fensters."
+msgid "move-window-viewport"
+msgstr "Fenster auf Sichtfeld verschieben"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the top and bottom screen-edge."
-msgstr "Aktion für den oberen und unteren Bildschirmrand."
+msgid "move-window-workspace"
+msgstr "Fenster auf Arbeitsfläche verschieben"
 
 #. ../lisp/sawfish/wm/edge/conf.jl
-msgid "Action for the top and bottom screen-edge while moving a window."
-msgstr ""
-"Aktion für den oberen und unteren Bildschirmrand beim Verschieben eines "
-"Fensters."
+msgid "Action for the right screen-edge while moving a window."
+msgstr "Aktion für den rechten Bildschirmrand beim Verschieben eines Fensters."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the left screen-edge while moving a window."
+msgstr "Aktion für den linken Bildschirmrand beim Verschieben eines Fensters."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the top screen-edge."
+msgstr "Aktion für den oberen Bildschirmrand."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the bottom screen-edge."
+msgstr "Aktion für den unteren Bildschirmrand."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the top screen-edge while moving a window."
+msgstr "Aktion für den oberen Bildschirmrand beim Verschieben eines Fensters."
+
+#. ../lisp/sawfish/wm/edge/conf.jl
+msgid "Action for the bottom screen-edge while moving a window."
+msgstr "Aktion für den unteren Bildschirmrand beim Verschieben eines Fensters."
 
 #. ../lisp/sawfish/wm/edge/conf.jl
 msgid "Delay (in milliseconds) of flipping of viewport / workspace."
@@ -3623,6 +3647,14 @@ msgstr "Gamma Wert des Grünen Kanals in Prozent."
 msgid "Gamma value for blue channel in per cent."
 msgstr "Gamma Wert des Blauen Kanals in Prozent."
 
+#. ../lisp/sawfish/wm/prg/idesk.jl
+msgid "Whether to start idesk with Sawfish."
+msgstr "Idesk mit Sawfish starten."
+
+#. ../lisp/sawfish/wm/prg/nm-applet.jl
+msgid "Whether to start nm-applet with Sawfish."
+msgstr "NM-applet mit Sawfish starten."
+
 #. ../lisp/sawfish/wm/prg/pancake.jl
 msgid "Whether to start pancake with Sawfish."
 msgstr "Pancake mit Sawfish starten."
@@ -3638,6 +3670,10 @@ msgstr "Xmobar mit Sawfish starten."
 #. ../lisp/sawfish/wm/prg/xmobar.jl
 msgid "xmobar configuration file to use."
 msgstr "Xmobar Konfigurationsdatei. "
+
+#. ../lisp/sawfish/wm/prg/diodon.jl
+msgid "Whether to start diodon with Sawfish."
+msgstr "Diodon mit Sawfish starten."
 
 #. ../lisp/sawfish/wm/prg/fehlstart.jl
 msgid "Whether to start fehlstart with Sawfish."
@@ -4330,6 +4366,50 @@ msgid "Prompt message's colors."
 msgstr "Farben der Eingabeaufforderung."
 
 #. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Exclude applications from `run-application': "
+msgstr "Anwendungen von `Anwendungen ausführen' ausschließen: "
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "a regular expression matching applications to exclude"
+msgstr "Regulärer Ausdruck der ausgeschlossen werden soll."
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "'run-application' x position: \\w"
+msgstr "Vertikale position: \\w"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "'run-application' x offset: \\w"
+msgstr "Vertikal verschieben: \\w"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "'run-application' y position: \\w"
+msgstr "Horizontale position: \\w"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "'run-application' y offset: \\w"
+msgstr "Horizontal verschieben: \\w"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Center"
+msgstr "Mitte"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Top"
+msgstr "Oben"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Bottom"
+msgstr "Unten"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Left"
+msgstr "Links"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
+msgid "Right"
+msgstr "Rechts"
+
+#. ../lisp/sawfish/wm/util/prompt.jl
 msgid "prompt-keymap"
 msgstr "Abfrage Tastenbelegung"
 
@@ -4695,7 +4775,7 @@ msgid "Renames WINDOW to NEW-NAME."
 msgstr "Fenster umbenennen."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Toggle fixed position"
+msgid "Toggle window fixed position"
 msgstr "Fenster »Feste Position« an/aus"
 
 #. ../lisp/sawfish/wm/windows.jl
@@ -4703,7 +4783,7 @@ msgid "Toggle the window property `fixed-position'."
 msgstr "Fenstereigenschaft feste Position ein-/ausschalten."
 
 #. ../lisp/sawfish/wm/windows.jl
-msgid "Toggle fixed size"
+msgid "Toggle window fixed size"
 msgstr "Fenster »Feste Größe« an/aus"
 
 #. ../lisp/sawfish/wm/windows.jl
@@ -6118,7 +6198,8 @@ msgstr "Verzögerung bis ein Fenster beim blättern angehoben wird. \\bottom"
 #. ../lisp/sawfish/wm/ext/cabinet.jl
 msgid "Delay in milliseconds until a window keybinding gets repeats. \\bottom"
 msgstr ""
-"Verzögerung der Tastatureingabe bis ein Fensterereignisse wiederholt wird. \\bottom"
+"Verzögerung der Tastatureingabe bis ein Fensterereignisse wiederholt wird. "
+"\\bottom"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
 msgid "Font color."
@@ -6284,11 +6365,11 @@ msgid "maximize-window-fullxinerama-toggle"
 msgstr "Fenster auf Xinerama Vollbild »Maximieren« ein/aus"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "toggle-fixed-position"
+msgid "toggle-window-fixed-position"
 msgstr "Fenster »Feste Position« an/aus"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "toggle-fixed-size"
+msgid "toggle-window-fixed-size"
 msgstr "Fenster »Feste Größe« an/aus"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
@@ -6320,11 +6401,11 @@ msgid "toggle-desktop"
 msgstr "Desktop »Anzeigen« ein/aus"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "send-to-next-head"
+msgid "send-window-to-next-head"
 msgstr "Fenster zum nächsten Monitor »Verschieben«"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
-msgid "send-to-previous-head"
+msgid "send-window-to-previous-head"
 msgstr "Fenster zum vorherigen Monitor »Verschieben«"
 
 #. ../lisp/sawfish/wm/ext/cabinet.jl
@@ -7468,13 +7549,13 @@ msgstr ""
 "Fenster auf der halben linken Bildschirmgröße auf Vollbildgröße maximieren "
 "(ohne Rahmen) ein-/ausschalten."
 
-msgid "Send to next head"
+msgid "Send window to next head"
 msgstr "Fenster zum »Nächsten Bildschirm« verschieben"
 
 msgid "Send window to the next head."
 msgstr "Verschiebt das Fenster zum nächsten Xinerama Bildschirm."
 
-msgid "Send to previous head"
+msgid "Send window to previous head"
 msgstr "Fenster zum »Vorherigen Bildschirm« verschieben"
 
 msgid "Send window to the previous head."
