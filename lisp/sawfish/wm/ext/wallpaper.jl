@@ -91,18 +91,21 @@
 
   (define (set-wallpaper)
     (when (and init-wallpaper
-	       (file-exists-p root-wallpaper))
-      (when set-wallpaper-xfce4
-        (set-wallpaper-xfce))
-      (when set-wallpaper-gnome2
-        (set-wallpaper-gnome))
-      (when (and wallpaper-setter
-		 (not (eq desktop-environment "gnome"))
-		 (not (eq desktop-environment "xfce")))
-        (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
-	(when (or (program-exists-p wallpaper-setter)
-		  (file-exists-p wallpaper-setter))
-	  (system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &"))))))
+	       (not (equal root-wallpaper ())))
+    (if (file-exists-p root-wallpaper)
+        (progn
+	  (when set-wallpaper-xfce4
+            (set-wallpaper-xfce))
+	  (when set-wallpaper-gnome2
+            (set-wallpaper-gnome))
+          (when (and wallpaper-setter
+	        (not (eq desktop-environment "gnome"))
+		(not (eq desktop-environment "xfce")))
+            (setq wallpaper-filename (concat " \"" root-wallpaper "\""))
+	    (when (or (program-exists-p wallpaper-setter)
+	              (file-exists-p wallpaper-setter))
+	      (system (concat wallpaper-setter " " wallpaper-setter-args " " wallpaper-filename " &")))))
+      (display-message (format nil "Wallpaper %s not found." root-wallpaper)))))
 
   (defvar gnome-type nil)
   (defvar xfce-type nil)
