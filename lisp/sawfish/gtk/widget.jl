@@ -551,7 +551,7 @@
       (gtk-button-set-relief button 'none)
       (g-signal-connect button "clicked"
 	(lambda ()
-	      (system (format nil "x-terminal-emulator -e %s &" command))))
+	      (system (format nil "xterm -e %s &" command))))
       (gtk-widget-show-all box)
       (lambda (op)
 	(if (eq op 'gtk-widget)

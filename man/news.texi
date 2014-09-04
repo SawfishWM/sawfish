@@ -58,6 +58,8 @@ Each release lists incompatible changes at its top.
 @item Fix handling symbol-type defcustoms in sawfish-xgettext, preventing generation of new sawfish.pot. [Christopher Bratusek]
 
 @item Fixed that @code{Open Home} was shown in the root menu even if @code{filemanager-program} was unset. [Christopher Bratusek]
+
+@item In SawfishConfig @code{x-terminal-emulator} was used to access the Sawfish info-file. For better compat with non-Debian-distributions, use @code{xterm} instead. Note that the Sawfish variable @code{xterm-program} is not accessible from SawfishConfig. [Christopher Bratusek]
 @end itemize
 
 @item New Features
