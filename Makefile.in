@@ -43,15 +43,26 @@ install : all installdirs
 	for f in ./DOC*; do \
 	  $(INSTALL_DATA) $$f $(DESTDIR)$(sawfishexecdir); \
 	done
-	$(INSTALL_DATA) $(srcdir)/data/sawfish.desktop \
-		$(DESTDIR)$(datadir)/applications/
+	$(INSTALL_DATA) $(srcdir)/data/sawfish.desktop $(DESTDIR)$(datadir)/applications/
+	$(INSTALL_DATA) $(srcdir)/data/sawfish-config.desktop $(DESTDIR)$(datadir)/applications/
+	# needed for GNOME2 to recognize Sawfish, GConf-Key /desktop/gnome/session/required-components/windowmanager 
+	# need to be set to 'sawfish' aswell
 	if test $(GNOME2_SESSION) = "yes"; then \
-		$(INSTALL_DATA) $(srcdir)/data/sawfish-wm.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties; \
+		$(INSTALL_DATA) $(srcdir)/data/sawfish.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/sawfish-wm.desktop; \
 	fi
 	$(INSTALL_DATA) $(top_srcdir)/data/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 	if test $(XDM_SESSION) = "yes"; then \
-		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-session.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop; \
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop;\
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-mate.desktop $(DESTDIR)$(datadir)/xsessions/sawfish-mate.desktop;\
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-xfce.desktop $(DESTDIR)$(datadir)/xsessions/sawfish-xfce.desktop;\
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-kde4.desktop $(DESTDIR)$(datadir)/xsessions/sawfish-kde4.desktop;\
+		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-lumina.desktop $(DESTDIR)$(datadir)/xsessions/sawfish-lumina.desktop;\
+		$(INSTALL_SCRIPT) $(top_srcdir)/data/sawfish-kde4-session $(DESTDIR)$(bindir)/sawfish-kde4-session;\
+		$(INSTALL_SCRIPT) $(top_srcdir)/data/sawfish-mate-session $(DESTDIR)$(bindir)/sawfish-mate-session;\
+		$(INSTALL_SCRIPT) $(top_srcdir)/data/sawfish-xfce-session $(DESTDIR)$(bindir)/sawfish-xfce-session;\
+		$(INSTALL_SCRIPT) $(top_srcdir)/data/sawfish-lumina-session $(DESTDIR)$(bindir)/sawfish-lumina-session;\
 	fi
+	# allows Sawfish to be selected as default WM from within System Settings
 	if test $(KDE4_SESSION) = "yes"; then \
 		$(INSTALL_DATA) $(top_srcdir)/data/sawfish-ksm.desktop $(DESTDIR)$(KDEDIR)/ksmserver/windowmanagers/sawfish.desktop; \
 	fi

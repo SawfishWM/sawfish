@@ -65,3 +65,35 @@ Description: sawfish lisp files
  .
  It is not required for normal use of sawfish and not installing it will save
  space in small systems.
+
+Package: sawfish-kde4-session
+Architecture: all
+Depends: sawfish (= ${source:Version}), kde-standard | kde-full
+Description: KDE4 session integration for Sawfish
+ This package provides a new display manager session file, that will
+ start Sawfish with KDE4.
+ .
+ Furthermore Sawfish is integrated into SystemSettings, so can also
+ be choosen from the 'Default Applications' section of SystemSettings.
+
+Package: sawfish-xfce-session
+Architecture: all
+Depends: sawfish (= ${source:Version}), xfce4
+Description: XFCE session integration for Sawfish
+ This package provides a new display manager session file, that will
+ start Sawfish with XFCE
+
+Package: sawfish-mate-session
+Architecture: all
+Depends: sawfish (= ${source:Version}),
+         mate-desktop-environment | mate-desktop-environment-core
+Description: MATE session integration for Sawfish
+ This package provides a new display manager session file, that will
+ start Sawfish with MATE.
+
+Package: sawfish-lumina-session
+Architecture: all
+Depends: sawfish (= ${source:Version}), lumina-desktop
+Description: Lumina session integration for Sawfish
+ This package provides a new display manager session file, that will
+ start Sawfish with Lumina

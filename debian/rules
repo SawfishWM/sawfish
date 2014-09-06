@@ -20,7 +20,7 @@ LINGUAS=
 LANG=
 export LC_ALL LINGUAS LANG
 
-DEB_CONFIGURE_USER_FLAGS =
+DEB_CONFIGURE_USER_FLAGS = --without-gnome2session
 
 lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
 	\! -name "*autoload*" \! -name "*custom-defaults*" \
@@ -33,11 +33,8 @@ data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload.jl" \
 
 data_extradirs = debian/tmp/usr/share/sawfish/sounds \
 	debian/tmp/usr/share/sawfish/themes \
-	debian/tmp/usr/share/xsessions \
 	debian/tmp/usr/include \
 	debian/tmp/usr/share/applications \
-	debian/tmp/usr/share/kde4 \
-	debian/tmp/usr/share/gnome \
 	debian/tmp/usr/share/locale \
 	debian/tmp/usr/share/icons
 
@@ -61,6 +58,7 @@ override_dh_auto_install:
 	dh_install -psawfish-data sawfish.el usr/share/emacs/site-lisp/sawfish
 	for d in $(data_extradirs) ; do dh_install -psawfish-data --autodest $$d ; done
 	dh_install -psawfish-data debian/tmp/usr/share/sawfish/sawfish.png
+	dh_install -psawfish-data debian/tmp/usr/share/xsessions/sawfish.desktop
 
 override_dh_installdocs:
 	dh_installdocs --link-doc=sawfish-data

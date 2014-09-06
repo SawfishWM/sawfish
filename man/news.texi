@@ -65,6 +65,42 @@ Each release lists incompatible changes at its top.
 @item New Features
 @itemize @minus
 
+@item Session scripts with xdm (and compatible) integration. [fuchur] [Christopher Bratusek]
+@itemize x
+
+@item @code{sawfish-mate-session}/@code{Sawfish/MATE} start Sawfish and then initialize MATE session.
+
+@item @code{sawfish-kde4-session}/@code{Sawfish/KDE4} start Sawfish and then initialize KDE4 session. [note: it's still possible to select Sawfish from System Settings > Default Applications and starting KDE4 normally using Sawfish in favour of KWin]
+
+@item @code{sawfish-xfce-session}/@code{Sawfish/XFCE} start Sawfish and then initialize XFCE session.
+
+@item @code{sawfish-lumina-session}/@code{Sawfish/Lumina} start Sawfish and then initialize Lumina session. Also add Lumina integration module.
+
+@item Other desktop environments:
+@itemize +
+
+@item GNOME2: set the GConf key @code{/desktop/gnome/session/required-components/windowmanager} to @code{sawfish} and start a new session.
+
+@item LXDE: in lxsession-default-apps replace @code{openbox} with @code{sawfish}.
+
+@item Razor Qt: in the razor configuration center > default applications enter @code{sawfish} in the corresponding field.
+
+@item Other: no other desktop environments are officially supported as of now.
+@end itemize
+
+@item Note for Debian users: the official Sawfish Debian GNU/Linux packages for amd64/i386/armhf distributed at http://apt.nanolx.org/ now have three more packages built from the Sawfish source:
+@itemize +
+
+@item @code{sawfish-kde4-session}: install above mentioned KDE4 integration and (install if not already) kde-core (metapackage for minimal KDE4 desktop)
+
+@item @code{sawfish-mate-session}: install above mentioned MATE integration and (install if not already) mate-desktop-environment-core (metapackage for minimal MATE desktop)
+
+@item @code{sawfish-xfce-session}: install above mentioned XFCE integration and (install if not already) xfce (meta-package for XFCE desktop)
+
+@item @code{sawfish-lumina-session}: install above mentioned Lumina integration and (install if not already) lumina-desktop (meta-package for Lumina Desktop)
+@end itemize
+@end itemize
+
 @item @code{CTWM} like interactive window placement. Previously pressing any button while interactively placing a window would place it. @code{Sawfish} now mimics @code{CTWM}s behaviour: pressing button 1 will just place the window, button 2 will allow dragging to resize the window and place it when the button releases, button 3 will place the window and attempt to fill it to the screen bottom. [Maxime Soulé]
 
 @item New EdgeActions for when moving windows. [Christopher Bratusek]
