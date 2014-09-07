@@ -290,7 +290,12 @@ AC_ARG_WITH(kde4session,
 KDE4_SESSION="$with_kde4session"
 
 if test "$with_kde4session" = "yes"; then
-	KDEDIR="`kde4-config --install data`" || KDEDIR="${datadir}/kde4/apps/"
+	KDEDIR="`kde4-config --install data`"
+fi
+
+dnl fallback
+if test "x$KDEDIR" = x; then
+       KDEDIR="${datadir}/kde4/apps/"
 fi
 
 AC_ARG_WITH(gnome2session,
