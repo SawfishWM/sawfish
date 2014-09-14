@@ -39,6 +39,7 @@
   (define switch-opacity nil)
   (define update-opacity nil)
   (define stop-compton nil)
+  (define timer-load-compton nil)
 
   (defgroup window-effects "Window Effects"
     :group appearance)
@@ -386,13 +387,14 @@
                            (window-opacity w))))))
 
     (define (switch-opacity)
-      (if opacity-enable
-          (start-compton)
-        (stop-compton))
-      (map-windows (lambda (w)
-                     (if opacity-enable
-                         (window-opacity w)
-                       (dim-window w (get-opacity '100))))))
+      (when (not timer-load-compton)
+        (if opacity-enable
+            (start-compton)
+          (stop-compton))
+        (map-windows (lambda (w)
+                       (if opacity-enable
+                           (window-opacity w)
+                         (dim-window w (get-opacity '100)))))))
 
     (define (max-window w)
       (if shadows-crop-maximized
@@ -403,13 +405,22 @@
 
     (define (before-resize w)
       (dim-window w (get-opacity opacity-by-resize)))
-
+    
     (define (tab-release w)
       (if (and (car w)
                (not (cdr w)))
-           (if opacity-enable
-               (window-opacity (car w))
-             (dim-window (car w) (get-opacity '100)))))
+          (if opacity-enable
+              (window-opacity (car w))
+            (dim-window (car w) (get-opacity '100)))))
+
+    (define (timer-compton-load)
+      (setq timer-load-compton
+            (make-timer (lambda ()
+                          (setq timer-load-compton nil)
+                          (switch-opacity))
+                        (quotient 3000 1000) (mod 3000 1000))))
+    
+    (timer-compton-load)
 
     (add-hook 'window-maximized-hook (lambda (w) (if opacity-enable (max-window w))))
     (add-hook 'window-unmaximized-hook (lambda (w) (if opacity-enable (max-window w))))
@@ -422,4 +433,5 @@
     (add-hook 'after-move-hook (lambda (w) (if opacity-enable (window-opacity w))))
     (add-hook 'before-resize-hook (lambda (w) (if opacity-enable (before-resize w))))
     (add-hook 'after-resize-hook (lambda (w) (if opacity-enable (window-opacity w))))
-    (add-hook 'after-initialization-hook switch-opacity)))
+    (add-hook 'after-initialization-hook switch-opacity)
+    (add-hook 'before-exit-hook stop-compton)))
