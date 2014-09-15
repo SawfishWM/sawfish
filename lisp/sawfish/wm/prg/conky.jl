@@ -27,15 +27,12 @@
   (open rep
         rep.system
         rep.io.processes
-        rep.io.timers
 	rep.io.files
         rep.util.misc
         sawfish.wm.misc
 	sawfish.wm.custom)
 
   (define-structure-alias conky sawfish.wm.prg.conky)
-
-  (define %conky-proc nil)
 
   (defcustom init-conky nil
     "Whether to start conky with Sawfish."
@@ -45,14 +42,11 @@
   (define (start-conky)
     "Start conky. If a conky process already exists, it's beeing killed."
     (if (program-exists-p "conky")
-        (progn
-	  (when %conky-proc (kill-process %conky-proc))
-          (setq %conky-proc (make-process))
-          (start-process %conky-proc "conky"))
+        (system "conky &")
       (display-message (format nil "conky executable not found in PATH."))))
 
   (define (stop-conky)
     "Stop conky, if running."
-    (when %conky-proc
-      (kill-process %conky-proc)
-      (setq %conky-proc nil))))
+    (system "killall -qw conky &"))
+
+  (add-hook 'before-exit-hook stop-conky))
