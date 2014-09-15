@@ -183,7 +183,8 @@
   
   (defcustom cabinet:filter-out-from-display (list "^Gdesklets-daemon$" "^Xfce4-panel$" "^Mate-panel$"
                                                    "^Xfdesktop$" "^x-caja-desktop$" "^plasma-desktop$"
-						   "^Pancake$" "^lxpanel" "Sawfishpager")
+						   "^Pancake$" "^lxpanel" "Sawfishpager" "Conky"
+						   "Lumina-DE")
     nil
     :group (focus cabinet filter)
     :widget-flags (expand-horizontally expand-vertically)
