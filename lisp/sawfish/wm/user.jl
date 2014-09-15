@@ -55,6 +55,7 @@
 	   sawfish.wm.commands.launcher
 	   sawfish.wm.ext.wallpaper
 	   sawfish.wm.prg.compton
+	   sawfish.wm.prg.conky
 	   sawfish.wm.prg.diodon
 	   sawfish.wm.prg.fehlstart
 	   sawfish.wm.prg.idesk
@@ -296,6 +297,8 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
       (add-hook 'after-initialization-hook start-nm-applet t))
     (when init-diodon
       (add-hook 'after-initialization-hook start-diodon t))
+    (when init-conky
+      (add-hook 'after-initialization-hook start-conky t))
     (when init-idesk
       (add-hook 'after-initialization-hook start-idesk t)))
 
