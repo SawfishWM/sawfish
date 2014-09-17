@@ -2943,8 +2943,8 @@
            (make-frame w 'shaped-transient-frame current-title)))))
 
 ;; initialize theme
-(color-changed)
-(make-buttons)
+(require 'rep.io.timers)
+(make-timer (lambda () t) (quotient 1000 1000) (mod 1000 1000))
 
 (add-frame-style theme-name get-frame)
 
@@ -2968,3 +2968,6 @@
 (custom-set-property 'styletab-c:left-bottom-buttons ':after-set make-buttons-reframe-with-style)
 (custom-set-property 'styletab-c:right-top-buttons ':after-set make-buttons-reframe-with-style)
 (custom-set-property 'styletab-c:right-bottom-buttons ':after-set make-buttons-reframe-with-style)
+
+(color-changed)
+(make-buttons)
