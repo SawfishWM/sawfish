@@ -2598,7 +2598,7 @@
 (define frame nil)
 (define button-alist nil)
 (define current-title styletab-c:titlebar-place)
-(define recolor-lock nil)
+(define recolor-lock t)
 (define current-type nil)
 
 ;; botton list table
@@ -2877,33 +2877,39 @@
 ;; reframe-with-style, resize bottons
 ;; reset icon cache
 (define (clear-icon-cache-reframe)
-  (when (not recolor-lock)
+  (when recolor-lock
+    (setq recolor-lock nil)
     (recolor-all-buttons)
     (setq styletab-c-icon-cache (make-weak-table eq-hash eq))
     (make-buttons)
-    (reframe-with-style)))
-
+    (reframe-with-style)
+    (setq recolor-lock t)))
 
 (define (color-changed)
-  (when (not recolor-lock)
+  (when recolor-lock
+    (setq recolor-lock nil)
     (recolor-all)
-    (reframe-with-style)))
+    (reframe-with-style)
+    (setq recolor-lock t)))
 
 (define (bright-changed)
-  (when (not recolor-lock)
+  (when recolor-lock
+    (setq recolor-lock nil)
     (recolor-tab)
     (recolor-all-buttons)
-    (reframe-with-style)))
+    (reframe-with-style)
+    (setq recolor-lock t)))
 
 (define (botton-color-changed botton)
-  (when (not recolor-lock)
+  (when recolor-lock
+    (setq recolor-lock nil)
     (botton)
-    (reframe-with-style)))
+    (reframe-with-style)
+    (setq recolor-lock t)))
 
 (define (reload-frame-style-reframe)
-  (when (not recolor-lock)
-    (reload-frame-style theme-name)
-    (reframe-with-style)))
+  (reload-frame-style theme-name)
+  (reframe-with-style))
 
 (define (frame-style-name w)
   (when (eq (window-get w 'current-frame-style) theme-name)
@@ -2936,21 +2942,9 @@
           ((shaped-transient)
            (make-frame w 'shaped-transient-frame current-title)))))
 
-(define (timer-theme-load)
-  (color-changed)
-  (make-buttons)
-  ;; Lock recolor untill all defcustom loaded.
-  ;; Then recolor the theme with images from
-  ;; the hashtables and reframe the theme
-  (require 'rep.io.timers)
-  (setq recolor-lock
-        (make-timer (lambda ()
-                      (setq recolor-lock nil)
-                      (color-changed))
-                    (quotient 1000 1000) (mod 1000 1000))))
-
 ;; initialize theme
-(timer-theme-load)
+(color-changed)
+(make-buttons)
 
 (add-frame-style theme-name get-frame)
 
