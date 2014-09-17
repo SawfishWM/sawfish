@@ -71,7 +71,8 @@
 	     sawfish.wm.integration.xfce
 	     sawfish.wm.integration.mate
 	     sawfish.wm.integration.razor
-	     sawfish.wm.integration.lxde)
+	     sawfish.wm.integration.lxde
+	     sawfish.wm.integration.lumina)
 
      (set-binds))
 
@@ -132,7 +133,8 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
 	(sawfish.wm.integration.kde#detect-kde)
 	(sawfish.wm.integration.xfce#detect-xfce)
 	(sawfish.wm.integration.razor#detect-razor)
-	(sawfish.wm.integration.lxde#detect-lxde))
+	(sawfish.wm.integration.lxde#detect-lxde)
+	(sawfish.wm.integration.lumina#detect-lumina))
     )
 
   ;; Don't signal an error even if user "require" them. These modules
