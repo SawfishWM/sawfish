@@ -788,20 +788,17 @@
 (define (get-recolor-bright bright color)
   (brighten-color color bright))
 
-(define start-lock nil)
 (define (do-recolor img color)
   (if (and (eq styletab-c:styles 'Flat)
            (not flat-buttons))
       (make-sized-image 1 1 color)
     (if (not (eq styletab-c:styles 'Flat))
-        (if start-lock
-            img
-          (let ((recolorer
-                 (make-image-recolorer color
-                                       #:zero-channel blue-channel
-                                       #:index-channel green-channel)))
-            (recolorer img)
-            img))
+        (let ((recolorer
+               (make-image-recolorer color
+                                     #:zero-channel blue-channel
+                                     #:index-channel green-channel)))
+          (recolorer img)
+          img)
       img)))
 
 (define (do-make-get-image img)
@@ -2940,7 +2937,6 @@
            (make-frame w 'shaped-transient-frame current-title)))))
 
 (define (timer-theme-load)
-  (setq start-lock 't)
   (color-changed)
   (make-buttons)
   ;; Lock recolor untill all defcustom loaded.
@@ -2949,7 +2945,6 @@
   (require 'rep.io.timers)
   (setq recolor-lock
         (make-timer (lambda ()
-                      (setq start-lock nil)
                       (setq recolor-lock nil)
                       (color-changed))
                     (quotient 1000 1000) (mod 1000 1000))))
