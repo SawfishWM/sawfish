@@ -1065,7 +1065,8 @@ generate.")
 	    frame-part-get frame-part-put frame-part-window frame-part-x-window
 	    frame-part-position frame-part-dimensions frame-part-state
 	    map-frame-parts refresh-frame-part refresh-window rebuild-frame-part
-	    reload-frame-style update-title-x-offsets update-title-y-offsets)
+	    reload-frame-style update-title-x-offsets update-title-y-offsets
+        find-frame-style)
 
   (add-hook 'add-window-hook reframe-window t)
   (add-hook 'shape-notify-hook reframe-window t)

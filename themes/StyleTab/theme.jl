@@ -788,17 +788,20 @@
 (define (get-recolor-bright bright color)
   (brighten-color color bright))
 
+(define start-lock 't)
 (define (do-recolor img color)
   (if (and (eq styletab-c:styles 'Flat)
            (not flat-buttons))
       (make-sized-image 1 1 color)
     (if (not (eq styletab-c:styles 'Flat))
-        (let ((recolorer
-               (make-image-recolorer color
-                                     #:zero-channel blue-channel
-                                     #:index-channel green-channel)))
-          (recolorer img)
-          img)
+        (if start-lock
+            img
+          (let ((recolorer
+                 (make-image-recolorer color
+                                       #:zero-channel blue-channel
+                                       #:index-channel green-channel)))
+            (recolorer img)
+            img))
       img)))
 
 (define (do-make-get-image img)
@@ -808,7 +811,7 @@
     (or
      (table-ref styletab-c-frame-cache img)
      (let ((image
-            (make-image img)))
+            (make-image (concat (find-frame-style theme-name) "/" img))))
        (table-set styletab-c-frame-cache img image)
        image))))
 
@@ -2598,7 +2601,6 @@
 (define frame nil)
 (define button-alist nil)
 (define current-title styletab-c:titlebar-place)
-(define recolor-lock t)
 (define current-type nil)
 
 ;; botton list table
@@ -2877,39 +2879,33 @@
 ;; reframe-with-style, resize bottons
 ;; reset icon cache
 (define (clear-icon-cache-reframe)
-  (when recolor-lock
-    (setq recolor-lock nil)
+  (when (not start-lock)
     (recolor-all-buttons)
     (setq styletab-c-icon-cache (make-weak-table eq-hash eq))
     (make-buttons)
-    (reframe-with-style)
-    (setq recolor-lock t)))
+    (reframe-with-style)))
 
 (define (color-changed)
-  (when recolor-lock
-    (setq recolor-lock nil)
+  (when (not start-lock)
     (recolor-all)
-    (reframe-with-style)
-    (setq recolor-lock t)))
+    (reframe-with-style)))
 
 (define (bright-changed)
-  (when recolor-lock
-    (setq recolor-lock nil)
+  (when (not start-lock)
     (recolor-tab)
     (recolor-all-buttons)
-    (reframe-with-style)
-    (setq recolor-lock t)))
+    (reframe-with-style)))
 
 (define (botton-color-changed botton)
-  (when recolor-lock
-    (setq recolor-lock nil)
+  (when (not start-lock)
     (botton)
-    (reframe-with-style)
-    (setq recolor-lock t)))
+    (reframe-with-style)))
 
-(define (reload-frame-style-reframe)
-  (reload-frame-style theme-name)
-  (reframe-with-style))
+(define (build-style)
+  (when (not start-lock)
+    (recolor-all)
+    (make-buttons)
+    (reframe-with-style)))
 
 (define (frame-style-name w)
   (when (eq (window-get w 'current-frame-style) theme-name)
@@ -2942,10 +2938,6 @@
           ((shaped-transient)
            (make-frame w 'shaped-transient-frame current-title)))))
 
-;; initialize theme
-(require 'rep.io.timers)
-(make-timer (lambda () t) (quotient 1000 1000) (mod 1000 1000))
-
 (add-frame-style theme-name get-frame)
 
 (call-after-state-changed '(tab-theme-name) frame-style-name)
@@ -2954,7 +2946,7 @@
 (call-after-state-changed '(maximized sticky fixed-position fixed-size stacking) reframe-one)
 (add-hook 'remove-from-workspace-hook reframe-one)
 
-(custom-set-property 'styletab-c:styles ':after-set reload-frame-style-reframe)
+(custom-set-property 'styletab-c:styles ':after-set build-style)
 (custom-set-property 'styletab-c:title-dimension ':after-set clear-icon-cache-reframe)
 (custom-set-property 'styletab-c:custom-button-width ':after-set clear-icon-cache-reframe)
 (custom-set-property 'styletab-c:button-width ':after-set clear-icon-cache-reframe)
@@ -2969,5 +2961,12 @@
 (custom-set-property 'styletab-c:right-top-buttons ':after-set make-buttons-reframe-with-style)
 (custom-set-property 'styletab-c:right-bottom-buttons ':after-set make-buttons-reframe-with-style)
 
-(color-changed)
-(make-buttons)
+(define (timer-theme-load)
+  (require 'rep.io.timers)
+  (setq start-lock
+        (make-timer (lambda ()
+                      (setq start-lock nil)
+                      (build-style))
+                    (quotient 10 1000) (mod 10 1000))))
+
+(timer-theme-load)
