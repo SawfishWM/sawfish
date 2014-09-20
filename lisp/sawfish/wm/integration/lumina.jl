@@ -27,7 +27,8 @@
 	  rep.system
           sawfish.wm.menus
 	  sawfish.wm.misc
-          sawfish.wm.custom
+          sawfish.wm.windows
+	  sawfish.wm.custom
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
@@ -48,6 +49,8 @@
   ;; Returns nil if lumina is not found.
   ;; If detected, returns t, and do also lumina support init.
   (define (detect-lumina)
-    (when (equal (getenv "XDG_CURRENT_DESKTOP") "LUMINA")
+    (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "LUMINA")
+	      (equal (getenv "DESKTOP_SESSION") "sawfish-lumina")
+	      (get-window-by-class "Lumina" #:regex t))
       (init)
       t)))

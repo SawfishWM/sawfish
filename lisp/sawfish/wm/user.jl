@@ -80,10 +80,10 @@
   ;; apps-menu, too, or it will break.
   (defvar desktop-environment "none"
     "Running desktop environment, detected by Sawfish.
-Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" or \"none\".")
+Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\", \"lumina\" or \"none\".")
 
   (defvar want-poweroff-menu t
-    "Add poweroff menu if you don't use GNOME / KDE / XFCE / Razor-Qt / LXDE.")
+    "Add poweroff menu if you don't use GNOME / KDE / XFCE / Razor-Qt / LXDE / Lumina.")
 
   (defvar want-extra-menu-entries t
     "Provide additional entries in root menu.")
@@ -159,7 +159,7 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\" 
 	  (unless batch-mode
 	    (rename-old-stuff)
 	    ;; detect DE before loading rc
-	    (detect-desktop-environment)
+            (detect-desktop-environment)
 
 	    ;; then the customized options
 	    (condition-case data

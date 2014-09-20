@@ -90,6 +90,7 @@
   ;; If detected, returns t, and do also kde support init.
   (define (detect-kde)
     (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "KDE")
+              (equal (getenv "DESKTOP_SESSION") "sawfish-kde4")
               (getenv "KDE_FULL_SESSION"))
       (init)
       t))

@@ -80,6 +80,7 @@
   ;; If detected, returns t, and do also xfce support init.
   (define (detect-xfce)
     (when (or (get-x-property 'root '_DT_SAVE_MODE)
+              (equal (getenv "DESKTOP_SESSION") "sawfish-xfce")
               (equal (getenv "XDG_CURRENT_DESKTOP") "XFCE"))
       (init)
       t)))

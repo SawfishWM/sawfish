@@ -74,6 +74,7 @@
   ;; If detected, returns t, and do also mate support init.
   (define (detect-mate)
     (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "MATE")
+              (equal (getenv "DESKTOP_SESSION") "sawfish-mate")
               (getenv "MATE_DESKTOP_SESSION_ID"))
       (init)
       t)))
