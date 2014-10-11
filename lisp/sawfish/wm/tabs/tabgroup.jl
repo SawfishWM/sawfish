@@ -58,6 +58,7 @@
           sawfish.wm.commands.move-resize
           sawfish.wm.stacking
           sawfish.wm.util.groups
+          sawfish.wm.util.window-order
           sawfish.wm.commands.groups
           sawfish.wm.ext.auto-raise
           sawfish.wm.ext.shade-hover
@@ -66,15 +67,18 @@
   (define-structure-alias tabgroup sawfish.wm.tabs.tabgroup)
 
   (define all-wins nil)
+  (define windows-stacking-order nil)
   (define oldgroup nil)
   (define tab-groups nil)
   (define tab-refresh-lock t)
   (define tab-move-resize-lock nil)
+  (define destroy nil)
   (define release-window t)
   (define last-unmap-id nil)
   (define in-tab-group-name nil)
   (define tab-theme-name)
   (define tab-theme-tabbars)
+  (define timer-raise nil)
 
   (defvar tab-group-windows-hook '()
     "Tab-group-windows-hook called when changing or creating a tabgroup.
@@ -178,6 +182,10 @@ has multiple tabbars. Also need the currect settings in the theme.jl from the th
         0
       (+ 1 (tab-rank elem (cdr list)))))
 
+  (define (destroy-hook w)
+    (setq destroy 't)
+    (tab-delete-window-from-tab-groups w))
+
   (define (tab-delete-window-from-group win index)
     "Remove WIN from the group at given index."
     (let* ((old (nth index tab-groups))
@@ -198,12 +206,14 @@ has multiple tabbars. Also need the currect settings in the theme.jl from the th
     (setq release-window t)
     (when (window-tabbed-p w)
       (let ((wins (list (remove w (tab-group-windows w)))))
-        (if (not (window-get w 'shaded))
-            (mapcar (lambda (w)
-                      (unshade-window w)) (tab-group-windows w)))
         (tab-delete-window-from-group w (tab-window-group-index w))
         (window-put w 'fixed-position nil)
         (tab-refresh-group oldgroup 'frame)
+        (unshade-window (nth 0 (tab-group-windows-stacking-order oldgroup)))
+        (window-order-push (nth 0 (tab-group-windows-stacking-order oldgroup)))
+        (when (eq destroy 't)
+          (set-input-focus (nth 0 (tab-group-windows-stacking-order oldgroup)))
+          (setq destroy nil))
         (call-hook 'tab-group-windows-hook wins)
         (reframe-window w))))
 
@@ -213,7 +223,8 @@ has multiple tabbars. Also need the currect settings in the theme.jl from the th
       (rplaca (nthcdr index tab-groups)
               (tab-build-group (tab-group-position group)
                                (tab-group-dimensions group)
-                               (append (tab-group-window-list group) (list win))))))
+                               (append (tab-group-window-list group) (list win))))
+      (window-order-push win)))
 
   (define (tab-refresh-group win prop)
     "Refresh the entire group containing WIN according to PROP.
@@ -235,7 +246,7 @@ sticky, unsticky, fixed-position fixed-size."
                           (unshade-window w)) wins))
             (cond
              ((eq prop 'raise)
-              (raise-windows focus wins))
+              (raise-windows win (remove win (tab-group-windows-stacking-order win))))
              ((eq prop 'title-position)
               (let ((group-title-position (window-get win 'title-position)))
                 (mapcar (lambda (w)
@@ -415,7 +426,8 @@ sticky, unsticky, fixed-position fixed-size."
           (set-input-focus w)
           (call-hook 'tab-group-windows-hook (list (tab-group-windows w)))
           (if (not (window-tabbed-p win)) (window-put win 'tabbed t))
-          (window-put w 'tabbed t)))))
+          (window-put w 'tabbed t)
+          (raise-windows w (remove w (tab-group-windows-stacking-order w)))))))
   
   (define (tab-release-window w)
     "Release the window from its group."
@@ -552,6 +564,7 @@ sticky, unsticky, fixed-position fixed-size."
     (let* ((default-window-animator 'none)
            (index (tab-window-group-index win))
            (wins (tab-group-windows win))
+           (order (tab-group-windows-stacking-order win))
            (tabs (remove win (tab-group-windows win))))
       (setq tab-move-resize-lock 't)
       (tab-delete-window-from-group win index)
@@ -562,6 +575,7 @@ sticky, unsticky, fixed-position fixed-size."
                   (window-put w 'never-iconify nil)
                   (window-put w 'never-iconify-opaque t))
                 (iconify-window w)) tabs)
+      (setq windows-stacking-order order)
       (setq all-wins wins))
     (setq tab-refresh-lock t))
 
@@ -588,7 +602,8 @@ sticky, unsticky, fixed-position fixed-size."
                     (window-put w 'never-iconify t))
                   (window-put w 'tabbed t)) wins)
         (call-hook 'tab-group-windows-hook (list (tab-group-windows win)))
-        (raise-window win)
+        (raise-windows win (remove win windows-stacking-order))
+        (tab-refresh-group win 'raise)
         (setq all-wins nil))
       (setq tab-refresh-lock t)
       (when (window-tabbed-p win)
@@ -654,7 +669,6 @@ of the windows the same 'tab-group property"
     (when (window-get win 'tab-group)
       (setq in-tab-group-name (remove (assoc last-unmap-id in-tab-group-name) in-tab-group-name))))
 
-  (define timer-raise nil)
   (define (focus-in-tab win)
     (let ((timer-wait (if raise-windows-on-focus raise-window-timeout '1)))
       (if (or (eq focus-mode 'click)
@@ -663,7 +677,7 @@ of the windows the same 'tab-group property"
       (setq timer-raise
             (make-timer (lambda ()
                           (if (or shade-hover-mode (window-get win 'shade-hover))
-                              (raise-windows win (tab-group-windows-stacking-order win))
+                              (raise-windows win (remove win (tab-group-windows-stacking-order win)))
                             (tab-refresh-group win 'raise)))
                         (quotient timer-wait 1000) (mod timer-wait 1000)))))
 
@@ -684,7 +698,6 @@ of the windows the same 'tab-group property"
           (mapcar (lambda (w)
                     (shade-window w)) (remove win (tab-group-windows win))))
         (set-input-focus win))))
-
 
   (unless batch-mode
     (add-hook 'after-add-window-hook in-tab-group)
@@ -726,6 +739,6 @@ of the windows the same 'tab-group property"
     (add-hook 'uniconify-window-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'uniconify))))
     (add-hook 'window-maximized-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'maximized))))
     (add-hook 'window-unmaximized-hook (lambda (win) (if (window-tabbed-p win) (tab-refresh-group win 'maximized))))
-    (add-hook 'destroy-notify-hook tab-delete-window-from-tab-groups))
+    (add-hook 'destroy-notify-hook destroy-hook))
 
   (gaol-add set-tab-theme-name set-tab-theme-tabbars tab-refresh-group tab-group-windows))
