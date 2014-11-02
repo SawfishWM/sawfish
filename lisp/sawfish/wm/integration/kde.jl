@@ -22,7 +22,8 @@
 (define-structure sawfish.wm.integration.kde
 
     (export detect-kde
-	    kde-late-init)
+	    kde-late-init
+	    kde-window-matchers)
 
     (open rep
 	  rep.system
@@ -31,7 +32,8 @@
           sawfish.wm.custom
           sawfish.wm.commands
           sawfish.wm.commands.launcher
-	  sawfish.wm.ext.apps-menu)
+	  sawfish.wm.ext.apps-menu
+          sawfish.wm.ext.match-window)
 
   (define-structure-alias kde-int sawfish.wm.integration.kde)
 
@@ -39,17 +41,20 @@
     '("/usr/share/applications/kde4/")
     "KDE specific directories where *.desktop files are stored.")
 
+  (define (kde-window-matchers)
+    ;; window matchers so we properly interact with plasma stuff
+    (add-window-matcher '((WM_CLASS . "^krunner/krunner$"))
+     '((focus-mode . click)))
+    (add-window-matcher '((WM_CLASS . "^Plasma-desktop/plasma-desktop$"))
+     '((focus-mode . click)))
+    (add-window-matcher '((WM_CLASS . "^Plasma/Plasma$"))
+     '((focus-mode . click))))
+
   (define (init)
     (let (menu
 	  kde-logout-cmd)
       (setq desktop-environment "kde")
       (setq want-poweroff-menu nil)
-
-      ;; window matchers so we properly interact with plasma stuff
-      (add-window-matcher '((WM_CLASS . "^krunner/krunner$"))
-       '((focus-mode . click)))
-      (add-window-matcher '((WM_CLASS . "^Plasma-desktop/plasma-desktop$"))
-       '((focus-mode . click)))
 
       ;; invoke the KDE terminal instead of xterm
       (unless (variable-customized-p 'xterm-program)
@@ -104,4 +109,5 @@
   ;; Should be called after user customization is read.
   (define (kde-late-init)
     (setq desktop-directory
-	  (append desktop-directory kde-desktop-directories))))
+	  (append desktop-directory kde-desktop-directories))
+    (kde-window-matchers)))
