@@ -129,7 +129,7 @@ Each release lists incompatible changes at its top.
 
 @item Add @code{sawfish.wm.prg.diodon}, simple auto-starter for the @code{Diodon Clipboard Manager}. [Christopher Bratusek]
 
-@item Add @code{sawfish.wm.prg.conky}, simple auto-starter for the @code{Conky System Monitor}. [Christopher Bratusek]
+@item Add @code{sawfish.wm.prg.conky}, simple auto-starter for the @code{Conky System Monitor}, that allows for custom command line options to be passed. [Christopher Bratusek]
 
 @item Add @code{sawfish.wm.prg.idesk}, simple auto-starter for the @code{Idesk Desktop Icon Manager}. [Christopher Bratusek]
 @end itemize
@@ -137,9 +137,11 @@ Each release lists incompatible changes at its top.
 @item Miscellaneous Changes
 @itemize @minus
 
-@item Majorly improve speed-up of StyleTab theme by locking the re-coloring of images until all configuration is loaded, so that re-coloring is only done once upon start. [fuchur]
+@item Majorly improved start-up speed of StyleTab theme by locking the re-coloring of images until all configuration is loaded, so that re-coloring is only done once upon start. [fuchur]
 
 @item In @code{sawfish.wm.prg.compton} delay compton start by 3 seconds to prevent heavy screen flickering. [fuchur]
+
+@item Partially revert focus changes introduced in Sawfish 1.6.0 [fuchur], auto-apply window-matchers for Plasma when KDE4 is detected running, for proper user experience. [Christopher Bratusek]
 
 @item Improve @code{cabinet} window-switcher. Code-cleanup, bug fixes, blacklisting applications (mostly panels, pagers) and icon for missing window-icons. [fuchur]
 
