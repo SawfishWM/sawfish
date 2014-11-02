@@ -39,10 +39,16 @@
     :type boolean
     :group (misc apps))
 
+  (defcustom conky-args ""
+    "Extra arguments for launching conky"
+    :type string
+    :group (misc apps)
+    :depends init-conky)
+
   (define (start-conky)
     "Start conky. If a conky process already exists, it's beeing killed."
     (if (program-exists-p "conky")
-        (system "conky &")
+        (system "conky %s &" conky-args)
       (display-message (format nil "conky executable not found in PATH."))))
 
   (define (stop-conky)
