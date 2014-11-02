@@ -45,6 +45,12 @@
       (setq desktop-environment "kde")
       (setq want-poweroff-menu nil)
 
+      ;; window matchers so we properly interact with plasma stuff
+      (add-window-matcher '((WM_CLASS . "^krunner/krunner$"))
+       '((focus-mode . click)))
+      (add-window-matcher '((WM_CLASS . "^Plasma-desktop/plasma-desktop$"))
+       '((focus-mode . click)))
+
       ;; invoke the KDE terminal instead of xterm
       (unless (variable-customized-p 'xterm-program)
 	(setq xterm-program "konsole"))
