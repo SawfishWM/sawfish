@@ -144,34 +144,11 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 
 ;;; modes
 
-  #|
-  From sawfish-1.5.0, enter-notify events invoked by grab are
-  ignored in enter-exit and enter-only. This has a down side, too,
-  but first let us see what's the intention.
-
-  The problem that this solves is when you press Alt F2 in KDE, the
-  Run Command popup appears and gets focused (if focus-when-mapped is
-  non-nil), you start typing, the completion list pops up and takes
-  focus, then you type a bit further and the completion list
-  disappears.  Focus used to revert to the window the pointer was in,
-  which usually was not the Run Command popup.  transient-unmap-window
-  tries hard to get it right, then the grab-induced enter-notify
-  brought focus to the wrong window anyway.
-
-  The problem that this causes is when you open the KDE main menu by
-  clicking the K icon in the panel, move the mouse into some
-  application window and click to dismiss the open menu, focus reverts
-  to the panel. You have to move the pointer out of the application
-  window and back in to get it focused.
-  |#
   (define-focus-mode 'enter-exit
     (lambda (w action . args)
       (case action
 	((pointer-in)
-	 (when (and (window-really-wants-input-p w)
-		    ;; ignore grab/ungrab enter events
-		    ;; See the above long comment
-		    (eq (car args) 'normal))
+	 (when (window-really-wants-input-p w)
 	   (set-input-focus w)))
 	((pointer-out)
 	 ;; ignore grab/ungrab leave events
@@ -190,13 +167,10 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
            (set-input-focus w))))))
 
   (define-focus-mode 'enter-only
-    (lambda (w action . args)
+    (lambda (w action)
       (case action
 	((pointer-in)
-	 (when (and (window-really-wants-input-p w)
-		    ;; ignore grab/ungrab enter events
-		    ;; See the comment above enter-exit
-		    (eq (car args) 'normal))
+	 (when (window-really-wants-input-p w)
 	   (set-input-focus w)))
 	((warp-if-necessary)
 	 (let ((current (query-pointer-window)))
