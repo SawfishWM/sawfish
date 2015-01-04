@@ -1403,6 +1403,34 @@ out:
     return tem;
 }
 
+#ifdef HAVE_GDK_PIXBUF
+static void
+argbdata_to_pixdata (gulong * argb_data, int len, guchar ** pixdata)
+{
+    guchar *p;
+    guint argb;
+    guint rgba;
+    int i;
+
+    *pixdata = g_new (guchar, len * 4);
+    p = *pixdata;
+
+    i = 0;
+    while (i < len)
+    {
+        argb = argb_data[i];
+        rgba = (argb << 8) | (argb >> 24);
+
+        *p = rgba >> 24; ++p;
+        *p = (rgba >> 16) & 0xff; ++p;
+        *p = (rgba >> 8) & 0xff; ++p;
+        *p = rgba & 0xff; ++p;
+
+        ++i;
+    }
+}
+#endif
+
 DEFUN("window-icon-image", Fwindow_icon_image,
       Swindow_icon_image, (repv win), rep_Subr1) /*
 ::doc:sawfish.wm.windows.subrs#window-icon-image::
@@ -1416,6 +1444,53 @@ WINDOW. Returns the symbol `nil' if no such image.
 
    if (VWIN (win)->icon_image == rep_NULL)
    {
+       #ifdef HAVE_GDK_PIXBUF
+       if (!WINDOW_IS_GONE_P (VWIN (win)))
+       {
+	   Atom actual_type;
+	   int actual_format;
+	   unsigned long nitems, bytes_after;
+	   union {
+	       unsigned long *l;
+	       unsigned char *c;
+	   } data;
+
+	   static Atom net_wm_icon = 0;
+
+	   if (net_wm_icon == 0)
+	       net_wm_icon = XInternAtom (dpy, "_NET_WM_ICON", False);
+
+	   data.l = 0;
+	   if (XGetWindowProperty (dpy, VWIN (win)->id, net_wm_icon,
+				   0L, G_MAXLONG, False, AnyPropertyType,
+				   &actual_type, &actual_format,
+				   &nitems, &bytes_after,
+				   &data.c) == Success)
+	   {
+	       int i;
+	       for (i = 0; i < nitems; i += 2 + data.l[i] * data.l[i + 1])
+		   if (data.l[i] <= 16 && data.l[i + 1] <= 16)
+		   {
+
+			int w = data.l[i];
+			int h = data.l[i + 1];
+			guchar * pixdata;
+			argbdata_to_pixdata(&(data.l[i + 2]), w * h, &pixdata);
+			XFree (data.l);
+			GdkPixbuf * img = gdk_pixbuf_new_from_data(
+						pixdata,
+						GDK_COLORSPACE_RGB,
+						TRUE, 8,
+						w, h, w * 4,
+						NULL, NULL);
+			return VWIN (win)->icon_image = make_image(img, Qnil);
+		   }
+	   }
+	   if (data.l != 0)
+	       XFree (data.l);
+       }
+       #endif
+
        Window pixmap_id = 0, mask_id = 0;
 
        if (VWIN (win)->wmhints != 0)
