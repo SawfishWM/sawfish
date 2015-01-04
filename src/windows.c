@@ -1403,34 +1403,6 @@ out:
     return tem;
 }
 
-#ifdef HAVE_GDK_PIXBUF
-static void
-argbdata_to_pixdata (gulong * argb_data, int len, guchar ** pixdata)
-{
-    guchar *p;
-    guint argb;
-    guint rgba;
-    int i;
-
-    *pixdata = g_new (guchar, len * 4);
-    p = *pixdata;
-
-    i = 0;
-    while (i < len)
-    {
-        argb = argb_data[i];
-        rgba = (argb << 8) | (argb >> 24);
-
-        *p = rgba >> 24; ++p;
-        *p = (rgba >> 16) & 0xff; ++p;
-        *p = (rgba >> 8) & 0xff; ++p;
-        *p = rgba & 0xff; ++p;
-
-        ++i;
-    }
-}
-#endif
-
 DEFUN("window-icon-image", Fwindow_icon_image,
       Swindow_icon_image, (repv args), rep_SubrN) /*
 ::doc:sawfish.wm.windows.subrs#window-icon-image::
@@ -1482,18 +1454,10 @@ WINDOW. Returns the symbol `nil' if no such image.
 	       for (i = 0; i < nitems; i += 2 + data.l[i] * data.l[i + 1])
 		   if (data.l[i] == iconsize && data.l[i + 1] == iconsize)
 		   {
-
-			iconsize = data.l[i];
-			guchar * pixdata;
-			argbdata_to_pixdata(&(data.l[i + 2]), iconsize * iconsize, &pixdata);
+			VWIN (win)->icon_image =
+				make_image_from_data(&(data.l[i + 2]), iconsize);
 			XFree (data.l);
-			GdkPixbuf * img = gdk_pixbuf_new_from_data(
-						pixdata,
-						GDK_COLORSPACE_RGB,
-						TRUE, 8,
-						iconsize, iconsize, iconsize * 4,
-						NULL, NULL);
-			return VWIN (win)->icon_image = make_image(img, Qnil);
+			return VWIN (win)->icon_image;
 		   }
 	   }
 	   if (data.l != 0)

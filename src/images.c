@@ -990,6 +990,49 @@ defines the color of its pixels.
     return Qnil;
 }
 
+#ifdef HAVE_GDK_PIXBUF
+static void
+argbdata_to_pixdata (gulong * argb_data, int len, unsigned char ** pixdata)
+{
+    guchar *p;
+    guint argb;
+    guint rgba;
+    int i;
+
+    *pixdata = rep_alloc (len * 4);
+    p = *pixdata;
+
+    i = 0;
+    while (i < len)
+    {
+        argb = argb_data[i];
+        rgba = (argb << 8) | (argb >> 24);
+
+        *p = rgba >> 24; ++p;
+        *p = (rgba >> 16) & 0xff; ++p;
+        *p = (rgba >> 8) & 0xff; ++p;
+        *p = rgba & 0xff; ++p;
+
+        ++i;
+    }
+}
+
+repv make_image_from_data (long * data, int size)
+{
+    unsigned char * pixdata;
+    argbdata_to_pixdata(data, size * size, &pixdata);
+
+    GdkPixbuf * img = gdk_pixbuf_new_from_data(pixdata,
+					       GDK_COLORSPACE_RGB,
+					       TRUE, 8,
+					       size, size,
+					       size * 4,
+					       free_pixbuf_data,
+					       pixdata);
+    return make_image(img, Qnil);
+}
+#endif
+
 DEFUN("tile-image", Ftile_image, Stile_image, (repv dst, repv src), rep_Subr2) /*
 ::doc:sawfish.wm.images#tile-image::
 tile-image DEST-IMAGE SOURCE-IMAGE
