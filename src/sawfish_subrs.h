@@ -230,6 +230,7 @@ extern int image_channels (Lisp_Image *im);
 extern void image_changed (Lisp_Image *im);
 extern void images_init (void);
 extern void images_kill (void);
+extern repv make_image (image_t im, repv plist);
 
 /* from keys.c */
 extern repv Qglobal_keymap, Qunbound_key_hook, Qkeymap;
