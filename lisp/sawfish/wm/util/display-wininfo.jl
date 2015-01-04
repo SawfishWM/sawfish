@@ -110,7 +110,7 @@ If W is nil previous window is removed."
 
     (when w
       (let* ((text (make-text-item (window-info w) default-font))
-	     (icon (let ((i (window-icon-image w)))
+	     (icon (let ((i (window-icon-image w 32)))
 		     (and i (scale-image i (car icon-size) (cdr icon-size)))))
 	     (icon-dims (if icon icon-size '(0 . 0)))
 	     (win-size (cons (+ (car icon-dims)
