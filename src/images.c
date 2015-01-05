@@ -95,7 +95,7 @@ load_image (char *file)
 
 /* Make a Lisp image object from the imlib image IM. Its initial properties
    will be taken from the list PLIST. */
-repv
+static repv
 make_image (image_t im, repv plist)
 {
     Lisp_Image *f;
