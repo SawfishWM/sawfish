@@ -21,7 +21,8 @@
 
 (define-structure sawfish.wm.integration.lumina
 
-    (export detect-lumina)
+    (export detect-lumina
+            lumina-window-matchers)
 
     (open rep
 	  rep.system
@@ -30,9 +31,16 @@
           sawfish.wm.windows
 	  sawfish.wm.custom
           sawfish.wm.commands
-          sawfish.wm.commands.launcher)
+          sawfish.wm.commands.launcher
+	  sawfish.wm.ext.match-window)
 
   (define-structure-alias lumina-int sawfish.wm.integration.lumina)
+
+  (define (lumina-window-matchers)
+    ;; window matchers so we properly interact with lumina-panel
+    (add-window-matcher '((WM_CLASS . "^Lumina Desktop Environment/Lumina-DE$"))
+     '((cycle-skip . t)
+       (fixed-position . t))))
 
   (define (init)
       (setq desktop-environment "lumina")

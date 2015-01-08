@@ -182,6 +182,9 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\",
   (when (equal desktop-environment "kde")
     (sawfish.wm.integration.kde#kde-late-init))
 
+  (when (equal desktop-environment "lumina")
+    (sawfish.wm.integration.lumina#lumina-window-matchers))
+
   (unless batch-mode
     (when want-extra-menu-entries
       (let ((menu root-menu))
