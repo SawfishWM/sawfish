@@ -1404,7 +1404,7 @@ out:
 }
 
 DEFUN("window-icon-image", Fwindow_icon_image,
-      Swindow_icon_image, (repv win), rep_Subr1) /*
+      Swindow_icon_image, (repv args), rep_SubrN) /*
 ::doc:sawfish.wm.windows.subrs#window-icon-image::
 window-icon-image WINDOW
 
@@ -1412,10 +1412,59 @@ Returns an image object representing the icon currently associated with
 WINDOW. Returns the symbol `nil' if no such image.
 ::end:: */
 {
+   if (!rep_CONSP(args))
+       return rep_signal_missing_arg (1);
+   repv win = rep_CAR(args);
    rep_DECLARE1 (win, WINDOWP);
 
-   if (VWIN (win)->icon_image == rep_NULL)
+   int iconsize = 16;
+   if (rep_CONSP(rep_CDR(args)) && rep_INTP(rep_CAR(rep_CDR(args))))
    {
+       iconsize = rep_INT(rep_CAR(rep_CDR(args)));
+   }
+
+   if (VWIN (win)->icon_image == rep_NULL || VWIN (win)->icon_size != iconsize)
+   {
+       VWIN (win)->icon_size = iconsize;
+
+       #ifdef HAVE_GDK_PIXBUF
+       if (!WINDOW_IS_GONE_P (VWIN (win)))
+       {
+	   Atom actual_type;
+	   int actual_format;
+	   unsigned long nitems, bytes_after;
+	   union {
+	       unsigned long *l;
+	       unsigned char *c;
+	   } data;
+
+	   static Atom net_wm_icon = 0;
+
+	   if (net_wm_icon == 0)
+	       net_wm_icon = XInternAtom (dpy, "_NET_WM_ICON", False);
+
+	   data.l = 0;
+	   if (XGetWindowProperty (dpy, VWIN (win)->id, net_wm_icon,
+				   0L, G_MAXLONG, False, AnyPropertyType,
+				   &actual_type, &actual_format,
+				   &nitems, &bytes_after,
+				   &data.c) == Success)
+	   {
+	       int i;
+	       for (i = 0; i < nitems; i += 2 + data.l[i] * data.l[i + 1])
+		   if (data.l[i] == iconsize && data.l[i + 1] == iconsize)
+		   {
+			VWIN (win)->icon_image =
+				make_image_from_data(&(data.l[i + 2]), iconsize);
+			XFree (data.l);
+			return VWIN (win)->icon_image;
+		   }
+	   }
+	   if (data.l != 0)
+	       XFree (data.l);
+       }
+       #endif
+
        Window pixmap_id = 0, mask_id = 0;
 
        if (VWIN (win)->wmhints != 0)

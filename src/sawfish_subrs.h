@@ -230,6 +230,9 @@ extern int image_channels (Lisp_Image *im);
 extern void image_changed (Lisp_Image *im);
 extern void images_init (void);
 extern void images_kill (void);
+#ifdef HAVE_GDK_PIXBUF
+extern repv make_image_from_data (long * data, int size);
+#endif
 
 /* from keys.c */
 extern repv Qglobal_keymap, Qunbound_key_hook, Qkeymap;

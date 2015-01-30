@@ -157,6 +157,7 @@ typedef struct lisp_window {
     repv net_name, net_icon_name;
     int frame_vis;
     repv icon_image;
+    int icon_size;
 
     /* Frame data */
     Window frame; /* Reparenter window */
