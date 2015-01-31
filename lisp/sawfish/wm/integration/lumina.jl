@@ -39,8 +39,7 @@
   (define (lumina-window-matchers)
     ;; window matchers so we properly interact with lumina-panel
     (add-window-matcher '((WM_CLASS . "^Lumina Desktop Environment/Lumina-DE$"))
-     '((cycle-skip . t)
-       (fixed-position . t))))
+     '((opacity . 100))))
 
   (define (init)
       (setq desktop-environment "lumina")
