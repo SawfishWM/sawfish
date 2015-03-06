@@ -155,15 +155,15 @@ EVENT-NAME)', where EVENT-NAME may be one of the following symbols:
 ;;; modes
 
   (define-focus-mode 'enter-exit
-    (lambda (w action . args)
+    ;; `pointer-out' should not be caught. `enter-root' handles it.
+    ;; Furthermore, pointer-out used to make troubles: for example,
+    ;; an appearance of a menu by alt-key which covers the pointer
+    ;; made the focus lost.
+    (lambda (w action)
       (case action
 	((pointer-in)
 	 (when (window-really-wants-input-p w)
 	   (set-input-focus w)))
-	((pointer-out)
-	 ;; ignore grab/ungrab leave events
-	 (when (eq (car args) 'normal)
-	   (set-input-focus nil)))
 	((enter-root)
 	 ;; ensure that any desktop window gets focused
 	 (set-input-focus w))
