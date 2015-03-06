@@ -289,15 +289,16 @@
                   (catch 'x-cycle-exit
                     ;; do the first step
                     (cycle-next windows step)
-                    (setq focus-ignore-pointer-events t)
+		    ;; Record current time + 0.1 sec.
+                    (setq focus-xcycle-timestamp
+			  (cons (current-time)
+				(+ 100000 (current-utime))))
+
                     (recursive-edit))
                   (when (fluid x-cycle-current)
                     (display-window (fluid x-cycle-current))))
               (remove-message)
-              (ungrab-keyboard)
-              (make-timer (lambda ()
-                            (setq focus-ignore-pointer-events nil))
-                          0 100)))))
+              (ungrab-keyboard)))))
 
       (when tail-command
 	;; make sure that the command operates on the newly-focused
