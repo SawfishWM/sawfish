@@ -55,4 +55,5 @@
     "Stop conky, if running."
     (system "killall -qw conky &"))
 
-  (add-hook 'before-exit-hook stop-conky))
+  (unless batch-mode
+    (add-hook 'before-exit-hook stop-conky)))
