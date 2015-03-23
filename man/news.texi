@@ -39,6 +39,27 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
+@heading 1.11.90 (1.12 beta) "The Day Is My Enemy"
+@itemize @bullet
+
+@item Build and Installation
+@itemize @minus
+@item When building Sawfish while an instance of it is running, a sawfish-managed @code{conky} instance does no longer get killed. [Christopher Bratusek]
+@end itemize
+
+@item New Features
+@itemize @minus
+@item Let @code{window-icon-image} use @code{NET_WM_ICON} to get 16x16 icon. Also add a size-parameter in case a different one is desired. [hans1024]
+
+@item Allow passing of extra (custom) arguments to compton. [Joshua Moller-Mara]
+@end itemize
+
+@item Miscellaneous Changes
+@itemize @minus
+@item Add @code{lumina-window-matchers} for better interaction of Lumina and Compton. Also filter Lumina out from @code{cabinet}. [Christopher Bratusek]
+@end itemize
+@end itemize
+
 @heading 1.11 "Apollo"
 @itemize @bullet
 
