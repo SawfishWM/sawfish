@@ -42,6 +42,13 @@ Each release lists incompatible changes at its top.
 @heading 1.11.90 (1.12 beta) "The Day Is My Enemy"
 @itemize @bullet
 
+@item Bug Fixes
+@itemize @minus
+@item Fixed that a focus change by pointer motion was ignored after x-cycle. [Timo Korvola]
+
+@item Focus-mode @code{enter-exit} now ignores @code{pointer-out} event. Fixing flickering bugs with widgets like GtkComboBox, GtkCompletion or Firefox' URL-Bar. [Timo Korvola]
+@end itemize
+
 @item Build and Installation
 @itemize @minus
 @item When building Sawfish while an instance of it is running, a sawfish-managed @code{conky} instance does no longer get killed. [Christopher Bratusek]
