@@ -167,7 +167,7 @@
 			(distancefrom trayer-distancefrom)
 			(padding trayer-padding)
 			(monitor trayer-monitor))
-    "Start trayer. If a trayer process already exists, it's beeing killed.
+    "Start trayer. If a trayer process already exists, it'll be killed and started again.
 All options of trayer are supported."
     (if (program-exists-p "trayer")
         (progn
