@@ -31,6 +31,7 @@
 	  sawfish.wm.placement
 	  sawfish.wm.workspace
           sawfish.wm.util.window-order
+	  sawfish.wm.util.workarea
           sawfish.wm.misc)
 
   (define (window-workspace w) (car (window-get w 'workspaces)))
@@ -63,8 +64,8 @@
   (define (window-y w) (cdr (window-position w)))
   (define (window-width w) (car (window-frame-dimensions w)))
   (define (window-height w) (cdr (window-frame-dimensions w)))
-  (define (scr-height #!optional (tm 0) (bm 0)) (- (screen-height) tm bm))
-  (define (scr-width #!optional (l 0) (r 0) (g 0)) (- (screen-width) l r g))
+  (define (scr-height #!optional (tm 0) (bm 0)) (- (cadddr (calculate-workarea #:head (current-head))) tm bm))
+  (define (scr-width #!optional (l 0) (r 0) (g 0)) (- (caddr (calculate-workarea #:head (current-head))) l r g))
 
   (define (resize-frame-to w width height)
     (let ((width-offset (- (car (window-frame-dimensions w))
@@ -74,12 +75,25 @@
       (resize-window-to w (- width width-offset) (- height height-offset))))
 
   (define (push-window w x y width height)
+    (let ((height-offset (cadr (calculate-workarea #:window w #:head (current-head))))
+          (width-offset (car (calculate-workarea #:window w #:head (current-head)))))
+          (when (not (eq 0 height-offset))
+	             (when (< y height-offset)
+		         (setq y (+ y height-offset))
+			 (setq height (- height height-offset))))
+          (when (not (eq 0 width-offset))
+		     (if (< x width-offset)
+                         (progn
+			   (setq x (+ x width-offset))
+		           (setq width (- width (- width-offset x))))
+		       (setq x (+ x width-offset))
+		       (setq width (- width width-offset))))
     (resize-frame-to w (inexact->exact width) (inexact->exact height))
     (move-window-to w (inexact->exact x) (inexact->exact y))
     (require 'sawfish.wm.tabs.tabgroup)
     (when (window-tabbed-p w)
       (tab-refresh-group (nth 0 (tab-group-windows-stacking-order w)) 'move))
-    (window-order-push w))
+    (window-order-push w)))
 
   (define (focus-window w) (window-order-push w))
 

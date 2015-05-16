@@ -56,6 +56,8 @@ Each release lists incompatible changes at its top.
 
 @item New Features
 @itemize @minus
+@item The Tiling functions now use @code{calculate-workarea} to not overlap @code{_NET_WM_STRUT} windows like panels and others. [Christopher Bratusek]
+
 @item Let @code{window-icon-image} use @code{NET_WM_ICON} to get 16x16 icon. Also add a size-parameter in case a different one is desired. [hans1024]
 
 @item Allow passing of extra (custom) arguments to compton. [Joshua Moller-Mara]
