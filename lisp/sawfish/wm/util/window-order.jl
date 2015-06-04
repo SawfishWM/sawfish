@@ -90,7 +90,7 @@ function will restrict its search to the elements of this list."
     (let loop ((rest (window-order current-workspace nil)))
       (cond ((null rest) nil)
 	    ((or (window-get (car rest) 'never-focus)
-             (dock-window-p (car rest));; panel/pager workspace switcher
+		 (dock-window-p (car rest));; panel/pager workspace switcher
 		 (and (listp windows) (not (memq (car rest) windows))))
 	     (loop (cdr rest)))
 	    (t (car rest)))))
