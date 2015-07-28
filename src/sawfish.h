@@ -261,7 +261,7 @@ struct frame_part {
 
     Lisp_Window *win;
     int x, y, width, height;
-    Window id;
+    Window id, dbe;
     GC gc;
 
     unsigned int clicked : 1;
