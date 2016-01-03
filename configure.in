@@ -290,25 +290,52 @@ AC_ARG_WITH(kde4session,
 KDE4_SESSION="$with_kde4session"
 
 if test "$with_kde4session" = "yes"; then
-	KDEDIR="`kde4-config --install data`"
+	KDED4IR="`kde4-config --install data`"
 fi
 
 dnl fallback
-if test "x$KDEDIR" = x; then
-       KDEDIR="${datadir}/kde4/apps/"
+if test "x$KDE4DIR" = x; then
+       KDE4DIR="${datadir}/kde4/apps/"
 fi
+
+AC_ARG_WITH(kde5session,
+  [  --with-kde5session 	install kde5 session files
+  --without-kde5session], [], [with_kde5session=yes])
+
+KDE5_SESSION="$with_kde5session"
+
+if test "$with_kde4session" = "yes"; then
+	KDED5IR="`kf5-config --install data`"
+fi
+
+dnl fallback
+if test "x$KDE5DIR" = x; then
+       KDE5DIR="${datadir}/"
+fi
+
+AC_ARG_WITH(luminasession,
+  [  --with-luminasession 	install lumina session files
+  --without-luminasession], [], [with_luminasession=yes])
+
+LUMINA_SESSION="$with_luminasession"
+
+AC_ARG_WITH(matesession,
+  [  --with-matesession 	install mate session files
+  --without-matesession], [], [with_matesession=yes])
+
+MATE_SESSION="$with_matesession"
+
+AC_ARG_WITH(xfcesession,
+  [  --with-xfcesession 	install xfce session files
+  --without-xfcesession], [], [with_xfcesession=yes])
+
+XFCE_SESSION="$with_xfcesession"
 
 AC_ARG_WITH(gnome2session,
   [  --with-gnome2session 	install gnome2 session files
   --without-gnome2session], [], [with_gnome2session=yes])
 
 GNOME2_SESSION="$with_gnome2session"
-
-AC_ARG_WITH(xdmsession,
-  [  --with-xdmsession 	install xdm session files
-  --without-xdmsession], [], [with_xdmsession=yes])
-
-XDM_SESSION="$with_xdmsession"
 
 dnl Check for GNOME location
 AC_ARG_WITH(gnome_prefix,
@@ -403,7 +430,12 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_SUBST(LINGUAS)
 AC_SUBST(KDE4_SESSION)
 AC_SUBST(GNOME2_SESSION)
-AC_SUBST(XDM_SESSION)
+AC_SUBST(KDE5_SESSION)
+AC_SUBST(LUMINA_SESSION)
+AC_SUBST(MATE_SESSION)
+AC_SUBST(XFCE_SESSION)
+AC_SUBST(KDE4DIR)
+AC_SUBST(KDE5DIR)
 AC_SUBST(codename)
 
 dnl Build all files
