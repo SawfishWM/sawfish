@@ -13,7 +13,7 @@ Build-Depends: gettext (>= 0.10.37),
                libgtk2.0-dev (>= 2.24.0),
                libxrender-dev,
                libxext-dev,
- 	       libxtst-dev,
+               libxtst-dev,
                autotools-dev,
                automake,
                autoconf,
@@ -65,6 +65,16 @@ Description: sawfish lisp files
  .
  It is not required for normal use of sawfish and not installing it will save
  space in small systems.
+
+Package: sawfish-kde5-session
+Architecture: all
+Depends: sawfish (= ${source:Version}), plasma-desktop
+Description: KDE5 session integration for Sawfish
+ This package provides a new display manager session file, that will
+ start Sawfish with KDE5.
+ .
+ Furthermore Sawfish is integrated into SystemSettings, so can also
+ be choosen from the 'Default Applications' section of SystemSettings.
 
 Package: sawfish-kde4-session
 Architecture: all
