@@ -70,6 +70,12 @@ Each release lists incompatible changes at its top.
 @item Add double buffering of frame parts to reduce flickering while redraw of frames. [hans1024]
 
 @item Properly filter out @code{conky} from @code{cabinet}. [Christopher Bratusek]
+
+@item Added session integration for KDE5, @code{--with-kde5session} configure flag, updated @code{sawfish.wm.integration.kde}, sawfish-kde5-session package for Debian GNU/Linux [Christopher Bratusek]
+
+@item Restructured session file installation. Removed @code{--with-xdmsession} configure flag, the bare Sawfish session is installed always. For the remaining there's now an configure option each: @code{--with-matesession} (MATE), @code{--with-luminasession} (Lumina) and @code{--with-xfcesession} (XFCE). [Christopher Bratusek]
+
+@item Properly uninstall all session related files upon @code{make uninstall} [Christopher Bratusek]
 @end itemize
 @end itemize
 
