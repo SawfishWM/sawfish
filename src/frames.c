@@ -43,8 +43,11 @@
 #include <X11/Xutil.h>
 #include <X11/Xresource.h>
 #include <X11/extensions/shape.h>
-#include <X11/extensions/Xdbe.h>
 #include <assert.h>
+
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
+# include <X11/extensions/Xdbe.h>
+#endif
 
 static XID window_fp_context;
 
@@ -541,7 +544,11 @@ set_frame_part_bg (struct frame_part *fp)
 	    XGCValues gcv;
 	    gcv.foreground = VCOLOR(bg)->pixel;
 	    XChangeGC (dpy, fp->gc, GCForeground, &gcv);
+	#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 	    XFillRectangle (dpy, fp->dbe, fp->gc, 0, 0, fp->width, fp->height);
+	#else
+	    XFillRectangle (dpy, fp->id, fp->gc, 0, 0, fp->width, fp->height);
+	#endif
 	    fp->drawn.bg = bg;
 	    fp->drawn.fg = rep_NULL;
 	}
@@ -590,8 +597,13 @@ set_frame_part_bg (struct frame_part *fp)
 
 	if (!tiled)
 	{
+	#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 	    XCopyArea (dpy, bg_pixmap, fp->dbe, fp->gc, 0, 0,
 		       fp->width, fp->height, 0, 0);
+	#else
+	    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc, 0, 0,
+		       fp->width, fp->height, 0, 0);
+	#endif
 	    if (bg_mask != 0)
 	    {
 		XShapeCombineMask (dpy, fp->id, ShapeBounding,
@@ -627,8 +639,13 @@ set_frame_part_bg (struct frame_part *fp)
 		int height = image_height (image);
 		while (x < fp->width)
 		{
+		#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 		    XCopyArea (dpy, bg_pixmap, fp->dbe, fp->gc,
 			       0, 0, width, height, x, y);
+		#else
+		    XCopyArea (dpy, bg_pixmap, fp->id, fp->gc,
+			       0, 0, width, height, x, y);
+		#endif
 		    if (bg_mask != 0)
 		    {
 			XShapeCombineMask (dpy, tem, ShapeBounding,
@@ -797,9 +814,15 @@ set_frame_part_fg (struct frame_part *fp)
 		}
 
 		XChangeGC (dpy, fp->gc, gcv_mask, &gcv);
+	#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 		XCopyArea (dpy, fg_pixmap, fp->dbe, fp->gc,
 			   0, 0, MIN(fp->width, width),
 			   MIN(fp->height, height), x, y);
+	#else
+		XCopyArea (dpy, fg_pixmap, fp->id, fp->gc,
+			   0, 0, MIN(fp->width, width),
+			   MIN(fp->height, height), x, y);
+	#endif
 		if (fg_mask)
 		{
 		    gcv.clip_mask = None;
@@ -834,9 +857,15 @@ set_frame_part_fg (struct frame_part *fp)
 		set_frame_part_bg (fp);
 	    }
 
+	#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 	    x_draw_string (fp->dbe, font, fp->gc, VCOLOR(fg),
 			   x, y + VFONT(font)->ascent,
                            rep_STR(string), length);
+	#else
+	    x_draw_string (fp->id, font, fp->gc, VCOLOR(fg),
+			   x, y + VFONT(font)->ascent,
+                           rep_STR(string), length);
+	#endif
 
 	    fp->drawn.text = string;
 	}
@@ -870,11 +899,13 @@ refresh_frame_part (struct frame_part *fp)
 	fp->drawn.height = fp->height;
 	fp->pending_refresh = 0;
 
+#ifdef HAVE_X11_EXTENSIONS_XDBE_H
 	XdbeSwapInfo swap_info = {
             .swap_window = fp->id,
             .swap_action = XdbeCopied
         };
         XdbeSwapBuffers(dpy, &swap_info, 1);
+#endif
     }
     else
 	fp->pending_refresh = 1;
@@ -1429,7 +1460,9 @@ configure_frame_part (struct frame_part *fp)
 	    fp->gc = XCreateGC (dpy, fp->id, GCGraphicsExposures, &gcv);
 	    XSelectInput (dpy, fp->id, FP_EVENTS);
 
+	#ifdef HAVE_X11_EXTENSIONS_XDBE_H
             fp->dbe = XdbeAllocateBackBufferName(dpy, fp->id, XdbeCopied);
+	#endif
 
 	    if (!fp->below_client)
 		XMapRaised (dpy, fp->id);
