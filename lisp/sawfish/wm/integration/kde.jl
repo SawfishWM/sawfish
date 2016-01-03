@@ -48,6 +48,8 @@
     (add-window-matcher '((WM_CLASS . "^Plasma-desktop/plasma-desktop$"))
      '((focus-mode . click)))
     (add-window-matcher '((WM_CLASS . "^Plasma/Plasma$"))
+     '((focus-mode . click)))
+    (add-window-matcher '((WM_CLASS . "^plasmashell/plasmashell$"))
      '((focus-mode . click))))
 
   (define (init)
@@ -102,6 +104,7 @@
   (define (detect-kde)
     (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "KDE")
               (equal (getenv "DESKTOP_SESSION") "sawfish-kde4")
+              (equal (getenv "DESKTOP_SESSION") "sawfish-kde5")
               (getenv "KDE_FULL_SESSION"))
       (init)
       t))
