@@ -49,7 +49,7 @@
     :group (misc apps))
 
   (define (start-xmobar #!key (config xmobar-config))
-    "Start xmobar. If a xmobar process already exists, it's beeing killed.
+    "Start xmobar. If a xmobar process already exists, it's being killed.
      Configuration-file may be passed, if not, $HOME/.xmobarrc is used."
     (if (program-exists-p "xmobar")
         (progn

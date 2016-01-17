@@ -55,7 +55,7 @@
       (message (format nil "dump_xsettings executable not found in PATH."))))
 
   (define (start-xsettingsd #!key (config xsettingsd-config))
-    "Start xsettingsd. If a xsettingsd process already exists, it's beeing killed.
+    "Start xsettingsd. If a xsettingsd process already exists, it's being killed.
      Configuration-file may be passed, if not, $HOME/.xsettingsd is used."
     (if (program-exists-p "xsettingsd")
         (progn

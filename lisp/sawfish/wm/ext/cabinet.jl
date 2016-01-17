@@ -434,12 +434,12 @@
          (t (loop (cdr fow-nrl)))))))
 
   (define (cabinet-split-line)
-    (let ((lenght '0)
+    (let ((length '0)
           line enil mode)
-      (while (< lenght split-line-length) 
+      (while (< length split-line-length) 
         (setq line (concat line "»")) 
         (setq enil (concat enil "«")) 
-        (setq lenght (1+ lenght)))
+        (setq length (1+ length)))
       (setq mode (if workspace-mode
                      (format nil "%s/%s"
                              current-workspace
@@ -633,7 +633,7 @@
   
   (define (with-draw cmd)  
     "If your cmd will change Cabinet's
-apperances,then add it."
+appearances,then add it."
     (lambda ()
       (cmd)
       (draw-cabinet)))

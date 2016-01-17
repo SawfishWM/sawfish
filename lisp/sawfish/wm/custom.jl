@@ -540,7 +540,7 @@ defcustoms in the script\). Additional information about Sawfish can be found at
 
   (defcustom introduction-edit nil
     " "
-    :type (v-and (label "\nSawfish additionaly supports a user resource file \
+    :type (v-and (label "\nSawfish additionally supports a user resource file \
 in which you can add custom function, load additional scripts on startup \
 and much more.") (xdg "~/.sawfishrc" "=> open (or create) resource file"))
     :group ())

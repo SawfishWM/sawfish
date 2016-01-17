@@ -43,7 +43,7 @@
     :group (misc apps))
 
   (define (start-diodon)
-    "Start diodon. If a diodon process already exists, it's beeing killed."
+    "Start diodon. If a diodon process already exists, it's being killed."
     (if (program-exists-p "diodon")
         (progn
 	  (when %diodon-proc (kill-process %diodon-proc))

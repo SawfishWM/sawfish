@@ -43,7 +43,7 @@
     :group (misc apps))
 
   (define (start-nm-applet)
-    "Start nm-applet. If a nm-applet process already exists, it's beeing killed."
+    "Start nm-applet. If a nm-applet process already exists, it's being killed."
     (if (program-exists-p "nm-applet")
         (progn
 	  (when %nm-applet-proc (kill-process %nm-applet-proc))

@@ -43,7 +43,7 @@
     :group (misc apps))
 
   (define (start-idesk)
-    "Start idesk. If a idesk process already exists, it's beeing killed."
+    "Start idesk. If a idesk process already exists, it's being killed."
     (if (program-exists-p "idesk")
         (progn
 	  (when %idesk-proc (kill-process %idesk-proc))

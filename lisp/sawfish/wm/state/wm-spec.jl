@@ -168,7 +168,7 @@
     (let* ((limits (workspace-limits))
 	   (port (screen-viewport))
            ;; Since vp size can vary from workspace to workspace, use
-           ;; the maximum dimensions accross all workspaces.
+           ;; the maximum dimensions across all workspaces.
 	   (port-size (let ((dims (cons viewport-dimensions
                                         (mapcar (lambda (e)
                                                   (unless (eq (car e)

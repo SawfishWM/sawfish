@@ -121,7 +121,7 @@
 
   (define-window-outliner 'crosshair draw-crosshair-outline)
 
-  ;; prevent edge actions from beeing invoked while mousetrapping
+  ;; prevent edge actions from being invoked while mousetrapping
   (defvar while-mousetrap nil)
   (defvar server-grabbed nil)
 

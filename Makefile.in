@@ -47,7 +47,7 @@ install : all installdirs
 	$(INSTALL_DATA) $(srcdir)/data/sawfish-config.desktop $(DESTDIR)$(datadir)/applications/
 	$(INSTALL_DATA) $(top_srcdir)/data/sawfish.pc $(DESTDIR)$(libdir)/pkgconfig/
 	# needed for GNOME2 to recognize Sawfish, GConf-Key /desktop/gnome/session/required-components/windowmanager 
-	# need to be set to 'sawfish' aswell
+	# need to be set to 'sawfish' as well
 	$(INSTALL_DATA) $(top_srcdir)/data/sawfish.desktop $(DESTDIR)$(datadir)/xsessions/sawfish.desktop;\
 	if test $(GNOME2_SESSION) = "yes"; then \
 		$(INSTALL_DATA) $(srcdir)/data/sawfish.desktop $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties/sawfish-wm.desktop; \

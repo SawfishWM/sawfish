@@ -284,7 +284,7 @@
                            (c-red (red))
                            (c-green (green))
                            (c-blue (blue)))
-      "Start compton. If a compton process already exists, it's beeing killed."
+      "Start compton. If a compton process already exists, it's being killed."
       (when (program-exists-p "compton")
         (stop-compton)
         (setq %compton-proc (make-process))

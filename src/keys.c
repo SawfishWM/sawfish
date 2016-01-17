@@ -34,7 +34,7 @@
    contains the previously processed event.  */
 static unsigned long current_event[2], last_event[2];
 
-/* print_prefix means echo all events upto the end of the key-sequence.
+/* print_prefix means echo all events up to the end of the key-sequence.
    printed_this_prefix says the last event has been echoed. */
 static bool print_prefix, printed_this_prefix;
 

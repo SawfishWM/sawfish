@@ -169,7 +169,7 @@ Returns (key . value)"
     ;; Sorry, \\s doesn't work. Why??
     (if (string-match "^([^ \t=]+)[ \t]*=[ \t]*([^\n]+)" instring)
 	(cons (expand-last-match "\\1") (expand-last-match "\\2"))
-      ;; Ususally, it doesn't reach here.
+      ;; Usually, it doesn't reach here.
       (cons "" "")))
 
   (define (fdo-group-p instring)
@@ -374,7 +374,7 @@ exile it."
 	fdo-list)))
 
   (define (fdo-double-check-category fdo-list)
-    "Make sure the Category key is present and correctly asigned."
+    "Make sure the Category key is present and correctly assigned."
     (when fdo-list
       (if (assoc "Category" fdo-list)
 	  (if (or (not (stringp (cdr (assoc "Category" fdo-list))))

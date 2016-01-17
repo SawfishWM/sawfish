@@ -13489,7 +13489,7 @@
  * ChangeLog, lisp/sawfish/gtk/widgets/file.jl: better widget-layout for 'file
 
  * ChangeLog, lisp/sawfish/wm/ext/wallpaper.jl: added option to pass
- additional arguements to wallpaper-setter
+ additional arguments to wallpaper-setter
 
   2011-05-28 Christopher Roy Bratusek <nano@tuxfamily.org>
 
@@ -13586,7 +13586,7 @@
  * ChangeLog, lisp/sawfish/wm/autoload.jl: add EF, VD and TI to autoload
 
  * ChangeLog, lisp/sawfish/wm/autoload.jl: removed maybe-raise-tab from
- autoload, aswell as viewport-linear stuff
+ autoload, as well as viewport-linear stuff
 
  * ChangeLog, lisp/sawfish/wm/edge/tile.jl, lisp/sawfish/wm/workspace.jl:
  fixed tiling
@@ -18755,7 +18755,7 @@
  animation/setup.jl animation/outline.jl   -> animation/main.jl
  util/window-outline.jl -> animation/modes.jl
 
- * lisp/sawfish/wm/edge/util.jl, man/sawfish.texi: Typo fix "lenght" ->
+ * lisp/sawfish/wm/edge/util.jl, man/sawfish.texi: Typo fix "length" ->
  "length" in edge.
 
  * lisp/sawfish/wm/edge/actions.jl, lisp/sawfish/wm/edge/flip.jl,
@@ -20381,7 +20381,7 @@
  * lisp/Makefile.in, lisp/sawfish/cfg/main.jl.in, lisp/sawfish/wm.jl,
  man/news.texi, man/sawfish.texi, src/main.c, src/sawfish_subrs.h,
  themes/Makefile.in: Implements SAWFISH_USER_LISP_DIR.  Like PATH, it's colon
- seperated directories. Its value will be prepended to load-path. Now it's
+ separated directories. Its value will be prepended to load-path. Now it's
  possible for users to override any installed lisp files. sawfish-config
  respects it, too. Doc.
 
@@ -20583,7 +20583,7 @@
 
  * ChangeLog, configure.in: post-release version-bump to 1.6.0
 
- * ChangeLog, debian/changelog: removed debian/changelog, beeing created from
+ * ChangeLog, debian/changelog: removed debian/changelog, being created from
  the .in file
 
  * ChangeLog, README.IMPORTANT: updated REAMDE.IMPORTANT
@@ -21120,7 +21120,7 @@
 
  * ChangeLog, lisp/sawfish/wm/frames.jl, lisp/sawfish/wm/user.jl,
  man/news.texi: Added a way to change the font-color via SawfishConfig
- independently of what theme is beeing used
+ independently of what theme is being used
 
  * CONTRIBUTING, ChangeLog, OPTIONS, README.IMPORTANT, TODO, configure.in,
  lisp/Makefile.in, lisp/sawfish/cfg/Makefile.in, lisp/sawfish/cfg/README,
@@ -21758,7 +21758,7 @@
  * ChangeLog, autogen.sh, configure.in, man/news.texi, po/LINGUAS,
  po/Makefile.in, po/POTFILES.in, po/make-pot, po/sawfish-xgettext,
  po/sawfish.pot, po/update.sh, sawfish.ebuild.in: * configure.in: - fix the
- last incomplete AC_DEFINE - remove unsed configure flags - don't add CFLAGS
+ last incomplete AC_DEFINE - remove unused configure flags - don't add CFLAGS
  if non given - check for intltool 0.40.0  * autogen.sh: run intltoolize  *
  po/POTFILES.in: updated  * sawfish.ebuild.in: updated  * po/LINGUAS: added  *
  po/sawfish.pot * po/make-pot * po/sawfish-xgettext * po/update.sh: removed,
@@ -21894,7 +21894,7 @@
  commands appear in sawfish-ui  * configure.in: changed appearance of ending
  message a bit display additional infos added codename field re-ordered some
  checks only display cairo version if it exists put all AC_SUBST at the end of
- the file  * Makedefs.in: remove nokogiridir (not beeing used) first define
+ the file  * Makedefs.in: remove nokogiridir (not being used) first define
  host_type then stuff that refers to it first define datarootdir then stuff
  that refers to it  * man/news.texi: updated  2009-03-15  Christopher Bratusek
  <zanghar@freenet.de> * KEYBINDINGS: added description of several extra keys 
@@ -22004,8 +22004,8 @@
  Documentation updated [Derek Upham]  svn path=/trunk/; revision=4421
 
  * ChangeLog, config.h.in, lisp/sawfish/wm/ext/3d-hack.jl: remove
- annotate-points - not beeing used  * lisp/sawfish/wm/ext/3d-hack.jl: remove
- annotate-points - not beeing used  svn path=/trunk/; revision=4419
+ annotate-points - not being used  * lisp/sawfish/wm/ext/3d-hack.jl: remove
+ annotate-points - not being used  svn path=/trunk/; revision=4419
 
  * ChangeLog, Makefile.in, man/news.texi, sawfish-session.desktop:
  sawfish-session.desktop: added session desktop file  svn path=/trunk/;
@@ -22181,7 +22181,7 @@
  Makefiles  * */Makefile.in: add distclean rule to all subdir Makefiles  svn
  path=/trunk/; revision=4387
 
- * ChangeLog, configure.in, man/news.texi: print usefull stuff at the end of
+ * ChangeLog, configure.in, man/news.texi: print useful stuff at the end of
  configure  svn path=/trunk/; revision=4386
 
  * ChangeLog, autogen.sh: autogen.sh  svn path=/trunk/; revision=4384
@@ -22414,7 +22414,7 @@
  src/sawmill.h, src/sawmill_subrs.h, src/selection.c, src/server.c,
  src/server.h, src/session.c, src/stacking-list.c, src/windows.c, src/x.c:
  fully renamed to sawfish from sawmill - any reference in the copyright header
- - any function - any other occurence of sawmill - any file with sawmill in
+ - any function - any other occurrence of sawmill - any file with sawmill in
  it's name  ** You might need to run 'make distclean' before you can compile
  sawfish again, ** If you got this revision via 'svn up'  svn path=/trunk/;
  revision=4345
@@ -22497,7 +22497,7 @@
  gnome-menu to sawfish-menu updated NEWS  svn path=/trunk/; revision=4318
 
  * ChangeLog, lisp/sawfish/wm/gnome/menus.jl: invoke x-terminal-emulator
- instead of gnome-terminal and add /usr/share/applications aswell as
+ instead of gnome-terminal and add /usr/share/applications as well as
  /var/lib/menu-xdg/applications/menu-xdg to the menu-paths  svn path=/trunk/;
  revision=4317
 

@@ -1765,7 +1765,7 @@ Possible returned symbols are @code{fully-obscured},
 @code{partially-obscured} or @code{unobscured}.
 
 @code{window-visibility} is deprecated.  It is unreliable when using
-the Composite extention, as every window is reported unobscured.  Use
+the Composite extension, as every window is reported unobscured.  Use
 @code{window-obscured} and @code{stacking-visibility} instead.
 @end deffn
 
@@ -2147,7 +2147,7 @@ When non-nil, the window size is shown in the center of the screen.
 
 When you move a window and it comes close to another, sawfish adjusts
 its position so that its edge fits to the other, or ``snaps''. (It may
-be dubbed as ``interactive tiling''.) Snapping also takes place agaisnt
+be dubbed as ``interactive tiling''.) Snapping also takes place against
 screen boundary.
 
 @defvar move-snap-epsilon
@@ -4307,7 +4307,7 @@ Normally, the viewport cannot move beyond the limits set by
 viewport. The viewport is allowed to go as far as you wish.
 
 In addition, workspace is automatically resized, both enlarged and
-shrinked, so that it contains the current viewport and all
+shrunk, so that it contains the current viewport and all
 windows. (Precisely speaking, it takes the minimum such size.)  The
 size is set when you move the viewport, and also at Sawfish
 startup. Each workspace has its own size independent of the others.
@@ -4531,7 +4531,7 @@ Create a new workspace following the current workspace.
 @end defun
 
 @defun insert-workspace-before
-Create a new workspace preceeding the current workspace.
+Create a new workspace preceding the current workspace.
 @end defun
 
 @defun move-workspace space count
@@ -4798,7 +4798,7 @@ functions, @code{sawfish.wm.edge.conf} - configuration infrastructure,
 @code{sawfish.wm.edge.actions} - functionality infrastucture module,
 @code{sawfish.wm.edge.flip} - viewport/workspace fliping functions,
 @code{sawfish.wm.edge.hot-spots} - hot-spot/hot-move functions,
-@code{sawfish.wm.edge.tile} - simple, but functional tiling funtion and
+@code{sawfish.wm.edge.tile} - simple, but functional tiling function and
 @code{sawfish.wm.edge.viewport-drag} - functions for dragging the viewport.
 
 @section EdgeAction Internals
@@ -4889,7 +4889,7 @@ Delay (in milliseconds) before activating a hot-spot.
 @end defvr
 
 @defvr Customizable hot-spots-corner-length 50
-Length in px (in both x and y direction) wich is used for the hot-spot corners.
+Length in px (in both x and y direction) which is used for the hot-spot corners.
 All remaining pixels represent the borders.
 @end defvr
 
@@ -4993,7 +4993,7 @@ a screen edge or a corner is activated. the corners are defined via
 @code{hot-spots-corner-length}. Only HotSpots responds to the corners.
 
 HotMove is HotSpots' companion, which allows for practically everything to be done
-when a screen edge is actived by dragging a window over it. HotMove doesn't know about
+when a screen edge is activated by dragging a window over it. HotMove doesn't know about
 corners, it only sees for edges.
 
 That way your screen-edge is actually split into 12: 4 corners, two times 4
@@ -5004,7 +5004,7 @@ for while moving a window.
 @c this is going to be changed by Teika, he said
 @c I'll check into this before merging into master 11-07-08
 HotSpots only allows functions to be used as actions, though practically
-everything can be done this way. If the arguement is not a function, an
+everything can be done this way. If the argument is not a function, an
 error is thrown, to in form the user.
 
 @defvr Customizable left-edge-function nil
@@ -5068,7 +5068,7 @@ either left, top, right, or bottom.
 Example configuration (@file{~/.sawfishrc}):
 
 Note: this is just an example, not all functions in
-      it may be availabe on your system.
+      it may be available on your system.
 
 @lisp
 ;; Timers
@@ -5538,7 +5538,7 @@ variable @code{user-apps-menu}. An example definition:
  ("Emacs" (system "emacs &"))
  ("Firefox" (system "firefox &"))
  ("The _GIMP" (system "gimp &"))
- () ; Seperation horizontal bar
+ () ; Separation horizontal bar
  ) ;; Auto generated menu will follow.
 @end lisp
 
@@ -5700,11 +5700,11 @@ Whether or not the entry should be displayed by default.
 @item NotShowIn
 
 If an item should not be shown by checking the current desktop
-enviroment against the value of this key.
+environment against the value of this key.
 
 @item OnlyShowIn
 
-If an item should be shown by checking the current desktop enviroment
+If an item should be shown by checking the current desktop environment
 against the value of this key.
 @end itemize
 
@@ -5876,7 +5876,7 @@ Contains the root menu definition.
 The variable containing the definition of all window operations.
 @end defvar
 
-Popup menu is made by making a seperate process.
+Popup menu is made by making a separate process.
 
 @defvar menu-program
 Location of the program implementing Sawfish's menu interface.
@@ -7218,7 +7218,7 @@ that files under these directories are searched prior to
 @code{sawfish-lisp-lib-directory}.
 
 You can override the value with environment variable
-@code{SAWFISH_USER_LISP_DIR}. Paths are seperated by colon, like
+@code{SAWFISH_USER_LISP_DIR}. Paths are separated by colon, like
 the @code{PATH} environmental variable. Example:
 @code{~/.sawfish/lisp-test:~/.sawfish/lisp}.
 @end defvar

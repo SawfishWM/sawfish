@@ -715,7 +715,7 @@ also shown in your pager and task-list."
 (defcustom mxflat:customize-buttons
   nil
   "customize button position (-1 -2 -3 .. title string .. +3 +2 +1)"
-  :tooltip "Enabling this will allow you to set the positon of each \
+  :tooltip "Enabling this will allow you to set the position of each \
 button in the titlebar manually.  A negative/positiv value means the \
 button will be drawn on left/right side of the titlebar."
   :group (appearance mxflat:group mxflat:buttons-group
@@ -1146,7 +1146,7 @@ the normal border width.)"
   nil
   "customize border for focused windows (experimental)"
   :tooltip "(NOTE: this works but it is VERY cpu intensive and might \
-slow down your computer noticably.  So turn it on at your own risk.)"
+slow down your computer noticeably.  So turn it on at your own risk.)"
   :group (appearance mxflat:group mxflat:border-group mxflat:border1-group)
   :type boolean
   :after-set rebuild-all-frames)
@@ -1155,7 +1155,7 @@ slow down your computer noticably.  So turn it on at your own risk.)"
   1
   "border width for focused windows (0 - 1000 pixel)"
   :tooltip "(NOTE: this works but it is VERY cpu intensive and might \
-slow down your computer noticably.  So turn it on at your own risk.)"
+slow down your computer noticeably.  So turn it on at your own risk.)"
   :group (appearance mxflat:group mxflat:border-group mxflat:border1-group)
   :type (number 0 1000)
   :depends mxflat:custom-border-focused
@@ -1257,7 +1257,7 @@ able to resize the window in two directions; thus, make it bigger."
   :tooltip "Draw a small additional border around your windows \
 emulating a solid shadow effect.  Use the options below to adjust its \
 width and direction.  (NOTE: this is VERY cpu intensive and might slow \
-down your computer noticably.  So turn it on at your own risk.)"
+down your computer noticeably.  So turn it on at your own risk.)"
   :group (appearance mxflat:group mxflat:border-group
                      mxflat:border-extended-group)
   :type boolean
@@ -1894,11 +1894,11 @@ string color."
 (define (calculate-position pos)
   (if (and mxflat:customize-buttons
            (eq mxflat:button-position-model 'pixel))
-      ;; if the button-position-model is pixel we dont
+      ;; if the button-position-model is pixel we don't
       ;; need to calculate anything but just return the
       ;; argument value
       pos
-    ;; actually calculate the positon
+    ;; actually calculate the position
     (* (1- pos)
        (+ (get-button-size)
           mxflat:button-distance))))

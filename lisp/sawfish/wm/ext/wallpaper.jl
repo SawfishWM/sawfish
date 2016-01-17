@@ -62,7 +62,7 @@
     :depends init-wallpaper)
 
   (defcustom wallpaper-setter-args ""
-    "Additional arguements to pass to the application."
+    "Additional arguments to pass to the application."
     :type string
     :group (appearance wallpaper)
     :after-set (lambda () (set-wallpaper))

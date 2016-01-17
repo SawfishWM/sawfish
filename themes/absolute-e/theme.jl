@@ -25,9 +25,9 @@
 
 ;;    Thanks for using Absolute E, the theme that thinks diffrently.
 ;;    This theme is created by Hallvar Helleseth using nothing but The
-;;    Gimp.  Everything is originaly made by me - Propably the only
+;;    Gimp.  Everything is originally made by me - Propably the only
 ;;    Etheme that can say that ;) Though alot of people have helped me
-;;    (too many to list here/can't remeber all of them either...) But I
+;;    (too many to list here/can't remember all of them either...) But I
 ;;    give them a BIG thank you!
 
 ;;    There is a GTK and WMaker version of this theme available at

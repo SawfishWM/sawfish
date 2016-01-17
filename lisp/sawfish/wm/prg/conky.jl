@@ -46,7 +46,7 @@
     :depends init-conky)
 
   (define (start-conky)
-    "Start conky. If a conky process already exists, it's beeing killed."
+    "Start conky. If a conky process already exists, it's being killed."
     (if (program-exists-p "conky")
         (system "conky %s &" conky-args)
       (display-message (format nil "conky executable not found in PATH."))))

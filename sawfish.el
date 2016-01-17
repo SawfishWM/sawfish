@@ -89,7 +89,7 @@
 ;;   bits. Ideally a new sawfish.el would be written in terms of a
 ;;   librep.el which would be a ground-up-rewritten mode for dealing
 ;;   with rep.
-;; o sawfish-pp is not complete. The challange is that we want to
+;; o sawfish-pp is not complete. The challenge is that we want to
 ;;   `read' sawfish sexp. It can fail if there're #f and #t. So
 ;;   it's tried to replace them temporarily, but it may transform
 ;;   say "#f".
@@ -326,7 +326,7 @@ already fontified."
                                `,(regexp-opt sawfish-warning-keyword-list) 
                                "\\>")
                        '(0 font-lock-warning-face prepend)))))
-  "Some additonal keywords to highlight in `sawfish-mode'.")
+  "Some additional keywords to highlight in `sawfish-mode'.")
 
 ;; Main code:
 
@@ -551,7 +551,7 @@ value of SEXP will be inserted into the current buffer."
       (sawfish-output result))))
 
 (defun sawfish-output (output)
-  "Display output either in mini-buffer or a seperate buffer.
+  "Display output either in mini-buffer or a separate buffer.
 
 If the output is empty then the string \"No output\" is displayed.
 

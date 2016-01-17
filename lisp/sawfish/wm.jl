@@ -30,7 +30,7 @@
 (setq *user-structure* 'sawfish.wm)
 
 ;; Expand tilde for efficiency. Otherwise, tilde file-handler is called
-;; everytime in path search.
+;; every time in path search.
 (setq load-path (mapcar canonical-file-name load-path))
 
 ;; load always-present session-manager stuff

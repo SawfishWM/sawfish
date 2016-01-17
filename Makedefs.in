@@ -91,7 +91,7 @@ INSTALL_SCRIPT=@INSTALL_SCRIPT@
 % : %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LIBS)
 
-# This rule builds dependancy files from C source files.
+# This rule builds dependency files from C source files.
 .%.d : %.c
 	$(SHELL) -ec '$(MAKEDEP) $(CPPFLAGS) $(CFLAGS) $< \
 	| sed '\''s/$*\.o/& $*.lo .$*\.d/g'\'' > $@'

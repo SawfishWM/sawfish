@@ -49,7 +49,7 @@
     :group (misc apps))
 
   (define (start-pancake #!key (config pancake-config))
-    "Start pancake. If a pancake process already exists, it's beeing killed.
+    "Start pancake. If a pancake process already exists, it's being killed.
      Configuration-file may be passed, if not, $HOME/.pancakerc is used."
     (if (program-exists-p "pancake")
         (progn

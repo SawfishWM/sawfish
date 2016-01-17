@@ -33,7 +33,7 @@
 ;; the window off the right or bottom of the screen, then resize the
 ;; window to avoid this happening.
 
-;; If no spot can be found to accomodate the window's minimum allowed
+;; If no spot can be found to accommodate the window's minimum allowed
 ;; size, then fallback to placing the window randomly.
 
 ;; (note, for `screen' above, I actually mean the work-area, i.e. the
