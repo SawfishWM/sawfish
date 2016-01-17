@@ -52,6 +52,10 @@ Each release lists incompatible changes at its top.
 @item Build and Installation
 @itemize @minus
 @item When building Sawfish while an instance of it is running, a sawfish-managed @code{conky} instance does no longer get killed. [Christopher Bratusek]
+
+@item Fix @code{libtool} version check in @code{autogen.sh}. [Christopher Bratusek]
+
+@item Remove @code{gitclean} Makefile target, improve @code{distclean} target. [Christopher Bratusek]
 @end itemize
 
 @item New Features
@@ -76,6 +80,15 @@ Each release lists incompatible changes at its top.
 @item Restructured session file installation. Removed @code{--with-xdmsession} configure flag, the bare Sawfish session is installed always. For the remaining there's now an configure option each: @code{--with-matesession} (MATE), @code{--with-luminasession} (Lumina) and @code{--with-xfcesession} (XFCE). [Christopher Bratusek]
 
 @item Properly uninstall all session related files upon @code{make uninstall} [Christopher Bratusek]
+
+@item Debian code review
+@itemize x
+@item Fix FSF address across all files [Christopher Bratusek]
+
+@item Fix code spellings [Christopher Bratusek]
+
+@item Rename @code{configure.in} to @code{configure.ac} [Christopher Bratusek]
+@end itemize
 @end itemize
 @end itemize
 
@@ -87,7 +100,7 @@ Each release lists incompatible changes at its top.
 
 @item Fix possibly wrong @code{input-focus} from @code{enter-*} focus-modes in tabbed-windowing. [fuchur]
 
-@item Properly support tabbed-windowing when tiling is active aswell. [fuchur]
+@item Properly support tabbed-windowing when tiling is active as well. [fuchur]
 
 @item Several fixes for the @code{wallpaper} module regarding wrong values or non-existent files. [Christopher Bratusek]
 
@@ -287,7 +300,7 @@ from within Sawfish. [fuchur]
 
 @item Make @code{focus-when-mapped} window-matcher chooseable from 'never 'maybe and
 'always. 'never is suggested for KDE users to be applied to Plasma in order to prevent
-notification popups to take focus from currently active window (and possibly loosing
+notification popups to take focus from currently active window (and possibly losing
 keyboard input) [fuchur]
 
 @item Completeley revised @code{resize-window-prompt}. Now display window's name and old width
@@ -432,7 +445,7 @@ both Categories and the (errorneous) Category key, or only the later. [Matthew L
 
 @item Fixed a bug in window-manager selection handling. Set all fields of the client
 message event. This prevents bugs, where Sawfish sometimes isn't able to replace another
-window-manager or aquiring the screen if no other WM is running. [Timo Korvola]
+window-manager or acquiring the screen if no other WM is running. [Timo Korvola]
 
 @item When making X request, we might receive and @code{select} will stuck. This is fixed now
 [Michal Maruska]
@@ -572,7 +585,7 @@ Of course that only works, if the label is a GtkLabel widget on it's own.
 @itemize @minus
 
 === spoiler ===
-: StyleTab in Sawfish 1.9 add lots of new fancyness for the price of beeing slow.
+: StyleTab in Sawfish 1.9 add lots of new fancyness for the price of being slow.
 So if you experience a long startup-time of Sawfish, it's a feature, not a bug. :
 == /spoiler ===
 
@@ -1547,7 +1560,7 @@ instead of hardcoding those paths from configure, which makes it more portable.
 sawfish on several architectures. From this version on, we don't ship it anymore.
 [Kim B. Heino]
 
-@item Export the imageloader beeing used by sawfish in the .pc file.
+@item Export the imageloader being used by sawfish in the .pc file.
 [Christopher Bratusek]
 
 @item Don't remove the .pot file upon @code{make distclean}.
@@ -1573,7 +1586,7 @@ viewport when displaying all workspaces.
 @item Doc
 @itemize @minus
 
-@item Fixed a small doc misstake (refered to window-set instead of window-put).
+@item Fixed a small doc misstake (referred to window-set instead of window-put).
 [Christopher Bratusek]
 
 @item Fixed the docstrings of shrink and yank.
@@ -1663,7 +1676,7 @@ latter doesn't.
 Sawfish used to rely on ESounD and LibAudioFile to play sound, but we
 dropped that. If you want sound, set the variable @code{play-sample-program}
 to the path of the program capable of playing *.wav file. You can set the
-variable from the Configurator, too. By default `paplay' is beeing used.
+variable from the Configurator, too. By default `paplay' is being used.
 
 You can't set any arguments to pass from this variable. If you want to
 give arguments or redirect output, write a wrapper
@@ -1763,7 +1776,7 @@ Position parameters can be negative [Christopher Bratusek, Teika Kazura]
 
 @item Fixed Focus issues with KDE4 Menu/Run-Dialog [Timo Korvola]
 
-@item Fix cursor-warping in conjuction with Infinite-Desktop [Jeremy Hankins]
+@item Fix cursor-warping in conjunction with Infinite-Desktop [Jeremy Hankins]
 
 @item Fixed group of the stagger options [Christopher Bratusek]
 
@@ -1920,7 +1933,7 @@ buttons or frames to their theme in charge. There are no user visible changes.
 @item @code{raise-lower-button}, a button to perform various raising and lowering actions on a window
 @end itemize
 @end itemize
-@item Widget Transistion [Christopher Bratusek]
+@item Widget Transition [Christopher Bratusek]
 @itemize @minus
 
 @item Custom make-url-widget replaced by GtkLinkButton
@@ -2184,7 +2197,7 @@ your configuration file, and use configurator GUI.
 
 @item Major update of the spec file [Christopher Bratusek, Michal Jaegermann, Ritz]
 
-@item Print usefull stuff at the end of configure [Christopher Bratusek]
+@item Print useful stuff at the end of configure [Christopher Bratusek]
 
 @item Add distclean rule to all Makefiles [Christopher Bratusek]
 
