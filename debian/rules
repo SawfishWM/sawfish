@@ -49,9 +49,6 @@ dh_install_data = dh_install -psawfish-data --autodest
 override_dh_auto_configure:
 	dh_auto_configure -- $(shell dpkg-buildflags --export=configure) $(DEB_CONFIGURE_USER_FLAGS)
 
-override_dh_auto_clean:
-	-$(MAKE) gitclean
-
 override_dh_auto_install:
 	dh_auto_install
 	find $(lisp_source_extras) | $(dh_install_auto) -psawfish-lisp-source
