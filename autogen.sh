@@ -12,14 +12,14 @@ if [ -d m4 ]; then
 	rm -fv m4/*
 fi
 
-if [ -f configure.in ]; then
-  if grep "AC_CONFIG_HEADER" configure.in >/dev/null; then
+if [ -f configure.ac ]; then
+  if grep "AC_CONFIG_HEADER" configure.ac >/dev/null; then
       echo "Running autoheader"
       autoheader || exit 1
   fi
-  if grep "AM_PROG_LIBTOOL" configure.in >/dev/null; then
+  if grep "AM_PROG_LIBTOOL" configure.ac >/dev/null; then
     echo "Running libtoolize"
-    lver=$(libtool --version | grep 1.5)
+    lver=$(libtoolize --version | grep 1.5)
     if [ "x${lver}" != "x" ]; then
 	    libtoolize --force --copy || exit 1
     else    libtoolize --force --copy --install || exit 1
