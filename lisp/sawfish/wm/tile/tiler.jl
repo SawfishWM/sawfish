@@ -82,7 +82,7 @@
          (not (window-ignored-p w))
          (not (dock-window-p w))
          (not (tab-background-p w))
-         (eq (window-type w) 'default)))
+         (not (eq (window-type w) 'transient))))
 
   (define (tileable-windows #!optional ignore)
     (filter tileable-window-p (tileable-workspace-windows ignore)))
