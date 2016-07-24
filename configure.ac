@@ -304,7 +304,7 @@ AC_ARG_WITH(kde5session,
 
 KDE5_SESSION="$with_kde5session"
 
-if test "$with_kde4session" = "yes"; then
+if test "$with_kde5session" = "yes"; then
 	KDED5IR="`kf5-config --install data`"
 fi
 
