@@ -27,9 +27,9 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_PROG_LIBTOOL
 
 dnl Release versioning info
-version="1.11.90"
+version="1.11.91"
 subversion=""
-codename="The Day Is My Enemy"
+codename="The Promised Land"
 
 VERSION=${version}
 
