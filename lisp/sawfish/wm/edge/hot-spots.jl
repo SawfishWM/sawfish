@@ -26,7 +26,6 @@
 
     (open rep
 	  rep.system
-	  rep.io.timers
 	  sawfish.wm.custom
 	  sawfish.wm.windows
 	  sawfish.wm.misc
@@ -59,10 +58,7 @@
   (defvar bottom-left-corner-function nil
     "The function launched when hitting the bottom-left-corner.")
 
-  (define hot-spot-timer nil)
-
   (define (hot-spot-invoke spot)
-    (unless hot-spot-timer
       (let ((func (case spot
                     ((top-left)
                      top-left-corner-function)
@@ -83,16 +79,11 @@
         (if (functionp func)
             (progn
               (call-hook 'before-edge-action-hook (list 'hot-spot spot nil))
-	      (setq hot-spot-timer
-		    (make-timer (lambda ()
-				  (setq hot-spot-timer nil)
-				  (funcall func)
-				  (call-hook 'after-edge-action-hook (list 'hot-spot spot nil)))
-				(quotient hot-spot-delay 1000)
-				(mod hot-spot-delay 1000))))
+              (funcall func)
+              (call-hook 'after-edge-action-hook (list 'hot-spot spot nil)))
           (when func
             ;; non-nil, but not a function?
-            (error "In hot-spot, your configuration of spot `%s' is wrong; it should be a function." spot))))))
+            (error "In hot-spot, your configuration of spot `%s' is wrong; it should be a function." spot)))))
 
   (defvar left-edge-move-function nil
     "The function launched when hitting the left-edge.")
@@ -106,10 +97,7 @@
   (defvar bottom-edge-move-function nil
     "The function launched when hitting the bottom-edge.")
 
-  (define hot-move-timer nil)
-
   (define (hot-move-invoke spot)
-    (unless hot-move-timer
       (let ((func (case spot
                     ((left)
                      left-edge-move-function)
@@ -123,15 +111,10 @@
         (if (functionp func)
             (progn
 	      (call-hook 'before-edge-action-hook (list 'hot-move spot t))
-	      (setq hot-move-timer
-		    (make-timer (lambda ()
-				  (setq hot-move-timer nil)
-				  (allow-events 'async-both)
-				  (fake-release-window)
-				  (funcall func win)
-				  (call-hook 'after-edge-action-hook (list 'hot-move spot t)))
-				(quotient hot-spot-delay 1000)
-				(mod hot-spot-delay 1000))))
+	      (allow-events 'async-both)
+	      (fake-release-window)
+	      (funcall func win)
+	      (call-hook 'after-edge-action-hook (list 'hot-move spot t)))
           (when func
             ;; non-nil, but not a function?
-            (error "In hot-move, your configuration of spot `%s' is wrong; it should be a function." spot)))))))
+            (error "In hot-move, your configuration of spot `%s' is wrong; it should be a function." spot))))))

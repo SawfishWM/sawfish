@@ -26,7 +26,6 @@
 
     (open rep
 	  rep.system
-	  rep.io.timers
 	  sawfish.wm.windows
 	  sawfish.wm.misc
 	  sawfish.wm.events
@@ -37,22 +36,14 @@
 
   (define-structure-alias edge-flip sawfish.wm.edge.flip)
 
-  (define edge-flip-timer nil)
   (define steps nil)
 
   (define (edge-flip-invoke edge type while-moving)
-    (unless edge-flip-timer
-
       (call-hook 'before-edge-action-hook (list type edge while-moving))
 
-      (setq edge-flip-timer
-            (make-timer (lambda ()
-                          (setq edge-flip-timer nil)
-                          (if (eq type 'flip-viewport)
-                              (flip-viewport edge while-moving)
-                            (flip-workspace edge while-moving)))
-                        (quotient edge-flip-delay 1000)
-                        (mod edge-flip-delay 1000)))))
+      (if (eq type 'flip-viewport)
+          (flip-viewport edge while-moving)
+        (flip-workspace edge while-moving)))
 
   (define (flip-viewport edge while-moving)
     (let ((ptr (query-pointer t)))

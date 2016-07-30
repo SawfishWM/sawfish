@@ -47,6 +47,8 @@ Each release lists incompatible changes at its top.
 @item Fixed that a focus change by pointer motion was ignored after x-cycle. [Teika Kazura]
 
 @item Focus-mode @code{enter-exit} now ignores @code{pointer-out} event. Fixing flickering bugs with widgets like GtkComboBox, GtkCompletion or Firefox' URL-Bar. [Teika Kazura]
+
+@item Fixed at @code{edge-flip-delay} did not work as expected. Before this fix the edge-action would always be actived when the cursor hit the edge, and @code{edge-flip-delay} would only delay the actual action, leaving the edge before the @code{edge-flip-delay} ended, would not stop the action. Now @code{edge-flip-delay} properly works: when the cursor leaves the edge before the @code{edge-flip-delay} ended, the action will be stopped. [Christopher Bratusek]
 @end itemize
 
 @item Build and Installation

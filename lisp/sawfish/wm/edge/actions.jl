@@ -43,6 +43,7 @@
 
   (defvar while-hot-move nil)
   (defvar while-mousetrap nil)
+  (define edge-action-timer nil)
 
   (define (edge-action-call func edge while-moving)
     (case func
@@ -85,7 +86,12 @@
 	              ((right) right-edge-action)
 	              ((top) top-edge-action)
 	              ((bottom) bottom-edge-action))))
-	  (funcall edge-action-call func edge nil))))))
+	    (setq edge-action-timer
+              (make-timer (lambda ()
+                            (setq edge-action-timer nil)
+	                    (funcall edge-action-call func edge nil))
+	                  (quotient edge-flip-delay 1000)
+                          (mod edge-flip-delay 1000))))))))
 
   ;; Entry point while dragging a window
   (define (edge-action-move-hook-func)
@@ -97,9 +103,19 @@
 	             ((right) right-edge-move-action)
 	             ((top) top-edge-move-action)
 	             ((bottom) bottom-edge-move-action))))
-	   (funcall edge-action-call func edge t))
+	   (setq edge-action-timer
+            (make-timer (lambda ()
+                          (setq edge-action-timer nil)
+	                  (funcall edge-action-call func edge t))
+	                (quotient edge-flip-delay 1000)
+                        (mod edge-flip-delay 1000))))
       ;; for one second after HotMove prevent HotSpot
       (make-timer (lambda () (setq while-hot-move nil)) 1))))
+
+  (define (edge-action-unhook-func)
+    (when edge-action-timer
+      (delete-timer edge-action-timer)
+      (setq edge-action-timer nil)))
 
   (define (activate-edges init)
     (if init
@@ -107,6 +123,8 @@
 	  (activate-flippers t)
 	  (unless (in-hook-p 'enter-flipper-hook edge-action-hook-func)
 	    (add-hook 'enter-flipper-hook edge-action-hook-func))
+	  (unless (in-hook-p 'leave-flipper-hook edge-action-unhook-func)
+	    (add-hook 'leave-flipper-hook edge-action-unhook-func))
 	  ;; While the pointer is grabbed, window enter/leave events
 	  ;; are not generated.
 	  (unless (in-hook-p 'while-moving-hook edge-action-move-hook-func)
