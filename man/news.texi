@@ -48,7 +48,7 @@ Each release lists incompatible changes at its top.
 
 @item Focus-mode @code{enter-exit} now ignores @code{pointer-out} event. Fixing flickering bugs with widgets like GtkComboBox, GtkCompletion or Firefox' URL-Bar. [Teika Kazura]
 
-@item Fixed at @code{edge-flip-delay} did not work as expected. Before this fix the edge-action would always be actived when the cursor hit the edge, and @code{edge-flip-delay} would only delay the actual action, leaving the edge before the @code{edge-flip-delay} ended, would not stop the action. Now @code{edge-flip-delay} properly works: when the cursor leaves the edge before the @code{edge-flip-delay} ended, the action will be stopped. [Christopher Bratusek]
+@item Fixed that @code{edge-flip-delay} did not work as expected. Before this fix the edge-action would always be actived when the cursor hit the edge, and @code{edge-flip-delay} would only delay the actual action. Leaving the edge before @code{edge-flip-delay} ended, would not stop the action. Now @code{edge-flip-delay} properly works when the cursor leaves the edge before @code{edge-flip-delay} ended, the action will not be executed as expected. [Christopher Bratusek]
 
 @item Better detection of transient windows during tiling [Jose A. Ortega Ruiz]
 @end itemize
@@ -92,11 +92,11 @@ Each release lists incompatible changes at its top.
 @item Fix code spellings [Christopher Bratusek]
 
 @item Rename @code{configure.in} to @code{configure.ac} [Christopher Bratusek]
+@end itemize
 
 @item Update @code{config.sub}, @code{config.guess} and @code{install-sh} to 2016-04 [Christopher Bratusek]
 
 @item Add window matcher @code{never-tile} to @code{Conky} by default [Christopher Bratusek]
-@end itemize
 @end itemize
 @end itemize
 
