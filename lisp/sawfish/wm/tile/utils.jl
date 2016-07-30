@@ -55,7 +55,7 @@
                      ;; for pager and stuff
                      (not (window-visible-p w))
                      ;; no dialogs
-                     (not (eq (window-type w) 'default))
+                     (eq (window-type w) 'transient)
                      (tab-background-p w)
                      (window-ignored-p w)))
                (window-order current-workspace)))
