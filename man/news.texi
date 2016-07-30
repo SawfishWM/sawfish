@@ -39,7 +39,7 @@ Each release lists incompatible changes at its top.
 @c @end itemize
 @c @end itemize
 
-@heading 1.11.90 (1.12 beta) "The Day Is My Enemy"
+@heading 1.11.91 (1.12 RC1) "The Promised Land"
 @itemize @bullet
 
 @item Bug Fixes
@@ -49,6 +49,8 @@ Each release lists incompatible changes at its top.
 @item Focus-mode @code{enter-exit} now ignores @code{pointer-out} event. Fixing flickering bugs with widgets like GtkComboBox, GtkCompletion or Firefox' URL-Bar. [Teika Kazura]
 
 @item Fixed at @code{edge-flip-delay} did not work as expected. Before this fix the edge-action would always be actived when the cursor hit the edge, and @code{edge-flip-delay} would only delay the actual action, leaving the edge before the @code{edge-flip-delay} ended, would not stop the action. Now @code{edge-flip-delay} properly works: when the cursor leaves the edge before the @code{edge-flip-delay} ended, the action will be stopped. [Christopher Bratusek]
+
+@item Better detection of transient windows during tiling [Jose A. Ortega Ruiz]
 @end itemize
 
 @item Build and Installation
@@ -90,6 +92,10 @@ Each release lists incompatible changes at its top.
 @item Fix code spellings [Christopher Bratusek]
 
 @item Rename @code{configure.in} to @code{configure.ac} [Christopher Bratusek]
+
+@item Update @code{config.sub}, @code{config.guess} and @code{install-sh} to 2016-04 [Christopher Bratusek]
+
+@item Add window matcher @code{never-tile} to @code{Conky} by default [Christopher Bratusek]
 @end itemize
 @end itemize
 @end itemize
