@@ -30,7 +30,8 @@
 	rep.io.files
         rep.util.misc
         sawfish.wm.misc
-	sawfish.wm.custom)
+	sawfish.wm.custom
+	sawfish.wm.ext.match-window)
 
   (define-structure-alias conky sawfish.wm.prg.conky)
 
@@ -48,7 +49,10 @@
   (define (start-conky)
     "Start conky. If a conky process already exists, it's being killed."
     (if (program-exists-p "conky")
-        (system "conky %s &" conky-args)
+        (progn
+          (add-window-matcher '((WM_CLASS . "^conky/conky$"))
+            '((never-tile . t)))
+          (system "conky %s &" conky-args))
       (display-message (format nil "conky executable not found in PATH."))))
 
   (define (stop-conky)
