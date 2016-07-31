@@ -85,6 +85,12 @@ Each release lists incompatible changes at its top.
 
 @item Properly uninstall all session related files upon @code{make uninstall} [Christopher Bratusek]
 
+@item Update @code{config.sub}, @code{config.guess} and @code{install-sh} to 2016-04 [Christopher Bratusek]
+
+@item Add window matcher @code{never-tile} to @code{Conky} by default [Christopher Bratusek]
+
+@item Guard @code{PangoX} functions as it is going to go away (Debian patch) [Emilio Pozuelo Monfort]
+
 @item Debian code review
 @itemize x
 @item Fix FSF address across all files [Christopher Bratusek]
@@ -92,11 +98,15 @@ Each release lists incompatible changes at its top.
 @item Fix code spellings [Christopher Bratusek]
 
 @item Rename @code{configure.in} to @code{configure.ac} [Christopher Bratusek]
+
+@item Make build reproducible (Debian patch) [Jose M. Calhariz]
+
+@item Honour @code{SOURCE_DATE_EPOCH} for build.h when building Debian packages (Debian patch) [Jose M. Calhariz]
+
+@item Add @code{Keyword} entry to @code{sawfish.desktop} (Debian patch) [Jose M. Calhariz]
+
+@item Do not remove @code{wallpaper.jlc} compiled lisp file. It used to break Wallpaper Setter, thus it was removed. But with fixes since the first release of the Wallpaper Setter this is no longer the case, thus  the compiled file does not need to be removed anymore. (Debian patch) [Jose M. Calhariz]
 @end itemize
-
-@item Update @code{config.sub}, @code{config.guess} and @code{install-sh} to 2016-04 [Christopher Bratusek]
-
-@item Add window matcher @code{never-tile} to @code{Conky} by default [Christopher Bratusek]
 @end itemize
 @end itemize
 
