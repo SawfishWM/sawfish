@@ -509,6 +509,8 @@ pango_draw_line (XftDraw *draw, Window id, GC gc, XftColor *xft_color,
 #ifdef HAVE_PANGO_XFT
 	if (PANGO_XFT_IS_FONT (font))
 	    pango_xft_render (draw, xft_color, font, glyphs, x, y);
+#else
+	    pango_x_render (dpy, id, gc, font, glyphs, x, y);
 #endif
 
 	x += rect.width / PANGO_SCALE;
