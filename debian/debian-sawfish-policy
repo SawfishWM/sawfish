@@ -1,0 +1,344 @@
+-*-indented-text-*-
+
+[ Due to a general lack of time, this document is way too terse, and
+  should be better organized, so be prepared to suffer a little.
+  Improvements are welcome.
+
+  Also, there will be some changes in the nearish future to allow
+  add-on packages to avoid (if they choose) rebuilding unnecessarily.
+]
+
+First, some terminology: when I say <emacs> below I mean one of (emacs
+xemacs20 emacs19 emacs20), but when I say <flavor>, I mean just one of
+(xemacs20 emacs19 emacs20).
+
+1) emacsen-common
+
+   Each flavor of emacs must depend on emacsen-common.  This package
+   contains all of the Debian specific emacs flavor independent files
+   like debian-rundir, and all the infrastructure implementing our
+   mechanism for dealing with all the various emacsen.
+
+2) Flavor indication
+
+   [ NOTE: I am at least temporarily rescinding my recent changes (the
+     ones detailed below).  Though aesthetically appealing, they have
+     caused too much trouble.  For now (at least for Debian's current
+     frozen release), please revert to the previous behavior of
+     setting debian-emacs-flavor early in your particular emacsen's
+     startup process and regardless of the setting of -q or
+     --no-site-file.
+
+     I believe that this reversion also means that emacsen maintainers
+     can remove the emacsen-common version dependency...
+
+     Thanks, and sorry for the short notice. (rlb). ]
+
+   Each emacs binary must indicate it's "flavor" which must be the
+   same as the name of the debian package.  This is now handed with an
+   argument to the debian-startup function discussed later.  For
+   example, the emacs20 package does this in startup.el like this:
+
+     (debian-startup 'emacs20)
+
+   This is a change from previous versions of emacsen-common.  Once a
+   flavor has been modified to follow this new approach, it should add
+   a depends line to make sure the right version of emacsen common is
+   installed: "Depends: emacsen-common (>= 1.4.10)".  This change
+   provides a better abstraction, and it minimizes the amount of code
+   we have to insinuate into startup.el.
+
+3) Emacs startup strategy
+
+  We have the following startup files/directories:
+
+  emacsen-common: /etc/emacs/site-start.{el,d}
+  emacs20:        /etc/X11/sawfish/site-start.d
+
+  /etc/emacs/site-start.el is a conffile, and is owned by
+  emacsen-common.  This file should not be modified by *any* add-on
+  packages, or by any emacsen package maintainer.  It is solely for
+  the use of the local admin.  It should be empty unless the local
+  admin modifies it.
+
+  The load-path for a given emacs flavor must include /etc/<flavor>
+  and /etc/emacs in that order, and on startup each emacsen must call
+  (debian-startup) and then load "site-start".  This means that
+  /etc/emacs/site-start.el will be loaded if it exists, unless there's
+  an /etc/<flavor>/site-start.el{,c} or /etc/emacs/site-start.elc
+  which will take precedence.  These site-start.el files are also the
+  sole domain of the local system admin, and should be empty unless
+  modified by the local admin.
+
+  Given that the site-startup.el files are "off-limits" to the emacsen
+  maintainers, the next question is, "From where can we run
+  debian-startup?"  The safest possibility, and the one I had
+  originally intended was to modify lisp/startup.el to do the right
+  thing, and I had also intended that --no-site-file would disable all
+  of the debian startup bits, including calling debian startup.  So I
+  did this in emacs20's startup.el:
+
+    ;; Debian version of site-start.
+    (if site-run-file
+        (progn
+          ;; Load all the debian package snippets.
+          ;; It's in here because we want -q to kill it too.
+          (if (load "debian-startup" t t nil)
+              (debian-startup 'emacs20))
+          ;; Now the normal site file...
+          (load site-run-file t t nil)))
+
+  This makes sure that debian's bits are setup as early as possible,
+  and requires only minor modifications to the emacs source.  An
+  alternate possibility might be to use lisp/site-init.el, but I'm not
+  sure that would work right.  Feel free to contact me if you know
+  better.
+
+  debian-startup, among other things, sets debian-emacs-flavor and
+  then calls debian-run-directories.  debian-run-directories takes the
+  union of all the file base names (i.e. without any .el or .elc
+  extension, and without the directory component:
+  i.e. /etc/xemacs/site-start.d/50foo.elc => foo).  Then
+  debian-startup temporarily augments the emacs load path to include
+  /etc/<flavor>/site-start.d and /etc/emacs/site-start.d in that
+  order, and then calls (load base-name) in alphabetical order.
+
+  This result is that .elc files will take precedence over .el files
+  in a given directory, and files in the <flavor> site-start.d
+  directory will take precedence over those in the emacs common
+  directory.
+
+4) Code locations
+
+  In addition to the /etc/<emacs>/site-start* directories, we have the
+  following directories (their use will be described shortly):
+
+  emacsen-common: /usr/share/emacs/site-lisp/
+  emacs20:        /usr/share/sawfish/site-lisp/
+
+  These are treated as part of the normal emacsen load path with the
+  <flavor> dir taking precedence over the emacs (common) dir.
+
+  /usr/share/<flavor>/site-lisp must be a symlink to the normal
+  site-lisp directory for that flavor of emacs.  For example:
+
+    /usr/share/emacs20/site-lisp -> ../../emacs/20.2/site-lisp
+
+6) Emacs add-on package support (there are examples later which make
+   this much clearer)
+
+  A) Each package may place a file named the same as the package into
+
+       /usr/lib/sawfish/packages/install/
+       /usr/lib/sawfish/packages/remove/
+
+     and the package must call
+  
+       /usr/lib/sawfish/emacs-package-install foo
+
+     in the postinst and 
+
+       /usr/lib/sawfish/emacs-package-remove foo
+
+     in the prerm.
+
+     For now, "emacs-package-install foo" will conceptually just turn
+     into a call for the common package emacs, and for each installed
+     flavor to
+
+       /usr/lib/sawfish/packages/install/foo
+
+     The arguments to these scripts will be the flavor being installed
+     (or just the common name "emacs") followed by a list of other
+     flavors already installed, potentially including the current one.
+
+     So if emacs20 and xemacs20 were installed, installing foo would
+     result in calls to:
+
+       /usr/lib/emacsen-common/packages/install/foo emacs emacs20 xemacs20
+       /usr/lib/emacsen-common/packages/install/foo emacs20 emacs20 xemacs20
+       /usr/lib/emacsen-common/packages/install/foo xemacs20 emacs20 xemacs20
+
+     emacs-package remove does the symmetric thing.
+
+  B) Each emacsen main package must have a call to
+     "/usr/lib/emacsen-common/emacs-install <flavor> in its postinst
+     and a call to "/usr/lib/emacsen-common/emacs-remove <flavor> in
+     it's prerm.
+
+     The emacs-install script (for now) just executes
+
+       /usr/lib/emacsen-common/packages/install/<pkg> <flavor> <others>
+
+     for each installed <pkg>, but might do more later.  Similarly,
+     emacs-remove would just be equivalent to
+
+       /usr/lib/emacsen-common/packages/remove/<pkg> <flavor> <others>
+
+     for now.  Don't forget that the argument list to the add-on
+     package install scripts will indicate both the flavor being
+     installed, and the flavors already installed.  In this case,
+     since we're actually installing a flavor, the first argument
+     won't appear in the subsequent arguments.
+
+  C) Each add-on package has the right to place files into the
+     following directories:
+
+       /etc/X11/sawfish/site-start.d
+       /usr/share/sawfish/site-lisp/<package-name>
+
+  D) Each add-on package must declare relevant dependencies on other
+     packages (including other add-on packages).  Note that add-on
+     packages should not depend on emacsen-common directly, but rather
+     on either the virtual package "emacsen" (see below), or some
+     appropriate combination of flavors (i.e. Depends: emacs20 |
+     emacs19).  In addition, any tools needed by the install/remove
+     scripts must be listed as package dependencies.  For example,
+     many add-on packages will probably use make in the install
+     script, so they need to add "Depends: make" to their control
+     file.  emacsen-common will make sure that the install/remove
+     scripts are ordered to respect inter-add-on package dependencies.
+
+8) Virtual package
+
+   Each emacsen main package will "Provides: emacsen".  It would be
+   nice to use "emacs", but for historical reasons, and given the
+   nature of the packaging system, we can't.
+
+   Packages that just need to make sure some flavor of emacs is
+   installed should just "Depends: emacsen".  If they depend on
+   specific flavors of emacs, then they should list those dependencies
+   explicitly instead.
+
+9) Emacs lisp load path.
+
+   At a minimum, each emacs has the following directories in the given
+   order in their load path:
+
+     /etc/<flavor>
+     /etc/emacs
+     /usr/local/share/emacs/<upstream>/site-lisp
+     /usr/local/share/emacs/site-lisp
+     /usr/share/emacs/<upstream>/site-lisp
+     /usr/share/emacs/site-lisp
+
+   where <upstream> is the normal emacs upstream version number for
+   the relevant flavor like 20.2 or 19.34.  The symlink mentioned in
+   (4) will also effectively add
+
+     /usr/local/share/emacs/<flavor>/site-lisp
+
+   in the same position as
+
+     /usr/local/share/emacs/<upstream>/site-lisp
+
+10) Usage of autoload instead of load in the site-start.d files.
+
+   It's been suggested, and is probably a good idea that maintainers
+   switch to using autoload rather than load when possible in their
+   site-start.d files.
+
+   For example, instead of (load "some-package), you should use
+   autoloads for all the top level, user visible functions.  Currently
+   the calc package has a good example of this.
+
+
+
+That's it.  I think this gives the add-on package maintainers the
+flexibility they need to be able to DTRT, and I think the common case
+won't be all that difficult.
+
+Examples (I've been told that there may be some bugs in these
+examples, but I haven't had time to check through them yet.  So don't
+take them as gospel at the moment.  I suggest that you loook at
+existing packages for examples of working code.  I will probably be
+revamping these soon, but I don't want to do it now since there are
+probably about to be some changes that will invalidate some of this):
+
+1) Xemacs20 and the add-on packages tm and auctex are already installed,
+   and now someone installs emacs20.
+
+   In it's postinst, emacs20 would make this call:
+
+     /usr/lib/emacsen-common/emacs-install emacs20
+
+   which would result in calls to
+
+     /usr/lib/emacsen-common/packages/install/auctex emacs xemacs20
+     /usr/lib/emacsen-common/packages/install/auctex emacs20 xemacs20
+     /usr/lib/emacsen-common/packages/emacs20/install/tm emacs xemacs20
+     /usr/lib/emacsen-common/packages/emacs/install/tm emacs20 xemacs20
+    
+2) Now, given (1), assume that someone removes xemacs20.
+
+   In it's postinst, xemacs20 would make this call:
+
+     /usr/lib/emacsen-common/emacs-remove xemacs20
+
+   which would result in calls to
+
+     /usr/lib/emacsen-common/packages/remove/auctex emacs emacs20 xemacs20
+     /usr/lib/emacsen-common/packages/remove/auctex xemacs20 emacs20 xemacs20
+     /usr/lib/emacsen-common/packages/remove/tm emacs emacs20 xemacs20
+     /usr/lib/emacsen-common/packages/remove/tm xemacs20 emacs20 xemacs20
+
+3) Now assume emacs20 and xemacs20 are installed, and that someone removes
+   tm.
+
+   The call to emacsen-package-remove in tm's prerm will result in
+   the following calls:
+
+     /usr/lib/emacsen-common/packages/remove/tm emacs emacs20 xemacs20
+     /usr/lib/emacsen-common/packages/remove/tm emacs20 emacs20 xemacs20
+     /usr/lib/emacsen-common/packages/remove/tm xemacs20 emacs20 xemacs20
+
+   In the remove/tm file, tm is responsible for cleaning up any files
+   it put into it's allowed locations:
+
+     /etc/X11/sawfish/site-init.d/
+     /usr/share/shawfish/site-lisp/tm
+
+4) Finally, here are sample install and remove scripts for a
+   hypothetical package "foo":
+
+     #!/bin/sh
+     # /usr/lib/emacsen-common/packages/install/foo
+     # [ This particular script hasn't been tested, so be careful. ]
+     set -e
+
+     FLAVOR=$1
+     echo install/foo: Handling install of emacsen flavor ${FLAVOR}
+
+     byte_compile_options="-batch -f batch-byte-compile"
+     el_files="some-file.el some-other-file.el etc.el" 
+     el_dir=/usr/share/emacs/site-lisp/foo/
+     elc_dir=/usr/share/${FLAVOR}/site-lisp/foo/
+     el_path_list=`echo ${el_files} | perl -pe 's|^|${el_dir}|o'`
+     elc_path_list=`echo ${el_files} | perl -pe 's|^|${elc_dir}|o'`
+
+     if [ ${FLAVOR} != emacs ]
+     then
+       echo install/foo: byte-compiling
+
+       # Copy the temp .el files
+       cp ${el_path_list} ${elc_dir}
+
+       # Byte compile them
+       ${FLAVOR} ${byte_compile_options} ${el_path_list}
+
+       # remove the redundant .el files
+       # presumes that any .el files in the <flavor> dir are trash.
+       rm ${elc_dir}/*.el
+     fi
+     exit 0;
+
+     #!/bin/sh
+     # /usr/lib/emacsen-common/packages/remove/foo
+     # [ This particular script hasn't been tested either, so be careful. ]
+     set -e
+
+     echo remove/foo: Handling removal of emacsen flavor ${FLAVOR}
+
+     echo emacsen-common: purging byte-compiled files
+     rm -f /usr/share/sawfish/site-lisp/foo/*.elc
+     exit 0;

@@ -1,0 +1,45 @@
+Sawfish for Debian
+------------------
+
+The sawfish package includes sawfish.el, written by Dave Pearson
+<davep@davep.org>, which is normally distributed from his web site
+http://www.davep.org/sawfish/
+
+For each upstream release you need to restart sawfish with :
+
+sawfish-client -f restart
+
+I'll close all bugs report related to this feature.
+
+Also if you have this error:
+
+$ sawfish-ui 
+error--> (file-error "No such file or directory" "gui/gtk")
+
+This is because you have mixed up Ximian packages and Debian packages.
+You need to replace all Ximian packages related to sawfish by the Debian
+packages (rep, rep-gtk, librep9).
+
+Why this doesn't work ?
+
+Because Ximian doesn't follow the Debian policy (Chapter 12.1) :
+
+     If a program needs to specify an _architecture specification string_
+     in some place, the following format should be used:
+
+                    <arch>-<os>
+
+     where <arch>' is one of the following: i386, alpha, arm, m68k,
+     powerpc, sparc and <os>' is one of: linux, gnu.  Use of _gnu_ in this
+     string is reserved for the GNU/Hurd operating system.
+
+I'll close all bugs report related to this feature too.
+
+Since GNOME 2 use AA (Anti Aliased) fonts, you should remove/disable usage
+of libgdkxft0.
+
+If rep take 100% CPU when you try to access to custom popup menu (with
+middle mouse click on the root window), you should install the
+gnome-control-center package or forget to access this menu entry.
+
+Christian

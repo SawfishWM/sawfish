@@ -1,0 +1,27 @@
+#!/usr/bin/install-menu
+
+!include menu.h
+compat="menu-2";
+outputencoding="UTF-8";
+outputlanguage="C";
+
+userprefix=".sawfish/lisp";
+rootprefix="/var/lib/sawfish";
+genmenu="debian-menu.jl";
+rootsection="Debian";
+
+function label($arg)=tolower(replacewith($arg,"/ ","--"));
+function q($arg)=esc($arg,"\"\\");
+
+supported;
+	x11="	'(\"" q(title()) "\" (system \"exec " q($command) " &\"))" ifneq(entryindex(), sub(entrycount(), "1"), "\n");
+	text="	'(\"" q(title()) "\" (system \"exec " q(term()) " &\"))" ifneq(entryindex(), sub(entrycount(), "1"), "\n");
+	wm="	'(\"" q(title()) "\" (progn (setq saved-command-line-args '(\"" q($command) "\")) (restart)))" ifneq(entryindex(), sub(entrycount(), "1"), "\n");
+endsupported;
+
+preoutput=";; This is -*-Lisp-*-\n;; Automagically generated file.  Do not edit (see /usr/doc/menu/html/index.html)\n\n(provide 'debian-menu)\n\n";
+
+startmenu="(defvar " label($section)"-menu\n	(list\n";
+endmenu="))\n";
+submenutitle="	'(\"" translate("",title()) "\" . " label($section) "-menu)" ifneq(entryindex(), sub(entrycount(), "1"), "\n");
+sort=tolower(translate("",title()))

@@ -1,0 +1,53 @@
+sawfish (1.5.0-1) unstable; urgency=low
+
+  * sawmill-defaults is now sawfish-defaults
+
+  sawfish-defaults is an alias to the standard sawfish
+  configuration, if your ~/.sawfish[/]rc contains the line:
+
+   (require 'sawmill-defaults)
+
+  then updated the line to the new value:
+
+   (require 'sawfish-defaults)
+
+  * ~/.sawmillrc is no longer a valid configuration file
+
+  now, there we fully renamed from sawmil to sawfish,
+  also ~/.sawmillrc is no longer a valid configuration file.
+
+  if you're using it, simply rename it to:
+
+   ~/.sawfishrc -or- ~/.sawfish/rc
+
+   both are valid and please restart sawfish after renaming
+   your configuration file.
+
+ -- Luis Rodrigo Gallardo Cruz <rodrigo@debian.org>  Thu, 20 Aug 2009 13:14:00 -0700
+
+sawfish (1.3.2-1) unstable; urgency=low
+
+  * This release includes the patches collected by the sawfish community,
+    In particular:
+  
+   -  http://sawfish.wikia.com/wiki/Fix_Xlib_client_message
+
+     This patch addresses an issue with 64 bit datatypes handling. Please,
+    if you've been affected by issues unreproducible under 32bit archs
+    test again and report your results to the BTS.
+
+
+   -  http://sawfish.wikia.com/wiki/Net_wm_properties
+  
+     In order to properly handle applications that always set their title
+    in UTF-8 encoding, and to enable displaying characters not in the
+    current sesion's encoding, this patch modified *all* internal string
+    handling in sawfish to use UTF-8.
+  
+     If you have scripts or configuration files with strings that are
+    displayed by sawfish you will need to reencode them. Of course, if
+    your scripts contain only characters in the ASCII range, they are
+    already UTF-8 and no action is needed.
+
+ -- Luis Rodrigo Gallardo Cruz <rodrigo@debian.org>  Sat, 02 Feb 2008 21:50:11 -0600
+

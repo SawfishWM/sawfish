@@ -1,75 +1,45 @@
 #!/usr/bin/make -f
-DH_VERBOSE = 1
 
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/default.mk
+export DH_VERBOSE=1
 
-export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
-
-version := $(shell sed -n 's/version="\(.*\)"/\1/p' configure.ac | head -n 1)
-
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	export DEB_CFLAGS_MAINT_APPEND = -Wall -pedantic -g -fno-strict-aliasing -O0
-else
-	export DEB_CFLAGS_MAINT_APPEND = -Wall -pedantic -g -fno-strict-aliasing -O2
-endif
-
-LC_ALL=
-LINGUAS=
-LANG=
-export LC_ALL LINGUAS LANG
-
-DEB_CONFIGURE_USER_FLAGS = --without-gnome2session
-
-lisp_source_extras = debian/tmp/usr/share/sawfish/lisp -name "*.jl" \
-	\! -name "*autoload*" \! -name "*custom-defaults*" \
-	\! -name "*wallpaper.jl"
-
-data_extras = debian/tmp/usr/share/sawfish/lisp -name "*autoload.jl" \
-	      -o -name "*custom-defaults.jl" \
-	      -o -name "*.jlc" \
-	      -o -name "*wallpaper.jl"
-
-data_extradirs = debian/tmp/usr/share/sawfish/sounds \
-        debian/tmp/usr/share/sawfish/images \
-        debian/tmp/usr/share/sawfish/themes \
-	debian/tmp/usr/include \
-	debian/tmp/usr/share/applications \
-	debian/tmp/usr/share/locale \
-	debian/tmp/usr/share/icons
-
-dh_install_auto = xargs dh_install --autodest
-
-dh_install_data = dh_install -psawfish-data --autodest
+DEB_CFLAGS_MAINT_APPEND := -Wall -fno-strict-aliasing
 
 %:
-	dh $@ --with autotools-dev --with autoreconf
+	dh $@ --parallel --with autoreconf --with autotools_dev
 
-override_dh_auto_configure:
-	dh_auto_configure -- $(shell dpkg-buildflags --export=configure) $(DEB_CONFIGURE_USER_FLAGS)
+override_dh_auto_build:
+	# Get rid of rpath
+	set -e; \
+	 tmpfile=`mktemp`; \
+	 sed "s/^REP_LIBS=\(.*\)-Wl,--rpath -Wl,[^ ]* \(.*\)$$/REP_LIBS=\1 \2/" Makedefs >$$tmpfile ;\
+	 mv $$tmpfile Makedefs
+	dh_auto_build -O--parallel
 
 override_dh_auto_install:
-	dh_auto_install
-	find $(lisp_source_extras) | $(dh_install_auto) -psawfish-lisp-source
-	find $(data_extras) | $(dh_install_auto) -psawfish-data
-	dh_install -psawfish-data sawfish.el usr/share/emacs/site-lisp/sawfish
-	for d in $(data_extradirs) ; do dh_install -psawfish-data --autodest $$d ; done
-	dh_install -psawfish-data debian/tmp/usr/share/sawfish/sawfish.png
-	dh_install -psawfish-data debian/tmp/usr/share/xsessions/sawfish.desktop
+	dh_auto_install -O--parallel
+	# Fixup libdir in .la files
+	find debian/tmp -name \*.la | while read file; do \
+	  libdir=`echo $$file | sed -e 's@debian/tmp\(.*\)/[^/]*la$$@\1@' `; \
+	  tmpfile=`mktemp`; \
+	  sed "s@^libdir=.*@libdir='$$libdir'@" $$file >$$tmpfile; \
+	  mv $$tmpfile $$file; \
+	done
 
-override_dh_installdocs:
-	dh_installdocs --link-doc=sawfish-data
-	dh_installdocs -psawfish-data  doc/FAQ NEWS README TODO doc/OPTIONS doc/KEYBINDINGS doc/USERDOC doc/AUTOSTART doc/XSettings
+	# Remove info files installed by Makefile. dh_installinfo will do it again without creating info.dir
+	find debian -type d -name info | xargs rm -rf
+	#empty dependency_libs file in la files
+	find debian/tmp/usr/lib -name *.la | xargs \
+		sed -i "/dependency_libs/ s/'.*'/''/"
 
-override_dh_installchangelogs:
-	dh_installchangelogs -psawfish-data
 
-override_dh_installman:
-	dh_installman -psawfish man/*.1
+override_dh_install:
+	[ ! -f debian/sawfish-lisp-source.install ] || rm debian/sawfish-lisp-source.install
+	find debian/tmp/usr/share/sawfish/lisp -name \*.jl | \
+	 cut -d/ -f3- | grep -v 'autoload\|custom-defaults' > debian/sawfish-lisp-source.install
 
-override_dh_strip:
-	dh_strip -a --dbg-package=sawfish-dbg
+	cp debian/sawfish-data.install.in debian/sawfish-data.install
+	find debian/tmp/usr/share/sawfish/lisp -name \*.jlc | \
+	 cut -d/ -f3- | grep -v 'main' >> debian/sawfish-data.install
 
-override_dh_shlibdeps:
-	dh_shlibdeps -- --warnings=2
+	#dh_install --fail-missing
+	dh_install --list-missing
