@@ -27,9 +27,9 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_PROG_LIBTOOL
 
 dnl Release versioning info
-version="1.11.91"
+version="1.12.0"
 subversion=""
-codename="The Promised Land"
+codename="The Hidden Village"
 
 VERSION=${version}
 
