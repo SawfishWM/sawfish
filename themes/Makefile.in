@@ -48,7 +48,7 @@ install : all installdirs
 	  rm -rf $(DESTDIR)$(themedir)/$$d; \
 	  for f in $(srcdir)/$$d/*; do \
 	    if [ $$f != $(srcdir)/$$d/CVS ]; then \
-	      ( cd $(srcdir) && tar czf $$d.tar.gz $$d/* ) ; \
+	      ( cd $(srcdir) && LC_ALL=C GZIP=-9n tar czf $$d.tar.gz $$d/* ) ; \
 	      $(INSTALL_DATA) $$d.tar.gz $(DESTDIR)$(themedir)/$$d.tar.gz; \
 	    fi \
 	  done \
