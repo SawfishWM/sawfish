@@ -127,8 +127,8 @@ PKG_CHECK_MODULES(libSM, sm >= 1.0
 
 PKG_CHECK_MODULES(XTest, xtst >= 1.0
 		  ,X_EXTRA_LIBS="${X_EXTRA_LIBS} -lXtst"
-		  AC_DEFINE(HAVE_X11_EXTENSIONS_XTST_H, 1, [Have Xtest])
-		  ,AC_MSG_ERROR([cannot locate Xtest]))
+		  AC_DEFINE(HAVE_X11_EXTENSIONS_XTST_H, 1, [Have Xtest (libXtst)])
+		  ,AC_MSG_ERROR([cannot locate Xtest (libXtst)]))
 
 X_SERVER="X.Org X11R7"
 
