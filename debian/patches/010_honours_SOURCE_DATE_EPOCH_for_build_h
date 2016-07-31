@@ -1,0 +1,32 @@
+Description: Honours SOURCE_DATE_EPOCH for build.h
+ Honours SOURCE_DATE_EPOCH when building build.h, to get reproducible build.
+ See https://reproducible-builds.org/specs/source-date-epoch/
+Author: Alexis Bienvenüe <pado@passoire.fr>
+
+--- sawfish-1.11.orig/build-info
++++ sawfish-1.11/build-info
+@@ -20,8 +20,11 @@ localedir="$5"
+ sys_name="$HOSTNAME.$LOCALDOMAIN"
+ user_name="$LOGNAME"
+ 
+-build_date="`date +'%a %b %e %Y'`"
+-build_time="`date +'%T %Z'`"
++SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-$(date +%s)}"
++DATE_FMT="%Y-%m-%d"
++build_date=$(date -u -d "@$SOURCE_DATE_EPOCH" "+$DATE_FMT" 2>/dev/null || date -u -r "$SOURCE_DATE_EPOCH" "+$DATE_FMT" 2>/dev/null || date -u "+$DATE_FMT")
++DATE_FMT="%T %Z"
++build_time=$(date -u -d "@$SOURCE_DATE_EPOCH" "+$DATE_FMT" 2>/dev/null || date -u -r "$SOURCE_DATE_EPOCH" "+$DATE_FMT" 2>/dev/null || date -u "+$DATE_FMT")
+ 
+ cat >src/build.h <<EOF
+ /* build.h -- Definitions relating to the current build
+@@ -36,8 +39,8 @@ cat >src/build.h <<EOF
+ #define SAWFISH_EXECDIR "$sawfishexecdir"
+ #define SAWFISH_LOCALEDIR "$localedir"
+ 
+-#define BUILD_HOST "$sys_name"
+-#define BUILD_USER "$user_name"
++#define BUILD_HOST "unknown"
++#define BUILD_USER "unknown"
+ 
+ #define BUILD_DATE "$build_date"
+ #define BUILD_TIME "$build_time"
