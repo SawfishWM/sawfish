@@ -1,14 +1,14 @@
 Summary: An extensible window manager for the X Window System
 Name: sawfish
 Version: @version@
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+ and Artistic 2.0
 # GPLv2+ is for Sawfish
 # Artistic 2.0 is for sounds
 Group: User Interface/Desktops
-Source0: http://download.tuxfamily.org/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://download.tuxfamily.org/%{name}/%{name}_%{version}.tar.bz2
 URL: http://sawfish.wikia.com/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot: %{_tmppath}/%{name}_%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: gmp-devel
 BuildRequires: gtk2-devel
 BuildRequires: libXft-devel
@@ -21,6 +21,7 @@ BuildRequires: kde-filesystem
 BuildRequires: desktop-file-utils
 BuildRequires: librep-devel >= @REP_MIN_VER@
 BuildRequires: rep-gtk-devel >= @REP_GTK_MIN_VER@
+BuildRequires: gdk-pixbuf2-xlib-devel
 Requires: control-center-filesystem
 Requires: hicolor-icon-theme
 Requires: kde-filesystem
@@ -46,10 +47,10 @@ Requires: %{name} = %{version}-%{release}, pkgconfig
 Include files for Sawfish development.
 
 %prep
-%setup -q
+%setup -q -n %{name}_%{version}
 
 %build
-/bin/sh autogen.sh --nocfg
+autogen.sh --nocfg
 /usr/bin/makeinfo --no-validate --no-headers man/news.texi >NEWS
 %configure
 make %{?_smp_mflags}
@@ -65,9 +66,14 @@ find %{buildroot}%{_libdir} -name \*.la -exec rm '{}' \;
 sed -i -e '/^\#!/,/^!\#/d' %{buildroot}%{_datadir}/sawfish/lisp/sawfish/cfg/main.jl
 
 desktop-file-validate %{buildroot}%{_datadir}/applications/sawfish.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/sawfish-config.desktop
 desktop-file-validate %{buildroot}%{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 desktop-file-validate %{buildroot}%{_kde4_appsdir}/ksmserver/windowmanagers/sawfish.desktop
 desktop-file-validate %{buildroot}%{_datadir}/xsessions/sawfish.desktop
+desktop-file-validate %{buildroot}%{_datadir}/xsessions/sawfish-kde4.desktop
+desktop-file-validate %{buildroot}%{_datadir}/xsessions/sawfish-lumina.desktop
+desktop-file-validate %{buildroot}%{_datadir}/xsessions/sawfish-mate.desktop
+desktop-file-validate %{buildroot}%{_datadir}/xsessions/sawfish-xfce.desktop
 
 %post
 /sbin/install-info %{_infodir}/sawfish.info.gz %{_infodir}/dir
@@ -86,9 +92,16 @@ fi
 %{_libdir}/sawfish
 %{_datadir}/sawfish
 %{_datadir}/applications/sawfish.desktop
+%{_datadir}/applications/sawfish-config.desktop
 %{_datadir}/gnome/wm-properties/sawfish-wm.desktop
 %{_kde4_appsdir}/ksmserver/windowmanagers/sawfish.desktop
+%{_datadir}/ksmserver/windowmanagers/sawfish.desktop
 %{_datadir}/xsessions/sawfish.desktop
+%{_datadir}/xsessions/sawfish-kde4.desktop
+%{_datadir}/xsessions/sawfish-kde5.desktop
+%{_datadir}/xsessions/sawfish-lumina.desktop
+%{_datadir}/xsessions/sawfish-mate.desktop
+%{_datadir}/xsessions/sawfish-xfce.desktop
 %{_datadir}/icons/hicolor/32x32/apps/sawfish-config.png
 %{_mandir}/man1/sawfish*.gz
 %{_infodir}/sawfish*
@@ -102,6 +115,10 @@ fi
 # This is sawfish GUI configurator, not devel config script.
 
 %changelog
+* Mon Aug  1 2016 Allan Duncan <sawfish@lists.tuxfamily.org> - 1.11.91-2
+- spec.in altered so tar file name uses '_' instead of older '-'
+- Other alterations to this file shamelessly adapted from Fedora 24 sawfish.spec
+
 * Tue Apr 22 2014 Allan Duncan
 - Shamelessly copied sawfish.spec from Fedora's distro and made a sawfish.spec.in
 - Altered to run autorun.sh and makeinfo for NEWS for the git version
