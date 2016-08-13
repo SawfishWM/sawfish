@@ -1,32 +1,33 @@
-Summary: An extensible window manager for the X Window System
-Name: sawfish
-Version: @version@
-Release: 2%{?dist}
-License: GPLv2+ and Artistic 2.0
+Summary:        An extensible window manager for the X Window System
+Name:           sawfish
+Version:        @version@
+Release:        1%{?dist}
+License:        GPLv2+ and Artistic 2.0
 # GPLv2+ is for Sawfish
 # Artistic 2.0 is for sounds
-Group: User Interface/Desktops
-Source0: http://download.tuxfamily.org/%{name}/%{name}_%{version}.tar.bz2
-URL: http://sawfish.wikia.com/
-BuildRoot: %{_tmppath}/%{name}_%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: gmp-devel
-BuildRequires: gtk2-devel
-BuildRequires: libXft-devel
-BuildRequires: libXtst-devel
-BuildRequires: libICE-devel
-BuildRequires: libSM-devel
-BuildRequires: texinfo
-BuildRequires: gettext
-BuildRequires: kde-filesystem
-BuildRequires: desktop-file-utils
-BuildRequires: librep-devel >= @REP_MIN_VER@
-BuildRequires: rep-gtk-devel >= @REP_GTK_MIN_VER@
-BuildRequires: gdk-pixbuf2-xlib-devel
-Requires: control-center-filesystem
-Requires: hicolor-icon-theme
-Requires: kde-filesystem
-Requires: librep >= @REP_MIN_VER@
-Requires: rep-gtk >= @REP_GTK_MIN_VER@
+URL:            http://sawfish.wikia.com/
+Source0:        http://download.tuxfamily.org/%{name}/%{name}_%{version}.tar.bz2
+
+BuildRequires:  gmp-devel
+BuildRequires:  gtk2-devel
+BuildRequires:  libXft-devel
+BuildRequires:  libXtst-devel
+BuildRequires:  libICE-devel
+BuildRequires:  libSM-devel
+BuildRequires:  autoconf
+BuildRequires:  libtool
+BuildRequires:  texinfo
+BuildRequires:  gettext
+BuildRequires:  kde-filesystem
+BuildRequires:  desktop-file-utils
+BuildRequires:  librep-devel >= @REP_MIN_VER@
+BuildRequires:  rep-gtk-devel >= @REP_GTK_MIN_VER@
+BuildRequires:  gdk-pixbuf2-xlib-devel
+Requires:       control-center-filesystem
+Requires:       hicolor-icon-theme
+Requires:       kde-filesystem
+Requires:       librep >= @REP_MIN_VER@
+Requires:       rep-gtk >= @REP_GTK_MIN_VER@
 
 %define rep_execdir %(pkg-config librep --variable=repcommonexecdir)
 
@@ -39,9 +40,9 @@ accomplished by writing Lisp code in a personal .sawfishrc file, or
 using a GTK+ interface.  Sawfish is mostly GNOME compliant
 
 %package devel
-Summary: Development files for Sawfish
-Group: Development/Languages
-Requires: %{name} = %{version}-%{release}, pkgconfig
+Summary:        Development files for Sawfish
+Requires:       %{name} = %{version}-%{release}
+Requires:       pkgconfig
 
 %description devel
 Include files for Sawfish development.
@@ -50,8 +51,7 @@ Include files for Sawfish development.
 %setup -q -n %{name}_%{version}
 
 %build
-autogen.sh --nocfg
-/usr/bin/makeinfo --no-validate --no-headers man/news.texi >NEWS
+./autogen.sh --nocfg
 %configure
 make %{?_smp_mflags}
 
@@ -84,7 +84,8 @@ if [ "$1" = 0 ]; then
 fi
 
 %files -f %{name}.lang
-%doc COPYING COPYING.SOUNDS README README.IMPORTANT NEWS doc/*
+%license COPYING COPYING.SOUNDS
+%doc README README.IMPORTANT doc/*
 %dir %{_kde4_appsdir}/ksmserver
 %dir %{_kde4_appsdir}/ksmserver/windowmanagers
 %{_bindir}/*
@@ -115,7 +116,10 @@ fi
 # This is sawfish GUI configurator, not devel config script.
 
 %changelog
-* Mon Aug  1 2016 Allan Duncan <sawfish@lists.tuxfamily.org> - 1.11.91-2
+* Sat Aug 13 2016 Kim B. Heino <b@bbbs.net> - 1.11.91-1
+- Merge all changes from Fedora's sawfish.spec
+
+* Mon Aug  1 2016 Allan Duncan <sawfish@lists.tuxfamily.org> - 1.11.91-1
 - spec.in altered so tar file name uses '_' instead of older '-'
 - Other alterations to this file shamelessly adapted from Fedora 24 sawfish.spec
 
