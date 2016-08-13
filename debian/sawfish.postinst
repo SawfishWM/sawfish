@@ -4,24 +4,6 @@ set -e
 
 if [ "$1" = "configure" ]; then
 
-# Move old conffiles in < 0.37.2-2
-  if [ -e /etc/X11/sawfish/defaults.jl ]; then
-    mv /etc/X11/sawfish/defaults.jl /etc/X11/sawfish/site-init.d/00debian.jl
-  fi
-  if [ -e /etc/X11/sawfish/menu.jl ]; then
-    mv /etc/X11/sawfish/menu.jl /etc/X11/sawfish/site-init.d/00menu.jl
-  fi
-
-# Remove old conffiles in < 0.38-1
-	rm /etc/X11/sawfish/site-init.d/defaults.jl 2>/dev/null || true
-	rm /etc/X11/sawfish/site-init.d/menu.jl 2>/dev/null || true
-
-# Be sure to remove this old file
-	rm /etc/X11/sawfish/site-init.jl 2>/dev/null || true
-
-# Remove old generated menu file in /etc
-	rm /etc/X11/sawfish/debian-menu.jl 2>/dev/null || true
-
 # Touch all jlc files
   find /usr/share/sawfish/lisp -name *.jlc | xargs touch
 
