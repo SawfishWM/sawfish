@@ -44,13 +44,17 @@
   (define (kde-window-matchers)
     ;; window matchers so we properly interact with plasma stuff
     (add-window-matcher '((WM_CLASS . "^krunner/krunner$"))
-     '((focus-mode . click)))
+     '((focus-mode . click)
+       (never-tile . t)))
     (add-window-matcher '((WM_CLASS . "^Plasma-desktop/plasma-desktop$"))
-     '((focus-mode . click)))
+     '((focus-mode . click)
+       (never-tile . t)))
     (add-window-matcher '((WM_CLASS . "^Plasma/Plasma$"))
-     '((focus-mode . click)))
+     '((focus-mode . click)
+       (never-tile . t)))
     (add-window-matcher '((WM_CLASS . "^plasmashell/plasmashell$"))
-     '((focus-mode . click))))
+     '((focus-mode . click)
+       (never-tile . t))))
 
   (define (init)
     (let (menu
