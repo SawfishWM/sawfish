@@ -1,6 +1,27 @@
 For full changes, read the news section in info. This file
 lists only important changes.
 
+KDE5 / KF5 applications not properly working
+********************************************
+
+A known issue that for example 'dolphin' does not show thumbnails
+outside of KDE5. To fix this, export 'KDE_FULL_SESSION' as 'true'
+in your environment.
+
+For example place this in your ${HOME}/.sawfish/rc:
+
+	(setenv "KDE_FULL_SESSION" "true")
+
+or only prepend it to certain applications like:
+
+	(defvar-setq bottom-edge-function
+		(lambda ()
+			(jump-or-exec "dolphin"
+			 "KDE_FULL_SESSION=true dolphin"
+			 #:match-class t)))
+
+or whatever function you use to open an application.
+
 In Sawfish 1.9.0 there are the following major changes:
 
 StyleTab incompatibility
@@ -89,7 +110,7 @@ simply add the following flag to configure:
 (eg: ./configure --prefix=/usr --without-nls)
 
 SawfishConfig GtkTree:
-*******************
+**********************
 
 recently the old GtkNotebook UI has been replaced by a GtkTree
 UI, sadly this widget does currently not support single-clicking
