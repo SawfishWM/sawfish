@@ -38,8 +38,9 @@
 
   (define (lumina-window-matchers)
     ;; window matchers so we properly interact with lumina-panel
-    (add-window-matcher '((_NET_WM_NAME . "^Lumina Desktop Environment$"))
-     '((opacity . 100))))
+    (add-window-matcher '((WM_CLASS . "^Lumina Desktop Environment/lumina-desktop$"))
+     '((opacity . 100)
+       (never-tile . t))))
 
   (define (init)
       (setq desktop-environment "lumina")
@@ -57,7 +58,9 @@
   ;; If detected, returns t, and do also lumina support init.
   (define (detect-lumina)
     (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "LUMINA")
+	      (equal (getenv "XDG_CURRENT_DESKTOP") "Lumina")
 	      (equal (getenv "DESKTOP_SESSION") "sawfish-lumina")
-	      (get-window-by-class "Lumina" #:regex t))
+	      (get-window-by-class "Lumina" #:regex t)
+	      (get-window-by-class "Lumina Desktop Environment" #:regex t))
       (init)
       t)))
