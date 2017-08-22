@@ -43,9 +43,7 @@ uninstall :
 clean :
 	rm -f *~ core
 
-distclean : gitclean
-
-gitclean : clean
+distclean : clean
 	rm -f Makefile
 
-.PHONY : all install uninstall clean gitclean
+.PHONY : all install uninstall clean distclean
