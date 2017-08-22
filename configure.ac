@@ -215,6 +215,12 @@ fi
 dnl Check for librep
 REP_MIN_VER="0.92.3"
 
+AC_CHECK_PROG(REP_BIN, [rep], [yes])
+if test "$REP_BIN" != "yes"; then
+	echo "rep binary not found!"
+	exit 1
+fi
+
 PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  ,REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
 		  REP_CFLAGS="`pkg-config --cflags librep`"
