@@ -78,12 +78,11 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	  $(DESTDIR)${datadir}/icons/hicolor/32x32/apps/
 
 clean : 
-	rm -f *.jlc *~ core
-	rm -f layouts/*~ layouts/*.jlc
+	rm -f *.jlc *~ core \
+		layouts/*~ layouts/*.jlc \
+		main.jl
 
-distclean : gitclean
+distclean : clean
+	rm -f Makefile
 
-gitclean : clean
-	rm -f Makefile main.jl
-
-.PHONY: all install uninstall clean gitclean distclean
+.PHONY: all install uninstall clean distclean
