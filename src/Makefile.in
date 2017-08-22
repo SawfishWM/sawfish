@@ -96,7 +96,8 @@ installdirs : $(top_srcdir)/mkinstalldirs
 clean :
 	rm -f *~ *.o *.lo *.la *.jlc build.h core \
 		.*.d sawfish sawfish-about.jl \
-		 gtk-style .libs .libexec
+		 gtk-style
+	rm -rf .libs .libexec
 
 distclean : clean
 	rm -f Makefile
