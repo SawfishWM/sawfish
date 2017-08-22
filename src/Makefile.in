@@ -94,12 +94,13 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $(srcdir)/fake-libexec
 
 clean :
-	rm -f *~ *.o *.lo *.la *.jlc build.h core
+	rm -f *~ *.o *.lo *.la *.jlc build.h core \
+		.*.d sawfish sawfish-about.jl \
+		 gtk-style .libs .libexec
 
-distclean: gitclean
-
-gitclean : clean
-	rm -f .*.d sawfish sawfish-about.jl Makefile gtk-style
-	rm -rf .libs .libexec
+distclean : clean
+	rm -f Makefile
 
 -include $(SRCS:%.c=.%.d) $(DL_SRCS:%.c=.%.d)
+
+.PHONY: all clean install uninstall distclean
