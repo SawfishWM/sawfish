@@ -223,13 +223,6 @@ PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
 		  REP_VERSION="`pkg-config --variable=version librep`"
 		  ,AC_MSG_ERROR([cannot locate librep >= $REP_MIN_VER]))
 
-dnl Check for rep-gtk
-REP_GTK_MIN_VER="0.90.7"
-
-PKG_CHECK_MODULES(REP_GTK, rep-gtk >= ${REP_GTK_MIN_VER}
-		  ,
-		  ,AC_MSG_ERROR([cannot locate rep-gtk >= $REP_GTK_MIN_VER]))
-
 dnl Check for GTK+2
 GTK_MIN_VER="2.24.0"
 GDK_MIN_VER="2.23.0"
@@ -239,6 +232,13 @@ PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
 		  GTK_CFLAGS="`pkg-config --cflags gtk+-2.0`"
 		  AC_DEFINE(HAVE_GTK, 1, [Have GTK])
 		  ,AC_MSG_ERROR([cannot locate gtk+ >= $GTK_MIN_VER]))
+
+dnl Check for rep-gtk
+REP_GTK_MIN_VER="0.90.7"
+
+PKG_CHECK_MODULES(REP_GTK, rep-gtk >= ${REP_GTK_MIN_VER}
+		  ,
+		  ,AC_MSG_ERROR([cannot locate rep-gtk >= $REP_GTK_MIN_VER]))
 
 dnl Check for image handling libraries
 AC_ARG_WITH(gdk-pixbuf,
