@@ -45,13 +45,28 @@ Each release lists incompatible changes at its top.
 @item Bug Fixes
 @itemize @minus
 @item Improved KDE integration. Prevent Plasma and KRunner windows to be tiled. [Christopher Bratusek]
+
+@item Explicitely check for @code{rep} binary, not just @code{librep-dev}. [Christopher Bratusek]
+
+@item First check for @code{libgtk2.0-dev} then for @code{rep-gtk-dev}. [Christopher Bratusek]
+
+@item Allow to override build time, hostname and username to allow for reproducible builds
+of Sawfish packages. [Bernhard M. Wiedemann]
+
+@item Avoid recreating theme tarballs (the old code was erroneously recreating theme tarballs
+for each file contained thus calling @code{tar} over 200 times to create 8 tarballs), other minor
+improvements. [Bernhard M. Wiedemann]
 @end itemize
 
 @item Miscellaneous Changes
 @itemize @minus
-@item Update Lumina integration [Christopher Bratusek]
+@item Various minor changes to the Makefiles, mostly replacing @code{gitlcean} target with
+@code{distclean} target and adding @code{.PHONY} section. Also move theme tarball creation
+into @code{all} target, rather than @code{install} target. [Christopher Bratusek]
 
-@item Update Japanese translation [Takeshi Hamasaki]
+@item Update Lumina integration. [Christopher Bratusek]
+
+@item Update Japanese translation. [Takeshi Hamasaki]
 @end itemize
 @end itemize
 
