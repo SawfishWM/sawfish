@@ -76,8 +76,7 @@ uninstall :
 clean :
 	rm -f *~ sawfish.info* sawfish.?? sawfish.??? *1.gz
 
-distclean : gitclean
-	rm -f Makefile
+distclean : clean
+	rm -f Makefile ../doc/FAQ ../doc/USERDOC ../NEWS
 
-gitclean : clean
-	rm -f ../doc/FAQ ../doc/USERDOC ../NEWS
+.PHONY: all install uninstall clean distclean NEWS FAQ USERDOC
