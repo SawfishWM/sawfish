@@ -62,9 +62,9 @@ installdirs : $(top_srcdir)/mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) $(DESTDIR)$(sawfishimagedir)
 
 clean :
-	rm -f *~ *.jlc core
+	rm -f *~ *.jlc core sawfish-about.jl
 
-distclean : gitclean
+distclean : clean
+	rm -f Makefile
 
-gitclean : clean
-	rm -f sawfish-about.jl Makefile
+.PHONY: all install uninstall clean distclean
