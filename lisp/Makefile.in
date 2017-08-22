@@ -92,12 +92,10 @@ clean :
 	done
 	rm -f `find . \( -name '*.jlc' -o -name '*~' -o -name core \) -print`
 
-distclean: gitclean
-
-gitclean : clean
+distclean: clean
 	set -e; for d in $(SUBDIRS); do \
 	  ( cd $$d && $(MAKE) $@ ); \
 	done
 	rm -f Makefile sawfish/gtk/widgets/font.jl
 
-.PHONY : all lisp install uninstall clean gitclean
+.PHONY : all lisp install uninstall clean distclean
