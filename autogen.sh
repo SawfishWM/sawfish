@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -f Makefile ]; then
-	make gitclean
+	make distclean
 fi
 
 if [ -f aclocal.m4 ]; then
