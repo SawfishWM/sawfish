@@ -38,15 +38,13 @@ COMPILE_ENV = SAWFISHLISPDIR=../lisp \
 THEMES := StyleTab absolute-e Crux microGUI mxflat Elberg-tabbed Zami-like candido gradient-tabbed
 
 all :
-# only uncompiled themes are loaded for now, so no point doing this
-#	for d in $(THEMES); do \
-#	  $(COMPILE_ENV) $(sawfish_prog) compiler -f compile-lib-batch $$d; \
-#	done
+	for d in $(THEMES); do \
+		( cd $(srcdir) && LC_ALL=C tar -c $$d/* | gzip -n9 > $$d.tar.gz ) ; \
+	done
 
 install : all installdirs
 	for d in $(THEMES); do \
 	  rm -rf $(DESTDIR)$(themedir)/$$d; \
-	  ( cd $(srcdir) && LC_ALL=C tar -c $$d/* | gzip -n9 > $$d.tar.gz ) ; \
 	  $(INSTALL_DATA) $$d.tar.gz $(DESTDIR)$(themedir)/$$d.tar.gz; \
 	done
 	@# Don't use tar for StyleTab. It's not compression, but tar
@@ -58,18 +56,17 @@ installdirs : $(top_srcdir)/mkinstalldirs
 
 uninstall :
 	for d in $(THEMES); do \
-	  rm -rf $(DESTDIR)$(themedir)/$$d; \
+	  rm -rf $(DESTDIR)$(themedir)/$$d.tar.gz; \
 	done
+	rm -rf $(DESTDIR)$(themedir)/StyleTab
 
 clean :
 	for d in $(THEMES); do \
 	  rm -f $(srcdir)$$d/*.jlc $(srcdir)/$$d/*~; \
 	done
-	rm -f *.jlc *.jld *~
+	rm -f *.jlc *.jld *~ *.gz
 
-distclean : gitclean
+distclean : clean
+	rm -f Makefile
 
-gitclean : clean
-	rm -f Makefile *.gz
-
-.PHONY : all lisp install uninstall clean gitclean
+.PHONY : all lisp install uninstall clean
