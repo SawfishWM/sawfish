@@ -46,6 +46,9 @@ Each release lists incompatible changes at its top.
 @itemize @minus
 @item Improved KDE integration. Prevent Plasma and KRunner windows to be tiled. [Christopher Bratusek]
 
+@end itemize
+@item Build and Installation
+@itemize @minus
 @item Explicitely check for @code{rep} binary, not just @code{librep-dev}. [Christopher Bratusek]
 
 @item First check for @code{libgtk2.0-dev} then for @code{rep-gtk-dev}. [Christopher Bratusek]
@@ -54,8 +57,8 @@ Each release lists incompatible changes at its top.
 of Sawfish packages. [Bernhard M. Wiedemann]
 
 @item Avoid recreating theme tarballs (the old code was erroneously recreating theme tarballs
-for each file contained thus calling @code{tar} over 200 times to create 8 tarballs), other minor
-improvements. [Bernhard M. Wiedemann]
+for each file contained thus calling @code{tar} over 200 times to create 8 tarballs), other
+improvements to allow for reproducible builds of Sawfish packages. [Bernhard M. Wiedemann]
 @end itemize
 
 @item Miscellaneous Changes
