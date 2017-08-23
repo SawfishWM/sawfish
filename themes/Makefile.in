@@ -40,7 +40,8 @@ THEMES := StyleTab absolute-e Crux microGUI mxflat Elberg-tabbed Zami-like candi
 all :
 	for d in $(THEMES); do \
 		( tar --help|grep -q sort= && rbopts=--sort=name ; \
-		  cd $(srcdir) && LC_ALL=C tar --format=gnu --mtime @1 $$rbopts -c $$d/* | gzip -n9 > $$d.tar.gz ) ; \
+	          tar --help|grep -q 'GNU tar' && rbopts="$$rbopts --format=gnu --mtime @1" ; \
+		  cd $(srcdir) && LC_ALL=C tar $$rbopts -c $$d/* | gzip -n9 > $$d.tar.gz ) ; \
 	done
 
 install : all installdirs
