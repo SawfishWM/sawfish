@@ -56,11 +56,6 @@
 	   sawfish.wm.ext.wallpaper
 	   sawfish.wm.prg.compton
 	   sawfish.wm.prg.conky
-	   sawfish.wm.prg.diodon
-	   sawfish.wm.prg.fehlstart
-	   sawfish.wm.prg.idesk
-	   sawfish.wm.prg.nm-applet
-	   sawfish.wm.prg.pancake
 	   sawfish.wm.prg.trayer
 	   sawfish.wm.prg.xgamma
 	   sawfish.wm.prg.xmobar
@@ -285,10 +280,6 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\",
       (add-hook 'after-initialization-hook (lambda () (xgamma-set-from-cfg t t t)) t))
     (when init-wallpaper
       (add-hook 'after-initialization-hook set-wallpaper t))
-    (when init-fehlstart
-      (add-hook 'after-initialization-hook start-fehlstart t))
-    (when init-pancake
-      (add-hook 'after-initialization-hook start-pancake t))
     (when init-trayer
       (add-hook 'after-initialization-hook start-trayer t))
     (when init-xmobar
@@ -298,14 +289,8 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\",
       (add-hook 'before-restart-hook restore-keymap t))
     (when init-xsettingsd
       (add-hook 'after-initialization-hook start-xsettingsd t))
-    (when init-nm-applet
-      (add-hook 'after-initialization-hook start-nm-applet t))
-    (when init-diodon
-      (add-hook 'after-initialization-hook start-diodon t))
     (when init-conky
-      (add-hook 'after-initialization-hook start-conky t))
-    (when init-idesk
-      (add-hook 'after-initialization-hook start-idesk t)))
+      (add-hook 'after-initialization-hook start-conky t)))
 
   (when (eq error-destination 'init)
     (setq error-destination 'standard-error)))
