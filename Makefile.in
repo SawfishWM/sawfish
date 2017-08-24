@@ -105,7 +105,7 @@ uninstall :
 # At this stage, DOC file omits some docstrings. (Only small portion,
 # though.) Byte compilation makes it complete.
 DOC :
-	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print`
+	repdoc DOC `find $(srcdir) \( -name '*.c' -o -name '*.jl' \) -print|LC_ALL=C sort`
 
 changelog :
 	$(srcdir)/scripts/make-changelog
