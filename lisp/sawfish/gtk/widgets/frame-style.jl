@@ -100,9 +100,7 @@
 					  (setq full dir)
 					  (throw 'out t))
 				      (error))))
-				'("%s" "%s.tar#tar/%s" "%s.tar.gz#tar/%s"
-				  "%s.tar.Z#tar/%s" "%s.tar.bz2#tar/%s"
-				  "%s.tar.lzma#tar/%s" "%s.tar.xz#tar/%s"))
+				'("%s"))
 			  nil)
 		    (setq full (i18n-filename
 				(expand-file-name "README" full)))
