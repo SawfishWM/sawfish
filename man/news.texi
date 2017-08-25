@@ -53,12 +53,15 @@ Each release lists incompatible changes at its top.
 
 @item First check for @code{libgtk2.0-dev} then for @code{rep-gtk-dev}. [Christopher Bratusek]
 
-@item Allow to override build time, hostname and username to allow for reproducible builds
-of Sawfish packages. [Bernhard M. Wiedemann]
-
-@item Avoid recreating theme tarballs (the old code was erroneously recreating theme tarballs
-for each file contained thus calling @code{tar} over 200 times to create 8 tarballs), other
-improvements to allow for reproducible builds of Sawfish packages. [Bernhard M. Wiedemann]
+@item Make build reproducible [Bernhard M. Wiedemann]
+@itemize x
+@item allow overriding @code{build-info} build time, hostname and username.
+@item avoid recreating theme tarball for every single file (the old code was
+erroneously recreating theme tarballs for each file contained thus calling
+@code{tar} over 200 times to create 8 tarballs)
+@item make @code{DOC} file reproducibly
+@item other improvements to make builds reproducible
+@end itemize
 @end itemize
 
 @item Miscellaneous Changes
@@ -75,6 +78,8 @@ into @code{all} target, rather than @code{install} target. [Christopher Bratusek
 @item @code{nm-applet}
 @item @code{pancake}
 @end itemize
+
+@item Filter out @code{Trayer} in @code{cabinet}. [Christopher Bratusek]
 
 @item Update Lumina integration. [Christopher Bratusek]
 
