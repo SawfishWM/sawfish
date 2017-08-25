@@ -49,13 +49,6 @@ Each release lists incompatible changes at its top.
 @end itemize
 @item Build and Installation
 @itemize @minus
-@item Explicitely check for @code{rep} binary, not just @code{librep-dev}. [Christopher Bratusek]
-
-@item First check for @code{libgtk2.0-dev} then for @code{rep-gtk-dev}. [Christopher Bratusek]
-
-@item Only create session file directories for GNOME 2, KDE 4 or KDE 5 if actually
-requested by user. [Christopher Bratusek]
-
 @item Make build reproducible [Bernhard M. Wiedemann]
 @itemize x
 @item allow overriding @code{build-info} build time, hostname and username.
@@ -65,6 +58,16 @@ erroneously recreating theme tarballs for each file contained thus calling
 @item make @code{DOC} file reproducibly
 @item other improvements to make builds reproducible
 @end itemize
+
+@item Explicitely check for @code{rep} binary, not just @code{librep-dev}. [Christopher Bratusek]
+
+@item First check for @code{libgtk2.0-dev} then for @code{rep-gtk-dev}. [Christopher Bratusek]
+
+@item Only create session file directories for GNOME 2, KDE 4 or KDE 5 if actually
+requested by user. [Christopher Bratusek]
+
+@item Makefile.in @code{distclean} target no longer utilizes debian/rules, no
+longer removes finalized RPM spec file or Gentoo ebuild. [Christopher Bratusek]
 @end itemize
 
 @item Miscellaneous Changes

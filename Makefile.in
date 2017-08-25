@@ -122,7 +122,7 @@ clean :
 	done
 	rm -f *~ DOC* TAGS build.h
 
-distclean :
+distclean : clean
 	-for dir in $(SUBDIRS); do \
 	  [ -d $$dir ] && ( cd $$dir && $(MAKE) $@ ) || exit 1; \
 	done
@@ -131,7 +131,6 @@ distclean :
 		data/sawfish.pc aclocal.m4 configure ltmain.sh \
 		config.h.in
 	rm -rf autom4te.cache m4/
-	-fakeroot debian/rules clean
 
 tarball :
 	git checkout-index --prefix="$$HOME/sawfish-$(version)/" -a
