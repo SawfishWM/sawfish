@@ -50,7 +50,8 @@
     (open rep
 	  rep.system
 	  sawfish.wm.misc
-	  sawfish.wm.windows)
+	  sawfish.wm.windows
+	  sawfish.wm.ext.error-handler)
 
   (defconst protocol-version 1)
 
