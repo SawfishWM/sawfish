@@ -78,12 +78,18 @@ install : all installdirs
 installdirs : mkinstalldirs
 	$(SHELL) $< $(DESTDIR)$(sawfishdir) \
 	  $(DESTDIR)$(bindir) $(DESTDIR)$(sawfishexecdir) \
-	  $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties \
 	  $(DESTDIR)$(datadir)/applications/ \
 	  $(DESTDIR)$(libdir)/pkgconfig/ \
-	  $(DESTDIR)$(datadir)/xsessions/ \
-	  $(DESTDIR)$(KDE4DIR)/ksmserver/windowmanagers/ \
-	  $(DESTDIR)$(KDE5DIR)/ksmserver/windowmanagers/
+	  $(DESTDIR)$(datadir)/xsessions/
+	if test $(GNOME2_SESSION) = "yes"; then \
+		$(SHELL) $< $(DESTDIR)$(GNOMEDIR)/share/gnome/wm-properties ; \
+	fi
+	if test $(KDE4_SESSION) = "yes"; then \
+		$(SHELL) $< $(DESTDIR)$(KDE4DIR)/ksmserver/windowmanagers/ ; \
+	fi
+	if test $(KDE5_SESSION) = "yes"; then \
+		$(SHELL) $< $(DESTDIR)$(KDE5DIR)/ksmserver/windowmanagers/ ; \
+	fi
 
 uninstall :
 	for dir in $(SUBDIRS); do \
