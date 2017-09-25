@@ -58,6 +58,7 @@
   (defconst _NET_WM_MOVERESIZE_MOVE 8)
   (defconst _NET_WM_MOVERESIZE_SIZE_KEYBOARD 9)
   (defconst _NET_WM_MOVERESIZE_MOVE_KEYBOARD 10)
+  (defconst _NET_WM_MOVERESIZE_CANCEL 11)
 
   (defconst _NET_WM_STATE_REMOVE 0)
   (defconst _NET_WM_STATE_ADD 1)
@@ -94,6 +95,7 @@
      _NET_WM_MOVERESIZE_SIZE_TOPRIGHT
      _NET_WM_MOVERESIZE_SIZE_KEYBOARD
      _NET_WM_MOVERESIZE_MOVE_KEYBOARD
+     _NET_WM_MOVERESIZE_CANCEL
      _NET_WM_PING
      _NET_WM_STATE
      _NET_WM_STATE_ABOVE
@@ -522,7 +524,8 @@
 			     '(left))
 			    ((eq mode _NET_WM_MOVERESIZE_SIZE_RIGHT)
 			     '(right)))))
-		 (resize-window-interactively w))))))
+                 (when (not (eq mode _NET_WM_MOVERESIZE_CANCEL))
+                   (resize-window-interactively w)))))))
 
 	((_NET_NUMBER_OF_DESKTOPS)
 	 (set-number-of-workspaces (aref data 0)))
