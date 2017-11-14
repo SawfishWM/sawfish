@@ -30,8 +30,6 @@ if [ -n "$SOURCE_DATE_EPOCH" ] ; then
     sys_name=reproducible
     user_name=reproducible
 fi
-build_date="`date $dateopts +'%a %b %e %Y'`"
-build_time="`date $dateopts +'%T %Z'`"
 
 cat >src/build.h <<EOF
 /* build.h -- Definitions relating to the current build
