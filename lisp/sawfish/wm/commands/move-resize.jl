@@ -659,8 +659,8 @@ that window."
            (old-h (cdr (window-dimensions win)))
 	   (new-w (prompt #:title (format nil "Old width of window %s: %s\nEnter new width: " w-name old-w)))
 	   (new-h (prompt #:title (format nil "Old height of window %s: %s\nEnter new height: " w-name old-h))))
-      (if (and (numberp (string->number new-w))
-	       (numberp (string->number new-h)))
+      (if (and (and new-w (numberp (string->number new-w)))
+	       (and new-h (numberp (string->number new-h))))
 	  (resize-window-with-hints* win (string->number new-w) (string->number new-h))
 	(display-message (format nil "One of the given values is not a number.")))))
 
