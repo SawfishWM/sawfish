@@ -590,7 +590,7 @@ STATES has been changed. STATES may also be a single symbol."
 
   (define (rename-window window new-name)
     "Renames WINDOW to NEW-NAME."
-    (when (string-p new-name)
+    (when (stringp new-name)
       (set-x-text-property window 'WM_NAME (vector new-name))
       (set-x-text-property window '_NET_WM_NAME (vector new-name))
       (set-x-text-property window 'WM_ICON_NAME (vector new-name))
