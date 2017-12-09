@@ -44,6 +44,8 @@ Each release lists incompatible changes at its top.
 
 @item Bug Fixes
 @itemize @minus
+@item Fix random resize issues with GTK+3 [GSR]
+
 @item Improved KDE integration. Prevent Plasma and KRunner windows to be tiled. [Christopher Bratusek]
 
 @end itemize
@@ -76,7 +78,14 @@ longer removes finalized RPM spec file or Gentoo ebuild. [Christopher Bratusek]
 @code{distclean} target and adding @code{.PHONY} section. Also move theme tarball creation
 into @code{all} target, rather than @code{install} target. [Christopher Bratusek]
 
+@item Make @code{rename-window} throw an actual useful error message if no string
+(or no usable) was given. [Christopher Bratusek]
+
+@item Make @code{resize-window-prompt} throw an actual useful error message if one
+(or both) of the input values was not given. [Christopher Bratusek]
+
 @item Move several modules from @code{sawfish.wm.prg} into the Sawfish Extras package
+[Christopher Bratusek]
 @itemize +
 @item @code{diodon}
 @item @code{fehlstart}
