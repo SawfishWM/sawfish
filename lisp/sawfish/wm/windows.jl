@@ -590,10 +590,11 @@ STATES has been changed. STATES may also be a single symbol."
 
   (define (rename-window window new-name)
     "Renames WINDOW to NEW-NAME."
-    (set-x-text-property window 'WM_NAME (vector new-name))
-    (set-x-text-property window '_NET_WM_NAME (vector new-name))
-    (set-x-text-property window 'WM_ICON_NAME (vector new-name))
-    (set-x-text-property window '_NET_WM_ICON_NAME (vector new-name)))
+    (when (string-p new-name)
+      (set-x-text-property window 'WM_NAME (vector new-name))
+      (set-x-text-property window '_NET_WM_NAME (vector new-name))
+      (set-x-text-property window 'WM_ICON_NAME (vector new-name))
+      (set-x-text-property window '_NET_WM_ICON_NAME (vector new-name))))
 
   (define-command 'rename-window rename-window
     #:spec "%W\nsEnter new window name:")
