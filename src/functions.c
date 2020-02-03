@@ -65,7 +65,6 @@ static int xinerama_heads;
 # endif
 #endif
 
-DEFSYM(root, "root");
 DEFSYM(after_restacking_hook, "after-restacking-hook");
 DEFSYM(position, "position");
 DEFSYM(spacing, "spacing");
@@ -1406,7 +1405,6 @@ functions_init (void)
     rep_ADD_SUBR(Ssend_client_message);
     rep_pop_structure (tem);
 
-    rep_INTERN(root);
     rep_INTERN_SPECIAL(after_restacking_hook);
     Fset(Qafter_restacking_hook, Qnil);
     rep_INTERN(position);

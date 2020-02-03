@@ -22,10 +22,6 @@
 
 static Window edge_left, edge_right, edge_top, edge_bottom;
 
-DEFSYM(left, "left");
-DEFSYM(right, "right");
-DEFSYM(top, "top");
-DEFSYM(bottom, "bottom");
 DEFSYM(enter_flipper_hook, "enter-flipper-hook");
 DEFSYM(leave_flipper_hook, "leave-flipper-hook");
 
@@ -155,10 +151,6 @@ flippers_init (void)
 
     rep_pop_structure (tem);
 
-    rep_INTERN (left);
-    rep_INTERN (right);
-    rep_INTERN (top);
-    rep_INTERN (bottom);
     rep_INTERN_SPECIAL (enter_flipper_hook);
     rep_INTERN_SPECIAL (leave_flipper_hook);
     Fset(Qenter_flipper_hook, Qnil);
