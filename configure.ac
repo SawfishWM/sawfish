@@ -59,7 +59,7 @@ AC_CHECK_LIB(socket, bind)
 AC_HEADER_SYS_WAIT
 AC_HEADER_TIME
 AC_CHECK_HEADERS(fcntl.h sys/time.h sys/utsname.h)
-AC_PATH_PROG(PKG_CONFIG, [pkg-config], [no])
+PKG_PROG_PKG_CONFIG
 
 dnl Check for X headers, etc
 _cppflags="${CPPFLAGS}"
@@ -97,7 +97,7 @@ PKG_CHECK_MODULES(libXRandR, xrandr >= 1.0
 
 PKG_CHECK_MODULES(libXft, xft >= 1.0
 		  ,XFT_LIBS="-lXft"
-		  XFT_CFLAGS="`pkg-config --cflags xft`"
+		  XFT_CFLAGS="`$PKG_CONFIG --cflags xft`"
 		  AC_DEFINE(HAVE_X11_XFT_XFT_H, 1, [Have xft])
 		  ,AC_MSG_ERROR([cannot locate libXft]))
 
@@ -106,8 +106,8 @@ X_LIBS=""
 
 PKG_CHECK_MODULES(libX11, x11 >= 1.0
 		  ,AC_DEFINE(HAVE_X11, 1, [Have X11])
-		  X_LIBS="`pkg-config --libs x11`"
-		  X_CFLAGS="`pkg-config --cflags x11`"
+		  X_LIBS="`$PKG_CONFIG --libs x11`"
+		  X_CFLAGS="`$PKG_CONFIG --cflags x11`"
 		  AC_DEFINE(X_DISPLAY_MISSING, 0, [Have x11])
 		  ,AC_MSG_ERROR([cannot locate libX11]))
 
@@ -159,7 +159,7 @@ AC_CHECK_LIB(Xrandr, XRRUpdateConfiguration,
 	         [#include <X11/Xlib.h> ])],
 	     [],[$X_LIBS -lX11 -lXext])
 
-dnl Try using pkg-config first, since it looks like Xft2 may fail our
+dnl Try using $PKG_CONFIG first, since it looks like Xft2 may fail our
 dnl hand-crafted tests
 PKG_CHECK_MODULES(XFT, xft >= 1.0,
  [_cppflags=$CPPFLAGS
@@ -206,8 +206,8 @@ PKG_CHECK_MODULES(PANGOXFT, pangoxft >= ${PANGO_MIN_VER}
 		  ,AC_DEFINE(HAVE_PANGO_XFT, 1, [Have pangoxft]) PANGO_MODULES="${PANGO_MODULES} pangoxft" have_pango_xft="yes" FONT_LOADER="Pango XFT" AC_SUBST(have_pango_xft)
 		  ,AC_MSG_WARN([pango xft support not available $PANGO_MIN_VER]))
 
-PANGO_LIBS=`pkg-config --libs $PANGO_MODULES`
-PANGO_CFLAGS=`pkg-config --cflags $PANGO_MODULES`
+PANGO_LIBS=`$PKG_CONFIG --libs $PANGO_MODULES`
+PANGO_CFLAGS=`$PKG_CONFIG --cflags $PANGO_MODULES`
 
 else FONT_LOADER="X.Org"
 fi
@@ -222,11 +222,11 @@ if test "$REP_BIN" != "yes"; then
 fi
 
 PKG_CHECK_MODULES(LIBREP, librep >= ${REP_MIN_VER}
-		  ,REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
-		  REP_CFLAGS="`pkg-config --cflags librep`"
-		  REP_LIBS="`pkg-config --libs librep`"
+		  ,REP_EXECDIR="`$PKG_CONFIG --variable=repcommonexecdir librep`"
+		  REP_CFLAGS="`$PKG_CONFIG --cflags librep`"
+		  REP_LIBS="`$PKG_CONFIG --libs librep`"
 		  REP_MSGFMT="`which msgfmt`"
-		  REP_VERSION="`pkg-config --variable=version librep`"
+		  REP_VERSION="`$PKG_CONFIG --variable=version librep`"
 		  ,AC_MSG_ERROR([cannot locate librep >= $REP_MIN_VER]))
 
 dnl Check for GTK+2
@@ -234,8 +234,8 @@ GTK_MIN_VER="2.24.0"
 GDK_MIN_VER="2.23.0"
 
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= ${GTK_MIN_VER}
-		  ,GTK_LIBS="`pkg-config --libs gtk+-2.0`"
-		  GTK_CFLAGS="`pkg-config --cflags gtk+-2.0`"
+		  ,GTK_LIBS="`$PKG_CONFIG --libs gtk+-2.0`"
+		  GTK_CFLAGS="`$PKG_CONFIG --cflags gtk+-2.0`"
 		  AC_DEFINE(HAVE_GTK, 1, [Have GTK])
 		  ,AC_MSG_ERROR([cannot locate gtk+ >= $GTK_MIN_VER]))
 
@@ -253,8 +253,8 @@ AC_ARG_WITH(gdk-pixbuf,
 
 if test "$with_gdk_pixbuf" != "no"; then
 	PKG_CHECK_MODULES(GDK_PIXBUF, gdk-pixbuf-xlib-2.0 >= ${GDK_MIN_VER}
-			  ,IMAGE_CFLAGS="`pkg-config --cflags gdk-pixbuf-xlib-2.0`"
-			  IMAGE_LIBS="`pkg-config --libs gdk-pixbuf-xlib-2.0`"
+			  ,IMAGE_CFLAGS="`$PKG_CONFIG --cflags gdk-pixbuf-xlib-2.0`"
+			  IMAGE_LIBS="`$PKG_CONFIG --libs gdk-pixbuf-xlib-2.0`"
 			  IMAGE_PC="gdk-pixbuf-xlib-2.0 >= ${GDK_MIN_VER}"
 			  AC_DEFINE(HAVE_GDK_PIXBUF, 1, [Have gdk-pixbuf])
 			  AC_DEFINE(NEED_PIXMAP_CACHE, 1, [Need pixmap cache])
@@ -267,11 +267,11 @@ fi
 
 if test "$with_gdk_pixbuf" = "no"; then
 	PKG_CHECK_MODULES(IMLIB1, imlib >= 1.9
-			  ,IMAGE_CFLAGS="-I`pkg-config --variable includedir imlib`"
-			  IMAGE_LIBS="`pkg-config --libs imlib`"
+			  ,IMAGE_CFLAGS="-I`$PKG_CONFIG --variable includedir imlib`"
+			  IMAGE_LIBS="`$PKG_CONFIG --libs imlib`"
 			  IMAGE_PC="imlib >= 1.9"
 			  AC_DEFINE(HAVE_IMLIB, 1, [Have Imlib1])
-			  IMLIB_VERSION="`pkg-config --modversion imlib`"
+			  IMLIB_VERSION="`$PKG_CONFIG --modversion imlib`"
 			  IMAGE_LOADER="IMLIB 1"
 			  imageloader="imlib1"
 			  ,AC_MSG_ERROR([cannot locate imlib1 library]))
@@ -468,16 +468,16 @@ AC_OUTPUT
 mv data/sawfish.ebuild sawfish-$version.ebuild
 mv data/sawfish.spec sawfish.spec
 
-REP_VERSION="`pkg-config --modversion librep`"
-REP_GTK_VERSION="`pkg-config --modversion rep-gtk`"
-GLIB_VERSION="`pkg-config --modversion glib-2.0`"
-PANGO_VERSION="`pkg-config --modversion pango`"
+REP_VERSION="`$PKG_CONFIG --modversion librep`"
+REP_GTK_VERSION="`$PKG_CONFIG --modversion rep-gtk`"
+GLIB_VERSION="`$PKG_CONFIG --modversion glib-2.0`"
+PANGO_VERSION="`$PKG_CONFIG --modversion pango`"
 
 if $PKG_CONFIG --exists cairo; then
-	CAIRO_VERSION="`pkg-config --modversion cairo`"
+	CAIRO_VERSION="`$PKG_CONFIG --modversion cairo`"
 fi
 
-GTK_VERSION="`pkg-config --modversion gtk+-2.0`"
+GTK_VERSION="`$PKG_CONFIG --modversion gtk+-2.0`"
 
 echo "
   == == == == == == == == == == == == ==
