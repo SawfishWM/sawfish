@@ -145,12 +145,50 @@ dimensions of WINDOW."
                                 (top nwr) (bottom nwr)))))
 	   (warp-cursor xpos ypos))))))
 
-  ;; Return the coordinate of the window intersection to shink or yank
-  ;; to.  This will do for both shrinking and yanking although the
-  ;; requirements are slightly different: e.g., a window that
-  ;; completely surrounds the active window is irrelevant for
-  ;; shrinking.
+  ;; Return the coordinate of the window or screen intersection to shink or yank
+  ;; to.  This will do for both shrinking and yanking although the requirements
+  ;; are slightly different: e.g., a window that completely surrounds the active
+  ;; window is irrelevant for shrinking.
   (define (find-least-intersection window wr direction yank)
+    (let ((scr-interesction (find-least-screen-intersection wr direction))
+          (wnd-intersection (find-least-window-intersection
+                             window wr direction yank)))
+      (if (and scr-interesction wnd-intersection)
+          ((if (memq direction '(left up)) max min)
+           scr-interesction wnd-intersection)
+        (or scr-interesction wnd-intersection))))
+
+  ;; Return the coordinate of the screen intersection to shrink or yank to.
+  ;; On multi-display setups all heads which display portion of the window are
+  ;; taken into account.
+  (define (find-least-screen-intersection wr direction)
+    (let* (result
+           (i (head-count))
+           (horizontal (memq direction '(left right)))
+           (getter (if horizontal car cdr))
+           (wedges (if horizontal
+                       (cons (left wr) (right wr))
+                     (cons (top wr) (bottom wr))))
+           (cmp (if horizontal < >))
+           (check-candidate (lambda (edge)
+                              (and (< (car wedges) edge (cdr wedges))
+                                   (or (not result) (cmp edge result))
+                                   (setq result edge)))))
+      ;; Go through all the displays.
+      (while (> i 0)
+        (setq i (1- i))
+        (let ((dimensions (head-dimensions i))
+              (offset     (head-offset     i)))
+          (when (positivep (rect-2d-overlap dimensions offset wr))
+            (check-candidate (getter offset))
+            (check-candidate (+ (getter offset) (getter dimensions))))))
+      ;; Check screen edges as well.
+      (check-candidate 0)
+      (check-candidate (if horizontal (screen-width) (screen-height)))
+      result))
+
+  ;; Return the coordinate of the window intersection to shink or yank to.
+  (define (find-least-window-intersection window wr direction yank)
     (let* ((isect-coord (if yank
 			    (case direction
 			      ((left up) 0)
@@ -178,30 +216,17 @@ dimensions of WINDOW."
 			   (lambda (xr)
 			     (and (< (top wr) (bottom xr) isect-coord)
 				  (setq isect-coord (bottom xr))))))))
-      ;; If the window is partially (shrink or yank) or entirely (yank
-      ;; only) outside the screen return the screen edge.
-      (cond ((and (eq direction 'left)
-		  (< isect-coord (screen-width) (right wr)))
-	     (screen-width))
-	    ((and (eq direction 'right) (< (left wr) 0 isect-coord))
-	     0)
-	    ((and (eq direction 'up)
-		  (< isect-coord (screen-height) (bottom wr)))
-	     (screen-height))
-	    ((and (eq direction 'down) (< (top wr) 0 isect-coord))
-	     0)
-	    (t
-	     (let ((win nil))
-	       (mapc (lambda (x)
-		       (and (not (eql x window))
-			    (not (window-iconified-p x))
-			    (window-appears-in-workspace-p x current-workspace)
-			    (let ((xr (window-frame-rect x)))
-			      (and (positivep (rect-2d-overlap* wr xr))
-				   (isect-check xr)
-				   (setq win x)))))
-		     (managed-windows))
-	       (and win isect-coord))))))
+      (let ((win nil))
+	(mapc (lambda (x)
+		(and (not (eql x window))
+		     (not (window-iconified-p x))
+		     (window-appears-in-workspace-p x current-workspace)
+		     (let ((xr (window-frame-rect x)))
+		       (and (positivep (rect-2d-overlap* wr xr))
+			    (isect-check xr)
+			    (setq win x)))))
+	      (managed-windows))
+	(and win isect-coord))))
 
   (define (shrink-window window direction)
     "Shrinks WINDOW by moving the edge opposite to DIRECTION (left, right,
