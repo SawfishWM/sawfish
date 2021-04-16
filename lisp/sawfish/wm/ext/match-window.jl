@@ -360,17 +360,26 @@
 	(when (assq 'position actions)
 	  (window-put w 'placed t)))
 
+      ;; Return t if the window W satisfies a MATCH.  A MATCH can be one of:
+      ;; * (cons PROP VALUE) where PROP is a symbol → checks whether property is
+      ;;   defined on window and whether it matches VALUE.
+      ;; * (cons FUNC ARGS) where FUNC is a function → calls function with
+      ;;   window as first argument and ARGS as remaining arguments to determine
+      ;;   whether window matches.
+      (define (matches-p match)
+        (and (consp match)
+             (cond ((symbolp (car match))
+                    (let ((prop (get-prop (car match))))
+                      (and prop (match-prop (nth 2 prop) (cdr match)))))
+                   ((functionp (car match))
+                    (apply (car match) w (cdr match))))))
+
       (mapc (lambda (cell)
-	      (when (catch 'out
-		      (mapc (lambda (match)
-			      (let ((prop (and (symbolp (car match))
-					       (get-prop (car match)))))
-				(when (or (not prop)
-					  (not (match-prop (nth 2 prop)
-							   (cdr match))))
-				  (throw 'out nil))))
-			    (car cell))
-		      t)
+              (catch 'out
+                (mapc (lambda (match)
+                        (unless (matches-p match)
+                          (throw 'out nil)))
+                      (car cell))
 		(run-actions (cdr cell))))
 	    match-window-profile)))
 

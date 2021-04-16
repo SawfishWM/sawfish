@@ -2748,11 +2748,15 @@ Let us see an example first:
                       (maximize . vertical)))
 @end lisp
 
-@var{rules} is an alist, and each value is matched using regex.
-Allowed keys are any of @code{WM_NAME}, @code{WM_CLASS},
+@var{rules} is an list where each element is a @code{(property
+. regex)} or a @code{(function . arguments)} cons.  In the first form,
+specified property is matched against the regular expression.  Allowed
+properties are any of @code{WM_NAME}, @code{WM_CLASS},
 @code{WM_ICON_NAME}, @code{WM_WINDOW_ROLE}, @code{WM_CLIENT_MACHINE},
-@code{WM_COMMAND}, and @code{WM_LOCALE_NAME}. Values to the keys are
-strings. Windows are selected if all of these rules match.
+@code{WM_COMMAND}, and @code{WM_LOCALE_NAME}.  In the second form,
+specified function is called with window as first argument and list of
+arguments specified in the cons as remaining arguments.  Windows are
+selected if all of these rules match.
 
 @var{actions} is an alist. For possible keys and values, see
 @file{lisp/sawfish/wm/ext/match-window.jl}.
