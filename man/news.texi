@@ -50,6 +50,9 @@ Each release lists incompatible changes at its top.
 
 @item Update KDE5 session script, use @code{startx11-plasma} instead of @code{startkde} [Christpher Bratusek]
 
+@item Make @code{shring-yank} recognise screen edges when shrinking or
+yanking windows, when the window crosses screen edges [Michal Nazarewicz]
+
 @item Add support for @code{_NET_FRAME_EXTENTS} property, fixing issues
 with HTML5 data element positioning in some browsers, and possibly more [womble]
 
@@ -79,6 +82,13 @@ requested by user. [Christopher Bratusek]
 
 @item Makefile.in @code{distclean} target no longer utilizes debian/rules, no
 longer removes finalized RPM spec file or Gentoo ebuild. [Christopher Bratusek]
+
+@item Remove dead code from @code{build-info} [Ulrik Haugen]
+@end itemize
+
+@item New or changes features
+@itemize @minus
+@item Make @code{match-window} allow specifying arbitrary functions as filter [Michal Nazarewicz]
 @end itemize
 
 @item Miscellaneous Changes
@@ -110,6 +120,7 @@ into @code{all} target, rather than @code{install} target. [Christopher Bratusek
 @item Simplify Frame-Style README parsing. [OpenBSD patch]
 
 @item Update Japanese translation. [Takeshi Hamasaki]
+@item Update Korean translation. [parkmino]
 @end itemize
 @end itemize
 
