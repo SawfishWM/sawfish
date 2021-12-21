@@ -57,7 +57,7 @@
 		      (,(_ "Cinnamon _Website") (browser "https://projects.linuxmint.com/cinnamon/"))
 		      (,(_ "_About Cinnamon") (system "cinnamon-about &")))))
 
-      ;; add mate-logout and customize menu-entries
+      ;; add Cinnamon logout and customize menu-entries
       (when (setq menu (assoc (_ "Sessi_on") root-menu))
 	(nconc menu `(()
 		      (,(_ "_Customize Cinnamon") (system "cinnamon-settings &"))
@@ -72,7 +72,7 @@
 
   ;; Returns nil if Cinnamon is not found.
   ;; If detected, returns t, and do also mate support init.
-  (define (detect-mate)
+  (define (detect-cinnamon)
     (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "X-Cinnamon")
               (equal (getenv "XDG_SESSION_DESKTOP") "cinnamon")
               (equal (getenv "XDG_SESSION_DESKTOP") "sawfish-cinnamon"))
