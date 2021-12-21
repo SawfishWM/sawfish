@@ -16,7 +16,7 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with sawfish; see the file COPYING.  If not, write to
-;; the Free Software Foundation, 51 Franklin Street, Fifth Floor, 
+;; the Free Software Foundation, 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301 USA.
 
 (define-structure sawfish.wm.state.wm-spec
@@ -75,8 +75,10 @@
      _NET_DESKTOP_GEOMETRY
      _NET_DESKTOP_NAMES
      _NET_DESKTOP_VIEWPORT
+     _NET_FRAME_EXTENTS
      _NET_NUMBER_OF_DESKTOPS
      _NET_PROTOCOLS
+     _NET_REQUEST_FRAME_EXTENTS
      _NET_SHOWING_DESKTOP
      _NET_SUPPORTED
      _NET_SUPPORTING_WM_CHECK
@@ -286,6 +288,26 @@
 	    supported-states)
       (set-x-property w '_NET_WM_STATE (apply vector state) 'ATOM 32)))
 
+;;; setting the frame extents (pixels of frame per edge)
+
+  (define (update-frame-extents w)
+    (if (window-framed-p w)
+        (let* ((left   (- (car (window-frame-offset w))))
+               (right  (- (- (car (window-frame-dimensions w))
+                             (car (window-dimensions w)))
+                          left))
+               (top    (- (cdr (window-frame-offset w))))
+               (bottom (- (- (cdr (window-frame-dimensions w))
+                             (cdr (window-dimensions w)))
+                          top)))
+          (set-x-property w '_NET_FRAME_EXTENTS
+                          (vector (max 0 left) (max 0 right)
+                                  (max 0 top) (max 0 bottom))
+                          'CARDINAL 32))
+      ;; frame none/unframed appears as 0 0 0 0
+      ;; this is to stay safe when "->reparented" FALSE/Qnil
+      (delete-x-property w '_NET_FRAME_EXTENTS)))
+
 ;;; honouring the initially set window state hints
 
   (define (update-icon-geometry w geom)
@@ -493,6 +515,10 @@
 	 (when (windowp w)
 	   (delete-window w)))
 
+        ((_NET_REQUEST_FRAME_EXTENTS)
+         (when (windowp w)
+           (update-frame-extents w)))
+
 	((_NET_SHOWING_DESKTOP)
 	 (if (= (aref data 0) 1)
 	     (show-desktop)
@@ -658,6 +684,10 @@
     (add-hook 'map-notify-hook update-client-list-hints)
     (add-hook 'unmap-notify-hook update-client-list-hints)
     (add-hook 'after-restacking-hook update-client-list-hints)
+
+    (add-hook 'after-framing-hook update-frame-extents)
+    (add-hook 'after-add-window-hook update-frame-extents)
+    (add-hook 'reparent-notify-hook update-frame-extents)
 
     (add-hook 'before-add-window-hook honour-client-state)
     (add-hook 'add-window-hook update-client-state)
