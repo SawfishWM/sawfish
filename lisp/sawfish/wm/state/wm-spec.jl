@@ -32,8 +32,7 @@
 	  sawfish.wm.workspace
 	  sawfish.wm.viewport
 	  sawfish.wm.state.iconify
-	  sawfish.wm.util.workarea
- 	  sawfish.wm.util.x)
+	  sawfish.wm.util.workarea)
 
   ;; todo:
 
@@ -76,7 +75,6 @@
      _NET_DESKTOP_GEOMETRY
      _NET_DESKTOP_NAMES
      _NET_DESKTOP_VIEWPORT
-     _NET_FRAME_EXTENTS
      _NET_NUMBER_OF_DESKTOPS
      _NET_PROTOCOLS
      _NET_SHOWING_DESKTOP
@@ -300,20 +298,6 @@
 	(let ((data (nth 2 strut)))
 	  (define-window-strut w (aref data 0) (aref data 2)
             (aref data 1) (aref data 3))))))
-
-  (defun add-net-frame-extents (w)
-    (let*
-        ( (foff (window-frame-offset w))
-          (fdim (window-frame-dimensions w))
-          (wdim (window-dimensions w))
-          (hgap (- (car fdim) (car wdim)))
-          (vgap (- (cdr fdim) (cdr wdim)))
-          (lhs  (- (car foff)))
-          (top  (- (cdr foff)))
-          (rhs  (- hgap lhs))
-          (bot  (- vgap top))
-          (ext  (vector lhs rhs top bot)) )
-      (set-x-property w '_NET_FRAME_EXTENTS ext 'CARDINAL 32)))
 
   (define (honour-client-state w)
     (let ((space (get-x-property w '_NET_WM_DESKTOP)))
@@ -677,7 +661,6 @@
 
     (add-hook 'before-add-window-hook honour-client-state)
     (add-hook 'add-window-hook update-client-state)
-    (add-hook 'after-framing-hook add-net-frame-extents)
     (call-after-state-changed '(sticky shaded maximized stacking
                                        window-list-skip task-list-skip)
 			      update-client-state)
