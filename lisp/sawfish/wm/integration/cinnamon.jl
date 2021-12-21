@@ -31,7 +31,7 @@
           sawfish.wm.commands
           sawfish.wm.commands.launcher)
 
-  (define-structure-alias mate-int sawfish.wm.integration.cinnamon)
+  (define-structure-alias cinnamon-int sawfish.wm.integration.cinnamon)
 
   (define (init)
     (let (menu)
