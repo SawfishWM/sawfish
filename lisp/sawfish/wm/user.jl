@@ -65,9 +65,9 @@
 	     sawfish.wm.integration.gnome
 	     sawfish.wm.integration.xfce
 	     sawfish.wm.integration.mate
-	     sawfish.wm.integration.razor
 	     sawfish.wm.integration.lxde
-	     sawfish.wm.integration.lumina)
+	     sawfish.wm.integration.lumina
+	     sawfish.wm.integration.cinnamon)
 
      (set-binds))
 
@@ -75,7 +75,7 @@
   ;; apps-menu, too, or it will break.
   (defvar desktop-environment "none"
     "Running desktop environment, detected by Sawfish.
-Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\", \"lumina\" or \"none\".")
+Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"lxde\", \"lumina\", \"cinnamon\" or \"none\".")
 
   (defvar want-poweroff-menu t
     "Add poweroff menu if you don't use GNOME / KDE / XFCE / Razor-Qt / LXDE / Lumina.")
@@ -127,9 +127,9 @@ Possible values are \"kde\", \"gnome\", \"mate\", \"xfce\", \"razor\", \"lxde\",
 	(sawfish.wm.integration.mate#detect-mate)
 	(sawfish.wm.integration.kde#detect-kde)
 	(sawfish.wm.integration.xfce#detect-xfce)
-	(sawfish.wm.integration.razor#detect-razor)
 	(sawfish.wm.integration.lxde#detect-lxde)
-	(sawfish.wm.integration.lumina#detect-lumina))
+	(sawfish.wm.integration.lumina#detect-lumina)
+	(sawfish.wm.integration.cinnamon#detect-cinnamon))
     )
 
   ;; Don't signal an error even if user "require" them. These modules

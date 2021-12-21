@@ -63,17 +63,17 @@
 		      (,(_ "_Customize GNOME") (system "gnome-control-center &"))
 		      (,(_ "_Edit GNOME menu") (system "alacarte &"))
 		      ()
-		      (,(_ "L_ock screen from GNOME")
-			(system "gnome-screensaver-command -l &"))
 		      (,(_ "_Logout from GNOME")
-		       (system "gnome-session-save --logout-dialog &"))
+		       (system "gnome-session-quit --logout &"))
 		      (,(_ "_Shutdown from GNOME")
-		       (system "gnome-session-save --shutdown-dialog &")))))))
+		       (system "gnome-session-quit --power-off &")))))))
 
   ;; Returns nil if gnome is not found.
   ;; If detected, returns t, and do also gnome support init.
   (define (detect-gnome)
     (when (or (equal (getenv "XDG_CURRENT_DESKTOP") "GNOME")
-              (getenv "GNOME_DESKTOP_SESSION_ID"))
+	      (equal (getenv "XDG_CURRENT_DESKTOP") "GNOME-Classic:GNOME")
+	      (equal (getenv "XDG_SESSION_DESKTOP") "gnome")
+	      (equal (getenv "XDG_SESSION_DESKTOP") "gnome-classic"))
       (init)
       t)))
