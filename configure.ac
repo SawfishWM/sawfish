@@ -27,7 +27,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AM_PROG_LIBTOOL
 
 dnl Release versioning info
-version="1.12.90"
+version="1.13.0"
 subversion=""
 codename="Bolero"
 
