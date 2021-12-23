@@ -55,7 +55,10 @@ yanking windows, when the window crosses screen edges [Michal Nazarewicz]
 
 @item Add support for @code{_NET_FRAME_EXTENTS} and @code{_NET_REQUEST_FRAME_EXTENTS}
 properties, fixing issues with HTML5 data element positioning in browsers,
-and several more [GSF]
+and several more [GSR]
+
+@item Fix wrong detection of GNOME because of other DEs using an old GNOME-related envvar [Christopher Bratusek]
+
 @end itemize
 @item Build and Installation
 @itemize @minus
@@ -120,6 +123,10 @@ into @code{all} target, rather than @code{install} target. [Christopher Bratusek
 @item Filter out @code{Trayer} in @code{cabinet}. [Christopher Bratusek]
 
 @item Update Lumina integration. [Christopher Bratusek]
+
+@item Update GNOME integration and explicitely check for GNOME, respectively GNOME-classic [Christopher Bratusek]
+
+@item Update KDE5 integration, check for plasma as desktop session [Christopher Bratusek]
 
 @item Simplify Frame-Style README parsing. [OpenBSD patch]
 
