@@ -28,7 +28,7 @@ srcdir=@srcdir@
 themedir := ${sawfishdir}/themes
 
 # also in lisp/Makefile.in
-sawfish_prog = $(rep_LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
+sawfish_prog = $(LIBTOOL) --mode=execute -dlopen ../src/gradient.la \
 		../src/sawfish --batch --no-rc
 COMPILE_ENV = SAWFISHLISPDIR=../lisp \
 	      SAWFISHEXECDIR=$(top_builddir)/src/.libs \

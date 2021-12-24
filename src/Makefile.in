@@ -42,7 +42,7 @@ override CFLAGS := $(CFLAGS) $(REP_CFLAGS) $(IMAGE_CFLAGS) $(X11_CFLAGS) $(PANGO
 all : sawfish libclient.o $(DL_OBJS) .libexec gtk-style
 
 sawfish : $(OBJS) $(LIBOBJS)
-	$(rep_LIBTOOL) --mode=link --tag=CC $(CC) -export-dynamic $(LDFLAGS) \
+	$(LIBTOOL) --mode=link --tag=CC $(CC) -export-dynamic $(LDFLAGS) \
 	  -o sawfish $(OBJS) $(LIBOBJS) $(REP_LIBS) $(PANGO_LIBS) \
 	  $(IMAGE_LIBS) $(X11_LIBS) $(EXTRA_X11_LIBS) $(LIBS) $(XRANDR_LIBS)
 
@@ -50,7 +50,7 @@ sawfish : $(OBJS) $(LIBOBJS)
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $<
 
 libclient_.lo : libclient.c
-	$(rep_LIBTOOL) --mode=compile --tag=CC $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(LIBTOOL) --mode=compile --tag=CC $(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 client.la : client.lo libclient_.lo
 	$(rep_DL_LD) $(LDFLAGS) -o $@ $^ $(X11_LIBS) $(REP_LIBS) $(LIBS) $(XRANDR_LIBS)
@@ -60,14 +60,14 @@ gtk-style : gtk-style.c
 
 install : all installdirs
 	for p in sawfish; do \
-	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
+	  $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)${bindir}; \
 	done
 	$(rep_DL_INSTALL) gtk-style $(DESTDIR)${sawfishexecdir}
 	$(foreach x,$(DL_DSTS),\
-	  $(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) \
+	  $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) \
 	  $(notdir $(x)) $(DESTDIR)$(sawfishexecdir)/$(dir $(x));)
 	$(rep_INSTALL_ALIASES) -c $(srcdir) $(DESTDIR)$(sawfishexecdir)
-	$(rep_LIBTOOL) --mode=install $(INSTALL_PROGRAM) client.la $(DESTDIR)$(repexecdir)/sawfish/
+	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) client.la $(DESTDIR)$(repexecdir)/sawfish/
 	for i in $(INSTALL_HDRS); do \
 	  $(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(includedir)/sawfish/; \
 	done
@@ -75,12 +75,12 @@ install : all installdirs
 
 uninstall :
 	for p in sawfish; do \
-	  $(rep_LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${bindir}/$$p; \
+	  $(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${bindir}/$$p; \
 	done
 	rm -f $(DESTDIR)$(bindir)/sawfish-client
 	$(rep_DL_UNINSTALL) -f $(DESTDIR)${sawfishexecdir}/gtk-style
 	for dl in $(DL_DSTS); do \
-	  $(rep_LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${sawfishexecdir}/$$dl; \
+	  $(LIBTOOL) --mode=uninstall rm -f $(DESTDIR)${sawfishexecdir}/$$dl; \
 	done
 	$(rep_DL_UNINSTALL) -f $(DESTDIR)$(repexecdir)/sawfish/client.la
 	rm -rf $(DESTDIR)$(includedir)/sawfish/
