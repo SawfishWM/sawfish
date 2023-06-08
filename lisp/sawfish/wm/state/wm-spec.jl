@@ -114,6 +114,7 @@
      _NET_WM_STATE_STICKY
      _NET_WM_STATE_TOGGLE
      _NET_WM_STRUT
+     _NET_WM_STRUT_PARTIAL
      _NET_WM_WINDOW_TYPE
      _NET_WM_WINDOW_TYPE_DESKTOP
      _NET_WM_WINDOW_TYPE_DIALOG
@@ -314,8 +315,11 @@
     (when (>= (length geom) 2)
       (window-put w 'icon-position (cons (aref geom 0) (aref geom 1)))))
 
-  (define (update-strut w)
-    (let ((strut (get-x-property w '_NET_WM_STRUT)))
+  (define (update-strut w #!optional partial)
+    (let (strut)
+      (if partial
+          (setq strut (get-x-property w '_NET_WM_STRUT_PARTIAL))
+        (setq strut (get-x-property w '_NET_WM_STRUT)))
       (when (and strut (eq (nth 0 strut) 'CARDINAL))
 	(let ((data (nth 2 strut)))
 	  (define-window-strut w (aref data 0) (aref data 2)
@@ -631,6 +635,9 @@
        (let ((geom (get-x-property w '_NET_WM_ICON_GEOMETRY)))
 	 (when geom
 	   (update-icon-geometry w (nth 2 geom)))))
+      ;; _NET_WM_STRUT_PARTIAL takes precedence over _NET_WM_STRUT
+      ((_NET_WM_STRUT_PARTIAL)
+       (update-strut w t))
       ((_NET_WM_STRUT)
        (update-strut w))))
 
