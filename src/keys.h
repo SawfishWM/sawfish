@@ -43,58 +43,118 @@ enum {
     EV_CODE_MOUSE_OFF3
 };
 
-/* The low 16 bits of the MODS is the standard X modifier mask. Bits
-   16 to 20 define the type of the event. One of the following: */
-
 enum {
-    EV_TYPE_KEY   = 0x00010000,
-    EV_TYPE_MOUSE = 0x00020000,
+    /*
+      The low 16 bits of the MODS are the standard X modifier mask, as
+      found in <X11/X.h>.  The highest standard modifier mask (1<<15)
+      corresponds to AnyModifier, but there's a gap for (1<<13) and
+      (1<<14) that we can fill.  According to libinput(4):
+
+        X clients receive events with logical button numbers, where 1, 2, 3 are
+        usually interpreted as left, middle, right and logical buttons 4, 5, 6,
+        7 are usually interpreted as scroll up, down, left, right.  The  fourth
+        and fifth physical buttons on a device will thus send logical buttons 8
+        and 9.
+
+      These button 6/7 masks are probably consistent with everybody
+      everywhere.  They are definitely consistent with Tcl/Tk:
+      https://core.tcl-lang.org/tk/artifact/fe30190927f08326.
+    */
+    EV_BUTTON6_MASK = 0x00002000, /* the (1<<13) gap */
+    EV_BUTTON7_MASK = 0x00004000, /* the (1<<14) gap */
+
+    /*
+      Bits 16 to 20 define the type of the event.  We allocate two right
+      now.  We have two available.
+    */
+    EV_TYPE_KEY      = 0x00010000,
+    EV_TYPE_MOUSE    = 0x00020000,
+
+    /* Defines the slots for the above EV_TYPE values. */
+    EV_TYPE_MASK     = 0x00030000,
+
+    /* Put that button 8+9 pair into an existing gap in the bitset. */
+    EV_BUTTON8_MASK  = 0x00040000,
+    EV_BUTTON9_MASK  = 0x00080000,
 
     /* this is used as a placeholder when translating events<->strings,
        it's replaced by the actual meta value */
-    EV_MOD_META   = 0x00100000,
-    EV_MOD_ALT    = 0x00200000,
-    EV_MOD_HYPER  = 0x01000000,
-    EV_MOD_SUPER  = 0x02000000,
+    EV_MOD_META      = 0x00100000,
+    EV_MOD_ALT       = 0x00200000,
+
+    /* Matches any of the modifiers, above and below, including no
+       modifier */
+    EV_MOD_ANY       = 0x00400000,
+
+    /* a KeyRelease event */
+    EV_MOD_RELEASE   = 0x00800000,
+
+    /* more placeholders for translating events<->strings */
+    EV_MOD_HYPER     = 0x01000000,
+    EV_MOD_SUPER     = 0x02000000,
 
     /* this is a customizable modifier; it allows the user to move
        all predefined wm key bindings to a different modifier */
-    EV_MOD_WM     = 0x04000000,
+    EV_MOD_WM        = 0x04000000,
 
-    /* Matches any of the modifiers, including no modifier */
-    EV_MOD_ANY    = 0x00400000,
+    /* The combined mask for all of those placeholders.
+       translate_event_to_x_button() uses this to distinguish these
+       placeholders and wildcards from other bits.
+    */
+    EV_VIRT_MOD_MASK = 0x07f00000,
 
-    /* a KeyRelease event */
-    EV_MOD_RELEASE= 0x00800000,
+   /* This isn't just "modifier" masks, it's all masks known to
+      Sawfish, whether from X11 or internal.  These bits are exclusive
+      with EV_TYPE_MASK; EV_VIRT_MOD_MASK must be a subset of these
+      bits.
+    */
+    EV_MOD_MASK      = 0x07fcffff,
 
-    EV_TYPE_MASK  = 0x000f0000,
-    EV_MOD_MASK   = 0x0ff0ffff,
-    EV_VIRT_MOD_MASK = 0x0ff00000
+    /* There are three bits left to play with: 0x08000000, 0x10000000,
+       and 0x20000000.  The above masks do not allocate them.
+
+       We can't use bits 0x40000000 and 0x80000000 because rep
+       immediate integers are only 30 bits wide (see the "rep_lisp.h"
+       comments in the librep sources), and keys.c assumes that we're
+       using immediate integers everywhere.  Look at all of the calls
+       to rep_INT() in keys.c, for example.
+
+       The internals of "rep_lisp.h" and "rep_config.h.in" suggest
+       that 64-bit systems automatically upgrade to 62 bit wide
+       immediate integers.  That would give us many more bits to play
+       with at the cost of breaking 32-bit systems.  And I don't know
+       whether those large values would violate some other assumption,
+       probably in X11 somewhere.
+     */
+
 };
-
-/* Support for buttons 6, 7, 8.
-
-   <X11/X.h> doesn't define these, even though XFree supports them.. */
 
 #ifndef Button6
 # define Button6 6
 #endif
 #ifndef Button6Mask
-# define Button6Mask (1<<13)
+# define Button6Mask EV_BUTTON6_MASK
 #endif
 
 #ifndef Button7
 # define Button7 7
 #endif
 #ifndef Button7Mask
-# define Button7Mask (1<<14)
+# define Button7Mask EV_BUTTON7_MASK
 #endif
 
 #ifndef Button8
 # define Button8 8
 #endif
 #ifndef Button8Mask
-# define Button8Mask (1<<15)
+# define Button8Mask EV_BUTTON8_MASK
+#endif
+
+#ifndef Button9
+# define Button9 9
+#endif
+#ifndef Button9Mask
+# define Button9Mask EV_BUTTON9_MASK
 #endif
 
 /* In key maps, a `key' is (COMMAND . EVENT) */
