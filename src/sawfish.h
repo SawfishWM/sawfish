@@ -49,7 +49,9 @@
 # define rep_INTERFACE 7		/* rep 0.10 */
 #endif
 
+#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202311L
 typedef int bool;
+#endif
 
 #ifdef rep_HAVE_UNIX
 # define HAVE_UNIX 1
